@@ -1,0 +1,100 @@
+Project Alexandria Ryan Gannon - 05456983
+Proposal Saturday, 02 February 2008
+
+
+Contents
+Team	1
+Introduction	1
+Overview	2
+Technology	2
+Roles	2
+Requirements	3
+Bibliography	3
+
+
+Team
+Ryan Gannon (Project Proposer), Thomas Higgins, Amal Tukur Modibbo
+
+
+Introduction
+In the 3rd Century BCE the greatest library in the ancient would was built, the Library of Alexandria. It survived for centuries before finally burnt to the ground.
+
+Project Alexandria is a php web-based Library System based on Delicious Library. "Delicious Library is a media cataloguing application for Mac OS X, developed by Delicious Monster. The software allows users to manage their collections of books...  by entering [an ISBN]"  (Wikipedia) it also works as a Library system with "borrowers", "lending" and monitoring "out" and "late" books. Alexandria will provide all of these features and more as will be discussed below.
+The idea is nothing original with similar software such as Collectorz.com’s "Book Collector" for Windows and Perpustakaan for Linux. 
+
+	So why is this different?
+	The key point with the above mentioned software is that they are all platform-specific and are all desktop run. Alexandria is web-based this means it allows for;
+
+		* Cross platform compatibility (internet based software typically does not require you to have specially Windows, Mac OS, etc.)
+		* Public access through the internet
+			o This would allow users to request books online
+			o This would also mean that the librarian can operate anywhere there is internet access rather than being tied to one machine or network.
+
+
+	But wait aren’t there web-based book/library-management systems? 
+	This is true, but like the above they are not inexpensive (most web-based library-systems have a recurring charge). Alexandria on the other hand will be;
+
+		* free
+		* open-source 
+
+
+	Why is open-source important?
+	Well one of the reasons for the recurring charge is that these online library-systems are based on the creating company’s servers, having this software be php-based and open-source allows people to host the library themselves. It will also allow them to edit it to their needs.
+	One of Alexandria’s key features is that it will be designed with plug-ins in mind so that users will be able to add features themselves and distribute them.
+
+
+Overview
+
+	* It will also be designed in a modular fashion, users will be able to scale it from a simple vanity list of their personal collection online to a fully fledged library system.
+	* It would include a recommender system.
+	* Some pseudo-Web 2.0 elements.
+
+Delicious Library uses the ISBN (with optional manual entry) and the Amazon api to retrieve data about the book and add it automatically. Alexandria would expand beyond this by use of isbndb.com.
+
+isbndb.com is a online database working to create a catalogue of all books ever published, as opposed to Amazon as they would be limited to books chiefly published within they’re time. This would of course mean that the software is dependent on these sites but it also means that the program itself can be very slim.
+
+In conjunction to this slim program it will also feature a Collaborative Filtering system. Aside from the freedom it being web-based, this is the major step-up from Delicious. It will be based on other users that request similar books and their rating of them.  User would be encouraged to rate their books when they return them by a message that would appear on the site when they login. Also there would be a form so that they could optionally review books.
+
+In addition to this users would also be able to "subscribe" to other users in a similar manner to LiveJournal’s Friends Page, but instead of journal entries you’ll be able to see what books your "Friends" are requesting and their rating and review of them.
+
+
+Technology
+PHP, MySQL, XHTML 1.1, CSS, possibly a barcode scanner.
+
+
+Roles
+Book System designer - who will build the basic book system (adding, deleting, displaying, etc.)
+User System designer - who will build the user system (registration, login/out, profiles, deletion and banning
+Layout and Art-Work
+
+
+Requirements
+	The Project Must...
+	* Have a working installer that would create all necessary tables for both users and books
+	* Adds books (through the ISBN number and optionally by entering details manually)
+	* Delete/Edit books (you have to be an admin to edit/add books)
+	* A request and "on-loan" management system
+	o Delete requests or transfer them to on-loan
+	o Delete on-loan books when they’re returned
+	* Have a search page for users and orders the search results (e.g. by ISBN, Author, etc.)
+	* User Accounts (by which users can request books and cancel requests)
+	* The books have individual profiles
+	* Use a basic collaborative filtering system to produce recommendations for users based on the books they rent/request.
+	* Send email alerts to the librarian and to any persons that have an impending return date.
+
+	Secondary requirements include...
+	* Have a WordPress bridge, this would use the WordPress’ users, have reports from the library to the Wordpress homepage/sidebar and if you login to WordPress you would be logged into the library.
+	* Use a better than basic collaborative filtering system algorithms to produce recommendations.
+	* Use a barcode reader to make entering new books even easier.
+	* Send the librarian alerts individually or optionally in digest form.
+	* Use of open-source book websites (e.g.  WikiSource, Project Gutenberg, etc.) to add virtual books.
+
+	Things that are not goals of the project include:
+	* To have a superb collaborative filtering system.
+	* To catalogue anything other than books.
+	* Will not be designed with the intent to sell anything.
+	* Will not read ISBN from captured images.
+
+
+Bibliography
+Wikipedia. (n.d.). Delicious Library. Retrieved from Wikipedia: http://en.wikipedia.org/wiki/Delicious_library
