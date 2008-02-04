@@ -1,7 +1,7 @@
 Revision:
 0.1  DS  First draft
 0.2  EB  Added fluff as possible direction to take proposal[?]
-0.3  ED    Edited proposal as to how I would write it...
+0.3  ED  Edited proposal as to how I would write it...
 
 Title: Kinephon, a different music experience
 Team: Eva Darulova
@@ -12,50 +12,59 @@ Team: Eva Darulova
 
 Introduction:
 In the creation of dance music, a musician has numerous theories, techniques,
-instruments, and hardware and software to avail of. Music created in
-this manner appears to entice people into dance. However, dance does not have to
-be the response to music, nor music a product of impassive instruments; it may well
-be the other way round: music should be the manifestation of dance.
-This project aims to show that one does not have to follow the old paths. With
-the help of software and IR cameras it will follow the users movements and
-produce music that is not stifled by any boundaries arising by having the music first.
+instruments, and hardware and software to avail of. Music created in this
+manner appears to entice people into dance. However, dance does not have to be
+the response to music, nor music a product of impassive instruments; it may
+well be the other way round: music should be the manifestation of dance. This
+project aims to show that one does not have to follow the old paths. With the
+help of software and IR cameras it will follow the users movements and produce
+music that is not stifled by any boundaries arising by having the music first.
 
 Overview:
 Kinephon will be a tool designed to realise dance as a musical composition.
-This will be achieved by having the dancer wear or reflect IR lights. These
-IR lights will be tracked by a Wiimote and spatial information transmitted to a PC through a Bluetooth connection.
-The Kinephon software will use this data to build an animation of the movement and map those movements to audible
-samples, synths,or effects, thereby producing the dance's song. To enhance the use of the tool, the created data will
-be recorded, so that one can review and compare it later maybe to the music of other users.
+This will be achieved by having the dancer wear or reflect IR lights. These IR
+lights will be tracked by a Wiimote and spatial information will be transmitted
+to a PC through a Bluetooth connection. The Kinephon software will use this
+data to build an animation of the movement and map those movements to audible
+samples, synths, or effects, thereby producing the dance's song. To enhance the
+use of the tool, the created data can be recorded, so that one can review and
+compare it later, maybe to the music of other users. (Does this refer to the
+audio sample or the action/response data?)
 
-Suitable code for a Wiimote interface is already available as OpenSource and this
-project will make use of this. However, it may be necessary to adapt it slightly
-so that the kinephon will be platform independent. The same applies possibly to sound libraries and bluetooth interfaces.
-Suitable APIs will have to be developed between the different components to make the tool extendable and adaptable in the future.
-A substantial part of the project is to design a mapping between the dancer's
-movements and the music created that is natural and intuitive, easy to learn but at
-the same time one that leaves enough room for individuality.
+Suitable code for a Wiimote interface is already available as OpenSource and
+this project will make use of it. However, it may be necessary to adapt it
+slightly so that kinephon will be platform-independent. The same applies
+possibly to sound libraries and Bluetooth interface. Suitable APIs will have to
+be developed between the different components to make the tool extendable and
+adaptable in the future. (I don't remember this being agreed on!) A substantial
+part of the project is to design a mapping between the dancer's movements and
+the music created that is natural and intuitive, easy to learn but at the same
+time one that leaves enough room for individuality.
  
-In order to appeal to the other senses as well and make the experience more complete,
-optional features of this project include a graphical representation of the music just
-created. This should be done in a mathematical way (??yes?? don't know); the more
-harmonic the music, the more harmonic the picture will be, thus giving direct feedback
-to the user.
-To go with the modern way of sharing pretty much everything a webpage could be possibly set
-up to provide for an exchange of ideas and compositions.
+In order to appeal to the other senses as well and make the experience more
+complete, optional features of this project include a graphical representation
+of the music just created. This should be done in a mathematical way (??yes??
+don't know); the more harmonic the music, the more harmonic the picture will
+be, thus giving visual feedback to the user. To go with the modern way of
+sharing pretty much everything, a webpage could be possibly set up to provide
+for an exchange of ideas and compositions.
 
 Requirements:
 The project must...
- - detect gestures via a IR camera and send the data in an appropriate format
-    to the computer (possibly via Bluetooth).
- - be able to control the generation of sound through the combination of gestures
-    supplied by the camera.
- - record sounds created in an audio format for which a codex exist (saving the audio).
+ - detect gestures via an IR camera and send the data in an appropriate format
+    to the computer (possibly via Bluetooth (this should probably be changed;
+	nowhere in the document, other than here, is Bluetooth a 'possible').
+ - be able to control the generation of sound through the combination of
+    gestures supplied by the camera.
+ - record sounds created in an audio format for which a codex exist (saving the
+    audio).
 
 Secondary requirements include...
- - a graphical representation of the music created or some sort of aid for the user.
+ - a graphical representation of the music created, or some sort of aid for the
+    user.
  - a web service for sharing of creations.
- - preprocessed output from recordings for an attractive presentation.
+ - preprocessed output from recordings for an attractive presentation. (this is
+    also a 'project must' requirement (or have I misunderstood?))
 
 Things that are not goals of the project include...
  - writing the Wiimote software from scratch.
@@ -64,18 +73,18 @@ Things that are not goals of the project include...
  - a tracker, sample editor, or direct manual music creator.
 
 Technology:
-Wiimote, Bluetooth, Infrared, C++, HTML
+Wiimote, Bluetooth, Infrared, C++, HTML, PHP
 
 Roles:
  - Wiimote (Hardware) - physically set up all hardware components to allow the
-   Wiimote to communicate the dancer's movements to a Bluetooth receiver
+    Wiimote to communicate the dancer's movements to a Bluetooth receiver
  - Wiimote (Software) - programming a library or class to stream, translate,
-   and make accessible, all necessary data received by the Bluetooth device
-   that was sent by the Wiimote
+    and make accessible, all necessary data received by the Bluetooth device
+    that was sent by the Wiimote
  - Audio developer - program audio mixer, buffers, synthesisers, and effects
-   for real-time playback
+    for real-time playback
  - Choreographer and Musicologist - map the dancer's movements to music
 Roles for secondary requirements:
  - Artist - draw necessary graphics
  - Graphics developer - program graphical surface, buffers, and effects
- - Web developer - html and with some PHP to develop sharing site
+ - Web developer - HTML with some PHP to develop sharing site
