@@ -7,7 +7,6 @@ Revision:
 flow charts
 architecture diagrams
 
-
 **On the Moodle**
 Title: Kinephon, a different music experience
 Team: Eva Darulova
@@ -28,9 +27,10 @@ produce music that is not stifled by any boundaries arising by having the music 
 Overview:
 Kinephon will be a tool designed to realise dance as a musical composition.
 This will be achieved by having the dancer wear or reflect IR lights. These
-IR lights will be tracked by a Wiimote and transmitted to a PC through a
-Bluetooth connection. 
-The Kinephon software will use this data to build an animation of the movement and map those movements to audible samples, synths,or effects, thereby producing the dance's song. To enhance the use of the tool, the created data will be recorded, so that one can review and compare it later maybe to the music of other users.
+IR lights will be tracked by a Wiimote and spatial information transmitted to a PC through a Bluetooth connection. 
+The Kinephon software will use this data to build an animation of the movement and map those movements to audible
+samples, synths,or effects, thereby producing the dance's song. To enhance the use of the tool, the created data will
+be recorded, so that one can review and compare it later maybe to the music of other users.
 
 Suitable code for a Wiimote interface is already available as OpenSource and this 
 project will make use of this. However, it may be necessary to adapt it slightly
