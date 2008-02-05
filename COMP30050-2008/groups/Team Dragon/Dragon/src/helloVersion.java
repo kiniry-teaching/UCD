@@ -9,5 +9,9 @@ class helloVersion
         {
            System.out.println("Hello World!");
         }
+        
+        public int one(){
+        	return 1;
+        }
 }
 
