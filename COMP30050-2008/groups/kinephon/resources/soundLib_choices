@@ -1,0 +1,20 @@
+Here are some other libraries I found, all in C++ and portable:
+1) http://fastlabinc.com/CSL/index.html
+    This looks rather huge and already complete, so I'm not sure if that wouldn't be too much. Our project is mainly about the sound, so we should do at least some part of it.
+
+2.)http://clam.iua.upf.edu/index.html
+    Same is for this one. It comes with a graphical interface already. We could try and strip it down, but as I said, the grading of this might not be the best...
+
+They have a list fo other such libraries on their web page, so I looked at those, whose links still worked or could be found:
+
+3.)http://osw.sourceforge.net/ 
+   Called Open Sound World, and more like what we want. I think it also comes with some graphic interface.
+
+4.)http://sndobj.sourceforge.net/
+   Similar again...
+
+5.)STK
+   The one I already looked and the one I still like best. I think it's simple enough, so that noone can say, we made it easy for ourselves. It has been developed with the purpose of extension and education. However, it states, that some classes (only few) ARE platform-dependent, but I don't know it what matter and what those classes do. It might be, that they work on Linux, WIndows but not on other...
+
+Here is some overview over the most used sound libraries:
+http://www.create.ucsb.edu/~xavier/Thesis/html/node58.html
