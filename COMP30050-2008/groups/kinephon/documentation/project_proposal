@@ -4,7 +4,8 @@ Revision:
 0.3  ED  Edited proposal as to how I would write it...
 0.4  DS  Spelling and wording change
 0.5  EB  Formatting and comments
-0.6  DS	 Formatting, spelling and wording. Removed comments and included suggestions.  
+0.6  DS	 Formatting, spelling and wording. Removed comments and included suggestions.
+0.7  JD  Role definition, spellchecking...  
 
 Title: Kinephon
 Team: Intuitive Aptitudes
@@ -34,13 +35,12 @@ and map those movements to audible samples, synths, or effects, thereby
 producing the movement's song. To enhance the use of the tool, the created data can be recorded, so that one 
 can review and compare it later, maybe to the audio samples of other users.
     Code for a Wiimote interface is already available as OpenSource, but it may
-be nessessary that this is written from scratch in order to support variations
+be necessary that this is written from scratch in order to support variations
 on functionality and platform independence. However, in relation to sound 
 libraries, OpenSource ones will be used. Suitable APIs will have to be developed
 between the different components to make the tool extendable and adaptable for
 the future.
-    Suitable APIs will have to be developed between the different components 
-to make the project more manageable so that the work can be split. A substantial 
+    These APIs will also make the project more manageable so that the work can be split. A substantial 
 part of the project is to design a mapping between the user's movements and 
 the music created that is natural and intuitive, easy to learn but at the same 
 time one that leaves enough room for individuality.
@@ -54,37 +54,61 @@ users to upload, share and comment on the songs they created.
 
 Requirements:
 The project must...
-    - detect gestures and send the data in an appropriate format to the computer.
-    - be able to control the generation of sound though the combination of gestures
-      supplied by the IR camera.
-    - record analysed data.
+    - produce a tool that is able to detect gestures and send the data in an appropriate format to the computer;
+    - and be able to control the generation of sound though the combination of gestures supplied by the IR camera.
+    - Also, it must record analysed data.
+    - Moreover, it must include a simple GUI and audio visualisation providing 
+      feedback and visual cues to the user.
 
 Secondary requirements include...
-    - a graphical representation of the music created or some sort of aid for
+    - a more complex graphical representation of the music created and more helpful feedback for
     the user.
-    - the web service for sharing of creations.
+    - a web service for sharing of creations.
     - preprocessed output from recordings for an attractive presentation.
 
 Things that are not goals of the project include...
     - programming a sound library from scratch.
-    - a complex interface in shich the dancer can produce deterministic songs.
+    - a complex interface in which the dancer can produce deterministic songs.
     - a tracker, sample editor, or direct manual music creator.
 
 Technology:
     - IR camera e.g. Nintendo Wiimote or Webcam.
     - Bluetooth if Wiimote is used.
-    - HTML, XML
     - C++
+    - XML
+    - web technologies (generality due to the website being a secondary requirement)
 
 Roles:
-    - Hardware developer will create a interface, which is able to gather information about the user's 
-    movements using Infared LEDs and IR receiver then to transmit this data to
-    the interpreter. This will consist of two areas, the first hardware the
-    second software. The hardware will be the IR LED and receiver aspect and
-    the softare will be the driver to support the IR receiver.
-    - Audio developer will program audio mixers, buffers, synthesisers and effects
-    for real-time playback.
-    - GUI developer for the secondary requirement of graphical feedback for the
-    user and installation of project.
-    - Web developer for another secondary requirement. The person will make it
-    possible to share creations will others easily.
+	Primary requirements:
+		Hardware:
+			Interface Design (David Swords, Jakub Dostal): Design an interface which will 
+				allow the tool to gather as much information as possible about the user's
+				movements while providing a continuous and reliable stream of information. 
+			Data transfer 1 (Jakub Dostal): Develop a mechanism that will establish 
+				the connection and manage all communication with the wiimote, providing all
+				the necessary data for parsing (Primarily for linux and, if time permits, for 
+				Windows as well).
+			Data transfer 2 (David Swords): Parse the received data into meaningful information
+				and design an API, which will allow the information to be collected for analysis.
+		Software:
+			Movement analysis and interpretation (Eliott Bartley, Sumbo Ajisafe):
+				information analysis:  [to be filled]
+				movement interpreter: [to be filled]
+			Sound creation (Eva Darulova): [to be filled]
+		Small parts:
+			GUI (Jakub Dostal): Simple GUI that will help the user to connect and setup the wiimote,
+				and prepare the system. 
+			Installation system (David Swords): Create the deployment system (primarily for linux and,
+				if time permits, for Windows) that will allow the user to easily install the tool.
+			Primitive visualisation (David Swords): Aesthetically simple visual representation of 
+				the created audio, providing the user with feedback and visual cues.
+				
+	Secondary requirements: [details to be added]
+		Note: Specific people will be assigned to these as time and resources permit.
+		Website:
+			Graphical design
+			Server-side back-end (for sharing and multimedia delivery)
+			Social networking aspect
+		Visualisation:
+			More complex music representation (karaoke ;) )
+			Flash/Silverlight (embeddable and online-usable anyway) audio/video production system
