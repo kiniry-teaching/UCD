@@ -6,14 +6,15 @@ Revision:
 0.5  EB  Formatting and comments
 0.6  DS	 Formatting, spelling and wording. Removed comments and included suggestions.
 0.7  JD  Role definition, spellchecking...  
+0.8  ED  sound role filled in
 
 Title: Kinephon
 Team: Intuitive Aptitudes
-Members: 	Eva Darulova   05817625
-      		Sumbo Ajisafe  05005451
+Members: 	Sumbo Ajisafe  05005451
       		David Swords   05477689
       		Eliott Bartley 05806500
       		Jakub Dostal   05844151
+      		Eva Darulova   05817625
 
 Introduction:
 	In the creation of dance music, a musician has numerous theories, techniques,
@@ -94,7 +95,13 @@ Roles:
 			Movement analysis and interpretation (Eliott Bartley, Sumbo Ajisafe):
 				information analysis:  [to be filled]
 				movement interpreter: [to be filled]
-			Sound creation (Eva Darulova): [to be filled]
+			Sound creation (Eva Darulova): 
+			    synthesis: Design an API that will take in higher-level information from the 
+			        movement analysis and map it onto audio characteristics such as (overlaid) 
+			        frequency or power.
+			    generation: Using available sound libraries as reference reliably create the sound
+			        (primary for Linux, if time permits for Windows as well).
+			        
 		Small parts:
 			GUI (Jakub Dostal): Simple GUI that will help the user to connect and setup the wiimote,
 				and prepare the system. 
