@@ -7,6 +7,7 @@ Revision:
 0.6  DS	 Formatting, spelling and wording. Removed comments and included suggestions.
 0.7  JD  Role definition, spellchecking...  
 0.8  ED  sound role filled in
+0.9  JD  Sound role beefing up (Eva, it's up to you if you agree with this.)
 
 Title: Kinephon
 Team: Intuitive Aptitudes
@@ -96,10 +97,12 @@ Roles:
 				information analysis:  [to be filled]
 				movement interpreter: [to be filled]
 			Sound creation (Eva Darulova): 
-			    synthesis: Design an API that will take in higher-level information from the 
-			        movement analysis and map it onto audio characteristics such as (overlaid) 
-			        frequency or power.
-			    generation: Using available sound libraries as reference reliably create the sound
+			    Synthesis: Design an API that will take in higher-level information from the 
+			        movement interpreter and map it onto audio characteristics such as (overlaid) 
+			        frequency or power [, thus composing the music and creating a representation of 
+			        the different elements that will characterise it.]
+			    Generation: Using available sound libraries as reference, reliably create the sound
+			        [using the information about its characteristics from the synthesis system]
 			        (primary for Linux, if time permits for Windows as well).
 			        
 		Small parts:
@@ -117,5 +120,5 @@ Roles:
 			Server-side back-end (for sharing and multimedia delivery)
 			Social networking aspect
 		Visualisation:
-			More complex music representation (karaoke ;) )
+			More complex music representation and user feedback
 			Flash/Silverlight (embeddable and online-usable anyway) audio/video production system
