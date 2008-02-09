@@ -1,0 +1,62 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	2008.02.09.02.35.37;	author eoin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.09.02.34.17;	author eoin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Counting char,tab,newlines and blank spaces
+@
+
+
+1.2
+log
+@Fixed log and id
+@
+text
+@#include <stdio.h>
+//$Id$
+//$Log$
+
+main(){
+  int c, countl, countt, counts, totalchar;
+
+  countl = countt = counts = totalchar = 0;
+
+  while((c = getchar()) != EOF){
+    if(c == '\n')
+      ++countl;
+    else if(c=='\t')
+      ++countt;
+    else if(c == ' ')
+      ++counts;
+    ++totalchar;
+ }
+  printf("%3d %6d %9d %12d\n", countl, countt, counts, totalchar);
+}
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 2
+a3 2
+$Id$
+$Log$
+@

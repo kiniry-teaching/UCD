@@ -1,0 +1,111 @@
+head	1.5;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.5
+date	2008.02.08.21.38.34;	author eoin;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.02.08.21.34.20;	author eoin;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.02.08.21.31.35;	author eoin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.08.21.30.14;	author eoin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.08.21.27.59;	author eoin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Temperature program, base file
+@
+
+
+1.5
+log
+@Fixed maths, again, compiled version working correctly
+@
+text
+@#include <stdio.h>
+//$Id: temperature.c,v 1.4 2008/02/08 21:34:20 eoin Exp eoin $
+//$Log: temperature.c,v $
+//Revision 1.4  2008/02/08 21:34:20  eoin
+//Fixed maths in for loop
+//
+int main(){
+
+  int step, lower, upper;
+  int fahr, celsius;
+
+  lower =0;
+  upper = 100;
+  step = 5;
+
+  for(celsius = lower; celsius <= upper ; celsius+=step){
+    printf("%3d %6.1f\n", celsius, ((9.0/5.0)*(celsius))+32);
+  }
+}
+@
+
+
+1.4
+log
+@Fixed maths in for loop
+@
+text
+@d2 5
+a6 2
+//$Id$
+//$Log$
+d17 1
+a17 1
+    printf("%3d %6.1f\n", celsius, (9.0/5.0)*(celsius-32));
+@
+
+
+1.3
+log
+@Fixed error with for loop
+@
+text
+@d14 1
+a14 1
+    printf("%3d %6.1f\n", celsius, (9.0/5.0)*(celsius+32));
+@
+
+
+1.2
+log
+@Added Id and Log
+@
+text
+@d13 1
+a13 1
+  for(celsius = lower; celsius <= upper ; i+=step){
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 2
+a3 1
+
+@
