@@ -1,0 +1,46 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2008.02.11.15.27.14;	author ccasey;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.11.15.25.33;	author ccasey;	state Exp;
+branches;
+next	;
+
+
+desc
+@Simple java program
+@
+
+
+1.2
+log
+@added comment
+@
+text
+@public class Hello
+{
+    //a comment
+  public static void main(String args[])
+  {
+     System.out.println("Hello");
+  }
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+@
