@@ -2,6 +2,7 @@
  * A simple class that prints out a "Hello World" message on the screen.
  *
  * @author Emerson Loureiro (emerson.loureiro@ucd.ie)
+ *
  */
 public class HelloWorld {
     // Main method called when the program starts...
