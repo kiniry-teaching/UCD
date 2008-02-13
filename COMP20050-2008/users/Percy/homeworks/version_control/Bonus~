@@ -1,0 +1,10 @@
+Difference:
+
+
+Piping:
+When piping results, you would get a .tar file compressed inside a .gz or .bz file.
+Ie. RCS.tar would be inside RCS.gz
+
+When using the switches, "-j" and "-z", the .tar file is compressed using the gzip and bipz2 algorithms. 
+Ie. RCS.tgz
+

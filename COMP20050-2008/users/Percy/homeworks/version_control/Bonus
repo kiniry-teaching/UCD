@@ -1,10 +1,18 @@
 Difference:
+Gzip uses Lempel-Ziv coding(L277) while Bzip2 uses Burrows Wheeler block sorting text compression algorithm, and Huffman coding.
+
+bzip2 replaces the original file, with orginal_file.bz2. Gzip does not however do this, it leaves the original version and creates the .gz file. 
+
+Gzip also retains permissions,ownerships and dates while bzip2 does not.
+
+
+'-j' and '-z' are different because when using pipelines you would be be compressing
 
 
 Piping:
 When piping results, you would get a .tar file compressed inside a .gz or .bz file.
 Ie. RCS.tar would be inside RCS.gz
 
-When using the switches, "-j" and "-z", the .tar file is compressed using the gzip and bipz2 algorithms. 
+When using the switches, "-j" and "-z", the .tar file is compressed using the gzip and bipz2 algorithms alongside tar. 
 Ie. RCS.tgz
 
