@@ -1,0 +1,26 @@
+head	1.1;
+access;
+symbols;
+locks
+	dave:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.02.12.19.03.38;	author dave;	state Exp;
+branches;
+next	;
+
+
+desc
+@an empty file
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@
+@

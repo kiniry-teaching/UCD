@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.02.11.21.20.08;	author dave;	state Exp;
+branches;
+next	;
+
+
+desc
+@its some c program
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include 
+
+template inline T SQR( T x ){ return x*x; };
+
+int main()
+{
+    double a = 1.123456789012345678;
+    float b = float( a );
+
+    cout << "double SQR = " << SQR( a ) << '\n'
+         << "float  SQR = " << SQR( b ) << '\n';
+}
+@
