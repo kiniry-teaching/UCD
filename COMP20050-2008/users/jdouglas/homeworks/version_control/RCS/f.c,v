@@ -1,0 +1,24 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.02.13.16.50.51;	author jdouglas;	state Exp;
+branches;
+next	;
+
+
+desc
+@This a file on Computer Science
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@@
