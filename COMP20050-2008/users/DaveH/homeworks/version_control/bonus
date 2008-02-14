@@ -1,0 +1,11 @@
+GZip uses Lempel-Ziv coding, whereas bzip2 uses the Burrows-Wheeler block sorting text compression algorithm and Huffman coding. The compression of bzip is usually better than GZIP.
+
+Bzip2 keeps the permission and dates of the original files when compressed. Gzip does not do this.
+
+______________________________________
+
+Using Piping
+The uncompressed tar would be compressed in a Gzip or bzip2 file.
+
+Using Switches
+The tar file would be compressed and have the extension tgz(is the same as tar.gz) or .tb2( is the same as tar.bz2).
