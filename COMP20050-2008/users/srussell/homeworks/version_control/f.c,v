@@ -1,0 +1,24 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.02.14.15.37.40;	author sean;	state Exp;
+branches;
+next	;
+
+
+desc
+@Created the file
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@@
