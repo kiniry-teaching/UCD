@@ -1,0 +1,58 @@
+head	1.3;
+access;
+symbols
+	threelines:1.2;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2008.02.14.14.01.04;	author erik;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.14.13.49.14;	author erik;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.14.13.47.44;	author erik;	state Exp;
+branches;
+next	;
+
+
+desc
+@added something else.
+@
+
+
+1.3
+log
+@added keywords .
+@
+text
+@something
+something new
+ooooh something else!
+$Author:$
+$Revision:$
+@
+
+
+1.2
+log
+@added a suprising something else
+@
+text
+@d4 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+@
