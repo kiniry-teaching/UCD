@@ -1,0 +1,25 @@
+head	1.1;
+access;
+symbols;
+locks
+	simon:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.02.14.13.35.00;	author simon;	state Exp;
+branches;
+next	;
+
+
+desc
+@rcs attempt one
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@@
