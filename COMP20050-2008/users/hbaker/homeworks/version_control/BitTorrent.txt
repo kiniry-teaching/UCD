@@ -1,0 +1,308 @@
+BitTorrent/:
+total 176
+drwxr-xr-x  3 hbaker csusers  4096 Feb 15 14:38 BitTorrent
+-rw-r--r--  1 hbaker csusers   318 Oct 26  2003 bittorrent.ico
+-rw-r--r--  1 hbaker csusers  1642 Apr  4  2004 bittorrent.nsi
+-rw-r--r--  1 hbaker csusers  6420 Mar 20  2004 btcompletedirgui.py
+-rw-r--r--  1 hbaker csusers  1160 May 17  2004 btcompletedir.py
+-rwxr-xr-x  1 hbaker csusers  8568 Sep 21  2003 btdownloadcurses.py
+-rwxr-xr-x  1 hbaker csusers 11292 Mar 20  2004 btdownloadgui.py
+-rwxr-xr-x  1 hbaker csusers  4714 Sep 21  2003 btdownloadheadless.py
+-rw-r--r--  1 hbaker csusers   465 May 20  2003 btdownloadlibrary.py
+-rwxr-xr-x  1 hbaker csusers 14379 Sep 16  2003 btlaunchmanycurses.py
+-rwxr-xr-x  1 hbaker csusers  9812 Sep 16  2003 btlaunchmany.py
+-rwxr-xr-x  1 hbaker csusers  4530 Mar  2  2004 btmakemetafile.py
+-rwxr-xr-x  1 hbaker csusers   657 Mar 17  2003 btreannounce.py
+-rwxr-xr-x  1 hbaker csusers   858 Mar 17  2003 btrename.py
+-rwxr-xr-x  1 hbaker csusers  1823 Feb 25  2004 btshowmetainfo.py
+-rwxr-xr-x  1 hbaker csusers   439 Mar 28  2003 bttest.py
+-rwxr-xr-x  1 hbaker csusers   194 Mar 17  2003 bttrack.py
+-rw-r--r--  1 hbaker csusers   118 Mar 11  2004 build.bat
+-rw-r--r--  1 hbaker csusers   678 Mar  1  2004 BUILD.windows.txt
+-rw-r--r--  1 hbaker csusers  1080 Mar 20  2004 completedir.nsi
+-rw-r--r--  1 hbaker csusers   425 Mar 28  2004 credits.txt
+drwxr-xr-x  2 hbaker csusers  4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers   783 Oct  4  2003 INSTALL.unix.txt
+-rw-r--r--  1 hbaker csusers  1182 Jun 24  2002 LICENSE.txt
+-rw-r--r--  1 hbaker csusers   287 Mar 30  2003 MANIFEST.in
+drwxr-xr-x  7 hbaker csusers  4096 Feb 15 14:38 osx
+-rw-r--r--  1 hbaker csusers  4124 Jan  7  2003 README.txt
+-rw-r--r--  1 hbaker csusers    90 Sep 25  2003 redirdonate.html
+-rwxr-xr-x  1 hbaker csusers   829 Mar 17  2003 setup.py
+-rw-r--r--  1 hbaker csusers   232 Mar 13  2004 wincompletedirsetup.py
+-rwxr-xr-x  1 hbaker csusers   229 Mar 13  2004 winsetup.py
+
+BitTorrent/BitTorrent:
+total 252
+-rw-r--r--  1 hbaker csusers  7052 Mar 21  2004 bencode.py
+-rw-r--r--  1 hbaker csusers  3733 Apr  4  2004 bitfield.py
+-rw-r--r--  1 hbaker csusers  3831 Mar 21  2004 btformats.py
+-rw-r--r--  1 hbaker csusers  9955 Sep 13  2003 Choker.py
+-rw-r--r--  1 hbaker csusers 10802 Mar 30  2004 Connecter.py
+-rw-r--r--  1 hbaker csusers  1016 Oct  5  2003 CurrentRateMeasure.py
+drwxr-xr-x  2 hbaker csusers  4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  2855 Nov  2  2003 DownloaderFeedback.py
+-rw-r--r--  1 hbaker csusers 17734 Mar 30  2004 Downloader.py
+-rw-r--r--  1 hbaker csusers 12791 Apr  3  2004 download.py
+-rw-r--r--  1 hbaker csusers 18789 Mar 12  2004 Encrypter.py
+-rw-r--r--  1 hbaker csusers  2240 Dec 30  2001 fakeopen.py
+-rw-r--r--  1 hbaker csusers  6054 Oct  4  2003 HTTPHandler.py
+-rw-r--r--  1 hbaker csusers    18 Apr  4  2004 __init__.py
+-rw-r--r--  1 hbaker csusers  2650 Sep 13  2003 NatCheck.py
+-rw-r--r--  1 hbaker csusers  3579 Mar 21  2004 parseargs.py
+-rw-r--r--  1 hbaker csusers  5014 Oct  5  2003 PiecePicker.py
+-rw-r--r--  1 hbaker csusers  1503 Sep 13  2003 RateMeasure.py
+-rw-r--r--  1 hbaker csusers 18347 Apr  3  2004 RawServer.py
+-rw-r--r--  1 hbaker csusers  5704 Apr 17  2004 Rerequester.py
+-rw-r--r--  1 hbaker csusers  2287 Dec 13  2002 selectpoll.py
+-rw-r--r--  1 hbaker csusers  5021 Sep 13  2003 Storage.py
+-rw-r--r--  1 hbaker csusers 17029 Mar 30  2004 StorageWrapper.py
+-rw-r--r--  1 hbaker csusers  2052 Sep 13  2003 testtest.py
+-rw-r--r--  1 hbaker csusers 25813 Jun  4  2004 track.py
+-rw-r--r--  1 hbaker csusers  8059 Sep 13  2003 Uploader.py
+-rw-r--r--  1 hbaker csusers  4261 Jun 27  2003 zurllib.py
+
+BitTorrent/BitTorrent/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 1248 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers   22 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers   70 Feb 15 14:38 Root
+
+BitTorrent/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 1426 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers   11 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers   70 Feb 15 14:38 Root
+
+BitTorrent/osx:
+total 268
+drwxr-xr-x  3 hbaker csusers  4096 Feb 15 14:38 BitTorrent.pbproj
+-rw-r--r--  1 hbaker csusers   944 Nov 13  2003 BTAppController.h
+-rw-r--r--  1 hbaker csusers  7433 Oct  3  2003 BTAppController.m
+-rw-r--r--  1 hbaker csusers   552 May 30  2003 BTCallbacks.h
+-rw-r--r--  1 hbaker csusers  3260 May 30  2003 BUILD_INSTRUCTIONS
+-rw-r--r--  1 hbaker csusers   189 May 14  2003 callbacks.h
+-rw-r--r--  1 hbaker csusers  7051 Nov 13  2003 callbacks.m
+drwxr-xr-x  2 hbaker csusers  4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  2189 Nov 13  2003 DLWindowController.h
+-rw-r--r--  1 hbaker csusers 15806 Oct  3  2003 DLWindowController.m
+drwxr-xr-x  7 hbaker csusers  4096 Feb 15 14:38 Dutch.lproj
+drwxr-xr-x  7 hbaker csusers  4096 Feb 15 14:38 English.lproj
+-rwxr-xr-x  1 hbaker csusers  2983 Nov 13  2003 freeze.py
+drwxr-xr-x  6 hbaker csusers  4096 Feb 15 14:38 French.lproj
+-rw-r--r--  1 hbaker csusers   926 Nov 13  2003 Generate.h
+-rw-r--r--  1 hbaker csusers 10232 Oct  3  2003 Generate.m
+-rw-r--r--  1 hbaker csusers   312 Jul 30  2002 ICHelper.h
+-rw-r--r--  1 hbaker csusers  1870 Dec 29  2002 ICHelper.m
+-rw-r--r--  1 hbaker csusers  1473 Nov 13  2003 main.m
+-rw-r--r--  1 hbaker csusers   514 May 14  2003 Preferences.h
+-rw-r--r--  1 hbaker csusers  1509 May 14  2003 Preferences.m
+-rw-r--r--  1 hbaker csusers   297 Nov 13  2003 pystructs.h
+-rw-r--r--  1 hbaker csusers  3801 Nov 13  2003 README.txt
+-rw-r--r--  1 hbaker csusers 59778 Jan  4  2003 torrent.icns
+-rw-r--r--  1 hbaker csusers   121 Nov 13  2003 Tstate.h
+-rw-r--r--  1 hbaker csusers 77542 Jul 30  2002 waterfall.icns
+
+BitTorrent/osx/BitTorrent.pbproj:
+total 28
+drwxr-xr-x  2 hbaker csusers  4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers 20829 Nov 13  2003 project.pbxproj
+
+BitTorrent/osx/BitTorrent.pbproj/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 51 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers 33 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers 70 Feb 15 14:38 Root
+
+BitTorrent/osx/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 1046 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers   15 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers   70 Feb 15 14:38 Root
+
+BitTorrent/osx/Dutch.lproj:
+total 24
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 DLWindow.nib
+-rw-r--r--  1 hbaker csusers 3732 Oct 11  2003 Localizable.strings
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 MainMenu.nib
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 Metainfo.nib
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 Preferences.nib
+
+BitTorrent/osx/Dutch.lproj/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 131 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  27 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/Dutch.lproj/DLWindow.nib:
+total 20
+-rw-r--r--  1 hbaker csusers  803 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  475 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 7447 Oct 11  2003 keyedobjects.nib
+
+BitTorrent/osx/Dutch.lproj/DLWindow.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 136 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  40 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/Dutch.lproj/MainMenu.nib:
+total 24
+-rw-r--r--  1 hbaker csusers   762 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers  4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers   613 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 12133 Oct 11  2003 keyedobjects.nib
+
+BitTorrent/osx/Dutch.lproj/MainMenu.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 136 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  40 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/Dutch.lproj/Metainfo.nib:
+total 16
+-rw-r--r--  1 hbaker csusers  553 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  453 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 2712 Oct 11  2003 objects.nib
+
+BitTorrent/osx/Dutch.lproj/Metainfo.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 131 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  40 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/Dutch.lproj/Preferences.nib:
+total 20
+-rw-r--r--  1 hbaker csusers  389 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  451 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 6322 Oct 11  2003 keyedobjects.nib
+
+BitTorrent/osx/Dutch.lproj/Preferences.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 136 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  43 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/English.lproj:
+total 32
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 DLWindow.nib
+-rw-r--r--  1 hbaker csusers  694 Nov 13  2003 InfoPlist.strings
+-rw-r--r--  1 hbaker csusers 4172 Oct  3  2003 Localizable.strings
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 MainMenu.nib
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 Metainfo.nib
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 Preferences.nib
+
+BitTorrent/osx/English.lproj/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 181 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  29 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/English.lproj/DLWindow.nib:
+total 20
+-rw-r--r--  1 hbaker csusers  803 May 30  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  475 Oct  3  2003 info.nib
+-rw-r--r--  1 hbaker csusers 7425 Oct  3  2003 keyedobjects.nib
+
+BitTorrent/osx/English.lproj/DLWindow.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 136 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  42 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/English.lproj/MainMenu.nib:
+total 24
+-rw-r--r--  1 hbaker csusers   762 May 14  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers  4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers   613 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 12082 Oct 11  2003 keyedobjects.nib
+
+BitTorrent/osx/English.lproj/MainMenu.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 137 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  42 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/English.lproj/Metainfo.nib:
+total 20
+-rw-r--r--  1 hbaker csusers  553 Jan  4  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  453 May 30  2003 info.nib
+-rw-r--r--  1 hbaker csusers 6364 May 30  2003 keyedobjects.nib
+
+BitTorrent/osx/English.lproj/Metainfo.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 136 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  42 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/English.lproj/Preferences.nib:
+total 20
+-rw-r--r--  1 hbaker csusers  389 May 14  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  453 May 14  2003 info.nib
+-rw-r--r--  1 hbaker csusers 6201 May 14  2003 keyedobjects.nib
+
+BitTorrent/osx/English.lproj/Preferences.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 136 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  45 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/French.lproj:
+total 16
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 DLWindow.nib
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 MainMenu.nib
+drwxr-xr-x  3 hbaker csusers 4096 Feb 15 14:38 Metainfo.nib
+
+BitTorrent/osx/French.lproj/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 57 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers 28 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers 70 Feb 15 14:38 Root
+
+BitTorrent/osx/French.lproj/DLWindow.nib:
+total 16
+-rw-r--r--  1 hbaker csusers  803 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  475 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 3238 Oct 11  2003 objects.nib
+
+BitTorrent/osx/French.lproj/DLWindow.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 131 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  41 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/French.lproj/MainMenu.nib:
+total 20
+-rw-r--r--  1 hbaker csusers  762 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rw-r--r--  1 hbaker csusers  588 Oct 11  2003 info.nib
+-rw-r--r--  1 hbaker csusers 6402 Oct 11  2003 objects.nib
+
+BitTorrent/osx/French.lproj/MainMenu.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 131 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  41 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
+
+BitTorrent/osx/French.lproj/Metainfo.nib:
+total 16
+-rwxr-xr-x  1 hbaker csusers  553 Oct 11  2003 classes.nib
+drwxr-xr-x  2 hbaker csusers 4096 Feb 15 14:38 CVS
+-rwxr-xr-x  1 hbaker csusers  384 Oct 11  2003 info.nib
+-rwxr-xr-x  1 hbaker csusers 2721 Oct 11  2003 objects.nib
+
+BitTorrent/osx/French.lproj/Metainfo.nib/CVS:
+total 12
+-rw-r--r--  1 hbaker csusers 131 Feb 15 14:38 Entries
+-rw-r--r--  1 hbaker csusers  41 Feb 15 14:38 Repository
+-rw-r--r--  1 hbaker csusers  70 Feb 15 14:38 Root
