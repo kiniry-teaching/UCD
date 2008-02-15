@@ -1,3 +1,5 @@
+06408940/Eoin Healy
+
 Difference:
 Gzip uses Lempel-Ziv coding(L277) while Bzip2 uses Burrows Wheeler block sorting text compression algorithm, and Huffman coding.
 

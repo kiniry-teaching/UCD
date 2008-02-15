@@ -1,0 +1,16 @@
+06408940/Eoin Healy
+
+The more random a file a file is, the less it can be compressed. This is because compression depends, to a degree, on repititon of a file. This is why pictures/video/audio can not usually be compressed very much.
+
+A 1KB audio file would usually be the least,or one of the least, compressable 1kb file but I can't make a 1KB file to test this.
+
+
+Project: Azureus
+
+I find this project cool because it expands a lot on the basic BitTorrent client. It allows a lot more freedom when using it because it is very configurable. It also allows more than 1 simultanious download that the original BitTorrent client did not. I also like this because it is wrote in Java, and not many mainstream programs are wrote entirely in Java.
+
+The project is wrote in Java.
+
+The user documentation is very clear for it, and it also starts up with a wizard to make it easier for new users. The wizard makes it very easy to just download and use because you don't need to configure it for a long time, it only takes about 30seconds.
+
+The project uses many of SourceForges features, including their web based CVS browser. It also uses their bug tracking and public forums, making it easier for people to communicate with the developers and report bugs.
