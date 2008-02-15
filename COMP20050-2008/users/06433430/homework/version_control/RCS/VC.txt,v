@@ -1,0 +1,25 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2008.02.13.17.29.22;	author dcarr;	state Exp;
+branches;
+next	;
+
+
+desc
+@My thoughts on version control systems
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@I like version control
+@

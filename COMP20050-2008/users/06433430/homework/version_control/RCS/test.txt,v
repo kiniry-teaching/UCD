@@ -1,0 +1,124 @@
+head	2.8;
+access;
+symbols
+	eurekaitsthebest:1.1;
+locks; strict;
+comment	@# @;
+
+
+2.8
+date	2008.02.14.13.49.36;	author dcarr;	state Exp;
+branches;
+next	2.7;
+
+2.7
+date	2008.02.14.13.47.25;	author dcarr;	state Exp;
+branches;
+next	2.6;
+
+2.6
+date	2008.02.13.17.18.43;	author dcarr;	state Exp;
+branches;
+next	2.5;
+
+2.5
+date	2008.02.13.17.09.45;	author dcarr;	state Exp;
+branches
+	2.5.1.1;
+next	1.2;
+
+1.2
+date	2008.02.13.16.59.23;	author dcarr;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.13.16.53.44;	author dcarr;	state Exp;
+branches;
+next	;
+
+2.5.1.1
+date	2008.02.13.17.13.57;	author dcarr;	state Exp;
+branches;
+next	;
+
+
+desc
+@Version one, something!
+@
+
+
+2.8
+log
+@Added more RCS keywords
+@
+text
+@yo!
+something.....more.....or less
+$Revision: 2.7 $
+$Author:$
+$Date:$
+$Log:$
+$Id:$
+@
+
+
+2.7
+log
+@added RCS keyword
+@
+text
+@d3 5
+a7 1
+$Revision:$
+@
+
+
+2.6
+log
+@Added "yo!"
+@
+text
+@d3 1
+@
+
+
+2.5
+log
+@Version 2.5!
+@
+text
+@d1 1
+@
+
+
+2.5.1.1
+log
+@New Branch
+@
+text
+@a1 1
+I am adding a branch.
+@
+
+
+1.2
+log
+@added more.......
+@
+text
+@d1 1
+a1 1
+something.....more
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+something
+@
