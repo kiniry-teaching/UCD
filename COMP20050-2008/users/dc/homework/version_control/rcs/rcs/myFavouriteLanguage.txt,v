@@ -1,0 +1,41 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2008.02.13.17.21.39;	author dcarr;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.13.17.20.22;	author dcarr;	state Exp;
+branches;
+next	;
+
+
+desc
+@This is a file detailing the name of my very favourite language!
+@
+
+
+1.2
+log
+@Added description of it's awesomeness!
+@
+text
+@java.......is awesome!
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+java
+@
