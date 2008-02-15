@@ -1,0 +1,773 @@
+bugzilla/:
+total 12
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+drwxr-xr-x  4 smonkevicius csusers 4096 Feb 15 12:28 docs
+drwxr-xr-x  4 smonkevicius csusers 4096 Feb 15 12:28 template
+
+bugzilla/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 26 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  9 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/docs:
+total 8
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 xml
+
+bugzilla/docs/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 10 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 14 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/docs/xml:
+total 564
+-rw-r--r--  1 smonkevicius csusers  12640 Sep 10 22:10 about.xml
+-rw-r--r--  1 smonkevicius csusers 153930 Feb  9 16:18 administration.xml
+-rw-r--r--  1 smonkevicius csusers   1223 Nov  6 22:04 bugzilla.ent
+-rw-r--r--  1 smonkevicius csusers   4972 Feb  2 11:32 Bugzilla-Guide.xml
+-rw-r--r--  1 smonkevicius csusers   3682 Jan 21 18:38 conventions.xml
+-rw-r--r--  1 smonkevicius csusers  44091 Jan 19 18:40 customization.xml
+drwxr-xr-x  2 smonkevicius csusers   4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  22063 Jul 25  2007 gfdl.xml
+-rw-r--r--  1 smonkevicius csusers  22300 Sep 10 23:13 glossary.xml
+-rw-r--r--  1 smonkevicius csusers    491 Jul 27  2007 index.xml
+-rw-r--r--  1 smonkevicius csusers  98569 Feb  9 11:57 installation.xml
+-rw-r--r--  1 smonkevicius csusers   5388 Jul 25  2007 integration.xml
+-rw-r--r--  1 smonkevicius csusers   4631 Jul 25  2007 introduction.xml
+-rw-r--r--  1 smonkevicius csusers   9583 Jul 26  2007 modules.xml
+-rw-r--r--  1 smonkevicius csusers   6205 Jul 26  2007 patches.xml
+-rw-r--r--  1 smonkevicius csusers   2080 Jul 25  2007 requiredsoftware.xml
+-rw-r--r--  1 smonkevicius csusers  16381 Sep 10 22:54 security.xml
+-rw-r--r--  1 smonkevicius csusers  15055 Jul 26  2007 troubleshooting.xml
+-rw-r--r--  1 smonkevicius csusers  97502 Feb 13 15:45 using.xml
+
+bugzilla/docs/xml/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 846 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  18 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template:
+total 8
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+drwxr-xr-x  5 smonkevicius csusers 4096 Feb 15 12:28 fr
+
+bugzilla/template/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers  9 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 18 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr:
+total 12
+drwxr-xr-x   2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+drwxr-xr-x  17 smonkevicius csusers 4096 Feb 15 12:28 default
+drwxr-xr-x   3 smonkevicius csusers 4096 Feb 15 12:28 extension
+
+bugzilla/template/fr/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 30 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 21 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default:
+total 112
+drwxr-xr-x   7 smonkevicius csusers  4096 Feb 15 12:28 account
+drwxr-xr-x  18 smonkevicius csusers  4096 Feb 15 12:28 admin
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 attachment
+drwxr-xr-x   7 smonkevicius csusers  4096 Feb 15 12:28 bug
+-rw-r--r--   1 smonkevicius csusers  4329 Oct  6 12:49 config.js.tmpl
+-rw-r--r--   1 smonkevicius csusers  6196 Oct  8 17:55 config.rdf.tmpl
+drwxr-xr-x   2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 email
+-rw-r--r--   1 smonkevicius csusers 11133 Dec  3 17:23 filterexceptions.pl
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 flag
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 global
+-rw-r--r--   1 smonkevicius csusers  7126 Sep 20 18:10 index.html.tmpl
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 list
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 pages
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 reports
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 request
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 search
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 setup
+-rw-r--r--   1 smonkevicius csusers  5922 Sep 20 18:10 sidebar.xul.tmpl
+-rw-r--r--   1 smonkevicius csusers  4427 Sep 20 18:10 welcome-admin.html.tmpl
+drwxr-xr-x   3 smonkevicius csusers  4096 Feb 15 12:28 whine
+
+bugzilla/template/fr/default/account:
+total 40
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 auth
+-rw-r--r--  1 smonkevicius csusers 4293 Sep 20 18:10 cancel-token.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1482 Sep 20 18:10 created.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2984 Sep 20 18:10 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 email
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 password
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 prefs
+-rw-r--r--  1 smonkevicius csusers 2800 Sep 20 18:10 profile-activity.html.tmpl
+
+bugzilla/template/fr/default/account/auth:
+total 12
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 4068 Sep 20 18:10 login.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3153 Sep 20 18:10 login-small.html.tmpl
+
+bugzilla/template/fr/default/account/auth/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 104 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  42 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/account/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 262 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  37 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/account/email:
+total 24
+-rw-r--r--  1 smonkevicius csusers 1690 Sep 20 18:10 change-new.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1888 Sep 20 18:10 change-old.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1609 Sep 20 18:10 confirm.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3212 Sep 20 18:10 confirm-new.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2619 Sep 20 18:10 request-new.txt.tmpl
+
+bugzilla/template/fr/default/account/email/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 263 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  43 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/account/password:
+total 12
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 1728 Sep 20 18:10 forgotten-password.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1736 Sep 20 18:10 set-forgotten-password.html.tmpl
+
+bugzilla/template/fr/default/account/password/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 127 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  46 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/account/prefs:
+total 44
+-rw-r--r--  1 smonkevicius csusers  3023 Sep 20 18:10 account.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 10697 Sep 20 18:10 email.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3326 Sep 20 18:10 permissions.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  4128 Oct 22 12:57 prefs.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  7069 Feb 12 17:54 saved-searches.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3143 Sep 20 18:10 settings.html.tmpl
+
+bugzilla/template/fr/default/account/prefs/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 311 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  43 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin:
+total 92
+-rw-r--r--  1 smonkevicius csusers 8126 Oct 23 00:26 admin.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 classifications
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 components
+-rw-r--r--  1 smonkevicius csusers 4100 Sep 20 18:10 confirm-action.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 custom_fields
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 fieldvalues
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 flag-type
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 groups
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 keywords
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 milestones
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 params
+drwxr-xr-x  4 smonkevicius csusers 4096 Feb 15 12:28 products
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 sanitycheck
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 settings
+-rw-r--r--  1 smonkevicius csusers 3873 Oct 23 00:26 sudo.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 6756 Sep 20 18:10 table.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 users
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 versions
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 workflow
+
+bugzilla/template/fr/default/admin/classifications:
+total 24
+-rw-r--r--  1 smonkevicius csusers 1945 Sep 20 18:10 add.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2140 Sep 20 18:10 del.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3060 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3252 Sep 20 18:10 reclassify.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2487 Sep 20 18:10 select.html.tmpl
+
+bugzilla/template/fr/default/admin/classifications/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 243 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  51 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/components:
+total 36
+-rw-r--r--  1 smonkevicius csusers 4682 Oct  8 17:55 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3297 Oct 12 17:32 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 4420 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1950 Sep 20 18:10 footer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3806 Sep 20 18:10 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1957 Sep 20 18:10 select-product.html.tmpl
+
+bugzilla/template/fr/default/admin/components/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 308 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  46 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/custom_fields:
+total 28
+-rw-r--r--  1 smonkevicius csusers 2208 Feb  6 21:00 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4308 Nov 11 22:59 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 4219 Feb  6 20:22 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2625 Feb  6 19:56 list.html.tmpl
+
+bugzilla/template/fr/default/admin/custom_fields/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 202 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  49 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 441 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  35 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/fieldvalues:
+total 32
+-rw-r--r--  1 smonkevicius csusers 4526 Sep 20 18:10 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2802 Sep 20 18:10 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2578 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1832 Sep 20 18:10 footer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2847 Sep 20 18:10 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1343 Sep 20 18:10 select-field.html.tmpl
+
+bugzilla/template/fr/default/admin/fieldvalues/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 306 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  47 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/flag-type:
+total 28
+-rw-r--r--  1 smonkevicius csusers  2116 Oct 23 00:26 confirm-delete.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 10380 Oct 23 00:26 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5606 Oct 23 00:26 list.html.tmpl
+
+bugzilla/template/fr/default/admin/flag-type/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 153 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  45 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/groups:
+total 44
+-rw-r--r--  1 smonkevicius csusers 2667 Nov 11 22:59 confirm-remove.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4410 Nov 11 22:59 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 5070 Nov 20 13:48 delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 8488 Nov 11 22:59 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 5758 Nov 11 22:59 list.html.tmpl
+
+bugzilla/template/fr/default/admin/groups/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 252 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  42 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/keywords:
+total 20
+-rwxr-xr-x  1 smonkevicius csusers 1902 Sep 20 18:10 confirm-delete.html.tmpl
+-rwxr-xr-x  1 smonkevicius csusers 1883 Sep 20 18:10 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rwxr-xr-x  1 smonkevicius csusers 2438 Sep 20 18:10 edit.html.tmpl
+-rwxr-xr-x  1 smonkevicius csusers 2162 Sep 20 18:10 list.html.tmpl
+
+bugzilla/template/fr/default/admin/keywords/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 202 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  44 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/milestones:
+total 28
+-rw-r--r--  1 smonkevicius csusers 3329 Sep 20 18:10 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2238 Sep 20 18:10 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2458 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2397 Sep 20 18:10 footer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3147 Sep 20 18:10 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1945 Sep 20 18:10 select-product.html.tmpl
+
+bugzilla/template/fr/default/admin/milestones/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 308 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  46 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/params:
+total 96
+-rw-r--r--  1 smonkevicius csusers 2612 Sep 20 18:10 admin.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3037 Sep 20 18:10 attachment.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 7870 Dec  5 18:16 auth.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3254 Sep 20 18:10 bugchange.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3065 Sep 20 18:10 bugfields.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2554 Feb  9 14:08 bugmove.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 5796 Sep 20 18:10 common.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 7060 Sep 20 18:10 core.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2504 Sep 20 18:10 dependencygraph.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4373 Oct 23 00:26 editparams.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3422 Sep 20 18:10 groupsecurity.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1583 Sep 20 18:10 index.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3075 Sep 20 18:10 ldap.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3907 Sep 20 18:10 mta.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4024 Sep 20 18:10 patchviewer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3514 Sep 20 18:10 query.html.tmpl
+-rwxr-xr-x  1 smonkevicius csusers 2600 Sep 20 15:07 radius.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2740 Sep 20 18:10 shadowdb.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2501 Sep 20 18:10 usermatch.html.tmpl
+
+bugzilla/template/fr/default/admin/params/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 963 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  42 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/products:
+total 52
+-rw-r--r--  1 smonkevicius csusers 7418 Oct  8 17:55 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2213 Nov  3 18:42 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 3981 Sep 20 18:10 edit-common.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4981 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3083 Sep 20 18:10 footer.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers 4096 Feb 15 12:28 groupcontrol
+-rw-r--r--  1 smonkevicius csusers 2005 Sep 20 23:28 list-classifications.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3456 Sep 20 18:10 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 6781 Sep 20 18:10 updated.html.tmpl
+
+bugzilla/template/fr/default/admin/products/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 435 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  44 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/products/groupcontrol:
+total 24
+-rw-r--r--  1 smonkevicius csusers  2089 Sep 20 18:10 confirm-edit.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 10802 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1803 Sep 20 18:10 updated.html.tmpl
+
+bugzilla/template/fr/default/admin/products/groupcontrol/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 154 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  57 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/sanitycheck:
+total 20
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  1471 Sep 13 22:58 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 11694 Sep 13 22:58 messages.html.tmpl
+
+bugzilla/template/fr/default/admin/sanitycheck/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 100 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  47 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/settings:
+total 8
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 3583 Jan 29 19:01 edit.html.tmpl
+
+bugzilla/template/fr/default/admin/settings/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 49 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 44 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/users:
+total 52
+-rw-r--r--  1 smonkevicius csusers 16245 Nov 19 18:33 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1820 Oct 23 00:26 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  5877 Oct 23 00:26 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3838 Oct 23 00:26 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1156 Sep 20 18:10 listselectvars.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2319 Sep 16 21:53 responsibilities.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2951 Oct 23 00:26 search.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3355 Jan 12 13:32 userdata.html.tmpl
+
+bugzilla/template/fr/default/admin/users/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 419 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  41 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/versions:
+total 28
+-rw-r--r--  1 smonkevicius csusers 3195 Sep 20 18:10 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1994 Sep 20 18:10 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2152 Sep 20 18:10 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2348 Sep 20 18:10 footer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2568 Sep 20 18:10 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1943 Sep 20 18:10 select-product.html.tmpl
+
+bugzilla/template/fr/default/admin/versions/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 308 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  44 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/admin/workflow:
+total 16
+-rw-r--r--  1 smonkevicius csusers 3209 Sep 16 23:10 comment.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 4374 Sep 16 23:10 edit.html.tmpl
+
+bugzilla/template/fr/default/admin/workflow/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 99 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 44 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/attachment:
+total 96
+-rw-r--r--  1 smonkevicius csusers  1705 Sep 20 18:10 choose.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2929 Nov 11 23:26 confirm-delete.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1353 Sep 20 18:10 content-types.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2758 Jan 28 18:28 created.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3632 Sep 20 18:10 createformcontents.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5275 Nov 11 23:26 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  1145 Sep 20 18:10 delete_reason.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers  6717 Sep 20 18:10 diff-file.html.tmpl
+-rw-r--r--  1 smonkevicius csusers   948 Sep 20 18:10 diff-footer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  9922 Nov 11 23:26 diff-header.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 13469 Nov 29 23:18 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5371 Sep 20 18:10 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2682 Feb  9 16:38 midair.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3447 Sep 20 18:10 show-multiple.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2343 Jan 29 19:20 updated.html.tmpl
+
+bugzilla/template/fr/default/attachment/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 790 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  40 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/bug:
+total 156
+drwxr-xr-x  3 smonkevicius csusers  4096 Feb 15 12:28 activity
+-rw-r--r--  1 smonkevicius csusers  1251 Sep 20 18:10 choose.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  8015 Feb  9 16:35 comments.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers  4096 Feb 15 12:28 create
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  4103 Sep 20 18:10 dependency-graph.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  9958 Nov 11 23:26 dependency-tree.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 39378 Feb  9 16:27 edit.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3239 Jan 12 21:58 field.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  4130 Sep 16 22:25 keyword-chooser.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  4852 Jan 10 18:44 knob.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3173 Jan 28 18:24 navigate.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers  4096 Feb 15 12:28 process
+-rw-r--r--  1 smonkevicius csusers  2349 Jan 28 18:16 show.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 11855 Nov 11 23:26 show-multiple.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5027 Sep 20 18:10 show.xml.tmpl
+-rw-r--r--  1 smonkevicius csusers 10340 Nov 11 23:26 summarize-time.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1563 Sep 20 18:10 time.html.tmpl
+drwxr-xr-x  3 smonkevicius csusers  4096 Feb 15 12:28 votes
+
+bugzilla/template/fr/default/bug/activity:
+total 16
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 1688 Oct  3 19:53 show.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4991 Sep 20 18:10 table.html.tmpl
+
+bugzilla/template/fr/default/bug/activity/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 97 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 42 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/bug/create:
+total 68
+-rw-r--r--  1 smonkevicius csusers  1906 Sep 20 18:10 comment-guided.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers  1217 Sep 20 18:10 comment.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers  2074 Sep 20 18:10 confirm-create-dupe.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2219 Jan 28 18:14 created.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 19938 Dec 14 17:16 create-guided.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 19974 Dec  3 17:21 create.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  1559 Sep 20 18:10 make-template.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1466 Sep 20 18:10 user-message.html.tmpl
+
+bugzilla/template/fr/default/bug/create/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 437 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  40 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/bug/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 779 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  33 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/bug/process:
+total 32
+-rw-r--r--  1 smonkevicius csusers 2551 Sep 20 18:10 bugmail.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2710 Sep 20 18:10 confirm-duplicate.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 1631 Feb  6 19:31 header.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3215 Feb  9 16:32 midair.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2083 Sep 20 18:10 results.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 6826 Jan 12 16:59 verify-new-product.html.tmpl
+
+bugzilla/template/fr/default/bug/process/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 321 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  41 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/bug/votes:
+total 20
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 1648 Sep 20 18:10 delete-all.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 1883 Sep 20 18:10 list-for-bug.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 6172 Feb  3 12:35 list-for-user.html.tmpl
+
+bugzilla/template/fr/default/bug/votes/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 166 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  39 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 478 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  29 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/email:
+total 24
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2804 Sep 20 18:10 newchangedmail.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1278 Sep 16 12:07 sanitycheck.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1606 Sep 20 18:10 sudo.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 1232 Sep 20 18:10 votes-removed.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 3053 Sep 20 18:10 whine.txt.tmpl
+
+bugzilla/template/fr/default/email/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 259 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  35 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/flag:
+total 16
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 10688 Sep 20 18:10 list.html.tmpl
+
+bugzilla/template/fr/default/flag/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 49 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 34 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/global:
+total 264
+-rw-r--r--  1 smonkevicius csusers  1049 Sep 20 18:10 banner.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2143 Sep 20 18:10 choose-classification.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2554 Sep 20 18:10 choose-product.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 20686 Jan 28 18:09 code-error.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5088 Nov 25 22:02 common-links.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  6464 Sep 20 18:10 confirm-user-match.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  2116 Sep 20 18:10 docslinks.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5583 Jan 11 12:23 field-descs.none.tmpl
+-rw-r--r--  1 smonkevicius csusers  1467 Sep 20 18:10 footer.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  9846 Nov 29 17:58 header.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1101 Sep 20 18:10 help.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2365 Sep 20 18:10 hidden-fields.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1380 Sep 20 18:10 initialize.none.tmpl
+-rw-r--r--  1 smonkevicius csusers  1400 Sep 20 18:10 js-products.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1412 Sep 20 18:10 message.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 35593 Feb 12 17:50 messages.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1007 Sep 20 18:10 message.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers  3661 Sep 20 18:10 per-bug-queries.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2389 Sep 20 18:10 select-menu.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2785 Sep 20 18:10 setting-descs.none.tmpl
+-rw-r--r--  1 smonkevicius csusers  5053 Feb  6 19:29 site-navigation.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1883 Sep 20 18:10 tabs.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2461 Sep 20 18:10 textarea.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3103 Sep 20 18:10 useful-links.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 74993 Feb  6 19:41 user-error.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2735 Sep 20 18:10 userselect.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1978 Sep 20 18:10 variables.none.tmpl
+
+bugzilla/template/fr/default/global/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 1448 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers   36 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers   76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/list:
+total 84
+-rw-r--r--  1 smonkevicius csusers  3215 Sep 20 18:10 change-columns.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 12277 Jan  4 14:17 edit-multiple.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  4589 Sep 20 18:10 list.atom.tmpl
+-rw-r--r--  1 smonkevicius csusers  1665 Sep 20 18:10 list.csv.tmpl
+-rw-r--r--  1 smonkevicius csusers  9610 Jan 12 14:48 list.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3121 Oct  8 17:55 list.ics.tmpl
+-rw-r--r--  1 smonkevicius csusers  1297 Sep 20 18:10 list.js.tmpl
+-rw-r--r--  1 smonkevicius csusers  1798 Sep 20 18:10 list.rdf.tmpl
+-rw-r--r--  1 smonkevicius csusers  1846 Sep 20 18:10 list-simple.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  5576 Oct  8 17:55 quips.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1463 Sep 20 18:10 server-push.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  8446 Jan 12 14:48 table.html.tmpl
+
+bugzilla/template/fr/default/list/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 598 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  34 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/pages:
+total 116
+-rw-r--r--  1 smonkevicius csusers  7068 Sep 20 18:10 bug-writing.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 10568 Feb  9 16:22 fields.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1457 Feb  9 16:30 linked.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1617 Sep 20 18:10 linkify.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  9848 Dec  3 17:30 quicksearchhack.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  6343 Sep 20 18:10 quicksearch.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 50645 Jan  9 12:59 release-notes.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2886 Sep 20 18:10 sudo.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  3231 Sep 20 18:10 voting.html.tmpl
+
+bugzilla/template/fr/default/pages/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 470 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  35 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/reports:
+total 124
+-rw-r--r--  1 smonkevicius csusers 1439 Sep 20 18:10 chart.csv.tmpl
+-rw-r--r--  1 smonkevicius csusers 2179 Sep 20 18:10 chart.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2404 Sep 20 18:10 chart.png.tmpl
+-rw-r--r--  1 smonkevicius csusers 2577 Sep 20 18:10 components.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 9068 Sep 20 18:10 create-chart.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 6140 Sep 20 18:10 duplicates.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2168 Sep 20 18:10 duplicates.rdf.tmpl
+-rw-r--r--  1 smonkevicius csusers 1306 Sep 20 18:10 duplicates-simple.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 5628 Sep 20 18:10 duplicates-table.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2312 Sep 20 18:10 edit-series.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2660 Sep 20 18:10 keywords.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2273 Nov 11 23:26 menu.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2547 Nov 11 23:26 old-charts.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2684 Sep 20 18:10 report-bar.png.tmpl
+-rw-r--r--  1 smonkevicius csusers  968 Sep 20 18:10 report.csv.tmpl
+-rw-r--r--  1 smonkevicius csusers 6219 Sep 20 18:10 report.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2861 Sep 20 18:10 report-line.png.tmpl
+-rw-r--r--  1 smonkevicius csusers 1498 Sep 20 18:10 report-pie.png.tmpl
+-rw-r--r--  1 smonkevicius csusers  930 Sep 20 18:10 report-simple.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 2268 Sep 20 18:10 report-table.csv.tmpl
+-rw-r--r--  1 smonkevicius csusers 5344 Sep 20 18:10 report-table.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 4101 Sep 20 18:10 series-common.html.tmpl
+-rw-r--r--  1 smonkevicius csusers 3630 Sep 20 18:10 series.html.tmpl
+
+bugzilla/template/fr/default/reports/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 1205 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers   37 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers   76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/request:
+total 16
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2888 Sep 20 18:10 email.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 6634 Sep 20 18:10 queue.html.tmpl
+
+bugzilla/template/fr/default/request/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 97 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 37 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/search:
+total 88
+-rw-r--r--  1 smonkevicius csusers  5118 Sep 20 18:10 boolean-charts.html.tmpl
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 20545 Sep 23 11:46 form.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2844 Sep 20 18:10 knob.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2461 Nov 11 23:26 search-advanced.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2073 Nov 11 23:26 search-create-series.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  6088 Sep 20 18:10 search-help.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2402 Sep 20 18:10 search-plugin.xml.tmpl
+-rw-r--r--  1 smonkevicius csusers  4521 Nov 11 23:26 search-report-graph.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1957 Sep 20 18:10 search-report-select.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2628 Nov 11 23:26 search-report-table.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  4381 Sep 20 18:10 search-specific.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  1322 Sep 20 18:10 tabs.html.tmpl
+
+bugzilla/template/fr/default/search/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 675 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  36 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/setup:
+total 8
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 2559 Jan 29 19:06 strings.txt.pl
+
+bugzilla/template/fr/default/setup/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 49 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 35 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
+
+bugzilla/template/fr/default/whine:
+total 32
+drwxr-xr-x  2 smonkevicius csusers  4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers  3239 Sep 20 18:10 mail.html.tmpl
+-rw-r--r--  1 smonkevicius csusers  2437 Sep 20 18:10 mail.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers  1710 Sep 20 18:10 multipart-mime.txt.tmpl
+-rw-r--r--  1 smonkevicius csusers 15679 Nov 11 22:59 schedule.html.tmpl
+
+bugzilla/template/fr/default/whine/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 202 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers  35 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers  76 Feb 15 12:28 Root
+
+bugzilla/template/fr/extension:
+total 8
+drwxr-xr-x  2 smonkevicius csusers 4096 Feb 15 12:28 CVS
+-rw-r--r--  1 smonkevicius csusers 1734 Jul  8  2007 filterexceptions.pl
+
+bugzilla/template/fr/extension/CVS:
+total 12
+-rw-r--r--  1 smonkevicius csusers 58 Feb 15 12:28 Entries
+-rw-r--r--  1 smonkevicius csusers 31 Feb 15 12:28 Repository
+-rw-r--r--  1 smonkevicius csusers 76 Feb 15 12:28 Root
