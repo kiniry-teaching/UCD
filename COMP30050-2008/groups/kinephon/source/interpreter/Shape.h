@@ -27,7 +27,7 @@ public:				// Methods
 					//	Overload to compare movements, speeds, or accelerations
 	virtual float	compare
 					(	Animation const * const	animation
-					)	const;
+					)	const					= 0;
 
 private:
 					// Compare array of vector points against the shape data	
