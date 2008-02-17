@@ -4,20 +4,30 @@ Revision:
 Title:	Kinephon
 Team:	Intuitive Aptitudes
 Members:	Eva Darulova	05817625
-	Sumbo Ajisafe	05005451
-	David Swords	05477689
-	Eliott Bartley	05806500
-	Jakub Dostal	05844151
+			Sumbo Ajisafe	05005451
+			David Swords	05477689
+			Eliott Bartley	05806500
+			Jakub Dostal	05844151
 
 Project Parts:
-Installer
-<dave>
+Installer <Dave>
+This installer could come in different flavours, depending on how the project comes along.
+The two main options are one for Linux and one for Windows.
+Linux:
+	This will be a .deb (Debian) package. Itself can come in two flavours which are binary and
+	source. A binary package contains all the executables, man pages etc. and are unpacked using
+	the Debian utility dpkg. A source package contains a .dsc file describing the source package itself,
+	a orig.tar.gz containing the orignal source code and a diff.gz describing the Debian specfic changes
+	to the source. The dpkg-source, packs and unpacks the Debian source archives.
+Windows:
+	#TO DO - Have to do a little bit more research. Signed Dave
 
 Configuration
 <jakub>
 
 Interface
 <dave, jakub>
+	#TO DO - We can chat about the nuts and bolts of this in the meeting tomorrow. Signed Dave
 
 Camera
 <jakub>
