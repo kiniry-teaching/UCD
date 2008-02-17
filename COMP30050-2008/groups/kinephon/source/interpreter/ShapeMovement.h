@@ -1,7 +1,7 @@
 #ifndef __INTERPRETER_SHAPEMOVEMENT_H__
 #define __INTERPRETER_SHAPEMOVEMENT_H__
 
-#include "Shape.h"
+#include "Shapes.h"
 
 /*
  * Author:	EB
@@ -26,6 +26,12 @@ public:				// Methods
 	virtual float	compare
 					(	Animation const * const	animation
 					)	const;
+
+private:
+					// Sub-shapes describing speeds
+	Shapes			_shapeSpeed;
+					// Sub-shapes describing accelerations
+	Shapes			_shapeAcceleration;
 
 };
 

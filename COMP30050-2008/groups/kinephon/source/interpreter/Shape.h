@@ -43,14 +43,6 @@ private:
 	int				_width;
 					// Total length of array
 	int				_length;
-					// Array of sub-shapes describing speeds
-	Shape *			_shapeSpeed;
-					// Array of sub-shapes describing accelerations
-	Shape *			_shapeAcceleration;
-					// Elemements in _shapeSpeed
-	int				_lengthSpeed;
-					// Elemements in _shapeAcceleration
-	int				_lengthAcceleration;
 
 };
 
