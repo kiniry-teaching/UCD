@@ -40,19 +40,20 @@ Parser
 <dave>
 
 Recorder
-Keeps a history of data from the Parser. Each blob tracked by the Camera will be have its own history 
-and be uniquely identifiable. This part of the project will be broken into the following classes
-Frame
-	Holds information about a single blob and a single point in time. This will include blob position,
-	vector to next position, frame time, and a tag. Tag will be modifiable by the Analyser and allow 
-	the Analyser to attach a custom data structure to the frame during processing. If not saved elsewhere,
-	this tag will be deleted along with the frame.
-Animation
-	Holds a list of Frames for a single tracked blob. Responsible for adding and removing frames for its blob
-Recorder
-	Holds a list of animations, one for each tracked blob. Responsible for communicating with the parser
-	and analyser, passing data for each frame on to the correct Animation blob and giving requested 
-	Animations to the Analyser
+	Keeps a history of data from the Parser. Each blob tracked by the Camera will be have its own history 
+	and be uniquely identifiable. This part of the project will be broken into the following classes
+
+	Frame
+		Holds information about a single blob and a single point in time. This will include blob position,
+		vector to next position, frame time, and a tag. Tag will be modifiable by the Analyser and allow 
+		the Analyser to attach a custom data structure to the frame during processing. If not saved elsewhere,
+		this tag will be deleted along with the frame.
+	Animation
+		Holds a list of Frames for a single tracked blob. Responsible for adding and removing frames for its blob
+	Recorder
+		Holds a list of animations, one for each tracked blob. Responsible for communicating with the parser
+		and analyser, passing data for each frame on to the correct Animation blob and giving requested 
+		Animations to the Analyser
 
 Analyser
 	Analyses a blob's animation to calculate speed, acceleration, shape, position, size and angle. 
@@ -92,8 +93,7 @@ Analyser
 		ordered by closest match, along with its closest matching speed, acceleration sub-shapes. The list will
 		be limited to shapes that are matched within a given range. Analyser can use this information to 
 		decide not to use a high matching shape if it looks like a lower matching shape will be used in the future that better suites the flow of the music… Is this making it too complicated? Need to put more thought into this but it could also be set to watch speed and give a shape a little more weight if it looks like an incomplete shape will become complete given a little more time. There will have to be something to differentiate between a line shape and every other shape that is made up of lines, a way to determine when a movement is complete[?]
-
-Analyser
+	Analyser
 		Gets the latest animation from the Recorder and passes it on to Shapes. If no shape is found, 
 		speed and acceleration tests will be done independent of shape. Final nearest matching shape will be 
 		passed on to Interpreter. When a shape has been determined, the point up to where the shape was matched
@@ -101,10 +101,10 @@ Analyser
 		it runs
 
 Interpreter
-		Will keep a short history of shapes and can either link a group of shapes to determine what sounds 
-		or music to play, or can take individual shapes to make a control switch. As shapes are used, 
-		they are deleted from the history. Don't have a clue how to make music with this, so don't know what 
-		classes will be needed[?]
+	Will keep a short history of shapes and can either link a group of shapes to determine what sounds 
+	or music to play, or can take individual shapes to make a control switch. As shapes are used, 
+	they are deleted from the history. Don't have a clue how to make music with this, so don't know what 
+	classes will be needed[?]
 
 Synthesis
 	The AudioController class is the interface taking information from the interpreter. It will be managing opening
@@ -115,7 +115,15 @@ Synthesis
 	the Midi-port, the communication amongs them being handled by the AudioController class.
 	This communication might involve sound synthesis such as pitch bend(I don't know yet what it does exactly) and 
 	adding of effects.
-	
+
+####
+#	It would be preferable (to me, EB) if, as an API, the Synthesis didn't rely on SEH backtracking the stack, out of the
+#	 API, all exceptions should be handled by the API and use return values to notify errors. Error messages could be
+#	 passed through a GetLastError() type method. As an API, it should hide its internals and not display to its caller
+#	 things like an RtError exception; i.e. if for some random reason, we decided not to use RtMidi any more, it should have
+#	 no affect on the rest of the project, just the audio part
+####
+
 Generation
 	We will use the OpenSource RtMidi classes. They provide basic low-level functionality such as probing for ports
 	and opening available ones. An RtError class provides the appropriate exception handling.
@@ -132,11 +140,18 @@ Sound Recorder
 	This will need some more reasearch as to how exactly Midi files are stored, i.e. what the header contains, 
 	what format the messages are stored in and how it is ended.
 
+####
+#	There are several documents on MID file format here http://www.wotsit.org/list.asp?al=M
+####
+
 Visualisation
-The visualisation will consist of colour and movement. The points that are being tracked will appear as points on the screen. As the points move a trail like that behind a comet will be produced.
-Depending on the notes being generated a new colour will be appended to the tail as the motion continues.
+	The visualisation will consist of colour and movement. The points that are being tracked will appear as points on the screen. As the points move a trail like that behind a comet will be produced.
+	Depending on the notes being generated a new colour will be appended to the tail as the motion continues.
+	Drawing will be done using an OpenGL buffer and a GLUT window.
+	Will these points on screen be sprites? Or will we plot them once and blend the out using fullscreen blur/warp effects?
 
 Visual Recorder
+	Since the project changed to MID - this probably doesn't make sense anymore as we cannot mix video into MIDI
 Movement Recorder
 Web app
 <do secondary's need to be filled>
