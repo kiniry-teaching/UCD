@@ -38,6 +38,14 @@ Connection to Computer
 
 Parser
 <dave>
+	Just to get this started, an interface I could make use of would be just a single 'get' method that
+	 would return the next piece of information in a class or struct containing { id, x, y, size }. I suppose
+	 if it were to be extended, I could ask how many blobs are you tracked and 'get' by a blob id.
+	An alternative would be to use a callback event. I will call you once and pass the address of a callback
+	 function. Every time you get new data, you call my callback and pass the { id, x, y, size } struct, or
+	 (it's such a small data-structure) you could just pass it as parameters. This option would be useful
+	 if you need to constantly watch the input stream so there are no timeouts, and are going to thread the
+	 reading of the data
 
 Recorder
 	Keeps a history of data from the Parser. Each blob tracked by the Camera will be have its own history 
