@@ -20,7 +20,8 @@ Linux:
 	a orig.tar.gz containing the orignal source code and a diff.gz describing the Debian specfic changes
 	to the source. The dpkg-source, packs and unpacks the Debian source archives.
 Windows:
-	#TO DO - Have to do a little bit more research. Signed Dave
+	For this it will be likely that we will produce the MSI files with a Third-party app.
+	Though we could also use Visual Studioi 8 to produce an installer also.
 
 Configuration
 <jakub>
