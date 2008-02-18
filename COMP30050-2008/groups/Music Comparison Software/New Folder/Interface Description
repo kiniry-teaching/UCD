@@ -1,0 +1,36 @@
+The aim of the interface is to create a very user friendly 
+application. 
+This will mean making the interface very informative and 
+intuitive. 
+To create such an interface it would have to be kept simple so
+ it will not cause confusion.
+  The interface will therefore be very straightforward.
+
+The main interface will have a statement saying something 
+along the lines of “please enter a file to search through:”,
+ then there will be a drop down menu to search for the file 
+ to search through for mp3 files. There will be two buttons 
+ one saying “run” and the other saying “cancel”.
+
+The interface will change depending on what is done by the 
+user. If cancel is pressed the program will finish and if 
+run is pressed a progress bar will appear to show how long 
+is left to find duplicates. When the program is finished 
+running another popup will appear asking what you would like 
+to do with the duplicates. There will still be the cancel 
+button to end the program and there will be a move button 
+to move the duplicates to a new location to be looked through
+ later by the user. There will also be a merge button that 
+ will ………………………………………….
+
+If the user does not enter a folder before pressing the run
+ button an error message will popup saying “you have not 
+ entered a folder, please enter a folder”. This popup message
+  will have an ok button that when pressed will return you to
+   the original interface screen.
+
+If the user enters a folder that does not have any mp3 files
+ in it a message will popup and say “no mp3 files found”.
+
+If there are no duplicates found a message will return to 
+the user saying “no duplicates found”.
