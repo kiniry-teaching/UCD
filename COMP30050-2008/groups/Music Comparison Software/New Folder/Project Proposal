@@ -1,0 +1,51 @@
+Title: Music Comparison Software
+Proposer: Paul McGrath
+Team: Marc Whelan, Dudley Stuart-Murphy, Paul McGrath, Brian Harty and Peter O' Murchú
+
+Introduction:
+
+Audio comparison software for a home users music library. When two users want to share libraries more often than not many duplicates arise, leaving the user having to delete each duplication manually. Whilst one or two is manageable, when dealing with a large database of music this can quickly become a very sizable task and very time consuming.  We aim to eliminate this problem by developing a piece of software that will compare the mp3 files and will ask whether duplicates can be deleted when found .
+
+Overview:
+
+This project uses C++, html and SQL. This project builds a C++ interface which we allow the user to choose which files to keep and which to delete after our comparison is taken into account. A search will run that will identify all mp3 files in the users library and the new library being created. It will discard all other media types. It will compare all the mp3's, using numerous items of information that come with the mp3 files, for example; artist name, album name, track title and most importantly bit rate. The better bit rate will decide which mp3 file will be kept and which will be discarded.
+
+After this search has taken place, the resulting list of mp3's will be stored in the users library. A simple interface will be made to allow the user to choose which mp3 files will be used and which they want to compare. The C++ equivalent of a jframe is the most likely choice for the interface The program will then be hosted on a web-page, build using a html editor and SQL language. The website will host the program and allow other users to download the program and use it for the own libraries.  
+
+Requirements:
+This project must...
+    •    Search through and compare two audio libraries.
+    •    If a comparison is found then the higher bit rate will be kept and the lower bit rate will be deleted.
+    •    An interface will be needed to allow the user to choose which files to search through.
+
+Secondary requirements include:
+    •    Developing a website to host the program and advertise it.
+    •    A secondary database which will hold a substancial amount of music, so that track names can be searched.
+
+    •    Creation of a on-line database that will allow the identification of unknown track names, artist details etc. and update them in our database automatically.   
+
+    
+Things that are not goals of the project include:
+    •    A program that automatically deletes the audio file with the lower bit rate.
+    •    It will not compare any other parts of the audio file bar the artist name, the album name, track name, bit rate and id3 tag.
+
+Technology:
+Java - as our team feels they are strongest in this area compared to any other languages,  SQL, a web page editor - using html.
+
+Roles:
+The Project will require the following roles:
+    ⁃    A filesystems role - this person takes in the information inputed into the interface, searches for the file, gets the id3 tag information from them and gives it to the database.(Peadar O'Murchu)
+    ⁃    A project manager to co-ordinate all the information and communication between all members of the team.This project manager will do all write -ups for the team based on the information given to him by the team.(Paul Mc Grath)
+    ⁃    A Java programmer: will write the code to compare the album names and artist names and will develop a compare method to choose the higher bit rate on each audio file. Also this person will develop the search method for the program, and ensure only mp3 files are searched.(Dudley Stuart-Murphy)
+    ⁃    An interface developer: who will build the interface to allow the user to choose which files will be searched, which will be compared and which will be kept. This will also be done through Java.(Brian Harty)
+    ⁃    A database developer - who will put all the information entered into a database.(Marc Whelan)
+
+
+Member Contacts:
+Marc Whelan - whelo10@gmail.com
+Dudley Stuart-Murphy - dudley.stuartmurphy@gmail.com
+Paul McGrath - paulomcgrath@gmail.com
+Brian Harty - brainharty@gmail.com
+Peter O'Murchú - peter.omurchu@gmaiil.com
+
+
