@@ -72,7 +72,8 @@ Sound Recorder
 <eva>
 
 Visualisation
-<dave>
+The visualisation will consist of colour and movement. The points that are being tracked will appear as points on the screen. As the points move a trail like that behind a comet will be produced.
+Depending on the notes being generated a new colour will be appended to the tail as the motion continues.
 
 Visual Recorder
 Movement Recorder
