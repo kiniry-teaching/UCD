@@ -1,5 +1,6 @@
 Revision:
 0.1	EB	First draft
+0.2   SA    Added interpreter
 
 Title:	Kinephon
 Team:	Intuitive Aptitudes
@@ -122,11 +123,22 @@ Analyser
 		will be marked for deletion and everything before that point will be removed by the Recorder next time 
 		it runs
 
-Interpreter
-	Will keep a short history of shapes and can either link a group of shapes to determine what sounds 
-	or music to play, or can take individual shapes to make a control switch. As shapes are used, 
-	they are deleted from the history. Don't have a clue how to make music with this, so don't know what 
-	classes will be needed[?]
+Interpreter:
+		Composing music from the instrument given, keep a short histroy of shapes i.e the movement create some type of shape
+                        The main goal for the interprter is converting the movement to sound(Don't know how to do this but still doing some reasearch on this).
+                         At the moment it's too early to say exactly the way the interpreter will be broken into, there is more experimental going on but as for
+                         now the interpreter is broken into the following classes.
+
+                         RecorderSound:
+                                                    This will record the different sound produced or generate the sound from the music compose.
+                                                     Each sound produced or generated is store and can also repeat or replay the same music 
+                                                      played previous.
+
+		  Movement:
+                                                This class will work with the animation class which as already create a frame for each point for a
+                                                 single movement.Here, the motion will response to the shape in general and not single movement.
+                                                  This will allow each each point to come together and then create a general movement. 
+
 
 Synthesis
 	The AudioController class is the interface taking information from the interpreter. It will be managing opening
