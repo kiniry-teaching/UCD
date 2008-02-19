@@ -1,0 +1,69 @@
+/*
+	Source: http://tomscarff.tripod.com/midi_analyser/midi_messages.htm
+*/
+General MIDI Patch Map
+Program Change
+
+The Program Change message is used to specify the type of instrument which 
+should be used to play sounds on a given Channel. This message needs only 
+one data byte which specifies the new program number.
+
+The message is set up of 2 bytes:
+byte 1: |1 1 0 0 |x x x x| 
+			192		channelNo
+byte 2: |0 x x x |x x x x|
+		program # 
+
+Use: 
+message[0] = 192 + <channelNo>
+message[1] = <program number>
+
+Prog# refers to the Program Change instruction that selects the instrument. Instrument Name describes the instrument invoked by the Program Change command.
+
+ 
+Prog# 	Instrument Name 	Prog# 	Instrument Name 	Prog# 	Instrument Name
+1 	Acoustic Grand Piano 	44 	Contrabass 			87 	Lead 7 (fifths)
+2 	Bright Acoustic Piano 	45 	Tremolo Strings 	88 	Lead 8 (bass + lead)
+3 	Electric Grand Piano 	46 	Pizzicato Strings 	89 	Pad 1 (new age)
+4 	Honky-tonk Piano 		47 	Orchestral Harp 	90 	Pad 2 (warm)
+5 	Electric Piano 1 		48 	Timpani  			91	Pad 3 (polysynth)
+6 	Electric Piano 2 		49 	String Ensemble 1 	92 	Pad 4 (choir)
+7 	Harpsichord 			50 	String Ensemble 2 	93 	Pad 5 (bowed)
+8 	Clavi 					51 	SynthStrings 1 		94 	Pad 	6 (metallic)
+9 	Celesta 				52 	SynthStrings 2 		95 	Pad 	7 (halo)
+10 	Glockenspiel 			53 	Choir Aahs 			96 	Pad 	8 (sweep)
+11 	Music Box 				54 	Voice Oohs 			97 	FX 	1 (rain)
+12 	Vibraphone 				55 	Synth Voice 		98 	FX 	2 (soundtrack)
+13 	Marimba  				56 	Orchestra Hit 		99 	FX 	3 (crystal)
+14 	Xylophone 				57 	Trumpet 			100 	FX 	4 (atmosphere)
+15 	Tubular Bells 			58 	Trombone 			101 	FX 	5 (brightness)
+16 	Dulcimer 				59 	Tuba 				102 	FX 6 (goblins)
+17 	Drawbar Organ 			60 	Muted Trumpet 		103 	FX 7 (echoes)
+18 	Percussive Organ 		61 	French Horn 		104 	FX 8 (sci-fi)
+19 	Rock Organ 				62 	Brass Section 		105	Sitar
+20 	Church Organ 			63 	SynthBrass 1 		106 	Banjo
+21 	Reed Organ 				64 	SynthBrass 2 		107 	Shamisen
+22 	Accordion 				65 	Soprano Sax 		108 	Koto
+23 	Harmonica 				66 	Alto Sax 			109 	Kalimba
+24 	Tango Accordion 		67 	Tenor Sax 			110 	Bag pipe
+25 	Acoustic Guitar (nylon) 68 	Baritone Sax 		111 	Fiddle
+26 	Acoustic Guitar (steel) 69 	Oboe 				112 	Shanai
+27 	Electric Guitar (jazz) 	70 	English Horn 		113	Tinkle Bell
+28 	Electric Guitar (clean) 71 	Bassoon	 			114 	Agogo
+29 	Electric Guitar (muted) 72 	Clarinet 			115 	Steel Drums
+30 	Overdriven Guitar 		73 	Piccolo 			116 	Woodblock
+31 	Distortion Guitar 		74 	Flute 				117 	Taiko Drum
+32 	Guitar harmonics 		75 	Recorder 			118 	Melodic Tom
+33 	Acoustic Bass 			76 	Pan Flute 			119 	Synth Drum
+34 	Electric Bass (finger) 	77 	Blown Bottle 		120 	Reverse Cymbal
+35 	Electric Bass  (pick) 	78 	Shakuhachi 			121 	Guitar Fret Noise
+36 	Fretless Bass 			79 	Whistle 			122 	Breath Noise
+37 	Slap Bass 1 			80 	Ocarina 			123 	Seashore
+38 	Slap Bass 2 			81 	Lead 1 (square) 	124 	Bird Tweet
+39 	Synth Bass 1 			82 	Lead 2 (sawtooth) 	125 	Telephone Ring
+40 	Synth Bass 2 			83 	Lead 3 (calliope) 	126 	Helicopter
+41 	Violin 					84 	Lead 4 (chiff) 		127 	Applause
+42 	Viola 					85 	Lead 5 (charang) 	128 	Gunshot
+43 	Cello 					86 	Lead 6 (voice) 	  	 
+
+

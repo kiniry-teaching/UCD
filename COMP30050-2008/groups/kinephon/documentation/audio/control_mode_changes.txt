@@ -1,0 +1,30 @@
+Control and mode changes can make some changes to the synthesizer.
+There are 128 possible values, however not all of them are defined.
+The message is set up of 3 bytes:
+
+byte 1: |1 0 1 1 |x x x x| 
+			176		channelNo
+byte 2: |0 x x x |x x x x|
+		function # between 0 - 127
+byte 3: |0 x x x |x x x x|
+		function value between 0 - 127
+
+Use:
+message[0] = 176 + <channelNo>
+message[1] = <functionNo>
+message[2] = <value>
+
+Possible functions:
+These affect all channels at once:
+121 Local Control  Off
+122 Local Control On
+123 All Notes Off
+124 Omni Mode Off
+125 Omni Mode ON
+126 Mono mode On
+127 Poly Mode On
+	
+And there are loads other affecting always the selected channel,
+but they need some testing.... to follow
+if you want to have an overview:
+<add link>
