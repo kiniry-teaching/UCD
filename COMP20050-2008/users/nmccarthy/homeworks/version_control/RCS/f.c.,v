@@ -1,0 +1,55 @@
+head	1.3;
+access;
+symbols;
+locks
+	nmccarthy:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2008.02.13.18.34.41;	author nmccarthy;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.13.17.52.34;	author nmccarthy;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.13.17.24.15;	author nmccarthy;	state Exp;
+branches;
+next	;
+
+
+desc
+@a practice file for RCS
+@
+
+
+1.3
+log
+@added 2 more sentences.
+@
+text
+@This is a practice line.This is a second practice line.This is the third line.
+This is the fourth line.@
+
+
+1.2
+log
+@added in some lines
+@
+text
+@d1 2
+a2 1
+This is a practice line.This is a second practice line.@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+@
