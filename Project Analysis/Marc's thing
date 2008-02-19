@@ -1,0 +1,7 @@
+Project Analysis:
+
+Combined Database.
+
+A database will be created to combine two separate input files, both containing only mp3. files. In this database, the ID3 tags will be searched and the Artist Name, Track Title and Bit Rate will be taken. We are only getting these three at first as we do not know how difficult this task will be. If we achieve our goal ahead of time, album names and song lengths will be added. 
+
+The file system stage prior to the combined database will get the actual ID3 tags, and they will be sent to my database. The database will then combine the two sets of files, from say an itunes library and a separate usb key containing mp3. files.  Once this information has been received, the database will then send on the files to the next stage which will run the comparison between the bit rates, artist names and track titles.
