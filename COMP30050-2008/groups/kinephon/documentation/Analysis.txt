@@ -141,7 +141,7 @@ Generation
 		'fluidsynth' is a command-line synthesizer, so it will be necessary to incorporate it into to project
 		(at a later stage).
 	[Windows] 
-		Windows does have an already built-in synthesizer (? name ?), but this will have to be tested if it fits
+		Windows does have an already built-in synthesizer Microsoft GS Wavetable SW Synth, but this will have to be tested if it fits
 		our purposes, otherwise another one will have to be found.
 		
 Sound Recorder
@@ -159,10 +159,14 @@ Visualisation
 	Will these points on screen be sprites? Or will we plot them once and blend the out using fullscreen blur/warp effects?
 
 Visual Recorder
-	Since the project changed to MID - this probably doesn't make sense anymore as we cannot mix video into MIDI
+	
+	
 Movement Recorder
+	All Recorder animation frames will be passed on to this and saved as raw data as they are received. This will
+	 mean that frames from different animations will be interleaved with other animations, but when loading, the frame's
+	 blob id will link it back to its animation. Frames will be saved in order and so can be loaded in the same order
 Web app
-<do secondary's need to be filled>
+	<sumbo>
 
 Dictionary:
 Blob : Single IR light or reflective IR tape picked up by the Camera as an (X, Y) co-ordinate and radius
