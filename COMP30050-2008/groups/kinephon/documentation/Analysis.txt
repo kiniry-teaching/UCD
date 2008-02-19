@@ -21,20 +21,34 @@ Linux:
 	to the source. The dpkg-source, packs and unpacks the Debian source archives.
 Windows:
 	For this it will be likely that we will produce the MSI files with a Third-party app.
-	Though we could also use Visual Studioi 8 to produce an installer also.
+	Though we could also use Visual Studio 8 to produce an installer also.
 
 Configuration
-<jakub>
+	Before the program can be fully started, we need to establish a connection with the wiimote and check
+	that the wiimote sees the appropriate number of points (if we decide torequire at least a given number
+	of points). Also, it will probably be necessary to configure the system itself e.g. for specific types
+	of music that we want to produce. After all of these things are configured, the program will be run. 
 
 Interface
 <dave, jakub>
 	#TO DO - We can chat about the nuts and bolts of this in the meeting tomorrow. Signed Dave
+	- finger band and/or wrist band with 1+ LEDs to make sure that the point is always visible.
+	- static wiimote near the display with line of sight visibility.
 
 Camera
-<jakub>
+	The IR camera in the wiimote has a resolution of 1024x768. In front of the camera, there is a special hardware filter,
+	which tracks up to four IR blobs. Their locations are recorded into memory. This data can be accessed
+	through bluetooth HCI interface by querying the wiimote. The reports can be sent up to 100 times per 
+	second, which is a hardware limit caused by the camera and the tracking filter.  
 
 Connection to Computer
-<jakub>
+	In order to extract the necessary data (in form of reports) from the wiimote, we will need to establish
+	a stable connection with the wiimote through the available bluetooth HCI interface. After the connection
+	is successfully established, we will query the wiimote on the appropriate port(s) to get the reports. 
+	If necessary, we will write specific instructions to the wiimore memory over the same interface to
+	specify the format of the reports further. The reports that will be received from the wiimote will consist
+	of a channel ID/report ID and several bytes of payload. The reports will then be passed to the parser using 
+	an API between the two. 
 
 Parser
 <dave>
