@@ -23,11 +23,11 @@ int main(){
     	error.printMessage();
     	exit( EXIT_FAILURE );
   	}
-  	audio->changeProgram(0, 1);
+  	audio->changeProgram(0, 1);//set instrument
   	
-	audio->modeTest(0,7,50);
+	audio->modeTest(0,7,50);//volume
 	
-	audio->modeTest(0,64,100);
+	audio->modeTest(0,64,100);//some effect
 	
   	for(int i = 0; i < 10; i++){
     	
