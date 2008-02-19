@@ -1,9 +1,13 @@
-Revision:
-0.1	EB	First draft
-0.2   SA    Added interpreter
+﻿Revision:
+0.1		EB	First draft
+0.2		ED	Added sound
+0.3		DS	Added installer and notes
+0.4		JD	Added configuration and connection
+0.5		SA	Added interpreter and web
+0.6		EB	Added comments and some clean-up
 
-Title:	Kinephon
-Team:	Intuitive Aptitudes
+Title:		Kinephon
+Team:		Intuitive Aptitudes
 Members:	Eva Darulova	05817625
 			Sumbo Ajisafe	05005451
 			David Swords	05477689
@@ -11,48 +15,50 @@ Members:	Eva Darulova	05817625
 			Jakub Dostal	05844151
 
 Project Parts:
-Installer <Dave>
-This installer could come in different flavours, depending on how the project comes along.
-The two main options are one for Linux and one for Windows.
-Linux:
-	This will be a .deb (Debian) package. Itself can come in two flavours which are binary and
-	source. A binary package contains all the executables, man pages etc. and are unpacked using
-	the Debian utility dpkg. A source package contains a .dsc file describing the source package itself,
-	a orig.tar.gz containing the original source code and a diff.gz describing the Debian specific changes
-	to the source. The dpkg-source, packs and unpacks the Debian source archives.
-Windows:
-	For this it will be likely that we will produce the MSI files with a Third-party app.
-	Though we could also use Visual Studio 8 to produce an installer also.
+Installer
+	This installer could come in different flavours, depending on how the project comes along.
+	The two main options are one for Linux and one for Windows.
+	Linux:
+		This will be a .deb (Debian) package. Itself can come in two flavours which are binary and
+		source. A binary package contains all the executables, man pages etc. and are unpacked using
+		the Debian utility dpkg. A source package contains a .dsc file describing the source package itself,
+		a orig.tar.gz containing the original source code and a diff.gz describing the Debian specific changes
+		to the source. The dpkg-source, packs and unpacks the Debian source archives.
+	Windows:
+		For this it will be likely that we will produce the MSI files with a Third-party app.
+		Though we could also use Visual Studio 8 to produce an installer also.
 
 Configuration
-	Before the program can be fully started, we need to establish a connection with the wiimote and check
-	that the wiimote sees the appropriate number of points (if we decide torequire at least a given number
+	Before the program can be fully started, we need to establish a connection with the Wiimote and check
+	that the Wiimote sees the appropriate number of points (if we decide to require at least a given number
 	of points). Also, it will probably be necessary to configure the system itself e.g. for specific types
 	of music that we want to produce. After all of these things are configured, the program will be run. 
 
 Interface
-<dave, jakub>
+	<dave, jakub>
 	#TO DO - We can chat about the nuts and bolts of this in the meeting tomorrow. Signed Dave
 	- finger band and/or wrist band with 1+ LEDs to make sure that the point is always visible.
-	- static wiimote near the display with line of sight visibility.
+	- static Wiimote near the display with line of sight visibility.
+
+    # Can a schematic be included with this of the electronics
 
 Camera
-	The IR camera in the wiimote has a resolution of 1024x768. In front of the camera, there is a special hardware filter,
+	The IR camera in the Wiimote has a resolution of 1024x768. In front of the camera, there is a special hardware filter,
 	which tracks up to four IR blobs. Their locations are recorded into memory. This data can be accessed
-	through bluetooth HCI interface by querying the wiimote. The reports can be sent up to 100 times per 
+	through bluetooth HCI interface by querying the Wiimote. The reports can be sent up to 100 times per 
 	second, which is a hardware limit caused by the camera and the tracking filter.  
 
 Connection to Computer
-	In order to extract the necessary data (in form of reports) from the wiimote, we will need to establish
-	a stable connection with the wiimote through the available bluetooth HCI interface. After the connection
-	is successfully established, we will query the wiimote on the appropriate port(s) to get the reports. 
-	If necessary, we will write specific instructions to the wiimore memory over the same interface to
-	specify the format of the reports further. The reports that will be received from the wiimote will consist
+	In order to extract the necessary data (in form of reports) from the Wiimote, we will need to establish
+	a stable connection with the Wiimote through the available bluetooth HCI interface. After the connection
+	is successfully established, we will query the Wiimote on the appropriate port(s) to get the reports. 
+	If necessary, we will write specific instructions to the Wiimote memory over the same interface to
+	specify the format of the reports further. The reports that will be received from the Wiimote will consist
 	of a channel ID/report ID and several bytes of payload. The reports will then be passed to the parser using 
 	an API between the two. 
 
 Parser
-<dave>
+	<dave>
 	Just to get this started, an interface I could make use of would be just a single 'get' method that
 	 would return the next piece of information in a class or struct containing { id, x, y, size }. I suppose
 	 if it were to be extended, I could ask how many blobs are you tracked and 'get' by a blob id.
@@ -115,7 +121,12 @@ Analyser
 		Container of all known predetermined shapes. Given an animation, will return a list of shapes, 
 		ordered by closest match, along with its closest matching speed, acceleration sub-shapes. The list will
 		be limited to shapes that are matched within a given range. Analyser can use this information to 
-		decide not to use a high matching shape if it looks like a lower matching shape will be used in the future that better suites the flow of the music… Is this making it too complicated? Need to put more thought into this but it could also be set to watch speed and give a shape a little more weight if it looks like an incomplete shape will become complete given a little more time. There will have to be something to differentiate between a line shape and every other shape that is made up of lines, a way to determine when a movement is complete[?]
+		decide not to use a high matching shape if it looks like a lower matching shape will be used in the future
+		that better suites the flow of the music… Is this making it too complicated? Need to put more thought into
+		this but it could also be set to watch speed and give a shape a little more weight if it looks like an
+		incomplete shape will become complete given a little more time. There will have to be something to
+		differentiate between a line shape and every other shape that is made up of lines, a way to determine when
+		a movement is complete[?]
 	Analyser
 		Gets the latest animation from the Recorder and passes it on to Shapes. If no shape is found, 
 		speed and acceleration tests will be done independent of shape. Final nearest matching shape will be 
@@ -124,21 +135,20 @@ Analyser
 		it runs
 
 Interpreter:
-		Composing music from the instrument given, keep a short histroy of shapes i.e the movement create some type of shape
-                        The main goal for the interprter is converting the movement to sound(Don't know how to do this but still doing some reasearch on this).
-                         At the moment it's too early to say exactly the way the interpreter will be broken into, there is more experimental going on but as for
-                         now the interpreter is broken into the following classes.
+	Composing music from the instrument given, keep a short histroy of shapes i.e the movement create some type of shape
+	The main goal for the interprter is converting the movement to sound(Don't know how to do this but still doing some
+	reasearch on this). At the moment it's too early to say exactly the way the interpreter will be broken into, there
+	is more experimental going on but as for now the interpreter is broken into the following classes.
 
-                         RecorderSound:
-                                                    This will record the different sound produced or generate the sound from the music compose.
-                                                     Each sound produced or generated is store and can also repeat or replay the same music 
-                                                      played previous.
+	RecorderSound:
+		This will record the different sound produced or generate the sound from the music compose.
+		Each sound produced or generated is store and can also repeat or replay the same music 
+		played previous.
 
-		  Movement:
-                                                This class will work with the animation class which as already create a frame for each point for a
-                                                 single movement.Here, the motion will response to the shape in general and not single movement.
-                                                  This will allow each each point to come together and then create a general movement. 
-
+	Movement:
+		This class will work with the animation class which as already create a frame for each point for a
+		single movement.Here, the motion will response to the shape in general and not single movement.
+		This will allow each each point to come together and then create a general movement. 
 
 Synthesis
 	The AudioController class is the interface taking information from the interpreter. It will be managing opening
@@ -167,8 +177,8 @@ Generation
 		'fluidsynth' is a command-line synthesizer, so it will be necessary to incorporate it into to project
 		(at a later stage).
 	[Windows] 
-		Windows does have an already built-in synthesizer Microsoft GS Wavetable SW Synth, but this will have to be tested if it fits
-		our purposes, otherwise another one will have to be found.
+		Windows does have an already built-in synthesizer Microsoft GS Wavetable SW Synth, but this will have to be tested
+		if it fits our purposes, otherwise another one will have to be found.
 		
 Sound Recorder
 	This will need some more reasearch as to how exactly Midi files are stored, i.e. what the header contains, 
@@ -191,8 +201,9 @@ Movement Recorder
 	All Recorder animation frames will be passed on to this and saved as raw data as they are received. This will
 	 mean that frames from different animations will be interleaved with other animations, but when loading, the frame's
 	 blob id will link it back to its animation. Frames will be saved in order and so can be loaded in the same order
+	 
 Web app
-	<sumbo>
+	The web app has been described in more detail in Sumbo_WebService_Analysis.doc
 
 Dictionary:
 Blob : Single IR light or reflective IR tape picked up by the Camera as an (X, Y) co-ordinate and radius
