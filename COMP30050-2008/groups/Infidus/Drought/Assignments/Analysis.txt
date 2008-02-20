@@ -16,7 +16,7 @@ The networking component sends updates between players to keep the environment i
 
 Audio
 ------------------
-The audio component allows other components to trigger sound events. Both the menu state and the game state also play a continuous looping soundtrack.
+The Audio component allows other components to trigger sound events in a 3D environment. Both the menu state and the game state play a continuous looping soundtrack. Game Objects also use the Audio component to play sound effects.
 
 Game Objects
 ------------------
