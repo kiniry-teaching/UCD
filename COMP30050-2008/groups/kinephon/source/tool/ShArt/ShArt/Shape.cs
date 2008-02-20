@@ -33,5 +33,10 @@ namespace ShArt
 			e.Graphics.DrawRectangle(box, dx * 4, dy * 4, dx * 24, dy * 24);
 
 		}
+
+		private void gridXToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

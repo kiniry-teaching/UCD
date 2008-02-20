@@ -50,5 +50,12 @@ namespace ShArt
 
 		}
 
+		private void ShArt_MdiChildActivate(object sender, EventArgs e)
+		{
+			ToolStripManager.RevertMerge(toolStrip1);
+			if(ActiveMdiChild != null)
+				ToolStripManager.Merge(((Shape)ActiveMdiChild).toolStrip1, toolStrip1);
+		}
+
 	}
 }

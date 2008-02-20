@@ -38,15 +38,26 @@ namespace ShArt
 			this.pgdProperties = new System.Windows.Forms.PropertyGrid();
 			this.splProperties = new System.Windows.Forms.Splitter();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.menuStrip1.SuspendLayout();
 			this.spcProperties.Panel1.SuspendLayout();
 			this.spcProperties.Panel2.SuspendLayout();
 			this.spcProperties.SuspendLayout();
+			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.windowsToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
@@ -58,6 +69,7 @@ namespace ShArt
 			// 
 			this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem});
+			this.windowsToolStripMenuItem.MergeIndex = 2;
 			this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
 			this.windowsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
 			this.windowsToolStripMenuItem.Text = "Windows";
@@ -65,7 +77,7 @@ namespace ShArt
 			// testToolStripMenuItem
 			// 
 			this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-			this.testToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+			this.testToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.testToolStripMenuItem.Text = "test";
 			this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
 			// 
@@ -135,12 +147,75 @@ namespace ShArt
 			// 
 			this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-			this.toolStrip1.Size = new System.Drawing.Size(26, 300);
+			this.toolStrip1.Size = new System.Drawing.Size(79, 300);
 			this.toolStrip1.TabIndex = 9;
 			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveasToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.compileToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.exitToolStripMenuItem});
+			this.fileToolStripMenuItem.MergeIndex = 0;
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+			this.fileToolStripMenuItem.Text = "&File";
+			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem.Text = "&Open...";
+			// 
+			// saveToolStripMenuItem
+			// 
+			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Text = "&Save";
+			// 
+			// saveasToolStripMenuItem
+			// 
+			this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
+			this.saveasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveasToolStripMenuItem.Text = "Save &as...";
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+			// 
+			// compileToolStripMenuItem
+			// 
+			this.compileToolStripMenuItem.Name = "compileToolStripMenuItem";
+			this.compileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.compileToolStripMenuItem.Text = "&Compile";
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Text = "E&xit";
+			// 
+			// toolStripLabel1
+			// 
+			this.toolStripLabel1.Name = "toolStripLabel1";
+			this.toolStripLabel1.Size = new System.Drawing.Size(76, 13);
+			this.toolStripLabel1.Text = "toolStripLabel1";
 			// 
 			// ShArt
 			// 
@@ -159,12 +234,15 @@ namespace ShArt
 			this.Name = "ShArt";
 			this.Text = "ShArt (v0.1)";
 			this.Resize += new System.EventHandler(this.ShArt_Resize);
+			this.MdiChildActivate += new System.EventHandler(this.ShArt_MdiChildActivate);
 			this.Load += new System.EventHandler(this.ShArt_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.spcProperties.Panel1.ResumeLayout(false);
 			this.spcProperties.Panel2.ResumeLayout(false);
 			this.spcProperties.ResumeLayout(false);
+			this.toolStrip1.ResumeLayout(false);
+			this.toolStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -182,6 +260,15 @@ namespace ShArt
 		private System.Windows.Forms.PropertyGrid pgdProperties;
 		private System.Windows.Forms.Splitter splProperties;
 		private System.Windows.Forms.ToolStrip toolStrip1;
+		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveasToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 	}
 }
 
