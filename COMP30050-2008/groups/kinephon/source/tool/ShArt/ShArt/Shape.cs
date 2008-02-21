@@ -38,5 +38,10 @@ namespace ShArt
 		{
 
 		}
+
+		private void Shape_Load(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

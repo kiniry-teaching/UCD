@@ -30,6 +30,7 @@ namespace ShArt
 
 		private void splPropertiesSplit_SplitterMoved(object sender, SplitterEventArgs e)
 		{
+			spcProperties.Top = splProperties.Top;
 			spcProperties.Width = splProperties.ClientSize.Width - 1;
 			spcProperties.Left = ClientRectangle.Width - spcProperties.Width;
 		}
@@ -45,16 +46,52 @@ namespace ShArt
 			ShArt_Resize(null, null);
 		}
 
-		private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-
-		}
-
 		private void ShArt_MdiChildActivate(object sender, EventArgs e)
 		{
-			ToolStripManager.RevertMerge(toolStrip1);
+			ToolStripManager.RevertMerge(tbrShArt);
 			if(ActiveMdiChild != null)
-				ToolStripManager.Merge(((Shape)ActiveMdiChild).toolStrip1, toolStrip1);
+			{	ToolStripManager.Merge(((Shape)ActiveMdiChild).tbrShape, tbrShArt);
+				tbrShArt.Visible = true;
+			}
+			else
+				tbrShArt.Visible = false;
+			ShArt_Resize(null, null);
+		}
+
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+
+		private void mnuWindowArrange_Click(object sender, EventArgs e)
+		{
+			LayoutMdi(MdiLayout.ArrangeIcons);
+		}
+
+		private void mnuWindowCascade_Click(object sender, EventArgs e)
+		{
+			LayoutMdi(MdiLayout.Cascade);
+		}
+
+		private void mnuWindowHorizontal_Click(object sender, EventArgs e)
+		{
+			LayoutMdi(MdiLayout.TileHorizontal);
+		}
+
+		private void mnuWindowVertical_Click(object sender, EventArgs e)
+		{
+			LayoutMdi(MdiLayout.TileVertical);
+		}
+
+		private void mnuWindowCloseAll_Click(object sender, EventArgs e)
+		{
+			foreach(Form form in MdiChildren)
+				form.Close();
+		}
+
+		private void mnuWindowWindows_Click(object sender, EventArgs e)
+		{
+			
 		}
 
 	}
