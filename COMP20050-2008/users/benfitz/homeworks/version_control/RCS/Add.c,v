@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.02.19.20.54.51;	author benfitz;	state Exp;
+branches;
+next	;
+
+
+desc
+@This a c adding program.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include <stdio.h>
+
+main()
+{
+	int int_num1;
+	int int_num2;
+	int addition = 0;
+	
+	scanf("%i", &int_num1);
+	scanf("%i", &int_num2);
+	
+	addition = int_num1 + int_num2;
+	
+	printf("%i\n", addition);
+}
+@

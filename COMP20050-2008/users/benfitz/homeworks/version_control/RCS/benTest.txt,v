@@ -1,0 +1,43 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2008.02.19.21.03.16;	author benfitz;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.19.20.59.30;	author benfitz;	state Exp;
+branches;
+next	;
+
+
+desc
+@Hello.
+..
+@
+
+
+1.2
+log
+@Test ender
+@
+text
+@Hello
+Ben is great
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+a2 1
+
+@
