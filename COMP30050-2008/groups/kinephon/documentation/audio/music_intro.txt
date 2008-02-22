@@ -59,6 +59,11 @@ Octave #	Note Numbers
 	specifies to release a note of channel, pitch and velocity. 
 	(sometimes the note will stop even without this, sometimes not. If someone knows why, I'm happy
 	 to know...)
+	 ***
+	 *** A MIDI instrument will stop itself if it's a percussion or similar instrument and will not
+	 ***	stop if it's a wind or similar instrument. That is, holding a key on a piano versus holding
+	 ***	a constant wind pressure on a flute; piano's sound will eventually stop, flute's won't
+	 ***
 - Polyphonic Key Pressure, Channel pressure
 	Pressure being applied to keys while being pressed, also called aftertouch.  
 - Control Change
