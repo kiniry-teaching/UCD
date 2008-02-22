@@ -1,0 +1,78 @@
+########
+# Musical Theory
+########
+
+First of all, there is no algorithm that will make beautiful music out of any random movement.
+Simply because music is ART and no science.
+
+Sound, on the other hand CAN be described mathematically. 
+In principle, any sound is a sine wave of certain frequency
+(or a combination of those, but we don't need these details here).
+A note is just a label for a certain frequency. There are many different scales,
+based on different theories. Some are based on the golden ration, some on the 
+Fibonnaci numbers etc. That is where most of the maths goes in. 
+
+However, we have chosen MIDI format, which has already a set scale. That is, we cannot
+assign Middle C with another frequency. (There is the option of pitch bend, but I don't think
+that it will probably not make too much of an impact.)
+Even though we cannot fiddle with the scale, we can still use the theory of intonation.
+That is, some notes sound better together than others. This is determined by the ratio of the 
+note's frequencies. If the ratio is one with small integer numbers, then the notes generally
+sound good together.
+However, making music only with combinations of the best-sounding pairs would result in a nice
+but dull piece. The art in music is to get the balance right between agreement and disruption.
+
+#####
+# Musical jargon  
+#####
+
+- pitch 	corresponds to a set frequency of the music scale, MIDI has 128 pitches
+- octave	the midi scale has 12 notes (C C# D D# E F F# G G# A A# B) that form an octave
+		this is being repeated , so that a note sounds very similar but slightly higher/lower
+		depending on which octave it is in.
+- interval	ratio between two pitches' frequencies, more useful than just absolute frequencies
+- temper	denotes the octave. changing the temper will not affect the tune, but it might have an
+		effect of how the piece comes across (e.g. serious/cheerful)
+
+/* source  http://www.harmony-central.com/MIDI/Doc/table2.html */
+Octave #	Note Numbers
+*	C	C#	D	D#	E	F	F#	G	G#	A	A#	B
+-1	0	1	2	3 	4	5 	6	7	8	9	10	11
+0	12	13	14 	15	16	17	18	19	20	21	22 	23
+1	24	25	26	27	28	29	30	31	32	33	34	35
+2	36	37	38	39	40	41	42	43	44	45	46	47
+3	48	49	50	51	52	53	54 	55	56	57	58	59
+4	60	61	62	63	64	65	66	67	68	69	70	71
+5	72	73	74	75	76	77	78	79	80	81	82	83
+6	84	85	86	87	88	89	90	91	92	93	94	95
+7	96	97	98	99	100	101	102	103	104	105	106	107
+8	108	109	110	111	112	113	114	115	116	117	118	119
+9	120	121	122	123	124	125 126	127
+
+######
+# MIDI options for controlling the sound:
+######
+
+- Note-On Event
+	specifies to play a note on specific channel, at specific pitch and velocity
+- Note-Off  Event
+	specifies to release a note of channel, pitch and velocity. 
+	(sometimes the note will stop even without this, sometimes not. If someone knows why, I'm happy
+	 to know...)
+- Polyphonic Key Pressure, Channel pressure
+	Pressure being applied to keys while being pressed, also called aftertouch.  
+- Control Change
+	specifies a function/effect for specific channel
+	( see control_node_changes.txt for list )
+- Channel Mode
+	global settings for all channels
+	( see control_node_changes.txt for list )
+- Program Change
+	specifies the instrument for a channel
+	( see program_change.txt for list of instruments ) 
+- Pitch Bend
+	modifies the pitch of sounds played on given channel
+	( on real keyboard, this models the changes of position of the pitch bend wheel )
+	
+Note: there are 16 channels which can play polyphonically, i.e. simultaneously.
+

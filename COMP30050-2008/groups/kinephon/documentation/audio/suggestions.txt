@@ -1,0 +1,9 @@
+Here are some ideas just thrown into the room:
+( maybe anyone can just add some to the list )
+
+- 3 channels dedicated to playing chords ( controlled explicitly
+	or just choosing the best matching chord to notes played)
+- certain gestures may change the instrument on a channel/chord
+- sudden movements may result in temporary increase in volume
+- we can correct notes by half-notes, if they won't play together
+- 

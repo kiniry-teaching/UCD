@@ -1,8 +1,10 @@
 /*
 	Source: http://tomscarff.tripod.com/midi_analyser/midi_messages.htm
 */
-General MIDI Patch Map
-Program Change
+########
+# General MIDI Patch Map
+# Program Change
+########
 
 The Program Change message is used to specify the type of instrument which 
 should be used to play sounds on a given Channel. This message needs only 
@@ -67,3 +69,15 @@ Prog# 	Instrument Name 	Prog# 	Instrument Name 	Prog# 	Instrument Name
 43 	Cello 					86 	Lead 6 (voice) 	  	 
 
 
+########
+# Pitch bend
+########
+
+The message is set up of 3 bytes:
+
+byte 1: |1 0 1 1 |x x x x| 
+			224		channelNo
+byte 2: |0 x x x |x x x x|
+		data bits 0 - 6
+byte 3: |0 x x x |x x x x|
+		data bits 7 - 13
