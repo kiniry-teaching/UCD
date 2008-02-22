@@ -6,4 +6,41 @@ Here are some ideas just thrown into the room:
 - certain gestures may change the instrument on a channel/chord
 - sudden movements may result in temporary increase in volume
 - we can correct notes by half-notes, if they won't play together
-- 
+- Some conducting gestures http://en.wikipedia.org/wiki/Conducting
+- We might split up composition of the music into the parts
+	described at http://en.wikipedia.org/wiki/Music_theory, that
+	could be generated independently. We would also then have a
+	controller that, based on feedback from the different parts,
+	attempted to maintain a certain style to the music
+	For example, during the start-up of the music, various movements
+	could be deciding the drum pattern, which the controller would
+	be generating by feedback from the rhythm sub-part, but then it would
+	be up to the controller to decide when to begin playing the drums
+	
+	Maybe a class structure like..
+	
+	Orchestrator	// Central control of music generation, stores music score and timing
+	|_Conductor		// Generates the style of music based on movements (past and present)
+	| |_Melody		// Watches movements and calculates a melody
+	| |_Pitch		//    ..      ..      .       ..    . pitch
+	| |_Rhythm		// etc..
+	| |_Harmony
+	| |_Dynamics
+	| |_Texture
+	| |_Form
+	|_Composer		// Generates music patterns, given results of Conductor
+	| |_Piano		// Generate pattern for piano; this pattern could be
+	| |_Drum		//	changing over time, based on conductor results
+	| |_etc..		//	but at some point, it gets locked, making the pattern
+	|				//	available for Cueing, then a new pattern can begin
+	|				//	generating (either brand new, or mutation of existing)
+	|_Cue			// Decides when to play a pattern, and in what order
+					//	could choose an AABA timing given two patters (A and B)
+					//	from the composer
+					
+	So the idea would be that the Orchestrator passes the movements shapes on to
+	 Conductor which fills some data structure with all its calculations. These
+	 are then handed on to Composer which starts writing patters and then those
+	 are handed on to Cue (along with Conductor's calculations) which orders them.
+	 Then the Orchestrator (which keeps overall timing and music score), hands each
+	 note/instrument on to the audio class when it's time to play it
