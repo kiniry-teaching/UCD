@@ -17,6 +17,12 @@ namespace ShArt
 		protected float _falloff = 0.0f;
 		protected List<Pixel> _neighbours = new List<Pixel>();
 
+		public Pixel(int x, int y)
+		{
+			_x = x;
+			_y = y;
+		}
+
 		[DescriptionAttribute("Cell X position"),
 		 CategoryAttribute("Position")]
 		public int X { get { return _x; } }
@@ -24,7 +30,7 @@ namespace ShArt
 		 CategoryAttribute("Position")]
 		public int Y { get { return _y; } }
 
-		[DefaultValueAttribute("8.0"),
+		[DefaultValueAttribute("4.0"),
 		 DescriptionAttribute("Radius of affected cells"),
 		 CategoryAttribute("Weight")]
 		public float Radius

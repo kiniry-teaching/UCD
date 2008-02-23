@@ -49,6 +49,7 @@ namespace ShArt
 			this.mnuWindowVertical = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuWindowCloseAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.stsShArt = new System.Windows.Forms.StatusStrip();
+			this.stsStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tbrShArt = new System.Windows.Forms.ToolStrip();
 			this.splPropertiesSplit = new System.Windows.Forms.Splitter();
 			this.spcProperties = new System.Windows.Forms.SplitContainer();
@@ -56,7 +57,6 @@ namespace ShArt
 			this.imlShArt = new System.Windows.Forms.ImageList(this.components);
 			this.pgdProperties = new System.Windows.Forms.PropertyGrid();
 			this.splProperties = new System.Windows.Forms.Splitter();
-			this.stsStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			mnuFileDiv1 = new System.Windows.Forms.ToolStripSeparator();
 			mnuFileDiv2 = new System.Windows.Forms.ToolStripSeparator();
 			this.mnuShArt.SuspendLayout();
@@ -69,12 +69,12 @@ namespace ShArt
 			// mnuFileDiv1
 			// 
 			mnuFileDiv1.Name = "mnuFileDiv1";
-			mnuFileDiv1.Size = new System.Drawing.Size(149, 6);
+			mnuFileDiv1.Size = new System.Drawing.Size(133, 6);
 			// 
 			// mnuFileDiv2
 			// 
 			mnuFileDiv2.Name = "mnuFileDiv2";
-			mnuFileDiv2.Size = new System.Drawing.Size(149, 6);
+			mnuFileDiv2.Size = new System.Drawing.Size(133, 6);
 			// 
 			// mnuShArt
 			// 
@@ -106,31 +106,31 @@ namespace ShArt
 			// mnuFileOpen
 			// 
 			this.mnuFileOpen.Name = "mnuFileOpen";
-			this.mnuFileOpen.Size = new System.Drawing.Size(152, 22);
+			this.mnuFileOpen.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileOpen.Text = "&Open...";
 			// 
 			// mnuFileSave
 			// 
 			this.mnuFileSave.Name = "mnuFileSave";
-			this.mnuFileSave.Size = new System.Drawing.Size(152, 22);
+			this.mnuFileSave.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileSave.Text = "&Save";
 			// 
 			// mnuFileSaveAs
 			// 
 			this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-			this.mnuFileSaveAs.Size = new System.Drawing.Size(152, 22);
+			this.mnuFileSaveAs.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileSaveAs.Text = "Save &As...";
 			// 
 			// mnuFileCompile
 			// 
 			this.mnuFileCompile.Name = "mnuFileCompile";
-			this.mnuFileCompile.Size = new System.Drawing.Size(152, 22);
+			this.mnuFileCompile.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileCompile.Text = "&Compile";
 			// 
 			// mnuFileExit
 			// 
 			this.mnuFileExit.Name = "mnuFileExit";
-			this.mnuFileExit.Size = new System.Drawing.Size(152, 22);
+			this.mnuFileExit.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileExit.Text = "E&xit";
 			this.mnuFileExit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -147,14 +147,14 @@ namespace ShArt
 			// mnuShapeNew
 			// 
 			this.mnuShapeNew.Name = "mnuShapeNew";
-			this.mnuShapeNew.Size = new System.Drawing.Size(152, 22);
+			this.mnuShapeNew.Size = new System.Drawing.Size(116, 22);
 			this.mnuShapeNew.Text = "&New";
 			this.mnuShapeNew.Click += new System.EventHandler(this.mnuShapeNew_Click);
 			// 
 			// mnuShapeDelete
 			// 
 			this.mnuShapeDelete.Name = "mnuShapeDelete";
-			this.mnuShapeDelete.Size = new System.Drawing.Size(152, 22);
+			this.mnuShapeDelete.Size = new System.Drawing.Size(116, 22);
 			this.mnuShapeDelete.Text = "&Delete";
 			// 
 			// mnuWindow
@@ -165,7 +165,7 @@ namespace ShArt
             this.mnuWindowHorizontal,
             this.mnuWindowVertical,
             this.mnuWindowCloseAll});
-			this.mnuWindow.MergeIndex = 4;
+			this.mnuWindow.MergeIndex = 5;
 			this.mnuWindow.Name = "mnuWindow";
 			this.mnuWindow.Size = new System.Drawing.Size(57, 20);
 			this.mnuWindow.Text = "&Window";
@@ -214,6 +214,12 @@ namespace ShArt
 			this.stsShArt.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
 			this.stsShArt.Size = new System.Drawing.Size(922, 22);
 			this.stsShArt.TabIndex = 5;
+			// 
+			// stsStatus
+			// 
+			this.stsStatus.Name = "stsStatus";
+			this.stsStatus.Size = new System.Drawing.Size(42, 17);
+			this.stsStatus.Text = "Ready!";
 			// 
 			// tbrShArt
 			// 
@@ -289,12 +295,6 @@ namespace ShArt
 			this.splProperties.Size = new System.Drawing.Size(340, 556);
 			this.splProperties.TabIndex = 11;
 			this.splProperties.TabStop = false;
-			// 
-			// stsStatus
-			// 
-			this.stsStatus.Name = "stsStatus";
-			this.stsStatus.Size = new System.Drawing.Size(42, 17);
-			this.stsStatus.Text = "Ready!";
 			// 
 			// frmShArt
 			// 

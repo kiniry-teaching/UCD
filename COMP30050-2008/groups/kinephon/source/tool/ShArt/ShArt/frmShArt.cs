@@ -111,6 +111,11 @@ namespace ShArt
 
 		}
 
+		public void SelectPixel(Pixel pixel)
+		{
+			pgdProperties.SelectedObject = pixel;
+		}
+
 		private Shape Shape(TreeNode Node)
 		{
 			return (Shape)Node.Tag;

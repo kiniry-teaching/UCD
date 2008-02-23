@@ -132,7 +132,7 @@ namespace ShArt
 			Pixel[,] pixels = new Pixel[w, h];
 			for(int y = 0; y < h; y++)
 			for(int x = 0; x < w; x++)
-				pixels[x, y] = new Pixel();
+				pixels[x, y] = new Pixel(x, y);
 
 			if(_pixels != null)
 				for(int y = 0; y < Math.Min(h, _height); y++)
