@@ -23,7 +23,7 @@ namespace TuneBlaster_.Graphics
             base.Initialise();
             coreDistance = Vector2.Distance(Position, core.Position);
             rotation = core.Rotation;
-            initialRotation = core.Rotation;
+            initialRotation = (float)(Math.PI -Math.PI/4 + Math.Acos((core.Position.X - Position.X) / coreDistance) + Math.Asin((core.Position.Y - Position.Y) / coreDistance));
         }
 
         public void GetRotation(float rotate)
