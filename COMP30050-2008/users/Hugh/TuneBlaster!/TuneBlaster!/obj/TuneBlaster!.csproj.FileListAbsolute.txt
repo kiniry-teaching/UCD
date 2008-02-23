@@ -1,7 +1,0 @@
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\bin\x86\Debug\TuneBlaster!.exe
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\bin\x86\Debug\TuneBlaster!.pdb
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\obj\x86\Debug\TuneBlaster!.exe
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\obj\x86\Debug\TuneBlaster!.pdb
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\bin\x86\Debug\Resources\Textures\Arrow.xnb
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster!\TuneBlaster!\bin\x86\Debug\Resources\Textures\Ball.xnb
