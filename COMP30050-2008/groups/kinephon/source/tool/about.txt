@@ -1,0 +1,5 @@
+ShArt        (Shape Artist)
+  Language:  C#
+  OS:        Windows Only
+  About:     Draw gesture weight-maps and compile them into a single file that
+              will be loaded into Kinephon
