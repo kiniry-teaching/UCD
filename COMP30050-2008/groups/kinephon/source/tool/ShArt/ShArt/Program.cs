@@ -14,7 +14,7 @@ namespace ShArt
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new ShArt());
+			Application.Run(new frmShArt());
 		}
 	}
 }
