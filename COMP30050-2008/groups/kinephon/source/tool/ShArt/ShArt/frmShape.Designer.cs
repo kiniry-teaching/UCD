@@ -89,17 +89,17 @@ namespace ShArt
 			// mnuImageDiv2
 			// 
 			mnuImageDiv2.Name = "mnuImageDiv2";
-			mnuImageDiv2.Size = new System.Drawing.Size(147, 6);
+			mnuImageDiv2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuImageDiv3
 			// 
 			mnuImageDiv3.Name = "mnuImageDiv3";
-			mnuImageDiv3.Size = new System.Drawing.Size(147, 6);
+			mnuImageDiv3.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuImageDiv1
 			// 
 			mnuImageDiv1.Name = "mnuImageDiv1";
-			mnuImageDiv1.Size = new System.Drawing.Size(147, 6);
+			mnuImageDiv1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// picShape
 			// 
@@ -110,6 +110,8 @@ namespace ShArt
 			this.picShape.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.picShape.TabIndex = 0;
 			this.picShape.TabStop = false;
+			this.picShape.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picShape_MouseDown);
+			this.picShape.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picShape_MouseMove);
 			this.picShape.Paint += new System.Windows.Forms.PaintEventHandler(this.picShape_Paint);
 			// 
 			// mnuShape
@@ -151,21 +153,21 @@ namespace ShArt
 			// 
 			this.mnuImageSelect.Name = "mnuImageSelect";
 			this.mnuImageSelect.ShortcutKeyDisplayString = "S";
-			this.mnuImageSelect.Size = new System.Drawing.Size(150, 22);
+			this.mnuImageSelect.Size = new System.Drawing.Size(152, 22);
 			this.mnuImageSelect.Text = "&Select";
 			// 
 			// mnuImageSelectAll
 			// 
 			this.mnuImageSelectAll.Name = "mnuImageSelectAll";
 			this.mnuImageSelectAll.ShortcutKeyDisplayString = "A";
-			this.mnuImageSelectAll.Size = new System.Drawing.Size(150, 22);
+			this.mnuImageSelectAll.Size = new System.Drawing.Size(152, 22);
 			this.mnuImageSelectAll.Text = "Select &All";
 			// 
 			// mnuImagePaint
 			// 
 			this.mnuImagePaint.Name = "mnuImagePaint";
 			this.mnuImagePaint.ShortcutKeyDisplayString = "P";
-			this.mnuImagePaint.Size = new System.Drawing.Size(150, 22);
+			this.mnuImagePaint.Size = new System.Drawing.Size(152, 22);
 			this.mnuImagePaint.Text = "&Paint";
 			// 
 			// mnuImageRadius
@@ -180,8 +182,8 @@ namespace ShArt
             this.toolStripMenuItem10,
             this.toolStripMenuItem11});
 			this.mnuImageRadius.Name = "mnuImageRadius";
-			this.mnuImageRadius.Size = new System.Drawing.Size(150, 22);
-			this.mnuImageRadius.Text = "&Radius (8)";
+			this.mnuImageRadius.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius.Text = "&Radius (8.0)";
 			// 
 			// toolStripMenuItem3
 			// 
@@ -249,7 +251,7 @@ namespace ShArt
             this.increaseToolStripMenuItem,
             this.decreaseToolStripMenuItem});
 			this.mnuImageWeight.Name = "mnuImageWeight";
-			this.mnuImageWeight.Size = new System.Drawing.Size(150, 22);
+			this.mnuImageWeight.Size = new System.Drawing.Size(152, 22);
 			this.mnuImageWeight.Text = "&Weight (1.0)";
 			// 
 			// toolStripMenuItem12
@@ -318,7 +320,7 @@ namespace ShArt
             this.increaseToolStripMenuItem1,
             this.decreaseToolStripMenuItem1});
 			this.falloff00ToolStripMenuItem.Name = "falloff00ToolStripMenuItem";
-			this.falloff00ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.falloff00ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.falloff00ToolStripMenuItem.Text = "Falloff (0.0)";
 			// 
 			// toolStripMenuItem6
@@ -382,28 +384,28 @@ namespace ShArt
 			// 
 			this.mnuImageCut.Name = "mnuImageCut";
 			this.mnuImageCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-			this.mnuImageCut.Size = new System.Drawing.Size(150, 22);
+			this.mnuImageCut.Size = new System.Drawing.Size(152, 22);
 			this.mnuImageCut.Text = "Cu&t";
 			// 
 			// mnuImageCopy
 			// 
 			this.mnuImageCopy.Name = "mnuImageCopy";
 			this.mnuImageCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.mnuImageCopy.Size = new System.Drawing.Size(150, 22);
+			this.mnuImageCopy.Size = new System.Drawing.Size(152, 22);
 			this.mnuImageCopy.Text = "&Copy";
 			// 
 			// mnuImagePaste
 			// 
 			this.mnuImagePaste.Name = "mnuImagePaste";
 			this.mnuImagePaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-			this.mnuImagePaste.Size = new System.Drawing.Size(150, 22);
+			this.mnuImagePaste.Size = new System.Drawing.Size(152, 22);
 			this.mnuImagePaste.Text = "&Paste";
 			// 
 			// mnuImageClear
 			// 
 			this.mnuImageClear.Name = "mnuImageClear";
 			this.mnuImageClear.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-			this.mnuImageClear.Size = new System.Drawing.Size(150, 22);
+			this.mnuImageClear.Size = new System.Drawing.Size(152, 22);
 			this.mnuImageClear.Text = "&Clear";
 			// 
 			// areaToolStripMenuItem
@@ -415,6 +417,7 @@ namespace ShArt
             this.addToolStripMenuItem,
             this.deleteToolStripMenuItem,
             this.toolStripMenuItem22});
+			this.areaToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
 			this.areaToolStripMenuItem.MergeIndex = 3;
 			this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
 			this.areaToolStripMenuItem.Size = new System.Drawing.Size(43, 20);

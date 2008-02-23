@@ -49,6 +49,7 @@
     <Compile Include="frmShArt.Designer.cs">
       <DependentUpon>frmShArt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pixel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmShape.resx">
@@ -78,6 +79,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Shape.cs" />
+    <Compile Include="Zone.cs" />
+    <Compile Include="Zones.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

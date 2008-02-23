@@ -6,6 +6,7 @@ namespace ShArt
 {
 	static class Program
 	{
+		public static frmShArt ShArt;
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -14,7 +15,7 @@ namespace ShArt
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new frmShArt());
+			Application.Run(ShArt = new frmShArt());
 		}
 	}
 }

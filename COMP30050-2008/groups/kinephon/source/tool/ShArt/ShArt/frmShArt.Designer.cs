@@ -56,9 +56,11 @@ namespace ShArt
 			this.imlShArt = new System.Windows.Forms.ImageList(this.components);
 			this.pgdProperties = new System.Windows.Forms.PropertyGrid();
 			this.splProperties = new System.Windows.Forms.Splitter();
+			this.stsStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			mnuFileDiv1 = new System.Windows.Forms.ToolStripSeparator();
 			mnuFileDiv2 = new System.Windows.Forms.ToolStripSeparator();
 			this.mnuShArt.SuspendLayout();
+			this.stsShArt.SuspendLayout();
 			this.spcProperties.Panel1.SuspendLayout();
 			this.spcProperties.Panel2.SuspendLayout();
 			this.spcProperties.SuspendLayout();
@@ -67,12 +69,12 @@ namespace ShArt
 			// mnuFileDiv1
 			// 
 			mnuFileDiv1.Name = "mnuFileDiv1";
-			mnuFileDiv1.Size = new System.Drawing.Size(133, 6);
+			mnuFileDiv1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuFileDiv2
 			// 
 			mnuFileDiv2.Name = "mnuFileDiv2";
-			mnuFileDiv2.Size = new System.Drawing.Size(133, 6);
+			mnuFileDiv2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuShArt
 			// 
@@ -83,7 +85,7 @@ namespace ShArt
 			this.mnuShArt.Location = new System.Drawing.Point(0, 0);
 			this.mnuShArt.MdiWindowListItem = this.mnuWindow;
 			this.mnuShArt.Name = "mnuShArt";
-			this.mnuShArt.Size = new System.Drawing.Size(473, 24);
+			this.mnuShArt.Size = new System.Drawing.Size(922, 24);
 			this.mnuShArt.TabIndex = 1;
 			// 
 			// mnuFile
@@ -104,31 +106,31 @@ namespace ShArt
 			// mnuFileOpen
 			// 
 			this.mnuFileOpen.Name = "mnuFileOpen";
-			this.mnuFileOpen.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileOpen.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileOpen.Text = "&Open...";
 			// 
 			// mnuFileSave
 			// 
 			this.mnuFileSave.Name = "mnuFileSave";
-			this.mnuFileSave.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileSave.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileSave.Text = "&Save";
 			// 
 			// mnuFileSaveAs
 			// 
 			this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-			this.mnuFileSaveAs.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileSaveAs.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileSaveAs.Text = "Save &As...";
 			// 
 			// mnuFileCompile
 			// 
 			this.mnuFileCompile.Name = "mnuFileCompile";
-			this.mnuFileCompile.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileCompile.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileCompile.Text = "&Compile";
 			// 
 			// mnuFileExit
 			// 
 			this.mnuFileExit.Name = "mnuFileExit";
-			this.mnuFileExit.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileExit.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileExit.Text = "E&xit";
 			this.mnuFileExit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -145,14 +147,14 @@ namespace ShArt
 			// mnuShapeNew
 			// 
 			this.mnuShapeNew.Name = "mnuShapeNew";
-			this.mnuShapeNew.Size = new System.Drawing.Size(116, 22);
+			this.mnuShapeNew.Size = new System.Drawing.Size(152, 22);
 			this.mnuShapeNew.Text = "&New";
 			this.mnuShapeNew.Click += new System.EventHandler(this.mnuShapeNew_Click);
 			// 
 			// mnuShapeDelete
 			// 
 			this.mnuShapeDelete.Name = "mnuShapeDelete";
-			this.mnuShapeDelete.Size = new System.Drawing.Size(116, 22);
+			this.mnuShapeDelete.Size = new System.Drawing.Size(152, 22);
 			this.mnuShapeDelete.Text = "&Delete";
 			// 
 			// mnuWindow
@@ -205,12 +207,13 @@ namespace ShArt
 			// 
 			// stsShArt
 			// 
-			this.stsShArt.Location = new System.Drawing.Point(0, 324);
+			this.stsShArt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stsStatus});
+			this.stsShArt.Location = new System.Drawing.Point(0, 580);
 			this.stsShArt.Name = "stsShArt";
 			this.stsShArt.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-			this.stsShArt.Size = new System.Drawing.Size(473, 22);
+			this.stsShArt.Size = new System.Drawing.Size(922, 22);
 			this.stsShArt.TabIndex = 5;
-			this.stsShArt.Text = "stsStatus";
 			// 
 			// tbrShArt
 			// 
@@ -223,16 +226,16 @@ namespace ShArt
 			// splPropertiesSplit
 			// 
 			this.splPropertiesSplit.Dock = System.Windows.Forms.DockStyle.Right;
-			this.splPropertiesSplit.Location = new System.Drawing.Point(260, 24);
+			this.splPropertiesSplit.Location = new System.Drawing.Point(578, 24);
 			this.splPropertiesSplit.Name = "splPropertiesSplit";
-			this.splPropertiesSplit.Size = new System.Drawing.Size(4, 300);
+			this.splPropertiesSplit.Size = new System.Drawing.Size(4, 556);
 			this.splPropertiesSplit.TabIndex = 13;
 			this.splPropertiesSplit.TabStop = false;
 			this.splPropertiesSplit.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splPropertiesSplit_SplitterMoved);
 			// 
 			// spcProperties
 			// 
-			this.spcProperties.Location = new System.Drawing.Point(264, 48);
+			this.spcProperties.Location = new System.Drawing.Point(584, 24);
 			this.spcProperties.Name = "spcProperties";
 			this.spcProperties.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -244,8 +247,8 @@ namespace ShArt
 			// 
 			this.spcProperties.Panel2.Controls.Add(this.pgdProperties);
 			this.spcProperties.Panel2.Resize += new System.EventHandler(this.spcProperties_Panel2_Resize);
-			this.spcProperties.Size = new System.Drawing.Size(152, 248);
-			this.spcProperties.SplitterDistance = 128;
+			this.spcProperties.Size = new System.Drawing.Size(296, 496);
+			this.spcProperties.SplitterDistance = 217;
 			this.spcProperties.TabIndex = 12;
 			// 
 			// tvwShapes
@@ -257,7 +260,7 @@ namespace ShArt
 			this.tvwShapes.Location = new System.Drawing.Point(0, 0);
 			this.tvwShapes.Name = "tvwShapes";
 			this.tvwShapes.SelectedImageIndex = 0;
-			this.tvwShapes.Size = new System.Drawing.Size(152, 128);
+			this.tvwShapes.Size = new System.Drawing.Size(296, 217);
 			this.tvwShapes.TabIndex = 0;
 			this.tvwShapes.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvwShapes_MouseDoubleClick);
 			this.tvwShapes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvwShapes_AfterSelect);
@@ -281,17 +284,23 @@ namespace ShArt
 			// splProperties
 			// 
 			this.splProperties.Dock = System.Windows.Forms.DockStyle.Right;
-			this.splProperties.Location = new System.Drawing.Point(264, 24);
+			this.splProperties.Location = new System.Drawing.Point(582, 24);
 			this.splProperties.Name = "splProperties";
-			this.splProperties.Size = new System.Drawing.Size(209, 300);
+			this.splProperties.Size = new System.Drawing.Size(340, 556);
 			this.splProperties.TabIndex = 11;
 			this.splProperties.TabStop = false;
+			// 
+			// stsStatus
+			// 
+			this.stsStatus.Name = "stsStatus";
+			this.stsStatus.Size = new System.Drawing.Size(42, 17);
+			this.stsStatus.Text = "Ready!";
 			// 
 			// frmShArt
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(473, 346);
+			this.ClientSize = new System.Drawing.Size(922, 602);
 			this.Controls.Add(this.splPropertiesSplit);
 			this.Controls.Add(this.spcProperties);
 			this.Controls.Add(this.splProperties);
@@ -308,6 +317,8 @@ namespace ShArt
 			this.Load += new System.EventHandler(this.ShArt_Load);
 			this.mnuShArt.ResumeLayout(false);
 			this.mnuShArt.PerformLayout();
+			this.stsShArt.ResumeLayout(false);
+			this.stsShArt.PerformLayout();
 			this.spcProperties.Panel1.ResumeLayout(false);
 			this.spcProperties.Panel2.ResumeLayout(false);
 			this.spcProperties.ResumeLayout(false);
@@ -320,7 +331,6 @@ namespace ShArt
 
 		private System.Windows.Forms.MenuStrip mnuShArt;
 		private System.Windows.Forms.ToolStripMenuItem mnuWindow;
-		private System.Windows.Forms.StatusStrip stsShArt;
 		private System.Windows.Forms.ToolStrip tbrShArt;
 		private System.Windows.Forms.ToolStripMenuItem mnuFile;
 		private System.Windows.Forms.ToolStripMenuItem mnuFileOpen;
@@ -342,6 +352,8 @@ namespace ShArt
 		private System.Windows.Forms.ToolStripMenuItem mnuShapeNew;
 		private System.Windows.Forms.ToolStripMenuItem mnuShapeDelete;
 		private System.Windows.Forms.ImageList imlShArt;
+		public System.Windows.Forms.ToolStripStatusLabel stsStatus;
+		private System.Windows.Forms.StatusStrip stsShArt;
 	}
 }
 
