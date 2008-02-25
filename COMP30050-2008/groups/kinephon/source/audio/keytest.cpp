@@ -12,34 +12,21 @@ using namespace std;
   #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
 #endif
 
+/*
+ * Author:	ED
+ *
+ * Demo test program for AudioController.
+ */
+ 
 int main(){
 	
 	AudioController* audio = 0;
-	
-	try {
-    	audio = new AudioController();
-  	}
-  	catch ( RtError &error ) {
-    	error.printMessage();
+	audio = new AudioController();
+	if(!audio->init())
     	exit( EXIT_FAILURE );
-  	}
-  	audio->changeProgram(0, 1);//set instrument
-  	
-	audio->modeTest(0,7,50);//volume
-	
-	audio->modeTest(0,64,100);//some effect
-	
-  	for(int i = 0; i < 10; i++){
+    
+    audio->Input(0);
     	
-  		// Note On: 144, 64, 90
-  		audio->makeBeep(true, 0, 64 + i);
-		//audio->makeBeep(true, 1, 64 + i);
-  		SLEEP( 500 );
-
-  		// Note Off: 128, 64, 40
-  		audio->makeBeep(false, 0, 64 + i);
-  		//audio->makeBeep(false, 1, 64 + i);
-    }
-
+	
 	return 0;
 }

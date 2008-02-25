@@ -2,11 +2,20 @@
 #include "RtError.h"
 
 AudioController::AudioController():
-	midiout(NULL),
-	message(3)
+	_midiout(NULL),
+	_connected(false),
+	_defaultChannel(NULL),
+	_rhythmChannel(NULL)
+{}
+
+AudioController::~AudioController()
 {
+	delete _midiout;
+}
+
+bool AudioController::init(){
 	// RtMidiOut constructor
-	midiout = new RtMidiOut();
+	_midiout = new RtMidiOut();
   	
   	// Call function to select port.
   	cout << "\nWould you like to open a virtual output port? [y/N] ";
@@ -14,20 +23,26 @@ AudioController::AudioController():
   	string keyHit;
   	getline( cin, keyHit );
   	if ( keyHit == "y" ) {
-    	midiout->openVirtualPort();
-    	
+  		try{
+    		_midiout->openVirtualPort();
+  		}
+    	catch ( RtError &error ) {
+    		_connected = false;	
+    	}
+    	_connected = true;
   	}else{
 		string portName;
-  		unsigned int i = 0, nPorts = midiout->getPortCount();
+  		unsigned int i = 0, nPorts = _midiout->getPortCount();
   		if ( nPorts == 0 ) {
-    		throw RtError("No output ports available", RtError::NO_DEVICES_FOUND);
+  			_connected = false;
    		}
 		if ( nPorts == 1 ) {
-    		cout << "\nOpening " << midiout->getPortName() << endl;
+    		cout << "\nOpening " << _midiout->getPortName() << endl;
+    		_connected = true;
   		}
   		else {
     		for ( i=0; i<nPorts; i++ ) {
-      			portName = midiout->getPortName(i);
+      			portName = _midiout->getPortName(i);
       			cout << "  Output port #" << i << ": " << portName << '\n';
     		}
     		do {
@@ -36,46 +51,69 @@ AudioController::AudioController():
     		} while ( i >= nPorts );
   		}
   	  	cout << "\n";
-  		midiout->openPort( i );
+  		_midiout->openPort( i );
+  		_connected = true;
   	}
-	
+  	if(_connected){
+  		_defaultChannel = new Channel(_midiout, 0);
+  		_rhythmChannel = new Channel(_midiout, 9);
+  		return true;
+  	}
+  	else{
+  		return false;
+  	}
 }
 
-AudioController::~AudioController()
-{
-	delete midiout;
+void AudioController::PlayNote(bool on, unsigned char pitch, unsigned char velocity){
+	if(_connected){
+		if(on)
+			_defaultChannel -> Play( pitch, velocity );
+		else
+			_defaultChannel -> Release( pitch, velocity );
+	}
 }
 
+// Plays or stops the given note on given channel
+void AudioController::PlayRhythm(bool on, unsigned char pitch, unsigned char velocity){
+	if(_connected){
+		if(on)
+			_rhythmChannel -> Play( pitch, velocity );
+		else
+			_rhythmChannel -> Release( pitch, velocity );
+	}
+		
 
-
-void AudioController::makeBeep(bool on, unsigned char channel, unsigned char pitch){
-if(on){
-
-  message[0] = 144 + channel;
-  message[1] = pitch;
-  message[2] = 90;
-  midiout->sendMessage( &message );
-}
-else{
-  // Note Off: 128, 64, 40
-  message[0] = 128 + channel;
-  message[1] = pitch;
-  message[2] = 40;
-  midiout->sendMessage( &message );
-}
-}
-
-void AudioController::changeProgram(unsigned char channel, unsigned char program){
-	vector<unsigned char> mssg;
-	mssg.push_back( 192 + channel );
-  	mssg.push_back( program );
-  
-  midiout->sendMessage( &mssg );
 }
 	
-void AudioController::modeTest(unsigned char channel, unsigned char function, unsigned char value){
-	message[0] = 176  + channel;
-  	message[1] = function;
-  	message[2] = value;
-  	midiout->sendMessage( &message );
+
+void AudioController::ProgramChange(unsigned char channel, unsigned char program){
+	if(_connected){
+		_defaultChannel -> ProgramChange( program );
+	}
 }
+	
+void AudioController::ControlChange(unsigned char channel, unsigned char function, unsigned char value){
+	if(_connected){
+		_defaultChannel -> ControlChange( function, value );
+
+	}
+}
+
+//Just a demo
+void AudioController::Input(int tune){
+	PlayNote(true, MIDDLE_F, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_F, 60);
+	PlayNote(true, MIDDLE_G, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_G, 60);
+	PlayNote(true, MIDDLE_A, 127);SLEEP( 700 );PlayNote(false, MIDDLE_A, 60);
+	PlayNote(true, MIDDLE_A, 60);SLEEP ( 150 );PlayNote(false, MIDDLE_A, 60);
+	PlayNote(true, MIDDLE_G, 60);SLEEP ( 150 );PlayNote(false, MIDDLE_G, 60);
+	PlayNote(true, MIDDLE_F, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_F, 60);
+	PlayNote(true, MIDDLE_G, 127);SLEEP ( 700 );PlayNote(false, MIDDLE_G, 60);
+	PlayNote(true, MIDDLE_A, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_A, 60);
+	PlayNote(true, MIDDLE_G, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_G, 60);
+	PlayNote(true, MIDDLE_F, 127);SLEEP ( 700 );PlayNote(false, MIDDLE_F, 60);
+	PlayNote(true, MIDDLE_A, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_A, 60);
+	PlayNote(true, 72, 60);SLEEP ( 300 );PlayNote(false, 72, 60);
+	PlayNote(true, 74, 127);SLEEP ( 700 );PlayNote(false, 74, 60);
+
+}
+
