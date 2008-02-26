@@ -7,11 +7,17 @@ using Microsoft.Xna.Framework;
 namespace TuneBlaster_.Graphics
 {
     class MovingBall : Image
-    {
+    {    
+        #region Fields (core, live, angles, colour)
+
         Core core;
         bool live;
         float hypotenuse, x, y;
         value colour;
+
+        #endregion
+
+        #region Main Methods (MovingBall, Initialise)
 
         public MovingBall(Core c, value v)
         {
@@ -25,11 +31,18 @@ namespace TuneBlaster_.Graphics
             live = true;
         }
 
+        #endregion
+
+        #region Return Methods (IsLive)
+
         public bool IsLive()
         {
             return live;
         }
 
+        #endregion
+
+        #region Action Methods (Collide, Move)
 
         public bool Collide()
         {
@@ -68,5 +81,7 @@ namespace TuneBlaster_.Graphics
                 live = false;         
             }
         }
+
+        #endregion
     }
 }

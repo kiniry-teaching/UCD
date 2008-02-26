@@ -10,16 +10,24 @@ namespace TuneBlaster_
 {
     class BallManager
     {
+        #region Fields (ball, generator, core, spritebatch, texture)
+
         MovingBall ball;
         Random generator;
         Core core;
         SpriteBatch s;
         Texture2D t;
 
+        #endregion
+
+        #region Main Methods (BallManager, Initialise, LoadGraphicsContent, Update, Draw)
+
         public BallManager(Core c)
         {
             core = c;
         }
+
+        
 
         public void Initialise()
         {
@@ -52,5 +60,7 @@ namespace TuneBlaster_
         {
             ball.Draw(gameTime);
         }
+
+        #endregion
     }
 }

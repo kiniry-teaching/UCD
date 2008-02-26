@@ -24,12 +24,13 @@ namespace TuneBlaster_
         Texture2D texture;
         Core core;
         BallManager ball;
+        GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
         
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
-            core = new Core();
+            core = new Core(gamePadState);
             ball = new BallManager(core);
         }
 
@@ -96,7 +97,7 @@ namespace TuneBlaster_
             // Allows the default game to exit on Xbox 360 and Windows
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            core.Update(gameTime, GamePad.GetState(PlayerIndex.One), Keyboard.GetState());
+            core.Update(gameTime, Keyboard.GetState());
             ball.Update(gameTime);
             // TODO: Add your update logic here
 

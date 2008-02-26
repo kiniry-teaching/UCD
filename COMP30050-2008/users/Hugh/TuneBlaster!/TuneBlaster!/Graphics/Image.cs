@@ -8,7 +8,7 @@ namespace TuneBlaster_.Graphics
 {
     class Image
     {
-        public enum value { red, green, blue, yellow }
+        
 
         #region Properties (Position, Rotation, Size)
 
@@ -38,8 +38,9 @@ namespace TuneBlaster_.Graphics
 
         #endregion
 
-        #region Field (spritebatch, texture, position, source, colour, rotation, origin, scale, efftects, layer, size)
+        #region Field (spritebatch, texture, position, source, colour, rotation, origin, scale, efftects, layer, size, value)
 
+        public enum value { red, green, blue, yellow }
         public SpriteBatch spriteBatch;
         public Texture2D texture;
         private Vector2 position;
@@ -91,7 +92,6 @@ namespace TuneBlaster_.Graphics
         }
 
         #endregion
-
 
         #region Action Methods (Collide, Move)
 

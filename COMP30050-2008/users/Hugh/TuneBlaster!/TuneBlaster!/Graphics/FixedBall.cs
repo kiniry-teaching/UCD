@@ -8,9 +8,15 @@ namespace TuneBlaster_.Graphics
 {
     class FixedBall : Image
     {
+        #region Fields (core, colour, initialRoatation, coreDistance)
+
         Core core;
         value colour;
         float initialRotation, coreDistance;
+
+        #endregion
+
+        #region Main Methods(FixedBall, Initialise)
 
         public FixedBall(Core c, value v) 
         {
@@ -23,8 +29,12 @@ namespace TuneBlaster_.Graphics
             base.Initialise();
             coreDistance = Vector2.Distance(Position, core.Position);
             rotation = core.Rotation;
-            initialRotation = (float)(Math.PI -Math.PI/4 + Math.Acos((core.Position.X - Position.X) / coreDistance) + Math.Asin((core.Position.Y - Position.Y) / coreDistance));
+            initialRotation = (float)(3*Math.PI/4 + Math.Acos((core.Position.X - Position.X) / coreDistance) + Math.Asin((core.Position.Y - Position.Y) / coreDistance));
         }
+
+        #endregion
+
+        #region Action Methods (GetRotation, Move)
 
         public void GetRotation(float rotate)
         {
@@ -37,6 +47,8 @@ namespace TuneBlaster_.Graphics
         {
             GetRotation(rotate);
         }
+
+        #endregion
 
     }
 }

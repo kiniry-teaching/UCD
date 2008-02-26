@@ -10,15 +10,23 @@ namespace TuneBlaster_.Graphics
 {
     class Core : Image
     {
+        #region Fields (ballsSize, oldRotation, acceleration, balls, maxAcceleration)
+
         int ballsSize;
         float oldRotation;
         public float acceleration;
         public List<FixedBall> balls;
-        
+        static float maxAcceleration = 0.05f;
+        GamePadState gamePadState;
 
-        public Core()
+        #endregion
+
+        #region Main Methods (Core, Initialise, Draw, Update)
+
+        public Core(GamePadState g)
         {
             balls = new List<FixedBall>();
+            gamePadState = g;
         }
 
         public override void Initialise()
@@ -38,10 +46,19 @@ namespace TuneBlaster_.Graphics
             }
         }
 
-        public void SetRotation(GamePadState gamepadState)
+        public void Update(GameTime gameTime, KeyboardState keyBoardState)
+        {
+            Move(keyBoardState);
+        }
+
+        #endregion
+
+        #region Action Methods (SetRotation, Move, AddBall, RemoveBall)
+
+        public void SetRotation()
         {
             oldRotation = rotation;
-            if (gamepadState.ThumbSticks.Left.X > 0)
+            if (gamePadState.ThumbSticks.Left.X > 0)
             {
                 acceleration += 0.1f;
             }
@@ -50,7 +67,7 @@ namespace TuneBlaster_.Graphics
                 acceleration = 1.0f;
             }
 
-            else if (gamepadState.ThumbSticks.Left.X < 0)
+            else if (gamePadState.ThumbSticks.Left.X < 0)
             {
                 acceleration -= 0.1f;
             }
@@ -60,30 +77,7 @@ namespace TuneBlaster_.Graphics
             }
         }
 
-        public void SetKeyboardRotation(KeyboardState keyBoardState)
-        {
-            if (keyBoardState.IsKeyDown(Keys.Right))
-            {
-                if (keyBoardState.IsKeyDown(Keys.Left))
-                {
-                    acceleration *= 0.90f;
-                }
-                acceleration = 0.1f;
-            }
-            if (keyBoardState.IsKeyDown(Keys.Left))
-            {
-                acceleration = -0.1f;
-            }
-            else
-            {
-                acceleration *= 0.9f;
-            }
-
-            rotation += acceleration;
-
-        }
-
-        public void Move(GamePadState gamepadState, KeyboardState keyBoardState)
+        public void Move(KeyboardState keyBoardState)
         {
             //SetRotation(gamepadState);
             oldRotation = rotation;
@@ -92,11 +86,6 @@ namespace TuneBlaster_.Graphics
             {
                 balls[i].Move(rotation-oldRotation);
             }           
-        }
-
-        public void Update(GameTime gameTime, GamePadState gamepadState,KeyboardState keyBoardState)
-        {
-            Move(gamepadState, keyBoardState);
         }
 
         public void addBall(FixedBall f)
@@ -114,13 +103,76 @@ namespace TuneBlaster_.Graphics
                 {
                     balls.Remove(balls[i]);
                 }
-            } 
+            }
         }
+
+        #endregion
+
+        #region Input Methods (SetControllerRotation, SetKeyBoardRotation)
+
+        public void SetControllerRotation()
+        {
+            if (gamePadState.ThumbSticks.Left.X < 0.0f)
+            {
+                acceleration += 0.01f * gamePadState.Triggers.Right;
+                acceleration *= 0.9f;
+
+                if (acceleration >= maxAcceleration)
+                {
+                    acceleration = maxAcceleration;
+                }
+            }
+            else if (gamePadState.ThumbSticks.Left.X > 0.0f)
+            {
+                acceleration -= 0.01f * gamePadState.Triggers.Right;
+                acceleration *= 0.9f;
+
+                if (acceleration <= -maxAcceleration)
+                {
+                    acceleration = -maxAcceleration;
+                }
+            }
+            else
+            {
+                acceleration *= 0.9f;
+            }
+
+            rotation += acceleration;
+        }
+
+        public void SetKeyboardRotation(KeyboardState keyBoardState)
+        {
+            if (keyBoardState.IsKeyDown(Keys.Right))
+            {
+                if (keyBoardState.IsKeyDown(Keys.Left))
+                {
+                    acceleration *= 0.90f;
+                }
+                acceleration = 0.05f;
+            }
+            if (keyBoardState.IsKeyDown(Keys.Left))
+            {
+                acceleration = -0.05f;
+            }
+            else
+            {
+                acceleration *= 0.9f;
+            }
+
+            rotation += acceleration;
+
+        }
+
+#endregion
+
+        #region Getter/Setter Methods (getBallSize)
 
         public int getBallSize()
         {
             return ballsSize;
         }
+
+        #endregion
 
     }
 }
