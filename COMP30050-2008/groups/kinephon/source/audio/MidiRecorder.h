@@ -1,5 +1,5 @@
-#ifndef AUDIORECORDER_H_
-#define AUDIORECORDER_H_
+#ifndef MIDIRECORDER_H_
+#define MIDIRECORDER_H_
 
 #include <string>
 #include <vector>
@@ -11,14 +11,14 @@ using namespace std;
  * 
  */
 
-class AudioRecorder
+class MidiRecorder
 {
 public:
-	/* Initializes a new AudioRecorder */
-	AudioRecorder();
+	/* Initializes a new MidiRecorder */
+	MidiRecorder();
 	
 	/* Anything to clean up? */
-	virtual ~AudioRecorder();
+	virtual ~MidiRecorder();
 	
 public://Properties
 		
@@ -53,4 +53,4 @@ private:
 	//other needed I/O devices, needs further research.
 };
 
-#endif /*AUDIORECORDER_H_*/
+#endif /*MIDIRECORDER_H_*/

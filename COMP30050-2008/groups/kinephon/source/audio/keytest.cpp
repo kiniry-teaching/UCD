@@ -1,4 +1,4 @@
-#include "AudioController.h"
+#include "MidiPlayer.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -15,13 +15,13 @@ using namespace std;
 /*
  * Author:	ED
  *
- * Demo test program for AudioController.
+ * Demo test program for MidiPlayer.
  */
  
 int main(){
 	
-	AudioController* audio = 0;
-	audio = new AudioController();
+	MidiPlayer* audio = 0;
+	audio = new MidiPlayer();
 	if(!audio->init())
     	exit( EXIT_FAILURE );
     

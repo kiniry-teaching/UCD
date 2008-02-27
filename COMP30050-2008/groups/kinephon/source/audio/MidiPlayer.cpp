@@ -1,19 +1,19 @@
-#include "AudioController.h"
+#include "MidiPlayer.h"
 #include "RtError.h"
 
-AudioController::AudioController():
+MidiPlayer::MidiPlayer():
 	_midiout(NULL),
 	_connected(false),
 	_defaultChannel(NULL),
 	_rhythmChannel(NULL)
 {}
 
-AudioController::~AudioController()
+MidiPlayer::~MidiPlayer()
 {
 	delete _midiout;
 }
 
-bool AudioController::init(){
+bool MidiPlayer::init(){
 	// RtMidiOut constructor
 	_midiout = new RtMidiOut();
   	
@@ -64,7 +64,7 @@ bool AudioController::init(){
   	}
 }
 
-void AudioController::PlayNote(bool on, unsigned char pitch, unsigned char velocity){
+void MidiPlayer::PlayNote(bool on, unsigned char pitch, unsigned char velocity){
 	if(_connected){
 		if(on)
 			_defaultChannel -> Play( pitch, velocity );
@@ -74,7 +74,7 @@ void AudioController::PlayNote(bool on, unsigned char pitch, unsigned char veloc
 }
 
 // Plays or stops the given note on given channel
-void AudioController::PlayRhythm(bool on, unsigned char pitch, unsigned char velocity){
+void MidiPlayer::PlayRhythm(bool on, unsigned char pitch, unsigned char velocity){
 	if(_connected){
 		if(on)
 			_rhythmChannel -> Play( pitch, velocity );
@@ -86,13 +86,13 @@ void AudioController::PlayRhythm(bool on, unsigned char pitch, unsigned char vel
 }
 	
 
-void AudioController::ProgramChange(unsigned char channel, unsigned char program){
+void MidiPlayer::ProgramChange(unsigned char channel, unsigned char program){
 	if(_connected){
 		_defaultChannel -> ProgramChange( program );
 	}
 }
 	
-void AudioController::ControlChange(unsigned char channel, unsigned char function, unsigned char value){
+void MidiPlayer::ControlChange(unsigned char channel, unsigned char function, unsigned char value){
 	if(_connected){
 		_defaultChannel -> ControlChange( function, value );
 
@@ -100,7 +100,7 @@ void AudioController::ControlChange(unsigned char channel, unsigned char functio
 }
 
 //Just a demo
-void AudioController::Input(int tune){
+void MidiPlayer::Input(int tune){
 	PlayNote(true, MIDDLE_F, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_F, 60);
 	PlayNote(true, MIDDLE_G, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_G, 60);
 	PlayNote(true, MIDDLE_A, 127);SLEEP( 700 );PlayNote(false, MIDDLE_A, 60);

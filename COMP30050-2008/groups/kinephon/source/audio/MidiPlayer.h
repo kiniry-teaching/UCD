@@ -1,5 +1,5 @@
-#ifndef AUDIOCONTROLLER_H_
-#define AUDIOCONTROLLER_H_
+#ifndef MIDIPLAYER_H_
+#define MIDIPLAYER_H_
 
 #include "Channel.h"
 #include "RtMidi.h"
@@ -23,14 +23,14 @@ using namespace std;
  */
 /*TODO TODO TODO TODO: EXHAUSTIVE TESTING FOR EXCEPTIONS*/
 
-class AudioController
+class MidiPlayer
 {
 public://Constructor
-	/* Creates a new AudioController which is NOT yet connected to a port */
-	AudioController();
+	/* Creates a new MidiPlayer which is NOT yet connected to a port */
+	MidiPlayer();
 	
 	/* deletes RtMidiOut class */
-	virtual ~AudioController();
+	virtual ~MidiPlayer();
 	/* 
 	 * Returns false, if connection to a port has not been established.
 	 */
@@ -53,18 +53,18 @@ public://Methods for manually sending messages (if necessary, some may be made p
 	int openChannel();
 
 	/* Adjusts channel mode */
-	void ChannelMode(unsigned char mode );
+	void setChannelMode(unsigned char mode );
 	
 	/* Adjusts each channel's setting separately */
-	void ControlChange(unsigned char channel, unsigned char function, unsigned char value);
+	void changeControl(unsigned char channel, unsigned char function, unsigned char value);
 	
 	/*
 	 *	Change the instrument on given channel.
 	 */
-	void ProgramChange(unsigned char channel, unsigned char program);
+	void setProgram(unsigned char channel, unsigned char program);
 	
 	/* Turns all notes off (maybe if necessary later, it will also close all channels) */
-	void Panic();
+	void panic();
   	
   	/*
   	 * Based on nature of event an effect is set on one/several/all channels.
@@ -73,20 +73,33 @@ public://Methods for manually sending messages (if necessary, some may be made p
   	void Event(string event);
   	
   	/*
-  	 * Plays a chord on channels 14-16 most suitable to the other notes played.
+  	 * Sets the default velocity on all channels.
   	 */
-  	void PlayChord();
+  	void setVelocity(unsigned char velocity);
+  	
+  	/*
+  	 * Plays a chord on the chord channel.
+  	 */
+  	void playChord();
   	
   	/* 
-  	 * Plays or stops the given note on given channel
+  	 * Plays or stops the given note on given channel with 
+  	 * preset velocity.
   	 */
-	void PlayNote(bool on, unsigned char pitch, unsigned char velocity);
+	void playNote(bool on, unsigned char pitch);
+	
+  	
+  	/* 
+  	 * Plays or stops the given note on given channel with
+  	 * specific velocity.
+  	 */
+	void playNote(bool on, unsigned char pitch, unsigned char velocity);
 	
 	/* 
   	 * Plays or stops the given note on the rhythm channel.
   	 * TODO: this doesnt work yet, needs a bit of research.
   	 */
-	void PlayRhythm(bool on, unsigned char pitch, unsigned char velocity);
+	void playRhythm(bool on, unsigned char pitch, unsigned char velocity);
 	
 	/*
 	 * And more funtions to be added depending on the input format from the interpreter class.
@@ -101,7 +114,8 @@ public://Methods for manually sending messages (if necessary, some may be made p
 	/*
 	 * various other features can be added depending on need arising.
 	 */
-	void Pause();
+	void pause();
+	
 private:
 	RtMidiOut *_midiout;
 	vector<Channel> _channels;	
@@ -109,6 +123,7 @@ private:
 	bool _connected;
 	Channel *_defaultChannel;
 	Channel *_rhythmChannel;
+	Channel *_chordChannel;
 };
 
-#endif /*AUDIOCONTROLLER_H_*/
+#endif /*MIDIPLAYER_H_*/
