@@ -1,31 +1,32 @@
 #ifndef EXAMPLE_H_
 #define EXAMPLE_H_
 
+/// Brief description of class here
+/**
+ * Detailed description of class here
+ */
 class Example
 {
 public:
 	Example();
 	virtual ~Example();
-	//taken from 
-	//http://java.sun.com/j2se/javadoc/writingdoccomments/
+
+	/// Insert brief description of function
 	/**
-	 * This first sentence will appear in the class interface summary.
-	 * The rest of the text will appear in the detailed description.
-	 * Use <code>...</code> for highlighting keywords and (class/method etc.)names.
-	 * <p>
-	 * Include the following tags (where necessary) in THIS order. 
-	 * The param and return are 'required' even if purpose is obvious.
-	 * @param       (classes, interfaces, methods and constructors only)
-	 * @return      (methods only)
-	 * @exception   (@throws is a synonym added in Javadoc 1.2)
-	 * @author      (classes and interfaces only, required)
-	 * @version     (classes and interfaces only, required. See footnote 1)
-	 * @see         
-	 * @since       
-	 * @serial      (or @serialField or @serialData)
-	 * @deprecated  (see How and When To Deprecate APIs)
+	 * Insert detailed description of function. Can HTML or <code>...</code> tag
+	 *  as well as features described in doxygen help
+	 * Also fill the details of the following tags, note. the param and return
+	 *  are 'required' even if purpose is obvious.
+	 * @param       exParam1 Insert brief of exParam1
+	 * @param       exParam2 Insert brief of exParam2
+	 * @return      Insert brief of return value (methods only)
+	 * @exception   Insert brief of exceptions thrown
+	 * @author      Insert initials
+	 * @version     Will we use this?
+	 * @see         How is this used?
+	 * @since       What's the purpose of this?
 	 */
-	int sampleMethod(int exParam);
+	int sampleMethod(int exParam1, int exParam2);
 };
 
 #endif /*EXAMPLE_H_*/

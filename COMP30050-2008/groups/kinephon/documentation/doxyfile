@@ -86,7 +86,7 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text"
-WARN_LOGFILE           = 
+WARN_LOGFILE           = ./documentation/source/warnings.log
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
@@ -96,7 +96,7 @@ FILE_PATTERNS          = *.cpp \
                          *.h \
                          *.py
 RECURSIVE              = YES
-EXCLUDE                = "./source/tool"
+EXCLUDE                = ./source/tool
 EXCLUDE_SYMLINKS       = YES
 EXCLUDE_PATTERNS       = */.svn/*
 EXCLUDE_SYMBOLS        = 
