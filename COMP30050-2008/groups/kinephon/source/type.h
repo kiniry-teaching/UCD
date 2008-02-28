@@ -1,9 +1,9 @@
 #ifndef __TYPE_H__
 #define __TYPE_H__
 
-typedef uchar unsigned char
-typedef ushort unsigned short
-typedef uint unsigned int
-typedef ulong unsigned long
+typedef unsigned char uchar;
+typedef unsigned short ushort;
+typedef unsigned int uint;
+typedef unsigned long ulong;
 
 #endif
