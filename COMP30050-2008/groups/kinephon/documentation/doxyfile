@@ -25,7 +25,7 @@ ABBREVIATE_BRIEF       = "The $name class" \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = NO
-STRIP_FROM_PATH        = "C:/Documents and Settings/HP_Administrator/"
+STRIP_FROM_PATH        = 
 STRIP_FROM_INC_PATH    = 
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -96,7 +96,7 @@ FILE_PATTERNS          = *.cpp \
                          *.h \
                          *.py
 RECURSIVE              = YES
-EXCLUDE                = "C:/Data/College/COMP30050 - Software Engerineering Project III/kinephon/source/tool"
+EXCLUDE                = "./source/tool"
 EXCLUDE_SYMLINKS       = YES
 EXCLUDE_PATTERNS       = */.svn/*
 EXCLUDE_SYMBOLS        = 
