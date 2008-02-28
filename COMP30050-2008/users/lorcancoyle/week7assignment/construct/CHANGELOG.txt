@@ -1,0 +1,54 @@
+*_*_*_*_* CHANGELOG *_*_*_*_*
+
+Version 0.74:
+ - Removed debug message mistakenly left in
+ - HttpPort now capable of adding data to Construct.
+
+Version 0.73:
+ - Fixed URI encoding bug affecting gossiping merge.
+
+Version 0.72:
+ - Removed Java Service Wrapper software from the distribution
+ - Proxy and Construct now bundled in the same distribution
+ - Removed the now unused 'server' property for components
+ - Made 'hostname' a global property
+ - Construct now attempts to detect the hostname when it has not been set
+ - Added alert when hostname is 'localhost' or '127.0.0.1'
+ - Updated the README files and SETUPGUIDE
+ - Renamed package hierarchy
+ - Edited launch files (.bat and .sh) to work with relative links
+ - Reduced service socket timeout to 2 minutes. 
+
+Version 0.71:
+ - Upgraded to version 2.5.4 of Jena
+ - Improved the error message when a hostname property of a service is missing.
+ - Improved README for *NIX install
+ - Fixed bug where newline characters were included in transmission of a SPARQL result set
+
+Version 0.7:
+ - Fixed memory leak where old sockets were not being disposed of correctly in the DataPort and QueryService.
+ - Improved performance of threading in the data store observer.
+ - Upgraded to version 2.5.3 of Jena
+ - Improved stylesheet support for the HttpProxy
+
+Version 0.63:
+ - Added the HttpPort component to allow a web based view of the Data Store.
+
+Version 0.62:
+ - Fixed bug where the localhost was not preferred if it was running a Construct node.
+ - Logging to file now re-enabled.
+
+Version 0.61:
+ - Construct now capable of running as a system process. 
+
+Version 0.6:
+ - addition of proxy component to interface directly with bonjour. This provides a language neutral interface to access service descriptors on the network.
+ - introduction of a basic persistent query service. Current operation relies on the service it is connected to staying up. This will be addressed in a future release.
+ - Improved Java client libraries to reuse connections where possible.
+ - improved error descriptions when problems occur starting Construct.
+ - explicit support removed for Jython and JRuby.
+ - addition of Python client library.
+ - addition of Ruby client library.
+
+Version 0.5a
+ - initial release

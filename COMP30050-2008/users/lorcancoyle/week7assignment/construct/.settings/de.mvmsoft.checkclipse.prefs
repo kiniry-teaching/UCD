@@ -1,0 +1,5 @@
+#Thu Feb 28 13:50:21 GMT 2008
+filenames.properties=codestyle/checkstyle/toplevel.properties
+enabled=true
+filenames.packagenames=codestyle/checkstyle/checkstyle_packages.xml
+filenames.config=codestyle/checkstyle/construct_checks.xml

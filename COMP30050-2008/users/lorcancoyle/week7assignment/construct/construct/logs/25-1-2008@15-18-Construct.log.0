@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2008-02-25T15:18:11</date>
+  <millis>1203952691752</millis>
+  <sequence>0</sequence>
+  <logger>org.construct_infrastructure.component.datastorage.DataStoreManagerImpl</logger>
+  <level>INFO</level>
+  <class>org.construct_infrastructure.component.datastorage.DataStoreManagerImpl</class>
+  <method>setupDataStores</method>
+  <thread>10</thread>
+  <message>Using an in memory data store</message>
+</record>
+<record>
+  <date>2008-02-25T15:18:13</date>
+  <millis>1203952693065</millis>
+  <sequence>1</sequence>
+  <logger>org.construct_infrastructure.component.network.NetworkManagerImpl</logger>
+  <level>FINE</level>
+  <class>org.construct_infrastructure.component.network.NetworkManagerImpl</class>
+  <method>serviceFound</method>
+  <thread>11</thread>
+  <message>Service discovered: CONSTRUCT[matt]</message>
+</record>
+<record>
+  <date>2008-02-25T15:18:13</date>
+  <millis>1203952693106</millis>
+  <sequence>2</sequence>
+  <logger>org.construct_infrastructure.component.network.NetworkManagerImpl</logger>
+  <level>FINE</level>
+  <class>org.construct_infrastructure.component.network.NetworkManagerImpl</class>
+  <method>serviceFound</method>
+  <thread>11</thread>
+  <message>Service discovered: CONSTRUCT[lorcan]</message>
+</record>
+<record>
+  <date>2008-02-25T15:19:58</date>
+  <millis>1203952798931</millis>
+  <sequence>3</sequence>
+  <logger>org.construct_infrastructure.component.network.NetworkManagerImpl</logger>
+  <level>FINE</level>
+  <class>org.construct_infrastructure.component.network.NetworkManagerImpl</class>
+  <method>serviceLost</method>
+  <thread>11</thread>
+  <message>Service lost: CONSTRUCT[lorcan]</message>
+</record>
+<record>
+  <date>2008-02-25T15:20:03</date>
+  <millis>1203952803456</millis>
+  <sequence>4</sequence>
+  <logger>org.construct_infrastructure.component.network.NetworkManagerImpl</logger>
+  <level>WARNING</level>
+  <class>org.construct_infrastructure.component.network.NetworkManagerImpl$ListenerThread</class>
+  <method>run</method>
+  <thread>12</thread>
+  <message>IO error while listening for gossiped data.</message>
+</record>
+<record>
+  <date>2008-02-25T15:20:03</date>
+  <millis>1203952803865</millis>
+  <sequence>5</sequence>
+  <logger>org.construct_infrastructure</logger>
+  <level>FINE</level>
+  <class>org.construct_infrastructure.loader.ComponentLoader</class>
+  <method>shutdown</method>
+  <thread>10</thread>
+  <message>All components shut down correctly</message>
+</record>
+</log>

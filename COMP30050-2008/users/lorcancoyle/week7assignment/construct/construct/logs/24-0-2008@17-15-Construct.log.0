@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2008-01-24T17:15:21</date>
+  <millis>1201194921781</millis>
+  <sequence>2</sequence>
+  <logger>org.construct_infrastructure.component.datastorage.DataStoreManagerImpl</logger>
+  <level>INFO</level>
+  <class>org.construct_infrastructure.component.datastorage.DataStoreManagerImpl</class>
+  <method>setupDataStores</method>
+  <thread>10</thread>
+  <message>Using an in memory data store</message>
+</record>
+</log>
