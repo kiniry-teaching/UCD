@@ -1,7 +1,8 @@
+//
 // $Id: java.header.txt 3615 2007-03-09 10:14:49Z gstevenson $
-
+//
 // This file is part of Construct, a context-aware systems platform.
-// Copyright (c) 2006, 2007 UCD Dublin. All rights reserved.
+// Copyright (c) 2006, 2007, 2008 UCD Dublin. All rights reserved.
 //
 // Construct is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as

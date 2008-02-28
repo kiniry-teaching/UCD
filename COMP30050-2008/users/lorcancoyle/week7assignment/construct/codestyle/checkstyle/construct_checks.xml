@@ -60,7 +60,7 @@
 
 	  <module name="Header">
     		<property name="headerFile" value="${basedir}/java.header.txt"/>
-    		<property name="ignoreLines" value="1, 4"/>
+    		<property name="ignoreLines" value="2"/>
 	  </module>  
 
 
@@ -79,7 +79,7 @@
           <property name="format" value="^[a-z][_a-zA-Z0-9]*$"/>
         </module>
         <module name="PackageName"> 
-          <property name="format" value="ie.ucd.srg.construct.*"/> 
+          <property name="format" value="org.construct_infrastructure.*"/> 
         </module> 
         <module name="ParameterName">
           <property name="format" value="(^a_[a-z][_a-zA-Z0-9]*$)|(^an_[a-z][_a-zA-Z0-9]*$)|(^the_[a-z][_a-zA-Z0-9]*$)|(^some_[a-z][_a-zA-Z0-9]*$)"/>
