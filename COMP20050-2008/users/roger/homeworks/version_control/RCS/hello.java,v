@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2008.02.25.16.17.04;	author roger;	state Exp;
+branches;
+next	;
+
+
+desc
+@java rcs
+dir
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@//$Id: hello,v 1.1 2008/02/25 16:14:13 roger Exp roger $
+public class hello {
+	public static void main (String args[]) {
+		
+		String readout = "Hello there, this is a simple java program to test a java file using RCS and the id marker";
+		
+		System.out.println(readout);
+
+		System.exit(0);
+	}
+}
+
+@

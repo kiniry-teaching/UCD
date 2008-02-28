@@ -1,0 +1,42 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2008.02.28.12.23.43;	author roger;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.28.12.22.53;	author roger;	state Exp;
+branches;
+next	;
+
+
+desc
+@Test
+@
+
+
+1.2
+log
+@Second revision
+@
+text
+@Change Hell
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+Hell
+@

@@ -1,0 +1,87 @@
+head	1.5;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.5
+date	2008.02.25.15.54.48;	author roger;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.02.25.15.45.55;	author roger;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.02.25.15.42.56;	author roger;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.25.15.42.04;	author roger;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.25.15.40.21;	author roger;	state Exp;
+branches;
+next	;
+
+
+desc
+@Test change one.
+@
+
+
+1.5
+log
+@Last change.
+@
+text
+@Hello there.
+First change.
+Second change.
+Fourth change.
+Fifth change.
+@
+
+
+1.4
+log
+@Fourth change
+@
+text
+@d5 1
+a5 1
+
+@
+
+
+1.3
+log
+@Third test.
+@
+text
+@d4 1
+@
+
+
+1.2
+log
+@Test again.
+@
+text
+@d3 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+@

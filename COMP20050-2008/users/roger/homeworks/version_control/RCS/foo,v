@@ -1,0 +1,104 @@
+head	2.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+2.3
+date	2008.02.25.16.08.52;	author roger;	state Exp;
+branches;
+next	2.2;
+
+2.2
+date	2008.02.25.16.06.24;	author roger;	state Exp;
+branches;
+next	2.1;
+
+2.1
+date	2008.02.25.16.05.35;	author roger;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.02.25.16.04.31;	author roger;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.25.15.59.26;	author roger;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.25.15.56.59;	author roger;	state Exp;
+branches;
+next	;
+
+
+desc
+@First save.
+@
+
+
+2.3
+log
+@Testing Id
+@
+text
+@New file called foo i'm using just to fool around with rcs.
+Starting new revision.
+New revision succesfull.
+$Id$
+
+@
+
+
+2.2
+log
+@working
+@
+text
+@d4 2
+@
+
+
+2.1
+log
+@New revision.
+@
+text
+@d3 1
+@
+
+
+1.3
+log
+@Testing.
+@
+text
+@d2 1
+a2 1
+
+@
+
+
+1.2
+log
+@Saving revision 2.
+@
+text
+@d1 2
+a2 2
+Created this new file called foo just to play around with rcs to see how it works.
+Changing file here.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+@
