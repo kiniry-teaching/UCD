@@ -22,9 +22,9 @@ public:
 	 * @return      Insert brief of return value (methods only)
 	 * @exception   Insert brief of exceptions thrown
 	 * @author      Insert initials
-	 * @version     Will we use this?
-	 * @see         How is this used?
-	 * @since       What's the purpose of this?
+	 * @version     ? 1.0 until after break, after we have a demo version?
+	 * @see         pointer to references, produces "Also see: "
+	 * @since       used if element is older than class/package
 	 */
 	int sampleMethod(int exParam1, int exParam2);
 };
