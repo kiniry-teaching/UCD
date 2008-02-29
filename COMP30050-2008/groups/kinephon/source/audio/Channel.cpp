@@ -1,4 +1,4 @@
-#include "Channel.h"
+/*#include "Channel.h"
 
 Channel::Channel(RtMidiOut* midi, int no):
 	_number(no),
@@ -60,3 +60,4 @@ void Channel::Release(unsigned char note, unsigned char velocity){
 
 }
 
+*/

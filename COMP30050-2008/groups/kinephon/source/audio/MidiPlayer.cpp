@@ -1,4 +1,4 @@
-#include "MidiPlayer.h"
+/*#include "MidiPlayer.h"
 #include "RtError.h"
 
 MidiPlayer::MidiPlayer():
@@ -117,3 +117,4 @@ void MidiPlayer::Input(int tune){
 
 }
 
+*/

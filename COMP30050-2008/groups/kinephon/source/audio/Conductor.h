@@ -1,19 +1,18 @@
 #ifndef CONDUCTOR_H_
 #define CONDUCTOR_H_
 
-/*
- * Author:	ED
- *
+/**
  * Wrapper class for MidiPlayer, hiding the MIDI particular message 
  * passing and providing a musically oriented interface instead.
- * 
+ * @author      ED
+ * @version     1.0
  */
 
+namespace audio
+{
 //Note:
 // The following enumerated types may be extended/shortend/changed/discarded
-// depending on whether we will actually use them and how.
-// This should just us an idea.
-
+// depending on whether we will actually use them and how.	
 enum Rhythm { RHYTHM_3_4, RHYTHM_4_4, RHYTHM_5_4, RHYTHM_6_4, RHYTHM_7_4,RHYTHM_8_4, RHYTHM_NONE };
 
 // Which notes the chords should be based on.
@@ -31,26 +30,45 @@ public:
     * Constructs a new Conductor class.
     */
 	Conductor();
-	/**
-    * Deletes all dynamic datastructures needed
-    */	
+		
 	virtual ~Conductor();
 	
 	/**
-	 * Plays, i.e. produces a sound based on the settings specified
-	 * below.
+	 * Produces a sound based on the settings specified previously.
 	 * This class will have to be called in regular intervals to ensure
-	 * a consitent timing. 
+	 * a consitent timing, e.g. each time it is invoked, it is assumed a 
+	 * quarter note has passed. 
 	 */
 	void play();
 	
+	/**
+	 * Produces a sound based on the settings specified previously as well as the lead melody.
+	 * This class will have to be called in regular intervals to ensure
+	 * a consitent timing, e.g. each time it is invoked, it is assumed a 
+	 * quarter note has passed. 
+	 * Only the lead note is specified, the accompaniement and other effects
+	 * have been specified before and will be included automatically.
+	 * @param pitch the pitch of the lead  
+	 */
+	void play(unsigned char pitch);
+	
+	
+	/**
+	 * Plays the lead and accompanying melody together with previously set effects.
+	 * This class will have to be called in regular intervals to ensure
+	 * a consitent timing, e.g. each time it is invoked, it is assumed a 
+	 * quarter note has passed. 
+	 * @param pitch the pitch of the lead
+	 * @param accompany the pitch of the accompanying melody  
+	 */
+	void play(unsigned char pitch, unsigned char accompany);
 	
 	/**
 	 * This will change the piece from one key to another, basically
 	 * by changing the pitches specified in the melody buffer.
 	 * Optionally, the changes might affect future notes as well.
 	 */
-	void changeModulation(unsigned char key); 
+	void changeKey(unsigned char key); 
 	
 	/**
 	 * Plays the given melody, i.e. the pitches specified in the vector. 
@@ -107,5 +125,5 @@ private:
 	vector<bool> keySignature_; 	//determines which notes are played "sharp"
 	
 };
-
+}
 #endif /*CONDUCTOR_H_*/

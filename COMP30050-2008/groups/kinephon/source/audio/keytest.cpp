@@ -1,4 +1,4 @@
-#include "MidiPlayer.h"
+/*#include "MidiPlayer.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -17,7 +17,7 @@ using namespace std;
  *
  * Demo test program for MidiPlayer.
  */
- 
+/* 
 int main(){
 	
 	MidiPlayer* audio = 0;
@@ -30,3 +30,4 @@ int main(){
 	
 	return 0;
 }
+*/

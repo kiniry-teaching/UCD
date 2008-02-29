@@ -10,7 +10,8 @@ using namespace std;
  * Writes a Midi file.
  * 
  */
-
+namespace audio
+{
 class MidiRecorder
 {
 public:
@@ -52,5 +53,5 @@ private:
 	string _filename;
 	//other needed I/O devices, needs further research.
 };
-
+}
 #endif /*MIDIRECORDER_H_*/
