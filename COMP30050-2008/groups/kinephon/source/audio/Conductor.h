@@ -4,6 +4,11 @@
 /**
  * Wrapper class for MidiPlayer, hiding the MIDI particular message 
  * passing and providing a musically oriented interface instead.
+ * Good webpages for reference:
+ * wikipedia and google :-)
+ * http://www.wonderful-music.com/philosophy.html
+ * http://www.classicalarchives.com/tutorial/
+ * http://www.midistudio.com/Management/R-Finley/MidiTips.html
  * @author      ED
  * @version     1.0
  */
@@ -17,11 +22,11 @@ enum Rhythm { RHYTHM_3_4, RHYTHM_4_4, RHYTHM_5_4, RHYTHM_6_4, RHYTHM_7_4,RHYTHM_
 
 // Which notes the chords should be based on.
 // Assuming a chord will be composed of 3 notes.
-enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_NONE };
+enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_NONE, CHORDS_ONEOFF };
 
 enum Dynamics { DYNAMICS_PIANO, DYNAMICS_FORTE, DYNAMICS_PIANISSIMO, DYNAMICS_FORTISSIMO };
 
-enum Texture { TEXTURE_MONOPHONIC, TEXTURE_POLYPHONIC };
+enum Texture { TEXTURE_OMNI, TEXTURE_MONO, TEXTURE_POLY };
 
 class Conductor
 {
@@ -48,9 +53,11 @@ public:
 	 * quarter note has passed. 
 	 * Only the lead note is specified, the accompaniement and other effects
 	 * have been specified before and will be included automatically.
+	 * Note that if a melody has been set previously, it will be ignored until play()
+	 * is called again.
 	 * @param pitch the pitch of the lead  
 	 */
-	void play(unsigned char pitch);
+	void play(uchar pitch);
 	
 	
 	/**
@@ -58,71 +65,125 @@ public:
 	 * This class will have to be called in regular intervals to ensure
 	 * a consitent timing, e.g. each time it is invoked, it is assumed a 
 	 * quarter note has passed. 
+	 * Using this method any previously set accompaniment and melody will be ignored,
+	 * however not turned off.
 	 * @param pitch the pitch of the lead
 	 * @param accompany the pitch of the accompanying melody  
 	 */
-	void play(unsigned char pitch, unsigned char accompany);
+	void play(uchar pitch, uchar accompany);
 	
 	/**
-	 * This will change the piece from one key to another, basically
-	 * by changing the pitches specified in the melody buffer.
-	 * Optionally, the changes might affect future notes as well.
+	 * Sets the instrument for the lead voice.
+	 * @param instrument the instrument to be used
 	 */
-	void changeKey(unsigned char key); 
+	void setLeadInstrument(uchar instrument); 
 	
 	/**
-	 * Plays the given melody, i.e. the pitches specified in the vector. 
-	 * If vector has 1 element play note immediately.
-	 * If vector has more elements, place into buffer.
+	 * Sets whether a accompaniment is to be played.
+	 * The paramenters will specify the nature of the accompaniment. 
+	 * @param isOn true if accompaniment is set on
+	 * @param paramOne to be decided
 	 */
-	void setMelody(vector<unsigned char> melody); 
-	 	
-	/**
-	 * Based on the Rhythm specified, a rhythm pattern will be set up
-	 * of different instruments like drums, bass, piano etc.  
-	 */
-	void setRhythm(Rhythm rhythm); 
-	 
-	/**
-	 * Set whether and chords are to be played.
-	 * Frequency of 1 will play a chord with each note,
-	 * freq. of 3 will play one with every third one.
-	 */ 
-	void setChords(Chords mode, unsigned char frequency);
+	void setAccompaniment(bool isOn, int paramOne);
 	
 	/**
-	 * This sets the number of voices in the music piece, and also 
-	 * in some cases whether any accompaniment is present.
+	 * Sets whether chords are to be played.
+	 * The parameters will specify the nature of the chords. 
+	 * @param isOn true if chords are set on
+	 * @param chords setting what type of chords to play
+	 */
+	void setChords(bool isOn, Chords chords);
+	
+	/**
+	 * Sets a basic rhythm.
+	 * @param isOn true if rhythm is to be played
+	 * @param rhythm selected rhythm 
+	 */
+	void setRhythm(bool isOn, Rhythm rhythm);
+	
+	/**
+	 * Modifies the basic rhythm.
+	 * The parameters will specify the modification.
+	 * This function will be used to make the rhythm of the piece more interesting, 
+	 * i.e. less monotonous, but ensuring that the changes made will be appropriate.
+	 * Rhythm will be automatically set ON, if this has not happened previously.
+	 * Note that the definitive structure will be based on further 
+	 * development of the project.
+	 * @param paramOne to be decided
+	 * @param paramTwo to be decided
+	 */
+	void modifyRhythm(int paramOne, int paramTwo);
+	
+	/**
+	 * Sets the dynamics for the next note.
+	 * This setting will be kept until the next call to this function
+	 * or until automatic Dynamics are turned on.
+	 * @param
+	 * @return
+	 */
+	void setDynamics(Dynamics dynamics);
+	
+	/**
+	 * Sets the class to automatically vary the dynamics.
+	 * Some algorithm will vary the dynamics based on the lead melody
+	 * played, adding crescendos and diminuendos (gradually getting
+	 * louder or quieter) 
+	 * @param isOn true if automaticDynamics is to be used
+	 */
+	void setAutomaticDynamics(bool isOn);
+	
+	/**
+	 * Controls the interaction when two or more notes are played simultaneously.
+	 * @param isOn true if interaction is set on, false if it is to be ignored
+	 * @param paramOne to be decided
+	 */
+	void setHarmony(bool isOn, int paramOne);
+	
+	/**
+	 * Plays the given melody repeatedly. 
+	 * @param melody vector with pitches, if NULL then this option is set OFF
+	 */
+	void setMelody(vector<uchar>* melody); 
+	
+	/**
+	 * Sets pedalling on/off.
+	 * The frequency will specify after how many played notes the pedal is to be
+	 * released. If this method is called in the middle of a pedal-down period
+	 * then the pedal will be released and set down again with the new frequency.
+	 * @param isOn true is pedaling is to be ON
+	 * @param frequency the frequency of pedal-down/pedal-ups
+	 */
+	void setPedaling(bool isOn, int frequency);
+	
+	/**
+	 * Sets the texture of the piece.
+	 * The options are:
+	 * Omni mode = all notes sound like played in only one channel
+	 * Mono mode = initial note is cut off when a second is played 
+	 * Poly mode = plays multiple notes at once (default)
 	 */
 	void setTexture(Texture texture);
-	 	
-	/**
-	 * This will analyze the melody saved in the buffer and correct
-	 * the intonation of the piece to a more harmonic sounding.
-	 * This feature can be turned on or off, or can be specified how much
-	 * this should occur. 
-	 * (E.g. 10 will specify, ONE note in 10 will be corrected at max.)
-	 */
-	void correctHarmony(bool on, unsigned char amount);
-	 	
-	/**
-	 * This will create some dissonance in the piece. 
-	 * (To be determined how, options are in chords, in )
-	 */
-	void createDissonance(unsigned char amount); 	
-	 
 	
+	/**
+	 * Sets the reverberation on/off.
+	 * @param isOn true if reverberation is to be played
+	 */
+	void setReverberation(bool isOn);
 	
 private:
 	MidiPlayer *midi_;		//midi output
-	unsigned char key_;		//key of this piece
-	vector<unsigned char> buffer_;
+	vector<uchar> melody_;
+	bool hasAccompaniment_;
+	bool hasChords_;
+	bool hasRhythm_;
+	bool hasAutoDynamics_;
+	bool hasHarmony_;
+	bool hasReverb_;
+	
 	Rhythm rhythm_;
 	Chords chords_;
 	Dynamics dynamics_;
 	Texture texture_;
-	//Optional, if need arises. Advanced music
-	vector<bool> keySignature_; 	//determines which notes are played "sharp"
 	
 };
 }

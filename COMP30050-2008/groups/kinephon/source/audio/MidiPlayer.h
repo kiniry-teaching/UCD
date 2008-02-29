@@ -44,6 +44,13 @@ public:
 	bool initialize();
 	
 	/**
+	 * Set if music piece is to be recorded
+	 * @param true when setting recoding ON, false when setting OFF
+	 * @return true if recording is ready/file has been closed
+	 */
+	bool setRecording(bool setOn);
+	
+	/**
 	 * Sends a Universal System Exclusive Message.
 	 * They control Master volume, reverb, chorus and others. 
 	 * Only necessary options will be made available.
@@ -124,14 +131,34 @@ public:
 	void sendProgramChange(unsigned char channel, unsigned char program);
 	
   	/**
-	 * Plays a note of given pitch on given channel.
-	 * The pitch value will be interpreted differently for different channels.
-	 * @param channel the channel to be used
-	 * @param pitch the value of the note to be played            
+	 * Plays a lead note.
+	 * @param pitch the value of the note to be played  
+	 * @param velocity velocity of lead note          
 	 */
-	void playNote(Channels channel, unsigned char pitch);
+	void playLead(uchar pitch, uchar velocity);
 	
-  	
+	/**
+	 * Plays a accompaniment note.
+	 * @param pitch the value of the note to be played  
+	 * @param velocity velocity of the note          
+	 */
+	void playAccompaniment(uchar pitch, uchar velocity);
+	
+	/**
+	 * Plays a chord.
+	 * @param chord the chord to be played  
+	 * @param velocity velocity of the chord          
+	 */
+	void playChord(uchar chord, uchar velocity);
+	
+  	/**
+	 * Plays a percussion note.
+	 * @param pitch the pitch of the note to be played  
+	 * @param velocity velocity of the note          
+	 */
+	void playPercussion(uchar pitch, uchar velocity);
+	
+	
   	/**
 	 * Plays a note of given pitch and velocity on given channel.
 	 * The pitch and velocity value will be interpreted differently for different channels.
@@ -152,7 +179,7 @@ private:
 	RtMidiOut* _midiout;
 	vector<Channel> _channels;	
 	bool isConnected_;
-	Channel* defaultChannel_;
+	Channel* leadChannel_;
 	Channel* chordChannel_;
 	Channel* accompanyChannel_;
 	Channel* percussionChannel_; //channel 10
