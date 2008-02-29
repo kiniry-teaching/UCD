@@ -4,15 +4,16 @@
 #include "Recorder.h"
 #include "Shapes.h"
 
-/*
+namespace Interpreter
+{
+
+/**
+ * 
  * Author:	EB
  *
  * Analyse all recorded movements and generate audio messages for them
  *
  */
-namespace Interpreter
-{
-
 class Analyser
 {
 
