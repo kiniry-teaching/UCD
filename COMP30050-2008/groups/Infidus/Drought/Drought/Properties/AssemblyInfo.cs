@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Drought")]
-[assembly: AssemblyProduct("Drought")]
+[assembly: AssemblyTitle("drought_states")]
+[assembly: AssemblyProduct("drought_states")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("TOSHIBA")]
+[assembly: AssemblyCompany("")]
 
-[assembly: AssemblyCopyright("Copyright © TOSHIBA 2008")]
+[assembly: AssemblyCopyright("Copyright ©  2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fc1fb668-2b7e-4c46-b7e0-8c285da35e71")]
+[assembly: Guid("af9c9b9e-b5a0-41c9-abda-ebe7668757bf")]
 
 
 // Version information for an assembly consists of the following four values:
