@@ -1,7 +1,0 @@
-bin\x86\Debug\Drought.exe
-bin\x86\Debug\Drought.pdb
-obj\x86\Debug\ResolveAssemblyReference.cache
-obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-obj\x86\Debug\Drought.obj.x86.Debug.Microsoft.Xna.Framework.RuntimeProfile.txt
-obj\x86\Debug\Drought.exe
-obj\x86\Debug\Drought.pdb
