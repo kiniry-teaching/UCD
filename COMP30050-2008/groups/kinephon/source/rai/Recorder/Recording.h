@@ -99,7 +99,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint const			_length;
+	uint const			_nTracks;
 
 };
 

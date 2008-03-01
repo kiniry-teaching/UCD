@@ -15,11 +15,11 @@ namespace interpreter
 class ShapeAcceleration : public Shape
 {
 
-public:				// Constructor
+private:			// Constructor
 					// Load the <name>'d shape data 
 	/**/			ShapeAcceleration 
-					(	char const * const	name
-					) :	Shape(name) {};
+					(	float const * const	data
+					) :	Shape(data) {};
 
 public:				// Methods
 					// Comare the acceleration in the track against this shape

@@ -3,12 +3,6 @@
 
 #include "Shape.h"
 
-/*
- * Author:	EB
- *
- * Compare against a track's speed
- *
- */
 namespace interpreter
 {
 
@@ -17,9 +11,9 @@ class ShapeSpeed : public Shape
 
 public:				// Constructor
 					// Load the <name>'d shape data 
-	/**/			ShapeSpeed 
-					(	char const * const		name
-					) :	Shape(name) {};
+					ShapeSpeed
+					(	float const * const	data
+					) :	Shape(data) {};
 
 public:				// Methods
 					// Comare the speed in the track against this shape

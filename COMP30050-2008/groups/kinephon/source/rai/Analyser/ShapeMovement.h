@@ -17,9 +17,9 @@ class ShapeMovement : public Shape
 
 public:				// Constructor
 					// Load the <name>'d shape data 
-	/**/			ShapeMovement 
-					(	char const * const	name
-					) :	Shape(name) {};
+					ShapeMovement 
+					(	float const * const	data
+					) :	Shape(data) {};
 
 public:				// Methods
 					// Comare the movements in the track against this shape
