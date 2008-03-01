@@ -16,7 +16,64 @@ namespace interpreter
 class Recorder : public IParserRecorder
 {
 
-	
+public:
+	/**
+	 * Create an instance of a recorder.
+	 * The recorder does nothing itself, it should be passed on to the Parser,
+	 *	which will call the recorder, giving it information to record
+	 * @author EB
+	 * @version 1.0
+	 */
+					Recorder		(void);
+	/**
+	 * Destroy this instance of the recorder.
+	 * @author EB
+	 * @version 1.0
+	 * @warning Destructor is not virtual, don't inherit from this class
+	 */
+					~Recorder		(void);
+
+public:
+	/**
+	 * Eject the recording from the Recorder.
+	 * Takes a copy of the recorded animation up to this point. The Recorder
+	 *	will still contain this copied data, so calling Eject again will
+	 *	return the same animation data, possibly with new frames add at the
+	 *	end. To remove consumed frames from an animation, call Erase.
+	 * @return A copy of the recording at this point in time
+	 * @author EB
+	 * @version 1.0
+	 */
+	Recording *		Eject			(void)	const;
+	/**
+	 * Erase frames from an animation.
+	 * All frames before and including the specified frame are removed from
+	 *	the animation that is recording the speicified IR blob
+	 * @param irid IR blob whose animation is to be erased
+	 * @param frame All frames from this and before are removed from the
+	 *	animation. If frame is -1 (default), the whole animation is erased
+	 * @author EB
+	 * @version 1.0
+	 */
+	void			Erase
+					(	irid const	irid,
+						int const	frame	= -1
+					);
+
+public:
+	/** . @copydoc IParserRecorder::Control */
+	virtual int		Control
+					(	int const	control,
+						void *		data
+					);
+
+	/** . @copydoc IParserRecorder::Record */
+	virtual void	Record
+					(	irid const	irid,
+						int const	x,
+						int const	y,
+						int const	size
+					);
 
 };
 
