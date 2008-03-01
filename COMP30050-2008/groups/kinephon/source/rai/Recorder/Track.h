@@ -3,50 +3,119 @@
 
 #include "Frame.h"
 
-/*
- * Author:	EB
- *
- * Store all the frames for a single IR blob
- *
- */
 namespace interpreter
 {
 
+/**
+ * Stores all frames for a single IR blob
+ * @author EB
+ * @version 1.0
+ */
 class Track
 {
 
-				// Be friends with Recorder so it can add frames
+	/**
+	 * Be friends with Recorder so it can add frames
+	 * @author EB
+	 * @version 1.0
+	 */
 	friend		class Recorder;
 
 public:
-	/**/		Track
-				(	int const	id
+	/**
+	 * Create a new track for a specific IR blob
+	 * @param irid The IR blob id that this Track will hold
+	 * @author EB
+	 * @version 1.0
+	 */
+				Track
+				(	irid const	irid
 				);
-	virtual		~Track			(void);
-				// Get the id of the blob that this track records
-	int			id				(void)	const;
-				// Get the number of frames
-	int			length			(void)	const;
-				// Get the first frame in the list of frames
-	Frame *		frames			(void)	const;
+	/**
+	 * Destory this track
+	 * @author EB
+	 * @version 1.0
+	 * @warning Destructor is not virtual, don't inherit from this class
+	 */
+				~Track			(void);
+	/**
+	 * Get the IR blob's id being tracked by this
+	 * @return The IR blob's id
+	 */
+	irid		irid			(void)	const;
+	/**
+	 * Returns the number of frames.
+	 * @return The number of frames held by this track
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint		length			(void)	const;
+	/**
+	 * Returns the first frame in this Track.
+	 * Following frams can be accessed by this->frame()->next()..
+	 * @return The first frame in this Track
+	 * @author EB
+	 * @version 1.0
+	 */
+	Frame *		first			(void)	const;
 
-				// Return a frame by index
+	/**
+	 * Returns the indexed Frame.
+	 * Index should be in the range (0..length()-1)
+	 * @param index Index of frame to return, from 0 to length() - 1
+	 * @return Indexed frame. If Index is out of range, 0 is returned
+	 * @warning It is slower to access each frame by index than sequentially
+	 *	from first() and Frame::next() as each indexed frame needs to first
+	 *	find the frame.
+	 * @author EB
+	 * @version 1.0
+	 * @pre index >= 0 && index < length();
+	 * @post /result != 0;
+	 */
 	Frame *		operator []
-				(	int const	index
+				(	uint const	index
 				)	const;
 
 private:
-				// Add the next frame to the end of the list
+	/**
+	 * Set the next frame on the track. This will only be called by Recorder when
+	 *	a new frame needs to be created
+	 * @next The next frame on the track
+	 * @author EB
+	 * @version 1.0
+	 */
 	void		next
 				(	Frame const * const	next
 				);
 
 private:
-				// Store the id of the blob that this track records
-	int			_id;
-				// First in linked list of frames in track
+	/**
+	 * irid() field
+	 * @author EB
+	 * @version 1.0
+	 * @see irid()
+	 */
+	irid		_irid;
+	/**
+	 * length() field
+	 * @author EB
+	 * @version 1.0
+	 * @see length()
+	 */
+	uint		_length;
+	/**
+	 * first() field
+	 * @author EB
+	 * @version 1.0
+	 * @see first()
+	 */
 	Frame *		_frameFirst;
-				// Last in linked list of frames in track, for quick add
+	/**
+	 * Store a pointer to the last frame to allow quick access when adding a
+	 *	new frame
+	 * @author EB
+	 * @version 1.0
+	 */
 	Frame *		_frameLast;
 
 };

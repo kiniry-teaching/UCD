@@ -18,7 +18,7 @@ namespace control
 	 * @author EB
 	 * @version 1.0
 	 */
-	int const	FOUND	= 0;
+	uchar const	FOUND	= 0;
 	/**
 	 * An IR blob has been lost, either because it was physically removed, or
 	 *	because it's data packets have been lost. \v data should contain the id
@@ -27,7 +27,7 @@ namespace control
 	 * @author EB
 	 * @version 1.0
 	 */
-	int const	LOST	= 1;
+	uchar const	LOST	= 1;
 	/**
 	 * The Parser is no longer receiving data. Connection may be lost. \v data
 	 *	is ignored
@@ -35,7 +35,7 @@ namespace control
 	 * @author EB
 	 * @version 1.0
 	 */
-	int const	BADCOM	= 2;
+	uchar const	BADCOM	= 2;
 }
 
 /**
@@ -59,9 +59,9 @@ public:
 	 *	control will specify what is returned
 	 */
 	virtual int		Control
-					(	int const	control,
+					(	uchar const	control,
 						void *		data
-					)	pure;
+					)				pure;
 
 	/**
 	 * Record the current position of an IR blob.
@@ -80,7 +80,7 @@ public:
 						int const	x,
 						int const	y,
 						int const	size
-					)	pure;
+					)				pure;
 
 };
 

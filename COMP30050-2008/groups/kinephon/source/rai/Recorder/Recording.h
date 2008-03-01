@@ -26,6 +26,8 @@ class Recording
 
 	/**
 	 * Be friends with Recorder so that Recorder can create instances of this
+	 * @author EB
+	 * @version 1.0
 	 */
 	friend				class Recorder;
 
@@ -36,7 +38,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int					length						(void)	const
+	uint				length						(void)	const
 						{	return _length;
 						};
 
@@ -54,7 +56,7 @@ public:
 	 * @post /result != 0;
 	 */
 	Track const * const	operator []
-						(	int const				index
+						(	uint const				index
 						)	const;
 
 	/**
@@ -81,19 +83,23 @@ private:
 	 */
 						Recording
 						(	Track const * &	const	tracks,
-							int const				length
+							uint const				length
 						);
 
 private:
 	/**
 	 * Contains a copy of the Recorders track at the time the Recording was
 	 *	generated
+	 * @author EB
+	 * @version 1.0
 	 */
 	Track *				_tracks;
 	/**
 	 * Contains the number of tracks 
+	 * @author EB
+	 * @version 1.0
 	 */
-	int const			_length;
+	uint const			_length;
 
 };
 

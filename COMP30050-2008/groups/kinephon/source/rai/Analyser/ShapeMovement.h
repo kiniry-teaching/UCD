@@ -6,7 +6,7 @@
 /*
  * Author:	EB
  *
- * Compare against an track's movement
+ * Compare against a track's movement
  *
  */
 namespace interpreter

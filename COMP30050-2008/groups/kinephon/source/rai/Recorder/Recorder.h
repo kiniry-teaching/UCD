@@ -39,14 +39,14 @@ public:
 	 * Takes a copy of the recorded track up to this point. The Recorder
 	 *	will still contain this copied data, so calling Eject again will
 	 *	return the same track data, possibly with new frames add at the
-	 *	end. To remove consumed frames from an track, call Erase.
+	 *	end. To remove consumed frames from a track, call Erase.
 	 * @return A copy of the recording at this point in time
 	 * @author EB
 	 * @version 1.0
 	 */
 	Recording *		Eject			(void)	const;
 	/**
-	 * Erase frames from an track.
+	 * Erase frames from a track.
 	 * All frames before and including the specified frame are removed from
 	 *	the track that is recording the speicified IR blob
 	 * @param irid IR blob whose track is to be erased
@@ -63,7 +63,7 @@ public:
 public:
 	/** . @copydoc IParserRecorder::Control */
 	virtual int		Control
-					(	int const	control,
+					(	uchar const	control,
 						void *		data
 					);
 
@@ -74,6 +74,27 @@ public:
 						int const	y,
 						int const	size
 					);
+
+private:
+	/**
+	 * Contains an array of the Recorder's tracks. This array may be re-allocated
+	 *	as IR blob are control::LOST and control::FOUND
+	 * @author EB
+	 * @version 1.0
+	 */
+	Track *			_tracks;
+	/**
+	 * Contains the number of tracks in total (array size)
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint			_nTracks;
+	/**
+	 * Contains the number of tracks in use
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint			_length;
 
 };
 
