@@ -9,7 +9,7 @@
  * Store all the frames for a single IR blob
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class Animation

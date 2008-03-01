@@ -9,7 +9,7 @@
  * Compare against an animation's speed
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class ShapeSpeed : public Shape

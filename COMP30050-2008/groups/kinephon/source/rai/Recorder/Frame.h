@@ -9,7 +9,7 @@
  * Store the position and direction of an IR blob and link to next frame
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class Frame

@@ -4,7 +4,7 @@
 #include "Recorder.h"
 #include "Shapes.h"
 
-namespace Interpreter
+namespace interpreter
 {
 
 /**

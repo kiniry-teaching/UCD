@@ -9,7 +9,7 @@
  * Store the approximation of a shape to be compared against a movement
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class Shape

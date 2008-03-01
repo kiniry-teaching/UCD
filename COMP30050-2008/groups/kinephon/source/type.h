@@ -6,4 +6,6 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
+#define pure = 0
+
 #endif

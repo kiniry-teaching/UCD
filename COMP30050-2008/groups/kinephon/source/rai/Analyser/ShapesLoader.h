@@ -9,7 +9,7 @@
  * Load each movement shape and its related speed and acceleration shapes
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class ShapesLoader

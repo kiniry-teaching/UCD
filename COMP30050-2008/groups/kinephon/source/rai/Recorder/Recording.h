@@ -1,5 +1,5 @@
-#ifndef __INTERPRETER_RECORDER_H__
-#define __INTERPRETER_RECORDER_H__
+#ifndef __INTERPRETER_RECORDING_H__
+#define __INTERPRETER_RECORDING_H__
 
 #include "Animation.h"
 
@@ -32,7 +32,6 @@ class Recording
 public:
 	/**
 	 * Returns the number of animations.
-	 * Returns the number of animations held by this recording.
 	 * @return The number of Animations tracked by this recorder
 	 * @author EB
 	 * @version 1.0
@@ -43,7 +42,7 @@ public:
 
 	/**
 	 * Returns the indexed Animation.
-	 * Returns indexed Animation. Index should be in the range (0..length()-1)
+	 * Index should be in the range (0..length()-1)
 	 * @param index Index of animation to return, from 0 to length() - 1
 	 * @return Indexed animation. If Index is out of range, 0 is returned
 	 * @warning Each Recording returned from the Recorder could have animations
@@ -60,7 +59,7 @@ public:
 
 	/**
 	 * Deallocate all memory associated with this object.
-	 * Gets the Recorder to deallocates this object. The behavious of
+	 * Gets the Recorder to deallocate this object. The behavious of
 	 *	operations on this object after this call are unspecified
 	 * @author EB
 	 * @version 1.0
@@ -71,19 +70,9 @@ public:
 
 private:
 	/**
-	 * Empty constructor.
-	 * Move default constructor out of public.
-	 * @author EB
-	 * @version 1.0
-	 * @warning This should never be called
-	 */
-							Recording						(void)
-							{ };
-	/**
 	 * Construct a Recording.
-	 * Constructs a Recording containing a snapshot of the Recorder at
-	 *	the time it was created. This is private except to friend Recorder
-	 *	which creates the object
+	 * Containing a snapshot of the Recorder at the time it was created. This
+	 *	is private except to friend Recorder which creates the object
 	 * @param animations The state of the Recorder's animation 
 	 * @param length The number of animations passed in
 	 * @author EB

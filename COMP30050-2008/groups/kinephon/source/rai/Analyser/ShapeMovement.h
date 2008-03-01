@@ -9,7 +9,7 @@
  * Compare against an animation's movement
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class ShapeMovement : public Shape

@@ -9,7 +9,7 @@
  * Store a collection of shapes and compare an animation against them all
  *
  */
-namespace Interpreter
+namespace interpreter
 {
 
 class Shapes
