@@ -3,6 +3,8 @@
 
 #include "Channel.h"
 #include "RtMidi.h"
+#include "RtError.h"
+#include "../type.h"
 #include <string>
 using namespace std;
 
@@ -14,8 +16,9 @@ using namespace std;
   #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
 #endif
 
-namespace audio
-{
+
+	enum Channels {CHANNEL_LEAD, CHANNEL_ACCOMPANY, CHANNEL_PERCUSSION, CHANNEL_CHORD};
+	
 /**
  * General Midi player.
  * This class provides facilities to connect to available Midi ports and to
@@ -42,6 +45,13 @@ public:
 	 * @return true if connection has been established, false if an error occured     
 	 */
 	bool initialize();
+	
+	/**
+	 * Releases all notes.
+	 * This is a quick fix function, if one wants to switch everything off.
+	 * ( Optionally, if need be, we can change this to restore defaults. )
+	 */
+	void panic();
 	
 	/**
 	 * Set if music piece is to be recorded
@@ -72,7 +82,7 @@ public:
 	 * #127 Poly Mode On
 	 * @param mode messageto be sent      
 	 */
-	void sendChannelMode(unsigned char mode );
+	void sendChannelMode(uchar mode );
 	
 	/**
 	 * Sends a Control Change message to one channel.
@@ -103,7 +113,7 @@ public:
 	 * @param function the chosen function 
 	 * @param value the value of the function
 	 */
-	void sendControlChange(unsigned char channel, unsigned char function, unsigned char value);
+	void sendControlChange(uchar channel, uchar function, uchar value);
 	
 	/**
 	 * Sends a Program Change message to one channel.
@@ -128,7 +138,7 @@ public:
 	 * @param channel the channel the message is to be sent to       
 	 * @param program selected instrument number
 	 */
-	void sendProgramChange(unsigned char channel, unsigned char program);
+	void sendProgramChange(uchar channel, uchar program);
 	
   	/**
 	 * Plays a lead note.
@@ -166,23 +176,22 @@ public:
 	 * @param pitch the value of the note to be played
 	 * @param velocity the velocity of the note
 	 */
-	void playNote(Channels channel, unsigned char pitch, unsigned char velocity);
+	void playNote(Channels channel, uchar pitch, uchar velocity);
 	
 	/**
 	 * Additional methods may be included if need arises.
 	 */
 	void otherOptions();
 	
-	enum Channels {CHANNEL_LEAD, CHANNEL_ACCOMPANY, CHANNEL_PERCUSSION, CHANNEL_CHORD};
 	
 private:
-	RtMidiOut* _midiout;
-	vector<Channel> _channels;	
+	RtMidiOut* midiout_;
+	vector<Channel> channels_;	
 	bool isConnected_;
 	Channel* leadChannel_;
 	Channel* chordChannel_;
 	Channel* accompanyChannel_;
 	Channel* percussionChannel_; //channel 10
 };
-}
+
 #endif /*MIDIPLAYER_H_*/

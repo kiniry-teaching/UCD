@@ -1,20 +1,21 @@
-/*#include "Channel.h"
+#include "Channel.h"
 
 Channel::Channel(RtMidiOut* midi, int no):
-	_number(no),
-	_program(1),
-	_octave(0),
-	_midiout(midi)
+	channelNo_(no),
+	programNo_(1),
+	octaveNo_(0),
+	midiout_(midi)
 {
-	vector<unsigned char> message(2);
-	message[0] = 192 + _number;
-	message[1] = _program;
-  	_midiout->sendMessage( &message );
+	//TODO: set default settings
+	vector<uchar> message(2);
+	message[0] = 192 + channelNo_;
+	message[1] = programNo_;
+  	midiout_->sendMessage( &message );
   	
-  	message[0] = 176 + _number;
+  	message[0] = 176 + channelNo_;
 	message[1] = 7;
-	message.push_back(30);
-	_midiout->sendMessage( &message );
+	message.push_back(127);
+	midiout_->sendMessage( &message );
   	
 }
 
@@ -23,41 +24,41 @@ Channel::~Channel()
 }
 
 // Returns the mode of the specified function. 
-unsigned char Channel::ControlChange(unsigned char channel){
+uchar Channel::getControl(uchar control){
+	return 0u;
+}
+
+// Returns the program 
+uchar Channel::getProgram(){
 	return 0u;
 }
 	
 //Adjusts this channel's settings 
-void Channel::ControlChange(unsigned char function, unsigned char value){}
+void Channel::setControl(uchar function, uchar value){}
 	 
 //Change the instrument.
-void Channel::ProgramChange(unsigned char program){}
+void Channel::setProgram(uchar program){}
 	
 //Plays the given note in default octave.
-void Channel::Play(unsigned char note, unsigned char velocity){
-	vector<unsigned char> message(3);
-  	message[0] = 144 + _number;
+void Channel::play(uchar note, uchar velocity, int octave){
+	vector<uchar> message(3);
+  	message[0] = 144 + channelNo_;
   	message[1] = note;
   	message[2] = velocity;
-  	_midiout->sendMessage( &message );
-	
+  	midiout_->sendMessage( &message );
+	note_[0] = note;
+	note_[1] = velocity;
 }
 	
-//Plays the given note in specified octave.
-void Channel::Play(unsigned char note, unsigned char velocity, int octave){}
-	
-//Plays the given chord in specified octave.
-void Channel::PlayChord(unsigned char chord, unsigned char velocity, int octave){}
 	
 //Stops the playing note.
-void Channel::Release(unsigned char note, unsigned char velocity){
-	vector<unsigned char> message(3);
-	message[0] = 128 + _number;
-	message[1] = note;
-  	message[2] = velocity;
-  	_midiout->sendMessage( &message );
+void Channel::release(){
+	vector<uchar> message(3);
+	message[0] = 128 + channelNo_;
+	message[1] = note_[0];
+  	message[2] = note_[1];
+  	midiout_->sendMessage( &message );
 	
 
 }
 
-*/

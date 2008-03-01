@@ -2,6 +2,7 @@
 #define CHANNEL_H_
 
 #include "RtMidi.h"
+#include "../type.h"
 #include <vector>
 using namespace std;
 /**
@@ -13,8 +14,23 @@ using namespace std;
  * @version		1.0     
  */ 
 
- namespace audio
-{
+ 
+	/* 
+	 * Define middle notes as constants, these are essential.
+	 * What octave we are in is less important for the tune. 
+	 */
+	const uchar MIDDLE_C = 60;
+	const uchar MIDDLE_CSHARP = 61;
+	const uchar MIDDLE_D = 62;
+	const uchar MIDDLE_DSHARP = 63;
+	const uchar MIDDLE_E = 64;
+	const uchar MIDDLE_F = 65;
+	const uchar MIDDLE_FSHARP = 66;
+	const uchar MIDDLE_G = 67;
+	const uchar MIDDLE_GSHARP = 68;
+	const uchar MIDDLE_A = 69;
+	const uchar MIDDLE_ASHARP = 70;
+	const uchar MIDDLE_B = 71;
 		
 class Channel
 {
@@ -22,7 +38,8 @@ public:
 	/**
 	 * Constructs a new channel.
 	 * @param midiout reference to Midi output
-	 * @param number the number of this channel           
+	 * @param number the number of this channel   
+	 * @throws RtError if anything went wrong          
 	 */
 	Channel(RtMidiOut* midiout, int number);
 	
@@ -33,71 +50,59 @@ public:
 	 * @param control the control change option we are interested in
 	 * @return the program value     
 	 */
-	unsigned char getControl(unsigned char control);
+	uchar getControl(uchar control);
 	
 
 	/**
 	 * Gets the program value.
 	 * @return the program value     
 	 */
-	unsigned char getProgram();
+	uchar getProgram();
 	
 		
 	/**
 	 * Sets the given control to specified value.
 	 * @param function number of control option
 	 * @param value the value of the option      
+	 * @throws RtError if anything went wrong
 	 */
-	void setControl(unsigned char function, unsigned char value);
+	void setControl(uchar function, uchar value);
 	 
 	/**
 	 * Sets the program, ie instrument on this channel.
-	 * @param program the instrument to be         
+	 * @param program the instrument to be   
+	 * @throws RtError if anything went wrong      
 	 */
-	void setProgram(unsigned char program);
+	void setProgram(uchar program);
 
   	/**
 	 * Sends a Note On message to play a note.
 	 * @param note the pitch to be played
 	 * @param velocity the velocity with which the note sounds 
 	 * @param octave the octave the specified pitch is in     
-	 * @return      
+	 * @throws RtError if anything went wrong       
 	 */
-	void Play(unsigned char note, unsigned char velocity, int octave);
+	void play(uchar note, uchar velocity, int octave);
 	
 	/**
 	 * Sends a Note Off message.
+	 * @throws RtError if anything went wrong  
 	 */
-	void Release();
+	void release();
 	
 	
-	/* 
-	 * Define middle notes as constants, these are essential.
-	 * What octave we are in is less important for the tune. 
-	 */
-	const unsigned char MIDDLE_C = 60;
-	const unsigned char MIDDLE_CSHARP = 61;
-	const unsigned char MIDDLE_D = 62;
-	const unsigned char MIDDLE_DSHARP = 63;
-	const unsigned char MIDDLE_E = 64;
-	const unsigned char MIDDLE_F = 65;
-	const unsigned char MIDDLE_FSHARP = 66;
-	const unsigned char MIDDLE_G = 67;
-	const unsigned char MIDDLE_GSHARP = 68;
-	const unsigned char MIDDLE_A = 69;
-	const unsigned char MIDDLE_ASHARP = 70;
-	const unsigned char MIDDLE_B = 71;
+	
 		
 	
 private:
-	unsigned char channelNo_;
-	unsigned char programNo_;
-	unsigned char octaveNo_;
-	unsigned char note_[2];			  //note and velocity of last played
-	vector<unsigned char> controls_; 
+	uchar channelNo_;
+	uchar programNo_;
+	uchar octaveNo_;
+	uchar note_[2];			  //note and velocity of last played
+	vector<uchar> controls_; 
 	RtMidiOut* midiout_;
 	
 	
 };
-}
+
 #endif /*CHANNEL_H_*/

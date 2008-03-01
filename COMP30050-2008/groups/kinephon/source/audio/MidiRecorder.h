@@ -4,54 +4,61 @@
 #include <string>
 #include <vector>
 using namespace std;
-/*
- * Author:	ED
- *
- * Writes a Midi file.
- * 
+/**
+ * Records a MIDI file.
+ * @author ED 
+ * @version 1.0
  */
-namespace audio
-{
+
 class MidiRecorder
 {
 public:
-	/* Initializes a new MidiRecorder */
+	/**
+	 * Constructs a new MidiRecorder. 
+	 */
 	MidiRecorder();
 	
-	/* Anything to clean up? */
 	virtual ~MidiRecorder();
 	
-public://Properties
+	/** 
+	 * Opens a new file to write to and sets up the MIDI header. 
+	 * @param noTracks number of tracks to be used
+	 * @returns Returns false if, for any reason, fails to open a file.
+	 */
+	bool openFile(int noTracks);
 		
-
-public://Methods
-		/* 
-		 * Opens new file to write to and sets up the header 
-		 * @returns Returns false if, for any reason, fails to open a file.
-		 */
-		bool OpenFile();
+	/** 
+	 * Opens the given file to write to.
+	 * This will overwrite all old contents of the file. 
+	 * @param fileName fileName of the new file 
+	 * @param noTracks number of tracks to be used
+	 * @returns false if, for any reason, fails to open a file.
+	 */
+	bool openFile(string fileName, int noTracks);
 		
-		/* 
-		 * Opens the given file to write to.
-		 * This will overwrite all old contents of the file. 
-		 * @returns Returns false if, for any reason, fails to open a file.
-		 */
-		bool OpenFile(string fileName);
+	/** 
+	 * Closes (saves) the file.
+	 * The previously filled buffers will be written to file in
+	 * the correct order.
+	 * @returns true if file successfully closed
+	 */
+	bool closeFile();
 		
-		/* 
-		 * Closes (saves) the file.
-		 */
-		bool CloseFile();
-		
-		/* 
-		 * Writes a new event to file. 
-		 * Note: the format of the argument might change, reaserch needed.
-		 */
-		bool Write(vector<unsigned char> *event);
+	/** 
+	 * Writes a new event to buffer.
+	 * @param event message to be written to file
+	 * @param track trackNo number this event belongs to
+	 * @returns true if write is successful
+	 */
+	bool write(vector<uchar>* event, int trackNo);
 		
 private:
-	string _filename;
+	string fileName_;
+	//buffer
+	vector<uchar> trackOne;
+	vector<uchar> trackTwo;
+	vector<uchar> trackThree;
 	//other needed I/O devices, needs further research.
 };
-}
+
 #endif /*MIDIRECORDER_H_*/
