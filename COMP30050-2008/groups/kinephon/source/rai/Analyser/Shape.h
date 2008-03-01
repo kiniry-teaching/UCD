@@ -1,7 +1,7 @@
 #ifndef __INTERPRETER_SHAPE_H__
 #define __INTERPRETER_SHAPE_H__
 
-#include "Animation.h"
+#include "Track.h"
 
 /*
  * Author:	EB
@@ -18,22 +18,22 @@ class Shape
 public:				// Constructor
 					// Load the <name>'d shape data 
 	/**/			Shape
-					(	char const * const		name
+					(	char const * const	name
 					);
-	virtual			~Shape						(void);
+	virtual			~Shape					(void);
 
 public:				// Methods
-					// Comare an animation against this shape
+					// Comare a track against this shape
 					//	Overload to compare movements, speeds, or accelerations
 	virtual float	compare
-					(	Animation const * const	animation
-					)	const					= 0;
+					(	Track const * const	track
+					)	const				pure;
 
 private:
 					// Compare array of vector points against the shape data	
 	float			compare
-					(	int const * const		x,
-						int const * const		y
+					(	int const * const	x,
+						int const * const	y
 					);
 
 private:

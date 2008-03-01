@@ -36,22 +36,22 @@ public:
 public:
 	/**
 	 * Eject the recording from the Recorder.
-	 * Takes a copy of the recorded animation up to this point. The Recorder
+	 * Takes a copy of the recorded track up to this point. The Recorder
 	 *	will still contain this copied data, so calling Eject again will
-	 *	return the same animation data, possibly with new frames add at the
-	 *	end. To remove consumed frames from an animation, call Erase.
+	 *	return the same track data, possibly with new frames add at the
+	 *	end. To remove consumed frames from an track, call Erase.
 	 * @return A copy of the recording at this point in time
 	 * @author EB
 	 * @version 1.0
 	 */
 	Recording *		Eject			(void)	const;
 	/**
-	 * Erase frames from an animation.
+	 * Erase frames from an track.
 	 * All frames before and including the specified frame are removed from
-	 *	the animation that is recording the speicified IR blob
-	 * @param irid IR blob whose animation is to be erased
+	 *	the track that is recording the speicified IR blob
+	 * @param irid IR blob whose track is to be erased
 	 * @param frame All frames from this and before are removed from the
-	 *	animation. If frame is -1 (default), the whole animation is erased
+	 *	track. If frame is -1 (default), the whole track is erased
 	 * @author EB
 	 * @version 1.0
 	 */

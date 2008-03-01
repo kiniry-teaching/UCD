@@ -6,7 +6,7 @@
 /*
  * Author:	EB
  *
- * Store a collection of shapes and compare an animation against them all
+ * Store a collection of shapes and compare a track against them all
  *
  */
 namespace interpreter
@@ -20,14 +20,14 @@ class Shapes
 	friend		class ShapesLoader;
 
 public:			// Constructor
-	/**/		Shapes						(void);
-	virtual		~Shapes						(void);
+	/**/		Shapes					(void);
+	virtual		~Shapes					(void);
 
 public:			// Methods
-				// Comare an animation against all shapes and return the most
+				// Comare a track against all shapes and return the most
 				//	likely one, or NULL if none matched
 	Shape *		compare
-				(	Animation const * const	animation
+				(	Track const * const	track
 				)	const;
 
 private:

@@ -4,7 +4,7 @@
 /*
  * Autor: Sumbo
  * The motion that response to the shape in general
- * It works with the animation class 
+ * It works with the track class 
  */
 
 class Movement

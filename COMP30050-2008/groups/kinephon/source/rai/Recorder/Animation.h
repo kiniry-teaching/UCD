@@ -1,5 +1,5 @@
-#ifndef __INTERPRETER_ANIMATION_H__
-#define __INTERPRETER_ANIMATION_H__
+#ifndef __INTERPRETER_TRACK_H__
+#define __INTERPRETER_TRACK_H__
 
 #include "Frame.h"
 
@@ -12,18 +12,18 @@
 namespace interpreter
 {
 
-class Animation
+class Track
 {
 
 				// Be friends with Recorder so it can add frames
 	friend		class Recorder;
 
 public:
-	/**/		Animation
+	/**/		Track
 				(	int const	id
 				);
-	virtual		~Animation		(void);
-				// Get the id of the blob that this animation records
+	virtual		~Track			(void);
+				// Get the id of the blob that this track records
 	int			id				(void)	const;
 				// Get the number of frames
 	int			length			(void)	const;
@@ -42,11 +42,11 @@ private:
 				);
 
 private:
-				// Store the id of the blob that this animation records
+				// Store the id of the blob that this track records
 	int			_id;
-				// First in linked list of frames in animation
+				// First in linked list of frames in track
 	Frame *		_frameFirst;
-				// Last in linked list of frames in animation, for quick add
+				// Last in linked list of frames in track, for quick add
 	Frame *		_frameLast;
 
 };

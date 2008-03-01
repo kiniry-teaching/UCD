@@ -6,7 +6,7 @@
 /*
  * Author:	EB
  *
- * Compare against an animation's speed
+ * Compare against a track's speed
  *
  */
 namespace interpreter
@@ -22,9 +22,9 @@ public:				// Constructor
 					) :	Shape(name) {};
 
 public:				// Methods
-					// Comare the speed in the animation against this shape
+					// Comare the speed in the track against this shape
 	virtual float	compare
-					(	Animation const * const	animation
+					(	Track const * const	track
 					)	const;
 
 };

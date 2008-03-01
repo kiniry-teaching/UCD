@@ -6,7 +6,7 @@
 /*
  * Author:	EB
  *
- * Compare against an animation's movement
+ * Compare against an track's movement
  *
  */
 namespace interpreter
@@ -18,13 +18,13 @@ class ShapeMovement : public Shape
 public:				// Constructor
 					// Load the <name>'d shape data 
 	/**/			ShapeMovement 
-					(	char const * const		name
+					(	char const * const	name
 					) :	Shape(name) {};
 
 public:				// Methods
-					// Comare the movements in the animation against this shape
+					// Comare the movements in the track against this shape
 	virtual float	compare
-					(	Animation const * const	animation
+					(	Track const * const	track
 					)	const;
 
 private:

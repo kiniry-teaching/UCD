@@ -6,7 +6,7 @@
 /*
  * Author:	EB
  *
- * Compare against an animation's acceleration
+ * Compare against a track's acceleration
  *
  */
 namespace interpreter
@@ -18,13 +18,13 @@ class ShapeAcceleration : public Shape
 public:				// Constructor
 					// Load the <name>'d shape data 
 	/**/			ShapeAcceleration 
-					(	char const * const		name
+					(	char const * const	name
 					) :	Shape(name) {};
 
 public:				// Methods
-					// Comare the acceleration in the animation against this shape
+					// Comare the acceleration in the track against this shape
 	virtual float	compare
-					(	Animation const * const	animation
+					(	Track const * const	track
 					)	const;
 
 };

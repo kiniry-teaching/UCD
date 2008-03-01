@@ -15,8 +15,8 @@ namespace interpreter
 class Frame
 {
 
-					// Be friends with Animation so it can set the next frame
-	friend			class Animation;
+					// Be friends with Track so it can set the next frame
+	friend			class Track;
 
 public:
 	/**/			Frame
@@ -40,7 +40,7 @@ public:
 	int				time					(void)	const;
 					// Get/Set the associated tagged data
 	FrameTag * &	tag						(void);
-					// Get the next frame in the animation
+					// Get the next frame in the track
 	Frame *			next					(void);
 
 private:

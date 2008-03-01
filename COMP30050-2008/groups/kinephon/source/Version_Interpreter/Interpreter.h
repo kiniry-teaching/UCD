@@ -22,7 +22,7 @@ public:
 		
 private:   
 
-		/*Calling the frame(point) from animation
+		/*Calling the frame(point) from track
 		 * Distance from each frame(point) to another
 		 */
         int calSpeed();

@@ -3,10 +3,10 @@
 
 /*
  * Autor: Sumbo
- * The movement of the gesture/animation
+ * The movement of the gesture/track
  * Depending on the different control of the music we have??
  * The motion that response to the shape in general
- * It works with the animation class 
+ * It works with the track class 
  * 
  */
 
