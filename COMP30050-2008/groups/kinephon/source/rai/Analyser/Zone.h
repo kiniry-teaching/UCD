@@ -98,13 +98,13 @@ private:
 			);
 
 	/**
-	 * Tests a movement segment to see if how the move interacted with this zone
+	 * Tests a movement segment to see how the move interacted with this zone
 	 * @param x The x co-ordinate of the movement to test
 	 * @param y The y co-ordinate of the movement to test
 	 * @param u The x vector the movement is making
 	 * @param v The y vector the movement is making
 	 * @param isEntered True if this zone has been entered (a previous test
-	 *	returned ezone::ENTERED
+	 *	returned ezone::ENTERED), false otherwise
 	 * @return Returns how the move interacted with the zone. Values are
 	 *	enumerated in ezone
 	 * @see zone
