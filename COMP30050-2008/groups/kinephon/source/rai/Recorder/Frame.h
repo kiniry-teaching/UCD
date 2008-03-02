@@ -99,14 +99,15 @@ public:
 
 private:
 	/**
-	 * Set the next frame on the track. This will only be called by Track when
+	 * Add the next frame on the track. This will only be called by Track when
 	 *	a new frame is created
-	 * @next The next frame on the track
+	 * @param frame The next frame on the track
+	 * @return A reference to this
 	 * @author EB
 	 * @version 1.0
 	 */
-	void			next
-					(	Frame const * const	next
+	Frame &			operator+=
+					(	Frame const * const	frame
 					);
 
 private:

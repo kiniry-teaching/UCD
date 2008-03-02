@@ -1,30 +1,38 @@
-#ifndef __INTERPRETER_SHAPEACCELERATION_H__
-#define __INTERPRETER_SHAPEACCELERATION_H__
+#ifndef __INTERPRETER_SHAPEACCEL_H__
+#define __INTERPRETER_SHAPEACCEL_H__
 
 #include "Shape.h"
 
-/*
- * Author:	EB
- *
- * Compare against a track's acceleration
- *
- */
 namespace interpreter
 {
 
-class ShapeAcceleration : public Shape
+/**
+ * A shape that compares acceleration plotted against time
+ * @author EB
+ * @version 1.0
+ */
+class ShapeAccel : public Shape
 {
 
-private:			// Constructor
-					// Load the <name>'d shape data 
-	/**/			ShapeAcceleration 
-					(	float const * const	data
-					) :	Shape(data) {};
+private:
+					ShapeAccel 
+					(	float const * const		data,
+						uint const				width,
+						uint const				nData,
+						Zone const * const		zones,
+						uint const				nZones
+					) :	Shape
+						(	data,
+							width,
+							nData,
+							zones,
+							nZones
+						) {};
 
-public:				// Methods
-					// Comare the acceleration in the track against this shape
-	virtual float	compare
-					(	Track const * const	track
+public:
+	virtual bool	compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
 					)	const;
 
 };

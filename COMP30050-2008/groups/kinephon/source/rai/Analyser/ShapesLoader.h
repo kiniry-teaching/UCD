@@ -3,21 +3,25 @@
 
 #include "Shapes.h"
 
-/*
- * Author:	EB
- *
- * Load each movement shape and its related speed and acceleration shapes
- *
- */
 namespace interpreter
 {
 
+/**
+ * Loads all shape data
+ * @author EB
+ * @version 1.0
+ */
 class ShapesLoader
 {
 
-public:				// Methods
-					// Load all shapes from filename
-					//	and return a pointer to them
+public:
+	/**
+	 * Loads all shape data
+	 * @param filename Path to shape data file to load
+	 * @return Returns a collection of shapes collection with all shapes loaded
+	 * @author EB
+	 * @version 1.0
+	 */
 	static Shapes *	loadShapes
 					(	char const * const	filename
 					);

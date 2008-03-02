@@ -78,14 +78,15 @@ public:
 
 private:
 	/**
-	 * Set the next frame on the track. This will only be called by Recorder when
+	 * Add the next frame on the track. This will only be called by Recorder when
 	 *	a new frame needs to be created
-	 * @next The next frame on the track
+	 * @param frame The next frame on the track
+	 * @return A reference to this
 	 * @author EB
 	 * @version 1.0
 	 */
-	void		next
-				(	Frame const * const	next
+	Track &		operator+=
+				(	Frame const * const	frame
 				);
 
 private:

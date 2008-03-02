@@ -3,35 +3,60 @@
 
 #include "Shapes.h"
 
-/*
- * Author:	EB
- *
- * Compare against a track's movement
- *
- */
 namespace interpreter
 {
 
+/**
+ * A shape that compares (x, y) movements
+ * @author EB
+ * @version 1.0
+ */
 class ShapeMovement : public Shape
 {
 
-public:				// Constructor
-					// Load the <name>'d shape data 
+public:
 					ShapeMovement 
-					(	float const * const	data
-					) :	Shape(data) {};
+					(	float const * const	data,
+						uint const			width,
+						uint const			nData,
+						Zone const * const	zones,
+						uint const			nZones,
+						Shapes *			speedShapes,
+						Shapes *			accelShapes,
+					) :	Shape
+						(	data,
+							width,
+							nData,
+							zones,
+							nZones
+						),
+						_speedShapes		(speedShapes),
+						_accelShapes		(accelShapes)
+						{};
 
-public:				// Methods
-					// Comare the movements in the track against this shape
-	virtual float	compare
-					(	Track const * const	track
+public:
+	virtual bool	compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
 					)	const;
 
 private:
-					// Sub-shapes describing speeds
-	Shapes			_shapeSpeed;
-					// Sub-shapes describing accelerations
-	Shapes			_shapeAcceleration;
+	/**
+	 * A movement shape contains a sub collection of speed shapes.
+	 * This allows a movement to differ based on a speed gensture
+	 * @author EB
+	 * @version 1.0
+	 */
+	Shapes			_speedShape;
+	/**
+	 * A movement shape contains a sub collection of acceleration
+	 * shapes.
+	 * This allows a movement to differ based on an acceleration
+	 *	gensture
+	 * @author EB
+	 * @version 1.0
+	 */
+	Shapes			_accelShapes;
 
 };
 

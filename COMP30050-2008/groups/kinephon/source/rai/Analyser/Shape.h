@@ -39,18 +39,18 @@ protected:
 	 * @pre nZones >= 0;
 	 */
 					Shape
-					(	float const * const	data,
-						uint const			width,
-						uint const			nData,
-						Zone const * const	zones,
-						uint const			nZones
+					(	float const * const		data,
+						uint const				width,
+						uint const				nData,
+						Zone const * const		zones,
+						uint const				nZones
 					);
 	/**
 	 * Destroy this shape
 	 * @author EB
 	 * @version 1.0
 	 */
-	virtual			~Shape					(void);
+	virtual			~Shape						(void);
 
 public:
 	/**
@@ -58,31 +58,31 @@ public:
 	 * This must be overloaded to say what track data will be compared against
 	 *	and compare(int *, int *) should be called to do the actual comparison
 	 * @param track The track to compare against
+	 * @param shapeMatches A filter and collection for the matched shapes
 	 * @return A weight of how close the track matches the shape from (0..1)
 	 * @author EB
 	 * @version 1.0
 	 */
-	virtual float	compare
-					(	Track const * const	track
-					)	const				pure;
+	virtual bool	compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
+					)	const					pure;
 
 private:
 	/**
 	 * Compare an array of (x, y) points against this data.
-	 * @param x An array of x co-ordinates
-	 * @param y An array of y co-ordinates
-	 * @param length The size of the x and y arrays
+	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, .., x[length], y[length])
+	 * @param length The number of points in the array.
 	 * @return A weight from (0..1) of how close the (x, y) array matches the
 	 *	shape
 	 * @author EB
 	 * @version 1.0
-	 * @pre /length(x) == /length(y) == length;
+	 * @pre /length(points) == length * 2;
 	 * @pre length > 0;
 	 */
 	float			compare
-					(	int const * const	x,
-						int const * const	y,
-						uint const			length
+					(	int const * const		points,
+						uint const				length
 					)	const;
 
 private:

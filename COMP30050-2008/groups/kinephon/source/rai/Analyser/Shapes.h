@@ -19,7 +19,7 @@ class Shapes
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend		class ShapesLoader;
+	friend			class ShapesLoader;
 
 private:
 	/**
@@ -27,47 +27,47 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-				Shapes
-				(	uint				length
-				);
+					Shapes
+					(	uint					length
+					);
 	/**
 	 * Destruct the shapes collection. All shapes in the collection will be
 	 *	destroyed too
 	 * @author EB
 	 * @version 1.0
 	 */
-	virtual		~Shapes					(void);
+	virtual			~Shapes						(void);
 
 public:
 	/**
 	 * Comare a track against all shapes and return the most likely one, or
 	 *	0 if none matched
 	 * @param track The track to compare against
-	 * @return The nearest matching shape within range, or 0 if no near
-	 *	matches are found
+	 * @param shapeMatches A shape match collection to add any matched shapes.
+	 *	This should be preconfigured to specify the filter for the match
+	 * @return True if any matches are found, else false
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shape *		compare
-				(	Track const * const	track
-				)	const;
+	bool			compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
+					)	const;
 
 private:
 	/**
-	 * Add a shape to the collection by index.
+	 * Add a shape to the collection
 	 * This is called by ShapesLoader
-	 * @param index The index to store this shape at. Must be unique for each
-	 *	shape or existing ones will be overwritten
-	 * @param shape Pointer to an allocated shape
+	 * @param shape Pointer to an allocated shape to add
+	 * @return A reference to this
 	 * @author EB
 	 * @version 1.0
-	 * @pre index >= 0 && index <= _length;
 	 * @pre shape != 0;
+	 * @pre _shapeIndex < _nShapes;
 	 */
-	void		loadShape
-				(	uint				index,
-					Shape *				shape
-				);
+	Shapes &		operator+=
+					(	Shape *					shape
+					);
 
 private:
 	/**
@@ -75,13 +75,19 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shape *		_shapes;
+	Shape *			_shapes;
 	/**
 	 * Length of _shapes array
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint		_nShapes;
+	uint			_nShapes;
+	/**
+	 * Index of next shape to add when += is called
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint			_shapeIndex;
 
 };
 
