@@ -120,13 +120,53 @@ private:
 			);
 
 private:
+	/**
+	 * Store the x co-ordinate of this zone
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_x;
+	/**
+	 * Store the y co-ordinate of this zone
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_y;
+	/**
+	 * Store the radius of the zone's entry
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_enterRadius;
+	/**
+	 * Store the radius of the zone's exit
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_exitRadius;
+	/**
+	 * Store the angle of the zone's entry
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_enterAngle;
+	/**
+	 * Store the angle of the zone's exit
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_exitAngle;
+	/**
+	 * Store the arc off the angle of the zone's entry
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_enterArc;
+	/**
+	 * Store the arc off the angle of the zone's exit
+	 * @author EB
+	 * @version 1.0
+	 */
 	float	_exitArc;
 	
 };
