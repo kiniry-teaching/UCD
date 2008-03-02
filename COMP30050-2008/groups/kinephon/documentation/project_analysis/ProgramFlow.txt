@@ -19,12 +19,14 @@ Kinephon
   start Parser
    <parser initialise>
     <connection initialise>
-     Recorder.control(add)
-      new Track
+     foreach(IR blob)
+      Recorder.control(add)
+       new Track
    <parser loop>          [Async]
     <connection call>
-     Recorder.record
-      new Frame
+     foreach(IR blob)
+      Recorder.record
+       new Frame
   start Audio
    <audio initialise>
   Main loop
@@ -33,7 +35,19 @@ Kinephon
    foreach(Recording.track)
     Shapes.compare(track)
      new ShapeMatches
-   foreach(ShapeMatch)
+     foreach(Shape) [ShapeMovement]
+      Shape.compare
+       Zone compare
+       Matched
+        ShapeMatches++
+         new ShapeMatch
+        foreach(Sub-shape) [ShapeSpeed|ShapeAccel]
+         Shape.compare
+          Zone compare
+          Matched
+           ShapeMatches++
+            new ShapeMatch
+   foreach(ShapeMatch in ShapeMatches)
     <interpreter gesture call>
      Match Consumed
       Recorder.erase
