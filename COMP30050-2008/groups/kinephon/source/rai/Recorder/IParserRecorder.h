@@ -43,7 +43,7 @@ namespace econtrol
 /**
  * Interface between Parser and Recorder.
  * The parser will call on the methods availabe
- *	here to and the Recorder will capture them.
+ *	here and the Recorder will respond to them.
  * @author EB
  * @version 1.0
  */
@@ -54,12 +54,11 @@ public:
 	/**
 	 * Issue a control switch.
 	 * Used to add or remove IR blob ids, indicate errors
-	 * @param control Control switch to make.
+	 * @param control Control switch to make. Values are enumerated in econtrol
 	 * @param data If the control requires extra data, it is passed here. Each
 	 *	control will specify the type of data to pass
 	 * @return If the control needs to respond, it will be returned here. Each
-	 *	control will specify what is returned. Values are enumerated in
-	 *	econtrol
+	 *	control will specify what is returned.
 	 * @see econtrol
 	 */
 	virtual int		control
