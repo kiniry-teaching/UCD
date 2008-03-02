@@ -1,6 +1,8 @@
 #ifndef __INTERPRETER_SHAPEMOVEMENT_H__
 #define __INTERPRETER_SHAPEMOVEMENT_H__
 
+#include "../../type.h"
+#include "Shape.h"
 #include "Shapes.h"
 
 namespace interpreter
@@ -22,7 +24,7 @@ public:
 						Zone const * const	zones,
 						uint const			nZones,
 						Shapes *			speedShapes,
-						Shapes *			accelShapes,
+						Shapes *			accelShapes
 					) :	Shape
 						(	data,
 							width,
@@ -32,7 +34,7 @@ public:
 						),
 						_speedShapes		(speedShapes),
 						_accelShapes		(accelShapes)
-						{};
+						{}
 
 public:
 	virtual bool	compare
@@ -47,7 +49,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shapes			_speedShape;
+	Shapes *		_speedShapes;
 	/**
 	 * A movement shape contains a sub collection of acceleration
 	 * shapes.
@@ -56,7 +58,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shapes			_accelShapes;
+	Shapes *		_accelShapes;
 
 };
 

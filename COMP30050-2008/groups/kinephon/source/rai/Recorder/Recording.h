@@ -1,6 +1,7 @@
 #ifndef __INTERPRETER_RECORDING_H__
 #define __INTERPRETER_RECORDING_H__
 
+#include "../../type.h"
 #include "Track.h"
 
 /**
@@ -31,6 +32,22 @@ class Recording
 	 */
 	friend				class Recorder;
 
+private:
+	/**
+	 * Construct a Recording.
+	 * Containing a snapshot of the Recorder at the time it was created. This
+	 *	is private except to friend Recorder which creates the object
+	 * @param tracks The state of the Recorder's track 
+	 * @param length The number of tracks passed in
+	 * @author EB
+	 * @version 1.0
+	 * @post this->length() == length;
+	 */
+						Recording
+						(	Track const * const	tracks,
+							uint const			length
+						);
+
 public:
 	/**
 	 * Returns the number of tracks.
@@ -38,8 +55,8 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint				length						(void)	const
-						{	return _length;
+	uint				length					(void)	const
+						{	return _nTracks;
 						};
 
 	/**
@@ -56,7 +73,7 @@ public:
 	 * @post /result != 0;
 	 */
 	Track const * const	operator []
-						(	uint const				index
+						(	uint const			index
 						)	const;
 
 	/**
@@ -66,25 +83,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	void				release						(void)	const
-						{	Recorder::deleteRecording(this);
-						}
-
-private:
-	/**
-	 * Construct a Recording.
-	 * Containing a snapshot of the Recorder at the time it was created. This
-	 *	is private except to friend Recorder which creates the object
-	 * @param tracks The state of the Recorder's track 
-	 * @param length The number of tracks passed in
-	 * @author EB
-	 * @version 1.0
-	 * @post this->length() == length;
-	 */
-						Recording
-						(	Track const * &	const	tracks,
-							uint const				length
-						);
+	void				release					(void)	const;
 
 private:
 	/**

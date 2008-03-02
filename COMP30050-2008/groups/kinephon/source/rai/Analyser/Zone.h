@@ -1,15 +1,17 @@
-#ifndef __INTERPRETER_SHAPE_H__
-#define __INTERPRETER_SHAPE_H__
+#ifndef __INTERPRETER_ZONE_H__
+#define __INTERPRETER_ZONE_H__
+
+#include "../../type.h"
 
 namespace interpreter
 {
 
 /**
- * List of possible results from Zone::test(int, int, int, int, bool)
+ * List of possible results from Zone::test()
  * @author EB
  * @version 1.0
  */
-namespace zone
+namespace ezone
 {
 	/**
 	 * The zone was neither entered nor exited. This means it's either still
@@ -102,8 +104,9 @@ private:
 	 * @param u The x vector the movement is making
 	 * @param v The y vector the movement is making
 	 * @param isEntered True if this zone has been entered (a previous test
-	 *	returned zone::ENTERED
-	 * @return Returns how the move interacted with the zone
+	 *	returned ezone::ENTERED
+	 * @return Returns how the move interacted with the zone. Values are
+	 *	enumerated in ezone
 	 * @see zone
 	 * @author EB
 	 * @version 1.0
@@ -117,8 +120,15 @@ private:
 			);
 
 private:
+	float	_x;
+	float	_y;
+	float	_enterRadius;
+	float	_exitRadius;
+	float	_enterAngle;
+	float	_exitAngle;
+	float	_enterArc;
+	float	_exitArc;
 	
-
 };
 
 }

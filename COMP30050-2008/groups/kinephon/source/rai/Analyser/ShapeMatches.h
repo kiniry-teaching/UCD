@@ -2,6 +2,7 @@
 #define __INTERPRETER_SHAPEMATCHES_H__
 
 #include <vector>
+#include "ShapeMatch.h"
 using std::vector;
 
 namespace interpreter
@@ -31,7 +32,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-							ShapeMatch
+							ShapeMatches
 							(	float const * const			weight,
 								uint const					total	= 1
 							);
@@ -73,7 +74,7 @@ public:
 	 */
 	ShapeMatches &			operator+=
 							(	ShapeMatch const * const	shapeMatch
-							)
+							);
 
 private:
 	/**

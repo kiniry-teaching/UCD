@@ -1,6 +1,7 @@
 #ifndef __INTERPRETER_TRACK_H__
 #define __INTERPRETER_TRACK_H__
 
+#include "../../type.h"
 #include "Frame.h"
 
 namespace interpreter
@@ -42,7 +43,7 @@ public:
 	 * Get the IR blob's id being tracked by this
 	 * @return The IR blob's id
 	 */
-	irid		irid			(void)	const;
+	irid		id				(void)	const;
 	/**
 	 * Returns the number of frames.
 	 * @return The number of frames held by this track
@@ -94,7 +95,7 @@ private:
 	 * irid() field
 	 * @author EB
 	 * @version 1.0
-	 * @see irid()
+	 * @see id()
 	 */
 	irid		_irid;
 	/**

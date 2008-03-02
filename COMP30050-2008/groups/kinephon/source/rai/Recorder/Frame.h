@@ -1,6 +1,8 @@
 #ifndef __INTERPRETER_FRAME_H__
 #define __INTERPRETER_FRAME_H__
 
+#include "../../type.h"
+
 namespace interpreter
 {
 

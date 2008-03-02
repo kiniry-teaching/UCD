@@ -1,6 +1,8 @@
 #ifndef __INTERPRETER_SHAPES_H__
 #define __INTERPRETER_SHAPES_H__
 
+#include "../../type.h"
+#include "../Recorder/Track.h"
 #include "Shape.h"
 
 namespace interpreter
@@ -24,6 +26,8 @@ class Shapes
 private:
 	/**
 	 * Construct the shapes collection. This is done by the ShapesLoader
+	 * @param length The total number of shapes this collection will ever hold.
+	 *	This must be predetermined before adding each shape to this collection
 	 * @author EB
 	 * @version 1.0
 	 */

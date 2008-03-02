@@ -1,18 +1,20 @@
 #ifndef __INTERPRETER_PARSERRECORDER_H__
 #define __INTERPRETER_PARSERRECORDER_H__
 
+#include "../../type.h"
+
 namespace interpreter
 {
 
 /**
- * List of control switches for IParserRecorder::Control(int, void*)
+ * List of control switches for IParserRecorder::control()
  * @author EB
  * @version 1.0
  */
-namespace control
+namespace econtrol
 {
 	/**
-	 * A new IR blob has been found by the parser. \v data should contain the
+	 * A new IR blob has been found by the parser. Data should contain the
 	 *	id of the blob that will be used when calling Record for that blob.
 	 *	Return value will always be 0
 	 * @author EB
@@ -21,16 +23,16 @@ namespace control
 	uchar const	FOUND	= 0;
 	/**
 	 * An IR blob has been lost, either because it was physically removed, or
-	 *	because it's data packets have been lost. \v data should contain the id
-	 *	of the blob lost
+	 *	because it's data packets have been lost. Data should contain the
+	 *	id of the blob lost
 	 *	Return value will always be 0
 	 * @author EB
 	 * @version 1.0
 	 */
 	uchar const	LOST	= 1;
 	/**
-	 * The Parser is no longer receiving data. Connection may be lost. \v data
-	 *	is ignored
+	 * The Parser is no longer receiving data. Connection may be lost. Data is
+	 *	ignored
 	 *	Return value will always be 0
 	 * @author EB
 	 * @version 1.0
@@ -56,9 +58,11 @@ public:
 	 * @param data If the control requires extra data, it is passed here. Each
 	 *	control will specify the type of data to pass
 	 * @return If the control needs to respond, it will be returned here. Each
-	 *	control will specify what is returned
+	 *	control will specify what is returned. Values are enumerated in
+	 *	econtrol
+	 * @see econtrol
 	 */
-	virtual int		Control
+	virtual int		control
 					(	uchar const	control,
 						void *		data
 					)				pure;
@@ -75,7 +79,7 @@ public:
 	 * @post id must be added by calling Control
 	 * @pre size > 0;
 	 */
-	virtual void	Record
+	virtual void	record
 					(	irid const	irid,
 						int const	x,
 						int const	y,

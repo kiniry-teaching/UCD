@@ -1,7 +1,10 @@
 #ifndef __INTERPRETER_RECORDER_H__
 #define __INTERPRETER_RECORDER_H__
 
+#include "../../type.h"
 #include "IParserRecorder.h"
+#include "Track.h"
+#include "Recording.h"
 
 namespace interpreter
 {
@@ -44,7 +47,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Recording *		Eject			(void)	const;
+	Recording *		eject			(void)	const;
 	/**
 	 * Erase frames from a track.
 	 * All frames before and including the specified frame are removed from
@@ -55,20 +58,41 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	void			Erase
+	void			erase
 					(	irid const	irid,
 						int const	frame	= -1
 					);
 
 public:
-	/** . @copydoc IParserRecorder::Control */
-	virtual int		Control
+	/**
+	 * Issue a control switch.
+	 * Used to add or remove IR blob ids, indicate errors
+	 * @param control Control switch to make.
+	 * @param data If the control requires extra data, it is passed here. Each
+	 *	control will specify the type of data to pass
+	 * @return If the control needs to respond, it will be returned here. Each
+	 *	control will specify what is returned. Values are enumerated in
+	 *	econtrol
+	 * @see econtrol
+	 */
+	virtual int		control
 					(	uchar const	control,
 						void *		data
 					);
 
-	/** . @copydoc IParserRecorder::Record */
-	virtual void	Record
+	/**
+	 * Record the current position of an IR blob.
+	 * @param irid Identification of the IR blob. This id will be used to link
+	 *	each Record together
+	 * @param x X co-ordinate of the IR blob
+	 * @param y Y co-ordinate of the IR blob
+	 * @param size Size of the IR blob
+	 * @author EB
+	 * @version 1.0
+	 * @post id must be added by calling Control
+	 * @pre size > 0;
+	 */
+	virtual void	record
 					(	irid const	irid,
 						int const	x,
 						int const	y,

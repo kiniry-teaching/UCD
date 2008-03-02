@@ -1,7 +1,10 @@
 #ifndef __INTERPRETER_SHAPE_H__
 #define __INTERPRETER_SHAPE_H__
 
-#include "Track.h"
+#include "../../type.h"
+#include "../Recorder/Track.h"
+#include "Zone.h"
+#include "ShapeMatches.h"
 
 namespace interpreter
 {
@@ -29,7 +32,7 @@ protected:
 	 * @param width The width of the 2 dimensional weight map
 	 * @param nData The resolution of the weight map (height is nData / width)
 	 * @param zones Array of zones in this shape
-	 * @param zones Total number of zones
+	 * @param nZones Total number of zones
 	 * @author EB
 	 * @version 1.0
 	 * @pre data != 0;

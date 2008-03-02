@@ -4,6 +4,9 @@
 namespace interpreter
 {
 
+class Shape;
+class ShapeMatches;
+
 /**
  * A structure containing a matched shape and the weight of the match as well
  *	as a collection of sub matched shapes (speed or accel) if any
@@ -74,7 +77,9 @@ private:
 	 * @version 1.0
 	 * @see shapeMatches()
 	 */
-	ShapeMatches	_shapeMatches;
+	ShapeMatches *	_shapeMatches;
+
+};
 
 }
 

@@ -1,6 +1,7 @@
 #ifndef __INTERPRETER_SHAPEACCEL_H__
 #define __INTERPRETER_SHAPEACCEL_H__
 
+#include "../../type.h"
 #include "Shape.h"
 
 namespace interpreter
