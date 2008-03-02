@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace TuneBlaster_.Graphics
 {
+    /// <summary>
+    /// The class for all balls that are not stationary, that gravitate towards the core
+    /// Author Hugh Corrigan
+    /// </summary>
     class MovingBall : Image
     {    
         #region Fields (core, live, angles, colour)
@@ -25,9 +29,9 @@ namespace TuneBlaster_.Graphics
             colour = v;
         }
 
-        public override void Initialise()
+        public override void Initialise(Game g)
         {
-            base.Initialise();
+            base.Initialise(g);
             live = true;
         }
 
@@ -75,7 +79,7 @@ namespace TuneBlaster_.Graphics
             else
             {
                 FixedBall f = new FixedBall(core, colour);
-                f.Initialise(size, Position);
+                f.Initialise(size, Position, game);
                 f.LoadGraphicsContent(spriteBatch, texture);
                 core.addBall(f);
                 live = false;         

@@ -2,15 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Resources\Textures\Arrow.png</Source>
-      <Name>Resources\Textures\Arrow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Resources\Textures\Arrow.xnb</Output>
-      <Time>2008-02-18T22:59:33.6875+00:00</Time>
-    </Item>
-    <Item>
       <Source>Resources\Textures\Ball.png</Source>
       <Name>Resources\Textures\Ball</Name>
       <Importer>TextureImporter</Importer>
@@ -19,14 +10,77 @@
       <Output>bin\x86\Debug\Resources\Textures\Ball.xnb</Output>
       <Time>2008-02-19T22:12:47.484375+00:00</Time>
     </Item>
+    <Item>
+      <Source>Resources\Textures\tune-blast-logo.png</Source>
+      <Name>Resources\Textures\tune-blast-logo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\tune-blast-logo.xnb</Output>
+      <Time>2008-02-26T11:11:18.125+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Resources\Textures\space-background.png</Source>
+      <Name>Resources\Textures\space-background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\space-background.xnb</Output>
+      <Time>2008-02-28T23:12:06.515625+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Resources\Textures\greenball.png</Source>
+      <Name>Resources\Textures\greenball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\greenball.xnb</Output>
+      <Time>2008-02-29T09:35:35.203125+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Resources\Textures\core final.png</Source>
+      <Name>Resources\Textures\core final</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\core final.xnb</Output>
+      <Time>2008-02-29T13:25:31.203125+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Resources\Textures\ballredfinal.png</Source>
+      <Name>Resources\Textures\ballredfinal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\ballredfinal.xnb</Output>
+      <Time>2008-02-29T09:47:28.140625+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Resources\Textures\Core.png</Source>
+      <Name>Resources\Textures\Core</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\Core.xnb</Output>
+      <Time>2008-02-29T13:39:19.578125+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Resources\Textures\Red.png</Source>
+      <Name>Resources\Textures\Red</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Resources\Textures\Red.xnb</Output>
+      <Time>2008-02-29T13:39:29.484375+00:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Software\TuneBlaster\TuneBlaster\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Software\TuneBlaster\TuneBlaster\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Software\TuneBlaster\TuneBlaster\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Software\TuneBlaster\TuneBlaster\bin\x86\Debug\</OutputDirectory>
+      <RootDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Kangaroo Jump\TuneBlaster\TuneBlaster\</RootDirectory>
+      <LoggerRootDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Kangaroo Jump\TuneBlaster\TuneBlaster\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Kangaroo Jump\TuneBlaster\TuneBlaster\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\Hugh\My Documents\Software Project\Kangaroo Jump\TuneBlaster\TuneBlaster\bin\x86\Debug\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

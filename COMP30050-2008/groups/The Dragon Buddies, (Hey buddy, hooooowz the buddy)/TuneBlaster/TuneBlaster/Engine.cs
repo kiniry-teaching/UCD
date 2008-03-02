@@ -14,24 +14,33 @@ using TuneBlaster_.Graphics;
 namespace TuneBlaster_
 {
     /// <summary>
-    /// This is the main type for your game
+    /// The Class that calls everything
+    /// Defalt Class
+    /// Authors Hugh Corrigan, Ahmed Warreth
     /// </summary>
     public class Engine : Microsoft.Xna.Framework.Game
     {
+        
         GraphicsDeviceManager graphics;
         ContentManager content;
         SpriteBatch spriteBatch;
         Texture2D texture;
         Core core;
         BallManager ball;
+        Image background;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
         
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
-            core = new Core(gamePadState);
-            ball = new BallManager(core);
+            core = new Core();
+            ball = new BallManager(core, this);
+            background = new Image();
+            this.graphics.PreferredBackBufferWidth = 800;
+            this.graphics.PreferredBackBufferHeight = 600;
+
+            //this.graphics.IsFullScreen = true;
         }
 
 
@@ -43,7 +52,8 @@ namespace TuneBlaster_
         /// </summary>
         protected override void Initialize()
         {
-            core.Initialise(new Vector2(150f, 150f), new Vector2(400f, 400f));
+            core.Initialise(new Vector2(150f, 150f), new Vector2(400f,300f), this);
+            background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
             ball.Initialise();
             base.Initialize();
         }
@@ -60,9 +70,11 @@ namespace TuneBlaster_
             if (loadAllContent)
             {
                 spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-                texture = content.Load<Texture2D>(@"Resources\Textures\Arrow");
+                texture = content.Load<Texture2D>(@"Resources\Textures\space-background");
+                background.LoadGraphicsContent(spriteBatch, texture);
+                texture = content.Load<Texture2D>(@"Resources\Textures\Core");
                 core.LoadGraphicsContent(spriteBatch, texture);
-                texture = content.Load<Texture2D>(@"Resources\Textures\Ball");
+                texture = content.Load<Texture2D>(@"Resources\Textures\Red");
                 ball.LoadGraphicsContent(spriteBatch, texture);
                 // TODO: Load any ResourceManagementMode.Automatic content
             }
@@ -97,7 +109,7 @@ namespace TuneBlaster_
             // Allows the default game to exit on Xbox 360 and Windows
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            core.Update(gameTime, Keyboard.GetState());
+            core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
             ball.Update(gameTime);
             // TODO: Add your update logic here
 
@@ -113,6 +125,7 @@ namespace TuneBlaster_
         {
             graphics.GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
+            background.Draw(gameTime);
             core.Draw(gameTime);
             ball.Draw(gameTime);
             spriteBatch.End();

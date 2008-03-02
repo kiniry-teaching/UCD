@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TuneBlaster_.Graphics
 {
+    /// <summary>
+    /// The base class for everything that appears onscreen
+    /// Author Hugh Corrigan
+    /// </summary>
     class Image
     {
         
@@ -52,6 +56,7 @@ namespace TuneBlaster_.Graphics
         private SpriteEffects effects;
         private float layer;
         protected Vector2 size;
+        public Game game;
 
         #endregion
 
@@ -63,8 +68,9 @@ namespace TuneBlaster_.Graphics
             this.texture = texture;
         }
 
-        public virtual void Initialise()
+        public virtual void Initialise(Game g)
         {
+            game = g;
             this.colour = Color.White;
             this.rotation = 0f;
             this.scale = Vector2.One;
@@ -74,11 +80,11 @@ namespace TuneBlaster_.Graphics
             this.origin = new Vector2(source.Width / 2, source.Height / 2);
         }
 
-        public void Initialise(Vector2 mySize, Vector2 myPosition)
+        public virtual void Initialise(Vector2 mySize, Vector2 myPosition, Game g)
         {
             this.size = mySize;
             this.position = myPosition;
-            this.Initialise();
+            this.Initialise(g);
         }
 
         public virtual void Draw(GameTime gameTime)

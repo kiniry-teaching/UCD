@@ -5,7 +5,8 @@ namespace TuneBlaster_
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Runs the game
+        /// Default Class
         /// </summary>
         static void Main(string[] args)
         {

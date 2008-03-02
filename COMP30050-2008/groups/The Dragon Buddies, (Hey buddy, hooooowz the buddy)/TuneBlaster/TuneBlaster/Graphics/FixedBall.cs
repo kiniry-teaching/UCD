@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace TuneBlaster_.Graphics
 {
+    /// <summary>
+    /// The class for the balls that have become stationary due to a colission
+    /// Author Hugh Corrigan
+    /// </summary>
     class FixedBall : Image
     {
         #region Fields (core, colour, initialRoatation, coreDistance)
@@ -13,6 +17,7 @@ namespace TuneBlaster_.Graphics
         Core core;
         value colour;
         float initialRotation, coreDistance;
+        bool dead, locked;
 
         #endregion
 
@@ -24,12 +29,22 @@ namespace TuneBlaster_.Graphics
             colour = v;    
         }
 
-        public override void Initialise()
+        public override void Initialise(Game g)
         {
-            base.Initialise();
+            locked = true;
+            dead = false;
+            base.Initialise(g);
             coreDistance = Vector2.Distance(Position, core.Position);
-            rotation = core.Rotation;
-            initialRotation = (float)(3*Math.PI/4 + Math.Acos((core.Position.X - Position.X) / coreDistance) + Math.Asin((core.Position.Y - Position.Y) / coreDistance));
+            //rotation = core.Rotation;
+            if (((core.Position.X - Position.X) / coreDistance) > Math.PI)
+            {
+                initialRotation = (float) Math.Sin((core.Position.Y - Position.Y + 0.53*origin.Y ) / coreDistance);
+            }
+            else
+            {
+                initialRotation = (float) (Math.PI + Math.Sin((core.Position.Y - Position.Y + 0.53*origin.Y) / coreDistance));
+            }
+            // initialRotation = (float)(Math.Sin((core.Position.X - Position.X) / coreDistance) + Math.Sin((core.Position.Y - Position.Y) / coreDistance));
         }
 
         #endregion
@@ -40,12 +55,28 @@ namespace TuneBlaster_.Graphics
         {
             rotation += rotate;
             initialRotation += rotate;
+
             Position = core.Position + new Vector2((float)(coreDistance * Math.Cos(initialRotation)), (float) (coreDistance * Math.Sin(initialRotation)));
         }
 
         public void Move(float rotate)
         {
             GetRotation(rotate);
+        }
+
+        public void Destroy()
+        {
+            dead = true;
+        }
+
+        public bool IsDead()
+        {
+            return dead;
+        }
+
+        public void Unlock()
+        {
+            locked = false;
         }
 
         #endregion

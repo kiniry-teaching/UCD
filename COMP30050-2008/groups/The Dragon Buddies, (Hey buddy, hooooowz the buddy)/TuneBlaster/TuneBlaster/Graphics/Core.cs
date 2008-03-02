@@ -17,22 +17,19 @@ namespace TuneBlaster_.Graphics
         public float acceleration;
         public List<FixedBall> balls;
         static float maxAcceleration = 0.05f;
-        GamePadState gamePadState;
 
         #endregion
 
         #region Main Methods (Core, Initialise, Draw, Update)
 
-        public Core(GamePadState g)
+        public Core()
         {
             balls = new List<FixedBall>();
-            gamePadState = g;
         }
 
-        public override void Initialise()
+        public override void Initialise(Vector2 mySize, Vector2 myPosition, Game g)
         {
-            base.Initialise();
-            Position = new Vector2(400, 400);
+            base.Initialise(mySize, myPosition, g);
             acceleration = 0f;
             oldRotation = 0f;
         }
@@ -46,42 +43,28 @@ namespace TuneBlaster_.Graphics
             }
         }
 
-        public void Update(GameTime gameTime, KeyboardState keyBoardState)
+        public void Update(GameTime gameTime, KeyboardState keyBoardState, GamePadState gamePadState)
         {
-            Move(keyBoardState);
+            Move(keyBoardState, gamePadState);
+            for (int i = 0; i < balls.Count; i++)
+            {
+                if (balls[i].IsDead())
+                {
+                    balls.Remove(balls[i]);
+                }
+            }
         }
 
         #endregion
 
-        #region Action Methods (SetRotation, Move, AddBall, RemoveBall)
+        #region Action Methods (Move, AddBall, RemoveBall)
 
-        public void SetRotation()
+
+        public void Move(KeyboardState keyBoardState, GamePadState gamePadState)
         {
-            oldRotation = rotation;
-            if (gamePadState.ThumbSticks.Left.X > 0)
-            {
-                acceleration += 0.1f;
-            }
-            if (acceleration > 1.0)
-            {
-                acceleration = 1.0f;
-            }
-
-            else if (gamePadState.ThumbSticks.Left.X < 0)
-            {
-                acceleration -= 0.1f;
-            }
-            if (acceleration > 1.0)
-            {
-                acceleration = 1.0f;
-            }
-        }
-
-        public void Move(KeyboardState keyBoardState)
-        {
-            //SetRotation(gamepadState);
             oldRotation = rotation;
             SetKeyboardRotation(keyBoardState);
+            SetControllerRotation(gamePadState);
             for (int i = 0; i < balls.Count; i++) 
             {
                 balls[i].Move(rotation-oldRotation);
@@ -92,25 +75,27 @@ namespace TuneBlaster_.Graphics
         {
             balls.Add(f);
             ballsSize++;
-            Console.WriteLine(ballsSize);
+            CheckExplosions();
         }
 
-        public void removeBall(FixedBall f)
+        public void CheckExplosions()
         {
-            for (int i = 0; i < ballsSize; i++)
+            if (ballsSize > 4)
             {
-                if (balls[i].Equals(f))
+                for (int i = 0; i < ballsSize; i++)
                 {
-                    balls.Remove(balls[i]);
+                    balls[i].Destroy();
                 }
+                ballsSize = 0;
             }
         }
+
 
         #endregion
 
         #region Input Methods (SetControllerRotation, SetKeyBoardRotation)
 
-        public void SetControllerRotation()
+        public void SetControllerRotation(GamePadState gamePadState)
         {
             if (gamePadState.ThumbSticks.Left.X < 0.0f)
             {
@@ -148,11 +133,11 @@ namespace TuneBlaster_.Graphics
                 {
                     acceleration *= 0.90f;
                 }
-                acceleration = 0.05f;
+                acceleration = 0.03f;
             }
             if (keyBoardState.IsKeyDown(Keys.Left))
             {
-                acceleration = -0.05f;
+                acceleration = -0.03f;
             }
             else
             {
