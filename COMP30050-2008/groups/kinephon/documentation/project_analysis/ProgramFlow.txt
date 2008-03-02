@@ -1,0 +1,47 @@
+Highlevel overview of program flow
+ Children are function calls or logical blocks
+ Siblings are flow within a single function
+
+Missing links
+ What determines when to call MIDI recorder
+ What determines when to call Movement recorder
+
+Kinephon
+ Main
+  new Parser(Recorder)
+  new Recorder
+  ShapesLoader
+   new Shapes
+    new ShapeMovement
+     new ShapeSpeed
+     new ShapeAccel
+  new Audio
+  start Parser
+   <parser initialise>
+    <connection initialise>
+     Recorder.control(add)
+      new Track
+   <parser loop>          [Async]
+    <connection call>
+     Recorder.record
+      new Frame
+  start Audio
+   <audio initialise>
+  Main loop
+   Recorder.eject
+    new Recording
+   foreach(Recording.track)
+    Shapes.compare(track)
+     new ShapeMatches
+   foreach(ShapeMatch)
+    <interpreter gesture call>
+     Match Consumed
+      Recorder.erase
+      <generate data for synthesis>
+   no ShapeMatch
+    <interpreter general call>
+     General interpretation
+      <generate data for synthesis>
+   Sleep until audio tick (Audio must be called regularly (free time will be spent waiting (might move this into async proc)))
+   <Audio call (pass data for synthesis>
+   <Video call (pass data for synthesis>
