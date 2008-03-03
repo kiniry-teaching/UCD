@@ -64,87 +64,79 @@ Parser
 	 if you need to constantly watch the input stream so there are no timeouts, and are going to thread the
 	 reading of the data
 
-Recorder
-	Keeps a history of data from the Parser. Each blob tracked by the Camera will be have its own history 
-	and be uniquely identifiable. This part of the project will be broken into the following classes
-
-	Frame
-		Holds information about a single blob and a single point in time. This will include blob position,
-		vector to next position, frame time, and a tag. Tag will be modifiable by the Analyser and allow 
-		the Analyser to attach a custom data structure to the frame during processing. If not saved elsewhere,
-		this tag will be deleted along with the frame.
-	Animation
-		Holds a list of Frames for a single tracked blob. Responsible for adding and removing frames for its blob
-	Recorder
-		Holds a list of animations, one for each tracked blob. Responsible for communicating with the parser
-		and analyser, passing data for each frame on to the correct Animation blob and giving requested 
-		Animations to the Analyser
-
-Analyser
-	Analyses a blob's animation to calculate speed, acceleration, shape, position, size and angle. 
-	Speed, acceleration, and shape will be determined by graphing each ones' properties against a large grid 
-	and comparing it to preset approximations of known movements. Position will be taken by splitting 
-	the camera area into a small grid and picking one cell as the movements position, biased towards 
-	the first and centre points in the movement. As all movements will be given in vector data, 
-	the movement will first be scaled during graphing to determined shape, and size will then be the amount
-	by which it had to be scaled. However, If a shape cannot be determined, size will be meaningless. 
-	Angle will also require that a shape is known, the shape will be rotated to fit it to known shapes 
-	and the closest match will determine the angle. i.e. a diamond shape would be picked before a square 
-	at 45 degrees.
-	Speed, acceleration, and shape will be found by comparing to predefined shapes, which will be described 
-	as a weight of the areas a shape would pass through. This weight will be in the range (0..1) where 1 are
-	areas that will be crossed, and 0 are areas that are not crossed. The movement is then rendered on top
-	of this using some rasterisation algorithm (Bresnham's for example) and the weight of the points crossed 
-	by the rasterisation will be totalled and divided by the number of points crossed giving a normal weight. 
-	(See shape.png; green is predetermined shape positions, red is recorded positions/vectors, and blue is 
-	the rasterisation of the movement. The green covered by blue calculates the weight that this movement 
-	makes this shape). The shape with a high enough normal weight will be picked and if several shapes are 
-	acceptable, the highest will be chosen. In addition to the weights, each predefined shape will also 
-	contain areas that must be crossed, the order they should be crossed, and the sides the area should be 
-	entered and exited. This will allow movements that don't complete a shape to be ignored, winding order 
-	to be determined, as well as differentiate between a movement that would follow an 8 shape or two 3's 
-	back to back. This method can also be used with speed or acceleration, plotted against time, and 
-	rendered on predetermined graphs, which could be used to determine the tempo, style, etc. i.e. same shape,
-	with different acceleration spikes could mean same melody, different rhythm, or something?
-	The analyser will be broken into the following classes
-	
-	Shape
-		Stores each predetermined shape. Given an animation, will return the weight of how close the movement
-		matches the shape along with angle and scale information if a match was found. A shape can contain 
-		speed and acceleration sub-shapes, which the closest match will also be retuned if a match was found. 
-		Each shape will specify whether its purpose is to match movements, speeds, or accelerations.
-	Shapes
-		Container of all known predetermined shapes. Given an animation, will return a list of shapes, 
-		ordered by closest match, along with its closest matching speed, acceleration sub-shapes. The list will
-		be limited to shapes that are matched within a given range. Analyser can use this information to 
-		decide not to use a high matching shape if it looks like a lower matching shape will be used in the future
-		that better suites the flow of the music… Is this making it too complicated? Need to put more thought into
-		this but it could also be set to watch speed and give a shape a little more weight if it looks like an
-		incomplete shape will become complete given a little more time. There will have to be something to
-		differentiate between a line shape and every other shape that is made up of lines, a way to determine when
-		a movement is complete[?]
-	Analyser
-		Gets the latest animation from the Recorder and passes it on to Shapes. If no shape is found, 
-		speed and acceleration tests will be done independent of shape. Final nearest matching shape will be 
-		passed on to Interpreter. When a shape has been determined, the point up to where the shape was matched
-		will be marked for deletion and everything before that point will be removed by the Recorder next time 
-		it runs
-
-Interpreter:
-	Composing music from the instrument given, keep a short histroy of shapes i.e the movement create some type of shape
-	The main goal for the interprter is converting the movement to sound(Don't know how to do this but still doing some
-	reasearch on this). At the moment it's too early to say exactly the way the interpreter will be broken into, there
-	is more experimental going on but as for now the interpreter is broken into the following classes.
-
-	RecorderSound:
-		This will record the different sound produced or generate the sound from the music compose.
-		Each sound produced or generated is store and can also repeat or replay the same music 
-		played previous.
-
-	Movement:
-		This class will work with the animation class which as already create a frame for each point for a
-		single movement.Here, the motion will response to the shape in general and not single movement.
-		This will allow each each point to come together and then create a general movement. 
+Recorder and Analyser[EB]
+	During initialisation Kinephon will call on the ShapeLoader, ShapeLoader will open a file containing all
+	the different gestures and load them in returning a Shapes collection. A gesture is a physical movement
+	made by the user, recorded by the WiiMotem and stored as an array of vectors in 2 dimensional space (a
+	gesture actually has a more general meaning, but this is described below). A Shapes collection has two
+	functions, hold an array of Shape objects and compare a single gesture against each shape to find near
+	matches. A Shape is made up a 2 dimensional array of 'weights' and an array of Zone objects. The 2
+	dimensional array of 'weights' describe a grid over the most likely areas which a gesture will travel to
+	make that shape. Each grid element will contain a real value between 0 and 1 and the gesture's vectors
+	will be rendered, after being scaled and possibly rotated, over this grid. The sum the weights of the
+	grid over which the renderer passed will be totaled and then divided by the number of grid elements
+	crossed giving a resultant weight of how closely the gesture matches the Shape. This means that gestures
+	that make partial matches, for example, a gesture of a line rendered on a Shape of a square, would return
+	a near match. To prevent this, the Zone objects describe areas of the Shape that must be crossed before a
+	match will be considered, as in the example, putting a Zone on each corner of the square would prevent a
+	line being matched. A Zone is made up of an enter and exit radius (how far the gesture's vertex must be
+	from the zone to be considered as having entered or exited), an enter and exit angle (the angle the
+	gesture's vector must enter or exit from), and an enter and exit arc (same as angle, but gives a range of
+	angles off the enter/exit angle). Only if the gesture enters the enter radius, angle and arc, and exits
+	the exit radius, angle and arc, or doesn't exit, is the zone considered as having been used. In general,
+	a gesture isn't just the 2 dimensional projected movement from the user, it is also the speed or
+	acceleration of a movement, plotted against time. To account for the different meanings of gesture, the
+	Shape class is inherited as three sub-classes, ShapeMovement, ShapeSpeed, and ShapeAccel. The purpose of
+	these classes is to extract the necessary information from the movement, and compare it against the
+	Shape, i.e. the ShapeSpeed class extracts the vectors length as the y co-ordinate of the movement, and
+	time as the x co-ordinate, and the Shape then renders that to compare the Shape. The ShapeMovement also
+	contains a ShapesCollection specifically for ShapeSpeed and ShapeAccel collections, which allow a
+	ShapeMovement to have different results based on the suddeness or sharpness of the movement, by having a
+	collection of different Speed and Accel Shapes.
+	After the Shapes have been loaded, a Recorder object is created and passed on to the Parser[DS]. The
+	Parser reads the data from the WiiMote's Connection[JD] and passes it on the Recorder in simple terms.
+	The Recorder captures this simple data, and stores it in a way that will be described below, but for now,
+	the result of storing this data will be the gesture. The Recorder is sub-classed from an interface
+	IParserRecorder, and this is what allows the Parser to talk to the Recorder. The IParserRecorder gives
+	the Parser two methods to communicate with the Recorder and these are Control and Record. Control allows
+	the Parser to give new state information to the Recorder such as 'Found new IR blob', or 'Connection with
+	WiiMote lost' allowing the Recorder to allocate or de-allocate storage as needed. The Record method allows
+	the Parser to tell the Recorder the positions of each IR blob individually using an IRID (IR blob
+	Identification). For each unique IRID, the Recorder holds a unique Track object, and within each Track,
+	for each Record call that the Parser makes, the Recorder stores the information in a Frame object, which
+	is stored in the Track. The Frame is just a data structure holding (x, y) co-ordinate of the IR blob, the
+	(x, y) vector to the next Frame (this information is only available when a next Frame is added), the size
+	of the IR blob, and the time the Frame was created. The time is calculated as the number of milliseconds
+	since the Kinephon program began. The Frame also handles adding new Frame objects by linking it to the
+	last in a linked-list. The Track is just a container for Frame objects (and from above, is a gesture that
+	can be matched against the Shapes) by holding a reference to the first Frame in the list, but also holds
+	the IRID, and a helper for accessing a Frame by index number and a count of frames. Due to the fact that
+	the Parser will be running asynchronously, so Frame objects will be created at non-deterministic times,
+	the Recorder will have two functions for dealing with the Tracks, these are Eject and Erase. Eject will
+	be a critical section that blocks the Parser and will create a copy of all the Track and Frame objects
+	and store then in a Recording object, which it will then return. Kinephon can work off this static
+	Recording while ignoring the fact that the Recorder may be receiving new Frame objects. A Recording is a
+	basic Recorder with no Eject or Erase functionality, just a holder for Tracks and their Frames. Erase
+	will be another critical section that blocks the Parser and will allow the caller (described below during
+	the main loop) to ask for frames to be deleted by a frame index. All Frames before and including this
+	frame index will be removed from the Recorder's Track.
+	After initialisation, the main loop will begin. The main loop will perform the following steps on the
+	Recorder and Analyser. First, it calls the Recorder's Eject to get a copy of the latest gesture's (Tracks
+	and Frames) made by each IR blob. Each gesture in turn is passed on to the Shapes object along with a
+	ShapeMatches object. The ShapeMatches is a container for keeping a list of shapes that matched and when
+	it's constructed, can be given a weight range and total that specifies the minimum weight that a gesture
+	must match a Shape and the maximum number of shapes that can be matched (if more shapes match, the list
+	is trimmed to the top 'total' amount). As the Shapes object compares the gesture against all the Shape
+	objects it contains, for each one that matches, it creates a ShapeMatch object and stores a reference to
+	the Shape, along with the weight of the match in it, the ShapeMatch is then added to the ShapeMatches,
+	which sorts and trims its current list. When the Shapes compare returns, ShapeMatches will then contain
+	this sorted list of Shape objects matched within the given weight range and this list is passed on to the
+	Interpreter[SA]. The Interpreter converts the matched shapes into the audio controls and passes them on
+	to Audio[ED]. The Audio generates and plays the music based on the audio controls. Once the Interpreter
+	has used a matched shape, it returns that information back so that that Shape's Frame index can be marked
+	for deletion. The Recorder is then asked to Erase those frames that have been used. If the Interpreter
+	does not use the data (it may not a good time to use it musically) it will not be deleted and will be
+	reprocessed next time the Recorder is asked to Eject.
 
 Synthesis [Eva]
 	The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
