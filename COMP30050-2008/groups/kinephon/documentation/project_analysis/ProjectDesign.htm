@@ -8,6 +8,7 @@
 		<table>
 			<tr><td>0.1</td><td>ED</td><td>First draft</td></tr>
 			<tr><td>0.2</td><td>EB</td><td>Added Recorder and Analyser</td></tr>
+			<tr><td>0.2</td><td>ED</td><td>Finished Sound Part</td></tr>
 		</table>
 	<h2>About</h2>
 		<table>
@@ -125,5 +126,125 @@
 	    deleted and will be reprocessed next time when the Recorder is asked to Eject.
     </p>
 
+ 	<h2>Sound Synthesis and Generation [ED]</h2>
+    <p>
+    	The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
+		abstraction between the high-level interface of the Conductor and the (relative) low-level interface of the
+		sound generation classes.
+	
+		MIDI messaging works with 'unsigned char', that is, every setting is encoded as a number.
+		To avoid using 'Magic Numbers' and ending up in a confusing lump of meaningless numbers, enumerated types 
+		will be used in the Synthesis and in the Sound Generation part of this project. E.g. there will be enumerated 
+		types for Chords, Middle Notes, Rhythms, Dynamics and Textures, so these will basically hide the numeric details
+		and only use the high-level musical representations. 
+	
+	<h3>MidiPlayer:</h3>
+		(Formerly this class was called AudioController; it was renamed for naming consistency.)
+		This class provides facilities to connect to available Midi ports and to play MIDI audio based on several 
+		dedicated channels, such as rhythm, chords and percussion channels. 
+		This class provides a middle level of abstraction, so it is kept intentionally technical. It is intended 
+		not to obscure the details of the Midi messaging mechanism.  
+		
+		The class currently has 4 dedicated channels: lead, accompaniment, chords, percussion. Each of them can 
+		be controlled individually, thus allowing for different configurations on each. With this approach
+		it is possible to play different instruments at once, at different volume levels and with different 
+		effects, which results in a more authentic music experience.
+		 
+		
+		<ul>
+		The main tasks of this class are:
+		<li> finding available MIDI output ports, including the ones that were opened by software synthesisers. 
+	 	  If more than one is available, the user is given a choice to pick one, subsequently establishing a connection.
+	 	<li> sending control MIDI messages to the correct channels; there are the following message formats:
+	 		<table>
+	 		<tr><td>* Channel Mode</td><td>
+	 		<tr><td>* Control Change</td><td>
+	 		<tr><td>* Program Change</td><td>
+	 		<tr><td>* System Exclusive</td><td>
+	 		</table>
+	 	<li> sending messages to play notes on the different channels (Note On MIDI messages). 
+	 	  Each channel is being controlled by a separate method.
+	 	<li> sending a generic Note On message. Although this method is redundant for controlling the 4 dedicated
+	 	  channels, this function is included for completeness. It may be desirable in future to send a message
+	 	  to a channel other than our four, since, theoratically MIDI supports 16 simultaneous channels.
+	 	<li> sending messages to release playing notes. This functionality is vital, since MIDI does not stop
+	 	  playing a note automatically. Whithout releasing notes, one would very quickly get an indistiguishable
+	 	  blur of noise.
+	 	  Releasing notes on the channels will also have to be done separately, since some notes should be played
+	 	  longer than others.
+	 	<li> remember configurations, such as last played notes. This is necessary for some MIDI messages, however the
+	 	  user should have to worry about these, so the class does this automatically.
+	 	<li> handling exceptions. These should not be propagated into the upper levels but caught and handled here.
+	 	  If initial connection to a MIDI port has failed, feedback in form of a boolean return variable will be
+	 	  given. Any following errors, like wrong messages formats, resulting in exceptions being thrown, will be
+	 	  caught, but ingnored. I.e. no backward feedback will be given, since none of these errors are critical
+	 	  for the working of the rest of the program.
+	 	</ul>  
+	 	The class can be easily extended if future development (of the sound part or the moevement analysis part of
+	 	the project) will require additional (specialized/dedicated) functions.
+	 	
+	<h3>Conductor:</h3>
+		The Conductor is wrapper class for the MidiPlayer providing a high-level musically oriented interface.
+		This class will be the interface between the Interpreter and the Sound Generation part of this project.
+		It is intended to hide all MIDI related details and only work with musical terminology. This will require
+		some basic understanding of how music works, however this class is intended to help the user by automating as
+		much as possible while still allowing for enough artistic freedom.
+		</p>
+		It works basically in two stages:
+		<table>
+		1.) Setting up the parts of the music piece. This is more or less equivalent to composing a music piece.
+			Methods are provided for specifying rhythms, dynamics, textures, chords and other effects as and when required. 
+			These will then call the correct function for the correct channels in the MidiPlayer class.
+			These settings can be carried out at any time, since they themselves do not result in any audible feedback,
+			they are only setting up attributes of the composition.
+		</p>
+		2.) Playing audio. This method will actually produce a sound. To satisfy the timing constraints of music,
+			this method relies upon being called in regular time intervals, e.g. every quarter of a note, or every eigth of
+			the note. How much time actually passes between the calls is irrelevant for the Conductor, since music also
+			only relies on the relative intervals. 
+	 	</table>
+
+		This class again can be arbitrarily extended as development of the project progresses. Some of the movement analysis
+		may require a specific effect on the music, so the structure of the class has been set up in a way that will easily
+		cater for any future demand. This is also one of the strength of the MIDI technology.
+    </p>
+    <h3>Channel:</h3>
+    <p>
+    	The Channel class is a Container class representing a single MIDI channel. It encapsulates the low-level details,
+    	i.e. the bit manipulations, of the MIDI messaging mechanism, as well as saving the current state of this channel.
+    	This information is important for some MIDI actions, such as releasing notes or determining matching chords or accompaniment.
+    	This class is supposed to be low-level, so it does not deal with exceptions, it only propagates them.
+    	
+    <h3>RtMidi</h3>
+    <p>
+    	This project makes use of the OpenSource RtMidi classes (©2003-2007 Gary P. Scavone, McGill University)
+    	RtMidiIn and RtMidiOut.
+    	They provide basic low-level functionality such as probing for ports and opening available ones, providing
+    	code for these services on the UNIX, Windows and Mac OS platforms.
+    	An RtError class provides the appropriate exception handling, thus providing a solid basis.
+    </p>
+    
+    <h3>MidiRecorder:</h3>
+    <p>
+    	This class will write the audio output produced into a MIDI file.
+    	It will not be accessible directly from the user, but will be managed from the MidiPlayer class, since this
+    	class will also have all the information that will need to be recorded.
+    	MIDI files consist of a MThd header chunk that identifies the type of file as a MIDI file and specifies
+    	its format.
+    	MIDI files are build up of separate tracks which are being written to the file successively. This means that
+    	the MidiRecorder class will need buffer for each separate track, in out case we will probably have one track for each
+    	one of the channels used by the MidiPlayer class. Only after the music piece is completed the data from these buffer
+    	will be written to the file.
+    	The actual part of writing to file may turn out to be platform dependent. The first aim will be to enable this feature
+    	for the LINUX system, and only after that for the Windows platform as well. 
+    </p>
+    
+   <b>Note:</b> Normal PC computers do not have hardware MIDI support. Hence we are forced to use Software Synthesizer fro this project.
+   For the LINUX platform the development is currently using the command line synthesizer 'fluidsynth' with the soundfont PC51f.sf2.
+   These settings may change, however the choice of synthesizers does not influence the music piece as such, only the particular
+   quality of the sound. That is, the acoustic grand piano will sound slightly differently on each synthesizer.
+   As for the Windows platform, it has a MIDI synthesizer build in; the SW-Synthesizer. Currently, it seems to be suitable for this project.
+    
+ 
 </body>
 </html>
