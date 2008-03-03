@@ -23,19 +23,34 @@ int main(){
 	Conductor audio;
 	if(!audio.initialize())
     	exit( EXIT_FAILURE ); 
+   
+    vector<uchar> melody(30);
+    melody[0] = 76; melody[1] = 60;
+    melody[2] = 75; melody[3] = 60;
+    melody[4] = 76; melody[5] = 60;
+    melody[6] = 75; melody[7] = 60;
+    melody[8] = 76; melody[9] = 60;
+    melody[10] = 71; melody[11] = 60;
+    melody[12] = 74; melody[13] = 60;
+    melody[14] = 72; melody[15] = 60;
+    melody[16] = 69; melody[17] = 127;
     
-    vector<uchar> melody;
-    melody.push_back(60);
-    melody.push_back(61);
-    melody.push_back(62);
-    melody.push_back(63);
-    audio.setMelody(&melody);
+    melody[18] = 33; melody[19] = 60;
+    melody[20] = 40; melody[21] = 60;
+    melody[22] = 45; melody[23] = 60;
+    melody[24] = 60; melody[25] = 60;
+    melody[26] = 64; melody[27] = 60;
+    melody[28] = 69; melody[29] = 60;
+    
+    
+    audio.setMelody(melody);
     int i = 0;
-    while(i < 8){
+    while(i < 30){
     	audio.play();	
-    	SLEEP(500);
+    	SLEEP(200);
     	i++;
     }	
     audio.pressPanicButton();
+   
 	return 0;
 }

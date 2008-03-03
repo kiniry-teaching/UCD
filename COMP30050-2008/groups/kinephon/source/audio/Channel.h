@@ -85,12 +85,18 @@ public:
 	void play(uchar note, uchar velocity, int octave);
 	
 	/**
-	 * Sends a Note Off message.
+	 * Sends a Note Off message for the last played pitch.
 	 * @throws RtError if anything went wrong  
 	 */
 	void release();
 	
-	
+	/**
+     * Sends a Note Off message for a specific pitch.
+     * This method is necessary to cater for chords, since we have 3 simultaneous
+     * pitches there.
+     * @throws RtError if anything went wrong  
+     */
+    void release(uchar pitch);
 	
 		
 	
@@ -99,7 +105,7 @@ private:
 	uchar programNo_;
 	uchar octaveNo_;
 	uchar note_[2];			  //note and velocity of last played
-	vector<uchar> controls_; 
+	uchar controls_[93]; 
 	RtMidiOut* midiout_;
 	
 	

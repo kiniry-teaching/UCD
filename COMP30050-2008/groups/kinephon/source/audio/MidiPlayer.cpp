@@ -3,17 +3,25 @@
 
 MidiPlayer::MidiPlayer():
 	midiout_(NULL),
+    chords_(3),
 	isConnected_(false),
-	leadChannel_(NULL)
+	leadChannel_(NULL),
+	chordChannel_(NULL),
+	accompanyChannel_(NULL),
+	percussionChannel_(NULL)
 {}
 
-MidiPlayer::~MidiPlayer()
-{
+//delete all dynamic data structures
+MidiPlayer::~MidiPlayer() {
 	delete midiout_;
+    delete leadChannel_;
+    delete chordChannel_;
+    delete accompanyChannel_;
+    delete percussionChannel_;
 }
 
-//TODO: initialize all channels
-bool MidiPlayer::initialize(){
+
+bool MidiPlayer::initialize() {
 	// RtMidiOut constructor
 	midiout_ = new RtMidiOut();
   	
@@ -21,111 +29,177 @@ bool MidiPlayer::initialize(){
   	cout << "\nWould you like to open a virtual output port? [y/N] ";
 
   	string keyHit;
-  	getline( cin, keyHit );
-  	if ( keyHit == "y" ) {
-  		try{
+  	getline(cin, keyHit);
+  	if (keyHit == "y") {
+  		try {
     		midiout_->openVirtualPort();
   		}
-    	catch ( RtError &error ) {
+    	catch (RtError &error) {
     		isConnected_ = false;	
     	}
     	isConnected_ = true;
-  	}else{
+  	}
+    else {
 		string portName;
   		unsigned int i = 0, nPorts = midiout_->getPortCount();
-  		if ( nPorts == 0 ) {
+  		if (nPorts == 0) {
   			isConnected_ = false;
    		}
-		if ( nPorts == 1 ) {
+		if (nPorts == 1) {
     		cout << "\nOpening " << midiout_->getPortName() << endl;
     		isConnected_ = true;
   		}
   		else {
-    		for ( i=0; i<nPorts; i++ ) {
+    		for (i=0; i<nPorts; i++) {
       			portName = midiout_->getPortName(i);
       			cout << "  Output port #" << i << ": " << portName << '\n';
     		}
     		do {
       			cout << "\nChoose a port number: ";
       			cin >> i;
-    		} while ( i >= nPorts );
+    		} while (i >= nPorts);
   		}
   	  	cout << "\n";
-  		midiout_->openPort( i );
+  		midiout_->openPort(i);
   		isConnected_ = true;
   	}
   	if(isConnected_){
-  		leadChannel_ = new Channel(midiout_, 0);
-  		return true;
+        try{//sending messages, so catch expections
+  		    leadChannel_ = new Channel(midiout_, 0);
+            accompanyChannel_ = new Channel(midiout_, 1);
+            chordChannel_ = new Channel(midiout_, 2);
+            percussionChannel_ = new Channel(midiout_, 9);
+            //TODO: check the percussion channel 
+  		    return true;
+        }
+        catch (RtError &error) {
+            return false;
+        }
   	}
-  	else{
+  	else {
   		return false;
   	}
 }
 
 //release all notes
-void MidiPlayer::panic(){
-	if(isConnected_){
-		leadChannel_ -> release();
+void MidiPlayer::panic() {
+	if(isConnected_) {
+        try {
+		  leadChannel_->release();
+          accompanyChannel_->release();
+        }
+        catch (RtError &error) {}
 	}
 }
 
-bool MidiPlayer::setRecording(bool setOn){}
-	
-void MidiPlayer::sendSysEx(int message, int value){}
-	
-void MidiPlayer::sendChannelMode(uchar mode ){}
-	
-void MidiPlayer::sendControlChange(uchar channel, uchar function, uchar value){
-	if(isConnected_){
-		leadChannel_ -> setControl( function, value );
+//release chords
+void MidiPlayer::panicChords() {
+    if(isConnected_) {
+        try {
+          chordChannel_->release(chords_[0]);
+          chordChannel_->release(chords_[1]);
+          chordChannel_->release(chords_[2]);
+        }
+        catch (RtError &error) {}
+    }   
+}
 
-	}
+bool MidiPlayer::setRecording(bool setOn) {
+	return false;
 }
 	
-void MidiPlayer::sendProgramChange(uchar channel, uchar program){
-	if(isConnected_){
-		leadChannel_ -> setProgram( program );
-	}
+//TODO: find out what this does
+void MidiPlayer::sendSysEx(int message, int value) {}
+	
+//TODO: find out which ones we will use
+void MidiPlayer::sendChannelMode(uchar mode ) {}
+	
+void MidiPlayer::sendControlChange(uchar channel, uchar function, uchar value) {
+	if (isConnected_) {
+        try {
+		  if (channel == CHANNEL_LEAD)
+		      leadChannel_->setControl(function, value);
+		  else if(channel == CHANNEL_ACCOMPANY)
+		      accompanyChannel_->setControl(function, value);
+		  else if(channel == CHANNEL_CHORD)
+		      chordChannel_->setControl(function, value);
+		  else if(channel == CHANNEL_PERCUSSION)
+		      percussionChannel_->setControl(function, value);	
+        }
+        catch (RtError &error) {}	   
+    }
 }
 	
-void MidiPlayer::playLead(uchar pitch, uchar velocity){}
-	
-void MidiPlayer::playAccompaniment(uchar pitch, uchar velocity){}
-	
-void MidiPlayer::playChord(uchar chord, uchar velocity){}
-	
-void MidiPlayer::playPercussion(uchar pitch, uchar velocity){}
-
-void MidiPlayer::playNote(Channels channel, uchar pitch, uchar velocity){
-	if(isConnected_){
-		
-			leadChannel_ -> play( pitch, velocity, 0 );
-		
-	}
+void MidiPlayer::sendProgramChange(uchar channel, uchar program) {
+	if (isConnected_) {
+        try {
+            if (channel == CHANNEL_LEAD)
+                leadChannel_->setProgram(program);
+            else if(channel == CHANNEL_ACCOMPANY)
+                accompanyChannel_->setProgram(program);
+            else if(channel == CHANNEL_CHORD){
+                cout << "set chord channel \n";
+                chordChannel_->setProgram(program);
+            }
+            else if(channel == CHANNEL_PERCUSSION)
+                percussionChannel_->setProgram(program);  
+        }
+        catch (RtError &error) {}
+    }
 }
 	
-void MidiPlayer::otherOptions(){}
-	
-
-	
-
-
-/*
-void MidiPlayer::Input(int tune){
-	PlayNote(true, MIDDLE_F, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_F, 60);
-	PlayNote(true, MIDDLE_G, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_G, 60);
-	PlayNote(true, MIDDLE_A, 127);SLEEP( 700 );PlayNote(false, MIDDLE_A, 60);
-	PlayNote(true, MIDDLE_A, 60);SLEEP ( 150 );PlayNote(false, MIDDLE_A, 60);
-	PlayNote(true, MIDDLE_G, 60);SLEEP ( 150 );PlayNote(false, MIDDLE_G, 60);
-	PlayNote(true, MIDDLE_F, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_F, 60);
-	PlayNote(true, MIDDLE_G, 127);SLEEP ( 700 );PlayNote(false, MIDDLE_G, 60);
-	PlayNote(true, MIDDLE_A, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_A, 60);
-	PlayNote(true, MIDDLE_G, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_G, 60);
-	PlayNote(true, MIDDLE_F, 127);SLEEP ( 700 );PlayNote(false, MIDDLE_F, 60);
-	PlayNote(true, MIDDLE_A, 60);SLEEP ( 300 );PlayNote(false, MIDDLE_A, 60);
-	PlayNote(true, 72, 60);SLEEP ( 300 );PlayNote(false, 72, 60);
-	PlayNote(true, 74, 127);SLEEP ( 700 );PlayNote(false, 74, 60);
-
+//TODO: figure out what to do with the octave
+void MidiPlayer::playLead(uchar pitch, uchar velocity) {
+    if(isConnected_) 
+        try {
+            leadChannel_->play(pitch, velocity, 0);
+        }
+        catch (RtError &error) {}
 }
-*/
+	
+void MidiPlayer::playAccompaniment(uchar pitch, uchar velocity) {
+    if(isConnected_)
+        try {
+            accompanyChannel_->play(pitch, velocity, 0);
+        }
+        catch (RtError &error) {}
+}
+	
+void MidiPlayer::playChord(uchar chord, uchar velocity) {
+    if(isConnected_)
+        try {
+            chordChannel_->play(chord, velocity, 0);
+            chords_[0] = chord;
+            chordChannel_->play(chord + 4, velocity, 0);
+            chords_[1] = chord + 4;
+            chordChannel_->play(chord + 7, velocity, 0);
+            chords_[2] = chord + 7;
+        }
+        catch (RtError &error) {}
+}
+	
+void MidiPlayer::playPercussion(uchar pitch, uchar velocity) {
+    if(isConnected_)
+        try {
+            percussionChannel_->play(pitch, velocity, 0);
+        }
+        catch (RtError &error) {}
+}
+
+void MidiPlayer::playNote(Channels channel, uchar pitch, uchar velocity) {
+    if (isConnected_) {
+        try {
+            if (channel == CHANNEL_LEAD)
+                leadChannel_->play(pitch, velocity, 0);
+            else if(channel == CHANNEL_ACCOMPANY)
+                accompanyChannel_->play(pitch, velocity, 0);
+            else if(channel == CHANNEL_CHORD)
+                chordChannel_->play(pitch, velocity, 0);
+            else if(channel == CHANNEL_PERCUSSION)
+                percussionChannel_->play(pitch, velocity, 0);  
+        }
+        catch (RtError &error) {}
+    }
+}
+	
+void MidiPlayer::otherOptions() {}

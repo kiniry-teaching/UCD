@@ -47,11 +47,20 @@ public:
 	bool initialize();
 	
 	/**
-	 * Releases all notes.
-	 * This is a quick fix function, if one wants to switch everything off.
-	 * ( Optionally, if need be, we can change this to restore defaults. )
-	 */
+	 * Releases all notes except for the chords.
+	 * This function needs to be called before new notes are played, 
+     * otherwise they will just melt together in one big blur.
+     */
 	void panic();
+
+    /**
+     * Releases all notes played by the previous chord.
+     * It should be possible to release chords independently from the melody accompaniment. 
+     * They have to be released however regularly, or the result will be an
+     * indistinguishable blur.
+     */
+    void panicChords();
+    
 	
 	/**
 	 * Set if music piece is to be recorded
@@ -186,7 +195,7 @@ public:
 	
 private:
 	RtMidiOut* midiout_;
-	vector<Channel> channels_;	
+	vector<uchar> chords_;	
 	bool isConnected_;
 	Channel* leadChannel_;
 	Channel* chordChannel_;

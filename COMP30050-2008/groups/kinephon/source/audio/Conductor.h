@@ -228,10 +228,12 @@ public:
 	 * The format of the vector data is to be as follows:
 	 * each note consists of a pitch and a velocity value
 	 * e.g.: 60, 60, 61, 127, 60, 60
-	 * will play 3 notes, of which the middle one is 'more forceful' and one note higher. 
+	 * will play 3 notes, of which the middle one is 'more forceful' and one note higher.
+	 * The passed vector has to have an EVEN size.
+	 * This format my change later to allow for more complicated melodies. 
 	 * @param melody vector with pitches, if NULL then this option is set OFF
 	 */
-	void setMelody(vector<uchar>* melody); 
+	void setMelody(vector<uchar> melody); 
 	
 	/**
 	 * Sets pedalling on/off.
@@ -280,8 +282,9 @@ public:
 private:
 	MidiPlayer *midi_;		//midi output
 	int timeStep_;
+	int melodyStep_;
 	
-	vector<uchar>* melody_;
+	vector<uchar> melody_;
 	bool hasAccompaniment_;
 	bool hasChords_;
 	bool hasRhythm_;
@@ -293,6 +296,5 @@ private:
 	Chords chords_;
 	Dynamics dynamics_;
 	Texture texture_;
-	
 };
 #endif /*CONDUCTOR_H_*/
