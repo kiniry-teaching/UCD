@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     17-Oct-2005 10:34:01                                                        
+
+     Construct build file
+     This file contains all the tasks to build, run, and create the construct distribution.
+                   
+     Mark Sullivan
+     Graeme Stevenson (28/02/07)                                                          
+     ====================================================================== -->
+<project name="construct" default="compile" basedir=".">
+	<property name="classes" location="bin" />
+	<property name="archive" location="archive" />
+	<property name="source" location="src" />
+	<property name="docs" location="docs" />	
+	<property name="librarys" location="lib" />
+	<property name="dist" location="distribution" />
+	<property name="version.num" value="0.74"/>
+
+	<description>
+            description
+    </description>
+
+	<!-- ================================= 
+          target: compile
+          compiles the construct code              
+    ================================= -->
+	<target name="compile" depends="init" description="Compiles Construct">
+		<javac srcdir="${source}" destdir="${classes}" source="1.5" target="1.5" debug="on">
+			<classpath> 
+				<fileset dir="lib">
+					<include name="**${file.separator}*.jar"/>
+				</fileset>
+				<dirset dir="${classes}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- ================================= 
+		target: clean 
+		removes the bin, archive, and distribution directories             
+	================================= -->
+	<target name="clean">
+		<delete dir="${classes}" />
+		<delete dir="${archive}" />
+		<delete dir="${dist}" />
+		<delete dir="${docs}" />
+	</target>
+	
+	
+	<!-- ================================= 
+		target: init
+		creates the bin directory              
+	================================= -->
+	<target name="init" depends="clean">
+		<mkdir dir="${classes}" />
+	</target>
+
+	<!-- ================================= 
+		target: archive-bin
+		creates a jar containing the construct class files              
+	================================= -->
+	<target name="archive-bin" depends="compile">
+		<tstamp />
+		<antcall target="archive_condition"/>
+		<jar destfile="${archive}${file.separator}construct.jar" basedir="${classes}" >
+		</jar>
+	</target>
+	
+	
+	<!-- ================================= 
+		target: archive-src  
+		creates a zip containing the construct source code            
+	================================= -->
+	<target name="archive-src" depends="compile">
+		<tstamp />
+		<antcall target="archive_condition"/>
+		<zip destfile="${archive}${file.separator}construct${version.num}-src.zip" basedir="${source}" />
+	</target>
+	
+	
+	<!-- ================================= 
+		target: archive-all
+		a meta-target to create the src and binary jars and zips              
+	================================= -->
+	<target name="archive-all" depends="archive-bin, archive-src">
+	</target>
+	
+	<!-- ================================= 
+		target: archive_condition
+		creates the archive directory if not present              
+	================================= -->
+	<target name="archive_condition">
+		<condition property="condition">
+			<available type="dir" file="${archive}" />
+		</condition>
+		<antcall target="archive_condition_then" />
+		<antcall target="archive_condition_else" />
+	</target>
+	<target name="archive_condition_then" if="condition">
+		<echo>Archive directory exists</echo>
+	</target>
+	<target name="archive_condition_else" unless="condition">
+		<mkdir dir="${archive}" />
+		<echo>Archive directory created</echo>
+	</target>
+	
+		
+	<!-- ================================= 
+		target: create-construct-dist
+		creates the construct distibution              
+	================================= -->
+	<target name="create-construct-dist" depends="archive-bin, archive-src, javadoc">
+		<tstamp />
+		<antcall target="dist-dir-condition"/>
+		<copy todir="${dist}/construct/construct">
+		  <fileset dir=".">
+		  	<include name="datastore"/>
+		  	<include name="docs${file.separator}**"/>
+		  	<include name="lib${file.separator}**"/>
+		  	<include name="ontologies${file.separator}**"/>
+		  	<include name="logs"/>
+		  	<include name="python${file.separator}**"/>
+		  	<include name="ruby${file.separator}**"/>
+		  	<include name="construct.properties"/>
+		  	<include name="LIB_COPYRIGHT.html"/>
+		  	<include name="COPYRIGHT.txt"/>
+		  	<include name="CHANGELOG.txt"/>
+		  	<include name="README-WIN.txt"/>
+		  	<include name="README-NIX.txt"/>
+		  	<include name="SETUPGUIDE.txt"/>
+		  	<include name="construct.bat"/>
+		  	<include name="constructNoGUI.bat"/>
+		  	<include name="construct.sh"/>
+		  	<include name="constructNoGUI.sh"/>
+		  </fileset>
+		</copy>
+	
+	  <copy todir="${dist}${file.separator}construct${file.separator}construct">
+	    <fileset dir="${archive}">
+	      <include name="construct*"/>
+	    </fileset>
+	  </copy>
+		
+	</target>
+	
+	<!-- ================================= 
+		target: dist
+		zips the constuct and proxy disributions
+	================================= -->
+	<target name="dist" depends="create-construct-dist">
+	<zip destfile="${dist}${file.separator}construct${version.num}.zip" basedir="${dist}${file.separator}construct" />
+	</target>	
+	
+	
+	<!-- ================================= 
+		target: dist-clean
+		creates the distribution and cleans the unnecessary files
+	================================= -->
+	<target name="dist-clean" depends="dist">
+		<delete dir="${classes}" />
+		<delete dir="${archive}" />
+		<delete dir="${dist}${file.separator}construct" />
+	</target>	
+	
+	
+	
+	<!-- ================================= 
+		target: dist-dir-condition        
+		creates the distribution directory if not present      
+	================================= -->
+	<target name="dist-dir-condition">
+		<condition property="dist_dir_condition">
+			<available type="dir" file="${dist}" />
+		</condition>
+		<antcall target="dist_dir_condition_then" />
+		<antcall target="dist_dir_condition_else" />
+	</target>
+	<target name="dist_dir_condition_then" if="dist_dir_condition">
+		<echo>Distribution directory exists</echo>
+	</target>
+	<target name="dist_dir_condition_else" unless="dist_dir_condition">
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}${file.separator}construct" />
+		<mkdir dir="${dist}${file.separator}construct${file.separator}construct" />
+		<echo>Distribution directory created</echo>
+	</target>	
+
+	<!-- ================================= 
+		target: docs-dir-condition        
+		creates the docs directory if not present      
+	================================= -->
+	<target name="docs-dir-condition">
+		<condition property="doc_dir_condition">
+			<available type="dir" file="${docs}" />
+		</condition>
+		<antcall target="docs_dir_condition_then" />
+		<antcall target="docs_dir_condition_else" />
+	</target>
+	<target name="docs_dir_condition_then" if="docs_dir_condition">
+		<echo>Docs directory exists</echo>
+	</target>
+	<target name="docs_dir_condition_else" unless="docs_dir_condition">
+		<mkdir dir="${docs}" />
+		<echo>Docs directory created</echo>
+	</target>	
+	
+	
+	<!-- ================================= 
+		target: javadoc        
+		creates the javadoc for the construct distribution
+	================================= -->		
+	<target name="javadoc" depends="docs-dir-condition">
+	  <javadoc packagenames="org.construct_infrastructure.*"
+	           sourcepath="${source}"
+	           defaultexcludes="yes"
+	           destdir="${docs}"
+	           author="true"
+	           version="true"
+	           use="true"
+	           windowtitle="Construct API">
+		<classpath> 
+			<fileset dir="lib">
+				<include name="**${file.separator}*.jar"/>
+			</fileset>
+	  	</classpath>
+	    <doctitle><![CDATA[<h1>Construct</h1>]]></doctitle>
+	    <bottom><![CDATA[<i>Copyright &#169; 2006, 2007 Systems Research Group, University College Dublin. All Rights Reserved.</i>]]></bottom>
+	    <group title="Construct Packages" packages="org.construct_infrastructure.*"/>
+	    <link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+	  	<link href="http://jena.sourceforge.net/javadoc/"/>
+	  </javadoc>
+	</target>
+</project>
+
+
