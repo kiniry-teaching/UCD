@@ -65,35 +65,37 @@ Parser
 	 reading of the data
 
 Recorder and Analyser[EB]
-	During initialisation Kinephon will call on the ShapeLoader, ShapeLoader will open a file containing all
-	the different gestures and load them in returning a Shapes collection. A gesture is a physical movement
-	made by the user, recorded by the WiiMotem and stored as an array of vectors in 2 dimensional space (a
+	During initialisation, Kinephon will call on the ShapeLoader. ShapeLoader will open a file containing all
+	the different gestures and load them in, returning a Shapes collection. A gesture is a physical movement
+	made by the user, recorded by the WiiMote, and stored as an array of vectors in 2 dimensional space (a
 	gesture actually has a more general meaning, but this is described below). A Shapes collection has two
-	functions, hold an array of Shape objects and compare a single gesture against each shape to find near
-	matches. A Shape is made up a 2 dimensional array of 'weights' and an array of Zone objects. The 2
-	dimensional array of 'weights' describe a grid over the most likely areas which a gesture will travel to
-	make that shape. Each grid element will contain a real value between 0 and 1 and the gesture's vectors
-	will be rendered, after being scaled and possibly rotated, over this grid. The sum the weights of the
-	grid over which the renderer passed will be totaled and then divided by the number of grid elements
+	functions; hold an array of Shape objects, and compare a single gesture against each shape to find near
+	matches. A Shape is made up a 2 dimensional array of 'weights' and an array of Zone objects, and an SID,
+	a Shape	id. The 2 dimensional array of 'weights' describe a grid over the most likely areas which a gesture
+	will travel to make that shape. Each grid element will contain a real between 0 and 1 and the gesture's
+	vectors will be rendered (after being scaled and possibly rotated) over this grid. The sum the weights of
+	the grid over which the renderer passes will be totalled and then divided by the number of grid elements
 	crossed giving a resultant weight of how closely the gesture matches the Shape. This means that gestures
 	that make partial matches, for example, a gesture of a line rendered on a Shape of a square, would return
 	a near match. To prevent this, the Zone objects describe areas of the Shape that must be crossed before a
-	match will be considered, as in the example, putting a Zone on each corner of the square would prevent a
+	match will be considered - as in the example, putting a Zone on each corner of the square would prevent a
 	line being matched. A Zone is made up of an enter and exit radius (how far the gesture's vertex must be
 	from the zone to be considered as having entered or exited), an enter and exit angle (the angle the
 	gesture's vector must enter or exit from), and an enter and exit arc (same as angle, but gives a range of
 	angles off the enter/exit angle). Only if the gesture enters the enter radius, angle and arc, and exits
 	the exit radius, angle and arc, or doesn't exit, is the zone considered as having been used. In general,
 	a gesture isn't just the 2 dimensional projected movement from the user, it is also the speed or
-	acceleration of a movement, plotted against time. To account for the different meanings of gesture, the
+	acceleration of a movement, plotted against time. The gesture is generalised further in the
+	Interpreter[SA] but this is not described here. To account for the different meanings of gesture, the
 	Shape class is inherited as three sub-classes, ShapeMovement, ShapeSpeed, and ShapeAccel. The purpose of
 	these classes is to extract the necessary information from the movement, and compare it against the
-	Shape, i.e. the ShapeSpeed class extracts the vectors length as the y co-ordinate of the movement, and
+	Shape, i.e. the ShapeSpeed class extracts the vector's length as the y co-ordinate of the movement, and
 	time as the x co-ordinate, and the Shape then renders that to compare the Shape. The ShapeMovement also
-	contains a ShapesCollection specifically for ShapeSpeed and ShapeAccel collections, which allow a
+	contains a Shapes collection specifically for ShapeSpeed and ShapeAccel collections, which allow a
 	ShapeMovement to have different results based on the suddeness or sharpness of the movement, by having a
-	collection of different Speed and Accel Shapes.
-	After the Shapes have been loaded, a Recorder object is created and passed on to the Parser[DS]. The
+	collection of different Speed and Accel Shapes. Different shapes (whether they are movement, speed, or
+	acceleration, and ultimately identified by the SID.
+	After the shapes have been loaded, a Recorder object is created and passed on to the Parser[DS]. The
 	Parser reads the data from the WiiMote's Connection[JD] and passes it on the Recorder in simple terms.
 	The Recorder captures this simple data, and stores it in a way that will be described below, but for now,
 	the result of storing this data will be the gesture. The Recorder is sub-classed from an interface
@@ -102,16 +104,16 @@ Recorder and Analyser[EB]
 	the Parser to give new state information to the Recorder such as 'Found new IR blob', or 'Connection with
 	WiiMote lost' allowing the Recorder to allocate or de-allocate storage as needed. The Record method allows
 	the Parser to tell the Recorder the positions of each IR blob individually using an IRID (IR blob
-	Identification). For each unique IRID, the Recorder holds a unique Track object, and within each Track,
-	for each Record call that the Parser makes, the Recorder stores the information in a Frame object, which
-	is stored in the Track. The Frame is just a data structure holding (x, y) co-ordinate of the IR blob, the
+	Identification). For each unique IRID, the Recorder holds a unique Track object, and within each Track
+	(for each Record call that the Parser makes) the Recorder stores the information in a Frame object, which
+	is stored in the Track. The Frame is just a data structure holding an (x, y) co-ordinate of the IR blob, the
 	(x, y) vector to the next Frame (this information is only available when a next Frame is added), the size
 	of the IR blob, and the time the Frame was created. The time is calculated as the number of milliseconds
 	since the Kinephon program began. The Frame also handles adding new Frame objects by linking it to the
-	last in a linked-list. The Track is just a container for Frame objects (and from above, is a gesture that
+	last in a linked-list. The Track is just a container for Frame objects (or abstractly, is the gesture that
 	can be matched against the Shapes) by holding a reference to the first Frame in the list, but also holds
-	the IRID, and a helper for accessing a Frame by index number and a count of frames. Due to the fact that
-	the Parser will be running asynchronously, so Frame objects will be created at non-deterministic times,
+	the IRID, a helper for accessing a Frame by index number, and a count of frames. Due to the fact that
+	the Parser will be running asynchronously (i.e. Frame objects will be created at non-deterministic times)
 	the Recorder will have two functions for dealing with the Tracks, these are Eject and Erase. Eject will
 	be a critical section that blocks the Parser and will create a copy of all the Track and Frame objects
 	and store then in a Recording object, which it will then return. Kinephon can work off this static
@@ -121,22 +123,24 @@ Recorder and Analyser[EB]
 	the main loop) to ask for frames to be deleted by a frame index. All Frames before and including this
 	frame index will be removed from the Recorder's Track.
 	After initialisation, the main loop will begin. The main loop will perform the following steps on the
-	Recorder and Analyser. First, it calls the Recorder's Eject to get a copy of the latest gesture's (Tracks
-	and Frames) made by each IR blob. Each gesture in turn is passed on to the Shapes object along with a
-	ShapeMatches object. The ShapeMatches is a container for keeping a list of shapes that matched and when
-	it's constructed, can be given a weight range and total that specifies the minimum weight that a gesture
-	must match a Shape and the maximum number of shapes that can be matched (if more shapes match, the list
-	is trimmed to the top 'total' amount). As the Shapes object compares the gesture against all the Shape
-	objects it contains, for each one that matches, it creates a ShapeMatch object and stores a reference to
-	the Shape, along with the weight of the match in it, the ShapeMatch is then added to the ShapeMatches,
-	which sorts and trims its current list. When the Shapes compare returns, ShapeMatches will then contain
-	this sorted list of Shape objects matched within the given weight range and this list is passed on to the
-	Interpreter[SA]. The Interpreter converts the matched shapes into the audio controls and passes them on
-	to Audio[ED]. The Audio generates and plays the music based on the audio controls. Once the Interpreter
-	has used a matched shape, it returns that information back so that that Shape's Frame index can be marked
-	for deletion. The Recorder is then asked to Erase those frames that have been used. If the Interpreter
-	does not use the data (it may not a good time to use it musically) it will not be deleted and will be
-	reprocessed next time the Recorder is asked to Eject.
+	Recorder and Analyser. First, it calls the Recorder's Eject to get a copy of the latest gestures (Tracks
+	and Frames) made by each IR blob. Then each gesture in turn is passed on to the Shapes object along with
+	a ShapeMatches object. The ShapeMatches is a container for keeping a list of Shape objects that matched.
+	When it is constructed, the ShapeMatches can be given a 'weight range' and 'total' that specifies the
+	minimum weight that a gesture must match a Shape by, and the maximum number of shapes that can be matched
+	(if more shapes match, the list is trimmed to the best matched 'total' amount). As the Shapes object compares
+	the gesture against all the Shape objects it contains, for each one that matches, it creates a ShapeMatch
+	object and stores a reference to the Shape, along with the weight of the match, in this. The ShapeMatch is
+	then added to the ShapeMatches, which sorts and trims its current list. When the Shapes's compare returns,
+	ShapeMatches will then contain this sorted list of Shape objects matched within the given weight range and
+	this list is passed on to the Interpreter[SA]. The Interpreter converts the matched shapes into the audio
+	controls and passes them on to Audio[ED]. The Audio generates and plays the music based on the audio
+	controls. If no Shape matches were made, the gesture is still passed on to Interpreter so that the
+	Interpreter can try to calculate the flow of the gesture, rather than a specific shape. Once the Interpreter
+	has used a gesture, either specifically or generally, it returns that information back so that that Frame
+	index can be marked for deletion. The Recorder is then asked to Erase those frames that have been used. If
+	the Interpreter does not use the gesture (it may not a good time to use it musically) it will not be
+	deleted and will be reprocessed next time when the Recorder is asked to Eject.
 
 Synthesis [Eva]
 	The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
