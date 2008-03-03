@@ -6,10 +6,11 @@
 	h1	{ font-size: 150%; }
 	h2	{ font-size: 120%; background-color: #eee; }
 	h3	{ font-size: 100%; font-style: italic; }
+	h4	{ font-size: 100%; text-decoration: underline; font-weight: normal; }
 	p	{ text-indent: -1em; margin-left: 2em; text-align: justify; justify: newspaper; }
-	.cl	{ color: #00a; }
-	.fn	{ color: #a00; }
-	.kw	{ color: #0a0; }
+	.cl	{ color: #448; }
+	.fn	{ color: #844; }
+	.kw	{ color: #484; }
 	-->
 	</style>
 </head>
@@ -25,11 +26,11 @@
 		<table>
 			<tr><td><b>Title:</b></td><td>Kinephon</td><td></td></tr>
 			<tr><td><b>Team:</b></td><td>Intuitive Aptitudes</td><td></td></tr>
-			<tr><td><b>Members:</b></td><td>Eva Darulova</td><td>05817625</td></tr>
-			<tr><td></td><td>Sumbo Ajisafe</td><td>05005451</td></tr>
-			<tr><td></td><td>David Swords</td><td>05477689</td></tr>
-			<tr><td></td><td>Eliott Bartley</td><td>05806500</td></tr>
-			<tr><td></td><td>Jakub Dostal</td><td>05844151</td></tr>
+			<tr><td><b>Members:</b></td><td>Eva Darulova</td><td>ED</td><td>05817625</td></tr>
+			<tr><td></td><td>Sumbo Ajisafe</td><td>SA</td><td>05005451</td></tr>
+			<tr><td></td><td>David Swords</td><td>DS</td><td>05477689</td></tr>
+			<tr><td></td><td>Eliott Bartley</td><td>EB</td><td>05806500</td></tr>
+			<tr><td></td><td>Jakub Dostal</td><td>JD</td><td>05844151</td></tr>
 		</table>
 	<h2>Installer</h2>
 	<p>
@@ -54,6 +55,50 @@
 	<p>...</p>
 
     <h2>Recorder and Analyser [EB]</h2>
+    <h3>Information</h3>
+    <h4>Inputs:</h4>
+    <p>All inputs will be from <span class="cl">Parser</span> [DS]</p>
+    <ul>
+    <li><span class="fn">IParserRecorder::Control</span> ( uchar control, void * data ) : Allows the <span class="cl">Parser</span> to configure the <span class="cl">Recorder</span>
+		<ul>
+		<li>control : Can be FOUND, LOST, or BADCOM to add, remove an <span class="kw">IR blob</span>, or notify of error</li>
+		<li>data : If FOUND or LOST, the <span class="kw">IRID</span> of the <span class="kw">IR blob</span></li>
+		</ul>
+	</li>
+	<li><span class="fn">IParserRecorder::Record</span> ( irid irid, int x, int y, int size ) : Allows the parser to say where an <span class="kw">IR blob</span> is at the current time</li>
+		<ul>
+		<li>irid : The <span class="kw">IRID</span> of the <span class="kw">IR blob</span> whose data will be passed</li>
+		<li>x : The x co-ordinate of the <span class="kw">IR blob</span></li>
+		<li>y : The y co-ordinate of the <span class="kw">IR blob</span></li>
+		<li>size : The size of the <span class="kw">IR blob</span></li>
+		</ul>	
+    </ul>
+    <h4>Outputs:</h4>
+    <p>All outputs will be to <span class="cl">Interpreter</span> [SA]</p>
+    <ul>
+		<li><span class="cl">ShapeMatches</span> : An ordered collection of <span class="cl">ShapeMatch</span> objects that each contain a <span class="cl">Shape</span> that specifies an <span class="kw">SID</span></li>
+		<li><span class="cl">Track</span> : A <span class="kw">gesture</span> that contains a collection of <span class="cl">Frame</span>s</li>
+    </ul>
+    <h4>Task milestones:</h4>
+    <p>This part of the project can be broken into the following major sections..</p>
+    <ul>
+		<li>Recorder
+			<ul>
+				<li>Recorder : 2 days</li>
+				<li>Recording : 3 days</li>
+			</ul>
+		</li>
+		<li>Analyser
+			<ul>
+				<li>Shape : 7 days</li>
+				<li>Shape (sub-classes) : 2 days</li>
+				<li>ShapeLoader : 1 day</li>
+			</ul>
+		</li>
+		<li>Total : 15 days</li>
+    </ul>
+    
+    <h3>Description</h3>
     <p>
 	    During initialisation, <b>Kinephon</b> will call on the <span class="cl">ShapeLoader</span>. <span class="cl">ShapeLoader</span> will open a file containing all the different <span class="kw">gestures</span> and load them in, returning a <span class="cl">Shapes</span> collection. A <span class="kw">gesture</span> is a physical movement made by the user, recorded by the <span class="kw">WiiMote</span>, and stored as an array of vectors in 2 dimensional space (a <span class="kw">gesture</span> actually has a more general meaning, but this is described below). A <span class="cl">Shapes</span> collection has two functions; hold an array of <span class="cl">Shape</span> objects, and <span class="fn">compare</span> a single <span class="kw">gesture</span> against each <span class="cl">Shape</span> to find near matches. A <span class="cl">Shape</span> is made up a 2 dimensional array of 'weights', an array of <span class="cl">Zone</span> objects, and an <span class="kw">SID</span> (a shape id). The 2 dimensional array of 'weights' describe a grid over the most likely areas which a <span class="kw">gesture</span> will travel to make that 'shape'. Each grid element will contain a real between 0 and 1 and the <span class="kw">gesture</span>'s vectors will be rendered (after being scaled and possibly rotated) over this grid. The sum the weights of the grid over which the renderer passes will be totalled and then divided by the number of grid elements crossed giving a resultant weight of how closely the <span class="kw">gesture</span> matches the <span class="cl">Shape</span>. This means that <span class="kw">gestures</span> that make partial matches, for example, a <span class="kw">gesture</span> of a line rendered on a <span class="cl">Shape</span> of a square, would return a near match. To prevent this, the <span class="cl">Zone</span>s describe areas of the <span class="cl">Shape</span> that must be crossed before a match will be considered - as in the example, putting a <span class="cl">Zone</span> on each corner of the square would prevent a line being matched. A <span class="cl">Zone</span> is made up of an enter and exit radius (how far the <span class="kw">gesture</span>'s vertex must be from the <span class="cl">Zone</span> to be considered as having entered or exited), an enter and exit angle (the angle the <span class="kw">gesture</span>'s vector must enter or exit from), and an enter and exit arc (same as angle, but gives a range of angles off the enter/exit angle). Only if the <span class="kw">gesture</span> enters the enter radius, angle and arc, and exits the exit radius, angle and arc, or doesn't exit, is the zone considered as having been used. In general, a <span class="kw">gesture</span> isn't just the 2 dimensional projected movement from the user, it is also the speed or acceleration of a movement, plotted against time. The <span class="kw">gesture</span> is generalised further in the <span class="cl">Interpreter</span> [SA] but this is not described here. To account for the different meanings of <span class="kw">gesture</span>, the <span class="cl">Shape</span> class is inherited as three sub-classes, <span class="cl">ShapeMovement</span>, <span class="cl">ShapeSpeed</span>, and <span class="cl">ShapeAccel</span>. The purpose of these classes is to extract the necessary information from the movement, and <span class="fn">compare</span> it against the <span class="cl">Shape</span>, i.e. the <span class="cl">ShapeSpeed</span> class extracts the vector's length as the y co-ordinate of the movement, and time as the x co-ordinate, and the <span class="cl">Shape</span> then renders that to <span class="fn">compare</span> the <span class="cl">Shape</span>. The <span class="cl">ShapeMovement</span> also contains a <span class="cl">Shapes</span> collection specifically for <span class="cl">ShapeSpeed</span> and <span class="cl">ShapeAccel</span> collections, which allow a <span class="cl">ShapeMovement</span> to have different results based on the suddeness or sharpness of the movement, by having a collection of different <span class="cl">Speed</span> and <span class="cl">Accel</span> <span class="cl">Shapes</span>. Different <span class="cl">Shapes</span> (whether they are movement, speed, or acceleration, are ultimately identified by the <span class="kw">SID</span>.
 	</p>
