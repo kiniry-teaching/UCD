@@ -22,6 +22,7 @@
 			<tr><td>0.2</td><td>EB</td><td>Added Recorder and Analyser</td></tr>
 			<tr><td>0.3</td><td>ED</td><td>Finished Sound Part</td></tr>
 			<tr><td>0.4</td><td>EB</td><td>Formatting and a bit more info</td></tr>
+			<tr><td>0.4</td><td>DS</td><td>Finished Installer part</td></tr>
 		</table>
 	<h2>About</h2>
 		<table>
@@ -33,23 +34,18 @@
 			<tr><td></td><td>Eliott Bartley</td><td>EB</td><td>05806500</td></tr>
 			<tr><td></td><td>Jakub Dostal</td><td>JD</td><td>05844151</td></tr>
 		</table>
-	<h2>Installer</h2>
+	<h2>Installer [DS]</h2>
 	<p>
-	    This installer could come in different flavours, depending on how the project comes along.
-	    The two main options are one for Linux and one for Windows.
-    </p>
+	    	The installation of the program on to the OS can come in variety of different forms. A 'silent installation' will 			install Kinephon without any notification after executed. This form of installation will not be used because we 		feel that it doesn't provide the user with feedback on the progress of the installation. A 'self' will not be 			considered as it is used purely with certain 'plug in and play' devices, which is not the case in this project. A 			'headless' again will not be preferred as we fully intend to have a graphical component to the installation 			process. An 'unattended' form is the desired final product. This is the case due to the nature of most 			installation processes users have feedback on how the installation is progressing. If there are errors that occur 			during installation then the user will be notified. But for the most part the only interaction the user will have 			with the process will be purely the execution of the installer. The intended platform for the Kinephon is Linux. 			A secondary goal of the project is to allow for installation also on Windows machines. For the two cases there 			are options in regards to the format of their installations.
+    	</p>
    	<h3>Linux:</h3>
 	<p>
-		This will be a .deb (Debian) package. Itself can come in two flavours which are binary and
-		source. A binary package contains all the executables, man pages etc. and are unpacked using
-		the Debian utility dpkg. A source package contains a .dsc file describing the source package itself,
-		a orig.tar.gz containing the original source code and a diff.gz describing the Debian specific changes
-		to the source. The dpkg-source, packs and unpacks the Debian source archives.
+		With this OS we will be using a Debian software package (.deb). There are two types of .deb packages which are 			binary and source. A binary package is unpacked using the dpkg utility and contains all the man pages, 			executables etc.An outline of the process to produce this package would be the following. To start will need the 			following files a 'changelog', 'changelog.Debian', 'copyright', a manpage for all of the the executables included 			and binary executables or just shell script files. After this we would setup our temporary directories. Then copy 			our files into the temporary directories. So we copy executables and shell scripts into 'debian/user/bin', our	 			manpage into 'debian/user/share/man/man1', 'copyright', 'changelog' and 'changelog.debian' into 		'debian/usr/share/doc/kinephon', the 'control' into 'debian/DEBIAN' . Then after this we gzip everything except 		the 'control' and executables or shell scripts with the option '--best' into the temporary 'debian' directory. To 			finish we perform our check and build on the package. We perform 'dpkg-ded â€“build' with 'fakeroot' on the 			'debian' directory. The 'debian.deb' that appears will be renamed 'kinephon.deb'. A final check is done on the 			'kinephon.deb' to see if it complies with Debian policy and this is done with 'lintian'.
+		The package that will be presented when the project is completed will be a source. The binary package is one 			which the producer wants not to include the source code. The source package will include all of the source code 		for inspection. The source package is produced in the same way as the above binary example. The contents 			being .dsc file describing the source package, diff.gz which describes the Debian changes to the source and a 			orig.tar.gz which contains the original source code.
 	</p>
 	<h3>Windows:</h3>
 	<p>
-		For this it will be likely that we will produce the MSI files with a Third-party app.
-		Though we could also use Visual Studio 8 to produce an installer also.
+		With this OS the process is much more simple and will be most likely produced using free software. If it is the 		case the project will be Windows portable then it will be presented in either a MSI or MSM setup packages. The 			production of the these packages I won't go into since production varies between software. An example of a 			third-party application would be WIX, this takes XML source code describing the package and converts it into the 			desired product. Though, a decision on what to use hasn't been made as this is a secondary requirement. 
 	</p>
 
 	<h2>Configuration</h2>
@@ -207,7 +203,7 @@
     	
     <h3>RtMidi</h3>
     <p>
-    	This project makes use of the OpenSource RtMidi classes (©2003-2007 Gary P. Scavone, McGill University)
+    	This project makes use of the OpenSource RtMidi classes (ï¿½2003-2007 Gary P. Scavone, McGill University)
     	RtMidiIn and RtMidiOut.
     	They provide basic low-level functionality such as probing for ports and opening available ones, providing
     	code for these services on the UNIX, Windows and Mac OS platforms.
