@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Kinephon - Project Design</title>
+</head>
+<body>
+<h1>Kinephon</h1>
+	<h2>Revision</h2>
+		<table>
+			<tr><td>0.1</td><td>ED</td><td>First draft</td></tr>
+			<tr><td>0.2</td><td>EB</td><td>Added Recorder and Analyser</td></tr>
+		</table>
+	<h2>Installer</h2>
+	<p>
+	    This installer could come in different flavours, depending on how the project comes along.
+	    The two main options are one for Linux and one for Windows.
+    </p>
+   	<h3>Linux:</h3>
+	<p>
+		This will be a .deb (Debian) package. Itself can come in two flavours which are binary and
+		source. A binary package contains all the executables, man pages etc. and are unpacked using
+		the Debian utility dpkg. A source package contains a .dsc file describing the source package itself,
+		a orig.tar.gz containing the original source code and a diff.gz describing the Debian specific changes
+		to the source. The dpkg-source, packs and unpacks the Debian source archives.
+	</p>
+	<h3>Windows:</h3>
+	<p>
+		For this it will be likely that we will produce the MSI files with a Third-party app.
+		Though we could also use Visual Studio 8 to produce an installer also.
+	</p>
+
+	<h2>Configuration</h2>
+	<p>...</p>
+</body>
+</html>
