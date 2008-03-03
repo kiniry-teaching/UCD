@@ -1,0 +1,256 @@
+Revision:
+0.1		ED	First draft
+
+Title:		Kinephon
+Team:		Intuitive Aptitudes
+Members:	Eva Darulova	05817625
+			Sumbo Ajisafe	05005451
+			David Swords	05477689
+			Eliott Bartley	05806500
+			Jakub Dostal	05844151
+
+PROJECT DESIGN
+
+Installer
+	This installer could come in different flavours, depending on how the project comes along.
+	The two main options are one for Linux and one for Windows.
+	Linux:
+		This will be a .deb (Debian) package. Itself can come in two flavours which are binary and
+		source. A binary package contains all the executables, man pages etc. and are unpacked using
+		the Debian utility dpkg. A source package contains a .dsc file describing the source package itself,
+		a orig.tar.gz containing the original source code and a diff.gz describing the Debian specific changes
+		to the source. The dpkg-source, packs and unpacks the Debian source archives.
+	Windows:
+		For this it will be likely that we will produce the MSI files with a Third-party app.
+		Though we could also use Visual Studio 8 to produce an installer also.
+
+Configuration
+	Before the program can be fully started, we need to establish a connection with the Wiimote and check
+	that the Wiimote sees the appropriate number of points (if we decide to require at least a given number
+	of points). Also, it will probably be necessary to configure the system itself e.g. for specific types
+	of music that we want to produce. After all of these things are configured, the program will be run. 
+
+Interface
+	<dave, jakub>
+	#TO DO - We can chat about the nuts and bolts of this in the meeting tomorrow. Signed Dave
+	- finger band and/or wrist band with 1+ LEDs to make sure that the point is always visible.
+	- static Wiimote near the display with line of sight visibility.
+
+    # Can a schematic be included with this of the electronics
+
+Camera
+	The IR camera in the Wiimote has a resolution of 1024x768. In front of the camera, there is a special hardware filter,
+	which tracks up to four IR blobs. Their locations are recorded into memory. This data can be accessed
+	through bluetooth HCI interface by querying the Wiimote. The reports can be sent up to 100 times per 
+	second, which is a hardware limit caused by the camera and the tracking filter.  
+
+Connection to Computer
+	In order to extract the necessary data (in form of reports) from the Wiimote, we will need to establish
+	a stable connection with the Wiimote through the available bluetooth HCI interface. After the connection
+	is successfully established, we will query the Wiimote on the appropriate port(s) to get the reports. 
+	If necessary, we will write specific instructions to the Wiimote memory over the same interface to
+	specify the format of the reports further. The reports that will be received from the Wiimote will consist
+	of a channel ID/report ID and several bytes of payload. The reports will then be passed to the parser using 
+	an API between the two. 
+
+Parser
+	<dave>
+	Just to get this started, an interface I could make use of would be just a single 'get' method that
+	 would return the next piece of information in a class or struct containing { id, x, y, size }. I suppose
+	 if it were to be extended, I could ask how many blobs are you tracked and 'get' by a blob id.
+	An alternative would be to use a callback event. I will call you once and pass the address of a callback
+	 function. Every time you get new data, you call my callback and pass the { id, x, y, size } struct, or
+	 (it's such a small data-structure) you could just pass it as parameters. This option would be useful
+	 if you need to constantly watch the input stream so there are no timeouts, and are going to thread the
+	 reading of the data
+
+Recorder
+	Keeps a history of data from the Parser. Each blob tracked by the Camera will be have its own history 
+	and be uniquely identifiable. This part of the project will be broken into the following classes
+
+	Frame
+		Holds information about a single blob and a single point in time. This will include blob position,
+		vector to next position, frame time, and a tag. Tag will be modifiable by the Analyser and allow 
+		the Analyser to attach a custom data structure to the frame during processing. If not saved elsewhere,
+		this tag will be deleted along with the frame.
+	Animation
+		Holds a list of Frames for a single tracked blob. Responsible for adding and removing frames for its blob
+	Recorder
+		Holds a list of animations, one for each tracked blob. Responsible for communicating with the parser
+		and analyser, passing data for each frame on to the correct Animation blob and giving requested 
+		Animations to the Analyser
+
+Analyser
+	Analyses a blob's animation to calculate speed, acceleration, shape, position, size and angle. 
+	Speed, acceleration, and shape will be determined by graphing each ones' properties against a large grid 
+	and comparing it to preset approximations of known movements. Position will be taken by splitting 
+	the camera area into a small grid and picking one cell as the movements position, biased towards 
+	the first and centre points in the movement. As all movements will be given in vector data, 
+	the movement will first be scaled during graphing to determined shape, and size will then be the amount
+	by which it had to be scaled. However, If a shape cannot be determined, size will be meaningless. 
+	Angle will also require that a shape is known, the shape will be rotated to fit it to known shapes 
+	and the closest match will determine the angle. i.e. a diamond shape would be picked before a square 
+	at 45 degrees.
+	Speed, acceleration, and shape will be found by comparing to predefined shapes, which will be described 
+	as a weight of the areas a shape would pass through. This weight will be in the range (0..1) where 1 are
+	areas that will be crossed, and 0 are areas that are not crossed. The movement is then rendered on top
+	of this using some rasterisation algorithm (Bresnham's for example) and the weight of the points crossed 
+	by the rasterisation will be totalled and divided by the number of points crossed giving a normal weight. 
+	(See shape.png; green is predetermined shape positions, red is recorded positions/vectors, and blue is 
+	the rasterisation of the movement. The green covered by blue calculates the weight that this movement 
+	makes this shape). The shape with a high enough normal weight will be picked and if several shapes are 
+	acceptable, the highest will be chosen. In addition to the weights, each predefined shape will also 
+	contain areas that must be crossed, the order they should be crossed, and the sides the area should be 
+	entered and exited. This will allow movements that don't complete a shape to be ignored, winding order 
+	to be determined, as well as differentiate between a movement that would follow an 8 shape or two 3's 
+	back to back. This method can also be used with speed or acceleration, plotted against time, and 
+	rendered on predetermined graphs, which could be used to determine the tempo, style, etc. i.e. same shape,
+	with different acceleration spikes could mean same melody, different rhythm, or something?
+	The analyser will be broken into the following classes
+	
+	Shape
+		Stores each predetermined shape. Given an animation, will return the weight of how close the movement
+		matches the shape along with angle and scale information if a match was found. A shape can contain 
+		speed and acceleration sub-shapes, which the closest match will also be retuned if a match was found. 
+		Each shape will specify whether its purpose is to match movements, speeds, or accelerations.
+	Shapes
+		Container of all known predetermined shapes. Given an animation, will return a list of shapes, 
+		ordered by closest match, along with its closest matching speed, acceleration sub-shapes. The list will
+		be limited to shapes that are matched within a given range. Analyser can use this information to 
+		decide not to use a high matching shape if it looks like a lower matching shape will be used in the future
+		that better suites the flow of the music… Is this making it too complicated? Need to put more thought into
+		this but it could also be set to watch speed and give a shape a little more weight if it looks like an
+		incomplete shape will become complete given a little more time. There will have to be something to
+		differentiate between a line shape and every other shape that is made up of lines, a way to determine when
+		a movement is complete[?]
+	Analyser
+		Gets the latest animation from the Recorder and passes it on to Shapes. If no shape is found, 
+		speed and acceleration tests will be done independent of shape. Final nearest matching shape will be 
+		passed on to Interpreter. When a shape has been determined, the point up to where the shape was matched
+		will be marked for deletion and everything before that point will be removed by the Recorder next time 
+		it runs
+
+Interpreter:
+	Composing music from the instrument given, keep a short histroy of shapes i.e the movement create some type of shape
+	The main goal for the interprter is converting the movement to sound(Don't know how to do this but still doing some
+	reasearch on this). At the moment it's too early to say exactly the way the interpreter will be broken into, there
+	is more experimental going on but as for now the interpreter is broken into the following classes.
+
+	RecorderSound:
+		This will record the different sound produced or generate the sound from the music compose.
+		Each sound produced or generated is store and can also repeat or replay the same music 
+		played previous.
+
+	Movement:
+		This class will work with the animation class which as already create a frame for each point for a
+		single movement.Here, the motion will response to the shape in general and not single movement.
+		This will allow each each point to come together and then create a general movement. 
+
+Synthesis [Eva]
+	The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
+	abstraction between the high-level interface of the Conductor and the (relative) low-level interface of the
+	sound generation classes.
+	
+	MIDI messaging works with 'unsigned char', that is, every setting is encoded as a number.
+	To avoid using 'Magic Numbers' and ending up in a confusing lump of meaningless numbers, enumerated types 
+	will be used in the Synthesis and in the Sound Generation part of this project. E.g. there will be enumerated 
+	types for Chords, Middle Notes, Rhythms, Dynamics and Textures, so these will basically hide the numeric details
+	and only use the high-level musical representations. 
+	
+	MidiPlayer:
+		(Formerly this class was called AudioController; it was renamed for naming consistency.)
+		This class provides facilities to connect to available Midi ports and to play MIDI audio based on several 
+		dedicated channels, such as rhythm, chords and percussion channels. 
+		This class provides a middle level of abstraction, so it is kept intentionally technical. It is intended 
+		not to obscure the details of the Midi messaging mechanism.  
+		
+		The class currently has 4 dedicated channels: lead, accompaniment, chords, percussion. Each of them can 
+		be controlled individually, thus allowing for different configurations on each. With this approach
+		it is possible to play different instruments at once, at different volume levels and with different 
+		effects, which results in a more authentic music experience.
+		 
+		The main tasks of this class are:
+		- finding available MIDI output ports, including the ones that are being opened by software synthesisers. 
+	 	  If more than one is available, the user is given a choice to pick one, subsequently establishing a connection.
+	 	- sending control MIDI messages to the correct channels; there are the following message formats:
+	 		* Channel Mode	
+	 		* Control Change
+	 		* Program Change
+	 		* System Exclusive
+	 	- sending messages to play notes on the different channels (Note On MIDI messages). 
+	 	  Each channel is being controlled by a separate method.
+	 	- sending a generic Note On message. Although this method is redundant for controlling the 4 dedicated
+	 	  channels, this function is included for completeness. It may be desirable in future to send a message
+	 	  to a channel other than the 4 since, theoratically, MIDI supports 16 simultaneous channels.
+	 	- sending messages to release playing notes. This functionality is vital, since MIDI does not stop
+	 	  playing a note automatically. Whithout releasing notes, one would very quickly get an indistiguishable
+	 	  blur of noise.
+	 	  Releasing notes on the channels will also have to be done separately, since some notes should be played
+	 	  longer than others.
+	 	- remember configurations, such as last played notes. This is necessary for some MIDI messages, however the
+	 	  user should have to worry about these, so the class does this automatically.
+	 	- handling exceptions. These should not be propagated into the upper levels but caught and handles here.
+	 	  If initial connection to a MIDI port has failed, feedback in form of a boolean return variable will be
+	 	  given. Any following errors, like wrong messages formats, resulting in Exceptions being thrown, will be
+	 	  caught, but ingnored. I.e. no backward feedback will be given, since none of these errors are critical
+	 	  for the working of the rest of the program.
+	 	  
+	 	The class can be easily extended if future development (of the sound part or the moevement analysis part of
+	 	the project) will require additional (specialized/dedicated) functions.
+	 	
+	Conductor:
+		The conductor is wrapper class for the MidiPlayer providing a high-level musically oriented interface.
+		This class will be the interface between the Interpreter and the Sound Generation part of this project.
+		It is intended to hide all MIDI related details.
+		  
+		It works in basically two stages:
+		1.) Setting up the parts of the music piece. It will provide methods for specifying rhythms, dynamics,
+			textures, chords and other effects, or whether these should be switched off. The methods will then 
+			automatically call the correct function for the correct channels in the MidiPlayer class.
+			These settings can be carried out any time, since they themselves do not result in any audible feedback. 
+		
+		2.) Playing audio. This method will actually produce a sound. To satisfy the timing constraints of music,
+			this method relies upon being called in regular time intervals. 
+	 
+
+
+
+Generation [Eva]
+	We will use the OpenSource RtMidi classes. They provide basic low-level functionality such as probing for ports
+	and opening available ones. An RtError class provides the appropriate exception handling.
+	[LINUX]
+		Since on-board sound cards do not have built in Midi support we need to use a software synthesizer.
+		The choice will most probably be 'fluidsynth' together with an appropriate soundfont file.
+		'fluidsynth' is a command-line synthesizer, so it will be necessary to incorporate it into to project
+		(at a later stage).
+	[Windows] 
+		Windows does have an already built-in synthesizer Microsoft GS Wavetable SW Synth, but this will have to be tested
+		if it fits our purposes, otherwise another one will have to be found.
+		
+Sound Recorder [Eva]
+	This will need some more reasearch as to how exactly Midi files are stored, i.e. what the header contains, 
+	what format the messages are stored in and how it is ended.
+
+####
+#	There are several documents on MID file format here http://www.wotsit.org/list.asp?al=M
+####
+
+Visualisation
+	The visualisation will consist of colour and movement. The points that are being tracked will appear as points on the screen. As the points move a trail like that behind a comet will be produced.
+	Depending on the notes being generated a new colour will be appended to the tail as the motion continues.
+	Drawing will be done using an OpenGL buffer and a GLUT window.
+	Will these points on screen be sprites? Or will we plot them once and blend the out using fullscreen blur/warp effects?
+
+Visual Recorder
+	
+	
+Movement Recorder
+	All Recorder animation frames will be passed on to this and saved as raw data as they are received. This will
+	 mean that frames from different animations will be interleaved with other animations, but when loading, the frame's
+	 blob id will link it back to its animation. Frames will be saved in order and so can be loaded in the same order
+	 
+Web app
+	The web app has been described in more detail in Sumbo_WebService_Analysis.doc
+
+Dictionary:
+Blob : Single IR light or reflective IR tape picked up by the Camera as an (X, Y) co-ordinate and radius
