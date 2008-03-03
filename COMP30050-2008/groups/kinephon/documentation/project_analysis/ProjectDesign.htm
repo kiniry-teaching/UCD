@@ -48,8 +48,8 @@
 	    made by the user, recorded by the WiiMote, and stored as an array of vectors in 2 dimensional space (a
 	    gesture actually has a more general meaning, but this is described below). A Shapes collection has two
 	    functions; hold an array of Shape objects, and compare a single gesture against each shape to find near
-	    matches. A Shape is made up a 2 dimensional array of 'weights' and an array of Zone objects, and an SID,
-	    a Shape	id. The 2 dimensional array of 'weights' describe a grid over the most likely areas which a gesture
+	    matches. A Shape is made up a 2 dimensional array of 'weights', an array of Zone objects, and an SID (a
+	    Shape id). The 2 dimensional array of 'weights' describe a grid over the most likely areas which a gesture
 	    will travel to make that shape. Each grid element will contain a real between 0 and 1 and the gesture's
 	    vectors will be rendered (after being scaled and possibly rotated) over this grid. The sum the weights of
 	    the grid over which the renderer passes will be totalled and then divided by the number of grid elements
@@ -72,7 +72,7 @@
 	    contains a Shapes collection specifically for ShapeSpeed and ShapeAccel collections, which allow a
 	    ShapeMovement to have different results based on the suddeness or sharpness of the movement, by having a
 	    collection of different Speed and Accel Shapes. Different shapes (whether they are movement, speed, or
-	    acceleration, and ultimately identified by the SID.
+	    acceleration, are ultimately identified by the SID.
 	</p>
 	<p>
 	    After the shapes have been loaded, a Recorder object is created and passed on to the Parser[DS]. The
