@@ -36,6 +36,7 @@ namespace ShArt
 			this.mnuShape = new System.Windows.Forms.MenuStrip();
 			this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuViewGrid = new System.Windows.Forms.ToolStripMenuItem();
+			this.mnuView1to1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuImage = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuImageSelect = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuImageSelectAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,13 +87,14 @@ namespace ShArt
 			this.toolStripMenuItem22 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbrShape = new System.Windows.Forms.ToolStrip();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			this.mnuView1to1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.trkWeight = new System.Windows.Forms.TrackBar();
 			mnuImageDiv2 = new System.Windows.Forms.ToolStripSeparator();
 			mnuImageDiv3 = new System.Windows.Forms.ToolStripSeparator();
 			mnuImageDiv1 = new System.Windows.Forms.ToolStripSeparator();
 			((System.ComponentModel.ISupportInitialize)(this.picShape)).BeginInit();
 			this.mnuShape.SuspendLayout();
 			this.tbrShape.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trkWeight)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// mnuImageDiv2
@@ -112,10 +114,9 @@ namespace ShArt
 			// 
 			// picShape
 			// 
-			this.picShape.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.picShape.Location = new System.Drawing.Point(0, 0);
 			this.picShape.Name = "picShape";
-			this.picShape.Size = new System.Drawing.Size(300, 324);
+			this.picShape.Size = new System.Drawing.Size(256, 264);
 			this.picShape.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.picShape.TabIndex = 0;
 			this.picShape.TabStop = false;
@@ -132,7 +133,7 @@ namespace ShArt
             this.areaToolStripMenuItem});
 			this.mnuShape.Location = new System.Drawing.Point(8, 8);
 			this.mnuShape.Name = "mnuShape";
-			this.mnuShape.Size = new System.Drawing.Size(233, 24);
+			this.mnuShape.Size = new System.Drawing.Size(141, 24);
 			this.mnuShape.TabIndex = 1;
 			this.mnuShape.Text = "mnuShape";
 			this.mnuShape.Visible = false;
@@ -155,9 +156,17 @@ namespace ShArt
 			this.mnuViewGrid.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewGrid.Name = "mnuViewGrid";
 			this.mnuViewGrid.ShortcutKeyDisplayString = "G";
-			this.mnuViewGrid.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewGrid.Size = new System.Drawing.Size(118, 22);
 			this.mnuViewGrid.Text = "&Grid";
 			this.mnuViewGrid.Click += new System.EventHandler(this.mnuViewGrid_Click);
+			// 
+			// mnuView1to1
+			// 
+			this.mnuView1to1.Name = "mnuView1to1";
+			this.mnuView1to1.ShortcutKeyDisplayString = "R";
+			this.mnuView1to1.Size = new System.Drawing.Size(118, 22);
+			this.mnuView1to1.Text = "1:1";
+			this.mnuView1to1.Click += new System.EventHandler(this.mnuView1to1_Click);
 			// 
 			// mnuImage
 			// 
@@ -581,19 +590,23 @@ namespace ShArt
 			this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
 			this.toolStripButton1.Text = "toolStripButton1";
 			// 
-			// mnuView1to1
+			// trkWeight
 			// 
-			this.mnuView1to1.Name = "mnuView1to1";
-			this.mnuView1to1.ShortcutKeyDisplayString = "R";
-			this.mnuView1to1.Size = new System.Drawing.Size(152, 22);
-			this.mnuView1to1.Text = "1:1";
-			this.mnuView1to1.Click += new System.EventHandler(this.mnuView1to1_Click);
+			this.trkWeight.LargeChange = 10;
+			this.trkWeight.Location = new System.Drawing.Point(256, 0);
+			this.trkWeight.Maximum = 50;
+			this.trkWeight.Name = "trkWeight";
+			this.trkWeight.Orientation = System.Windows.Forms.Orientation.Vertical;
+			this.trkWeight.Size = new System.Drawing.Size(42, 320);
+			this.trkWeight.TabIndex = 3;
+			this.trkWeight.Scroll += new System.EventHandler(this.trkWeight_Scroll);
 			// 
 			// frmShape
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(300, 324);
+			this.Controls.Add(this.trkWeight);
 			this.Controls.Add(this.mnuShape);
 			this.Controls.Add(this.tbrShape);
 			this.Controls.Add(this.picShape);
@@ -602,11 +615,14 @@ namespace ShArt
 			this.Name = "frmShape";
 			this.Text = "Shape";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmShape_FormClosed);
+			this.Resize += new System.EventHandler(this.frmShape_Resize);
+			this.Load += new System.EventHandler(this.frmShape_Load);
 			((System.ComponentModel.ISupportInitialize)(this.picShape)).EndInit();
 			this.mnuShape.ResumeLayout(false);
 			this.mnuShape.PerformLayout();
 			this.tbrShape.ResumeLayout(false);
 			this.tbrShape.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trkWeight)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -669,5 +685,6 @@ namespace ShArt
 		private System.Windows.Forms.ToolStripMenuItem mnuView;
 		private System.Windows.Forms.ToolStripMenuItem mnuViewGrid;
 		private System.Windows.Forms.ToolStripMenuItem mnuView1to1;
+		private System.Windows.Forms.TrackBar trkWeight;
 	}
 }

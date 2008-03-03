@@ -62,10 +62,13 @@ namespace ShArt
 					mwe = we;
 			}
 
+			mwe = 1 / mwe;
+			mwe = (1 - (1 - mwe) * (float)trkWeight.Value / 50);
+
 			for(int y = 0; y < _shape.Height; y++)
 			for(int x = 0; x < _shape.Width; x++)
 			{
-				we = CalculateWeight(_shape.Pixels[x, y]) / mwe;
+				we = CalculateWeight(_shape.Pixels[x, y]) * mwe;
 				if(we < -1) we = -1;
 				if(we >  1) we = 1;
 				if(we < 0)
@@ -307,12 +310,30 @@ namespace ShArt
 			float w = 1.0f;
 			float h = (float)_shape.Height / _shape.Width;
 			float ow = ClientSize.Height / h;
-			w = (ClientSize.Width + ow) / 2;
+			w = ((ClientSize.Width - trkWeight.Width) + ow) / 2;
 			h *= w;
 
-			Width = (int)(w + (Width - ClientSize.Width));
+			Width = (int)(w + (Width - ClientSize.Width + trkWeight.Width));
 			Height = (int)(h + (Height - ClientSize.Height));
 
+		}
+
+		private void frmShape_Load(object sender, EventArgs e)
+		{
+			frmShape_Resize(null, null);
+		}
+
+		private void frmShape_Resize(object sender, EventArgs e)
+		{
+			picShape.Width = ClientSize.Width - trkWeight.Width;
+			picShape.Height = ClientSize.Height;
+			trkWeight.Height = ClientSize.Height;
+			trkWeight.Left = ClientSize.Width - trkWeight.Width;
+		}
+
+		private void trkWeight_Scroll(object sender, EventArgs e)
+		{
+			picShape.Invalidate();
 		}
 
 	}
