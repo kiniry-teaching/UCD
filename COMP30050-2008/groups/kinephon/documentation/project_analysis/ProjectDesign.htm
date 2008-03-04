@@ -1,257 +1,281 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Kinephon - Project Design</title>
-	<style type="text/css">
-	<!--
-	h1			{ font-size: 150%; }
-	h2			{ font-size: 120%; background-color: #eee; }
-	h3			{ font-size: 100%; font-style: italic; }
-	h4			{ font-size: 100%; text-decoration: underline; font-weight: normal; }
-	p			{ text-indent: -1em; margin-left: 2em; text-align: justify; justify: newspaper; }
-	.cl			{ color: #448; }
-	.fn			{ color: #844; }
-	.kw			{ color: #484; }
-	.fig		{ margin-left: 3em; font-size: 80%; }
-	table		{ font-size: 100%; }
-	.fig table	{ width: 100%; }
-	-->
-	</style>
+    <title>Kinephon - Project Design</title>
+    <style type="text/css">
+    <!--
+    h1            { font-size: 150%; }
+    h2            { font-size: 120%; background-color: #eee; }
+    h3            { font-size: 100%; font-style: italic; }
+    h4            { font-size: 100%; text-decoration: underline; font-weight: normal; }
+    p            { text-indent: -1em; margin-left: 2em; text-align: justify; justify: newspaper; }
+    .cl            { color: #448; }
+    .fn            { color: #844; }
+    .kw            { color: #484; }
+    .fig        { margin-left: 3em; font-size: 80%; }
+    table        { font-size: 100%; }
+    .fig table    { width: 100%; }
+    -->
+    </style>
 </head>
 <body>
 <h1>Kinephon</h1>
-	<h2>Revision</h2>
-		<table>
-			<tr><td>0.1</td><td>ED</td><td>First draft</td></tr>
-			<tr><td>0.2</td><td>EB</td><td>Added Recorder and Analyser</td></tr>
-			<tr><td>0.3</td><td>ED</td><td>Finished Sound Part</td></tr>
-			<tr><td>0.4</td><td>EB</td><td>Formatting and a bit more info</td></tr>
-			<tr><td>0.5</td><td>DS</td><td>Finished Installer part</td></tr>
-			<tr><td>0.6</td><td>EB</td><td>Added pictures to explain Shape matching</td></tr>
-			<tr><td>0.7</td><td>DS</td><td>Finished Interface part</td></tr>
-			<tr><td>0.8</td><td>DS</td><td>Finished Parser part</td></tr>
-			<tr><td>0.9</td><td>JD</td><td>Wiimote Connection and Configuration parts added, minor edits, spelling</td></tr>
-		</table>
-	<h2>About</h2>
-		<table>
-			<tr><td><b>Title:</b></td><td>Kinephon</td><td></td></tr>
-			<tr><td><b>Team:</b></td><td>Intuitive Aptitudes</td><td></td></tr>
-			<tr><td><b>Members:</b></td><td>Eva Darulova</td><td>ED</td><td>05817625</td></tr>
-			<tr><td></td><td>Sumbo Ajisafe</td><td>SA</td><td>05005451</td></tr>
-			<tr><td></td><td>David Swords</td><td>DS</td><td>05477689</td></tr>
-			<tr><td></td><td>Eliott Bartley</td><td>EB</td><td>05806500</td></tr>
-			<tr><td></td><td>Jakub Dostal</td><td>JD</td><td>05844151</td></tr>
-		</table>
-	<h2>Installer [DS]</h2>
-	<p>
-	    	The installation of the program on to the OS can come in variety of different forms. A 'silent installation' will 
-	    	install Kinephon without any notification after executed. This form of installation will not be used because we 
-	    	feel that it doesn't provide the user with feedback on the progress of the installation. A 'self' will not be 	
-	    	considered as it is used purely with certain 'plug in and play' devices, which is not the case in this project. A 
-	    	'headless' again will not be preferred as we fully intend to have a graphical component to the installation process. 
-	    	An 'unattended' form is the desired final product. This is the case due to the nature of most installation processes
-	    	users have feedback on how the installation is progressing. If there are errors that occur during installation then 
-	    	the user will be notified. But for the most part the only interaction the user will have with the process will be 
-	    	purely the execution of the installer. The intended platform for the Kinephon is Linux. A secondary goal of the project
-	    	is to allow for installation also on Windows machines. For the two cases there are options in regards to the format
-	    	of their installations.
+    <h2>Revision</h2>
+        <table>
+            <tr><td>0.1</td><td>ED</td><td>First draft</td></tr>
+            <tr><td>0.2</td><td>EB</td><td>Added Recorder and Analyser</td></tr>
+            <tr><td>0.3</td><td>ED</td><td>Finished Sound Part</td></tr>
+            <tr><td>0.4</td><td>EB</td><td>Formatting and a bit more info</td></tr>
+            <tr><td>0.5</td><td>DS</td><td>Finished Installer part</td></tr>
+            <tr><td>0.6</td><td>EB</td><td>Added pictures to explain Shape matching</td></tr>
+            <tr><td>0.7</td><td>DS</td><td>Finished Interface part</td></tr>
+            <tr><td>0.8</td><td>DS</td><td>Finished Parser part</td></tr>
+            <tr><td>0.9</td><td>JD</td><td>Wiimote Connection and Configuration parts added, minor edits, spelling</td></tr>
+            <tr><td>1.0</td><td>DS</td><td>Milestone addition, proof-reading and complete spellcheck</td></tr>
+        </table>
+    <h2>About</h2>
+        <table>
+            <tr><td><b>Title:</b></td><td>Kinephon</td><td></td></tr>
+            <tr><td><b>Team:</b></td><td>Intuitive Aptitudes</td><td></td></tr>
+            <tr><td><b>Members:</b></td><td>Eva Darulova</td><td>ED</td><td>05817625</td></tr>
+            <tr><td></td><td>Sumbo Ajisafe</td><td>SA</td><td>05005451</td></tr>
+            <tr><td></td><td>David Swords</td><td>DS</td><td>05477689</td></tr>
+            <tr><td></td><td>Eliott Bartley</td><td>EB</td><td>05806500</td></tr>
+            <tr><td></td><td>Jakub Dostal</td><td>JD</td><td>05844151</td></tr>
+        </table>
+    <h2>Installer [DS]</h2>
+    <p>
+            The installation of the program on to the OS can come in variety of different forms. A 'silent installation' will
+            install Kinephon without any notification after executed. This form of installation will not be used because we
+            feel that it doesn't provide the user with feedback on the progress of the installation. A 'self' will not be     
+            considered as it is used purely with certain 'plug in and play' devices, which is not the case in this project. A
+            'headless' again will not be preferred as we fully intend to have a graphical component to the installation process.
+            An 'unattended' form is the desired final product. This is the case due to the nature of most installation processes
+            users have feedback on how the installation is progressing. If there are errors that occur during installation then
+            the user will be notified. But for the most part the only interaction the user will have with the process will be
+            purely the execution of the installer. The intended platform for the Kinephon is Linux. A secondary goal of the project
+            is to allow for installation also on Windows machines. For the two cases there are options in regards to the format
+            of their installations.
     </p>
-   	<h3>Linux:</h3>
-	<p>
-		With this OS we will be using a Debian software package (.deb). There are two types of .deb packages which are binary and source.
-		A binary package is unpacked using the dpkg utility and contains all the man pages, executables etc.An outline of the process to 
-		produce this package would be the following. To start will need the following files a 'changelog', 'changelog.Debian', 'copyright',
-		a manpage for all of the the executables included and binary executables or just shell script files. After this we would setup our
-		temporary directories. Then copy our files into the temporary directories. So we copy executables and shell scripts into 'debian/user/bin',
-		our	manpage into 'debian/user/share/man/man1', 'copyright', 'changelog' and 'changelog.debian' into 'debian/usr/share/doc/kinephon', the
-		'control' into 'debian/DEBIAN' . Then after this we gzip everything except the 'control' and executables or shell scripts with the option 
-		'--best' into the temporary 'debian' directory. To finish we perform our check and build on the package. We perform 'dpkg-ded –build'
-		with 'fakeroot' on the 'debian' directory. The 'debian.deb' that appears will be renamed 'kinephon.deb'. A final check is done on the 
-		'kinephon.deb' to see if it complies with Debian policy and this is done with 'lintian'. The package that will be presented when the project
-		is completed will be a source. The binary package is one which the producer wants not to include the source code. The source package will
-		include all of the source code for inspection. The source package is produced in the same way as the above binary example. The contents 
-		being .dsc file describing the source package, diff.gz which describes the Debian changes to the source and a orig.tar.gz which contains
-		the original source code.
-	</p>
-	<h3>Windows:</h3>
-	<p>
-		With this OS the process is much more simple and will be most likely produced using free software. If it is the 		case the project will be Windows portable then it will be presented in either a MSI or MSM setup packages. The 			production of the these packages I won't go into since production varies between software. An example of a 			third-party application would be WIX, this takes XML source code describing the package and converts it into the 			desired product. Though, a decision on what to use hasn't been made as this is a secondary requirement. 
-	</p>
-
-	<h2>Configuration [JD]</h2>
-	<p>
-		In order for <b>Kinephon</b> to start properly, a connection with the wiimote has to be established before
-		the program itself can start. However, since we want to make it as convenient for users to use as possible,
-		we wanted to avoid using any commandline preparation steps. The configuration part ofthe program will therefore
-		provide a simple GUI (implemented using the GTK+ toolkit for portability) that will guide the user through the
-		process of stablishing the bluetooth connection and ensure that everything is working before the program itself is started.
-	</p>
-	<h4>Task milestones:</h4>
-	<p>Note: this depends on the wiimote connection implementation.</p>
+       <h3>Linux:</h3>
+    <p>
+        With this OS we will be using a Debian software package (.deb). There are two types of .deb packages which are binary and source.
+        A binary package is unpacked using the dpkg utility and contains all the man pages, executables etc.An outline of the process to
+        produce this package would be the following. To start will need the following files a 'changelog', 'changelog.Debian', 'copyright',
+        a manpage for all of the the executables included and binary executables or just shell script files. After this we would setup our
+        temporary directories. Then copy our files into the temporary directories. So we copy executables and shell scripts into 'debian/user/bin',
+        our    manpage into 'debian/user/share/man/man1', 'copyright', 'changelog' and 'changelog.debian' into 'debian/usr/share/doc/kinephon', the
+        'control' into 'debian/DEBIAN' . Then after this we gzip everything except the 'control' and executables or shell scripts with the option
+        '--best' into the temporary 'debian' directory. To finish we perform our check and build on the package. We perform 'dpkg-ded –build'
+        with 'fakeroot' on the 'debian' directory. The 'debian.deb' that appears will be renamed 'kinephon.deb'. A final check is done on the
+        'kinephon.deb' to see if it complies with Debian policy and this is done with 'lintian'. The package that will be presented when the project
+        is completed will be a source. The binary package is one which the producer wants not to include the source code. The source package will
+        include all of the source code for inspection. The source package is produced in the same way as the above binary example. The contents
+        being .dsc file describing the source package, diff.gz which describes the Debian changes to the source and a orig.tar.gz which contains
+        the original source code.
+    </p>
+    <h3>Windows:</h3>
+    <p>
+        With this OS the process is much more simple and will be most likely produced using free software. If it is the case the project will be
+        Windows portable then it will be presented in either a MSI or MSM setup packages. With the production of the these packages, I won't go into
+        since production varies between software. An example of a third-party application would be WIX, this takes XML source code describing the
+        package and converts it into the desired product. Though, a decision on what to use hasn't been made as this is a secondary requirement.
+    </p>
+    <h4>Task milestones:</h4>
     <ul>
-    	<li> Weeks 8-10 of term:
-    		<ul>
-    			<li>implementation started</li>
-    		</ul>
-    	</li>
-    	<li> Weeks 10-12 of term:
-    		<ul>
-    			<li>implementation finished</li>
-    			<li>testing/debugging</li>
-    		</ul>
-    	</li>
-    </ul>	
+        <li>Weeks 10-12 of term:
+            <ul>
+                <li>Implementation 3-4 days work</li>
+                <li>Structuring of directories</li>
+            </ul>
+        </li>
+    </ul>
 
-	<h2>Interface [DS, JD]</h2>
-    	<p>
-		The Kinephon will have a motion sensitive interface. The user will wear two wristbands. From these wristbands
-		will come two wires which from the end there will be a small hoop of tape. On top of this hoop there will be an
-		Infrared LED. This hoop will be placed on either the index or middle finger of each hand. The user will turn on
-		these LEDs via a switch on the wristband. When the system has been intialised and the LEDs are on, then user will
-		stand in front of a Wiimote. The Wiimote contains an IR camera that can detech the LEDs on the user's fingers.
-		The user will then be able to generate notes at varying levels by forming gestures will both hands. These 
-		gestures will consist of drawing imaginary 2D shapes. Additional LEDs may also be placed at both above the 
-		shoulders and at the waist. These may be added to allow for further accuracy in the interpretation the LEDs movement.
-	</p>
-	<p>
-		Note: The final design of the hardware interface may be changed depending on the results of our testing and availability
-		of construction materials.
-	</p>
 
-	<p><h3>Components:</h3></p><ul><li>Wiimote<ul><li>This is the primary controller for the Wii console, but in this project two of its features are being used. The first being the IR camera, which is used to detect the position of the IR LEDs. The second is the Bluetooth functionality. This allows communication with the device via a Bluetooth enabled device, in this case a laptop with built in Bluetooth or with a dongle.</li></ul></li><li>Laptop<ul><li>The laptop is the computer form we are using simply due to preference. All team members use primarily laptops over desktops. Though it could be stated that portability would be an advantage. The laptop will primarily be running Linux and secondly Windows. The finer details of program execution are mentioned elsewhere.</li></ul></li><li>Speakers<ul><li>The speakers are going to be simple standard Desktop external speakers, powered via the mains. The external are preferred over the internal laptop ones due to ease of replacement.</li></ul><li>Finger Emitters<ul><li>IR LEDs<ul><li>These will be wide angled and high power emitting Infrared LEDs.</li></ul></li><li>Stripboard<ul><li>This is simple stripboard, within which a simple circuit will be constructed on to control the Finger Emitters.</li></ul></li><li>Wire<ul><li>Wire to electrically connect the components.</li></ul></li><li>Switch<ul><li>The turn on/off the Finger Emitters.</li></ul></li><li>Wristband<ul><li>This to attach the stripboard to the body.</li></ul></li><li>Batteries<ul><li>These will simple wristwatch batteries towered together.</li></ul></ul></li></ul>
-	</p>
-	
-	<h2>Wiimote Connection [JD]</h2>
-	<h3>Wiimote</h3>
-	<p>
-		The wiimote, which will be used for transfering the information about user's gestures, is a controller
-		originally designed to control the wii console. In this project, we will be using it because it offers
-		features not wasily available otherwise. The two parts used will be the bluetooh chip and the IR camera
-		and the hardware attached to it.
-	</p>
-	<p>
-		The IR camera in the wiimote offers much better resolution than most realtively cheap and easily available webcams. 
-		The majority of those have resolution of either 640x480 or 800x600, while the wiimote camera has a resolution of 1024x768.
-		This will allow us to track the IR LEDs better. The wiimote also contains IR blob tracking hardware which will make
-		it much easier for us to track the IR LEDs as all the processing and filtering will be done in hardware.
-		This will allow us to concentrate on interpreting the information and actually using it, rather than having
-		to process the raw data in addition to the rest of the stuff.
-	</p>
-	<p>
-		The wiimote  will be connected to the computer via a bluetooth connection. The wiimote contains a Broadcom 2042 bluetooth chip,
-		which is used in devices following the bluetooth HID standard. This chip allows for communication over the L2CAP protocol.
-	</p>
-	<h3>Bluetooth Connection</h3>
-	<p> 
-		One of the goals of this project is to make it as portable as possible. This is unfortunately rather tricky
-		when dealing with hardware. This is also why Windows compatibility is also only a secondary goal. From the
-		reseach that was conducted, we have learned that there are some major differences in features that are available
-		on different platforms and that most of these depend on the bluetooth stack implementation. 
-	</p>
-	<p>
-		In linux, the situation is relatively simple. The main bluetooth stack is called BlueZ and works very well with
-		a lot of different bluetooth adapters and provides a very wide range of functionality including connections
-		using the L2CAP protocol and HCI profiles. There are also two major APIs for accessing the available features.
-		One of them is the BlueZ API itself and the second is called PyBlueZ and it is a set of Python bindings for BlueZ. 
-	</p>
-	<p>
-		On the other hand, the situation is rather complicated in Windows. The default Windows bluetooth stack is rather limited
-		in terms of functions, only allowing communication over the RFCOMM protocol, which makes it pretty much unusable for our
-		project (without extensive very low level coding) as the wiimote requires communication over the L2CAP protocol. However, 
-		there is a light at the end of the tunnel as there is an alternative bluetooth stack, which supports the L2CAP protocol. 
-		It is provided by Broadcom, which unfortunately also means that only Broadcom/Widcomm bluetooth adapters are supported. 
-		As for the APIs, the basic APIs are the Windows API and the Broadcom SDK. Moreover, there is also a port of PyBluez API
-		for Windows, which supports the default Windows bluetooth stack and has experimental support for the Broadcom/Widcomm stack.
-	</p>
-	<p>
-		Because of its portability and the wider support, it was decided that the PyBlueZ API will be used for this project.
-		This makes the project slightly more complex in that we will have to make sure our C++ and Python code works well together. 
-		However, using this API will provide us with much better potential portability, while maintaining all the necessary functionality.
-	</p>
-	<p>
-		<h3>Package Description:</h3>
-		<h4>Connection</h4>
-			<p>
-			This package will contain all the necessary functions to establish and maintain the connection with the wiimote and
-			for sending and receiving data.
-			</p>
-			<p>
-			The main functions will be <code>find_wiimote()</code>, <code>establish_connection()</code> and <code>close_connection()</code> (note: the naming of the functions may be changed in the final version of the program). The first one will
-			find all available bluetooth devices and if any of them is a wiimote, find its bluetooth address. <code>establish_connection()</code> will take care
-			of opening and binding sockets and preparing the connection for data transfer. <code>close_connection()</code> will close the connection
-			and free all used resources.
-			</p>
-		<h4>Communication</h4>
-			<p>
-			This package will handle the actual communication over the bluetooth connection. The data will be sent and received using the functions in this package.
-			The main methods will of course be <code>send()</code> and <code>receive()</code>. <code>send()</code> will take several bytes of information, convert it into format
-			used to send data over the bluetooth connection (strings) and send the packet. <code>receive()</code> will receive whatever data is  sent from the wiimote
-			filter out data with no meaning to us and pass on the useful information converted into bytes.
-			</p>
-		<h4>Utils</h4>
-			<p>
-				This package will containg utilities used for conversion from strings to bytes and vice versa and for all other small useful support
-				functions.
-			</p>
-		<h4>C++ glue</h4>
-			<p>
-				A simple C++ class will be constructed, so that it is possible to interface the python part with the rest of the
-				system. This class will contain a buffer containing data received from the wiimote, which will be queried by the parser.
-				This data will be a sequence of bytes and a timestamp. This timestamp will help data analysis to determine e.g. the speed of gestures. 
-			</p>
-			<p>
-				As for interfacing the python and C++ code, the Boost.Python library will be used (unless a better solution is found).
-				Boost.Python is a C++ library, which enables easy interfacing of python and C++ code, while supporting a wide range of
-				features (e.g. pointers and references, exporting iterators, manipulating objects). 
-			</p>
+    <h2>Configuration [JD]</h2>
+    <p>
+        In order for <b>Kinephon</b> to start properly, a connection with the Wiimote has to be established before
+        the program itself can start. However, since we want to make it as convenient for users to use as possible,
+        we wanted to avoid using any commandline preparation steps. The configuration part of the program will therefore
+        provide a simple GUI (implemented using the GTK+ toolkit for portability) that will guide the user through the
+        process of establishing the Bluetooth connection and ensure that everything is working before the program itself is started.
+    </p>
+        <h4>Task milestones:</h4>
+    <p>Note: this depends on the Wiimote connection implementation.</p>
+    <ul>
+        <li> Weeks 8-10 of term:
+            <ul>
+                <li>implementation started</li>
+            </ul>
+        </li>
+        <li> Weeks 10-12 of term:
+            <ul>
+                <li>implementation finished</li>
+                <li>testing/debugging</li>
+            </ul>
+        </li>
+    </ul>   
 		
-	</p>
-	
-	<h4>Task milestones:</h4>
+
+    <h2>Interface [DS, JD]</h2>
+    <p>
+        The Kinephon will have a motion sensitive interface. The user will wear two wristbands. From these wristbands
+        will come two wires which from the end there will be a small hoop of tape. On top of this hoop there will be an
+        Infrared LED. This hoop will be placed on either the index or middle finger of each hand. The user will turn on
+        these LEDs via a switch on the wristband. When the system has been initialised and the LEDs are on, then user will
+        stand in front of a Wiimote. The Wiimote contains an IR camera that can detect the LEDs on the user's fingers.
+        The user will then be able to generate notes at varying levels by forming gestures will both hands. These
+        gestures will consist of drawing imaginary 2D shapes. Additional LEDs may also be placed at both above the
+        shoulders and at the waist. These may be added to allow for further accuracy in the interpretation the LEDs movement.
+        </p>
+        <p>
+        Note: The final design of the hardware interface may be changed depending on the results of our testing and availability
+        of construction materials.
+        </p>
+
+        <p><h3>Components:</h3></p><ul><li>Wiimote<ul><li>This is the primary controller for the Wii console, but in this project two of its features are being used. The first being the IR camera, which is used to detect the position of the IR LEDs. The second is the Bluetooth functionality. This allows communication with the device via a Bluetooth enabled device, in this case a laptop with built in Bluetooth or with a dongle.</li></ul></li><li>Laptop<ul><li>The laptop is the computer form we are using simply due to preference. All team members use primarily laptops over desktops. Though it could be stated that portability would be an advantage. The laptop will primarily be running Linux and secondly Windows. The finer details of program execution are mentioned elsewhere.</li></ul></li><li>Speakers<ul><li>The speakers are going to be simple standard Desktop external speakers, powered via the mains. The external are preferred over the internal laptop ones due to ease of replacement.</li></ul><li>Finger Emitters<ul><li>IR LEDs<ul><li>These will be wide angled and high power emitting Infrared LEDs.</li></ul></li><li>Stripboard<ul><li>This is simple stripboard, within which a simple circuit will be constructed on to control the Finger Emitters.</li></ul></li><li>Wire<ul><li>Wire to electrically connect the components.</li></ul></li><li>Switch<ul><li>The turn on/off the Finger Emitters.</li></ul></li><li>Wristband<ul><li>This to attach the stripboard to the body.</li></ul></li><li>Batteries<ul><li>These will simple wristwatch batteries towered together.</li></ul></ul></li></ul>
+        <h4>Task milestones:</h4>
+        <ul>
+        <li>Weeks 8-12 of term:
+            <ul>
+                <li>Implementation 1-2 days work</li>
+                <li>Varying configurations over 4 weeks</li>
+                <li>Soldering</li>
+                <li>Receipt of IR LEDs</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    
+    <h2>Wiimote Connection [JD]</h2>
+    <h3>Wiimote</h3>
+    <p>
+        The Wiimote, which will be used for transferring the information about user's gestures, is a controller
+        originally designed to control the Wii console. In this project, we will be using it because it offers
+        features not easily available otherwise. The two parts used will be the Bluetooth chip, the IR camera
+        and the hardware attached to it.
+    </p>
+    <p>
+        The IR camera in the Wiimote offers much better resolution than most relatively cheap and easily available webcams.
+        The majority of those have resolution of either 640x480 or 800x600, while the Wiimote camera has a resolution of 1024x768.
+        This will allow us to track the IR LEDs better. The Wiimote also contains IR blob tracking hardware which will make
+        it much easier for us to track the IR LEDs as all the processing and filtering will be done in hardware.
+        This will allow us to concentrate on interpreting the information and actually using it, rather than having
+        to process the raw data in addition to the rest of the stuff.
+    </p>
+    <p>
+        The Wiimote  will be connected to the computer via a Bluetooth connection. The Wiimote contains a Broadcom 2042 Bluetooth chip,
+        which is used in devices following the Bluetooth HID standard. This chip allows for communication over the L2CAP protocol.
+    </p>
+    <h3>Bluetooth Connection</h3>
+    <p>
+        One of the goals of this project is to make it as portable as possible. This is unfortunately rather tricky
+        when dealing with hardware. This is also why Windows compatibility is also only a secondary goal. From the
+        research that was conducted, we have learned that there are some major differences in features that are available
+        on different platforms and that most of these depend on the Bluetooth stack implementation.
+    </p>
+    <p>
+        In linux, the situation is relatively simple. The main Bluetooth stack is called BlueZ and works very well with
+        a lot of different Bluetooth adapters and provides a very wide range of functionality including connections
+        using the L2CAP protocol and HCI profiles. There are also two major APIs for accessing the available features.
+        One of them is the BlueZ API itself and the second is called PyBlueZ and it is a set of Python bindings for BlueZ.
+    </p>
+    <p>
+        On the other hand, the situation is rather complicated in Windows. The default Windows Bluetooth stack is rather limited
+        in terms of functions, only allowing communication over the RFCOMM protocol, which makes it pretty much unusable for our
+        project (without extensive very low level coding) as the Wiimote requires communication over the L2CAP protocol. However,
+        there is a light at the end of the tunnel as there is an alternative Bluetooth stack, which supports the L2CAP protocol.
+        It is provided by Broadcom, which unfortunately also means that only Broadcom/Widcomm Bluetooth adapters are supported.
+        As for the APIs, the basic APIs are the Windows API and the Broadcom SDK. Moreover, there is also a port of PyBluez API
+        for Windows, which supports the default Windows Bluetooth stack and has experimental support for the Broadcom/Widcomm stack.
+    </p>
+    <p>
+        Because of its portability and the wider support, it was decided that the PyBlueZ API will be used for this project.
+        This makes the project slightly more complex in that we will have to make sure our C++ and Python code works well together.
+        However, using this API will provide us with much better potential portability, while maintaining all the necessary functionality.
+    </p>
+    <p>
+        <h3>Package Description:</h3>
+        <h4>Connection</h4>
+            <p>
+            This package will contain all the necessary functions to establish and maintain the connection with the Wiimote and
+            for sending and receiving data.
+            </p>
+            <p>
+            The main functions will be <code>find_Wiimote()</code>, <code>establish_connection()</code> and <code>close_connection()</code> (note: the naming of the functions may be changed in the final version of the program). The first one will
+            find all available Bluetooth devices and if any of them is a Wiimote, find its Bluetooth address. <code>establish_connection()</code> will take care
+            of opening and binding sockets and preparing the connection for data transfer. <code>close_connection()</code> will close the connection
+            and free all used resources.
+            </p>
+        <h4>Communication</h4>
+            <p>
+            This package will handle the actual communication over the Bluetooth connection. The data will be sent and received using the functions in this package.
+            The main methods will of course be <code>send()</code> and <code>receive()</code>. <code>send()</code> will take several bytes of information, convert it into format
+            used to send data over the Bluetooth connection (strings) and send the packet. <code>receive()</code> will receive whatever data is  sent from the Wiimote
+            filter out data with no meaning to us and pass on the useful information converted into bytes.
+            </p>
+        <h4>Utils</h4>
+            <p>
+                This package will contain utilities used for conversion from strings to bytes and vice versa and for all other small useful support
+                functions.
+            </p>
+        <h4>C++ glue</h4>
+            <p>
+                A simple C++ class will be constructed, so that it is possible to interface the python part with the rest of the
+                system. This class will contain a buffer containing data received from the Wiimote, which will be queried by the parser.
+                This data will be a sequence of bytes and a timestamp. This timestamp will help data analysis to determine e.g. the speed of gestures.
+            </p>
+            <p>
+                As for interfacing the python and C++ code, the Boost.Python library will be used (unless a better solution is found).
+                Boost.Python is a C++ library, which enables easy interfacing of python and C++ code, while supporting a wide range of
+                features (e.g. pointers and references, exporting iterators, manipulating objects).
+            </p>
+        
+    </p>
+    
+    <h4>Task milestones:</h4>
     <ul>
-    	<li> Spring break:
-    		<ul>
-    			<li>connection package implementation</li>
-    			<li>communication package implementation</li>
-    			<li>python/C++ glue implementation start</li>
-    		</ul>
-    	</li>
-    	<li> Weeks 8-10 of term:
-    		<ul>
-    			<li>python/C++ glue inplementation</li>
-    			<li>testing/debugging of the connection and communication packages</li>
-    		</ul>
-    	</li>
-    	<li> Weeks 10-12 of term:
-    		<ul>
-    			<li>further testing/debugging of all packages</li>
-    			<li>secondary goals, if time permits</li>
-    		</ul>
-    	</li>
-    </ul>	
-	
-	
-	<h2>Parser [DS]</h2>
-	<p>
-		The parser has the job of taking the output from the Bluetooth connection code in the form of reports, parsing the
-		bytes of information which refers to the x.y position of the LED blobs and also their size. This information
-		is then passed on to the IparserRecorder. On intialisation the Parser object will take in a IparserRecorder. 
-		The wrapper class for the python connection code will take The Parser on intialisation. The PCC will call a function
-		in Parser passing it a buffer containing the bytes of a report everytime there is one. The parser will then take the
-		buffer and read the values, converting them into decimal and interpreting the particular report. On receiving
-		a report and converting it's contents we have then to pass it on to the IparserRecorder. When a new blob is descovered or
-		lost the Parser makes a call to the IparserRecorder with 'control'. 'record' sends the x, y and size information on each blob.
-		<h4>Task milestones:</h4>
-    	<p>This part of the project can be broken into the following major sections..</p>
-    	<ul>
-			<li>Parser
-				<ul>
-					<li> Note: Will have to wait till Bluetooth communication system is done before full completion. 
-					<li>Parser: 4 days</li>
-				</ul>
-			</li>
-			<li>Total : 4 days</li>
-    	</ul>
-	</p>
+        <li> Spring break:
+            <ul>
+                <li>connection package implementation</li>
+                <li>communication package implementation</li>
+                <li>python/C++ glue implementation start</li>
+            </ul>
+        </li>
+        <li> Weeks 8-10 of term:
+            <ul>
+                <li>python/C++ glue implementation</li>
+                <li>testing/debugging of the connection and communication packages</li>
+            </ul>
+        </li>
+        <li> Weeks 10-12 of term:
+            <ul>
+                <li>further testing/debugging of all packages</li>
+                <li>secondary goals, if time permits</li>
+            </ul>
+        </li>
+    </ul>    	
+   
+    <h2>Parser [DS]</h2>
+    <p>
+        The parser has the job of taking the output from the Bluetooth connection code in the form of reports, parsing the
+        bytes of information which refers to the x.y position of the LED blobs and also their size. This information
+        is then passed on to the IParserRecorder. On initialisation the Parser object will take in a IParserRecorder.
+        The wrapper class for the python connection code will take The Parser on initialisation. The PCC will call a function
+        in Parser passing it a buffer containing the bytes of a report every time there is one. The parser will then take the
+        buffer and read the values, converting them into decimal and interpreting the particular report. On receiving
+        a report and converting it's contents we have then to pass it on to the IParserRecorder. When a new blob is discovered or
+        lost the Parser makes a call to the IParserRecorder with <code>control()</code>. <code>record()</code> sends the x, y and size information on each blob.
+        <h4>Task milestones:</h4>
+        <ul>
+        <li>Weeks 8-10 of term:
+            <ul>
+                <li>Implementation 4-6 days work</li>
+                <li>Buffered Bytes conversion</li>
+                <li>Converted Reports relaying</li>
+            </ul>
+        </li>
+        </ul>
+    </p>
 
     <h2>Recorder and Analyser [EB]</h2>
     <h3>Information</h3>
@@ -259,77 +283,76 @@
     <p>All inputs will be from <span class="cl">Parser</span> [DS]</p>
     <ul>
     <li><span class="fn">IParserRecorder::Control</span> ( uchar control, void * data ) : Allows the <span class="cl">Parser</span> to configure the <span class="cl">Recorder</span>
-		<ul>
-		<li>control : Can be FOUND, LOST, or BADCOM to add, remove an <span class="kw">IR blob</span>, or notify of error</li>
-		<li>data : If FOUND or LOST, the <span class="kw">IRID</span> of the <span class="kw">IR blob</span></li>
-		</ul>
-	</li>
-	<li><span class="fn">IParserRecorder::Record</span> ( irid irid, int x, int y, int size ) : Allows the parser to say where an <span class="kw">IR blob</span> is at the current time
-		<ul>
-		<li>irid : The <span class="kw">IRID</span> of the <span class="kw">IR blob</span> whose data will be passed</li>
-		<li>x : The x co-ordinate of the <span class="kw">IR blob</span></li>
-		<li>y : The y co-ordinate of the <span class="kw">IR blob</span></li>
-		<li>size : The size of the <span class="kw">IR blob</span></li>
-		</ul>
-		</li>
+        <ul>
+        <li>control : Can be FOUND, LOST, or BADCOM to add, remove an <span class="kw">IR blob</span>, or notify of error</li>
+        <li>data : If FOUND or LOST, the <span class="kw">IRID</span> of the <span class="kw">IR blob</span></li>
+        </ul>
+    </li>
+    <li><span class="fn">IParserRecorder::Record</span> ( irid irid, int x, int y, int size ) : Allows the parser to say where an <span class="kw">IR blob</span> is at the current time
+        <ul>
+        <li>irid : The <span class="kw">IRID</span> of the <span class="kw">IR blob</span> whose data will be passed</li>
+        <li>x : The x co-ordinate of the <span class="kw">IR blob</span></li>
+        <li>y : The y co-ordinate of the <span class="kw">IR blob</span></li>
+        <li>size : The size of the <span class="kw">IR blob</span></li>
+        </ul>
+        </li>
     </ul>
     <h4>Outputs:</h4>
     <p>All outputs will be to <span class="cl">Interpreter</span> [SA]</p>
     <ul>
-		<li><span class="cl">ShapeMatches</span> : An ordered collection of <span class="cl">ShapeMatch</span> objects that each contain a <span class="cl">Shape</span> that specifies an <span class="kw">SID</span></li>
-		<li><span class="cl">Track</span> : A <span class="kw">gesture</span> that contains a collection of <span class="cl">Frame</span>s</li>
+        <li><span class="cl">ShapeMatches</span> : An ordered collection of <span class="cl">ShapeMatch</span> objects that each contain a <span class="cl">Shape</span> that specifies an <span class="kw">SID</span></li>
+        <li><span class="cl">Track</span> : A <span class="kw">gesture</span> that contains a collection of <span class="cl">Frame</span>s</li>
     </ul>
     <h4>Task milestones:</h4>
     <p>This part of the project can be broken into the following major sections..</p>
     <ul>
-		<li>Recorder
-			<ul>
-				<li>Recorder : 2 days</li>
-				<li>Recording : 3 days</li>
-			</ul>
-		</li>
-		<li>Analyser
-			<ul>
-				<li>Shape : 7 days</li>
-				<li>Shape (sub-classes) : 2 days</li>
-				<li>ShapeLoader : 1 day</li>
-			</ul>
-		</li>
-		<li>Total : 15 days</li>
+        <li>Recorder
+            <ul>
+                <li>Recorder : 2 days</li>
+                <li>Recording : 3 days</li>
+            </ul>
+        </li>
+        <li>Analyser
+            <ul>
+                <li>Shape : 7 days</li>
+                <li>Shape (sub-classes) : 2 days</li>
+                <li>ShapeLoader : 1 day</li>
+            </ul>
+        </li>
+        <li>Total : 15 days</li>
     </ul>
     <h3>Description</h3>
     <p>Note: <span class="cl">Blue</span> highlights classes in the code, <span class="fn">Red</span> highlights functions in the code, and <span class="kw">Green</span> highlights keywords (not code related).</p>
     <p>
-		During initialisation, <b>Kinephon</b> will call on the <span class="cl">ShapeLoader</span>. <span class="cl">ShapeLoader</span> will open a file containing all the different <span class="kw">gestures</span> and load them in, returning a <span class="cl">Shapes</span> collection. A <span class="kw">gesture</span> is a physical movement made by the user, recorded by the <span class="kw">WiiMote</span>, and stored as an array of vectors in 2 dimensional space (a <span class="kw">gesture</span> actually has a more general meaning, but this is described below). A <span class="cl">Shapes</span> collection has two functions; hold an array of <span class="cl">Shape</span> objects, and <span class="fn">compare</span> a single <span class="kw">gesture</span> against each <span class="cl">Shape</span> to find near matches. A <span class="cl">Shape</span> is made up a 2 dimensional array of 'weights', an array of <span class="cl">Zone</span> objects, and an <span class="kw">SID</span> (a shape id). The 2 dimensional array of 'weights' describe a grid over the most likely areas which a <span class="kw">gesture</span> will travel to make that 'shape'. Each grid element will contain a real between 0 and 1 and the <span class="kw">gesture</span>'s vectors will be rendered (after being scaled and possibly rotated) over this grid. The sum the weights of the grid over which the renderer passes will be totalled and then divided by the number of grid elements crossed giving a resultant weight of how closely the <span class="kw">gesture</span> matches the <span class="cl">Shape</span>. See fig 1.</p>
-	<div class="fig">
-	<table>
-	<tr><td style="width: 196px;"><img src="rafig1.png" alt="Fig 1" width="196" height="196" /><br />Fig 1</td><td>Green is weight of the areas a gesture would pass to make this shape<br />The red line is the gesture made<br />Black and red squares are the gesture rasterised on the grid<br />Black don't fall on the Shape<br />Red do fall on the shape<br />Given the total number of squares rasterised to be 63, the number of black being 17, the number of Red being 40, and the rest are between Black and Red, this approximately gives the gesture matching the shape a weight of<br />[ 17 * 0 + 4 * 0.25 + 4 * 0.75 + 40 * 1 ] / 63 == [ 43.25 ] / 63 == 0.68<br />That is, a 68% match.
-	</td></tr></table></div>
-	<p>This means that <span class="kw">gestures</span> that make partial matches, for example, a <span class="kw">gesture</span> of a line rendered on a <span class="cl">Shape</span> of a triangle as in Fig 2, would return an exact match.</p>
-	<div class="fig">
-	<table>
-	<tr><td style="width: 196px;"><img src="rafig2.png" alt="Fig 2" width="196" height="196" /><br />Fig 2</td><td>A wrong 100% match!</td></tr>
-	</table></div>
-	<p>To prevent this, the <span class="cl">Zone</span>s describe areas of the <span class="cl">Shape</span> that must be crossed before a match will be considered - as in the example, putting a <span class="cl">Zone</span> on each corner of the triangle would prevent a line being matched, see Fig 3 (it would also reduce the 68% match in the previous example to 0%). A <span class="cl">Zone</span> is made up of an enter and exit radius (how far the <span class="kw">gesture</span>'s vertex must be from the <span class="cl">Zone</span> to be considered as having entered or exited), an enter and exit angle (the angle the <span class="kw">gesture</span>'s vector must enter or exit from), and an enter and exit arc (same as angle, but gives a range of angles off the enter/exit angle). Only if the <span class="kw">gesture</span> enters the enter radius, angle and arc, and exits the exit radius, angle and arc, or doesn't exit, is the zone considered as having been used.</p>
-	<div class="fig">
-	<table>
-	<tr><td style="width: 196px;"><img src="rafig3.png" alt="Fig 3" width="196" height="196" /><br />Fig 3</td><td>Green circles are enter radius, with green shaded being the enter angle/arc<br />Blue circles are exit radius, with blue shaded being the exit angle/arc<br />As the line didn't pass through all Zones, the Shape is immediately a mismatch.<br />Note that exit radii are larger than enter, this is to prevent an accidental exit from a hand shake at the point of entry.</td></tr>
-	</table></div>
-	<p>In general, a <span class="kw">gesture</span> isn't just the 2 dimensional projected movement from the user, it is also the speed or acceleration of a movement, plotted against time. The <span class="kw">gesture</span> is generalised further in the <span class="cl">Interpreter</span> [SA] but this is not described here. To account for the different meanings of <span class="kw">gesture</span>, the <span class="cl">Shape</span> class is inherited as three sub-classes, <span class="cl">ShapeMovement</span>, <span class="cl">ShapeSpeed</span>, and <span class="cl">ShapeAccel</span>. The purpose of these classes is to extract the necessary information from the movement, and <span class="fn">compare</span> it against the <span class="cl">Shape</span>, i.e. the <span class="cl">ShapeSpeed</span> class extracts the vector's length as the y co-ordinate of the movement, and time as the x co-ordinate, and the <span class="cl">Shape</span> then renders that to <span class="fn">compare</span> the <span class="cl">Shape</span>. The <span class="cl">ShapeMovement</span> also contains a <span class="cl">Shapes</span> collection specifically for <span class="cl">ShapeSpeed</span> and <span class="cl">ShapeAccel</span> collections, which allow a <span class="cl">ShapeMovement</span> to have different results based on the suddeness or sharpness of the movement. Different <span class="cl">Shapes</span> (whether they are movement, speed, or acceleration, are ultimately identified by the <span class="kw">SID</span>.
-	</p>
-	<p>
-	    After the <span class="cl">Shapes</span> have been loaded, a <span class="cl">Recorder</span> object is created and passed on to the <span class="cl">Parser</span> [DS]. The <span class="cl">Parser</span> reads the data from the <span class="kw">WiiMote</span>'s <span class="cl">Connection</span> [JD] and passes it on the <span class="cl">Recorder</span> in simple terms. The <span class="cl">Recorder</span> captures this simple data, and stores it in a way that will be described below, but for now, the result of storing this data will be the <span class="kw">gesture</span>. The <span class="cl">Recorder</span> is sub-classed from an interface <span class="cl">IParserRecorder</span>, and this is what allows the <span class="cl">Parser</span> to talk to the <span class="cl">Recorder</span>. The <span class="cl">IParserRecorder</span> gives the <span class="cl">Parser</span> two methods to communicate with the <span class="cl">Recorder</span> and these are <span class="fn">Control</span> and <span class="fn">Record</span>. <span class="fn">Control</span> allows the <span class="cl">Parser</span> to give new state information to the <span class="cl">Recorder</span> such as 'Found new IR blob', or 'Connection with WiiMote lost' allowing the <span class="cl">Recorder</span> to allocate or de-allocate storage as needed. The <span class="fn">Record</span> method allows the <span class="cl">Parser</span> to tell the <span class="cl">Recorder</span> the positions of each <span class="kw">IR blob</span> individually using an <span class="kw">IRID</span> (IR blob identification). For each unique <span class="kw">IRID</span>, the <span class="cl">Recorder</span> holds a unique <span class="cl">Track</span> object, and within each <span class="cl">Track</span> (for each <span class="fn">Record</span> call that the <span class="cl">Parser</span> makes) the <span class="cl">Recorder</span> stores the information in a <span class="cl">Frame</span> object, which is stored in the <span class="cl">Track</span>. The <span class="cl">Frame</span> is just a data structure holding an (x, y) co-ordinate of the <span class="kw">IR blob</span>, the (x, y) vector to the next <span class="cl">Frame</span> (this information is only available when a next <span class="cl">Frame</span> is added), the size of the <span class="kw">IR blob</span>, and the time the <span class="cl">Frame</span> was created. The time is calculated as the number of milliseconds since the <b>Kinephon</b> program began. The <span class="cl">Frame</span> also handles adding new <span class="cl">Frame</span>s by linking it to the last in a linked-list. The <span class="cl">Track</span> is just a container for <span class="cl">Frame</span>s (or abstractly, is the <span class="kw">gesture</span>) by holding a reference to the first <span class="cl">Frame</span> in the list, but also holds the <span class="kw">IRID</span>, a helper for accessing a <span class="cl">Frame</span> by index number, and a count of frames. Due to the fact that the <span class="cl">Parser</span> will be running asynchronously (i.e. <span class="cl">Frame</span>s will be created at non-deterministic times) the <span class="cl">Recorder</span> will have two functions for dealing with the <span class="cl">Track</span>s, these are <span class="fn">Eject</span> and <span class="fn">Erase</span>. <span class="fn">Eject</span> will be a critical section that blocks the <span class="cl">Parser</span> and will create a copy of all the <span class="cl">Track</span>s and <span class="cl">Frame</span>s, and store then in a <span class="cl">Recording</span> object, which it will then return. <b>Kinephon</b> can work off this static <span class="cl">Recording</span> while ignoring the fact that the <span class="cl">Recorder</span> may be receiving new <span class="cl">Frame</span>s. A <span class="cl">Recording</span> is a basic <span class="cl">Recorder</span> with no <span class="fn">Eject</span> or <span class="fn">Erase</span> functionality, just a holder for <span class="cl">Track</span>s and their <span class="cl">Frame</span>s. <span class="fn">Erase</span> will be another critical section that blocks the <span class="cl">Parser</span> and will allow the caller (described below during the main loop) to ask for <span class="cl">Frame</span>s to be deleted by an index. All <span class="cl">Frame</span>s before and including this index will be removed from the <span class="cl">Recorder</span>'s <span class="cl">Track</span>.
-	</p>
-	<p>
-	    After initialisation, the main loop will begin. The main loop will perform the following steps on the <span class="cl">Recorder</span> and <span class="cl">Analyser</span>.</p>
-	 <ul>
-		<li>First, it calls the <span class="cl">Recorder</span>'s <span class="fn">Eject</span> to get a copy of the latest <span class="kw">gestures</span> (<span class="cl">Track</span>s and <span class="cl">Frame</span>s) made by each <span class="kw">IR blob</span>.</li>
-		<li>Next, each <span class="kw">gesture</span> in turn is passed on to the <span class="cl">Shapes</span> object along with a <span class="cl">ShapeMatches</span> object. The <span class="cl">ShapeMatches</span> is a container for keeping a list of <span class="cl">Shape</span>s that matched. When it is constructed, the <span class="cl">ShapeMatches</span> can be given a 'weight range' and 'total' that specifies the minimum weight that a <span class="kw">gesture</span> must match a <span class="cl">Shape</span> by, and the maximum number of <span class="cl">Shape</span>s that can be matched (if more <span class="cl">Shape</span>s match, the list is trimmed to the best matched 'total' amount). As the <span class="cl">Shapes</span> object <span class="fn">compare</span> the <span class="kw">gesture</span> against all the <span class="cl">Shape</span>s it contains, for each one that matches, it creates a <span class="cl">ShapeMatch</span> object and stores a reference to the <span class="cl">Shape</span>, along with the weight of the match, in this. The <span class="cl">ShapeMatch</span> is then added to the <span class="cl">ShapeMatches</span>, which sorts and trims its current list.</li>
-		<li>When the <span class="cl">Shapes</span>'s <span class="fn">compare</span> returns, <span class="cl">ShapeMatches</span> will then contain this sorted list of <span class="cl">Shape</span>s matched within the given weight range and this list is passed on to the <span class="cl">Interpreter</span> [SA]. The <span class="cl">Interpreter</span> converts the matched <span class="cl">Shape</span>s into the audio controls and passes them on to <span class="cl">Audio</span> [ED]. The <span class="cl">Audio</span> generates and plays the music based on the audio controls. If no <span class="cl">Shape</span> matches were made, the <span class="kw">gesture</span> is still passed on to <span class="cl">Interpreter</span> so that the <span class="cl">Interpreter</span> can try to calculate the flow of the <span class="kw">gesture</span>, rather than a specific shape.</li>
-		<li>Once the <span class="cl">Interpreter</span> has used a <span class="kw">gesture</span>, either specifically or generally, it returns that information back so that the <span class="cl">Frame</span> index can be marked for deletion. The <span class="cl">Recorder</span> is then asked to <span class="fn">Erase</span> those <span class="cl">Frame</span>s that have been used. If the <span class="cl">Interpreter</span> does not use the <span class="kw">gesture</span> (it may not a good time to use it musically) it will not be deleted and will be reprocessed next time when the <span class="cl">Recorder</span> is asked to <span class="fn">Eject</span>.</li>	
-		</ul>	
+        During initialisation, <b>Kinephon</b> will call on the <span class="cl">ShapeLoader</span>. <span class="cl">ShapeLoader</span> will open a file containing all the different <span class="kw">gestures</span> and load them in, returning a <span class="cl">Shapes</span> collection. A <span class="kw">gesture</span> is a physical movement made by the user, recorded by the <span class="kw">WiiMote</span>, and stored as an array of vectors in 2 dimensional space (a <span class="kw">gesture</span> actually has a more general meaning, but this is described below). A <span class="cl">Shapes</span> collection has two functions; hold an array of <span class="cl">Shape</span> objects, and <span class="fn">compare</span> a single <span class="kw">gesture</span> against each <span class="cl">Shape</span> to find near matches. A <span class="cl">Shape</span> is made up a 2 dimensional array of 'weights', an array of <span class="cl">Zone</span> objects, and an <span class="kw">SID</span> (a shape id). The 2 dimensional array of 'weights' describe a grid over the most likely areas which a <span class="kw">gesture</span> will travel to make that 'shape'. Each grid element will contain a real between 0 and 1 and the <span class="kw">gesture</span>'s vectors will be rendered (after being scaled and possibly rotated) over this grid. The sum the weights of the grid over which the renderer passes will be totalled and then divided by the number of grid elements crossed giving a resultant weight of how closely the <span class="kw">gesture</span> matches the <span class="cl">Shape</span>. See fig 1.</p>
+    <div class="fig">
+    <table>
+    <tr><td style="width: 196px;"><img src="rafig1.png" alt="Fig 1" width="196" height="196" /><br />Fig 1</td><td>Green is weight of the areas a gesture would pass to make this shape<br />The red line is the gesture made<br />Black and red squares are the gesture rasterised on the grid<br />Black don't fall on the Shape<br />Red do fall on the shape<br />Given the total number of squares rasterised to be 63, the number of black being 17, the number of Red being 40, and the rest are between Black and Red, this approximately gives the gesture matching the shape a weight of<br />[ 17 * 0 + 4 * 0.25 + 4 * 0.75 + 40 * 1 ] / 63 == [ 43.25 ] / 63 == 0.68<br />That is, a 68% match.
+    </td></tr></table></div>
+    <p>This means that <span class="kw">gestures</span> that make partial matches, for example, a <span class="kw">gesture</span> of a line rendered on a <span class="cl">Shape</span> of a triangle as in Fig 2, would return an exact match.</p>
+    <div class="fig">
+    <table>
+    <tr><td style="width: 196px;"><img src="rafig2.png" alt="Fig 2" width="196" height="196" /><br />Fig 2</td><td>A wrong 100% match!</td></tr>
+    </table></div>
+    <p>To prevent this, the <span class="cl">Zone</span>s describe areas of the <span class="cl">Shape</span> that must be crossed before a match will be considered - as in the example, putting a <span class="cl">Zone</span> on each corner of the triangle would prevent a line being matched, see Fig 3 (it would also reduce the 68% match in the previous example to 0%). A <span class="cl">Zone</span> is made up of an enter and exit radius (how far the <span class="kw">gesture</span>'s vertex must be from the <span class="cl">Zone</span> to be considered as having entered or exited), an enter and exit angle (the angle the <span class="kw">gesture</span>'s vector must enter or exit from), and an enter and exit arc (same as angle, but gives a range of angles off the enter/exit angle). Only if the <span class="kw">gesture</span> enters the enter radius, angle and arc, and exits the exit radius, angle and arc, or doesn't exit, is the zone considered as having been used.</p>
+    <div class="fig">
+    <table>
+    <tr><td style="width: 196px;"><img src="rafig3.png" alt="Fig 3" width="196" height="196" /><br />Fig 3</td><td>Green circles are enter radius, with green shaded being the enter angle/arc<br />Blue circles are exit radius, with blue shaded being the exit angle/arc<br />As the line didn't pass through all Zones, the Shape is immediately a mismatch.<br />Note that exit radii are larger than enter, this is to prevent an accidental exit from a hand shake at the point of entry.</td></tr>
+    </table></div>
+    <p>In general, a <span class="kw">gesture</span> isn't just the 2 dimensional projected movement from the user, it is also the speed or acceleration of a movement, plotted against time. The <span class="kw">gesture</span> is generalised further in the <span class="cl">Interpreter</span> [SA] but this is not described here. To account for the different meanings of <span class="kw">gesture</span>, the <span class="cl">Shape</span> class is inherited as three sub-classes, <span class="cl">ShapeMovement</span>, <span class="cl">ShapeSpeed</span>, and <span class="cl">ShapeAccel</span>. The purpose of these classes is to extract the necessary information from the movement, and <span class="fn">compare</span> it against the <span class="cl">Shape</span>, i.e. the <span class="cl">ShapeSpeed</span> class extracts the vector's length as the y co-ordinate of the movement, and time as the x co-ordinate, and the <span class="cl">Shape</span> then renders that to <span class="fn">compare</span> the <span class="cl">Shape</span>. The <span class="cl">ShapeMovement</span> also contains a <span class="cl">Shapes</span> collection specifically for <span class="cl">ShapeSpeed</span> and <span class="cl">ShapeAccel</span> collections, which allow a <span class="cl">ShapeMovement</span> to have different results based on the suddenness or sharpness of the movement. Different <span class="cl">Shapes</span> (whether they are movement, speed, or acceleration, are ultimately identified by the <span class="kw">SID</span>.
     </p>
-
+    <p>
+        After the <span class="cl">Shapes</span> have been loaded, a <span class="cl">Recorder</span> object is created and passed on to the <span class="cl">Parser</span> [DS]. The <span class="cl">Parser</span> reads the data from the <span class="kw">WiiMote</span>'s <span class="cl">Connection</span> [JD] and passes it on the <span class="cl">Recorder</span> in simple terms. The <span class="cl">Recorder</span> captures this simple data, and stores it in a way that will be described below, but for now, the result of storing this data will be the <span class="kw">gesture</span>. The <span class="cl">Recorder</span> is sub-classed from an interface <span class="cl">IParserRecorder</span>, and this is what allows the <span class="cl">Parser</span> to talk to the <span class="cl">Recorder</span>. The <span class="cl">IParserRecorder</span> gives the <span class="cl">Parser</span> two methods to communicate with the <span class="cl">Recorder</span> and these are <span class="fn">Control</span> and <span class="fn">Record</span>. <span class="fn">Control</span> allows the <span class="cl">Parser</span> to give new state information to the <span class="cl">Recorder</span> such as 'Found new IR blob', or 'Connection with WiiMote lost' allowing the <span class="cl">Recorder</span> to allocate or de-allocate storage as needed. The <span class="fn">Record</span> method allows the <span class="cl">Parser</span> to tell the <span class="cl">Recorder</span> the positions of each <span class="kw">IR blob</span> individually using an <span class="kw">IRID</span> (IR blob identification). For each unique <span class="kw">IRID</span>, the <span class="cl">Recorder</span> holds a unique <span class="cl">Track</span> object, and within each <span class="cl">Track</span> (for each <span class="fn">Record</span> call that the <span class="cl">Parser</span> makes) the <span class="cl">Recorder</span> stores the information in a <span class="cl">Frame</span> object, which is stored in the <span class="cl">Track</span>. The <span class="cl">Frame</span> is just a data structure holding an (x, y) co-ordinate of the <span class="kw">IR blob</span>, the (x, y) vector to the next <span class="cl">Frame</span> (this information is only available when a next <span class="cl">Frame</span> is added), the size of the <span class="kw">IR blob</span>, and the time the <span class="cl">Frame</span> was created. The time is calculated as the number of milliseconds since the <b>Kinephon</b> program began. The <span class="cl">Frame</span> also handles adding new <span class="cl">Frame</span>s by linking it to the last in a linked-list. The <span class="cl">Track</span> is just a container for <span class="cl">Frame</span>s (or abstractly, is the <span class="kw">gesture</span>) by holding a reference to the first <span class="cl">Frame</span> in the list, but also holds the <span class="kw">IRID</span>, a helper for accessing a <span class="cl">Frame</span> by index number, and a count of frames. Due to the fact that the <span class="cl">Parser</span> will be running asynchronously (i.e. <span class="cl">Frame</span>s will be created at non-deterministic times) the <span class="cl">Recorder</span> will have two functions for dealing with the <span class="cl">Track</span>s, these are <span class="fn">Eject</span> and <span class="fn">Erase</span>. <span class="fn">Eject</span> will be a critical section that blocks the <span class="cl">Parser</span> and will create a copy of all the <span class="cl">Track</span>s and <span class="cl">Frame</span>s, and store then in a <span class="cl">Recording</span> object, which it will then return. <b>Kinephon</b> can work off this static <span class="cl">Recording</span> while ignoring the fact that the <span class="cl">Recorder</span> may be receiving new <span class="cl">Frame</span>s. A <span class="cl">Recording</span> is a basic <span class="cl">Recorder</span> with no <span class="fn">Eject</span> or <span class="fn">Erase</span> functionality, just a holder for <span class="cl">Track</span>s and their <span class="cl">Frame</span>s. <span class="fn">Erase</span> will be another critical section that blocks the <span class="cl">Parser</span> and will allow the caller (described below during the main loop) to ask for <span class="cl">Frame</span>s to be deleted by an index. All <span class="cl">Frame</span>s before and including this index will be removed from the <span class="cl">Recorder</span>'s <span class="cl">Track</span>.
+    </p>
+    <p>
+        After initialisation, the main loop will begin. The main loop will perform the following steps on the <span class="cl">Recorder</span> and <span class="cl">Analyser</span>.</p>
+     <ul>
+        <li>First, it calls the <span class="cl">Recorder</span>'s <span class="fn">Eject</span> to get a copy of the latest <span class="kw">gestures</span> (<span class="cl">Track</span>s and <span class="cl">Frame</span>s) made by each <span class="kw">IR blob</span>.</li>
+        <li>Next, each <span class="kw">gesture</span> in turn is passed on to the <span class="cl">Shapes</span> object along with a <span class="cl">ShapeMatches</span> object. The <span class="cl">ShapeMatches</span> is a container for keeping a list of <span class="cl">Shape</span>s that matched. When it is constructed, the <span class="cl">ShapeMatches</span> can be given a 'weight range' and 'total' that specifies the minimum weight that a <span class="kw">gesture</span> must match a <span class="cl">Shape</span> by, and the maximum number of <span class="cl">Shape</span>s that can be matched (if more <span class="cl">Shape</span>s match, the list is trimmed to the best matched 'total' amount). As the <span class="cl">Shapes</span> object <span class="fn">compare</span> the <span class="kw">gesture</span> against all the <span class="cl">Shape</span>s it contains, for each one that matches, it creates a <span class="cl">ShapeMatch</span> object and stores a reference to the <span class="cl">Shape</span>, along with the weight of the match, in this. The <span class="cl">ShapeMatch</span> is then added to the <span class="cl">ShapeMatches</span>, which sorts and trims its current list.</li>
+        <li>When the <span class="cl">Shapes</span>'s <span class="fn">compare</span> returns, <span class="cl">ShapeMatches</span> will then contain this sorted list of <span class="cl">Shape</span>s matched within the given weight range and this list is passed on to the <span class="cl">Interpreter</span> [SA]. The <span class="cl">Interpreter</span> converts the matched <span class="cl">Shape</span>s into the audio controls and passes them on to <span class="cl">Audio</span> [ED]. The <span class="cl">Audio</span> generates and plays the music based on the audio controls. If no <span class="cl">Shape</span> matches were made, the <span class="kw">gesture</span> is still passed on to <span class="cl">Interpreter</span> so that the <span class="cl">Interpreter</span> can try to calculate the flow of the <span class="kw">gesture</span>, rather than a specific shape.</li>
+        <li>Once the <span class="cl">Interpreter</span> has used a <span class="kw">gesture</span>, either specifically or generally, it returns that information back so that the <span class="cl">Frame</span> index can be marked for deletion. The <span class="cl">Recorder</span> is then asked to <span class="fn">Erase</span> those <span class="cl">Frame</span>s that have been used. If the <span class="cl">Interpreter</span> does not use the <span class="kw">gesture</span> (it may not a good time to use it musically) it will not be deleted and will be reprocessed next time when the <span class="cl">Recorder</span> is asked to <span class="fn">Eject</span>.</li>    
+        </ul>    
+    </p>
 
     <h2>Interpreter [SA]</h2>
 
@@ -435,143 +458,143 @@ For the time, it will calculate the time it takes from one frame (point) to anot
     <h4>Outputs:</h4>
     <p>All outputs will be to a software synthesizer (representing computer speakers)</p>
     <ul>
-		<li> a set of MIDI messages
-	</ul>
+        <li> a set of MIDI messages
+    </ul>
     <h4>Task milestones:</h4>
     <ul>
-		<li>spring break
-			<ul>
-				<li> Implement basic functionalities of Channel, MidiPlayer, COnductor</li>
-				<li> Research MIDI recording</>
-			</ul>
-		</li>
-		<li> week 8 of term
-			<ul>
-				<li>Based on feedback from group modify/add functionality to Conductor </li>
-				<li>Implement MidiRecoder</li>
-			</ul>
-		</li>
-		<li> week 9-12 of term
-			<ul>
-				<li>Testing</li>
-				<li>Secondary goals, e.g. functioning on Windows platform</li>
-				<li>Other secondary goals</li>
-			</ul>
-		</li>
+        <li>spring break
+            <ul>
+                <li> Implement basic functionalities of Channel, MidiPlayer, Conductor</li>
+                <li> Research MIDI recording</>
+            </ul>
+        </li>
+        <li> week 8 of term
+            <ul>
+                <li>Based on feedback from group modify/add functionality to Conductor </li>
+                <li>Implement MidiRecorder</li>
+            </ul>
+        </li>
+        <li> week 9-12 of term
+            <ul>
+                <li>Testing</li>
+                <li>Secondary goals, e.g. functioning on Windows platform</li>
+                <li>Other secondary goals</li>
+            </ul>
+        </li>
     </ul>
     <p>
-    	The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
-		abstraction between the high-level interface of the Conductor and the (relative) low-level interface of the
-		sound generation classes.
-	
-		MIDI messaging works with 'unsigned char', that is, every setting is encoded as a number.
-		To avoid using 'Magic Numbers' and ending up in a confusing lump of meaningless numbers, enumerated types 
-		will be used in the Synthesis and in the Sound Generation part of this project. E.g. there will be enumerated 
-		types for Chords, Middle Notes, Rhythms, Dynamics and Textures, so these will basically hide the numeric details
-		and only use the high-level musical representations. 
-	
-	<h3>MidiPlayer:</h3>
-	<p>	
-		(Formerly this class was called AudioController; it was renamed for naming consistency.)
-		This class provides facilities to connect to available Midi ports and to play MIDI audio based on several 
-		dedicated channels, such as rhythm, chords and percussion channels. 
-		This class provides a middle level of abstraction, so it is kept intentionally technical. It is intended 
-		not to obscure the details of the Midi messaging mechanism.  
-		
-		The class currently has 4 dedicated channels: lead, accompaniment, chords, percussion. Each of them can 
-		be controlled individually, thus allowing for different configurations on each. With this approach
-		it is possible to play different instruments at once, at different volume levels and with different 
-		effects, which results in a more authentic music experience.
-		 
-		
-		<ul>
-		The main tasks of this class are:
-		<li> finding available MIDI output ports, including the ones that were opened by software synthesisers. 
-	 	  If more than one is available, the user is given a choice to pick one, subsequently establishing a connection.
-	 	<li> sending control MIDI messages to the correct channels; there are the following message formats:
-	 		<table>
-	 		<tr><td>* Channel Mode</td><td>
-	 		<tr><td>* Control Change</td><td>
-	 		<tr><td>* Program Change</td><td>
-	 		<tr><td>* System Exclusive</td><td>
-	 		</table>
-	 	<li> sending messages to play notes on the different channels (Note On MIDI messages). 
-	 	  Each channel is being controlled by a separate method.
-	 	<li> sending a generic Note On message. Although this method is redundant for controlling the 4 dedicated
-	 	  channels, this function is included for completeness. It may be desirable in future to send a message
-	 	  to a channel other than our four, since, theoratically MIDI supports 16 simultaneous channels.
-	 	<li> sending messages to release playing notes. This functionality is vital, since MIDI does not stop
-	 	  playing a note automatically. Whithout releasing notes, one would very quickly get an indistiguishable
-	 	  blur of noise.
-	 	  Releasing notes on the channels will also have to be done separately, since some notes should be played
-	 	  longer than others.
-	 	<li> remember configurations, such as last played notes. This is necessary for some MIDI messages, however the
-	 	  user should have to worry about these, so the class does this automatically.
-	 	<li> handling exceptions. These should not be propagated into the upper levels but caught and handled here.
-	 	  If initial connection to a MIDI port has failed, feedback in form of a boolean return variable will be
-	 	  given. Any following errors, like wrong messages formats, resulting in exceptions being thrown, will be
-	 	  caught, but ingnored. I.e. no backward feedback will be given, since none of these errors are critical
-	 	  for the working of the rest of the program.
-	 	</ul>  
-	 	The class can be easily extended if future development (of the sound part or the moevement analysis part of
-	 	the project) will require additional (specialized/dedicated) functions.
-	 </p>	
-	<h3>Conductor:</h3>
-	<p>
-		The Conductor is wrapper class for the MidiPlayer providing a high-level musically oriented interface.
-		This class will be the interface between the Interpreter and the Sound Generation part of this project.
-		It is intended to hide all MIDI related details and only work with musical terminology. This will require
-		some basic understanding of how music works, however this class is intended to help the user by automating as
-		much as possible while still allowing for enough artistic freedom.
-	</p>
-	<p>
-		It works basically in two stages:
-	<ul>
-	<li>	Setting up the parts of the music piece. This is more or less equivalent to composing a music piece.
-	Methods are provided for specifying rhythms, dynamics, textures, chords and other effects as and when required. 
-	These will then call the correct function for the correct channels in the MidiPlayer class.
-	These settings can be carried out at any time, since they themselves do not result in any audible feedback,
-	they are only setting up attributes of the composition.
-	</li>
-	<li>	Playing audio. This method will actually produce a sound. To satisfy the timing constraints of music,
-	this method relies upon being called in regular time intervals, e.g. every quarter of a note, or every eigth of
-	the note. How much time actually passes between the calls is irrelevant for the Conductor, since music also
-	only relies on the relative intervals. 
-	</li>
-	</ul> 
-	This class again can be arbitrarily extended as development of the project progresses. Some of the movement analysis
-		may require a specific effect on the music, so the structure of the class has been set up in a way that will easily
-		cater for any future demand. This is also one of the strength of the MIDI technology.
+        The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
+        abstraction between the high-level interface of the Conductor and the (relative) low-level interface of the
+        sound generation classes.
+    
+        MIDI messaging works with 'unsigned char', that is, every setting is encoded as a number.
+        To avoid using 'Magic Numbers' and ending up in a confusing lump of meaningless numbers, enumerated types
+        will be used in the Synthesis and in the Sound Generation part of this project. E.g. there will be enumerated
+        types for Chords, Middle Notes, Rhythms, Dynamics and Textures, so these will basically hide the numeric details
+        and only use the high-level musical representations.
+    
+    <h3>MidiPlayer:</h3>
+    <p>    
+        (Formerly this class was called AudioController; it was renamed for naming consistency.)
+        This class provides facilities to connect to available Midi ports and to play MIDI audio based on several
+        dedicated channels, such as rhythm, chords and percussion channels.
+        This class provides a middle level of abstraction, so it is kept intentionally technical. It is intended
+        not to obscure the details of the Midi messaging mechanism.  
+        
+        The class currently has 4 dedicated channels: lead, accompaniment, chords, percussion. Each of them can
+        be controlled individually, thus allowing for different configurations on each. With this approach
+        it is possible to play different instruments at once, at different volume levels and with different
+        effects, which results in a more authentic music experience.
+        
+        
+        <ul>
+        The main tasks of this class are:
+        <li> finding available MIDI output ports, including the ones that were opened by software synthesisers.
+           If more than one is available, the user is given a choice to pick one, subsequently establishing a connection.
+         <li> sending control MIDI messages to the correct channels; there are the following message formats:
+             <table>
+             <tr><td>* Channel Mode</td><td>
+             <tr><td>* Control Change</td><td>
+             <tr><td>* Program Change</td><td>
+             <tr><td>* System Exclusive</td><td>
+             </table>
+         <li> sending messages to play notes on the different channels (Note On MIDI messages).
+           Each channel is being controlled by a separate method.
+         <li> sending a generic Note On message. Although this method is redundant for controlling the 4 dedicated
+           channels, this function is included for completeness. It may be desirable in future to send a message
+           to a channel other than our four, since, theoretically MIDI supports 16 simultaneous channels.
+         <li> sending messages to release playing notes. This functionality is vital, since MIDI does not stop
+           playing a note automatically. Without releasing notes, one would very quickly get an indistinguishable
+           blur of noise.
+           Releasing notes on the channels will also have to be done separately, since some notes should be played
+           longer than others.
+         <li> remember configurations, such as last played notes. This is necessary for some MIDI messages, however the
+           user should have to worry about these, so the class does this automatically.
+         <li> handling exceptions. These should not be propagated into the upper levels but caught and handled here.
+           If initial connection to a MIDI port has failed, feedback in form of a Boolean return variable will be
+           given. Any following errors, like wrong messages formats, resulting in exceptions being thrown, will be
+           caught, but ignored. I.e. no backward feedback will be given, since none of these errors are critical
+           for the working of the rest of the program.
+         </ul>  
+         The class can be easily extended if future development (of the sound part or the movement analysis part of
+         the project) will require additional (specialized/dedicated) functions.
+     </p>    
+    <h3>Conductor:</h3>
+    <p>
+        The Conductor is wrapper class for the MidiPlayer providing a high-level musically oriented interface.
+        This class will be the interface between the Interpreter and the Sound Generation part of this project.
+        It is intended to hide all MIDI related details and only work with musical terminology. This will require
+        some basic understanding of how music works, however this class is intended to help the user by automating as
+        much as possible while still allowing for enough artistic freedom.
+    </p>
+    <p>
+        It works basically in two stages:
+    <ul>
+    <li>    Setting up the parts of the music piece. This is more or less equivalent to composing a music piece.
+    Methods are provided for specifying rhythms, dynamics, textures, chords and other effects as and when required.
+    These will then call the correct function for the correct channels in the MidiPlayer class.
+    These settings can be carried out at any time, since they themselves do not result in any audible feedback,
+    they are only setting up attributes of the composition.
+    </li>
+    <li>    Playing audio. This method will actually produce a sound. To satisfy the timing constraints of music,
+    this method relies upon being called in regular time intervals, e.g. every quarter of a note, or every eighth of
+    the note. How much time actually passes between the calls is irrelevant for the Conductor, since music also
+    only relies on the relative intervals.
+    </li>
+    </ul>
+    This class again can be arbitrarily extended as development of the project progresses. Some of the movement analysis
+        may require a specific effect on the music, so the structure of the class has been set up in a way that will easily
+        cater for any future demand. This is also one of the strength of the MIDI technology.
     </p>
     <h3>Channel:</h3>
     <p>
-    	The Channel class is a Container class representing a single MIDI channel. It encapsulates the low-level details,
-    	i.e. the bit manipulations, of the MIDI messaging mechanism, as well as saving the current state of this channel.
-    	This information is important for some MIDI actions, such as releasing notes or determining matching chords or accompaniment.
-    	This class is supposed to be low-level, so it does not deal with exceptions, it only propagates them.
-    	
+        The Channel class is a Container class representing a single MIDI channel. It encapsulates the low-level details,
+        i.e. the bit manipulations, of the MIDI messaging mechanism, as well as saving the current state of this channel.
+        This information is important for some MIDI actions, such as releasing notes or determining matching chords or accompaniment.
+        This class is supposed to be low-level, so it does not deal with exceptions, it only propagates them.
+        
     <h3>RtMidi</h3>
     <p>
-    	This project makes use of the OpenSource RtMidi classes (&copy;2003-2007 Gary P. Scavone, McGill University)
-    	RtMidiIn and RtMidiOut.
-    	They provide basic low-level functionality such as probing for ports and opening available ones, providing
-    	code for these services on the UNIX, Windows and Mac OS platforms.
-    	An RtError class provides the appropriate exception handling, thus providing a solid basis.
+        This project makes use of the OpenSource RtMidi classes (&copy;2003-2007 Gary P. Scavone, McGill University)
+        RtMidiIn and RtMidiOut.
+        They provide basic low-level functionality such as probing for ports and opening available ones, providing
+        code for these services on the UNIX, Windows and Mac OS platforms.
+        An RtError class provides the appropriate exception handling, thus providing a solid basis.
     </p>
     
     <h3>MidiRecorder:</h3>
     <p>
-    	This class will write the audio output produced into a MIDI file.
-    	It will not be accessible directly from the user, but will be managed from the MidiPlayer class, since this
-    	class will also have all the information that will need to be recorded.
-    	MIDI files consist of a MThd header chunk that identifies the type of file as a MIDI file and specifies
-    	its format.
-    	MIDI files are build up of separate tracks which are being written to the file successively. This means that
-    	the MidiRecorder class will need buffer for each separate track, in out case we will probably have one track for each
-    	one of the channels used by the MidiPlayer class. Only after the music piece is completed the data from these buffer
-    	will be written to the file.
-    	The actual part of writing to file may turn out to be platform dependent. The first aim will be to enable this feature
-    	for the LINUX system, and only after that for the Windows platform as well. 
+        This class will write the audio output produced into a MIDI file.
+        It will not be accessible directly from the user, but will be managed from the MidiPlayer class, since this
+        class will also have all the information that will need to be recorded.
+        MIDI files consist of a MThd header chunk that identifies the type of file as a MIDI file and specifies
+        its format.
+        MIDI files are build up of separate tracks which are being written to the file successively. This means that
+        the MidiRecorder class will need buffer for each separate track, in out case we will probably have one track for each
+        one of the channels used by the MidiPlayer class. Only after the music piece is completed the data from these buffer
+        will be written to the file.
+        The actual part of writing to file may turn out to be platform dependent. The first aim will be to enable this feature
+        for the LINUX system, and only after that for the Windows platform as well.
     </p>
     
    <b>Note:</b> Normal PC computers do not have hardware MIDI support. Hence we are forced to use Software Synthesizer fro this project.
