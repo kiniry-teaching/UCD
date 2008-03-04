@@ -18,6 +18,13 @@ public:
 		
 		//Determinine the Mapping of the shape to audio commands
 		bool mapShape();
+
+                 
+                //Mapping from the shape given into audio control(chords, dynamic, rythmic, texture)
+                 // return integer of the last frame(point) use.
+                int shapeMatching(ShapeMatches* sm);
+
+            
 		
 		
 private:   
