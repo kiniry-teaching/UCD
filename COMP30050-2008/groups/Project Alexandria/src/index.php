@@ -2,6 +2,6 @@
 	include("include/header.php");
 ?>
 	<p>Future Site of Project Alexandria</p>
-<? php
+<?php
 	include("include/footer.php");
 ?>
