@@ -29,6 +29,7 @@
 			<tr><td>0.6</td><td>EB</td><td>Added pictures to explain Shape matching</td></tr>
 			<tr><td>0.7</td><td>DS</td><td>Finished Interface part</td></tr>
 			<tr><td>0.8</td><td>DS</td><td>Finished Parser part</td></tr>
+			<tr><td>0.9</td><td>JD</td><td>Wiimote Connection and Configuration parts added, minor edits, spelling</td></tr>
 		</table>
 	<h2>About</h2>
 		<table>
@@ -76,26 +77,167 @@
 		With this OS the process is much more simple and will be most likely produced using free software. If it is the 		case the project will be Windows portable then it will be presented in either a MSI or MSM setup packages. The 			production of the these packages I won't go into since production varies between software. An example of a 			third-party application would be WIX, this takes XML source code describing the package and converts it into the 			desired product. Though, a decision on what to use hasn't been made as this is a secondary requirement. 
 	</p>
 
-	<h2>Configuration</h2>
-	<p>...</p>
+	<h2>Configuration [JD]</h2>
+	<p>
+		In order for <b>Kinephon</b> to start properly, a connection with the wiimote has to be established before
+		the program itself can start. However, since we want to make it as convenient for users to use as possible,
+		we wanted to avoid using any commandline preparation steps. The configuration part ofthe program will therefore
+		provide a simple GUI (implemented using the GTK+ toolkit for portability) that will guide the user through the
+		process of stablishing the bluetooth connection and ensure that everything is working before the program itself is started.
+	</p>
+	<h4>Task milestones:</h4>
+	<p>Note: this depends on the wiimote connection implementation.</p>
+    <ul>
+    	<li> Weeks 8-10 of term:
+    		<ul>
+    			<li>implementation started</li>
+    		</ul>
+    	</li>
+    	<li> Weeks 10-12 of term:
+    		<ul>
+    			<li>implementation finished</li>
+    			<li>testing/debugging</li>
+    		</ul>
+    	</li>
+    </ul>	
 
-	<h2>Interface [DS]</h2>
+	<h2>Interface [DS, JD]</h2>
     	<p>
-		The Kinephon will have a motion sensitive interface. The user will wear two wristbands. From these wristbands 			will come two wires which from the end there will be a small hoop of tape. On top of this hoop there will be an 		Infrared LED. This hoop will be placed on either the index or middle finger of each hand. The user will turn on 		these LEDs via a switch on the wristband. When the system has been intialised and the LEDs are on, then user will 			stand in front of a Wiimote. The Wiimote contains an IR camera that can detech the LEDs on the user's fingers.
-		The user will then be able to generate notes at varying levels by forming gestures will both hands. These 			gestures will consist of drawing imaginary 2D shapes. Additional LEDs may also be placed at both above the 			shoulders and at the waist. These may be added to allow for further accuracy in the interpretation the LEDs 			movement.
+		The Kinephon will have a motion sensitive interface. The user will wear two wristbands. From these wristbands
+		will come two wires which from the end there will be a small hoop of tape. On top of this hoop there will be an
+		Infrared LED. This hoop will be placed on either the index or middle finger of each hand. The user will turn on
+		these LEDs via a switch on the wristband. When the system has been intialised and the LEDs are on, then user will
+		stand in front of a Wiimote. The Wiimote contains an IR camera that can detech the LEDs on the user's fingers.
+		The user will then be able to generate notes at varying levels by forming gestures will both hands. These 
+		gestures will consist of drawing imaginary 2D shapes. Additional LEDs may also be placed at both above the 
+		shoulders and at the waist. These may be added to allow for further accuracy in the interpretation the LEDs movement.
+	</p>
+	<p>
+		Note: The final design of the hardware interface may be changed depending on the results of our testing and availability
+		of construction materials.
 	</p>
 
 	<p><h3>Components:</h3></p><ul><li>Wiimote<ul><li>This is the primary controller for the Wii console, but in this project two of its features are being used. The first being the IR camera, which is used to detect the position of the IR LEDs. The second is the Bluetooth functionality. This allows communication with the device via a Bluetooth enabled device, in this case a laptop with built in Bluetooth or with a dongle.</li></ul></li><li>Laptop<ul><li>The laptop is the computer form we are using simply due to preference. All team members use primarily laptops over desktops. Though it could be stated that portability would be an advantage. The laptop will primarily be running Linux and secondly Windows. The finer details of program execution are mentioned elsewhere.</li></ul></li><li>Speakers<ul><li>The speakers are going to be simple standard Desktop external speakers, powered via the mains. The external are preferred over the internal laptop ones due to ease of replacement.</li></ul><li>Finger Emitters<ul><li>IR LEDs<ul><li>These will be wide angled and high power emitting Infrared LEDs.</li></ul></li><li>Stripboard<ul><li>This is simple stripboard, within which a simple circuit will be constructed on to control the Finger Emitters.</li></ul></li><li>Wire<ul><li>Wire to electrically connect the components.</li></ul></li><li>Switch<ul><li>The turn on/off the Finger Emitters.</li></ul></li><li>Wristband<ul><li>This to attach the stripboard to the body.</li></ul></li><li>Batteries<ul><li>These will simple wristwatch batteries towered together.</li></ul></ul></li></ul>
 	</p>
 	
+	<h2>Wiimote Connection [JD]</h2>
+	<h3>Wiimote</h3>
+	<p>
+		The wiimote, which will be used for transfering the information about user's gestures, is a controller
+		originally designed to control the wii console. In this project, we will be using it because it offers
+		features not wasily available otherwise. The two parts used will be the bluetooh chip and the IR camera
+		and the hardware attached to it.
+	</p>
+	<p>
+		The IR camera in the wiimote offers much better resolution than most realtively cheap and easily available webcams. 
+		The majority of those have resolution of either 640x480 or 800x600, while the wiimote camera has a resolution of 1024x768.
+		This will allow us to track the IR LEDs better. The wiimote also contains IR blob tracking hardware which will make
+		it much easier for us to track the IR LEDs as all the processing and filtering will be done in hardware.
+		This will allow us to concentrate on interpreting the information and actually using it, rather than having
+		to process the raw data in addition to the rest of the stuff.
+	</p>
+	<p>
+		The wiimote  will be connected to the computer via a bluetooth connection. The wiimote contains a Broadcom 2042 bluetooth chip,
+		which is used in devices following the bluetooth HID standard. This chip allows for communication over the L2CAP protocol.
+	</p>
+	<h3>Bluetooth Connection</h3>
+	<p> 
+		One of the goals of this project is to make it as portable as possible. This is unfortunately rather tricky
+		when dealing with hardware. This is also why Windows compatibility is also only a secondary goal. From the
+		reseach that was conducted, we have learned that there are some major differences in features that are available
+		on different platforms and that most of these depend on the bluetooth stack implementation. 
+	</p>
+	<p>
+		In linux, the situation is relatively simple. The main bluetooth stack is called BlueZ and works very well with
+		a lot of different bluetooth adapters and provides a very wide range of functionality including connections
+		using the L2CAP protocol and HCI profiles. There are also two major APIs for accessing the available features.
+		One of them is the BlueZ API itself and the second is called PyBlueZ and it is a set of Python bindings for BlueZ. 
+	</p>
+	<p>
+		On the other hand, the situation is rather complicated in Windows. The default Windows bluetooth stack is rather limited
+		in terms of functions, only allowing communication over the RFCOMM protocol, which makes it pretty much unusable for our
+		project (without extensive very low level coding) as the wiimote requires communication over the L2CAP protocol. However, 
+		there is a light at the end of the tunnel as there is an alternative bluetooth stack, which supports the L2CAP protocol. 
+		It is provided by Broadcom, which unfortunately also means that only Broadcom/Widcomm bluetooth adapters are supported. 
+		As for the APIs, the basic APIs are the Windows API and the Broadcom SDK. Moreover, there is also a port of PyBluez API
+		for Windows, which supports the default Windows bluetooth stack and has experimental support for the Broadcom/Widcomm stack.
+	</p>
+	<p>
+		Because of its portability and the wider support, it was decided that the PyBlueZ API will be used for this project.
+		This makes the project slightly more complex in that we will have to make sure our C++ and Python code works well together. 
+		However, using this API will provide us with much better potential portability, while maintaining all the necessary functionality.
+	</p>
+	<p>
+		<h3>Package Description:</h3>
+		<h4>Connection</h4>
+			<p>
+			This package will contain all the necessary functions to establish and maintain the connection with the wiimote and
+			for sending and receiving data.
+			</p>
+			<p>
+			The main functions will be <code>find_wiimote()</code>, <code>establish_connection()</code> and <code>close_connection()</code> (note: the naming of the functions may be changed in the final version of the program). The first one will
+			find all available bluetooth devices and if any of them is a wiimote, find its bluetooth address. <code>establish_connection()</code> will take care
+			of opening and binding sockets and preparing the connection for data transfer. <code>close_connection()</code> will close the connection
+			and free all used resources.
+			</p>
+		<h4>Communication</h4>
+			<p>
+			This package will handle the actual communication over the bluetooth connection. The data will be sent and received using the functions in this package.
+			The main methods will of course be <code>send()</code> and <code>receive()</code>. <code>send()</code> will take several bytes of information, convert it into format
+			used to send data over the bluetooth connection (strings) and send the packet. <code>receive()</code> will receive whatever data is  sent from the wiimote
+			filter out data with no meaning to us and pass on the useful information converted into bytes.
+			</p>
+		<h4>Utils</h4>
+			<p>
+				This package will containg utilities used for conversion from strings to bytes and vice versa and for all other small useful support
+				functions.
+			</p>
+		<h4>C++ glue</h4>
+			<p>
+				A simple C++ class will be constructed, so that it is possible to interface the python part with the rest of the
+				system. This class will contain a buffer containing data received from the wiimote, which will be queried by the parser.
+				This data will be a sequence of bytes and a timestamp. This timestamp will help data analysis to determine e.g. the speed of gestures. 
+			</p>
+			<p>
+				As for interfacing the python and C++ code, the Boost.Python library will be used (unless a better solution is found).
+				Boost.Python is a C++ library, which enables easy interfacing of python and C++ code, while supporting a wide range of
+				features (e.g. pointers and references, exporting iterators, manipulating objects). 
+			</p>
+		
+	</p>
+	
+	<h4>Task milestones:</h4>
+    <ul>
+    	<li> Spring break:
+    		<ul>
+    			<li>connection package implementation</li>
+    			<li>communication package implementation</li>
+    			<li>python/C++ glue implementation start</li>
+    		</ul>
+    	</li>
+    	<li> Weeks 8-10 of term:
+    		<ul>
+    			<li>python/C++ glue inplementation</li>
+    			<li>testing/debugging of the connection and communication packages</li>
+    		</ul>
+    	</li>
+    	<li> Weeks 10-12 of term:
+    		<ul>
+    			<li>further testing/debugging of all packages</li>
+    			<li>secondary goals, if time permits</li>
+    		</ul>
+    	</li>
+    </ul>	
+	
+	
 	<h2>Parser [DS]</h2>
 	<p>
 		The parser has the job of taking the output from the Bluetooth connection code in the form of reports, parsing the
-		hexidecimal information contained which refers to the x.y position of the LED blobs and also their size. This information
+		bytes of information which refers to the x.y position of the LED blobs and also their size. This information
 		is then passed on to the IparserRecorder. On intialisation the Parser object will take in a IparserRecorder. 
 		The wrapper class for the python connection code will take The Parser on intialisation. The PCC will call a function
 		in Parser passing it a buffer containing the bytes of a report everytime there is one. The parser will then take the
-		buffer and read the hexidecimal values, converting them into decimal and interpretating the particular report. On receiving
+		buffer and read the values, converting them into decimal and interpreting the particular report. On receiving
 		a report and converting it's contents we have then to pass it on to the IparserRecorder. When a new blob is descovered or
 		lost the Parser makes a call to the IparserRecorder with 'control'. 'record' sends the x, y and size information on each blob.
 		<h4>Task milestones:</h4>
