@@ -330,6 +330,92 @@
 		</ul>	
     </p>
 
+
+    <h2>Interpreter [SA]</h2>
+
+    <p>Converting analysis movement from the analyser into the high level commands for the audio, keep a short history of shapes i.e use the identity of shape to convert to the commands by specific control change and also keep in track of the track class(EB) for the general change.</p>
+
+    <p>The main goal for the interpreter is converting the movement from analyse into high level commands, the setting for rhythm, chords, dynamics and texture function from the class conductor(ED) would take high level commands.</p>
+
+    <h3>Example:</h3>
+     
+    <ul>
+        <li>For music dynamics:
+        <ul>
+            <li>P or piano, meaning 'soft' and</li>
+            <li>F or forte, meaning 'loud' or strong</li>
+        </ul>
+        </li>
+        <li>Degree of loudness or softness subtle are indicated by
+        <ul>
+            <li>Mp standing for mezzo-piano which means 'medium or moderately-quite'</li>
+            <li>Mf standing for mezzo-forte which means 'medium or moderately-loud'</li>
+        </ul>
+        </li>
+        <li>There are also ff for fortissimo which represent “very loud” and pp standing for pianissimo which represent 'very quiet'.</li>
+    </ul>
+
+    <p>This will determine the values for the music from the movement.
+    As at now, the interpreter is broken into the following classes.</p>
+
+
+    <h3>Movement:</h3>
+       <p>This class will work with the track class(EB) which as already create a frame for each point for a single movement. Here, the movement of the gesture will response to the shape in general and not single movement.</p>
+       
+    <p>This will allow each point to come together and then create a general movement.</p>
+
+
+    <ul>
+        <li>Depending on the different control of the 
+        Music we have.</li>
+        <li>The motion that response to the shape in General.</li>
+        <li>It works with the track class.</li>
+    </ul>
+
+    <p>The speed and time will be calculated.
+For the speed, calling the frames which represent the point from track and getting the distance from each frame (point) to another.
+For the time, it will calculate the time it takes from one frame (point) to another.</p>
+
+    <h3>Interpreter:</h3>
+    <p>This class will work with both the track and the shape, by using the shape identification to get/build the commands and the change for a specific control can is allowed from the audio.</p>
+
+    <p>Also, determine the Mapping of the shape to audio commands and also the map for each control into commands.</p>
+
+    <h4>Inputs:</h4>
+
+    <ul>
+    <li>Shape Movement(EB): int shapeMatching(ShapeMatches*) The movement of the shape as identification for shape to get the commands.</li>
+    <li>Track(EB): int tracking(Track*)The control of the general change will capture the movement.</li>
+    </ul>
+
+    <h4>Outputs:</h4>
+
+	<ul>
+	<li>Passing control to the input from audio(ED)</li>
+	</ul>
+
+    <h4>Task milestone:</h4>
+    <ul>
+        <li>Spring-break:
+            <ul>
+            <li>Determining more general high level commands for the music dynamics.</li>
+            <li>Start writing a pseudo code for the movement class and the interpreter.</li>
+            </ul>
+        </li>
+        <li>Week 8-9:
+            <ul>
+               <li>Start writing the source code for movement class.</li>
+               <li>Determine the values for the music from the movement.</li>
+            </ul>
+        </li>
+        <li>Week 10-12:
+            <ul>
+                <li>Start writing the source code for interpreter class.</li>
+                <li>Start converting the general movement into high level commands.</li>
+            </ul>
+        </li>
+    </ul>
+
  	<h2>Sound Synthesis and Generation [ED]</h2>
     <h3>Information</h3>
     <h4>Inputs:</h4>
