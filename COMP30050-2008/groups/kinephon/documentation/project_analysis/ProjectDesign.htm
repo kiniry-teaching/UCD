@@ -143,6 +143,48 @@
     </p>
 
  	<h2>Sound Synthesis and Generation [ED]</h2>
+    <h3>Information</h3>
+    <h4>Inputs:</h4>
+    <p>All inputs will be from <span class="cl">Interpreter</span> [ED]</p>
+    <ul>
+    <li><span class="fn">Conductor</span> by means of function calls such as
+		<ul>
+		<li> setLeadInstrument(uchar instrument); setAccompaniment(bool isOn, uchar type); setMelody(vector<uchar> melody);
+		<li> setChords(bool isOn, Chords chord); setRhythm(bool isOn, Rhythm rhythm); setTexture(bool isOn, Texture texture); setDynamics(bool isOn, Dynamics dynamics);
+		<li> modifyRhythm(uchar param);
+		<li> setHarmony(bool isOn, uchar param); setPedaling(bool isOn, uchar param); setReverberation(bool isOn);
+		<li> etc (depending on future development)
+		</ul>
+	</li>
+	
+    </ul>
+    <h4>Outputs:</h4>
+    <p>All outputs will be to a software synthesizer (representing computer speakers)</p>
+    <ul>
+		<li> a set of MIDI messages
+	</ul>
+    <h4>Task milestones:</h4>
+    <ul>
+		<li>spring break
+			<ul>
+				<li> Implement basic functionalities of Channel, MidiPlayer, COnductor</li>
+				<li> Research MIDI recording</>
+			</ul>
+		</li>
+		<li> week 8 of term
+			<ul>
+				<li>Based on feedback from group modify/add functionality to Conductor </li>
+				<li>Implement MidiRecoder</li>
+			</ul>
+		</li>
+		<li> week 9-12 of term
+			<ul>
+				<li>Testing</li>
+				<li>Secondary goals, e.g. functioning on Windows platform</li>
+				<li>Other secondary goals</li>
+			</ul>
+		</li>
+    </ul>
     <p>
     	The Synthesis consists of two classes: MidiPlayer and Conductor. The former represents a middle layer of
 		abstraction between the high-level interface of the Conductor and the (relative) low-level interface of the
@@ -155,6 +197,7 @@
 		and only use the high-level musical representations. 
 	
 	<h3>MidiPlayer:</h3>
+	<p>	
 		(Formerly this class was called AudioController; it was renamed for naming consistency.)
 		This class provides facilities to connect to available Midi ports and to play MIDI audio based on several 
 		dedicated channels, such as rhythm, chords and percussion channels. 
@@ -198,29 +241,31 @@
 	 	</ul>  
 	 	The class can be easily extended if future development (of the sound part or the moevement analysis part of
 	 	the project) will require additional (specialized/dedicated) functions.
-	 	
+	 </p>	
 	<h3>Conductor:</h3>
+	<p>
 		The Conductor is wrapper class for the MidiPlayer providing a high-level musically oriented interface.
 		This class will be the interface between the Interpreter and the Sound Generation part of this project.
 		It is intended to hide all MIDI related details and only work with musical terminology. This will require
 		some basic understanding of how music works, however this class is intended to help the user by automating as
 		much as possible while still allowing for enough artistic freedom.
-		</p>
+	</p>
+	<p>
 		It works basically in two stages:
-		<table>
-		1.) Setting up the parts of the music piece. This is more or less equivalent to composing a music piece.
-			Methods are provided for specifying rhythms, dynamics, textures, chords and other effects as and when required. 
-			These will then call the correct function for the correct channels in the MidiPlayer class.
-			These settings can be carried out at any time, since they themselves do not result in any audible feedback,
-			they are only setting up attributes of the composition.
-		</p>
-		2.) Playing audio. This method will actually produce a sound. To satisfy the timing constraints of music,
-			this method relies upon being called in regular time intervals, e.g. every quarter of a note, or every eigth of
-			the note. How much time actually passes between the calls is irrelevant for the Conductor, since music also
-			only relies on the relative intervals. 
-	 	</table>
-
-		This class again can be arbitrarily extended as development of the project progresses. Some of the movement analysis
+	<ul>
+	<li>	Setting up the parts of the music piece. This is more or less equivalent to composing a music piece.
+	Methods are provided for specifying rhythms, dynamics, textures, chords and other effects as and when required. 
+	These will then call the correct function for the correct channels in the MidiPlayer class.
+	These settings can be carried out at any time, since they themselves do not result in any audible feedback,
+	they are only setting up attributes of the composition.
+	</li>
+	<li>	Playing audio. This method will actually produce a sound. To satisfy the timing constraints of music,
+	this method relies upon being called in regular time intervals, e.g. every quarter of a note, or every eigth of
+	the note. How much time actually passes between the calls is irrelevant for the Conductor, since music also
+	only relies on the relative intervals. 
+	</li>
+	</ul> 
+	This class again can be arbitrarily extended as development of the project progresses. Some of the movement analysis
 		may require a specific effect on the music, so the structure of the class has been set up in a way that will easily
 		cater for any future demand. This is also one of the strength of the MIDI technology.
     </p>
