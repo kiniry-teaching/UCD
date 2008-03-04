@@ -18,6 +18,10 @@ public:
 		
 		//The deconstructor for the movement		
 		virtual ~Movement();
+
+               //the main work of the interpreter converting the movement into commads
+              // return integer of the last frame(point) use.
+             int tracking(Track* track);
 		
 };
 
