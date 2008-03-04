@@ -169,7 +169,7 @@ namespace ShArt
 			}
 		}
 
-		[DefaultValueAttribute(0.0),
+		[DefaultValueAttribute(0.0f),
 		 DescriptionAttribute("Dampen intensity of near pixels glow"),
 		 CategoryAttribute("Details")]
 		public float Dampen

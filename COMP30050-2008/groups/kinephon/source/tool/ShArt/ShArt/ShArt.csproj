@@ -49,6 +49,7 @@
     <Compile Include="frmShArt.Designer.cs">
       <DependentUpon>frmShArt.cs</DependentUpon>
     </Compile>
+    <Compile Include="KBHook.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

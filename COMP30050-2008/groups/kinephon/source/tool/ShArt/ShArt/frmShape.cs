@@ -34,6 +34,7 @@ namespace ShArt
 		public frmShape()
 		{
 			InitializeComponent();
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
 		public Shape Shape
@@ -65,35 +66,62 @@ namespace ShArt
 			if(_tool == TypesOfTool.Draw || _tool == TypesOfTool.Line || _tool == TypesOfTool.Paint)
 				clear = SetPixelLock(_mouseX, _mouseY, true, true);
 
-			for(int y = 0; y < _shape.Height; y++)
-			for(int x = 0; x < _shape.Width; x++)
-				SetNeighbourPixel(x, y, _shape.Pixels[x, y].Radius);
+			// Calculate maximum dimming amount
+			if(mnuViewGlow.Checked == true)
+			{
 
-			for(int y = 0; y < _shape.Height; y++)
-			for(int x = 0; x < _shape.Width; x++)
-				if((we = CalculateWeight(_shape.Pixels[x, y])) > mwe)
-					mwe = we;
+				for(int y = 0; y < _shape.Height; y++)
+				for(int x = 0; x < _shape.Width; x++)
+					SetNeighbourPixel(x, y, _shape.Pixels[x, y].Radius);
 
-			mwe = 1 / mwe;
-			mwe = (1 - (1 - mwe) * (float)trkWeight.Value / 50);
+				for(int y = 0; y < _shape.Height; y++)
+				for(int x = 0; x < _shape.Width; x++)
+					if((we = CalculateWeight(_shape.Pixels[x, y])) > mwe)
+						mwe = we;
+
+				mwe = 1 / mwe;
+				mwe = (1 - (1 - mwe) * (float)trkWeight.Value / 50);
+
+			}
 
 			for(int y = 0; y < _shape.Height; y++)
 			for(int x = 0; x < _shape.Width; x++)
 			{
-				we = CalculateWeight(_shape.Pixels[x, y]) * mwe;
-				if(we < -1) we = -1;
-				if(we >  1) we = 1;
+				r = 0;
+				g = 0;
+				// Calculate glow
+				if(mnuViewGlow.Checked == true)
+				{
+
+					we = CalculateWeight(_shape.Pixels[x, y]) * mwe;
+					if(we < -1) we = -1;
+					if(we >  1) we = 1;
+
+				}
+				else
+					we = _shape.Pixels[x, y].Weight;
+
 				if(we < 0)
-					r = (int)(62 * (-we));
+					if(mnuViewNegative.Checked == true)
+						r = (int)(62 * (-we));
+					else
+						r = 0;
 				else
 					g = (int)(62 * we);
-				if(_shape.Pixels[x, y].Weight > 0)
-					b = 62;
-				else
-				if(_shape.Pixels[x, y].Weight < 0)
-					b = -62;
-				else
-					b = 0;
+
+				// Add or remove a blue tint to the centre pixel
+				if(mnuViewPixel.Checked == true)
+					if(_shape.Pixels[x, y].Weight > 0)
+						b = 62;
+					else
+					if(_shape.Pixels[x, y].Weight < 0)
+						if(mnuViewNegative.Checked == true)
+							b = -62;
+						else
+							b = 0;
+					else
+						b = 0;
+
 				Brush br = new SolidBrush(Color.FromArgb(193 + r, 193 + g, 193 + b));
 				e.Graphics.FillRectangle(br, x * dx, y * dy, dx, dy);
 			}
@@ -117,6 +145,10 @@ namespace ShArt
 			if(_tool == TypesOfTool.Draw || _tool == TypesOfTool.Line || _tool == TypesOfTool.Paint)
 				if(clear == true)
 					SetPixelLock(_mouseX, _mouseY, false, false);
+
+			if(mnuViewZone.Checked == true)
+			{
+			}
 
 		}
 
@@ -192,7 +224,7 @@ namespace ShArt
 					return false;
 
 			if(draw == true)
-				SetPixel(x, y, _radius, 1.0f, 0.0f);
+				SetPixel(x, y, _radius, _weight, _falloff);
 			else
 				SetPixel(x, y, 1.0f, 0.0f, 0.0f);
 			picShape.Invalidate();
@@ -222,7 +254,10 @@ namespace ShArt
 							_zone = new Zone();
 							_zone.X = e.X;
 							_zone.Y = e.Y;
-							MapXY(_zone.X, _zone.Y);
+							float mx = e.X, my = e.Y;
+							MapXY(ref mx, ref my);
+							_zone.X = mx;
+							_zone.Y = my;
 							_shape.Zones.Add(_zone);
 							_zoneMode = 1;
 							break;
@@ -253,6 +288,15 @@ namespace ShArt
 		{
 			_mouseX = e.X;
 			_mouseY = e.Y;
+
+			float fx = e.X, fy = e.Y;
+			MapXY(ref fx, ref fy);
+			int x = (int)fx, y = (int)fy;
+			if(x >= 0 && y >= 0 && x < _shape.Width && y < _shape.Height)
+			{
+				stsCoords.Text = x.ToString("0") + ", " + y.ToString("0");
+				setPaintStatus(stsCanvas, _shape.Pixels[x, y].Weight, _shape.Pixels[x, y].Radius, _shape.Pixels[x, y].Falloff);
+			}
 
 			switch(_tool)
 			{
@@ -311,6 +355,7 @@ namespace ShArt
 			mnuImageDraw.Checked = false;
 			mnuImageLine.Checked = false;
 			_tool = TypesOfTool.Paint;
+			stsTool.Text = "Paint";
 		}
 
 		private void mnuImageDraw_Click(object sender, EventArgs e)
@@ -320,6 +365,7 @@ namespace ShArt
 			mnuImageDraw.Checked = true;
 			mnuImageLine.Checked = false;
 			_tool = TypesOfTool.Draw;
+			stsTool.Text = "Draw";
 		}
 
 		private void mnuImageLine_Click(object sender, EventArgs e)
@@ -329,72 +375,7 @@ namespace ShArt
 			mnuImageDraw.Checked = false;
 			mnuImageLine.Checked = true;
 			_tool = TypesOfTool.Line;
-		}
-
-		private void mnuImageRadius01_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (1.0)";
-			_radius = 1.0f;
-		}
-
-		private void mnuImageRadius02_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (2.0)";
-			_radius = 2.0f;
-		}
-
-		private void mnuImageRadius03_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (3.0)";
-			_radius = 3.0f;
-		}
-
-		private void mnuImageRadius04_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (4.0)";
-			_radius = 4.0f;
-		}
-
-		private void mnuImageRadius05_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (5.0)";
-			_radius = 5.0f;
-		}
-
-		private void mnuImageRadius10_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (10.0)";
-			_radius = 10.0f;
-		}
-
-		private void mnuImageRadius15_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (15.0)";
-			_radius = 15.0f;
-		}
-
-		private void mnuImageRadius20_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (20.0)";
-			_radius = 20.0f;
-		}
-
-		private void mnuImageRadius50_Click(object sender, EventArgs e)
-		{
-			mnuImageRadius.Text = "&Radius (50.0)";
-			_radius = 50.0f;
-		}
-
-		private void mnuImageRadiusInc_Click(object sender, EventArgs e)
-		{
-			_radius += 0.1f;
-			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
-		}
-
-		private void mnuImageRadiusDec_Click(object sender, EventArgs e)
-		{
-			_radius -= 0.1f;
-			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
+			stsTool.Text = "Line";
 		}
 
 		private void mnuViewGrid_Click(object sender, EventArgs e)
@@ -406,12 +387,12 @@ namespace ShArt
 		{
 			float w = 1.0f;
 			float h = (float)_shape.Height / _shape.Width;
-			float ow = ClientSize.Height / h;
+			float ow = (ClientSize.Height - stsStatus.Height) / h;
 			w = ((ClientSize.Width - trkWeight.Width) + ow) / 2;
 			h *= w;
 
 			Width = (int)(w + (Width - ClientSize.Width + trkWeight.Width));
-			Height = (int)(h + (Height - ClientSize.Height));
+			Height = (int)(h + (Height - ClientSize.Height +stsStatus.Height));
 
 		}
 
@@ -423,8 +404,8 @@ namespace ShArt
 		private void frmShape_Resize(object sender, EventArgs e)
 		{
 			picShape.Width = ClientSize.Width - trkWeight.Width;
-			picShape.Height = ClientSize.Height;
-			trkWeight.Height = ClientSize.Height;
+			picShape.Height = ClientSize.Height - stsStatus.Height;
+			trkWeight.Height = ClientSize.Height - stsStatus.Height;
 			trkWeight.Left = ClientSize.Width - trkWeight.Width;
 		}
 
@@ -445,11 +426,191 @@ namespace ShArt
 		private void mnuZoneAdd_Click(object sender, EventArgs e)
 		{
 			_tool = TypesOfTool.Zone;
+			stsTool.Text = "Zone";
 		}
 
 		private void mnuViewBound_Click(object sender, EventArgs e)
 		{
 			picShape.Invalidate();
+		}
+
+		private void mnuViewGlow_Click(object sender, EventArgs e)
+		{
+			picShape.Invalidate();
+		}
+
+		private void mnuViewPixel_Click(object sender, EventArgs e)
+		{
+			picShape.Invalidate();
+		}
+
+		private void mnuViewZone_Click(object sender, EventArgs e)
+		{
+			picShape.Invalidate();
+		}
+
+		#region mnuImageRadius
+		private void mnuImageRadius01_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (1.0)";
+			_radius = 1.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius02_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (2.0)";
+			_radius = 2.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius03_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (3.0)";
+			_radius = 3.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius04_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (4.0)";
+			_radius = 4.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius05_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (5.0)";
+			_radius = 5.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius10_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (10.0)";
+			_radius = 10.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius15_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (15.0)";
+			_radius = 15.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius20_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (20.0)";
+			_radius = 20.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadius50_Click(object sender, EventArgs e)
+		{
+			mnuImageRadius.Text = "&Radius (50.0)";
+			_radius = 50.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadiusInc_Click(object sender, EventArgs e)
+		{
+			_radius += 0.1f;
+			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageRadiusDec_Click(object sender, EventArgs e)
+		{
+			_radius -= 0.1f;
+			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+		#endregion
+		#region mnuImageWeight
+		private void mnuImageWeight4_Click(object sender, EventArgs e)
+		{
+			mnuImageWeight.Text = "&Weight (1.0)";
+			_weight = 1.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageWeight3_Click(object sender, EventArgs e)
+		{
+			mnuImageWeight.Text = "&Weight (0.5)";
+			_weight = 0.5f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageWeight2_Click(object sender, EventArgs e)
+		{
+			mnuImageWeight.Text = "&Weight (0.0)";
+			_weight = 0.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageWeight1_Click(object sender, EventArgs e)
+		{
+			mnuImageWeight.Text = "&Weight (-0.5)";
+			_weight = -0.5f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageWeight0_Click(object sender, EventArgs e)
+		{
+			mnuImageWeight.Text = "&Weight (-1.0)";
+			_weight = -1.0f;
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageWeightInc_Click(object sender, EventArgs e)
+		{
+			_weight += 0.1f;
+			if(_weight > 1)
+				_weight = 1;
+			mnuImageWeight.Text = "&Weight (" + _weight.ToString("0.0") + ")";
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+
+		private void mnuImageWeightDec_Click(object sender, EventArgs e)
+		{
+			_weight -= 0.1f;
+			if(_weight < -1)
+				_weight = -1;
+			mnuImageWeight.Text = "&Weight (" + _weight.ToString("0.0") + ")";
+			setPaintStatus(stsBrush, _weight, _radius, _falloff);
+		}
+		#endregion
+
+		private void setPaintStatus(ToolStripStatusLabel sts, float weight, float radius, float falloff)
+		{
+			sts.Text = weight.ToString("0.0") + ", " + radius.ToString("0.0") + ", " + falloff.ToString("0.0");
+		}
+
+		private void mnuViewNegative_Click(object sender, EventArgs e)
+		{
+			picShape.Invalidate();
+		}
+
+		private void frmShape_KeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.KeyCode == Keys.Subtract)
+				mnuImageWeightInc_Click(null, null);
+		}
+
+		private void frmShape_Activated(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void frmShape_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			;
+		}
+
+		private void trkWeight_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			;
 		}
 
 	}
