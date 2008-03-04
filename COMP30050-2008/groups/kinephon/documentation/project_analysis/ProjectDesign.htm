@@ -64,6 +64,18 @@
 
 	<p><h3>Components:</h3></p><ul><li>Wiimote<ul><li>This is the primary controller for the Wii console, but in this project two of its features are being used. The first being the IR camera, which is used to detect the position of the IR LEDs. The second is the Bluetooth functionality. This allows communication with the device via a Bluetooth enabled device, in this case a laptop with built in Bluetooth or with a dongle.</li></ul></li><li>Laptop<ul><li>The laptop is the computer form we are using simply due to preference. All team members use primarily laptops over desktops. Though it could be stated that portability would be an advantage. The laptop will primarily be running Linux and secondly Windows. The finer details of program execution are mentioned elsewhere.</li></ul></li><li>Speakers<ul><li>The speakers are going to be simple standard Desktop external speakers, powered via the mains. The external are preferred over the internal laptop ones due to ease of replacement.</li></ul><li>Finger Emitters<ul><li>IR LEDs<ul><li>These will be wide angled and high power emitting Infrared LEDs.</li></ul></li><li>Stripboard<ul><li>This is simple stripboard, within which a simple circuit will be constructed on to control the Finger Emitters.</li></ul></li><li>Wire<ul><li>Wire to electrically connect the components.</li></ul></li><li>Switch<ul><li>The turn on/off the Finger Emitters.</li></ul></li><li>Wristband<ul><li>This to attach the stripboard to the body.</li></ul></li><li>Batteries<ul><li>These will simple wristwatch batteries towered together.</li></ul></ul></li></ul>
 	</p>
+	
+	<h2>Parser [DS]</h2>
+	<p>
+		The parser has the job of taking the output from the Bluetooth connection code in the form of reports, parsing the
+		hexidecimal information contained which refers to the x.y position of the LED blobs and also their size. This information
+		is then passed on to the IparserRecorder. On intialisation the Parser object will take in a IparserRecorder. 
+		The wrapper class for the python connection code will take The Parser on intialisation. The PCC will call a function
+		in Parser passing it a buffer containing the bytes of a report everytime there is one. The parser will then take the
+		buffer and read the hexidecimal values, converting them into decimal and interpretating the particular report. On receiving
+		a report and converting it's contents we have then to pass it on to the IparserRecorder. When a new blob is descovered or
+		lost the Parser makes a call to the IparserRecorder with 'control'. 'record' sends the x, y and size information on each blob.
+	</p>
 
     <h2>Recorder and Analyser [EB]</h2>
     <h3>Information</h3>
