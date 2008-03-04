@@ -1,5 +1,7 @@
 ﻿<?php
 	include("include/header.php");
-	echo "<p>Future Site of Project Alexandria</p>";
+?>
+	<p>Future Site of Project Alexandria</p>
+<? php
 	include("include/footer.php");
 ?>
