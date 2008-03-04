@@ -12,7 +12,7 @@ namespace ShArt
 
 		protected int _x;
 		protected int _y;
-		protected float _radius = 0.0f;
+		protected float _radius = 1.0f;
 		protected float _weight = 0.0f;
 		protected float _falloff = 0.0f;
 		protected List<Pixel> _neighbours = new List<Pixel>();

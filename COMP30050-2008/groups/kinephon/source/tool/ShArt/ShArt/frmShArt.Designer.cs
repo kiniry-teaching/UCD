@@ -41,6 +41,7 @@ namespace ShArt
 			this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuShape = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuShapeNew = new System.Windows.Forms.ToolStripMenuItem();
+			this.mnuShapeNewChild = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuShapeDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuWindowArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +58,9 @@ namespace ShArt
 			this.imlShArt = new System.Windows.Forms.ImageList(this.components);
 			this.pgdProperties = new System.Windows.Forms.PropertyGrid();
 			this.splProperties = new System.Windows.Forms.Splitter();
+			this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
+			this.dlgSave = new System.Windows.Forms.SaveFileDialog();
+			this.dlgCompile = new System.Windows.Forms.FolderBrowserDialog();
 			mnuFileDiv1 = new System.Windows.Forms.ToolStripSeparator();
 			mnuFileDiv2 = new System.Windows.Forms.ToolStripSeparator();
 			this.mnuShArt.SuspendLayout();
@@ -108,24 +112,28 @@ namespace ShArt
 			this.mnuFileOpen.Name = "mnuFileOpen";
 			this.mnuFileOpen.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileOpen.Text = "&Open...";
+			this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
 			// 
 			// mnuFileSave
 			// 
 			this.mnuFileSave.Name = "mnuFileSave";
 			this.mnuFileSave.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileSave.Text = "&Save";
+			this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
 			// 
 			// mnuFileSaveAs
 			// 
 			this.mnuFileSaveAs.Name = "mnuFileSaveAs";
 			this.mnuFileSaveAs.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileSaveAs.Text = "Save &As...";
+			this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
 			// 
 			// mnuFileCompile
 			// 
 			this.mnuFileCompile.Name = "mnuFileCompile";
 			this.mnuFileCompile.Size = new System.Drawing.Size(136, 22);
 			this.mnuFileCompile.Text = "&Compile";
+			this.mnuFileCompile.Click += new System.EventHandler(this.mnuFileCompile_Click);
 			// 
 			// mnuFileExit
 			// 
@@ -138,6 +146,7 @@ namespace ShArt
 			// 
 			this.mnuShape.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuShapeNew,
+            this.mnuShapeNewChild,
             this.mnuShapeDelete});
 			this.mnuShape.MergeIndex = 1;
 			this.mnuShape.Name = "mnuShape";
@@ -147,15 +156,24 @@ namespace ShArt
 			// mnuShapeNew
 			// 
 			this.mnuShapeNew.Name = "mnuShapeNew";
-			this.mnuShapeNew.Size = new System.Drawing.Size(116, 22);
+			this.mnuShapeNew.Size = new System.Drawing.Size(132, 22);
 			this.mnuShapeNew.Text = "&New";
 			this.mnuShapeNew.Click += new System.EventHandler(this.mnuShapeNew_Click);
+			// 
+			// mnuShapeNewChild
+			// 
+			this.mnuShapeNewChild.Enabled = false;
+			this.mnuShapeNewChild.Name = "mnuShapeNewChild";
+			this.mnuShapeNewChild.Size = new System.Drawing.Size(132, 22);
+			this.mnuShapeNewChild.Text = "New &Child";
+			this.mnuShapeNewChild.Click += new System.EventHandler(this.mnuShapeNewChild_Click);
 			// 
 			// mnuShapeDelete
 			// 
 			this.mnuShapeDelete.Name = "mnuShapeDelete";
-			this.mnuShapeDelete.Size = new System.Drawing.Size(116, 22);
+			this.mnuShapeDelete.Size = new System.Drawing.Size(152, 22);
 			this.mnuShapeDelete.Text = "&Delete";
+			this.mnuShapeDelete.Click += new System.EventHandler(this.mnuShapeDelete_Click);
 			// 
 			// mnuWindow
 			// 
@@ -296,6 +314,23 @@ namespace ShArt
 			this.splProperties.TabIndex = 11;
 			this.splProperties.TabStop = false;
 			// 
+			// dlgOpen
+			// 
+			this.dlgOpen.DefaultExt = "sap";
+			this.dlgOpen.Filter = "ShArt Project files|*.sap|All files|*.*";
+			this.dlgOpen.Title = "Select the ShArt project to open..";
+			// 
+			// dlgSave
+			// 
+			this.dlgSave.DefaultExt = "sap";
+			this.dlgSave.Filter = "ShArt Project files|*.sap|All files|*.*";
+			this.dlgSave.Title = "Select a pathname to save the ShArt project..";
+			// 
+			// dlgCompile
+			// 
+			this.dlgCompile.Description = "Select a folder to store the compiled ShArt project and generated .h file";
+			this.dlgCompile.RootFolder = System.Environment.SpecialFolder.MyComputer;
+			// 
 			// frmShArt
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,9 +346,10 @@ namespace ShArt
 			this.IsMdiContainer = true;
 			this.MainMenuStrip = this.mnuShArt;
 			this.Name = "frmShArt";
-			this.Text = "ShArt (v0.1)";
+			this.Text = "ShArt (v0.1) - [untitled]";
 			this.Resize += new System.EventHandler(this.ShArt_Resize);
 			this.MdiChildActivate += new System.EventHandler(this.ShArt_MdiChildActivate);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmShArt_FormClosing);
 			this.Load += new System.EventHandler(this.ShArt_Load);
 			this.mnuShArt.ResumeLayout(false);
 			this.mnuShArt.PerformLayout();
@@ -341,7 +377,6 @@ namespace ShArt
 		private System.Windows.Forms.Splitter splPropertiesSplit;
 		private System.Windows.Forms.SplitContainer spcProperties;
 		private System.Windows.Forms.TreeView tvwShapes;
-		private System.Windows.Forms.PropertyGrid pgdProperties;
 		private System.Windows.Forms.Splitter splProperties;
 		private System.Windows.Forms.ToolStripMenuItem mnuWindowArrange;
 		private System.Windows.Forms.ToolStripMenuItem mnuWindowCascade;
@@ -354,6 +389,11 @@ namespace ShArt
 		private System.Windows.Forms.ImageList imlShArt;
 		public System.Windows.Forms.ToolStripStatusLabel stsStatus;
 		private System.Windows.Forms.StatusStrip stsShArt;
+		private System.Windows.Forms.ToolStripMenuItem mnuShapeNewChild;
+		private System.Windows.Forms.OpenFileDialog dlgOpen;
+		private System.Windows.Forms.SaveFileDialog dlgSave;
+		private System.Windows.Forms.FolderBrowserDialog dlgCompile;
+		public System.Windows.Forms.PropertyGrid pgdProperties;
 	}
 }
 
