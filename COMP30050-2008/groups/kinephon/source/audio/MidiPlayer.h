@@ -37,6 +37,9 @@ public:
 	 */
 	MidiPlayer();
 	
+    /**
+     * Destroy this MidiPlayer.
+     */
 	virtual ~MidiPlayer();
 	
 	/**
@@ -63,8 +66,8 @@ public:
     
 	
 	/**
-	 * Set if music piece is to be recorded
-	 * @param true when setting recoding ON, false when setting OFF
+	 * Set if music piece is to be recorded.
+	 * @param  setOn true when setting recoding ON, false when setting OFF
 	 * @return true if recording is ready/file has been closed
 	 */
 	bool setRecording(bool setOn);

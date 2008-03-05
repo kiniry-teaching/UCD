@@ -3,19 +3,6 @@
 
 #include "MidiPlayer.h"
 
-/**
- * Wrapper class for MidiPlayer, hiding the MIDI particular message 
- * passing and providing a musically oriented interface instead.
- * Good webpages for reference:
- * wikipedia and google :-)
- * http://www.wonderful-music.com/philosophy.html
- * http://www.classicalarchives.com/tutorial/
- * http://www.midistudio.com/Management/R-Finley/MidiTips.html
- * @author      ED
- * @version     1.0
- */
-
-
 //Note:
 // The following enumerated types may be extended/shortend/changed/discarded
 // depending on whether we will actually use them and how.	
@@ -29,6 +16,17 @@ enum Dynamics { DYNAMICS_PIANO, DYNAMICS_FORTE, DYNAMICS_PIANISSIMO, DYNAMICS_FO
 
 enum Texture { TEXTURE_OMNI, TEXTURE_MONO, TEXTURE_POLY };
 
+/**
+ * Wrapper class for MidiPlayer, hiding the MIDI particular message 
+ * passing and providing a musically oriented interface instead.
+ * Good webpages for reference:
+ * wikipedia and google :-)
+ * http://www.wonderful-music.com/philosophy.html
+ * http://www.classicalarchives.com/tutorial/
+ * http://www.midistudio.com/Management/R-Finley/MidiTips.html
+ * @author      ED
+ * @version     1.0
+ */
 class Conductor
 {
 public:
@@ -36,7 +34,10 @@ public:
     * Constructs a new Conductor class.
     */
 	Conductor();
-		
+    
+    /**
+     * Destroy this Conductor.
+     */		
 	virtual ~Conductor();
 	
 	/**
@@ -195,8 +196,7 @@ public:
 	 * <li> pianissimo (very quiet)
 	 * <li> fortissimo (very strong)
 	 * </ul>
-	 * @param
-	 * @return
+	 * @param dynamics the type of dynamics to use
 	 */
 	void setDynamics(Dynamics dynamics);
 	

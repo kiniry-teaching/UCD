@@ -5,14 +5,7 @@
 #include "../type.h"
 #include <vector>
 using namespace std;
-/**
- * Represents a single Midi channel.
- * This class encapsulates the low level, i.e. bit level, details
- * of the Midi messaging mechanism. It also acts as a container for the
- * various settings a Midi channel may have.
- * @author      ED
- * @version		1.0     
- */ 
+
 
  
 	/* 
@@ -31,7 +24,15 @@ using namespace std;
 	const uchar MIDDLE_A = 69;
 	const uchar MIDDLE_ASHARP = 70;
 	const uchar MIDDLE_B = 71;
-		
+
+/**
+ * Represents a single Midi channel.
+ * This class encapsulates the low level, i.e. bit level, details
+ * of the Midi messaging mechanism. It also acts as a container for the
+ * various settings a Midi channel may have.
+ * @author      ED
+ * @version     1.0     
+ */ 		
 class Channel
 {
 public:
@@ -43,6 +44,9 @@ public:
 	 */
 	Channel(RtMidiOut* midiout, int number);
 	
+    /**
+     * Destroy this Channel.
+     */
 	virtual ~Channel();
 	
 	/**
@@ -94,6 +98,7 @@ public:
      * Sends a Note Off message for a specific pitch.
      * This method is necessary to cater for chords, since we have 3 simultaneous
      * pitches there.
+     * @param pitch the pitch of the note to be released
      * @throws RtError if anything went wrong  
      */
     void release(uchar pitch);

@@ -14,11 +14,15 @@
 
 #include <iostream>
 #include <string>
-
+/**
+ * An error class.
+ */
 class RtError
 {
 public:
-  //! Defined RtError types.
+  /** 
+   * Defined RtError types.
+   */
   enum Type {
     WARNING,           /*!< A non-critical error. */
     DEBUG_WARNING,     /*!< A non-critical error which might be useful for debugging. */
@@ -34,26 +38,44 @@ public:
   };
 
 protected:
+  /**
+   * Message.
+   */
   std::string message_;
+  /**
+   * Type.
+   */
   Type type_;
 
 public:
-  //! The constructor.
+  /**
+   * The constructor.
+   */
   RtError(const std::string& message, Type type = RtError::UNSPECIFIED) : message_(message), type_(type) {}
 
-  //! The destructor.
+  /** 
+   * The destructor.
+   */
   virtual ~RtError(void) {};
 
-  //! Prints thrown error message to stderr.
+  /**
+   * Prints thrown error message to stderr.
+   */
   virtual void printMessage(void) { std::cerr << '\n' << message_ << "\n\n"; }
 
-  //! Returns the thrown error message type.
+  /** 
+   * Returns the thrown error message type.
+   */
   virtual const Type& getType(void) { return type_; }
 
-  //! Returns the thrown error message string.
+  /** 
+   * Returns the thrown error message string.
+   */
   virtual const std::string& getMessage(void) { return message_; }
 
-  //! Returns the thrown error message as a C string.
+  /** 
+   * Returns the thrown error message as a C string.
+   */
   virtual const char *getMessageString(void) { return message_.c_str(); }
 };
 

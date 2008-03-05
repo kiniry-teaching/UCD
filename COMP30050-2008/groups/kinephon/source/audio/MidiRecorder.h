@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 using namespace std;
+
 /**
  * Records a MIDI file.
  * @author ED 
  * @version 1.0
  */
-
 class MidiRecorder
 {
 public:
@@ -18,6 +18,9 @@ public:
 	 */
 	MidiRecorder();
 	
+    /**
+     * Destroy this MidiRecorder.
+     */
 	virtual ~MidiRecorder();
 	
 	/** 
@@ -47,7 +50,7 @@ public:
 	/** 
 	 * Writes a new event to buffer.
 	 * @param event message to be written to file
-	 * @param track trackNo number this event belongs to
+	 * @param trackNo trackNo number this event belongs to
 	 * @returns true if write is successful
 	 */
 	bool write(vector<uchar>* event, int trackNo);
