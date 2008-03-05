@@ -1,7 +1,12 @@
-from Connection import btConnection
+from Connection import bt_connection
 import Communication
 
-wiimote_address = btConnection.findWiimote()
+from converter import toBytes
+from converter import toString
 
-if (wiimote_address != btConnection.NOT_FOUND):
-    btConnection.establishConnection(wiimote_address)
+
+wiimote_address = bt_connection.find_wiimote()
+
+if (wiimote_address != bt_connection.NOT_FOUND):
+    bt_connection.establish_connection(wiimote_address)
+    
