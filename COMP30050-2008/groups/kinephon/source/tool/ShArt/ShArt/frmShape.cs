@@ -513,14 +513,14 @@ namespace ShArt
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadiusInc_Click(object sender, EventArgs e)
+		public void mnuImageRadiusInc_Click(object sender, EventArgs e)
 		{
 			_radius += 0.1f;
 			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadiusDec_Click(object sender, EventArgs e)
+		public void mnuImageRadiusDec_Click(object sender, EventArgs e)
 		{
 			_radius -= 0.1f;
 			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
@@ -563,7 +563,7 @@ namespace ShArt
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageWeightInc_Click(object sender, EventArgs e)
+		public void mnuImageWeightInc_Click(object sender, EventArgs e)
 		{
 			_weight += 0.1f;
 			if(_weight > 1)
@@ -572,7 +572,7 @@ namespace ShArt
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageWeightDec_Click(object sender, EventArgs e)
+		public void mnuImageWeightDec_Click(object sender, EventArgs e)
 		{
 			_weight -= 0.1f;
 			if(_weight < -1)

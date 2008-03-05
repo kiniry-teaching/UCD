@@ -15,7 +15,9 @@ namespace ShArt
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			KBHook.SetHook();
 			Application.Run(ShArt = new frmShArt());
+			KBHook.Unhook();
 		}
 	}
 }

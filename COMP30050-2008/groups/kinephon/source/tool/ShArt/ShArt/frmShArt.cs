@@ -16,7 +16,42 @@ namespace ShArt
 
 		public frmShArt()
 		{
+			KBHook.OnKeydown += OnKeydown;
 			InitializeComponent();
+		}
+
+		public void OnKeydown(Keys key)
+		{
+			stsStatus.Text = key.ToString();
+			switch(key)
+			{
+
+				case Keys.OemMinus:
+				case Keys.Oemplus:
+					OnKeydownShape(key);
+					break;
+
+
+			}
+		}
+
+		public void OnKeydownShape(Keys key)
+		{
+			frmShape shape;
+
+			if(ActiveMdiChild is frmShape)
+				shape = (frmShape)ActiveMdiChild;
+			else
+				return;
+
+			switch(key)
+			{
+				case Keys.OemMinus: shape.mnuImageWeightDec_Click(null, null); break;
+				case Keys.Oemplus: shape.mnuImageWeightInc_Click(null, null); break;
+				case Keys.OemOpenBrackets: shape.mnuImageRadiusDec_Click(null, null); break;
+				case Keys.Oem6: shape.mnuImageRadiusInc_Click(null, null); break;
+			}
+
 		}
 
 		private void setCaption()
