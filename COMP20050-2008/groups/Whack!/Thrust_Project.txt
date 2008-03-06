@@ -1,0 +1,56 @@
+﻿Group name: Whack!
+Group Members:	David Maguire dmaguire 06024769
+			Tara Flood tflood 06361188
+	   		Allison Fallon afallon 06584551
+
+	For our project we hope to recreate the Commoder 64 game Thrust. By todays standards Thrust is a relatively basic computer game, which sees the player taking control of a spaceship and attempting to maneuver through a 2D landscape while trying to avoid obstacles. We will be coding this using linux an operating system which uses unix.  By visual analysis alone, i.e. without viewing any code, we hope to identify what the main components of the game are and recreate them.
+
+Requirements:
+Linux Operating System – our group is using ubuntu
+Access to the online Trac to share and edit files
+Programming environment – we are using eclipse
+A working copy of the game Thrust
+Knowledge of the programming language Java
+Internet access
+Group contact details
+
+Project Purpose:
+	The purpose of the project, from our group's perspective,  is to become more familiar with a new operating system, as none of the members in our group have ever used any other operating system other than Windows. We are also gaining knowledge in a broader range of software outside of Microsoft, for example we are now using Firefox instead “Intercrap Exploder” as well as 
+expanding our knowledge by using emacs and vi etc.
+
+Analysis and Design:
+We have become familiar with every aspect of the game, we have done this by playing with the game and viewing screenshots of the game.
+We have identified all the main concepts of the game.
+We identified relationships linking those concepts.
+We then used those relationships to group the concepts into clusters.
+During this we have been learning about other software on linux that will later aid us in developing the project.
+
+Class Dictionary:
+
+Ball- Round Entity, it is your goal to collect
+Bullets - Entity fired from Spaceship and Turrets
+Collision - When the Spaceship comes into contact with another Entity
+Colour - Visually stimulating effect
+Death - Life goes down due to Collision with other Entity
+Entity - A visual object in the game
+Explosion - Green dots appear when Collision occurs
+Factory - Yellow and blue Entity, destroying increases Score
+Fuel - A blue box
+Fuel Gauge – A String at the top of the screen with an associated Integer that decreases as Spaceship moves and increases while Sucking Fuel. When Integer reaches zero Life decreases
+Forcefield - Circle around Spaceship, protects from Bullets
+Gravity - Pulls Spaceship towards Landscape
+Integer - A number
+Landscape - Horizontal lines, Entities
+Life - A String at the top of the screen with an associated Integer that decreases after each Death
+Momentum - Continue to move forward after releasing forward
+Music - Tones played during gameplay
+Rod - Connects Spaceship to the Ball
+Score - A String at the top of the screen with an associated Integer that increases
+Sound - Noise produced by an Entity
+Spaceship - Main triangular Entity you control
+Stars - Coloured dots above the Landscape
+String - Word
+Sucking Fuel - Causes Fuel Gauge to increase
+Teleporting - Spaceship disappears with Ball in the sky
+Tracking - Allows Turrets to lock onto Spaceship
+Turrets - Entity, tracks Spaceships movement,fires Bullets
