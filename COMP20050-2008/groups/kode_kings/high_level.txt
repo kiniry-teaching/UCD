@@ -1,0 +1,276 @@
+system_chart THE_GAME
+  cluster E description ""
+  cluster D description ""
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart FUEL
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "What the SHIP uses to move"
+part "1/1 "
+query
+  "Quantity" 
+command
+  "Increase", "Reduce"
+constraint
+  "Must be greater than or equal to zero"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart LIFE
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "How many SHIP available"
+part "1/1 "
+query
+  "Quantity" 
+command
+  "Reduce"
+constraint
+  "Must be greater than or equal to zero"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart DEATH
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "Losing a LIFE"
+part "1/1 "
+query
+  "Dead" 
+command
+  ""
+constraint
+  ""
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart SCORE
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "An INT that represents progress"
+part "1/1 "
+query
+  "Quantity" 
+command
+  "Increase"
+constraint
+  "Must be greater than or equal to zero"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart ENTITY
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "A visual object in the game"
+part "1/1 "
+query
+  "" 
+command
+  "Display" "Hide"
+constraint
+  ""
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart SHIP
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "The ENTITY that collects the BALL"
+part "1/1 "
+query
+  "Location", "Orientation", "Speed", "Have Ball" 
+command
+  "Thrust", "Turn", "Shoot", "Use Shield", "Use Tractor Beam"
+constraint
+  "Must be visible on GAME SCREEN"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart BALL
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "Green circle on BALL HOLDER"
+part "1/1 "
+query
+  "Location", "Speed", "Direction"
+command
+  "Attach"
+constraint
+  "Must be one and only one on each level"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart BALL_HOLDER
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "Holds BALL"
+part "1/1 "
+query
+  "Have BALL" 
+command
+  "Release BALL"
+constraint
+  "Must be one and only one on each level",
+  "Must start level holding BALL"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart TRACTOR_BEAM
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "Attaches BALL to SHIP"
+part "1/1 "
+query
+  "Near BALL", "Near FUEL"
+command
+  "Pick up"
+constraint
+  "FUEL must be greater than zero"
+end
+
+cluster_chart E
+  class C description ""
+  class N description ""
+end
+
+class_chart FACTORY
+indexing
+  clauster: "";
+  created: "2008-03-05 cc";
+explanation
+  "Destructable ENTITY that activates TIMER"
+part "1/1 "
+query
+  "Destroyed", "Stunned"  
+command
+  "Stop power", "Explode"
+constraint
+  "Must be one and only one per level"
+end
+
+creation_chart THE_GAME
+indexing
+  author: "";
+  created: "2008-03-05 cc";
+explanation
+  "List of classes creating objects in the system."
+creator CHANNEL creates (IMPLEMENTATIONS)
+creator CHANNEL_ANALYST creates CHANNEL_INFORMATION
+end
+
+scenario_chart THE_GAME
+indexing
+  author: "";
+  created: "2008-03-05 cc";
+explanation
+  "Set of representative scenarios to show important types of system \
+  \behavior."
+scenario
+  "Initialize the Connector system."
+description
+  "When a system starts up the connector system needs to be \
+  \initialized. This is a potentially lengthy operation in that it must \
+  \query the system to determine which channel types are available."
+scenario
+  "Shutdown the Connector system."
+description
+  "When a system shuts down, all of the components, connectors, and \
+  \channels need be shut down in an orderly fashion."
+end
+
+event_chart THE_GAME
+incoming
+indexing
+  author: "";
+  created: "2008-03-05 cc";
+explanation
+  ""
+part
+  "1/2"
+event
+  "Send an SDO on a connector."
+involves
+  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+event
+  "Query the properties of a channel."
+involves
+  CHANNEL, (IMPLEMENTATIONS)
+end
+
+event_chart THE_GAME
+outgoing
+indexing
+  author: "";
+  created: "2008-03-05 cc";
+explanation
+  ""
+part
+  "2/2"
+event
+  "Send an SDO on a connector."
+involves
+  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+event
+  "Query the properties of a channel."
+involves
+  CHANNEL, (IMPLEMENTATIONS)
+L
+end
+
+

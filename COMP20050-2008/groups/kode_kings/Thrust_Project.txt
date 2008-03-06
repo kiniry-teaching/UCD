@@ -1,0 +1,113 @@
+Group Name: KodeKings 
+
+Group Members:
+
+Colin Casey, Ccasey, 04319176
+
+Ciaran Hale, ciaranhale, 05416370
+
+Neil Mc Carthy, nmccarthy , 06449034
+
+Introduction to Project:
+
+This project involves making the game Thrust from Commodore 64. There are many aspects to consider when coding this game. Even though it is a basic game, it involves a lot of code. The main aim within our group is to fully complete the coding of this game and have it running to its original capabilities.
+
+
+Project Requirements:
+
+1: Outline high level concepts
+2: Convert these concepts to Java methods
+3: Complete the code of the game
+
+
+Project Purpose Overview:
+
+The purpose of the project is to teach us how to work as team with the goal of developing a working replica of the Commodore 64 game Thrust. We will learn to use industry tools to aid us in this goal. We will also use a formal standard throughout the design and implementation process.
+
+
+A Summary of Analysis and Design:
+
+
+Project Dictionary:
+
+*CONCEPT* *DEFINITION*
+-----------------------------------
+
+FUEL - What the SHIP uses to move
+LIFE - How many SHIP available
+DEATH - Losing a LIFE
+SCORE - An INT that represents progress
+ENTITY - A visual object in the game
+SHIP - The ENTITY that collects the BALL
+BALL - Green circle on BALL HOLDER
+BALL HOLDER - Holds BALL
+TRACTOR BEAM - Attaches BALL to SHIP
+FACTORY - Destructable ENTITY that activates TIMER
+TIMER - Countdown from an INT
+PLANET - ENTITY that destroys SHIP if SHIP touches it
+SPACE - Background that SHIP flies through
+STARS- ENTITY in SPACE
+INTS - Numerical values on SCREEN
+STRING - STRING values on SCREEN
+COLOUR - Color with a 'u'
+BULLETS - ENTITY that causes DEATH
+ENEMIES - ENTITY that emits BULLETS
+SCREEN - What the monitor shows
+GRAPHICS - ENTITY displayed on SCREEN
+SOUND - What is heard
+GRAVITY - Pulls SHIP down
+STATUS BAR - Displays values for FUEL, LIFE and SCORE
+EXPLOSION - ENTITY displayed on DEATH
+SHIELD - Stops BULLETS causing DEATH
+MAIN MENU - SCREEN shown at start up
+GAME SCREEN - SCREEN shown during play
+HIGH SCORE - SCREEN shown when all LIFE are lost
+
+
+*IS-A RELATIONS*
+-----------------------------------
+
+SHIP is an ENTITY.
+BALL is an ENTITY.
+BALL HOLDER is an ENTITY.
+TRACTOR BEAM is an ENTITY.
+FACTORY is an ENTITY.
+PLANET  is an ENTITY.
+SPACE is an ENTITY.
+BULLETS is an ENTITY.
+ENEMIES is an ENTITY.
+STATUS BAR is an ENTITY.
+EXPLOSION is an ENTITY.
+SHIELD is an ENTITY.
+
+*HAS-A RELATIONS*
+-----------------------------------
+
+ENTITY has a COLOUR. 
+SHIP has a SOUND, TRACTOR BEAM, SHIELD.
+TRACTOR BEAM has a SOUND.
+TIMER has a SOUND.
+PLANET has a BALL HOLDER, FACTORY, ENEMIES.
+SPACE has STARS, SHIP.
+BULLETS has a SOUND
+SCREEN has GRAPHICS
+STATUS BAR has LIFE,FUEL,SCORE.
+EXPLOSION has a SOUND.
+SHIELD has a SOUND.
+SPACE has a PLANET
+SHIP has BULLETS
+
+*IS-A-KIND-OF RELATIONS*
+-----------------------------------
+
+FUEL is a kinda ENTITY,INT,STRING.
+LIFE is a kinda INT,STRING.
+SCORE is a kinda INT,STRING.
+TIMER is a kinda INT,ENTITY.
+
+
+
+
+
+
+
