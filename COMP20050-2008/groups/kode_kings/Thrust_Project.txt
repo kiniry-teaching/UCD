@@ -35,7 +35,6 @@ Project Dictionary:
 
 FUEL - What the SHIP uses to move
 LIFE - How many SHIP available
-DEATH - Losing a LIFE
 SCORE - An INT that represents progress
 ENTITY - A visual object in the game
 SHIP - The ENTITY that collects the BALL
@@ -47,18 +46,17 @@ TIMER - Countdown from an INT
 PLANET - ENTITY that destroys SHIP if SHIP touches it
 SPACE - Background that SHIP flies through
 STARS- ENTITY in SPACE
-INTS - Numerical values on SCREEN
+INT - Numerical value on SCREEN
 STRING - STRING values on SCREEN
 COLOUR - Color with a 'u'
-BULLETS - ENTITY that causes DEATH
+BULLETS - ENTITY that causes SHIP to be destroyed
 ENEMIES - ENTITY that emits BULLETS
-SCREEN - What the monitor shows
-GRAPHICS - ENTITY displayed on SCREEN
-SOUND - What is heard
+MUSIC - Continuous noise heard
+SOUND EFFECTS - Noise made by ENTITY
 GRAVITY - Pulls SHIP down
 STATUS BAR - Displays values for FUEL, LIFE and SCORE
-EXPLOSION - ENTITY displayed on DEATH
-SHIELD - Stops BULLETS causing DEATH
+EXPLOSION - ENTITY displayed after SHIP is destroyed
+SHIELD - Stops BULLETS causing SHIP to be destroyed
 MAIN MENU - SCREEN shown at start up
 GAME SCREEN - SCREEN shown during play
 HIGH SCORE - SCREEN shown when all LIFE are lost
@@ -79,6 +77,7 @@ ENEMIES is an ENTITY.
 STATUS BAR is an ENTITY.
 EXPLOSION is an ENTITY.
 SHIELD is an ENTITY.
+STARS is an ENTITY.
 
 *HAS-A RELATIONS*
 -----------------------------------
@@ -91,7 +90,7 @@ PLANET has a BALL HOLDER, FACTORY, ENEMIES.
 SPACE has STARS, SHIP.
 BULLETS has a SOUND
 SCREEN has GRAPHICS
-STATUS BAR has LIFE,FUEL,SCORE.
+STATUS BAR has LIFE, FUEL, SCORE.
 EXPLOSION has a SOUND.
 SHIELD has a SOUND.
 SPACE has a PLANET
@@ -100,10 +99,10 @@ SHIP has BULLETS
 *IS-A-KIND-OF RELATIONS*
 -----------------------------------
 
-FUEL is a kinda ENTITY,INT,STRING.
-LIFE is a kinda INT,STRING.
-SCORE is a kinda INT,STRING.
-TIMER is a kinda INT,ENTITY.
+FUEL is a kinda ENTITY, INT, STRING.
+LIFE is a kinda ENTITY, INT, STRING.
+SCORE is a kinda ENTITY, INT, STRING.
+TIMER is a kinda INT, ENTITY.
 
 
 

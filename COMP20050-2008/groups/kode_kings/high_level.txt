@@ -1,11 +1,47 @@
 system_chart THE_GAME
-  cluster E description ""
-  cluster D description ""
+  cluster GRAPHICS description "ENTITY displayed on SCREEN"
+  cluster VALUES description "Predefined range of descriptive characteristics inherent in the game"
+  cluster SCREEN description "What the monitor shows"
+  cluster SOUND description "Noises heard by the user"
 end
 
-cluster_chart E
-  class C description ""
-  class N description ""
+cluster_chart GRAPHICS
+  class ENTITY description ""
+  class FUEL description ""
+  class LIFE description ""
+  class SCORE description ""
+  class SHIP description ""
+  class BALL description ""
+  class BALL_HOLDER description ""
+  class TRACTOR_BEAM description ""
+  class FACTORY description ""
+  class TIMER description ""
+  class PLANET description ""
+  class SPACE description ""
+  class STARS description ""
+  class BULLETS description ""
+  class ENEMIES description ""
+  class SHIELD description ""
+  class EXPLOSION description ""
+  class STATUS_BAR description ""
+end
+
+cluster_chart VALUES
+  class INT description ""
+  class STRING description ""
+  class COLOUR description ""
+  class GRAVITY description ""
+end
+
+cluster_chart SCREEN
+  class MAIN_MENU description ""
+  class GAME_SCREEN description ""
+  class HIGH_SCORE description ""
+end
+
+cluster_chart SOUND
+  class MUSIC description ""
+  class SOUND_EFFECTS description ""
 end
 
 class_chart FUEL
@@ -23,11 +59,6 @@ constraint
   "Must be greater than or equal to zero"
 end
 
-cluster_chart E
-  class C description ""
-  class N description ""
-end
-
 class_chart LIFE
 indexing
   clauster: "";
@@ -41,31 +72,6 @@ command
   "Reduce"
 constraint
   "Must be greater than or equal to zero"
-end
-
-cluster_chart E
-  class C description ""
-  class N description ""
-end
-
-class_chart DEATH
-indexing
-  clauster: "";
-  created: "2008-03-05 cc";
-explanation
-  "Losing a LIFE"
-part "1/1 "
-query
-  "Dead" 
-command
-  ""
-constraint
-  ""
-end
-
-cluster_chart E
-  class C description ""
-  class N description ""
 end
 
 class_chart SCORE
@@ -83,11 +89,6 @@ constraint
   "Must be greater than or equal to zero"
 end
 
-cluster_chart E
-  class C description ""
-  class N description ""
-end
-
 class_chart ENTITY
 indexing
   clauster: "";
@@ -98,14 +99,9 @@ part "1/1 "
 query
   "" 
 command
-  "Display" "Hide"
+  "Display", "Hide"
 constraint
   ""
-end
-
-cluster_chart E
-  class C description ""
-  class N description ""
 end
 
 class_chart SHIP
@@ -123,11 +119,6 @@ constraint
   "Must be visible on GAME SCREEN"
 end
 
-cluster_chart E
-  class C description ""
-  class N description ""
-end
-
 class_chart BALL
 indexing
   clauster: "";
@@ -141,11 +132,6 @@ command
   "Attach"
 constraint
   "Must be one and only one on each level"
-end
-
-cluster_chart E
-  class C description ""
-  class N description ""
 end
 
 class_chart BALL_HOLDER
@@ -164,11 +150,6 @@ constraint
   "Must start level holding BALL"
 end
 
-cluster_chart E
-  class C description ""
-  class N description ""
-end
-
 class_chart TRACTOR_BEAM
 indexing
   clauster: "";
@@ -182,11 +163,6 @@ command
   "Pick up"
 constraint
   "FUEL must be greater than zero"
-end
-
-cluster_chart E
-  class C description ""
-  class N description ""
 end
 
 class_chart FACTORY
@@ -270,7 +246,4 @@ event
   "Query the properties of a channel."
 involves
   CHANNEL, (IMPLEMENTATIONS)
-L
 end
-
-
