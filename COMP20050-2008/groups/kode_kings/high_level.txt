@@ -26,24 +26,6 @@ cluster_chart GRAPHICS
   class STATUS_BAR description ""
 end
 
-cluster_chart VALUES
-  class INT description ""
-  class STRING description ""
-  class COLOUR description ""
-  class GRAVITY description ""
-end
-
-cluster_chart SCREEN
-  class MAIN_MENU description ""
-  class GAME_SCREEN description ""
-  class HIGH_SCORE description ""
-end
-
-cluster_chart SOUND
-  class MUSIC description ""
-  class SOUND_EFFECTS description ""
-end
-
 class_chart FUEL
 indexing
   clauster: "";
@@ -178,6 +160,24 @@ command
   "Stop power", "Explode"
 constraint
   "Must be one and only one per level"
+end
+
+cluster_chart VALUES
+  class INT description ""
+  class STRING description ""
+  class COLOUR description ""
+  class GRAVITY description ""
+end
+
+cluster_chart SCREEN
+  class MAIN_MENU description ""
+  class GAME_SCREEN description ""
+  class HIGH_SCORE description ""
+end
+
+cluster_chart SOUND
+  class MUSIC description ""
+  class SOUND_EFFECTS description ""
 end
 
 creation_chart THE_GAME
