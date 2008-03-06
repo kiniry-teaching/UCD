@@ -1,5 +1,0 @@
-The makefile begins by stating the value of variables, such as JAVAC. This variable holds the path in which Javac is located.
-.PHONY: is a command used to state that the following commands do not create any files. For example one such command is clean. 
-Clean removes all files, which were created as a by product of the current project, except the source code.
-
-The rest of the makefile consits of rules that run commands and prerequisits. 
