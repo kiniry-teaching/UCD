@@ -6,15 +6,15 @@ system_chart THE_GAME
 end
 
 cluster_chart GRAPHICS
-  class ENTITY description ""
-  class FUEL description ""
-  class LIFE description ""
-  class SCORE description ""
-  class SHIP description ""
-  class BALL description ""
-  class BALL_HOLDER description ""
-  class TRACTOR_BEAM description ""
-  class FACTORY description ""
+  class ENTITY description "A visual object in the game"
+  class FUEL description "What the SHIP uses to move"
+  class LIFE description "How many SHIP available"
+  class SCORE description "An INT that represents progress"
+  class SHIP description "The ENTITY that collects the BALL"
+  class BALL description "Green circle on BALL HOLDER"
+  class BALL_HOLDER description "Holds BALL"
+  class TRACTOR_BEAM description "Attaches BALL to SHIP"
+  class FACTORY description "Destructable ENTITY that activates TIMER"
   class TIMER description ""
   class PLANET description ""
   class SPACE description ""
@@ -28,11 +28,12 @@ end
 
 class_chart FUEL
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "What the SHIP uses to move"
 part "1/1 "
+inherit ENTITY
 query
   "Quantity" 
 command
@@ -43,11 +44,12 @@ end
 
 class_chart LIFE
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "How many SHIP available"
 part "1/1 "
+inherit ENTITY
 query
   "Quantity" 
 command
@@ -58,11 +60,12 @@ end
 
 class_chart SCORE
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "An INT that represents progress"
 part "1/1 "
+inherit ENTITY
 query
   "Quantity" 
 command
@@ -73,13 +76,13 @@ end
 
 class_chart ENTITY
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "A visual object in the game"
 part "1/1 "
 query
-  "" 
+  "Location" 
 command
   "Display", "Hide"
 constraint
@@ -88,11 +91,12 @@ end
 
 class_chart SHIP
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "The ENTITY that collects the BALL"
 part "1/1 "
+inherit ENTITY
 query
   "Location", "Orientation", "Speed", "Have Ball" 
 command
@@ -103,11 +107,12 @@ end
 
 class_chart BALL
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "Green circle on BALL HOLDER"
 part "1/1 "
+inherit ENTITY
 query
   "Location", "Speed", "Direction"
 command
@@ -118,11 +123,12 @@ end
 
 class_chart BALL_HOLDER
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "Holds BALL"
 part "1/1 "
+inherit ENTITY
 query
   "Have BALL" 
 command
@@ -134,11 +140,12 @@ end
 
 class_chart TRACTOR_BEAM
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "Attaches BALL to SHIP"
 part "1/1 "
+inherit ENTITY
 query
   "Near BALL", "Near FUEL"
 command
@@ -149,11 +156,12 @@ end
 
 class_chart FACTORY
 indexing
-  clauster: "";
+  in_cluster: "GRAPHICS";
   created: "2008-03-05 cc";
 explanation
   "Destructable ENTITY that activates TIMER"
 part "1/1 "
+inherit ENTITY
 query
   "Destroyed", "Stunned"  
 command
@@ -216,7 +224,7 @@ indexing
   author: "";
   created: "2008-03-05 cc";
 explanation
-  ""
+  "internal"
 part
   "1/2"
 event
@@ -235,7 +243,45 @@ indexing
   author: "";
   created: "2008-03-05 cc";
 explanation
-  ""
+  "internal"
+part
+  "2/2"
+event
+  "Send an SDO on a connector."
+involves
+  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+event
+  "Query the properties of a channel."
+involves
+  CHANNEL, (IMPLEMENTATIONS)
+end
+
+event_chart THE_GAME
+incoming
+indexing
+  author: "";
+  created: "2008-03-05 cc";
+explanation
+  "external"
+part
+  "1/2"
+event
+  "Send an SDO on a connector."
+involves
+  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+event
+  "Query the properties of a channel."
+involves
+  CHANNEL, (IMPLEMENTATIONS)
+end
+
+event_chart THE_GAME
+outgoing
+indexing
+  author: "";
+  created: "2008-03-05 cc";
+explanation
+  "external"
 part
   "2/2"
 event
