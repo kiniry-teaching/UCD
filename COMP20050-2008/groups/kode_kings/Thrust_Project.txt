@@ -15,9 +15,12 @@ This project involves recreating the Commodore 64 game Thrust. The main aim with
 
 Project Requirements:
 
-1: Outline high level concepts
-2: Convert these concepts to Java methods
-3: Complete the code of the game
+1: Come up with concept analysis and define terms for all entities
+2: Create Bon constraints for our code to adhere too.
+3:Convert our bon code into Java code.
+4: Fully begin to code the game.
+5: Hopfully play a fully completed game!
+
 
 
 Project Purpose Overview:
