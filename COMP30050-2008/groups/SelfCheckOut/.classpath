@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="Documents/**" kind="src" path=""/>
+	<classpathentry excluding="Documents/**|Peter/CodeTests/HardWareConcept01/" kind="src" path=""/>
+	<classpathentry kind="src" path="Peter/CodeTests/HardWareConcept01"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
