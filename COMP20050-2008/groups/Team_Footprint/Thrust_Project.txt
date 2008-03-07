@@ -1,0 +1,17 @@
+
+Name of group: Team Footprint
+
+Members of the group:
+
+1: Name: Daire O'Doherty, Username:daire, Student#: 06535691
+2: Name: Lane Egan,Student #: 06610960
+3: Name: Sinead Morley, Student#: 05576334
+
+Introduction:
+
+Our project is to develop a game called Thrust using Java and JML. The idea of the game is to pilot a spacecraft which must pick up a pod using a tractor beam and fly it into space. Every level has a factory that gives off smoke that must be avoided, this factory powers the defences of each planet. The factory can be destroyed with one bullet. The ship itself has a shield and fuel, if the ship runs out of fuel the game is ended.
+
+In this project what is required is to design a program that replicates the game. The program should have all of the classes and methods for everything entity that is game the game. for example the program must contain a class for the ship itself and the class must contain methods of all of the actions that can happen to the ship or that the ship can do.
+
+
+We have conducted a concept analy 
