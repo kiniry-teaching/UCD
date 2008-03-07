@@ -282,8 +282,6 @@ constraint
   "Is user controlled",
   "Is never a numerical VALUE",
   "Always against user"
-  
-
 end
 
 cluster_chart VALUES
