@@ -18,12 +18,12 @@ cluster_chart GRAPHICS
   class TIMER description "Countdown from an INT"
   class PLANET description "ENTITY that destroys SHIP if SHIP touches it"
   class SPACE description "Background that SHIP flies through"
-  class STARS description "ENTITIES in SPACE"
+  class STARS description "ENTITY in SPACE"
   class BULLETS description "ENTITY that causes SHIP to be destroyed"
   class ENEMIES description " ENTITY that emits BULLETS"
-  class SHIELD description ""
-  class EXPLOSION description ""
-  class STATUS_BAR description ""
+  class SHIELD description "Stops BULLETS causing SHIP to be destroyed"
+  class EXPLOSION description "ENTITY displayed after SHIP is destroyed"
+  class STATUS_BAR description "Displays values for FUEL, LIFE and SCORE"
 end
 
 class_chart FUEL
@@ -199,7 +199,6 @@ explanation
 part "1/1 "
 query
   "LOCATION", "COLOUR"
-  
 command
   "EXPOLOSION", "DISPLAY"
 constraint
@@ -217,7 +216,6 @@ explanation
 part "1/1 "
 query
   "GRAPHICS", "COLOUR"
-  
 command
   "DISPLAY"
 constraint
@@ -261,8 +259,6 @@ constraint
   "Is user controlled",
   "Is never a numerical VALUE",
   "Can sometimes cause ship to be destroyed"
-  
-
 end
 
 class_chart ENEMIES
@@ -278,17 +274,65 @@ query
 command
   "EXPLOSION"
 constraint
-  "IS GRAPHICS",
+  "Is GRAPHICS",
   "Is user controlled",
   "Is never a numerical VALUE",
   "Always against user"
+end
+
+class_chart STATUS_BAR
+indexing
+   in_cluster: "GRAPHICS";
+   created: "2008-03-06 nmc";
+explanation
+   "Displays values for FUEL, LIFE and SCORE"
+part "1/1"
+query
+   "What are the values"
+command
+   "Change values", "Display values"
+constraint  
+   "Must contain values",
+   "Values cannot exceed limit"
+end
+
+class_chart EXPLOSION
+indexing
+   in_cluster: "GRAPHICS";
+   created: "2008-03-06 nmc";
+explanation
+   "ENTITY displayed after SHIP is destroyed"
+part "1/1"
+query
+   "Size", "COLOUR", "SOUND"
+command
+   "Initiate explosion animation"
+constraint  
+   "Only occurs when ship is destroyed"
+end
+
+class_chart SHIELD
+indexing
+   in_cluster: "GRAPHICS";
+   created: "2008-03-06 nmc";
+explanation
+   "Stops BULLETS causing SHIP to be destroyed"
+part "1/1"
+inherit ENTITY
+query
+   "Energy required", "Lasting time", "COLOUR", "SOUND"
+command
+   "Raise shield", "Lower shield"
+constraint  
+   "Only lasts for a limited time",
+   "Will not stop SHIP being destroyed from hitting other entities"
 end
 
 cluster_chart VALUES
   class INT description "Numerical values on SCREEN"
   class STRING description " STRING values on SCREEN"
   class COLOUR description "Color with a 'u'"
-  class GRAVITY description ""
+  class GRAVITY description "Pulls SHIP down"
 end
 
 class_chart INTS
@@ -301,7 +345,6 @@ explanation
 part "1/1 "
 query
   "VAlUE", "TYPE", "Max", "Min"
-  
 command
   "DISPLAY", 
 constraint
@@ -320,20 +363,18 @@ explanation
   " STRING values on SCREEN"
 part "1/1 "
 query
-  "Position", "TYPE",
-  
+  "Position", "TYPE",  
 command
   "DISPLAY"
 constraint
   "Text Format",
   "Is not user controlled",
   "Is never a numerical VALUE"
-
 end
 
 class_chart COLOUR
 indexing
-  in_cluster: "VALUES " ;
+  in_cluster: "VALUES";
   created: "2008-03-06 chale";
   revised: "";
 explanation
@@ -341,29 +382,119 @@ explanation
 part "1/1 "
 query
  "TYPE",
-  
 command
   "DISPLAY" , "COLOUR"
 constraint
   "IS GRAPHICS",
   "Is not user controlled",
   "Is never a numerical VALUE"
-  
-
 end
 
-cluster_chart SCREEN
-  class MAIN_MENU description ""
-  class GAME_SCREEN description ""
-  class HIGH_SCORE description ""
+class_chart GRAVITY
+indexing
+   in_cluster: "VALUES";
+   created: "2008-03-06 nmc";
+explanation
+   "Pulls SHIP down"
+part "1/1"
+query
+   "Strength"
+command
+   "Pull ship"
+constraint  
+   "Only causes ship to move downwards",
+   "Pull cannot prevent all movement of ship upwards"
 end
-
-
-
 
 cluster_chart SOUND
-  class MUSIC description ""
-  class SOUND_EFFECTS description ""
+  class MUSIC description "Continuous noise heard"
+  class SOUND_EFFECTS description "Noise made by ENTITY"
+end
+
+class_chart SOUND_EFFECTS
+indexing
+   in_cluster: "SOUND";
+   created: "2008-03-06 nmc";
+explanation
+   "Noise made by ENTITY"
+part "1/1"
+query
+   "Frequency", "Volume", "Cause", "Length", "File"
+command
+   "Adust volume",
+   "Make noise"
+constraint  
+   "Must be initialised by an entity"
+end 
+
+class_chart MUSIC
+indexing
+   in_cluster: "SOUND";
+   created: "2008-03-06 nmc";
+explanation
+   "Continuous noise heard"
+part "1/1"
+query
+   "Frequency", "Volume", "Cause", "Length", "File"
+command
+   "Adjust volume", "Start music"
+constraint  
+   "Must be initialised by a certain event"
+end 
+
+cluster_chart SCREEN
+  class MAIN_MENU description "SCREEN shown at start up"
+  class GAME_SCREEN description "SCREEN shown during play"
+  class HIGH_SCORE description "SCREEN shown when all LIVES are lost or the game is completed"
+end
+
+class_chart MAIN_MENU
+indexing
+   in_cluster: "SCREEN";
+   created: "2008-03-06 nmc";
+explanation
+   "SCREEN shown at start up"
+part "1/1"
+query
+   "Options", "COLOUR", "SOUND"
+command
+   "Start game", "Exit game"
+constraint  
+   "Must have colour",
+   "Must have sound"
+end
+
+class_chart GAME_SCREEN
+indexing
+   in_cluster: "SCREEN";
+   created: "2008-03-06 nmc";
+explanation
+   "SCREEN shown during play"
+part "1/1"
+query
+   "Amount of entities", "COLOUR", "SOUND"
+command
+   "Display STATUS_BAR", "Display ENTITY"
+constraint  
+   "Can only display defined entities",
+   "Must have colour",
+   "Must have sound"
+end
+
+class_chart HIGH_SCORE
+indexing
+   in_cluster: "SCREEN";
+   created: "2008-03-06 nmc";
+explanation
+   "SCREEN shown when all LIVES are lost or the game is completed"
+part "1/1"
+query
+   "Number of scores", "COLOUR", "SOUND"
+command
+   "Display scores", "Exit game"
+constraint  
+   "Must have colour",
+   "Must have sound"
 end
 
 creation_chart THE_GAME
