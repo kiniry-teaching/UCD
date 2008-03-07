@@ -30,6 +30,8 @@ The purpose of the project is to teach us how to work as team with the goal of d
 
 A Summary of Analysis and Design:
 
+To date we defined our class dictionary and have written our High Level Documents in bon textual format. And also enjoyed playing the game thrust.
+
 
 Project Dictionary:
 

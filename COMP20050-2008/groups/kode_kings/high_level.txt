@@ -19,7 +19,7 @@ cluster_chart GRAPHICS
   class PLANET description "ENTITY that destroys SHIP if SHIP touches it"
   class SPACE description "Background that SHIP flies through"
   class STARS description "ENTITIES in SPACE"
-  class BULLETS description "ENTITY that causes DEATH"
+  class BULLETS description "ENTITY that causes SHIP to be destroyed"
   class ENEMIES description " ENTITY that emits BULLETS"
   class SHIELD description ""
   class EXPLOSION description ""
@@ -250,18 +250,17 @@ indexing
   created: "2008-03-06 chale";
   revised: "";
 explanation
-  " ENTITY that causes DEATH'"
+  " ENTITY that causes ENTITY that causes SHIP to be destroyed'"
 part "1/1 "
 query
- "Source","DEATH"
-  
+ "Source"  
 command
-  "DEATH" , "EXPLOSION"
+  "EXPLOSION"
 constraint
   "IS GRAPHICS",
   "Is user controlled",
   "Is never a numerical VALUE",
-  "Can sometimes cause DEATH"
+  "Can sometimes cause ship to be destroyed"
   
 
 end
@@ -275,15 +274,13 @@ explanation
   " ENTITY that emits BULLETS'"
 part "1/1 "
 query
- "Source","DEATH"
-  
+ "Source" 
 command
-  "DEATH" , "EXPLOSION"
+  "EXPLOSION"
 constraint
   "IS GRAPHICS",
   "Is user controlled",
   "Is never a numerical VALUE",
-  "Can sometimes cause DEATH",
   "Always against user"
   
 
@@ -373,51 +370,83 @@ end
 
 creation_chart THE_GAME
 indexing
-  author: "";
-  created: "2008-03-05 cc";
+  created: "2008-03-05";
 explanation
   "List of classes creating objects in the system."
-creator CHANNEL creates (IMPLEMENTATIONS)
-creator CHANNEL_ANALYST creates CHANNEL_INFORMATION
+creator ENTITY creates FUEL
+creator ENTITY creates LIFE
+creator ENTITY creates SCORE
+creator ENTITY creates SHIP
+creator ENTITY creates BALL
+creator ENTITY creates BALL_HOLDER
+creator ENTITY creates TRACTOR_BEAM
+creator ENTITY creates FACTORY
+creator ENTITY creates TIMER
+creator ENTITY creates PLANET
+creator ENTITY creates SPACE
+creator ENTITY creates STARS
+creator ENTITY creates BULLETS
+creator ENTITY creates ENEMIES
+creator ENTITY creates SHIELD
+creator ENTITY creates EXPLOSION
+creator ENTITY creates STATUS_BAR
 end
 
 scenario_chart THE_GAME
 indexing
-  author: "";
-  created: "2008-03-05 cc";
+  created: "2008-03-05";
 explanation
-  "Set of representative scenarios to show important types of system \
-  \behavior."
+  "Set of representative scenarios to show important types of system behavior."
 scenario
-  "Initialize the Connector system."
+  "Run the game"
 description
-  "When a system starts up the connector system needs to be \
-  \initialized. This is a potentially lengthy operation in that it must \
-  \query the system to determine which channel types are available."
+  "When the game starts up it loads all necessary game files and displays the MAIN_MENU SCREEN"
 scenario
-  "Shutdown the Connector system."
+  "Start new game"
 description
-  "When a system shuts down, all of the components, connectors, and \
-  \channels need be shut down in an orderly fashion."
+  "Creates all necessary entities and brings you to GAME_SCREEN"
+scenario
+  "Level complete"
+description
+  "Creates all necessary entities and brings you to new GAME_SCREEN"
+scenario
+  "End current game"
+description
+  "Creates all necessary entities and brings you to MAIN_MENU"
+scenario
+  "Shutdown the game"
+description
+  "When the game shuts down the program is stopped in an orderly fashion."
 end
 
 event_chart THE_GAME
 incoming
 indexing
-  author: "";
-  created: "2008-03-05 cc";
+  created: "2008-03-05";
 explanation
   "internal"
 part
   "1/2"
 event
-  "Send an SDO on a connector."
+  "Query score"
 involves
-  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+  SCORE
 event
-  "Query the properties of a channel."
+  "Query fuel"
 involves
-  CHANNEL, (IMPLEMENTATIONS)
+  FUEL
+event
+  "Query life"
+involves
+  LIFE
+event
+  "Create new entity"
+involves
+  ENTITY
+event
+  "Query ship"
+involves
+  SHIP
 end
 
 event_chart THE_GAME
@@ -430,13 +459,25 @@ explanation
 part
   "2/2"
 event
-  "Send an SDO on a connector."
+  "Answer score query"
 involves
-  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+  SCORE
 event
-  "Query the properties of a channel."
+  "Answer fuel query"
 involves
-  CHANNEL, (IMPLEMENTATIONS)
+  FUEL
+event
+  "Answer life query"
+involves
+  LIFE
+event
+  "Return new entity"
+involves
+  ENTITY
+event
+  "Answer ship query"
+involves
+  SHIP
 end
 
 event_chart THE_GAME
@@ -449,30 +490,73 @@ explanation
 part
   "1/2"
 event
-  "Send an SDO on a connector."
+  "Press space to start new game"
 involves
-  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+  MAIN_MENU, GAME_SCREEN, ENTITY
 event
-  "Query the properties of a channel."
+  "User presses thrust key"
 involves
-  CHANNEL, (IMPLEMENTATIONS)
+  SHIP, GAME_SCREEN
+event
+  "User presses shield key"
+involves
+  SHIP, GAME_SCREEN, SHIELD
+event
+  "User presses shoot key"
+involves
+  SHIP, GAME_SCREEN, BULLETS
+event
+  "User presses tractor beam key"
+involves
+  SHIP, GAME_SCREEN, TRACTOR_BEAM
+event
+  "User presses a direction key"
+involves
+  SHIP, GAME_SCREEN
+event
+  "User presses a quit key"
+involves
+  GAME_SCREEN, MAIN_MENU
 end
 
 event_chart THE_GAME
 outgoing
 indexing
-  author: "";
-  created: "2008-03-05 cc";
+  created: "2008-03-05";
 explanation
   "external"
 part
   "2/2"
 event
-  "Send an SDO on a connector."
+  "Shoot bullet"
 involves
-  CHANNEL, CONNECTOR, (IMPLEMENTATIONS), CHANNEL_ANALYST
+  SHIP, BULLETS, SOUND_EFFECT
 event
-  "Query the properties of a channel."
+  "Ship gets destroyed"
 involves
-  CHANNEL, (IMPLEMENTATIONS)
+  SHIP, EXPLOSION, SOUND_EFFECT
+event
+  "Level complete"
+involves
+  GAME_SCREEN
+event
+  "Game over"
+involves
+  GAME_SCREEN, HIGH_SCORE
+event
+  "Thrusting"
+involves
+  GAME_SCREEN, SHIP, FUEL, SOUND_EFFECT
+event
+  "Turning"
+involves
+  GAME_SCREEN, SHIP
+event
+  "Picking up ball"
+involves
+  GAME_SCREEN, SHIP, BALL, TRACTOR_BEAM, BALL_HOLDER
+event
+  "Use Shield"
+involves
+  GAME_SCREEN, SHIP, SHIELD
 end
