@@ -1,0 +1,619 @@
+-- Informal charts
+
+system_chart THE_GAME
+  cluster ENTITY_CLUSTER
+  description
+    "Cluster of ENTITYs in game"
+  cluster INFORMATION_CLUSTER
+  description
+    "dynamically changing data defining the state of the game"
+end
+
+cluster_chart ENTITY_CLUSTER
+  class ENTITY
+  description
+    "An interactive visual object in the game"
+  class USER_CONTROL
+  description
+    "ENTITIES in game that can be moved my the player"
+  class SHIP
+  description
+    "The main yellowish, triangular ENTITY controlled by the player"
+  class BULLET
+  description
+    "ENTITIES that collide with other ENTITIES"
+  class POD
+  description
+    "the object of the level is to retrieve this"
+  class TOW_LINE
+  description
+    "an ENTITY which holds the POD at a fixed distance from the SHIP"
+  class DOOR
+  description
+    "blocks the player from continuing the mission until a BUTTON has been pressed"
+  class BUTTON
+  description
+    "an entity which opens the door when a bullet has a COLLISION with it"
+  class NUCLEAR_POWER_PLANT
+  description
+    "powers the LIMPET_GUN and destroys the planet when destroyed"
+  class FUEL_TANK
+  description
+    "is an ENTITY from which the SPACESHIP can get FUEL"
+  class PLANET
+  description
+    "place where the level takes place"
+  class LIMPET_GUN
+  description
+    "is an AI controlled ENTITY that FIRES BULLETS"
+  class GROUND
+  description
+    "Area of screen through which ENTITIES can not travel"
+end
+
+cluster_chart INFORMATION_CLUSTER
+  class HUD
+  description
+    "visual tracking of LIVES, SCORE, FUEL"
+  class INFORMATION
+  description
+    "dynamically changing data defining the state of the game."
+  class FUEL
+  description
+    "consumed by the SPACESHIP through forward movement"
+  class SCORE
+  description
+    "summation of points received in game"
+  class LIVES
+  description
+    "amount of COLLISION the SPACESHIP can have"
+  class HIGH_SCORE
+  description
+    "largest score attained in the game history"
+  class BONUS
+  description
+    "extra score"
+  class TIMER
+  description
+    "a timer created by an EVENT or action which counts to another EVENT or ACTION"
+end
+
+class_chart ENTITY
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "6-3-2008";
+  explanation
+    "An interactive visual object in the game"
+  part
+    "1/1 "
+  query
+    "Velocity",
+    "Collision"
+  command
+    "Thrust"
+  constraint
+    "There is a max velocity.",
+    "There is a max firing rate.",
+    "You can not cross borders with other entities"
+end
+
+class_chart PLANET
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "place where the level takes place"
+  part
+    "1/1 "
+  query
+    "Factory destroyed",
+    "What level",
+    "Read map"
+  command
+    "Create GROUND",
+    "Create LIMPET_GUN",
+    "Create FUEL",
+    "Create DOOR",
+    "Create BUTTON"
+  constraint
+    "Can only read specific map depending on level",
+    "Cannot create other ENTITIES with in the ground"
+end
+
+class_chart USER_CONTROL
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "ENTITIES in game that can be moved by the player"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    "Attached"
+  command
+    "Attach"
+  constraint
+    ""
+end
+
+class_chart SHIP
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "6-3-2008";
+  explanation
+    "The main yellowish, triangular ENTITY controlled by the player"
+  part
+    "1/1 "
+  inherit 
+    USER_CONTROL
+  query
+    "Information",
+    "Shields"
+  command
+    "Pick up FUEL",
+    "Shields"
+  constraint
+    "There is a max velocity.",
+    "There is a max firing rate.",
+    "You can not cross borders with other entities",
+    "Can only use while fuel is greater than 0",
+    "Can only thrust while fuel is greater than 0",
+    "When attached is always attached to opposite end of TOW_LINE to SHIP"
+end
+
+class_chart BULLET
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "6-3-2008";
+  explanation
+    "ENTITIES that collide with other ENTITIES"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    "Exists"
+  command
+    "Create",
+    "Remove"
+  constraint
+    "Only exists while has no collision",
+    "Unaffected by gravity",
+    "Has static velocity"
+end
+
+class_chart POD
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "6-3-2008";
+  explanation
+    "the object of the level is to retrieve this"
+  part
+    "1/1 "
+  inherit 
+    USER_CONTROL
+  query
+    ""
+  command
+    ""
+  constraint
+    "Motionless until attached to ship",
+    "Unaffected by gravity",
+    "Has static velocity",
+    "Experiences thrust towards SHIP only",
+    "When attached is always attached to opposite end of TOW_LINE to SHIP",
+    "Must be within a certain distance of the ship to attach"
+end
+
+class_chart TOW_LINE
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "6-3-2008";
+  explanation
+    "an ENTITY which holds the POD at a fixed distance from the SHIP"
+  part
+    "1/1 "
+  inherit 
+    USER_CONTROL
+  query
+    ""
+  command
+    ""
+  constraint
+    "Is always positioned between the POD and the SHIP",
+    "Static length"
+end
+
+class_chart DOOR
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "blocks the player from continuing the mission until a BUTTON has been pressed"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    "Is open"
+  command
+    "Close",
+    "Create timer when opened"
+  constraint
+    "Can only be open for a set amount of time",
+    "Can only be opened by activating a specific button"
+end
+
+class_chart BUTTON
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "an entity which opens the door when a bullet has a COLLISION with it"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    "Is the door open"
+  command
+    "Open door"
+  constraint
+    "Can only be activated when the door is closed"
+end
+
+class_chart NUCLEAR_POWER_PLANT
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "powers the LIMPET_GUN and destroys the planet when destroyed"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    ""
+  command
+    ""
+  constraint
+    ""
+end
+
+class_chart FUEL_TANK
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "is an ENTITY from which the SPACESHIP can get FUEL"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    ""
+  command
+    ""
+  constraint
+    ""
+end
+
+class_chart LIMPET_GUN
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "is an AI controlled ENTITY that fires BULLETS"
+  part
+    "1/1 "
+  inherit 
+    ENTITY
+  query
+    ""
+  command
+    ""
+  constraint
+    ""
+end
+
+class_chart GROUND
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3208";
+  explanation
+    "Area of screen through which ENTITIES can not travel"
+  part
+    "1/1 "
+  query
+    ""
+  command
+    ""
+  constraint
+    ""
+end
+
+class_chart INFORMATION
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: " 7-3-2008";
+  explanation
+    "dynamically changing data defining the state of the game."
+  part
+    "1/1 "
+  query
+    "What value do you have"
+  command
+    "Increase value",
+    "Decrease value",
+    "SetValue"
+  constraint
+    "Must be greater than 0"
+end
+
+class_chart HUD
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "visual tracking of LIVES, SCORE, FUEL"
+  part
+    "1/1 "
+  query
+    ""
+  command
+    ""
+  constraint
+    ""
+end
+
+class_chart FUEL
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "consumed by the SPACESHIP through forward movement, or shield use"
+  part
+    "1/1 "
+  inherit 
+    INFORMATION
+  query
+    "Consumption multiplier"
+  command
+    "Set shield multiplier",
+    "Picked up"
+  constraint
+    ""
+end
+
+class_chart SCORE
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: " 7-3-2008";
+  explanation
+    "summation of points received in game"
+  part
+    "1/1 "
+  inherit 
+    INFORMATION
+  query
+    ""
+  command
+    "Increase value"
+  constraint
+    "Must be greater than zero"
+end
+
+class_chart LIVES
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: " 7-3-2008";
+  explanation
+    "amount of COLLISION the SPACESHIP can have"
+  part
+    "1/1 "
+  inherit 
+    INFORMATION
+  query
+    ""
+  command
+    ""
+  constraint
+    "The SHIP will not respawn if this reaches zero.",
+    "The initial value is three",
+    "It can only be decreased when the SHIP or ORB has a collision"
+end
+
+class_chart HIGH_SCORE
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: " 7-3-2008";
+  explanation
+    "largest score attained in the game history"
+  part
+    "1/1 "
+  inherit 
+    INFORMATION
+  query
+    ""
+  command
+    "Store",
+    "List",
+    "Set name"
+  constraint
+    "Will only store 5 values"
+end
+
+class_chart BONUS
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: " 7-3-2008";
+  explanation
+    "extra score"
+  part
+    "1/1 "
+  inherit 
+    INFORMATION
+  query
+    "Planet destroyed",
+    "level number"
+  command
+    "Add to score"
+  constraint
+    "Multiplier based on level number",
+    "Addition if NUCLEAR POWER PLANT is destroyed"
+end
+
+class_chart TIMER
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: " 7-3-2008";
+  explanation
+    "a timer that counts down to an event"
+  part
+    "1/1 "
+  inherit 
+    INFORMATION
+  query
+    ""
+  command
+    ""
+  constraint
+    ""
+end
+
+creation_chart THE_GAME
+  indexing
+    created: "7-3-2008";
+  explanation
+    "List of classes creating objects in the system."
+  creator INFORMATION creates FUEL
+  creator INFORMATION creates LIVES
+  creator INFORMATION creates SCORE
+  creator INFORMATION creates BONUS
+  creator INFORMATION creates HIGH_SCORE
+  creator PLANET creates SHIP
+  creator PLANET creates POD
+  creator PLANET creates NUCLEAR_POWER_PLANT
+  creator SHIP creates BULLET
+  creator LIMPET_GUN creates BULLET
+end
+
+scenario_chart THE_GAME
+  indexing
+    created: "7-3-2008";
+  explanation
+    ""
+  scenario "" 
+  description
+    ""
+end
+
+event_chart THE_GAME incoming
+  indexing
+    created: "7-3-2008";
+  explanation
+    "Internal events"
+  part
+    "1/2"
+  event "" involves ENTITY
+end
+
+event_chart THE_GAME outgoing
+  indexing
+    created: "7-3-2008";
+  explanation
+    "Internal events"
+  part
+    "2/2"
+  event "" involves ENTITY
+end
+
+event_chart THE_GAME incoming
+  indexing
+    created: "7-3-2008";
+  explanation
+    "External events"
+  part
+    "1/2"
+  event "" involves ENTITY
+end
+
+event_chart THE_GAME outgoing
+  indexing
+    created: "7-3-2008";
+  explanation
+    "External events"
+  part
+    "2/2"
+  event "" involves ENTITY
+end
+
+dictionary THE_GAME
+  explanation
+    "BONc automatically generated class dictionary."
+  class INFORMATION cluster INFORMATION_CLUSTER
+  description
+    "dynamically changing data defining the state of the game."
+  class TOW_LINE cluster ENTITY_CLUSTER
+  description
+    "an ENTITY which holds the POD at a fixed distance from the SHIP"
+  class DOOR cluster ENTITY_CLUSTER
+  description
+    "blocks the player from continuing the mission until a BUTTON has been pressed"
+  class SCORE cluster INFORMATION_CLUSTER
+  description
+    "summation of points received in game"
+  class BULLET cluster ENTITY_CLUSTER
+  description
+    "ENTITIES that collide with other ENTITIES"
+  class HIGH_SCORE cluster INFORMATION_CLUSTER
+  description
+    "largest score attained in the game history"
+  class PLANET cluster ENTITY_CLUSTER
+  description
+    "place where the level takes place"
+  class FUEL cluster INFORMATION_CLUSTER
+  description
+    "consumed by the SPACESHIP through forward movement, or shield use"
+  class FUEL_TANK cluster ENTITY_CLUSTER
+  description
+    "is an ENTITY from which the SPACESHIP can get FUEL"
+  class NUCLEAR_POWER_PLANT cluster ENTITY_CLUSTER
+  description
+    "powers the LIMPET_GUN and destroys the planet when destroyed"
+  class LIMPET_GUN cluster ENTITY_CLUSTER
+  description
+    "is an AI controlled ENTITY that fires BULLETS"
+  class LIVES cluster INFORMATION_CLUSTER
+  description
+    "amount of COLLISION the SPACESHIP can have"
+  class GROUND cluster ENTITY_CLUSTER
+  description
+    "Area of screen through which ENTITIES can not travel"
+  class USER_CONTROL cluster ENTITY_CLUSTER
+  description
+    "ENTITIES in game that can be moved by the player"
+  class BUTTON cluster ENTITY_CLUSTER
+  description
+    "an entity which opens the door when a bullet has a COLLISION with it"
+  class SHIP cluster ENTITY_CLUSTER
+  description
+    "The main yellowish, triangular ENTITY controlled by the player"
+  class POD cluster ENTITY_CLUSTER
+  description
+    "the object of the level is to retrieve this"
+  class TIMER cluster INFORMATION_CLUSTER
+  description
+    "a timer that counts down to an event"
+  class HUD cluster INFORMATION_CLUSTER
+  description
+    "visual tracking of LIVES, SCORE, FUEL"
+  class BONUS cluster INFORMATION_CLUSTER
+  description
+    "extra score"
+  class ENTITY cluster ENTITY_CLUSTER
+  description
+    "An interactive visual object in the game"
+end

@@ -1,0 +1,108 @@
+Group Jar
+
+Sean Russell		srussell	06373313
+Keith Byrne		timbyr		04003195
+Eoghan O'Donovan	don88		06358985
+
+-------------------------------------------------------------------------------------------------------------------------------
+Introduction
+----------------------------------
+
+This is a a project to recreate the video game Thrust, originally designed for the computer systems BBC Micro and Acorn Electron.
+This is to be done using a series of steps from basic concept analysis to playing the game.
+
+-------------------------------------------------------------------------------------------------------------------------------
+Requirements
+----------------------------------
+This project requires the use of high level concept analysis, and then translating this into informal charts.
+These charts must be then turned into textual bon.
+We must also use the SVN repository for version tracking and have a good working knowledge of Java.
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+Overview
+----------------------------------
+The purpose of this project is learn and acquire the necessary skills for high level system design.
+This should give us the skills needed to complete a fully functional, high quality, well documented system.
+
+-------------------------------------------------------------------------------------------------------------------------------
+Summary
+----------------------------------
+We have completed concept analysis.
+We have completed the class charts according to our concept analysis.
+We have used the class charts to create 
+
+-------------------------------------------------------------------------------------------------------------------------------
+Project Dictionary
+-----------------------------------
+
+*CONCEPT* *DEFINITION*
+-----------------------------------
+SPACESHIP The main yellowish, triangular entity controlled
+by the player.
+ENTITY An interactive visual object in the game.
+INFORMATION dynamically changing data defining the state of the game.
+ACTION inputs given by the player or AI.
+AI input from the computer.
+PHYSICS governs movement and interactions of entities.
+COLLISION connection of visual borders(i.e. when various object collide in game).
+EVENT something that happens due to a trigger.
+TOW_LINE an ENTITY which holds the POD at a fixed distance from the SPACESHIP.
+LIMPET_GUN is an AI controlled ENTITY that FIRES BULLETS.
+FUEL_TANK is an ENTITY from which the SPACESHIP can get FUEL.
+BULLET ENTITIES that collide with other ENTITIES.
+POD the object of the level is to retrieve this.
+DOOR blocks the player from continuing the mission until a BUTTON has been pressed.
+GROUND static object which all other entities rest upon or can collide with.
+NUCLEAR_POWER_PLANT powers the LIMPET_GUN and destroys the planet when destroyed.
+BUTTON an entity which opens the door when a bullet has a COLLISION with it.
+PLANET place where the level takes place.
+HUD area of the screen where information is displayed.
+FUEL consumed by the SPACESHIP through forward movement. 
+SCORE summation of points received in game.
+LIVES amount of COLLISION the SPACESHIP can have. 
+HIGH_SCORE largest score attained in the game history.
+BONUS extra score.
+
+...
+
+*IS-A RELATIONS*
+----------------
+SPACESHIP is-a ENTITY
+BULLET is-a ENTITY
+POD is-a ENTITY
+TOW_LINE is-a ENTITY
+DOOR is-a ENTITY
+NUCLEAR_POWER_PLANT is-a ENTITY
+BUTTON is-a ENTITY
+LIMPET_GUN is-a ENTITY
+FUEL_TANK is-a ENTITY
+PLANET is-a  ENTITY
+HIGH_SCORE is-a INFORMATION
+COLLISION is-a EVENT
+BONUS is-a INFORMATION 
+FUEL is-a INFORMATION
+SCORE is-a INFORMATION
+LIVES is-a INFORMATION
+
+
+*HAS-A RELATIONS*
+-----------------
+ENTITY has-a COLOR
+ENTITY has-a PHYSICS
+LIMPET_GUN has-a AI
+BUTTON has-a EVENT 
+DOOR has-a EVENT
+LIMPET_GUN has-a ACTION
+SPACESHIP has-a ACTION 
+ENTITY has-a COLLISION
+GROUND has-a COLLISION
+HUD has-a INFORMATION 
+NUCLEAR_POWER_PLANT has-a ACTION
+
+
+*IS-A-KIND-OF RELATIONS*
+------------------------
+INFORMATION in-a-kinda STRING
+PHYSICS is-a-kinda EVENT
+TOW_LINE is-a-kinda ACTION
