@@ -15,12 +15,12 @@ cluster_chart GRAPHICS
   class BALL_HOLDER description "Holds BALL"
   class TRACTOR_BEAM description "Attaches BALL to SHIP"
   class FACTORY description "Destructable ENTITY that activates TIMER"
-  class TIMER description ""
-  class PLANET description ""
-  class SPACE description ""
-  class STARS description ""
-  class BULLETS description ""
-  class ENEMIES description ""
+  class TIMER description "Countdown from an INT"
+  class PLANET description "ENTITY that destroys SHIP if SHIP touches it"
+  class SPACE description "Background that SHIP flies through"
+  class STARS description "ENTITIES in SPACE"
+  class BULLETS description "ENTITY that causes DEATH"
+  class ENEMIES description " ENTITY that emits BULLETS"
   class SHIELD description ""
   class EXPLOSION description ""
   class STATUS_BAR description ""
@@ -170,11 +170,191 @@ constraint
   "Must be one and only one per level"
 end
 
+class_chart TIMER
+indexing
+   in_cluster: "GRAPHICS " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  "Countdown from an INT"
+part "1/1 "
+query
+  "Time", "Value", "Max", "Min",
+  
+command
+  "Start", "Stop"
+constraint
+  "TIMER cannot start at 0.",
+  "Can only be started when FACTORY is Destroyed.",
+  "Is an INT value",
+end
+
+class_chart PLANET
+indexing
+   in_cluster: "GRAPHICS " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  "ENTITY that destroys SHIP if SHIP touches it"
+part "1/1 "
+query
+  "LOCATION", "COLOUR"
+  
+command
+  "EXPOLOSION", "DISPLAY"
+constraint
+  "Cannot be moved",
+  "Is not user controlled",
+end
+
+class_chart SPACE
+indexing
+   in_cluster: "GRAPHICS " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  "Background that SHIP flies through"
+part "1/1 "
+query
+  "GRAPHICS", "COLOUR"
+  
+command
+  "DISPLAY"
+constraint
+  "Cannot be moved",
+  "Is not user controlled",
+end
+
+class_chart STARS
+indexing
+   in_cluster: "GRAPHICS " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  "ENTITIES in SPACE"
+part "1/1 "
+query
+  "GRAPHICS", "COLOUR"
+  
+command
+  "DISPLAY"
+constraint
+  "Cannot be moved",
+  "Is not user controlled",
+end
+
+
+class_chart BULLETS
+indexing
+   in_cluster: "GRAPHICS " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  " ENTITY that causes DEATH'"
+part "1/1 "
+query
+ "Source","DEATH"
+  
+command
+  "DEATH" , "EXPLOSION"
+constraint
+  "IS GRAPHICS",
+  "Is user controlled",
+  "Is never a numerical VALUE",
+  "Can sometimes cause DEATH"
+  
+
+end
+
+class_chart ENEMIES
+indexing
+   in_cluster: "GRAPHICS " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  " ENTITY that emits BULLETS'"
+part "1/1 "
+query
+ "Source","DEATH"
+  
+command
+  "DEATH" , "EXPLOSION"
+constraint
+  "IS GRAPHICS",
+  "Is user controlled",
+  "Is never a numerical VALUE",
+  "Can sometimes cause DEATH",
+  "Always against user"
+  
+
+end
+
 cluster_chart VALUES
-  class INT description ""
-  class STRING description ""
-  class COLOUR description ""
+  class INT description "Numerical values on SCREEN"
+  class STRING description " STRING values on SCREEN"
+  class COLOUR description "Color with a 'u'"
   class GRAVITY description ""
+end
+
+class_chart INTS
+indexing
+   in_cluster: "VALUES " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  "Numerical values on SCREEN"
+part "1/1 "
+query
+  "VAlUE", "TYPE", "Max", "Min"
+  
+command
+  "DISPLAY", 
+constraint
+  "Cannot be 0",
+  "Is not user controlled",
+  "Is allways a numerical VALUE"
+
+end
+
+class_chart STRING 
+indexing
+  in_cluster: "VALUES " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  " STRING values on SCREEN"
+part "1/1 "
+query
+  "Position", "TYPE",
+  
+command
+  "DISPLAY"
+constraint
+  "Text Format",
+  "Is not user controlled",
+  "Is never a numerical VALUE"
+
+end
+
+class_chart COLOUR
+indexing
+  in_cluster: "VALUES " ;
+  created: "2008-03-06 chale";
+  revised: "";
+explanation
+  " Color with a 'u'"
+part "1/1 "
+query
+ "TYPE",
+  
+command
+  "DISPLAY" , "COLOUR"
+constraint
+  "IS GRAPHICS",
+  "Is not user controlled",
+  "Is never a numerical VALUE"
+  
+
 end
 
 cluster_chart SCREEN
@@ -182,6 +362,9 @@ cluster_chart SCREEN
   class GAME_SCREEN description ""
   class HIGH_SCORE description ""
 end
+
+
+
 
 cluster_chart SOUND
   class MUSIC description ""
