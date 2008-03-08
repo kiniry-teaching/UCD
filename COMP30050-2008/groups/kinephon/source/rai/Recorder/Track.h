@@ -25,32 +25,30 @@ class Track
 public:
 	/**
 	 * Create a new track for a specific IR blob
-	 * @param irid The IR blob id that this Track will hold
+	 * @param iid The IR blob id that this Track will hold
 	 * @author EB
 	 * @version 1.0
 	 */
 				Track
-				(	irid const	irid
-				);
-	/**
-	 * Destory this track
-	 * @author EB
-	 * @version 1.0
-	 * @warning Destructor is not virtual, don't inherit from this class
-	 */
-				~Track			(void);
+				(	irid const		iid
+				) :	_iid			(iid),
+					_length			(0),
+					_frameFirst		(0),
+					_frameLast		(0),
+					_isLost			(false)
+					{ }
 	/**
 	 * Get the IR blob's id being tracked by this
 	 * @return The IR blob's id
 	 */
-	irid		id				(void)	const;
+	irid		iid					(void)	const;
 	/**
 	 * Returns the number of frames.
 	 * @return The number of frames held by this track
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint		length			(void)	const;
+	uint		length				(void)	const;
 	/**
 	 * Returns the first frame in this Track.
 	 * Following frams can be accessed by this->frame()->next()..
@@ -58,7 +56,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Frame *		first			(void)	const;
+	Frame *		first				(void)	const;
+	/**
+	 * Store whether this track has been lost, is no longer in use. A track
+	 *	that is no longer is use can be deleted when all its frames are used
+	 * @author EB
+	 * @version 1.0
+	 */
+	bool		isLost				(void)	const;
 
 	/**
 	 * Returns the indexed Frame.
@@ -74,7 +79,7 @@ public:
 	 * @post /result != 0;
 	 */
 	Frame *		operator []
-				(	uint const	index
+				(	uint const		index
 				)	const;
 
 private:
@@ -86,27 +91,37 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Track &		operator+=
-				(	Frame const * const	frame
+	Track &		operator +=
+				(	Frame * const	frame
+				);
+	/**
+	 * Remove a frame and all that follow.
+	 * @param frame The frame to remove from the track
+	 * @return A reference to this
+	 * @author EB
+	 * @version 1.0
+	 */
+	Track &		operator -=
+				(	Frame * const	frame
 				);
 
 private:
 	/**
-	 * irid() field
+	 * iid()'s field
 	 * @author EB
 	 * @version 1.0
 	 * @see id()
 	 */
-	irid		_irid;
+	irid		_iid;
 	/**
-	 * length() field
+	 * length()'s field
 	 * @author EB
 	 * @version 1.0
 	 * @see length()
 	 */
 	uint		_length;
 	/**
-	 * first() field
+	 * first()'s field
 	 * @author EB
 	 * @version 1.0
 	 * @see first()
@@ -119,8 +134,31 @@ private:
 	 * @version 1.0
 	 */
 	Frame *		_frameLast;
+	/**
+	 * lost()'s field
+	 * @author EB
+	 * @version 1.0
+	 * @see lost()
+	 */
+	bool		_isLost;
 
 };
+
+inline irid Track::iid(void) const
+{	return _iid;
+}
+
+inline uint Track::length(void) const
+{	return _length;
+}
+
+inline Frame * Track::first(void) const
+{	return _frameFirst;
+}
+
+inline bool Track::isLost(void) const
+{	return _isLost;
+}
 
 }
 

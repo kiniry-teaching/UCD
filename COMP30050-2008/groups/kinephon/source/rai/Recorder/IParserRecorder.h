@@ -68,7 +68,7 @@ public:
 
 	/**
 	 * Record the current position of an IR blob.
-	 * @param irid Identification of the IR blob. This id will be used to link
+	 * @param iid Identification of the IR blob. This id will be used to link
 	 *	each Record together
 	 * @param x X co-ordinate of the IR blob
 	 * @param y Y co-ordinate of the IR blob
@@ -79,7 +79,7 @@ public:
 	 * @pre size > 0;
 	 */
 	virtual void	record
-					(	irid const	irid,
+					(	irid const	iid,
 						int const	x,
 						int const	y,
 						int const	size

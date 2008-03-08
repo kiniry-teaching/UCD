@@ -69,7 +69,7 @@ private:
 	 * @pre shape != 0;
 	 * @pre _shapeIndex < _nShapes;
 	 */
-	Shapes &		operator+=
+	Shapes &		operator +=
 					(	Shape *					shape
 					);
 

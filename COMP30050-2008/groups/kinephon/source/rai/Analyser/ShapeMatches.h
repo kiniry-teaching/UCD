@@ -57,7 +57,7 @@ public:
 	 * @pre index >= 0 && index < length();
 	 * @post /value != 0;
 	 */
-	ShapeMatch *			operator[]
+	ShapeMatch *			operator []
 							(	uint const					index
 							)	const;
 
@@ -72,7 +72,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	ShapeMatches &			operator+=
+	ShapeMatches &			operator +=
 							(	ShapeMatch const * const	shapeMatch
 							);
 

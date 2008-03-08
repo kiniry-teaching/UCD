@@ -1,7 +1,9 @@
 #ifndef __INTERPRETER_FRAME_H__
 #define __INTERPRETER_FRAME_H__
 
+#include <iostream>
 #include "../../type.h"
+using std::ostream;
 
 namespace interpreter
 {
@@ -20,7 +22,18 @@ class Frame
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend			class Track;
+	friend		class Track;
+
+	/**
+	 * Be friends with cout stream writer
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend
+	ostream &	operator <<
+				(	ostream &	stream,
+					Frame *		frame
+				);
 
 public:
 	/**
@@ -34,26 +47,31 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-					Frame
-					(	int const			x,
-						int const			y,
-						int const			size,
-						uint const			time
-					);
+				Frame
+				(	int const	x,
+					int const	y,
+					int const	size,
+					uint const	time
+				) :	_x			(x),
+					_y			(y),
+					_size		(size),
+					_time		(time),
+					_next		(0)
+					{ }
 	/**
 	 * The x co-ordinate of the blob at the recorded time
 	 * @return Get the x co-ordinate of the blob
 	 * @author EB
 	 * @version 1.0
 	 */
-	int				x						(void)	const;
+	int			x				(void)	const;
 	/**
 	 * The y co-ordinate of the blob at the recorded time
 	 * @return Get the y co-ordinate of the blob
 	 * @author EB
 	 * @version 1.0
 	 */
-	int				y						(void)	const;
+	int			y				(void)	const;
 	/**
 	 * The x vector amount from the blob at the recorded time to the
 	 *	blob at the following time. This will be 0 if there is no next
@@ -64,7 +82,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int				u						(void)	const;
+	int			u				(void)	const;
 	/**
 	 * The y vector amount from the blob at the recorded time to the
 	 *	blob at the following time. This will be 0 if there is no next
@@ -75,14 +93,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int				v						(void)	const;
+	int			v				(void)	const;
 	/**
 	 * The size of the IR blob
 	 * @return Get the size of the IR blob
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint			size					(void)	const;
+	uint		size			(void)	const;
 	/**
 	 * The time this Frame was created counted in milliseconds from the
 	 *	beginning of the program
@@ -90,27 +108,36 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	tick			time					(void)	const;
+	tick		time			(void)	const;
 	/**
 	 * The next frame on the track. This will be 0 if there are no more frames
 	 * @return Get the next frame on the track
 	 * @author EB
 	 * @version 1.0
 	 */
-	Frame *			next					(void)	const;
+	Frame *		next			(void)	const;
 
 private:
 	/**
 	 * Add the next frame on the track. This will only be called by Track when
-	 *	a new frame is created
+	 *	a new frame is created. frame is inserted after this frame and before
+	 *	this->next() frame. If frame is a linked-list of frames, all frames
+	 *	will come between this and this->next(). e.g. If there are frames
+	 *	A B C a and b, and they are linked A -> B -> C and a -> b, and B is
+	 *	called with += on a, the frames will become A -> B -> a -> b -> C
 	 * @param frame The next frame on the track
 	 * @return A reference to this
 	 * @author EB
 	 * @version 1.0
+	 * @pre this != && frame != 0;
+	 * @pre frame must not already exist in this
+	 * @post this->next() == frame;
+	 * @warning Adding frame to this twice may cause it to go into an infinite
+	 *	loop at an undetermined time. This is not checked in the method
 	 */
-	Frame &			operator+=
-					(	Frame const * const	frame
-					);
+	Frame *		operator +=
+				(	Frame *		frame
+				);
 
 private:
 	/**
@@ -119,37 +146,57 @@ private:
 	 * @version 1.0
 	 * @see x()
 	 */
-	int				_x;
+	int			_x;
 	/**
 	 * y() field
 	 * @author EB
 	 * @version 1.0
 	 * @see y()
 	 */
-	int				_y;
+	int			_y;
 	/**
 	 * size() field
 	 * @author EB
 	 * @version 1.0
 	 * @see size()
 	 */
-	uint			_size;
+	uint		_size;
 	/**
 	 * time() field
 	 * @author EB
 	 * @version 1.0
 	 * @see time()
 	 */
-	tick			_time;
+	tick		_time;
 	/**
 	 * next() field
 	 * @author EB
 	 * @version 1.0
 	 * @see next()
 	 */
-	Frame *			_next;
+	Frame *		_next;
 
 };
+
+inline int Frame::x(void) const
+{	return _x;
+}
+
+inline int Frame::y(void) const
+{	return _y;
+}
+
+inline uint Frame::size(void) const
+{	return _size;
+}
+
+inline tick Frame::time(void) const
+{	return _time;
+}
+
+inline Frame * Frame::next(void) const
+{	return _next;
+}
 
 }
 

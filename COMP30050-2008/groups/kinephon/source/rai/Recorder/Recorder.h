@@ -1,10 +1,12 @@
 #ifndef __INTERPRETER_RECORDER_H__
 #define __INTERPRETER_RECORDER_H__
 
+#include <map>
 #include "../../type.h"
 #include "IParserRecorder.h"
 #include "Track.h"
 #include "Recording.h"
+using std::map;
 
 namespace interpreter
 {
@@ -21,23 +23,6 @@ class Recorder : public IParserRecorder
 
 public:
 	/**
-	 * Create an instance of a recorder.
-	 * The recorder does nothing itself, it should be passed on to the Parser,
-	 *	which will call the recorder, giving it information to record
-	 * @author EB
-	 * @version 1.0
-	 */
-					Recorder		(void);
-	/**
-	 * Destroy this instance of the recorder.
-	 * @author EB
-	 * @version 1.0
-	 * @warning Destructor is not virtual, don't inherit from this class
-	 */
-					~Recorder		(void);
-
-public:
-	/**
 	 * Eject the recording from the Recorder.
 	 * Takes a copy of the recorded track up to this point. The Recorder
 	 *	will still contain this copied data, so calling Eject again will
@@ -47,21 +32,21 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Recording *		eject			(void)	const;
+	Recording *			eject			(void)	const;
 	/**
 	 * Erase frames from a track.
 	 * All frames before and including the specified frame are removed from
 	 *	the track that is recording the speicified IR blob
-	 * @param irid IR blob whose track is to be erased
+	 * @param iid IR blob whose track is to be erased
 	 * @param frame All frames from this and before are removed from the
 	 *	track. If frame is -1 (default), the whole track is erased
 	 * @author EB
 	 * @version 1.0
 	 */
-	void			erase
-					(	irid const	irid,
-						int const	frame	= -1
-					);
+	void				erase
+						(	irid const	iid,
+							int const	frame	= -1
+						);
 
 public:
 	/**
@@ -75,14 +60,14 @@ public:
 	 *	econtrol
 	 * @see econtrol
 	 */
-	virtual int		control
-					(	uchar const	control,
-						void *		data
-					);
+	virtual int			control
+						(	uchar const	control,
+							void *		data
+						);
 
 	/**
 	 * Record the current position of an IR blob.
-	 * @param irid Identification of the IR blob. This id will be used to link
+	 * @param iid Identification of the IR blob. This id will be used to link
 	 *	each Record together
 	 * @param x X co-ordinate of the IR blob
 	 * @param y Y co-ordinate of the IR blob
@@ -92,12 +77,41 @@ public:
 	 * @post id must be added by calling Control
 	 * @pre size > 0;
 	 */
-	virtual void	record
-					(	irid const	irid,
-						int const	x,
-						int const	y,
-						int const	size
-					);
+	virtual void		record
+						(	irid const	iid,
+							int const	x,
+							int const	y,
+							int const	size
+						);
+
+private:
+	/**
+	 * control() econtrol::FOUND Helper
+	 * @param iid IR blob whose track is to be erased
+	 * @return always 0
+	 * @author EB
+	 * @version 1.0
+	 */
+	int					controlFound
+						(	irid const	iid
+						);
+	/**
+	 * control() econtrol::LOST Helper
+	 * @param iid IR blob whose track is to be erased
+	 * @return always 0
+	 * @author EB
+	 * @version 1.0
+	 */
+	int					controlLost
+						(	irid const	iid
+						);
+	/**
+	 * control() econtrol::BADCOM Helper
+	 * @return always 0
+	 * @author EB
+	 * @version 1.0
+	 */
+	int					controlBadcom	(void);
 
 private:
 	/**
@@ -106,19 +120,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Track *			_tracks;
-	/**
-	 * Contains the number of tracks in total (array size)
-	 * @author EB
-	 * @version 1.0
-	 */
-	uint			_nTracks;
-	/**
-	 * Contains the number of tracks in use
-	 * @author EB
-	 * @version 1.0
-	 */
-	uint			_length;
+	map<irid, Track *>	_tracks;
 
 };
 
