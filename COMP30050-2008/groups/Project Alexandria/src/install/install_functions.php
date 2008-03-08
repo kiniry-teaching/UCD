@@ -7,7 +7,7 @@
  */
 function install($host, $username, $password, $dbname){
 	$file = fopen("../connection.php","w");
-	echo fwrite($file,"
+	fwrite($file,"
 	<?php
 		\$con=mysql_connect ($host, $username, $password)
 			or die
@@ -31,6 +31,7 @@ function install($host, $username, $password, $dbname){
 	//TODO - Ryan - Create tables
 	//TODO - Thomas - Create tables	
 	
+	mysql_close($con);
 	echo "<p>Installation Complete</p>";
 }
 ?>

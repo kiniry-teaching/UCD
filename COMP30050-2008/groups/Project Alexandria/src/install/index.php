@@ -45,9 +45,8 @@
 		<li>For further information contact your host.</li>
 	</ul>
 	<?php
-		include("install_functions.php");
-		
 		if($_POST["dbname"] != NULL){
+			include("install_functions.php");
 			install($_POST["host"], $_POST["username"], $_POST["password"], $_POST["dbname"]);	
 		}
 		else{
