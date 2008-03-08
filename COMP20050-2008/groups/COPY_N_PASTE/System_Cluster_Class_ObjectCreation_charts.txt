@@ -1,0 +1,202 @@
+system_chat THRUST
+	cluster STRUCTURE description "All the entities of form in the game belong to the STRUCTURE cluster"
+	cluster SYSTEM 	  description "Set of classes responsible for creating and running the game"
+end
+
+cluster_chart STRUCTURE
+
+	class SPACESHIP	description "A SPACESHIP that flies and fires BULLETS."
+
+	class FUEL	description  "STRUCTURE which SPACESHIP can collect." 
+
+	class FACTORY	description  "Structure, Level becomes contaminated if Factory is destroyed."
+
+	class ENEMY     description  "Enemy's fire bullets, which can kill the SPACESHIP."
+
+	class BULLET 	description  "Projectile with magnitude and direction, which destroys Structures it impacts."
+
+	class POD	description  "The objective of the game is for the SPACESHIP to pick up each LEVELS POD"
+end 
+
+class_chat STRUCTURE
+ indexing 
+ 	cluster: "STRUCTURE"
+ 	created: "06-03-2008 pN";
+ explanation
+	"Parent class of all entities of form in our domain, defines state and behaviour all instances of STRUCTURE share, "
+	"IE the  child classes all inherit the following Fields , Position, Color, Size Hit_By_Entity."
+part "1/1"
+query
+	"Position", "Color", "Size", "Hit_by_Entity"
+command
+	"On_Hit_By_Entity"
+constraints
+	" "
+end
+
+class_chart SPACESHIP
+ indexing
+	cluster: "STRUCTURE" ;
+	created: "06-03-2008 pN";
+ explanation
+	"The component the player interacts with and controls to play the game. Its a triangular 
+	shaped object which depends on Fuel to move, composed of yellow lines and a clear body" 
+ part "1/1 "
+ query
+	"Position", "Color", "Size", "Fuel_Level" , "Shield_On", "Speed", "Gravity", "Hit_By_Entity"  
+ command
+	"Fire", "Rotate_Left", "Rotate_Right", "Turn_Shield_On", "Thrust", "Collect_Fuel", "Collect_Pod",
+	"On_Hit_By_Entity", "Update_Fuel_Level"
+ constraints
+	"There is a constant value of gravity pulling the spaceship in down word direction only"
+	"Constant time period between BULLETs fired"
+	"Can only fly/Thrust when FUEL is above zero"
+	"Postion and speed can only hold positive integers, from zero to a specified maximum"
+	"Hit_By_Entity and Shiled_On can only take the values true and false" 
+ end
+
+class_chart FUEL
+ indexing
+	cluster: "STRUCTURE" ;
+	created: "06-03-2008 pN";
+ explanation
+	"A Structure with a size and position, which can be picked up be the SPACESHIP, to refuel."
+ part "1/1 "
+ query
+ 	"Position", "Color", "Size", "HIT_By_Entity"
+ command
+	"On_Hit_By_Entity"
+ constraint
+	"Postion and Size are constant value integers"
+	"Hit_By_Entity can only take the values true and false"	
+ end
+
+class_chart Enemy
+ indexing
+	cluster: "STRUCTURE" ;
+	created: "06-03-2008 pN";
+ explanation
+	"A Structure with a size and position, which fires BULLETS which kill the SPACESHIP if they hit."
+ part "1/1 "
+ query
+      "Position", "Color", "Hit_By_Entity"	  
+ command
+      "On_Hit_By_Entity", "Fire"
+ constraints  
+	"Constant time period between BULLETs fired"
+	"Constant time period between rotation of direction of BULLETS"
+	"Postion and Size are constant value integers"
+	"Hit_By_Entity can only take the values true and false" 
+ end
+
+class_chart FACTORY
+ indexing
+	cluster: "STRUCTURE" ;
+	created: "06-03-2008 pN";
+ explanation
+	"A Structure with a size and position, SPACESHIPS can destroy FACTORIES, by firing multiple BULLET's at it"
+	"If a FACTORY is destroyed the whole planet becomes contaminated and SPACESHIP dies after set time."
+ part "1/1 "
+ query
+      "Position", "Color", "Size", "Times_Hit" 
+ command
+	"On_Hit_By_Bullet", "Emite_Smoke"
+	
+ constraints
+	"Constant time period between emission of smoke"
+	"Postion and Size are constant value integers"
+	"Times_Hit is a postive integer value ranging for zero to specified maximum" 
+ end
+
+class_chart POD
+ indexing
+	cluster: "STRUCTURE" ;
+	created: "06-03-2008 pN";
+ explanation
+	"A Structure with a size and position, the objective of the game is for the SPACESHIP to collect each LEVEL's POD, "
+	"and fly of with it without crashing"
+ part "1/1 "
+ query
+     "Position", "Size", "Color", "Speed", "Direction", "Gravity", "Hit_By_Entity"	
+ command
+      "Change_In_Position", "Change_In_Speed", "Change_In_Direction", "On_Hit_By_Entity"
+
+ constraint
+	"Gravity is a constant value pulling pod down wards"
+	"Position, Speed and Direction are positive integers ranging from zero to specified maximun"
+	"Hit_By_Entity can only take the values true or false" 
+ end
+
+class_chart BULLET
+ indexing
+	cluster: "STRUCTURE" ;
+	created: "06-03-2008 pN";
+ explanation
+	"A Structure with a size and position, and movement of the form of Speed and direction, kills entities it impacts." 
+ part "1/1 "
+ query
+     "Position", "Size", "Color", "Direction", "Speed", "Hit_By_Entity" 
+ command
+      "Change_In_Position", "Change_In_Speed", "Change_In_Direction", "On_Hit_By_Entity"
+ constraint
+	"Position, Size, Direcition and Speed are postive integers"
+	"Hit_By_Entity can only take the values true and false"
+ end
+
+cluster_chart SYSTEM
+
+	class LEVEL	description "Creates LEVELs and everything within them instances within them."
+	class SOUND	description "All noise and audio outpout from the game is an instance of SOUND."			  
+end
+
+class_chart LEVEL
+ indexing
+	cluster: "SYSTEM" ;
+	created: "06-03-2008 pN";
+ explanation
+	"The game is executed over a number of LEVELs, including the intro page which is essentially all menu system"
+	"everything within our domain(THRUST) is contained within the LEVELs."
+ part "1/1 "
+ query
+     "Number", "Size", "Factory_Destroyed", "Spaceship_Destroyed", "Caption"
+
+ command
+	"Update_Caption", "Count_Down_To_Destroy", "Pod_Lifted_Above_Level", "Remove_Structure", "Draw_Background", Draw_Terrain",
+	"Add_Structure"
+ constraint
+	"Size is a positive integer specifing the number of pixiels of the screen"
+	"Factory_Destroyed and Spaceship_Destroyed can only take the values true or false."
+	"Number can only be in between one and six inclusive"
+	"Caption contains only specified values"
+ end
+
+cluster_chart SOUND
+ indexing
+	cluster: "SYSTEM" ;
+	created: "06-03-2008 pN" ;
+ explanation
+	"All noises and music, emitted for the game are instances of SOUND"
+part "1/1"
+query
+     "Volume", "Duration", "Is_Playing"
+command
+     "Play", "Stop"
+constraint
+     "There is all volume is set to a constant value"
+     "IS_Playing is either true or false"
+end
+	
+object_creation_chart THRUST
+ indexing
+	created: "06-03-2008 pN" ; 
+ explanation
+	"The classes that are created by and display in the class LEVEL."
+ part "1/1"
+ creator LEVEL creates SPACESHIP
+ creator LEVEL creates FACTORY
+ creator LEVEL creates POD
+ creator LEVEL creates ENEMY
+ creator LEVEL creates BULLET
+ creator LEVEL creates FUEL
+end
+

@@ -1,0 +1,86 @@
+GROUP NAME:
+	Copy N' Paste
+
+GRPOUP MEMEBERS:
+	Patrick Nevin,  pNevin,   06754155
+	Robert Plunket, RPlunket, 06
+	Cirian Flynn,   CFlynn,   06
+
+INTRODUCTION and PROJECT OVERVIEW:
+	
+	Our goal is to recreate a project based on the c64 game Thrust
+
+	We will consider this creation and design of our projectan as engineering discipline, by completing and
+	Adhering to a sequence of traditional phases.
+	
+        1. Create a REQUIREMENTS SPECIFICATION, this document/paragraph should identify what the software should
+	do and the enviromnent in which it will work.
+
+	1.1 To generate this REQIOREMENTS SPECIFICATION, we will use a process known as ANALYSIS to examing and
+	    identify what the software should do. We hope to break this phase down into two separte phases
+	1.1.a ELICITATION OF THE REQUIREMENTS, finding out what is required.
+	1.1.b SPECIFICATION OF THE REQUIREMENTS, ie production of the REQUIREMENTS SPECIFICATION
+
+	2. DESIGN, using BON chart we will deside how to build our System.
+
+	3. IMPLEMENTATION, we will code and implement our design through the Java language.
+	
+	4. TESTING, using both black box and white box techniques and methods we learn through the course.
+	   We will TEST our system continiously to ensure that is works technically and that it meets it
+	   its objectives and specification. 
+	
+	5. VERIFICATION, While developing each part of our system we will execute the above four steps to
+	   constantly check that the design corresponds to the specification and the the programming is 
+	   correctly coded.  
+
+REQUIREMENTS (SPECIFICATION):
+	 
+	Our goal is to recreate a project based on the c64 game Thrust with the following fuctionality, 
+	THRUST is a simple game, consiting of a SPACESHIP which flyes through a number of LEVELs trying to advoid
+        been killed by ENEMY fire and crashes, the objective of each LEVEL is for the SPACESHIP to collect a POD
+	And fly of into the horizon, each LEVEL becomes progressively harded. The SPACESHIP is dependent on FUEL
+	which can be collected, SPACESHIP dies and crashes when FUEL runs out. The SPACESHIP can also fire BULLETS
+	Which can distory ENEMY's, and the SPACESHIP also has a protective shield it can use to shield ENEMY BUL-
+	LETS. Each LEVEL also contains FACTORIES which when distroyed, contaminate the LEVEL and start a count down
+	to distory the LEVEL."
+
+	Our goal is to create a platform indepent System which can run on heterogenious systems such as Unix, Mac, Windows etc.
+	As we intend to implement our project/system through a Java interpiter which has is platform Independent this should not 
+	be a problem.
+
+SUMMARY OF ANALYSIS AND DESIGN:
+
+	So far we have created our REQUIREMENTS SPECIFICATION, and created a pratical DESIGN (system, cluster, class, object, evet
+	object creation and senario charts) using BON.
+
+PROJECT DICTIONARY:
+ 
+ 	LEVEL: The game is executed over a number of Levels which in essence encapsulate the    	
+	whole game.
+
+	SPACESHIP: The component the player interacts with and controls to play the game. Its a 	
+	triangular shaped object which depends on Fuel to move, composed of yellow lines and a 	clear body.
+
+	FUEL: Instance of Structure necessary for SPACESHIP to survive 
+
+	FACTORY: Instance of Structure, Level becomes contaminated if Factory is destroyed..
+
+	ENEMY: Instance of Structure that fires instances of bullet at the SPACESHIP.
+
+	BULLET: Projectile with magnitude and direction, which destroys Structure's it impacts
+
+	STRUCTURE: All objects of form displayed in the Levels are structure 
+
+	POD: The objective of the game is for the SPACESHIP to pick up each LEVELS POD
+	
+	SOUND: All noise heard from the game is an instance of SOUND
+
+	
+"is-a" relations between concepts 
+	
+	SPACESHIP, BULLET, ENEMY, FACTORY, FUEL and POD is-a STRUCTURE
+      
+"has-a" relations between concepts 
+	All STRUCTURES has-a COLOUR, SIZE and POSITION
+	
+	
