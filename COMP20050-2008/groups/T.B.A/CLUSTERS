@@ -41,17 +41,9 @@ cluster_chart SOUND
 end
 
 	
-CLUSTER PHYSICS_INTERFACE-
-
-DESCRIPTION:
-	This cluster contains all the game physics concepts.
-
-INDEXING:
-	Created 07/03/08
-
-CLASSES:
-	ADDING_FUEL
-	MOVEMENT
-	GRAVITY
-	
+cluster_chart PHYSICS
+	class	ADDING_FUEL
+	class	MOVEMENT
+	class	GRAVITY
+end
 	
