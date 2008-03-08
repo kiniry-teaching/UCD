@@ -172,15 +172,14 @@ end
 
 class_chart TIMER
 indexing
-   in_cluster: "GRAPHICS " ;
+  in_cluster: "GRAPHICS";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
   "Countdown from an INT"
 part "1/1 "
+inherit ENTITY
 query
-  "Time", "Value", "Max", "Min",
-  
+  "Value", "Max", "Min", 
 command
   "Start", "Stop"
 constraint
@@ -191,16 +190,16 @@ end
 
 class_chart PLANET
 indexing
-   in_cluster: "GRAPHICS " ;
+  in_cluster: "GRAPHICS";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
   "ENTITY that destroys SHIP if SHIP touches it"
 part "1/1 "
+inherit ENTITY
 query
-  "LOCATION", "COLOUR"
+  "Location", "Colour"
 command
-  "EXPOLOSION", "DISPLAY"
+  "Explode", "Display"
 constraint
   "Cannot be moved",
   "Is not user controlled",
@@ -208,16 +207,16 @@ end
 
 class_chart SPACE
 indexing
-   in_cluster: "GRAPHICS " ;
+  in_cluster: "GRAPHICS";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
   "Background that SHIP flies through"
 part "1/1 "
+inherit ENTITY
 query
-  "GRAPHICS", "COLOUR"
+  "Location", "Colour"
 command
-  "DISPLAY"
+  "Display"
 constraint
   "Cannot be moved",
   "Is not user controlled",
@@ -225,58 +224,52 @@ end
 
 class_chart STARS
 indexing
-   in_cluster: "GRAPHICS " ;
+  in_cluster: "GRAPHICS";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
   "ENTITIES in SPACE"
 part "1/1 "
+inherit ENTITY
 query
-  "GRAPHICS", "COLOUR"
-  
+  "Location", "Colour" 
 command
-  "DISPLAY"
+  "Display", "Hide"
 constraint
   "Cannot be moved",
   "Is not user controlled",
 end
 
-
 class_chart BULLETS
 indexing
-   in_cluster: "GRAPHICS " ;
+   in_cluster: "GRAPHICS";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
-  " ENTITY that causes ENTITY that causes SHIP to be destroyed'"
-part "1/1 "
+  "ENTITY that causes SHIP to be destroyed'"
+part "1/1"
+inherit ENTITY
 query
- "Source"  
+ "Direction", "Speed" 
 command
   "EXPLOSION"
 constraint
-  "IS GRAPHICS",
+  "Can be no more than five on screen at once",
   "Is user controlled",
-  "Is never a numerical VALUE",
   "Can sometimes cause ship to be destroyed"
 end
 
 class_chart ENEMIES
 indexing
-   in_cluster: "GRAPHICS " ;
+  in_cluster: "GRAPHICS";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
-  " ENTITY that emits BULLETS'"
+  "ENTITY that emits BULLETS'"
 part "1/1 "
+inherit ENTITY
 query
- "Source" 
+ "Location" 
 command
-  "EXPLOSION"
+  "Shoot"
 constraint
-  "Is GRAPHICS",
-  "Is user controlled",
-  "Is never a numerical VALUE",
   "Always against user"
 end
 
@@ -335,59 +328,51 @@ cluster_chart VALUES
   class GRAVITY description "Pulls SHIP down"
 end
 
-class_chart INTS
+class_chart INT
 indexing
-   in_cluster: "VALUES " ;
+  in_cluster: "VALUES";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
   "Numerical values on SCREEN"
 part "1/1 "
 query
-  "VAlUE", "TYPE", "Max", "Min"
+  "Value", "Max", "Min"
 command
-  "DISPLAY", 
+  "Display", "Increase", "Decrease" 
 constraint
-  "Cannot be 0",
   "Is not user controlled",
-  "Is allways a numerical VALUE"
-
+  "Is always a numerical VALUE"
 end
 
 class_chart STRING 
 indexing
-  in_cluster: "VALUES " ;
+  in_cluster: "VALUES";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
-  " STRING values on SCREEN"
+  "STRING values on SCREEN"
 part "1/1 "
 query
-  "Position", "TYPE",  
+  "Value", "Length"  
 command
-  "DISPLAY"
+  "Display", "Set"
 constraint
   "Text Format",
-  "Is not user controlled",
-  "Is never a numerical VALUE"
+  "Is not user controlled"
 end
 
 class_chart COLOUR
 indexing
   in_cluster: "VALUES";
   created: "2008-03-06 chale";
-  revised: "";
 explanation
-  " Color with a 'u'"
+  "Color with a 'u'"
 part "1/1 "
 query
- "TYPE",
+ "TYPE"
 command
-  "DISPLAY" , "COLOUR"
+  "Display"
 constraint
-  "IS GRAPHICS",
   "Is not user controlled",
-  "Is never a numerical VALUE"
 end
 
 class_chart GRAVITY
@@ -421,7 +406,7 @@ part "1/1"
 query
    "Frequency", "Volume", "Cause", "Length", "File"
 command
-   "Adust volume",
+   "Adjust volume",
    "Make noise"
 constraint  
    "Must be initialised by an entity"
@@ -619,7 +604,7 @@ explanation
 part
   "1/2"
 event
-  "Press space to start new game"
+  "User presses new game key to start new game"
 involves
   MAIN_MENU, GAME_SCREEN, ENTITY
 event
@@ -643,7 +628,7 @@ event
 involves
   SHIP, GAME_SCREEN
 event
-  "User presses a quit key"
+  "User presses quit key"
 involves
   GAME_SCREEN, MAIN_MENU
 end
@@ -659,11 +644,11 @@ part
 event
   "Shoot bullet"
 involves
-  SHIP, BULLETS, SOUND_EFFECT
+  SHIP, BULLETS, SOUND_EFFECTS
 event
   "Ship gets destroyed"
 involves
-  SHIP, EXPLOSION, SOUND_EFFECT
+  SHIP, EXPLOSION, SOUND_EFFECTS
 event
   "Level complete"
 involves
@@ -675,7 +660,7 @@ involves
 event
   "Thrusting"
 involves
-  GAME_SCREEN, SHIP, FUEL, SOUND_EFFECT
+  GAME_SCREEN, SHIP, FUEL, SOUND_EFFECTS
 event
   "Turning"
 involves

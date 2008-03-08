@@ -1,26 +1,28 @@
-Group Name: KodeKings 
+Group Name: 
+
+Kode Kings 
+
 
 Group Members:
 
 Colin Casey, Ccasey, 04319176
-
 Ciaran Hale, ciaranhale, 05416370
-
 Neil Mc Carthy, nmccarthy , 06449034
+
 
 Introduction to Project:
 
-This project involves recreating the Commodore 64 game Thrust. The main aim within our group is to fully complete the coding of this game and have it running to its original capabilities.
+This project involves recreating the Commodore 64 game Thrust. While a small project in the grand scheme of things, it does require a well thought design process as there a lot of interweaving processes involved. The main aim within our group is to fully complete the coding of this game and have it running to its original capabilities.
 
 
 Project Requirements:
 
-1: Come up with concept analysis and define terms for all entities
-2: Create Bon constraints for our code to adhere too.
-3:Convert our bon code into Java code.
-4: Fully begin to code the game.
-5: Hopfully play a fully completed game!
-
+1: Do a concept analysis and create a project dictionary based on this.
+2: Create high level Bon design documents for our code to adhere too.
+3: Adhere to formal a standard set out to us.
+4: Convert our bon code into Java code.
+5: Fully begin to code the game.
+6: Hopefully play a fully completed game!
 
 
 Project Purpose Overview:
@@ -30,7 +32,7 @@ The purpose of the project is to teach us how to work as team with the goal of d
 
 A Summary of Analysis and Design:
 
-To date we defined our class dictionary and have written our High Level Documents in bon textual format. And also enjoyed playing the game thrust.
+To date we have completed our high level concept analysis and subsequently defined our class dictionary. We have created system, cluster, class, creation, scenario and event charts in bon textual format. And also enjoyed playing the game thrust.
 
 
 Project Dictionary:
@@ -108,10 +110,4 @@ FUEL is a kinda ENTITY, INT, STRING.
 LIFE is a kinda ENTITY, INT, STRING.
 SCORE is a kinda ENTITY, INT, STRING.
 TIMER is a kinda INT, ENTITY.
-
-
-
-
-
-
 
