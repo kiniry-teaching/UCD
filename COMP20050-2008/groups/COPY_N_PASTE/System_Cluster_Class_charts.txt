@@ -1,0 +1,140 @@
+
+
+system_chat THRUST
+	cluster STRUCTURE description "THRUST is a simple game, consiting of a SPACESHIP which flyes through a number of LEVELs trying to advoid"
+				      "been killed by ENEMY fire and crashes, the objective of each LEVEL is for the SPACESHIP to collect a POD "
+				      "And fly of into the horizon, each LEVEL becomes progressively harded. The SPACESHIP is dependent on FUEL "
+				      "which can be collected, SPACESHIP dies and crashes when FUEL runs out. The SPACESHIP can also fire BULLETS"
+				      "Which can distory ENEMY's, and the SPACESHIP also has a protective shield it can use to shield ENEMY BUL-"
+				      "LETS. Each LEVEL also contains FACTORIES which when distroyed, contaminate the LEVEL and start a count down"
+				      "to distory the LEVEL."
+end
+
+cluster_chart STRUCTURE
+
+	class SPACESHIP	description "A SPACESHIP that flies and fires BULLETS."
+
+	class FUEL	description  "STRUCTURE whch SPACESHIP can collect." 
+
+	class FACTORY	description  "Structure, Level becomes contaminated if Factory is destroyed."
+
+	class ENMEY     description  "Enemys fire bullets, which can kill the SPACESHIP."
+
+	class BULLET 	description  "Projectile with magnitude and direction, which destroys Structures it impacts."
+
+	class POD	description  "The objective of the game is for the SPACESHIP to pick up each LEVELS POD"
+end
+
+class_chart SPACESHIP
+ indexing
+	clauster: "STRUCTURE" ;
+	created: "06-03-2008 pn";
+ explantion
+	"The component the player interacts with and controls to play the game. Its a triangular 
+	shaped object which depends on Fuel to move, composed of yellow lines and a clear body" 
+ part "1/1 "
+ query
+	"Postion", "Color", "Size", "Fuel_Level" , "Shield", "Speed", "Gravity", "Hit_By_Entity"  
+ command
+	"Fire", "Rotate_Left", "Rotate_Right", "Shield_On", "Thrust", "Collect_Fuel", "Collect_Pod",
+	"On_Hit_By_Entity", "Update_Fuel_Level"
+ constraint
+	"None yet"
+ end
+
+class_chart FUEL
+ indexing
+	clauster: "STRUCTURE" ;
+	created: "06-03-2008 pn";
+ explantion
+	"A Structure with a size and postion, which can be picked up be the SPACESHIP, to refuel."
+ part "1/1 "
+ query
+ 	"Position", "Color", "Size", "HIT_By_Entity"
+ command
+	"On_Hit_By_Entity"
+ constraint
+	"None yet"
+ end
+
+class_chart Enemy
+ indexing
+	clauster: "STRUCTURE" ;
+	created: "06-03-2008 pn";
+ explantion
+	"A Structure with a size and postion, which fires BULLETS which kill the SPACESHIP if they hit."
+ part "1/1 "
+ query
+      "Position", "Color", "Hit_By_Entity"	  
+ command
+      "On_Hit_By_Entity", "Fire"
+ constraint  
+	"None yet"
+ end
+
+class_chart FACTORY
+ indexing
+	clauster: "STRUCTURE" ;
+	created: "06-03-2008 pn";
+ explantion
+	"A Structure with a size and postion, SPACESHIPS can distroy FACTORIES, by firing multiple BULLET's at it"
+	"If a FACTORY is distroyed the whole panet becomes containminated and SPACESHIP dies after set time."
+ part "1/1 "
+ query
+      "Positon", "Color", "Size", "TimesHit" 
+ command
+	"On_Hit_By_Bullet", "EmiteSmoke"
+	
+ constraint
+	"None yet"
+ end
+
+class_chart POD
+ indexing
+	clauster: "STRUCTURE" ;
+	created: "06-03-2008 pn";
+ explantion
+	"A Structure with a size and postion, the objective of the game is for the SPACESHIP to collect each LEVEL's POD, "
+	"and fly of with it without crashing"
+ part "1/1 "
+ query
+     "Postion", "Size", "Color", "Speed", "Direction", "Gavity", "Hit_By_Entity"	
+ command
+      "Change_In_Position", "Change_In_Speed", "Change_In_Direction", "On_Hit_By_Entity"
+
+ constraint
+	"None yet"
+ end
+
+class_chart BULLET
+ indexing
+	clauster: "STRUCTURE" ;
+	created: "06-03-2008 pn";
+ explantion
+	"A Structure with a size and postion, and movement of the form of Speed and direction, kills entities it impacts." 
+ part "1/1 "
+ query
+     "Postion", "Size", "Color", "Direction", "Speed", "Hit_By_Entity" 
+ command
+      "Change_In_Position", "Change_In_Speed", "Change_In_Direction", "On_Hit_By_Entity"
+ constraint
+	"None yet"
+ end
+
+class_chart LEVEL
+ indexing
+	clauster: "None" ;
+	created: "06-03-2008 pn";
+ explantion
+	"The game is executed over a number of LEVELs, including the intro page which is essentially all menu system"
+	"everything within our domain(THRUST) is contained within the LEVELs."
+ part "1/1 "
+ query
+     "Number", "Size", "Factory_Distoryed", "Spaceship_Distroyed", "Caption"
+
+ command
+	"Update_Caption", "Count_Down_To_Distroy", "Pod_Lifted_Above_Level", "Remove_Strutre", "Draw_Background", Draw_Terrain",
+	"Add_Structure"
+ constraint
+	"None yet"
+ end
