@@ -1,11 +1,8 @@
-SYSTEM_CHART GAME
+system_chart GAME
+	cluster GRAPHIC_INTERFACE description "Visual ENTITYS"
+	cluster TEXT_INTERFACE description "The text displayed and the HUD"
+	cluster SOUND description "What is heard by the user"
+	cluster PHYSICS_INTERFACE "The physics behind the game"
+end
 
-INDEXING:
-        Created 08/03/08
-
-CLUSTERS:
-	cluster GRAPHIC_INTERFACE
-	cluster TEXT_INTERFACE
-	cluster SOUND_INTERFACE
-	cluster PHYSICS_INTERFACE
 

@@ -1,66 +1,44 @@
-CLUSTER TEXT_INTERFACE-
+cluster_chart GRAPHIC_INTERFACE
 
-DESCRIPTION:
-	This cluster displays all the information contained in the HUD. 
+	class 	HUDFUEL description "Shows how much FUEL you have left"
+	class 	HUDLIVES description "How much SHIPs you have left"
+	class	SCORE description "Measures how succesful you have been" 
+	class	LEVEL description "How much progress you have made"
+	class	HIGHSCORE description "The best SCOREs"
+	class	MEN_SAVED descrption "How many MEN you have saved this LEVEL"
+	class	HUD description "Heads up display, the interface that you can see"
+	class	BONUS description "the bonus SCORE you have recieved for this level"
+	class	PASSWORDS "a PASSWORD to start on a certain LEVEL"
+	class	TEXT "a String"
+end
 
-INDEXING:
-	Created 07/03/08
-	
-CLASSES:
-	HUDFUEL
-	LIVES
-	HUDLIVES
-	SCORE
-	LEVEL
-	HIGHSCORE
-	MEN_SAVED
-	HUD
-	BONUS
-	PASSWORDS
-	TEXT
+cluster_chart GRAPHIC_INTERFACE
 
-CLUSTER GRAPHIC_INTERFACE-
-
-DESCRIPTION:
-	This cluster contains all the graphical objects.
-
-INDEXING:
-	Created 07/03/08
-
-CLASSES:
-	SPACESHIP
-	BACKGROUND
-	LANDSCAPE
-	TURRET
-	FUEL
-	FACTORY
-	BALL
-	TRACTOR_BEAM
-	SHIELDS
-	BULLETS
-	MEN
-	GATES
-	FORCEFIELD
-	SPACESHIP_WITH_BALL
-	STARS
-	GATELOCKS
-	COLORS
-	
+	class	SPACESHIP description ""
+	class	BACKGROUND description ""
+	class	LANDSCAPE description ""
+	class	TURRET description ""
+	class	FUEL description ""
+	class	FACTORY description ""
+	class	BALL description ""
+	class	TRACTOR_BEAM description ""
+	class	SHIELDS description ""
+	class	BULLETS description ""
+	class	MEN description ""
+	class	GATES description ""
+	class	FORCEFIELD description ""
+	class	SPACESHIP_WITH_BALL description ""
+	class	STARS description ""
+	class	GATELOCKS description ""
+	class	COLORS description ""
+end
 
 
 
-CLUSTER SOUND_INTERFACE-
-
-DESCRIPTION:
-	This cluster contains all the sound concepts. 
-
-INDEXING:
-	Created 07/03/08
-
-CLASSES:
-	MUSIC
-	SOUND
-
+cluster_chart SOUND
+	class	MUSIC description ""
+	class	SOUND description ""
+end
 
 	
 CLUSTER PHYSICS_INTERFACE-
