@@ -7,6 +7,7 @@
 <style type="text/css">
 	form{
 		width:18em;
+		font-family:"Times New Roman", Times, serif;
 	}
 	
 	.formrow{
@@ -43,17 +44,22 @@
 		<li>Username and password may be optional.</li>
 		<li>For further information contact your host.</li>
 	</ul>
-	<form action="index.php" method="post">
+	<?php
+		include("install_functions.php");
+		
+		if($_POST["dbname"] != NULL){
+			install($_POST["host"], $_POST["username"], $_POST["password"], $_POST["dbname"]);	
+		}
+		else{
+	?>
+		<form action="index.php" method="post">
 			<div class="formrow"><div class="formtext">Host: </div><div class="forminput"><input type="text" name="host" value="localhost" /></div></div>
 			<div class="formrow"><div class="formtext">Database Username: </div><div class="forminput"><input type="text" name="username" /></div></div>
 			<div class="formrow"><div class="formtext">Database Password: </div><div class="forminput"><input type="password" name="password" /></div></div>
 			<div class="formrow"><div class="formtext">Database Name: </div><div class="forminput"><input type="text" name="dbname" /></div></div>
 			<div class="formbutton"><input type="submit" /></div>
-	</form>
+		</form>
 	<?php
-		if($_POST["dbname"] != NULL){
-			include("install_functions.php");
-			install($host, $username, $password, $dbname);
 		}
 	?>
 	<?php //TODO - Thomas - Add user-system install process ?>
