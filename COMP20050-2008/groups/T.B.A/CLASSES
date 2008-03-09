@@ -327,3 +327,262 @@ constraint:
 "GATELOCKS must be destroyed to open GATES"
 
 end
+
+class_chart SHEILDS
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation: 
+"cicular entity surrounding ship, which protects ship from BULLETS"
+
+query:
+"FUEL remaining", "Time limit", "COLOR"
+
+command:
+"SHEILDS up", "SHEILDS down"
+
+constraints:
+"SHEILDS lasts limited amount of time"
+"SHEILDS can only last provided there is sufficent FUEL"
+
+end
+
+
+class_chart BULLETS
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"small ENTITY, which accelerates away from ship or turret when fired."
+
+query:
+"position","velocity"
+
+command:
+"fire", "SOUND", "COLOR"
+
+costraints:
+"BULLETS destroy ship if SHEILD is not up"
+"SHIP can only fire a BULLET if it's previous is no longer in the screen"
+
+end
+
+
+class_chart MEN
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"small ENTITY, to be brought onto ship by tractor beam"
+
+query:
+"location", "COLOR"
+
+command:
+"Use TRACTOR_BEAM", "increment SAVED_MEN"
+
+costraints:
+"TRACTOR_BEAM must be used"
+
+end
+
+
+class_chart LIVES
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"The number of attemps the player has at completeing the game"
+
+query:
+"LIVES remaining"
+
+command:
+"Decrease LIVES"
+
+costraints:
+"If ship is hit by BULLET or PLANET descrease lives and restart level"
+"if lives variable is less than zero, end game"
+
+end
+
+
+class_chart HUDLIVES
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"Display the lives variable in the HUD"
+
+inherit: HUD
+
+query:
+"LIVES remaining"
+
+command:
+
+costraints:
+
+end
+
+
+class_chart SCORE
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"assign points for completing specific tasks"
+"add the current points earned to the SCORE variable"
+
+query:
+"return SCORE"
+
+command:
+"increase SCORE variable"
+
+costraints:
+"only increase SCORE variable if a turret has been destroyed or a man has been saved or the BALL taken off planet or FACTORY destroyed and BALL taken off planet before destroyed"
+
+end
+
+
+class_chart HIGHSCORE
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"variable to store the highest SCORE and the name of person who got that score"
+
+inherit: SCORE
+
+query:
+"return HIGHSCORE variable"
+
+command:
+"store HIGHSCORE variable"
+
+costraints:
+"if current SCORE is greater than HIGHSCORE, replace HIGHSCORE with SCORE"
+
+end
+
+
+class_chart LEVEL
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"the number of stages competed in the game"
+
+query:
+"return LEVEL variable"
+
+command:
+"increase_LEVEL"
+
+costraints:
+"increment the LEVEL variable by one each time a stage has been completed"
+
+end
+
+
+class_chart MEN_SAVED
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"Displays in the HUD, the MEN_SAVED variable"
+
+inherit: HUD
+
+query:
+"MEN_SAVED"
+
+command:
+
+costraints:
+"MEN_SAVED variable is increased when a man has been TRACTOR_BEEMED onto the ship"
+
+end
+
+
+class_chart HUD
+
+indexing:
+in_cluster: "GRAPHIC_INTERFACE"
+created: "09-03-2008 Dave";
+
+explanation:
+"Heads up display, used to display FUEL, LIVES, SCORE and MEN_SAVED variables."
+
+query:
+"return FUEL, LIVES, SCORE and MEN_SAVED variables"
+
+command:
+
+costraints:
+"the HUD must be located at all times at the top of the screen, during the game"
+
+end
+
+
+
+class_chart SOUND
+
+indexing:
+in_cluster: "SOUND"
+created: "09-03-2008 Dave";
+
+explanation:
+"sound effects used when shooting BULLETS, being hit by BULLETS, destroying FACTORIES and TURRETS, crashing into the PLANET, and escaping the PLANET"
+
+query:
+"BULLET SOUND", "destroy FACTORY SOUND", "destroy TURRET SOUND", "crash PLANET SOUND", "escape PLANET SOUND"
+
+command:
+"play destroy_bullet_sound", "play destroy_factory_sound","play destroy_turret_sound","play escape_planet"
+
+costraints:
+"When an entity is destroyed the corresponding sound is played"
+"When the SPACESHIP escapes the PLANET the escape_planet sound is played"
+
+end
+
+
+class_chart MUSIC
+
+indexing:
+in_cluster: SOUND
+created: "09-03-2008 Dave";
+
+explanation:
+"background music played while playing the game"
+
+query:
+"LEVEL_MUSIC"
+
+command:
+"play MUSIC"
+
+costraints:
+"only once a LEVEL has begun is the MUSIC to be played"
+
+end
