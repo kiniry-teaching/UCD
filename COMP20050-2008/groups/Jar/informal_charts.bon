@@ -546,7 +546,7 @@ event_chart THE_GAME incoming
   indexing
     created: "7-3-2008";
   explanation
-    "External events"
+    "External events"or
   part
     "1/2"
   event "" involves ENTITY
