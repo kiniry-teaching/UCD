@@ -143,6 +143,7 @@ class_chart SHIP
   indexing
     in_cluster: "ENTITY_CLUSTER";
     created: "6-3-2008";
+    revised: "9-3-2008";
   explanation
     "The main yellowish, triangular ENTITY controlled by the player"
   part
@@ -152,7 +153,8 @@ class_chart SHIP
   query
     "Information",
     "Are the shields active?",
-    "Is the POD attached?"
+    "Is the POD attached?",
+    "What direction are you facing?"
   command
     "Activate Thrust",
     "Pick up FUEL",
