@@ -1,4 +1,4 @@
-cluster_chart GRAPHIC_INTERFACE
+cluster_chart TEXT_INTERFACE
 	class 	HUDFUEL description "Displays how much FUEL you have left"
 	class 	HUDLIVES description "How much SHIPs you have left"
 	class	SCORE description "keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed" 
