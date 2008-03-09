@@ -1,3 +1,87 @@
+class_chart ENTITY
+
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created "09-03-2008 eh";
+
+explanation: "An object"
+
+query:
+"What type of object are you?",
+"Where are you?"
+
+end
+
+class_chart SPACESHIP
+
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created "09-03-2008 eh";
+
+explanation: "player controlled ENTITY"
+
+inherit ENTITY
+
+query:
+	"How many lives are remaining?",
+	"How much fuel is remaining?",
+	"How fast is the spaceship going?",
+	"Can the spaceship go faster?",
+	"What direction is the spaceship going?",
+	"Are shields active?",
+	"Is the tractor beam active?"
+
+command:
+	"Change direction!",
+	"Use tractor beam!"
+	"Speed up!",
+	"Use shield!",
+	"fire bullet!"
+
+constraints:
+	"fuel must be positive",
+	"lives must be greater or equal to 0"
+end
+
+class_chart OBSTACLE
+
+indexing 
+	in_cluster: "GRAPHICS_INTERFACE"
+	created "09-03-2008 eh";
+
+explanation: "An ENTITY that acts as a barrier"
+
+inherit ENTITY
+
+query:
+	"What type of obstacle are you?"
+	"Where are you?"
+
+constraints:
+	"Must be an ENTITY"
+end
+
+class_chart BACKGROUND
+
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created "09-03-2008" eh";
+
+explanation: "The background sky that you can see"
+
+query
+	"What level is this?"
+
+command:
+	"Set background!"
+
+constraints:
+	"Must not overlap onto the landscape"
+
+end
+	
+
+
 class_chart BONUS
 
 indexing
@@ -7,10 +91,10 @@ created: "08-03-2008 jd";
 explanation: "Additonal points for special achievment"
 
 query:
-"What are the points", "What was the special achievement"
+"What are the points?", "What was the special achievement?"
 
 command:
-"Increase points", "Display SCORE"
+"Increase points!", "Display SCORE!"
 
 constraint:
 "Must contain (a) point(s)"
@@ -76,7 +160,7 @@ end
 class_chart GRAVITY
 
 indexing
-in_cluster: "PHYSICS_INTERFACE"
+in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
 explanation: "downward force acting against you"
 
@@ -95,7 +179,7 @@ end
 class_chart INPUT
 
 indexing
-in_cluster: "PHYSICS_INTERFACE"
+in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
 explanation: "keyboard"
 
@@ -150,7 +234,7 @@ end
 class_chart ADDING_FUEL
 
 indexing
-in_cluster: "PHYSICS_INTERFACE"
+in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
 explanation: "increasing FUEL supply"
 
@@ -188,7 +272,7 @@ end
 class_chart MOVEMENT
 
 indexing
-in_cluster: "PHYSICS_INTERFACE"
+in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
 explanation: "change in location on the screen"
 
