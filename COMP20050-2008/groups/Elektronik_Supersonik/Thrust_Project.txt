@@ -2,15 +2,15 @@ Name: Elektronik Supersonik
 
 Members:
 	Name: Sigitas Monkevicius 
-	Moodle id: radament
+	Trac id: zylius
 	Student no.: 06850529
 	
 	Name: Erik Roche Farrelly
-	Moodle id: erik
+	Trac id: dafty
 	Student no.: 06471978
 	
 	Name: Dominic Carr
-	Moodle id: dominiccarr
+	Trac id: dominiccarr (was 06433430)
 	Student no.: 06433430
 	
 Introduction:
