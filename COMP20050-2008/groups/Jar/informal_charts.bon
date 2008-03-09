@@ -1,12 +1,24 @@
 -- Informal Chart
 
 system_chart THE_GAME
+  cluster GAME
+  description
+    "initialisation of game state"
   cluster ENTITY_CLUSTER
   description
     "Cluster of ENTITYs in game"
   cluster INFORMATION_CLUSTER
   description
     "dynamically changing data defining the state of the game"
+end
+
+cluster_chart GAME
+  class LEVEL
+  description
+    "A round of the game"
+  class DRAW
+  description
+    "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
 end
 
 cluster_chart ENTITY_CLUSTER
@@ -16,6 +28,9 @@ cluster_chart ENTITY_CLUSTER
   class MOVABLE
   description
     "ENTITIES in game that can be moved"
+  class NON_MOVABLE
+  description
+    "Entities in game that have a fixed position"
   class SHIP
   description
     "The main yellowish, triangular ENTITY controlled by the player"
@@ -40,9 +55,6 @@ cluster_chart ENTITY_CLUSTER
   class FUEL_TANK
   description
     "An ENTITY from which the SPACESHIP can get FUEL"
-  class PLANET
-  description
-    "The place where the level takes place"
   class LIMPET_GUN
   description
     "An AI controlled ENTITY that fires BULLETS"
@@ -78,6 +90,42 @@ cluster_chart INFORMATION_CLUSTER
     "a timer created by an EVENT or action which counts to another EVENT or ACTION"
 end
 
+class_chart LEVEL
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+    revised: "K Byrne 9-3-2008";
+  explanation
+    "Creates all objects in game and keeps track of the state of the game"
+  part
+    "1/1 "
+  query
+    "Is the NUCLEAR_POWER_PLANT destroyed?",
+    "What level are you on?",
+    "Has the ship left the planet?",
+    "Did the ship have the pod?",
+    "On last collision did the ship have more than one life or more than 0 fuel?"
+    "On last collision was ship involved?"
+    "On last collision was POD attached?"
+  command
+    "Create GROUND",
+    "Create LIMPET_GUN",
+    "Create FUEL",
+    "Create DOOR",
+    "Create BUTTON",
+    "Create SHIP",
+    "Create POD",
+    "End Level",
+    "Draw level",
+    "Respawn ship",
+    "Respawn ship + orb"
+  constraint
+    "Can only read specific map depending on level number",
+    "Cannot create ENTITIES within the ground",
+    "Will not respawn if LIVES = 0, or FUEL = 0 and ship has crashed",
+    "Respawns ship with orb if orb was attached when it last crashed",
+end
+
 class_chart ENTITY
   indexing
     in_cluster: "ENTITY_CLUSTER";
@@ -96,33 +144,11 @@ class_chart ENTITY
     "You can not cross borders with other entities"
 end
 
-class_chart PLANET
-  indexing
-    in_cluster: "ENTITY_CLUSTER";
-    created: "7-3-2008";
-  explanation
-    "place where the level takes place"
-  part
-    "1/1 "
-  query
-    "Is the NUCLEAR_POWER_PLANT destroyed?",
-    "What level are you on?",
-    "Read map"
-  command
-    "Create GROUND",
-    "Create LIMPET_GUN",
-    "Create FUEL",
-    "Create DOOR",
-    "Create BUTTON"
-  constraint
-    "Can only read specific map depending on level",
-    "Cannot create other ENTITIES with in the ground"
-end
-
 class_chart MOVABLE
   indexing
     in_cluster: "ENTITY_CLUSTER";
     created: "7-3-2008";
+    revised: "8-3-2008 S Russell";
   explanation
     "ENTITIES in game that can be moved"
   part
@@ -136,7 +162,25 @@ class_chart MOVABLE
     ""
   constraint
     "Position must be within the bounds of the level.",
-    "Velocity must be between 0 and Max_Velocity."
+    "The magnitude of the velocity must be between 0 and Max_Velocity."
+end
+
+class_chart NON_MOVABLE
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "9-3-2008 K Byrne";
+  explanation
+    "Entities in game that have a fixed position"
+  part
+    "1/1 "
+  inherit
+    ENTITY
+  query
+    "Timer at zero?"
+  command
+    "Start timer"
+  constraint
+    "Must have a velocity of zero"
 end
 
 class_chart SHIP
@@ -207,6 +251,7 @@ class_chart POD
     ""
   constraint
     "Motionless until attached to ship",
+    "Only experiences force towards the ship",
     "Experiences movement relative to SHIP only",
     "When attached is always attached to opposite end of TOW_LINE to SHIP",
     "Must be within a minimum distance of the ship to attach"
@@ -223,12 +268,13 @@ class_chart TOW_LINE
   inherit 
     MOVABLE
   query
-    "What is your current length?"
+    "Do you exist"
   command
     ""
   constraint
     "Is always positioned between the POD and the SHIP",
-    "Static length once the pod is attached"
+    "Has a fixed length",
+    "Only exist when the player attaches the pod to the ship"
 end
 
 class_chart DOOR
@@ -240,15 +286,15 @@ class_chart DOOR
   part
     "1/1 "
   inherit 
-    ENTITY
+    NON_MOVABLE
   query
-    "Are you open?"
+    "Are you open?",
+    "Are you closed?"
   command
     "Open",
     "Close",
-    "Create timer when opened"
   constraint
-    "Can only be open for a set amount of time",
+    "Can only be open for a set amount of time after which it automatically closes",
     "Can only be opened by activating a specific button"
 end
 
@@ -261,13 +307,14 @@ class_chart BUTTON
   part
     "1/1 "
   inherit 
-    ENTITY
+    NON_MOVABLE
   query
     "Is the door open"
   command
     "Open door"
   constraint
-    "Can only be activated when the door is closed"
+    "Can only be activated when the door is closed",
+    "Is associated with a specfic door"
 end
 
 class_chart NUCLEAR_POWER_PLANT
@@ -279,13 +326,12 @@ class_chart NUCLEAR_POWER_PLANT
   part
     "1/1 "
   inherit 
-    ENTITY
+    NON_MOVABLE
   query
     "How much damage have you taken?"
   command
     "Turn on LIMPET_GUNs",
     "Turn off LIMPET_GUNs",
-    "Start Timer for destruction of planet"
   constraint
     "Has a maximum level of damage it can take before the planet is destroyed.",
     "Amount of damage taken is reduced over time",
@@ -301,14 +347,14 @@ class_chart FUEL_TANK
   part
     "1/1 "
   inherit 
-    ENTITY
+    NON_MOVABLE
   query
     "How much fuel do you have?"
   command
     "Reduce fuel"
   constraint
-    "Fuel must be between 0 and max value",
-    "When fuel is gone the FUEL_TANK is removed from the level"
+    "Fuel must be between 0 and a maximum value",
+    "When fuel is equal to zero the FUEL_TANK is removed from the level"
 end
 
 class_chart LIMPET_GUN
@@ -320,9 +366,9 @@ class_chart LIMPET_GUN
   part
     "1/1 "
   inherit 
-    ENTITY
+    NON_MOVABLE
   query
-    "Are you powered?"
+    "Are you powered?", "Is Power Plant deactivated?"
   command
     "Fire Bullet"
   constraint
@@ -337,12 +383,31 @@ class_chart GROUND
     "Area of level through which ENTITIES can not travel"
   part
     "1/1 "
+  inherit
+    ENTITY
   query
     ""
   command
     ""
   constraint
-    ""
+    "Can not move",
+    "NON_MOVABLE ENTITIES must be placed in a position close to it"
+end
+
+class_chart DRAW
+   indexing
+     in_cluster: "THE_GAME";
+     created: "9-3-2008 K Byrne";
+   explanation
+     "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
+   part
+     "1/1 "
+   query
+     "Is it a new level?"
+   command
+     "Refresh screen"
+   constraint
+     ""
 end
 
 class_chart INFORMATION
@@ -395,7 +460,7 @@ class_chart FUEL
     "Set shield multiplier",
     "Picked up"
   constraint
-    ""
+    "Must be greater than or equal to 0"
 end
 
 class_chart SCORE
@@ -452,7 +517,6 @@ class_chart HIGH_SCORE
   command
     "Store",
     "List",
-    "Set name"
   constraint
     "Will only store 5 values"
 end
@@ -468,8 +532,8 @@ class_chart BONUS
   inherit 
     INFORMATION
   query
-    "Planet destroyed",
-    "level number"
+    "Has the planet been destroyed",
+    "What level is it"
   command
     "Add to score"
   constraint
@@ -492,7 +556,7 @@ class_chart TIMER
   command
     "Start timer"
   constraint
-    ""
+    "Length of time is dependant on what event has activated it"
 end
 
 creation_chart THE_GAME
@@ -505,9 +569,9 @@ creation_chart THE_GAME
   creator INFORMATION creates SCORE
   creator INFORMATION creates BONUS
   creator INFORMATION creates HIGH_SCORE
-  creator PLANET creates SHIP
-  creator PLANET creates POD
-  creator PLANET creates NUCLEAR_POWER_PLANT
+  creator LEVEL creates SHIP
+  creator LEVEL creates POD
+  creator LEVEL creates NUCLEAR_POWER_PLANT
   creator SHIP creates BULLET
   creator LIMPET_GUN creates BULLET
 end
