@@ -41,43 +41,43 @@ Please check this spot weekly as we put up our design process and analysis.
 --------------------------------------
 
 ENTITY - an object.
-SPACESHIP – triangular entity controlled by user.
+SPACESHIP – triangular ENTITY controlled by user.
 OBSTACLE – prevent movement.
-BACKGROUND – what you can see.
-LANDSCAPE – the planet.
-TURRET – enemy entity that shoots at you.
-FACTORY – an entity on the surface of a planet.
+BACKGROUND – What you can see that is not an ENTITY, or LANDSCAPE.
+LANDSCAPE – The planet itself, like a giant ENTITY.
+TURRET – enemy ENTITY that shoots at you.
+FACTORY – An ENTITY on the LANDSCAPE.
 FUEL – an object that adds to the fuel variable and is needed to accelerate.
-HUDFUEL - How much fuel is remaining
-BALL – a circular entity that you must take with you off the planet.
-TRACTOR BEAM – used to remove the ball and obtain fuel.
-SHIELDS – barrier that protects spaceship from bullets.
-BULLETS – small circular object which destroys other objects.
-MEN – human object.
+HUDFUEL - Displays how much FUEL you have left
+BALL – a circular ENTITY that you must take with you off the planet.
+TRACTOR BEAM – used to remove BALL,obtain FUEL, and save MEN.
+SHIELDS – Circular barrier that protects SPACESHIP from BULLETS.
+BULLETS – small circular ENTITYs, shot from SPACESHIPs or TURRETS. Destroys other ENTITYS.
+MEN – human ENTITY.
 LIVES – number of spaceships a user has to attempt a level.
-HUDLIVES - how many lives that are remaining.
+HUDLIVES - Displays how much SHIPs you have left.
 SCORE – keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed.
-HIGHSCORE - highest scores
+HIGHSCORE - The best SCOREs
 LEVEL – how far you have progressed.
-MEN SAVED – number of rescued people.
-HUD – used to display fuel, lives, score and men saved.
+MEN_SAVED – How many MEN you have saved this LEVEL.
+HUD – Heads up display, used to display fuel, lives, score and men saved.
 SOUND – background effects.
-MUSIC - music.
-BONUS – additional points for special achievement.
-PASSWORDS – act as save points.
+MUSIC - background music.
+BONUS – the bonus SCORE you have recieved for this level.
+PASSWORDS – a PASSWORD to start on a certain LEVEL.
 GATES – moving obstacles.
 FORCEFIELD – time set obstacle.
 GRAVITY – downward force acting against you.
 INPUT – keyboard.
 SPACESHIP WITH BALL – spaceship carries ball with tractor beam.
 TEXT – character type used.
-ADDING FUEL – increasing fuel supply.
+ADDING FUEL – increasing FUEL supply.
 HIGH SCORE – measures progress.
 COLOR – a visual effect.
 YELLOW, RED, LIGHT BLUE, GREEN, PURPLE, WHITE – colors.
 MOVEMENT – change in location on the screen.
 STARS -  a visual effect.
-GATELOCKS - open gates
+GATELOCKS - Open GATES when hit by BULLETs
  
 *IS-A-RELATIONS*
  

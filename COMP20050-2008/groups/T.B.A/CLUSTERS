@@ -1,49 +1,49 @@
 cluster_chart GRAPHIC_INTERFACE
-
-	class 	HUDFUEL description "Shows how much FUEL you have left"
+	class 	HUDFUEL description "Displays how much FUEL you have left"
 	class 	HUDLIVES description "How much SHIPs you have left"
-	class	SCORE description "Measures how succesful you have been" 
-	class	LEVEL description "How much progress you have made"
+	class	SCORE description "keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed" 
+	class	LEVEL description "how far you have progressed"
 	class	HIGHSCORE description "The best SCOREs"
 	class	MEN_SAVED descrption "How many MEN you have saved this LEVEL"
-	class	HUD description "Heads up display, the interface that you can see"
+	class	HUD description "Heads up display, used to display fuel, lives, score and men saved"
 	class	BONUS description "the bonus SCORE you have recieved for this level"
-	class	PASSWORDS "a PASSWORD to start on a certain LEVEL"
-	class	TEXT "a String"
+	class	PASSWORDS "A PASSWORD to start on a certain LEVEL"
+	class	TEXT "Character type used"
 end
 
-cluster_chart GRAPHIC_INTERFACE
-
-	class	SPACESHIP description ""
-	class	BACKGROUND description ""
-	class	LANDSCAPE description ""
-	class	TURRET description ""
-	class	FUEL description ""
-	class	FACTORY description ""
-	class	BALL description ""
-	class	TRACTOR_BEAM description ""
-	class	SHIELDS description ""
-	class	BULLETS description ""
-	class	MEN description ""
-	class	GATES description ""
-	class	FORCEFIELD description ""
-	class	SPACESHIP_WITH_BALL description ""
-	class	STARS description ""
-	class	GATELOCKS description ""
-	class	COLORS description ""
+cluster_chart GRAPHIC_INTERFACE	
+	class	ENTITY description "An object."
+	class	OBSTACLE descrption "prevent MOVEMENT."
+	class	SPACESHIP description "Triangular ENTITY controlled by user."
+	class	BACKGROUND description "What you can see that is not an ENTITY, or LANDSCAPE."
+	class	LANDSCAPE description "The planet itself, like a giant ENTITY."
+	class	TURRET description "enemy ENTITY that shoots at you."
+	class	FUEL description "An object that adds to HUDFUEL and is needed to accelerate."
+	class	FACTORY description "An ENTITY on the LANDSCAPE."
+	class	BALL description "a circular ENTITY that you must take with you off the planet."
+	class	TRACTOR_BEAM description "used to remove BALL,obtain FUEL, and save MEN."
+	class	SHIELDS description "Circular barrier that protects SPACESHIP from BULLETS."
+	class	BULLETS description "small circular ENTITYs, shot from SPACESHIPs or TURRETS. Destroys other ENTITYS."
+	class	MEN description "human ENTITY."
+	class	GATES description "moving OBSTACLEs."
+	class	FORCEFIELD description "time set OBSTACLE."
+	class	SPACESHIP_WITH_BALL description "spaceship carries ball with tractor beam."
+	class	STARS description "A visual effect"
+	class	GATELOCKS description "Open GATES when hit by BULLETs"
+	class	COLORS description "a visual effect"
 end
 
 
 
 cluster_chart SOUND
-	class	MUSIC description ""
-	class	SOUND description ""
+	class	MUSIC description "background music"
+	class	SOUND description "background effects"
 end
 
 	
 cluster_chart PHYSICS
-	class	ADDING_FUEL
-	class	MOVEMENT
-	class	GRAVITY
+	class	ADDING_FUEL description "increasing FUEL supply"
+	class	MOVEMENT description ""
+	class	GRAVITY description ""
 end
 	

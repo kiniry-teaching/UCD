@@ -1,0 +1,245 @@
+class_chart BONUS
+
+indexing
+in_cluster: "TEXT_INTERFACE"
+created: "08-03-2008 jd";
+ 
+explanation: "Additonal points for special achievment"
+
+query:
+"What are the points", "What was the special achievement"
+
+command:
+"Increase points", "Display SCORE"
+
+constraint:
+"Must contain (a) point(s)"
+"Points can't surpass the limit"
+
+end
+
+class_chart PASSWORDS
+
+indexing
+in_cluster: "TEXT_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "act as save points"
+
+query:
+"Enter the PASSWORD"
+
+command:
+"Accept PASSWORD", "Reject PASSWORD"
+
+constraint:
+"Must contain the correct letters and nummbers"
+"INPUT cannot exceed limit"
+
+end
+
+class_chart GATES
+
+indexing
+in_cluster: "GRAPHIC_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "moving OBSTACLE"
+
+query:
+"What is the OBSTACLE", "What is moving", "What is its position"
+
+command:
+"Move OBSTACLE up and down" "Block SPACESHIP"
+
+constraint:
+"Must move up and down", "Must move side to side"
+
+end
+
+class_chart FORCEFIELD
+
+indexing
+in_cluster: "GRAPHIC_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "time set OBSTACLE"
+
+query:
+"What is the OBSTACLE", "What is the time set"
+
+command:
+"Have a fixed time set", "Block SPACESHIP"
+
+constraint:
+"Must keep a fixed time", "Must block SPACESHIP"
+
+end
+
+class_chart GRAVITY
+
+indexing
+in_cluster: "PHYSICS_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "downward force acting against you"
+
+query:
+"Where is force being dragged to" "What is forcing MOVEMENT of SPACESHIP"
+
+command:
+"Drag downwards" "Force SPACESHIP to move"
+
+constraint:
+"SPACESHIP must be under constant state of downward force" 
+"SPACESHIP can use FUEL to act against GRAVITY"
+
+end
+
+class_chart INPUT
+
+indexing
+in_cluster: "PHYSICS_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "keyboard"
+
+query:
+"What is being inputed by the keyboard"
+"Is the INPUT a set of characters or numbers"
+
+command:
+"Accept INPUT", "Reject INPUT"
+
+constraint:
+"Must accept INPUT if INPUT is correct", "Must reject INPUT if INPUT is incorrect"
+
+end
+
+class_chart SPACESHIP_WITH_BALL
+
+indexing
+in_cluster: "GRAPHIC_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "SPACESHIP carries BALL with TRACTOR_BEAM"
+
+query:
+"What is being carried", "What is the SPACESHIP using to carry the BALL"
+
+command:
+"Carry ball using TRACTOR_BEAM"
+
+constraint:
+"Must use TRACTOR_BEAM to move BALL"
+
+end
+
+class_chart TEXT
+
+indexing
+in_cluster: "TEXT_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "character type used"
+
+query:
+"What type face is being used"
+
+command:
+"Display typed characters"
+
+constraint:
+"Must display typed characters"
+
+end
+
+class_chart ADDING_FUEL
+
+indexing
+in_cluster: "PHYSICS_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "increasing FUEL supply"
+
+query:
+"What is being added" "What is being used to add fuel"
+
+command:
+"Use TRACTOR_BEAM to collect fuel", "Increase HUDFUEL"
+
+constraint:
+"Must use TRACTOR_BEAM in order to increase HUDFUEL"
+
+end
+
+class_chart COLORS
+
+indexing
+in_cluster: "GRAPHIC_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "a visual effect(s)"
+
+query:
+"What action or events has taken place"
+"What are the different visual effects"
+"Which COLORS are there"
+
+command:
+"Display COLORS that conform to action or event"
+
+constraint:
+"Set COLORS must correspond to set event or action"
+
+end
+
+class_chart MOVEMENT
+
+indexing
+in_cluster: "PHYSICS_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "change in location on the screen"
+
+query:
+"What is the current location"
+"What is the SPACESHIP's location after MOVEMENT"
+
+command:
+"Use fuel to initiate MOVEMENT", "Decrease HUDFUEL"
+
+constraint:
+"HUDFUEL must decrease", "SPACESHIP must move"
+
+end
+
+class_chart STARS
+
+indexing
+in_cluster: "GRAPHIC_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "a visual effect"
+
+query:
+"What are the different visual effect"
+"What does the visual effect do"
+"What COLORS does the visual effect have"
+
+command:
+"Display shining star"
+
+constraint:
+"Must display star", "Must have set COLOR"
+
+end
+
+class_chart GATELOCKS
+
+indexing
+in_cluster: "GRAPHIC_INTERFACE"
+created: "08-03-2008 jd"; 
+explanation: "opens GATES"
+
+query:
+"Is the GATELOCK there"
+"Is the GATELOCK destroyed"
+"What is its position"
+
+command:
+"Open GATES when GATELOCKS are destroyed"
+
+constraint:
+"GATELOCKS must be destroyed to open GATES"
+
+end
