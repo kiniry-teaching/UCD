@@ -1,0 +1,62 @@
+Name: Elektronik Supersonik
+
+Members:
+	Name: Sigitas Monkevicius 
+	Moodle id: radament
+	Student no.: 06850529
+	
+	Name: Erik Roche Farrelly
+	Moodle id: erik
+	Student no.: 06471978
+	
+	Name: Dominic Carr
+	Moodle id: dominiccarr
+	Student no.: 06433430
+	
+Introduction:
+	Our project will be designed to replicate the Commodore 64 game Thrust using Java. 
+	In Thrust you must guide your spaceship through increasingly difficult caves to collect the valuable Klystron Pods. After locating the pod, you must attach it to your ship and make your way up again, all the time battling the planet's gravity and the Empire's defensive systems, while keeping track of your fuel supply. Once you have beaten all six levels, the game restarts but adds the extra challenge of reverse gravity and invisible levels.
+	
+Requirements:
+	Has to be written in Java;
+	Has to be done using the appropriate checkstyle;
+	Has to aspire to have small metrics;
+	Be based on and as close as possible to the Commodore 64 game Thrust;
+	Provide appropriate Javadoc documentation;
+	Must use JML for proper modelling;
+	
+Overview:
+	The project purpose is to learn programming in a team, in this case trying to replicate the Commodore 64 game Thrust. We are also learning to use industry tools designed to keep programs easily understandable, well documented, and, most importantly, well written. We are being introduced to techniques which eliminate the most common programming mistakes.
+	
+Analysis and design summary:
+	So far we have had a team concept analysis session, in which we wrote a list of concepts about the project and their relationships. After that has been inspected by our tutors, we revised the list and turned it into the project dictionary.
+	
+Dictionary:
+
+
+	BULLET		- ENEMY BULLETS make you LOSE if they HIT your SPACESHIP. Your bullets help you destroy the FACTORY
+	CONTROL		- a way to give instructions to the game environment
+	CREDITS		- a kind of STRING to display information abou the programmers
+	DOOR		- a kind of TERRAIN that you can CONTROL
+	ENEMY 		- an ENTITY which hinders the SPACESHIP
+	ENTITY 		- a visual object in the game
+	ENTRY_POINT 	- the point where the SPACESHIP enters the LEVEL
+	FACTORY 	- an ENEMY which CONTROLS the TURRET
+	FUEL 		- a STRING that displays the FUEL_UP left
+	FUEL_UP 	- a RESOURCE that the SPACESHIP uses for MOVEMENT. Also an ENTITY
+	HIGH_SCORE 	- a STRING of the top SCORES acheived by PLAYERS
+	JUMP_PORTAL 	- the exit location of a LEVEL
+	LIVES 		- a RESOURCE used to allow LOSING
+	MENU		- a set of STRINGS to CONTROL the program
+	PHYSICS		- a way to control all the moving entities in the game
+	PLAYER		- the person CONTROLING the game
+	POD_HOLDER	- an ENTITY that holds the POD
+	POD		- the ENTITY you must MOVE to the JUMP_PORTAL
+	SCORE 		- the current amount of points acheived by the PLAYER
+	SHIELD		- a RESOURCE that the SPACESHIP uses for protection
+	SPACESHIP	- an ENTITY CONTROLLED by the PLAYER
+	TERRAIN 	- locations where MOVEMENT causes you to LOSE
+	TIMER		- a STRING. You LOSE when it's 0. It counts down
+	TURRET 		- an ENEMY which fires on the SPACESHIP
+	
+

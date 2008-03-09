@@ -1,0 +1,595 @@
+system_chart THRUST
+
+  cluster ENTITY_CLUSTER
+  description
+    "a visual object in the game"
+  cluster ENEMY_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+  cluster PLAYER
+  description
+    "the person controlling the game"
+  cluster INFO
+  description
+    "displays information for the player"
+  cluster ENVIRONMENT_CLUSTER
+  description
+    "the terrain/space environment, non-active objects and resources, menu"
+  
+end
+
+cluster_chart ENTITY_CLUSTER
+
+  class SPACESHIP
+  description
+    "an entity controlled by the player"
+
+  class POD_HOLDER
+  description
+    "an entity that holds the pod"
+
+  class POD
+  description
+    "the entity you must move to the jump portal"
+    
+  class ENTITY
+  description
+    "a general class describing all the entities. They should inherit this class."
+  
+end
+
+cluster_chart ENEMY_CLUSTER
+
+  class TURRET
+  description
+    "an entity/enemy that fires bullets at the spaceship"
+
+  class FACTORY
+  description
+    "an enemy which enables the turret"
+
+  class DOOR
+  description
+    "a kind of enemy. Can be opened by firing at a button"
+
+  class BUTTON
+  description
+    "controls a door. Opens it when fired upon"
+    
+  class ENEMY
+  description
+  	 "A general enemy class. Needed for construction more than control."
+  
+end
+
+cluster_chart PLAYER
+
+  class CONTROL
+  description
+    "a way to communicate with the game and control the spaceship"
+  
+end
+
+cluster_chart INFO
+
+  class HIGH_SCORE
+  description
+    "a list of the best scores achieved by the player"
+
+  class STATISTICS
+  description
+    "a way to display statistics for the game, such as fuel, lives, level number etc."
+  
+end
+
+cluster_chart ENVIRONMENT_CLUSTER
+
+  class ENTRY_POINT
+  description
+    "the starting position for the spaceship"
+
+  class FUEL_UP
+  description
+    "a fuel pickup"
+
+  class JUMP_PORTAL
+  description
+    "the position in the level where the pod must be brought"
+
+  class MENU
+  description
+    "the menu for the game"
+
+  class TERRAIN
+  description
+    "the terrain in a level. Absence of it implies space"
+    
+  class PHYSICS
+  description
+    "A calculator class, used mostly to make things like gravity and acceleration work, determine all movement."
+  
+  class ENVIRONMENT
+  description
+    "The environment class, encompasses the environment, mostly needed for creation rather than control."
+  
+end
+
+class_chart ENEMY
+  indexing
+    in_cluster: "ENEMY_CLUSTER";
+  explanation
+    "A class describing enemies. Mostly used for creation purposes."
+end
+
+class_chart ENTITY
+
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+  
+  explanation
+    "A general class describing all the entities/enemies."
+    
+  part
+  		"1/1"
+  		
+  query
+  	 "What position is this entity in?"
+end
+
+class_chart SPACESHIP
+
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+
+  explanation
+    "The main entity in the game. The only entity controlled by the player"
+
+  part
+    "1/1"
+
+  inherit ENTITY
+
+  query
+    "How many lives does the spaceship have?",
+    "How much fuel does the spaceship have left?",
+    "What is the current speed of the spaceship?",
+    "What is the current acceleration of the spaceship?",
+    "Does the spaceship have the pod attached?",
+    "What is the current mass of the spaceship?",
+    "What direction is the spaceship travelling in?",
+    "Is the shield active?"
+
+  command
+    "Change direction!",
+    "Thrust (speed up)!",
+    "Fire a bullet!",
+    "Attempt to pick up fuel!",
+    "Pick up the pod!",
+    "Activate shield!"
+
+  constraint
+    "Fuel must be positive",
+    "Mass must be positive",
+    "Lives cannot be negative"
+
+end
+
+class_chart ENVIRONMENT
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+  explanation
+    "A class to construct environment objects."
+end
+    
+
+class_chart POD_HOLDER
+
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+
+  explanation
+    "The pedestal that holds the pod"
+
+
+  part "1/1"
+  inherit ENTITY
+  constraint
+    "Has to be positioned on the terrain"
+end
+
+class_chart POD
+
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+
+  explanation
+    "The pod that must be brought to the jump portal"
+
+  part
+    "1/1"
+  inherit ENTITY
+  query
+    "Is the pod attached to the spaceship?",
+    "What is the speed of the pod? (only applies to attached pods)",
+    "What is the mass of the pod?"
+
+  command
+    "Attach to spaceship!"
+
+  constraint
+    "When not attached, has to be position on the pod_holder.",
+    "Has to be positioned in space otherwise, cannot be 'in' terrain"
+
+end
+
+class_chart TURRET
+
+  indexing
+    in_cluster: "ENEMY_CLUSTER";
+
+  explanation
+    "The enemy that fires bullets at the player's spaceship"
+
+  part
+    "1/1"
+  inherit ENTITY
+  query
+    "Is the turret active (i.e. not deactivated by firing at the factory)?"
+
+  command
+    "Deactivate this turret!",
+    "Activate this turret!",
+    "Destroy this turret!"
+
+  constraint
+    "Must be positioned on terrain",
+    "Must die when hit by bullet",
+    "Cannot fire when inactive"
+
+end
+
+class_chart FACTORY
+
+  indexing
+    in_cluster: "ENEMY_CLUSTER";
+
+  explanation
+    "A factory that powers the turrets. When fired upon, it will disable the turrets for some amount of time. When destroyed, all turrets are deactivated, and you have 10 seconds to reach the jump portal"
+
+  part
+    "1/1"
+  inherit ENTITY
+  query
+    "What is the health of the factory?",
+    "Is the factory disabled?",
+
+  command
+    "Damage this factory (take away health)!",
+    "Destroy this factory!",
+    "Disable this factory!",
+    "Enable this factory!"
+
+  constraint
+    "Must be positioned on level terrain",
+    "Must be destroyed when health <= 0",
+    "Must deactivate turrets when fired upon"
+
+end
+
+class_chart CONTROL
+
+  indexing
+    in_cluster: "PLAYER";
+
+  explanation
+    "The means to control the spaceship."
+
+  part
+    "1/1"
+
+  command
+    "Turn the spaceship!",
+    "Make the spaceship fire bullets!",
+    "Make the spaceship fuel up!",
+    "Make the spaceship pick up the pod!",
+    "Make the spaceship thrust!"
+
+end
+
+class_chart HIGH_SCORE
+
+  indexing
+    in_cluster: "INFO";
+
+  explanation
+    "A means to display the top scores achieved by players"
+
+  part
+    "1/1"
+
+  query
+    "What are the high scores?"
+
+  command
+    "Add a high-score!"
+
+end
+
+class_chart STATISTICS
+
+  indexing
+    in_cluster: "INFO";
+
+  explanation
+    "A means to display the various info required by the player - lives, fuel, score, etc."
+
+  part
+    "1/1"
+    
+  command
+    "Display statistics (refresh screen)!",
+    "Start the planet destruction timer!"
+end
+
+class_chart DOOR
+
+  indexing
+    in_cluster: "ENEMY_CLUSTER";
+
+  explanation
+    "A door that looks like its part of the terrain. Can be opened by firing upon a controlling button."
+
+  part
+    "1/1"
+  inherit ENTITY
+  query
+    "Is the door open?"
+
+  command
+    "Open this door!",
+    "Close this door!"
+
+end
+
+class_chart BUTTON
+
+  indexing
+    in_cluster: "ENEMY_CLUSTER";
+
+  explanation
+    "A button opens the door it controls."
+
+  part
+    "1/1"
+  inherit ENTITY
+
+  command
+    "Make the corresponding door open!"
+
+end
+
+class_chart ENTRY_POINT
+
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+
+  explanation
+    "The starting position in a level."
+
+  part
+    "1/1"
+  inherit ENTITY
+
+  constraint
+    "Must be positioned in space"
+
+end
+
+class_chart FUEL_UP
+
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+
+  explanation
+    "A fuel pickup"
+
+  part
+    "1/1"
+  inherit ENTITY
+  query
+    "How much fuel is left in this fuel pickup?"
+
+  command
+    "Draw fuel (fuel-- essentially)!",
+    "Destroy this fuel pickup"
+
+  constraint
+    "Must be positioned on terrain"
+
+end
+
+class_chart JUMP_PORTAL
+
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+
+  explanation
+    "The position in a level to which the pod must be brought"
+
+  part
+    "1/1"
+
+  query
+    "Position"
+
+  constraint
+    "Must be positioned in space"
+
+end
+
+class_chart MENU
+
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+
+  explanation
+    "The main menu for the game"
+
+  part
+    "1/1"
+
+  query
+    "Display menu"
+
+  command
+    "New game",
+    "Quit",
+    "Show Credits"
+
+end
+
+class_chart TERRAIN
+
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+
+  explanation
+    "The game terrain, every point on the level has to be either space or ground"
+
+  part
+    "1/1"
+
+  query
+    "Is there terrain in this set of coordinates?"
+
+  command
+    "Display the terrain!",
+    "Hide the terrain!"
+
+end
+
+class_chart PHYSICS
+
+  indexing
+    in_cluster: "ENVIRONMENT_CLUSTER";
+    
+  explanation
+    "The physics class, here to ensure that the laws of physics, or some implementation of them are adhered to."
+    
+  part
+    "1/1"
+   
+  query
+    "I'm accelerating. What is my velocity going to be?",
+    "I'm not doing anything. My mass is this. How do I move?"
+end
+
+event_chart THRUST
+outgoing
+explanation
+  "Internal events."
+event
+  "Spaceship is destroyed."
+involves
+  SPACESHIP
+event
+  "Factory is destroyed."
+involves
+  FACTORY
+event
+  "Pod is taken to jump portal."
+involves
+  POD, SPACESHIP
+end
+
+event_chart THRUST
+incoming
+explanation
+  "Internal events."
+event
+  "Shut down the game."
+involves
+  (ENVIRONMENT_CLUSTER), (ENEMY_CLUSTER), (PLAYER), (ENTITY_CLUSTER)
+event
+  "Start a new game."
+involves
+  (ENVIRONMENT_CLUSTER), (ENEMY_CLUSTER), (PLAYER), (ENTITY_CLUSTER)
+event
+  "Issue keyboard command."
+involves
+  CONTROL
+end
+
+event_chart THRUST
+incoming
+explanation
+  "External events."
+event 
+  "Start the game."
+involves
+  (ENVIRONMENT_CLUSTER), (ENEMY_CLUSTER), (PLAYER), (ENTITY_CLUSTER)
+event
+  "Quit the game."
+involves
+  (ENVIRONMENT_CLUSTER), (ENEMY_CLUSTER), (PLAYER), (ENTITY_CLUSTER)
+event
+  "Send a keyboard command to the system."
+involves
+  CONTROL
+end
+
+event_chart THRUST
+outgoing
+explanation
+  "External events."
+event
+  "End level with lose condition."
+involves
+  (ENVIRONMENT_CLUSTER), (ENEMY_CLUSTER), (PLAYER), (ENTITY_CLUSTER)
+event 
+  "End level with win condition."
+involves
+  (ENVIRONMENT_CLUSTER), (ENEMY_CLUSTER), (PLAYER), (ENTITY_CLUSTER), (INFO)
+end
+
+scenario_chart THRUST
+explanation
+  "Scenario chart. Lists the different scenarios you can have in the game."
+scenario
+  "Turn on/off sound."
+description
+  "Turns sound on/off."
+scenario
+  "Start a new game."
+description
+  "A new game starts."
+scenario
+  "Conquer the level."
+description
+  "The pod is taken up to the jump portal, i.e. player wins."
+scenario
+  "Spaceship/planet is destroyed."
+description
+  "The spaceship is destroyed or factor destruction timer runs out. Lose condition."
+scenario
+  "Player wins last level."
+description
+  "The player wins all the levels, thus winning the game."
+scenario
+  "Pause game on/off."
+description
+  "Player pauses/unpauses the game."
+scenario
+  "Quit game."
+description
+  "Player quits the game."
+end
+
+creation_chart THRUST
+explanation
+	"The classes that create objects in the game."
+creator ENVIRONMENT creates TERRAIN, MENU, JUMP_PORTAL, ENTRY_POINT, FUEL_UP
+creator ENTITY creates SPACESHIP, POD_HOLDER, POD
+creator ENEMY creates TURRET, DOOR, BUTTON, FACTORY
+end
+
