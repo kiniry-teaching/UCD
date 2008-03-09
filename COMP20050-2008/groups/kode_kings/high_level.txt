@@ -35,7 +35,7 @@ explanation
 part "1/1 "
 inherit ENTITY
 query
-  "Quantity" 
+  "Quantity", "Location" 
 command
   "Increase", "Reduce"
 constraint
@@ -183,8 +183,8 @@ query
 command
   "Start", "Stop"
 constraint
-  "TIMER cannot start at 0.",
-  "Can only be started when FACTORY is Destroyed.",
+  "TIMER cannot start at 0",
+  "Can only be started when FACTORY is Destroyed",
   "Is an INT value",
 end
 
@@ -252,7 +252,7 @@ query
 command
   "EXPLOSION"
 constraint
-  "Can be no more than five on screen at once",
+  "Can be no more than bullet limit on screen at once",
   "Is user controlled",
   "Can sometimes cause ship to be destroyed"
 end
@@ -270,7 +270,7 @@ query
 command
   "Shoot"
 constraint
-  "Always against user"
+  "Must be attached to PLANET"
 end
 
 class_chart STATUS_BAR
@@ -313,7 +313,7 @@ explanation
 part "1/1"
 inherit ENTITY
 query
-   "Energy required", "Lasting time", "COLOUR", "SOUND"
+   "Fuel required", "Lasting time", "COLOUR", "SOUND"
 command
    "Raise shield", "Lower shield"
 constraint  

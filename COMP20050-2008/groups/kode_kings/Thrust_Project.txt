@@ -12,7 +12,7 @@ Neil Mc Carthy, nmccarthy , 06449034
 
 Introduction to Project:
 
-This project involves recreating the Commodore 64 game Thrust. While a small project in the grand scheme of things, it does require a well thought design process as there a lot of interweaving processes involved. The main aim within our group is to fully complete the coding of this game and have it running to its original capabilities.
+This project involves recreating the Commodore 64 game Thrust. While a small project in the grand scheme of things, it does require a well thought out design process as there a lot of components that rely on each other to function correctly. The main aim within our group is to fully complete the coding of this game and have it running to its original capabilities.
 
 
 Project Requirements:
