@@ -28,7 +28,7 @@ Jonathan Douglas       jdouglas           06423159
 
 6th March 2008:
 
-	Based upon the results of Homework assignment #3 "Concept Analysis" we discovered that for some of the nouns we used in concept definitions should have also been concepts themselves. An example was when we used the noun 'FUEL'and said that 'FUEL adds the fuel variable'. In this case 'fuel varaible' should have been defined as well. For some of our descriptions of concepts we were told that some of definitions needed to be more specific. For example we said 'BALL - a circular entity you must save'. We changed this to 'BALL – a circular entity that you must take with you off the planet'. Another concept was 'SCORE'. We originally had 'SCORE - how well you are doing'. We changed this to: 'SCORE – keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed'. In one of our *IS-A-RELATIONS* we wrote that 'SPACESHIP is YELLOW'. SPACESHIP however was not a special case of YELLOW. We then added 'SPACESHIP - has COLOR'. 
+	Based upon the results of Homework assignment #3 "Concept Analysis" we discovered that for some of the nouns we used in concept definitions should have also been concepts themselves. An example was when we used the noun 'FUEL'and said that 'FUEL adds the fuel variable'. In this case 'fuel varaible' should have been defined as well. For some of our descriptions of concepts we were told that some of definitions needed to be more specific. For example we said 'BALL - a circular entity you must save'. We changed this to 'BALL - a circular entity that you must take with you off the planet'. Another concept was 'SCORE'. We originally had 'SCORE - how well you are doing'. We changed this to: 'SCORE - keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed'. In one of our *IS-A-RELATIONS* we wrote that 'SPACESHIP is YELLOW'. SPACESHIP however was not a special case of YELLOW. We then added 'SPACESHIP - has COLOR'. 
 
 Please check this spot weekly as we put up our design process and analysis. 
 
@@ -41,39 +41,39 @@ Please check this spot weekly as we put up our design process and analysis.
 --------------------------------------
 
 ENTITY - an object.
-SPACESHIP – triangular ENTITY controlled by user.
-OBSTACLE – prevent movement.
-BACKGROUND – What you can see that is not an ENTITY, or LANDSCAPE.
-LANDSCAPE – The planet itself, like a giant ENTITY.
-TURRET – enemy ENTITY that shoots at you.
-FACTORY – An ENTITY on the LANDSCAPE.
-FUEL – an object that adds to the fuel variable and is needed to accelerate.
+SPACESHIP - triangular ENTITY controlled by user.
+OBSTACLE - prevent movement.
+BACKGROUND - What you can see that is not an ENTITY, or LANDSCAPE.
+LANDSCAPE - The planet itself, like a giant ENTITY.
+TURRET - enemy ENTITY that shoots at you.
+FACTORY - An ENTITY on the LANDSCAPE.
+FUEL - an object that adds to the fuel variable and is needed to accelerate.
 HUDFUEL - Displays how much FUEL you have left
-BALL – a circular ENTITY that you must take with you off the planet.
-TRACTOR BEAM – used to remove BALL,obtain FUEL, and save MEN.
-SHIELDS – Circular barrier that protects SPACESHIP from BULLETS.
-BULLETS – small circular ENTITYs, shot from SPACESHIPs or TURRETS. Destroys other ENTITYS.
-MEN – human ENTITY.
-LIVES – number of spaceships a user has to attempt a level.
+BALL - a circular ENTITY that you must take with you off the planet.
+TRACTOR BEAM - used to remove BALL,obtain FUEL, and save MEN.
+SHIELDS - Circular barrier that protects SPACESHIP from BULLETS.
+BULLETS - small circular ENTITYs, shot from SPACESHIPs or TURRETS. Destroys other ENTITYS.
+MEN - human ENTITY.
+LIVES - number of spaceships a user has to attempt a level.
 HUDLIVES - Displays how much SHIPs you have left.
-SCORE – keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed.
+SCORE - keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed.
 HIGHSCORE - The best SCOREs
-LEVEL – how far you have progressed.
-MEN_SAVED – How many MEN you have saved this LEVEL.
-HUD – Heads up display, used to display fuel, lives, score and men saved.
-SOUND – background effects.
+LEVEL - how far you have progressed.
+MEN_SAVED - How many MEN you have saved this LEVEL.
+HUD - Heads up display, used to display fuel, lives, score and men saved.
+SOUND - background effects.
 MUSIC - background music.
-BONUS – the bonus SCORE you have recieved for this level.
-PASSWORDS – a PASSWORD to start on a certain LEVEL.
-GATES – moving obstacles.
-FORCEFIELD – time set obstacle.
-GRAVITY – downward force acting against you.
-INPUT – keyboard.
-SPACESHIP WITH BALL – spaceship carries ball with tractor beam.
-TEXT – character type used.
-ADDING FUEL – increasing FUEL supply.
-COLOR – a visual effect.
-MOVEMENT – change in location on the screen.
+BONUS - the bonus SCORE you have recieved for this level.
+PASSWORDS - a PASSWORD to start on a certain LEVEL.
+GATES - moving obstacles.
+FORCEFIELD - time set obstacle.
+GRAVITY - downward force acting against you.
+INPUT - keyboard.
+SPACESHIP WITH BALL - spaceship carries ball with tractor beam.
+TEXT - character type used.
+ADDING FUEL - increasing FUEL supply.
+COLOR - a visual effect.
+MOVEMENT - change in location on the screen.
 STARS -  a visual effect on the background.
 GATELOCKS - Open GATES when hit by BULLETs
  
@@ -81,21 +81,21 @@ GATELOCKS - Open GATES when hit by BULLETs
  
 ---------------------------
  
-SPACESHIP – is an ENTITY
-//SPACESHIP – is YELLOW
-TURRET – is an ENTITY
-TURRET – is LIGHT BLUE
-FACTORY – is an ENTITY
-FACTORY – is YELLOW and PURPLE
-BALL – is an ENTITY
-BALL – is LIGHT BLUE
+SPACESHIP - is an ENTITY
+//SPACESHIP - is YELLOW
+TURRET - is an ENTITY
+TURRET - is LIGHT BLUE
+FACTORY - is an ENTITY
+FACTORY - is YELLOW and PURPLE
+BALL - is an ENTITY
+BALL - is LIGHT BLUE
 MEN - is an entity
-SPACESHIP WITH BALL – is a singular ENTITY
-TRACTORBEAM – is WHITE
-GATES – is an OBSTACLE
-FORECEFIELD – is an OBSTACLE
-FORCEFIELD – is GREEN
-LANDSCAPE – is different COLORS
+SPACESHIP WITH BALL - is a singular ENTITY
+TRACTORBEAM - is WHITE
+GATES - is an OBSTACLE
+FORECEFIELD - is an OBSTACLE
+FORCEFIELD - is GREEN
+LANDSCAPE - is different COLORS
 BARRIER - is an OBSTACTLE
 YELLOW, RED, LIGHT BLUE, GREEN, PURPLE, WHITE - are COLORS
 BULLETS - are red
