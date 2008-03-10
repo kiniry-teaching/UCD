@@ -16,6 +16,7 @@ cluster_chart TEXT_INTERFACE
 	class	BONUS description "the bonus SCORE you have recieved for this level"
 	class	PASSWORDS description "A PASSWORD to start on a certain LEVEL"
 	class	TEXT description "Character type used"
+	class	LIVES description "Number of chances player has at completing level"
 end
 
 cluster_chart GRAPHIC_INTERFACE	
@@ -38,6 +39,8 @@ cluster_chart GRAPHIC_INTERFACE
 	class	STARS description "A visual effect"
 	class	GATELOCKS description "Open GATES when hit by BULLETs"
 	class	COLORS description "a visual effect"
+	class 	PLANET description "the terrain, which the SPACESHIP avoids hitting"
+	class	ENEMY description "ENTITY that tries to prevent you from completing the level"
 end
 
 
@@ -49,9 +52,10 @@ end
 
 	
 cluster_chart PHYSICS
-	class	ADDING_FUEL description "increasing FUEL supply"
-	class	MOVEMENT description ""
-	class	GRAVITY description ""
+	class	ADDING_FUEL description "Increasing FUEL supply"
+	class	MOVEMENT description "Accelerate forwards"
+	class	GRAVITY description "Force acting on SPACESHIP in downward direction"
+	class	INPUT description "Player's commands"
 end
 
 class_chart ENTITY
@@ -65,6 +69,49 @@ explanation "An object"
 query
 "What type of object are you?",
 "Where are you?"
+
+end
+
+class_chart ENEMY
+
+indexing
+	in_cluster: "GRAPHIC_INTERFACE";
+	created: "10-03-2008 Dave";
+
+explanation  "ENTITY, whose goal is to prevent you from completing the level"
+
+query
+	"What type of ENEMY is it?",
+	"Where is it located?",
+	"How does it stop you from completing the level?"
+
+command
+	"fire!",
+	"move!"
+
+constraint
+	" "
+
+end
+
+class_chart PLANET
+
+indexing
+	in_cluster: "GRAPHIC_INTERFACE";
+	created: "10-03-2008 Dave";
+
+explanation  "the terrain, which the SPACESHIP avoids hitting"
+
+query
+	"How big is the PLANET?",
+	"What COLOR is the PLANET?",
+	"What OBSTACLES are on the PLANET?",
+	"Where is the ball located?"
+command
+	"Display PLANET!"
+
+constraint
+	"If the SPACESHIP hits the PLANET, restart level"
 
 end
 
@@ -246,7 +293,7 @@ command "Destroy ball"
 constraint "Must be one, and only one ball"
 end
 
-class_chart TRACTORBEAM
+class_chart TRACTOR_BEAM
 
 indexing
 	in_cluster: "GRAPHIC_INTERFACE";
@@ -259,7 +306,7 @@ query	"Is tractor beam being used?",
 
 command	"Pick up fuel!",
 	"Change spaceship to spaceship_with_ball!",
-	"Save men"!,
+	"Save men!",
 	"Do nothing(Tractor beam is over nothing)!"
 end
 
@@ -533,7 +580,7 @@ constraint
 
 end
 
-class_chart SHEILDS
+class_chart SHIELDS
 
 indexing
 in_cluster: "GRAPHIC_INTERFACE";
@@ -548,12 +595,12 @@ query
 	"what COLOR is the SHEILD?"
 
 command
-	"SHEILDS up!", 
-	"SHEILDS down!"
+	"SHIELDS up!", 
+	"SHIELDS down!"
 
 constraint
-	"SHEILDS lasts limited amount of time",
-	"SHEILDS can only last provided there is sufficent FUEL"
+	"SHIELDS lasts limited amount of time",
+	"SHIELDS can only last provided there is sufficent FUEL"
 
 end
 
@@ -654,7 +701,7 @@ created: "09-03-2008 Dave";
 explanation
 	"assign points for completing specific tasks,add the current points earned to the SCORE variable"
 
-inherit TEXT
+inherit TEXT, HUD
 
 query
 	"What is the current score?"
@@ -703,7 +750,7 @@ created: "09-03-2008 Dave";
 explanation
 	"The stage in which the game is played"
 
-inherit SPACESHIP, PLANET, OBSTACLE, TURRET, FACTORY, GATES, MEN, BALL
+inherit SPACESHIP, PLANET, OBSTACLE, TURRET, FACTORY, GATES, MEN, BALL, HUD
 
 query
 	"How many FACTORIES are on this level?",
@@ -753,7 +800,6 @@ created: "09-03-2008 Dave";
 explanation
 	"Heads up display, used to display FUEL, LIVES, SCORE and MEN_SAVED variables."
 
-inherit HUDFUEL, HUDLIVES, SCORE, MEN_SAVED
 
 query
 	"How much FUEL is left?",
@@ -824,9 +870,9 @@ indexing
 
 explanation "Classes that create other objects"
 
-	creator PLANET creates LANDSCAPE,BACKGROUND,HUD,STARS
-	creator ENTIY creates SPACESHIP, BALL, FUEL
-	creator ENEMY creates TURRET,FORCEFIELD,GATE,GATELOCK,FACTORY
+	creator PLANET creates LANDSCAPE, BACKGROUND, HUD, STARS
+	creator ENTITY creates SPACESHIP, BALL, FUEL
+	creator ENEMY creates TURRET, FORCEFIELD, GATES, GATELOCKS, FACTORY
 end
 
 
@@ -845,7 +891,7 @@ explanation
 event
 	"request to start the game"
 involves
-	GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, INPUT
+	TEXT, COLORS, SOUND, INPUT
 
 event
 	"move forward"
@@ -863,9 +909,9 @@ involves
 	SPACESHIP, BULLETS, MOVEMENT, INPUT
 
 event
-	"sheilds up"
+	"SHIELDS up"
 involves
-	SPACESHIP, SHEILDS
+	SPACESHIP, SHIELDS
 
 event
 	"use tractor beam"
@@ -893,17 +939,17 @@ explanation
 event
 	"Bullet fired"
 involves
-	SOUND, COLOR
+	SOUND, COLORS
 
 event
 	"Crashed"
 involves
-	SOUND, COLOR, LIVES, SCORE
+	SOUND, COLORS, LIVES, SCORE
 
 event
 	"Game over"
 involves
-	SOUND, TEXT_INTERFACE, HIGHSCORE, SCORE
+	SOUND, HIGHSCORE, SCORE
 
 event
 	"Return FUEL variable"
@@ -976,7 +1022,7 @@ involves
 event
 	"crash"
 involves
-	SOUND, COLOR
+	SOUND, COLORS
 
 event
 	"show progress"
@@ -986,7 +1032,7 @@ involves
 event
 	"lives used up"
 involves
-	SCORE, HIGHSCORE, TEXT_INTERFACE
+	SCORE, HIGHSCORE
 
 end
 
