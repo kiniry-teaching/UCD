@@ -1,7 +1,7 @@
 ﻿Group name: Whack!
-Group Members:	David Maguire dmaguire 06024769
-			Tara Flood tflood 06361188
-	   		Allison Fallon afallon 06584551
+Group Members:		David Maguire 	david    06024769
+			Tara Flood 	Tara	 06361188
+	   		Allison Fallon 	06584551 06584551
 
 	For our project we hope to recreate the Commoder 64 game Thrust. By today's standards Thrust is a relatively basic computer game, which sees the player taking control of a spaceship and attempting to maneuver through a 2D landscape while trying to avoid obstacles. We will be coding this using linux an operating system which uses UNIX.  By visual analysis alone, i.e. without viewing any code, we hope to identify what the main components of the game are and recreate them.
 
@@ -34,7 +34,7 @@ COLOUR - Visually stimulating effect
 DEATH - Life goes down due to Collision with other Entity
 ENTITY - A visual object in the game
 EXPLOSION - Green dots appear when Collision occurs
-FACTORY - Yellow and blue Entity, destroying increases Score
+FACTORY - Yellow and blue Entity, destroying increases Score and distroys Turrets
 FUEL - A blue box
 FUEL_GAUGE - A String at the top of the screen
 FUEL_RECORD - An Integer that decreases as Spaceship moves and increases while Sucking Fuel. When Integer reaches zero Life decreases
@@ -53,7 +53,7 @@ SOUND - Noise produced by an Entity
 SPACESHIP - Main triangular Entity you control
 STARS - Coloured dots above the Landscape
 STRING - Word
-SUCKING_FUEL - Causes Fuel Gauge to increase
+SUCKING_FUEL - Causes Fuel_Record to increase
 TELEPORTING - Spaceship disappears with Ball in the sky
 TIME - An Integer that decreases when Factory is destroyed
 TRACKING - Allows Turrets to lock onto Spaceship
