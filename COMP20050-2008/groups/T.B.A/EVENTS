@@ -1,57 +1,158 @@
 event_chart GAME
 
-external(incomming)
+incomming
+
+indexing:
+	created "10-03-2008 Dave";
 
 explanation:
-"possible external events"
+	"External events"
 
 event:
-"request to start the game"
-
-involved objects:
-GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, input via player
-
-event:
-"user input to game"
-
-invloved objects
-GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, PHYSICS, input via player
+	"request to start the game"
+involves:
+	GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, INPUT
 
 event:
-"request to end game"
+	"move forward"
+involves:
+	SPACESHIP, INPUT, MOVEMENT
 
-invloved objects:
-GRAPHIC_INTERFACE, TEXT_INTERFACE, input via player
+event:
+	"turn"
+invloves:
+	SPACESHIP, INPUT, MOVEMENT
+
+event:
+	"fire"
+invloves:
+	SPACESHIP, BULLETS, MOVEMENT, INPUT
+
+event:
+	"sheilds up"
+involves:
+	SPACESHIP, SHEILDS
+
+event:
+	"use tractor beam"
+involves:
+	SPACESHIP, TRACTOR_BEAM, BALL, MEN, FUEL
+
+event:
+	"open gates"
+involves:
+	SPACESHIP, BULLETS, GATELOCKS
 
 end
 
-internal(outgoing)
+
+
+event_chart GAME
+
+incomming
+
+indexing:
+	created "10-03-2008 Dave";
 
 explanation:
-"events triggered by user or automatic that output information"
+	"Internal events"
 
 event:
-"game started"
-
-involved objects:
-GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, PHYSICS, input via player
-
-event:
-"level completed"
-
-invloved objects:
-GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND
+	"Bullet fired"
+involved:
+	SOUND, COLOR
 
 event:
-"lives used up, game over"
-
-involved objects:
-GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND
+	"Crashed"
+involved:
+	SOUND, COLOR, LIVES, SCORE
 
 event:
-"game won"
+	"Game over"
+involved:
+	SOUND, TEXT_INTERFACE, HIGHSCORE, SCORE
 
-involved objects:
-GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, input via player
+event:
+	"Return FUEL variable"
+involved:
+	FUEL
+
+event:
+	"Return SCORE variable"
+involved:
+	SCORE
+
+event:
+	"Return MEN_SAVED variable"
+involved:
+	MEN_SAVED
+
+event:
+	"Retrun HIGHSCORE variable"
+involved:
+	HIGHSCORE
+
+end
+
+
+
+event_chart GAME
+
+outgoing
+
+indexing:
+	created "10-03-2008 Dave";
+
+explanation:
+	"Internal events"
+
+event:
+	"Add to FUEL variable"
+involved:
+	FUEL,
+
+event:
+	"Subtract from FUEL variable"
+involved:
+	FUEL, MOVEMENT
+
+event:
+	"Add to SCORE variable"
+involved:
+	SCORE, TURRET, MEN, BONUS
+ 
+end
+
+
+
+event_chart GAME
+
+outgoing 
+
+indexing:
+	created "10-03-2008 Dave";
+
+explanation:
+"External events"
+
+event:
+	"gravity effect"
+involved:
+	MOVEMENT, SPACESHIP, BALL
+
+event:
+	"crash"
+involved:
+	SOUND, COLOR
+
+event:
+	"show progress"
+involved:
+	HUD, HUDFUEL, HUDLIVES, MEN_SAVED, SCORE
+
+event:
+	"lives used up"
+involved:
+	SCORE, HIGHSCORE, TEXT_INTERFACE
 
 end
