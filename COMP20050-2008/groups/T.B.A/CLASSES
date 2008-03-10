@@ -2,11 +2,11 @@ class_chart ENTITY
 
 indexing
 	in_cluster: "GRAPHICS_INTERFACE"
-	created "09-03-2008 eh";
+	created: "09-03-2008 Eoin";
 
-explanation: "An object"
+explanation "An object"
 
-query:
+query
 "What type of object are you?",
 "Where are you?"
 
@@ -16,13 +16,13 @@ class_chart SPACESHIP
 
 indexing
 	in_cluster: "GRAPHICS_INTERFACE"
-	created "09-03-2008 eh";
+	created: "09-03-2008 Eoin";
 
-explanation: "player controlled ENTITY"
+explanation "player controlled ENTITY"
 
 inherit ENTITY
 
-query:
+query
 	"How many lives are remaining?",
 	"How much fuel is remaining?",
 	"How fast is the spaceship going?",
@@ -31,14 +31,14 @@ query:
 	"Are shields active?",
 	"Is the tractor beam active?"
 
-command:
+command
 	"Change direction!",
 	"Use tractor beam!"
 	"Speed up!",
 	"Use shield!",
 	"fire bullet!"
 
-constraints:
+constraints
 	"fuel must be positive",
 	"lives must be greater or equal to 0"
 end
@@ -47,17 +47,20 @@ class_chart OBSTACLE
 
 indexing 
 	in_cluster: "GRAPHICS_INTERFACE"
-	created "09-03-2008 eh";
+	created: "09-03-2008 Eoin";
 
-explanation: "An ENTITY that acts as a barrier"
+explanation "An ENTITY that acts as a barrier"
 
 inherit ENTITY
 
-query:
+query
 	"What type of obstacle are you?"
 	"Where are you?"
 
-constraints:
+command
+	"Block SPACESHIP!"
+
+constraints
 	"Must be an ENTITY"
 end
 
@@ -65,22 +68,143 @@ class_chart BACKGROUND
 
 indexing
 	in_cluster: "GRAPHICS_INTERFACE"
-	created "09-03-2008" eh";
+	created: "09-03-2008" Eoin";
 
-explanation: "The background sky that you can see"
+explanation "The background sky that you can see"
 
 query
 	"What level is this?"
 
-command:
+command
 	"Set background!"
 
-constraints:
+constraints
 	"Must not overlap onto the landscape"
 
 end
 	
+class_chart LANDSCAPE
 
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created: "09-03-2008 Eoin";
+
+explanation "The landscape for the planet"
+
+query
+	"What level is this?"
+
+command
+	"Set landscape!"
+end
+
+class_chart TURRET
+
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created: "09-03-2008 Eoin";
+
+explanation "Enemy entity that shoots bullets at you"
+
+inherit ENTITY
+
+query "What level is this?",
+	"Where is the spaceship?"
+
+command "Set difficulty!",
+	"Fire a bullet at spaceships position!"
+	"Deactivate turret!",
+	"Destroy turret!",
+	"Activate turret!"
+
+constraint	 "Must be on landscape",
+		"Can not fire when deactivated"
+end
+
+class_chart FACTORY
+
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created: "10-03-2008 Eoin";
+
+inherit ENTITY
+
+query	"How much health is remaining?"
+
+command "Blow up planet"
+
+constraint 	"Must only be one factory",
+	  	"Must be on landscape" 
+end
+
+class_chart FUEL
+
+indexing
+	in_cluster: "GRAPHICS_INTERFACE"
+	created: "10-03-2008 Eoin";
+
+inherit ENTITY
+
+query "How much fuel is left in this store?"
+
+command "Destroy fuel entity!",
+	"Decrease fuel in store!"
+
+constraint 	"Must be on landscape"
+end
+
+class_chart HUDFUEL
+
+indexing
+	in_cluster: "TEXT_INTERFACE"
+	created: "10-03-2008 Eoin";
+
+inherit TEXT
+
+query	"How much fuel is there?",
+	"Is fuel being used?",
+	"Is fuel being gained?"
+
+command	"Increase fuel!",
+	"Decrease fuel!",
+	"Display fuel!"
+
+constraint "Must be >= 0"
+end
+
+class_chart BALL
+
+indexing
+	in_cluster: "GRAPHIC_INTERFACE"
+	created: "10-03-2008 Eoin";
+
+inheirt ENTITY
+
+query "Is ball being tractor-beamed?"
+
+
+constraint "Must be one, and only one ball"
+end
+
+class_chart TRACTORBEAM
+
+indexing
+	in_cluster: "GRAPHIC_INTERFACE"
+	created: "10-03-2008 Eoin"
+
+query	"Is tractor beam being used?",
+	"What is the beam over?",
+	"Is the tractorbeam over the ball?"
+	
+
+command	"Pick up fuel".
+	"Change spaceship to spaceship_with_ball".
+	"Save men",
+	"Do nothing(Tractor beam is over nothing")
+end
+
+
+	
 
 class_chart BONUS
 
@@ -88,16 +212,16 @@ indexing
 in_cluster: "TEXT_INTERFACE"
 created: "08-03-2008 jd";
  
-explanation: "Additonal points for special achievment"
+explanation "Additonal points for special achievment"
 
-query:
+query
 "What are the points?", "What was the special achievement?"
 
-command:
+command
 "Increase points!", "Display SCORE!"
 
-constraint:
-"Must contain (a) point(s)"
+constraint
+"Must contain (a) point(s)",
 "Points can't surpass the limit"
 
 end
@@ -107,16 +231,16 @@ class_chart PASSWORDS
 indexing
 in_cluster: "TEXT_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "act as save points"
+explanation "act as save points"
 
-query:
-"Enter the PASSWORD"
+query
+"Enter the PASSWORD?"
 
-command:
-"Accept PASSWORD", "Reject PASSWORD"
+command
+"Accept PASSWORD!", "Reject PASSWORD!"
 
-constraint:
-"Must contain the correct letters and nummbers"
+constraint
+"Must contain the correct letters and nummbers",
 "INPUT cannot exceed limit"
 
 end
@@ -126,16 +250,19 @@ class_chart GATES
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "moving OBSTACLE"
+explanation "moving OBSTACLE"
 
-query:
-"What is the OBSTACLE", "What is moving", "What is its position"
+inherit OBSTACLE
 
-command:
-"Move OBSTACLE up and down" "Block SPACESHIP"
+query
+"Is gate open?", "Is gate closed?"
 
-constraint:
-"Must move up and down", "Must move side to side"
+command
+"Open gate!",
+"Close gate!"
+
+constraint
+"Can not be open and closed at the same time"
 
 end
 
@@ -144,16 +271,23 @@ class_chart FORCEFIELD
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "time set OBSTACLE"
+explanation "time set OBSTACLE"
 
-query:
-"What is the OBSTACLE", "What is the time set"
+inherit OBSTACLE
 
-command:
-"Have a fixed time set", "Block SPACESHIP"
+query
+"What time limit is their on forcefield turning on and off?",
+"How long is left till next action?",
+"Is forcefield on?",
+"Is forcefield off?"
 
-constraint:
-"Must keep a fixed time", "Must block SPACESHIP"
+command
+"Set time limit!",
+"Turn on!",
+"Turn off!"
+ 
+constraint
+"Must keep a fixed time"
 
 end
 
@@ -162,15 +296,15 @@ class_chart GRAVITY
 indexing
 in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
-explanation: "downward force acting against you"
+explanation "downward force acting against you"
 
-query:
+query
 "Where is force being dragged to" "What is forcing MOVEMENT of SPACESHIP"
 
-command:
+command
 "Drag downwards" "Force SPACESHIP to move"
 
-constraint:
+constraint
 "SPACESHIP must be under constant state of downward force" 
 "SPACESHIP can use FUEL to act against GRAVITY"
 
@@ -181,16 +315,16 @@ class_chart INPUT
 indexing
 in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
-explanation: "keyboard"
+explanation "keyboard"
 
-query:
+query
 "What is being inputed by the keyboard"
 "Is the INPUT a set of characters or numbers"
 
-command:
+command
 "Accept INPUT", "Reject INPUT"
 
-constraint:
+constraint
 "Must accept INPUT if INPUT is correct", "Must reject INPUT if INPUT is incorrect"
 
 end
@@ -200,15 +334,15 @@ class_chart SPACESHIP_WITH_BALL
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "SPACESHIP carries BALL with TRACTOR_BEAM"
+explanation "SPACESHIP carries BALL with TRACTOR_BEAM"
 
-query:
-"What is being carried", "What is the SPACESHIP using to carry the BALL"
+query
+"Has spaceship flown high enough?"
 
-command:
-"Carry ball using TRACTOR_BEAM"
+command
+"End level"
 
-constraint:
+constraint
 "Must use TRACTOR_BEAM to move BALL"
 
 end
@@ -218,15 +352,15 @@ class_chart TEXT
 indexing
 in_cluster: "TEXT_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "character type used"
+explanation "character type used"
 
-query:
+query
 "What type face is being used"
 
-command:
+command
 "Display typed characters"
 
-constraint:
+constraint
 "Must display typed characters"
 
 end
@@ -236,15 +370,15 @@ class_chart ADDING_FUEL
 indexing
 in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
-explanation: "increasing FUEL supply"
+explanation "increasing FUEL supply"
 
-query:
+query
 "What is being added" "What is being used to add fuel"
 
-command:
+command
 "Use TRACTOR_BEAM to collect fuel", "Increase HUDFUEL"
 
-constraint:
+constraint
 "Must use TRACTOR_BEAM in order to increase HUDFUEL"
 
 end
@@ -254,17 +388,17 @@ class_chart COLORS
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "a visual effect(s)"
+explanation "a visual effect(s)"
 
-query:
+query
 "What action or events has taken place"
 "What are the different visual effects"
 "Which COLORS are there"
 
-command:
+command
 "Display COLORS that conform to action or event"
 
-constraint:
+constraint
 "Set COLORS must correspond to set event or action"
 
 end
@@ -274,16 +408,16 @@ class_chart MOVEMENT
 indexing
 in_cluster: "PHYSICS"
 created: "08-03-2008 jd"; 
-explanation: "change in location on the screen"
+explanation "change in location on the screen"
 
-query:
+query
 "What is the current location"
 "What is the SPACESHIP's location after MOVEMENT"
 
-command:
+command
 "Use fuel to initiate MOVEMENT", "Decrease HUDFUEL"
 
-constraint:
+constraint
 "HUDFUEL must decrease", "SPACESHIP must move"
 
 end
@@ -293,17 +427,17 @@ class_chart STARS
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "a visual effect"
+explanation "a visual effect"
 
-query:
+query
 "What are the different visual effect"
 "What does the visual effect do"
 "What COLORS does the visual effect have"
 
-command:
+command
 "Display shining star"
 
-constraint:
+constraint
 "Must display star", "Must have set COLOR"
 
 end
@@ -313,17 +447,17 @@ class_chart GATELOCKS
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
-explanation: "opens GATES"
+explanation "opens GATES"
 
-query:
+query
 "Is the GATELOCK there"
 "Is the GATELOCK destroyed"
 "What is its position"
 
-command:
+command
 "Open GATES when GATELOCKS are destroyed"
 
-constraint:
+constraint
 "GATELOCKS must be destroyed to open GATES"
 
 end
@@ -334,13 +468,13 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation: 
+explanation 
 "cicular entity surrounding ship, which protects ship from BULLETS"
 
-query:
+query
 "FUEL remaining", "Time limit", "COLOR"
 
-command:
+command
 "SHEILDS up", "SHEILDS down"
 
 constraints:
@@ -356,13 +490,13 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "small ENTITY, which accelerates away from ship or turret when fired."
 
-query:
+query
 "position","velocity"
 
-command:
+command
 "fire", "SOUND", "COLOR"
 
 costraints:
@@ -378,13 +512,13 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "small ENTITY, to be brought onto ship by tractor beam"
 
-query:
+query
 "location", "COLOR"
 
-command:
+command
 "Use TRACTOR_BEAM", "increment SAVED_MEN"
 
 costraints:
@@ -399,13 +533,13 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "The number of attemps the player has at completeing the game"
 
-query:
+query
 "LIVES remaining"
 
-command:
+command
 "Decrease LIVES"
 
 costraints:
@@ -421,15 +555,15 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "Display the lives variable in the HUD"
 
 inherit: HUD
 
-query:
+query
 "LIVES remaining"
 
-command:
+command
 
 costraints:
 
@@ -442,14 +576,14 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "assign points for completing specific tasks"
 "add the current points earned to the SCORE variable"
 
-query:
+query
 "return SCORE"
 
-command:
+command
 "increase SCORE variable"
 
 costraints:
@@ -464,15 +598,15 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "variable to store the highest SCORE and the name of person who got that score"
 
 inherit: SCORE
 
-query:
+query
 "return HIGHSCORE variable"
 
-command:
+command
 "store HIGHSCORE variable"
 
 costraints:
@@ -487,13 +621,13 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "the number of stages competed in the game"
 
-query:
+query
 "return LEVEL variable"
 
-command:
+command
 "increase_LEVEL"
 
 costraints:
@@ -508,15 +642,15 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "Displays in the HUD, the MEN_SAVED variable"
 
 inherit: HUD
 
-query:
+query
 "MEN_SAVED"
 
-command:
+command
 
 costraints:
 "MEN_SAVED variable is increased when a man has been TRACTOR_BEEMED onto the ship"
@@ -530,13 +664,13 @@ indexing:
 in_cluster: "GRAPHIC_INTERFACE"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "Heads up display, used to display FUEL, LIVES, SCORE and MEN_SAVED variables."
 
-query:
+query
 "return FUEL, LIVES, SCORE and MEN_SAVED variables"
 
-command:
+command
 
 costraints:
 "the HUD must be located at all times at the top of the screen, during the game"
@@ -551,13 +685,13 @@ indexing:
 in_cluster: "SOUND"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "sound effects used when shooting BULLETS, being hit by BULLETS, destroying FACTORIES and TURRETS, crashing into the PLANET, and escaping the PLANET"
 
-query:
+query
 "BULLET SOUND", "destroy FACTORY SOUND", "destroy TURRET SOUND", "crash PLANET SOUND", "escape PLANET SOUND"
 
-command:
+command
 "play destroy_bullet_sound", "play destroy_factory_sound","play destroy_turret_sound","play escape_planet"
 
 costraints:
@@ -570,16 +704,16 @@ end
 class_chart MUSIC
 
 indexing:
-in_cluster: SOUND
+in_cluster: "SOUND"
 created: "09-03-2008 Dave";
 
-explanation:
+explanation
 "background music played while playing the game"
 
-query:
+query
 "LEVEL_MUSIC"
 
-command:
+command
 "play MUSIC"
 
 costraints:
