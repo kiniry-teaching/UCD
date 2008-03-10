@@ -108,7 +108,7 @@ explanation "Enemy entity that shoots bullets at you"
 
 inherit ENTITY
 
-query "What level is this?",
+query 	"What level is this?",
 	"Where is the spaceship?"
 
 command "Set difficulty!",
@@ -117,7 +117,7 @@ command "Set difficulty!",
 	"Destroy turret!",
 	"Activate turret!"
 
-constraint	 "Must be on landscape",
+constraint	"Must be on landscape",
 		"Can not fire when deactivated"
 end
 
@@ -131,7 +131,9 @@ inherit ENTITY
 
 query	"How much health is remaining?"
 
-command "Blow up planet"
+command "Blow up planet!"
+	"Decrease factory health!"
+	"Disable turrents!"
 
 constraint 	"Must only be one factory",
 	  	"Must be on landscape" 
@@ -199,10 +201,10 @@ query	"Is tractor beam being used?",
 	"Is the tractorbeam over the ball?"
 	
 
-command	"Pick up fuel",
-	"Change spaceship to spaceship_with_ball".
-	"Save men",
-	"Do nothing(Tractor beam is over nothing)"
+command	"Pick up fuel!",
+	"Change spaceship to spaceship_with_ball!".
+	"Save men"!,
+	"Do nothing(Tractor beam is over nothing)!"
 end
 
 
@@ -217,14 +219,14 @@ created: "08-03-2008 jd";
 explanation "Additonal points for special achievment"
 
 query
-"What are the points?", "What was the special achievement?"
+	"What are the points?", "What was the special achievement?"
 
 command
-"Increase points!", "Display SCORE!"
+	"Increase points!", "Display SCORE!"
 
 constraint
-"Must contain (a) point(s)",
-"Points can't surpass the limit"
+	"Must contain (a) point(s)",
+	"Points can't surpass the limit"
 
 end
 
@@ -237,14 +239,14 @@ created: "08-03-2008 jd";
 explanation "act as save points"
 
 query
-"Enter the PASSWORD?"
+	"Enter the PASSWORD?"
 
 command
-"Accept PASSWORD!", "Reject PASSWORD!"
+	"Accept PASSWORD!", "Reject PASSWORD!"
 
 constraint
-"Must contain the correct letters and nummbers",
-"INPUT cannot exceed limit"
+	"Must contain the correct letters and nummbers",
+	"INPUT cannot exceed limit"
 
 end
 
@@ -259,14 +261,14 @@ explanation "moving OBSTACLE"
 inherit OBSTACLE
 
 query
-"Is gate open?", "Is gate closed?"
+	"Is gate open?", "Is gate closed?"
 
 command
-"Open gate!",
-"Close gate!"
+	"Open gate!",
+	"Close gate!"
 
 constraint
-"Can not be open and closed at the same time"
+	"Can not be open and closed at the same time"
 
 end
 
@@ -281,18 +283,18 @@ explanation "time set OBSTACLE"
 inherit OBSTACLE
 
 query
-"What time limit is their on forcefield turning on and off?",
-"How long is left till next action?",
-"Is forcefield on?",
-"Is forcefield off?"
+	"What time limit is their on forcefield turning on and off?",
+	"How long is left till next action?",
+	"Is forcefield on?",
+	"Is forcefield off?"
 
 command
-"Set time limit!",
-"Turn on!",
-"Turn off!"
+	"Set time limit!",
+	"Turn on!",
+	"Turn off!"
  
 constraint
-"Must keep a fixed time"
+	"Must keep a fixed time"
 
 end
 
@@ -305,14 +307,14 @@ created: "08-03-2008 jd";
 explanation "downward force acting against you"
 
 query
-"Where is force being dragged to","What is forcing MOVEMENT of SPACESHIP"
+	"Where is force being dragged to?","What is forcing MOVEMENT of SPACESHIP?"
 
 command
-"Drag downwards","Force SPACESHIP to move"
+	"Drag downwards!","Force SPACESHIP to move!"
 
 constraint
-"SPACESHIP must be under constant state of downward force", 
-"SPACESHIP can use FUEL to act against GRAVITY"
+	"SPACESHIP must be under constant state of downward force", 
+	"SPACESHIP can use FUEL to act against GRAVITY"
 
 end
 
@@ -324,14 +326,14 @@ created: "08-03-2008 jd";
 explanation "keyboard"
 
 query
-"What is being inputed by the keyboard",
-"Is the INPUT a set of characters or numbers"
+	"What is being inputed by the keyboard?",
+	"Is the INPUT a set of characters or numbers?"
 
 command
-"Accept INPUT", "Reject INPUT"
+	"Accept INPUT!", "Reject INPUT!"
 
 constraint
-"Must accept INPUT if INPUT is correct", "Must reject INPUT if INPUT is incorrect"
+	"Must accept INPUT if INPUT is correct", "Must reject INPUT if INPUT is incorrect"
 
 end
 
@@ -344,13 +346,13 @@ created: "08-03-2008 jd";
 explanation "SPACESHIP carries BALL with TRACTOR_BEAM"
 
 query
-"Has spaceship flown high enough?"
+	"Has spaceship flown high enough?"
 
 command
-"End level"
+	"End level!"
 
 constraint
-"Must use TRACTOR_BEAM to move BALL"
+	"Must use TRACTOR_BEAM to move BALL"
 
 end
 
@@ -363,13 +365,13 @@ created: "08-03-2008 jd";
 explanation "character type used"
 
 query
-"What type face is being used"
+	"What type face is being used?"
 
 command
-"Display typed characters"
+	"Display typed characters!"
 
 constraint
-"Must display typed characters"
+	"Must display typed characters"
 
 end
 
@@ -382,13 +384,13 @@ created: "08-03-2008 jd";
 explanation "increasing FUEL supply"
 
 query
-"What is being added","What is being used to add fuel"
+	"What is being added?","What is being used to add fuel?"
 
 command
-"Use TRACTOR_BEAM to collect fuel", "Increase HUDFUEL"
+	"Use TRACTOR_BEAM to collect fuel!", "Increase HUDFUEL!"
 
 constraint
-"Must use TRACTOR_BEAM in order to increase HUDFUEL"
+	"Must use TRACTOR_BEAM in order to increase HUDFUEL"
 
 end
 
@@ -401,15 +403,15 @@ created: "08-03-2008 jd";
 explanation "a visual effect(s)"
 
 query
-"What action or events has taken place",
-"What are the different visual effects",
-"Which COLORS are there"
+	"What action or events has taken place?",
+	"What are the different visual effects?",
+	"Which COLORS are there?"
 
 command
-"Display COLORS that conform to action or event"
+	"Display COLORS that conform to action or event!"
 
 constraint
-"Set COLORS must correspond to set event or action"
+	"Set COLORS must correspond to set event or action"
 
 end
 
@@ -422,14 +424,14 @@ created: "08-03-2008 jd";
 explanation "change in location on the screen"
 
 query
-"What is the current location",
-"What is the SPACESHIP's location after MOVEMENT"
+	"What is the current location?",
+	"What is the SPACESHIP's location after MOVEMENT?"
 
 command
-"Use fuel to initiate MOVEMENT", "Decrease HUDFUEL"
+	"Use fuel to initiate MOVEMENT!", "Decrease HUDFUEL!"
 
 constraint
-"HUDFUEL must decrease", "SPACESHIP must move"
+	"HUDFUEL must decrease", "SPACESHIP must move"
 
 end
 
@@ -442,15 +444,15 @@ created: "08-03-2008 jd";
 explanation "a visual effect"
 
 query
-"What are the different visual effect",
-"What does the visual effect do",
-"What COLORS does the visual effect have"
+	"What are the different visual effect?",
+	"What does the visual effect do?",
+	"What COLORS does the visual effect have?"
 
 command
-"Display shining star"
+	"Display shining star!"
 
 constraint
-"Must display star", "Must have set COLOR"
+	"Must display star", "Must have set COLOR"
 
 end
 
@@ -463,15 +465,15 @@ created: "08-03-2008 jd";
 explanation "opens GATES"
 
 query
-"Is the GATELOCK there"
-"Is the GATELOCK destroyed"
-"What is its position"
+	"Is the GATELOCK there?",
+	"Is the GATELOCK destroyed?",
+	"What is its position?"
 
 command
-"Open GATES when GATELOCKS are destroyed"
+	"Open GATES when GATELOCKS are destroyed!"
 
 constraint
-"GATELOCKS must be destroyed to open GATES"
+	"GATELOCKS must be destroyed to open GATES"
 
 end
 
@@ -485,14 +487,17 @@ explanation
 "cicular entity surrounding ship, which protects ship from BULLETS"
 
 query
-"FUEL remaining", "Time limit", "COLOR"
+	"how much FUEL remains?", 
+	"what is the Time limit for the SHEILD?", 
+	"what COLOR is the SHEILD?"
 
 command
-"SHEILDS up", "SHEILDS down"
+	"SHEILDS up!", 
+	"SHEILDS down!"
 
 constraint
-"SHEILDS lasts limited amount of time",
-"SHEILDS can only last provided there is sufficent FUEL"
+	"SHEILDS lasts limited amount of time",
+	"SHEILDS can only last provided there is sufficent FUEL"
 
 end
 
@@ -507,10 +512,13 @@ explanation
 "small ENTITY, which accelerates away from ship or turret when fired."
 
 query
-"position","velocity"
+	"What is the position of the SHACESHIP",
+	"What should the velocity of a BULLET be?"
+	"What COLOR should the bullet be?"
 
 command
-"fire", "SOUND", "COLOR"
+	"fire!", 
+	"bullet SOUND!"
 
 constraint
 "BULLETS destroy ship if SHEILD is not up",
@@ -526,16 +534,18 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"small ENTITY, to be brought onto ship by tractor beam"
+	"small ENTITY, to be brought onto ship by tractor beam"
 
 query
-"location", "COLOR"
+	"What is the location of the men?",
+	"What COLOR are the men?"
 
 command
-"Use TRACTOR_BEAM", "increment SAVED_MEN"
+	"Use TRACTOR_BEAM!", 
+	"increment SAVED_MEN!"
 
 constraint
-"TRACTOR_BEAM must be used"
+	"TRACTOR_BEAM must be used"
 
 end
 
@@ -547,17 +557,17 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"The number of attemps the player has at completeing the game"
+	"The number of attemps the player has at completeing the game"
 
 query
-"LIVES remaining"
+	"how many LIVES remain?"
 
 command
-"Decrease LIVES"
+	"Decrease LIVES!"
 
 constraint
-"If ship is hit by BULLET or PLANET descrease lives and restart level",
-"if lives variable is less than zero, end game"
+	"If ship is hit by BULLET or PLANET descrease LIVES variable by one and restart level",
+	"If lives variable is less than zero, end game"
 
 end
 
@@ -569,13 +579,12 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"Display the lives variable in the HUD"
+	"Display the lives variable in the HUD!"
 
 inherit HUD
 
 query
-"LIVES remaining"
-
+	"how many LIVES remain?"
 
 end
 
@@ -587,21 +596,21 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"assign points for completing specific tasks",
-"add the current points earned to the SCORE variable"
+	"assign points for completing specific tasks",
+	"add the current points earned to the SCORE variable"
 
 inherit TEXT
 
 query
-"What is the current score?"
+	"What is the current score?"
 
 
 command
-"increase SCORE variable",
-"Display SCORE"
+	"increase SCORE variable!",
+	"Display SCORE!"
 
 constraint
-"only increase SCORE variable if a turret has been destroyed or a man has been saved or the BALL taken off planet or FACTORY destroyed and BALL taken off planet before destroyed"
+	"only increase SCORE variable if a turret has been destroyed or a man has been saved or the BALL taken off planet or FACTORY destroyed and BALL taken off planet before destroyed"
 
 end
 
@@ -613,19 +622,19 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"variable to store the highest SCORE and the name of person who got that score"
+	"Variable to store the highest SCORE and the name of person who got that score"
 
 inherit TEXT
 
 query
-"What is the HIGHSCORE variable?"
+	"What is the value of the HIGHSCORE variable?"
 
 command
-"store HIGHSCORE variable!",
-"Display highscore!"
+	"Store HIGHSCORE variable!",
+	"Display highscore!"
 
 constraint
-"if current SCORE is greater than HIGHSCORE, replace HIGHSCORE with SCORE"
+	"If current SCORE is greater than HIGHSCORE, replace HIGHSCORE with SCORE"
 
 end
 
@@ -637,16 +646,25 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"the number of stages competed in the game"
+	"The stage in which the game is played"
+
+inherit SPACESHIP, PLANET, OBSTACLE, TURRET, FACTORY, GATES, MEN, BALL
 
 query
-"return LEVEL variable"
+	"How many FACTORIES are on this level?",
+	"How many TURRET are on this level?",
+	"How many GATES are on this level?",
+	"How many MEN are on this level?",
+	"Where are the OBSTACLES located?",
+	"What is the curent PLANET?",
+	"What is the next LEVEL?"
 
 command
-"increase_LEVEL"
+	"next_LEVEL!"
 
 constraint
-"increment the LEVEL variable by one each time a stage has been completed"
+	"A LEVEL has been completed when the SPACESHIP has escaped the PLANET with the BALL",
+	"Increment the LEVEL variable by one each time a stage has been completed"
 
 end
 
@@ -658,15 +676,15 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"Displays in the HUD, the MEN_SAVED variable"
+	"Displays in the HUD, the MEN_SAVED variable"
 
 inherit HUD, TEXT
 
 query
-"MEN_SAVED"
+	"What is the value of the MEN_SAVED variable?"
 
 constraint
-"MEN_SAVED variable is increased when a man has been TRACTOR_BEEMED onto the ship"
+	"MEN_SAVED variable is increased when a man has been TRACTOR_BEEMED onto the ship"
 
 end
 
@@ -678,17 +696,23 @@ in_cluster: "GRAPHIC_INTERFACE";
 created: "09-03-2008 Dave";
 
 explanation
-"Heads up display, used to display FUEL, LIVES, SCORE and MEN_SAVED variables."
+	"Heads up display, used to display FUEL, LIVES, SCORE and MEN_SAVED variables."
 
 inherit HUDFUEL, HUDLIVES, SCORE, MEN_SAVED
 
 query
-"how much FUEL is left, LIVES, SCORE and MEN_SAVED variables"
+	"How much FUEL is left?",
+	"How many LIVES remain?",
+	"What is the score?",
+	"How many men have been saved?"
+	"What type of text should be used?"
+	"What type of graphics should be used?"
 
 command
+	"Display HUD!"
 
 constraint
-"the HUD must be located at all times at the top of the screen, during the game"
+	"The HUD must be located at all times at the top of the screen, during the game"
 
 end
 
@@ -701,17 +725,19 @@ in_cluster: "SOUND";
 created: "09-03-2008 Dave";
 
 explanation
-"sound effects used when shooting BULLETS, being hit by BULLETS, destroying FACTORIES and TURRETS, crashing into the PLANET, and escaping the PLANET"
+	"Sound effects used when shooting BULLETS, being hit by BULLETS, destroying FACTORIES and TURRETS, crashing into the PLANET, and escaping the PLANET"
 
 query
-"What sound should be played?"
+	"What sound should be played?"
+	"At what volume should it be played?"
 
 command
-"play destroy_bullet_sound", "play destroy_factory_sound","play destroy_turret_sound","play escape_planet"
+	"Play destroy_bullet_sound!", "play destroy_factory_sound!",
+	"play destroy_turret_sound!","play escape_planet!"
 
 constraint
-"When an entity is destroyed the corresponding sound is played",
-"When the SPACESHIP escapes the PLANET the escape_planet sound is played"
+	"When an entity is destroyed the corresponding sound is played",
+	"When the SPACESHIP escapes the PLANET the escape_planet sound is played"
 
 end
 
@@ -723,15 +749,16 @@ in_cluster: "SOUND";
 created: "09-03-2008 Dave";
 
 explanation
-"background music played while playing the game"
+	"Background music played while playing the game"
 
 query
-"What level is it?"
+	"What level is it?"
+	"What volume level should it be at?"
 
 command
-"play MUSIC"
+	"Play MUSIC!"
 
 constraint
-"only once a LEVEL has begun is the MUSIC to be played"
+	"Only once a LEVEL has begun is the MUSIC to be played"
 
 end
