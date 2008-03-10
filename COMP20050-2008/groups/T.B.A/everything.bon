@@ -1,3 +1,60 @@
+system_chart GAME
+	cluster GRAPHIC_INTERFACE description "Visual ENTITYS"
+	cluster TEXT_INTERFACE description "The text displayed and the HUD"
+	cluster SOUND description "What is heard by the user"
+	cluster PHYSICS description "The physics behind the game"
+end
+
+cluster_chart TEXT_INTERFACE
+	class 	HUDFUEL description "Displays how much FUEL you have left"
+	class 	HUDLIVES description "How much SHIPs you have left"
+	class	SCORE description "keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed" 
+	class	LEVEL description "how far you have progressed"
+	class	HIGHSCORE description "The best SCOREs"
+	class	MEN_SAVED description "How many MEN you have saved this LEVEL"
+	class	HUD description "Heads up display, used to display fuel, lives, score and men saved"
+	class	BONUS description "the bonus SCORE you have recieved for this level"
+	class	PASSWORDS description "A PASSWORD to start on a certain LEVEL"
+	class	TEXT description "Character type used"
+end
+
+cluster_chart GRAPHIC_INTERFACE	
+	class	ENTITY description "An object."
+	class	OBSTACLE description "prevent MOVEMENT."
+	class	SPACESHIP description "Triangular ENTITY controlled by user."
+	class	BACKGROUND description "What you can see that is not an ENTITY, or LANDSCAPE."
+	class	LANDSCAPE description "The planet itself, like a giant ENTITY."
+	class	TURRET description "enemy ENTITY that shoots at you."
+	class	FUEL description "An object that adds to HUDFUEL and is needed to accelerate."
+	class	FACTORY description "An ENTITY on the LANDSCAPE."
+	class	BALL description "a circular ENTITY that you must take with you off the planet."
+	class	TRACTOR_BEAM description "used to remove BALL,obtain FUEL, and save MEN."
+	class	SHIELDS description "Circular barrier that protects SPACESHIP from BULLETS."
+	class	BULLETS description "small circular ENTITYs, shot from SPACESHIPs or TURRETS. Destroys other ENTITYS."
+	class	MEN description "human ENTITY."
+	class	GATES description "moving OBSTACLEs."
+	class	FORCEFIELD description "time set OBSTACLE."
+	class	SPACESHIP_WITH_BALL description "spaceship carries ball with tractor beam."
+	class	STARS description "A visual effect"
+	class	GATELOCKS description "Open GATES when hit by BULLETs"
+	class	COLORS description "a visual effect"
+end
+
+
+
+cluster_chart SOUND
+	class	MUSIC description "background music"
+	class	SOUND description "background effects"
+end
+
+	
+cluster_chart PHYSICS
+	class	ADDING_FUEL description "increasing FUEL supply"
+	class	MOVEMENT description ""
+	class	GRAVITY description ""
+end
+	
+
 class_chart ENTITY
 
 indexing

@@ -4,16 +4,16 @@ cluster_chart TEXT_INTERFACE
 	class	SCORE description "keeping a combined tally of the MEN SAVED, TURRETS destroyed and LEVEL(s) completed" 
 	class	LEVEL description "how far you have progressed"
 	class	HIGHSCORE description "The best SCOREs"
-	class	MEN_SAVED descrption "How many MEN you have saved this LEVEL"
+	class	MEN_SAVED description "How many MEN you have saved this LEVEL"
 	class	HUD description "Heads up display, used to display fuel, lives, score and men saved"
 	class	BONUS description "the bonus SCORE you have recieved for this level"
-	class	PASSWORDS "A PASSWORD to start on a certain LEVEL"
-	class	TEXT "Character type used"
+	class	PASSWORDS description "A PASSWORD to start on a certain LEVEL"
+	class	TEXT description "Character type used"
 end
 
 cluster_chart GRAPHIC_INTERFACE	
 	class	ENTITY description "An object."
-	class	OBSTACLE descrption "prevent MOVEMENT."
+	class	OBSTACLE description "prevent MOVEMENT."
 	class	SPACESHIP description "Triangular ENTITY controlled by user."
 	class	BACKGROUND description "What you can see that is not an ENTITY, or LANDSCAPE."
 	class	LANDSCAPE description "The planet itself, like a giant ENTITY."

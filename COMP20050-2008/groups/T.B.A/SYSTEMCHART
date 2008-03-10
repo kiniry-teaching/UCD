@@ -2,7 +2,7 @@ system_chart GAME
 	cluster GRAPHIC_INTERFACE description "Visual ENTITYS"
 	cluster TEXT_INTERFACE description "The text displayed and the HUD"
 	cluster SOUND description "What is heard by the user"
-	cluster PHYSICS "The physics behind the game"
+	cluster PHYSICS description "The physics behind the game"
 end
 
 
