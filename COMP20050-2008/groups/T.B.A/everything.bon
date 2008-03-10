@@ -236,7 +236,7 @@ indexing
 	in_cluster: "GRAPHIC_INTERFACE";
 	created: "10-03-2008 Eoin";
 
-inheirt ENTITY
+inherit ENTITY
 
 query "Is ball being tractor-beamed?"
 

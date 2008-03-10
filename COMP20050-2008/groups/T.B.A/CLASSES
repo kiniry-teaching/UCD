@@ -112,7 +112,7 @@ query "What level is this?",
 	"Where is the spaceship?"
 
 command "Set difficulty!",
-	"Fire a bullet at spaceships position!"
+	"Fire a bullet at spaceships position!",
 	"Deactivate turret!",
 	"Destroy turret!",
 	"Activate turret!"
@@ -179,10 +179,11 @@ indexing
 	in_cluster: "GRAPHIC_INTERFACE";
 	created: "10-03-2008 Eoin";
 
-inheirt ENTITY
+inherit ENTITY
 
 query "Is ball being tractor-beamed?"
 
+command "Destroy ball"
 
 constraint "Must be one, and only one ball"
 end
@@ -396,6 +397,7 @@ class_chart COLORS
 indexing
 in_cluster: "GRAPHIC_INTERFACE"
 created: "08-03-2008 jd"; 
+
 explanation "a visual effect(s)"
 
 query
@@ -455,7 +457,7 @@ end
 class_chart GATELOCKS
 
 indexing
-in_cluster: "GRAPHIC_INTERFACE"
+in_cluster: "GRAPHIC_INTERFACE";
 created: "08-03-2008 jd"; 
 
 explanation "opens GATES"
