@@ -1,6 +1,10 @@
--- Informal Chart
+-- Informal_charts
+-- author: Jar
 
 system_chart THE_GAME
+  cluster CONFIGURATION
+  description
+    "Setting up the game"
   cluster GAME
   description
     "initialisation of game state"
@@ -12,6 +16,15 @@ system_chart THE_GAME
     "dynamically changing data defining the state of the game"
 end
 
+cluster_chart CONFIGURATION
+  class CONTROL_CONFIGURATION
+  description
+    "Configure controls for fire, accept/shields/attach/pickup, left, right, thrust"
+  class SOUND_CONFIGURATION
+  description
+    "Turn sound on and off"
+end
+
 cluster_chart GAME
   class LEVEL
   description
@@ -19,6 +32,12 @@ cluster_chart GAME
   class DRAW
   description
     "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
+  class HUD
+  description
+    "visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet, shows menu when not being played"
+  class SOUND
+  description
+    "Outputs event sounds"
 end
 
 cluster_chart ENTITY_CLUSTER
@@ -28,6 +47,9 @@ cluster_chart ENTITY_CLUSTER
   class MOVABLE
   description
     "ENTITIES in game that can be moved"
+  class USER_CONTROL
+  description
+    "MOVABLEs that user control directly"
   class NON_MOVABLE
   description
     "Entities in game that have a fixed position"
@@ -43,6 +65,9 @@ cluster_chart ENTITY_CLUSTER
   class TOW_LINE
   description
     "An ENTITY which holds the POD at a fixed distance from the SHIP"
+  class POD_STAND
+  description
+    "This is a stand shaped object that holds the POD until it becomes attached"
   class DOOR
   description
     "A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed"
@@ -90,6 +115,43 @@ cluster_chart INFORMATION_CLUSTER
     "a timer created by an EVENT or action which counts to another EVENT or ACTION"
 end
 
+class_chart CONTROL_CONFIGURATION
+  indexing
+    in_cluster: "CONFIGURATION";
+    created: "9-3-2008 K Byrne";
+  explanation
+    "Configure controls for fire, accept/shields/attach/pickup, left, right, thrust"
+  part
+    "1/1 "
+  query
+    "Whats key is this mapped to?"
+  command
+    "Map key"
+  constraint
+    "Cannot be mapped to quit button",
+    "Cannot be mapped to pause button"
+end
+
+class_chart SOUND_CONFIGURATION
+  indexing
+    in_cluster: "CONFIGURATION";
+    created: "9-3-2008 K Byrne";
+  explanation
+    "Turn sound on and off"
+  part
+    "1/1 "
+  query
+    "Is music on?",
+    "IS SOUND on?"
+  command
+    "Turn music on",
+    "Turn music off",
+    "Turn SOUND on",
+    "Turn SOUND off"
+  constraint
+    ""
+end
+
 class_chart LEVEL
   indexing
     in_cluster: "ENTITY_CLUSTER";
@@ -104,8 +166,8 @@ class_chart LEVEL
     "What level are you on?",
     "Has the ship left the planet?",
     "Did the ship have the pod?",
-    "On last collision did the ship have more than one life or more than 0 fuel?"
-    "On last collision was ship involved?"
+    "On last collision did the ship have more than one life or more than 0 fuel?",
+    "On last collision was ship involved?",
     "On last collision was POD attached?"
   command
     "Create GROUND",
@@ -117,13 +179,72 @@ class_chart LEVEL
     "Create POD",
     "End Level",
     "Draw level",
-    "Respawn ship",
-    "Respawn ship + orb"
+    "Re-spawn ship",
+    "Re-spawn ship + orb"
   constraint
     "Can only read specific map depending on level number",
     "Cannot create ENTITIES within the ground",
-    "Will not respawn if LIVES = 0, or FUEL = 0 and ship has crashed",
-    "Respawns ship with orb if orb was attached when it last crashed",
+    "Will not re-spawn if LIVES = 0, or FUEL = 0 and ship has crashed",
+    "Re-spawns ship with orb if orb was attached when it last crashed"
+end
+
+class_chart HUD
+  indexing
+    in_cluster: "INFORMATION_CLUSTER";
+    created: "7-3-2008";
+    revised: "9-3-2008 K Byrne";
+  explanation
+    "visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet"
+  part
+    "1/1 "
+  query
+    "Is the power plant destroyed?",
+    "Has the ship/pod been destroyed?"
+  command
+    "Get score",
+    "Get fuel",
+    "Get value",
+    "Read timer",
+    "Display end of level dialog"
+  constraint
+    ""
+end
+
+class_chart DRAW
+  indexing
+    in_cluster: "THE_GAME";
+    created: "9-3-2008 K Byrne";
+  explanation
+    "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
+  part
+    "1/1 "
+  query
+    "Is it a new level?"
+  command
+    "Refresh screen"
+  constraint
+    ""
+end
+
+class_chart SOUND
+  indexing
+    in_cluster: "GAME";
+    created: "9-3-2008";
+  explanation
+    "Outputs event sounds"
+  part
+    "1/1 "
+  query
+    ""
+  command
+    "Play collision",
+    "Play successful pickup",
+    "Play thrust",
+    "Play ship fire",
+    "Play shield",
+    "Play enemy fire"
+  constraint
+    "Is dependant on the sound configuration"
 end
 
 class_chart ENTITY
@@ -135,9 +256,11 @@ class_chart ENTITY
   part
     "1/1 "
   query
-    "Are you in a Collision"
+    "Are you in a Collision",
+    "What is your position?"
   command
-    ""
+    "Make",
+    "Remove"
   constraint
     "There is a max velocity.",
     "There is a max firing rate.",
@@ -156,13 +279,30 @@ class_chart MOVABLE
   inherit 
     ENTITY
   query
-    "What is your position?",
     "What is your current Velocity?"
   command
     ""
   constraint
     "Position must be within the bounds of the level.",
     "The magnitude of the velocity must be between 0 and Max_Velocity."
+end
+
+class_chart USER_CONTROL
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "9-3-2008 K Byrne";
+  explanation
+    "Movable entities that are controlled by the player"
+  part
+    "1/1 "
+  inherit 
+    MOVABLE
+  query
+    "Are you attached?"
+  command
+    "Apply thrust"
+  constraint
+    "Always feels a constant force directly down"
 end
 
 class_chart NON_MOVABLE
@@ -173,7 +313,7 @@ class_chart NON_MOVABLE
     "Entities in game that have a fixed position"
   part
     "1/1 "
-  inherit
+  inherit 
     ENTITY
   query
     "Timer at zero?"
@@ -193,16 +333,14 @@ class_chart SHIP
   part
     "1/1 "
   inherit 
-    MOVABLE
+    USER_CONTROL
   query
     "Information",
     "Are the shields active?",
     "Is the POD attached?",
     "What direction are you facing?"
   command
-    "Activate Thrust",
-    "Pick up FUEL",
-    "Activate Shields",
+    "Pick up FUEL/Activate Shields/Attach POD",
     "Fire Bullet",
     "Rotate left",
     "Rotate Right"
@@ -211,7 +349,8 @@ class_chart SHIP
     "You can not cross borders with other entities without having a collision",
     "Can only use shields while fuel is greater than 0",
     "Can only thrust while fuel is greater than 0",
-    "When POD is attached it is always attached to the opposite end of the TOW_LINE to SHIP"
+    "When POD is attached it is always attached to the opposite end of the TOW_LINE to SHIP",
+    "Ship is not destroyed by collision with bullets if shield is up"
 end
 
 class_chart BULLET
@@ -244,9 +383,9 @@ class_chart POD
   part
     "1/1 "
   inherit 
-    MOVABLE
+    USER_CONTROL
   query
-    "Are you attached to the ship?"
+    ""
   command
     ""
   constraint
@@ -266,7 +405,7 @@ class_chart TOW_LINE
   part
     "1/1 "
   inherit 
-    MOVABLE
+    USER_CONTROL
   query
     "Do you exist"
   command
@@ -277,44 +416,23 @@ class_chart TOW_LINE
     "Only exist when the player attaches the pod to the ship"
 end
 
-class_chart DOOR
+class_chart POD_STAND
   indexing
     in_cluster: "ENTITY_CLUSTER";
-    created: "7-3-2008";
+    created: "9-3-2008 K Byrne";
   explanation
-    "A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed"
+    "This is a stand shaped object that holds the POD until it becomes attached"
   part
     "1/1 "
   inherit 
     NON_MOVABLE
   query
-    "Are you open?",
-    "Are you closed?"
+    "Has the pod been picked up"
   command
-    "Open",
-    "Close",
+    "Remove"
   constraint
-    "Can only be open for a set amount of time after which it automatically closes",
-    "Can only be opened by activating a specific button"
-end
-
-class_chart BUTTON
-  indexing
-    in_cluster: "ENTITY_CLUSTER";
-    created: "7-3-2008";
-  explanation
-    "An entity which opens the door when a bullet has a COLLISION with it"
-  part
-    "1/1 "
-  inherit 
-    NON_MOVABLE
-  query
-    "Is the door open"
-  command
-    "Open door"
-  constraint
-    "Can only be activated when the door is closed",
-    "Is associated with a specfic door"
+    "Can not be destroyed",
+    "Can only exist while the pod is not attached to the ship"
 end
 
 class_chart NUCLEAR_POWER_PLANT
@@ -331,7 +449,7 @@ class_chart NUCLEAR_POWER_PLANT
     "How much damage have you taken?"
   command
     "Turn on LIMPET_GUNs",
-    "Turn off LIMPET_GUNs",
+    "Turn off LIMPET_GUNs"
   constraint
     "Has a maximum level of damage it can take before the planet is destroyed.",
     "Amount of damage taken is reduced over time",
@@ -368,11 +486,34 @@ class_chart LIMPET_GUN
   inherit 
     NON_MOVABLE
   query
-    "Are you powered?", "Is Power Plant deactivated?"
+    "Are you powered?",
+    "Is Power Plant deactivated?"
   command
     "Fire Bullet"
   constraint
     "Has a maximum firing rate"
+end
+
+class_chart DOOR
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed"
+  part
+    "1/1 "
+  inherit 
+    NON_MOVABLE
+  query
+    "Are you open?",
+    "Are you closed?"
+  command
+    "Open",
+    "Close"
+  constraint
+    "Can only be open for a set amount of time after which it automatically closes",
+    "Can only be opened by activating a specific button",
+    "Can not be destroyed"
 end
 
 class_chart GROUND
@@ -383,7 +524,7 @@ class_chart GROUND
     "Area of level through which ENTITIES can not travel"
   part
     "1/1 "
-  inherit
+  inherit 
     ENTITY
   query
     ""
@@ -391,23 +532,28 @@ class_chart GROUND
     ""
   constraint
     "Can not move",
-    "NON_MOVABLE ENTITIES must be placed in a position close to it"
+    "NON_MOVABLE ENTITIES must be placed in a position close to it",
+    "Cannot be destroyed"
 end
 
-class_chart DRAW
-   indexing
-     in_cluster: "THE_GAME";
-     created: "9-3-2008 K Byrne";
-   explanation
-     "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
-   part
-     "1/1 "
-   query
-     "Is it a new level?"
-   command
-     "Refresh screen"
-   constraint
-     ""
+class_chart BUTTON
+  indexing
+    in_cluster: "ENTITY_CLUSTER";
+    created: "7-3-2008";
+  explanation
+    "An entity which opens the door when a bullet has a COLLISION with it"
+  part
+    "1/1 "
+  inherit 
+    NON_MOVABLE
+  query
+    "Is the door open"
+  command
+    "Open door"
+  constraint
+    "Can only be activated when the door is closed",
+    "Cannot be destroyed",
+    "Is associated with a specific door"
 end
 
 class_chart INFORMATION
@@ -426,22 +572,6 @@ class_chart INFORMATION
     "Set Value"
   constraint
     "Value must be greater than 0"
-end
-
-class_chart HUD
-  indexing
-    in_cluster: "INFORMATION_CLUSTER";
-    created: "7-3-2008";
-  explanation
-    "visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet"
-  part
-    "1/1 "
-  query
-    ""
-  command
-    ""
-  constraint
-    ""
 end
 
 class_chart FUEL
@@ -516,7 +646,7 @@ class_chart HIGH_SCORE
     ""
   command
     "Store",
-    "List",
+    "List"
   constraint
     "Will only store 5 values"
 end
@@ -564,14 +694,8 @@ creation_chart THE_GAME
     created: "7-3-2008";
   explanation
     "List of classes creating objects in the system."
-  creator INFORMATION creates FUEL
-  creator INFORMATION creates LIVES
-  creator INFORMATION creates SCORE
-  creator INFORMATION creates BONUS
-  creator INFORMATION creates HIGH_SCORE
-  creator LEVEL creates SHIP
-  creator LEVEL creates POD
-  creator LEVEL creates NUCLEAR_POWER_PLANT
+  creator INFORMATION creates FUEL, LIVES, SCORE, BONUS, HIGH_SCORE
+  creator LEVEL creates SHIP, POD, NUCLEAR_POWER_PLANT, POD_STAND, DRAW, FUEL_TANK, LIMPET_GUN, BUTTON, DOOR
   creator SHIP creates BULLET
   creator LIMPET_GUN creates BULLET
 end
@@ -580,10 +704,25 @@ scenario_chart THE_GAME
   indexing
     created: "7-3-2008";
   explanation
-    ""
-  scenario "" 
+    "A number of common scenarios in game"
+  scenario "Two ENTITIES collide" 
   description
-    ""
+    "Two ENTITIES in game collide with each other"
+  scenario "Start level" 
+  description
+    "The current level loads"
+  scenario "Game over" 
+  description
+    "Reset game to Menu screen"
+  scenario "Level complete" 
+  description
+    "Displays level complete information before loading the next level"
+  scenario "Re-spawn" 
+  description
+    "Re-spawns the ship or the ship and orb at a specific position"
+  scenario "Quit" 
+  description
+    "Ends and exits the game"
 end
 
 event_chart THE_GAME incoming
@@ -593,7 +732,10 @@ event_chart THE_GAME incoming
     "Internal events"
   part
     "1/2"
-  event "" involves ENTITY
+  event "Get value" involves INFORMATION, LEVEL, HUD
+  event "Start timer" involves DOOR, LEVEL, NUCLEAR_POWER_PLANT, LIMPET_GUN
+  event "Get state" involves DOOR, LEVEL, SHIP, TOW_LINE, POD, NUCLEAR_POWER_PLANT
+  event "Collision" involves ENTITY
 end
 
 event_chart THE_GAME outgoing
@@ -603,7 +745,10 @@ event_chart THE_GAME outgoing
     "Internal events"
   part
     "2/2"
-  event "" involves ENTITY
+  event "Set value" involves INFORMATION, LEVEL, HUD
+  event "Timer ended" involves DOOR, LEVEL, NUCLEAR_POWER_PLANT, LIMPET_GUN
+  event "Set state" involves DOOR, LEVEL
+  event "Collision" involves ENTITY
 end
 
 event_chart THE_GAME incoming
@@ -613,7 +758,12 @@ event_chart THE_GAME incoming
     "External events"
   part
     "1/2"
-  event "" involves ENTITY
+  event "Thrust" involves MOVABLE, FUEL
+  event "Turn" involves MOVABLE
+  event "Fire" involves SHIP, LIMPET_GUN, BULLET
+  event "Activate (IE attach/pickup/shield)" involves SHIP, POD, TOW_LINE, BUTTON, NUCLEAR_POWER_PLANT, FUEL_TANK, FUEL
+  event "Quit" involves LEVEL
+  event "Start" involves LEVEL
 end
 
 event_chart THE_GAME outgoing
@@ -623,5 +773,98 @@ event_chart THE_GAME outgoing
     "External events"
   part
     "2/2"
-  event "" involves ENTITY
+  event "Fall" involves MOVABLE
+  event "Collision" involves ENTITY, LEVEL, SOUND
+  event "Thrust" involves SOUND
+  event "Information change" involves HUD, LEVEL
+  event "Re-spawn" involves ENTITY, LEVEL, HUD
+end
+
+dictionary THE_GAME
+  explanation
+    "BONc automatically generated class dictionary."
+  class INFORMATION cluster INFORMATION_CLUSTER
+  description
+    "dynamically changing data defining the state of the game."
+  class TOW_LINE cluster ENTITY_CLUSTER
+  description
+    "an ENTITY which holds the POD at a fixed distance from the SHIP"
+  class SOUND cluster GAME
+  description
+    "Outputs event sounds"
+  class DOOR cluster ENTITY_CLUSTER
+  description
+    "A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed"
+  class BULLET cluster ENTITY_CLUSTER
+  description
+    "ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES"
+  class HIGH_SCORE cluster INFORMATION_CLUSTER
+  description
+    "largest score attained in the game history, matched with the name of the player who scored it"
+  class MOVABLE cluster ENTITY_CLUSTER
+  description
+    "ENTITIES in game that can be moved"
+  class SOUND_CONFIGURATION cluster CONFIGURATION
+  description
+    "Turn sound on and off"
+  class FUEL_TANK cluster ENTITY_CLUSTER
+  description
+    "is an ENTITY from which the SPACESHIP can get FUEL"
+  class NUCLEAR_POWER_PLANT cluster ENTITY_CLUSTER
+  description
+    "This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged"
+  class GROUND cluster ENTITY_CLUSTER
+  description
+    "Area of level through which ENTITIES can not travel"
+  class LIVES cluster INFORMATION_CLUSTER
+  description
+    "Number of COLLISIONs the SPACESHIP can have before the game is over"
+  class BUTTON cluster ENTITY_CLUSTER
+  description
+    "An entity which opens the door when a bullet has a COLLISION with it"
+  class ENTITY cluster ENTITY_CLUSTER
+  description
+    "An interactive visual object in the game"
+  class SCORE cluster INFORMATION_CLUSTER
+  description
+    "Summation of points received in game"
+  class LEVEL cluster GAME
+  description
+    "Creates all objects in game and keeps track of the state of the game"
+  class FUEL cluster INFORMATION_CLUSTER
+  description
+    "Consumed by the SPACESHIP through forward movement and use of the shields"
+  class CONTROL_CONFIGURATION cluster CONFIGURATION
+  description
+    "Configure controls for fire, accept/shields/attach/pickup, left, right, thrust"
+  class LIMPET_GUN cluster ENTITY_CLUSTER
+  description
+    "An AI controlled ENTITY that fires BULLETS"
+  class USER_CONTROL cluster ENTITY_CLUSTER
+  description
+    "Movable entities that are controlled by the player"
+  class POD_STAND cluster ENTITY_CLUSTER
+  description
+    "This is a stand shaped object that holds the POD until it becomes attached"
+  class NON_MOVABLE cluster ENTITY_CLUSTER
+  description
+    "Entities in game that have a fixed position"
+  class SHIP cluster ENTITY_CLUSTER
+  description
+    "The main yellowish, triangular ENTITY controlled by the player"
+  class POD cluster ENTITY_CLUSTER
+  description
+    "the object of the level is to retrieve this"
+  class TIMER cluster INFORMATION_CLUSTER
+  description
+    "a timer created by an EVENT or action which counts to another EVENT or ACTION"
+  class HUD cluster INFORMATION_CLUSTER, GAME
+  description
+    "visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet"
+  class BONUS cluster INFORMATION_CLUSTER
+  description
+    "Extra score achieved by finishing levels and destroying planets"
+  class DRAW cluster GAME
+  description
+    "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
 end

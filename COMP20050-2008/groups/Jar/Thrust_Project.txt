@@ -8,7 +8,7 @@ Eoghan O'Donovan	don88		06358985
 Introduction
 ----------------------------------
 
-This is a a project to recreate the video game Thrust, originally designed for the computer systems BBC Micro and Acorn Electron.
+This is a project to recreate the video game Thrust, originally designed for the computer systems BBC Micro and Acorn Electron.
 This is to be done using a series of steps from basic concept analysis to playing the game.
 
 -------------------------------------------------------------------------------------------------------------------------------
@@ -30,79 +30,93 @@ Summary
 ----------------------------------
 We have completed concept analysis.
 We have completed the class charts according to our concept analysis.
-We have used the class charts to create 
+We have used the class charts to create an informal bon specification for our system.
 
 -------------------------------------------------------------------------------------------------------------------------------
 Project Dictionary
 -----------------------------------
+  class INFORMATION cluster INFORMATION_CLUSTER
+  description
+    "dynamically changing data defining the state of the game."
+  class TOW_LINE cluster ENTITY_CLUSTER
+  description
+    "an ENTITY which holds the POD at a fixed distance from the SHIP"
+  class SOUND cluster GAME
+  description
+    "Outputs event sounds"
+  class DOOR cluster ENTITY_CLUSTER
+  description
+    "A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed"
+  class BULLET cluster ENTITY_CLUSTER
+  description
+    "ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES"
+  class HIGH_SCORE cluster INFORMATION_CLUSTER
+  description
+    "largest score attained in the game history, matched with the name of the player who scored it"
+  class MOVABLE cluster ENTITY_CLUSTER
+  description
+    "ENTITIES in game that can be moved"
+  class SOUND_CONFIGURATION cluster CONFIGURATION
+  description
+    "Turn sound on and off"
+  class FUEL_TANK cluster ENTITY_CLUSTER
+  description
+    "is an ENTITY from which the SPACESHIP can get FUEL"
+  class NUCLEAR_POWER_PLANT cluster ENTITY_CLUSTER
+  description
+    "This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged"
+  class GROUND cluster ENTITY_CLUSTER
+  description
+    "Area of level through which ENTITIES can not travel"
+  class LIVES cluster INFORMATION_CLUSTER
+  description
+    "Number of COLLISIONs the SPACESHIP can have before the game is over"
+  class BUTTON cluster ENTITY_CLUSTER
+  description
+    "An entity which opens the door when a bullet has a COLLISION with it"
+  class ENTITY cluster ENTITY_CLUSTER
+  description
+    "An interactive visual object in the game"
+  class SCORE cluster INFORMATION_CLUSTER
+  description
+    "Summation of points received in game"
+  class LEVEL cluster GAME
+  description
+    "Creates all objects in game and keeps track of the state of the game"
+  class FUEL cluster INFORMATION_CLUSTER
+  description
+    "Consumed by the SPACESHIP through forward movement and use of the shields"
+  class CONTROL_CONFIGURATION cluster CONFIGURATION
+  description
+    "Configure controls for fire, accept/shields/attach/pickup, left, right, thrust"
+  class LIMPET_GUN cluster ENTITY_CLUSTER
+  description
+    "An AI controlled ENTITY that fires BULLETS"
+  class USER_CONTROL cluster ENTITY_CLUSTER
+  description
+    "Movable entities that are controlled by the player"
+  class POD_STAND cluster ENTITY_CLUSTER
+  description
+    "This is a stand shaped object that holds the POD until it becomes attached"
+  class NON_MOVABLE cluster ENTITY_CLUSTER
+  description
+    "Entities in game that have a fixed position"
+  class SHIP cluster ENTITY_CLUSTER
+  description
+    "The main yellowish, triangular ENTITY controlled by the player"
+  class POD cluster ENTITY_CLUSTER
+  description
+    "the object of the level is to retrieve this"
+  class TIMER cluster INFORMATION_CLUSTER
+  description
+    "a timer created by an EVENT or action which counts to another EVENT or ACTION"
+  class HUD cluster INFORMATION_CLUSTER, GAME
+  description
+    "visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet"
+  class BONUS cluster INFORMATION_CLUSTER
+  description
+    "Extra score achieved by finishing levels and destroying planets"
+  class DRAW cluster GAME
+  description
+    "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
 
-*CONCEPT* *DEFINITION*
------------------------------------
-SPACESHIP The main yellowish, triangular entity controlled
-by the player.
-ENTITY An interactive visual object in the game.
-INFORMATION dynamically changing data defining the state of the game.
-ACTION inputs given by the player or AI.
-AI input from the computer.
-PHYSICS governs movement and interactions of entities.
-COLLISION connection of visual borders(i.e. when various object collide in game).
-EVENT something that happens due to a trigger.
-TOW_LINE an ENTITY which holds the POD at a fixed distance from the SPACESHIP.
-LIMPET_GUN is an AI controlled ENTITY that FIRES BULLETS.
-FUEL_TANK is an ENTITY from which the SPACESHIP can get FUEL.
-BULLET ENTITIES that collide with other ENTITIES.
-POD the object of the level is to retrieve this.
-DOOR blocks the player from continuing the mission until a BUTTON has been pressed.
-GROUND static object which all other entities rest upon or can collide with.
-NUCLEAR_POWER_PLANT powers the LIMPET_GUN and destroys the planet when destroyed.
-BUTTON an entity which opens the door when a bullet has a COLLISION with it.
-PLANET place where the level takes place.
-HUD area of the screen where information is displayed.
-FUEL consumed by the SPACESHIP through forward movement. 
-SCORE summation of points received in game.
-LIVES amount of COLLISION the SPACESHIP can have. 
-HIGH_SCORE largest score attained in the game history.
-BONUS extra score.
-
-...
-
-*IS-A RELATIONS*
-----------------
-SPACESHIP is-a ENTITY
-BULLET is-a ENTITY
-POD is-a ENTITY
-TOW_LINE is-a ENTITY
-DOOR is-a ENTITY
-NUCLEAR_POWER_PLANT is-a ENTITY
-BUTTON is-a ENTITY
-LIMPET_GUN is-a ENTITY
-FUEL_TANK is-a ENTITY
-PLANET is-a  ENTITY
-HIGH_SCORE is-a INFORMATION
-COLLISION is-a EVENT
-BONUS is-a INFORMATION 
-FUEL is-a INFORMATION
-SCORE is-a INFORMATION
-LIVES is-a INFORMATION
-
-
-*HAS-A RELATIONS*
------------------
-ENTITY has-a COLOR
-ENTITY has-a PHYSICS
-LIMPET_GUN has-a AI
-BUTTON has-a EVENT 
-DOOR has-a EVENT
-LIMPET_GUN has-a ACTION
-SPACESHIP has-a ACTION 
-ENTITY has-a COLLISION
-GROUND has-a COLLISION
-HUD has-a INFORMATION 
-NUCLEAR_POWER_PLANT has-a ACTION
-
-
-*IS-A-KIND-OF RELATIONS*
-------------------------
-INFORMATION in-a-kinda STRING
-PHYSICS is-a-kinda EVENT
-TOW_LINE is-a-kinda ACTION
