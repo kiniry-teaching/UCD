@@ -1,0 +1,727 @@
+system_chart THRUST
+
+cluster ENTITY_CLUSTER
+
+  description
+    "Object in the game enviroment"
+
+cluster SYSTEM_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+
+cluster FORCES_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+
+cluster GAUGE_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+
+cluster CONSTRAINT_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+
+cluster ENVIROMENT_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+
+cluster SYSTEM_MENU_CLUSTER
+  description
+    "an entity which hinders the SPACESHIP"
+
+end
+
+cluster_chart ENTITY_CLUSTER
+
+class ENTITY
+description
+	"Generic Entity Class"
+class SPACESHIP
+description
+    "Entity the player controls"
+
+class FUEL_TANK
+description
+	"Entity that increases your fuel level"
+
+class BALL
+description
+	"End of level objective. Attached to ship by tether. Has mass and can affect ship momentum"
+
+class TURRETS
+description
+	"Enemy entitity that fires bullets in player's general direction. Is static and ground-based"
+
+class TETHER
+description
+	"Entity which connects ball to ship and allows for the effects of mass and centrifugal force to be applied"
+
+class FACTORIES
+description
+	"static and non-interactive gaming entity"
+
+class BULLETS
+description
+	"Entities fired by turrets and space ship. Depletes lives when they come into contact with ship."
+
+end
+
+cluster_chart SYSTEM_CLUSTER
+
+class SOUND_EFFECTS
+description
+	"Sound emmited when an event occurs"
+
+class MENU
+description
+	"List of commands which accomplishing tasks outside the gaming enviroment"
+
+end
+
+cluster_chart FORCES_CLUSTER
+
+class FORCES
+description
+	"Various constraints imposed on objects in the gaming enviroment"
+
+class GRAVITY
+description
+	"A constant force within the game which pulls entities downwards"
+
+class MOMENTUM
+description
+	"Force in gaming enviroment based on the speed and mass of entities"
+
+end
+
+cluster_chart GAUGE_CLUSTER
+
+class FUEL
+description
+	"Visual representation of fuel level and thus the amount of thrust available."
+
+class LIVES
+description
+	"Visual representation of number of attempts available."
+
+class LIFE
+description
+	"Depleted by contact with bullets or ground"
+
+class SCORE
+description
+	"Visual representation of number of turrets, fuel tanks picked up, time completed in (multiplier) and balls picked up"
+
+end
+
+cluster_chart CONSTRAINT_CLUSTER
+
+class GROUND
+description
+	"Lower level constraints of the enviroment. Ship must fly above this. Will deplete lives if ship comes in contact with it"
+
+class FRAME
+description
+	"Area beyond which a space ship cannot move past"
+
+end
+
+cluster_chart ENVIROMENT_CLUSTER
+
+class ENVIROMENT
+description
+	"Generic Enviroment cluster"
+
+class BACKGROUND
+description
+	"static non-interactive image"
+
+end
+
+cluster_chart SYSTEM_MENU_CLUSTER
+
+class START_GAME
+description
+	"Command which initialises the gaming enviroment"
+
+class EXIT_GAME
+description
+	"Command which terminates the program"
+
+class OPTIONS
+description
+	"Command which displays list of subsidary commands that alter game interface and sound"
+
+class CONTROLS
+description
+	"Command which alters input controls of the game"
+
+class SOUND_OPTIONS
+description
+	"Command which alters sound level in the game"
+
+class TOP_SCORES
+description
+	"Command which outputs list of top ten game completions"
+
+end
+
+class_chart ENTITY
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"Generic Entity Class"
+part
+	"1/1"
+query 
+	""
+command
+	"",
+constraint
+	"",
+end
+
+class_chart SPACESHIP
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"Entity the player controls"
+part
+	"1/1"
+query 
+	"Where in the games is the spaceship?",
+	"How much fuel is left?",
+	"In what direction and how fast is the spaceship travelling?",
+	"Is the ball attached to the ship",
+	"Is the spaceship in contact with the ground, fuel tank, ball, turret, or factory?",
+	"Has the spaceship left the frame?",
+	"Has spaceship been hit by a bullet?"
+command
+	"Turn in a certain direction",
+	"Apply force in a certain direction (Thrust)",
+	"Fire a bullet",
+	"Pick up a fuel tank",
+	"Pick up the ball",
+constraint
+	"Must have positive amount of fuel and lives",
+	"Must not be in contact with ground or bullets",
+end
+
+class_chart FUEL_TANK
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"Entity that increases your fuel level"
+part
+	"1/1"
+query
+	"Has spaceship recieved fuel tank?",
+	"Is spaceship in contact with fuel tank?",
+	"Has a bullet made contact with the spaceship?",
+	"Has the spaceship's fuel level increase after recieving a fuel tank?"
+command
+	"Send to spaceship"
+constraint
+	"cannot be in contact with spaceship or bullet"
+end
+
+class_chart BALL
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"End of level objective. Attached to ship by tether. Has mass and can affect ship momentum"
+part
+	"1/1"
+query
+	"Has spaceship got the ball?",
+	"Is ball in contact with ground?",
+	"Is ball in contact with a bullet?",
+	"Is spaceship in contact with ball(before pickup)?",
+	"Is ball in contact with tether?",
+	"Has ball been picked up?"
+command
+	"Connect to tether"
+constraint
+	"Cannot be in contact with spaceship, bullet or ground"
+end
+
+class_chart TURRETS
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"Enemy entitity that fires bullets in player's general direction. Is static and ground-based"
+part
+	"1/1"
+query
+	"Has bullet hit turret?"
+command
+	""
+constraint
+	"Cannot exist after contact with bullet"
+end
+
+class_chart TETHER
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"Entity which connects ball to ship and allows for the effects of mass and centrifugal force to be applied"
+part
+	"1/1"
+query
+	"Has tether connected with ball?",
+	"Has tether hit ground?"
+command
+	""
+constraint
+	"Cannot hit ground or bullets"
+end
+
+class_chart FACTORIES
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"static and non-interactive gaming entity"
+part
+	"1/1"
+query
+	"Has spaceship hit factory?"
+	
+command
+	""
+constraint
+	""
+end
+
+class_chart BULLETS
+indexing
+    in_cluster: "ENTITY_CLUSTER";
+explanation
+	"Entities fired by turrets and space ship. Depletes lives when they come into contact with ship"
+part
+	"1/1"
+query
+	"Has bullet hit spaceship, turret, fuel tank or ball?"
+	
+command
+	"Fire bullet"
+constraint
+	""
+end
+
+class_chart SOUND_EFFECTS
+indexing
+    in_cluster: "SYSTEM_CLUSTER";
+explanation
+	"Sound emmited when an event occurs"
+part
+	"1/1"
+query
+	"What event has occured?"
+	
+command
+	"Play sound"
+constraint
+	""
+end
+
+class_chart MENU
+indexing
+    in_cluster: "SYSTEM_CLUSTER";
+explanation
+	"List of commands which accomplishing tasks outside the gaming enviroment"
+part
+	"1/1"
+query
+	"What menu item has been selected?"
+	
+command
+	"Excecute certain menu item"
+constraint
+	""
+end
+
+class_chart FORCES
+indexing
+    in_cluster: "FORCES_CLUSTER";
+explanation
+	"Various constraints imposed on objects in the gaming enviroment"
+part
+	"1/1"
+query
+	""
+	
+command
+	""
+constraint
+	""
+end
+
+class_chart GRAVITY
+indexing
+    in_cluster: "FORCES_CLUSTER";
+explanation
+	"A constant force within the game which pulls entities downwards"
+part
+	"1/1"
+query
+	""
+	
+command
+	""
+constraint
+	"Can only act as a downward force"
+end
+
+class_chart MOMENTUM
+indexing
+    in_cluster: "FORCES_CLUSTER";
+explanation
+	"Force in gaming enviroment based on the speed and mass of entities"
+part
+	"1/1"
+query
+	"How fast is spaceship travelling at the moment",
+	"How much mass does the spaceship have at the moment?",
+	"Is the ball attached to the tether?"
+	
+command
+	""
+constraint
+	"Can only act as a product of mass and force"
+end
+
+class_chart FUEL
+indexing
+    in_cluster: "GAUGES_CLUSTER";
+explanation
+	"Visual representation of fuel level and thus the amount of thrust available"
+part
+	"1/1"
+query
+	"How much is left?",
+	"Is thrust being engaged at the moment?",
+	"Has fuel tank been picked up?"
+	
+command
+	""
+constraint
+	"No more thrust can be provided if level equals zero"
+end
+
+class_chart LIVES
+indexing
+    in_cluster: "GAUGES_CLUSTER";
+explanation
+	"Visual representation of number of attempts available"
+part
+	"1/1"
+query
+	"How much is left?",
+	"Has the spaceship caused an end-of-life scenario?"
+	
+	
+command
+	""
+constraint
+	"Game is over if level equals zero"
+end
+
+class_chart LIFE
+indexing
+    in_cluster: "GAUGES_CLUSTER";
+explanation
+	"Depleted by contact with bullets or ground"
+part
+	"1/1"
+query
+	"How much is left?",
+	"Has the spaceship caused an end-of-life scenario?"
+	
+	
+command
+	""
+constraint
+	"Game is over if level equals zero"
+end
+
+class_chart SCORE
+indexing
+    in_cluster: "GAUGES_CLUSTER";
+explanation
+	"Visual representation of number of turrets, fuel tanks picked up, time completed in (multiplier) and balls picked up"
+part
+	"1/1"
+query
+	"What is the current score?",
+	"Is the score high enough to add to the high score list?"
+	
+	
+command
+	""
+constraint
+	"Cannot be a negative number"
+end
+
+class_chart FRAME
+indexing
+	in_cluster:"CONSTRAINTS_CLUSTER";
+explanation 
+	"Area beyond which an entity cannot move past."
+part
+	"1/1"
+query
+	"Has the entity made contact with the frame?"
+command
+	"terminate the entity",
+	"reduce entity velocity to zero"
+constraint
+	"Must not allow entities to visibly move past itself",
+	"Must contain the visible portion of the interactive environment."
+end
+
+class_chart GROUND
+indexing
+	in_cluster:"CONSTRAINTS_CLUSTER";
+explanation
+	" Lower level constraints of the enviroment. Ship must fly above this. Will deplete lives if ship comes in contact with it."
+part
+	"1/1"
+query
+	"Has the entity made contact with the ground?"
+command
+	"terminate the entity",
+	"reduce entity velocity to zero"
+constraint
+	"Must not allow entities to move past its visible border",
+	"Must consist of the lower portion of the visible interactive environment"
+end
+
+class_chart ENVIROMENT
+indexing
+    in_cluster: "ENVIROMENT_CLUSTER";
+explanation
+	"Generic Enviroment Class"
+part
+	"1/1"
+query 
+	""
+command
+	"",
+constraint
+	"",
+end
+
+class_chart BACKGROUND
+indexing
+	in_cluster:"ENVIRONMENT_CLUSTER";
+explanation
+	"static non-interactive image in the visible environment"
+part
+	"1/1"
+query
+	""
+command
+	""
+constraint
+	"Must be non-interactive with all entities",
+	"Must be behind the ground and all visible entities"
+end
+
+class_chart START_GAME
+indexing
+	in_cluster:"SYSTEM_MENU_CLUSTER"
+explanation
+	"Command which initialises the gaming environment"
+part
+	"1/1"
+query
+	"has the command been called?"
+command
+	"initialise the gaming environment at the first level"
+constraint
+	"Must have a single action"
+end
+
+class_chart EXIT_GAME
+indexing
+	in_cluster:"SYSTEM_MENU_CLUSTER"
+explanation
+	"Command which terminates the program"
+part
+	"1/1"
+query
+	"has the command been called?"
+command
+	"terminate the program"
+constraint
+	"Must have a single action"
+end
+
+class_chart OPTIONS
+indexing
+	in_cluster:"SYSTEM_MENU_CLUSTER"
+explanation
+	"Command which displays list of subsidary commands that alter game interface and sound."
+part
+	"1/1"
+query
+	"has the command been called?"
+command
+	"display a list of subsidary commands"
+constraint
+	"Must have a single action"
+end
+
+class_chart CONTROLS
+indexing
+	in_cluster:"SYSTEM_MENU_CLUSTER"
+explanation
+	"Command which alters input controls of the game."
+part
+	"1/1"
+query
+	"which inputs have been modified?",
+	"Are all the inputs unique?"
+command
+	"Request unique inputs",
+	"save the modified mapped keys"
+constraint
+	"Keys must conform to a standard keyboard",
+	"inputs must conform to actions in the gaming environment",
+	"all inputs must be unique"
+end
+
+class_chart SOUND_OPTIONS
+indexing 
+	in_cluster:"SYSTEM_MENU_CLUSTER"
+explanation
+	"command which alters the sound level in the game"
+part
+	"1/1"
+query
+	"has the sound level been changed?"
+command 
+	"save modified options and inact changes"
+constraint
+	"the input changes must conform to the sound output"
+end
+
+class_chart TOP_SCORES
+
+indexing 
+	in_cluster:"SYSTEM_MENU_CLUSTER"
+explanation
+	"Command which outputs list of top ten game completions."
+part
+	"1/1"
+query
+	""
+command
+	"update information apon game completion"
+constraint
+	"only highest 10 entries are permitted"
+end	
+
+scenario_chart THRUST
+explanation
+	"This lists the different screnarios that can occur in the game"
+scenario
+	"Start a new game"
+description
+	"This starts a new game for the player"
+scenario
+	"Turn sound on/off"
+description
+	"This turns sound on or off"
+scenario
+	"Change resolution"
+description
+	"This changes the output resolution of the game"
+scenario
+	"View high scores"
+description
+	"This shows the high scores to the player"
+scenario
+	"Win"
+description
+	"The player wins by flying with the ball attached to the ship out the top of the level"
+scenario
+	"Lose"
+description
+	"The player loses by the spaceship being destroyed"
+scenario
+	"Quits game"
+description
+	"The player exits the game"
+end
+
+creation_chart THRUST
+explanation
+	"The constructors for creating the game"
+creator ENTITY creates SPACESHIP, FUEL_TANK, BALL, TURRETS, TETHER, FACTORIES, BULLETS
+creator ENVIROMENT creates BACKGROUND, FRAME, GROUND, FUEL, LIVES, LIFE, SCORE
+
+end
+
+event_chart THRUST
+outgoing
+explanation
+	"Internal events that are outputted to the user"
+event
+	"Spaceship is destroyed"
+involves
+	SPACESHIP
+event
+	"Spaceship takes ball out of level"
+involves
+	SPACESHIP,BALL
+
+end
+
+
+event_chart THRUST
+incoming
+explanation
+	"Internal events that are sent from the user to the game"
+event
+	"Quit the game"
+involves
+	(ENTITY_CLUSTER), (SYSTEM_CLUSTER), (FORCES_CLUSTER), (GAUGE_CLUSTER), (CONSTRAINT_CLUSTER), (ENVIROMENT_CLUSTER), (SYSTEM_MENU_CLUSTER)
+event
+	"Start the game"
+involves
+	(ENTITY_CLUSTER), (SYSTEM_CLUSTER), (FORCES_CLUSTER), (GAUGE_CLUSTER), (CONSTRAINT_CLUSTER), (ENVIROMENT_CLUSTER), (SYSTEM_MENU_CLUSTER)
+
+end
+
+
+event_chart THRUST
+outgoing
+explanation
+	"External events that are sent from the user to the game"
+event
+	"Quit the game"
+involves
+	(ENTITY_CLUSTER), (SYSTEM_CLUSTER), (FORCES_CLUSTER), (GAUGE_CLUSTER), (CONSTRAINT_CLUSTER), (ENVIROMENT_CLUSTER), (SYSTEM_MENU_CLUSTER)
+event
+	"Start the game"
+involves
+	(ENTITY_CLUSTER), (SYSTEM_CLUSTER), (FORCES_CLUSTER), (GAUGE_CLUSTER), (CONSTRAINT_CLUSTER), (ENVIROMENT_CLUSTER), (SYSTEM_MENU_CLUSTER)
+
+end
+
+
+event_chart THRUST
+outgoing
+explanation
+	"External events that are sent from the game to the user"
+event
+	"Lost the level"
+involves
+	(ENTITY_CLUSTER), (SYSTEM_CLUSTER), (FORCES_CLUSTER), (GAUGE_CLUSTER), (CONSTRAINT_CLUSTER), (ENVIROMENT_CLUSTER), (SYSTEM_MENU_CLUSTER)
+event
+	"Win the game"
+involves
+	(ENTITY_CLUSTER), (SYSTEM_CLUSTER), (FORCES_CLUSTER), (GAUGE_CLUSTER), (CONSTRAINT_CLUSTER), (ENVIROMENT_CLUSTER), (SYSTEM_MENU_CLUSTER)
+
+end
