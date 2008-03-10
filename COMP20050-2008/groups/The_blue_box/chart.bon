@@ -1,0 +1,750 @@
+system_chart THRUST
+  
+  cluster PLANET 
+  description 
+  "The main place where things happen/the levels contains all interactive and non interactive components"
+  
+  cluster GUI 
+  description 
+  "The main interface the player interacts with"
+  
+  cluster ENEMY 
+  description 
+  "An INTERACTIVE_OBJECT that hinders the player"
+  
+  cluster PHYSICS 
+  description 
+  "The physics that act on the ship and ball"
+  
+  cluster PLAYER 
+  description 
+  "The main person who controls the game character, in this case the spaceship"
+
+  cluster ENTITY
+  description
+  "an interactive in the game"
+
+
+end
+
+cluster_chart ENTITY
+
+  class BALL 
+  description 
+ "The main objective is the ball move it to the space jump to win"
+
+
+  class BALL_PAD
+  description
+  "Where the ball sits until you pick it up"
+
+  class OBJECT
+  description
+  "OBJECT applies to all entities in the game a general class for everything interactive"
+
+  class BULLET
+  description "an entity that kills objects (decreases health)"
+
+end
+cluster_chart PLANET
+
+  class SPAWN_POINT
+  description
+  "spawn point includes the initial spawn point as all spawn points are the same"
+
+  class SPACE_JUMP
+  description
+  "end of level if you have the ball attached"
+
+  class FUELCAN
+  description
+  "a fuel can that increases your fuel over time"  
+
+  class TERRAIN 
+  description
+  "ground /landmasses."
+
+  class BUTTON
+  description
+  "opens doors"
+  
+  class DOOR 
+  description 
+ "opens and closes when button is shot /limited time"
+
+  class SKY 
+  description 
+ "lack of landmass contains spacejump and non interactive stars" 
+
+  class PLANET_CREATOR
+  description
+  "a class to construct planet objects"
+end
+
+cluster_chart ENEMY
+ 
+  class TURRET 
+  description 
+  "The main multiple enemy that fires bullets at you while factory is powering them"
+  
+  class FACTORY
+  description 
+  "The only building in the game that powers the turrets"
+
+  class ENEMY_CREATOR
+  description
+  "a class to construct enemy objects"
+
+
+end
+ 
+cluster_chart PHYSICS
+  
+  class GRAVITY 
+  description 
+  "9.8 force downwards"
+  
+  class MOMENTUM
+  description
+   "your ship speeds up inertia"
+
+end
+
+cluster_chart PLAYER
+
+
+  class PLAYER_CREATOR
+  description
+  "The main class for player"
+
+  class SHIP
+  description
+  "The main good entity controlled in the game yellowish blob"
+  
+  class TRACTOR_BEAM
+  description
+  "The beam that sucks up fuel from fuel cans"
+ 
+  class GRAPPLE_HOOK
+  description
+  "The grappling hook is whats used to connect the ball to the spaceship,which you then in turn escape from the planet with"
+ 
+  class SHIELD
+  description
+  "A shield that protects the player from bullets while its in effect"
+
+  class PLAY
+  description
+  "guide the ship with input from the keyboard"
+
+end
+
+cluster_chart GUI
+  
+  class LIVES 
+  description
+  "record of players remaining lives"
+ 
+  class FUEL
+  description 
+  "record of players fuel remaining as an Integer"
+  
+  class POINTS
+  description 
+  "record of players current points"
+
+  class COUNTDOWN
+  description
+  "The countdown timer that activates if factory is destroyed (10 seconds)"
+
+  class MENU
+  description 
+  "main menu and password screen, option screen"
+
+end
+
+class_chart OBJECT
+indexing
+in_cluster: "ENTITY";
+explanation "general class thats inherited by everything thats an entity in the game"
+part "1/4"
+query "co-ordinates in of where this entity is"
+constraint "only applies to entitys nothing in the GUI"
+
+end
+
+class_chart BALL 
+indexing
+in_cluster: "ENTITY";
+explanation "The main objective in the game, you must pick it up using your grapple hook and then"
+part "2/4"
+ inherit OBJECT
+   query
+     "pod shape",
+     "pop colour",
+     "pod size",
+     "on grapple hook?",
+     "pod momentum [speed is zero when pod is stationary aka not attached to ship]",
+     "pod mass - this influences the pods momentum as P=MV momentum = mass*velocity"
+ 	
+  command
+  "attach to grapple hook"
+ 	
+  constraint
+    "Remains on POD_PAD till picked up by grapple hook",
+    "Never allowed to touch terrain"
+
+end
+
+class_chart BALL_PAD
+indexing
+in_cluster: "ENTITY";
+explanation "Where the ball sits until grappled by the player,holds on to ball"
+part "3/4"
+ inherit OBJECT
+
+   query "shape","colour","poisition","size"
+
+ 	
+  constraint
+	"must be positioned on flat surface"
+  
+end
+
+class_chart BULLET
+indexing
+in_cluster:"ENTITY";
+explanation"a projectile fired "
+part"4/4"
+inherit OBJECT
+query "direction?","co-ordinates","did i hit something/collision ","have i moved off the map","speed","size",
+command"reduce health of target collided with","disappear"
+constraint"can only have 4 at a go"
+end
+
+class_chart BUTTON
+indexing
+in_cluster:"PLANET";
+explanation"This is a button your spaceship shoots to open doors on the map"
+part"1/8"
+inherit OBJECT
+query "(on-shot event) have i been shot","(on-shot-event)how long has it since i have been shot"
+command"door open","door close"
+constraint"must be placed on a perfectly horizontal wall","must have a buddy button"
+
+end
+
+class_chart SPACE_JUMP
+indexing
+in_cluster:"PLANET";
+explanation "The position in the SKY where you win the game if you are holding the ball"
+part "2/8"
+inherit OBJECT
+query "has ship reached this point with or without ball?"
+command "activate win event","activate re-entry event if ship doesnt have ball(restart level)"
+
+end
+ 
+class_chart SPAWN_POINT
+indexing
+in_cluster:"PLANET"
+explanation"where your ship spawns, spawning points on the map this includes the initial spawning point"
+part"3/8"
+query"has the ship been destroyed?","does the ship have enough lives to respawn"
+command"respawn the ship in the closest spawn point"
+constraint"spawn point must be in the sky","must not overlap with terrain"
+
+end
+
+class_chart FUELCAN
+indexing
+in_cluster:"PLANET";
+explanation "a fuel can that increases your ships fuel"
+part "4/8"
+inherit OBJECT
+query "shape","colour","size","how much it increases your fuel per second","how much fuel it contains"
+command "if ship is using tractor beam on you refuel the ship/increase ships fuel gauge"
+constraint"must be placed on a flat surface"
+
+end
+class_chart TERRAIN
+
+  indexing
+    in_cluster: "PLANET" ;
+  created: "2008-03-15 sm";
+  revised: "n/a"
+explanation
+  "land that is in the level (land mass)"
+part "5/8"
+inherit OBJECT
+query
+  "Colour", "shape"
+command
+ "if ship touches this or ball activate death event"
+constraint
+  "cannot fill full map.",
+  "cannot overlap a spawn point."
+
+end
+
+class_chart DOOR
+indexing
+  in_cluster: "PLANET";
+explanation
+  "A door that opens and closes basically moveable terrain"
+part "6/8"
+inherit TERRAIN,OBJECT
+query
+  "has button sent command to open", "has button sent command to close"
+command"open","close"
+
+constraint
+  "imbedded in a wall.",
+  "open for limited time."
+  
+end
+
+
+class_chart SKY
+indexing
+  in_cluster: "PLANET";
+explanation
+  "Part of the map that isnt TERRAIN clear space where spaceship spawns and finishes level contains stars"
+part "7/8"
+query
+  "contains spawn points?"
+constraint
+  "must not overlap with TERRAIN"
+    
+end
+
+
+
+class_chart PLANET_CREATOR
+indexing
+in_cluster:"PLANET";
+explanation"The general planet class"
+part"8/8"
+end
+
+
+
+class_chart TURRET
+indexing
+  in_cluster: "ENEMY";
+explanation
+  "Tries to kill the players ship by firing bullets can be easily destroyed by firing a bullet at it"
+part "1/3"
+inherit OBJECT
+query
+    "health", "bullet","colour","shape","have i been shot aka destroyed","is the ship in range to shoot at",
+    "have i hit the ship",
+    "have i just fired a bullet?"
+
+command"destroy this turret","fire at ship","scan for ship"
+constraint
+  "must be on diagonal terrain / etc",
+  "cant fire when factory is shot aka disabled"
+    
+end
+
+class_chart FACTORY
+indexing
+  in_cluster: "ENEMY";
+explanation
+  "powers the turrets and the planet ultimately"
+part "2/3"
+inherit OBJECT
+query
+  "health","colour","shape","have i been shot?","do i still produce smoke smoke",
+  "if i have been killed start the planetary armageddon countdown"
+
+command"produce smoke","explode","activate COUNTDOWN","disable turrets","reduce health","increase health"
+
+constraint
+  "must be flat on terrain",
+  "Is destroyed if its health falls below or less than zero",
+  "deactivates turrets when fired upon"
+ 
+end
+
+class_chart ENEMY_CREATOR
+indexing
+in_cluster:"ENEMY";
+explanation"general enemy class"
+part"3/3"
+end
+
+class_chart GRAVITY
+indexing
+  in_cluster: "PHYSICS" ;
+explanation
+  "pulls the ship down with a force of 9.8 ideallaly"
+part "1/2"
+query
+  "force","what direction am i acting in?"
+constraint
+  "cant be so powerful that ship cant fly under the force"
+  
+end
+
+
+class_chart MOMENTUM
+indexing
+  in_cluster: "PHYSICS" ;
+  explanation
+   "The speed the ship/ball picks up the longer it speeds up P=MV it depends on the mass of the ship and the ball"
+part "2/2"
+query
+  "inertia","how much do i speed the moving OBJECTS up?"
+constraint
+  "in original game no constraint ship never stopped speeding up"
+
+end
+
+
+
+class_chart SHIP
+indexing
+  in_cluster: "PLAYER" ;
+explanation
+  "The character,main good entity if you will that the player controls to win the game"
+part "1/6"
+
+inherit GRAVITY,MOMENTUM,OBJECT
+
+query
+  "health",
+"colour",
+"bullet",
+"shape",
+"sound",
+"grapple",
+"Is the ball attached?",
+"have i been shot?",
+"have i run out of fuel?",
+"have i run our of lives?",
+"what speed am i traveling at",
+"whats my mass?",
+"acceleration is constant",
+"what direction in degrees am i facing",
+"am i using my shield?"
+
+  command
+ 	    
+ 	    "thrust",
+ 	    "Fire a bullet max = 4?",
+	    "turn",
+ 	    "pick up fuel using tractor beam",
+	    "use shield",
+ 	    "activate grapple to pick up ball",
+	    "explode"
+	    
+
+constraint
+  "cant touch TERRAIN FUEL TURRETS FACTORY BALLPAD",
+"no lives cant respawn",
+"hit by bullet ==dead",
+"no fuel == game over"
+
+end
+
+class_chart TRACTOR_BEAM
+indexing
+  in_cluster: "PLAYER" ;
+explanation"The tractor beam used by the ship along with the shield simultaneously,picks up fuel"
+  
+part "2/6"
+
+inherit OBJECT 
+
+query"how long is its reach?",
+     "when do i activate?",
+     "shape",
+     "colour",
+     "width"
+command "activate",
+ 	"absorb fuel",
+ 	"in use decrease fuel at a faster rate"
+
+constraint
+"cant activate unless fuel is near enough to be absorbed otherwise nothing happens and only the shield works"
+
+end
+
+class_chart GRAPPLE_HOOK
+indexing
+in_cluster:"PLAYER";
+explanation "The grapple hook that attaches to the ball"
+part"3/6"
+inherit OBJECT
+query "how long am i?","colour","am i attached to ball?","am i in use?","is the ball nearby enough to attach?"
+command"extend and attach to ball"
+constraint"cant be used when ball is not close enough"
+end
+
+class_chart SHIELD
+indexing
+in_cluster:"PLAYER";
+explanation"protects the player from bullets but uses up fuel faster"
+part"4/6"
+query"shape","size","did a bullet hit it?"
+command"activate","deactivate"
+constraint"can only shield against bullets"
+end
+
+
+class_chart PLAY
+indexing
+in_cluster:"PLAYER";
+explanation"The controls for the game input by the player the I/O"
+part"5/6"
+query"directional buttons for movement","fire button","shield/tractor beam/grapple hook"
+command"enable shield","enable tractor beam","enable grapple hook","fire bullet","move up","move down","move left","move right"
+constraint"can only react to registered commands"
+end
+
+class_chart PLAYER_CREATOR
+indexing
+in_cluster:"PLAYER";
+explanation"general player class that encorporates all player classes"
+part"6/6"
+
+end
+
+class_chart LIVES
+indexing
+in_cluster:"GUI";
+explanation "The players remaining lives!, essential to keep playing if you die"
+part"1/5"
+query"how many lives are left?"
+command"decrease lives if player dies","increase lives if player gets enough points"
+constraint"cant go below 0 or > 9"
+
+end
+
+class_chart POINTS
+indexing
+in_cluster:"GUI";
+explanation"The points you get for destroying turrets factories,escaping with ball,picking up fuel"
+part"2/5"
+query"how many points does the player have?"
+command"increase points"
+constraint"cant be <0"
+
+end
+
+class_chart COUNTDOWN
+indexing
+in_cluster:"GUI";
+explanation"The countdown activated when the factory is destroyed"
+part"3/5"
+query"has the factory been destroyed?"
+command"coutdown from 10-0s"
+constraint"only comes into effect if factory is destroyed"
+end
+
+class_chart FUEL
+indexing
+in_cluster:"GUI";
+explanation"integer that represents amount of fuel left"
+part"4/5"
+query"how much fuel left"
+constraint"cant be negative"
+end
+
+class_chart MENU
+indexing
+in_cluster: "GUI";
+explanation"The main menu screens these include password screen main menu and options screen"
+part"4/5"
+query"start game","start option screen","start password screen"
+command"begin game! (f1)","quit game (f2)","options screen(f3)"
+constraint"gay"
+end
+
+
+event_chart THRUST
+ 	incoming
+ 	explanation
+ 	  "The internal events that populate thrust."
+ 	event
+	  "destroy turret"
+ 	involves
+ 	  BULLET,TURRET,SHIP
+ 	event
+ 	  "Refuel ship."
+ 	involves
+ 	  FUEL,SHIP,FUELCAN
+ 	event
+ 	  "Re-entry (go to space jump without ball)"
+ 	involves
+ 	  SHIP,SPACE_JUMP,SPAWN_POINT
+ 	end
+
+
+
+
+
+ 	event_chart THRUST
+ 	incoming
+ 	explanation
+ 	  "The internal events that populate thrust."
+ 	event
+	  "quit/end game."
+ 	involves
+ 	  MENU
+ 	event
+ 	  "launch new thrust game."
+ 	involves
+ 	  MENU, (PLAYER), (ENEMY), (PLAYER), (ENTITY)
+ 	event
+ 	  "interact with the keyboard to control things."
+ 	involves
+ 	  PLAY
+ 	end
+
+
+
+  event_chart THRUST
+ 	incoming
+ 	explanation
+ 	  "The internal events that populate thrust."
+ 	event
+	  "Open option screen."
+ 	involves
+ 	  MENU, PLAY
+ 	event
+ 	  "Open password screen."
+ 	involves
+ 	  MENU, PLAY
+ 	event
+ 	  "typing in password/edit controls."
+ 	involves
+ 	  PLAY
+ 	end
+
+ 
+ event_chart THRUST
+ 	outgoing
+ 	explanation
+ 	  "External events that populate thrust."
+ 	event
+ 	  "your ship is destroyed sound effects"
+ 	involves
+ 	  SHIP
+ 	event
+ 	  "You destroyed the factory. sound effects"
+ 	involves
+ 	  FACTORY
+ 	event
+ 	  "absorbing fuel."
+ 	involves
+ 	  FUELCAN,SHIP
+ 	end
+
+
+       event_chart THRUST
+ 	outgoing
+ 	explanation
+ 	  "External events that populate thrust."
+ 	event
+ 	  "your ship is destroyed"
+ 	involves
+ 	  SHIP
+ 	event
+ 	  "You destroyed the factory."
+ 	involves
+ 	  FACTORY,COUNTDOWN
+ 	event
+ 	  "You have reached the space jump with the ball."
+ 	involves
+ 	  BALL, SHIP,SPACE_JUMP
+ 	end
+ 	
+	event_chart THRUST
+ 	outgoing
+ 	explanation
+       "External events."
+ 	event
+ 	  "End level victory."
+ 	involves
+ 	  (PLANET), (ENEMY), (PLAYER), (ENTITY)
+ 	event
+ 	  "End level failure (game over)."
+ 	involves
+ 	  (PLANET), (ENEMY), (PLAYER), (ENTITY), (GUI)
+ 	end
+ 	
+	scenario_chart THRUST
+ 	explanation
+ 	  "Event chart.This chart includes all the events"
+	scenario
+	"game music starts"
+	description
+	"The game music starts when the game begins for each level"
+	scenario
+	"Bullet sounds"
+	description
+	"bullet sounds"
+	scenario
+	"bullet hit event sound"
+	description
+	"bullet hit event sound"
+	scenario
+	"shoot factory event"
+	description
+	"factory health decreases and it stop producing smoke and disables the turrets" 	
+	scenario
+ 	"Level complete event."
+ 	description
+ 	"you have completed the level by making it to the SPACE_JUMP with the BALL."
+ 	scenario
+ 	"Level incomplete/lose."
+ 	description
+ 	"you failed the level can restart if you have enough lives or its game over."
+ 	scenario
+ 	"Extra life."
+ 	description
+ 	"you gain enough points to gain an extra life."
+ 	scenario
+ 	"toggle sound on and off."
+ 	description
+ 	"can turn the sound on and off"
+ 	scenario
+ 	"pausing the game."
+ 	description
+ 	"Player pauses the game."
+ 	scenario
+ 	"turret destroyed"
+ 	description
+ 	"you have destroyed a turret."
+ 	scenario
+ 	"factory destroyed"
+ 	description
+ 	"you have destroyed the factory and the countdown ensues."
+	scenario
+	"COUNTDOWN reaches zero but you didnt complete the level"
+	description
+	"you restart the level if you have enough lives otherwise its game over"
+	scenario
+	"game over"
+	description
+	"no lives remaining if you scored highly the highscores screen ensues where you enter your initials"
+	scenario
+	"password screen"
+	description
+	"you enter in a password to go the level with which that password corresponds to."
+ 	end
+
+ 	creation_chart THRUST
+ 	explanation
+ 	        "The following are the classes that create interactive objects in thrust."
+ 	creator PLANET_CREATOR creates SPACE_JUMP, FUEL,SPAWN_POINT,TERRAIN,BUTTON,DOOR,SKY
+ 	creator OBJECT creates BALL, BALL_PAD,OBJECT,BULLET
+	creator ENEMY_CREATOR creates TURRET, FACTORY
+	creator PLAYER_CREATOR creates SHIP, GRAPPLE_HOOK,TRACTOR_BEAM,SHIELD
+ 	end
+
+
+

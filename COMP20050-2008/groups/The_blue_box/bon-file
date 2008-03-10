@@ -1,0 +1,174 @@
+TEAM NAME: The blue box
+
+moodle id - mewtio
+
+Group members
+Simon Markey ID 06361536 trac id - mewtio
+Mark Kilgallon ID 06380298 trac id - mark88
+David Baker ID 06376738 trac id - N/A
+
+
+
+
+Introduction
+Myself and my team members are planning on remaking the game thrust using java, to do this we are using an assortment of tools to achieve a well polished and hopefully operational result.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+SUMMARY
+This projects aim is to recreate the game Thrust that was originally programmed for the commodore 64.
+We plan on redesigning the game using sun's java language.
+We have analysed the concepts of the game and performed an indepth analysis of the main game components.
+we have used class charts to make a bon specification for our version of the game thrust
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+REQUIREMENTS
+Requirements has to run on a C64 emulator and must be written in java.
+has to be done in the appropriate checkstyle.
+has to have small metrics (minimal complexity preferably below 10).
+has to have javadocs.
+replicate the game as much as possible.
+We must use high level concept analysis, and translate it into charts in bon.
+we must use SVN to submit out work
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Overview:
+
+Design overview:
+We have brain stormed and made a concept analysis identifying the most important concepts.
+We are learning high level system design and how to make a good easy to use documented system
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Dictionary:
+
+Elements of Thrust are as follows
+INTERACTIVE OBJECTS:
+planet
+factory
+ball
+ship
+fuel
+Turrets
+doors
+terrain
+space jump
+NON-INTERACTIVE OBJECTS:
+Stars
+sky(ends level however contains space jump at top)
+factory smoke
+
+GUI:
+Lives
+Fuel
+Points
+Turrets Remaining
+
+Physics:
+gravity
+momentum
+movement
+
+					Additional concepts
+					Other Concepts
+Fuel-up is-a kind of string that increases fuel gauge
+Fuel can is a planetary object
+tractor beam is a ship component
+Distance_from is a kind of planet variable
+Space Jump is a planet componet
+Starting Point is a kind of planet variable
+Terrain is a planet component
+Factory is a planet component and is an enemy type
+Planet is a kind of level
+Player is the main controller
+Ship is what the player controls
+Gui is a player informer
+Lives are part of the gui
+Points are part of the gui
+Turrets are planet components and enemy type
+Hit Event is a ship/turret event as only those two can fire bullets however factories can be killed by bullets
+Distance is a planet definer
+Win  is a player event
+lose is a player event
+Colour is a planet variable
+Smoke is a factory component
+Factory is a planet and enemy component
+Bullets is a turret and ship component
+Grapple hook is a ship component
+Tractor beam is a ship component
+Sky is a planet component
+Stars are non interactive planetary components
+Controls are player functions
+Doors are terrain and planet components
+Timer is a level component
+BackGround is a planetary component that is non interactive
+Thrusters are a ship component
+Turning are ship components
+
+					Ship has -a
+
+ship has-a lives
+ship has-a distance
+ship has-a sound
+ship has-a gravity
+ship has-a rope
+ship has-a bullets
+ship has-a fuel
+ship has-a direction
+ship has-a shape
+ship has-a colour
+					Turret has-a
+turret has-a position
+turret has-a bullets
+turret has-a lives
+turret has-a direction
+turret has-a sound
+turret has-a shape
+turret has-a colour
+					factory has-a
+factory has-a position
+factory has-a sound
+factory has-a lives
+factory has-a shape
+factory has-a colour
+					bullet has-a
+bullet has-a shape
+bullet has-a colour
+bullet has-a direction
+bullet has-a distance
+					ball has-a
+ball has-a shape
+ball has-a colour
+ball has-a position
+ball has-a lives
+					fuel has-a
+fuel has-a score
+fuel has-a amount
+fuel has-a shape
+fuel has-a colour
+fuel has-a position
+					terrain has-a
+terrain has-a shape
+terrain has-a colour
+terrain has-a position
+
+
+
+					Ship has a:(most important ones)
+
+
+
+Ship has a:
+starting point
+grapple hook
+bullet event
+tractor beam
+shield
+lives
+fuel
+points
+colour
+momentum
+gravitational pull
+
+one object creation chart, 
+one scenario chart, 
+four event charts (external/internal x incoming/outgoing).
+
+
