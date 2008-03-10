@@ -683,7 +683,7 @@ explanation
 inherit HUDFUEL, HUDLIVES, SCORE, MEN_SAVED
 
 query
-"Display FUEL, LIVES, SCORE and MEN_SAVED variables"
+"how much FUEL is left, LIVES, SCORE and MEN_SAVED variables"
 
 command
 
