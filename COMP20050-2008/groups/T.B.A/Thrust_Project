@@ -72,11 +72,9 @@ INPUT – keyboard.
 SPACESHIP WITH BALL – spaceship carries ball with tractor beam.
 TEXT – character type used.
 ADDING FUEL – increasing FUEL supply.
-HIGH SCORE – measures progress.
 COLOR – a visual effect.
-YELLOW, RED, LIGHT BLUE, GREEN, PURPLE, WHITE – colors.
 MOVEMENT – change in location on the screen.
-STARS -  a visual effect.
+STARS -  a visual effect on the background.
 GATELOCKS - Open GATES when hit by BULLETs
  
 *IS-A-RELATIONS*
