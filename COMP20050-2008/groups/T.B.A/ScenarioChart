@@ -1,5 +1,8 @@
 scenario_chart THRUST
 
+indexing 
+	created: "10-03-2008 Eoin";
+
 explanation "Lists all the scenarios that can occur in the game"
 
 scenario 

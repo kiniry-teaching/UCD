@@ -1,4 +1,6 @@
 creation_chart THEGAME
+indexing 
+	created: "10-03-2008 Eoin";
 
 explanation "Classes that create other objects"
 
