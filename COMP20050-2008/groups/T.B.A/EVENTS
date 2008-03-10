@@ -1,46 +1,46 @@
 event_chart GAME
 
-incomming
+incoming
 
-indexing:
-	created "10-03-2008 Dave";
+indexing
+	created: "10-03-2008 Dave";
 
-explanation:
+explanation
 	"External events"
 
-event:
+event
 	"request to start the game"
-involves:
+involves
 	GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, INPUT
 
-event:
+event
 	"move forward"
-involves:
+involves
 	SPACESHIP, INPUT, MOVEMENT
 
-event:
+event
 	"turn"
-invloves:
+involves
 	SPACESHIP, INPUT, MOVEMENT
 
-event:
+event
 	"fire"
-invloves:
+involves
 	SPACESHIP, BULLETS, MOVEMENT, INPUT
 
-event:
+event
 	"sheilds up"
-involves:
+involves
 	SPACESHIP, SHEILDS
 
-event:
+event
 	"use tractor beam"
-involves:
+involves
 	SPACESHIP, TRACTOR_BEAM, BALL, MEN, FUEL
 
-event:
+event
 	"open gates"
-involves:
+involves
 	SPACESHIP, BULLETS, GATELOCKS
 
 end
@@ -49,47 +49,47 @@ end
 
 event_chart GAME
 
-incomming
+incoming
 
-indexing:
-	created "10-03-2008 Dave";
+indexing
+	created: "10-03-2008 Dave";
 
-explanation:
+explanation
 	"Internal events"
 
-event:
+event
 	"Bullet fired"
-involved:
+involves
 	SOUND, COLOR
 
-event:
+event
 	"Crashed"
-involved:
+involves
 	SOUND, COLOR, LIVES, SCORE
 
-event:
+event
 	"Game over"
-involved:
+involves
 	SOUND, TEXT_INTERFACE, HIGHSCORE, SCORE
 
-event:
+event
 	"Return FUEL variable"
-involved:
+involves
 	FUEL
 
-event:
+event
 	"Return SCORE variable"
-involved:
+involves
 	SCORE
 
-event:
+event
 	"Return MEN_SAVED variable"
-involved:
+involves
 	MEN_SAVED
 
-event:
+event
 	"Retrun HIGHSCORE variable"
-involved:
+involves
 	HIGHSCORE
 
 end
@@ -100,25 +100,25 @@ event_chart GAME
 
 outgoing
 
-indexing:
-	created "10-03-2008 Dave";
+indexing
+	created: "10-03-2008 Dave";
 
-explanation:
+explanation
 	"Internal events"
 
-event:
+event
 	"Add to FUEL variable"
-involved:
-	FUEL,
+involves
+	FUEL
 
-event:
+event
 	"Subtract from FUEL variable"
-involved:
+involves
 	FUEL, MOVEMENT
 
-event:
+event
 	"Add to SCORE variable"
-involved:
+involves
 	SCORE, TURRET, MEN, BONUS
  
 end
@@ -129,30 +129,30 @@ event_chart GAME
 
 outgoing 
 
-indexing:
-	created "10-03-2008 Dave";
+indexing
+	created: "10-03-2008 Dave";
 
-explanation:
+explanation
 "External events"
 
-event:
+event
 	"gravity effect"
-involved:
+involves
 	MOVEMENT, SPACESHIP, BALL
 
-event:
+event
 	"crash"
-involved:
+involves
 	SOUND, COLOR
 
-event:
+event
 	"show progress"
-involved:
+involves
 	HUD, HUDFUEL, HUDLIVES, MEN_SAVED, SCORE
 
-event:
+event
 	"lives used up"
-involved:
+involves
 	SCORE, HIGHSCORE, TEXT_INTERFACE
 
 end
