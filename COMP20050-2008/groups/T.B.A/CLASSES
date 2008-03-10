@@ -1,7 +1,7 @@
 class_chart ENTITY
 
 indexing
-	in_cluster: "GRAPHICS_INTERFACE"
+	in_cluster: "GRAPHICS_INTERFACE";
 	created: "09-03-2008 Eoin";
 
 explanation "An object"
@@ -199,7 +199,7 @@ query	"Is tractor beam being used?",
 	"Is the tractorbeam over the ball?"
 	
 
-command	"Pick up fuel".
+command	"Pick up fuel",
 	"Change spaceship to spaceship_with_ball".
 	"Save men",
 	"Do nothing(Tractor beam is over nothing)"
@@ -308,7 +308,7 @@ query
 "Where is force being dragged to","What is forcing MOVEMENT of SPACESHIP"
 
 command
-"Drag downwards" "Force SPACESHIP to move"
+"Drag downwards","Force SPACESHIP to move"
 
 constraint
 "SPACESHIP must be under constant state of downward force", 

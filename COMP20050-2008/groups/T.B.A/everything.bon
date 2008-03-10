@@ -90,7 +90,7 @@ query
 
 command
 	"Change direction!",
-	"Use tractor beam!"
+	"Use tractor beam!",
 	"Speed up!",
 	"Use shield!",
 	"fire bullet!"
@@ -111,7 +111,7 @@ explanation "An ENTITY that acts as a barrier"
 inherit ENTITY
 
 query
-	"What type of obstacle are you?"
+	"What type of obstacle are you?",
 	"Where are you?"
 
 command
@@ -125,7 +125,7 @@ class_chart BACKGROUND
 
 indexing
 	in_cluster: "GRAPHICS_INTERFACE";
-	created: "09-03-2008" Eoin";
+	created: "09-03-2008 Eoin";
 
 explanation "The background sky that you can see"
 
