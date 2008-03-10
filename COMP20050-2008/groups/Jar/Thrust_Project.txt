@@ -1,4 +1,4 @@
-Group Jar
+Group: Jar
 
 Sean Russell		srussell	06373313
 Keith Byrne		timbyr		04003195
