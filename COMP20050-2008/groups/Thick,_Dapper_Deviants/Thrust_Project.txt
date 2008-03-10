@@ -1,0 +1,90 @@
+
+Name of group: Thick, Dapper Deviants (anagram of steven, patrick, dave)
+Group Members: Stephen McBride smackyb 06505783
+	       Patrick O'Sullivan cykio 06596860
+	       David Murphy dave 05590701
+
+1. Introduction
+===============
+Our project aims to try to recreate the Commodore 64 game "Thrust". Thrust involves guiding a spaceship through a map, shooting at turrets, picking up fuel boosters and then finishing by picking up a ball and flying to the top of the level. This project aims to have at least one fully working level of Thrust by the end of it.
+
+2. Requirements
+===============
+
+1. Must be written using Java.
+2. Must be faithful to original C64 game.
+3. Must have at least one fully playable level.
+4. Must be bug-free.
+5. Must have a low level of complexity.
+6. Must conform to BON specifications.
+
+3. Overview
+===========
+This project will not only give us a game to play at the end of it, but will also equip us with the skills (both technical and teamwork) to work on future projects.
+
+3. Summary of analysis and design process to date
+=================================================
+We have done a team concept analysis where we defined the entities and relationships that exist within the game.
+
+4. Dictionary
+=============
+*CONCEPT* *DEFINITION*
+
+SPACESHIP: Entity the player controls
+ENTITY: Object in the game enviroment.
+Force: Various constraints imposed on objects in the gaming enviroment.
+Fuel: Visual representation of fuel level and thus the amount of thrust available.
+Fuel Tank: Entity that increases your fuel level.
+Ball: End of level objective. Attached to ship by tether. Has mass and can affect ship momentum
+Ground: Lower level constraints of the enviroment. Ship must fly above this. Will deplete lives if ship comes in contact with it.  
+Frame: Area beyond which a space ship cannot move past.
+Lives: Visual representation of number of attempts available.
+Life: Depleted by contact with bullets or ground.
+Score: Visual representation of number of turrets, fuel tanks picked up, time completed in (multiplier) and balls picked up.
+Turrets: Enemy entitity that fires bullets in player's general direction. Is static and ground-based.
+Tether: Entity which connects ball to ship and allows for the effects of mass and centrifugal force to be applied.
+Gravity: A constant force within the game which pulls entities downwards.
+Momentum: Force in gaming enviroment based on the speed and mass of entities.
+Background: static non-interactive image.
+Factories: static and non-interactive gaming entity.
+Bullets: Entities fired by turrets and space ship. Depletes lives when they come into contact with ship.
+Sound effects: Sound emmited when an event occurs.
+	/effect
+	Bullets firing
+	Objects exploding
+	Music: Music played during program excecution.
+
+
+Menu: List of commands which accomplisg tasks outside the gaming enviroment.
+Start Game: Command which initialises the gaming enviroment.
+     -Exit: Command which terminates the program.
+     - Options: Command which displays list of subsidary commands that alter game interface and sound.
+ - Controls: Command which alters input controls of the game.
+ - Sound options: Command which alters sound level in the game
+     -Top Scores: Command which outputs list of top ten game completions.
+
+*IS-A RELATIONS*
+----------------
+SPACESHIP, Fuel tank, Ball, Turrets, tether, Factories, Bullets is-a ENTITY
+gravity is-a force
+momentum is-a force
+
+*HAS-A RELATIONS*
+-----------------
+Spaceship has-a fuel, life, tether, momentum, bullets, force,
+Enemy has-a bullet, life,
+Ball has-a momentum, force
+Fuel tank has-a fuel
+Frame has-a ground
+Lives has-a life
+
+*IS-A-KIND-OF RELATIONS*
+------------------------
+SCORE is-a-kind-of STRING
+FUEL is-a-kind-of INTEGER
+momentum is-a-kind-of variable double
+gravity is-a-kind-of constant double
+Frame is-a-kind-of constraint
+Ground is-a-kind-of constraint
+
+
