@@ -53,7 +53,7 @@ class IParserRecorder
 public:
 	/**
 	 * Issue a control switch.
-	 * Used to add or remove IR blob ids, indicate errors
+	 * Used to add or remove IR blob ids, or indicate errors
 	 * @param control Control switch to make. Values are enumerated in econtrol
 	 * @param data If the control requires extra data, it is passed here. Each
 	 *	control will specify the type of data to pass
@@ -65,7 +65,6 @@ public:
 					(	uchar const	control,
 						void *		data
 					)				pure;
-
 	/**
 	 * Record the current position of an IR blob.
 	 * @param iid Identification of the IR blob. This id will be used to link

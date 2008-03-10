@@ -16,6 +16,9 @@ namespace interpreter
 class Shapes
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// friends
+//
 	/**
 	 * Be friends with ShapesLoader so it can modify the shape collection
 	 * @author EB
@@ -23,6 +26,46 @@ class Shapes
 	 */
 	friend			class ShapesLoader;
 
+///////////////////////////////////////////////////////////////////////////////
+// commands
+//
+public:
+	/**
+	 * Comare a track against all shapes and return the most likely one, or
+	 *	0 if none matched
+	 * @param track The track to compare against
+	 * @param shapeMatches A shape match collection to add any matched shapes.
+	 *	This should be preconfigured to specify the filter for the match
+	 * @return True if any matches are found, else false
+	 * @author EB
+	 * @version 1.0
+	 */
+	bool			compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
+					)	const;
+
+///////////////////////////////////////////////////////////////////////////////
+// private commands
+//
+private:
+	/**
+	 * Add a shape to the collection
+	 * This is called by ShapesLoader
+	 * @param shape Pointer to an allocated shape to add
+	 * @return A reference to this
+	 * @author EB
+	 * @version 1.0
+	 * @pre shape != 0;
+	 * @pre _shapeIndex < _nShapes;
+	 */
+	Shapes &		operator +=
+					(	Shape *					shape
+					);
+
+///////////////////////////////////////////////////////////////////////////////
+// friend *tor
+//
 private:
 	/**
 	 * Construct the shapes collection. This is done by the ShapesLoader
@@ -42,37 +85,9 @@ private:
 	 */
 	virtual			~Shapes						(void);
 
-public:
-	/**
-	 * Comare a track against all shapes and return the most likely one, or
-	 *	0 if none matched
-	 * @param track The track to compare against
-	 * @param shapeMatches A shape match collection to add any matched shapes.
-	 *	This should be preconfigured to specify the filter for the match
-	 * @return True if any matches are found, else false
-	 * @author EB
-	 * @version 1.0
-	 */
-	bool			compare
-					(	Track const * const		track,
-						ShapeMatches * const	shapeMatches
-					)	const;
-
-private:
-	/**
-	 * Add a shape to the collection
-	 * This is called by ShapesLoader
-	 * @param shape Pointer to an allocated shape to add
-	 * @return A reference to this
-	 * @author EB
-	 * @version 1.0
-	 * @pre shape != 0;
-	 * @pre _shapeIndex < _nShapes;
-	 */
-	Shapes &		operator +=
-					(	Shape *					shape
-					);
-
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
 	/**
 	 * Array of shapes held by this collection. Array is created by ShapeLoader

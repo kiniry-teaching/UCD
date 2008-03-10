@@ -17,13 +17,28 @@ namespace interpreter
 class Shape
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// commands
+//
+public:
 	/**
-	 * Be friends with ShapesLoader so it can modify the shape's data
+	 * Compare a track against this data.
+	 * This must be overloaded to say what track data will be compared against
+	 *	and compare(int *, int *) should be called to do the actual comparison
+	 * @param track The track to compare against
+	 * @param shapeMatches A filter and collection for the matched shapes
+	 * @return A weight of how close the track matches the shape from (0..1)
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend			class ShapesLoader;
+	virtual bool	compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
+					)							pure;
 
+///////////////////////////////////////////////////////////////////////////////
+// *tor
+//
 protected:
 	/**
 	 * Create a shape.
@@ -48,33 +63,36 @@ protected:
 						Zone const * const		zones,
 						uint const				nZones
 					);
-	/**
-	 * Destroy this shape
-	 * @author EB
-	 * @version 1.0
-	 */
-	virtual			~Shape						(void);
 
-public:
+///////////////////////////////////////////////////////////////////////////////
+// protected commands
+//
+protected:
 	/**
-	 * Compare a track against this data.
-	 * This must be overloaded to say what track data will be compared against
-	 *	and compare(int *, int *) should be called to do the actual comparison
-	 * @param track The track to compare against
+	 * Test an array of (x, y) points against this data and add it if it's in range
+	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
+	 *	x[length], y[length])
+	 * @param length The number of points in the array.
 	 * @param shapeMatches A filter and collection for the matched shapes
-	 * @return A weight of how close the track matches the shape from (0..1)
 	 * @author EB
 	 * @version 1.0
+	 * @pre /length(points) == length * 2;
+	 * @pre length > 0;
 	 */
-	virtual bool	compare
-					(	Track const * const		track,
+	void			test
+					(	int const * const		points,
+						uint const				length,
 						ShapeMatches * const	shapeMatches
-					)	const					pure;
+					);
 
+///////////////////////////////////////////////////////////////////////////////
+// private commands
+//
 private:
 	/**
 	 * Compare an array of (x, y) points against this data.
-	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, .., x[length], y[length])
+	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
+	 *	x[length], y[length])
 	 * @param length The number of points in the array.
 	 * @return A weight from (0..1) of how close the (x, y) array matches the
 	 *	shape
@@ -87,7 +105,22 @@ private:
 					(	int const * const		points,
 						uint const				length
 					)	const;
+	/**
+	 * Add this to shapeMatches
+	 * @param weight The weight by which this shape matched
+	 * @param shapeMatches The ShapeMatches to add this to
+	 * @author EB
+	 * @version 1.0
+	 * @pre shapeMatches != 0;
+	 */
+	void			add
+					(	float const				weight,
+						ShapeMatches * const	shapeMatches
+					);
 
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
 	/**
 	 * Flat 2 dimensional array of weights in the range (0..1) describing this
@@ -96,19 +129,19 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	float *			_data;
+	float const * const	_data;
 	/**
 	 * Width of the shape. Height is _nData / _width
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint			_width;
+	uint const			_width;
 	/**
 	 * Resolution of the shape, or length of _data array. Height is _nData / _width
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint			_nData;
+	uint const			_nData;
 	/**
 	 * Array of zones in this shape.
 	 * Zones are areas that must be entered and exited in a particular order
@@ -116,15 +149,29 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Zone *			_zones;
+	Zone const * const	_zones;
 	/**
 	 * Length of the zones array.
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint			_nZones;
+	uint const			_nZones;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+inline Shape::Shape
+(	float const * const	data,
+	uint const			width,
+	uint const			nData,
+	Zone const * const	zones,
+	uint const			nZones
+) :	_data				(data),
+	_width				(width),
+	_nData				(nData),
+	_zones				(zones),
+	_nZones				(nZones)
+{ }
 
 }
 

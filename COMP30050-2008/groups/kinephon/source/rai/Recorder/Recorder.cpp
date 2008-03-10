@@ -4,26 +4,52 @@
 namespace interpreter
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// eject
+//
 Recording * Recorder::eject(void) const
-{
+{	Recording * recording;
 
-	return 0;
+	recording = new Recording(_tracks);
+
+	return recording;
 
 }
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+// erase frame
+//
 void Recorder::erase
 (	irid const	iid,
-	int const	frame	//= -1
-){
+	int const	frameIndex	//= -1
+){	Track *		track		= _tracks[iid];
+	Frame *		frame		= (*track)[frameIndex];
+	Frame *		frameNext	;
 
-	
+	// Note: if the iid is invalid, track will point to 0.
+	//	track[frame] will then also return 0 (and not crash,
+	//	if that's what you're thinking)
+
+	// Deallocate all removed frames
+	while(frame != 0)
+	{	frameNext = frame->_next;
+		delete frame;
+		frame = frameNext;
+	}
 
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// erase recording
+//
+void Recorder::erase
+(	Recording *	recording
+){	delete recording;
+}
 
-
+///////////////////////////////////////////////////////////////////////////////
+// control
+//
 int Recorder::control
 (	uchar const control,
 	void *		data
@@ -39,8 +65,9 @@ int Recorder::control
 
 }
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+// record
+//
 void Recorder::record
 (	irid const	iid,
 	int const	x,
@@ -52,18 +79,17 @@ void Recorder::record
 
 }
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+// control found
+//
 int Recorder::controlFound
 (	irid	iid
 ){	Track *	track	= _tracks[iid];
 
+	// New track, allocate and store
 	if(track == 0)
-	{
-
-		track = new Track(iid);
+	{	track = new Track(iid);
 		_tracks[iid] = track;
-
 	}
 	else
 	// Track has been found before it was deallocated
@@ -74,13 +100,14 @@ int Recorder::controlFound
 
 }
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+// control lost
+//
 int Recorder::controlLost
 (	irid	iid
 ){	Track *	track	= _tracks[iid];
 
-	// If there are no frames in the track, erase it's ass
+	// If there are no frames in the track, erase its ass
 	//	otherwise, mark it for deletion when all its frames are used
 	if(track->_length == 0)
 		erase(iid);
@@ -92,11 +119,13 @@ int Recorder::controlLost
 
 }
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+// control bad communication
+//
 int Recorder::controlBadcom(void)
 {
 
+	// Mark all tracks as being up for deletion
 	for
 	(	std::map<irid, Track *>::iterator i = _tracks.begin();
 		i != _tracks.end();

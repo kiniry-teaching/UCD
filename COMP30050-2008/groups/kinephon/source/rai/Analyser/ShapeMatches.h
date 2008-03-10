@@ -2,6 +2,7 @@
 #define __INTERPRETER_SHAPEMATCHES_H__
 
 #include <vector>
+#include "../../type.h"
 #include "ShapeMatch.h"
 using std::vector;
 
@@ -19,6 +20,19 @@ namespace interpreter
 class ShapeMatches
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// friends
+//
+	/**
+	 * Be friends with Shape so it can add matches
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend			class Shape;
+
+///////////////////////////////////////////////////////////////////////////////
+// *tor
+//
 public:
 	/**
 	 * Create a shape match collection.
@@ -33,11 +47,21 @@ public:
 	 * @version 1.0
 	 */
 							ShapeMatches
-							(	float const * const			weight,
+							(	float const					weight,
 								uint const					total	= 1
 							);
 
+///////////////////////////////////////////////////////////////////////////////
+// queries
+//
 public:
+	/**
+	 * Return the weight that a shape must match within to be added
+	 * @return The weight that a shape must match within to be added
+	 * @author EB
+	 * @version 1.0
+	 */
+	float					weight							(void)	const;
 	/**
 	 * Return the total number of shapes matched
 	 * @return The total number of shapes matched
@@ -61,6 +85,10 @@ public:
 							(	uint const					index
 							)	const;
 
+///////////////////////////////////////////////////////////////////////////////
+// friend commands
+//
+private:
 	/**
 	 * Add a shape match to the collection.
 	 * This may change the order of the indexed shapes so calling this[0]
@@ -76,15 +104,45 @@ public:
 							(	ShapeMatch const * const	shapeMatch
 							);
 
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
+	/**
+	 * weight()'s field
+	 * @author EB
+	 * @version 1.0
+	 * @see weight()
+	 */
+	float const				_weight;
+	/**
+	 * The maximum number of shapes that can be stored
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint const				_total;
 	/**
 	 * Sorted array of matching shapes
 	 * @author EB
 	 * @version 1.0
 	 */
-	vector<ShapeMatch> *	_shapeMatches;
+	vector<ShapeMatch *>	_shapeMatches;
+
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+inline ShapeMatches::ShapeMatches
+(	float const	weight,
+	uint const	total	//= 1
+) :	_weight		(weight),
+	_total		(total)
+{ }
+
+inline float ShapeMatches::weight(void) const
+{	return _weight;
+}
 
 }
 

@@ -17,13 +17,21 @@ namespace interpreter
 class Frame
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// friends
+//
+	/**
+	 * Be friends with Recorder so it can create new frames
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend		class Recorder;
 	/**
 	 * Be friends with Track so it can set the next frame
 	 * @author EB
 	 * @version 1.0
 	 */
 	friend		class Track;
-
 	/**
 	 * Be friends with cout stream writer
 	 * @author EB
@@ -36,28 +44,9 @@ class Frame
 				);
 
 public:
-	/**
-	 * Create a new immutable frame.
-	 * Doesn't store the IR blob id as that would be stored in the Track that
-	 *	holds this frame
-	 * @param x X co-ordinate of the IR blob
-	 * @param y Y co-ordinate of the IR blob
-	 * @param size Size of the IR blob
-	 * @param time Current time held by the Recorder
-	 * @author EB
-	 * @version 1.0
-	 */
-				Frame
-				(	int const	x,
-					int const	y,
-					int const	size,
-					uint const	time
-				) :	_x			(x),
-					_y			(y),
-					_size		(size),
-					_time		(time),
-					_next		(0)
-					{ }
+///////////////////////////////////////////////////////////////////////////////
+// queries
+//
 	/**
 	 * The x co-ordinate of the blob at the recorded time
 	 * @return Get the x co-ordinate of the blob
@@ -117,28 +106,31 @@ public:
 	 */
 	Frame *		next			(void)	const;
 
+///////////////////////////////////////////////////////////////////////////////
+// friend *tor
+//
 private:
 	/**
-	 * Add the next frame on the track. This will only be called by Track when
-	 *	a new frame is created. frame is inserted after this frame and before
-	 *	this->next() frame. If frame is a linked-list of frames, all frames
-	 *	will come between this and this->next(). e.g. If there are frames
-	 *	A B C a and b, and they are linked A -> B -> C and a -> b, and B is
-	 *	called with += on a, the frames will become A -> B -> a -> b -> C
-	 * @param frame The next frame on the track
-	 * @return A reference to this
+	 * Create a new immutable frame.
+	 * Doesn't store the IR blob id as that would be stored in the Track that
+	 *	holds this frame
+	 * @param x X co-ordinate of the IR blob
+	 * @param y Y co-ordinate of the IR blob
+	 * @param size Size of the IR blob
+	 * @param time Current time held by the Recorder
 	 * @author EB
 	 * @version 1.0
-	 * @pre this != && frame != 0;
-	 * @pre frame must not already exist in this
-	 * @post this->next() == frame;
-	 * @warning Adding frame to this twice may cause it to go into an infinite
-	 *	loop at an undetermined time. This is not checked in the method
 	 */
-	Frame *		operator +=
-				(	Frame *		frame
+				Frame
+				(	int const	x,
+					int const	y,
+					int const	size,
+					uint const	time
 				);
 
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
 	/**
 	 * x() field
@@ -177,6 +169,20 @@ private:
 	Frame *		_next;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+inline Frame::Frame
+(	int const	x,
+	int const	y,
+	int const	size,
+	uint const	time
+) :	_x			(x),
+	_y			(y),
+	_size		(size),
+	_time		(time),
+	_next		(0)
+{ }
 
 inline int Frame::x(void) const
 {	return _x;

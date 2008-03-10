@@ -21,6 +21,9 @@ namespace interpreter
 class Recorder : public IParserRecorder
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// commands
+//
 public:
 	/**
 	 * Eject the recording from the Recorder.
@@ -32,7 +35,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Recording *			eject			(void)	const;
+	Recording *			eject			(void)		const;
 	/**
 	 * Erase frames from a track.
 	 * All frames before and including the specified frame are removed from
@@ -45,9 +48,22 @@ public:
 	 */
 	void				erase
 						(	irid const	iid,
-							int const	frame	= -1
+							int const	frameIndex	= -1
+						);
+	/**
+	 * Erase a Recording previously obtained through eject()
+	 * @param recording The recording returned from eject. This pointer
+	 *	should not be used after calling this function
+	 * @author EB
+	 * @version 1.0
+	 */
+	void				erase
+						(	Recording *	recording
 						);
 
+///////////////////////////////////////////////////////////////////////////////
+// interface
+//
 public:
 	/**
 	 * Issue a control switch.
@@ -64,7 +80,6 @@ public:
 						(	uchar const	control,
 							void *		data
 						);
-
 	/**
 	 * Record the current position of an IR blob.
 	 * @param iid Identification of the IR blob. This id will be used to link
@@ -84,6 +99,9 @@ public:
 							int const	size
 						);
 
+///////////////////////////////////////////////////////////////////////////////
+// private commands
+//
 private:
 	/**
 	 * control() econtrol::FOUND Helper
@@ -113,6 +131,9 @@ private:
 	 */
 	int					controlBadcom	(void);
 
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
 	/**
 	 * Contains an array of the Recorder's tracks. This array may be re-allocated

@@ -16,8 +16,30 @@ namespace interpreter
 class ShapeMovement : public Shape
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// friends
+//
+	/**
+	 * Be friends with ShapesLoader so it can modify the shape's data
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend			class ShapesLoader;
+
+///////////////////////////////////////////////////////////////////////////////
+// commands
+//
 public:
-					ShapeMovement 
+	virtual bool	compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
+					);
+
+///////////////////////////////////////////////////////////////////////////////
+// friend *tor
+//
+protected:
+					ShapeMovement
 					(	float const * const	data,
 						uint const			width,
 						uint const			nData,
@@ -25,23 +47,11 @@ public:
 						uint const			nZones,
 						Shapes *			speedShapes,
 						Shapes *			accelShapes
-					) :	Shape
-						(	data,
-							width,
-							nData,
-							zones,
-							nZones
-						),
-						_speedShapes		(speedShapes),
-						_accelShapes		(accelShapes)
-						{}
+					);
 
-public:
-	virtual bool	compare
-					(	Track const * const		track,
-						ShapeMatches * const	shapeMatches
-					)	const;
-
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
 	/**
 	 * A movement shape contains a sub collection of speed shapes.
@@ -61,6 +71,27 @@ private:
 	Shapes *		_accelShapes;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+ShapeMovement::ShapeMovement
+(	float const * const	data,
+	uint const			width,
+	uint const			nData,
+	Zone const * const	zones,
+	uint const			nZones,
+	Shapes *			speedShapes,
+	Shapes *			accelShapes
+) :	Shape
+	(	data,
+		width,
+		nData,
+		zones,
+		nZones
+	),
+	_speedShapes		(speedShapes),
+	_accelShapes		(accelShapes)
+{}
 
 }
 

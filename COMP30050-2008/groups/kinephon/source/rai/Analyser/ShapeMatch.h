@@ -16,22 +16,19 @@ class ShapeMatches;
 class ShapeMatch
 {
 
-public:
+///////////////////////////////////////////////////////////////////////////////
+// friends
+//
 	/**
-	 * Create a shape match.
-	 * @param shape The shape that made the match
-	 * @param weight The weight the shape matched by
-	 * @param shapeMatches If there are sub-shapes (speed/accel) that match, a
-	 *	collection of those are added too
+	 * Be friends with Shape so it can create matches
 	 * @author EB
 	 * @version 1.0
 	 */
-					ShapeMatch
-					(	Shape * const			shape,
-						float const				weight,
-						ShapeMatches * const	shapeMatches
-					);
-					
+	friend	class Shape;
+
+///////////////////////////////////////////////////////////////////////////////
+// queries
+//
 public:
 	/**
 	 * Return the shape that matched
@@ -56,6 +53,28 @@ public:
 	 */
 	ShapeMatches *	shapeMatches				(void)	const;
 	
+///////////////////////////////////////////////////////////////////////////////
+// friend *tor
+//
+private:
+	/**
+	 * Create a shape match.
+	 * @param shape The shape that made the match
+	 * @param weight The weight the shape matched by
+	 * @param shapeMatches If there are sub-shapes (speed/accel) that match, a
+	 *	collection of those are added too
+	 * @author EB
+	 * @version 1.0
+	 */
+					ShapeMatch
+					(	Shape * const			shape,
+						float const				weight,
+						ShapeMatches * const	shapeMatches
+					);
+
+///////////////////////////////////////////////////////////////////////////////
+// fields
+//
 private:
 	/**
 	 * shape() field
@@ -80,6 +99,17 @@ private:
 	ShapeMatches *	_shapeMatches;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+inline ShapeMatch::ShapeMatch
+(	Shape * const			shape,
+	float const				weight,
+	ShapeMatches * const	shapeMatches
+) :	_shape					(shape),
+	_weight					(weight),
+	_shapeMatches			(shapeMatches)
+{ }
 
 }
 

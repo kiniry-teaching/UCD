@@ -15,28 +15,54 @@ namespace interpreter
 class ShapeSpeed : public Shape
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// friends
+//
+	/**
+	 * Be friends with ShapesLoader so it can modify the shape's data
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend			class ShapesLoader;
+
+///////////////////////////////////////////////////////////////////////////////
+// commands
+//
 public:
+	virtual bool	compare
+					(	Track const * const		track,
+						ShapeMatches * const	shapeMatches
+					);
+
+///////////////////////////////////////////////////////////////////////////////
+// friend *tor
+//
+protected:
 					ShapeSpeed
 					(	float const * const	data,
 						uint const			width,
 						uint const			nData,
 						Zone const * const	zones,
 						uint const			nZones
-					) :	Shape
-						(	data,
-							width,
-							nData,
-							zones,
-							nZones
-						) {};
-
-public:
-	virtual bool	compare
-					(	Track const * const		track,
-						ShapeMatches * const	shapeMatches
-					)	const;
+					);
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+ShapeSpeed::ShapeSpeed
+(	float const * const	data,
+	uint const			width,
+	uint const			nData,
+	Zone const * const	zones,
+	uint const			nZones
+) :	Shape
+	(	data,
+		width,
+		nData,
+		zones,
+		nZones
+	) {}
 
 }
 

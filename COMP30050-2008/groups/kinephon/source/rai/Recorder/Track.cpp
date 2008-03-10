@@ -3,6 +3,9 @@
 namespace interpreter
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// track indexer
+//
 Frame * Track::operator []
 (	uint const	index
 )	const
@@ -10,7 +13,8 @@ Frame * Track::operator []
 	uint		count;
 
 	// Don't bother search if the index is out of range
-	if(index >= _length)
+	//	Or this track doesn't exist
+	if(this == 0 || index >= _length)
 		return 0;
 
 	// Count through each frame until the
@@ -26,11 +30,16 @@ Frame * Track::operator []
 
 }
 
-
-
-Track & Track::operator +=
+///////////////////////////////////////////////////////////////////////////////
+// add frame(s)
+//
+Frame * Track::operator +=
 (	Frame * const frame
 ){
+
+	// Don't add to an unexsting track
+	if(this == 0)
+		return frame;
 
 	// If there are frames already, attach this one to the end
 	if(_frameLast != 0)
@@ -41,35 +50,56 @@ Track & Track::operator +=
 	// Make this frame the first and last frame
 		_frameFirst = _frameLast = frame;
 
-	/// @todo Set the last frame the the last frame in frame and sync length
-
 	// Sync the length of the track
 	_length++;
 
-	return (*this);
+	// If the added frame contained more than one
+	//	frame, add all the following ones
+	while(_frameLast->_next != 0)
+	{	_frameLast = _frameLast->_next;
+		_length++;
+	}
+
+	return frame;
 
 }
 
-Track & Track::operator -=
+///////////////////////////////////////////////////////////////////////////////
+// remove frame(s)
+//
+Frame * Track::operator -=
 (	Frame * const	frame
-){	Frame *			frameLast	= _frameFirst;
+){	Frame *			frameFirst;
+	Frame *			frameFirstDelete;
 
-	// Find the frame just before the frame to be deleted
-	while(frameLast != 0 && frameLast->_next != frame)
-		frameLast = frameLast->_next;
+	// Don't remove from an unexsting track
+	//	and return 0 so attempt to deallocate frames is made
+	if(this == 0)
+		return 0;
 
-	// If the frame being deleted actually exists in this Track
-	if(frameLast != 0)
-	{
-
-		/// @todo Deallocate all following frames and sync length
-
-		// Make the 
-		_frameLast = frameLast;
-
+	// Logically delete all frames from the original first,
+	//	up to and including, the specified frame
+	frameFirstDelete = frameFirst = _frameFirst;
+	while(frameFirst != 0 && frameFirst != frame)
+	{	frameFirst = frameFirst->_next;
+		_length--;
 	}
 
-	return (*this);
+	// If there are still frames not removed..
+	if(frameFirst != 0)
+		// Make the track point at the new first frame
+		_frameFirst = frameFirst->_next;
+	else
+		// else, make the track point at nothing for first and last frames
+		_frameFirst = _frameLast = 0;
+
+	// Remove the connection between the removed frame and the frames in
+	//	the track and then return the first frame removed. The called can
+	//	then iterate from the firstFrameDelete until frame with no next
+	//	to deallocate the removed frames
+	frame->_next = 0;
+
+	return frameFirstDelete;
 
 }
 

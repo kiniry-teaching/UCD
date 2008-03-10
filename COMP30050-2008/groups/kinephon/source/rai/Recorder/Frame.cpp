@@ -3,6 +3,9 @@
 namespace interpreter
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// x-vector
+//
 int Frame::u(void) const
 {
 
@@ -13,8 +16,9 @@ int Frame::u(void) const
 
 }
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+// y vector
+//
 int Frame::v(void) const
 {
 
@@ -25,42 +29,9 @@ int Frame::v(void) const
 
 }
 
-
-
-Frame * Frame::operator +=
-(	Frame *	frame
-){
-
-	// Remember the next frame pointed to
-	Frame * thisNext = _next;
-	Frame * thatNext;
-
-	// Set the added frame as the next in the sequence
-	_next = frame;
-
-	// Re-attach the original next if there is one
-	if(thisNext != 0)
-	{
-
-		// Find the last frame in the added link-list
-		for
-		(	thatNext = frame;
-			thatNext->_next != 0;
-			thatNext = thatNext->_next
-		);
-
-		// Attach the original next frame on to the end of
-		//	the new next frame
-		thatNext->_next = thisNext;
-
-	}
-
-	return this;
-
-}
-
-
-
+///////////////////////////////////////////////////////////////////////////////
+// print
+//
 ostream & operator <<
 (	ostream &	stream,
 	Frame *		frame
