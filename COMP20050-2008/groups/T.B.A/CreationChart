@@ -1,0 +1,8 @@
+creation_chart THEGAME
+
+explanation "Classes that create other objects"
+
+	creator WORLD creates LANDSCAPE,BACKGROUND,HUD,STARS
+	creator ENTIY creates SPACESHIP, BALL, FUEL
+	creator ENEMY creates TURRET,FORCEFIELD,GATE,GATELOCK,FACTORY
+end
