@@ -1,0 +1,57 @@
+event_chart GAME
+
+external(incomming)
+
+explanation:
+"possible external events"
+
+event:
+"request to start the game"
+
+involved objects:
+GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, input via player
+
+event:
+"user input to game"
+
+invloved objects
+GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, PHYSICS, input via player
+
+event:
+"request to end game"
+
+invloved objects:
+GRAPHIC_INTERFACE, TEXT_INTERFACE, input via player
+
+end
+
+internal(outgoing)
+
+explanation:
+"events triggered by user or automatic that output information"
+
+event:
+"game started"
+
+involved objects:
+GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, PHYSICS, input via player
+
+event:
+"level completed"
+
+invloved objects:
+GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND
+
+event:
+"lives used up, game over"
+
+involved objects:
+GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND
+
+event:
+"game won"
+
+involved objects:
+GRAPHIC_INTERFACE, TEXT_INTERFACE, SOUND, input via player
+
+end
