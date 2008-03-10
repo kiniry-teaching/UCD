@@ -759,8 +759,8 @@ query
 	"How much FUEL is left?",
 	"How many LIVES remain?",
 	"What is the score?",
-	"How many men have been saved?"
-	"What type of text should be used?"
+	"How many men have been saved?",
+	"What type of text should be used?",
 	"What type of graphics should be used?"
 
 command
@@ -783,7 +783,7 @@ explanation
 	"Sound effects used when shooting BULLETS, being hit by BULLETS, destroying FACTORIES and TURRETS, crashing into the PLANET, and escaping the PLANET"
 
 query
-	"What sound should be played?"
+	"What sound should be played?",
 	"At what volume should it be played?"
 
 command
@@ -807,7 +807,7 @@ explanation
 	"Background music played while playing the game"
 
 query
-	"What level is it?"
+	"What level is it?",
 	"What volume level should it be at?"
 
 command
