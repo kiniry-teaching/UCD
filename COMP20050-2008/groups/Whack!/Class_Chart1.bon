@@ -1,0 +1,651 @@
+system_chart THRUST
+  cluster ENEMIES description "Threat to the SPACESHIP"
+  cluster STRING description "Word"
+  cluster OBJECTS description "A visual objects in the game"
+  cluster CONTROLS description "How user inter acts with the game"
+  cluster FORCE description "Applying some laws of physics in the game"
+  cluster INTEGER description "Number"
+end
+
+cluster_chart ENEMIES
+  class ENEMIES_CREATOR description "A class to create all threats to the SPACESHIP in the game"
+  class TURRETS description "ENTITY, tracks SPACESHIPS movement, fires BULLETS."
+  class FACTORY description "Yellow and blue ENTITY, destroying increses SCORE_RECORD."
+  class TRACKING description "Allows TURRETS to lock onto SPACESHIP."
+  class LANDSCAPE description "Permanent horizontal lines, obstacle to be avoided."
+end
+
+cluster_chart STRING
+  class FUEL_GAUGE description "A STRING at the top of the screen."
+  class SCORE description "A STRING at the top of the screen."
+  class LIFE description "A STRING at the top of the screen."
+end
+
+cluster_chart OBJECTS
+  class OBJECT_CREATOR description "A class to create all OBJECTS in the game"
+  class BALL description "Round ENTITY, it is users goal to collect."
+  class BULLETS description "ENTITY fired from SPACESHIP and TURRETS."
+  class EXPLOSION description "Green dots appear when COLLISION occurs."
+  class FUEL description "A blue box."
+  class SPACESHIP description "Main triangular ENTITY, controled by user."
+end
+
+cluster_chart FORCE
+  class FORCE_CREATOR description "A class to create the FORCE in the game"
+  class GRAVITY description "Pulls the SPACESHIP towards the LANDSCAPE"
+  class MOMENTUM description "SPACESHIP continues to move forward after releasing thrust."
+  class TELEPORTING description "SPACESHIP disappears with BALL in the sky."
+end
+
+cluster_chart INTEGER
+  class SCORE_RECORD description "An INTEGER that increases."
+  class LIFE_RECORD description "An INTEGER that decreases as DEATH occurs."
+  class FUEL_RECORD description "An INTEGER that increases while SUCKING_FUEL and decreases while moving."
+  class TIME description "An INTEGER that decreases once FACTORY is destroyed."
+end
+
+cluster_chart CONTROLS
+  class CONTROLS_CREATOR description "A class to create the CONTROLS in the game"
+  class LEFT description "A direction that the SPACESHIP can rotate."
+  class RIGHT description "A direction that the SPACESHIP can rotate."
+  class THRUST_FORWARD description "Allows SPACESHIP to move forward, causes FUEL_RECORD to decrease."
+  class FIRE description "SPACESHIP shoots BULLETS."
+  class PICKUP_SHIELD description "Allows SPACESHIP to activate FORCE_FIELD or pick up FUEL or BALL."
+  class ROD description "Connects SPACESHIP to the BALL."
+end
+
+class_chart ENEMIES_CREATOR
+indexing
+  in_cluster: "ENEMIES " ;
+explanation
+  "All Threats to the SPACESHIP"
+part "1/5 "
+query
+ "loaction of the SPACESHIP in realtion to the ENEMIES"
+constraint
+  "SPACESHIP must be destroyed if hit by ENMIES BULLETS or COLLISION with the LANDSCAPE.",
+end
+
+class_chart TURRETS
+indexing
+  in_cluster: "ENEMIES " ;
+explanation
+  "Threat to the SPACESHIP"
+part "2/5 "
+query
+  "Shape", "Colour", "What direction is the gun facing?"
+command
+  "Fire BULLETS at SPACESHIP", "Track SPACESHIP"
+constraint
+  "Must be destroyed if hit by SPACESHIP BULLETS.",
+  "Must remain in same position.",
+end
+
+class_chart FACTORY
+indexing
+  in_cluster: "ENEMIES ";
+explanation
+  "Stationary ENTITY on screen"
+part "3/5 "
+query
+  "Shape", "Colour", "Size", "Have you been hit by a BULLET?"
+command
+  "Power TURRETS", "Start TIME when destroyed"
+constraint
+  "Must be destroyed if hit by SPACESHIP BULLETS.",
+  "TIME set to ten seconds",
+end
+
+class_chart TRACKING
+indexing
+  in_cluster: "ENEMIES " ;
+explanation
+  "Lock onto SPACESHIP"
+part "4/5 "
+command
+  "Find SPACESHIP"
+constraint
+  "Only track SPACESHIP",
+end
+
+class_chart LANDSCAPE
+indexing
+  in_cluster: "ENEMIES " ;
+explanation
+  "Permanent horizontal lines to be avoided"
+part "5/5 "
+query
+  "Shape", "Colour", "Size"
+constraint
+  "Must destroy SPACESHIP if COLLISION occurs.",
+end
+
+class_chart FUEL_GAUGE
+indexing
+  in_cluster: "STRING" ;
+explanation
+  "A word at top of screen"
+part "1/1 "
+query
+  "Shape", "Colour"
+constraint
+  "Must always be at top of screen",
+end
+
+class_chart SCORE
+indexing
+  in_cluster: "STRING" ;
+explanation
+  "A word at top of screen"
+part "1/1 "
+query
+  "Shape", "Colour"
+constraint
+  "Must always be at top of screen",
+end
+
+class_chart LIFE
+indexing
+  in_cluster: "STRING" ;
+explanation
+  "A word at top of screen"
+part "1/1 "
+query
+  "Shape", "Colour"
+constraint
+  "Must always be at top of screen",
+end
+
+class_chart OBJECT_CREATOR
+indexing
+  in_cluster: "OBJECTS" ;
+explanation
+	"Everything on the screen"
+part "1/6 "
+query
+ "location on screen"
+constraint
+  "Must have a physical location on screen otherwise not in level",
+end
+
+class_chart BALL
+indexing
+  in_cluster: "OBJECTS" ;
+explanation
+  "Collection Object to win level"
+part "2/6"
+query
+  "Shape", "Colour", "Size", "Are you on the LANDSCAPE?", "Are you attached to the ROD?"
+command
+  "Attach to ROD", "Remain stationary unless attached to ROD"
+constraint
+  "Avoid LANDSCAPE.",
+  "Obey FORCE constraints.",
+end
+
+class_chart BULLETS
+indexing
+  in_cluster: "OBJECTS" ;
+explanation
+  "Round dot that moves across the screen, fired from SPACESHIP and TURRETS"
+part "3/6 "
+query
+  "Shape", "Colour", "What direction are you heading?"
+command
+  "Appear when fired", "Travel in straight line in direction aimed"
+constraint
+  "Disappears when comes in contact with ENTITY, or else leaves screen",
+  "Must be fired from gun of SPACESHIP or TURRET.",
+end
+
+
+class_chart SPACESHIP
+indexing
+  in_cluster: "OBJECTS" ;
+explanation
+  "A trinagular shape that repersents a SPACESHIP that is controled by the user"
+part "4/6 "
+constraint
+  "Can only be controled by the user",
+end
+
+class_chart EXPLOSION
+indexing
+  in_cluster: "OBJECTS" ;
+explanation
+  "An effect that appears after COLLISION occurs"
+part "5/6 "
+query
+ "Colour", "Sound"
+command
+  "Create green dot effect"
+constraint
+  "Must only occur after COLLISION",
+end
+
+class_chart FUEL
+indexing
+  in_cluster: "OBJECTS" ;
+explanation
+  "Blue box with the STRING fuel written on it"
+part "6/6 "
+query
+  "Shape", "Colour", "Size", "What position do you occupy on the screen?"
+constraint
+  "Disappears after SUCKING_FUEL occurs",
+end
+
+class_chart TELEPORTING
+indexing
+  in_cluster: "FORCE" ;
+explanation
+  "SPACESHIP, BALL and ROD disappear when all are sufficient distance from LANDSCAPE"
+part "1/4 "
+query
+  "How far into the sky must the SPACESHIP be to TELEPORT?", "Sound"
+command
+  "Disappear"
+constraint
+  "SPACESHIP, BALL and ROD must be present",
+  "Must be high enough from LANDSCAPE",
+end
+
+
+class_chart GRAVITY
+indexing
+  in_cluster: "FORCE" ;
+explanation
+  "A physical law that pulls SPACESHIP and BALL towards LANDSCAPE"
+part "2/4"
+query
+  "How strong are you?"
+command
+  "Pulls SPACESHIP and BALL down"
+constraint
+  "Only effects SPACESHIP and BALL",
+end
+
+
+class_chart FORCE_CREATOR
+indexing
+  in_cluster: "FORCE" ;
+explanation
+	"Physical laws that effect the SPACESHIP in the game"
+part "3/4 "
+query
+ "Strength"
+constraint
+  "Only effect SPACESHIP and BALL"
+end
+
+class_chart MOMENTUM
+indexing
+  in_cluster: "FORCE" ;
+explanation
+  "A physical law that causes SPACESHIP to continue to move forward after ceasing to use thrust"
+part "4/4 "
+command
+  "Move SPACESHIP forward"
+constraint
+  "Only effect SPACESHIP and BALL"
+end
+
+class_chart SCORE_RECORD
+indexing
+  in_cluster: "INTEGER" ;
+explanation
+  "INTEGER that increases in accordance with certain actions"
+part "1/4"
+query
+  "Shape", "Colour", "What INTEGER are you?"
+command
+  "Increase when enemy is destroyed", "Increase when level completed"
+constraint
+  "Must only increase"
+end
+
+class_chart LIFE_RECORD
+indexing
+  in_cluster: "INTEGER" ;
+explanation
+  "INTEGER that increases when SCORE_RECORD reaches a certain point and decreases when DEATH occurs"
+part "2/4"
+query
+  "Shape", "Colour", "What INTEGER are you?"
+command
+  "Decrease when DEATH", "Increase when SCORE_RECORD gets to certain number"
+constraint
+  "Must only increase when SCORE_RECORD is high enough",
+  "Must only decrease when DEATH occurs"
+end
+
+class_chart FUEL_RECORD
+indexing
+  in_cluster: "INTEGER" ;
+explanation
+  "INTEGER that increases when SUCKING_FUEL occurs and decrease when THRUST occurs."
+part "3/4"
+query
+  "Shape", "Colour", "What INTEGER are you?"
+command
+  "Increase when SUCKING_FUEL", "Decrease when SPACESHIP uses THRUST"
+constraint
+  "Only increase when SUCKING_FUEL",
+  "Only decrease when SPACESHIP uses THRUST"
+end
+
+class_chart TIME
+indexing
+  in_cluster: "INTEGER" ;
+explanation
+  "INTEGER that starts a countdown once FACTORY had been distroyed."
+part "4/4"
+query
+	"What INTEGER are you?"
+constraint
+  "FACTORY must be distroyed before TIME starts",
+end
+
+
+class_chart CONTROLS_CREATOR
+indexing
+  in_cluster: "CONTROL" ;
+explanation
+	"How the user interacts with the game"
+part "1/7"
+query
+ "What button is been pressed"
+constraint
+  "Right button must be pressed to have the correct required action",
+end
+
+class_chart ROD
+indexing
+  in_cluster: "CONTROL" ;
+explanation
+  "Line that connects BALL to SPACESHIP"
+part "2/7 "
+query
+  "Shape", "Colour", "Length", "How close to the BALL must SPACESHIP be for ROD to activate?"
+command
+  "Attach to BALL", "Appear when activated"
+constraint
+  "Must only connect to BALL",
+  "Only appears when within range."
+end
+
+class_chart LEFT
+indexing
+  in_cluster: "CONTROLS" ;
+explanation
+  "Direction in which the SPACESHIP can rotate"
+part "3/7"
+command
+  "Rotate left"
+constraint
+  "Only Rotate to the left."
+end
+
+class_chart RIGHT
+indexing
+  in_cluster: "CONTROLS" ;
+explanation
+  "Direction in which the SPACESHIP can rotate"
+part "4/7"
+command
+  "Rotate right"
+constraint
+  "Only Rotate to the right."
+end
+
+class_chart THRUST_FORWARD
+indexing
+  in_cluster: "CONTROLS" ;
+explanation
+  "Causes SPACESHIP to move forward, FUEL_RECORD decreases"
+part "5/7"
+command
+  "Move forward"
+constraint
+  "FUEL_RECORD must decrease"
+end
+
+class_chart FIRE
+indexing
+  in_cluster: "CONTROLS" ;
+explanation
+  "Causes SPACESHIP to shoot a BULLET"
+part "6/7"
+query
+  "How many BULLETS do you fire when pressed?"
+command
+  "Shoot BULLET when pressed"
+constraint
+  "Only fire one bullet when button is pressed",
+  "Only cause SPACESHIP to fire"
+end
+
+class_chart PICKUP_SHIELD
+indexing
+  in_cluster: "CONTROLS" ;
+explanation
+  "Activates FORCE_FIELD or causes SPACEHIP to pick up BALL/FUEL when in range"
+part "7/7"
+query
+  "What do you do when pressed?"
+command
+  "Activate FORCE_FIELD", "Activate ROD when in range", "Activate SUCKING_FUEL when in range"
+constraint
+  "Only pick up BALL when in range of BALL",
+  "Only initiate SUCKING_FUEL when in range of FUEL"
+end
+
+scenario_chart THRUST
+
+scenario
+	"GAME_MUSIC"
+
+description
+	"Background music starts when new game begins."
+
+scenario
+	"THRUST_SOUND"
+
+description
+	"Sound accompanying the SPACESHIP using THRUST_FORWARD."
+
+scenario
+	"SUCKING_FUEL"
+
+description
+	"Lines appear below SPACESHIP when PICKUP_SHIELD is pressed while above FUEL. FUEL_RECORD increases. Sound also accompanies this action."
+
+scenario
+	"SPACESHIP_FIRING_BULLET"
+
+description
+	"Occurs when player presses FIRE, sound accompanies this action."
+
+scenario
+	"TURRETS_FIRE_BULLET"
+
+description
+	"TURRETS randomly fire BULLETS in different directions, sound also accompanies this action."
+
+scenario
+        "SPACESHIP_EXPLOSION"
+
+description
+        "Occurs when FUEL_RECORD reaches zero causing SPACESHIP to fall towards LANDSCAPE and explode upon contact. ALso occurs when SPACESHIP has been 	hit by enough ENEMY BULLETS."
+
+scenario
+        "FACTORY_EXPLOSION"
+
+description
+        "Occurs when FACTORY is hit by enough SPACESHIP BULLETS causes EXPLOSION, also causes TURRETS to cease firing."
+
+scenario
+        "TURRETS_EXPLOSION"
+
+description
+        "Occurs when TURRETS are hit by SPACESHIP BULLET, causes EXPLOSION."
+
+scenario
+        "TIMER"
+
+description
+        "A ten second time limit appears once FACTORY has been destroyed, if SPACESHIP has not TELEPORTED by end of TIME, LIFE_RECORD decreases and level 	 restarts."
+
+scenario
+        "COLLECT_BALL"
+
+description
+        "ROD is created when PICKUP_SHIELD is pressed while SPACESHIP is above BALL, causes BALL to attach to ROD."
+
+scenario
+        "DEATH"
+
+description
+        "Occurs when SPACESHIP is hit by enough bullets, causes EXPLOSION and level restarts. Occurs when SPACESHIP collides with LANDSCAPE, cause 		EXPLOSION and level restarts. Occurs when FUEL_RECORD reaches zero, causeing SPACESHIP to collide with LANDSCAPE."
+
+scenario
+        "QUITTING_GAME"
+
+description
+        "Player hits escape button if choosing to quit game, returns to main menu"
+
+scenario
+        "TELEPORTING_WITH_BALL"
+
+description
+        "When BALL has been collected and SPACESHIP gets high enough in the sky TELEPORTING occurs, level is cleared and player procedes to next level."
+
+scenario
+        "TELEPORTING_WITH_BALL_AND_FACTORY_DESTROYED"
+
+description
+        "When BALL has been collected, FACTORY destroyed and SPACESHIP gets high enough in the sky TELEPORTING occurs, level is cleared, bonus points are 		received and player can procede to next level."
+
+scenario
+        "TELEPORTING_WITHOUT_BALL"
+
+description
+        "If SPACESHIP gets too high in the sky without having collected the BALL then TELEPORTING will occur and level will be incomplete and restarted."
+
+scenario
+        "TELEPORTING_WITHOUT_BALL_AND_FACTORY_DESTROYED"
+
+description
+        "If the SPACESHIP gets too high in the sky when the FACTORY has been destroyed but the BALL has not been collected, then TELEPORTING occurs. No 	bonus is received but level has been completed and player may procede to next level."
+end
+
+event_chart THRUST
+outgoing
+explanation
+"Internal Events"
+
+event
+"SPACESHIP is destroyed"
+involves
+SPACESHIP,BULLETS,EXPLOSION,TURRETS
+
+event
+"TURRETS are destroyed"
+involves
+SPACESHIP,BULLETS
+
+event
+"Factory is destroyed"
+involves
+FACTORY,SPACESHIP,BULLETS
+
+event
+"Ball is picked up"
+involves
+BALL,ROD,SPACESHIP
+
+event
+"Fuel is collected"
+involves
+FUEL,PICKUP_SHIELD,SPACESHIP
+
+event
+"FUEL_GAUGE hits zero"
+involves
+SPACESHIP,FUEL
+
+event
+"Time runs out"
+involves
+TIME,OBJECT_CREATOR
+
+end
+
+event_chart THRUST
+outgoing
+explanation
+"External Events"
+
+event
+"Game ends by defeat"
+involves
+ENEMIES_CREATOR,EXPLOSION
+
+event
+" Game ends when missions are completed"
+involves
+OBJECT_CREATOR,CONTROLS_CREATOR
+
+end
+
+event_chart THRUST
+incoming
+explanation
+"Internal Events"
+
+event
+"Start New Game"
+involves
+CONTROLS_CREATOR
+
+event
+"shut down game"
+involves
+CONTROLS_CREATOR
+
+event
+"Configuration of the controls" 
+involves
+CONTROLS_CREATOR
+
+end
+
+event_chart THRUST
+incoming
+explanation
+"External Events"
+
+event
+"Start a new game"
+involves
+CONTROLS_CREATOR
+
+event
+"Give a command using the keyboard"
+involves
+CONTROLS_CREATOR
+
+event
+"Shut down game"
+involves
+CONTROLS_CREATOR
+
+end
+
+creation_chart THRUST
+	creator ENEMIES_CREATOR creates TURRETS, FACTORY, LANDSCAPE
+ 	creator FORCE_CREATOR creates GRAVITY, MOMENTUM, TELEPORTING
+ 	creator OBJECT_CREATOR creates BULLETS, BALL, EXPLOSION, FUEL, SPACESHIP
+	creator CONTROLS_CREATOR creates ROD, PICKUP_SHIELD
+end
+
