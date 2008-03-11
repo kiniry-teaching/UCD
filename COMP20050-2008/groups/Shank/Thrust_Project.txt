@@ -1,0 +1,73 @@
+Name of Group:
+ "Shank"
+
+Members:
+ Roger Thomas - 06577458, Kevin Lambe - 06413714, Ben Fitzgerald - 06477313
+
+Introduction:
+ For this project we hope to design a copy of the 1980's C-64 game "Thrust", we will do this by analysing the 
+original game and noting the concepts and run-time operation of the game. By doing this we will gain a fundamental insight 
+into the variables methods and classes we will need to implement the source code behind this game.
+
+Requirements:
+ Because this project will be written in java we will be needing the latest Java Runtime Enviroment(JRE).
+Using this environment an estimated 4,000 lines of code and 70 classes will be implemented to recreate the thrust game. 
+
+Overview of projects purpose:
+ The purpose of this project is to create a source file for the game "Thrust" that will compile and run with no errors.
+Together the team will design and implement code that will perform, at run-time, as close to the original game as possible. 
+
+Summary of process to date:
+ We have created a document detailing the concept analysis that outlines the concepts needed for the design of the project.
+ We will be creating one system chart, one class chart, and one cluster chart for every concept identified OBin the concept 
+analysis, and one object creation chart, one object scenario, and four event charts.
+
+Poject Dictionary
+
+Spaceship – Normal spaceship that is an entity
+Fuel – Fuel needed for movement
+Turret – Entity that shoots bullets at Spaceship
+Cargo – Entity you must collect with TractorBeam and escape with to win
+Factory – An entity that has a shield and produces smoke and can be destroyed with certain circumstances
+Men – Entity's that move and which you can collect
+Lives – A variable that determines how many attempts you have
+Score – The amount of points you have
+Heads up Display HUD – Displays information about your account
+Bullets – An Entity that Damages an entity and can destroy spaceship
+LaserGate – A barrier preventing movement
+Gate – A barrier prevent movement
+GateButton – A entity when shot with a bullet temporarily releases gate 
+CargoClamp – Entity used to hold cargo
+Shield – Protection device for an entity 
+TractorBeam –  A function of the spaceship allowing it to pick up men and fuel
+CargoWire – Connects spaceship to cargo
+Entity – Is a object with size, colour, position, shape
+Planets – Are objects containing landscape and background
+Landscape – A layout of a planet
+Count – an incremented variable
+Background – Images that is behind a landscape
+Position – Is the x, y  of an entity
+HighScore – The scores that users get
+Debris – Particles made of pixels that are produced when a entity is hit
+Explosion – Is a graphics effect that takes place when some entity are destroyed
+User – Are humans that play the game
+Variable – An object that can change state
+Gun – Shoots bullet entity's
+Graphic is a the layout of what is on the screen at a given time
+ 
+                                                          
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                            
+~                                                                                                                      
