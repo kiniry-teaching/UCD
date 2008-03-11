@@ -1,4 +1,4 @@
--- Informal Charts
+-- Informal Charts for the group Jar
 
 system_chart THE_GAME
   cluster CONFIGURATION
@@ -371,7 +371,9 @@ class_chart BULLET
   constraint
     "Only exists while has no collision",
     "Unaffected by gravity",
-    "Has static velocity"
+    "Has static velocity",
+    "Can only travel a fixed distance before it disappears",
+    "Can only travel in straight lines"
 end
 
 class_chart POD
@@ -390,7 +392,7 @@ class_chart POD
     ""
   constraint
     "Motionless until attached to ship",
-    "Only experiences force towards the ship",
+    "Only experiences force (excluding gravity) towards the ship",
     "Experiences movement relative to SHIP only",
     "When attached is always attached to opposite end of TOW_LINE to SHIP",
     "Must be within a minimum distance of the ship to attach"
