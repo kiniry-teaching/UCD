@@ -42,7 +42,7 @@ Shield – Protection device for an entity
 TractorBeam –  A function of the spaceship allowing it to pick up men and fuel
 CargoWire – Connects spaceship to cargo
 Entity – Is a object with size, colour, position, shape
-Planets – Are objects containing landscape and background
+LEVELS – Are the environments in which the game takes place
 Landscape – A layout of a planet
 Count – an incremented variable
 Background – Images that is behind a landscape
