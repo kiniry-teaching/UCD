@@ -173,5 +173,21 @@ indexing
 explanation
  "visual effect when ENTITY is destroyed"
 
+query
+ "what ENTITY?",
+ 
+constraints
+ "needs ENTITY to be destroyed"
+
+end
+
+class_chart HUD
+
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+ "A means of displaying variables in the game
 
  
