@@ -30,8 +30,8 @@ Turret – Entity that shoots bullets at Spaceship
 Cargo – Entity you must collect with TractorBeam and escape with to win
 Factory – An entity that has a shield and produces smoke and can be destroyed with certain circumstances
 Men – Entity's that move and which you can collect
-Lives – A variable that determines how many attempts you have
-Score – The amount of points you have
+HUD_Lives – A variable that determines how many attempts you have
+HUD_Score – The amount of points you have
 Heads up Display HUD – Displays information about your account
 Bullets – An Entity that Damages an entity and can destroy spaceship
 LaserGate – A barrier preventing movement
