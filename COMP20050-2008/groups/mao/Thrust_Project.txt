@@ -1,0 +1,61 @@
+﻿Group Name: MAO
+
+Group Members:
+Magdalena Zieniewicz
+magda
+06848290					
+
+Adam Krock
+adamk
+04003900
+
+Owen Mills
+omills
+05828422
+
+-----------------------------------------------------------
+	
+Introduction:
+	What we hope to do is to recreate the game called "Thrust" (1986) which was originally written for the Commodore 64. We want to implement most of the key features found in the original game using Java programming language and tools designed for it (javadoc, bon...). The game will run on Linux platforms. 
+
+
+Requirements:
+
+- The game shall accept user's input via keyboard. Keyboard is used to set up the game and to play i.e. move the Spaceship, shoot Bullets and pick up Fuel and the Ball. 
+- The game shall have a user interface. The user can see how many lives and how much fuel he has. He can see in which level he is. There is a manual page with instructions for the user which tells which key to press to start a particular action. For example: "To start press space bar." or "For help press h".   
+- The game should have the ability of sound playback (music/effects).
+- The game shall have simple colour graphical capabilities (Similar to the original).
+- The game  shall implement a simple simulation engine i.e. There is gravity acting on the spaceship and the ball. 
+- The game shall keep track of the progress of the user (scores/levels/lives/fuel/ball). It is possible to view High Scores. 
+- It should be possible to pause the game and start playing again from the same moment after a break. 
+- The game shall work on Linux platforms. 
+
+
+Overview:
+
+	The purpose of this project is, as the introduction says, to create the game and in the same time experience the dillemas that come with the planning and execution of implementing a software system. The game will be hopefully used by the authors and their friends, so they can have some fun and also by the lecturer and demonstrators to evaluate  authors' programming and other computer science skills. 
+	We want to create a game which looks and feels like the original Thrust. There has to be a Spaceship controlled by the user which mission is to fly near the planet surface, pick up a ball which waits there for it and fly away with the ball attached. The obstacles are the enemies who shoot bullets at the spaceship, the limited amount of fuel (which can be filled up from the box on the surface of the planet) and the gravity which drags the spaceship and the ball downwards. 
+	
+
+Summary:
+
+- We have performed a basic concept analysis of the game "Thrust". 
+- We have started writing the static model of our system. 	We divided our concepts into 4 clusters and created modelling charts for them. We also wrote a modelling chart for each class and one for the whole system. Now we need to translate our graphicla modelling charts into Java. 
+
+
+
+Dictionary:
+Shall - the item is absolutely necessary as stated. 
+Should - the item is desirable, but not required.
+User - person who is going to play the game. 
+Game - the product of our project.
+Simulation- The game imitates the real phenomenon of gravity.
+Manual - Key game functions.
+Lives - Number of times death can occur before the game is over.
+Fuel - A limiter of movement.
+Ball - Object of the game is to capture the ball and fly away.
+Levels - Each level contains varying obstacles.
+Scores - Indicator of achievement.
+User interface - How the game communicates with the user.  
+
+
