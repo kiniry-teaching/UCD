@@ -1,0 +1,54 @@
+system_chart Thrust
+  cluster VISUALS description "All objects graphics and texts displayed on the screen"
+  cluster SOUND description "The audio effects heard by user"
+  cluster PHYSICS description "The way in which all Entities interact"
+  cluster VARIABLES description "All variables required by game"
+
+end
+
+cluster_chart VISUALS
+  class ENTITY description "An object with size colour position and shape."
+  class FACTORY description "A static ENTITY."
+  class TURRET description "An ENTITY controlled by the computer."
+  class SPACESHIP description "An ENTITY controlled by user."
+  class CARGO description "An ENTITY that must be collected by SPACESHIP."
+  class EXPLOSION description "A graphic effect."
+  class HUD description "Means of displaying information."
+  class GATE description "An ENTITY defined to obstruct SPACESHIP."
+  class GATE_BUTTON description "An ENTITY used to manipulate GATE."
+  class CARGO_CLAMP description "An ENTITY used to hold CARGO to LANDSCAPE."
+  class DEBRIS description "A graphic effect."
+  class BULLETS description "An ENTITY that can be produced by TURRET and SPACESHIP."
+  class LANDSCAPE description "The physical layout of each level."
+  class BACKGROUND description "The graphic appearance of each level."
+  class SHIELD description "An ENTITY that activated by user around SPACESHIP."
+  class TRACTOR_BEAM description "An ENTITY activated by user to collect other entities."
+  class CARGO_WIRE description "An ENTITY used to connect SPACESHIP to CARGO."
+  class FUEL_DRUM description "An ENTITY that holds fuel for SPACESHIP."
+  class LASER_GATE description "An type of GATE"
+  class MAN description "An ENTITY that can be collected by SPACESHIP."
+  class LEVEL description "holds LANDSCAPE and BACKGROUND"
+end
+
+cluster_chart SOUND
+
+end
+
+cluster_chart PHYSICS
+  class VELOCITY description "rate of movement of ENTITY"
+  class DIRECTION description "position of ENTITY ACCELERATION vector"
+  class MOVEMENT description "change in DIRECTION"
+  class ACCELERATION description "changes VELOCITY of ENTITY"
+  class POSITION description "Coordinates of ENTITY"
+  class GRAVITY description "ACCELERATION vector"
+end  
+
+cluster_chart VARIABLES
+  class LIVES description "determines attemps at LEVEL"
+  class SCORE description "shows the points you have"
+  class HIGHSCORE description "holds the highest SCORE variable"
+  class FUEL description "shows how much FUEL SPACESHIP has left"
+  class COUNT description "countdown variable"
+end  
+
+
