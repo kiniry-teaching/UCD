@@ -23,8 +23,6 @@ $title =		"";
 $titleLong =	"";
 
 include("config.php"); //Holds the access keys for the API's
-	
-$isbn = $_POST["isbn"];
 
 function fetchBooksAmazon($isbn, $j){
 	$amazons = array("http://webservices.amazon.com/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.co.uk/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.co.jp/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.fr/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.ca/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.de/onca/xml?Service=AWSECommerceService");

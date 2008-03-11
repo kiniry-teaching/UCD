@@ -8,8 +8,10 @@
 
 include("include/adminbook_functions.php");
 
-if ($_POST["state"] == 1)
+if ($_POST["state"] == 1){
+	$isbn = $_POST["isbn"];
 	fetchBooksAmazon($isbn, 0);
+}
 else if($_POST["state"] == 2)
 	addBook($_POST["isbn"],$_POST["title"],$_POST["titleLong"],$_POST["authors"],$_POST["publisher"],$_POST["noOfPages"],$_POST["binding"],$_POST["ddc"],$_POST["lcc"],$_POST["description"],$_POST["largeImg"],$_POST["mediumImg"],$_POST["smallImg"]);
 ?>
