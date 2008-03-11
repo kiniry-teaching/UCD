@@ -8,7 +8,7 @@
 * 																*
 ****************************************************************/
 
-function install($host, $username, $password, $dbname){
+function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	/****************************************************************
 	* 																*
@@ -18,16 +18,44 @@ function install($host, $username, $password, $dbname){
 	****************************************************************/
 
 	$file = fopen("../connection.php","w");
-	fwrite($file,"
-	<?php
-		\$con=mysql_connect ($host, $username, $password)
-			or die
-				('I cannot connect to the database because: ' . mysql_error());
-		mysql_select_db ($dbname, \$con);
-	?" . ">");
+		if($password != NULL){
+			fwrite($file,"
+				<?php
+					\$con=mysql_connect ($host, $username, $password)
+						or die
+							('I cannot connect to the database because: ' . mysql_error());
+					mysql_select_db ($dbname, \$con);
+				?" . ">");
+		}
+		else{
+			fwrite($file,"
+				<?php
+					\$con=mysql_connect ($host, $username)
+						or die
+							('I cannot connect to the database because: ' . mysql_error());
+					mysql_select_db ($dbname, \$con);
+				?" . ">");
+
+		}
 	fclose($file);
 
 	chmod("../connection.php",0644);
+	
+	/****************************************************************
+	* 																*
+	* Edits the config.php file with the keys for the API's			*
+	* 																*
+	****************************************************************/
+
+	$file = fopen("../config.php","w");
+	fwrite($file,"
+	<?php
+		define('KEYID','$awskey');
+		define('ACCESSKEY','$isbndbkey');
+	?" . ">");
+	fclose($file);
+
+	chmod("../config.php",0644);
 
 	/****************************************************************
 	* 																*
@@ -56,10 +84,16 @@ function install($host, $username, $password, $dbname){
 		PRIMARY KEY(isbn),
 		title tinytext,
 		titleLong text,
-		author tinytext,
+		authors tinytext,
 		publisher tinytext,
 		ddc decimal,
-		description text
+		description text,
+		noOfPages int,
+		binding tinytext,
+		lcc tinytext,
+		largeImg tinytext,
+		mediumImg tinytext,
+		smallImg tinytext
 	)";
 	mysql_query($sql,$con);	
 	

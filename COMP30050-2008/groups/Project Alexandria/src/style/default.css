@@ -1,3 +1,35 @@
-﻿p{
+﻿#welcome{
 	text-align:center;
 }
+
+	#adminbookedit form{
+		width:21em;
+		font-family:"Times New Roman", Times, serif;
+	}
+	
+	#adminbookedit .formrow{
+		width:21em;
+		margin-bottom:2px;
+	}
+	
+	#adminbookedit .formtext{
+		width:9em;
+		display:inline-block;
+	}
+	
+	#adminbookedit .forminput{
+		width:12em;
+		display:inline-block;
+	}
+	
+	#adminbookedit .forminput input{
+		width:13.6em;
+	}
+	
+	#adminbookedit .formbutton{
+		width:9em;
+	}
+	
+	#adminbookedit textarea{
+		height:6em;
+	}
