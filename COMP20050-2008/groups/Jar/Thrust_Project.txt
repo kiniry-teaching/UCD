@@ -52,7 +52,7 @@ Project Dictionary
     "ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES"
   class HIGH_SCORE cluster INFORMATION_CLUSTER
   description
-    "largest score attained in the game history, matched with the name of the player who scored it"
+    "Largest scores attained in the game history, matched with the name of the player who scored it"
   class MOVABLE cluster ENTITY_CLUSTER
   description
     "ENTITIES in game that can be moved"
@@ -119,4 +119,3 @@ Project Dictionary
   class DRAW cluster GAME
   description
     "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
-

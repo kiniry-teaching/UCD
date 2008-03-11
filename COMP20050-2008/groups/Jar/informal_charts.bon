@@ -1,5 +1,4 @@
--- Informal_charts
--- author: Jar
+-- Informal Charts
 
 system_chart THE_GAME
   cluster CONFIGURATION
@@ -180,12 +179,12 @@ class_chart LEVEL
     "End Level",
     "Draw level",
     "Re-spawn ship",
-    "Re-spawn ship + orb"
+    "Re-spawn ship + POD"
   constraint
     "Can only read specific map depending on level number",
     "Cannot create ENTITIES within the ground",
-    "Will not re-spawn if LIVES = 0, or FUEL = 0 and ship has crashed",
-    "Re-spawns ship with orb if orb was attached when it last crashed"
+    "Will not re-spawn if LIVES = 0, or FUEL = 0 and ship has had a collision",
+    "Re-spawns ship with POD if POD was attached when it last had a collision"
 end
 
 class_chart HUD
@@ -203,7 +202,7 @@ class_chart HUD
   command
     "Get score",
     "Get fuel",
-    "Get value",
+    "Get lives",
     "Read timer",
     "Display end of level dialog"
   constraint
@@ -242,7 +241,8 @@ class_chart SOUND
     "Play thrust",
     "Play ship fire",
     "Play shield",
-    "Play enemy fire"
+    "Play enemy fire",
+    "Play timer"
   constraint
     "Is dependant on the sound configuration"
 end
@@ -256,15 +256,13 @@ class_chart ENTITY
   part
     "1/1 "
   query
-    "Are you in a Collision",
+    "Are you in a Collision?",
     "What is your position?"
   command
-    "Make",
-    "Remove"
+    "Remove from current level"
   constraint
-    "There is a max velocity.",
     "There is a max firing rate.",
-    "You can not cross borders with other entities"
+    "You can not cross borders with other entities."
 end
 
 class_chart MOVABLE
@@ -279,11 +277,12 @@ class_chart MOVABLE
   inherit 
     ENTITY
   query
-    "What is your current Velocity?"
+    ""
   command
     ""
   constraint
-    "Position must be within the bounds of the level.",
+    "There is a max velocity.",
+    "Position must stay within the bounds of the level.",
     "The magnitude of the velocity must be between 0 and Max_Velocity."
 end
 
@@ -298,7 +297,8 @@ class_chart USER_CONTROL
   inherit 
     MOVABLE
   query
-    "Are you attached?"
+    "Are you attached?",
+    "What is your current velocity?"
   command
     "Apply thrust"
   constraint
@@ -449,7 +449,8 @@ class_chart NUCLEAR_POWER_PLANT
     "How much damage have you taken?"
   command
     "Turn on LIMPET_GUNs",
-    "Turn off LIMPET_GUNs"
+    "Turn off LIMPET_GUNs",
+    "Change to destroyed"
   constraint
     "Has a maximum level of damage it can take before the planet is destroyed.",
     "Amount of damage taken is reduced over time",
@@ -467,7 +468,8 @@ class_chart FUEL_TANK
   inherit 
     NON_MOVABLE
   query
-    "How much fuel do you have?"
+    "How much fuel do you have?",
+    "Are you being picked up?"
   command
     "Reduce fuel"
   constraint
@@ -503,12 +505,12 @@ class_chart DOOR
   part
     "1/1 "
   inherit 
-    NON_MOVABLE
+    MOVABLE
   query
     "Are you open?",
     "Are you closed?"
   command
-    "Open",
+    "Open the door and start the timer",
     "Close"
   constraint
     "Can only be open for a set amount of time after which it automatically closes",
@@ -587,8 +589,7 @@ class_chart FUEL
   query
     "Consumption multiplier"
   command
-    "Set shield multiplier",
-    "Picked up"
+    "Set shield multiplier"
   constraint
     "Must be greater than or equal to 0"
 end
@@ -628,16 +629,17 @@ class_chart LIVES
   constraint
     "The SHIP will not re-spawn if this reaches zero.",
     "The initial value is three",
-    "It can only be decreased when the SHIP or ORB has a collision",
+    "It can only be decreased when the SHIP or POD has a collision",
     "It can only be increased when the SCORE goes over a multiple of 10,000"
 end
 
 class_chart HIGH_SCORE
   indexing
     in_cluster: "INFORMATION_CLUSTER";
-    created: " 7-3-2008";
+    created: "7-3-2008";
+    revised: "10-3-2008 srussell";
   explanation
-    "largest score attained in the game history, matched with the name of the player who scored it"
+    "Largest scores attained in the game history, matched with the name of the player who scored it"
   part
     "1/1 "
   inherit 
@@ -648,7 +650,7 @@ class_chart HIGH_SCORE
     "Store",
     "List"
   constraint
-    "Will only store 5 values"
+    "Will only store 8 values"
 end
 
 class_chart BONUS
@@ -698,6 +700,8 @@ creation_chart THE_GAME
   creator LEVEL creates SHIP, POD, NUCLEAR_POWER_PLANT, POD_STAND, DRAW, FUEL_TANK, LIMPET_GUN, BUTTON, DOOR
   creator SHIP creates BULLET
   creator LIMPET_GUN creates BULLET
+  creator DOOR creates TIMER
+  creator NUCLEAR_POWER_PLANT creates TIMER
 end
 
 scenario_chart THE_GAME
@@ -719,7 +723,7 @@ scenario_chart THE_GAME
     "Displays level complete information before loading the next level"
   scenario "Re-spawn" 
   description
-    "Re-spawns the ship or the ship and orb at a specific position"
+    "Re-spawns the ship or the ship and POD at a specific position"
   scenario "Quit" 
   description
     "Ends and exits the game"
@@ -782,7 +786,7 @@ end
 
 dictionary THE_GAME
   explanation
-    "BONc automatically generated class dictionary."
+    "Class dictionary for THE_GAME system."
   class INFORMATION cluster INFORMATION_CLUSTER
   description
     "dynamically changing data defining the state of the game."
@@ -800,7 +804,7 @@ dictionary THE_GAME
     "ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES"
   class HIGH_SCORE cluster INFORMATION_CLUSTER
   description
-    "largest score attained in the game history, matched with the name of the player who scored it"
+    "Largest scores attained in the game history, matched with the name of the player who scored it"
   class MOVABLE cluster ENTITY_CLUSTER
   description
     "ENTITIES in game that can be moved"
