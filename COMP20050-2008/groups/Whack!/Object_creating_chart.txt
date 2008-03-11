@@ -1,0 +1,21 @@
+﻿Group name: Whack!
+Group Members:		David Maguire 	david    06024769
+			Tara Flood 	Tara	 06361188
+	   		Allison Fallon 	06584551 06584551
+
+Object creation chart
+
+Bullets 	- 	(Entity), Death & Explosion
+Collision 	-	Explosion and Death
+Death		- 	Life and Integer
+Entity 		- 	Colour, Sound
+Explosion 	-	Colour, Sound and Death
+Fuel Gauge	-	String and Integer
+Gravity 	-	Collison and Momentum
+Life 		-	String and Integer
+Score 		- 	String and Integer
+Spaceship 	- 	Sound, Colour, Rod, Sucking Fuel, Forcefield, Bullets, Teleporting, Momentum
+Sucking Fuel 	- 	Integer
+Turrets 	-	Bullets and Tracking
+
+* Entity could be considered in all
