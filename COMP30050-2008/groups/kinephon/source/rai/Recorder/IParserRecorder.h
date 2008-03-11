@@ -20,7 +20,7 @@ namespace econtrol
 	 * @author EB
 	 * @version 1.0
 	 */
-	uchar const	FOUND	= 0;
+	ect const	FOUND	= 0;
 	/**
 	 * An IR blob has been lost, either because it was physically removed, or
 	 *	because it's data packets have been lost. Data should contain the
@@ -29,7 +29,7 @@ namespace econtrol
 	 * @author EB
 	 * @version 1.0
 	 */
-	uchar const	LOST	= 1;
+	ect const	LOST	= 1;
 	/**
 	 * The Parser is no longer receiving data. Connection may be lost. Data is
 	 *	ignored
@@ -37,7 +37,7 @@ namespace econtrol
 	 * @author EB
 	 * @version 1.0
 	 */
-	uchar const	BADCOM	= 2;
+	ect const	BADCOM	= 2;
 }
 
 /**
@@ -62,7 +62,7 @@ public:
 	 * @see econtrol
 	 */
 	virtual int		control
-					(	uchar const	control,
+					(	ect const	control,
 						void *		data
 					)				pure;
 	/**
@@ -72,6 +72,7 @@ public:
 	 * @param x X co-ordinate of the IR blob
 	 * @param y Y co-ordinate of the IR blob
 	 * @param size Size of the IR blob
+	 * @param time The time this record happened
 	 * @author EB
 	 * @version 1.0
 	 * @post id must be added by calling Control
@@ -81,7 +82,8 @@ public:
 					(	irid const	iid,
 						int const	x,
 						int const	y,
-						int const	size
+						int const	size,
+						tick const	time
 					)				pure;
 
 };

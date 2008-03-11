@@ -17,26 +17,26 @@ namespace ezone
 	 * The zone was neither entered nor exited. This means it's either still
 	 *	outside the zone, or still inside the zone
 	 */
-	uchar const	NOCHANGE	= 0;
+	ezt const	NOCHANGE	= 0;
 	/**
 	 * The zone was entered correctly
 	 * @author EB
 	 * @version 1.0
 	 */
-	uchar const	ENTERED		= 1;
+	ezt const	ENTERED		= 1;
 	/**
 	 * The zone was exited correctly
 	 * @author EB
 	 * @version 1.0
 	 */
-	uchar const	EXITED		= 2;
+	ezt const	EXITED		= 2;
 	/**
 	 * The zone was exited incorrectly. The zone should be considered as not
 	 *	entered in this case
 	 * @author EB
 	 * @version 1.0
 	 */
-	uchar const	FAILED		= 3;
+	ezt const	FAILED		= 3;
 }
 
 /**
@@ -56,7 +56,7 @@ class Zone
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend	class ShapeLoader;
+	friend	class ShapesLoader;
 	/**
 	 * Be friends with Shape so it can test the zones
 	 * @author EB
@@ -85,8 +85,8 @@ private:
 	 *	a given radius) is within the zone's radius, angle and arc
 	 * @param x The x co-ordinate of the segment start to test
 	 * @param y The y co-ordinate of the segment start to test
-	 * @param x The x co-ordinate of the segment's vector to test
-	 * @param y The y co-ordinate of the segment's vector to test
+	 * @param u The x co-ordinate of the segment's vector to test
+	 * @param v The y co-ordinate of the segment's vector to test
 	 * @param radius The radius to test, will be either enterRadius or
 	 *	exitRadius
 	 * @param angle The angle to test, will be either enterAngle or exitAngle
@@ -159,7 +159,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int		test
+	ezt		test
 			(	float const	x,
 				float const	y,
 				float const	u,

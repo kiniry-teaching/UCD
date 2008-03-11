@@ -30,7 +30,7 @@ inline bool Zone::isInside
 )	const
 {
 
-	// @todo isInside
+	// @todo isInside. Get intersect on radius and angle to intersect
 
 	return false;
 
@@ -39,7 +39,7 @@ inline bool Zone::isInside
 ///////////////////////////////////////////////////////////////////////////////
 // test
 //
-int Zone::test
+ezt Zone::test
 (	float const	x,
 	float const	y,
 	float const	u,

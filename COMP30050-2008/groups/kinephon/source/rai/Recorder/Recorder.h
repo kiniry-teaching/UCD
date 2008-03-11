@@ -41,8 +41,8 @@ public:
 	 * All frames before and including the specified frame are removed from
 	 *	the track that is recording the speicified IR blob
 	 * @param iid IR blob whose track is to be erased
-	 * @param frame All frames from this and before are removed from the
-	 *	track. If frame is -1 (default), the whole track is erased
+	 * @param frameIndex All frames from this and before are removed from the
+	 *	track. If frameIndex is -1 (default), the whole track is erased
 	 * @author EB
 	 * @version 1.0
 	 */
@@ -87,6 +87,7 @@ public:
 	 * @param x X co-ordinate of the IR blob
 	 * @param y Y co-ordinate of the IR blob
 	 * @param size Size of the IR blob
+	 * @param time The time this record happened
 	 * @author EB
 	 * @version 1.0
 	 * @post id must be added by calling Control
@@ -96,7 +97,8 @@ public:
 						(	irid const	iid,
 							int const	x,
 							int const	y,
-							int const	size
+							int const	size,
+							tick const	time
 						);
 
 ///////////////////////////////////////////////////////////////////////////////

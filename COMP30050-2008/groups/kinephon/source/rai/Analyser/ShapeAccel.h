@@ -39,7 +39,8 @@ public:
 //
 protected:
 					ShapeAccel
-					(	float const * const		data,
+					(	sid const				shapeId,
+						float const * const		data,
 						uint const				width,
 						uint const				nData,
 						Zone const * const		zones,
@@ -50,14 +51,16 @@ protected:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-ShapeAccel::ShapeAccel
-(	float const * const		data,
+inline ShapeAccel::ShapeAccel
+(	sid const				shapeId,
+	float const * const		data,
 	uint const				width,
 	uint const				nData,
 	Zone const * const		zones,
 	uint const				nZones
 ) :	Shape
-	(	data,
+	(	shapeId,
+		data,
 		width,
 		nData,
 		zones,

@@ -72,7 +72,8 @@ void Recorder::record
 (	irid const	iid,
 	int const	x,
 	int const	y,
-	int const	size
+	int const	size,
+	tick const	time
 ){
 
 	Track * track = _tracks[iid];

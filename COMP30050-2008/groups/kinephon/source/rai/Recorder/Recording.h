@@ -74,7 +74,6 @@ private:
 	 * Containing a snapshot of the Recorder at the time it was created. This
 	 *	is private except to friend Recorder which creates the object
 	 * @param tracks The state of the Recorder's track 
-	 * @param length The number of tracks passed in
 	 * @author EB
 	 * @version 1.0
 	 * @post this->length() == length;

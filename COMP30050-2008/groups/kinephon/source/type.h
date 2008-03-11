@@ -38,6 +38,30 @@ typedef uint			irid;
  * @version 1.0
  */
 typedef uint			tick;
+/**
+ * Shape identifier
+ * @author EB
+ * @version 1.0
+ */
+typedef uint			sid;
+/**
+ * Enumerated control type
+ * @author EB
+ * @version 1.0
+ */
+typedef uchar			ect;
+/**
+ * Enumerated shape type
+ * @author EB
+ * @version 1.0
+ */
+typedef uchar			est;
+/**
+ * Enumerated zone type
+ * @author EB
+ * @version 1.0
+ */
+typedef uchar			ezt;
 
 /**
  * Pure virtual function modifier

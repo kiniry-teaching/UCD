@@ -51,7 +51,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	ShapeMatches *	shapeMatches				(void)	const;
+	ShapeMatches *	shapeMatches				(void);
 	
 ///////////////////////////////////////////////////////////////////////////////
 // friend *tor
@@ -61,15 +61,12 @@ private:
 	 * Create a shape match.
 	 * @param shape The shape that made the match
 	 * @param weight The weight the shape matched by
-	 * @param shapeMatches If there are sub-shapes (speed/accel) that match, a
-	 *	collection of those are added too
 	 * @author EB
 	 * @version 1.0
 	 */
 					ShapeMatch
 					(	Shape * const			shape,
-						float const				weight,
-						ShapeMatches * const	shapeMatches
+						float const				weight
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -104,12 +101,16 @@ private:
 
 inline ShapeMatch::ShapeMatch
 (	Shape * const			shape,
-	float const				weight,
-	ShapeMatches * const	shapeMatches
+	float const				weight
 ) :	_shape					(shape),
-	_weight					(weight),
-	_shapeMatches			(shapeMatches)
+	_weight					(weight)
 { }
+
+inline ShapeMatches * ShapeMatch::shapeMatches(void)
+{//	if(_shapeMatches == 0)
+//		return _shapeMatches = new ShapeMatches;
+	return _shapeMatches;
+}
 
 }
 

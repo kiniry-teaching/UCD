@@ -39,25 +39,28 @@ public:
 //
 protected:
 					ShapeSpeed
-					(	float const * const	data,
-						uint const			width,
-						uint const			nData,
-						Zone const * const	zones,
-						uint const			nZones
+					(	sid const				shapeId,
+						float const * const		data,
+						uint const				width,
+						uint const				nData,
+						Zone const * const		zones,
+						uint const				nZones
 					);
 
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 
-ShapeSpeed::ShapeSpeed
-(	float const * const	data,
+inline ShapeSpeed::ShapeSpeed
+(	sid const			shapeId,
+	float const * const	data,
 	uint const			width,
 	uint const			nData,
 	Zone const * const	zones,
 	uint const			nZones
 ) :	Shape
-	(	data,
+	(	shapeId,
+		data,
 		width,
 		nData,
 		zones,

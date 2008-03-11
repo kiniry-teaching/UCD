@@ -40,7 +40,8 @@ public:
 //
 protected:
 					ShapeMovement
-					(	float const * const	data,
+					(	sid const			shapeId,
+						float const * const	data,
 						uint const			width,
 						uint const			nData,
 						Zone const * const	zones,
@@ -74,8 +75,9 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-ShapeMovement::ShapeMovement
-(	float const * const	data,
+inline ShapeMovement::ShapeMovement
+(	sid const			shapeId,
+	float const * const	data,
 	uint const			width,
 	uint const			nData,
 	Zone const * const	zones,
@@ -83,7 +85,8 @@ ShapeMovement::ShapeMovement
 	Shapes *			speedShapes,
 	Shapes *			accelShapes
 ) :	Shape
-	(	data,
+	(	shapeId,
+		data,
 		width,
 		nData,
 		zones,

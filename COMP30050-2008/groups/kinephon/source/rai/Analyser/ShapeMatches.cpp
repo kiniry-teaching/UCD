@@ -3,6 +3,9 @@
 namespace interpreter
 {
 
+///////////////////////////////////////////////////////////////////////////////
+// add
+//
 ShapeMatches & ShapeMatches::operator +=
 (	ShapeMatch const * const	shapeMatch
 ){

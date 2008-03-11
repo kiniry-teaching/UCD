@@ -18,6 +18,18 @@ class Shape
 {
 
 ///////////////////////////////////////////////////////////////////////////////
+// queries
+//
+public:
+	/**
+	 * The identifier set for this shape in the shape editor
+	 * @return the identifier set for this shape in the shape editor
+	 * @author EB
+	 * @version 1.0
+	 */
+	sid				shapeId						(void)		const;
+
+///////////////////////////////////////////////////////////////////////////////
 // commands
 //
 public:
@@ -43,6 +55,7 @@ protected:
 	/**
 	 * Create a shape.
 	 * The shape's data is filled by the ShapeLoader
+	 * @param shapeId A unique identifier for this shape
 	 * @param data Array of weight map data describing this shape
 	 * @param width The width of the 2 dimensional weight map
 	 * @param nData The resolution of the weight map (height is nData / width)
@@ -57,7 +70,8 @@ protected:
 	 * @pre nZones >= 0;
 	 */
 					Shape
-					(	float const * const		data,
+					(	sid						shapeId,
+						float const * const		data,
 						uint const				width,
 						uint const				nData,
 						Zone const * const		zones,
@@ -69,7 +83,8 @@ protected:
 //
 protected:
 	/**
-	 * Test an array of (x, y) points against this data and add it if it's in range
+	 * Test an array of (x, y) points against this data and add it if it's
+	 *	in range
 	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
 	 *	x[length], y[length])
 	 * @param length The number of points in the array.
@@ -79,7 +94,7 @@ protected:
 	 * @pre /length(points) == length * 2;
 	 * @pre length > 0;
 	 */
-	void			test
+	ShapeMatch *	test
 					(	int const * const		points,
 						uint const				length,
 						ShapeMatches * const	shapeMatches
@@ -113,7 +128,7 @@ private:
 	 * @version 1.0
 	 * @pre shapeMatches != 0;
 	 */
-	void			add
+	ShapeMatch * 	add
 					(	float const				weight,
 						ShapeMatches * const	shapeMatches
 					);
@@ -122,6 +137,12 @@ private:
 // fields
 //
 private:
+	/**
+	 * Identifier set for this shape in the shape editor
+	 * @author EB
+	 * @version 1.0
+	 */
+	sid const			_shapeId;
 	/**
 	 * Flat 2 dimensional array of weights in the range (0..1) describing this
 	 *	shape. Positions containing a 1 are points in the shape, 0, points not
@@ -137,7 +158,8 @@ private:
 	 */
 	uint const			_width;
 	/**
-	 * Resolution of the shape, or length of _data array. Height is _nData / _width
+	 * Resolution of the shape, or length of _data array. Height is
+	 *	_nData / _width
 	 * @author EB
 	 * @version 1.0
 	 */
@@ -160,18 +182,25 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
+
 inline Shape::Shape
-(	float const * const	data,
+(	sid					shapeId,
+	float const * const	data,
 	uint const			width,
 	uint const			nData,
 	Zone const * const	zones,
 	uint const			nZones
-) :	_data				(data),
+) :	_shapeId			(shapeId),
+	_data				(data),
 	_width				(width),
 	_nData				(nData),
 	_zones				(zones),
 	_nZones				(nZones)
 { }
+
+inline sid Shape::shapeId(void) const
+{	return _shapeId;
+}
 
 }
 

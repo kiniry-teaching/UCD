@@ -1,4 +1,4 @@
-#include "ShapeMovement.h"
+#include "ShapeSpeed.h"
 
 namespace interpreter
 {
@@ -6,7 +6,7 @@ namespace interpreter
 ///////////////////////////////////////////////////////////////////////////////
 // compare
 //
-bool ShapeMovement::compare
+bool ShapeSpeed::compare
 (	Track const * const		track,
 	ShapeMatches * const	shapeMatches
 ){	int *					points;
@@ -15,8 +15,8 @@ bool ShapeMovement::compare
 	ShapeMatch *			shapeMatch;
 	uint					length;
 
-	// Need at least one point to calculate an movement
-	length = track->length();
+	// Need at least two points to calculate an speed
+	length = track->length() - 1;
 
 	// Nothing to test, exit
 	if(length <= 0)
@@ -24,14 +24,17 @@ bool ShapeMovement::compare
 
 	points = new int[length * 2];
 
-	// Store x and y as co-ordinates
+	// Store time and proportional length of vector as co-ordinates
+	//	Don't bother get actual length - it will be scaled to fit
+	//	the shape's grid anyways
 	for
 	(	frame = track->first();
 		frame->next() != 0;
 		frame = frame->next(),
 		index += 2
-	)	points[index    ]	= frame->x(),
-		points[index + 1]	= frame->y();
+	)	points[index    ]	= frame->time(),
+		points[index + 1]	= (frame->u() << 1)
+							+ (frame->v() << 1);
 
 	shapeMatch = Shape::test
 	(	points,
@@ -40,25 +43,7 @@ bool ShapeMovement::compare
 	);
 
 	delete [] points;
-
-	// Match this shape against it's speed and accel shapes
-	if(shapeMatch != 0)
-	{
-
-		if(_speedShapes != 0)
-			_speedShapes->compare
-			(	track,
-				shapeMatch->shapeMatches()
-			);
-
-		if(_accelShapes != 0)
-			_accelShapes->compare
-			(	track,
-				shapeMatch->shapeMatches()
-			);
-
-	}
-
+	
 	return shapeMatch != 0;
 
 }

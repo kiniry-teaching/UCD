@@ -7,16 +7,19 @@ namespace interpreter
 ///////////////////////////////////////////////////////////////////////////////
 // test
 //
-void Shape::test
+ShapeMatch * Shape::test
 (	int const * const		points,
 	uint const				length,
 	ShapeMatches * const	shapeMatches
 ){	float					weight;
+	ShapeMatch *			shapeMatch		= 0;
 
 	weight = compare(points, length);
 
 	if(weight >= shapeMatches->weight())
-		add(weight, shapeMatches);
+		shapeMatch = add(weight, shapeMatches);
+		
+	return shapeMatch;
 
 }
 
@@ -36,14 +39,16 @@ float Shape::compare
 ///////////////////////////////////////////////////////////////////////////////
 // add
 //
-void Shape::add
+ShapeMatch * Shape::add
 (	float const				weight,
 	ShapeMatches * const	shapeMatches
 ){	ShapeMatch *			shapeMatch;
 
-	shapeMatch = new ShapeMatch(this, weight, 0);
+	shapeMatch = new ShapeMatch(this, weight);
 
 	(*shapeMatches) += shapeMatch;
+
+	return shapeMatch;
 
 }
 

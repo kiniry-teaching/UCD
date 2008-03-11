@@ -34,6 +34,8 @@ class Frame
 	friend		class Track;
 	/**
 	 * Be friends with cout stream writer
+	 * @param stream The stream to write to
+	 * @param frame This frame to output
 	 * @author EB
 	 * @version 1.0
 	 */
