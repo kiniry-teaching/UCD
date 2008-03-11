@@ -1,0 +1,31 @@
+class_chart SPACESHIP
+indexing
+	cluster: "SPACE_STATUS";
+	created: "1993-03-15 jmn";
+	revised: "1993-05-12 kw"
+explanation
+	"The object that the player interacts with and contorls to play the game as it reacts to things around it"
+part "1/1"
+query
+	"Fuel", "Bullets", "Weight", "Colour", "Shield",
+command
+	"Shoot", "Shield"
+constraint
+	"Only a certain amount of fuel.",
+	"Shield can only withstand so much attacks.",
+	"Limited number of bullets.",
+	"Gravity effects flight of spaceship",
+	"Object, when picked up using string, effects flight of spaceship."
+end
+
+system_chart THE_WORLD
+  cluster EARTH description "A small, insignificant planet."
+end
+
+cluster_chart EARTH
+  class SPACESHIP description 
+	"The object that the player interacts with and contorls to play the game as it reacts to things around it."
+  class OBJECT description
+	"The aim of the game is to collect this object and fly into the sky with it."
+end
+
