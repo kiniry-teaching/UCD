@@ -269,7 +269,7 @@ class_chart PHYSICS
   constraint
     "Gravity has a constant magnitude, but can be negative or positive which indicates direction",
     "The mass of the ship is static",
-    "The mass of the pos is static",
+    "The mass of the pod is static",
     "The towline has zero mass"
 end
 
