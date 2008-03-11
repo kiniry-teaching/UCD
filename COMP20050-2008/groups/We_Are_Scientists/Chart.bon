@@ -1,0 +1,730 @@
+system_chart THRUST
+  cluster SPACESHIP 
+description
+ "An object which moves through space, has a shield and a tractor beam. Aim is to take ball and avoid Attacker. Can 			explode."
+
+ cluster BACKGROUND 
+description 
+"An object on ground that shoots at Spaceship."
+
+cluster BAR
+description
+"The gamer hud gives out information regarding lives points and fuel"
+
+cluster MENU
+description
+"The different menus that can be accesed,password screen,about screen,creits,options"
+
+cluster ATTACKER 
+description 
+"An object on ground that shoots at Spaceship."
+ 
+cluster POWER_POD 
+description
+ "Rests on stand until string from Spaceship picks it up. A pendulum motion then happens between the ball and Spaceship. 	Explodes when far enough into space."
+
+ cluster FACTORY 
+ description 
+ "An object without movement that resides on the ground and emits smoke. It will explode 10 seconds after being attacked."
+
+
+ cluster FUEL 
+description 
+"Is placed on the ground. Spaceship is able to use tractor beam to pick it up."
+
+cluster ACTION
+description
+"Actions that populate thrust"
+
+cluster INPUT
+description
+"The users input that controls the game and th menu screen/will have default keys that can be edited in the option menu"
+
+
+end
+
+cluster_chart ACTION
+class FIRE_BULLET description"the action involved in the firing of a bulet"
+class COLLISION description"What happens when the ship or pod collides with either land"
+class EXPLODE description"When somethings health is zero factory,attacker,ship"
+end
+
+cluster_chart INPUT
+class USE_MOVE description"The input buttons thrust(up) down left right "
+class USE_FIRE description"The fire button that shoots a bullet max == 4 at a go in original"
+class USE_SHIELD description"The shield button that is also the tractor beam and beam"
+class QUIT description "the esc key usually or Q"
+end
+
+cluster_chart SPACESHIP
+  class PLAYER_CREATOR description"a general class for everything SPACESHIP related"
+  class SHIELD description "Protects Spaceship from Bullets of Attacker."
+  class PLAYER_BULLET description "Can be fired from Spaceship and Attacker."
+  class TRACTOR_BEAM description "Comes out from Spaceship when near to fuel and consumes fuel."
+  class BEAM description "Comes out from Spaceship when near Ball and maintains a pendulum motion between Spaceship and Ball."
+  class SHIP description "Triangular body of Spaceship"
+end
+
+cluster_chart FUEL
+  class FUEL_CREATOR description "a general class for everything FUEL related"
+  class QUANTITY description "Amount of fuel in canister."
+  class CANISTER description "Body of fuel canister."
+end
+
+cluster_chart BACKGROUND
+  class PLANET_CREATOR description "a general class for everything BACKGROUND related"
+  class GROUND description "Underneath ground."
+  class SPACE description "Area above ground, excluding all objects residing on ground."
+  class STARS description "Shapes in Space(cirles, triangles)."
+end
+
+
+cluster_chart ATTACKER
+  class ENEMY_CREATOR description "a general class for everything ATTACKER related"
+  class ENEMY_BULLET description "Can be fired from Spaceship and Attacker."
+  class ACKER description "Body of Attacker."
+end
+
+
+
+
+cluster_chart POWER_POD
+  class POWER_POD_CREATOR description "a general class for everything POWER_POD created"
+  class STAND description "Supports power pod, on ground."
+  class POD description "Circular body of Power pod"
+end
+
+
+cluster_chart FACTORY
+  class FACTORY_CREATOR description "a general class for everything FACTORY related"
+  class SMOKE description "Is a grey colour that rises into space in circles."
+  class FACTO description "Body of factory."
+end
+
+
+cluster_chart BAR
+class LIVES_DISPLAY description"displays amount of lives player has"
+class POINTS_DISPLAY description"displays amount of points player has"
+class FUEL_DISPLAY description "displays amount of points player has"
+
+end
+
+cluster_chart MENU
+class SCREENS description "all the menu screens availible"
+end
+
+class_chart SHIELD
+indexing
+  in_cluster: "SPACESHIP";
+explanation
+  "Protects Spaceship from Bullets of Attacker."
+part "1/5"
+query
+  "Full power", "Some power", "No power"
+command
+  "Activate", "Lose Power", "Deactivate", "Flicker"
+constraint
+  "Deativate when no power left.",
+  "Full power initially.",
+  "Lose power when hit by bullet(s) from attacker.",
+  "Protect spaceship while it has full/some power.",
+  "Flickers when hit by bullet."
+end
+
+class_chart PLAYER_BULLET
+indexing
+  in_cluster: "SPACESHIP"
+explanation
+  "Can be fired from Spaceship and Attacker."
+part "2/5"
+query
+  "Fired", "Hit target", "Missed target" 
+command
+  "Be created", "Disappear"
+constraint
+  "Move in straight line at constant speed when fired.",
+  "Disappears when hits an object.",
+  "Continues off screen if no object in path."
+end
+
+class_chart TRACTOR_BEAM
+indexing
+ in_cluster: "SPACESHIP";
+explanation
+  "Comes out from Spaceship when near to fuel and consumes fuel."
+part "3/5"
+query
+  "Connected with fuel"
+command
+  "Connect with fuel"
+constraint
+  "Can only connect with fuel when spaceship is a certain distance from fuel."
+end
+
+class_chart BEAM
+indexing
+  in_cluster: "SPACESHIP";
+explanation 
+  "Comes out from Spaceship when near Power Pod and maintains a pendulum motion between Spaceship and Power Pod."
+part "4/5"
+query
+  "Connected with Power Pod", "Power Pod or Spaceship hit ground or high in space"
+command
+  "Connect with Power Pod", "Disappear"
+constraint
+  "Can only connect with Power Pod when spaceship is a certain distance from Power Pod.",
+  "Disappear if Power Pod or Spaceship hit ground or are high enough in space.",
+  "Doesn't change length."
+end
+
+class_chart SHIP
+indexing
+  in_cluster: "SPACESHIP";
+explanation
+  "Triangular body of Spaceship"
+part "5/5"
+inherit EXPLODE
+query
+  "Direction pointing in", "Been hit by bullet"
+command
+  "Move", "Change direction"
+constraint
+  "Obey the laws of physics implemented in the game"
+end
+
+
+
+
+
+
+
+
+class_chart QUANTITY
+indexing
+  in_cluster: "FUEL";
+explanation
+  "Amount of fuel in canister."
+part "1/2"
+query
+  "Full", "Empty", "Connected to tractor beam"
+command
+  "Reduce fuel amount to empty"
+constraint
+  "Cannot exceed maximum (full) or be less than minimum (empty)."
+end
+
+class_chart CANISTER
+indexing
+  in_cluster: "FUEL";
+explanation
+  "Body of fuel canister."
+part "2/2"
+query
+  ""
+command
+  ""
+constraint
+  "Doesn't move relative to ground."
+end
+
+
+
+ 
+
+
+
+
+class_chart SMOKE
+indexing
+  in_cluster: "FACTORY";
+explanation
+  "Is a grey colour that rises into space in circles."
+part "1/2"
+query
+  "Certain distance above factory"
+command
+  "Disappear"
+constraint
+  "Disappears when certain distance above factory"
+end
+
+class_chart FACTO
+indexing
+  in_cluster: "FACTORY";
+explanation
+  "Body of factory."
+part "2/2"
+inherit EXPLODE
+query
+  "Been hit by bullet"
+command
+  "Emit smoke"
+constraint
+  "Doesn't move relative to ground."
+end
+
+
+
+ 
+
+
+class_chart STAND
+indexing
+  in_cluster: "POWER_POD";
+explanation
+  "Supports power pod, on ground."
+part "1/2"
+query
+  ""
+command
+  ""
+constraint
+  "Doesn't move relative to ground."
+end
+
+class_chart POD
+indexing
+  in_cluster: "POWER_POD";
+explanation
+  "Circular body of Power pod"
+part "2/2"
+inherit EXPLODE
+query
+  "On stand", "Connected to beam", "High enough into space", "Touching ground"
+command
+  "Connect to beam", "Leave stand"
+constraint
+  "Explode on contact with ground.",
+  "Obey the laws of physics implemented in the game"
+end
+
+
+
+
+  
+
+
+
+class_chart ENEMY_BULLET
+indexing
+  in_cluster: "ATTACKER"
+explanation
+  "Can be fired from Spaceship and Attacker."
+part "1/2"
+query
+  "Fired", "Hit target", "Missed target" 
+command
+  "Be created", "Disappear"
+constraint
+  "Move in straight line at constant speed when fired.",
+  "Disappears when hits an object.",
+  "Continues off screen if no object in path."
+end
+
+class_chart ACKER
+indexing
+  in_cluster: "ATTACKER";
+explanation
+  "Body of Attacker"
+part "2/2"
+inherit EXPLODE
+query
+  "Been hit by bullet", "Spaceship in range", "Been hit by maximum number of bullets"
+command
+  "Fire", "Move gun to correct angle"
+constraint
+  "Main body doesn't move relative to ground.",
+  "Gun has 180 degrees of freedom."
+end
+
+
+
+
+ 
+
+
+class_chart GROUND
+indexing
+  in_cluster: "BACKGROUND";
+explanation
+  "The planetary terrain the ship and pod must not collide with."
+part "1/3"
+query
+  "Collided with by ship or pod"
+command
+  ""
+constraint
+  "Doesn't change shape.",
+  "Doesn't move."
+end
+
+class_chart SPACE
+indexing
+  in_cluster: "BACKGROUND";
+explanation
+  "Area above ground, excluding all objects residing on ground."
+part "2/3"
+query
+  ""
+command
+  ""
+constraint
+  "Doesn't change shape."
+end
+
+class_chart STARS
+indexing
+  in_cluster: "BACKGROUND";
+explanation
+  "Shapes in Space(cirles, triangles)."
+part "3/3"
+query
+  ""
+command
+  "Twinkle (appear repeatedly)"
+constraint
+  "Doesn't move.",
+  "Certain number of twinkles per minute per star."
+end
+
+
+class_chart FIRE_BULLET
+indexing
+in_cluster :"ACTION";
+explanation "when a bullet is fired"
+part "1/3"
+query"what just fired a bullet?"
+command"firebullet"
+constraint"cant fire more than 4 at one go"
+end
+
+class_chart COLLISION
+indexing
+in_cluster :"ACTION";
+explanation "when a collision occurs"
+part "2/3"
+query"what just collided with what?"
+command"implement explode?"
+constraint"only ship can collide with things"
+end
+
+class_chart EXPLODE
+indexing
+in_cluster :"ACTION";
+explanation "when something blows up"
+part "3/3"
+query "what just blew up"
+command"blow up object related to","return blown up objects name"
+constraint"certain things dont blow up"
+
+end
+
+
+class_chart PLAYER_CREATOR
+indexing
+in_cluster:"SPACESHIP";
+explanation"general class for all the spaceship concepts"
+
+end
+class_chart ENEMY_CREATOR
+indexing
+in_cluster:"ATTACKER";
+explanation"general class for all the Attacker concepts"
+end
+
+class_chart PLANET_CREATOR
+indexing
+in_cluster:"BACKGROUND";
+explanation"general class for all the planet concepts"
+end
+
+class_chart POWER_POD_CREATOR
+indexing
+in_cluster:"POWER_POD";
+explanation"general class for all the power pod concepts"
+
+end
+class_chart FACTORY_CREATOR
+indexing
+in_cluster:"FACTORY";
+explanation"general class for all the factory concepts"
+end
+class_chart FUEL_CREATOR
+indexing
+in_cluster:"FUEL";
+explanation"general class for all the fuel concepts"
+end
+
+
+
+
+
+class_chart FUEL_DISPLAY
+indexing
+in_cluster:"BAR";
+explanation"displays the amount of fuel the player has"
+part"1/3"
+query"do i increase?","do i decrease?","how fast do i decrease?"
+command"increase","decrease"
+constraint"cannot be negative value"
+end
+
+class_chart LIVES_DISPLAY
+indexing
+in_cluster:"BAR";
+explanation""
+part"2/3"
+query"do i increase by 1?","do i decrease by 1?"
+command"add 1","minus 1"
+constraint"cannot be negative integer"
+end
+
+class_chart POINTS_DISPLAY 
+indexing
+in_cluster:"BAR";
+explanation""
+part"3/3"
+query"has an event happened that involves an increase in points?"
+command"increase"
+constraint"cannot be negative","must start at zero"
+end
+
+class_chart SCREENS
+indexing
+in_cluster:"MENU";
+explanation"all the menu screens availible to you"
+part"1/1"
+query"what screen am i at?","what screen was asked for via input?"
+command"go to about screen","go to credits screen","go to main menu screen(when game boots)","go to password screen","go to options screen","go to high score screen"
+constraint"must start at main menu screen always"
+end
+
+class_chart USE_MOVE
+indexing
+in_cluster:"INPUT";
+explanation"move the ship relative to controls you use ship"
+part"1/4"
+query"what way am i facing?","whats the shortest angle to "
+command"turn right","turn left","thrust"
+constraint"can only thrust while sufficient fuel is availible"
+end
+
+class_chart USE_FIRE
+indexing
+in_cluster:"INPUT";
+explanation"fire a bullet from your ship"
+part"2/4"
+query"has a bullet been fired?","has the bullet button been pressed?"
+command"FIRE BULLET "
+constraint"can only fire 4 at a go"
+end
+
+
+class_chart USE_SHIELD
+indexing
+in_cluster:"INPUT";
+explanation"use the ships shield to deflect bullets"
+part"3/4"
+query"is the shield active","have i just blocked a bullet"
+command"enable shield","deflect bullet","use shield twice as fast"
+constraint"can only use shield while sufficient fuel aka not zero"
+end
+
+
+class_chart QUIT
+indexing
+in_cluster:"INPUT";
+explanation"key that quits the game"
+part"4/4"
+query"is a game running?","have i quit the game?"
+command"end process Thrust","quit game yes no screen"
+constraint"can only quit if game is active"
+end
+
+
+
+scenario_chart THRUST
+indexing
+  created: "2008-03-11";
+explanation
+  "Scenarios to show the types of system behavior."
+scenario
+  "Run the game"
+description
+  "The game starts up, loads files needed and displays the START_SCREEN"
+scenario
+  "Start new game"
+description
+  "Creates all objects needed and displays the GAME_SCREEN"
+scenario
+  "Level completed"
+description
+  "Creates all objects needed and displays the next GAME_SCREEN"
+scenario
+  "Spaceship explosion before level completion"
+description
+  "Spaceship either collides with ground (due to bad manouver or no fuel) or is shot, and explodes"
+scenario
+  "End game"
+description
+  "Displays MAIN_MENU"
+scenario
+  "Quit game"
+description
+  "The game shuts down and the program is stopped."
+end
+
+
+
+
+
+event_chart THRUST
+incoming
+indexing
+  created: "2008-03-11";
+explanation
+  "external"
+part
+  "1/2"
+event
+  "Thrust key pressed"
+involves
+  SHIP,(MENU)
+event
+  "Shield/Tractor Beam/Beam key pressed"
+involves
+  SHIP, (MENU), SHIELD, TRACTOR_BEAM, BEAM
+event
+  "Fire key pressed"
+involves
+  SHIP, (MENU), PLAYER_BULLET
+event
+  "Left/Right direction key pressed"
+involves
+  SHIP, (MENU)
+event
+  "End game key pressed"
+involves
+  (MENU)
+end
+
+event_chart THRUST
+outgoing
+indexing
+  created: "2008-03-11";
+explanation
+  "internal"
+part
+  "2/2"
+event
+  "Thrusting"
+involves
+  (MENU), SHIP,(FUEL)
+event
+  "Use Shield/Tractor Beam/Beam"
+involves
+  (MENU), SHIP, SHIELD, TRACTOR_BEAM, BEAM
+event
+  "Fire Player bullet"
+involves
+  SHIP, PLAYER_BULLET
+event
+  "Spaceship explodes"
+involves
+  SHIP, EXPLODE
+event
+  "Navigating"
+involves
+  (MENU), SHIP
+end
+
+event_chart THRUST
+incoming
+indexing
+  created: "2008-03-11";
+explanation
+  "external"
+part
+  "1/2"
+event
+  "New game selected"
+involves
+  (MENU)
+event
+  "Resume game selected"
+involves
+  (MENU)
+event
+  "High score selected"
+involves
+  (MENU)
+event
+  "Enter password selected"
+involves
+  (MENU)
+event
+  "Quit game selected"
+involves
+  (MENU)
+end
+
+event_chart THRUST
+outgoing
+indexing
+  created: "2008-03-11";
+explanation
+  "internal"
+part
+  "2/2"
+event
+  "New game begins"
+involves
+  (MENU)
+event
+  "The last game resumes"
+involves
+  (MENU)
+event
+  "List of high scores appears"
+involves
+  (MENU)
+event
+  "Password input screen appears"
+involves
+  (MENU)
+event
+  "Program stops running"
+involves
+  (MENU)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+creation_chart THRUST
+indexing
+  created: "2008-03-11";
+explanation
+  "List of classes creating objects in the game's system."
+creator FUEL_CREATOR creates CANISTER 
+creator PLAYER_CREATOR creates SHIP, SHIELD, PLAYER_BULLET, BEAM, TRACTOR_BEAM
+creator POWER_POD_CREATOR creates STAND,POD
+creator FACTORY_CREATOR creates FACTO, SMOKE
+creator PLANET_CREATOR creates GROUND, SPACE, STARS
+creator ENEMY_CREATOR creates ACKER, ENEMY_BULLET
+
+end
+ 
+

@@ -28,22 +28,25 @@ We have done brainstorming to identify our concept names and defined these conce
 
 CONCEPT DEFINITIONS:
 
-SPACESHIP:	A yellow object which moves through space, has a shield and a tractor beam. Aim is to take ball and avoid Attacker. Can explode.
-FACTORY:	An object without movement that resides on the landscape and emits smoke. It will explode 10 seconds after being attacked.
-SMOKE:		Is a grey colour that rises into space in circles.
-FUEL:		Is placed on the landscape. Spaceship is able to use tractor beam to pick it up.
-ATTACKER:	An object on landscape that shoots at Spaceship.
-BULLETS:	Can be fired from Attacker to Spaceship and from Spaceship to Attacker and Factory.
-BALL:		Rests on stand until string from Spaceship picks it up. A pendulum motion then happens between the ball and Spaceship. Explodes when far 			enough into space.
-STAND:		Supports ball, on landscape.
-SHIELD:		Protects Spaceship from Bullets of Attacker.
-TRACTOR BEAM:	Comes out from Spaceship when near to fuel and consumes fuel.
-STRING:		Comes out from Spaceship when near Ball and maintains a pendulum motion between Spaceship and Ball.
-COLOUR:		Visual aid to help tell things apart on the screen.
-CIRCLE:		Shape of Ball, Smoke.
-LANDSCAPE:	Divide between Ground and Space.
-GROUND:		Underneath Landscape.
-SPACE:		Area above Landscape, excluding all objects residing on Landscape.
-STARS:		Shapes in Space(cirles, triangles)
-SHAPES:		Outline of Objects.
-DISPLAY:	Visual track of variables at top of screen, independent of system movement.
+SPACESHIP:		An object which moves through space, has a shield and a tractor beam. Aim is to take Power pod and avoid Attacker. Can explode.
+SHIP:			Triangular Shape of Spaceship.
+FACTORY:		An object without movement that resides on the ground and emits smoke. It will explode 10 seconds after being attacked.
+FACTO:			Shape of factory.
+SMOKE:			Is a grey colour that rises into space in circles.
+FUEL:			Is placed on the ground. Spaceship is able to use tractor beam to pick it up.
+ATTACKER:		An object on ground that shoots at Spaceship.
+ACKER: 			Shape of Attacker.
+BULLET:			Can be fired from Spaceship and Attacker.
+POWER_POD:		Rests on stand until string from Spaceship picks it up. A pendulum motion then happens between the power pod and Spaceship. Explodes when 					far	enough into space.
+POD:			Circular Shape of Power pod.
+STAND:			Supports power pod, on ground.
+SHIELD:			Protects Spaceship from Bullets of Attacker.
+TRACTOR_BEAM:	Comes out from Spaceship when near to fuel and consumes fuel.
+BEAM:			Comes out from Spaceship when near Power pod and maintains a pendulum motion between Spaceship and Power pod.
+COLOUR:			Visual aid to help tell things apart on the screen.
+BACKGROUND:		Area of the screen in which ship, facto, acker and pod appear.
+GROUND:			The planetary terrain the ship and pod must not collide with.
+SPACE:			Area above ground, excluding all objects residing on ground.
+STARS:			Shapes in Space(cirles, triangles).
+SHAPES:			Outline of Objects.
+BAR:			Visual track of variables (lives, fuel, score) at top of screen, independent of planet's movement.
