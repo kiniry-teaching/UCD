@@ -1,0 +1,239 @@
+
+
+class_chart ENTITY
+indexing
+  	"obj"
+explanation
+  	"A thing which provides control over itself"
+part 
+	"1/1 "
+query
+	"Position"
+	"Life"
+	"Shape"
+	"Colour"
+command
+	"Shoot"
+	"Move" 
+	"Die"
+
+constraint
+	"Must exist in the window"
+end
+
+
+
+
+
+class_chart SPACESHIP
+indexing
+	"obj"
+explanation
+	"An object which can shoot bullets, hit the ground, needs fuel, changes position, picks up "the ball"."
+part "1/1 "
+inherit ENTITY
+query	
+	"Fuel"
+	"Lives"
+constraint
+	"Has a limited number of lives"
+	"Has a limited number of fuel"
+	"Loses a life if touches the the ground"
+	"Loses a life if hit by bullet"
+end
+
+
+
+
+class_chart BALL
+indexing
+	"obj"
+explanation
+	"Connects to the spaceship via string"
+part "1/1 "
+inherit ENTITY
+query
+	"Is the ball attached?"
+constraint
+	"If attached, and hits ground, spaceship loses a life."
+	"If attached, and hit by bullet, spaceship loses a life."
+end
+
+
+
+
+class_chart ENEMY
+indexing
+	"obj"
+explanation
+	"Exists to destroy the spaceship, shoots bullets."
+part "1/1 "
+inherit ENTITY
+query
+	"Position of SPACESHIP"
+constraint
+	"If hit by bullet, deincrement lives."
+end
+
+
+
+
+class_chart STRING
+indexing
+	"obj"
+explanation
+	"Attaches the ball to the ship."
+part "1/1 "
+inherit ENTITY
+query
+constraint
+	"Only exists if ball attached to spaceship."
+end
+
+
+
+
+
+class_chart BULLET
+indexing
+	"inf"
+explanation
+	"A thing that has to be shot by something, damages what it comes in contact with."
+part "1/1 "
+query
+	"Position"
+	"Direction"
+	"Who shoots"
+command
+	"Shoot"
+constraint
+	"A bullet can be shot by the spaceship and the enemy."
+	"It can damage spaceship, enemy and factory."
+end
+
+
+
+
+class_chart FACTORY
+indexing
+	"inf"
+explanation
+	"An object which produces smoke. When it's damaged the score increases."
+part "1/1 "
+query
+	"Damaged"
+command
+constraint
+	"Can be damaged only by bullets shot by the spaceship."
+end
+
+
+
+
+class_chart FUEL
+indexing
+	"inf"
+explanation
+	"A thing that enables SPACESHIP to change the POSITION."
+part "1/1 "
+query
+	"Spaceship"
+command
+	"Fill"
+constraint
+	"Can be used only by the spaceship."
+	"Spaceship has to be close enough to the fuel box to fill its tank."
+	"The player has to press a specified button to make spaceship take the fuel."
+end
+
+
+
+
+class_chart WINDOW
+indexing
+	"win"
+explanation
+	"A box that holds the image. All the graphics of the game is contained in it."
+part "1/1 "
+query
+	"Size"
+command
+	"Size"
+constraint
+	"Can't be bigger than 480x350px and smaller than 400x300px (for example...)"
+end
+
+
+
+
+class_chart BACKGROUND
+indexing
+	"win"
+explanation
+	"Colour that fills the window and makes all objects visible. It is black and has little white dots to represent stars."
+part "1/1 "
+query
+command
+constraint
+	"It is visible always when the window is open."
+end
+
+
+
+
+class_chart SCORE
+indexing
+	"win"
+explanation
+	"A number which keeps a number of particular actions."
+part "1/1 "
+query
+	"Value"
+command
+	"Add"
+constraint
+	"Score increases when the enemy is killed"
+	"Score increases when the factory is damaged"
+	"Score increases when the ball is picked up"
+end
+
+
+
+
+class_chart COUNT
+indexing
+	"win"
+explanation
+	"Number saying how much fuel or how many lives you have, or in which level you are."
+part "1/1 "
+query
+	"value"
+command
+	"Add"
+	"Sub"
+constraint
+	"Has to be equal to or more than zero."
+	"If count of lives or fuel is zero, the game is over."
+	"Count of levels can be only the number representing the level."
+end
+
+
+class_chart GRAVITY
+indexing
+	"sim"
+explanation
+	"Acts upon Spaceship and the ball, pulling them down."
+
+part "1/1 "
+query
+command
+	"Act"
+constraint
+	"Doesn't act on bullets, as they are very small."
+	"Doesn't act on the string as it is very light."  
+end
+
+
+
+
+
