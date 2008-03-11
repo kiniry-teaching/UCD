@@ -1,0 +1,95 @@
+
+
+
+Team name: M&M Peanut
+Team Memebers :#1 Naomi O' Reilly, naomi, 05389623
+     	       #2 Sean Jago, sjago, 06588557
+	       #3 Colm Murphy, comurphy, 06592295
+
+Project Introduction:
+        For this project we aim as a team to re-create the commodore 64 game "Thrust"
+        using what we will  have learned throughout the module.
+       
+Project Purpose:
+	To teach us how to use the concepts and tools of software engineering 
+	we cover in class to successfully create a game.
+
+Project Requirements:
+	Become familiar with and use Linux.
+	Work as a team to decide on our workplan.
+	Use knowledge obtained from lectures to complete assignments.	 
+	To successfully run the game Thrust using our own implementations.
+	
+
+Summary of analysis & design process to date:
+	Concept Analysis - We wrote out a class dictionary and defined the core
+	concepts we will be using in our development of the game.
+	05/03/08 - We updated our class library.
+
+Project Dictionary:
+
+	*CONCEPT* *DEFINITION*
+-----------------------------------
+Fuel:Is what powers the ship in the game.
+Score:Keeps track of points scored.
+Points:Keep track of success in the game.
+Sucess:Achieving your goals.
+Colour:Each colour is unique.
+Lives:Decrease and increase depending on success or lack thereof.
+Ship:A yellow, triangular entity, controlled by the player.
+Pod:Is a ball shaped object.
+Enemy:Tries to harm the ship by shooting at the ship.
+Shooting:What the enemy does to take lives from the ship.
+Land:Is a sequence of lines and colours.
+Lines:Lines are pieces of colour that form the land and other objects in the game.
+Space:An area of black.
+Area:Area is a defined part of space.
+Tractor Beam:A line extended from the ship.				
+Entity:A visual object in the game.
+Energy:Powers the ship.
+Tool:An object the ship/enemies use to help them succeed.
+Size:Refers to how much Area an Entity possesses.
+Amount:A number that increases and decreases.
+Total:The final Amount.
+Visual:Something you see.
+
+*IS-A RELATIONS*
+----------------
+Fuel is a source of Energy.
+Score is a series of numbers that increases with Success.  
+Colour is an Entity.
+Lives is a counter of remaining chances to Suceed. 
+Enemy is an Entity.
+Ship is an Entity.
+Pod is an object the Ship must collect.
+Land is a Area that constrains the flight of the Ship.
+Space is an Area where the Ship flies.
+Tractor Beam is a Line shaped Tool that picks up the Pod.
+
+
+*HAS-A RELATIONS*
+-----------------
+Fuel has an Amount.
+Score has a Total.
+Colour has a unique Visual impact.
+Lives has an Amount.
+Enemy has a Tool to harm the Ship.
+Ship has a Tractor Beam.
+Pod has a Line.
+Land has an assortment of Colours.
+Space has a Colour and Area.
+Tractor Beam has a Size.
+
+*IS-A-KIND-OF RELATIONS*
+------------------------
+Fuel is a kind of string.
+Score is a kind of string.
+Colour is a kind of effect.
+Lives is a kind of string.
+Enemy is a kind of Entity.
+Ship is a kind of Entity.
+Pod is a kind of object.
+Land is a kind of platform.
+Space is a kind of Area.
+Tractor Beam is a kind of Tool.
+

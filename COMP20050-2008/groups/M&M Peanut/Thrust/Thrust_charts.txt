@@ -1,0 +1,377 @@
+
+system_chart GAME
+	    cluster GRAPHICS description "used to draw objects such as LINES and other VISUALS on the screen."
+	    cluster SOUND description "noises heard by the user."
+	    cluster GAMEPLAY description "how the game progresses as the user plays."
+	    cluster CHARACTERS description "ENTITIES that are present for example ENEMIES and the SHIP."
+end
+
+cluster_chart GRAPHICS
+	      	    class LINES descripton "pieces of colour that form the land and other objects in the game."
+		    class LAND  descripton "a sequence of lines and colours."
+		    class SHIP  description "a yellow triangular ENTITY controlled by the player."
+		    class ENEMY description "tries to harm the ship by SHOOTING at the SHIP."
+		    class POD description "Is a ball shaped object."
+		    class SCORE description "Keeps track of POINTS scored."
+		    class FUEL description "Is what powers the SHIP in the game."
+		    class LIVES description "Decrease and increase depending on success or lack thereof."
+end
+
+class_chart LINES
+indexing 
+  cluster: "SHAPE";
+  created: "2008-03-10 nor";
+  
+explanation
+  "A shape created to form an ENTITY."
+part "1/1"
+query
+   "Length","COLOUR", "Width".
+command
+   "Be this length", "Be this colour", "Be this width".
+constraint
+   "Cant shoot", "Cant be killed", "Cant kill".
+end
+
+class_chart LAND
+indexing 
+  cluster: "AREA";
+  created: "2008-03-10 nor";
+
+explanation
+  "An area which is occupied by ENEMIES, FUEL, the POD and is made up of LINES."
+part"1/1"
+query
+   "SIZE", "COLOUR", "Shape".
+command 
+   "Do not move", "Be this SIZE", "Be this COLOUR", "Be this shape".
+constraint
+   "cannot move".
+end
+
+class_chart SHIP
+indexing
+  cluster: "ENTITY";
+  created: "2008-03-10 sj";
+
+explanation
+  "The main ENTITY in the game."
+part "1/1"
+query
+   "Where are you flying","What is your mission", "Do you have enough FUEL","How will you succeed", "How do you fail".
+command
+   "Fly here", "Get FUEL", "Pick up POD", "SHOOT", "Avoid ENEMIES".
+constraint
+   "Cannot fly through LAND", "Has limited AMOUNT of LIVES", " Cannot fly without FUEL", "Cannot progress without obtaining POD".
+end
+
+class_chart ENEMY
+indexing
+  cluster: "ENTITY";
+  created: "2008-03-10 sj";
+
+explanation
+  "The opposition to the SHIP."
+part "1/1"
+query
+   "How do you destroy the SHIP", "COLOUR", "SIZE", "type", "SHAPE", "What is your GOAL".
+command
+   "SHOOT at the SHIP", "Die when shot", "Trigger a time limit when factories are destroyed".
+constraint
+   "Cannot come back to life once destroyed", "Cannot retrieve the POD", "Cannot SHOOT through LAND".
+end
+
+class_chart POD
+indexing
+  cluster: "ENTITY";
+  created: "2008-03-10 sj";
+
+explanation
+  "It is the goal of the SHIP."
+part "1/1"
+query
+   "Where are you", "How heavy are you", "What COLOUR are you".
+command
+   "Attach to the TRACTOR BEAM", "Disturb the SHIP'S flight".
+constraint
+   "Cannot move when not attched to TRACTOR BEAM", "Can be destroyed", "Can't Kill".
+end
+
+
+class_chart SCORE
+indexing
+  cluster: "VALUE";
+  created: "2008-03-10 sj";
+
+explanation
+  "Increases with SUCCESS."
+part "1/1"
+query
+   "What is your value".
+command
+   "Increase with SUCCESS".
+constraint
+   "Can only increase with SUCCESS, cannot decrease".
+end
+
+class_chart FUEL
+indexing
+  cluster: "VALUE";
+  created: "2008-03-10 cm";
+
+explanation
+  "Decreases as it is consumed by the SHIP and Increases when the SHIP refuels."
+part "1/1"
+query
+  "What is your value".
+command
+  "Decrease as the SHIP flies", "Increase as the SHIP picks up FUEL".
+constraint
+  "Has a limited AMOUNT", "Can only increase as the SHIP refuels".
+end
+
+class_chart LIVES;
+indexing
+  cluster: "VALUE";
+  created: "2008-03-10 cm";
+
+explanation
+  "Decreases as SHIP gets destroyed."
+part "1/1"
+query
+  "What is your value".
+command
+  "Decrease when SHIP gets destroyed".
+constraint
+  "Has limited AMOUNT".
+
+
+end
+  
+cluster_chart SOUND
+	      class MUSIC description "Pleasing background noise accompanying the game."
+	      class SOUND EFFECTS description "Additional noises in the game example explosions."
+end
+
+class_chart MUSIC
+indexing
+cluster: "SOUND";
+created: "2008-03-10 nor";
+
+explanation "Constant noise in the background while the user plays the game."
+part "1/1"
+
+query 
+   "How loud are you", "Can you be turned off", "Do you change depending on GAMEPLAY".
+command
+   "Turn on", "Turn off", "Increase volume", "Decrease volume", "Change".
+constraint
+   "Can only play while game is running".
+end
+
+class_chart SOUND EFFECTS
+indexing 
+cluster: "SOUND";
+created: "2008-03-10 nor";
+
+explanation "Noises heard depending on GAMEPLAY."
+part "1/1"
+ 
+query
+"When are you heard", "Can you be heard with the music", "How loud are you", "What do you sound like".
+command
+"Turn on", "Turn off", "Occur when this happens", "Increase/decrese volume".
+constraint
+"Can only be heard when instances occur".
+end
+
+cluster_chart GAMEPLAY
+
+class GOAL "The aim of the SHIP."
+class CONTROLS "How the game is played."
+class DIFFICULTY "Increases as the obstacles increase in each level."
+class LAYOUT "The look and feel of the game."
+class LEVEL "Different part of the game that increase in DIFFICULTY as the game progresses, has a number which also increases"
+end
+
+class_chart GOAL
+indexing
+cluster:"AIM";
+created: "2008-03-10 nor";
+
+explanation "What the user must achieve to progress in the game."
+part"1/1"
+query
+"What is the GOAL", "How is the GOAL achieved", "What happens once the GOAL is achieved".
+command
+"Set a specific GOAL".
+constraint
+"Must be achieved to progress to the next LEVEL". "Cant be achieved if the POD or SHIP are destroyed."
+end
+
+class_chart CONTROLS
+indexing
+cluster: "ACTIONS";
+created: "2008-03-10 cm";
+
+explanation "How the user interacts with the game."
+part "1/1"
+query
+"What do you control", "How do you control".
+command
+"Control the SHIP", "Make the SHIP fly/change direction/shoot/pick up POD,FUEL".
+constraint
+"Requires a user", "Requires joypad or keyboard".
+end
+
+class_chart DIFFICULTY
+indexing
+cluster: "GAMEPLAY";
+created: "2008-03-10 cm";
+
+explanation "How many obstacles you must avoid in order to complete the LEVEL."
+part "1/1"
+query
+"How do you increase", "Can you decrease".
+command
+"Increase with LEVELS", "Add more ENEMIES", "Change structure of LAND", "Start with less FUEL".
+constraint
+"Can only increase when LEVELS increase".
+end
+
+class_chart LAYOUT
+indexing
+cluster: "VISUAL";
+created: "2008-03-10 cm";
+
+explanation "How the screen is divided into LAND and SPACE and where the VALUES are located."
+part "1/1"
+query
+"How are you divided", "How do you differentiate between LAND and SPACE", "Where are your VALUES located".
+command
+"Use different COLOURS for LAND and SPACE", "Put VALUES at the top of the screen", "Change SHAPE and COLOUR of LAND and SPACE for each LEVEL".
+constraint
+"Does not change within LEVEL", "VALUES remain in same position".
+end
+
+class_chart LEVEL
+indexing
+cluster: "GAMEPLAY";
+created: "2008-03-10 nor";
+
+explanation "How the player progresses through the game."
+part"1/1"
+query
+"How many LEVELS are there", "How long are the LEVELS", "Which LEVEL are you on", "How is the LEVEL completed", "What happens when a LEVEL is completed".
+command
+"Increase DIFFICULTY", "Change LAYOUT once previous LEVEL is completed", "Increase number for LEVEL".
+constraint
+"Number cannot decrease", "User can only progress to the next LEVEL once the current LEVEL is completed", "Cannot change DIFFICULTY/LAYOUT during LEVELS", "Game has a limited AMOUNT of LEVELS".
+end
+
+cluster_chart CHARACTERS
+	      class SHIP description "The main ENTITY in the game controlled by the user."
+	      class ENEMIES description "The opposition to the SHIP."
+end
+
+class_chart SHIP
+indexing
+cluster: "ENTITY";
+created: "2008-03-10 nor";
+
+explanation "What the user must guide through the LEVELS."
+part"1/1"
+query
+   "SHAPE", "SIZE", "COLOUR", "FUEL", "LIVES", "GOAL", "POSITION", "DIRECTION TRAVELING IN", "DEAD/ALIVE".
+command
+   "Fly", "be this SIZE,COLOUR", "Pick up FUEL", "Lose a LIFE if you die", "Travel in this direction", "Die if shot/you crash".
+constraint 
+   "Cannot fly through LAND", "Can be destroyed when SHOT","Flight is constrained when the POD is attached","Limited AMOUNT of LIVES, FUEL".
+end
+
+class_chart ENEMIES
+indexing 
+cluster: "ENTITY";
+created: "2008-03-10 nor";
+
+explanation "Aim to destroy the SHIP and prevent it from achieving its GOAL."
+part"1/1"
+query
+   "How do you destroy the SHIP", "COLOUR", "SIZE", "type", "SHAPE", "What is your GOAL".
+command
+   "SHOOT at the SHIP", "Die when shot", "Trigger a time limit when factories are destroyed".
+constraint
+   "Cannot come back to life once destroyed", "Cannot retrieve the POD", "Cannot SHOOT through LAND".
+end
+
+object creation_chart GAME
+indexing 
+created: "2008-03-10 nor sj cm";
+
+explanation "The grouping togther of different aspects of the game under each of the core classes."
+
+class ENTITY creates instances of "SHIP", "ENEMIES", "POD".
+class VALUE creates instances of "SCORE", "LIVES", "FUEL", "LEVEL".
+class AREA creates instances of "LAND", "SPACE".
+class EFFECTS creates instances of "COLOUR", "MUSIC", "SOUND EFFECTS".
+end
+
+scenario_chart GAME
+indexing 
+created "2008-03-10 nor sj cm";
+
+explanation "Each scenario in the game and what happens when they occur."
+
+scenario load screen appears and provides the user with options on how to proceed i.e. new game, saved game, options.
+scenario new game starts the game at level one.
+scenario saved game starts a previous game where the user last left off.
+scenario options gives the user options for example music and sound effects on/off.
+scenario ship is destroyed when the ship crashes or is shot down restart the level LIVES decreases by one.If no LIVES remain user is brought back to load screen.
+scenario pause game pauses the game to be resumed at a later stage.
+scenario ship runs out of fuel the ship can no longer fly and will crash ending the LEVEL and decreasing LIVES by one.
+scenario on complete LEVEL the user will proceed to the next LEVEL, LEVEL increases by one.
+scenario factory is destroyed triggers a time limit of ten seconds to complete the LEVEL.
+scenario enemy is destroyed clears a safe path for the SHIP.
+scenario end game can be brought about by the ship running out of lives or by the user completing the last level.
+scenario quit the user decides to terminate the game.
+end
+
+event_chart GAME
+indexing
+created: "2008-03-10 nor sj cm";
+
+explanation "incoming external events"
+
+event user pushes a button triggers an action in the game. Involved object types "SHIP".
+event options chosen by user whether the MUSIC/SOUND EFFECTS are on/off. Involved object types "MUSIC SOUND EFFECTS"
+end
+
+event_chart GAME
+indexing
+created: "2008-03-10 nor sj cm";
+
+explanation "outgoing external events"
+event SOUND EFFECTS involved object types "SOUND EFFECTS".
+event MUSIC involved object types "MUSIC".
+event LEVEL change involved object types "LAYOUT","COLOUR".
+
+event_chart GAME
+indexing
+created: "2008-03-10 nor sj cm";
+
+explanation "incoming internal events"
+event the SHIP progresses fuel decreases involved object types "FUEL","SHIP".
+event a factory is destroyed equals time limit activation, involved object types "ENEMIES"
+event SHIP retrieves and escapes with POD level complete, involved object types "SHIP", "POD", "LEVEL".
+event POD is destroyed, end level, involved object types "POD", "ENEMIES", "LAND".
+
+
+event_chart GAME
+indexing
+created: "2008-03-10 nor sj cm";
+
+explanation "outgoing internal events"
+event user successfully completes game returns to load screen, involved object types "LAYOUT".
+event user loses all lives game returns to load screen, involved object types "LAYOUT".
+event user quits game terminates the application, involved object types all object types.
+event user obtains a SCORE higher than any previous SCORE triggers high score screen on exit, involved object types "SCORE"
