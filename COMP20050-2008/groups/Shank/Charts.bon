@@ -16,8 +16,7 @@ cluster_chart VISUALS
   class HUD description "Means of displaying information."
   class GATE description "An ENTITY defined to obstruct SPACESHIP."
   class GATE_BUTTON description "An ENTITY used to manipulate GATE."
-  class CARGO_CLAMP description "An ENTITY used to hold CARGO to LANDSCAPE."
-  class DEBRIS description "A graphic effect."
+  class CARGO_CLAMP description "An ENTITY used to hold CARGO to LANDSCAPE"
   class BULLETS description "An ENTITY that can be produced by TURRET and SPACESHIP."
   class LANDSCAPE description "The physical layout of each level."
   class BACKGROUND description "The graphic appearance of each level."
@@ -51,4 +50,128 @@ cluster_chart VARIABLES
   class COUNT description "countdown variable"
 end  
 
+class_chart ENTITY
 
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+ "Object with position, color, size and shape"
+
+query
+  "What type?",
+  "What position?"
+
+end
+
+class_chart FACTORY
+
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+ "ENTITY that can be destroyed, that triggers a countdown to PLANET being destroyed"
+
+inherit ENTITY
+
+query
+ "How much life"
+
+command
+  "blow up"
+  "stop smoking"
+  "decrease health"
+
+Constraints
+  "Only one factory"
+  "Must be fixed to landscape"
+
+end
+
+class_chart TURRET
+
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+  "enemy ENTITY that shoots BULLET"
+
+inherit ENTITY
+
+query
+  "Position"
+
+command
+  "Fire BULLET"
+  "blow up"
+
+constraint
+  "Must be fixed to landscape"
+
+end
+
+class_chart SPACESHIP
+
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+  "ENTITY controlled by the user"
+
+inherit ENTITY, MOVEMENT, ACCELERATION, VELOCITY
+
+query
+ "how many lives are left",
+ "How much fuel is remaining?",
+ "Is Shield activated?",
+ "Is cargo attached?",
+ "What Direction",
+
+command
+ "Fire BULLET",
+ "Activate Shield",
+ "Change direction",
+ "Accelerate"
+
+constraints
+ "Fuel must be greater than 0",
+ "Lives must be greater or equal to 0"
+ "Must not overlap LANDSCAPE"
+
+end
+
+class_chart CARGO
+
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+ "ENTITY SPACESHIP must collect via TRACTOR_BEAM in order to complete level"
+
+inherit ENTITY, ACCELERATION, DIRECTION
+
+query
+ "What position?",
+ "Connected to SPACESHIP?"
+
+constraints
+ "Cannot overlap LANDSCAPE"
+
+end
+
+class_chart EXPLOSION
+
+indexing
+  in_cluster: "VISUALS";
+  created: "11/3/08 - Kevin";
+
+explanation
+ "visual effect when ENTITY is destroyed"
+
+
+ 
