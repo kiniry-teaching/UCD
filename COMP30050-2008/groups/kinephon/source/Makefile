@@ -1,4 +1,4 @@
-phony:
+phoney:
 	# usage:
 	#  make ceb  - compile cygwin compatible eb version
 	#  make leb  - compile linux compatible eb version (haven't tested this yet)
