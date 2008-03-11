@@ -22,13 +22,14 @@ class_chat STRUCTURE
  indexing 
  	cluster: "STRUCTURE"
  	created: "06-03-2008 pN";
+        revised: " ";
  explanation
 	"Parent class of all entities of form in our domain, defines state and behaviour all instances of STRUCTURE share, "
 	"IE the  child classes all inherit the following Fields , Position, Color, Size Hit_By_Entity."
-part "1/1"
-query
+ part "1/1"
+ query
 	"Position", "Color", "Size", "Hit_by_Entity"
-command
+ command
 	"On_Hit_By_Entity"
 constraints
 	" "
@@ -37,7 +38,8 @@ end
 class_chart SPACESHIP
  indexing
 	cluster: "STRUCTURE" ;
-	created: "06-03-2008 pN";
+	created: "06-03-2008 pN";	
+        revised: " ";
  explanation
 	"The component the player interacts with and controls to play the game. Its a triangular 
 	shaped object which depends on Fuel to move, composed of yellow lines and a clear body" 
@@ -53,12 +55,13 @@ class_chart SPACESHIP
 	"Can only fly/Thrust when FUEL is above zero"
 	"Postion and speed can only hold positive integers, from zero to a specified maximum"
 	"Hit_By_Entity and Shiled_On can only take the values true and false" 
- end
+end
 
 class_chart FUEL
  indexing
 	cluster: "STRUCTURE" ;
 	created: "06-03-2008 pN";
+	revised: " ";
  explanation
 	"A Structure with a size and position, which can be picked up be the SPACESHIP, to refuel."
  part "1/1 "
@@ -69,12 +72,13 @@ class_chart FUEL
  constraint
 	"Postion and Size are constant value integers"
 	"Hit_By_Entity can only take the values true and false"	
- end
+end
 
 class_chart Enemy
  indexing
 	cluster: "STRUCTURE" ;
 	created: "06-03-2008 pN";
+	revised: " ";
  explanation
 	"A Structure with a size and position, which fires BULLETS which kill the SPACESHIP if they hit."
  part "1/1 "
@@ -87,12 +91,13 @@ class_chart Enemy
 	"Constant time period between rotation of direction of BULLETS"
 	"Postion and Size are constant value integers"
 	"Hit_By_Entity can only take the values true and false" 
- end
+end
 
 class_chart FACTORY
  indexing
 	cluster: "STRUCTURE" ;
 	created: "06-03-2008 pN";
+	revised: " ";
  explanation
 	"A Structure with a size and position, SPACESHIPS can destroy FACTORIES, by firing multiple BULLET's at it"
 	"If a FACTORY is destroyed the whole planet becomes contaminated and SPACESHIP dies after set time."
@@ -106,12 +111,13 @@ class_chart FACTORY
 	"Constant time period between emission of smoke"
 	"Postion and Size are constant value integers"
 	"Times_Hit is a postive integer value ranging for zero to specified maximum" 
- end
+end
 
 class_chart POD
  indexing
 	cluster: "STRUCTURE" ;
 	created: "06-03-2008 pN";
+	revised: " ";
  explanation
 	"A Structure with a size and position, the objective of the game is for the SPACESHIP to collect each LEVEL's POD, "
 	"and fly of with it without crashing"
@@ -125,12 +131,13 @@ class_chart POD
 	"Gravity is a constant value pulling pod down wards"
 	"Position, Speed and Direction are positive integers ranging from zero to specified maximun"
 	"Hit_By_Entity can only take the values true or false" 
- end
+end
 
 class_chart BULLET
  indexing
 	cluster: "STRUCTURE" ;
 	created: "06-03-2008 pN";
+        revised: " ";
  explanation
 	"A Structure with a size and position, and movement of the form of Speed and direction, kills entities it impacts." 
  part "1/1 "
@@ -141,7 +148,7 @@ class_chart BULLET
  constraint
 	"Position, Size, Direcition and Speed are postive integers"
 	"Hit_By_Entity can only take the values true and false"
- end
+end
 
 cluster_chart SYSTEM
 
@@ -153,6 +160,7 @@ class_chart LEVEL
  indexing
 	cluster: "SYSTEM" ;
 	created: "06-03-2008 pN";
+        revised: " ";
  explanation
 	"The game is executed over a number of LEVELs, including the intro page which is essentially all menu system"
 	"everything within our domain(THRUST) is contained within the LEVELs."
@@ -161,27 +169,28 @@ class_chart LEVEL
      "Number", "Size", "Factory_Destroyed", "Spaceship_Destroyed", "Caption"
 
  command
-	"Update_Caption", "Count_Down_To_Destroy", "Pod_Lifted_Above_Level", "Remove_Structure", "Draw_Background", Draw_Terrain",
+	"Update_Caption" "Save_Caption", "Count_Down_To_Destroy", "Pod_Lifted_Above_Level", "Remove_Structure", "Draw_Background", Draw_Terrain",
 	"Add_Structure"
  constraint
 	"Size is a positive integer specifing the number of pixiels of the screen"
 	"Factory_Destroyed and Spaceship_Destroyed can only take the values true or false."
 	"Number can only be in between one and six inclusive"
 	"Caption contains only specified values"
- end
+end
 
 cluster_chart SOUND
  indexing
 	cluster: "SYSTEM" ;
 	created: "06-03-2008 pN" ;
+	revised: " ";
  explanation
 	"All noises and music, emitted for the game are instances of SOUND"
-part "1/1"
-query
+ part "1/1"
+ query
      "Volume", "Duration", "Is_Playing"
 command
      "Play", "Stop"
-constraint
+ constraint
      "There is all volume is set to a constant value"
      "IS_Playing is either true or false"
 end
@@ -189,14 +198,15 @@ end
 object_creation_chart THRUST
  indexing
 	created: "06-03-2008 pN" ; 
+        revised: " ";
  explanation
 	"The classes that are created by and display in the class LEVEL."
  part "1/1"
- creator LEVEL creates SPACESHIP
- creator LEVEL creates FACTORY
- creator LEVEL creates POD
- creator LEVEL creates ENEMY
- creator LEVEL creates BULLET
- creator LEVEL creates FUEL
+ 	creator LEVEL creates SPACESHIP
+ 	creator LEVEL creates FACTORY
+ 	creator LEVEL creates POD
+ 	creator LEVEL creates ENEMY
+ 	creator LEVEL creates BULLET
+ 	creator LEVEL creates FUEL
 end
 

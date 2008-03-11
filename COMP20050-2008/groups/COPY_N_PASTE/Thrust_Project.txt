@@ -3,7 +3,7 @@ GROUP NAME:
 
 GRPOUP MEMEBERS:
 	Patrick Nevin,  pNevin,   06754155
-	Robert Plunket, RPlunket, 06
+	Robert Plunket, RPlunket, 06038883
 	Cirian Flynn,   CFlynn,   06
 
 INTRODUCTION and PROJECT OVERVIEW:
