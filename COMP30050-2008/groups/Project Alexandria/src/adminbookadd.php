@@ -13,6 +13,15 @@ if ($_POST["state"] == 1)
 else if($_POST["state"] == 2)
 	addBook($_POST["isbn"],$_POST["title"],$_POST["titleLong"],$_POST["authors"],$_POST["publisher"],$_POST["noOfPages"],$_POST["binding"],$_POST["ddc"],$_POST["lcc"],$_POST["description"],$_POST["largeImg"],$_POST["mediumImg"],$_POST["smallImg"]);
 ?>
+	<h1>Add A Book</h1>
+	<ol>
+		<li>Enter the ISBN below and click "Retrieve".</li>
+		<li>The details will appear in the form below for you to edit and approve.</li>
+		<li>When you're happy jsut click "Add".</li>
+	</ol>
+	<ul>
+		<li>If no details appear you can add them manually.</li>
+	</ul>
 	<form action="adminbookadd.php" method="post">
 		<div class="formrow"><div class="formtext">ISBN: </div><div class="forminput"><input type="text" name="isbn" /></div></div>
 		<div class="formbutton"><input type="hidden" name="state" value="1" /><input type="submit" value="Retrieve" /></div>
