@@ -35,7 +35,7 @@ We have used the class charts to create an informal bon specification for our sy
 -------------------------------------------------------------------------------------------------------------------------------
 Project Dictionary
 -----------------------------------
-  class INFORMATION cluster INFORMATION_CLUSTER
+class INFORMATION cluster INFORMATION_CLUSTER
   description
     "dynamically changing data defining the state of the game."
   class TOW_LINE cluster ENTITY_CLUSTER
@@ -65,12 +65,12 @@ Project Dictionary
   class NUCLEAR_POWER_PLANT cluster ENTITY_CLUSTER
   description
     "This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged"
-  class GROUND cluster ENTITY_CLUSTER
-  description
-    "Area of level through which ENTITIES can not travel"
   class LIVES cluster INFORMATION_CLUSTER
   description
     "Number of COLLISIONs the SPACESHIP can have before the game is over"
+  class GROUND cluster ENTITY_CLUSTER
+  description
+    "Area of level through which ENTITIES can not travel"
   class BUTTON cluster ENTITY_CLUSTER
   description
     "An entity which opens the door when a bullet has a COLLISION with it"
@@ -110,6 +110,9 @@ Project Dictionary
   class TIMER cluster INFORMATION_CLUSTER
   description
     "a timer created by an EVENT or action which counts to another EVENT or ACTION"
+  class PHYSICS cluster GAME
+  description
+    "Controls the physics of the game and calculate the movement of the MOVABLE entities"
   class HUD cluster INFORMATION_CLUSTER, GAME
   description
     "visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet"
@@ -118,4 +121,4 @@ Project Dictionary
     "Extra score achieved by finishing levels and destroying planets"
   class DRAW cluster GAME
   description
-    "On level load, objects to be drawn to screen, HUD, stars, grounds, etc."
+    "Draws objects to screen, HUD, stars, grounds, etc., also tracks ship position using a three by three grid and moves the perspective to match"
