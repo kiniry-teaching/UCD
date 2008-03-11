@@ -38,6 +38,7 @@ LaserGate – A barrier preventing movement
 Gate – A barrier prevent movement
 GateButton – A entity when shot with a bullet temporarily releases gate 
 CargoClamp – Entity used to hold cargo
+FUEL_DRUM - Entity that contains FUEL
 Shield – Protection device for an entity 
 TractorBeam –  A function of the spaceship allowing it to pick up men and fuel
 CargoWire – Connects spaceship to cargo
