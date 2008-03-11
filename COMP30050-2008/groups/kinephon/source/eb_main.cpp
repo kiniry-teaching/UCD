@@ -1,3 +1,4 @@
+#pragma warning(disable: 4786)
 #include <GL/glut.h>
 #include <iostream>
 #include "type.h"
@@ -30,6 +31,8 @@ int main(int argc, char * * argv)
 
 	glutMainLoop();
 
+	return 0;
+
 }
 
 void display(void)
@@ -37,9 +40,12 @@ void display(void)
 
 	Recording * recording = g_recorder.eject();
 
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	glBegin(GL_LINES);
 	
-	// @todo output track as movement, speed, and accel
+	glVertex3i(0, 0, 0);
+	glVertex3i(1, 0, 0);
 	
 	glEnd();
 
