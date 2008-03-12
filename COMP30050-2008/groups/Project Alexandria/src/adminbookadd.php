@@ -8,18 +8,18 @@
 
 include("include/adminbook_functions.php");
 
-if ($_POST["state"] == 1){
+if ($_POST["state"] == 1){ //If you're retrieving book data
 	$isbn = $_POST["isbn"];
 	fetchBooksAmazon($isbn, 0);
 }
-else if($_POST["state"] == 2)
+else if($_POST["state"] == 2) //If you're adding book data
 	addBook($_POST["isbn"],$_POST["title"],$_POST["titleLong"],$_POST["authors"],$_POST["publisher"],$_POST["noOfPages"],$_POST["binding"],$_POST["ddc"],$_POST["lcc"],$_POST["description"],$_POST["largeImg"],$_POST["mediumImg"],$_POST["smallImg"]);
 ?>
 	<h1>Add A Book</h1>
 	<ol>
 		<li>Enter the ISBN below and click "Retrieve".</li>
 		<li>The details will appear in the form below for you to edit and approve.</li>
-		<li>When you're happy jsut click "Add".</li>
+		<li>When you're happy just click "Add".</li>
 	</ol>
 	<ul>
 		<li>If no details appear you can add them manually.</li>
