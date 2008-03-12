@@ -1,4 +1,3 @@
-
 public class BarCode01 extends Thread {
 	public BarCode01() { 
 		super();
