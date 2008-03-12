@@ -6,15 +6,22 @@
 //Note:
 // The following enumerated types may be extended/shortend/changed/discarded
 // depending on whether we will actually use them and how.	
-enum Rhythm { RHYTHM_3_4, RHYTHM_4_4, RHYTHM_5_4, RHYTHM_6_4, RHYTHM_7_4,RHYTHM_8_4, RHYTHM_NONE };
+enum Rhythm { RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3, RHYTHM_NONE };
 
 // Which notes the chords should be based on.
 // Assuming a chord will be composed of 3 notes.
-enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_NONE, CHORDS_ONEOFF };
+enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_ONEOFF, CHORDS_NONE };
 
 enum Dynamics { DYNAMICS_PIANO, DYNAMICS_FORTE, DYNAMICS_PIANISSIMO, DYNAMICS_FORTISSIMO };
 
 enum Texture { TEXTURE_OMNI, TEXTURE_MONO, TEXTURE_POLY };
+
+//these instruments will set suitable combinations of instruments for lead and chords
+//to be extended...
+enum Instrument { INSTRUMENT_CLASSIC, INSTRUMENT_CRAZY };
+//no note, i.e. temporary pause signal
+const uchar NO_NOTE = 255;
+//TODO maybe set up an enum type for a couple of instruments
 
 /**
  * Wrapper class for MidiPlayer, hiding the MIDI particular message 
@@ -66,9 +73,12 @@ public:
 	 * have been specified before and will be included automatically.
 	 * Note that if a melody has been set previously, it will be ignored until play()
 	 * is called again.
+     * If no lead note should be played, but the other effects none the less, (e.g. if the last
+     * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then. 
 	 * @param pitch the pitch of the lead  
+     * @param pitchVelocity attack velocity of note
 	 */
-	void play(uchar pitch);
+	void play(uchar pitch, uchar pitchVelocity);
 	
 	
 	/**
@@ -78,10 +88,14 @@ public:
 	 * quarter note has passed. 
 	 * Using this method any previously set accompaniment and melody will be ignored,
 	 * however not turned off.
+     * If no lead note should be played, but the other effects none the less, (e.g. if the last
+     * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then. 
 	 * @param pitch the pitch of the lead
+     * @param pitchVelocity attack velocity of note
 	 * @param accompany the pitch of the accompanying melody  
+     * @param accompanyVelocity attack velocity of accompaniment note
 	 */
-	void play(uchar pitch, uchar accompany);
+	void play(uchar pitch, uchar pitchVelocity, uchar accompany, uchar accompanyVelocity);
 	
 	/**
 	 * Plays given note immediately.
@@ -97,26 +111,16 @@ public:
 	 * Sets the instrument for the lead voice.
 	 * <p>
 	 * <i> Effect </i>
-	 * <ul>
-	 * <li> piano (#0 - #7), #0 is the acoustic grand piano
-	 * <li> chromatic percussion (#8 - #15)
-	 * <li> organ (#16 - #23)
-	 * <li> guitar (#24 - #31)
-	 * <li> bass (#32 - #39)
-	 * <li> strings (#40 - #55)
-	 * <li> brass (#56 - #63)
-	 * <li> reed (#64 - #71)
-	 * <li> pipe (#72 - #79)
-	 * <li> synth lead (#80 - #87)
-	 * <li> synth pad (#88 - #95)
-	 * <li> synth effects (#96 - #103)
-	 * <li> ethnic (#104 - #111)
-	 * <li> percussive (#112 - #118)
-	 * <li> sound effects (#119 - #127)
-	 * </ul>
+	 * Since the instruments have idividual characteristics, some go better together than others, i.e.
+     * in some combinations, one instrument would overpower the others. For this, we will have preset
+     * combinations (see the enum type Instrument). 
+     * <ul>
+     * <li>CLASSIC: lead-acoustic grand piano, chords-string ensemble, rhythm-synth drum
+     * <li>CRAZY: lead-woodblock, chords-seashore, rhythm-breath noise  
+     * </ul> 
 	 * @param instrument the instrument to be used
 	 */
-	void setLeadInstrument(uchar instrument); 
+	void setLeadInstrument(Instrument instrument); 
 	
 	/**
 	 * Sets whether a accompaniment is to be played.
@@ -244,6 +248,10 @@ public:
 	 * <i> Effect </i>
 	 * Pedaling blends notes together, making the music sounding more 'together'.
 	 * If some notes are to be emphasized, however, pedalling might be inappropriate.
+     * Also, pedaling will only affect the lead and the accompaniment, since it would be rather 
+     * contraproductive for the chords or rhythm.
+     * Note: Only frequencies above 8 will have an audible effect. Also the effect is subtle, so in
+     * combination with chords and rhythm it may not be noticable any more.
 	 * @param isOn true is pedaling is to be ON
 	 * @param frequency the frequency of pedal-down/pedal-ups
 	 */
@@ -267,7 +275,7 @@ public:
 	 * Sets the reverberation on/off.
 	 * <p>
 	 * <i> Effect </i>
-	 * 
+	 * Has a very small effect, best to be used with no chords/rhythm.
 	 * @param isOn true if reverberation is to be played
 	 */
 	void setReverberation(bool isOn);
@@ -283,6 +291,9 @@ private:
 	MidiPlayer *midi_;		//midi output
 	int timeStep_;
 	int melodyStep_;
+    int melodyLength_;      //save length for safety check, if vector has invalid format
+    int pedalingFreq_;
+    int pedalingCounter_;
 	
 	vector<uchar> melody_;
 	bool hasAccompaniment_;
@@ -290,8 +301,13 @@ private:
 	bool hasRhythm_;
 	bool hasAutoDynamics_;
 	bool hasHarmony_;
+    bool hasMelody_;
+    bool hasPedaling_;
 	bool hasReverb_;
 	
+    int accompaniment_;//TODO: temporary solution till we come up with something better
+    int harmony_;
+    
 	Rhythm rhythm_;
 	Chords chords_;
 	Dynamics dynamics_;

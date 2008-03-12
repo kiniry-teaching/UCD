@@ -57,15 +57,14 @@ public:
 	void panic();
 
     /**
-     * Releases all notes played by the previous chord.
-     * It should be possible to release chords independently from the melody accompaniment. 
-     * They have to be released however regularly, or the result will be an
+     * Releases all notes played on the given channel.
+     * It should be possible to release the channels independently. 
+     * They have to be released regularly, or the result will be an
      * indistinguishable blur.
      */
-    void panicChords();
+    void releaseChannel(Channels channel);
     
-	
-	/**
+    /**
 	 * Set if music piece is to be recorded.
 	 * @param  setOn true when setting recoding ON, false when setting OFF
 	 * @return true if recording is ready/file has been closed
@@ -99,18 +98,20 @@ public:
 	/**
 	 * Sends a Control Change message to one channel.
 	 * According to General MIDI 2 specification there are the following options:
-	 * Bank Select (cc#0/32)
-     * Modulation Depth (cc#1)
-     * Portamento Time (cc#5)
-     * Channel Volume (cc#7)
-     * Pan (cc#10)
-     * Expression (cc#11)
-     * Hold1 (Damper) (cc#64)
-     * Portamento ON/OFF (cc#65)
-     * Sostenuto (cc#66)
-     * Soft (cc#67)
-     * Filter Resonance (Timbre/Harmonic Intensity) (cc#71)
+	 * Bank Select (cc#0/32)-> synthesizer specific to allow for more than 128 instruments, we don't need that
+     * Modulation Depth (cc#1)-> frequency moves up&down in a repetitive way, tremolo, characteristic to some instr.
+     * Portamento Time (cc#5)-> rate at which portamento slides the pitch between 2 notes
+     * Channel Volume (cc#7)-> simple loudness
+     * Balance (cc#8)-> balance between left/right speaker
+     * Pan (cc#10)->panorama, i.e. right and left speaker
+     * Expression (cc#11)-> allows for volume dynamics to play e.g. crescendos. no fixed spec
+     * Hold1 (Damper) (cc#64)-> 0-63 hold pedal off, 64-127 on.
+     * Portamento ON/OFF (cc#65)-> 0-63 off, 64-127 on
+     * Sostenuto (cc#66)->only already playing notes will be kept, until a signla 0-63 is received
+     * Soft (cc#67)-> if ON, then the velocity values of the notes are being reduces slightly, so they seem 'softer'
+     * Filter Resonance (Timbre/Harmonic Intensity) (cc#71)->has effcect on notes being 
      * Release Time (cc#72)
+     * Attack Time (cc#73) 
      * Brightness (cc#74)
      * Decay Time (cc#75) (new message)
      * Vibrato Rate (cc#76) (new message)
@@ -125,7 +126,7 @@ public:
 	 * @param function the chosen function 
 	 * @param value the value of the function
 	 */
-	void sendControlChange(uchar channel, uchar function, uchar value);
+	void sendControlChange(Channels channel, uchar function, uchar value);
 	
 	/**
 	 * Sends a Program Change message to one channel.
@@ -150,7 +151,7 @@ public:
 	 * @param channel the channel the message is to be sent to       
 	 * @param program selected instrument number
 	 */
-	void sendProgramChange(uchar channel, uchar program);
+	void sendProgramChange(Channels channel, uchar program);
 	
   	/**
 	 * Plays a lead note.
@@ -189,7 +190,14 @@ public:
 	 * @param velocity the velocity of the note
 	 */
 	void playNote(Channels channel, uchar pitch, uchar velocity);
-	
+    
+    /**
+     * Releases the last played note on given channel.
+     * @param channel the chnnel to be used
+     * @param pitch the value of the note to be played
+     */
+	void releaseNote(Channels channel, uchar pitch);
+    
 	/**
 	 * Additional methods may be included if need arises.
 	 */

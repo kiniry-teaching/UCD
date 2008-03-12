@@ -68,8 +68,10 @@ bool MidiPlayer::initialize() {
   		    leadChannel_ = new Channel(midiout_, 0);
             accompanyChannel_ = new Channel(midiout_, 1);
             chordChannel_ = new Channel(midiout_, 2);
-            percussionChannel_ = new Channel(midiout_, 9);
-            //TODO: check the percussion channel 
+            chordChannel_->setProgram(48);
+            percussionChannel_ = new Channel(midiout_, 3);
+            percussionChannel_->setProgram(118);
+           
   		    return true;
         }
         catch (RtError &error) {
@@ -85,20 +87,33 @@ bool MidiPlayer::initialize() {
 void MidiPlayer::panic() {
 	if(isConnected_) {
         try {
-		  leadChannel_->release();
+		  /*leadChannel_->release();
           accompanyChannel_->release();
+          chordChannel_->release(chords_[0]);        
+          chordChannel_->release(chords_[1]);
+          chordChannel_->release(chords_[2]);
+          percussionChannel_->release();*/
+          leadChannel_->setControl(120,0);
         }
         catch (RtError &error) {}
 	}
 }
 
-//release chords
-void MidiPlayer::panicChords() {
+//release notes on channel
+void MidiPlayer::releaseChannel(Channels channel) {
     if(isConnected_) {
         try {
-          chordChannel_->release(chords_[0]);
-          chordChannel_->release(chords_[1]);
-          chordChannel_->release(chords_[2]);
+            if(channel == CHANNEL_LEAD)
+                leadChannel_->release();
+            else if(channel == CHANNEL_ACCOMPANY)
+                accompanyChannel_->release();
+            else if(channel == CHANNEL_CHORD){
+                chordChannel_->release(chords_[0]);        
+                chordChannel_->release(chords_[1]);
+                chordChannel_->release(chords_[2]);
+            }
+            else if(channel == CHANNEL_PERCUSSION)
+                percussionChannel_->release();
         }
         catch (RtError &error) {}
     }   
@@ -114,7 +129,7 @@ void MidiPlayer::sendSysEx(int message, int value) {}
 //TODO: find out which ones we will use
 void MidiPlayer::sendChannelMode(uchar mode ) {}
 	
-void MidiPlayer::sendControlChange(uchar channel, uchar function, uchar value) {
+void MidiPlayer::sendControlChange(Channels channel, uchar function, uchar value) {
 	if (isConnected_) {
         try {
 		  if (channel == CHANNEL_LEAD)
@@ -130,17 +145,15 @@ void MidiPlayer::sendControlChange(uchar channel, uchar function, uchar value) {
     }
 }
 	
-void MidiPlayer::sendProgramChange(uchar channel, uchar program) {
+void MidiPlayer::sendProgramChange(Channels channel, uchar program) {
 	if (isConnected_) {
         try {
             if (channel == CHANNEL_LEAD)
                 leadChannel_->setProgram(program);
             else if(channel == CHANNEL_ACCOMPANY)
                 accompanyChannel_->setProgram(program);
-            else if(channel == CHANNEL_CHORD){
-                cout << "set chord channel \n";
-                chordChannel_->setProgram(program);
-            }
+            else if(channel == CHANNEL_CHORD)
+               chordChannel_->setProgram(program);
             else if(channel == CHANNEL_PERCUSSION)
                 percussionChannel_->setProgram(program);  
         }
@@ -201,5 +214,21 @@ void MidiPlayer::playNote(Channels channel, uchar pitch, uchar velocity) {
         catch (RtError &error) {}
     }
 }
-	
+
+void MidiPlayer::releaseNote(Channels channel, uchar pitch) {
+    if (isConnected_) {
+        try {
+            if (channel == CHANNEL_LEAD)
+                leadChannel_->release(pitch);
+            else if(channel == CHANNEL_ACCOMPANY)
+                accompanyChannel_->release(pitch);
+            else if(channel == CHANNEL_CHORD)
+                chordChannel_->release(pitch);
+            else if(channel == CHANNEL_PERCUSSION)
+                percussionChannel_->release(pitch);  
+        }
+        catch (RtError &error) {}
+    }
+}
+
 void MidiPlayer::otherOptions() {}

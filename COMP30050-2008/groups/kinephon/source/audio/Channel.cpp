@@ -2,7 +2,7 @@
 
 Channel::Channel(RtMidiOut* midi, int no):
 	channelNo_(no),
-	programNo_(0),
+	programNo_(0),//default acoustic grand piano
 	octaveNo_(0),
 	midiout_(midi)
 {
