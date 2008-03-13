@@ -1,6 +1,7 @@
 #ifndef __INTERPRETER_RECORDING_H__
 #define __INTERPRETER_RECORDING_H__
 
+#pragma warning(disable: 4786)
 #include <map>
 #include "../../type.h"
 #include "Track.h"

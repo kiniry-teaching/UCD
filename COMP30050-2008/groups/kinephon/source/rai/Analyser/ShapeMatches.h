@@ -28,7 +28,7 @@ class ShapeMatches
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend			class Shape;
+	friend					class Shape;
 
 ///////////////////////////////////////////////////////////////////////////////
 // *tor

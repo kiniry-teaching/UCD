@@ -1,11 +1,11 @@
+#ifdef __EB__
+
 #pragma warning(disable: 4786)
 #include <GL/glut.h>
 #include <iostream>
 #include "type.h"
 #include "rai/recorder/frame.h"
 #include "rai/recorder/recorder.h"
-
-#ifdef __EB__
 
 using namespace interpreter;
 
