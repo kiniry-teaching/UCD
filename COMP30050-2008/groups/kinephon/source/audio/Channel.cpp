@@ -1,5 +1,6 @@
 #include "Channel.h"
-
+namespace audio
+{
 Channel::Channel(RtMidiOut* midi, int no):
 	channelNo_(no),
 	programNo_(0),//default acoustic grand piano
@@ -22,29 +23,6 @@ Channel::Channel(RtMidiOut* midi, int no):
 	midiout_->sendMessage(&message);
 	controls_[7] = 127;		
 	
-	//TODO test and set default values
-	/** Bank Select (cc#0/32)
-     * Modulation Depth (cc#1)
-     * Portamento Time (cc#5)
-     
-     * Pan (cc#10)
-     * Expression (cc#11)
-     * Hold1 (Damper) (cc#64)
-     * Portamento ON/OFF (cc#65)
-     * Sostenuto (cc#66)
-     * Soft (cc#67)
-     * Filter Resonance (Timbre/Harmonic Intensity) (cc#71)
-     * Release Time (cc#72)
-     * Brightness (cc#74)
-     * Decay Time (cc#75) (new message)
-     * Vibrato Rate (cc#76) (new message)
-     * Vibrato Depth (cc#77) (new message)
-     * Vibrato Delay (cc#78) (new message)
-     * Reverb Send Level (cc#91)
-     * Chorus Send Level (cc#93)
-     * Data Entry (cc#6/38)
-     * RPN LSB/MSB (cc#100/101)
-     */
 }
 
 Channel::~Channel() {
@@ -108,4 +86,4 @@ void Channel::release(uchar pitch) {
     message[2] = note_[1];
     midiout_->sendMessage(&message);
 }
-
+}

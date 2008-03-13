@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+using namespace audio;
 
 // Platform-dependent sleep routines.
 #if defined(__WINDOWS_MM__)
@@ -61,19 +62,23 @@ int main(){
    
    
 //for testing automation
+// for each true, the melody is being played
 bool piano = false;
 bool pianissimo = false;
-bool forte = false;
-bool fortissimo = true;   
+bool forte = true;
+bool fortissimo = false;   
 
 bool testingPlayOnly = false;
 bool testingPlayLead = true;
 bool testingPlayLeadAcc = false;
 
 int tempo = 200; //set the miliseconds to sleep between each note, here for once
+//uncomment these for overall settings, or include them somewhere in the middle of the code
 //audio.setPedaling(true, 16);
-//audio.setLeadInstrument(INSTRUMENT_CRAZY);
-audio.setReverberation(true);
+//audio.setInstrument(INSTRUMENT_WIND);
+//audio.setModulation(127);
+//audio.setPan(127);
+//audio.setReverberation(true);
 if (testingPlayOnly) {
     
    cout << "playing only preset settings"<< endl; 
@@ -124,10 +129,10 @@ if (testingPlayOnly) {
 if (testingPlayLead) {
     cout << "playing lead only "<< endl; 
     
-    audio.setMelody(melody);
-    //audio.setAccompaniment(true, 0);
-    //audio.setChords(true,CHORDS_FIRST);
-    //audio.setRhythm(true, RHYTHM_4_4);   
+    //audio.setMelody(melody);
+    audio.setAccompaniment(true, 0);
+    audio.setChords(true,CHORDS_FIRST);
+    audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);
@@ -143,7 +148,9 @@ if (testingPlayLead) {
         i = 0;
         while(i < 60){
             audio.play(melody[i], melody[i+1]);    
-            SLEEP(tempo);
+             SLEEP(tempo/2);
+           // audio.playImmediate(88,60);
+            SLEEP(tempo/2);
             i += 2;
         }
     }
@@ -151,7 +158,9 @@ if (testingPlayLead) {
         audio.setDynamics(DYNAMICS_FORTE);
         i = 0;
         while(i < 60){
-            audio.play(melody[i], melody[i+1]);    
+            audio.play(melody[i], melody[i+1]); 
+            if (i == 30) {  //audio.setPan(0); 
+            }    
             SLEEP(tempo);
             i += 2;
         }
@@ -173,9 +182,9 @@ if (testingPlayLead) {
 
 if (testingPlayLeadAcc) {
     cout << "playing lead and accompaniment "<< endl; 
-    audio.setAccompaniment(false, 0);
-    audio.setChords(true,CHORDS_FIRST);
-    audio.setRhythm(true, RHYTHM_4_4);   
+    //audio.setAccompaniment(false, 0);
+    //audio.setChords(true,CHORDS_FIRST);
+    //audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);
@@ -237,4 +246,5 @@ if (testingPlayLeadAcc) {
 }  
 	return 0;
 }
+
 #endif

@@ -1,4 +1,6 @@
 #include "Conductor.h"
+namespace audio
+{
 //TODO: getter functions
 Conductor::Conductor():
 	midi_(NULL),
@@ -15,17 +17,18 @@ Conductor::Conductor():
     hasMelody_(false),
     hasPedaling_(false),
 	hasReverb_(false),
+    modulation_(0),//default value to NO modulation
     accompaniment_(0),
     harmony_(0),
     
 	rhythm_(RHYTHM_NONE),
 	chords_(CHORDS_NONE),
-	dynamics_(DYNAMICS_FORTE),
-	texture_(TEXTURE_POLY)
+	dynamics_(DYNAMICS_FORTE)
     
 {}
 
 Conductor::~Conductor() {
+    setModulation(0); //just in case reset this, or it will be remembered
 	delete midi_;
 }
 
@@ -35,10 +38,9 @@ bool Conductor::initialize() {
     	return false;
     else {
         setDynamics(DYNAMICS_FORTE);
+        setModulation(0); //just in case someone forgot to switch it off last time
     	return true;//now we have 4 channels to play on
     } 
-        
-    //TODO: set default dynamics & texture
 }
 
 //expects 1/4 note steps
@@ -170,8 +172,6 @@ void Conductor::play(uchar pitch, uchar pitchVelocity){
                 midi_->playAccompaniment(pitch-12, pitchVelocity); 
             }
             if (hasChords_) {
-                midi_->releaseChannel(CHANNEL_CHORD);
-                midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
                 midi_->playChord(pitch-12,10);
                 midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
             }
@@ -224,7 +224,10 @@ void Conductor::play(uchar pitch, uchar pitchVelocity){
                 midi_->releaseChannel(CHANNEL_ACCOMPANY);
                 midi_->playAccompaniment(pitch-12, pitchVelocity);
             }
-            if (hasChords_) {}
+            if (hasChords_) {
+                midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
+                midi_->releaseChannel(CHANNEL_CHORD);
+            }
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_4_4) {
@@ -345,11 +348,51 @@ void Conductor::play(uchar pitch, uchar pitchVelocity, uchar accompany, uchar ac
 
 void Conductor::playImmediate(uchar pitch, uchar velocity) {
     midi_->releaseChannel(CHANNEL_LEAD);
-    midi_->playLead(pitch, 60);
+    midi_->playLead(pitch, velocity);
+}	
+
+Instrument Conductor::getInstrument() {
+    return instrument_;
 }
-	
+ 
+int Conductor::getAccompaniment() {
+    return accompaniment_;
+}
+ 
+Chords Conductor::getChords() {
+    return chords_;
+}
+
+Rhythm Conductor::getRhythm() {
+    return rhythm_;
+}
+     
+Dynamics Conductor::getDynamics() {
+    return dynamics_;
+}
+
+bool Conductor::getAutomaticDynamics() {
+    return hasAutoDynamics_;
+}
+   
+bool Conductor::getHarmony() {
+    return hasHarmony_;
+}
+    
+vector<uchar> Conductor::getMelody() {
+    return melody_;
+}
+    
+bool Conductor::getPedaling() {
+    return hasPedaling_;
+}
+     
+bool Conductor::getReverberation() {
+    return hasReverb_;
+}
+    
 //make accompaniment the same as the lead
-void Conductor::setLeadInstrument(Instrument instrument) {
+void Conductor::setInstrument(Instrument instrument) {
     if (instrument == INSTRUMENT_CLASSIC) {
         midi_->sendProgramChange(CHANNEL_LEAD, 0);
         midi_->sendProgramChange(CHANNEL_ACCOMPANY, 0);
@@ -362,7 +405,13 @@ void Conductor::setLeadInstrument(Instrument instrument) {
         midi_->sendProgramChange(CHANNEL_CHORD, 122);
         midi_->sendProgramChange(CHANNEL_PERCUSSION, 121);
     }
-    
+    else if (instrument == INSTRUMENT_WIND) {
+        midi_->sendProgramChange(CHANNEL_LEAD, 56);
+        midi_->sendProgramChange(CHANNEL_ACCOMPANY, 56);
+        midi_->sendProgramChange(CHANNEL_CHORD, 66);
+        midi_->sendProgramChange(CHANNEL_PERCUSSION, 118);
+    }
+    instrument_ = instrument;
 }
 	
 //make paramOne == 0 mean that the accompaniment plays the same note, just lower volume, for the time being
@@ -448,19 +497,42 @@ void Conductor::setPedaling(bool isOn, int frequency) {
     pedalingCounter_ = 0;
 }
 
-//TODO: is it useful at all?	
-void Conductor::setTexture(Texture texture) {
-    texture_ = texture;
-}
-	
 void Conductor::setReverberation(bool isOn) {
     hasReverb_ = isOn;
-    midi_->sendControlChange(CHANNEL_LEAD, 91,127);
+    if (isOn) {
+        midi_->sendControlChange(CHANNEL_LEAD, 91,127);//turn on
+        midi_->sendControlChange(CHANNEL_ACCOMPANY, 91,127);//turn on
+    }
+    else {
+        midi_->sendControlChange(CHANNEL_LEAD, 91,0); //turn off
+        midi_->sendControlChange(CHANNEL_ACCOMPANY, 91,0);//turn on
+    }
 }
 
 void Conductor::pressPanicButton() {
-    //all notes off somehow doesnt work with the chords, so turn off manually
-    midi_->releaseChannel(CHANNEL_CHORD);
+    midi_->releaseChannel(CHANNEL_CHORD);//in case a message is lost
     midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
    	midi_->panic();
+}
+
+void Conductor::setModulation(uchar position) {
+    if (position == 0) {
+        midi_->sendControlChange(CHANNEL_LEAD, 1, 0);
+        midi_->sendControlChange(CHANNEL_ACCOMPANY, 1, 0);
+        midi_->sendControlChange(CHANNEL_CHORD, 1, 0);
+        midi_->sendControlChange(CHANNEL_PERCUSSION, 1, 0);
+    }
+    else {
+        midi_->sendControlChange(CHANNEL_LEAD, 1, position);
+        midi_->sendControlChange(CHANNEL_ACCOMPANY, 1, position);
+        midi_->sendControlChange(CHANNEL_CHORD, 1, position);
+        midi_->sendControlChange(CHANNEL_PERCUSSION, 1, position);
+    }
+}
+
+void Conductor::setPan(uchar position) {
+    cout << "pan" << endl;
+    midi_->sendControlChange(CHANNEL_LEAD, 1, position);
+    //midi_->sendControlChange(CHANNEL_LEAD, 5, position);
+}
 }

@@ -8,6 +8,9 @@
 #include <string>
 using namespace std;
 
+namespace audio
+{
+
 #if defined(__WINDOWS_MM__)
   #include <windows.h>
   #define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds ) 
@@ -72,16 +75,6 @@ public:
 	bool setRecording(bool setOn);
 	
 	/**
-	 * Sends a Universal System Exclusive Message.
-	 * They control Master volume, reverb, chorus and others. 
-	 * Only necessary options will be made available.
-	 * @param message type of function
-	 * @param value value of specified function      
-	 */
-	void sendSysEx(int message, int value);
-	
-	
-	/**
 	 * Sends a Channel Mode message affecting all channels.
 	 * The following options are available: 
 	 * #121 Local Control  Off
@@ -100,10 +93,10 @@ public:
 	 * According to General MIDI 2 specification there are the following options:
 	 * Bank Select (cc#0/32)-> synthesizer specific to allow for more than 128 instruments, we don't need that
      * Modulation Depth (cc#1)-> frequency moves up&down in a repetitive way, tremolo, characteristic to some instr.
-     * Portamento Time (cc#5)-> rate at which portamento slides the pitch between 2 notes
+     * Portamento Time (cc#5)-> no audible effect
      * Channel Volume (cc#7)-> simple loudness
-     * Balance (cc#8)-> balance between left/right speaker
-     * Pan (cc#10)->panorama, i.e. right and left speaker
+     * Balance (cc#8)-> balance between left/right speaker --> no effect audible
+     * Pan (cc#10)->panorama, i.e. right and left speaker --> no effect
      * Expression (cc#11)-> allows for volume dynamics to play e.g. crescendos. no fixed spec
      * Hold1 (Damper) (cc#64)-> 0-63 hold pedal off, 64-127 on.
      * Portamento ON/OFF (cc#65)-> 0-63 off, 64-127 on
@@ -213,5 +206,5 @@ private:
 	Channel* accompanyChannel_;
 	Channel* percussionChannel_; //channel 10
 };
-
+}
 #endif /*MIDIPLAYER_H_*/

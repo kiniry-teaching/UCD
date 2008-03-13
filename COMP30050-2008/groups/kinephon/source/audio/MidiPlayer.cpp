@@ -1,6 +1,8 @@
 #include "MidiPlayer.h"
 
-
+namespace audio
+{
+    
 MidiPlayer::MidiPlayer():
 	midiout_(NULL),
     chords_(3),
@@ -65,12 +67,13 @@ bool MidiPlayer::initialize() {
   	}
   	if(isConnected_){
         try{//sending messages, so catch expections
-  		    leadChannel_ = new Channel(midiout_, 0);
-            accompanyChannel_ = new Channel(midiout_, 1);
+  		    leadChannel_ = new Channel(midiout_, 0);//default acoustic grand
+            accompanyChannel_ = new Channel(midiout_, 1);//default accoustic grand
             chordChannel_ = new Channel(midiout_, 2);
-            chordChannel_->setProgram(48);
+            chordChannel_->setProgram(48);//string ensemble 1, INSTRUMENT_CLASSIC
+           //chordChannel_->setControl(93, 127);
             percussionChannel_ = new Channel(midiout_, 3);
-            percussionChannel_->setProgram(118);
+            percussionChannel_->setProgram(118);//synth drum, INSTRUMENT_CLASSIC
            
   		    return true;
         }
@@ -87,13 +90,12 @@ bool MidiPlayer::initialize() {
 void MidiPlayer::panic() {
 	if(isConnected_) {
         try {
-		  /*leadChannel_->release();
+		  leadChannel_->release();
           accompanyChannel_->release();
           chordChannel_->release(chords_[0]);        
           chordChannel_->release(chords_[1]);
           chordChannel_->release(chords_[2]);
-          percussionChannel_->release();*/
-          leadChannel_->setControl(120,0);
+          percussionChannel_->release();
         }
         catch (RtError &error) {}
 	}
@@ -123,8 +125,6 @@ bool MidiPlayer::setRecording(bool setOn) {
 	return false;
 }
 	
-//TODO: find out what this does
-void MidiPlayer::sendSysEx(int message, int value) {}
 	
 //TODO: find out which ones we will use
 void MidiPlayer::sendChannelMode(uchar mode ) {}
@@ -232,3 +232,5 @@ void MidiPlayer::releaseNote(Channels channel, uchar pitch) {
 }
 
 void MidiPlayer::otherOptions() {}
+
+}

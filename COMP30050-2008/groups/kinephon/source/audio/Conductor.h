@@ -3,25 +3,37 @@
 
 #include "MidiPlayer.h"
 
+namespace audio
+{
+    
 //Note:
-// The following enumerated types may be extended/shortend/changed/discarded
-// depending on whether we will actually use them and how.	
+/** 
+ * The following enumerated types may be extended/shortend/changed/discarded
+ * depending on whether we will actually use them and how.	
+ */
 enum Rhythm { RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3, RHYTHM_NONE };
 
-// Which notes the chords should be based on.
-// Assuming a chord will be composed of 3 notes.
+/** 
+ * Which notes the chords should be based on.
+ * Assuming a chord will be composed of 3 notes.
+ */
 enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_ONEOFF, CHORDS_NONE };
 
+/** 
+ * What dynamics should be used, i.e. loud or quiet.
+ */
 enum Dynamics { DYNAMICS_PIANO, DYNAMICS_FORTE, DYNAMICS_PIANISSIMO, DYNAMICS_FORTISSIMO };
 
-enum Texture { TEXTURE_OMNI, TEXTURE_MONO, TEXTURE_POLY };
-
-//these instruments will set suitable combinations of instruments for lead and chords
-//to be extended...
-enum Instrument { INSTRUMENT_CLASSIC, INSTRUMENT_CRAZY };
-//no note, i.e. temporary pause signal
+/**
+ * these instruments will set suitable combinations of instruments for lead and chords
+ * to be extended...
+ */
+enum Instrument { INSTRUMENT_CLASSIC, INSTRUMENT_CRAZY, INSTRUMENT_WIND };
+/**
+ * no note, i.e. temporary pause signal
+ */
 const uchar NO_NOTE = 255;
-//TODO maybe set up an enum type for a couple of instruments
+
 
 /**
  * Wrapper class for MidiPlayer, hiding the MIDI particular message 
@@ -107,6 +119,77 @@ public:
 	 */
 	void playImmediate(uchar pitch, uchar velocity);
 	
+    /**
+     * Returns the currently set instruments.
+     * @return the instrument currently set
+     */
+    Instrument getInstrument();
+    
+    /**
+     * Returns the current accompaniment parameter.
+     * If no accompaniment is set, the return value will be -1.
+     * @return the accompaniment parameter
+     */
+    int getAccompaniment();
+    
+    /**
+     * Returns the currently set chords. 
+     * If no chords are set, the return value will be CHORDS_NONE.
+     * @return the currently set chords
+     */
+    Chords getChords();
+     
+     /**
+     * Returns the currently set rhythm. 
+     * If no rhythm is set, the return value will be RHYTHM_NONE.
+     * @return the currently set rhythm
+     */
+    Rhythm getRhythm();
+     
+     /**
+     * Returns the currently set dynamics. 
+     * @return the currently set dynamics
+     */
+    Dynamics getDynamics();
+    
+    /**
+     * Returns whether the automatic dynamics function is enabled. 
+     * @return true if automatic dynamics is on
+     */
+    bool getAutomaticDynamics();
+    
+    /**
+     * Returns whether the harmony function is enabled. 
+     * @return true if harmony is on
+     */
+    bool getHarmony();
+    
+    /**
+     * Returns the currently set melody.
+     * If no melody set, returns empty vector.
+     * @return vector with melody notes
+     */
+    vector<uchar> getMelody();
+    
+    /**
+     * Returns whether pedaling is currently enabled.
+     * @return true if pedaling is on
+     */
+    bool getPedaling();
+    
+    /**
+     * Returns whether reverberation is currently enabled.
+     * @return true if reverb is on
+     */
+    bool getReverberation();
+    
+    /**
+     * Returns the modulation value.
+     * A value of 0 means modulation is OFF.
+     * @return true if reverb is on
+     */
+    uchar getModulation();
+     
 	/**
 	 * Sets the instrument for the lead voice.
 	 * <p>
@@ -120,7 +203,7 @@ public:
      * </ul> 
 	 * @param instrument the instrument to be used
 	 */
-	void setLeadInstrument(Instrument instrument); 
+	void setInstrument(Instrument instrument); 
 	
 	/**
 	 * Sets whether a accompaniment is to be played.
@@ -258,20 +341,6 @@ public:
 	void setPedaling(bool isOn, int frequency);
 	
 	/**
-	 * Sets the texture of the piece.
-	 * <p>
-	 * <i> Effect </i>
-	 * This effect will affect the overall sound of the piece.
-	 * <ul>
-	 * <li> Omni mode  (all notes sound like played in only one channel)
-	 * <li> Mono mode  (initial note is cut off when a second is played) 
-	 * <li> Poly mode  (plays multiple notes at once) (default)
-	 * </ul>
-	 * @param texture texture to be used
-	 */
-	void setTexture(Texture texture);
-	
-	/**
 	 * Sets the reverberation on/off.
 	 * <p>
 	 * <i> Effect </i>
@@ -280,6 +349,19 @@ public:
 	 */
 	void setReverberation(bool isOn);
 	
+    /**
+     * Sets the modulation wheel.
+     * The values range from 0 - 127. O means modulation OFF.
+     * Note, if the value is out of this range, nothing will happen, also no crash, except
+     * a parsing error will be printed to std::out.
+     * <p>
+     * <i> Effect </i>
+     * Distorts the sound. Hard to describe, so better try it. It sounds funny.
+     * @param position the position of the modulation wheel
+     */
+    void setModulation(uchar position);
+        
+    void setPan(uchar position);
 	/**
 	 * Releases all notes.
 	 * Additional functionality, like restoring default state, may be added
@@ -305,12 +387,16 @@ private:
     bool hasPedaling_;
 	bool hasReverb_;
 	
+    uchar modulation_;
     int accompaniment_;//TODO: temporary solution till we come up with something better
     int harmony_;
+    
     
 	Rhythm rhythm_;
 	Chords chords_;
 	Dynamics dynamics_;
-	Texture texture_;
+    Instrument instrument_;
 };
+}
+
 #endif /*CONDUCTOR_H_*/

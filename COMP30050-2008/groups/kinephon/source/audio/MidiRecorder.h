@@ -5,6 +5,9 @@
 #include <vector>
 using namespace std;
 
+namespace audio
+{
+    
 /**
  * Records a MIDI file.
  * @author ED 
@@ -64,4 +67,5 @@ private:
 	//other needed I/O devices, needs further research.
 };
 
+}
 #endif /*MIDIRECORDER_H_*/

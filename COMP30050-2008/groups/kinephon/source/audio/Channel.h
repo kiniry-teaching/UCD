@@ -6,8 +6,8 @@
 #include <vector>
 using namespace std;
 
-
- 
+namespace audio
+{ 
 	/* 
 	 * Define middle notes as constants, these are essential.
 	 * What octave we are in is less important for the tune. 
@@ -115,5 +115,5 @@ private:
 	
 	
 };
-
+}
 #endif /*CHANNEL_H_*/
