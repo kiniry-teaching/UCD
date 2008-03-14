@@ -115,5 +115,15 @@ namespace drought_states
             // TODO: Add your drawing code here
             base.Draw(gameTime);
         }
+
+        public GraphicsDeviceManager getGraphics()
+        {
+            return graphics;
+        }
+
+        public SpriteBatch getSpriteBatch()
+        {
+            return spriteBatch;
+        }
     }
 }

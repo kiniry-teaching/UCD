@@ -15,17 +15,27 @@ namespace drought_states
 
         /** The content manager for this state to use to load content */
         private ContentManager content;
+
+        /** The game's graphics device provided by XNA */
+        private GraphicsDeviceManager graphics;
+
+        /** The game's sprite batch used when sprite drawing is required */
+        private SpriteBatch spriteBatch;
         
         /**
          * Constructs a new <code>GameState</code> being managed by
          * the specified <code>StateManager</code> class.
          * 
          * @param manager The state manager to manage this state.
+         * @param game XNA's game class to get accesses to 
+         *      resource managers and devices.
          */
-        public GameState(IStateManager manager, ContentManager content)
+        public GameState(IStateManager manager, Game game)
         {
             stateManager = manager;
-            this.content = content;
+            this.content = game.Content;
+            this.graphics = game.getGraphics();
+            this.spriteBatch = game.getSpriteBatch();
             loadContent();
         }
 
@@ -91,6 +101,16 @@ namespace drought_states
         public ContentManager getContentManager()
         {
             return content;
+        }
+
+        public GraphicsDeviceManager getGraphics()
+        {
+            return graphics;
+        }
+
+        public SpriteBatch getSpriteBatch()
+        {
+            return spriteBatch;
         }
     }
 }
