@@ -74,9 +74,16 @@ void Recorder::record
 	int const	y,
 	int const	size,
 	tick const	time
-){
+){	Frame *		frame;
 
 	Track * track = _tracks[iid];
+
+	// Don't record frames for unknown tracks
+	if(track == 0)
+		return;
+
+	frame = new Frame(x, y, size, time);
+	(*track) += frame;
 
 }
 

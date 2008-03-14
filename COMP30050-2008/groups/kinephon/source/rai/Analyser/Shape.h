@@ -39,9 +39,11 @@ public:
 	 *	and compare(int *, int *) should be called to do the actual comparison
 	 * @param track The track to compare against
 	 * @param shapeMatches A filter and collection for the matched shapes
-	 * @return A weight of how close the track matches the shape from (0..1)
+	 * @return A true if any match was fould, else false
 	 * @author EB
 	 * @version 1.0
+	 * @pre track != 0 && shapeMatches != 0;
+	 * @post \result == true ==> shapeMatches->length() != 0;
 	 */
 	virtual bool	compare
 					(	Track const * const		track,

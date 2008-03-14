@@ -11,7 +11,6 @@ using namespace interpreter;
 
 void display(void);
 void motion(int x, int y);
-void reshape(int x, int y);
 void timer(int t);
 void entry(int state);
 Recorder g_recorder;
@@ -31,6 +30,7 @@ int main(int argc, char * * argv)
 	glutDisplayFunc(display);
 	glutPassiveMotionFunc(motion);
 	glutTimerFunc(100, timer, 0);
+	glutTimerFunc(1231, timer, 1);
 	glutEntryFunc(entry);
 
 	glMatrixMode(GL_PROJECTION);
@@ -41,7 +41,7 @@ int main(int argc, char * * argv)
 	glDisable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-//	g_recorder.control(econtrol::FOUND, 0);
+	g_recorder.control(econtrol::FOUND, 0);
 
 	glutMainLoop();
 
@@ -52,9 +52,9 @@ int main(int argc, char * * argv)
 void display(void)
 {
 
-//	Recording * recording = g_recorder.eject();
+	Recording * recording = g_recorder.eject();
 
-//	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	glBegin(GL_LINES);
 	
@@ -65,26 +65,13 @@ void display(void)
 
 	glFlush();
 
-//	g_recorder.erase(recording);
+	g_recorder.erase(recording);
 
 }
 
 void motion(int x, int y)
 {
-
-if(tx != -1)
-{	lx = tx;
-	ly = ty;
-}
-else
-{	lx = x;
-	ly = y;
-}
-tx = x;
-ty = y;
-
-//	g_recorder.record(0, x, y, 1, g_time);
-	glutPostRedisplay();
+	g_recorder.record(0, x, y, 1, g_time);
 }
 
 void entry(int state)
@@ -94,15 +81,14 @@ void entry(int state)
 
 }
 
-void reshape(int x, int y)
-{
-
-
-}
-
 void timer(int t)
 {
-	g_time++;
+
+	if(t == 0)
+		g_time++;
+	else
+		glutPostRedisplay();
+		
 }
 
 #endif

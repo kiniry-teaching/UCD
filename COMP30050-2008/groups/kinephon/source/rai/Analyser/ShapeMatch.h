@@ -51,7 +51,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	ShapeMatches *	shapeMatches				(void);
+	ShapeMatches * &	shapeMatches				(void);
 	
 ///////////////////////////////////////////////////////////////////////////////
 // friend *tor
@@ -100,16 +100,14 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 inline ShapeMatch::ShapeMatch
-(	Shape * const			shape,
-	float const				weight
-) :	_shape					(shape),
-	_weight					(weight)
+(	Shape * const	shape,
+	float const		weight
+) :	_shape			(shape),
+	_weight			(weight)
 { }
 
-inline ShapeMatches * ShapeMatch::shapeMatches(void)
-{//	if(_shapeMatches == 0)
-//		return _shapeMatches = new ShapeMatches;
-	return _shapeMatches;
+inline ShapeMatches * & ShapeMatch::shapeMatches(void)
+{	return _shapeMatches;
 }
 
 }

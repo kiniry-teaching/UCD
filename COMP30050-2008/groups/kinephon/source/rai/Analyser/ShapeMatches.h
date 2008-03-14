@@ -51,6 +51,21 @@ public:
 								uint const					total	= 1
 							);
 
+	/**
+	 * Create a shape match collection based on an existing ShapeMatches.
+	 * This clones the weight and total counts into the new shape, but does
+	 *	not copy the collection of matched shapes, instead it has an empty
+	 *	list
+	 * @param shapeMatches The ShapeMatches whose weight and total will define
+	 *	this ShapeMatches
+	 * @author EB
+	 * @version 1.0
+	 * @pre shapeMatches != 0;
+	 */
+							ShapeMatches
+							(	ShapeMatches *				shapeMatches
+							);
+
 ///////////////////////////////////////////////////////////////////////////////
 // queries
 //
@@ -138,6 +153,12 @@ inline ShapeMatches::ShapeMatches
 	uint const	total	//= 1
 ) :	_weight		(weight),
 	_total		(total)
+{ }
+
+inline ShapeMatches::ShapeMatches
+(	ShapeMatches *	shapeMatches
+) :	_weight			(shapeMatches->_weight),
+	_total			(shapeMatches->_total)
 { }
 
 inline float ShapeMatches::weight(void) const

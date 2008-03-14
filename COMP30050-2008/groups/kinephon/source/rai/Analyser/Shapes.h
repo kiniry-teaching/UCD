@@ -39,6 +39,8 @@ public:
 	 * @return True if any matches are found, else false
 	 * @author EB
 	 * @version 1.0
+	 * @pre track != 0 && shapeMatches != 0;
+	 * @post \result == true ==> shapeMatches.length() > 0;
 	 */
 	bool			compare
 					(	Track const * const		track,
@@ -53,13 +55,12 @@ private:
 	 * Add a shape to the collection
 	 * This is called by ShapesLoader
 	 * @param shape Pointer to an allocated shape to add
-	 * @return A reference to this
 	 * @author EB
 	 * @version 1.0
 	 * @pre shape != 0;
 	 * @pre _shapeIndex < _nShapes;
 	 */
-	Shapes &		operator +=
+	void			operator +=
 					(	Shape *					shape
 					);
 
@@ -94,7 +95,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shape *			_shapes;
+	Shape *	*		_shapes;
 	/**
 	 * Length of _shapes array
 	 * @author EB

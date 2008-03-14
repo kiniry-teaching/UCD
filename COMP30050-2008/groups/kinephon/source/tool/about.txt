@@ -1,4 +1,4 @@
-ShArt        (Shape Artist)
+Shed        (Shape Editor)
   Language:  C#
   OS:        Windows Only
   About:     Draw gesture weight-maps and compile them into a single file that
