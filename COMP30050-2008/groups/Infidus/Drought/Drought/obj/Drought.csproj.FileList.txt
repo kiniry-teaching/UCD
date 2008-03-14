@@ -6,3 +6,14 @@ obj\x86\Debug\Drought.obj.x86.Debug.Microsoft.Xna.Framework.RuntimeProfile.txt
 obj\x86\Debug\Drought.exe
 obj\x86\Debug\Drought.pdb
 bin\x86\Debug\Content\Fonts\TestFont.xnb
+bin\x86\Debug\Content\Textures\error.xnb
+bin\x86\Debug\Content\Textures\sand.xnb
+bin\x86\Debug\Content\Textures\stone.xnb
+bin\x86\Debug\Content\Textures\water.xnb
+bin\x86\Debug\Content\TextureMaps\river_low.xnb
+bin\x86\Debug\Content\HeightMaps\river_low.xnb
+bin\x86\Debug\Content\EffectFiles\MultiEffects.xnb
+bin\x86\Debug\Content\Textures\error.jpg
+bin\x86\Debug\Content\Textures\sand.png
+bin\x86\Debug\Content\Textures\stone.jpg
+bin\x86\Debug\Content\Textures\water.jpg

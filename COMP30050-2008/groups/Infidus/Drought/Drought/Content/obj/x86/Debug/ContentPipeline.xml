@@ -7,38 +7,101 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\rashid\My Documents\Drought\Drought\Drought\bin\x86\Debug\Content\Fonts\TestFont.xnb</Output>
-      <Time>2008-02-29T14:15:35.5625+00:00</Time>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Fonts\TestFont.xnb</Output>
+      <Time>2008-03-12T18:09:51.6644146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\error.jpg</Source>
+      <Name>Textures\error</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\error.xnb</Output>
+      <Time>2008-03-12T18:11:53.1644146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\sand.png</Source>
+      <Name>Textures\sand</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\sand.xnb</Output>
+      <Time>2008-03-12T18:11:53.2084146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\stone.jpg</Source>
+      <Name>Textures\stone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\stone.xnb</Output>
+      <Time>2008-03-12T18:11:53.2744146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\water.jpg</Source>
+      <Name>Textures\water</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\water.xnb</Output>
+      <Time>2008-03-12T18:11:53.3184146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>TextureMaps\river_low.bmp</Source>
+      <Name>TextureMaps\river_low</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\TextureMaps\river_low.xnb</Output>
+      <Time>2008-03-12T18:13:20.6434146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>HeightMaps\river_low.bmp</Source>
+      <Name>HeightMaps\river_low</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\HeightMaps\river_low.xnb</Output>
+      <Time>2008-03-12T18:13:27.5534146+00:00</Time>
+    </Item>
+    <Item>
+      <Source>EffectFiles\MultiEffects.fx</Source>
+      <Name>EffectFiles\MultiEffects</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\MultiEffects.xnb</Output>
+      <Time>2008-03-12T18:13:49.1964146+00:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>C:\Documents and Settings\rashid\My Documents\Drought\Drought\Drought\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\rashid\My Documents\Drought\Drought\Drought\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\rashid\My Documents\Drought\Drought\Drought\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\rashid\My Documents\Drought\Drought\Drought\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
         <Value>2007-11-28T13:08:00+00:00</Value>
       </Assembly>
       <Assembly>
-        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
         <Value>2007-11-28T13:08:42+00:00</Value>
       </Assembly>
       <Assembly>
-        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
         <Value>2007-11-28T13:08:30+00:00</Value>
       </Assembly>
       <Assembly>
-        <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
         <Value>2007-11-28T13:07:44+00:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2007-12-31T15:55:37.375+00:00</Value>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2008-01-31T13:20:24.8985984+00:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

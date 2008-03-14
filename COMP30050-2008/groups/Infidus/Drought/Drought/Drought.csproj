@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera\Camera.cs" />
     <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Core\Program.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\IStateManager.cs" />
+    <Compile Include="Terrain\HeightMap.cs" />
+    <Compile Include="Terrain\TextureMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
