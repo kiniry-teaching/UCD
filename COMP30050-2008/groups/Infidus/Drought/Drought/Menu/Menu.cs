@@ -18,6 +18,8 @@ namespace drought_states.menu
 
         private IMenuListener listener;
 
+        private bool isActive;
+
         
         public Menu(IMenuListener listener)
         {
@@ -25,16 +27,17 @@ namespace drought_states.menu
             nonSelectableItems = new List<MenuItem>();
             this.listener = listener;
             selectedIndex = NO_ITEM;
+            isActive = false;
         }
 
         public void activate()
         {
-
+            isActive = true;
         }
 
         public void deactivate()
         {
-
+            isActive = false;
         }
 
         public void update()
@@ -44,6 +47,9 @@ namespace drought_states.menu
 
         public void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
+            if (!isActive)
+                return;
+
             for (int i = 0; i < selectableItems.Count; i++)
                 selectableItems[i].render(spriteBatch);
 

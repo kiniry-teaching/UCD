@@ -36,9 +36,13 @@ namespace drought_states
         /// </summary>
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
             //graphics.PreferredBackBufferWidth = 1280;
             //graphics.PreferredBackBufferHeight = 800;
-            //graphics.ApplyChanges();
+            //graphics.PreferredBackBufferWidth = 1650;
+            //graphics.PreferredBackBufferHeight = 1080;
+            graphics.ApplyChanges();
 
             Input input = Input.getInput();
             input.bind(GameKeys.QUIT, Keys.Q, ModifierKeys.NONE);
@@ -49,7 +53,7 @@ namespace drought_states
 
             //StateOne stateOne = new StateOne(gameManager, Content);
             //StateTwo stateTwo = new StateTwo(gameManager, Content);
-            MenuState menu = new MenuState(gameManager, Content);
+            MenuState menu = new MenuState(gameManager, Content, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //gameManager.pushState(stateOne);
             //gameManager.pushState(stateTwo);
             gameManager.pushState(menu);

@@ -75,6 +75,18 @@ namespace drought_states.menu
             set { toolTipText = value; }
         }
 
+        public void setSelectedColor(Color c)
+        {
+            if(c != null)
+                selectedColor = c;
+        }
+
+        public void setDefaultColor(Color c)
+        {
+            if(c != null)
+                defaultColor = c;
+        }
+
         public void setScale(float scale)
         {
             this.scale = scale;

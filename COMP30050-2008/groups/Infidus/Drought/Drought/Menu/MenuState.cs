@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace drought_states.menu
 {
-    enum MenuFunctions { QUIT, HOST, JOIN, OPTIONS };
+    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, JOIN, OPTIONS };
 
 
     class MenuState : GameState, IMenuListener
@@ -16,6 +16,8 @@ namespace drought_states.menu
         private Input input; 
 
         private Menu mainMenu;
+
+        private Menu quitMenu;
 
         private Menu currMenu;
 
@@ -29,10 +31,16 @@ namespace drought_states.menu
 
         private bool canPress;
 
+        private int screenWidth;
 
-        public MenuState(IStateManager manager, ContentManager content)
+        private int screenHeight;
+
+
+        public MenuState(IStateManager manager, ContentManager content, int width, int height)
             : base(manager, content)
         {
+            screenWidth = width;
+            screenHeight = height;
             initialise();
         }
 
@@ -45,11 +53,14 @@ namespace drought_states.menu
             canPrev = true;
             canPress = true;
 
-            float scale = 0.25f;
-            int mainX = 0;
-            int mainY = 0;
-            int mainSpacing = 50;
+            float scale = 0.35f * (screenHeight / 600.0f);
+            float mainX = 25.0f * (screenWidth / 800.0f);
+            float mainY = 300.0f * (screenHeight / 600.0f);
+            float mainSpacing = 70.0f * (screenHeight / 600.0f);
+            Console.WriteLine("scale = " + scale + ", x = " + mainX + ", y = " + mainY + ", yspacing = " + mainSpacing);
+            
             mainMenu = new Menu(this);
+            mainMenu.activate();
 
             MenuItem hostGame = new MenuItem(MenuFunctions.HOST, "Host Game", defaultFont);
             hostGame.setScale(scale);
@@ -68,6 +79,29 @@ namespace drought_states.menu
             quit.position = new Vector2(mainX, mainY);
             mainMenu.addSelectableItem(quit);
             mainY += mainSpacing;
+
+
+            float quitX = 500.0f * (screenWidth / 800.0f); ;
+            float quitY = 300.0f * (screenHeight / 600.0f);
+            quitMenu = new Menu(this);
+
+            MenuItem quitInfo = new MenuItem(MenuFunctions.NONE, "Are you sure?", defaultFont);
+            quitInfo.setScale(scale);
+            quitInfo.position = new Vector2(quitX, quitY);
+            quitInfo.setDefaultColor(Color.Blue);
+            quitMenu.addNonSelectableItem(quitInfo);
+            quitY += mainSpacing;
+
+            MenuItem quitYes = new MenuItem(MenuFunctions.QUIT_YES, "Yes", defaultFont);
+            quitYes.setScale(scale);
+            quitYes.position = new Vector2(quitX, quitY);
+            quitMenu.addSelectableItem(quitYes);
+            quitY += mainSpacing;
+
+            MenuItem quitNo = new MenuItem(MenuFunctions.QUIT_NO, "No", defaultFont);
+            quitNo.setScale(scale);
+            quitNo.position = new Vector2(quitX, quitY);
+            quitMenu.addSelectableItem(quitNo);
 
             currMenu = mainMenu;
         }
@@ -125,14 +159,17 @@ namespace drought_states.menu
 
         public override void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            currMenu.render(graphics, spriteBatch);
+            mainMenu.render(graphics, spriteBatch);
+            quitMenu.render(graphics, spriteBatch);
         }
 
         public void menuItemPressed(MenuItem item)
         {
             switch (item.getFunction())
             {
-                case MenuFunctions.QUIT: getStateManager().popState() ; break;
+                case MenuFunctions.QUIT: currMenu = quitMenu; quitMenu.activate(); ; break;
+                case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
+                case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
             }
         }
     }
