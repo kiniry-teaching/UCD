@@ -2,9 +2,9 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace Drought
+namespace Drought.Level
 {
-    public class HeightMap
+    class HeightMap
     {
         float[,] map;
         string fileName;

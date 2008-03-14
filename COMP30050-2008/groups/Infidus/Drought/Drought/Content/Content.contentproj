@@ -78,8 +78,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EffectFiles\MultiEffects.fx">
-      <Name>MultiEffects</Name>
+    <Compile Include="EffectFiles\terrain.fx">
+      <Name>terrain</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EffectFiles\simple.fx">
+      <Name>simple</Name>
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </Compile>

@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.Xna.Framework;
 
-namespace Drought
+namespace Drought.Level
 {
     class TextureMap
     {

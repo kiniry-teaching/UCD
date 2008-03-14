@@ -47,31 +47,40 @@
       <Time>2008-03-12T18:11:53.3184146+00:00</Time>
     </Item>
     <Item>
-      <Source>TextureMaps\river_low.bmp</Source>
-      <Name>TextureMaps\river_low</Name>
+      <Source>TextureMaps\level_0.bmp</Source>
+      <Name>TextureMaps\level_0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\TextureMaps\river_low.xnb</Output>
-      <Time>2008-03-12T18:13:20.6434146+00:00</Time>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\TextureMaps\level_0.xnb</Output>
+      <Time>2008-03-14T15:49:07.1981696+00:00</Time>
     </Item>
     <Item>
-      <Source>HeightMaps\river_low.bmp</Source>
-      <Name>HeightMaps\river_low</Name>
+      <Source>HeightMaps\level_0.bmp</Source>
+      <Name>HeightMaps\level_0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\HeightMaps\river_low.xnb</Output>
-      <Time>2008-03-12T18:13:27.5534146+00:00</Time>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\HeightMaps\level_0.xnb</Output>
+      <Time>2008-03-14T15:49:14.4551696+00:00</Time>
     </Item>
     <Item>
-      <Source>EffectFiles\MultiEffects.fx</Source>
-      <Name>EffectFiles\MultiEffects</Name>
+      <Source>EffectFiles\terrain.fx</Source>
+      <Name>EffectFiles\terrain</Name>
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\MultiEffects.xnb</Output>
-      <Time>2008-03-12T18:13:49.1964146+00:00</Time>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\terrain.xnb</Output>
+      <Time>2008-03-14T16:30:36.8101696+00:00</Time>
+    </Item>
+    <Item>
+      <Source>EffectFiles\simple.fx</Source>
+      <Name>EffectFiles\simple</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\simple.xnb</Output>
+      <Time>2008-03-14T16:39:34.6051696+00:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

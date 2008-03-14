@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Microsoft.Xna.Framework.Content;
 
-namespace Drought
+namespace Drought.Level
 {
-    public class Terrain
+    class Terrain
     {
         public struct VertexMultiTextured
         {
@@ -51,10 +51,9 @@ namespace Drought
         public double counter = Math.PI;
         public Vector3 lightDirection = new Vector3(0.5f, (float)Math.Sin(Math.PI), (float)Math.Sin(Math.PI));
 
-        public Terrain(Game game, Effect effect, HeightMap heightMap, TextureMap textureMap)
+        public Terrain(Game game, HeightMap heightMap, TextureMap textureMap)
         {
             this.device = game.GraphicsDevice();
-            this.effect  = effect;
             this.content = content;
             this.heightMap = heightMap;
             this.textureMap = textureMap;
@@ -76,7 +75,9 @@ namespace Drought
 
         private void loadGraphicsContent()
         {
-            sandTexture = content.Load<Texture2D>("Textures/sand");
+            effect = content.Load<Effect>("EffectFiles/terrain");
+
+            sandTexture  = content.Load<Texture2D>("Textures/sand");
             waterTexture = content.Load<Texture2D>("Textures/water");
             stoneTexture = content.Load<Texture2D>("Textures/stone");
             errorTexture = content.Load<Texture2D>("Textures/error");

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace Drought
+namespace Drought.Camera
 {
-    public class Camera
+    class Camera
     {
         private Game game;
         private HeightMap heightMap;

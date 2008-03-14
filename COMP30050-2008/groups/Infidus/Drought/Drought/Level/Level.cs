@@ -10,7 +10,7 @@ namespace Drought.Level
         HeightMap heightMap;
         TextureMap textureMap;
 
-        public Level(Game game, Effect effect, string fileName)
+        public Level(Game game, string fileName)
         {
             heightMap = new HeightMap(fileName);
             textureMap = new TextureMap(fileName);
