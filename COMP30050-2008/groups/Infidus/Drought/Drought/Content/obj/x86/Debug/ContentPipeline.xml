@@ -71,7 +71,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\terrain.xnb</Output>
-      <Time>2008-03-14T16:30:36.8101696+00:00</Time>
+      <Time>2008-03-14T21:17:51.9649736+00:00</Time>
     </Item>
     <Item>
       <Source>EffectFiles\simple.fx</Source>
@@ -81,6 +81,24 @@
       <Options>None</Options>
       <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\simple.xnb</Output>
       <Time>2008-03-14T16:39:34.6051696+00:00</Time>
+    </Item>
+    <Item>
+      <Source>HeightMaps\square.bmp</Source>
+      <Name>HeightMaps\square</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\HeightMaps\square.xnb</Output>
+      <Time>2008-03-14T21:54:26.8439736+00:00</Time>
+    </Item>
+    <Item>
+      <Source>TextureMaps\square.bmp</Source>
+      <Name>TextureMaps\square</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\TextureMaps\square.xnb</Output>
+      <Time>2008-03-14T21:54:42.6289736+00:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

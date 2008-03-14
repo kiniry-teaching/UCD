@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace drought_states.menu
+namespace Drought.Menu
 {
     interface IMenuListener
     {

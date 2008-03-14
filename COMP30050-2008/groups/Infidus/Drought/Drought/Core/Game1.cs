@@ -8,9 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
-using drought_states.menu;
+using Drought.Menu;
+using Drought.Input;
 
-namespace drought_states
+namespace Drought
 {
     /// <summary>
     /// This is the main type for your game
@@ -44,7 +45,7 @@ namespace drought_states
             //graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
 
-            Input input = Input.getInput();
+            Input.Input input = Input.Input.getInput();
             input.bind(GameKeys.QUIT, Keys.Q, ModifierKeys.NONE);
             input.bind(GameKeys.CHANGE_STATE, Keys.C, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_NEXT, Keys.Down, ModifierKeys.NONE);
@@ -53,7 +54,7 @@ namespace drought_states
 
             //StateOne stateOne = new StateOne(gameManager, Content);
             //StateTwo stateTwo = new StateTwo(gameManager, Content);
-            MenuState menu = new MenuState(gameManager, Content, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //gameManager.pushState(stateOne);
             //gameManager.pushState(stateTwo);
             gameManager.pushState(menu);
@@ -89,9 +90,9 @@ namespace drought_states
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            Input.getInput().poll();
+            Input.Input.getInput().poll();
 
-            if (Input.getInput().isKeyPressed(GameKeys.QUIT))
+            if (Input.Input.getInput().isKeyPressed(GameKeys.QUIT))
                 Exit();
 
             gameManager.update(gameTime);
@@ -109,16 +110,16 @@ namespace drought_states
         {
             graphics.GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            gameManager.render(graphics, spriteBatch);
+            gameManager.render(graphics.GraphicsDevice, spriteBatch);
             spriteBatch.End();
 
             // TODO: Add your drawing code here
             base.Draw(gameTime);
         }
 
-        public GraphicsDeviceManager getGraphics()
+        public GraphicsDevice getGraphics()
         {
-            return graphics;
+            return graphics.GraphicsDevice;
         }
 
         public SpriteBatch getSpriteBatch()

@@ -56,25 +56,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Camera\Camera.cs" />
+    <Compile Include="Game States\LevelState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="World\Camera.cs" />
     <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Core\Program.cs" />
     <Compile Include="Game States\StateOne.cs" />
     <Compile Include="Game States\StateTwo.cs" />
     <Compile Include="Input\Input.cs" />
-    <Compile Include="Level\Level.cs" />
-    <Compile Include="Level\Terrain.cs" />
+    <Compile Include="World\Terrain.cs" />
     <Compile Include="Menu\IMenuListener.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Game2.cs" />
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\IStateManager.cs" />
-    <Compile Include="Level\HeightMap.cs" />
-    <Compile Include="Level\TextureMap.cs" />
+    <Compile Include="World\HeightMap.cs" />
+    <Compile Include="World\TextureMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

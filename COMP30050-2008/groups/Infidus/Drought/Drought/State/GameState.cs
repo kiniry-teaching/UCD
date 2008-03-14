@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace drought_states
+namespace Drought.State
 {
 
     public abstract class GameState
@@ -13,11 +13,14 @@ namespace drought_states
         /** The <code>StateManager</code> managing this state */
         private IStateManager stateManager;
 
+        /** The game that this state is running on */
+        private Game game;
+
         /** The content manager for this state to use to load content */
         private ContentManager content;
 
         /** The game's graphics device provided by XNA */
-        private GraphicsDeviceManager graphics;
+        private GraphicsDevice graphics;
 
         /** The game's sprite batch used when sprite drawing is required */
         private SpriteBatch spriteBatch;
@@ -32,10 +35,11 @@ namespace drought_states
          */
         public GameState(IStateManager manager, Game game)
         {
+            this.game = game;
             stateManager = manager;
             this.content = game.Content;
-            this.graphics = game.getGraphics();
-            this.spriteBatch = game.getSpriteBatch();
+            this.graphics = game.GraphicsDevice;
+            this.spriteBatch = ((Game1)game).getSpriteBatch();
             loadContent();
         }
 
@@ -80,7 +84,7 @@ namespace drought_states
          * @param graphics The graphics device manager to draw with.
          * @param spriteBatch A sprite batch to use to draw sprites.
          */
-        public abstract void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch);
+        public abstract void render(GraphicsDevice graphics, SpriteBatch spriteBatch);
         
         /**
          * Gets the <code>StateManager</code> that is managing this state.
@@ -103,7 +107,7 @@ namespace drought_states
             return content;
         }
 
-        public GraphicsDeviceManager getGraphics()
+        public GraphicsDevice getGraphics()
         {
             return graphics;
         }
@@ -111,6 +115,11 @@ namespace drought_states
         public SpriteBatch getSpriteBatch()
         {
             return spriteBatch;
+        }
+
+        public Game getGame()
+        {
+            return game;
         }
     }
 }

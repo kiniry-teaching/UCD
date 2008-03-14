@@ -4,17 +4,19 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Drought.State;
+using Drought.Input;
 
-namespace drought_states
+namespace Drought.GameStates
 {
     public class StateOne : GameState
     {
-        private Input input;
+        private Input.Input input;
 
-        public StateOne(IStateManager manager, ContentManager content)
-            : base(manager, content)
+        public StateOne(IStateManager manager, Game game)
+            : base(manager, game)
         {
-            input = Input.getInput();
+            input = Input.Input.getInput();
         }
 
         public override void loadContent()
@@ -35,13 +37,13 @@ namespace drought_states
         public override void update(GameTime gameTime)
         {
             if (input.isKeyPressed(GameKeys.CHANGE_STATE))
-                getStateManager().pushState(new StateTwo(getStateManager(), getContentManager()));
+                getStateManager().pushState(new StateTwo(getStateManager(), getGame()));
 
         }
 
-        public override void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
-            graphics.GraphicsDevice.Clear(Color.Black);
+            graphics.Clear(Color.Black);
         }
     }
 }

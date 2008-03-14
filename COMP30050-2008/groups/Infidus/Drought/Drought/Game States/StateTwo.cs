@@ -4,17 +4,19 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Drought.State;
+using Drought.Input;
 
-namespace drought_states
+namespace Drought.GameStates
 {
     public class StateTwo : GameState
     {
-        private Input input;
+        private Input.Input input;
 
-        public StateTwo(IStateManager manager, ContentManager content)
-            : base(manager, content)
+        public StateTwo(IStateManager manager, Game game)
+            : base(manager, game)
         {
-            input = Input.getInput();
+            input = Input.Input.getInput();
         }
 
         public override void loadContent()
@@ -39,9 +41,9 @@ namespace drought_states
 
         }
 
-        public override void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
-            graphics.GraphicsDevice.Clear(Color.Red);
+            graphics.Clear(Color.Red);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace drought_states.menu
+namespace Drought.Menu
 {
     class Menu
     {
@@ -45,7 +45,7 @@ namespace drought_states.menu
 
         }
 
-        public void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        public void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
             if (!isActive)
                 return;

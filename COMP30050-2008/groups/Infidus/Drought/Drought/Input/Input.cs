@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 
-namespace drought_states
+namespace Drought.Input
 {
     /** The game's available commands */
     public enum GameKeys : int { MENU_NEXT, MENU_PREV, MENU_PRESS, UP, DOWN, LEFT, RIGHT, QUIT, CHANGE_STATE };

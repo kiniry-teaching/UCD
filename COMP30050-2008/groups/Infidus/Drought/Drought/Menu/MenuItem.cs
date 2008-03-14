@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace drought_states.menu
+namespace Drought.Menu
 {
 
     class MenuItem

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Drought.State;
 
-namespace drought_states
+namespace Drought
 {
     public class GameManager : IStateManager
     {
@@ -89,7 +90,7 @@ namespace drought_states
          * 
          * @param graphics The graphics device to render to.
          */
-        public void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        public void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
             stateStack[stateStack.Count - 1].render(graphics, spriteBatch);
         }

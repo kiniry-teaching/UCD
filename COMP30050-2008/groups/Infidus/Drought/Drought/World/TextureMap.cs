@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.Xna.Framework;
 
-namespace Drought.Level
+namespace Drought.World
 {
     class TextureMap
     {
@@ -13,12 +13,14 @@ namespace Drought.Level
         public TextureMap(string fileName)
         {
             this.fileName = fileName;
+
+            initalise();
         }
 
 
         public void initalise()
         {
-            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream("Content/TextureMaps/" + fileName + ".bmp", FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
 
             r.BaseStream.Seek(10, SeekOrigin.Current);

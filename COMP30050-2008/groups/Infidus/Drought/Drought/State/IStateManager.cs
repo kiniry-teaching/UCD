@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace drought_states
+namespace Drought.State
 {
     /**
      * <code>IStateManager</code> describes the interface for states to

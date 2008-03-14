@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Microsoft.Xna.Framework.Content;
 
-namespace Drought.Level
+namespace Drought.World
 {
     class Terrain
     {
@@ -51,29 +51,30 @@ namespace Drought.Level
         public double counter = Math.PI;
         public Vector3 lightDirection = new Vector3(0.5f, (float)Math.Sin(Math.PI), (float)Math.Sin(Math.PI));
 
-        public Terrain(Game game, HeightMap heightMap, TextureMap textureMap)
+        public Terrain(GraphicsDevice device, ContentManager content, HeightMap heightMap, TextureMap textureMap)
         {
-            this.device = game.GraphicsDevice();
+            this.device = device;
             this.content = content;
             this.heightMap = heightMap;
             this.textureMap = textureMap;
+
+            initialise();
         }
 
-        public void Initialize()
+        public void initialise()
         {
             width  = heightMap.getMapWidth();
             height = heightMap.getMapHeight();
 
             textureZoom = 40.0f;
 
-            loadGraphicsContent();
             setUpVertices();
             setUpIndices();
             setUpNormals();
             finaliseBuffers();
         }
 
-        private void loadGraphicsContent()
+        public void loadContent()
         {
             effect = content.Load<Effect>("EffectFiles/terrain");
 
@@ -120,7 +121,7 @@ namespace Drought.Level
             }
         }
 
-        public void setUpNormals()
+        private void setUpNormals()
         {
             for (int i = 0; i < indices.Length/3; i++)
             {
@@ -147,13 +148,7 @@ namespace Drought.Level
             ib.SetData(indices);
         }
 
-        public HeightMap getHeightMap()
-        {
-            return heightMap;
-        }
-
-
-        public void Update(GameTime gameTime)
+        public void update(GameTime gameTime)
         {
             double currTime = gameTime.TotalGameTime.Ticks;
 
@@ -167,7 +162,7 @@ namespace Drought.Level
             }
         }
 
-        public void Draw(GameTime gameTime)
+        public void render()
         {
             Matrix worldMatrix = Matrix.Identity;
 
@@ -196,6 +191,16 @@ namespace Drought.Level
                 pass.End();
             }
             effect.End();
+        }
+
+        public void setViewMatrix(Matrix viewMatrix)
+        {
+            effect.Parameters["xView"].SetValue(viewMatrix);
+        }
+
+        public void setProjectionMatrix(Matrix projectionMatrix)
+        {
+            effect.Parameters["xProjection"].SetValue(projectionMatrix);
         }
     }
 }

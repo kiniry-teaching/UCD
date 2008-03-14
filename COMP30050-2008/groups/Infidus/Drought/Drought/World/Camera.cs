@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace Drought.Camera
+namespace Drought.World
 {
-    class Camera
+    public class Camera
     {
         private Game game;
         private HeightMap heightMap;
@@ -22,18 +22,20 @@ namespace Drought.Camera
         {
             this.game = game;
             this.heightMap = heightMap;
+
+            initialize();
         }
 
-        public void Initialize()
+        public void initialize()
         {
-            eyeVector   = new Vector3(0, 0, heightMap.getHeight(0, 0));
+            eyeVector   = new Vector3(0, 0, heightMap.getHeight(0, 0)+cameraStand);
             focusVector = new Vector3(0, 0, heightMap.getHeight(0, 0));
             upVector    = new Vector3(0, 0, 1);
 
-            cameraRotationAngles = new Vector3(MathHelper.PiOver4, 0, MathHelper.PiOver4);
+            cameraRotationAngles = new Vector3(0,0,0);
         }
 
-        public void Update(GameTime gameTime)
+        public void update(GameTime gameTime)
         {
             if (eyeVector.Z < heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand)
                 eyeVector.Z = heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand;

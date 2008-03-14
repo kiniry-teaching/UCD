@@ -1,6 +1,6 @@
 using System;
 
-namespace drought_states
+namespace Drought
 {
     static class Program
     {

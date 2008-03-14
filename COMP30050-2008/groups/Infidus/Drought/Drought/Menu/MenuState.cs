@@ -5,15 +5,18 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Drought.State;
+using Drought.Input;
+using Drought.GameStates;
 
-namespace drought_states.menu
+namespace Drought.Menu
 {
     enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, JOIN, OPTIONS };
 
 
     class MenuState : GameState, IMenuListener
     {
-        private Input input; 
+        private Input.Input input; 
 
         private Menu mainMenu;
 
@@ -36,8 +39,8 @@ namespace drought_states.menu
         private int screenHeight;
 
 
-        public MenuState(IStateManager manager, ContentManager content, int width, int height)
-            : base(manager, content)
+        public MenuState(IStateManager manager, Game game, int width, int height)
+            : base(manager, game)
         {
             screenWidth = width;
             screenHeight = height;
@@ -46,7 +49,7 @@ namespace drought_states.menu
 
         private void initialise()
         {
-            input = Input.getInput();
+            input = Input.Input.getInput();
             defaultColor = Color.White;
 
             canNext = true;
@@ -157,7 +160,7 @@ namespace drought_states.menu
                 canPress = true;
         }
 
-        public override void render(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
             mainMenu.render(graphics, spriteBatch);
             quitMenu.render(graphics, spriteBatch);
@@ -170,6 +173,8 @@ namespace drought_states.menu
                 case MenuFunctions.QUIT: currMenu = quitMenu; quitMenu.activate(); ; break;
                 case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
                 case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
+
+                case MenuFunctions.HOST: getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
             }
         }
     }

@@ -2,9 +2,9 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace Drought.Level
+namespace Drought.World
 {
-    class HeightMap
+    public class HeightMap
     {
         float[,] map;
         string fileName;
@@ -14,12 +14,14 @@ namespace Drought.Level
         public HeightMap(string fileName)
         {
             this.fileName = fileName;
+
+            initalise();
         }
 
 
         public void initalise()
         {
-            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream("Content/HeightMaps/"+fileName+".bmp", FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
 
             r.BaseStream.Seek(10, SeekOrigin.Current);
