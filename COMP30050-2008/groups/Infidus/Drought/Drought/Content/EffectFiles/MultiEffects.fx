@@ -251,3 +251,40 @@ technique MultiTextured
         PixelShader = compile ps_2_0 MultiTexturedPS();
     }
 }
+
+
+//------- Technique: Simple --------
+
+Texture xColouredTexture;
+sampler ColouredTextureSampler = sampler_state { texture = <xColouredTexture> ; magfilter = LINEAR; minfilter = LINEAR; mipfilter=LINEAR; AddressU = mirror; AddressV = mirror;};
+
+float4x4 xWorldViewProjection;
+
+VertexToPixel SimpleVertexShader( float4 inPos : POSITION, float2 inTexCoords : TEXCOORD0)
+{
+    VertexToPixel Output = (VertexToPixel)0;
+
+    Output.Position = mul(inPos, xWorldViewProjection);
+    Output.TextureCoords = inTexCoords;
+
+    return Output;
+}
+
+PixelToFrame SimplePixelShader(VertexToPixel PSIn)
+{
+    PixelToFrame Output = (PixelToFrame)0;
+
+    Output.Color = tex2D(ColouredTextureSampler, PSIn.TextureCoords);
+
+    return Output;
+}
+
+technique Simple
+{
+    pass Pass0
+    {        
+        VertexShader = compile vs_1_1 SimpleVertexShader();
+        PixelShader = compile ps_1_1 SimplePixelShader();
+    }
+
+} 

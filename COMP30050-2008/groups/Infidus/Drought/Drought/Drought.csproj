@@ -52,6 +52,8 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera\Camera.cs" />
@@ -61,6 +63,8 @@
     <Compile Include="Game States\StateOne.cs" />
     <Compile Include="Game States\StateTwo.cs" />
     <Compile Include="Input\Input.cs" />
+    <Compile Include="Level\Level.cs" />
+    <Compile Include="Level\Terrain.cs" />
     <Compile Include="Menu\IMenuListener.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\MenuItem.cs" />
@@ -69,8 +73,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\IStateManager.cs" />
-    <Compile Include="Terrain\HeightMap.cs" />
-    <Compile Include="Terrain\TextureMap.cs" />
+    <Compile Include="Level\HeightMap.cs" />
+    <Compile Include="Level\TextureMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

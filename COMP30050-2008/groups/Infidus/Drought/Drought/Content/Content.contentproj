@@ -64,15 +64,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TextureMaps\river_low.bmp">
-      <Name>river_low</Name>
+    <Compile Include="TextureMaps\level_0.bmp">
+      <Name>level_0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HeightMaps\river_low.bmp">
-      <Name>river_low</Name>
+    <Compile Include="HeightMaps\level_0.bmp">
+      <Name>level_0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
