@@ -46,12 +46,24 @@ namespace Drought
             //graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
 
-            Input.Input input = Input.Input.getInput();
-            input.bind(GameKeys.QUIT, Keys.Q, ModifierKeys.NONE);
+            Input.DeviceInput input = Input.DeviceInput.getInput();
             input.bind(GameKeys.CHANGE_STATE, Keys.C, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_NEXT, Keys.Down, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_PREV, Keys.Up, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_PRESS, Keys.Enter, ModifierKeys.NONE);
+
+            input.bind(GameKeys.CAM_FORWARD, Keys.W, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_BACK, Keys.S, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_LEFT, Keys.A, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_RIGHT, Keys.D, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ASCEND, Keys.PageUp, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_DESCEND, Keys.PageDown, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ZOOM_IN, Keys.I, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ZOOM_OUT, Keys.O, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ROTATE_UP, Keys.Up, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ROTATE_DOWN, Keys.Down, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ROTATE_LEFT, Keys.Left, ModifierKeys.NONE);
+            input.bind(GameKeys.CAM_ROTATE_RIGHT, Keys.Right, ModifierKeys.NONE);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //adding this in here to test
@@ -90,9 +102,9 @@ namespace Drought
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            Input.Input.getInput().poll();
+            Input.DeviceInput.getInput().poll();
 
-            if (Input.Input.getInput().isKeyPressed(GameKeys.QUIT))
+            if (Input.DeviceInput.getInput().isKeyPressed(GameKeys.QUIT))
                 Exit();
 
             gameManager.update(gameTime);

@@ -17,7 +17,7 @@ namespace Drought.Menu
 
     class MenuState : GameState, IMenuListener
     {
-        private Input.Input input; 
+        private Input.DeviceInput input; 
 
         private Menu mainMenu;
 
@@ -51,7 +51,7 @@ namespace Drought.Menu
 
         private void initialise()
         {
-            input = Input.Input.getInput();
+            input = Input.DeviceInput.getInput();
             defaultColor = Color.White;
 
             canNext = true;

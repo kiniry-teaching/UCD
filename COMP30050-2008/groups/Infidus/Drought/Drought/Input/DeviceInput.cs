@@ -6,7 +6,9 @@ using Microsoft.Xna.Framework.Input;
 namespace Drought.Input
 {
     /** The game's available commands */
-    public enum GameKeys : int { MENU_NEXT, MENU_PREV, MENU_PRESS, UP, DOWN, LEFT, RIGHT, QUIT, CHANGE_STATE };
+    public enum GameKeys : int { MENU_NEXT, MENU_PREV, MENU_PRESS, UP, DOWN, LEFT, RIGHT, QUIT, CHANGE_STATE,
+                                CAM_FORWARD, CAM_BACK, CAM_LEFT, CAM_RIGHT, CAM_ASCEND, CAM_DESCEND, CAM_ZOOM_IN, CAM_ZOOM_OUT,
+                                CAM_ROTATE_UP, CAM_ROTATE_DOWN, CAM_ROTATE_LEFT, CAM_ROTATE_RIGHT};
 
     /** Keys that can be used as modifier keys */
     public enum ModifierKeys : int { NONE, CTRL, ALT, SHIFT };
@@ -18,7 +20,7 @@ namespace Drought.Input
     public enum MouseButtons : int { NONE, LEFT, RIGHT, MIDDLE };
 
     /**
-     * The <code>Input</code> class allows the binding of <code>GameKeys</code>
+     * The <code>DeviceInput</code> class allows the binding of <code>GameKeys</code>
      * to arbitrary keyboard and mouse buttons. 
      * 
      * Game Key: a representation of a command the user can give to the game. 
@@ -40,7 +42,7 @@ namespace Drought.Input
      * 
      * @author Infidus
      */
-    public class Input
+    public class DeviceInput
     {
         /** Differet devices that keys can be bound to */
         private enum Devices : int { KEYBOARD, MOUSE, NONE };
@@ -67,13 +69,13 @@ namespace Drought.Input
         private MouseState mouse;
 
         /** Single instance of the input class */
-        private static Input instance = new Input();
+        private static DeviceInput instance = new DeviceInput();
    
         /**
          * Constructs a new Input class with all the keys bound to
          * no device.
          */
-        private Input()
+        private DeviceInput()
         {
             gameKeyCount = Enum.GetValues(typeof(GameKeys)).Length;
             int modifierKeyCount = Enum.GetValues(typeof(ModifierKeys)).Length;
@@ -90,7 +92,7 @@ namespace Drought.Input
          * 
          * @return Input.
          */
-        public static Input getInput()
+        public static DeviceInput getInput()
         {
             return instance;
         }

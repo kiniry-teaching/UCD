@@ -7,6 +7,7 @@ using Drought.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Entity;
+using Drought.Input;
 
 namespace Drought.GameStates
 {
@@ -20,9 +21,12 @@ namespace Drought.GameStates
 
         private NormalMap normalMap;
 
+        private DeviceInput input;
+
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)
         {
+            input = DeviceInput.getInput();
             heightMap = new HeightMap(fileName);
             textureMap = new TextureMap(fileName);
 
@@ -30,17 +34,16 @@ namespace Drought.GameStates
 
             camera = new Camera(game, heightMap);
 
-            terrain.loadContent();
-            terrain.setProjectionMatrix(camera.getProjectionMatrix());
-            terrain.setViewMatrix(camera.getViewMatrix());
-
+            loadContent();
 
             normalMap = new NormalMap(heightMap);
         }
 
         public override void loadContent()
         {
-            
+            terrain.loadContent();
+            terrain.setProjectionMatrix(camera.getProjectionMatrix());
+            terrain.setViewMatrix(camera.getViewMatrix());
         }
 
         public override void background()
@@ -57,6 +60,36 @@ namespace Drought.GameStates
 
         public override void update(GameTime gameTime)
         {
+            if (input.isKeyPressed(GameKeys.CAM_FORWARD))
+                camera.forward();
+            else if (input.isKeyPressed(GameKeys.CAM_BACK))
+                camera.back();
+
+            if (input.isKeyPressed(GameKeys.CAM_LEFT))
+                camera.left();
+            else if (input.isKeyPressed(GameKeys.CAM_RIGHT))
+                camera.right();
+
+            if (input.isKeyPressed(GameKeys.CAM_ASCEND))
+                camera.ascend();
+            else if (input.isKeyPressed(GameKeys.CAM_DESCEND))
+                camera.descend();
+            
+            if (input.isKeyPressed(GameKeys.CAM_ZOOM_IN))
+                camera.zoomIn();
+            else if (input.isKeyPressed(GameKeys.CAM_ZOOM_OUT))
+                camera.zoomOut();
+            
+            if (input.isKeyPressed(GameKeys.CAM_ROTATE_UP))
+                camera.rotateUp();
+            else if (input.isKeyPressed(GameKeys.CAM_ROTATE_DOWN))
+                camera.rotateDown();
+
+            if (input.isKeyPressed(GameKeys.CAM_ROTATE_LEFT))
+                camera.rotateLeft();
+            else if (input.isKeyPressed(GameKeys.CAM_ROTATE_RIGHT))
+                camera.rotateRight();
+            
             camera.update(gameTime);
             terrain.setViewMatrix(camera.getViewMatrix());
             terrain.update(gameTime);

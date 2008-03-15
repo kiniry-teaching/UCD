@@ -67,7 +67,7 @@
     <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Core\Program.cs" />
-    <Compile Include="Input\Input.cs" />
+    <Compile Include="Input\DeviceInput.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Terrain.cs" />
     <Compile Include="Menu\IMenuListener.cs" />

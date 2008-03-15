@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Fonts\TestFont.xnb</Output>
-      <Time>2008-03-12T18:09:51.6644146+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\Fonts\TestFont.xnb</Output>
+      <Time>2008-03-15T21:07:25.453125+00:00</Time>
     </Item>
     <Item>
       <Source>Textures\error.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\error.xnb</Output>
-      <Time>2008-03-12T18:11:53.1644146+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\Textures\error.xnb</Output>
+      <Time>2008-03-15T21:07:25.296875+00:00</Time>
     </Item>
     <Item>
       <Source>Textures\sand.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\sand.xnb</Output>
-      <Time>2008-03-12T18:11:53.2084146+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\Textures\sand.xnb</Output>
+      <Time>2008-03-15T21:07:25.3125+00:00</Time>
     </Item>
     <Item>
       <Source>Textures\stone.jpg</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\stone.xnb</Output>
-      <Time>2008-03-12T18:11:53.2744146+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\Textures\stone.xnb</Output>
+      <Time>2008-03-15T21:07:25.296875+00:00</Time>
     </Item>
     <Item>
       <Source>Textures\water.jpg</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\Textures\water.xnb</Output>
-      <Time>2008-03-12T18:11:53.3184146+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\Textures\water.xnb</Output>
+      <Time>2008-03-15T21:07:25.296875+00:00</Time>
     </Item>
     <Item>
       <Source>TextureMaps\level_0.bmp</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\TextureMaps\level_0.xnb</Output>
-      <Time>2008-03-14T15:49:07.1981696+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\TextureMaps\level_0.xnb</Output>
+      <Time>2008-03-15T21:07:18.515625+00:00</Time>
     </Item>
     <Item>
       <Source>HeightMaps\level_0.bmp</Source>
@@ -61,26 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\HeightMaps\level_0.xnb</Output>
-      <Time>2008-03-14T15:49:14.4551696+00:00</Time>
-    </Item>
-    <Item>
-      <Source>EffectFiles\terrain.fx</Source>
-      <Name>EffectFiles\terrain</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\terrain.xnb</Output>
-      <Time>2008-03-15T00:24:12.3679736+00:00</Time>
-    </Item>
-    <Item>
-      <Source>EffectFiles\simple.fx</Source>
-      <Name>EffectFiles\simple</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\EffectFiles\simple.xnb</Output>
-      <Time>2008-03-14T16:39:34.6051696+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\HeightMaps\level_0.xnb</Output>
+      <Time>2008-03-15T21:07:25.53125+00:00</Time>
     </Item>
     <Item>
       <Source>HeightMaps\square.bmp</Source>
@@ -88,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\HeightMaps\square.xnb</Output>
-      <Time>2008-03-14T21:54:26.8439736+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\HeightMaps\square.xnb</Output>
+      <Time>2008-03-15T21:07:25.9375+00:00</Time>
     </Item>
     <Item>
       <Source>TextureMaps\square.bmp</Source>
@@ -97,17 +79,35 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\TextureMaps\square.xnb</Output>
-      <Time>2008-03-14T21:54:42.6289736+00:00</Time>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\TextureMaps\square.xnb</Output>
+      <Time>2008-03-15T21:07:18.53125+00:00</Time>
+    </Item>
+    <Item>
+      <Source>EffectFiles\terrain.fx</Source>
+      <Name>EffectFiles\terrain</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\EffectFiles\terrain.xnb</Output>
+      <Time>2008-03-15T21:07:18.34375+00:00</Time>
+    </Item>
+    <Item>
+      <Source>EffectFiles\simple.fx</Source>
+      <Name>EffectFiles\simple</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\EffectFiles\simple.xnb</Output>
+      <Time>2008-03-15T21:07:18.375+00:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\eoin\Documents\Visual Studio 2005\Projects\Drought\Drought\Drought\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\rashid\My Documents\Visual Studio 2005\Projects\Drought\Drought\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -127,8 +127,8 @@
         <Value>2007-11-28T13:07:44+00:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2008-01-31T13:20:24.8985984+00:00</Value>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2008-03-15T21:02:48.125+00:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
