@@ -151,7 +151,6 @@ namespace Drought.World
         public void update(GameTime gameTime)
         {
             double currTime = gameTime.TotalGameTime.Ticks;
-
             if (currTime > oldTime + 10)
             {
                 float lightDir = (float)(Math.Sin(counter % (Math.PI * 2)));
@@ -159,7 +158,7 @@ namespace Drought.World
                 lightDirection.Y = lightDir;
                 lightDirection.Z = lightDir;
                 oldTime = currTime;
-            }
+            } 
         }
 
         public void render()

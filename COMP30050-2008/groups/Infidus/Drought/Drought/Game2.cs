@@ -35,7 +35,7 @@ namespace Drought
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
 
-            l = new LevelState(null, this, "square");
+            l = new LevelState(null, this, "level_0");
 
             base.Initialize();
         }

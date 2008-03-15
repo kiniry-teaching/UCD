@@ -28,15 +28,18 @@ namespace Drought.World
 
         public void initialize()
         {
-            eyeVector   = new Vector3(0, 0, heightMap.getHeight(0, 0)+cameraStand);
-            focusVector = new Vector3(0, 0, heightMap.getHeight(0, 0));
-            upVector    = new Vector3(0, 0, 1);
+            cameraRotationAngles = new Vector3(0, 0, -35 * angleIncrement);
+            Matrix cameraRotation = Matrix.CreateRotationX(cameraRotationAngles.X) * Matrix.CreateRotationZ(cameraRotationAngles.Z);
 
-            cameraRotationAngles = new Vector3(0,0,0);
+            eyeVector   = new Vector3(0.0f, 0.0f, heightMap.getHeight(0, 0)+cameraStand);
+            focusVector = eyeVector + Vector3.Transform(new Vector3(0, 1, 0), cameraRotation);
+            upVector    = new Vector3(0, 0, 1);
         }
 
         public void update(GameTime gameTime)
         {
+            Console.WriteLine(eyeVector);
+
             if (eyeVector.Z < heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand)
                 eyeVector.Z = heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand;
 
@@ -58,9 +61,7 @@ namespace Drought.World
         public void forward()
         {
             Vector3 forward = focusVector - eyeVector;
-            forward.Z = 0;
-            forward.Normalize();
-
+            
             eyeVector.X += forward.X * 0.5f;
             eyeVector.Y += forward.Y * 0.5f;
         }
@@ -68,9 +69,7 @@ namespace Drought.World
         public void back()
         {
             Vector3 forward = focusVector - eyeVector;
-            forward.Z = 0;
-            forward.Normalize();
-
+            
             eyeVector.X -= forward.X * 0.5f;
             eyeVector.Y -= forward.Y * 0.5f;
         }
@@ -78,9 +77,7 @@ namespace Drought.World
         public void left()
         {
             Vector3 forward = focusVector - eyeVector;
-            forward.Z = 0;
-            forward.Normalize();
-
+            
             eyeVector.X -= forward.Y * 0.5f;
             eyeVector.Y += forward.X * 0.5f;
         }
@@ -88,9 +85,7 @@ namespace Drought.World
         public void right()
         {
             Vector3 forward = focusVector - eyeVector;
-            forward.Z = 0;
-            forward.Normalize();
-
+ 
             eyeVector.X += forward.Y * 0.5f;
             eyeVector.Y -= forward.X * 0.5f;
         }

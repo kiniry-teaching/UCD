@@ -56,11 +56,19 @@ namespace Drought.GameStates
             terrain.update(gameTime);
         }
 
-        public override void  render(GraphicsDevice graphics, SpriteBatch spriteBatch)
+        public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
             graphics.RenderState.FillMode = FillMode.Solid;
             graphics.RenderState.CullMode = CullMode.None;
-            graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, Color.OrangeRed, 1.0f, 0);
+
+            graphics.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
+            graphics.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
+
+            graphics.RenderState.DepthBufferEnable = true;
+            graphics.RenderState.AlphaBlendEnable = false;
+            graphics.RenderState.AlphaTestEnable = false;
+
+            graphics.Clear(ClearOptions.DepthBuffer, Color.Black, 1.0f, 0);
 
             terrain.render();
         }
