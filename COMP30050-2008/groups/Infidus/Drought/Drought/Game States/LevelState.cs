@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Entity;
 using Drought.Input;
+using Drought.Graphics;
 
 namespace Drought.GameStates
 {
@@ -25,7 +26,7 @@ namespace Drought.GameStates
 
         private MovableEntity entity;
 
-        private Model cubeModel;
+        private Model3D cubeModel;
 
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)
@@ -42,7 +43,11 @@ namespace Drought.GameStates
 
             normalMap = new NormalMap(heightMap);
 
+            //testing entity here
             entity = new MovableEntity(normalMap, heightMap, cubeModel);
+            List<Vector3> nodes = new List<Vector3>();
+            nodes.Add(new Vector3(0, 0, heightMap.getHeight(0, 0)));
+            entity.setPath(new Path(nodes));
         }
 
         public override void loadContent()
@@ -50,7 +55,7 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            cubeModel = getContentManager().Load<Model>("Models/cube");
+            cubeModel.loadContent(getContentManager(), getGraphics());
         }
 
         public override void background()

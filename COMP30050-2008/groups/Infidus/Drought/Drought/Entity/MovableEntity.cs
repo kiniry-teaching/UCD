@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Drought.World;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Drought.Graphics;
 
 namespace Drought.Entity
 {
@@ -23,9 +24,9 @@ namespace Drought.Entity
 
         private Path path;
 
-        private Model model;
+        private Model3D model;
 
-        public MovableEntity(NormalMap normalMap, HeightMap heightMap, Model model)
+        public MovableEntity(NormalMap normalMap, HeightMap heightMap, Model3D model)
         {
             position = new Vector3(256, 128, 15);
             heading = new Vector3(0, 0, 0);
@@ -36,11 +37,6 @@ namespace Drought.Entity
             this.normalMap = normalMap;
             this.heightMap = heightMap;
             this.model = model;
-        }
-
-        public void loadContent(ContentManager content)
-        {
-            model = content.Load<Model>("models/cube");
         }
 
         public void move()
@@ -64,7 +60,7 @@ namespace Drought.Entity
 
         public void render(GraphicsDevice graphics)
         {
-
+            model.render(graphics);
         }
     }
 }
