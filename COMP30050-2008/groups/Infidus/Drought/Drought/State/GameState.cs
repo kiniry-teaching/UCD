@@ -24,7 +24,9 @@ namespace Drought.State
 
         /** The game's sprite batch used when sprite drawing is required */
         private SpriteBatch spriteBatch;
-        
+
+        public GameState() { }
+
         /**
          * Constructs a new <code>GameState</code> being managed by
          * the specified <code>StateManager</code> class.

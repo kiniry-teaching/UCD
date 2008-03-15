@@ -48,6 +48,11 @@ namespace Drought.World
             upVector = Vector3.Transform(new Vector3(0, 0, 1), cameraRotation);
         }
 
+        public Vector3 getPosition()
+        {
+            return eyeVector;
+        }
+
         public Matrix getViewMatrix()
         {
             return Matrix.CreateLookAt(eyeVector, focusVector, upVector);

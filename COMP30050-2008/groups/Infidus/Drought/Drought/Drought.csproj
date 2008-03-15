@@ -59,6 +59,7 @@
     <Compile Include="Game States\LevelState.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Graphics\Model3D.cs" />
     <Compile Include="World\Camera.cs" />
     <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Game States\StateOne.cs" />
     <Compile Include="Game States\StateTwo.cs" />
     <Compile Include="Input\Input.cs" />
+    <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Terrain.cs" />
     <Compile Include="Menu\IMenuListener.cs" />
     <Compile Include="Menu\Menu.cs" />

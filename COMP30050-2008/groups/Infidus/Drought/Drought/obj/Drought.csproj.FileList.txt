@@ -10,10 +10,6 @@ bin\x86\Debug\Content\Textures\error.xnb
 bin\x86\Debug\Content\Textures\sand.xnb
 bin\x86\Debug\Content\Textures\stone.xnb
 bin\x86\Debug\Content\Textures\water.xnb
-bin\x86\Debug\Content\Textures\error.jpg
-bin\x86\Debug\Content\Textures\sand.png
-bin\x86\Debug\Content\Textures\stone.jpg
-bin\x86\Debug\Content\Textures\water.jpg
 bin\x86\Debug\Content\TextureMaps\level_0.xnb
 bin\x86\Debug\Content\HeightMaps\level_0.xnb
 bin\x86\Debug\Content\EffectFiles\terrain.xnb
