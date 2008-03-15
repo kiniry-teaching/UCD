@@ -55,6 +55,7 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
+            cubeModel = new Model3D("Models/Car/car", camera);
             cubeModel.loadContent(getContentManager(), getGraphics());
         }
 
