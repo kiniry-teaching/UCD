@@ -49,7 +49,9 @@ namespace Drought.Graphics
 
             model = content.Load<Model>(modelName);
 
-            textures = new Texture2D[model.Meshes.Count];
+            //THIS IS WRONG
+            //textures = new Texture2D[model.Meshes.Count];
+            textures = new Texture2D[7];
 
             int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
