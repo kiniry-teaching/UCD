@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\MovableEntity.cs" />
+    <Compile Include="Entity\NormalMap.cs" />
+    <Compile Include="Entity\Path.cs" />
     <Compile Include="Game States\LevelState.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,8 +67,6 @@
     <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Core\Program.cs" />
-    <Compile Include="Game States\StateOne.cs" />
-    <Compile Include="Game States\StateTwo.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Terrain.cs" />

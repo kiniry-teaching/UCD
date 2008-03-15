@@ -42,12 +42,10 @@ namespace Drought.State
             this.content = game.Content;
             this.graphics = game.GraphicsDevice;
             this.spriteBatch = ((Game1)game).getSpriteBatch();
-            loadContent();
         }
 
         /**
-         * This method is called once when a state is created
-         * and if the game requires its content to be reloaded.
+         * This method is called if the game requires its content to be reloaded.
          * This occurrs when XNA calls LoadContent().
          */
         public abstract void loadContent();
@@ -75,13 +73,7 @@ namespace Drought.State
         /**
          * Called to render the state to the screen. The graphics device manager
          * can be used to draw graphical content and the spriteBatch can
-         * be used to draw any sprites. It is guaranteed that spriteBatch will be
-         * inbetween a Begin() and End() call, so sprites can be drawn without calling
-         * these functions. This is to cut down on the number of Begin()/End() calls
-         * as they can decrease performance. If it is required to call End() in order to
-         * draw sprites with different properties, it must be ensured that when the
-         * render call completes, spriteBatch is between a Begin()/End() call and has its
-         * default properties.
+         * be used to draw any sprites.
          * 
          * @param graphics The graphics device manager to draw with.
          * @param spriteBatch A sprite batch to use to draw sprites.

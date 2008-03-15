@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using Drought.Menu;
 using Drought.Input;
+using Drought.GameStates;
 
 namespace Drought
 {
@@ -52,12 +53,11 @@ namespace Drought
             input.bind(GameKeys.MENU_PREV, Keys.Up, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_PRESS, Keys.Enter, ModifierKeys.NONE);
 
-            //StateOne stateOne = new StateOne(gameManager, Content);
-            //StateTwo stateTwo = new StateTwo(gameManager, Content);
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            //gameManager.pushState(stateOne);
-            //gameManager.pushState(stateTwo);
+            //adding this in here to test
+            LevelState level = new LevelState(gameManager, this, "level_0");
             gameManager.pushState(menu);
+            gameManager.pushState(level);
 
             base.Initialize();
         }
@@ -109,9 +109,7 @@ namespace Drought
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin();
             gameManager.render(graphics.GraphicsDevice, spriteBatch);
-            spriteBatch.End();
 
             // TODO: Add your drawing code here
             base.Draw(gameTime);

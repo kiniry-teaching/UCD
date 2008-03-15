@@ -6,6 +6,7 @@ using Drought.State;
 using Drought.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Drought.Entity;
 
 namespace Drought.GameStates
 {
@@ -16,6 +17,8 @@ namespace Drought.GameStates
         
         HeightMap heightMap;
         TextureMap textureMap;
+
+        private NormalMap normalMap;
 
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)
@@ -30,6 +33,9 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
+
+
+            normalMap = new NormalMap(heightMap);
         }
 
         public override void loadContent()

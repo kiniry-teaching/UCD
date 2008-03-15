@@ -44,6 +44,7 @@ namespace Drought.Menu
         {
             screenWidth = width;
             screenHeight = height;
+            loadContent();
             initialise();
         }
 
