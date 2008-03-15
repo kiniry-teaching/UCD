@@ -60,7 +60,7 @@ namespace Drought.World
 
         public Matrix getProjectionMatrix()
         {
-            return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, game.Window.ClientBounds.Width / game.Window.ClientBounds.Height, 1.0f, 500.0f); ;
+            return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, game.Window.ClientBounds.Width / game.Window.ClientBounds.Height, 1.0f, 5000.0f); ;
         }
 
         public void forward()

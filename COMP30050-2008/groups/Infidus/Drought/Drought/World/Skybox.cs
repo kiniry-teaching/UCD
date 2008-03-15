@@ -4,30 +4,37 @@ using System.Text;
 using Drought.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Drought.World
 {
-    class Skybox : Model3D
+    class Skybox
     {
-        public Skybox(string modelName, Camera camera) :
-            base(modelName)
+        Model3D model;
+
+        public Skybox(Camera camera)
         {
-            position = camera.getPosition();
+            model = new Model3D("Models/Skybox/skybox", camera);
         }
 
-        public override void loadContent(ContentManager content)
+        public void loadContent(ContentManager content, GraphicsDevice graphics)
         {
-            //load the model and the texture
+            model.loadContent(content, graphics);
         }
 
-        public override void update(Microsoft.Xna.Framework.GameTime gametime)
+        public void setScale(Vector3 scaleFactors)
         {
-            
+            model.scaleFactors = scaleFactors;
         }
 
-        public override void render(GraphicsDevice graphics)
+        public void update(GameTime gametime)
         {
-            throw new Exception("The method or operation is not implemented.");
+            model.position = model.camera.getPosition();
+        }
+
+        public void render(GraphicsDevice graphics)
+        {
+            model.render(graphics);
         }
     }
 }
