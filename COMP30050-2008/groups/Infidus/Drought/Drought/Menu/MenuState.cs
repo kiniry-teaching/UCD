@@ -11,7 +11,8 @@ using Drought.GameStates;
 
 namespace Drought.Menu
 {
-    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, JOIN, OPTIONS };
+    /** All the possible functions that can be performed from the menu. */
+    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, JOIN };
 
 
     class MenuState : GameState, IMenuListener
@@ -163,8 +164,8 @@ namespace Drought.Menu
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
-            mainMenu.render(graphics, spriteBatch);
-            quitMenu.render(graphics, spriteBatch);
+            mainMenu.render(spriteBatch);
+            quitMenu.render(spriteBatch);
         }
 
         public void menuItemPressed(MenuItem item)
