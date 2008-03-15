@@ -23,6 +23,10 @@ namespace Drought.GameStates
 
         private DeviceInput input;
 
+        private MovableEntity entity;
+
+        private Model cubeModel;
+
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)
         {
@@ -37,6 +41,8 @@ namespace Drought.GameStates
             loadContent();
 
             normalMap = new NormalMap(heightMap);
+
+            entity = new MovableEntity(normalMap, heightMap, cubeModel);
         }
 
         public override void loadContent()
@@ -44,6 +50,7 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
+            cubeModel = getContentManager().Load<Model>("Models/cube");
         }
 
         public override void background()
@@ -93,6 +100,8 @@ namespace Drought.GameStates
             camera.update(gameTime);
             terrain.setViewMatrix(camera.getViewMatrix());
             terrain.update(gameTime);
+
+            entity.update();
         }
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
@@ -110,6 +119,8 @@ namespace Drought.GameStates
             graphics.Clear(ClearOptions.DepthBuffer, Color.Black, 1.0f, 0);
 
             terrain.render();
+
+            entity.render(graphics);
         }
     }
 }
