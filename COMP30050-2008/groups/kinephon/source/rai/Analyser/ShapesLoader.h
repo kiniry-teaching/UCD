@@ -188,6 +188,18 @@ private:
 		 */
 		uint		nData;
 		/**
+		 * Allow start from any zone
+		 * @author EB
+		 * @version 1.0
+		 */
+		bool		zoneAnyStart;
+		/**
+		 * Allow reverse of zone order
+		 * @author EB
+		 * @version 1.0
+		 */
+		bool		zoneReverse;
+		/**
 		 * Number of zones in this shape
 		 * @author EB
 		 * @version 1.0
@@ -220,6 +232,12 @@ private:
 	class SEZone
 	{
 	public:
+		/**
+		 * Zone's order, zone 0 must be entered before zone 1
+		 * @author EB
+		 * @version 1.0
+		 */
+		uint		order;
 		/**
 		 * Zone's x position
 		 * @author EB

@@ -10,6 +10,7 @@ namespace Shed
 	public class Zone
 	{
 
+		protected int _order;
 		protected float _x;
 		protected float _y;
 		protected float _enterRadius;
@@ -18,7 +19,27 @@ namespace Shed
 		protected float _exitRadius;
 		protected float _exitAngle;
 		protected float _exitArc;
-		protected int _order;
+		protected bool _highlight;
+		protected Shape _owner;
+
+		public Zone(Shape Owner)
+		{	_owner = Owner;
+		}
+
+		[DescriptionAttribute("Highlight this zone"),
+		 CategoryAttribute("Position")]
+		public bool Highlight
+		{
+			get { return _highlight; }
+			set
+			{
+
+				if(value == true)
+					foreach(Zone zone in _owner.Zones)
+						zone.Highlight = false;
+				_highlight = value;
+			}
+		}
 
 		[DescriptionAttribute("X position of zone"),
 		 CategoryAttribute("Position")]

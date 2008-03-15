@@ -27,6 +27,8 @@ namespace Shed
 		protected int _hBound;
 		protected int _vBound;
 		protected float _dampen;
+		protected bool _anystart = false;
+		protected bool _reverse = true;
 		protected Zones _zones;
 		protected Pixel[,] _pixels;
 		protected uint _sid;
@@ -253,6 +255,24 @@ namespace Shed
 				if(_form != null)
 					_form.Shape = this;
 			}
+		}
+
+		[DefaultValueAttribute(true),
+		 DescriptionAttribute("Is a gesture allowed to go through the zones in reverse (Allows the shape to test with the enter/exit angles/arcs swapped (radius remains the same))"),
+		 CategoryAttribute("Grid")]
+		public bool ZoneReverse
+		{
+			get { return _reverse; }
+			set { _reverse = value; }
+		}
+
+		[DefaultValueAttribute(false),
+		 DescriptionAttribute("Is a gesture allowed to start from any zone, or can it only start from the first one"),
+		 CategoryAttribute("Grid")]
+		public bool ZoneAnyStart
+		{
+			get { return _anystart; }
+			set { _anystart = value; }
 		}
 
 		[TypeConverter(typeof(ExpandableObjectConverter)),

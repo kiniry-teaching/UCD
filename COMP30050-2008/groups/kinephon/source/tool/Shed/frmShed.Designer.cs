@@ -171,7 +171,7 @@ namespace Shed
 			// mnuShapeDelete
 			// 
 			this.mnuShapeDelete.Name = "mnuShapeDelete";
-			this.mnuShapeDelete.Size = new System.Drawing.Size(152, 22);
+			this.mnuShapeDelete.Size = new System.Drawing.Size(132, 22);
 			this.mnuShapeDelete.Text = "&Delete";
 			this.mnuShapeDelete.Click += new System.EventHandler(this.mnuShapeDelete_Click);
 			// 
@@ -304,6 +304,7 @@ namespace Shed
 			this.pgdProperties.Name = "pgdProperties";
 			this.pgdProperties.Size = new System.Drawing.Size(144, 104);
 			this.pgdProperties.TabIndex = 0;
+			this.pgdProperties.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgdProperties_PropertyValueChanged);
 			// 
 			// splProperties
 			// 

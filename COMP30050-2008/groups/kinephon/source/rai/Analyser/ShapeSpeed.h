@@ -43,6 +43,8 @@ protected:
 						float const * const		data,
 						uint const				width,
 						uint const				nData,
+						bool const				zoneAnyStart,
+						bool const				zoneReverse,
 						Zone const * const		zones,
 						uint const				nZones
 					);
@@ -56,6 +58,8 @@ inline ShapeSpeed::ShapeSpeed
 	float const * const	data,
 	uint const			width,
 	uint const			nData,
+	bool const			zoneAnyStart,
+	bool const			zoneReverse,
 	Zone const * const	zones,
 	uint const			nZones
 ) :	Shape
@@ -63,6 +67,8 @@ inline ShapeSpeed::ShapeSpeed
 		data,
 		width,
 		nData,
+		zoneAnyStart,
+		zoneReverse,
 		zones,
 		nZones
 	) {}

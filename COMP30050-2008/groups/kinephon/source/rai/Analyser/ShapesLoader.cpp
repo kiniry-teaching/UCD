@@ -73,6 +73,8 @@ bool ShapesLoader::loadShape
 	file >> seShape.shapeId;
 	file >> seShape.width;
 	file >> seShape.nData;
+	file >> seShape.zoneAnyStart;
+	file >> seShape.zoneReverse;
 	file >> seShape.nZones;
 	file >> seShape.nSpeedShapes;
 	file >> seShape.nAccelShapes;
@@ -183,6 +185,8 @@ bool ShapesLoader::loadShape
 					data,
 					seShape.width,
 					seShape.nData,
+					seShape.zoneAnyStart,
+					seShape.zoneReverse,
 					(*zones),
 					seShape.nZones,
 					speedShapes,
@@ -196,6 +200,8 @@ bool ShapesLoader::loadShape
 					data,
 					seShape.width,
 					seShape.nData,
+					seShape.zoneAnyStart,
+					seShape.zoneReverse,
 					(*zones),
 					seShape.nZones
 				);
@@ -207,6 +213,8 @@ bool ShapesLoader::loadShape
 					data,
 					seShape.width,
 					seShape.nData,
+					seShape.zoneAnyStart,
+					seShape.zoneReverse,
 					(*zones),
 					seShape.nZones
 				);
@@ -241,6 +249,7 @@ bool ShapesLoader::loadZone
 	Zone * *	zone
 ){	SEZone		seZone;
 
+	file >> seZone.order;
 	file >> seZone.x;
 	file >> seZone.y;
 	file >> seZone.enterRadius;
@@ -251,7 +260,8 @@ bool ShapesLoader::loadZone
 	file >> seZone.exitArc;
 
 	(*zone) = new Zone
-	(	seZone.x,
+	(	seZone.order,
+		seZone.x,
 		seZone.y,
 		seZone.enterRadius,
 		seZone.exitRadius,

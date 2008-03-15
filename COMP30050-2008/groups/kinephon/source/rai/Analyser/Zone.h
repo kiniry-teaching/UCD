@@ -131,7 +131,8 @@ private:
 	 * @version 1.0
 	 */
 			Zone
-			(	float const	x,
+			(	uint const	order,
+				float const	x,
 				float const	y,
 				float const	enterRadius,
 				float const	exitRadius,
@@ -167,10 +168,18 @@ private:
 				bool const	isEntered
 			)	const;
 
+	uint	order			(void)		const;
+
 ///////////////////////////////////////////////////////////////////////////////
 // fields
 //
 private:
+	/**
+	 * Store the order this zone must be tested
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint	_order;
 	/**
 	 * Store the x co-ordinate of this zone
 	 * @author EB
@@ -225,7 +234,8 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 inline Zone::Zone
-(	float const		x,
+(	uint const		order,
+	float const		x,
 	float const		y,
 	float const		enterRadius,
 	float const		exitRadius,
@@ -233,7 +243,8 @@ inline Zone::Zone
 	float const		exitAngle,
 	float const		enterArc,
 	float const		exitArc
-) :	_x				(x),
+) :	_order			(order),
+	_x				(x),
 	_y				(y),
 	_enterRadius	(enterRadius),
 	_exitRadius		(exitRadius),
@@ -242,6 +253,10 @@ inline Zone::Zone
 	_enterArc		(enterArc),
 	_exitArc		(exitArc)
 { }
+
+inline uint Zone::order(void) const
+{	return _order;
+}
 
 }
 

@@ -76,6 +76,8 @@ protected:
 						float const * const		data,
 						uint const				width,
 						uint const				nData,
+						bool const				zoneAnyStart,
+						bool const				zoneReverse,
 						Zone const * const		zones,
 						uint const				nZones
 					);
@@ -167,6 +169,25 @@ private:
 	 */
 	uint const			_nData;
 	/**
+	 * State whether any zone in this shape can be a start zone
+	 * If false, the gesture must start and the 0th order zone
+	 *	Allowing any zone will slow things down as each zone will have to be
+	 *	tested to see if it's a potential start zone
+	 * @author EB
+	 * @version 1.0
+	 */
+	bool const			_zoneAnyStart;
+	/**
+	 * State whether the zone orders can be reversed
+	 * As well as reversing the order of the zones, this also swaps the
+	 *	enter/exit angle/arc of each zone. It does not affect the enter/exit
+	 *	radius. Allowing zone reverse will slow things down as the zones have
+	 *	to be reversed and tested against to see if it's a potential match
+	 * @author EB
+	 * @version 1.0
+	 */
+	bool const			_zoneReverse;
+	/**
 	 * Array of zones in this shape.
 	 * Zones are areas that must be entered and exited in a particular order
 	 *	for the shape to match
@@ -190,12 +211,16 @@ inline Shape::Shape
 	float const * const	data,
 	uint const			width,
 	uint const			nData,
+	bool const			zoneAnyStart,
+	bool const			zoneReverse,
 	Zone const * const	zones,
 	uint const			nZones
 ) :	_shapeId			(shapeId),
 	_data				(data),
 	_width				(width),
 	_nData				(nData),
+	_zoneAnyStart		(zoneAnyStart),
+	_zoneReverse		(zoneReverse),
 	_zones				(zones),
 	_nZones				(nZones)
 { }

@@ -23,16 +23,7 @@ namespace Shed
 		public void OnKeydown(Keys key)
 		{
 			stsStatus.Text = key.ToString();
-			switch(key)
-			{
-
-				case Keys.OemMinus:
-				case Keys.Oemplus:
-					OnKeydownShape(key);
-					break;
-
-
-			}
+			OnKeydownShape(key);
 		}
 
 		public void OnKeydownShape(Keys key)
@@ -50,6 +41,36 @@ namespace Shed
 				case Keys.Oemplus: shape.mnuImageWeightInc_Click(null, null); break;
 				case Keys.OemOpenBrackets: shape.mnuImageRadiusDec_Click(null, null); break;
 				case Keys.Oem6: shape.mnuImageRadiusInc_Click(null, null); break;
+				//case Keys.Oemtilde: shape.mnuImageFalloffDec_Click(null, null); break;
+				//case Keys.Oem7: shape.mnuImageRadiusInc_Click(null, null); break;
+				case Keys.P: shape.mnuImagePaint_Click(null, null); break;
+				case Keys.A: shape.mnuZoneAdd_Click(null, null); break;
+				case Keys.G:
+					shape.mnuViewGrid.Checked = !shape.mnuViewGrid.Checked;
+					shape.mnuViewGrid_Click(null, null); break;
+				case Keys.L:
+					shape.mnuViewGlow.Checked = !shape.mnuViewGlow.Checked;
+					shape.mnuViewGlow_Click(null, null); break;
+				case Keys.Z:
+					shape.mnuViewZone_Click(null, null); break;
+				case Keys.N:
+					shape.mnuViewNegative.Checked = !shape.mnuViewNegative.Checked;
+					shape.mnuViewNegative_Click(null, null); break;
+				case Keys.X: shape.mnuView1to1_Click(null, null); break;
+				case Keys.Q: shape.mnuImageWeight0_Click(null, null); break;
+				case Keys.W: shape.mnuImageWeight1_Click(null, null); break;
+				case Keys.E: shape.mnuImageWeight2_Click(null, null); break;
+				case Keys.R: shape.mnuImageWeight3_Click(null, null); break;
+				case Keys.T: shape.mnuImageWeight4_Click(null, null); break;
+				case Keys.D1: shape.mnuImageRadius01_Click(null, null); break;
+				case Keys.D2: shape.mnuImageRadius02_Click(null, null); break;
+				case Keys.D3: shape.mnuImageRadius03_Click(null, null); break;
+				case Keys.D4: shape.mnuImageRadius04_Click(null, null); break;
+				case Keys.D5: shape.mnuImageRadius05_Click(null, null); break;
+				case Keys.D6: shape.mnuImageRadius10_Click(null, null); break;
+				case Keys.D7: shape.mnuImageRadius15_Click(null, null); break;
+				case Keys.D8: shape.mnuImageRadius20_Click(null, null); break;
+				case Keys.D9: shape.mnuImageRadius50_Click(null, null); break;
 			}
 
 		}
@@ -285,6 +306,8 @@ namespace Shed
 				int.Parse(stream.ReadLine()),
 				int.Parse(stream.ReadLine())
 			);
+			shape.ZoneReverse = bool.Parse(stream.ReadLine());
+			shape.ZoneAnyStart = bool.Parse(stream.ReadLine());
 			zc = int.Parse(stream.ReadLine());
 			cc = int.Parse(stream.ReadLine());
 
@@ -297,7 +320,8 @@ namespace Shed
 			
 			for(int zi = 0; zi < zc; zi++)
 			{
-				Zone zone = new Zone();
+				Zone zone = new Zone(shape);
+				zone.Order = int.Parse(stream.ReadLine());
 				zone.X = float.Parse(stream.ReadLine());
 				zone.Y = float.Parse(stream.ReadLine());
 				zone.EnterRadius = float.Parse(stream.ReadLine());
@@ -325,8 +349,8 @@ namespace Shed
 			if(rename == true)
 				if(dlgSave.ShowDialog() == DialogResult.Cancel)
 					return false;
-
-			_projname = dlgSave.FileName;
+				else
+					_projname = dlgSave.FileName;
 			setCaption();
 
 			StreamWriter stream = new StreamWriter(File.Open(_projname, FileMode.Create, FileAccess.Write, FileShare.Read));
@@ -363,6 +387,8 @@ namespace Shed
 			stream.WriteLine(shape.WindowPosition.Y);
 			stream.WriteLine(shape.WindowPosition.Width);
 			stream.WriteLine(shape.WindowPosition.Height);
+			stream.WriteLine(shape.ZoneReverse);
+			stream.WriteLine(shape.ZoneAnyStart);
 			stream.WriteLine(shape.Zones.Count);
 			stream.WriteLine(shape.Node.Nodes.Count);
 
@@ -376,7 +402,8 @@ namespace Shed
 
 			// Zones
 			for(int i = 0; i < shape.Zones.Count; i++)
-			{	stream.WriteLine(shape.Zones[i].X);
+			{	stream.WriteLine(shape.Zones[i].Order);
+				stream.WriteLine(shape.Zones[i].X);
 				stream.WriteLine(shape.Zones[i].Y);
 				stream.WriteLine(shape.Zones[i].EnterRadius);
 				stream.WriteLine(shape.Zones[i].ExitRadius);
@@ -418,6 +445,20 @@ namespace Shed
 		private void mnuShapeDelete_Click(object sender, EventArgs e)
 		{
 			tvwShapes.SelectedNode.Remove();
+		}
+
+		private void pgdProperties_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+		{
+			frmShape shape;
+
+			if(ActiveMdiChild is frmShape)
+				shape = (frmShape)ActiveMdiChild;
+			else
+				return;
+
+			shape.picShape.Invalidate();
+//			pgdProperties.Refresh();
+
 		}
 
 	}

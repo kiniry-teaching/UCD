@@ -175,7 +175,7 @@ namespace Shed
 			this.mnuViewGrid.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewGrid.Name = "mnuViewGrid";
 			this.mnuViewGrid.ShortcutKeyDisplayString = "G";
-			this.mnuViewGrid.Size = new System.Drawing.Size(138, 22);
+			this.mnuViewGrid.Size = new System.Drawing.Size(152, 22);
 			this.mnuViewGrid.Text = "&Grid";
 			this.mnuViewGrid.Click += new System.EventHandler(this.mnuViewGrid_Click);
 			// 
@@ -185,8 +185,8 @@ namespace Shed
 			this.mnuViewBound.CheckOnClick = true;
 			this.mnuViewBound.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewBound.Name = "mnuViewBound";
-			this.mnuViewBound.Size = new System.Drawing.Size(138, 22);
-			this.mnuViewBound.Text = "Boundaries";
+			this.mnuViewBound.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewBound.Text = "&Boundaries";
 			this.mnuViewBound.Click += new System.EventHandler(this.mnuViewBound_Click);
 			// 
 			// mnuViewGlow
@@ -195,8 +195,9 @@ namespace Shed
 			this.mnuViewGlow.CheckOnClick = true;
 			this.mnuViewGlow.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewGlow.Name = "mnuViewGlow";
-			this.mnuViewGlow.Size = new System.Drawing.Size(138, 22);
-			this.mnuViewGlow.Text = "Glow";
+			this.mnuViewGlow.ShortcutKeyDisplayString = "L";
+			this.mnuViewGlow.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewGlow.Text = "G&low";
 			this.mnuViewGlow.Click += new System.EventHandler(this.mnuViewGlow_Click);
 			// 
 			// mnuViewPixel
@@ -205,18 +206,18 @@ namespace Shed
 			this.mnuViewPixel.CheckOnClick = true;
 			this.mnuViewPixel.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewPixel.Name = "mnuViewPixel";
-			this.mnuViewPixel.Size = new System.Drawing.Size(138, 22);
-			this.mnuViewPixel.Text = "Pixels";
+			this.mnuViewPixel.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewPixel.Text = "&Pixels";
 			this.mnuViewPixel.Click += new System.EventHandler(this.mnuViewPixel_Click);
 			// 
 			// mnuViewZone
 			// 
 			this.mnuViewZone.Checked = true;
-			this.mnuViewZone.CheckOnClick = true;
-			this.mnuViewZone.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.mnuViewZone.CheckState = System.Windows.Forms.CheckState.Indeterminate;
 			this.mnuViewZone.Name = "mnuViewZone";
-			this.mnuViewZone.Size = new System.Drawing.Size(138, 22);
-			this.mnuViewZone.Text = "Zones";
+			this.mnuViewZone.ShortcutKeyDisplayString = "Z";
+			this.mnuViewZone.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewZone.Text = "&Zones";
 			this.mnuViewZone.Click += new System.EventHandler(this.mnuViewZone_Click);
 			// 
 			// mnuViewNegative
@@ -225,21 +226,22 @@ namespace Shed
 			this.mnuViewNegative.CheckOnClick = true;
 			this.mnuViewNegative.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewNegative.Name = "mnuViewNegative";
-			this.mnuViewNegative.Size = new System.Drawing.Size(138, 22);
-			this.mnuViewNegative.Text = "Negative";
+			this.mnuViewNegative.ShortcutKeyDisplayString = "N";
+			this.mnuViewNegative.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewNegative.Text = "&Negative";
 			this.mnuViewNegative.Click += new System.EventHandler(this.mnuViewNegative_Click);
 			// 
 			// mnuViewDiv1
 			// 
 			this.mnuViewDiv1.Name = "mnuViewDiv1";
-			this.mnuViewDiv1.Size = new System.Drawing.Size(135, 6);
+			this.mnuViewDiv1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuView1to1
 			// 
 			this.mnuView1to1.Name = "mnuView1to1";
-			this.mnuView1to1.ShortcutKeyDisplayString = "R";
-			this.mnuView1to1.Size = new System.Drawing.Size(138, 22);
-			this.mnuView1to1.Text = "1:1";
+			this.mnuView1to1.ShortcutKeyDisplayString = "X";
+			this.mnuView1to1.Size = new System.Drawing.Size(152, 22);
+			this.mnuView1to1.Text = "1&x1";
 			this.mnuView1to1.Click += new System.EventHandler(this.mnuView1to1_Click);
 			// 
 			// mnuImage
@@ -327,7 +329,7 @@ namespace Shed
 			// 
 			this.mnuImageWeight4.Name = "mnuImageWeight4";
 			this.mnuImageWeight4.ShortcutKeyDisplayString = "Q";
-			this.mnuImageWeight4.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeight4.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeight4.Text = "1.0";
 			this.mnuImageWeight4.Click += new System.EventHandler(this.mnuImageWeight4_Click);
 			// 
@@ -335,7 +337,7 @@ namespace Shed
 			// 
 			this.mnuImageWeight3.Name = "mnuImageWeight3";
 			this.mnuImageWeight3.ShortcutKeyDisplayString = "W";
-			this.mnuImageWeight3.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeight3.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeight3.Text = "0.5";
 			this.mnuImageWeight3.Click += new System.EventHandler(this.mnuImageWeight3_Click);
 			// 
@@ -343,7 +345,7 @@ namespace Shed
 			// 
 			this.mnuImageWeight2.Name = "mnuImageWeight2";
 			this.mnuImageWeight2.ShortcutKeyDisplayString = "E";
-			this.mnuImageWeight2.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeight2.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeight2.Text = "0.0";
 			this.mnuImageWeight2.Click += new System.EventHandler(this.mnuImageWeight2_Click);
 			// 
@@ -351,7 +353,7 @@ namespace Shed
 			// 
 			this.mnuImageWeight1.Name = "mnuImageWeight1";
 			this.mnuImageWeight1.ShortcutKeyDisplayString = "R";
-			this.mnuImageWeight1.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeight1.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeight1.Text = "-0.5";
 			this.mnuImageWeight1.Click += new System.EventHandler(this.mnuImageWeight1_Click);
 			// 
@@ -359,20 +361,20 @@ namespace Shed
 			// 
 			this.mnuImageWeight0.Name = "mnuImageWeight0";
 			this.mnuImageWeight0.ShortcutKeyDisplayString = "T";
-			this.mnuImageWeight0.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeight0.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeight0.Text = "-1.0";
 			this.mnuImageWeight0.Click += new System.EventHandler(this.mnuImageWeight0_Click);
 			// 
 			// toolStripMenuItem9
 			// 
 			this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-			this.toolStripMenuItem9.Size = new System.Drawing.Size(149, 6);
+			this.toolStripMenuItem9.Size = new System.Drawing.Size(139, 6);
 			// 
 			// mnuImageWeightInc
 			// 
 			this.mnuImageWeightInc.Name = "mnuImageWeightInc";
 			this.mnuImageWeightInc.ShortcutKeyDisplayString = "+";
-			this.mnuImageWeightInc.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeightInc.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeightInc.Text = "&Increase";
 			this.mnuImageWeightInc.Click += new System.EventHandler(this.mnuImageWeightInc_Click);
 			// 
@@ -380,7 +382,7 @@ namespace Shed
 			// 
 			this.mnuImageWeightDec.Name = "mnuImageWeightDec";
 			this.mnuImageWeightDec.ShortcutKeyDisplayString = "-";
-			this.mnuImageWeightDec.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeightDec.Size = new System.Drawing.Size(142, 22);
 			this.mnuImageWeightDec.Text = "&Decrease";
 			this.mnuImageWeightDec.Click += new System.EventHandler(this.mnuImageWeightDec_Click);
 			// 
@@ -407,7 +409,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius01.Name = "mnuImageRadius01";
 			this.mnuImageRadius01.ShortcutKeyDisplayString = "1";
-			this.mnuImageRadius01.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius01.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius01.Text = "1";
 			this.mnuImageRadius01.Click += new System.EventHandler(this.mnuImageRadius01_Click);
 			// 
@@ -415,7 +417,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius02.Name = "mnuImageRadius02";
 			this.mnuImageRadius02.ShortcutKeyDisplayString = "2";
-			this.mnuImageRadius02.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius02.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius02.Text = "2";
 			this.mnuImageRadius02.Click += new System.EventHandler(this.mnuImageRadius02_Click);
 			// 
@@ -423,7 +425,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius03.Name = "mnuImageRadius03";
 			this.mnuImageRadius03.ShortcutKeyDisplayString = "3";
-			this.mnuImageRadius03.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius03.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius03.Text = "3";
 			this.mnuImageRadius03.Click += new System.EventHandler(this.mnuImageRadius03_Click);
 			// 
@@ -431,7 +433,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius04.Name = "mnuImageRadius04";
 			this.mnuImageRadius04.ShortcutKeyDisplayString = "4";
-			this.mnuImageRadius04.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius04.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius04.Text = "4";
 			this.mnuImageRadius04.Click += new System.EventHandler(this.mnuImageRadius04_Click);
 			// 
@@ -439,7 +441,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius05.Name = "mnuImageRadius05";
 			this.mnuImageRadius05.ShortcutKeyDisplayString = "5";
-			this.mnuImageRadius05.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius05.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius05.Text = "5";
 			this.mnuImageRadius05.Click += new System.EventHandler(this.mnuImageRadius05_Click);
 			// 
@@ -447,7 +449,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius10.Name = "mnuImageRadius10";
 			this.mnuImageRadius10.ShortcutKeyDisplayString = "6";
-			this.mnuImageRadius10.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius10.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius10.Text = "10";
 			this.mnuImageRadius10.Click += new System.EventHandler(this.mnuImageRadius10_Click);
 			// 
@@ -455,7 +457,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius15.Name = "mnuImageRadius15";
 			this.mnuImageRadius15.ShortcutKeyDisplayString = "7";
-			this.mnuImageRadius15.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius15.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius15.Text = "15";
 			this.mnuImageRadius15.Click += new System.EventHandler(this.mnuImageRadius15_Click);
 			// 
@@ -463,7 +465,7 @@ namespace Shed
 			// 
 			this.mnuImageRadius20.Name = "mnuImageRadius20";
 			this.mnuImageRadius20.ShortcutKeyDisplayString = "8";
-			this.mnuImageRadius20.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius20.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius20.Text = "20";
 			this.mnuImageRadius20.Click += new System.EventHandler(this.mnuImageRadius20_Click);
 			// 
@@ -471,20 +473,20 @@ namespace Shed
 			// 
 			this.mnuImageRadius50.Name = "mnuImageRadius50";
 			this.mnuImageRadius50.ShortcutKeyDisplayString = "9";
-			this.mnuImageRadius50.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius50.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadius50.Text = "50";
 			this.mnuImageRadius50.Click += new System.EventHandler(this.mnuImageRadius50_Click);
 			// 
 			// toolStripMenuItem2
 			// 
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(138, 6);
 			// 
 			// mnuImageRadiusInc
 			// 
 			this.mnuImageRadiusInc.Name = "mnuImageRadiusInc";
 			this.mnuImageRadiusInc.ShortcutKeyDisplayString = "]";
-			this.mnuImageRadiusInc.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadiusInc.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadiusInc.Text = "&Increase";
 			this.mnuImageRadiusInc.Click += new System.EventHandler(this.mnuImageRadiusInc_Click);
 			// 
@@ -492,7 +494,7 @@ namespace Shed
 			// 
 			this.mnuImageRadiusDec.Name = "mnuImageRadiusDec";
 			this.mnuImageRadiusDec.ShortcutKeyDisplayString = "[";
-			this.mnuImageRadiusDec.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadiusDec.Size = new System.Drawing.Size(141, 22);
 			this.mnuImageRadiusDec.Text = "&Decrease";
 			this.mnuImageRadiusDec.Click += new System.EventHandler(this.mnuImageRadiusDec_Click);
 			// 
@@ -516,14 +518,14 @@ namespace Shed
 			this.mnuImageFalloff4.Name = "mnuImageFalloff4";
 			this.mnuImageFalloff4.ShortcutKeyDisplayString = "";
 			this.mnuImageFalloff4.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-			this.mnuImageFalloff4.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloff4.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloff4.Text = "1.0";
 			// 
 			// mnuImageFalloff3
 			// 
 			this.mnuImageFalloff3.Name = "mnuImageFalloff3";
 			this.mnuImageFalloff3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-			this.mnuImageFalloff3.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloff3.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloff3.Text = "0.5";
 			// 
 			// mnuImageFalloff2
@@ -531,14 +533,14 @@ namespace Shed
 			this.mnuImageFalloff2.Name = "mnuImageFalloff2";
 			this.mnuImageFalloff2.ShortcutKeyDisplayString = "";
 			this.mnuImageFalloff2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-			this.mnuImageFalloff2.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloff2.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloff2.Text = "0.0";
 			// 
 			// mnuImageFalloff1
 			// 
 			this.mnuImageFalloff1.Name = "mnuImageFalloff1";
 			this.mnuImageFalloff1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-			this.mnuImageFalloff1.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloff1.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloff1.Text = "-0.5";
 			// 
 			// mnuImageFalloff0
@@ -546,26 +548,26 @@ namespace Shed
 			this.mnuImageFalloff0.Name = "mnuImageFalloff0";
 			this.mnuImageFalloff0.ShortcutKeyDisplayString = "";
 			this.mnuImageFalloff0.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-			this.mnuImageFalloff0.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloff0.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloff0.Text = "-1.0";
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(141, 6);
 			// 
 			// mnuImageFalloffInc
 			// 
 			this.mnuImageFalloffInc.Name = "mnuImageFalloffInc";
 			this.mnuImageFalloffInc.ShortcutKeyDisplayString = "#";
-			this.mnuImageFalloffInc.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloffInc.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloffInc.Text = "Increase";
 			// 
 			// mnuImageFalloffDec
 			// 
 			this.mnuImageFalloffDec.Name = "mnuImageFalloffDec";
 			this.mnuImageFalloffDec.ShortcutKeyDisplayString = "\'";
-			this.mnuImageFalloffDec.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloffDec.Size = new System.Drawing.Size(144, 22);
 			this.mnuImageFalloffDec.Text = "Decrease";
 			// 
 			// mnuImageCut
@@ -595,8 +597,8 @@ namespace Shed
 			// mnuImageClear
 			// 
 			this.mnuImageClear.Name = "mnuImageClear";
-			this.mnuImageClear.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-			this.mnuImageClear.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageClear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+			this.mnuImageClear.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageClear.Text = "&Clear";
 			this.mnuImageClear.Click += new System.EventHandler(this.mnuImageClear_Click);
 			// 
@@ -636,6 +638,7 @@ namespace Shed
 			// mnuZoneAdd
 			// 
 			this.mnuZoneAdd.Name = "mnuZoneAdd";
+			this.mnuZoneAdd.ShortcutKeyDisplayString = "A";
 			this.mnuZoneAdd.Size = new System.Drawing.Size(167, 22);
 			this.mnuZoneAdd.Text = "Add";
 			this.mnuZoneAdd.Click += new System.EventHandler(this.mnuZoneAdd_Click);
@@ -675,7 +678,6 @@ namespace Shed
 			this.trkWeight.Orientation = System.Windows.Forms.Orientation.Vertical;
 			this.trkWeight.Size = new System.Drawing.Size(42, 320);
 			this.trkWeight.TabIndex = 3;
-			this.trkWeight.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.trkWeight_PreviewKeyDown);
 			this.trkWeight.Scroll += new System.EventHandler(this.trkWeight_Scroll);
 			// 
 			// stsStatus
@@ -751,7 +753,6 @@ namespace Shed
 			this.Name = "frmShape";
 			this.Text = "Shape";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmShape_FormClosed);
-			this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.frmShape_PreviewKeyDown);
 			this.Resize += new System.EventHandler(this.frmShape_Resize);
 			this.Activated += new System.EventHandler(this.frmShape_Activated);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmShape_KeyDown);
@@ -771,7 +772,6 @@ namespace Shed
 
 		#endregion
 
-		private System.Windows.Forms.PictureBox picShape;
 		private System.Windows.Forms.MenuStrip mnuShape;
 		private System.Windows.Forms.ToolStripMenuItem mnuImage;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageClear;
@@ -782,15 +782,8 @@ namespace Shed
 		public System.Windows.Forms.ToolStrip tbrShape;
 		private System.Windows.Forms.ToolStripMenuItem mnuImagePaint;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius01;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius02;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight4;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight3;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight2;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight1;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight0;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageSelect;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageSelectAll;
@@ -811,6 +804,27 @@ namespace Shed
 		private System.Windows.Forms.ToolStripMenuItem mnuZoneDelete;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageDraw;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageLine;
+		private System.Windows.Forms.ToolStripMenuItem mnuView;
+		public System.Windows.Forms.TrackBar trkWeight;
+		private System.Windows.Forms.ToolStripMenuItem mnuViewBound;
+		private System.Windows.Forms.ToolStripMenuItem mnuViewPixel;
+		private System.Windows.Forms.ToolStripSeparator mnuViewDiv1;
+		private System.Windows.Forms.StatusStrip stsStatus;
+		private System.Windows.Forms.ToolStripStatusLabel stsCoords;
+		private System.Windows.Forms.ToolStripStatusLabel stsTool;
+		private System.Windows.Forms.ToolStripStatusLabel stsBrush;
+		private System.Windows.Forms.ToolStripStatusLabel stsCanvas;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageRadiusInc;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageRadiusDec;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeightInc;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeightDec;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius01;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius02;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight4;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight3;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight2;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight1;
+		private System.Windows.Forms.ToolStripMenuItem mnuImageWeight0;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius04;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius05;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius10;
@@ -818,24 +832,11 @@ namespace Shed
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius03;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius20;
 		private System.Windows.Forms.ToolStripMenuItem mnuImageRadius50;
-		private System.Windows.Forms.ToolStripMenuItem mnuView;
-		private System.Windows.Forms.ToolStripMenuItem mnuViewGrid;
 		private System.Windows.Forms.ToolStripMenuItem mnuView1to1;
-		public System.Windows.Forms.TrackBar trkWeight;
-		private System.Windows.Forms.ToolStripMenuItem mnuViewBound;
-		private System.Windows.Forms.ToolStripMenuItem mnuViewGlow;
-		private System.Windows.Forms.ToolStripMenuItem mnuViewPixel;
-		private System.Windows.Forms.ToolStripSeparator mnuViewDiv1;
-		private System.Windows.Forms.ToolStripMenuItem mnuViewZone;
-		private System.Windows.Forms.StatusStrip stsStatus;
-		private System.Windows.Forms.ToolStripStatusLabel stsCoords;
-		private System.Windows.Forms.ToolStripStatusLabel stsTool;
-		private System.Windows.Forms.ToolStripStatusLabel stsBrush;
-		private System.Windows.Forms.ToolStripStatusLabel stsCanvas;
-		private System.Windows.Forms.ToolStripMenuItem mnuViewNegative;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageRadiusInc;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageRadiusDec;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeightInc;
-		private System.Windows.Forms.ToolStripMenuItem mnuImageWeightDec;
+		public System.Windows.Forms.ToolStripMenuItem mnuViewGlow;
+		public System.Windows.Forms.ToolStripMenuItem mnuViewZone;
+		public System.Windows.Forms.ToolStripMenuItem mnuViewNegative;
+		public System.Windows.Forms.ToolStripMenuItem mnuViewGrid;
+		public System.Windows.Forms.PictureBox picShape;
 	}
 }

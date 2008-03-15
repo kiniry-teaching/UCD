@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
@@ -18,8 +19,26 @@ namespace Shed
 		Zone
 	}
 
+	public enum ModesOfZone
+	{
+		// In Zone add tool, mouse up, set/change on mouse down
+		SetCentre,
+		// View radius/angle on drag, set/change on moues up
+		SetEnterRadiusAngle,
+		// View arc on move (moues up), set/change on mouse down
+		SetEnterArc,
+		// View radius/angle on drag, set/change on moues up
+		SetExitRadiusAngle,
+		// View arc on move (moues up), set/end (exit add tool) on mouse down
+		SetExitArc,
+		// Do nothing on drag, nothing on mouse up
+	}
+
 	public partial class frmShape: Form
 	{
+
+		const float DegRad = 3.1415926536f / 180.0f;
+		const float RadDeg = 180.0f / 3.1415926536f;
 
 		protected Shape _shape;
 		protected TypesOfTool _tool = TypesOfTool.Paint;
@@ -28,7 +47,7 @@ namespace Shed
 		protected float _falloff = 0.0f;
 		protected float _mouseX = float.MinValue;
 		protected float _mouseY = float.MinValue;
-		protected int _zoneMode = 0;
+		protected ModesOfZone _zoneMode = ModesOfZone.SetCentre;
 		protected Zone _zone;
 
 		public frmShape()
@@ -148,6 +167,101 @@ namespace Shed
 
 			if(mnuViewZone.Checked == true)
 			{
+
+				float mul = mnuViewZone.CheckState == CheckState.Indeterminate ? 1 : 2;
+				float mul2 = 1;
+
+				foreach(Zone zone in _shape.Zones)
+					if(zone.Highlight == true)
+					{	mul = 2;
+						mul *= 0.25f;
+					}
+
+				e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+				foreach(Zone zone in _shape.Zones)
+				{
+
+					if(zone.Highlight == true)
+						mul2 = 4;
+					else
+						mul2 = 1;
+
+					Pen enterRad = new Pen(Color.FromArgb((int)(63 * mul * mul2), 0, 255, 0));
+					Pen enterAngle = new Pen(Color.FromArgb((int)(127 * mul * mul2), 0, 255, 0));
+					Brush enterArc = new SolidBrush(Color.FromArgb((int)(31 * mul * mul2), 0, 255, 0));
+					Pen exitRad = new Pen(Color.FromArgb((int)(63 * mul * mul2), 255, 0, 0));
+					Pen exitAngle = new Pen(Color.FromArgb((int)(127 * mul * mul2), 255, 0, 0));
+					Brush exitArc = new SolidBrush(Color.FromArgb((int)(31 * mul * mul2), 255, 0, 0));
+					
+					float x = zone.X * dx;
+					float y = zone.Y * dy;
+					float erx = zone.EnterRadius * dx;
+					float ery = zone.EnterRadius * dy;
+					float ea = zone.EnterArc;
+					
+					if(erx <= 0) erx = 0.01f;
+					if(ery <= 0) ery = 0.01f;
+					if(ea == 0) ea = 0.01f;
+
+					// Enter render
+					e.Graphics.DrawEllipse
+					(	enterRad,
+						x - erx,
+						y - ery,
+						erx * 2,
+						ery * 2
+					);
+					GraphicsPath p = new GraphicsPath();
+					p.AddLine(x, y, x, y);
+					if(zone.EnterRadius > 0)
+						p.AddArc
+						(	x - erx,
+							y - ery,
+							erx * 2,
+							ery * 2,
+							zone.EnterAngle - ea,
+							ea * 2
+						);
+					p.CloseFigure();
+					e.Graphics.FillPath(enterArc, p);
+					e.Graphics.DrawPath(enterAngle, p);
+
+					// Exit render
+
+					erx = zone.ExitRadius * dx;
+					ery = zone.ExitRadius * dy;
+					ea = zone.ExitArc;
+
+					if(erx <= 0) erx = 0.01f;
+					if(ery <= 0) ery = 0.01f;
+					if(ea == 0) ea = 0.01f;
+
+					e.Graphics.DrawEllipse
+					(	exitRad,
+						x - erx,
+						y - ery,
+						erx * 2,
+						ery * 2
+					);
+					p = new GraphicsPath();
+					p.AddLine(x, y, x, y);
+					if(zone.ExitRadius > 0)
+						p.AddArc
+						(	x - erx,
+							y - ery,
+							erx * 2,
+							ery * 2,
+							zone.ExitAngle - ea,
+							ea * 2
+						);
+					p.CloseFigure();
+					e.Graphics.FillPath(exitArc, p);
+					e.Graphics.DrawPath(exitAngle, p);
+
+
+				}
+				e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+
 			}
 
 		}
@@ -204,8 +318,22 @@ namespace Shed
 			float h = picShape.ClientSize.Height;
 			float dy = (h - 1) / _shape.Height;
 			float dx = (w - 1) / _shape.Width;
-			x = (int)(x / dx);
-			y = (int)(y / dy);
+			x /= dx;
+			y /= dy;
+		}
+
+		private float UnMapX(float x)
+		{
+			float w = picShape.ClientSize.Width;
+			float dx = (w - 1) / _shape.Width;
+			return x * dx;
+		}
+
+		private float UnMapY(float y)
+		{
+			float h = picShape.ClientSize.Height;
+			float dy = (h - 1) / _shape.Height;
+			return y * dy;
 		}
 
 		private bool SetPixelLock(float mx, float my, bool draw, bool lck)
@@ -250,16 +378,23 @@ namespace Shed
 				case TypesOfTool.Zone:
 					switch(_zoneMode)
 					{
-						case 0:
-							_zone = new Zone();
+						case ModesOfZone.SetCentre:
+							_zone = new Zone(_shape);
 							_zone.X = e.X;
 							_zone.Y = e.Y;
 							float mx = e.X, my = e.Y;
 							MapXY(ref mx, ref my);
 							_zone.X = mx;
 							_zone.Y = my;
+							_zone.Order = _shape.Zones.Count;
 							_shape.Zones.Add(_zone);
-							_zoneMode = 1;
+							_zoneMode = ModesOfZone.SetEnterRadiusAngle;
+							break;
+						case ModesOfZone.SetEnterArc:
+							_zoneMode = ModesOfZone.SetExitRadiusAngle;
+							break;
+						case ModesOfZone.SetExitArc:
+							_tool = TypesOfTool.Paint;
 							break;
 					}
 					break;
@@ -276,7 +411,11 @@ namespace Shed
 
 				switch(_zoneMode)
 				{
-					case 0:
+					case ModesOfZone.SetEnterRadiusAngle:
+						_zoneMode = ModesOfZone.SetEnterArc;
+						break;
+					case ModesOfZone.SetExitRadiusAngle:
+						_zoneMode = ModesOfZone.SetExitArc;
 						break;
 				}
 
@@ -309,9 +448,66 @@ namespace Shed
 					break;
 
 				case TypesOfTool.Zone:
+					switch(_zoneMode)
+					{
+
+						case ModesOfZone.SetEnterRadiusAngle:
+							_zone.EnterRadius = radius(_zone.X, _zone.Y, fx, fy);
+							_zone.EnterAngle = angle(UnMapX(_zone.X), UnMapY(_zone.Y), e.X, e.Y);
+							break;
+
+						case ModesOfZone.SetEnterArc:
+							_zone.EnterArc = _zone.EnterAngle - angle(UnMapX(_zone.X), UnMapY(_zone.Y), e.X, e.Y);
+							break;
+
+						case ModesOfZone.SetExitRadiusAngle:
+							_zone.ExitRadius = radius(_zone.X, _zone.Y, fx, fy);
+							_zone.ExitAngle = angle(UnMapX(_zone.X), UnMapY(_zone.Y), e.X, e.Y);
+							break;
+
+						case ModesOfZone.SetExitArc:
+							_zone.ExitArc = _zone.ExitAngle - angle(UnMapX(_zone.X), UnMapY(_zone.Y), e.X, e.Y);
+							break;
+
+					}
+					picShape.Invalidate();
 					break;
 
 			}
+
+		}
+
+		private float radius(float x, float y, float u, float v)
+		{
+			float a = u - x;
+			float b = v - y;
+			return (float)Math.Sqrt(a * a + b * b);
+		}
+
+		private float angle(float x1, float y1, float x2, float y2)
+		{
+			float angle = 0;
+			float x = x2 - x1;
+			float y = y2 - y1;
+
+			if(x != 0)
+			{
+
+				// Get angle
+				angle = (float)Math.Atan(y / x);
+
+				// Convert from radians into degrees
+				angle *= RadDeg;
+
+				// Fix angle
+				if(x < 0) angle += 180;
+				if(x >= 0 && y < 0) angle += 360;
+
+			}
+			else
+				angle = y == 0 ? 0 : y < 0 ? 270 : 90;
+
+			return angle;
 
 		}
 
@@ -345,15 +541,17 @@ namespace Shed
 			for(int y = 0; y < _shape.Height; y++)
 			for(int x = 0; x < _shape.Width; x++)
 				SetPixel(x, y, 1.0f, 0.0f, 0.0f);
+			_shape.Zones.Clear();
 			picShape.Invalidate();
 		}
 
-		private void mnuImagePaint_Click(object sender, EventArgs e)
+		public void mnuImagePaint_Click(object sender, EventArgs e)
 		{
 			mnuImageSelect.Checked = false;
 			mnuImagePaint.Checked = true;
 			mnuImageDraw.Checked = false;
 			mnuImageLine.Checked = false;
+			mnuZoneAdd.Checked = false;
 			_tool = TypesOfTool.Paint;
 			stsTool.Text = "Paint";
 		}
@@ -364,6 +562,7 @@ namespace Shed
 			mnuImagePaint.Checked = false;
 			mnuImageDraw.Checked = true;
 			mnuImageLine.Checked = false;
+			mnuZoneAdd.Checked = false;
 			_tool = TypesOfTool.Draw;
 			stsTool.Text = "Draw";
 		}
@@ -374,16 +573,17 @@ namespace Shed
 			mnuImagePaint.Checked = false;
 			mnuImageDraw.Checked = false;
 			mnuImageLine.Checked = true;
+			mnuZoneAdd.Checked = false;
 			_tool = TypesOfTool.Line;
 			stsTool.Text = "Line";
 		}
 
-		private void mnuViewGrid_Click(object sender, EventArgs e)
+		public void mnuViewGrid_Click(object sender, EventArgs e)
 		{
 			picShape.Invalidate();
 		}
 
-		private void mnuView1to1_Click(object sender, EventArgs e)
+		public void mnuView1to1_Click(object sender, EventArgs e)
 		{
 			float w = 1.0f;
 			float h = (float)_shape.Height / _shape.Width;
@@ -423,9 +623,15 @@ namespace Shed
 			picShape.Invalidate();
 		}
 
-		private void mnuZoneAdd_Click(object sender, EventArgs e)
+		public void mnuZoneAdd_Click(object sender, EventArgs e)
 		{
+			mnuImageSelect.Checked = false;
+			mnuImagePaint.Checked = false;
+			mnuImageDraw.Checked = false;
+			mnuImageLine.Checked = false;
+			mnuZoneAdd.Checked = true;
 			_tool = TypesOfTool.Zone;
+			_zoneMode = ModesOfZone.SetCentre;
 			stsTool.Text = "Zone";
 		}
 
@@ -434,7 +640,7 @@ namespace Shed
 			picShape.Invalidate();
 		}
 
-		private void mnuViewGlow_Click(object sender, EventArgs e)
+		public void mnuViewGlow_Click(object sender, EventArgs e)
 		{
 			picShape.Invalidate();
 		}
@@ -444,69 +650,76 @@ namespace Shed
 			picShape.Invalidate();
 		}
 
-		private void mnuViewZone_Click(object sender, EventArgs e)
+		public void mnuViewZone_Click(object sender, EventArgs e)
 		{
+			if(mnuViewZone.CheckState == CheckState.Unchecked)
+				mnuViewZone.CheckState = CheckState.Indeterminate;
+			else
+			if(mnuViewZone.CheckState == CheckState.Indeterminate)
+				mnuViewZone.CheckState = CheckState.Checked;
+			else
+				mnuViewZone.CheckState = CheckState.Unchecked;
 			picShape.Invalidate();
 		}
 
 		#region mnuImageRadius
-		private void mnuImageRadius01_Click(object sender, EventArgs e)
+		public void mnuImageRadius01_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (1.0)";
 			_radius = 1.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius02_Click(object sender, EventArgs e)
+		public void mnuImageRadius02_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (2.0)";
 			_radius = 2.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius03_Click(object sender, EventArgs e)
+		public void mnuImageRadius03_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (3.0)";
 			_radius = 3.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius04_Click(object sender, EventArgs e)
+		public void mnuImageRadius04_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (4.0)";
 			_radius = 4.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius05_Click(object sender, EventArgs e)
+		public void mnuImageRadius05_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (5.0)";
 			_radius = 5.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius10_Click(object sender, EventArgs e)
+		public void mnuImageRadius10_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (10.0)";
 			_radius = 10.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius15_Click(object sender, EventArgs e)
+		public void mnuImageRadius15_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (15.0)";
 			_radius = 15.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius20_Click(object sender, EventArgs e)
+		public void mnuImageRadius20_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (20.0)";
 			_radius = 20.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageRadius50_Click(object sender, EventArgs e)
+		public void mnuImageRadius50_Click(object sender, EventArgs e)
 		{
 			mnuImageRadius.Text = "&Radius (50.0)";
 			_radius = 50.0f;
@@ -523,40 +736,42 @@ namespace Shed
 		public void mnuImageRadiusDec_Click(object sender, EventArgs e)
 		{
 			_radius -= 0.1f;
+			if(_radius < 1.0f)
+				_radius = 1.0f;
 			mnuImageRadius.Text = "&Radius (" + _radius.ToString("0.0") + ")";
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 		#endregion
 		#region mnuImageWeight
-		private void mnuImageWeight4_Click(object sender, EventArgs e)
+		public void mnuImageWeight4_Click(object sender, EventArgs e)
 		{
 			mnuImageWeight.Text = "&Weight (1.0)";
 			_weight = 1.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageWeight3_Click(object sender, EventArgs e)
+		public void mnuImageWeight3_Click(object sender, EventArgs e)
 		{
 			mnuImageWeight.Text = "&Weight (0.5)";
 			_weight = 0.5f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageWeight2_Click(object sender, EventArgs e)
+		public void mnuImageWeight2_Click(object sender, EventArgs e)
 		{
 			mnuImageWeight.Text = "&Weight (0.0)";
 			_weight = 0.0f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageWeight1_Click(object sender, EventArgs e)
+		public void mnuImageWeight1_Click(object sender, EventArgs e)
 		{
 			mnuImageWeight.Text = "&Weight (-0.5)";
 			_weight = -0.5f;
 			setPaintStatus(stsBrush, _weight, _radius, _falloff);
 		}
 
-		private void mnuImageWeight0_Click(object sender, EventArgs e)
+		public void mnuImageWeight0_Click(object sender, EventArgs e)
 		{
 			mnuImageWeight.Text = "&Weight (-1.0)";
 			_weight = -1.0f;
@@ -587,7 +802,7 @@ namespace Shed
 			sts.Text = weight.ToString("0.0") + ", " + radius.ToString("0.0") + ", " + falloff.ToString("0.0");
 		}
 
-		private void mnuViewNegative_Click(object sender, EventArgs e)
+		public void mnuViewNegative_Click(object sender, EventArgs e)
 		{
 			picShape.Invalidate();
 		}
@@ -601,16 +816,6 @@ namespace Shed
 		private void frmShape_Activated(object sender, EventArgs e)
 		{
 			
-		}
-
-		private void frmShape_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-		{
-			;
-		}
-
-		private void trkWeight_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-		{
-			;
 		}
 
 	}
