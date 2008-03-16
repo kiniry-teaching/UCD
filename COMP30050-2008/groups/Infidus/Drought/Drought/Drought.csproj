@@ -63,6 +63,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Graphics\Model3D.cs" />
+    <Compile Include="Menu\GameMenuItem.cs" />
+    <Compile Include="Network\NetworkManager.cs" />
+    <Compile Include="Network\RemoteGame.cs" />
     <Compile Include="World\Camera.cs" />
     <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />

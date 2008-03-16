@@ -8,20 +8,23 @@ using Microsoft.Xna.Framework;
 using Drought.State;
 using Drought.Input;
 using Drought.GameStates;
+using Drought.Network;
 
 namespace Drought.Menu
 {
     /** All the possible functions that can be performed from the menu. */
-    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, JOIN };
+    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, GAMELIST, GAMELIST_BACK, JOIN };
 
 
     class MenuState : GameState, IMenuListener
     {
-        private Input.DeviceInput input; 
+        private DeviceInput input; 
 
         private Menu mainMenu;
 
         private Menu quitMenu;
+
+        private Menu joinMenu;
 
         private Menu currMenu;
 
@@ -51,7 +54,7 @@ namespace Drought.Menu
 
         private void initialise()
         {
-            input = Input.DeviceInput.getInput();
+            input = DeviceInput.getInput();
             defaultColor = Color.White;
 
             canNext = true;
@@ -73,7 +76,7 @@ namespace Drought.Menu
             mainMenu.addSelectableItem(hostGame);
             mainY += mainSpacing;
 
-            MenuItem joinGame = new MenuItem(MenuFunctions.JOIN, "Join Game", defaultFont);
+            MenuItem joinGame = new MenuItem(MenuFunctions.GAMELIST, "Join Game", defaultFont);
             joinGame.setScale(scale);
             joinGame.position = new Vector2(mainX, mainY);
             mainMenu.addSelectableItem(joinGame);
@@ -86,7 +89,7 @@ namespace Drought.Menu
             mainY += mainSpacing;
 
 
-            float quitX = 500.0f * (screenWidth / 800.0f); ;
+            float quitX = 500.0f * (screenWidth / 800.0f);
             float quitY = 300.0f * (screenHeight / 600.0f);
             quitMenu = new Menu(this);
 
@@ -108,6 +111,8 @@ namespace Drought.Menu
             quitNo.position = new Vector2(quitX, quitY);
             quitMenu.addSelectableItem(quitNo);
 
+            joinMenu = new Menu(this); 
+            
             currMenu = mainMenu;
         }
 
@@ -164,20 +169,53 @@ namespace Drought.Menu
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
             mainMenu.render(spriteBatch);
             quitMenu.render(spriteBatch);
+            joinMenu.render(spriteBatch);
+            spriteBatch.End();
         }
 
         public void menuItemPressed(MenuItem item)
         {
             switch (item.getFunction())
             {
-                case MenuFunctions.QUIT: currMenu = quitMenu; quitMenu.activate(); ; break;
+                case MenuFunctions.QUIT: currMenu = quitMenu; quitMenu.activate(); break;
                 case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
                 case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
 
-                case MenuFunctions.HOST: getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
+                case MenuFunctions.HOST: ((Game1)getGame()).getNetworkManager().host(); getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
+                case MenuFunctions.GAMELIST: if (Game1.NETWORKED) { makeGameList(); currMenu = joinMenu; joinMenu.activate(); } break;
+                case MenuFunctions.GAMELIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
+                case MenuFunctions.JOIN: ((Game1)getGame()).getNetworkManager().connectToGame(((GameMenuItem)item).getGame()); getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
             }
+        }
+
+        /** Populates the list of joinable games. */
+        public void makeGameList() {
+            List<RemoteGame> remoteGames = ((Game1)getGame()).getNetworkManager().getLocalGames();
+            joinMenu = new Menu(this);
+            float scale = 0.35f * (screenHeight / 600.0f);
+            float gameX = 500.0f * (screenWidth / 800.0f);
+            float gameY = 100.0f * (screenHeight / 600.0f);
+            float spacing = 70.0f * (screenHeight / 600.0f);
+            MenuItem gameCount = new MenuItem(MenuFunctions.NONE, "<" + remoteGames.Count + " Games Found>", defaultFont);
+            gameCount.setScale(scale);
+            gameCount.position = new Vector2(gameX, gameY);
+            gameCount.setDefaultColor(Color.Blue);
+            joinMenu.addNonSelectableItem(gameCount);
+            gameY += spacing;
+            foreach (RemoteGame remoteGame in remoteGames) {
+                MenuItem aGame = new GameMenuItem(MenuFunctions.JOIN, remoteGame.getDescription(), defaultFont, remoteGame);
+                aGame.setScale(scale);
+                aGame.position = new Vector2(gameX, gameY);
+                joinMenu.addSelectableItem(aGame);
+                gameY += spacing;
+            }
+            MenuItem back = new MenuItem(MenuFunctions.GAMELIST_BACK, "Back", defaultFont);
+            back.setScale(scale);
+            back.position = new Vector2(gameX, gameY);
+            joinMenu.addSelectableItem(back);
         }
     }
 }

@@ -11,23 +11,32 @@ using Microsoft.Xna.Framework.Storage;
 using Drought.Menu;
 using Drought.Input;
 using Drought.GameStates;
+using Drought.Network;
 
 namespace Drought
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         GameManager gameManager;
+        NetworkManager networkManager;
+
+        /** So we can turn it off for testing, since it takes so damn long to start up */
+        public static readonly bool NETWORKED = true;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            if (NETWORKED) {
+                Components.Add(new GamerServicesComponent(this));
+            }
             gameManager = new GameManager(this);
+            networkManager = NetworkManager.getInstance();
         }
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace Drought
             //graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
 
-            Input.DeviceInput input = Input.DeviceInput.getInput();
+            DeviceInput input = DeviceInput.getInput();
             input.bind(GameKeys.CHANGE_STATE, Keys.C, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_NEXT, Keys.Down, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_PREV, Keys.Up, ModifierKeys.NONE);
@@ -67,9 +76,10 @@ namespace Drought
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //adding this in here to test
-            LevelState level = new LevelState(gameManager, this, "level_0");
+            //LevelState level = new LevelState(gameManager, this, "level_0");
+            
+            //gameManager.pushState(level);
             gameManager.pushState(menu);
-            gameManager.pushState(level);
 
             base.Initialize();
         }
@@ -102,11 +112,11 @@ namespace Drought
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            Input.DeviceInput.getInput().poll();
+            DeviceInput.getInput().poll();
 
             gameManager.update(gameTime);
 
-            // TODO: Add your update logic here
+            networkManager.update();
 
             base.Update(gameTime);
         }
@@ -132,6 +142,11 @@ namespace Drought
         public SpriteBatch getSpriteBatch()
         {
             return spriteBatch;
+        }
+
+        public NetworkManager getNetworkManager()
+        {
+            return networkManager;
         }
     }
 }
