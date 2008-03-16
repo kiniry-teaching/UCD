@@ -45,5 +45,31 @@ namespace Drought.Entity
                 return normals[x, y];
             return new Vector3(0, 0, 0);
         }
+
+       /**
+        * Gets the distance from a point to a line.
+        * Distance will be negative if point lies to the left
+        * of the line, positive if it lies to the right and 
+        * zero if it is on the line.
+        *
+        * @param line1 First point on the line segment.
+        * @param line2 Last point on the line segment.
+        * @param p The point to find the distance to.
+        */
+        public float Distance(Vector3 line1, Vector3 line2, Vector3 p)
+        {
+            float distance = 0.0f;
+
+            Vector3 v = line1 - p;
+            Vector3 n = (line2 - line1);
+            float x = n.X;
+            float y = n.Y;
+            n.X = -y;
+            n.Y = x;
+            n.Z = 0.0f;
+            distance = (Vector3.Dot(n, v) / n.Length());
+
+            return distance;
+        }
     }
 }

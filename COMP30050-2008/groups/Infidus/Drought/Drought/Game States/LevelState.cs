@@ -24,9 +24,11 @@ namespace Drought.GameStates
 
         private DeviceInput input;
 
-        private MovableEntity entity;
+        private List<MovableEntity> entities;
 
-        private Model3D cubeModel;
+        private Model3D truckModel;
+
+        private Model3D xyzModel;
 
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)
@@ -44,11 +46,21 @@ namespace Drought.GameStates
             normalMap = new NormalMap(heightMap);
 
             //testing entity here
-            entity = new MovableEntity(cubeModel);
+            entities = new List<MovableEntity>();
             List<Vector3> nodes = new List<Vector3>();
             for(int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            entity.setPath(new Path(nodes, normalMap));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(i, 100, heightMap.getHeight(i, 100)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(0, i, heightMap.getHeight(0, i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
         }
 
         public override void loadContent()
@@ -56,8 +68,15 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            cubeModel = new Model3D("Models/cube", camera);
-            cubeModel.loadContent(getContentManager(), getGraphics());
+            truckModel = new Model3D("Models/Truck/truck", camera);
+            truckModel.loadContent(getContentManager(), getGraphics());
+
+            xyzModel = new Model3D("Models/xyz", camera);
+            xyzModel.loadContent(getContentManager(), getGraphics());
+            xyzModel.rotationAngles = new Vector3(0, 0, 0);
+            float xyzX = heightMap.getMapWidth() / 2.0f;
+            float xyzY = heightMap.getMapHeight() / 2.0f;
+            xyzModel.position = new Vector3(xyzX, xyzY, heightMap.getHeight(xyzX, xyzY) + 5.0f);
         }
 
         public override void background()
@@ -108,7 +127,8 @@ namespace Drought.GameStates
             terrain.setViewMatrix(camera.getViewMatrix());
             terrain.update(gameTime);
 
-            entity.update();
+            for (int i = 0; i < entities.Count; i++)
+                entities[i].update();
         }
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
@@ -127,7 +147,10 @@ namespace Drought.GameStates
 
             terrain.render();
 
-            entity.render(graphics);
+            xyzModel.render(graphics);
+
+            for (int i = 0; i < entities.Count; i++)
+                entities[i].render(graphics);
         }
     }
 }
