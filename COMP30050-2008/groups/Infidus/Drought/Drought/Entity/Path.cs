@@ -15,15 +15,20 @@ namespace Drought.Entity
 
         private Vector3 position;
 
+        private Vector3 normal;
+
+        private NormalMap normalMap;
+
         private float length;
 
         private float coveredDist;
 
         private int currNode;
 
-        public Path(List<Vector3> nodes)
+        public Path(List<Vector3> nodes, NormalMap normalMap)
         {
             this.nodes = nodes;
+            this.normalMap = normalMap;
             nodeDist = new List<float>();
 
             //can't have an empty list of nodes
@@ -40,6 +45,7 @@ namespace Drought.Entity
         {
             currNode = 0;
             position = nodes[0];
+            normal = normalMap.getNormal((int)position.X, (int)position.Y);
             length = 0.0f;
 
             for (int i = 0; i < nodes.Count - 1; i++)
@@ -58,6 +64,11 @@ namespace Drought.Entity
         public Vector3 getPosition()
         {
             return position;
+        }
+
+        public Vector3 getNormal()
+        {
+            return normal;
         }
 
         public bool isFinished()
@@ -82,6 +93,9 @@ namespace Drought.Entity
             Vector3 next = nodes[currNode + 1];
             float amt = (coveredDist - nodeDist[currNode]) / Vector3.Distance(curr, next);
             position = Vector3.Lerp(curr, next, amt);
+            Vector3 currNorm = normalMap.getNormal((int)curr.X, (int)curr.Y);
+            Vector3 nextNorm = normalMap.getNormal((int)next.X, (int)next.Y);
+            normal = Vector3.Lerp(currNorm, nextNorm, amt);
         }
 
         private int getNextNodeIndex()

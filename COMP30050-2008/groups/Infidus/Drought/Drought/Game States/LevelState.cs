@@ -44,10 +44,11 @@ namespace Drought.GameStates
             normalMap = new NormalMap(heightMap);
 
             //testing entity here
-            entity = new MovableEntity(normalMap, heightMap, cubeModel);
+            entity = new MovableEntity(cubeModel);
             List<Vector3> nodes = new List<Vector3>();
-            nodes.Add(new Vector3(0, 0, heightMap.getHeight(0, 0)));
-            entity.setPath(new Path(nodes));
+            for(int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
+            entity.setPath(new Path(nodes, normalMap));
         }
 
         public override void loadContent()
@@ -55,7 +56,7 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            cubeModel = new Model3D("Models/Car/car", camera);
+            cubeModel = new Model3D("Models/cube", camera);
             cubeModel.loadContent(getContentManager(), getGraphics());
         }
 

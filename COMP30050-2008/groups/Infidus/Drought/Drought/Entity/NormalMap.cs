@@ -10,6 +10,10 @@ namespace Drought.Entity
     {
         private Vector3[,] normals;
 
+        private int width;
+
+        private int height;
+
         public NormalMap(HeightMap heightMap)
         {
             initialise(heightMap);
@@ -17,8 +21,8 @@ namespace Drought.Entity
 
         private void initialise(HeightMap heightMap)
         {
-            int width = heightMap.getMapWidth();
-            int height = heightMap.getMapHeight();
+            width = heightMap.getMapWidth();
+            height = heightMap.getMapHeight();
             normals = new Vector3[width, height];
 
             for (int x = 0; x < width; x++)
@@ -33,6 +37,13 @@ namespace Drought.Entity
 
                     normals[x, y] = Vector3.Cross(v0, v1);
                 }
+        }
+
+        public Vector3 getNormal(int x, int y)
+        {
+            if(x >= 0 && x < width && y >= 0 && y < height)
+                return normals[x, y];
+            return new Vector3(0, 0, 0);
         }
     }
 }

@@ -14,28 +14,22 @@ namespace Drought.Entity
     {
         private Vector3 position;
 
+        private Vector3 normal;
+
         private float velocity;
 
         private Vector3 heading;
-
-        private NormalMap normalMap;
-
-        private HeightMap heightMap;
 
         private Path path;
 
         private Model3D model;
 
-        public MovableEntity(NormalMap normalMap, HeightMap heightMap, Model3D model)
+        public MovableEntity(Model3D model)
         {
-            position = new Vector3(256, 128, 15);
+            position = new Vector3(0, 0, 0);
             heading = new Vector3(0, 0, 0);
-            List<Vector3> nodes = new List<Vector3>();
-            nodes.Add(position);
-            path = new Path(nodes);
-            velocity = 0.5f;
-            this.normalMap = normalMap;
-            this.heightMap = heightMap;
+            normal = new Vector3(0, 0, 0);
+            velocity = 0.05f;
             this.model = model;
         }
 
@@ -45,6 +39,7 @@ namespace Drought.Entity
             {
                 path.addDistance(velocity);
                 position = path.getPosition();
+                normal = path.getNormal();
             }
         }
 
@@ -60,6 +55,8 @@ namespace Drought.Entity
 
         public void render(GraphicsDevice graphics)
         {
+            model.position = position;
+            model.rotationAngles = normal;
             model.render(graphics);
         }
     }

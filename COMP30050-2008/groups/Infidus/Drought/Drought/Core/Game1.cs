@@ -104,9 +104,6 @@ namespace Drought
         {
             Input.DeviceInput.getInput().poll();
 
-            if (Input.DeviceInput.getInput().isKeyPressed(GameKeys.QUIT))
-                Exit();
-
             gameManager.update(gameTime);
 
             // TODO: Add your update logic here
