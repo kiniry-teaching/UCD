@@ -1,6 +1,26 @@
 ﻿<?php
 
 //TODO - Thomas - isAdmin() needed here
+/****************************************************************
+* 																*
+* Global variabes needed for adding books						*
+* 																*
+****************************************************************/
+
+$isbn = "";
+$title = "";
+$titleLong = "";
+$authors = "";
+$publisher = "";
+$noOfPages = "";
+$binding = "";
+$ddc = "";
+$lcc = "";
+$description = "";
+$largeImg = "";
+$mediumImg = "";
+$smallImg = "";
+$noOfCopies = "";
 
 /****************************************************************
 * 																*
@@ -12,12 +32,32 @@ $bookData = array($isbn,$title,$titleLong,$authors,$publisher,$noOfPages,$bindin
 
 include("config.php"); //Holds the access keys for the API's
 
+/****************************************************************
+* 																*
+* fetchBooks($isbn) - Takes the isbn and uses the available		*
+* api’s to find details on the book. It does this by going		*
+* through a list of api accessers and when one returns not null	*
+* it takes the details available and returns them by parsing	*
+* the xml.														*
+* Data being transmitted:										*
+* The ISBN is sent and details of the book are sent back in xml	*
+* form to be parsed.											*
+* 																*
+****************************************************************/
+
 function fetchBooks($isbn){
 	include("include/include_adminbook_functions/amazon_all.php");
 	include("include/include_adminbook_functions/isbndb.php");
 	fetchBooksAmazon($isbn, 0);
-	fetchBooksISBNdb($isbn);
+//	fetchBooksISBNdb($isbn);
 }
+
+/****************************************************************
+* 																*
+* parseBookData() - Parses the array with book data so it is	*
+* usable on other pages.										*
+* 																*
+****************************************************************/
 
 function parseBookData(){
 	global $isbn,
@@ -54,7 +94,17 @@ function parseBookData(){
 	}
 }
 
-function addBook($bookData){	
+/****************************************************************
+* 																*
+* function addBook($bookData) - Adds books to the “books“		*
+* database. It does this by inputting the arguments in the		*
+* database by use of the sql query INSERT.						*
+* Data being transmitted:										*
+* Data (the arguments) is sent into the “books” database.		*
+* 																*
+****************************************************************/
+
+function addBook($isbn,$title,$titleLong,$authors,$publisher,$noOfPages,$binding,$ddc,$lcc,$description,$largeImg,$mediumImg,$smallImg,$noOfCopies){
 	$imgarray = array($largeImg,$mediumImg,$smallImg);
 
 	for($i=0; $i<count($imgarray); $i++){
@@ -77,14 +127,35 @@ function addBook($bookData){
 		}
 	}
 
-	include("connection.php");
-	$sql="INSERT INTO books (isbn,title,titleLong,authors,publisher,noOfPages,binding,ddc,lcc,description,largeImg,mediumImg,smallImg)
-		VALUES ('$isbn','$title','$titleLong','$authors','$publisher','$noOfPages','$binding','$ddc','$lcc','$description','$largeImg','$mediumImg','$smallImg')";
-	if (!mysql_query($sql,$con))
-	{
-		die('Error: ' . mysql_error());
+	include("connection.php"); //Connects to database
+
+	$result = mysql_query("SELECT * FROM books
+		WHERE isbn='$isbn'");
+	while($row = mysql_fetch_array($result)){
+		$test = $row['isbn'];
 	}
-	echo "<p>1 record added</p>";
+	
+	if($test == NULL && $isbn != NULL){
+		if($noOfCopies > 0){
+			$sql="INSERT INTO books (isbn,title,titleLong,authors,publisher,noOfPages,binding,ddc,lcc,description,largeImg,mediumImg,smallImg,noOfCopies)
+				VALUES ('$isbn','$title','$titleLong','$authors','$publisher','$noOfPages','$binding','$ddc','$lcc','$description','$largeImg','$mediumImg','$smallImg','$noOfCopies')";
+			if (!mysql_query($sql,$con))
+			{
+				die('Error: ' . mysql_error());
+			}
+			echo "<p>1 record added</p>";
+		}
+		else{
+			echo "<p>Number of copies must be greater than 0</p>";
+		}
+	}
+	else if($test != NULL && $isbn != NULL){
+		echo "<p><b>ISBN:</b> " . $isbn . " already exists</p>";
+	}
+	else if($isbn == NULL){
+		echo "<p>ISBN is required</p>";
+	}
+	
 	mysql_close($con);
 }
 ?>

@@ -6,20 +6,6 @@
 
 //TODO - Thomas - isAdmin() needed here
 
-$isbn = "";
-$title = "";
-$titleLong = "";
-$authors = "";
-$publisher = "";
-$noOfPages = "";
-$binding = "";
-$ddc = "";
-$lcc = "";
-$description = "";
-$largeImg = "";
-$mediumImg = "";
-$smallImg = "";
-
 include("include/adminbook_functions.php");
 
 if ($_POST["state"] == 1){ //If you're retrieving book data
@@ -28,7 +14,7 @@ if ($_POST["state"] == 1){ //If you're retrieving book data
 	parseBookData();
 }
 else if($_POST["state"] == 2) //If you're adding book data
-	addBook($_POST["isbn"],$_POST["title"],$_POST["titleLong"],$_POST["authors"],$_POST["publisher"],$_POST["noOfPages"],$_POST["binding"],$_POST["ddc"],$_POST["lcc"],$_POST["description"],$_POST["largeImg"],$_POST["mediumImg"],$_POST["smallImg"]);
+	addBook($_POST["isbn"],$_POST["title"],$_POST["titleLong"],$_POST["authors"],$_POST["publisher"],$_POST["noOfPages"],$_POST["binding"],$_POST["ddc"],$_POST["lcc"],$_POST["description"],$_POST["largeImg"],$_POST["mediumImg"],$_POST["smallImg"], $_POST["noOfCopies"]);
 ?>
 	<h1>Add A Book</h1>
 	<ol>
@@ -57,6 +43,7 @@ else if($_POST["state"] == 2) //If you're adding book data
 		<div class="formrow"><div class="formtext">Medium Image URL: </div><div class="forminput"><input type="text" name="mediumImg" value="<?php echo $mediumImg; ?>" /></div></div>
 		<div class="formrow"><div class="formtext">Large Image URL: </div><div class="forminput"><input type="text" name="largeImg" value="<?php echo $largeImg; ?>" /></div></div>
 		<div class="formrow"><div class="formtext">Description: </div><div class="forminput"><textarea name="description"><?php echo $description; ?></textarea></div></div>
+		<div class="formrow"><div class="formtext">Number of Copies: </div><div class="forminput"><input type="text" name="noOfCopies" value="Enter number" /></div></div>
 		<div class="formbutton"><input type="hidden" name="state" value="2" /><input type="submit" value="Add" /></div>
 	</form>
 </div> <!--End of #adminbookedit-->

@@ -80,8 +80,9 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	$sql = "CREATE TABLE books 
 	(
-		isbn int(13) NOT NULL, 
-		PRIMARY KEY(isbn),
+		no bigint NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(no),
+		isbn varchar(13) NOT NULL, 
 		title tinytext,
 		titleLong text,
 		authors tinytext,
@@ -93,7 +94,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 		lcc tinytext,
 		largeImg tinytext,
 		mediumImg tinytext,
-		smallImg tinytext
+		smallImg tinytext,
+		noOfCopies bigint
 	)";
 	mysql_query($sql,$con);	
 	
@@ -102,9 +104,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_onloan 
 	(
-		loanNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(loanNo),
-		isbnUsername text,
+		isbnUsername varchar(239) NOT NULL,
+		PRIMARY KEY(isbnUsername ),
 		date int
 	)";
 	mysql_query($sql,$con);	

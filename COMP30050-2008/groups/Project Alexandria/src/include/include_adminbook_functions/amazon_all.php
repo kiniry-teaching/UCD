@@ -35,12 +35,12 @@ function fetchBooksAmazon($isbn, $j){
 }
 
 function printDetailsAmazon($basicDetails, $attributes, $images, $review){
-	global $bookData;
+	global $isbn, $bookData;
 	
 	for($j=0; $j<count($bookData); $j++){
 		if($bookData[$j] == NULL){
 			switch ($j){
-/*isbn*/		case 0: break;
+/*isbn*/		case 0: $bookData[$j] =	$isbn; break;
 /*title*/		case 1: $bookData[$j] =	$basicDetails->Items->Item->ItemAttributes->Title; break;
 /*titleLong*/	case 2: break;
 /*authors*/		case 3: $i=1;
