@@ -1,6 +1,11 @@
 ﻿<?php
 function fetchBooksAmazon($isbn, $j){
-	$amazons = array("http://webservices.amazon.com/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.co.uk/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.co.jp/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.fr/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.ca/onca/xml?Service=AWSECommerceService", "http://webservices.amazon.de/onca/xml?Service=AWSECommerceService");
+	$amazons = array("http://webservices.amazon.com/onca/xml?Service=AWSECommerceService",
+					 "http://webservices.amazon.co.uk/onca/xml?Service=AWSECommerceService",
+					 "http://webservices.amazon.co.jp/onca/xml?Service=AWSECommerceService",
+					 "http://webservices.amazon.fr/onca/xml?Service=AWSECommerceService",
+					 "http://webservices.amazon.ca/onca/xml?Service=AWSECommerceService",
+					 "http://webservices.amazon.de/onca/xml?Service=AWSECommerceService");
 	$responceGroup = array("Small", "ItemAttributes", "Images", "EditorialReview");
 
 	for ($i=0; $i<count($responceGroup); $i++){
@@ -21,9 +26,9 @@ function fetchBooksAmazon($isbn, $j){
 		$j++;
 		fetchBooksAmazon($isbn, $j);
 	}
-	else if($basicDetails->Items->Request->Errors->Error->Code == "AWS.InvalidParameterValue" && $j=count($amazons)-1){
+/*	else if($basicDetails->Items->Request->Errors->Error->Code == "AWS.InvalidParameterValue" && $j=count($amazons)-1){
 		
-	}
+	}*/
 	else if($basicDetails->Items->Request->Errors->Error->Code != "AWS.InvalidParameterValue" && $j=count($amazons)-1){	
 		printDetailsAmazon($basicDetails, $attributes, $images, $review);
 	}
@@ -59,5 +64,6 @@ function printDetailsAmazon($basicDetails, $attributes, $images, $review){
 			}
 		}
 	}
+
 }
 ?>

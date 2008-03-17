@@ -19,26 +19,24 @@ function fetchBooksISBNdb($isbn){
 function printDetailsISBNdb($basicDetails, $descriptions){
 	global $bookData;
 	
-	if($isbn == NULL)
-		$isbn =			$basicDetails->BookList[0]->BookData[0]['isbn'];
-	if($title == NULL)
-		$title =		$basicDetails->BookList[0]->BookData[0]->Title;
-	if($titleLong == NULL)
-		$titleLong =	$basicDetails->BookList[0]->BookData[0]->TitleLong;
-	if($authors == NULL)
-		$authors =		$basicDetails->BookList[0]->BookData[0]->AuthorsText;
-	if($publisher == NULL)
-		$publisher =	$basicDetails->BookList[0]->BookData[0]->PublisherText;
-	if($ddc == 0)
-		$ddc =			$basicDetails->BookList[0]->BookData[0]->Details[0]['dewey_decimal_normalized'];
-	if($lcc == NULL)
-		$lcc =			$basicDetails->BookList[0]->BookData[0]->Details[0]['lcc_number'];
-	if($description == NULL)
-		$description =	$descriptions->BookList[0]->BookData[0]->Summary;
-	if($noOfPages == NULL)
-		$noOfPages = 	$basicDetails->BookList[0]->BookData[0]->Details[0]['physical_description_text'];
-	if($binding == NULL)
-		$binding =		$basicDetails->BookList[0]->BookData[0]->Details[0]['edition_info'];
+	for($j=0; $j<count($bookData); $j++){
+		if($bookData[$j] == NULL){
+			switch ($j){
+/*isbn*/		case 0: $bookData[$j] = $basicDetails->BookList[0]->BookData[0]['isbn']; break;
+/*title*/		case 1: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->Title; break;
+/*titleLong*/	case 2: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->TitleLong; break;
+/*authors*/		case 3: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->AuthorsText; break;
+/*publisher*/	case 4: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->PublisherText; break;
+/*noOfPages*/	case 5: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->Details[0]['physical_description_text']; break;
+/*binding*/		case 6: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->Details[0]['edition_info']; break;
+/*ddc*/			case 7: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->Details[0]['dewey_decimal_normalized'];break;
+/*lcc*/			case 8: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->Details[0]['lcc_number'];break;
+/*description*/	case 9: $bookData[$j] =	$descriptions->BookList[0]->BookData[0]->Summary; break;
+/*largeImg*/	case 10: break;
+/*mediumImg*/	case 11: break;
+/*smallImg*/	case 12: break;
+			}
+		}
+	}
 }
-
 ?>

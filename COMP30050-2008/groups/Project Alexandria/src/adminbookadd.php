@@ -6,11 +6,26 @@
 
 //TODO - Thomas - isAdmin() needed here
 
+$isbn = "";
+$title = "";
+$titleLong = "";
+$authors = "";
+$publisher = "";
+$noOfPages = "";
+$binding = "";
+$ddc = "";
+$lcc = "";
+$description = "";
+$largeImg = "";
+$mediumImg = "";
+$smallImg = "";
+
 include("include/adminbook_functions.php");
 
 if ($_POST["state"] == 1){ //If you're retrieving book data
 	$isbn = $_POST["isbn"];
-	fetchBooksAmazon($isbn, 0);
+	fetchBooks($isbn);
+	parseBookData();
 }
 else if($_POST["state"] == 2) //If you're adding book data
 	addBook($_POST["isbn"],$_POST["title"],$_POST["titleLong"],$_POST["authors"],$_POST["publisher"],$_POST["noOfPages"],$_POST["binding"],$_POST["ddc"],$_POST["lcc"],$_POST["description"],$_POST["largeImg"],$_POST["mediumImg"],$_POST["smallImg"]);

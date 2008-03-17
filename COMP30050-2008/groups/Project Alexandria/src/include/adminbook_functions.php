@@ -8,30 +8,32 @@
 * addition and editing of books.								*
 * 																*
 ****************************************************************/
-$bookData = array(
-	$isbn,
-	$title,
-	$titleLong,
-	$authors,
-	$publisher,
-	$noOfPages,
-	$binding,
-	$ddc,
-	$lcc,
-	$description,
-	$largeImg,
-	$mediumImg,
-	$smallImg
-);
+$bookData = array($isbn,$title,$titleLong,$authors,$publisher,$noOfPages,$binding,$ddc,$lcc,$description,$largeImg,$mediumImg,$smallImg);
 
 include("config.php"); //Holds the access keys for the API's
 
 function fetchBooks($isbn){
-	
+	include("include/include_adminbook_functions/amazon_all.php");
+	include("include/include_adminbook_functions/isbndb.php");
+	fetchBooksAmazon($isbn, 0);
+	fetchBooksISBNdb($isbn);
 }
 
-
-function addBook($bookData){
+function parseBookData(){
+	global $isbn,
+		$title,
+		$titleLong,
+		$authors,
+		$publisher,
+		$noOfPages,
+		$binding,
+		$ddc,
+		$lcc,
+		$description,
+		$largeImg,
+		$mediumImg,
+		$smallImg,
+		$bookData;
 
 	for($j=0; $j<count($bookData); $j++){
 		switch ($j){
@@ -50,7 +52,9 @@ function addBook($bookData){
 			case 12: $smallImg = $bookData[$j]; break;
 		}
 	}
-	
+}
+
+function addBook($bookData){	
 	$imgarray = array($largeImg,$mediumImg,$smallImg);
 
 	for($i=0; $i<count($imgarray); $i++){
