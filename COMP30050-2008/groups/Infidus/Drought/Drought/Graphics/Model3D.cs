@@ -88,5 +88,26 @@ namespace Drought.Graphics
 
         }
 
+        public void render(GraphicsDevice graphics, Matrix orientation, Vector3 position)
+        {
+            Matrix worldMatrix = orientation * Matrix.CreateTranslation(position) * Matrix.CreateScale(scaleFactors);
+
+            int i = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                foreach (Effect currentEffect in mesh.Effects)
+                {
+                    currentEffect.CurrentTechnique = effect.Techniques["Textured"];
+
+                    currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
+                    currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
+                    currentEffect.Parameters["xProjection"].SetValue(projectionMatrix);
+                    currentEffect.Parameters["xTexture"].SetValue(textures[i++]);
+                }
+                mesh.Draw();
+            }
+
+        }
+
     }
 }

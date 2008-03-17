@@ -38,7 +38,7 @@ namespace Drought.World
 
         public void update(GameTime gameTime)
         {
-            Console.WriteLine(eyeVector);
+            //Console.WriteLine(eyeVector);
 
             if (eyeVector.Z < heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand)
                 eyeVector.Z = heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand;

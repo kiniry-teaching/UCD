@@ -93,9 +93,10 @@ namespace Drought.Entity
             Vector3 next = nodes[currNode + 1];
             float amt = (coveredDist - nodeDist[currNode]) / Vector3.Distance(curr, next);
             position = Vector3.Lerp(curr, next, amt);
-            Vector3 currNorm = normalMap.getNormal((int)curr.X, (int)curr.Y);
-            Vector3 nextNorm = normalMap.getNormal((int)next.X, (int)next.Y);
-            normal = Vector3.Lerp(currNorm, nextNorm, amt);
+            //Vector3 currNorm = normalMap.getNormal((int)curr.X, (int)curr.Y);
+            //Vector3 nextNorm = normalMap.getNormal((int)next.X, (int)next.Y);
+            //normal = Vector3.Lerp(currNorm, nextNorm, amt);
+            normal = normalMap.getNormal(position.X, position.Y);
         }
 
         private int getNextNodeIndex()

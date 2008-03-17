@@ -51,7 +51,7 @@ namespace Drought.GameStates
             for(int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
             entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
-
+            
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(i, 100, heightMap.getHeight(i, 100)));
@@ -61,6 +61,42 @@ namespace Drought.GameStates
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(0, i, heightMap.getHeight(0, i)));
             entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            
+            int hw = heightMap.getMapWidth() / 2;
+            int hh = heightMap.getMapHeight() / 2;
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw + i, hh, heightMap.getHeight(hw + i, hh)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw - i, hh, heightMap.getHeight(hw - i, hh)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw, hh + i, heightMap.getHeight(hw, hh + i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw, hh - i, heightMap.getHeight(hw, hh - i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw + i, hh + i, heightMap.getHeight(hw + i, hh + i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw - i, hh - i, heightMap.getHeight(hw - i, hh - i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw + i, hh - i, heightMap.getHeight(hw + i, hh - i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(hw - i, hh + i, heightMap.getHeight(hw - i, hh + i)));
+            entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            
         }
 
         public override void loadContent()
@@ -68,10 +104,10 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            truckModel = new Model3D("Models/Truck/truck", camera);
+            truckModel = new Model3D("Models/xyz", camera);
             truckModel.loadContent(getContentManager(), getGraphics());
 
-            xyzModel = new Model3D("Models/xyz", camera);
+            xyzModel = new Model3D("Models/Truck/truck", camera);
             xyzModel.loadContent(getContentManager(), getGraphics());
             xyzModel.rotationAngles = new Vector3(0, 0, 0);
             float xyzX = heightMap.getMapWidth() / 2.0f;

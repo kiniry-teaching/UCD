@@ -24,6 +24,8 @@ namespace Drought.Entity
 
         private Vector3 prevNormal;
 
+        private Matrix orientation;
+
         private float velocity;
 
         private Path path;
@@ -38,6 +40,7 @@ namespace Drought.Entity
             heading = new Vector3(0, 0, 0);
             rotation = new Vector3(0, 0, 0);
             normal = path.getNormal();
+            orientation = Matrix.Identity;
             velocity = 0.05f;
             this.model = model;
         }
@@ -59,9 +62,20 @@ namespace Drought.Entity
                 heading = Vector3.Subtract(position, prevPosition);
                 //heading.Normalize();
 
-                rotation.X = (float)-Math.Atan2(prevNormal.Y, normal.Z);
+                //Console.WriteLine(normal);
+                /*
+                rotation.X = (float)Math.Atan2(normal.Y, normal.Z);
                 rotation.Y = (float)Math.Atan2(normal.X, normal.Z);
                 rotation.Z = (float)Math.Atan2(heading.Y, heading.X);
+                */
+
+                orientation = Matrix.CreateRotationZ((float)Math.Atan2(heading.Y, heading.X));
+                //Console.WriteLine("mz " + orientation);
+                orientation.Up = normal;
+                orientation.Right = Vector3.Cross(orientation.Forward, orientation.Up);
+                orientation.Right = Vector3.Normalize(orientation.Right);
+                orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
+                orientation.Forward = Vector3.Normalize(orientation.Forward);
             }
         }
 
@@ -77,10 +91,11 @@ namespace Drought.Entity
 
         public void render(GraphicsDevice graphics)
         {
+            position.Z += 10;
             model.position = position;
             model.rotationAngles = rotation;
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
-            model.render(graphics);
+            model.render(graphics, orientation, position);
         }
     }
 }
