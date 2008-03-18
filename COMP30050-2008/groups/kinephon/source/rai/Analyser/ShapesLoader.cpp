@@ -19,14 +19,17 @@ namespace interpreter
 //
 Shapes * ShapesLoader::loadShapes
 (	char const * const	filename
-){	ifstream			file		(filename);
+){	ifstream			file		(filename, std::ios::binary);
 	SEHeader			seHeader;
 	uint				index;
 	Shapes *			shapes;
-						
-	// Reaad the header
-	file >> seHeader.magic;
-	file >> seHeader.nShapes;
+
+	if(file.good() == false)
+		return 0;
+
+	// Read the header
+	file.read((char*)&seHeader, sizeof(seHeader));
+	int x= file.gcount();
 
 	// Don't continue if the filetype
 	//	is wrong, or there's no shape data
@@ -40,6 +43,8 @@ Shapes * ShapesLoader::loadShapes
 	for(index = 0; index < seHeader.nShapes; index++)
 		if(loadShape(file, shapes) == false)
 			break;
+
+	file.close();
 
 	// Error, destory all shapes and exit
 	if(index != seHeader.nShapes)
@@ -69,15 +74,9 @@ bool ShapesLoader::loadShape
 	//-------------------------------------------------------------------------
 	// Read the shape header
 
-	file >> seShape.type;
-	file >> seShape.shapeId;
-	file >> seShape.width;
-	file >> seShape.nData;
-	file >> seShape.zoneAnyStart;
-	file >> seShape.zoneReverse;
-	file >> seShape.nZones;
-	file >> seShape.nSpeedShapes;
-	file >> seShape.nAccelShapes;
+	file.read((char*)&seShape, sizeof(seShape));
+	if(file.good() == false)
+		return false;
 
 	//-------------------------------------------------------------------------
 	// Validate as much as possible
@@ -113,6 +112,9 @@ bool ShapesLoader::loadShape
 		
 	}
 
+	// Don't return false after this point, intead use Success = false;
+	//	Memory is only cleaned at the bottom of the function
+
 	//-------------------------------------------------------------------------
 	// Allocate memory
 
@@ -138,7 +140,7 @@ bool ShapesLoader::loadShape
 		index < seShape.nZones
 	 &&	success == true;
 		index++
-	)	if(loadZone(file, zones + index) == false)
+	)	if(loadZone(file, *(zones + index)) == false)
 			success = false;
 
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -246,20 +248,13 @@ bool ShapesLoader::loadShape
 //
 bool ShapesLoader::loadZone
 (	ifstream &	file,
-	Zone * *	zone
+	Zone * &	zone
 ){	SEZone		seZone;
 
-	file >> seZone.order;
-	file >> seZone.x;
-	file >> seZone.y;
-	file >> seZone.enterRadius;
-	file >> seZone.exitRadius;
-	file >> seZone.enterAngle;
-	file >> seZone.exitAngle;
-	file >> seZone.enterArc;
-	file >> seZone.exitArc;
+	file.read((char*)&seZone, sizeof(seZone));
+	int x= file.gcount();
 
-	(*zone) = new Zone
+	zone = new Zone
 	(	seZone.order,
 		seZone.x,
 		seZone.y,
@@ -271,7 +266,7 @@ bool ShapesLoader::loadZone
 		seZone.exitArc
 	);
 	
-	return true;
+	return file.good() != false;
 	
 }
 
@@ -282,15 +277,19 @@ bool ShapesLoader::loadData
 (	ifstream &	file,
 	float *		data,
 	uint		nData
-){	SEData		seData;
+){	SEData *	seData;
 	uint		index;
-	
-	for(index = 0; index < nData; index++)
-	{	file >> seData.data;
-		*(data + index) = (float)seData.data / 255;
-	}
 
-	return true;
+	seData = new SEData[nData];
+
+	file.read((char*)seData, sizeof(seData->data) * nData);
+
+	for(index = 0; index < nData; index++)
+		*(data + index) = (float)(seData + index)->data / 255;
+
+	delete [] seData;
+
+	return file.good() != false;
 
 }
 

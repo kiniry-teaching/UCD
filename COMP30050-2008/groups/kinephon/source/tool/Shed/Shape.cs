@@ -291,7 +291,7 @@ namespace Shed
 
 			for(int y = 0; y < _height; y++)
 			for(int x = 0; x < _width; x++)
-				if((dim = _pixels.Pixel[x, y].CalculateWeight(1.0f, false)) > maxdim)
+				if((dim = _pixels.Pixel[x, y].CalculateWeight(1.0f, float.MinValue, float.MaxValue)) > maxdim)
 					maxdim = dim;
 
 			return 1 - (1 - (1 / maxdim)) * (float)_dampen;

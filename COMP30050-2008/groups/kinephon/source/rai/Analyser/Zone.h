@@ -109,6 +109,7 @@ private:
 	/**
 	 * Create a new zone. This will only be called by ShapeLoader. All
 	 *	angles are in radians
+	 * @param order The order this zone must be entered
 	 * @param x The x co-ordinate of the zone
 	 * @param y The y co-ordinate of the zone
 	 * @param enterRadius The radius a point must be from the zone to be

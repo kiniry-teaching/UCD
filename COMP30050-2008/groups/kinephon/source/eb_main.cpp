@@ -4,6 +4,8 @@
 #include <GL/glut.h>
 #include <iostream>
 #include "type.h"
+#include "rai/analyser/shapes.h"
+#include "rai/analyser/shapesloader.h"
 #include "rai/recorder/frame.h"
 #include "rai/recorder/recorder.h"
 
@@ -13,6 +15,7 @@ void display(void);
 void motion(int x, int y);
 void timer(int t);
 void entry(int state);
+Shapes * g_shapes;
 Recorder g_recorder;
 tick g_time = 0;
 
@@ -42,6 +45,8 @@ int main(int argc, char * * argv)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	g_recorder.control(econtrol::FOUND, 0);
+
+	g_shapes = ShapesLoader::loadShapes("C:\\Data\\College\\COMP30050 - Software Engerineering Project III\\kinephon\\source\\rai\\kinephon.sec");
 
 	glutMainLoop();
 

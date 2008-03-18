@@ -61,6 +61,8 @@ protected:
 	 * @param data Array of weight map data describing this shape
 	 * @param width The width of the 2 dimensional weight map
 	 * @param nData The resolution of the weight map (height is nData / width)
+	 * @param zoneAnyStart Can a match start from any zone, or must it start from zone 0
+	 * @param zoneReverse Can a match run through the zones in reverse
 	 * @param zones Array of zones in this shape
 	 * @param nZones Total number of zones
 	 * @author EB

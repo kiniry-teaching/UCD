@@ -85,7 +85,7 @@ private:
 	 */
 	static bool		loadZone
 					(	ifstream &			file,
-						Zone * *			zone
+						Zone * &			zone
 					);
 	/**
 	 * Load a shape's data
@@ -188,18 +188,6 @@ private:
 		 */
 		uint		nData;
 		/**
-		 * Allow start from any zone
-		 * @author EB
-		 * @version 1.0
-		 */
-		bool		zoneAnyStart;
-		/**
-		 * Allow reverse of zone order
-		 * @author EB
-		 * @version 1.0
-		 */
-		bool		zoneReverse;
-		/**
 		 * Number of zones in this shape
 		 * @author EB
 		 * @version 1.0
@@ -217,6 +205,24 @@ private:
 		 * @version 1.0
 		 */
 		uint		nAccelShapes;
+		/**
+		 * Allow start from any zone
+		 * @author EB
+		 * @version 1.0
+		 */
+		bool		zoneAnyStart;
+		/**
+		 * Allow reverse of zone order
+		 * @author EB
+		 * @version 1.0
+		 */
+		bool		zoneReverse;
+		/**
+		 * Pad the structure out to 4 byte alignment
+		 * @author EB
+		 * @version 1.0
+		 */
+		char		padding[2];
 	};
 	
 ///////////////////////////////////////////////////////////////////////////////

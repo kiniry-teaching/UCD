@@ -93,7 +93,7 @@ namespace Shed
 				g = 0;
 				// Calculate glow
 				if(mnuViewGlow.Checked == true)
-					we = _shape.Pixels.Pixel[x, y].CalculateWeight(DimAmt, true);
+					we = _shape.Pixels.Pixel[x, y].CalculateWeight(DimAmt, -1.0f, 1.0f);
 				else
 					we = _shape.Pixels.Pixel[x, y].Weight;
 

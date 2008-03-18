@@ -87,7 +87,7 @@ namespace Shed
 			_falloff = f;
 		}
 
-		public float CalculateWeight(float DimWeight, bool Normalise)
+		public float CalculateWeight(float DimWeight, float min, float max)
 		{
 
 			float d;
@@ -114,10 +114,8 @@ namespace Shed
 
 			w *= DimWeight;
 
-			if(Normalise == true)
-			{	if(w < -1) w = -1;
-				if(w >  1) w = 1;
-			}
+			if(w < min) w = min;
+			if(w > max) w = max;
 
 			return w;
 
