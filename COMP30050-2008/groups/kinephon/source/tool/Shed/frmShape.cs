@@ -21,17 +21,12 @@ namespace Shed
 
 	public enum ModesOfZone
 	{
-		// In Zone add tool, mouse up, set/change on mouse down
 		SetCentre,
-		// View radius/angle on drag, set/change on moues up
 		SetEnterRadiusAngle,
-		// View arc on move (moues up), set/change on mouse down
 		SetEnterArc,
-		// View radius/angle on drag, set/change on moues up
 		SetExitRadiusAngle,
-		// View arc on move (moues up), set/end (exit add tool) on mouse down
 		SetExitArc,
-		// Do nothing on drag, nothing on mouse up
+		SetExitRadiusAngleEx,
 	}
 
 	public partial class frmShape: Form
@@ -390,11 +385,8 @@ namespace Shed
 							_shape.Zones.Add(_zone);
 							_zoneMode = ModesOfZone.SetEnterRadiusAngle;
 							break;
-						case ModesOfZone.SetEnterArc:
-							_zoneMode = ModesOfZone.SetExitRadiusAngle;
-							break;
-						case ModesOfZone.SetExitArc:
-							_tool = TypesOfTool.Paint;
+						case ModesOfZone.SetExitRadiusAngle:
+							_zoneMode = ModesOfZone.SetExitArc;
 							break;
 					}
 					break;
@@ -414,7 +406,13 @@ namespace Shed
 					case ModesOfZone.SetEnterRadiusAngle:
 						_zoneMode = ModesOfZone.SetEnterArc;
 						break;
-					case ModesOfZone.SetExitRadiusAngle:
+					case ModesOfZone.SetEnterArc:
+						_zoneMode = ModesOfZone.SetExitRadiusAngle;
+						break;
+					case ModesOfZone.SetExitArc:
+						_tool = TypesOfTool.Paint;
+						break;
+					case ModesOfZone.SetExitRadiusAngleEx:
 						_zoneMode = ModesOfZone.SetExitArc;
 						break;
 				}
@@ -458,9 +456,12 @@ namespace Shed
 
 						case ModesOfZone.SetEnterArc:
 							_zone.EnterArc = _zone.EnterAngle - angle(UnMapX(_zone.X), UnMapY(_zone.Y), e.X, e.Y);
+							if(e.Button == MouseButtons.Left)
+								_zoneMode = ModesOfZone.SetExitRadiusAngleEx;
 							break;
 
 						case ModesOfZone.SetExitRadiusAngle:
+						case ModesOfZone.SetExitRadiusAngleEx:
 							_zone.ExitRadius = radius(_zone.X, _zone.Y, fx, fy);
 							_zone.ExitAngle = angle(UnMapX(_zone.X), UnMapY(_zone.Y), e.X, e.Y);
 							break;

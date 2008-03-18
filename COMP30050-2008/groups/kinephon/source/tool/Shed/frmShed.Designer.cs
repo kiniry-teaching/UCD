@@ -38,6 +38,7 @@ namespace Shed
 			this.mnuFileSave = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuFileCompile = new System.Windows.Forms.ToolStripMenuItem();
+			this.mnuFileCompileTo = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuShape = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuShapeNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,12 +74,12 @@ namespace Shed
 			// mnuFileDiv1
 			// 
 			mnuFileDiv1.Name = "mnuFileDiv1";
-			mnuFileDiv1.Size = new System.Drawing.Size(133, 6);
+			mnuFileDiv1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuFileDiv2
 			// 
 			mnuFileDiv2.Name = "mnuFileDiv2";
-			mnuFileDiv2.Size = new System.Drawing.Size(133, 6);
+			mnuFileDiv2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// mnuShed
 			// 
@@ -100,6 +101,7 @@ namespace Shed
             this.mnuFileSaveAs,
             mnuFileDiv1,
             this.mnuFileCompile,
+            this.mnuFileCompileTo,
             mnuFileDiv2,
             this.mnuFileExit});
 			this.mnuFile.MergeIndex = 0;
@@ -110,35 +112,42 @@ namespace Shed
 			// mnuFileOpen
 			// 
 			this.mnuFileOpen.Name = "mnuFileOpen";
-			this.mnuFileOpen.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileOpen.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileOpen.Text = "&Open...";
 			this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
 			// 
 			// mnuFileSave
 			// 
 			this.mnuFileSave.Name = "mnuFileSave";
-			this.mnuFileSave.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileSave.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileSave.Text = "&Save";
 			this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
 			// 
 			// mnuFileSaveAs
 			// 
 			this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-			this.mnuFileSaveAs.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileSaveAs.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileSaveAs.Text = "Save &As...";
 			this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
 			// 
 			// mnuFileCompile
 			// 
 			this.mnuFileCompile.Name = "mnuFileCompile";
-			this.mnuFileCompile.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileCompile.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileCompile.Text = "&Compile";
 			this.mnuFileCompile.Click += new System.EventHandler(this.mnuFileCompile_Click);
+			// 
+			// mnuFileCompileTo
+			// 
+			this.mnuFileCompileTo.Name = "mnuFileCompileTo";
+			this.mnuFileCompileTo.Size = new System.Drawing.Size(152, 22);
+			this.mnuFileCompileTo.Text = "Compile &To...";
+			this.mnuFileCompileTo.Click += new System.EventHandler(this.mnuFileCompileTo_Click);
 			// 
 			// mnuFileExit
 			// 
 			this.mnuFileExit.Name = "mnuFileExit";
-			this.mnuFileExit.Size = new System.Drawing.Size(136, 22);
+			this.mnuFileExit.Size = new System.Drawing.Size(152, 22);
 			this.mnuFileExit.Text = "E&xit";
 			this.mnuFileExit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -156,7 +165,8 @@ namespace Shed
 			// mnuShapeNew
 			// 
 			this.mnuShapeNew.Name = "mnuShapeNew";
-			this.mnuShapeNew.Size = new System.Drawing.Size(132, 22);
+			this.mnuShapeNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+			this.mnuShapeNew.Size = new System.Drawing.Size(172, 22);
 			this.mnuShapeNew.Text = "&New";
 			this.mnuShapeNew.Click += new System.EventHandler(this.mnuShapeNew_Click);
 			// 
@@ -164,14 +174,15 @@ namespace Shed
 			// 
 			this.mnuShapeNewChild.Enabled = false;
 			this.mnuShapeNewChild.Name = "mnuShapeNewChild";
-			this.mnuShapeNewChild.Size = new System.Drawing.Size(132, 22);
+			this.mnuShapeNewChild.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+			this.mnuShapeNewChild.Size = new System.Drawing.Size(172, 22);
 			this.mnuShapeNewChild.Text = "New &Child";
 			this.mnuShapeNewChild.Click += new System.EventHandler(this.mnuShapeNewChild_Click);
 			// 
 			// mnuShapeDelete
 			// 
 			this.mnuShapeDelete.Name = "mnuShapeDelete";
-			this.mnuShapeDelete.Size = new System.Drawing.Size(132, 22);
+			this.mnuShapeDelete.Size = new System.Drawing.Size(172, 22);
 			this.mnuShapeDelete.Text = "&Delete";
 			this.mnuShapeDelete.Click += new System.EventHandler(this.mnuShapeDelete_Click);
 			// 
@@ -243,7 +254,7 @@ namespace Shed
 			// 
 			this.tbrShed.Location = new System.Drawing.Point(0, 24);
 			this.tbrShed.Name = "tbrShed";
-			this.tbrShed.Size = new System.Drawing.Size(473, 25);
+			this.tbrShed.Size = new System.Drawing.Size(922, 25);
 			this.tbrShed.TabIndex = 9;
 			this.tbrShed.Visible = false;
 			// 
@@ -317,20 +328,19 @@ namespace Shed
 			// 
 			// dlgOpen
 			// 
-			this.dlgOpen.DefaultExt = "sap";
-			this.dlgOpen.Filter = "Shed Project files|*.sap|All files|*.*";
+			this.dlgOpen.DefaultExt = "sep";
+			this.dlgOpen.Filter = "Shed Project files|*.sep|All files|*.*";
 			this.dlgOpen.Title = "Select the Shed project to open..";
 			// 
 			// dlgSave
 			// 
-			this.dlgSave.DefaultExt = "sap";
-			this.dlgSave.Filter = "Shed Project files|*.sap|All files|*.*";
+			this.dlgSave.DefaultExt = "sep";
+			this.dlgSave.Filter = "Shed Project files|*.sep|All files|*.*";
 			this.dlgSave.Title = "Select a pathname to save the Shed project..";
 			// 
 			// dlgCompile
 			// 
 			this.dlgCompile.Description = "Select a folder to store the compiled Shed project and generated .h file";
-			this.dlgCompile.RootFolder = System.Environment.SpecialFolder.MyComputer;
 			// 
 			// frmShed
 			// 
@@ -395,6 +405,7 @@ namespace Shed
 		private System.Windows.Forms.SaveFileDialog dlgSave;
 		private System.Windows.Forms.FolderBrowserDialog dlgCompile;
 		public System.Windows.Forms.PropertyGrid pgdProperties;
+		private System.Windows.Forms.ToolStripMenuItem mnuFileCompileTo;
 	}
 }
 

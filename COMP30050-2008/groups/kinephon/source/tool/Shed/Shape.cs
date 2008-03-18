@@ -32,6 +32,7 @@ namespace Shed
 		protected Zones _zones;
 		protected Pixel[,] _pixels;
 		protected uint _sid;
+		public uint UseSID;
 
 		public Shape(TreeNode node)
 		{
@@ -81,10 +82,10 @@ namespace Shed
 			get { return _node.Text; }
 			set
 			{
-				if(value != "SID_*")
+				if(value.IndexOf('*') == -1)
 				{
 
-					Regex rx = new Regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
+					Regex rx = new Regex("^[a-zA-Z_][a-zA-Z0-9_\\*]*$");
 					if(rx.IsMatch(value) == false)
 						throw new Exception("Invalid name - must start with a-z or _ and follow with a-z, _, or 0-9");
 				
@@ -259,7 +260,7 @@ namespace Shed
 
 		[DefaultValueAttribute(true),
 		 DescriptionAttribute("Is a gesture allowed to go through the zones in reverse (Allows the shape to test with the enter/exit angles/arcs swapped (radius remains the same))"),
-		 CategoryAttribute("Grid")]
+		 CategoryAttribute("Zone")]
 		public bool ZoneReverse
 		{
 			get { return _reverse; }
@@ -268,7 +269,7 @@ namespace Shed
 
 		[DefaultValueAttribute(false),
 		 DescriptionAttribute("Is a gesture allowed to start from any zone, or can it only start from the first one"),
-		 CategoryAttribute("Grid")]
+		 CategoryAttribute("Zone")]
 		public bool ZoneAnyStart
 		{
 			get { return _anystart; }
@@ -277,7 +278,7 @@ namespace Shed
 
 		[TypeConverter(typeof(ExpandableObjectConverter)),
 		 DescriptionAttribute("Zones"),
-		 CategoryAttribute("Grid")]
+		 CategoryAttribute("Zone")]
 		public Zones Zones
 		{
 			get { return _zones; }
