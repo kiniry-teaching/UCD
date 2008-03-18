@@ -10,7 +10,7 @@ $isbn = $_GET["isbn"];
 fetchBookFromDB($isbn);
 
 if ($_POST["state"] == 1){ //If you're editing book data
-	$title = $_POST['title']; $titleLong = $_POST['titleLong']; $authors = $_POST['authors']; $publisher = $_POST['publisher']; $noOfPages = $_POST['noOfPages']; $binding = $_POST['binding']; $ddc = $_POST['binding']; $lcc = $_POST['binding']; $description = $_POST['binding']; $largeImg = $_POST['binding']; $mediumImg = $_POST['binding']; $smallImg = $_POST['binding']; $noOfCopies = $_POST['noOfCopies'];
+	$title = $_POST['title']; $titleLong = $_POST['titleLong']; $authors = $_POST['authors']; $publisher = $_POST['publisher']; $noOfPages = $_POST['noOfPages']; $binding = $_POST['binding']; $ddc = $_POST['ddc']; $lcc = $_POST['lcc']; $description = $_POST['description']; $largeImg = $_POST['largeImg']; $mediumImg = $_POST['mediumImg']; $smallImg = $_POST['smallImg']; $noOfCopies = $_POST['noOfCopies'];
 	updateBook();
 }
 ?>

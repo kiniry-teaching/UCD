@@ -9,7 +9,7 @@ include("config.php"); //Holds the access keys for the API's
 /****************************************************************
 * 																*
 * fetchBooks($isbn) - Takes the isbn and uses the available		*
-* api’s to find details on the book. It does this by going		*
+* api&#65533;s to find details on the book. It does this by going		*
 * through a list of api accessers and when one returns not null	*
 * it takes the details available and returns them by parsing	*
 * the xml.														*
@@ -66,11 +66,11 @@ function parseBookData(){
 
 /****************************************************************
 * 																*
-* function addBook($bookData) - Adds books to the “books“		*
+* function addBook($bookData) - Adds books to the &#65533;books&#65533;		*
 * database. It does this by inputting the arguments in the		*
 * database by use of the sql query INSERT.						*
 * Data being transmitted:										*
-* Data (the arguments) is sent into the “books” database.		*
+* Data (the arguments) is sent into the &#65533;books&#65533; database.		*
 * 																*
 ****************************************************************/
 
@@ -135,7 +135,7 @@ function addBook($isbn,$title,$titleLong,$authors,$publisher,$noOfPages,$binding
 * Uses the sql query UPDATE to replace the current stored data	*
 * with what is passed as arguments where the ISBN matches.		*
 * Data being transmitted:										*
-* New data is sent to the “books” database to overwrite the		*
+* New data is sent to the books database to overwrite the		*
 * existing entry for that book.									*
 * 																*
 ****************************************************************/
@@ -145,9 +145,9 @@ function updateBook(){
 	
 	include("connection.php"); //Connects to database
 
-	mysql_query("UPDATE Person
-		SET title = '$title', titleLong = '$titleLong', authors = '$authors', publisher = '$publisher', noOfPages = '$noOfPages', binding = '$binding', ddc = '$binding', lcc = '$binding', description = '$binding', largeImg = '$binding', mediumImg = '$binding', smallImg = '$binding', noOfCopies = '$noOfCopies'
-			WHERE isbn = $isbn");
+	mysql_query("UPDATE books
+		SET title = '$title', titleLong = '$titleLong', authors = '$authors', publisher = '$publisher', noOfPages = '$noOfPages', binding = '$binding', ddc = '$ddc', lcc = '$lcc', description = '$description', largeImg = '$largeImg', mediumImg = '$mediumImg', smallImg = '$smallImg', noOfCopies = '$noOfCopies'
+			WHERE isbn = '$isbn'");
 
 	mysql_close($con);
 }
