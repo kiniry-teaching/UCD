@@ -43,7 +43,7 @@ bool ShapeSpeed::compare
 	);
 
 	delete [] points;
-	
+
 	return shapeMatch != 0;
 
 }

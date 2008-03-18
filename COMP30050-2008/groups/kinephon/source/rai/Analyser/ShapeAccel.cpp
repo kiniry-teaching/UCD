@@ -47,7 +47,7 @@ bool ShapeAccel::compare
 	);
 
 	delete [] points;
-	
+
 	return shapeMatch != 0;
 
 }

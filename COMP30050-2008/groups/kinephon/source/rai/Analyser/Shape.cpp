@@ -18,7 +18,7 @@ ShapeMatch * Shape::test
 
 	if(weight >= shapeMatches->weight())
 		shapeMatch = add(weight, shapeMatches);
-		
+
 	return shapeMatch;
 
 }

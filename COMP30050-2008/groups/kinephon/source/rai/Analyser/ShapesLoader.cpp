@@ -93,11 +93,11 @@ bool ShapesLoader::loadShape
 	// Error, unknown type
 	switch(seShape.type)
 	{
-	
+
 		// If it's a movement, it's ok
 		case etype::MOVEMENT:
 			break;
-		
+
 		// If it's a speed or accel, it cannot have children
 		case etype::SPEED:
 		case etype::ACCEL:
@@ -105,11 +105,11 @@ bool ShapesLoader::loadShape
 			|| seShape.nAccelShapes != 0)
 				return false;
 			break;
-		
+
 		// Otherwise it's unknown, which is an error
 		default:
 			return false;
-		
+
 	}
 
 	// Don't return false after this point, intead use Success = false;
@@ -120,9 +120,9 @@ bool ShapesLoader::loadShape
 
 	if(seShape.nZones != 0)
 		zones = new Zone*[seShape.nZones];
-		
+
 	data = new float[seShape.nData];
-	
+
 	if(seShape.nSpeedShapes != 0)
 		speedShapes = new Shapes(seShape.nSpeedShapes);
 
@@ -134,7 +134,7 @@ bool ShapesLoader::loadShape
 
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	// Load zones
-	
+
 	for
 	(	index = 0;
 		index < seShape.nZones
@@ -180,7 +180,7 @@ bool ShapesLoader::loadShape
 		// Create the required shape
 		switch(seShape.type)
 		{
-		
+
 			case etype::MOVEMENT:
 				shape = new ShapeMovement
 				(	seShape.shapeId,
@@ -189,13 +189,13 @@ bool ShapesLoader::loadShape
 					seShape.nData,
 					seShape.zoneAnyStart,
 					seShape.zoneReverse,
-					(*zones),
+					zones,
 					seShape.nZones,
 					speedShapes,
 					accelShapes
 				);
 				break;
-				
+
 			case etype::SPEED:
 				shape = new ShapeSpeed
 				(	seShape.shapeId,
@@ -204,11 +204,11 @@ bool ShapesLoader::loadShape
 					seShape.nData,
 					seShape.zoneAnyStart,
 					seShape.zoneReverse,
-					(*zones),
+					zones,
 					seShape.nZones
 				);
 				break;
-		
+
 			case etype::ACCEL:
 				shape = new ShapeAccel
 				(	seShape.shapeId,
@@ -217,13 +217,13 @@ bool ShapesLoader::loadShape
 					seShape.nData,
 					seShape.zoneAnyStart,
 					seShape.zoneReverse,
-					(*zones),
+					zones,
 					seShape.nZones
 				);
 				break;
-		
+
 		}
-		
+
 		// Store it
 		(*shapes) += shape;
 
@@ -236,9 +236,9 @@ bool ShapesLoader::loadShape
 		delete speedShapes;
 		delete [] data;
 		delete [] zones;
-	
+
 	}
-	
+
 	return success;
 
 }
@@ -265,9 +265,9 @@ bool ShapesLoader::loadZone
 		seZone.enterArc,
 		seZone.exitArc
 	);
-	
+
 	return file.good() != false;
-	
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

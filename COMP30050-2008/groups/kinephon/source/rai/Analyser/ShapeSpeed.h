@@ -30,8 +30,8 @@ class ShapeSpeed : public Shape
 //
 public:
 	virtual bool	compare
-					(	Track const * const		track,
-						ShapeMatches * const	shapeMatches
+					(	Track const * const			track,
+						ShapeMatches * const		shapeMatches
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,14 +39,14 @@ public:
 //
 protected:
 					ShapeSpeed
-					(	sid const				shapeId,
-						float const * const		data,
-						uint const				width,
-						uint const				nData,
-						bool const				zoneAnyStart,
-						bool const				zoneReverse,
-						Zone const * const		zones,
-						uint const				nZones
+					(	sid const					shapeId,
+						float const * const			data,
+						uint const					width,
+						uint const					nData,
+						bool const					zoneAnyStart,
+						bool const					zoneReverse,
+						Zone const * const * const	zones,
+						uint const					nZones
 					);
 
 };
@@ -54,14 +54,14 @@ protected:
 ///////////////////////////////////////////////////////////////////////////////
 
 inline ShapeSpeed::ShapeSpeed
-(	sid const			shapeId,
-	float const * const	data,
-	uint const			width,
-	uint const			nData,
-	bool const			zoneAnyStart,
-	bool const			zoneReverse,
-	Zone const * const	zones,
-	uint const			nZones
+(	sid const					shapeId,
+	float const * const			data,
+	uint const					width,
+	uint const					nData,
+	bool const					zoneAnyStart,
+	bool const					zoneReverse,
+	Zone const * const * const	zones,
+	uint const					nZones
 ) :	Shape
 	(	shapeId,
 		data,

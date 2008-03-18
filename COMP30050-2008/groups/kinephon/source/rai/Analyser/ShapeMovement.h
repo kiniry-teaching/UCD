@@ -31,8 +31,8 @@ class ShapeMovement : public Shape
 //
 public:
 	virtual bool	compare
-					(	Track const * const		track,
-						ShapeMatches * const	shapeMatches
+					(	Track const * const			track,
+						ShapeMatches * const		shapeMatches
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,16 +40,16 @@ public:
 //
 protected:
 					ShapeMovement
-					(	sid const			shapeId,
-						float const * const	data,
-						uint const			width,
-						uint const			nData,
-						bool const			zoneAnyStart,
-						bool const			zoneReverse,
-						Zone const * const	zones,
-						uint const			nZones,
-						Shapes *			speedShapes,
-						Shapes *			accelShapes
+					(	sid const					shapeId,
+						float const * const			data,
+						uint const					width,
+						uint const					nData,
+						bool const					zoneAnyStart,
+						bool const					zoneReverse,
+						Zone const * const * const	zones,
+						uint const					nZones,
+						Shapes *					speedShapes,
+						Shapes *					accelShapes
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -78,16 +78,16 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 inline ShapeMovement::ShapeMovement
-(	sid const			shapeId,
-	float const * const	data,
-	uint const			width,
-	uint const			nData,
-	bool const			zoneAnyStart,
-	bool const			zoneReverse,
-	Zone const * const	zones,
-	uint const			nZones,
-	Shapes *			speedShapes,
-	Shapes *			accelShapes
+(	sid const					shapeId,
+	float const * const			data,
+	uint const					width,
+	uint const					nData,
+	bool const					zoneAnyStart,
+	bool const					zoneReverse,
+	Zone const * const * const	zones,
+	uint const					nZones,
+	Shapes *					speedShapes,
+	Shapes *					accelShapes
 ) :	Shape
 	(	shapeId,
 		data,
@@ -98,8 +98,8 @@ inline ShapeMovement::ShapeMovement
 		zones,
 		nZones
 	),
-	_speedShapes		(speedShapes),
-	_accelShapes		(accelShapes)
+	_speedShapes				(speedShapes),
+	_accelShapes				(accelShapes)
 {}
 
 }

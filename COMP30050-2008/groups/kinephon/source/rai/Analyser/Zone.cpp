@@ -80,7 +80,6 @@ ezt Zone::test
 		else
 		// ..or we're inside this zone, there's a problem
 			result = ezone::FAILED;
-		
 
 	}
 	else

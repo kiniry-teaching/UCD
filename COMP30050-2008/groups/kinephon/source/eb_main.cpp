@@ -62,10 +62,10 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glBegin(GL_LINES);
-	
+
 	glVertex3i(lx, ly, 0);
 	glVertex3i(tx, ty, 0);
-	
+
 	glEnd();
 
 	glFlush();
@@ -93,7 +93,7 @@ void timer(int t)
 		g_time++;
 	else
 		glutPostRedisplay();
-		
+
 }
 
 #endif

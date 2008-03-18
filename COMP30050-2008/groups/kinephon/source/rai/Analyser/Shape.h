@@ -27,7 +27,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	sid				shapeId						(void)		const;
+	sid				shapeId							(void)		const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // commands
@@ -46,9 +46,9 @@ public:
 	 * @post \result == true ==> shapeMatches->length() != 0;
 	 */
 	virtual bool	compare
-					(	Track const * const		track,
-						ShapeMatches * const	shapeMatches
-					)							pure;
+					(	Track const * const			track,
+						ShapeMatches * const		shapeMatches
+					)								pure;
 
 ///////////////////////////////////////////////////////////////////////////////
 // *tor
@@ -74,14 +74,14 @@ protected:
 	 * @pre nZones >= 0;
 	 */
 					Shape
-					(	sid						shapeId,
-						float const * const		data,
-						uint const				width,
-						uint const				nData,
-						bool const				zoneAnyStart,
-						bool const				zoneReverse,
-						Zone const * const		zones,
-						uint const				nZones
+					(	sid							shapeId,
+						float const * const			data,
+						uint const					width,
+						uint const					nData,
+						bool const					zoneAnyStart,
+						bool const					zoneReverse,
+						Zone const * const * const	zones,
+						uint const					nZones
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,9 +101,9 @@ protected:
 	 * @pre length > 0;
 	 */
 	ShapeMatch *	test
-					(	int const * const		points,
-						uint const				length,
-						ShapeMatches * const	shapeMatches
+					(	int const * const			points,
+						uint const					length,
+						ShapeMatches * const		shapeMatches
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -123,8 +123,8 @@ private:
 	 * @pre length > 0;
 	 */
 	float			compare
-					(	int const * const		points,
-						uint const				length
+					(	int const * const			points,
+						uint const					length
 					)	const;
 	/**
 	 * Add this to shapeMatches
@@ -135,8 +135,8 @@ private:
 	 * @pre shapeMatches != 0;
 	 */
 	ShapeMatch * 	add
-					(	float const				weight,
-						ShapeMatches * const	shapeMatches
+					(	float const					weight,
+						ShapeMatches * const		shapeMatches
 					);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -148,7 +148,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	sid const			_shapeId;
+	sid const					_shapeId;
 	/**
 	 * Flat 2 dimensional array of weights in the range (0..1) describing this
 	 *	shape. Positions containing a 1 are points in the shape, 0, points not
@@ -156,20 +156,20 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	float const * const	_data;
+	float const * const			_data;
 	/**
 	 * Width of the shape. Height is _nData / _width
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint const			_width;
+	uint const					_width;
 	/**
 	 * Resolution of the shape, or length of _data array. Height is
 	 *	_nData / _width
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint const			_nData;
+	uint const					_nData;
 	/**
 	 * State whether any zone in this shape can be a start zone
 	 * If false, the gesture must start and the 0th order zone
@@ -178,7 +178,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	bool const			_zoneAnyStart;
+	bool const					_zoneAnyStart;
 	/**
 	 * State whether the zone orders can be reversed
 	 * As well as reversing the order of the zones, this also swaps the
@@ -188,7 +188,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	bool const			_zoneReverse;
+	bool const					_zoneReverse;
 	/**
 	 * Array of zones in this shape.
 	 * Zones are areas that must be entered and exited in a particular order
@@ -196,35 +196,35 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Zone const * const	_zones;
+	Zone const * const * const	_zones;
 	/**
 	 * Length of the zones array.
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint const			_nZones;
+	uint const					_nZones;
 
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 
 inline Shape::Shape
-(	sid					shapeId,
-	float const * const	data,
-	uint const			width,
-	uint const			nData,
-	bool const			zoneAnyStart,
-	bool const			zoneReverse,
-	Zone const * const	zones,
-	uint const			nZones
-) :	_shapeId			(shapeId),
-	_data				(data),
-	_width				(width),
-	_nData				(nData),
-	_zoneAnyStart		(zoneAnyStart),
-	_zoneReverse		(zoneReverse),
-	_zones				(zones),
-	_nZones				(nZones)
+(	sid							shapeId,
+	float const * const			data,
+	uint const					width,
+	uint const					nData,
+	bool const					zoneAnyStart,
+	bool const					zoneReverse,
+	Zone const * const * const	zones,
+	uint const					nZones
+) :	_shapeId					(shapeId),
+	_data						(data),
+	_width						(width),
+	_nData						(nData),
+	_zoneAnyStart				(zoneAnyStart),
+	_zoneReverse				(zoneReverse),
+	_zones						(zones),
+	_nZones						(nZones)
 { }
 
 inline sid Shape::shapeId(void) const

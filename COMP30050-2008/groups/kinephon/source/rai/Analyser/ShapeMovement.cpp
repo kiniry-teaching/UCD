@@ -45,7 +45,7 @@ bool ShapeMovement::compare
 	// Match this shape against it's speed and accel shapes
 	if(shapeMatch != 0)
 	{
-	
+
 		// Create a new ShapeMatches to hold the sub-shape's
 		//	matches and create it with the same parameters
 		//	as the passed in shapeMatches

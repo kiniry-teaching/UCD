@@ -86,7 +86,7 @@ private:
 //
 private:
 	/**
-	 * Add the next frame on the track. This will only be called by Recorder 
+	 * Add the next frame on the track. This will only be called by Recorder
 	 *	when a new frame needs to be created. This does not allocated new
 	 *	frames
 	 * @param frame The next frame on the track

@@ -86,7 +86,7 @@ public:
 	uint					length							(void)	const;
 
 	/**
-	 * Return the indexed matched shape. 
+	 * Return the indexed matched shape.
 	 * @param index The index of the matched shape. Shapes will be indexed from
 	 *	strong to weakly matched. Index should be in the range (0..length()-1)
 	 * @return A structure containing the indexed matched shape along with the
