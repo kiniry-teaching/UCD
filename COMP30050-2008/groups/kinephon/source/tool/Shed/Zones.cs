@@ -131,4 +131,18 @@ namespace Shed
 
 	}
 
+	public class ZoneComparer : Comparer<Zone>
+	{
+		public override int Compare(Zone x, Zone y)
+		{
+			if(x.Order == y.Order)
+				return 0;
+			else
+			if(x.Order < y.Order)
+				return -1;
+			else
+				return 1;
+		}
+	}
+
 }

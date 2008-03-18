@@ -80,6 +80,59 @@ namespace Shed
 			get { return _neighbours; }
 		}
 
+		public void Set(float r, float w, float f)
+		{
+			_radius = r;
+			_weight = w;
+			_falloff = f;
+		}
+
+		public float CalculateWeight(float DimWeight, bool Normalise)
+		{
+
+			float d;
+			float w = _weight;
+			Pixel np;
+
+			if(_neighbours != null && _neighbours.Count != 0)
+				for(int i = 0; i < _neighbours.Count; i++)
+				{
+
+					np = _neighbours[i];
+
+					d = Distance(_x, _y, np.X, np.Y);
+
+					if(d > np.Radius)
+					{	// Too far away - don't consider this neighbour again
+						_neighbours.Remove(np);
+						i--;
+					}
+					else
+						w += (1 - (d / np.Radius)) * np.Weight;
+
+				}
+
+			w *= DimWeight;
+
+			if(Normalise == true)
+			{	if(w < -1) w = -1;
+				if(w >  1) w = 1;
+			}
+
+			return w;
+
+		}
+
+		private float Distance(int x, int y, int u, int v)
+		{
+
+			int dx = u - x;
+			int dy = v - y;
+
+			return (float)Math.Sqrt(dx * dx + dy * dy);
+
+		}
+
 	}
 
 }

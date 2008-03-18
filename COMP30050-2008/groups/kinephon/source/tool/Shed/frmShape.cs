@@ -74,7 +74,7 @@ namespace Shed
 			float dx = (w - 1) / _shape.Width;
 			float we;
 			int r = 0, g = 0, b = 0;
-			float mwe = 1.0f;
+			float DimAmt = 1.0f;
 			bool clear = false;
 
 			if(_tool == TypesOfTool.Draw || _tool == TypesOfTool.Line || _tool == TypesOfTool.Paint)
@@ -82,20 +82,8 @@ namespace Shed
 
 			// Calculate maximum dimming amount
 			if(mnuViewGlow.Checked == true)
-			{
-
-				for(int y = 0; y < _shape.Height; y++)
-				for(int x = 0; x < _shape.Width; x++)
-					SetNeighbourPixel(x, y, _shape.Pixels[x, y].Radius);
-
-				for(int y = 0; y < _shape.Height; y++)
-				for(int x = 0; x < _shape.Width; x++)
-					if((we = CalculateWeight(_shape.Pixels[x, y])) > mwe)
-						mwe = we;
-
-				mwe = 1 / mwe;
-				mwe = (1 - (1 - mwe) * (float)trkWeight.Value / 50);
-
+			{	_shape.Pixels.CalculateNeighbours();
+				DimAmt = _shape.CalculateDimmingWeight();
 			}
 
 			for(int y = 0; y < _shape.Height; y++)
@@ -105,15 +93,9 @@ namespace Shed
 				g = 0;
 				// Calculate glow
 				if(mnuViewGlow.Checked == true)
-				{
-
-					we = CalculateWeight(_shape.Pixels[x, y]) * mwe;
-					if(we < -1) we = -1;
-					if(we >  1) we = 1;
-
-				}
+					we = _shape.Pixels.Pixel[x, y].CalculateWeight(DimAmt, true);
 				else
-					we = _shape.Pixels[x, y].Weight;
+					we = _shape.Pixels.Pixel[x, y].Weight;
 
 				if(we < 0)
 					if(mnuViewNegative.Checked == true)
@@ -125,10 +107,10 @@ namespace Shed
 
 				// Add or remove a blue tint to the centre pixel
 				if(mnuViewPixel.Checked == true)
-					if(_shape.Pixels[x, y].Weight > 0)
+					if(_shape.Pixels.Pixel[x, y].Weight > 0)
 						b = 62;
 					else
-					if(_shape.Pixels[x, y].Weight < 0)
+					if(_shape.Pixels.Pixel[x, y].Weight < 0)
 						if(mnuViewNegative.Checked == true)
 							b = -62;
 						else
@@ -261,45 +243,6 @@ namespace Shed
 
 		}
 
-		private float CalculateWeight(Pixel p)
-		{
-
-			float d;
-			float w = p.Weight;
-			Pixel np;
-
-			if(p.Neighbours != null && p.Neighbours.Count != 0)
-				for(int i = 0; i < p.Neighbours.Count; i++)
-				{
-
-					np = p.Neighbours[i];
-
-					d = Distance(p.X, p.Y, np.X, np.Y);
-
-					if(d > np.Radius)
-					{	// Too far away - don't consider this neighbour again
-						p.Neighbours.Remove(np);
-						i--;
-					}
-					else
-						w += (1 - (d / np.Radius)) * np.Weight;
-
-				}
-
-			return w;
-
-		}
-
-		private float Distance(int x, int y, int u, int v)
-		{
-
-			int dx = u - x;
-			int dy = v - y;
-
-			return (float)Math.Sqrt(dx * dx + dy * dy);
-
-		}
-
 		private void frmShape_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			if(WindowState == FormWindowState.Normal)
@@ -343,13 +286,13 @@ namespace Shed
 
 			// If locked, don't do anything on written pixels
 			if(lck == true)
-				if(_shape.Pixels[x, y].Weight != 0)
+				if(_shape.Pixels.Pixel[x, y].Weight != 0)
 					return false;
 
 			if(draw == true)
-				SetPixel(x, y, _radius, _weight, _falloff);
+				_shape.Pixels.Pixel[x, y].Set(_radius, _weight, _falloff);
 			else
-				SetPixel(x, y, 1.0f, 0.0f, 0.0f);
+				_shape.Pixels.Pixel[x, y].Set(1.0f, 0.0f, 0.0f);
 			picShape.Invalidate();
 
 			return true;
@@ -432,7 +375,7 @@ namespace Shed
 			if(x >= 0 && y >= 0 && x < _shape.Width && y < _shape.Height)
 			{
 				stsCoords.Text = x.ToString("0") + ", " + y.ToString("0");
-				setPaintStatus(stsCanvas, _shape.Pixels[x, y].Weight, _shape.Pixels[x, y].Radius, _shape.Pixels[x, y].Falloff);
+				setPaintStatus(stsCanvas, _shape.Pixels.Pixel[x, y].Weight, _shape.Pixels.Pixel[x, y].Radius, _shape.Pixels.Pixel[x, y].Falloff);
 			}
 
 			switch(_tool)
@@ -512,36 +455,11 @@ namespace Shed
 
 		}
 
-		// x, y, radius, weight, falloff
-		private void SetPixel(int cx, int cy, float r, float w, float f)
-		{
-			_shape.Pixels[cx, cy].Radius = r;
-			_shape.Pixels[cx, cy].Weight = w;
-			_shape.Pixels[cx, cy].Falloff = f;
-			SetNeighbourPixel(cx, cy, r);
-
-		}
-
-		private void SetNeighbourPixel(int cx, int cy, float r)
-		{
-			for(int y = cy - (int)Math.Floor(r); y < cy + (int)Math.Ceiling(r); y++)
-			for(int x = cx - (int)Math.Floor(r); x < cx + (int)Math.Ceiling(r); x++)
-				if(!(x == cx && y == cy))
-					SetPixel(x, y, _shape.Pixels[cx, cy]);
-		}
-
-		private void SetPixel(int x, int y, Pixel n)
-		{
-			if(x >= 0 && y >= 0 && x < _shape.Width && y < _shape.Height)
-				if(_shape.Pixels[x, y].Neighbours.Contains(n) == false)
-					_shape.Pixels[x, y].Neighbours.Add(n);
-		}
-
 		private void mnuImageClear_Click(object sender, EventArgs e)
 		{
 			for(int y = 0; y < _shape.Height; y++)
 			for(int x = 0; x < _shape.Width; x++)
-				SetPixel(x, y, 1.0f, 0.0f, 0.0f);
+				_shape.Pixels.Pixel[x, y].Set(1.0f, 0.0f, 0.0f);
 			_shape.Zones.Clear();
 			picShape.Invalidate();
 		}

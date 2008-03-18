@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="KBHook.cs" />
     <Compile Include="Pixel.cs" />
+    <Compile Include="Pixels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmShape.resx">

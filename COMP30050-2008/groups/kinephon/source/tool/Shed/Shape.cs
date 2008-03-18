@@ -28,12 +28,12 @@ namespace Shed
 		protected int _vBound;
 		protected float _dampen;
 		protected bool _anystart = false;
-		protected bool _reverse = true;
+		protected bool _reverse = false;
 		protected Zones _zones;
-		protected Pixel[,] _pixels;
+		protected Pixels _pixels;
 		protected uint _sid;
 		public uint UseSID;
-
+		
 		public Shape(TreeNode node)
 		{
 			_node = node;
@@ -45,7 +45,8 @@ namespace Shed
 			_type = TypesOfShape.Movement;
 			_zones = new Zones();
 			_sid = 0;
-			CreatePixels(_width, _height);
+			_pixels = new Pixels(this);
+			_pixels.CreatePixels(_width, _height);
 		}
 
 		[BrowsableAttribute(false)]
@@ -69,7 +70,7 @@ namespace Shed
 		}
 
 		[BrowsableAttribute(false)]
-		public Pixel[,] Pixels
+		public Pixels Pixels
 		{
 			get { return _pixels; }
 		}
@@ -198,7 +199,7 @@ namespace Shed
 			{
 				if(value < 16)
 					throw new Exception("Too small");
-				CreatePixels(value, _height);
+				_pixels.CreatePixels(value, _height);
 				_width = value;
 				if(_form != null)
 					_form.Shape = this;
@@ -215,7 +216,7 @@ namespace Shed
 			{
 				if(value < 16)
 					throw new Exception("Too small");
-				CreatePixels(_width, value);
+				_pixels.CreatePixels(_width, value);
 				_height = value;
 				if(_form != null)
 					_form.Shape = this;
@@ -258,7 +259,7 @@ namespace Shed
 			}
 		}
 
-		[DefaultValueAttribute(true),
+		[DefaultValueAttribute(false),
 		 DescriptionAttribute("Is a gesture allowed to go through the zones in reverse (Allows the shape to test with the enter/exit angles/arcs swapped (radius remains the same))"),
 		 CategoryAttribute("Zone")]
 		public bool ZoneReverse
@@ -284,19 +285,16 @@ namespace Shed
 			get { return _zones; }
 		}
 
-		protected void CreatePixels(int w, int h)
-		{
-			Pixel[,] pixels = new Pixel[w, h];
-			for(int y = 0; y < h; y++)
-			for(int x = 0; x < w; x++)
-				pixels[x, y] = new Pixel(x, y);
+		public float CalculateDimmingWeight()
+		{	float dim;
+			float maxdim = 1.0f;
 
-			if(_pixels != null)
-				for(int y = 0; y < Math.Min(h, _height); y++)
-				for(int x = 0; x < Math.Min(w, _width); x++)
-					pixels[x, y] = _pixels[x, y];
+			for(int y = 0; y < _height; y++)
+			for(int x = 0; x < _width; x++)
+				if((dim = _pixels.Pixel[x, y].CalculateWeight(1.0f, false)) > maxdim)
+					maxdim = dim;
 
-			_pixels = pixels;
+			return 1 - (1 - (1 / maxdim)) * (float)_dampen;
 
 		}
 
