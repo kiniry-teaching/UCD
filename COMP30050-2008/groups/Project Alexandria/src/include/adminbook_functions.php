@@ -1,41 +1,15 @@
-ï»¿<?php
+<?php
 
 //TODO - Thomas - isAdmin() needed here
-/****************************************************************
-* 																*
-* Global variabes needed for adding books						*
-* 																*
-****************************************************************/
+include_once('include/variables.php');
 
-$isbn = "";
-$title = "";
-$titleLong = "";
-$authors = "";
-$publisher = "";
-$noOfPages = "";
-$binding = "";
-$ddc = "";
-$lcc = "";
-$description = "";
-$largeImg = "";
-$mediumImg = "";
-$smallImg = "";
-$noOfCopies = "";
-
-/****************************************************************
-* 																*
-* Global array containg all variables necessary for the			*
-* addition and editing of books.								*
-* 																*
-****************************************************************/
 $bookData = array($isbn,$title,$titleLong,$authors,$publisher,$noOfPages,$binding,$ddc,$lcc,$description,$largeImg,$mediumImg,$smallImg);
 
 include("config.php"); //Holds the access keys for the API's
-
 /****************************************************************
 * 																*
 * fetchBooks($isbn) - Takes the isbn and uses the available		*
-* apiâ€™s to find details on the book. It does this by going		*
+* api’s to find details on the book. It does this by going		*
 * through a list of api accessers and when one returns not null	*
 * it takes the details available and returns them by parsing	*
 * the xml.														*
@@ -46,9 +20,19 @@ include("config.php"); //Holds the access keys for the API's
 ****************************************************************/
 
 function fetchBooks($isbn){
-	include("include/include_adminbook_functions/amazon_all.php");
-	include("include/include_adminbook_functions/isbndb.php");
+	$dir="/include/include_adminbook_functions";
+	$TrackDir=opendir("." . $dir);
+	while ($file = readdir($TrackDir)) {  
+		if ($file == "." || $file == ".."){}
+		else if(substr($file,-3) == "php"){
+			$toBeIncluded ='"' . $dir . '/' . $file . '"';
+			include("$toBeIncluded");
+		}
+	}  
+	closedir($TrackDir);
+	
 	fetchBooksAmazon($isbn, 0);
+//TODO - Ryan - Fix isbndb timeout
 //	fetchBooksISBNdb($isbn);
 }
 
@@ -60,21 +44,7 @@ function fetchBooks($isbn){
 ****************************************************************/
 
 function parseBookData(){
-	global $isbn,
-		$title,
-		$titleLong,
-		$authors,
-		$publisher,
-		$noOfPages,
-		$binding,
-		$ddc,
-		$lcc,
-		$description,
-		$largeImg,
-		$mediumImg,
-		$smallImg,
-		$bookData;
-
+	include('include/variables_global.php');
 	for($j=0; $j<count($bookData); $j++){
 		switch ($j){
 			case 0: $isbn = $bookData[$j]; break;
@@ -96,11 +66,11 @@ function parseBookData(){
 
 /****************************************************************
 * 																*
-* function addBook($bookData) - Adds books to the â€œbooksâ€œ		*
+* function addBook($bookData) - Adds books to the “books“		*
 * database. It does this by inputting the arguments in the		*
 * database by use of the sql query INSERT.						*
 * Data being transmitted:										*
-* Data (the arguments) is sent into the â€œbooksâ€ database.		*
+* Data (the arguments) is sent into the “books” database.		*
 * 																*
 ****************************************************************/
 
@@ -156,6 +126,29 @@ function addBook($isbn,$title,$titleLong,$authors,$publisher,$noOfPages,$binding
 		echo "<p>ISBN is required</p>";
 	}
 	
+	mysql_close($con);
+}
+
+/****************************************************************
+* 																*
+* updateBook() - 												*
+* Uses the sql query UPDATE to replace the current stored data	*
+* with what is passed as arguments where the ISBN matches.		*
+* Data being transmitted:										*
+* New data is sent to the “books” database to overwrite the		*
+* existing entry for that book.									*
+* 																*
+****************************************************************/
+
+function updateBook(){
+	include('include/variables_global.php');
+	
+	include("connection.php"); //Connects to database
+
+	mysql_query("UPDATE Person
+		SET title = '$title', titleLong = '$titleLong', authors = '$authors', publisher = '$publisher', noOfPages = '$noOfPages', binding = '$binding', ddc = '$binding', lcc = '$binding', description = '$binding', largeImg = '$binding', mediumImg = '$binding', smallImg = '$binding', noOfCopies = '$noOfCopies'
+			WHERE isbn = $isbn");
+
 	mysql_close($con);
 }
 ?>

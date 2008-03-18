@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include("include/header.php");
 ?>
 	<p id="welcome">Future Site of Project Alexandria</p>

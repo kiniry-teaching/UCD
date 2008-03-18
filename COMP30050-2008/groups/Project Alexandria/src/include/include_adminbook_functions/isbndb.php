@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 function fetchBooksISBNdb($isbn){
 	$resultsArgs = array("details", "texts");
 	
@@ -17,12 +17,12 @@ function fetchBooksISBNdb($isbn){
 }
 
 function printDetailsISBNdb($basicDetails, $descriptions){
-	global $bookData;
+	global $isbn, $bookData;
 	
 	for($j=0; $j<count($bookData); $j++){
 		if($bookData[$j] == NULL){
 			switch ($j){
-/*isbn*/		case 0: $bookData[$j] = $basicDetails->BookList[0]->BookData[0]['isbn']; break;
+/*isbn*/		case 0: $bookData[$j] =	$isbn; break;
 /*title*/		case 1: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->Title; break;
 /*titleLong*/	case 2: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->TitleLong; break;
 /*authors*/		case 3: $bookData[$j] =	$basicDetails->BookList[0]->BookData[0]->AuthorsText; break;

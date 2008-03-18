@@ -1,4 +1,4 @@
-﻿#welcome{
+#welcome{
 	text-align:center;
 }
 
@@ -31,5 +31,38 @@
 	}
 	
 	#adminbookedit textarea{
+		height:6em;
+	}
+
+
+	#adminbookadd form{
+		width:21em;
+		font-family:"Times New Roman", Times, serif;
+	}
+	
+	#adminbookadd .formrow{
+		width:21em;
+		margin-bottom:2px;
+	}
+	
+	#adminbookadd .formtext{
+		width:9em;
+		display:inline-block;
+	}
+	
+	#adminbookadd .forminput{
+		width:12em;
+		display:inline-block;
+	}
+	
+	#adminbookadd .forminput input{
+		width:13.6em;
+	}
+	
+	#adminbookadd .formbutton{
+		width:9em;
+	}
+	
+	#adminbookadd textarea{
 		height:6em;
 	}

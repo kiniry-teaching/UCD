@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 function fetchBooksAmazon($isbn, $j){
 	$amazons = array("http://webservices.amazon.com/onca/xml?Service=AWSECommerceService",
 					 "http://webservices.amazon.co.uk/onca/xml?Service=AWSECommerceService",

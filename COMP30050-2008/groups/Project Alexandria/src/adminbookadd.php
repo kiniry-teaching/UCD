@@ -1,7 +1,7 @@
-﻿<?php
+<?php
 	include("include/header.php");
 ?>
-<div id="adminbookedit">
+<div id="adminbookadd">
 <?php
 
 //TODO - Thomas - isAdmin() needed here
@@ -43,10 +43,10 @@ else if($_POST["state"] == 2) //If you're adding book data
 		<div class="formrow"><div class="formtext">Medium Image URL: </div><div class="forminput"><input type="text" name="mediumImg" value="<?php echo $mediumImg; ?>" /></div></div>
 		<div class="formrow"><div class="formtext">Large Image URL: </div><div class="forminput"><input type="text" name="largeImg" value="<?php echo $largeImg; ?>" /></div></div>
 		<div class="formrow"><div class="formtext">Description: </div><div class="forminput"><textarea name="description"><?php echo $description; ?></textarea></div></div>
-		<div class="formrow"><div class="formtext">Number of Copies: </div><div class="forminput"><input type="text" name="noOfCopies" value="Enter number" /></div></div>
+		<div class="formrow"><div class="formtext">Number of Copies: </div><div class="forminput"><input type="text" name="noOfCopies" value="1" /></div></div>
 		<div class="formbutton"><input type="hidden" name="state" value="2" /><input type="submit" value="Add" /></div>
 	</form>
-</div> <!--End of #adminbookedit-->
+</div> <!--End of #adminbookadd-->
 <?php
 	include("include/footer.php");
 ?>
