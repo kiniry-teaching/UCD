@@ -24,7 +24,7 @@ class ShapeMatch
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend	class Shape;
+	friend				class Shape;
 
 ///////////////////////////////////////////////////////////////////////////////
 // queries
@@ -36,14 +36,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shape *			shape						(void)	const;
+	Shape *				shape						(void)	const;
 	/**
 	 * Return the weight the shape matched by
 	 * @return The weight the shape matched by
 	 * @author EB
 	 * @version 1.0
 	 */
-	float			weight						(void)	const;
+	float				weight						(void)	const;
 	/**
 	 * Return a collection of any sub-shapes (speed/accel) that matched
 	 * @return A collection of any sub-shapes (speed/accel) that matched. If
@@ -64,10 +64,10 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-					ShapeMatch
-					(	Shape * const			shape,
-						float const				weight
-					);
+						ShapeMatch
+						(	Shape * const			shape,
+							float const				weight
+						);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields
@@ -79,21 +79,21 @@ private:
 	 * @version 1.0
 	 * @see shape()
 	 */
-	Shape *			_shape;
+	Shape *				_shape;
 	/**
 	 * weight() field
 	 * @author EB
 	 * @version 1.0
 	 * @see weight()
 	 */
-	float			_weight;
+	float				_weight;
 	/**
 	 * shapeMatches() field
 	 * @author EB
 	 * @version 1.0
 	 * @see shapeMatches()
 	 */
-	ShapeMatches *	_shapeMatches;
+	ShapeMatches *		_shapeMatches;
 
 };
 
