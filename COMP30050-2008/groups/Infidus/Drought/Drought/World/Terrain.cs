@@ -158,7 +158,7 @@ namespace Drought.World
                 lightDirection.Y = lightDir;
                 lightDirection.Z = lightDir;
                 oldTime = currTime;
-            } 
+            }
         }
 
         public void render()

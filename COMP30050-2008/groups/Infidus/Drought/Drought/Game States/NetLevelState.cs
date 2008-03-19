@@ -19,22 +19,31 @@ namespace Drought.GameStates
      */
     class NetLevelState : GameState 
     {
-        Terrain terrain;
-        Camera camera; 
-        
-        HeightMap heightMap;
-        TextureMap textureMap;
+        private Terrain terrain;
+
+        private Camera camera;
+
+        private HeightMap heightMap;
+
+        private TextureMap textureMap;
+
+        private WaterMap waterMap;
 
         private NormalMap normalMap;
 
         private DeviceInput input;
 
+        private List<MovableEntity> entities;
+
+        private Effect modelEffect;
+
+        private enum modelIndexes { Skybox, XYZ, Truck, Car };
+
+        private Model[] models;
+
         private List<MovableEntity> localEntities;
+
         private List<MovableEntity> remoteEntities;
-
-        private Model3D truckModel;
-
-        private Model3D xyzModel;
 
         private NetworkManager networkManager;
 
@@ -54,6 +63,8 @@ namespace Drought.GameStates
 
             camera = new Camera(game, heightMap);
 
+            models = new Model[4];
+
             loadContent();
 
             normalMap = new NormalMap(heightMap);
@@ -63,34 +74,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            localEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+            //localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            localEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+            //localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
             
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            localEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+            //localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            remoteEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+            //remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            remoteEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+            //remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            remoteEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+            //remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
             
             if (hosting) {
                 List<MovableEntity> tempList = localEntities;
@@ -101,18 +112,17 @@ namespace Drought.GameStates
 
         public override void loadContent()
         {
+            modelEffect = getContentManager().Load<Effect>("EffectFiles/model");
+
+            //initialise models
+            models[(int)modelIndexes.Truck] = getContentManager().Load<Model>("Models/Truck/truck");
+            models[(int)modelIndexes.XYZ] = getContentManager().Load<Model>("Models/xyz");
+            models[(int)modelIndexes.Car] = getContentManager().Load<Model>("Models/Car/car");
+            models[(int)modelIndexes.Skybox] = getContentManager().Load<Model>("Model/Skybox/skybox");
+
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            truckModel = new Model3D("Models/Truck/truck", camera);
-            truckModel.loadContent(getContentManager(), getGraphics());
-
-            xyzModel = new Model3D("Models/xyz", camera);
-            xyzModel.loadContent(getContentManager(), getGraphics());
-            xyzModel.rotationAngles = new Vector3(0, 0, 0);
-            float xyzX = heightMap.getMapWidth() / 2.0f;
-            float xyzY = heightMap.getMapHeight() / 2.0f;
-            xyzModel.position = new Vector3(xyzX, xyzY, heightMap.getHeight(xyzX, xyzY) + 5.0f);
         }
 
         public override void background()
@@ -198,12 +208,10 @@ namespace Drought.GameStates
 
             terrain.render();
 
-            xyzModel.render(graphics);
-
             for (int i = 0; i < localEntities.Count; i++)
-                localEntities[i].render(graphics);
+                localEntities[i].render(graphics, camera, modelEffect);
             for (int i = 0; i < remoteEntities.Count; i++)
-                remoteEntities[i].render(graphics);
+                remoteEntities[i].render(graphics, camera, modelEffect);
         }
     }
 }

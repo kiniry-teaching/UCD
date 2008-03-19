@@ -10,31 +10,22 @@ namespace Drought.World
 {
     class Skybox
     {
-        Model3D model;
+        Model model;
 
-        public Skybox(Camera camera)
+        public Skybox(Camera camera, Model model)
         {
-            model = new Model3D("Models/Skybox/skybox", camera);
-        }
-
-        public void loadContent(ContentManager content, GraphicsDevice graphics)
-        {
-            model.loadContent(content, graphics);
-        }
-
-        public void setScale(Vector3 scaleFactors)
-        {
-            model.scaleFactors = scaleFactors;
+//            model.rotationAngles += new Vector3(MathHelper.PiOver2, 0, 0);
+//            model.scaleFactors += new Vector3(50, 50, 50);
         }
 
         public void update(GameTime gametime)
         {
-            model.position = model.camera.getPosition();
+ //           model.position = model.camera.getPosition();
         }
 
         public void render(GraphicsDevice graphics)
         {
-            model.render(graphics);
+ //           model.render(graphics);
         }
     }
 }

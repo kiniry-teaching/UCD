@@ -18,6 +18,13 @@ namespace Drought.World
             initalise();
         }
 
+        public HeightMap(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+
+            map = new float[width, height];
+        }
 
         public void initalise()
         {
@@ -125,6 +132,20 @@ namespace Drought.World
             }
         }
 
+        public void setHeight(float x, float y, float height)
+        {
+            map[(int)x, (int)y] = height;
+        }
+
+        public HeightMap clone()
+        {
+            HeightMap heightMap = new HeightMap(width, height);
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                    heightMap.setHeight(x, y, map[x, y]);
+
+            return heightMap;
+        }
 
     }
 }

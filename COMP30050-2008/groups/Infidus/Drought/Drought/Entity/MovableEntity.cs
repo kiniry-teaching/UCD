@@ -32,12 +32,14 @@ namespace Drought.Entity
 
         private Model model;
 
+        private Texture2D[] modelTextures;
+
         private bool selected, oldSelected;
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(Model model, Path path, int uid)
+        public MovableEntity(Model model, Texture2D[] modelTextures, Path path, int uid)
         {
             uniqueID = uid;
             this.path = path;
@@ -49,6 +51,7 @@ namespace Drought.Entity
             orientation = Matrix.Identity;
             velocity = 0.05f;
             this.model = model;
+            this.modelTextures = modelTextures;
             selected = false;
             oldSelected = false;
         }
@@ -113,6 +116,7 @@ namespace Drought.Entity
 
             Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
 
+            int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (Effect currentEffect in mesh.Effects)
@@ -122,7 +126,7 @@ namespace Drought.Entity
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
                     currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
                     currentEffect.Parameters["xProjection"].SetValue(camera.getProjectionMatrix());
-                    currentEffect.Parameters["xTexture"].SetValue(((BasicEffect)currentEffect).Texture);
+                    currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
                 }
                 mesh.Draw();
             }

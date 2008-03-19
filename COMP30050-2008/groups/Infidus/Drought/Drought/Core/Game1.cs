@@ -79,10 +79,7 @@ namespace Drought
             input.bind(GameKeys.CAM_ROTATE_RIGHT, Keys.Right, ModifierKeys.NONE);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            //adding this in here to test
-            LevelState level = new LevelState(gameManager, this, "level_0");
 
-            gameManager.pushState(level);
             gameManager.pushState(menu);
             gameManager.pushState(new SignInState(gameManager, this, true));
 

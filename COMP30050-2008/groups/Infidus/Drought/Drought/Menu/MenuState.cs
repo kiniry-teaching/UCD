@@ -191,11 +191,12 @@ namespace Drought.Menu
                 case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
                 case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
 
-                case MenuFunctions.LOCAL: getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
-                case MenuFunctions.HOST: ((Game1)getGame()).getNetworkManager().host(); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", true)); break;
+                case MenuFunctions.LOCAL: getStateManager().pushState(new LevelState(getStateManager(), getGame(), "water")); break;
+                case MenuFunctions.HOST: ((Game1)getGame()).getNetworkManager().host(); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "water", true)); break;
                 case MenuFunctions.GAMELIST: makeGameList(); currMenu = joinMenu; joinMenu.activate(); break;
+
                 case MenuFunctions.GAMELIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
-                case MenuFunctions.JOIN: ((Game1)getGame()).getNetworkManager().connectToGame(((GameMenuItem)item).getGame()); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", false)); break;
+                case MenuFunctions.JOIN: ((Game1)getGame()).getNetworkManager().connectToGame(((GameMenuItem)item).getGame()); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "water", false)); break;
             }
         }
 

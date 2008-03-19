@@ -14,11 +14,15 @@ namespace Drought.GameStates
 {
     class LevelState : GameState 
     {
-        Terrain terrain;
-        Camera camera; 
+        private Terrain terrain;
         
-        HeightMap heightMap;
-        TextureMap textureMap;
+        private Camera camera; 
+        
+        private HeightMap heightMap;
+
+        private TextureMap textureMap;
+
+        private WaterMap waterMap;
 
         private NormalMap normalMap;
 
@@ -26,9 +30,13 @@ namespace Drought.GameStates
 
         private List<MovableEntity> entities;
 
-        private Model3D truckModel;
+        private Effect modelEffect;
 
-        private Model3D xyzModel;
+        private enum modelIndexes { Skybox, XYZ, Truck, Car };
+
+        private Model[] models;
+
+        private Dictionary<int,Texture2D[]> modelTextures;
 
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)
@@ -36,10 +44,14 @@ namespace Drought.GameStates
             input = DeviceInput.getInput();
             heightMap = new HeightMap(fileName);
             textureMap = new TextureMap(fileName);
+            waterMap = new WaterMap(heightMap, textureMap);
 
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap);
 
             camera = new Camera(game, heightMap);
+
+            models = new Model[4];
+            modelTextures = new Dictionary<int, Texture2D[]>();
 
             loadContent();
 
@@ -50,17 +62,26 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for(int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+//            entities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), 0));
             
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(i, 100, heightMap.getHeight(i, 100)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+//            entities.Add(new MovableEntity(models[(int)modelIndexes.Truck], modelTextures[(int)modelIndexes.Truck], new Path(nodes, normalMap), 1));
 
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(0, i, heightMap.getHeight(0, i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+//            entities.Add(new MovableEntity(models[(int)modelIndexes.XYZ], modelTextures[(int)modelIndexes.XYZ], new Path(nodes, normalMap), 2));
+
+            nodes = new List<Vector3>();
+            for (int i = 0; i < 100; i++)
+                nodes.Add(new Vector3(0, i, heightMap.getHeight(0, i)));
+//            entities.Add(new MovableEntity(models[(int)modelIndexes.Skybox], modelTextures[(int)modelIndexes.Skybox], new Path(nodes, normalMap), 2));
+
+
+
+
             
             int hw = heightMap.getMapWidth() / 2;
             int hh = heightMap.getMapHeight() / 2;
@@ -101,18 +122,41 @@ namespace Drought.GameStates
 
         public override void loadContent()
         {
+            modelEffect = getContentManager().Load<Effect>("EffectFiles/model");
+
+            //initialise models
+            models[(int)modelIndexes.Truck] = getContentManager().Load<Model>("Models/Truck/truck");
+            models[(int)modelIndexes.XYZ] = getContentManager().Load<Model>("Models/xyz");
+            models[(int)modelIndexes.Car] = getContentManager().Load<Model>("Models/Car/car");
+            models[(int)modelIndexes.Skybox] = getContentManager().Load<Model>("Models/Skybox/skybox");
+
+            for(int index = 0; index < models.Length; index++)
+            {
+                Model model = models[index];
+
+                int textureCount = 0;
+                foreach (ModelMesh mesh in model.Meshes)
+                    textureCount += mesh.Effects.Count;
+
+                Texture2D[] textures = new Texture2D[textureCount];
+
+                int i = 0;
+                foreach (ModelMesh mesh in model.Meshes)
+                    foreach (BasicEffect basicEffect in mesh.Effects)
+                        textures[i++]  = basicEffect.Texture;
+
+                modelTextures.Add(index, textures);
+
+                foreach (ModelMesh mesh in model.Meshes)
+                    foreach (ModelMeshPart meshPart in mesh.MeshParts)
+                        meshPart.Effect = modelEffect.Clone(getGraphics());
+            }
+
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            truckModel = new Model3D("Models/xyz", camera);
-            truckModel.loadContent(getContentManager(), getGraphics());
 
-            xyzModel = new Model3D("Models/Truck/truck", camera);
-            xyzModel.loadContent(getContentManager(), getGraphics());
-            xyzModel.rotationAngles = new Vector3(0, 0, 0);
-            float xyzX = heightMap.getMapWidth() / 2.0f;
-            float xyzY = heightMap.getMapHeight() / 2.0f;
-            xyzModel.position = new Vector3(xyzX, xyzY, heightMap.getHeight(xyzX, xyzY) + 5.0f);
+            
         }
 
         public override void background()
@@ -143,9 +187,12 @@ namespace Drought.GameStates
                 camera.ascend();
             else if (input.isKeyPressed(GameKeys.CAM_DESCEND))
                 camera.descend();
-            
+
             if (input.isKeyPressed(GameKeys.CAM_ZOOM_IN))
+            {
                 camera.zoomIn();
+                waterMap.addWater(1);
+            }
             else if (input.isKeyPressed(GameKeys.CAM_ZOOM_OUT))
                 camera.zoomOut();
             
@@ -183,10 +230,8 @@ namespace Drought.GameStates
 
             terrain.render();
 
-            xyzModel.render(graphics);
-
             for (int i = 0; i < entities.Count; i++)
-                entities[i].render(graphics);
+                entities[i].render(graphics, camera, modelEffect);
         }
     }
 }

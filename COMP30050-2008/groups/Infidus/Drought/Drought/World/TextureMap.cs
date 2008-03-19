@@ -9,10 +9,12 @@ namespace Drought.World
         int width, height;
 
         string fileName;
+        public bool changed;
 
         public TextureMap(string fileName)
         {
             this.fileName = fileName;
+            changed = false;
 
             initalise();
         }
@@ -54,6 +56,12 @@ namespace Drought.World
         public Vector4 getValue(float x, float y)
         {
             return map[(int)x, (int)y];
+        }
+
+        public void setValue(float x, float y, Vector4 value)
+        {
+            map[(int)x, (int)y] = value;
+            changed = true;
         }
     }
 }

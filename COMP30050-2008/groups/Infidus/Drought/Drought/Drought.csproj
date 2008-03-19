@@ -64,7 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Game States\SignInState.cs" />
-    <Compile Include="Graphics\Model3D.cs" />
     <Compile Include="Menu\GameMenuItem.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\RemoteGame.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="State\IStateManager.cs" />
     <Compile Include="World\HeightMap.cs" />
     <Compile Include="World\TextureMap.cs" />
+    <Compile Include="World\WaterMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
