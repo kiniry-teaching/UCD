@@ -1,10 +1,10 @@
-<?php
+ï»¿<?php
 include_once('include/variables.php');
 
 /****************************************************************
 * 																*
 * fetchBookFromDB(isbn) - 										*
-* Produces all data for that ISBN from the “books” database. It	*
+* Produces all data for that ISBN from the books database. It	*
 * does this through while loop with a sql query of SELECT and	*
 * WHERE, the where being where the ISBN matches.				*
 * Data being transmitted:										*
@@ -44,13 +44,13 @@ function fetchBookFromDB($isbn){
 * 																*
 * availability(isbn) - 											*
 * Requests the number of copies of a book (using the sql query	*
-* WHERE to find the row with the matching ISBN) from “books”. It*
-* then does the same with the “books_online” but this time uses	*
+* WHERE to find the row with the matching ISBN) from &#65533;books&#65533;. It*
+* then does the same with the &#65533;books_online&#65533; but this time uses	*
 * COUNT to get the number of instances of the ISBN and then		*
 * compares the numbers, where the numbers are equal it prints	*
-* “On Loan” else “Available”.									*
+* &#65533;On Loan&#65533; else &#65533;Available&#65533;.									*
 * Data being transmitted:										*
-* Sends the same ISBN to the “books” and “books_onloan”			*
+* Sends the same ISBN to the &#65533;books&#65533; and &#65533;books_onloan&#65533;			*
 * databases and retrieves the number of copies from the former	*
 * and from the latter the number of times the ISBN appears.		*
 * 																*
@@ -63,10 +63,10 @@ availability($isbn){
 /****************************************************************
 * 																*
 * requestBook(isbn, username) - 								*
-* Adds the pair “isbn” and “username” to the “books_requested”	*
+* Adds the pair &#65533;isbn&#65533; and &#65533;username&#65533; to the &#65533;books_requested&#65533;	*
 * database by use of the sql query INSERT.						*
 * Data being transmitted:										*
-* Sends the ISBN and username to the database “books_requested”.*
+* Sends the ISBN and username to the database &#65533;books_requested&#65533;.*
 * 																*
 ****************************************************************/
 /*
@@ -78,7 +78,7 @@ requestBook($isbn, $username){
 * 																*
 * noOfRequests(isbn)											*
 * Uses the sql query COUNT to return the number of rows where	*
-* “isbn” occurs as the ISBN.									*
+* &#65533;isbn&#65533; occurs as the ISBN.									*
 * Data being transmitted:										*
 * The ISBN is being sent and the number of instances is being	*
 * returned.														*
@@ -92,12 +92,12 @@ noOfRequests($isbn){
 /****************************************************************
 * 																*
 * getReviewed(isbn, username)									*
-* Can be used to return all data from the “books_reviewed”		*
+* Can be used to return all data from the &#65533;books_reviewed&#65533;		*
 * database where the isbn and username match by use of a while	*
 * loop and the sql query WHERE.									*
 * Data being transmitted:										*
 * Sends the ISBN and username and retrieves the full data where	*
-* those match from the rows of “books_reviewed”.				*
+* those match from the rows of &#65533;books_reviewed&#65533;.				*
 * 																*
 ****************************************************************/
 /*

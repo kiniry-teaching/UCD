@@ -1,9 +1,16 @@
-<?php
+﻿<?php
 	include("include/header.php");
 ?>
 <div id="adminbook">
 	<?php 
 		include('include/adminbook_functions.php');
+		
+		if($_GET['delete'] == 1){
+			deleteBook($_GET['isbn']);
+		}
+		else if($_GET['delete'] == "all"){
+			deleteAllBook($_GET['isbn']);
+		}
 	?>
 	<h1>Book Admin</h1>
 	<p>
@@ -13,7 +20,7 @@
 		<div class="formrow"><div class="formtext">Search Term: </div><div class="forminput"><input type="text" name="searchterm" /></div></div>
 		<div class="formrow"><div class="formtext">Category: </div><div class="forminput">
 			<select name="category">
-				<option value="">Pick a Category</option>
+				<option value="isbn">Pick a Category</option>
 				<option value="isbn">ISBN</option>
 				<option value="title">Title</option>
 				<option value="titleLong">Title (Long)</option>
@@ -30,6 +37,9 @@
 	<?php 
 		if($_GET['state'] == 1){
 			adminTableOfBooks($_GET['searchterm'], $_GET['category'], 'title');
+		}
+		else if($_GET['state'] == 2){
+			adminTableOfBooks($_GET['searchterm'], $_GET['category'], $_GET['order']);
 		}
 	?>
 </div>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 //TODO - Thomas - isAdmin() needed here
 include_once('include/variables.php');
@@ -164,20 +164,20 @@ function adminTableOfBooks($searchterm, $category, $order){
 	echo "<div id='search_table'>";
 	
 		echo "<div class='search_row_header'>";
-			echo "<div class='search_isbn_header'>ISBN</div>";
-			echo "<div class='search_title_header'>Title</div>";
-			echo "<div class='search_titleLong_header'>Title (Long)</div>";
-			echo "<div class='search_authors_header'>Authors</div>";
-			echo "<div class='search_publisher_header'>Publisher</div>";
-			echo "<div class='search_noOfPages_header'>No. of Pages</div>";
-			echo "<div class='search_binding_header'>Binding</div>";
-			echo "<div class='search_ddc_header'>DDC</div>";
-			echo "<div class='search_lcc_header'>LCC</div>";
-			echo "<div class='search_description_header'>Description</div>";
-			echo "<div class='search_largeImg_header'>Large Image</div>";
-			echo "<div class='search_mediumImg_header'>Medium Image</div>";
-			echo "<div class='search_smallImg_header'>Small Image</div>";
-			echo "<div class='search_noOfCopies_header'>No. of Copies</div>";
+			echo "<div class='search_isbn_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=isbn&state=2'>ISBN</a></div>";
+			echo "<div class='search_title_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=title&state=2'>Title</a></div>";
+			echo "<div class='search_titleLong_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=titleLong&state=2'>Title (Long)</a></div>";
+			echo "<div class='search_authors_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=authors&state=2'>Authors</a></div>";
+			echo "<div class='search_publisher_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=publisher&state=2'>Publisher</a></div>";
+			echo "<div class='search_noOfPages_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=noOfPages&state=2'>No. of Pages</a></div>";
+			echo "<div class='search_binding_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=binding&state=2'>Binding</a></div>";
+			echo "<div class='search_ddc_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=ddc&state=2'>DDC</a></div>";
+			echo "<div class='search_lcc_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=lcc&state=2'>LCC</a></div>";
+			echo "<div class='search_description_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=description&state=2'>Description</a></div>";
+			echo "<div class='search_largeImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=largeImg&state=2'>Large Image</a></div>";
+			echo "<div class='search_mediumImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=mediumImg&state=2'>Medium Image</a></div>";
+			echo "<div class='search_smallImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=smallImg&state=2'>Small Image</a></div>";
+			echo "<div class='search_noOfCopies_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=noOfCopies&state=2'>No. of Copies</a></div>";
 			echo "<div class='search_edit_header'>Edit</div>";
 			echo "<div class='search_delete_header'>Delete</div>";
 			echo "<div class='search_deleteAll_header'>Delete All</div>";
@@ -220,11 +220,56 @@ function adminTableOfBooks($searchterm, $category, $order){
 			echo "</div>";
 			echo "<div class='search_noOfCopies'>" . $row['noOfCopies'] . "</div>";
 			echo "<div class='search_edit'><a href='adminbookedit.php?isbn=" . $row['isbn'] ."'>Edit</a></div>";
-			echo "<div class='search_delete'><a href=''>Delete</a></div>";
-			echo "<div class='search_deleteAll'><a href=''>Delete All</a></div>";
+			echo "<div class='search_delete'><a href='adminbook.php?searchterm=" . $_GET['searchterm'] . "&category=" . $_GET['category'] . "&order=" . $_GET['order'] . "&state=" . $_GET['state'] . "&isbn=" . $row['isbn'] ."&delete=1'>Delete</a></div>";
+			echo "<div class='search_deleteAll'><a href='adminbook.php?searchterm=" . $_GET['searchterm'] . "&category=" . $_GET['category'] . "&order=" . $_GET['order'] . "&state=" . $_GET['state'] . "&isbn=" . $row['isbn'] ."&delete=all''>Delete All</a></div>";
 		echo "</div>";
 	}
 	
 	echo "</div><!--End of search_table-->";
+}
+/****************************************************************
+* 																*
+* deleteBook(isbn) - 											*
+* Takes and ISBN and reduces the number of copies of it by one,	*
+* if only one exists then it removes the row.					*
+* Data being transmitted:										*
+* The ISBN is being utilized to reduce the count of a book, the	*
+* number of copies is being used to test if the count will hit	*
+* zero.															*
+* 																*
+****************************************************************/
+
+function deleteBook($isbn){
+	include('connection.php');
+	$result = mysql_query("SELECT * FROM books
+		WHERE isbn='$isbn'");
+	while($row = mysql_fetch_array($result)){
+		if($row['noOfCopies'] == 1){ //To prevent it from reducing to zero
+			deleteAllBook($isbn);
+		}
+		else if($row['noOfCopies'] > 1){ //Otherwise reduce it by one
+			$newNo = $row['noOfCopies'] - 1;
+			mysql_query("UPDATE books
+				SET noOfCopies = '$newNo'
+					WHERE isbn = '$isbn'");
+		}
+		else if($row['noOfCopies'] <= 0){ //If it is zero delete
+			deleteAllBook($isbn);
+		}
+	}
+}
+
+/****************************************************************
+* 																*
+* deleteAllBook(isbn) - 										*
+* Deletes the row where that ISBN is key.						*
+* Data being transmitted:										*
+* Used the ISBN sent to delete a row.							*
+* 																*
+****************************************************************/
+
+function deleteAllBook($isbn){
+	include('connection.php');
+	mysql_query("DELETE FROM books WHERE isbn='$isbn'");
 }
 ?>

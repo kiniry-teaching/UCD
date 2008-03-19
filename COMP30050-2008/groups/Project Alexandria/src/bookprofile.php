@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 	include("include/header.php");
 ?>
 <div id="bookprofile">
 <?php
 //TODO - Thomas - username() and isLoggedIn() needed here
 
-$isbn = $_GET["isbn"]; //Gets the isbn from the address
 include("include/book_functions.php");
+$isbn = $_GET["isbn"]; //Gets the isbn from the address
 fetchBookFromDB($isbn);
 
 if($mediumImg != NULL){
@@ -30,7 +30,7 @@ $detailsArray = array($publisher, $noOfPages, $binding, $ddc, $lcc);
 
 for($k=0; $k<count($detailsArray); $k++){
 	if($detailsArray[$k] != NULL){
-		switch ($j){
+		switch ($k){
 			case 0: echo("<b>Publisher:</b> " . $publisher . "<br/>"); break;
 			case 1: echo("<b>No of Pages:</b> " . $noOfPages . "<br/>"); break;
 			case 2: echo("<b>Edition:</b> " . $binding . "<br/>"); break;
