@@ -30,7 +30,7 @@ namespace Drought.Entity
 
         private Path path;
 
-        private Model3D model;
+        private Model model;
 
         private bool selected, oldSelected;
 
@@ -79,11 +79,11 @@ namespace Drought.Entity
 
                 orientation = Matrix.CreateRotationZ((float)Math.Atan2(heading.Y, heading.X));
                 //Console.WriteLine("mz " + orientation);
-                orientation.Up = normal;
-                orientation.Right = Vector3.Cross(orientation.Forward, orientation.Up);
-                orientation.Right = Vector3.Normalize(orientation.Right);
-                orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
-                orientation.Forward = Vector3.Normalize(orientation.Forward);
+                //orientation.Up = normal;
+                //orientation.Right = Vector3.Cross(orientation.Forward, orientation.Up);
+                //orientation.Right = Vector3.Normalize(orientation.Right);
+                //orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
+                //orientation.Forward = Vector3.Normalize(orientation.Forward);
 
                 if (selected && !oldSelected) {
                     Console.WriteLine("selected!");
@@ -107,16 +107,25 @@ namespace Drought.Entity
 
         public void render(GraphicsDevice graphics)
         {
-            //position.Z += 10;
-            model.position = position;
-            model.rotationAngles = rotation;
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
-            Matrix orientation = Matrix.Identity;
-            if (selected) {
-                model.render(graphics, orientation, position + new Vector3(0, 0, 20));
-            }
-            else {
-                model.render(graphics, orientation, position);
+            if (selected)
+                position + new Vector3(0, 0, 20);
+
+            Matrix worldMatrix = orientation * Matrix.CreateTranslation(position) * Matrix.CreateScale(scaleFactors);
+
+            int i = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                foreach (Effect currentEffect in mesh.Effects)
+                {
+                    currentEffect.CurrentTechnique = effect.Techniques["Textured"];
+
+                    currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
+                    currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
+                    currentEffect.Parameters["xProjection"].SetValue(projectionMatrix);
+                    currentEffect.Parameters["xTexture"].SetValue(textures[i++]);
+                }
+                mesh.Draw();
             }
         }
 
