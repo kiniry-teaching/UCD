@@ -49,7 +49,7 @@ namespace Drought.World
 
         public double oldTime = 0;
         public double counter = Math.PI;
-        public Vector3 lightDirection = new Vector3(0.5f, (float)Math.Sin(Math.PI), (float)Math.Sin(Math.PI));
+        public Vector3 lightDirection = new Vector3(0,0,-1);//0.5f, (float)Math.Sin(Math.PI), (float)Math.Sin(Math.PI));
 
         public Terrain(GraphicsDevice device, ContentManager content, HeightMap heightMap, TextureMap textureMap)
         {
@@ -155,8 +155,8 @@ namespace Drought.World
             {
                 float lightDir = (float)(Math.Sin(counter % (Math.PI * 2)));
                 counter += lightDir < 0 ? 0.001 : 0.01;
-                lightDirection.Y = lightDir;
-                lightDirection.Z = lightDir;
+                //lightDirection.Y = lightDir;
+                //lightDirection.Z = lightDir;
                 oldTime = currTime;
             }
         }
