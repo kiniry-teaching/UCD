@@ -9,7 +9,7 @@ include("config.php"); //Holds the access keys for the API's
 /****************************************************************
 * 																*
 * fetchBooks($isbn) - Takes the isbn and uses the available		*
-* api&#65533;s to find details on the book. It does this by going		*
+* api's to find details on the book. It does this by going		*
 * through a list of api accessers and when one returns not null	*
 * it takes the details available and returns them by parsing	*
 * the xml.														*
@@ -178,10 +178,13 @@ function adminTableOfBooks($searchterm, $category, $order){
 			echo "<div class='search_mediumImg_header'>Medium Image</div>";
 			echo "<div class='search_smallImg_header'>Small Image</div>";
 			echo "<div class='search_noOfCopies_header'>No. of Copies</div>";
+			echo "<div class='search_edit_header'>Edit</div>";
+			echo "<div class='search_delete_header'>Delete</div>";
+			echo "<div class='search_deleteAll_header'>Delete All</div>";
 		echo "</div>";
 	include('connection.php');
 	$result = mysql_query("SELECT * FROM books
-	WHERE $category LIKE '%$searchTerm%'
+	WHERE $category LIKE '%$searchterm%'
 		ORDER BY $order");
 	
 	while($row = mysql_fetch_array($result)){
@@ -189,7 +192,7 @@ function adminTableOfBooks($searchterm, $category, $order){
 			echo "<div class='search_isbn'>" . $row['isbn'] . "</div>";
 			echo "<div class='search_title'><a href='bookprofile.php?isbn=" . $row['isbn'] . "'>" . $row['title'] . "</a></div>";
 			echo "<div class='search_titleLong'>" . $row['titleLong'] . "</div>";
-			echo "<div class='search_authors'>" . $row['authors'] . "</div>";
+			echo "<div class='search_authors'><a href='adminbook.php?searchterm=" . $row['authors'] . "&category=authors&state=1'>" . $row['authors'] . "</a></div>";
 			echo "<div class='search_publisher'>" . $row['publisher'] . "</div>";
 			echo "<div class='search_noOfPages'>" . $row['noOfPages'] . "</div>";
 			echo "<div class='search_binding'>" . $row['binding'] . "</div>";
@@ -216,6 +219,9 @@ function adminTableOfBooks($searchterm, $category, $order){
 				}
 			echo "</div>";
 			echo "<div class='search_noOfCopies'>" . $row['noOfCopies'] . "</div>";
+			echo "<div class='search_edit'><a href='adminbookedit.php?isbn=" . $row['isbn'] ."'>Edit</a></div>";
+			echo "<div class='search_delete'><a href=''>Delete</a></div>";
+			echo "<div class='search_deleteAll'><a href=''>Delete All</a></div>";
 		echo "</div>";
 	}
 	

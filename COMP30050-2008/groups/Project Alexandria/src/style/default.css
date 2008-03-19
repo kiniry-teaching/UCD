@@ -144,3 +144,22 @@
 	.search_noOfCopies{
 		text-align:center;
 	}
+	
+	.search_edit_header, .search_edit{
+		width:6em;
+		height:1.5em;
+		display:inline-block;
+		overflow:hidden;
+	}
+	.search_delete_header, .search_delete{
+		width:6em;
+		height:1.5em;
+		display:inline-block;
+		overflow:hidden;
+	}
+	.search_deleteAll_header, .search_deleteAll{
+		width:6em;
+		height:1.5em;
+		display:inline-block;
+		overflow:hidden;
+	}

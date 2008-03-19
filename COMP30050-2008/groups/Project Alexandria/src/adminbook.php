@@ -29,7 +29,7 @@
 
 	<?php 
 		if($_GET['state'] == 1){
-			adminTableOfBooks($_GET['searchterm'], $_GET['category'], 'isbn');
+			adminTableOfBooks($_GET['searchterm'], $_GET['category'], 'title');
 		}
 	?>
 </div>
