@@ -37,7 +37,7 @@ namespace Drought.Entity
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(Model3D model, Path path, int uid)
+        public MovableEntity(Model model, Path path, int uid)
         {
             uniqueID = uid;
             this.path = path;
@@ -113,7 +113,6 @@ namespace Drought.Entity
 
             Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
 
-            int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (Effect currentEffect in mesh.Effects)
