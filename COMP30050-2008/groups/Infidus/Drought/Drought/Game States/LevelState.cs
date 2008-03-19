@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Entity;
 using Drought.Input;
-using Drought.Graphics;
 
 namespace Drought.GameStates
 {
@@ -36,7 +35,7 @@ namespace Drought.GameStates
 
         private Model[] models;
 
-        private Dictionary<int,Texture2D[]> modelTextures;
+        private Dictionary<int, Texture2D[]> modelTextures;
 
         public LevelState(IStateManager manager, Game game, string fileName) :
             base(manager, game)

@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Entity;
 using Drought.Input;
-using Drought.Graphics;
 using Drought.Network;
 
 namespace Drought.GameStates
@@ -37,6 +36,8 @@ namespace Drought.GameStates
 
         private Effect modelEffect;
 
+        private Dictionary<int, Texture2D[]> modelTextures;
+
         private enum modelIndexes { Skybox, XYZ, Truck, Car };
 
         private Model[] models;
@@ -64,6 +65,7 @@ namespace Drought.GameStates
             camera = new Camera(game, heightMap);
 
             models = new Model[4];
+            modelTextures = new Dictionary<int, Texture2D[]>();
 
             loadContent();
 
@@ -74,34 +76,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            //localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            //localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
             
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            //localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            //remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            //remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            //remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
             
             if (hosting) {
                 List<MovableEntity> tempList = localEntities;
@@ -118,11 +120,32 @@ namespace Drought.GameStates
             models[(int)modelIndexes.Truck] = getContentManager().Load<Model>("Models/Truck/truck");
             models[(int)modelIndexes.XYZ] = getContentManager().Load<Model>("Models/xyz");
             models[(int)modelIndexes.Car] = getContentManager().Load<Model>("Models/Car/car");
-            models[(int)modelIndexes.Skybox] = getContentManager().Load<Model>("Model/Skybox/skybox");
+            models[(int)modelIndexes.Skybox] = getContentManager().Load<Model>("Models/Skybox/skybox");
 
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
+
+            for (int index = 0; index < models.Length; index++) {
+                Model model = models[index];
+
+                int textureCount = 0;
+                foreach (ModelMesh mesh in model.Meshes)
+                    textureCount += mesh.Effects.Count;
+
+                Texture2D[] textures = new Texture2D[textureCount];
+
+                int i = 0;
+                foreach (ModelMesh mesh in model.Meshes)
+                    foreach (BasicEffect basicEffect in mesh.Effects)
+                        textures[i++] = basicEffect.Texture;
+
+                modelTextures.Add(index, textures);
+
+                foreach (ModelMesh mesh in model.Meshes)
+                    foreach (ModelMeshPart meshPart in mesh.MeshParts)
+                        meshPart.Effect = modelEffect.Clone(getGraphics());
+            }
         }
 
         public override void background()

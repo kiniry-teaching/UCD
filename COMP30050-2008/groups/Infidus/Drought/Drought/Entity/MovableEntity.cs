@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using Drought.World;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using Drought.Graphics;
 
 namespace Drought.Entity
 {
