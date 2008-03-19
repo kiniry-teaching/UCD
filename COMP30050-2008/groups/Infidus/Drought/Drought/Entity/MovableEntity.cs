@@ -70,21 +70,13 @@ namespace Drought.Entity
                 normal = path.getNormal();
 
                 heading = Vector3.Subtract(position, prevPosition);
-                //heading.Normalize();
+                heading.Normalize();
 
-                //Console.WriteLine(normal);
-                
-                float rotationX = (float) Math.Atan2(normal.Y, normal.Z);
-                float rotationY = (float) Math.Atan2(normal.X, normal.Z);
-                float rotationZ = (float) Math.Atan2(heading.Y, heading.X);
-                
-                orientation = Matrix.CreateRotationX(rotationX);
-                //Console.WriteLine("mz " + orientation);
-                //orientation.Up = normal;
-                //orientation.Right = Vector3.Cross(orientation.Forward, orientation.Up);
-                //orientation.Right = Vector3.Normalize(orientation.Right);
-                //orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
-                //orientation.Forward = Vector3.Normalize(orientation.Forward);
+                orientation.Up = Vector3.Normalize(normal);
+                orientation.Right = Vector3.Cross(heading, orientation.Up);
+                orientation.Right = Vector3.Normalize(orientation.Right);
+                orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
+                orientation.Forward = Vector3.Normalize(orientation.Forward);
 
                 if (selected && !oldSelected) {
                     Console.WriteLine("selected!");
