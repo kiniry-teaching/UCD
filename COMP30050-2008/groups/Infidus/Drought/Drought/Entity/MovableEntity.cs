@@ -105,13 +105,13 @@ namespace Drought.Entity
             move();
         }
 
-        public void render(GraphicsDevice graphics)
+        public void render(GraphicsDevice graphics, Camera camera, Effect effect)
         {
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
             if (selected)
-                position + new Vector3(0, 0, 20);
+                position += new Vector3(0, 0, 20);
 
-            Matrix worldMatrix = orientation * Matrix.CreateTranslation(position) * Matrix.CreateScale(scaleFactors);
+            Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
 
             int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
@@ -122,8 +122,8 @@ namespace Drought.Entity
 
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
                     currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
-                    currentEffect.Parameters["xProjection"].SetValue(projectionMatrix);
-                    currentEffect.Parameters["xTexture"].SetValue(textures[i++]);
+                    currentEffect.Parameters["xProjection"].SetValue(camera.getProjectionMatrix());
+                    currentEffect.Parameters["xTexture"].SetValue(((BasicEffect)currentEffect).Texture);
                 }
                 mesh.Draw();
             }
