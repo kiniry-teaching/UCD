@@ -200,7 +200,7 @@ namespace Drought.GameStates
                 localEntities[i].update();
 
             foreach (MovableEntity entity in localEntities) {
-                networkManager.sendPos(entity);
+                //networkManager.sendPos(entity);
                 //Console.WriteLine("sent: " + entity.getPosition());
             }
             

@@ -69,13 +69,14 @@ namespace Drought.Entity
                 prevNormal.Z = normal.Z;
                 normal = path.getNormal();
 
-                heading = Vector3.Subtract(position, prevPosition);
+                heading = Vector3.Subtract(prevPosition, position);
                 heading.Normalize();
+                normal.Normalize();
 
-                orientation.Up = Vector3.Normalize(normal);
-                orientation.Right = Vector3.Cross(heading, orientation.Up);
+                orientation.Up = normal;
+                orientation.Right = Vector3.Cross(orientation.Up, heading);
                 orientation.Right = Vector3.Normalize(orientation.Right);
-                orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
+                orientation.Forward = Vector3.Cross(-orientation.Right, orientation.Up);
                 orientation.Forward = Vector3.Normalize(orientation.Forward);
 
                 if (selected && !oldSelected) {
