@@ -9,10 +9,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Drought.Entity;
 using Drought.Input;
 using Drought.Graphics;
+using Drought.Network;
 
 namespace Drought.GameStates
 {
-    class LevelState : GameState 
+    /** 
+     * Branch of LevelState; a testbed for early networking functions,
+     * so any broken functionality won't impede others' efforts.
+     */
+    class NetLevelState : GameState 
     {
         Terrain terrain;
         Camera camera; 
@@ -24,15 +29,23 @@ namespace Drought.GameStates
 
         private DeviceInput input;
 
-        private List<MovableEntity> entities;
+        private List<MovableEntity> localEntities;
+        private List<MovableEntity> remoteEntities;
 
         private Model3D truckModel;
 
         private Model3D xyzModel;
 
-        public LevelState(IStateManager manager, Game game, string fileName) :
+        private NetworkManager networkManager;
+
+        private bool hosting;
+
+        public NetLevelState(IStateManager manager, Game game, string fileName, bool isHost) :
             base(manager, game)
         {
+            networkManager = ((Game1)game).getNetworkManager();
+            hosting = isHost;
+
             input = DeviceInput.getInput();
             heightMap = new HeightMap(fileName);
             textureMap = new TextureMap(fileName);
@@ -45,58 +58,45 @@ namespace Drought.GameStates
 
             normalMap = new NormalMap(heightMap);
 
-            //testing entity here
-            entities = new List<MovableEntity>();
+            localEntities = new List<MovableEntity>();
+            int uid = 0;
             List<Vector3> nodes = new List<Vector3>();
-            for(int i = 0; i < 100; i++)
+            for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
-            
-            nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(i, 100, heightMap.getHeight(i, 100)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            localEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(0, i, heightMap.getHeight(0, i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            for (int i = 100; i < 200; i++)
+                nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
+            localEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
             
-            int hw = heightMap.getMapWidth() / 2;
-            int hh = heightMap.getMapHeight() / 2;
             nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw + i, hh, heightMap.getHeight(hw + i, hh)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            for (int i = 100; i < 200; i++)
+                nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
+            localEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+
+            uid = 0;
+            remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw - i, hh, heightMap.getHeight(hw - i, hh)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            for (int i = 100; i > 0; i--)
+                nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
+            remoteEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+
             nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw, hh + i, heightMap.getHeight(hw, hh + i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            for (int i = 100; i > 0; i--)
+                nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
+            remoteEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
+
             nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw, hh - i, heightMap.getHeight(hw, hh - i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
-            nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw + i, hh + i, heightMap.getHeight(hw + i, hh + i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
-            nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw - i, hh - i, heightMap.getHeight(hw - i, hh - i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
-            nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw + i, hh - i, heightMap.getHeight(hw + i, hh - i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
-            nodes = new List<Vector3>();
-            for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw - i, hh + i, heightMap.getHeight(hw - i, hh + i)));
-            //entities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap)));
+            for (int i = 100; i > 0; i--)
+                nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
+            remoteEntities.Add(new MovableEntity(truckModel, new Path(nodes, normalMap), uid++));
             
+            if (hosting) {
+                List<MovableEntity> tempList = localEntities;
+                localEntities = remoteEntities;
+                remoteEntities = tempList;
+            }
         }
 
         public override void loadContent()
@@ -104,10 +104,10 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
-            truckModel = new Model3D("Models/xyz", camera);
+            truckModel = new Model3D("Models/Truck/truck", camera);
             truckModel.loadContent(getContentManager(), getGraphics());
 
-            xyzModel = new Model3D("Models/Truck/truck", camera);
+            xyzModel = new Model3D("Models/xyz", camera);
             xyzModel.loadContent(getContentManager(), getGraphics());
             xyzModel.rotationAngles = new Vector3(0, 0, 0);
             float xyzX = heightMap.getMapWidth() / 2.0f;
@@ -117,13 +117,13 @@ namespace Drought.GameStates
 
         public override void background()
         {
-            Console.WriteLine("LevelState in background");
+            Console.WriteLine("NetLevelState in background");
             //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void foreground()
         {
-            Console.WriteLine("LevelState in foreground");
+            Console.WriteLine("NetLevelState in foreground");
             //throw new Exception("The method or operation is not implemented.");
         }
 
@@ -163,8 +163,23 @@ namespace Drought.GameStates
             terrain.setViewMatrix(camera.getViewMatrix());
             terrain.update(gameTime);
 
-            for (int i = 0; i < entities.Count; i++)
-                entities[i].update();
+            for (int i = 0; i < localEntities.Count; i++)
+                localEntities[i].update();
+
+            foreach (MovableEntity entity in localEntities) {
+                networkManager.sendPos(entity);
+                //Console.WriteLine("sent: " + entity.getPosition());
+            }
+            
+            while (networkManager.hasMoreData()) {
+                Vector3 vec = networkManager.recievePos();
+                int uid = networkManager.recieveUID();
+                //Console.WriteLine("uid: " + uid + " recieved");
+                foreach (MovableEntity entity in remoteEntities)
+                    if (entity.uniqueID == uid)
+                        entity.setPosition(vec);
+                //if (vec != new Vector3()) Console.WriteLine("recieved: " + vec);
+            }
         }
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
@@ -185,8 +200,10 @@ namespace Drought.GameStates
 
             xyzModel.render(graphics);
 
-            for (int i = 0; i < entities.Count; i++)
-                entities[i].render(graphics);
+            for (int i = 0; i < localEntities.Count; i++)
+                localEntities[i].render(graphics);
+            for (int i = 0; i < remoteEntities.Count; i++)
+                remoteEntities[i].render(graphics);
         }
     }
 }

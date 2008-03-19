@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Net;
+using Drought.Entity;
 
 namespace Drought.Network
 {
@@ -25,6 +26,8 @@ namespace Drought.Network
         private PacketReader packetReader = new PacketReader();
 
         private static readonly ushort SENDCODE_POS = 42;
+
+        private int cachedID;
 
         /** Internal constructor; user classes should obtain a reference through SoundManager.getInstance() */
         private NetworkManager() { }
@@ -77,9 +80,15 @@ namespace Drought.Network
             Console.WriteLine("Connected to game: " + game.getDescription());
         }
 
-        public void sendPos(Vector3 position) {
-            packetWriter.Write(NetworkManager.SENDCODE_POS);
-            packetWriter.Write(position);
+        public bool hasMoreData() {
+            return session.LocalGamers[0].IsDataAvailable;
+        }
+
+        public void sendPos(MovableEntity entity) {
+            //packetWriter.Write(NetworkManager.SENDCODE_POS);
+            int uid = entity.uniqueID;
+            packetWriter.Write(uid);
+            packetWriter.Write(entity.getPosition());
             session.LocalGamers[0].SendData(packetWriter, SendDataOptions.None);
         }
 
@@ -87,14 +96,20 @@ namespace Drought.Network
             if (session.LocalGamers[0].IsDataAvailable) {
                 NetworkGamer sender;
                 session.LocalGamers[0].ReceiveData(packetReader, out sender);
-                if (packetReader.ReadUInt16() == 42)
-                    return packetReader.ReadVector3();
-                else
-                    return new Vector3();
+                cachedID = packetReader.ReadInt32();
+                return packetReader.ReadVector3();
             }
             else {
                 return new Vector3();
             }
+        }
+
+        public int recieveUID() {
+            return cachedID;
+        }
+
+        public bool anyoneElseHere() {
+            return session.RemoteGamers.Count != 0;
         }
 
         private void GameStarted(object sender, GameStartedEventArgs args)

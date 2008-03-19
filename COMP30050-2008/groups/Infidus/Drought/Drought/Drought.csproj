@@ -59,9 +59,11 @@
     <Compile Include="Entity\MovableEntity.cs" />
     <Compile Include="Entity\NormalMap.cs" />
     <Compile Include="Entity\Path.cs" />
+    <Compile Include="Game States\NetLevelState.cs" />
     <Compile Include="Game States\LevelState.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Game States\SignInState.cs" />
     <Compile Include="Graphics\Model3D.cs" />
     <Compile Include="Menu\GameMenuItem.cs" />
     <Compile Include="Network\NetworkManager.cs" />

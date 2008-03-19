@@ -34,8 +34,12 @@ namespace Drought.Entity
 
         private bool selected, oldSelected;
 
-        public MovableEntity(Model3D model, Path path)
+        /** A unique identifier for this entity. */
+        public readonly int uniqueID;
+
+        public MovableEntity(Model3D model, Path path, int uid)
         {
+            uniqueID = uid;
             this.path = path;
             position = path.getPosition();
             prevPosition = path.getPosition();
@@ -118,6 +122,10 @@ namespace Drought.Entity
 
         public Vector3 getPosition() {
             return position;
+        }
+
+        public void setPosition(Vector3 aPosition) {
+            position = aPosition;
         }
 
         public void setSelected(bool selected) {

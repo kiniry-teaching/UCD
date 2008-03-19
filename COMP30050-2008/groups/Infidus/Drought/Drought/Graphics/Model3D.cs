@@ -55,10 +55,10 @@ namespace Drought.Graphics
                     
             textures = new Texture2D[textureCount];
 
-            int i = 0;
-            foreach (ModelMesh mesh in model.Meshes)
-                foreach (BasicEffect basicEffect in mesh.Effects)
-                    textures[i++] = basicEffect.Texture;
+            //int i = 0;
+            //foreach (ModelMesh mesh in model.Meshes)
+            //    foreach (BasicEffect basicEffect in mesh.Effects)
+            //        textures[i++] = basicEffect.Texture;
 
             foreach (ModelMesh mesh in model.Meshes)
                 foreach (ModelMeshPart meshPart in mesh.MeshParts)

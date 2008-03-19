@@ -80,7 +80,7 @@ namespace Drought
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //adding this in here to test
-            NetLevelState level = new LevelState(gameManager, this, "level_0", true);
+            LevelState level = new LevelState(gameManager, this, "level_0");
 
             gameManager.pushState(level);
             gameManager.pushState(menu);
