@@ -18,7 +18,7 @@ namespace Drought
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    class Game1 : Microsoft.Xna.Framework.Game
+    public class DroughtGame : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -32,7 +32,7 @@ namespace Drought
          */
         public static readonly bool NETWORKED = true;
 
-        public Game1()
+        public DroughtGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -149,6 +149,12 @@ namespace Drought
         public NetworkManager getNetworkManager()
         {
             return networkManager;
+        }
+
+        public static void Main(string[] args) {
+            using (DroughtGame game = new DroughtGame()) {
+                game.Run();
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Drought.GameStates {
         /** How many game updates this SignInState has waited. */
         private int waited;
 
-        public SignInState(IStateManager manager, Game game, bool wait) : base(manager, game) {
+        public SignInState(IStateManager manager, DroughtGame game, bool wait) : base(manager, game) {
             waited = wait ? 0 : 10;
         }
 

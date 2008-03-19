@@ -50,10 +50,10 @@ namespace Drought.GameStates
 
         private bool hosting;
 
-        public NetLevelState(IStateManager manager, Game game, string fileName, bool isHost) :
+        public NetLevelState(IStateManager manager, DroughtGame game, string fileName, bool isHost) :
             base(manager, game)
         {
-            networkManager = ((Game1)game).getNetworkManager();
+            networkManager = game.getNetworkManager();
             hosting = isHost;
 
             input = DeviceInput.getInput();

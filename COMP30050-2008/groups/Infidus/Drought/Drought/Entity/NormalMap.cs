@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Drought.Entity
 {
-    class NormalMap
+    public class NormalMap
     {
         private Vector3[,,] normals;
 

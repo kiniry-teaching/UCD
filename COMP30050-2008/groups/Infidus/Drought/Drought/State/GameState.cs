@@ -14,7 +14,7 @@ namespace Drought.State
         private IStateManager stateManager;
 
         /** The game that this state is running on */
-        private Game game;
+        private DroughtGame game;
 
         /** The content manager for this state to use to load content */
         private ContentManager content;
@@ -34,13 +34,13 @@ namespace Drought.State
          * @param game XNA's game class to get accesses to 
          *      resource managers and devices.
          */
-        public GameState(IStateManager manager, Game game)
+        public GameState(IStateManager manager, DroughtGame game)
         {
             this.game = game;
             stateManager = manager;
             this.content = game.Content;
             this.graphics = game.GraphicsDevice;
-            this.spriteBatch = ((Game1)game).getSpriteBatch();
+            this.spriteBatch = game.getSpriteBatch();
         }
 
         /**
@@ -110,7 +110,7 @@ namespace Drought.State
             return spriteBatch;
         }
 
-        public Game getGame()
+        public DroughtGame getGame()
         {
             return game;
         }

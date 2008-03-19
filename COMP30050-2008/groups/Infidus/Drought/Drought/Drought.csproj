@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DroughtGame.cs" />
     <Compile Include="Entity\MovableEntity.cs" />
     <Compile Include="Entity\NormalMap.cs" />
     <Compile Include="Entity\Path.cs" />
@@ -68,9 +69,7 @@
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\RemoteGame.cs" />
     <Compile Include="World\Camera.cs" />
-    <Compile Include="Core\Game1.cs" />
     <Compile Include="Core\GameManager.cs" />
-    <Compile Include="Core\Program.cs" />
     <Compile Include="Input\DeviceInput.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Terrain.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Game2.cs" />
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\IStateManager.cs" />
     <Compile Include="World\HeightMap.cs" />

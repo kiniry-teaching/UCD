@@ -37,7 +37,7 @@ namespace Drought.GameStates
 
         private Dictionary<int, Texture2D[]> modelTextures;
 
-        public LevelState(IStateManager manager, Game game, string fileName) :
+        public LevelState(IStateManager manager, DroughtGame game, string fileName) :
             base(manager, game)
         {
             input = DeviceInput.getInput();

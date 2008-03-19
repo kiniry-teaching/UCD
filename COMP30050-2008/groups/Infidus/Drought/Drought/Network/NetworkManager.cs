@@ -9,7 +9,7 @@ namespace Drought.Network
     /**
      * Manages network communication.
      */
-    class NetworkManager
+    public class NetworkManager
     {
         private static readonly int MAX_PLAYERS = 2;
 

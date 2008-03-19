@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Drought.Entity
 {
-    class Path
+    public class Path
     {
         /** The nodes that make up the path. */
         private List<Vector3> nodes;

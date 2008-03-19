@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 namespace Drought.Entity
 {
 
-    class MovableEntity
+    public class MovableEntity
     {
         private Vector3 position;
 
@@ -73,13 +73,12 @@ namespace Drought.Entity
                 //heading.Normalize();
 
                 //Console.WriteLine(normal);
-                /*
-                rotation.X = (float)Math.Atan2(normal.Y, normal.Z);
-                rotation.Y = (float)Math.Atan2(normal.X, normal.Z);
-                rotation.Z = (float)Math.Atan2(heading.Y, heading.X);
-                */
-
-                orientation = Matrix.CreateRotationZ((float)Math.Atan2(heading.Y, heading.X));
+                
+                float rotationX = (float) Math.Atan2(normal.Y, normal.Z);
+                float rotationY = (float) Math.Atan2(normal.X, normal.Z);
+                float rotationZ = (float) Math.Atan2(heading.Y, heading.X);
+                
+                orientation = Matrix.CreateRotationX(rotationX);
                 //Console.WriteLine("mz " + orientation);
                 //orientation.Up = normal;
                 //orientation.Right = Vector3.Cross(orientation.Forward, orientation.Up);
