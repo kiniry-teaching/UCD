@@ -32,6 +32,8 @@ namespace Drought.Entity
 
         private Model3D model;
 
+        private bool selected, oldSelected;
+
         public MovableEntity(Model3D model, Path path)
         {
             this.path = path;
@@ -43,6 +45,8 @@ namespace Drought.Entity
             orientation = Matrix.Identity;
             velocity = 0.05f;
             this.model = model;
+            selected = false;
+            oldSelected = false;
         }
 
         public void move()
@@ -76,6 +80,14 @@ namespace Drought.Entity
                 orientation.Right = Vector3.Normalize(orientation.Right);
                 orientation.Forward = Vector3.Cross(orientation.Up, orientation.Right);
                 orientation.Forward = Vector3.Normalize(orientation.Forward);
+
+                if (selected && !oldSelected) {
+                    Console.WriteLine("selected!");
+                }
+                if (!selected && oldSelected) {
+                    Console.WriteLine("unselected!");
+                }
+                oldSelected = selected;
             }
         }
 
@@ -91,11 +103,29 @@ namespace Drought.Entity
 
         public void render(GraphicsDevice graphics)
         {
-            position.Z += 10;
+            //position.Z += 10;
             model.position = position;
             model.rotationAngles = rotation;
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
-            model.render(graphics, orientation, position);
+            Matrix orientation = Matrix.Identity;
+            if (selected) {
+                model.render(graphics, orientation, position + new Vector3(0, 0, 20));
+            }
+            else {
+                model.render(graphics, orientation, position);
+            }
+        }
+
+        public Vector3 getPosition() {
+            return position;
+        }
+
+        public void setSelected(bool selected) {
+            this.selected = selected;
+        }
+
+        public bool isSelected() {
+            return selected;
         }
     }
 }

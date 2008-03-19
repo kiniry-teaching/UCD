@@ -9,11 +9,12 @@ using Drought.State;
 using Drought.Input;
 using Drought.GameStates;
 using Drought.Network;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace Drought.Menu
 {
     /** All the possible functions that can be performed from the menu. */
-    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, HOST, GAMELIST, GAMELIST_BACK, JOIN };
+    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, LOCAL, HOST, GAMELIST, GAMELIST_BACK, JOIN };
 
 
     class MenuState : GameState, IMenuListener
@@ -69,6 +70,12 @@ namespace Drought.Menu
             
             mainMenu = new Menu(this);
             mainMenu.activate();
+
+            MenuItem localGame = new MenuItem(MenuFunctions.LOCAL, "Local Game (Test)", defaultFont);
+            localGame.setScale(scale);
+            localGame.position = new Vector2(mainX, mainY);
+            mainMenu.addSelectableItem(localGame);
+            mainY += mainSpacing;
 
             MenuItem hostGame = new MenuItem(MenuFunctions.HOST, "Host Game", defaultFont);
             hostGame.setScale(scale);
@@ -184,10 +191,11 @@ namespace Drought.Menu
                 case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
                 case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
 
-                case MenuFunctions.HOST: ((Game1)getGame()).getNetworkManager().host(); getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
-                case MenuFunctions.GAMELIST: if (Game1.NETWORKED) { makeGameList(); currMenu = joinMenu; joinMenu.activate(); } break;
+                case MenuFunctions.LOCAL: getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
+                case MenuFunctions.HOST: ((Game1)getGame()).getNetworkManager().host(); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", true)); break;
+                case MenuFunctions.GAMELIST: makeGameList(); currMenu = joinMenu; joinMenu.activate(); break;
                 case MenuFunctions.GAMELIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
-                case MenuFunctions.JOIN: ((Game1)getGame()).getNetworkManager().connectToGame(((GameMenuItem)item).getGame()); getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
+                case MenuFunctions.JOIN: ((Game1)getGame()).getNetworkManager().connectToGame(((GameMenuItem)item).getGame()); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", false)); break;
             }
         }
 

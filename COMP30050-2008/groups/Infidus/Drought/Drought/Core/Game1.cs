@@ -25,7 +25,11 @@ namespace Drought
         GameManager gameManager;
         NetworkManager networkManager;
 
-        /** So we can turn it off for testing, since it takes so damn long to start up */
+        /**
+         * So we can turn it off for testing, since it takes so damn long to start up.
+         * NOTE: Only prevents the Gamer Services component from being initialized; if
+         * a game tries to host or join a game, nasty exceptions will ensue.
+         */
         public static readonly bool NETWORKED = true;
 
         public Game1()
@@ -76,10 +80,11 @@ namespace Drought
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //adding this in here to test
-            LevelState level = new LevelState(gameManager, this, "level_0");
+            NetLevelState level = new LevelState(gameManager, this, "level_0", true);
 
-            gameManager.pushState(menu);
             gameManager.pushState(level);
+            gameManager.pushState(menu);
+            gameManager.pushState(new SignInState(gameManager, this, true));
 
             base.Initialize();
         }

@@ -1,6 +1,7 @@
 using System;
-using Microsoft.Xna.Framework.Net;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Net;
 
 namespace Drought.Network
 {
@@ -22,6 +23,8 @@ namespace Drought.Network
 
         /** Used to unpack data for receiving. */
         private PacketReader packetReader = new PacketReader();
+
+        private static readonly ushort SENDCODE_POS = 42;
 
         /** Internal constructor; user classes should obtain a reference through SoundManager.getInstance() */
         private NetworkManager() { }
@@ -74,6 +77,26 @@ namespace Drought.Network
             Console.WriteLine("Connected to game: " + game.getDescription());
         }
 
+        public void sendPos(Vector3 position) {
+            packetWriter.Write(NetworkManager.SENDCODE_POS);
+            packetWriter.Write(position);
+            session.LocalGamers[0].SendData(packetWriter, SendDataOptions.None);
+        }
+
+        public Vector3 recievePos() {
+            if (session.LocalGamers[0].IsDataAvailable) {
+                NetworkGamer sender;
+                session.LocalGamers[0].ReceiveData(packetReader, out sender);
+                if (packetReader.ReadUInt16() == 42)
+                    return packetReader.ReadVector3();
+                else
+                    return new Vector3();
+            }
+            else {
+                return new Vector3();
+            }
+        }
+
         private void GameStarted(object sender, GameStartedEventArgs args)
         {
             
@@ -91,12 +114,12 @@ namespace Drought.Network
 
         private void GamerJoined(object sender, GamerJoinedEventArgs args)
         {
-
+            Console.WriteLine(args.Gamer.Gamertag + " joined the game");
         }
 
         private void GamerLeft(object sender, GamerLeftEventArgs args)
         {
-
+            Console.WriteLine(args.Gamer.Gamertag + " left the game");
         }
     }
 }
