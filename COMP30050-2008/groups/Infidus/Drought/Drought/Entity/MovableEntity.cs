@@ -71,10 +71,10 @@ namespace Drought.Entity
                 prevNormal.Y = normal.Y;
                 prevNormal.Z = normal.Z;
                 normal = path.getNormal();
-
-                heading = Vector3.Subtract(prevPosition, position);
-                heading.Normalize();
                 normal.Normalize();
+
+                heading = position - prevPosition;
+                heading.Normalize();
 
                 orientation.Up = normal;
                 orientation.Right = Vector3.Cross(orientation.Up, heading);
@@ -106,6 +106,9 @@ namespace Drought.Entity
         {
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
 
+            Matrix[] transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
+
             Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
 
             int i = 0;
@@ -115,7 +118,7 @@ namespace Drought.Entity
                 {
                     currentEffect.CurrentTechnique = effect.Techniques["Textured"];
 
-                    currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
+                    currentEffect.Parameters["xWorld"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix);
                     currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
                     currentEffect.Parameters["xProjection"].SetValue(camera.getProjectionMatrix());
                     currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
