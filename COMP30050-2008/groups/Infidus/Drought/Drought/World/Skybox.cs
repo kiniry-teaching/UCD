@@ -9,22 +9,58 @@ namespace Drought.World
 {
     class Skybox
     {
+        Camera camera;
+        Effect effect;
         Model model;
+        Texture2D[] modelTextures;
 
-        public Skybox(Camera camera, Model model)
+        public Skybox(Camera camera)
         {
-//            model.rotationAngles += new Vector3(MathHelper.PiOver2, 0, 0);
-//            model.scaleFactors += new Vector3(50, 50, 50);
+            this.camera = camera;
         }
 
-        public void update(GameTime gametime)
+        public void loadContent(ContentManager content, GraphicsDevice graphics)
         {
- //           model.position = model.camera.getPosition();
+            model = content.Load<Model>("Models/Skydome/dome");
+            effect = content.Load<Effect>("EffectFiles/model");
+
+            int textureCount = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+                textureCount += mesh.Effects.Count;
+
+            modelTextures = new Texture2D[textureCount];
+
+            int i = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+                foreach (BasicEffect basicEffect in mesh.Effects)
+                    modelTextures[i++] = basicEffect.Texture;
+
+            foreach (ModelMesh mesh in model.Meshes)
+                foreach (ModelMeshPart meshPart in mesh.MeshParts)
+                    meshPart.Effect = effect.Clone(graphics);
         }
 
-        public void render(GraphicsDevice graphics)
+        public void render()
         {
- //           model.render(graphics);
+            Matrix[] transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
+
+            Matrix worldMatrix = Matrix.CreateScale(5000, 5000, 5000) * Matrix.CreateTranslation(camera.getPosition() - new Vector3(0, 0, 1000));
+
+            int i = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                foreach (Effect currentEffect in mesh.Effects)
+                {
+                    currentEffect.CurrentTechnique = effect.Techniques["Textured"];
+
+                    currentEffect.Parameters["xWorld"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix);
+                    currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
+                    currentEffect.Parameters["xProjection"].SetValue(camera.getProjectionMatrix());
+                    currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
+                }
+                mesh.Draw();
+            }
         }
     }
 }
