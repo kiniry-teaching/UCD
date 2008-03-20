@@ -20,6 +20,8 @@ namespace Drought.GameStates
     {
         private Terrain terrain;
 
+        private Skybox skybox;
+
         private Camera camera;
 
         private HeightMap heightMap;
@@ -76,6 +78,8 @@ namespace Drought.GameStates
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap);
 
             camera = new Camera(game, heightMap);
+
+            skybox = new Skybox(camera);
 
             models = new Model[4];
             modelTextures = new Dictionary<int, Texture2D[]>();
@@ -148,6 +152,8 @@ namespace Drought.GameStates
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
+
+            skybox.loadContent(getContentManager(), getGraphics());
 
             for (int index = 0; index < models.Length; index++) {
                 Model model = models[index];
@@ -225,7 +231,7 @@ namespace Drought.GameStates
                 localEntities[i].update();
 
             foreach (MovableEntity entity in localEntities) {
-                //networkManager.sendPos(entity);
+                networkManager.sendPos(entity);
                 //Console.WriteLine("sent: " + entity.getPosition());
             }
             
@@ -306,6 +312,7 @@ namespace Drought.GameStates
             graphics.Clear(ClearOptions.DepthBuffer, Color.Black, 1.0f, 0);
 
             terrain.render();
+            skybox.render();
 
             for (int i = 0; i < localEntities.Count; i++)
                 localEntities[i].render(graphics, spriteBatch, camera, modelEffect);
