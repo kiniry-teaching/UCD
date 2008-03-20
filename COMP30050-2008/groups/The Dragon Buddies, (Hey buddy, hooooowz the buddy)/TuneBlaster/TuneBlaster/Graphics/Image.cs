@@ -8,7 +8,7 @@ namespace TuneBlaster_.Graphics
 {
     /// <summary>
     /// The base class for everything that appears onscreen
-    /// Author Hugh Corrigan
+    /// Author Hugh Corrigan, Ahmed Warreth
     /// </summary>
     class Image
     {

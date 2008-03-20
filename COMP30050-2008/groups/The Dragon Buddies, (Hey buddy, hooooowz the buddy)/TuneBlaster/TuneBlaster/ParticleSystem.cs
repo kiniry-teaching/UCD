@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-
-
-using TuneBlaster_.Graphics;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TuneBlaster_
-
 {
+
+    // Author Ahmed Warreth
+ 
     /// <summary>
     /// ParticleSystem is an abstract class that provides the basic functionality to
     /// create a particle effect. Different subclasses will have different effects,
@@ -27,7 +27,7 @@ namespace TuneBlaster_
 
         // a reference to the main game; we'll keep this around because it exposes a
         // content manager and a sprite batch for us to use.
-        private ParticleSampleGame game;
+        private Engine game;
 
         // the texture this particle system will use.
         private Texture2D texture;
@@ -145,7 +145,7 @@ namespace TuneBlaster_
         /// However, this value should be set to the minimum possible, because
         /// it has a large impact on the amount of memory required, and slows down the
         /// Update and Draw functions.</remarks>
-        protected ParticleSystem(ParticleSampleGame game, int howManyEffects)
+        protected ParticleSystem(Engine game, int howManyEffects)
             : base(game)
         {            
             this.game = game;
@@ -222,7 +222,7 @@ namespace TuneBlaster_
             // the number of particles we want for this effect is a random number
             // somewhere between the two constants specified by the subclasses.
             int numParticles = 
-                ParticleSampleGame.Random.Next(minNumParticles, maxNumParticles);
+                Engine.Random.Next(minNumParticles, maxNumParticles);
 
             // create that many particles, if you can.
             for (int i = 0; i < numParticles && freeParticles.Count > 0; i++)
@@ -251,15 +251,15 @@ namespace TuneBlaster_
 
             // pick some random values for our particle
             float velocity = 
-                ParticleSampleGame.RandomBetween(minInitialSpeed, maxInitialSpeed);
+                Engine.RandomBetween(minInitialSpeed, maxInitialSpeed);
             float acceleration = 
-                ParticleSampleGame.RandomBetween(minAcceleration, maxAcceleration);
+                Engine.RandomBetween(minAcceleration, maxAcceleration);
             float lifetime =
-                ParticleSampleGame.RandomBetween(minLifetime, maxLifetime);
+                Engine.RandomBetween(minLifetime, maxLifetime);
             float scale =
-                ParticleSampleGame.RandomBetween(minScale, maxScale);
+                Engine.RandomBetween(minScale, maxScale);
             float rotationSpeed =
-                ParticleSampleGame.RandomBetween(minRotationSpeed, maxRotationSpeed);
+                Engine.RandomBetween(minRotationSpeed, maxRotationSpeed);
 
             // then initialize it with those random values. initialize will save those,
             // and make sure it is marked as active.
@@ -275,7 +275,7 @@ namespace TuneBlaster_
         /// </summary>
         protected virtual Vector2 PickRandomDirection()
         {
-            float angle = ParticleSampleGame.RandomBetween(0, MathHelper.TwoPi);
+            float angle = Engine.RandomBetween(0, MathHelper.TwoPi);
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
 
@@ -310,14 +310,14 @@ namespace TuneBlaster_
         }
 
         /// <summary>
-        /// overriden from DrawableGameComponent, Draw will use ParticleSampleGame's 
+        /// overriden from DrawableGameComponent, Draw will use Engine's 
         /// sprite batch to render all of the active particles.
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
             // tell sprite batch to begin, using the spriteBlendMode specified in
             // initializeConstants
-            game.SpriteBatch.Begin(spriteBlendMode);
+            game.spriteBatch.Begin(spriteBlendMode);
             
             foreach (Particle p in particles)
             {
@@ -348,15 +348,36 @@ namespace TuneBlaster_
                 // and increase to 100% once they're finished.
                 float scale = p.Scale * (.75f + .25f * normalizedLifetime);
 
-                game.SpriteBatch.Draw(texture, p.Position, null, color,
+                game.spriteBatch.Draw(texture, p.Position, null, color,
                     p.Rotation, origin, scale, SpriteEffects.None, 0.0f);
             }
 
-            game.SpriteBatch.End();
+            game.spriteBatch.End();
 
             base.Draw(gameTime);
         }
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 

@@ -6,6 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework;
 
+
+
+
+// Author Hugh, Ahmmed
+
 namespace TuneBlaster_.Graphics
 {
     class Core : Image
@@ -17,6 +22,8 @@ namespace TuneBlaster_.Graphics
         public float acceleration;
         public List<FixedBall> balls;
         static float maxAcceleration = 0.05f;
+        
+        
 
         #endregion
 
@@ -28,6 +35,7 @@ namespace TuneBlaster_.Graphics
         public Core()
         {
             balls = new List<FixedBall>();
+          
         }
 
         /*
@@ -57,6 +65,10 @@ namespace TuneBlaster_.Graphics
          */
         public void Update(GameTime gameTime, KeyboardState keyBoardState, GamePadState gamePadState)
         {
+
+           
+            
+            
             for (int i = 0; i < balls.Count; i++)
             {
                 if (balls[i] != null)
@@ -65,6 +77,14 @@ namespace TuneBlaster_.Graphics
                     {
                         balls.Remove(balls[i]);
                         ballsSize--;
+
+                  
+                       
+
+
+
+
+
                     }
                 }
             }
@@ -87,6 +107,7 @@ namespace TuneBlaster_.Graphics
             for (int i = 0; i < ballsSize; i++) 
             {
                 balls[i].Move(rotation - oldRotation);
+
             }           
         }
 
@@ -105,6 +126,13 @@ namespace TuneBlaster_.Graphics
          */
         public void CheckExplosions()
         {
+
+            Vector2 where = Vector2.Zero;
+            where.X = 65.0f;//need to change this posiotn to the postion of\ one of the balls
+            where.Y = 128.0f;//eed to change this posiotn to the positon of one of the balls
+            
+
+
             for (int i = 0; i < ballsSize; i++)
             {
                 if (balls[i] != null)
@@ -112,6 +140,15 @@ namespace TuneBlaster_.Graphics
                     if (balls[i].numInContact > 4)
                     {
                         balls[i].Destroy();
+
+                       
+                       Engine.explosion.AddParticles(where);
+                       Engine.smoke.AddParticles(where);
+
+                     
+
+                        //to put in code for explosion
+                      
                     }
                 }
             }

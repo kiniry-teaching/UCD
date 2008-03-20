@@ -18,20 +18,32 @@ namespace TuneBlaster_
     /// Defalt Class
     /// Authors Hugh Corrigan, Ahmed Warreth
     /// </summary>
+    /// 
+
+
+
     public class Engine : Microsoft.Xna.Framework.Game
     {
         
         GraphicsDeviceManager graphics;
         ContentManager content;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
+
+        // a random number generator that the whole sample can share.
+        public static Random Random = new Random();
+        
+
         Texture2D texture;
         Core core;
         BallManager ball;
         Image background;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+        public static ExplosionParticleSystem explosion;
+        public static ExplosionSmokeParticleSystem smoke;
         
         public Engine()
         {
+
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
             core = new Core();
@@ -39,9 +51,24 @@ namespace TuneBlaster_
             background = new Image();
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
+            explosion = new ExplosionParticleSystem(this,1);
+            Components.Add(explosion);
+            smoke = new ExplosionSmokeParticleSystem(this, 2);
+            Components.Add(smoke);
 
             //this.graphics.IsFullScreen = true;
         }
+
+
+
+        // gives a random float between two values
+        public static float RandomBetween(float min, float max)
+        {
+            return min + (float)Random.NextDouble() * (max - min);
+        }
+
+
+
 
 
         /// <summary>
@@ -56,6 +83,7 @@ namespace TuneBlaster_
             background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
             ball.Initialise();
             base.Initialize();
+            //Content.RootDirectory = "Content";
         }
 
 
@@ -80,6 +108,11 @@ namespace TuneBlaster_
 
             // TODO: Load any ResourceManagementMode.Manual content
         }
+
+
+
+      
+
 
 
         /// <summary>
@@ -108,8 +141,8 @@ namespace TuneBlaster_
             // Allows the default game to exit on Xbox 360 and Windows
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
-            ball.Update(gameTime);
+           core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+           ball.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
