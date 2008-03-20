@@ -1,5 +1,0 @@
-C:\Documents and Settings\Hugh\My Documents\Software Project\TuneBlaster\TuneBlaster\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Hugh\My Documents\Software Project\Software\TuneBlaster\TuneBlaster\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Hugh\My Documents\Software Project\Software\TuneBlaster\TuneBlaster\obj\x86\Debug\TuneBlaster!.pdb
-C:\Documents and Settings\Hugh\My Documents\Software Project\Kangaroo Jump\TuneBlaster\TuneBlaster\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Hugh\My Documents\Software Project\Kangaroo Jump\TuneBlaster\TuneBlaster\obj\x86\Debug\TuneBlaster!.pdb
