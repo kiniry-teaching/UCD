@@ -33,12 +33,14 @@ namespace Drought.Entity
 
         private Texture2D[] modelTextures;
 
+        private Texture2D selector;
+
         private bool selected, oldSelected;
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(Model model, Texture2D[] modelTextures, Path path, int uid)
+        public MovableEntity(Model model, Texture2D[] modelTextures, Texture2D circle, Path path, int uid)
         {
             uniqueID = uid;
             this.path = path;
@@ -51,6 +53,7 @@ namespace Drought.Entity
             velocity = 0.05f;
             this.model = model;
             this.modelTextures = modelTextures;
+            selector = circle;
             selected = false;
             oldSelected = false;
         }
@@ -80,10 +83,10 @@ namespace Drought.Entity
                 orientation.Forward = Vector3.Normalize(orientation.Forward);
 
                 if (selected && !oldSelected) {
-                    Console.WriteLine("selected!");
+                    //Console.WriteLine("selected!");
                 }
                 if (!selected && oldSelected) {
-                    Console.WriteLine("unselected!");
+                    //Console.WriteLine("unselected!");
                 }
                 oldSelected = selected;
             }
@@ -99,11 +102,9 @@ namespace Drought.Entity
             move();
         }
 
-        public void render(GraphicsDevice graphics, Camera camera, Effect effect)
+        public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect)
         {
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
-            if (selected)
-                position += new Vector3(0, 0, 20);
 
             Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
 
@@ -120,6 +121,18 @@ namespace Drought.Entity
                     currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
                 }
                 mesh.Draw();
+            }
+
+            if (selected) {
+                Vector3 v3 = graphics.Viewport.Project(position, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+                if (v3.Z < 1) {
+                    batch.Begin();
+                    Vector3 dist = camera.getPosition() - position;
+                    int radius = 20;
+                    Rectangle recty = new Rectangle((int)v3.X - radius, (int)v3.Y - radius, radius*2, radius*2);
+                    batch.Draw(selector, recty, Color.White);
+                    batch.End();
+                }
             }
         }
 

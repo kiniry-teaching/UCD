@@ -230,7 +230,7 @@ namespace Drought.GameStates
             terrain.render();
 
             for (int i = 0; i < entities.Count; i++)
-                entities[i].render(graphics, camera, modelEffect);
+                entities[i].render(graphics, spriteBatch, camera, modelEffect);
         }
     }
 }

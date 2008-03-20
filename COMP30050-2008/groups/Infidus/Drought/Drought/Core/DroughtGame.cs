@@ -36,6 +36,7 @@ namespace Drought
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
             if (NETWORKED) {
                 Components.Add(new GamerServicesComponent(this));
             }
@@ -77,6 +78,8 @@ namespace Drought
             input.bind(GameKeys.CAM_ROTATE_DOWN, Keys.Down, ModifierKeys.NONE);
             input.bind(GameKeys.CAM_ROTATE_LEFT, Keys.Left, ModifierKeys.NONE);
             input.bind(GameKeys.CAM_ROTATE_RIGHT, Keys.Right, ModifierKeys.NONE);
+            
+            input.bind(GameKeys.MOUSE_CLICK, MouseButtons.LEFT, ModifierKeys.NONE);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 

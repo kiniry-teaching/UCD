@@ -32,8 +32,6 @@ namespace Drought.GameStates
 
         private DeviceInput input;
 
-        private List<MovableEntity> entities;
-
         private Effect modelEffect;
 
         private Dictionary<int, Texture2D[]> modelTextures;
@@ -49,6 +47,21 @@ namespace Drought.GameStates
         private NetworkManager networkManager;
 
         private bool hosting;
+
+        private Texture2D selector;
+
+        private bool clickCurrent;
+
+        private int startClickX, startClickY;
+        private int currClickX, currClickY;
+
+        BasicEffect basicEffect;
+
+        VertexDeclaration vertexDeclaration;
+        VertexPositionNormalTexture[] pointList;
+        VertexBuffer vertexBuffer;
+
+        IndexBuffer lineStripIndexBuffer;
 
         public NetLevelState(IStateManager manager, DroughtGame game, string fileName, bool isHost) :
             base(manager, game)
@@ -76,40 +89,50 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
             
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
 
             uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
             
             if (hosting) {
                 List<MovableEntity> tempList = localEntities;
                 localEntities = remoteEntities;
                 remoteEntities = tempList;
             }
+
+            foreach (MovableEntity entity in localEntities) {
+                entity.setSelected(true);
+            }
+
+            vertexDeclaration = new VertexDeclaration(getGraphics(), VertexPositionNormalTexture.VertexElements);
+
+            pointList = new VertexPositionNormalTexture[5];
+            basicEffect = new BasicEffect(getGraphics(), null);
+            basicEffect.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
         public override void loadContent()
@@ -146,6 +169,8 @@ namespace Drought.GameStates
                     foreach (ModelMeshPart meshPart in mesh.MeshParts)
                         meshPart.Effect = modelEffect.Clone(getGraphics());
             }
+
+            selector = getContentManager().Load<Texture2D>("Textures/selector");
         }
 
         public override void background()
@@ -213,6 +238,57 @@ namespace Drought.GameStates
                         entity.setPosition(vec);
                 //if (vec != new Vector3()) Console.WriteLine("recieved: " + vec);
             }
+
+            /* Selecting units */
+            if (!clickCurrent && input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
+                clickCurrent = true;
+                startClickX = input.getMouseX();
+                startClickY = input.getMouseY();
+                currClickX = startClickX;
+                currClickY = startClickY;
+                UpdatePointsList();
+                //Console.WriteLine("started bounding");
+            }
+            else if (clickCurrent && !input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
+                clickCurrent = false;
+                Rectangle bounds = new Rectangle(startClickX, startClickY, input.getMouseX() - startClickX, input.getMouseY() - startClickY);
+                foreach (MovableEntity entity in localEntities) {
+                    entity.setSelected(false);
+                    Vector3 v3 = getGraphics().Viewport.Project(entity.getPosition(), camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+                    if (v3.Z < 1) {
+                        if (bounds.Contains(new Point((int)v3.X, (int)v3.Y))) {
+                            entity.setSelected(true);
+                        }
+                    }
+                }
+                //Console.WriteLine("ended bounding");
+            }
+            else if (clickCurrent) {
+                currClickX = input.getMouseX();
+                currClickY = input.getMouseY();
+                UpdatePointsList();
+            }
+        }
+
+        private void UpdatePointsList() {
+            int screenX = getGraphics().Viewport.Width / 2;
+            int screenY = getGraphics().Viewport.Height / 2;
+            pointList[0] = new VertexPositionNormalTexture(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
+            pointList[1] = new VertexPositionNormalTexture(new Vector3((currClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
+            pointList[2] = new VertexPositionNormalTexture(new Vector3((currClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
+            pointList[3] = new VertexPositionNormalTexture(new Vector3((startClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
+            pointList[4] = new VertexPositionNormalTexture(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
+
+            vertexBuffer = new VertexBuffer(getGraphics(), VertexPositionNormalTexture.SizeInBytes * (pointList.Length), BufferUsage.None);
+            vertexBuffer.SetData<VertexPositionNormalTexture>(pointList);
+            short[] lineStripIndices = new short[5];
+
+            for (int i = 0; i < 4; i++)
+                lineStripIndices[i] = (short)(i + 1);
+
+            lineStripIndices[4] = 1;
+            lineStripIndexBuffer = new IndexBuffer(getGraphics(), sizeof(short) * lineStripIndices.Length, BufferUsage.None, IndexElementSize.SixteenBits);
+            lineStripIndexBuffer.SetData<short>(lineStripIndices);
         }
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
@@ -232,9 +308,36 @@ namespace Drought.GameStates
             terrain.render();
 
             for (int i = 0; i < localEntities.Count; i++)
-                localEntities[i].render(graphics, camera, modelEffect);
+                localEntities[i].render(graphics, spriteBatch, camera, modelEffect);
             for (int i = 0; i < remoteEntities.Count; i++)
-                remoteEntities[i].render(graphics, camera, modelEffect);
+                remoteEntities[i].render(graphics, spriteBatch, camera, modelEffect);
+
+            if (clickCurrent) {
+
+                graphics.VertexDeclaration = vertexDeclaration;
+
+                basicEffect.Begin();
+                foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes) {
+                    pass.Begin();
+
+                    if (clickCurrent) {
+                        graphics.Vertices[0].SetSource(vertexBuffer, 0, VertexPositionNormalTexture.SizeInBytes);
+
+                        graphics.Indices = lineStripIndexBuffer;
+
+                        graphics.DrawIndexedPrimitives(
+                            PrimitiveType.LineStrip,
+                            0, // vertex buffer offset to add to each element of the index buffer
+                            0, // minimum vertex index
+                            5, // number of vertices
+                            0, // first index element to read
+                            4);// number of primitives to draw
+                    }
+
+                    pass.End();
+                }
+                basicEffect.End();
+            }
         }
     }
 }
