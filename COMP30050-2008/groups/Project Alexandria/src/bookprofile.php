@@ -26,7 +26,7 @@ echo(
 		<b>ISBN:</b> " . $isbn . "<br/>"
 );
 
-$detailsArray = array($publisher, $noOfPages, $binding, $ddc, $lcc);
+$detailsArray = array($publisher, $noOfPages, $binding, $ddc, $lcc, $noOfCopies);
 
 for($k=0; $k<count($detailsArray); $k++){
 	if($detailsArray[$k] != NULL && $detailsArray[$k] != '0'){
@@ -35,7 +35,8 @@ for($k=0; $k<count($detailsArray); $k++){
 			case 1: echo("<b>No of Pages:</b> " . $noOfPages . "<br/>"); break;
 			case 2: echo("<b>Edition:</b> " . $binding . "<br/>"); break;
 			case 3: echo("<b>DDC:</b> " . $ddc . "<br/>"); break;
-			case 4: echo("<b>LCC:</b> " . $lcc); break;
+			case 4: echo("<b>LCC:</b> " . $lcc . "<br/>"); break;
+			case 5: echo("<b>Number of Copies:</b> " . $noOfCopies); break;
 		}
 	}
 }
@@ -47,9 +48,13 @@ if($description != NULL){
 echo "<p><b>Availability:</b> ";
 	availability($isbn);
 echo "</p>";
-/*requestBook($isbn, $username);
-noOfRequests($isbn);
-getReviewed($isbn, $username);*/
+//requestBook($isbn, $username);
+echo "<p><b>Number of requests:</b> ";
+	noOfRequests($isbn);
+echo "</p>";
+echo "<p><b>User Reviews</b><br/>";
+	getReviewed($isbn, '*');
+echo "</p>";
 ?>
 </div>
 <?php

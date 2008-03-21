@@ -68,9 +68,10 @@ function availability($isbn){
 		$noOfCopies=$row['noOfCopies'];
 	}
 	
-	$noOfCopies_onLoan = mysql_query("SELECT COUNT(*)
+	$result = mysql_query("SELECT *
 		FROM books_onloan
 			WHERE isbn='$isbn'");
+	$noOfCopies_onLoan = mysql_num_rows($result);
 	
 	if($noOfCopies == $noOfCopies_onLoan){
 		echo "On Loan";
@@ -105,11 +106,16 @@ function requestBook($isbn, $username){
 * returned.														*
 * 																*
 ****************************************************************/
-/*
-function noOfRequests($isbn){
-	//TODO - Ryan - See comment
-}*/
 
+function noOfRequests($isbn){
+	include("connection.php"); //Connects to the database
+	$result = mysql_query("SELECT *
+		FROM books_requests
+			WHERE isbn = '$isbn'
+	");
+	$number = mysql_num_rows($result);
+	echo $number;
+}
 /****************************************************************
 * 																*
 * getReviewed(isbn, username)									*
@@ -121,9 +127,22 @@ function noOfRequests($isbn){
 * those match from the rows of books_reviewed.					*
 * 																*
 ****************************************************************/
-/*
+
 function getReviewed($isbn, $username){
-	//TODO - Ryan - See comment
-}*/
+	include("connection.php"); //Connects to the database
+	$result = mysql_query("SELECT *
+		FROM books_review
+			WHERE isbn='$isbn' AND username='$username'");
+
+	while($row = mysql_fetch_array($result)){
+		echo "<div class='reviewrow'>";
+			echo "<div class='reviewer'>" . $row['username'] . "</div>";
+			echo "<div class='rating'>" . $row['rating'] . "</div>";
+			echo "<div class='review'>" . $row['review'] . "</div>";
+			echo "<p><a href=''>Add a review</a></p>";
+		echo "</div>";
+	}
+
+}
 
 ?>

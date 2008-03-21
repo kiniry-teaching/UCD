@@ -138,7 +138,7 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	mysql_query($sql,$con);	
 	
-	$sql = 'DROP TABLE IF EXISTS `books_reviews`';
+	$sql = 'DROP TABLE IF EXISTS `books_review`';
 	mysql_query($sql,$con);	
 	
 	$sql = "CREATE TABLE books_review 
