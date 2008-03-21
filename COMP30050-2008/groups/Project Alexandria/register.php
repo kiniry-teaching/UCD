@@ -16,7 +16,11 @@ $email2 = $_POST[email2];
 $password1 = $_POST[password1];
 $password2 = $_POST[password2];
 
-if($username==) //incomplete check if that username already exsists in the database
+//the following checks if the entered username already exsists in the database
+$result = mysql_query("SELECT * FROM users	
+   WHERE username ='$username'");
+$ANOTHER_VARIABLE = mysql_num_rows($result);
+if($ANOTHER_VARIABLE != 0)
 	{echo "<p>". $username ."already exists, please try another username</p>";}
 else if($email1 != $email2) //compares the two entered email addresses
 	{echo "e-mail addresses do not match, please try again";}
