@@ -43,6 +43,12 @@
 		
 	}
 
+	.search_image_header, .search_image{
+		width:9em;
+		display:inline-block;
+		overflow:hidden;
+	}
+
 	.search_isbn_header, .search_isbn{
 		width:9em;
 		height:1.5em;

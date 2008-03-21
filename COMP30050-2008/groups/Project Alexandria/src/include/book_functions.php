@@ -145,4 +145,51 @@ function getReviewed($isbn, $username){
 
 }
 
+/****************************************************************
+* 																*
+* tableOfBooks(searchterm, category)							*
+* This uses a sql query inside a while loop to retrieve and		*
+* print out a table containing all key details on books where	*
+* the “category” (column) equals the “search term”. The table	*
+* produced will have hyperlinked headers and the title of the	*
+* books will be hyperlinked to that books profile page by use of*
+* its ISBN.														*
+* Data being transmitted:										*
+* The “search term” and “category” are sent and the relevant	*
+* details (by default the title, long title, author and genre)	*
+* are returned.													*
+* 																*
+****************************************************************/
+
+function tableOfBooks($searchterm, $category, $order){
+	echo "<div id='search_table'>";
+	
+		echo "<div class='search_row_header'>";
+			echo "<div class='search_image_header'>Image</div>";
+			echo "<div class='search_title_header'><a href='search.php?searchterm=" . $searchterm . "&category=" . $category . "&order=title&state=2'>Title</a></div>";
+			echo "<div class='search_titleLong_header'><a href='search.php?searchterm=" . $searchterm . "&category=" . $category . "&order=titleLong&state=2'>Title (Long)</a></div>";
+			echo "<div class='search_authors_header'><a href='search.php?searchterm=" . $searchterm . "&category=" . $category . "&order=authors&state=2'>Authors</a></div>";
+			echo "<div class='search_publisher_header'><a href='search.php?searchterm=" . $searchterm . "&category=" . $category . "&order=publisher&state=2'>Publisher</a></div>";
+			echo "<div class='search_noOfPages_header'><a href='search.php?searchterm=" . $searchterm . "&category=" . $category . "&order=noOfPages&state=2'>No. of Pages</a></div>";
+			echo "<div class='search_binding_header'><a href='search.php?searchterm=" . $searchterm . "&category=" . $category . "&order=binding&state=2'>Binding</a></div>";
+		echo "</div>";
+	include('connection.php');
+	$result = mysql_query("SELECT * FROM books
+	WHERE $category LIKE '%$searchterm%'
+		ORDER BY $order");
+	
+	while($row = mysql_fetch_array($result)){
+		echo "<div class='search_row'>";
+			echo "<div class='search_image'><a href='" . $row['largeImg'] . "'><img src='" . $row['smallImg'] . "' alt='CLick to enlarge' /></a></div>";
+			echo "<div class='search_title'><a href='bookprofile.php?isbn=" . $row['isbn'] . "'>" . $row['title'] . "</a></div>";
+			echo "<div class='search_titleLong'>" . $row['titleLong'] . "</div>";
+			echo "<div class='search_authors'><a href='search.php?searchterm=" . $row['authors'] . "&category=authors&state=1'>" . $row['authors'] . "</a></div>";
+			echo "<div class='search_publisher'>" . $row['publisher'] . "</div>";
+			echo "<div class='search_noOfPages'>" . $row['noOfPages'] . "</div>";
+			echo "<div class='search_binding'>" . $row['binding'] . "</div>";
+		echo "</div>";
+	}
+	
+	echo "</div><!--End of search_table-->";
+}
 ?>
