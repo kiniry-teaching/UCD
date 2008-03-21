@@ -128,15 +128,9 @@ namespace Drought.Menu
             defaultFont = getContentManager().Load<SpriteFont>("Fonts\\TestFont");
         }
 
-        public override void background()
-        {
+        public override void background() { }
 
-        }
-
-        public override void foreground()
-        {
-
-        }
+        public override void foreground() { }
 
         public override void update(GameTime gameTime)
         {

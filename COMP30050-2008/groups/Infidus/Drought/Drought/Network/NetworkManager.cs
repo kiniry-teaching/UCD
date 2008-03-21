@@ -80,6 +80,11 @@ namespace Drought.Network
             Console.WriteLine("Connected to game: " + game.getDescription());
         }
 
+        public void disconnect() {
+            session.Dispose();
+            session = null;
+        }
+
         public bool hasMoreData() {
             return session.LocalGamers[0].IsDataAvailable;
         }

@@ -8,7 +8,7 @@ namespace Drought.Input
     /** The game's available commands */
     public enum GameKeys : int { MENU_NEXT, MENU_PREV, MENU_PRESS, UP, DOWN, LEFT, RIGHT, QUIT, CHANGE_STATE,
                                 CAM_FORWARD, CAM_BACK, CAM_LEFT, CAM_RIGHT, CAM_ASCEND, CAM_DESCEND, CAM_ZOOM_IN, CAM_ZOOM_OUT,
-                                CAM_ROTATE_UP, CAM_ROTATE_DOWN, CAM_ROTATE_LEFT, CAM_ROTATE_RIGHT, MOUSE_CLICK};
+                                CAM_ROTATE_UP, CAM_ROTATE_DOWN, CAM_ROTATE_LEFT, CAM_ROTATE_RIGHT, MOUSE_CLICK, RESET};
 
     /** Keys that can be used as modifier keys */
     public enum ModifierKeys : int { NONE, CTRL, ALT, SHIFT };

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Drought.Entity;
 using Drought.Input;
 using Drought.Network;
+using Drought.Core;
 
 namespace Drought.GameStates
 {
@@ -57,13 +58,7 @@ namespace Drought.GameStates
         private int startClickX, startClickY;
         private int currClickX, currClickY;
 
-        BasicEffect basicEffect;
-
-        VertexDeclaration vertexDeclaration;
-        VertexPositionNormalTexture[] pointList;
-        VertexBuffer vertexBuffer;
-
-        IndexBuffer lineStripIndexBuffer;
+        LineTool lineTool;
 
         public NetLevelState(IStateManager manager, DroughtGame game, string fileName, bool isHost) :
             base(manager, game)
@@ -132,11 +127,7 @@ namespace Drought.GameStates
                 entity.setSelected(true);
             }
 
-            vertexDeclaration = new VertexDeclaration(getGraphics(), VertexPositionNormalTexture.VertexElements);
-
-            pointList = new VertexPositionNormalTexture[5];
-            basicEffect = new BasicEffect(getGraphics(), null);
-            basicEffect.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+            lineTool = new LineTool(getGraphics());
         }
 
         public override void loadContent()
@@ -166,6 +157,7 @@ namespace Drought.GameStates
 
                 int i = 0;
                 foreach (ModelMesh mesh in model.Meshes)
+                    //foreach (BasicEffect basicEffect in mesh.Effects)
                     foreach (BasicEffect basicEffect in mesh.Effects)
                         textures[i++] = basicEffect.Texture;
 
@@ -222,7 +214,13 @@ namespace Drought.GameStates
                 camera.rotateLeft();
             else if (input.isKeyPressed(GameKeys.CAM_ROTATE_RIGHT))
                 camera.rotateRight();
-            
+
+            if (input.isKeyPressed(GameKeys.RESET)) {
+                networkManager.disconnect();
+                getStateManager().popState();
+                return;
+            }
+
             camera.update(gameTime);
             terrain.setViewMatrix(camera.getViewMatrix());
             terrain.update(gameTime);
@@ -252,7 +250,6 @@ namespace Drought.GameStates
                 startClickY = input.getMouseY();
                 currClickX = startClickX;
                 currClickY = startClickY;
-                UpdatePointsList();
                 //Console.WriteLine("started bounding");
             }
             else if (clickCurrent && !input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
@@ -269,32 +266,19 @@ namespace Drought.GameStates
                 }
                 //Console.WriteLine("ended bounding");
             }
-            else if (clickCurrent) {
+            if (clickCurrent) {
                 currClickX = input.getMouseX();
                 currClickY = input.getMouseY();
-                UpdatePointsList();
+                int screenX = getGraphics().Viewport.Width / 2;
+                int screenY = getGraphics().Viewport.Height / 2;
+                List<Vector3> boundingBox = new List<Vector3>();
+                boundingBox.Add(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0));
+                boundingBox.Add(new Vector3((currClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0));
+                boundingBox.Add(new Vector3((currClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0));
+                boundingBox.Add(new Vector3((startClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0));
+                boundingBox.Add(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0));
+                lineTool.setPointsList(boundingBox);
             }
-        }
-
-        private void UpdatePointsList() {
-            int screenX = getGraphics().Viewport.Width / 2;
-            int screenY = getGraphics().Viewport.Height / 2;
-            pointList[0] = new VertexPositionNormalTexture(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
-            pointList[1] = new VertexPositionNormalTexture(new Vector3((currClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
-            pointList[2] = new VertexPositionNormalTexture(new Vector3((currClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
-            pointList[3] = new VertexPositionNormalTexture(new Vector3((startClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
-            pointList[4] = new VertexPositionNormalTexture(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0), Vector3.Forward, new Vector2());
-
-            vertexBuffer = new VertexBuffer(getGraphics(), VertexPositionNormalTexture.SizeInBytes * (pointList.Length), BufferUsage.None);
-            vertexBuffer.SetData<VertexPositionNormalTexture>(pointList);
-            short[] lineStripIndices = new short[5];
-
-            for (int i = 0; i < 4; i++)
-                lineStripIndices[i] = (short)(i + 1);
-
-            lineStripIndices[4] = 1;
-            lineStripIndexBuffer = new IndexBuffer(getGraphics(), sizeof(short) * lineStripIndices.Length, BufferUsage.None, IndexElementSize.SixteenBits);
-            lineStripIndexBuffer.SetData<short>(lineStripIndices);
         }
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
@@ -320,30 +304,7 @@ namespace Drought.GameStates
                 remoteEntities[i].render(graphics, spriteBatch, camera, modelEffect);
 
             if (clickCurrent) {
-
-                graphics.VertexDeclaration = vertexDeclaration;
-
-                basicEffect.Begin();
-                foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes) {
-                    pass.Begin();
-
-                    if (clickCurrent) {
-                        graphics.Vertices[0].SetSource(vertexBuffer, 0, VertexPositionNormalTexture.SizeInBytes);
-
-                        graphics.Indices = lineStripIndexBuffer;
-
-                        graphics.DrawIndexedPrimitives(
-                            PrimitiveType.LineStrip,
-                            0, // vertex buffer offset to add to each element of the index buffer
-                            0, // minimum vertex index
-                            5, // number of vertices
-                            0, // first index element to read
-                            4);// number of primitives to draw
-                    }
-
-                    pass.End();
-                }
-                basicEffect.End();
+                lineTool.render();
             }
         }
     }

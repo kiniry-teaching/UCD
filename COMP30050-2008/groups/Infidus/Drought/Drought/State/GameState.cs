@@ -38,7 +38,8 @@ namespace Drought.State
         {
             this.game = game;
             stateManager = manager;
-            this.content = game.Content;
+            this.content = new ContentManager(game.Services);
+            this.content.RootDirectory = "Content";
             this.graphics = game.GraphicsDevice;
             this.spriteBatch = game.getSpriteBatch();
         }
@@ -48,7 +49,7 @@ namespace Drought.State
          * This occurrs when XNA calls LoadContent().
          */
         public abstract void loadContent();
-        
+
         /**
          * Logic to execute when another state is pushed on top of this one in the
          * state manager's stack.
