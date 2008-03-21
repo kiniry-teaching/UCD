@@ -15,6 +15,7 @@ if ($_POST["state"] == 1){ //If you're editing book data
 }
 ?>
 	<h1>Edit A Book</h1>
+	<p><a href="adminbook.php">Book Admin</a></p>
 	<form action="adminbookedit.php<?php echo "?isbn=".$isbn?>" method="post">
 		<div class="formrow"><div class="formtext">ISBN: </div><div class="forminput"><p><?php echo $isbn; ?></p></div></div>
 		<div class="formrow"><div class="formtext">Title: </div><div class="forminput"><input type="text" name="title" value="<?php echo $title; ?>" /></div></div>
@@ -29,7 +30,7 @@ if ($_POST["state"] == 1){ //If you're editing book data
 		<div class="formrow"><div class="formtext">Medium Image URL: </div><div class="forminput"><input type="text" name="mediumImg" value="<?php echo $mediumImg; ?>" /></div></div>
 		<div class="formrow"><div class="formtext">Large Image URL: </div><div class="forminput"><input type="text" name="largeImg" value="<?php echo $largeImg; ?>" /></div></div>
 		<div class="formrow"><div class="formtext">Description: </div><div class="forminput"><textarea name="description"><?php echo $description; ?></textarea></div></div>
-		<div class="formrow"><div class="formtext">Number of Copies: </div><div class="forminput"><input type="text" name="noOfCopies" value="1" /></div></div>
+		<div class="formrow"><div class="formtext">Number of Copies: </div><div class="forminput"><input type="text" name="noOfCopies" value="<?php echo $noOfCopies; ?>" /></div></div>
 		<div class="formbutton"><input type="hidden" name="state" value="1" /><input type="submit" value="Edit" /></div>
 	</form>
 

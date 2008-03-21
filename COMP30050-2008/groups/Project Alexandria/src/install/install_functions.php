@@ -104,8 +104,10 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_onloan 
 	(
-		isbnUsername varchar(239) NOT NULL,
-		PRIMARY KEY(isbnUsername ),
+		no int NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(no),
+		isbn varchar(13) NOT NULL,
+		username varchar(30) NOT NULL,
 		date int
 	)";
 	mysql_query($sql,$con);	
@@ -115,10 +117,12 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_requests 
 	(
-		requestNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(requestNo),
-		isbnUsername text
+		no int NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(no),
+		isbn varchar(13) NOT NULL,
+		username varchar(30) NOT NULL
 	)";
+	
 	mysql_query($sql,$con);	
 	
 	$sql = 'DROP TABLE IF EXISTS `books_returned`';
@@ -126,10 +130,12 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	$sql = "CREATE TABLE books_returned 
 	(
-		returnNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(returnNo),
-		isbnUsername text
+		no int NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(no),
+		isbn varchar(13) NOT NULL,
+		username varchar(30) NOT NULL
 	)";
+	
 	mysql_query($sql,$con);	
 	
 	$sql = 'DROP TABLE IF EXISTS `books_reviews`';
@@ -137,9 +143,10 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	$sql = "CREATE TABLE books_review 
 	(
-		reviewNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(reviewNo),
-		isbnUsername text,
+		no int NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(no),
+		isbn varchar(13) NOT NULL,
+		username varchar(30) NOT NULL,
 		rating int(5),
 		review text
 	)";

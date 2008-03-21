@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include("include/header.php");
 ?>
 <div id="bookprofile">
@@ -29,7 +29,7 @@ echo(
 $detailsArray = array($publisher, $noOfPages, $binding, $ddc, $lcc);
 
 for($k=0; $k<count($detailsArray); $k++){
-	if($detailsArray[$k] != NULL){
+	if($detailsArray[$k] != NULL && $detailsArray[$k] != '0'){
 		switch ($k){
 			case 0: echo("<b>Publisher:</b> " . $publisher . "<br/>"); break;
 			case 1: echo("<b>No of Pages:</b> " . $noOfPages . "<br/>"); break;
@@ -44,8 +44,10 @@ if($description != NULL){
 	echo("<p id='description'><h4>Description</h4>" . $description . "</p>");
 }
 
-/*availability($isbn);
-requestBook($isbn, $username);
+echo "<p><b>Availability:</b> ";
+	availability($isbn);
+echo "</p>";
+/*requestBook($isbn, $username);
 noOfRequests($isbn);
 getReviewed($isbn, $username);*/
 ?>

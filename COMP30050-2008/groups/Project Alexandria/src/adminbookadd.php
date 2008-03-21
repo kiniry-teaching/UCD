@@ -25,6 +25,7 @@ else if($_POST["state"] == 2) //If you're adding book data
 	<ul>
 		<li>If no details appear you can add them manually.</li>
 	</ul>
+	<p><a href="adminbook.php">Book Admin</a></p>
 	<form action="adminbookadd.php" method="post">
 		<div class="formrow"><div class="formtext">ISBN: </div><div class="forminput"><input type="text" name="isbn" /></div></div>
 		<div class="formbutton"><input type="hidden" name="state" value="1" /><input type="submit" value="Retrieve" /></div>

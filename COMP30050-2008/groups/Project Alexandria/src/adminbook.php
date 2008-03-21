@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include("include/header.php");
 ?>
 <div id="adminbook">

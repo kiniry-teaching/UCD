@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once('include/variables.php');
 
 /****************************************************************
@@ -37,6 +37,7 @@ function fetchBookFromDB($isbn){
 		$largeImg=$row['largeImg'];
 		$mediumImg=$row['mediumImg'];
 		$smallImg=$row['smallImg'];
+		$noOfCopies=$row['noOfCopies'];
 	}
 }
 
@@ -44,33 +45,53 @@ function fetchBookFromDB($isbn){
 * 																*
 * availability(isbn) - 											*
 * Requests the number of copies of a book (using the sql query	*
-* WHERE to find the row with the matching ISBN) from &#65533;books&#65533;. It*
-* then does the same with the &#65533;books_online&#65533; but this time uses	*
+* WHERE to find the row with the matching ISBN) from books. It	*
+* then does the same with the books_onloan but this time uses	*
 * COUNT to get the number of instances of the ISBN and then		*
 * compares the numbers, where the numbers are equal it prints	*
-* &#65533;On Loan&#65533; else &#65533;Available&#65533;.									*
+* On Loan else Available.										*
 * Data being transmitted:										*
-* Sends the same ISBN to the &#65533;books&#65533; and &#65533;books_onloan&#65533;			*
+* Sends the same ISBN to the books and books_onloan				*
 * databases and retrieves the number of copies from the former	*
 * and from the latter the number of times the ISBN appears.		*
 * 																*
 ****************************************************************/
-/*
-availability($isbn){
-	//TODO - Ryan - See comment
-}*/
+
+function availability($isbn){
+	$noOfCopies = "";
+	
+	include("connection.php"); //Connects to the database
+	$result = mysql_query("SELECT * FROM books
+		WHERE isbn='$isbn'");
+
+	while($row = mysql_fetch_array($result)){
+		$noOfCopies=$row['noOfCopies'];
+	}
+	
+	$noOfCopies_onLoan = mysql_query("SELECT COUNT(*)
+		FROM books_onloan
+			WHERE isbn='$isbn'");
+	
+	if($noOfCopies == $noOfCopies_onLoan){
+		echo "On Loan";
+	}
+	else{
+		echo "Available";
+	}
+
+}
 
 /****************************************************************
 * 																*
 * requestBook(isbn, username) - 								*
-* Adds the pair &#65533;isbn&#65533; and &#65533;username&#65533; to the &#65533;books_requested&#65533;	*
+* Adds the pair isbn and username to the books_requested		*
 * database by use of the sql query INSERT.						*
 * Data being transmitted:										*
-* Sends the ISBN and username to the database &#65533;books_requested&#65533;.*
+* Sends the ISBN and username to the database books_requested.	*
 * 																*
 ****************************************************************/
 /*
-requestBook($isbn, $username){
+function requestBook($isbn, $username){
 	//TODO - Ryan - See comment
 }*/
 
@@ -78,30 +99,30 @@ requestBook($isbn, $username){
 * 																*
 * noOfRequests(isbn)											*
 * Uses the sql query COUNT to return the number of rows where	*
-* &#65533;isbn&#65533; occurs as the ISBN.									*
+* isbn occurs as the ISBN.										*
 * Data being transmitted:										*
 * The ISBN is being sent and the number of instances is being	*
 * returned.														*
 * 																*
 ****************************************************************/
 /*
-noOfRequests($isbn){
+function noOfRequests($isbn){
 	//TODO - Ryan - See comment
 }*/
 
 /****************************************************************
 * 																*
 * getReviewed(isbn, username)									*
-* Can be used to return all data from the &#65533;books_reviewed&#65533;		*
+* Can be used to return all data from the books_reviewed		*
 * database where the isbn and username match by use of a while	*
 * loop and the sql query WHERE.									*
 * Data being transmitted:										*
 * Sends the ISBN and username and retrieves the full data where	*
-* those match from the rows of &#65533;books_reviewed&#65533;.				*
+* those match from the rows of books_reviewed.					*
 * 																*
 ****************************************************************/
 /*
-getReviewed($isbn, $username){
+function getReviewed($isbn, $username){
 	//TODO - Ryan - See comment
 }*/
 
