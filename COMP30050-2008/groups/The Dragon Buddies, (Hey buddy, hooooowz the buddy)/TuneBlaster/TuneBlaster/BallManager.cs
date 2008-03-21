@@ -44,7 +44,35 @@ namespace TuneBlaster_
         {
             ResetColour();
             ball = new MovingBall(core, colour);
-            ball.Initialise(new Vector2(50f, 50f), new Vector2(0f, 0f), game);
+            ball.Initialise(new Vector2(50f, 50f), StartPosition(), game);
+        }
+
+        /*
+         * Generate a valid spawning point for the ball
+         * */
+        public Vector2 StartPosition()
+        {
+            int temp = generator.Next(1);
+            Vector2 startPosition = Vector2.One;
+            if (temp == 0)
+            {
+                temp = generator.Next(2);
+                int tempy = generator.Next(721);
+                if (temp == 1)
+                    temp = 801;
+                startPosition = new Vector2(temp,tempy);
+            }
+
+            else
+            {
+                temp = generator.Next(2);
+                int tempx = generator.Next(721);
+                if (temp == 2)
+                    temp = 801;
+                startPosition = new Vector2(tempx, temp);
+            }
+
+            return startPosition;
         }
 
         /*
