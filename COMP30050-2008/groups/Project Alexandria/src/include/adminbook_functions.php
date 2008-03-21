@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 
 //TODO - Thomas - isAdmin() needed here
 include_once('include/variables.php');
@@ -66,11 +66,11 @@ function parseBookData(){
 
 /****************************************************************
 * 																*
-* function addBook($bookData) - Adds books to the &#65533;books&#65533;		*
+* function addBook($bookData) - Adds books to the books			*
 * database. It does this by inputting the arguments in the		*
 * database by use of the sql query INSERT.						*
 * Data being transmitted:										*
-* Data (the arguments) is sent into the &#65533;books&#65533; database.		*
+* Data (the arguments) is sent into the books database.			*
 * 																*
 ****************************************************************/
 
@@ -271,5 +271,83 @@ function deleteBook($isbn){
 function deleteAllBook($isbn){
 	include('connection.php');
 	mysql_query("DELETE FROM books WHERE isbn='$isbn'");
+}
+
+/****************************************************************
+* 																*
+* loaned(isbn, username, date) -								*
+* Moves an entry from “books_requests” to “books_onloan” and	*
+* dates it. This uses sql queries DELETE and INSERT,			*
+* respectively.													*
+* Data being transmitted:										*
+* Data is being copied to “books_onloan” and then deleted from	*
+* “books_requested” by used of the ISBN and username.			*
+* 																*
+****************************************************************/
+
+function loaned($isbn, $username, $date){
+	include('connection.php');
+	
+	mysql_query("INSERT INTO books_onloan (isbn, username, date) 
+		VALUES ('$isbn', '$username', '$date')");
+	
+	mysql_query("DELETE FROM books_requests
+		WHERE isbn='$isbn' AND username='$username'");
+}
+
+/****************************************************************
+* 																*
+* returned(username, isbn) -									*
+* Moves an entry from “books_onloan” to “books_returned”. This	*
+* uses sql queries DELETE and INSERT, respectively.				*
+* Data being transmitted:										*
+* Data is being copied to “books_returned” and then deleted from*
+* “books_onloan” by used of the ISBN and username.				*
+* 																*
+****************************************************************/
+
+function returned($isbn, $username){
+	mysql_query("INSERT INTO books_returned (isbn, username) 
+		VALUES ('$isbn', '$username')");
+	
+	mysql_query("DELETE FROM books_onloan
+		WHERE isbn='$isbn' AND username='$username'");
+}
+
+/****************************************************************
+* 																*
+* neverReturned(username, isbn) -								*
+* Deletes the row with that (isbn, username) pair from			*
+* “books_onloan”.												*
+* 																*
+****************************************************************/
+
+function neverReturned($isbn, $username){
+	mysql_query("DELETE FROM books_onloan
+		WHERE isbn='$isbn' AND username='$username'");
+	
+	deleteBook($isbn);
+}
+
+/****************************************************************
+* 																*
+* renewed(isbn, username, date) -								*
+* Updates the date of the row with that (isbn, username) pair.	*
+* 																*
+****************************************************************/
+function renewed($isbn, $username, $date){
+	mysql_query("UPDATE books_onloan SET date = '$date'
+		WHERE isbn = '$isbn' AND username = '$username'");
+}
+/****************************************************************
+* 																*
+* neverloaned(username, isbn) -									*
+* Deletes the row with that (isbn, username) pair from			*
+* “books_requested”.											*
+* 																*
+****************************************************************/
+function neverloaned($isbn, $username){
+	mysql_query("DELETE FROM books_requests
+		WHERE isbn='$isbn' AND username='$username'");
 }
 ?>
