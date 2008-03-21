@@ -29,7 +29,7 @@ namespace TuneBlaster_
         ContentManager content;
         public SpriteBatch spriteBatch;
 
-        // a random number generator that the whole sample can share.
+        // a random number generator 
         public static Random Random = new Random();
         
 
@@ -53,7 +53,7 @@ namespace TuneBlaster_
             this.graphics.PreferredBackBufferHeight = 600;
             explosion = new ExplosionParticleSystem(this,1);
             Components.Add(explosion);
-            smoke = new ExplosionSmokeParticleSystem(this, 2);
+            smoke = new ExplosionSmokeParticleSystem(this,2);
             Components.Add(smoke);
 
             //this.graphics.IsFullScreen = true;

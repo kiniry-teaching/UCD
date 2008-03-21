@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 
 
-// Author Hugh, Ahmmed
+// Author Hugh, Ahmed
 
 namespace TuneBlaster_.Graphics
 {
@@ -126,10 +126,9 @@ namespace TuneBlaster_.Graphics
         public void CheckExplosions()
         {
 
-            Vector2 where = Vector2.Zero;
-            where.X = 65.0f;//need to change this posiotn to the postion of\ one of the balls
-            where.Y = 128.0f;//eed to change this posiotn to the positon of one of the balls
-
+            Vector2 where;
+           // where.X = balls[i].Position.X;
+           // where.Y = balls[i].Position.Y;
             for (int i = 0; i < ballsSize; i++)
             {
                 if (balls[i] != null)
@@ -138,7 +137,8 @@ namespace TuneBlaster_.Graphics
                     {
                         balls[i].Destroy();
 
-                       
+                       where.X = balls[i].Position.X;
+                       where.Y = balls[i].Position.Y;
                        Engine.explosion.AddParticles(where);
                        Engine.smoke.AddParticles(where);
 
