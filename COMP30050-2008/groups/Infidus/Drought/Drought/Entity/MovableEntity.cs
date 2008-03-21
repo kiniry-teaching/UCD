@@ -104,6 +104,10 @@ namespace Drought.Entity
             this.path = path;
         }
 
+        public Path getPath() {
+            return path;
+        }
+
         public void update()
         {
             move();

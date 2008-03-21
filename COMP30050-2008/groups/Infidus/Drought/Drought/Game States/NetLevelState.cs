@@ -52,6 +52,7 @@ namespace Drought.GameStates
         private bool hosting;
 
         private bool clickCurrent;
+        private bool rightClickCurrent;
 
         private int startClickX, startClickY;
         private int currClickX, currClickY;
@@ -239,14 +240,13 @@ namespace Drought.GameStates
                 //if (vec != new Vector3()) Console.WriteLine("recieved: " + vec);
             }
 
-            /* Selecting units */
+            /* Selecting Units */
             if (!clickCurrent && input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
                 clickCurrent = true;
                 startClickX = input.getMouseX();
                 startClickY = input.getMouseY();
                 currClickX = startClickX;
                 currClickY = startClickY;
-                //Console.WriteLine("started bounding");
             }
             else if (clickCurrent && !input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
                 clickCurrent = false;
@@ -260,7 +260,6 @@ namespace Drought.GameStates
                         }
                     }
                 }
-                //Console.WriteLine("ended bounding");
             }
             if (clickCurrent) {
                 currClickX = input.getMouseX();
@@ -274,6 +273,38 @@ namespace Drought.GameStates
                 boundingBox.Add(new Vector3((startClickX - screenX) / (float)screenX, -(currClickY - screenY) / (float)screenY, 0));
                 boundingBox.Add(new Vector3((startClickX - screenX) / (float)screenX, -(startClickY - screenY) / (float)screenY, 0));
                 lineTool.setPointsList(boundingBox);
+            }
+
+            /* Commanding Units */
+            if (!rightClickCurrent && input.isKeyPressed(GameKeys.MOUSE_RIGHT_CLICK)) {
+                rightClickCurrent = true;
+                foreach (MovableEntity entity in localEntities) {
+                    if (entity.isSelected()) {
+                        List<Vector3> newPathList = new List<Vector3>();
+                        newPathList.Add(entity.getPath().getRemainingPath()[0]);
+                        Vector3 startPos = newPathList[0];
+                        Vector3 endPos = terrain.projectToTerrain(getGraphics(), camera, input.getMouseX(), input.getMouseY());
+                        Vector3 distLeft = endPos - startPos;
+                        Vector3 currPos = startPos;
+                        int steps = 0;
+                        while (distLeft.Length() > 1 && steps < 1000) {
+                            //Console.WriteLine("distLeft.Length(): " + distLeft.Length() + " < " + 1);
+                            Vector3 pleh = new Vector3(distLeft.X, distLeft.Y, distLeft.Z);
+                            currPos = currPos + Vector3.Normalize(pleh);
+                            currPos.Z = heightMap.getHeight(currPos.X, currPos.Y);
+                            newPathList.Add(currPos);
+                            distLeft = endPos - currPos;
+                            steps++;
+                        }
+                        newPathList.Add(endPos);
+
+                        Path newPath = new Path(newPathList, normalMap);
+                        entity.setPath(newPath);
+                    }
+                }
+            }
+            else if (rightClickCurrent && !input.isKeyPressed(GameKeys.MOUSE_RIGHT_CLICK)) {
+                rightClickCurrent = false;
             }
         }
 

@@ -80,6 +80,7 @@ namespace Drought
             input.bind(GameKeys.CAM_ROTATE_RIGHT, Keys.Right, ModifierKeys.NONE);
             
             input.bind(GameKeys.MOUSE_CLICK, MouseButtons.LEFT, ModifierKeys.NONE);
+            input.bind(GameKeys.MOUSE_RIGHT_CLICK, MouseButtons.RIGHT, ModifierKeys.NONE);
             input.bind(GameKeys.RESET, Keys.R, ModifierKeys.CTRL);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);

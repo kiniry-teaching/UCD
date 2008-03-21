@@ -201,5 +201,37 @@ namespace Drought.World
         {
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
         }
+
+        /**
+         * Projects a mouseclick point on the screen onto the surface of terrain.
+         */
+        public Vector3 projectToTerrain(GraphicsDevice graphics, Camera camera, int mouseX, int mouseY) {
+            Vector3 nearScreenPoint = new Vector3(mouseX, mouseY, 0);
+            Vector3 farScreenPoint = new Vector3(mouseX, mouseY, 1);
+            Vector3 nearWorldPoint = graphics.Viewport.Unproject(nearScreenPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+            Vector3 farWorldPoint = graphics.Viewport.Unproject(farScreenPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+
+            Vector3 direction = farWorldPoint - nearWorldPoint;
+
+            //direction.Z will only be positive if you click up in the sky
+            if (direction.Z < 0) {
+                float zFactor = -nearWorldPoint.Z / direction.Z;
+                Vector3 zeroWorldPoint = nearWorldPoint + direction * zFactor;
+                Vector3 start = camera.getPosition();
+                Vector3 end = zeroWorldPoint;
+                Vector3 mid = (start + end) / 2;
+                while ((end - start).Length() > 1) {
+                    mid = (start + end) / 2;
+                    if (heightMap.getHeight(mid.X, mid.Y) < mid.Z) {
+                        start = mid;
+                    }
+                    else {
+                        end = mid;
+                    }
+                }
+                return new Vector3(mid.X, mid.Y, heightMap.getHeight(mid.X, mid.Y));
+            }
+            return new Vector3(500, 100, heightMap.getHeight(500, 100));
+        }
     }
 }
