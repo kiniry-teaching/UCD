@@ -25,8 +25,6 @@ namespace Drought.Network
         /** Used to unpack data for receiving. */
         private PacketReader packetReader = new PacketReader();
 
-        private static readonly ushort SENDCODE_POS = 42;
-
         private int cachedID;
 
         /** Internal constructor; user classes should obtain a reference through SoundManager.getInstance() */

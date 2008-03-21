@@ -29,7 +29,7 @@ namespace Drought.GameStates
 
         private TextureMap textureMap;
 
-        private WaterMap waterMap;
+        //private WaterMap waterMap;
 
         private NormalMap normalMap;
 
@@ -50,8 +50,6 @@ namespace Drought.GameStates
         private NetworkManager networkManager;
 
         private bool hosting;
-
-        private Texture2D selector;
 
         private bool clickCurrent;
 
@@ -88,34 +86,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
             
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            localEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            remoteEntities.Add(new MovableEntity(models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], selector, new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
             
             if (hosting) {
                 List<MovableEntity> tempList = localEntities;
@@ -167,8 +165,6 @@ namespace Drought.GameStates
                     foreach (ModelMeshPart meshPart in mesh.MeshParts)
                         meshPart.Effect = modelEffect.Clone(getGraphics());
             }
-
-            selector = getContentManager().Load<Texture2D>("Textures/selector");
         }
 
         public override void background()

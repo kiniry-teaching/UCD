@@ -136,5 +136,14 @@ namespace Drought.Entity
             return currNode + 1;
         }
         */
+
+        public List<Vector3> getRemainingPath() {
+            List<Vector3> remainingPath = new List<Vector3>();
+            remainingPath.Add(position);
+            for (int i = currNode + 1; i < nodes.Count; i++) {
+                remainingPath.Add(nodes[i]);
+            }
+            return remainingPath;
+        }
     }
 }

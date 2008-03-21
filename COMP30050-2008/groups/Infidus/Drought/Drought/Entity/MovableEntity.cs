@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Drought.World;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Drought.Core;
+using Drought.World;
 
 namespace Drought.Entity
 {
@@ -37,11 +38,16 @@ namespace Drought.Entity
 
         private bool selected, oldSelected;
 
+        private LineTool lineTool;
+
+        private Camera cam;
+
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(Model model, Texture2D[] modelTextures, Texture2D circle, Path path, int uid)
+        public MovableEntity(DroughtGame game, Camera camera, Model model, Texture2D[] modelTextures, Path path, int uid)
         {
+            this.cam = camera;
             uniqueID = uid;
             this.path = path;
             position = path.getPosition();
@@ -53,9 +59,10 @@ namespace Drought.Entity
             velocity = 0.05f;
             this.model = model;
             this.modelTextures = modelTextures;
-            selector = circle;
             selected = false;
             oldSelected = false;
+            lineTool = new LineTool(game.GraphicsDevice);
+            selector = game.Content.Load<Texture2D>("Textures/selector");
         }
 
         public void move()
@@ -100,6 +107,7 @@ namespace Drought.Entity
         public void update()
         {
             move();
+            lineTool.setPointsList(path.getRemainingPath());
         }
 
         public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect)
@@ -125,6 +133,8 @@ namespace Drought.Entity
                 }
                 mesh.Draw();
             }
+
+            lineTool.render(cam.getViewMatrix(), cam.getProjectionMatrix());
 
             if (selected) {
                 Vector3 v3 = graphics.Viewport.Project(position, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
