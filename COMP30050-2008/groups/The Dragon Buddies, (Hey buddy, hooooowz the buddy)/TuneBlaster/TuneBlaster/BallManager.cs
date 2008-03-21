@@ -111,9 +111,6 @@ namespace TuneBlaster_
             else if (temp == 3)
             {
                 colour = Image.value.red;
-
-
-
             }
         }
 
