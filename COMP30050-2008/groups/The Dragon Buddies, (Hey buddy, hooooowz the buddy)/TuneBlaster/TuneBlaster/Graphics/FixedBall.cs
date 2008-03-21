@@ -105,7 +105,7 @@ namespace TuneBlaster_.Graphics
                 tempAngle = tempAngle * 180 / Math.PI;
                 //calculate as percentge of full angle
                 tempAngle /= 90;
-                initialRotation = (float)(2 * Math.PI - tempAngle * Math.PI);
+                initialRotation = (float)(Math.PI - tempAngle * Math.PI);
                 //initialRotation = 0.2f;
             }
         }
