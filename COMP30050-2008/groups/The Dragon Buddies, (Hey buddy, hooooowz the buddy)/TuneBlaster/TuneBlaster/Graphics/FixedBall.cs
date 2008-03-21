@@ -46,15 +46,30 @@ namespace TuneBlaster_.Graphics
             numInContact++;
             base.Initialise(g);
             coreDistance = Vector2.Distance(Position, core.Position);
+
+
+            if (Position.Y <= core.Position.Y)
+            {
+                double tempAngle = (double)(Math.PI + Math.Acos(Vector2.Distance(new Vector2(core.Position.X + core.Size.X / 2, core.Position.Y), new Vector2(Position.X, core.Position.Y)) / Vector2.Distance(Position, new Vector2(core.Position.X + core.Size.X / 2, core.Position.Y))));
+                tempAngle = tempAngle * 180 / Math.PI;
+                tempAngle /= 90;
+                //initialRotation =(float) (Math.PI + tempAngle*Math.PI); 
+                initialRotation = 0.2f;
+            }
+
+            Console.WriteLine(Math.Acos(Vector2.Distance(new Vector2(core.Position.X+ core.Size.X/2, core.Position.Y), new Vector2(Position.X, core.Position.Y))/Vector2.Distance(Position, new Vector2(core.Position.X+ core.Size.X/2, core.Position.Y))));
+            
             //rotation = core.Rotation;
-            if (((core.Position.X - Position.X) / coreDistance) > Math.PI)
+            /*if (((core.Position.X - Position.X) / coreDistance) > Math.PI)
             {
                 initialRotation = (float) Math.Sin((core.Position.Y - Position.Y + 0.53*origin.Y ) / coreDistance);
             }
             else
             {
                 initialRotation = (float) (Math.PI + Math.Sin((core.Position.Y - Position.Y + 0.53*origin.Y) / coreDistance));
-            }
+            }*/
+
+
             // initialRotation = (float)(Math.Sin((core.Position.X - Position.X) / coreDistance) + Math.Sin((core.Position.Y - Position.Y) / coreDistance));
         }
 
