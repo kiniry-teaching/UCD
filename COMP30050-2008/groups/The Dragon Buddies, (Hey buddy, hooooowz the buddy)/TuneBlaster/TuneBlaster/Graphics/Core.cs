@@ -34,8 +34,7 @@ namespace TuneBlaster_.Graphics
          */
         public Core()
         {
-            balls = new List<FixedBall>();
-          
+            balls = new List<FixedBall>();  
         }
 
         /*
@@ -130,8 +129,6 @@ namespace TuneBlaster_.Graphics
             Vector2 where = Vector2.Zero;
             where.X = 65.0f;//need to change this posiotn to the postion of\ one of the balls
             where.Y = 128.0f;//eed to change this posiotn to the positon of one of the balls
-            
-
 
             for (int i = 0; i < ballsSize; i++)
             {
@@ -144,8 +141,6 @@ namespace TuneBlaster_.Graphics
                        
                        Engine.explosion.AddParticles(where);
                        Engine.smoke.AddParticles(where);
-
-                     
 
                         //to put in code for explosion
                       
