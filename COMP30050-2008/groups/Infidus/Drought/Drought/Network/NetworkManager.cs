@@ -11,6 +11,7 @@ namespace Drought.Network
      */
     public class NetworkManager
     {
+        /** The maximum amount of players allowed in any one game. */
         private static readonly int MAX_PLAYERS = 2;
 
         /** The session of the game we connected to. */
@@ -25,6 +26,7 @@ namespace Drought.Network
         /** Used to unpack data for receiving. */
         private PacketReader packetReader = new PacketReader();
 
+        /** TEMP: hacky! */
         private int cachedID;
 
         /** Internal constructor; user classes should obtain a reference through SoundManager.getInstance() */

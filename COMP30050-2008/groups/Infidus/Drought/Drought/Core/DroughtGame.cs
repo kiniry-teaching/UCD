@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Net;
-using Microsoft.Xna.Framework.Storage;
 using Drought.Menu;
 using Drought.Input;
 using Drought.GameStates;
@@ -15,9 +9,10 @@ using Drought.Network;
 
 namespace Drought
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    /**
+     * The entry point of a game.
+     * Initialises the GameManager and NetworkManager, sets up the initial states and binds game keys.
+     */
     public class DroughtGame : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
@@ -44,20 +39,13 @@ namespace Drought
             networkManager = NetworkManager.getInstance();
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+        /**
+         * Sets the screen size, and creates keybindings.
+         */
         protected override void Initialize()
         {
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
-            //graphics.PreferredBackBufferWidth = 1280;
-            //graphics.PreferredBackBufferHeight = 800;
-            //graphics.PreferredBackBufferWidth = 1650;
-            //graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
 
             DeviceInput input = DeviceInput.getInput();
@@ -91,32 +79,20 @@ namespace Drought
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            spriteBatch.Dispose();
+            spriteBatch = null;
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /**
+         * Gets the latest input state and updates the GameManager and NetworkManager.
+         */
         protected override void Update(GameTime gameTime)
         {
             DeviceInput.getInput().poll();
@@ -128,16 +104,15 @@ namespace Drought
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /**
+         * Draws the current game state.
+         */
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.Black);
+            
             gameManager.render(graphics.GraphicsDevice, spriteBatch);
 
-            // TODO: Add your drawing code here
             base.Draw(gameTime);
         }
 
