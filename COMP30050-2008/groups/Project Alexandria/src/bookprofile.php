@@ -17,11 +17,11 @@ if($mediumImg != NULL){
 	);
 }
 echo(
-	"<p id='titleandauthor'>
+	"<div id='titleandauthor'>
 		<h1>" . $title . "</h1>
 		<h2>" . $titleLong . "</h2>
 		<h3>by " . $authors . "</h3>
-	</p>
+	</div>
 	<p id='detailedinfo'>
 		<b>ISBN:</b> " . $isbn . "<br/>"
 );

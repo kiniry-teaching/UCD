@@ -164,20 +164,20 @@ function adminTableOfBooks($searchterm, $category, $order){
 	echo "<div id='search_table'>";
 	
 		echo "<div class='search_row_header'>";
-			echo "<div class='search_isbn_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=isbn&state=2'>ISBN</a></div>";
-			echo "<div class='search_title_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=title&state=2'>Title</a></div>";
-			echo "<div class='search_titleLong_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=titleLong&state=2'>Title (Long)</a></div>";
-			echo "<div class='search_authors_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=authors&state=2'>Authors</a></div>";
-			echo "<div class='search_publisher_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=publisher&state=2'>Publisher</a></div>";
-			echo "<div class='search_noOfPages_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=noOfPages&state=2'>No. of Pages</a></div>";
-			echo "<div class='search_binding_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=binding&state=2'>Binding</a></div>";
-			echo "<div class='search_ddc_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=ddc&state=2'>DDC</a></div>";
-			echo "<div class='search_lcc_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=lcc&state=2'>LCC</a></div>";
-			echo "<div class='search_description_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=description&state=2'>Description</a></div>";
-			echo "<div class='search_largeImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=largeImg&state=2'>Large Image</a></div>";
-			echo "<div class='search_mediumImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=mediumImg&state=2'>Medium Image</a></div>";
-			echo "<div class='search_smallImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=smallImg&state=2'>Small Image</a></div>";
-			echo "<div class='search_noOfCopies_header'><a href='adminbook.php?searchterm=" . $searchterm . "&category=" . $category . "&order=noOfCopies&state=2'>No. of Copies</a></div>";
+			echo "<div class='search_isbn_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=isbn&amp;state=2'>ISBN</a></div>";
+			echo "<div class='search_title_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=title&amp;state=2'>Title</a></div>";
+			echo "<div class='search_titleLong_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=titleLong&amp;state=2'>Title (Long)</a></div>";
+			echo "<div class='search_authors_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=authors&amp;state=2'>Authors</a></div>";
+			echo "<div class='search_publisher_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=publisher&amp;state=2'>Publisher</a></div>";
+			echo "<div class='search_noOfPages_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=noOfPages&amp;state=2'>No. of Pages</a></div>";
+			echo "<div class='search_binding_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=binding&amp;state=2'>Binding</a></div>";
+			echo "<div class='search_ddc_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=ddc&amp;state=2'>DDC</a></div>";
+			echo "<div class='search_lcc_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=lcc&amp;state=2'>LCC</a></div>";
+			echo "<div class='search_description_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=description&amp;state=2'>Description</a></div>";
+			echo "<div class='search_largeImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=largeImg&amp;state=2'>Large Image</a></div>";
+			echo "<div class='search_mediumImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=mediumImg&amp;state=2'>Medium Image</a></div>";
+			echo "<div class='search_smallImg_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=smallImg&amp;state=2'>Small Image</a></div>";
+			echo "<div class='search_noOfCopies_header'><a href='adminbook.php?searchterm=" . $searchterm . "&amp;category=" . $category . "&amp;order=noOfCopies&amp;state=2'>No. of Copies</a></div>";
 			echo "<div class='search_edit_header'>Edit</div>";
 			echo "<div class='search_delete_header'>Delete</div>";
 			echo "<div class='search_deleteAll_header'>Delete All</div>";
@@ -192,7 +192,7 @@ function adminTableOfBooks($searchterm, $category, $order){
 			echo "<div class='search_isbn'>" . $row['isbn'] . "</div>";
 			echo "<div class='search_title'><a href='bookprofile.php?isbn=" . $row['isbn'] . "'>" . $row['title'] . "</a></div>";
 			echo "<div class='search_titleLong'>" . $row['titleLong'] . "</div>";
-			echo "<div class='search_authors'><a href='adminbook.php?searchterm=" . $row['authors'] . "&category=authors&state=1'>" . $row['authors'] . "</a></div>";
+			echo "<div class='search_authors'><a href='adminbook.php?searchterm=" . $row['authors'] . "&amp;category=authors&amp;state=1'>" . $row['authors'] . "</a></div>";
 			echo "<div class='search_publisher'>" . $row['publisher'] . "</div>";
 			echo "<div class='search_noOfPages'>" . $row['noOfPages'] . "</div>";
 			echo "<div class='search_binding'>" . $row['binding'] . "</div>";
@@ -220,8 +220,8 @@ function adminTableOfBooks($searchterm, $category, $order){
 			echo "</div>";
 			echo "<div class='search_noOfCopies'>" . $row['noOfCopies'] . "</div>";
 			echo "<div class='search_edit'><a href='adminbookedit.php?isbn=" . $row['isbn'] ."'>Edit</a></div>";
-			echo "<div class='search_delete'><a href='adminbook.php?searchterm=" . $_GET['searchterm'] . "&category=" . $_GET['category'] . "&order=" . $_GET['order'] . "&state=" . $_GET['state'] . "&isbn=" . $row['isbn'] ."&delete=1'>Delete</a></div>";
-			echo "<div class='search_deleteAll'><a href='adminbook.php?searchterm=" . $_GET['searchterm'] . "&category=" . $_GET['category'] . "&order=" . $_GET['order'] . "&state=" . $_GET['state'] . "&isbn=" . $row['isbn'] ."&delete=all''>Delete All</a></div>";
+			echo "<div class='search_delete'><a href='adminbook.php?searchterm=" . $_GET['searchterm'] . "&amp;category=" . $_GET['category'] . "&amp;order=" . $_GET['order'] . "&amp;state=" . $_GET['state'] . "&amp;isbn=" . $row['isbn'] ."&amp;delete=1'>Delete</a></div>";
+			echo "<div class='search_deleteAll'><a href='adminbook.php?searchterm=" . $_GET['searchterm'] . "&amp;category=" . $_GET['category'] . "&amp;order=" . $_GET['order'] . "&amp;state=" . $_GET['state'] . "&amp;isbn=" . $row['isbn'] ."&amp;delete=all'>Delete All</a></div>";
 		echo "</div>";
 	}
 	
@@ -276,12 +276,12 @@ function deleteAllBook($isbn){
 /****************************************************************
 * 																*
 * loaned(isbn, username, date) -								*
-* Moves an entry from “books_requests” to “books_onloan” and	*
+* Moves an entry from books_requests to books_onloan and		*
 * dates it. This uses sql queries DELETE and INSERT,			*
 * respectively.													*
 * Data being transmitted:										*
-* Data is being copied to “books_onloan” and then deleted from	*
-* “books_requested” by used of the ISBN and username.			*
+* Data is being copied to books_onloan and then deleted from	*
+* books_requested by used of the ISBN and username.				*
 * 																*
 ****************************************************************/
 
@@ -298,11 +298,11 @@ function loaned($isbn, $username, $date){
 /****************************************************************
 * 																*
 * returned(username, isbn) -									*
-* Moves an entry from “books_onloan” to “books_returned”. This	*
+* Moves an entry from books_onloan to books_returned. This		*
 * uses sql queries DELETE and INSERT, respectively.				*
 * Data being transmitted:										*
-* Data is being copied to “books_returned” and then deleted from*
-* “books_onloan” by used of the ISBN and username.				*
+* Data is being copied to books_returned and then deleted from	*
+* books_onloan by used of the ISBN and username.				*
 * 																*
 ****************************************************************/
 
@@ -318,7 +318,7 @@ function returned($isbn, $username){
 * 																*
 * neverReturned(username, isbn) -								*
 * Deletes the row with that (isbn, username) pair from			*
-* “books_onloan”.												*
+* books_onloan.												*
 * 																*
 ****************************************************************/
 
@@ -343,7 +343,7 @@ function renewed($isbn, $username, $date){
 * 																*
 * neverloaned(username, isbn) -									*
 * Deletes the row with that (isbn, username) pair from			*
-* “books_requested”.											*
+* books_requested.												*
 * 																*
 ****************************************************************/
 function neverloaned($isbn, $username){
