@@ -138,7 +138,7 @@ namespace TuneBlaster_.Graphics
 
         public void UpdateLoose()
         {
-            for (int i = 0; i < ballsSize; i++)
+            for (int i = ballsSize -1; i >= 0; i--)
             {
                 balls[i].CheckSupports();
                 if (!balls[i].IsAgainstCore() && balls[i].Unsupported() && !balls[i].IsDead())
