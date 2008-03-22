@@ -108,6 +108,7 @@ namespace TuneBlaster_.Graphics
                 } 
                 else 
                 {
+                    f.AddSupport(collisionBall);
                     f.SetCollisionBall(collisionBall);
                 }
                 f.UpdateContactBalls();

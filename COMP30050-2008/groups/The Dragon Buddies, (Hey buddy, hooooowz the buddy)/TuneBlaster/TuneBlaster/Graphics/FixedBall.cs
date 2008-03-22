@@ -39,6 +39,7 @@ namespace TuneBlaster_.Graphics
             locked = true;
             dead = false;
             inContact = new List<FixedBall>();
+            supports = new List<FixedBall>();
             inContact.Add(this);
             numInContact++;
             base.Initialise(g);
@@ -129,6 +130,7 @@ namespace TuneBlaster_.Graphics
          * */
         public void Destroy()
         {
+            CheckSupports();
             dead = true;
         }
 
@@ -154,6 +156,20 @@ namespace TuneBlaster_.Graphics
         public void SetAgainstCore()
         {
             onCore = true;
+        }
+
+        /*
+         * Set the ball to be supported by the core
+         * */
+        public void CheckSupports()
+        {
+            for (int i = 0; i < supports.Count; i++)
+            {
+                if (supports[i].IsDead())
+                {
+                    supports.Remove(supports[i]);
+                }
+            }
         }
 
         /*
