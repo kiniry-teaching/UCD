@@ -10,12 +10,10 @@ namespace TuneBlaster_.Graphics
     /// The class for the balls that have become stationary due to a colission
     /// Author Hugh Corrigan
     /// </summary>
-    class FixedBall : Image
+    class FixedBall : MovingBall
     {
         #region Fields (core, colour, initialRoatation, coreDistance)
 
-        Core core;
-        value colour;
         float initialRotation, coreDistance;
         bool dead, locked;
         List<FixedBall> inContact;
@@ -28,10 +26,8 @@ namespace TuneBlaster_.Graphics
         /*
          * Constructo for FixedBall
          * */
-        public FixedBall(Core c, value v) 
+        public FixedBall(Core c, value v) : base(c,v)
         {
-            core = c;
-            colour = v;    
         }
 
         /*

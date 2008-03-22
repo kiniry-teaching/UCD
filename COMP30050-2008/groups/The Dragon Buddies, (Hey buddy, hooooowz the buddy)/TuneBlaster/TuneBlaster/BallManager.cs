@@ -66,7 +66,7 @@ namespace TuneBlaster_
             else
             {
                 temp = generator.Next(2);
-                int tempx = generator.Next(721);
+                int tempx = generator.Next(801);
                 if (temp == 2)
                     temp = 801;
                 startPosition = new Vector2(tempx, temp);

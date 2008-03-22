@@ -14,7 +14,7 @@ namespace TuneBlaster_.Graphics
     {    
         #region Fields (core, live, angles, colour)
 
-        Core core;
+        protected Core core;
         bool live;
         float hypotenuse, x, y;
         public value colour;
