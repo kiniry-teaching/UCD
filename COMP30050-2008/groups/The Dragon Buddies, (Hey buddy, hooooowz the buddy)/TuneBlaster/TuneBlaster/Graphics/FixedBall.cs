@@ -130,7 +130,6 @@ namespace TuneBlaster_.Graphics
          * */
         public void Destroy()
         {
-            CheckSupports();
             dead = true;
         }
 
