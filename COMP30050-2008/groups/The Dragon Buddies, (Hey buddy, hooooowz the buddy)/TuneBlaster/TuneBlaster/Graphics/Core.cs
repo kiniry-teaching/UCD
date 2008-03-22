@@ -102,10 +102,12 @@ namespace TuneBlaster_.Graphics
                 balls[i].Move(rotation - oldRotation);
             }
 
-            /*for (int i = 0; i < looseBallsSize; i++)
+            for (int i = 0; i < looseBallsSize; i++)
             {
                 looseBalls[i].Move();
-            }*/
+            }
+
+            CheckLoose();
         }
 
         /*
@@ -147,6 +149,8 @@ namespace TuneBlaster_.Graphics
                     looseBalls.Add(m);
                     looseBallsSize++;
                     balls[i].Destroy();
+                    balls.Remove(balls[i]);
+                    ballsSize--;                    
                 }
             }
         }
@@ -170,8 +174,8 @@ namespace TuneBlaster_.Graphics
 
                        where.X = balls[i].Position.X;
                        where.Y = balls[i].Position.Y;
-                       Engine.explosion.AddParticles(where);
-                       Engine.smoke.AddParticles(where);
+                       //Engine.explosion.AddParticles(where);
+                       //Engine.smoke.AddParticles(where);
 
                         //to put in code for explosion
                       
