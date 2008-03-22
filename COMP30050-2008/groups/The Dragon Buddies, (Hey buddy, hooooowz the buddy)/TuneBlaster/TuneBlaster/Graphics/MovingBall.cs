@@ -102,7 +102,12 @@ namespace TuneBlaster_.Graphics
             {
                 FixedBall f = new FixedBall(core, colour);
                 f.Initialise(size, Position, game);
-                if (collisionBall != null) {
+                if (collisionBall == null)
+                {
+                    f.SetAgainstCore();
+                } 
+                else 
+                {
                     f.SetCollisionBall(collisionBall);
                 }
                 f.UpdateContactBalls();

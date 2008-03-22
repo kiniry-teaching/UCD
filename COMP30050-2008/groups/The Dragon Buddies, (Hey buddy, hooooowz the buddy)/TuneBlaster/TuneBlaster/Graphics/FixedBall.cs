@@ -15,8 +15,9 @@ namespace TuneBlaster_.Graphics
         #region Fields (core, colour, initialRoatation, coreDistance)
 
         float initialRotation, coreDistance;
-        bool dead, locked;
+        bool dead, locked, onCore;
         List<FixedBall> inContact;
+        List<FixedBall> supports;
         public int numInContact;
 
         #endregion
@@ -137,6 +138,22 @@ namespace TuneBlaster_.Graphics
         public void Unlock()
         {
             locked = false;
+        }
+
+        /*
+         * Add a support
+         * */
+        public void AddSupport(FixedBall f)
+        {
+            supports.Add(f);
+        }
+
+        /*
+         * Set the ball to be supported by the core
+         * */
+        public void SetAgainstCore()
+        {
+            onCore = true;
         }
 
         /*
