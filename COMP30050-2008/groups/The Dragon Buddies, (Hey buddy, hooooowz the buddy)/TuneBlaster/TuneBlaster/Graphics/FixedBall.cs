@@ -150,6 +150,20 @@ namespace TuneBlaster_.Graphics
         }
 
         /*
+         * Add a support
+         * */
+        public bool Unsupported()
+        {
+            if (supports.Count == 0)
+            {
+                return true;
+            }
+
+            return false;
+            
+        }
+
+        /*
          * Set the ball to be supported by the core
          * */
         public void SetAgainstCore()
