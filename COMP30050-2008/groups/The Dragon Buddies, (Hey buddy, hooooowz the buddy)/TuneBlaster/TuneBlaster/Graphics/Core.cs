@@ -21,6 +21,7 @@ namespace TuneBlaster_.Graphics
         float oldRotation;
         public float acceleration;
         public List<FixedBall> balls;
+        public List<MovingBall> looseBalls;
         static float maxAcceleration = 0.05f;
         
         
@@ -34,7 +35,8 @@ namespace TuneBlaster_.Graphics
          */
         public Core()
         {
-            balls = new List<FixedBall>();  
+            balls = new List<FixedBall>();
+            looseBalls = new List<MovingBall>();
         }
 
         /*

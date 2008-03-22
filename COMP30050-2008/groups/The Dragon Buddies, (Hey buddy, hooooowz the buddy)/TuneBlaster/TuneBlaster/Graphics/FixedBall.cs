@@ -117,19 +117,19 @@ namespace TuneBlaster_.Graphics
         }
 
         /*
-         * Set the ball to dead
-         * */
-        public void Destroy()
-        {
-            dead = true;
-        }
-
-        /*
          * Determine if the ball is dead
          * */
         public bool IsDead()
         {
             return dead;
+        }
+
+        /*
+         * Set the ball to dead
+         * */
+        public void Destroy()
+        {
+            dead = true;
         }
 
         /*
