@@ -146,11 +146,11 @@ namespace TuneBlaster_.Graphics
                     MovingBall m = new MovingBall(this, balls[i].colour);
                     m.Initialise(balls[i].Size, balls[i].Position, this.game);
                     m.LoadGraphicsContent(balls[i].spriteBatch, balls[i].texture);
-                    looseBalls.Add(m);
-                    looseBallsSize++;
                     balls[i].Destroy();
                     balls.Remove(balls[i]);
-                    ballsSize--;                    
+                    ballsSize--;
+                    looseBalls.Add(m);
+                    looseBallsSize++;
                 }
             }
         }
@@ -174,8 +174,8 @@ namespace TuneBlaster_.Graphics
 
                        where.X = balls[i].Position.X;
                        where.Y = balls[i].Position.Y;
-                       //Engine.explosion.AddParticles(where);
-                       //Engine.smoke.AddParticles(where);
+                       Engine.explosion.AddParticles(where);
+                       Engine.smoke.AddParticles(where);
 
                         //to put in code for explosion
                       
