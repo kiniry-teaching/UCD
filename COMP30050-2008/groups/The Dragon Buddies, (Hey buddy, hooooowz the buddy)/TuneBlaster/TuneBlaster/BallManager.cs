@@ -114,13 +114,13 @@ namespace TuneBlaster_
             }
 
         }
-
+        
         /*
          * Randomly select a colour for the ball to be
          * */
         public void ResetColour()
         {
-            int temp = generator.Next(4);
+            int temp = generator.Next(2);
             if (temp == 0)
             {
                 colour = Image.value.green;

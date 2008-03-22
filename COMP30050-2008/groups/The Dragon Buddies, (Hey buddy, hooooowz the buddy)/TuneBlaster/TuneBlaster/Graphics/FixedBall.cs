@@ -38,6 +38,7 @@ namespace TuneBlaster_.Graphics
         {
             locked = true;
             dead = false;
+            onCore = false;
             inContact = new List<FixedBall>();
             supports = new List<FixedBall>();
             inContact.Add(this);
@@ -169,6 +170,14 @@ namespace TuneBlaster_.Graphics
         public void SetAgainstCore()
         {
             onCore = true;
+        }
+
+        /*
+         * Is ball against core
+         * */
+        public bool IsAgainstCore()
+        {
+            return onCore;
         }
 
         /*

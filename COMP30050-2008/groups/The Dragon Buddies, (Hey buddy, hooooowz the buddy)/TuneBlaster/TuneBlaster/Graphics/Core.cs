@@ -17,7 +17,7 @@ namespace TuneBlaster_.Graphics
     {
         #region Fields (ballsSize, oldRotation, acceleration, balls, maxAcceleration)
 
-        public int ballsSize;
+        public int ballsSize, looseBallsSize;
         float oldRotation;
         public float acceleration;
         public List<FixedBall> balls;
@@ -55,10 +55,14 @@ namespace TuneBlaster_.Graphics
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            for (int i = 0; i < balls.Count; i++) 
+            for (int i = 0; i < ballsSize; i++) 
             {
                 balls[i].Draw(gameTime);
             }
+            for (int i = 0; i < looseBallsSize; i++)
+            {
+                looseBalls[i].Draw(gameTime);
+            } 
         }
 
         /*
@@ -96,7 +100,12 @@ namespace TuneBlaster_.Graphics
             for (int i = 0; i < ballsSize; i++) 
             {
                 balls[i].Move(rotation - oldRotation);
-            }           
+            }
+
+            /*for (int i = 0; i < looseBallsSize; i++)
+            {
+                looseBalls[i].Move();
+            }*/
         }
 
         /*
@@ -107,6 +116,39 @@ namespace TuneBlaster_.Graphics
             balls.Add(f);
             ballsSize++;
             CheckExplosions();
+            UpdateLoose();
+        }
+
+        /*
+         * Remove any loose balls that have become fixed
+         * */
+        public void CheckLoose()
+        {
+            for (int i = 0; i < looseBallsSize; i++)
+            {
+                if (!looseBalls[i].IsLive())
+                {
+                    looseBalls.RemoveAt(i);
+                    looseBallsSize--;
+                }
+            }
+        }
+
+        public void UpdateLoose()
+        {
+            for (int i = 0; i < ballsSize; i++)
+            {
+                balls[i].CheckSupports();
+                if (!balls[i].IsAgainstCore() && balls[i].Unsupported() && !balls[i].IsDead())
+                {
+                    MovingBall m = new MovingBall(this, balls[i].colour);
+                    m.Initialise(balls[i].Size, balls[i].Position, this.game);
+                    m.LoadGraphicsContent(balls[i].spriteBatch, balls[i].texture);
+                    looseBalls.Add(m);
+                    looseBallsSize++;
+                    balls[i].Destroy();
+                }
+            }
         }
 
         /*
