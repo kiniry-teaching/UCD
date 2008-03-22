@@ -63,11 +63,7 @@ namespace TuneBlaster_.Graphics
          * Update variables for each frame
          */
         public void Update(GameTime gameTime, KeyboardState keyBoardState, GamePadState gamePadState)
-        {
-
-           
-            
-            
+        {   
             for (int i = 0; i < balls.Count; i++)
             {
                 if (balls[i] != null)
@@ -76,14 +72,6 @@ namespace TuneBlaster_.Graphics
                     {
                         balls.Remove(balls[i]);
                         ballsSize--;
-
-                  
-                       
-
-
-
-
-
                     }
                 }
             }
@@ -106,7 +94,6 @@ namespace TuneBlaster_.Graphics
             for (int i = 0; i < ballsSize; i++) 
             {
                 balls[i].Move(rotation - oldRotation);
-
             }           
         }
 
