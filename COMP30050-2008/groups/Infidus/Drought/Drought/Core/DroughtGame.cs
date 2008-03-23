@@ -6,6 +6,7 @@ using Drought.Menu;
 using Drought.Input;
 using Drought.GameStates;
 using Drought.Network;
+using Drought.Sound;
 
 namespace Drought
 {
@@ -18,6 +19,7 @@ namespace Drought
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         GameManager gameManager;
+        SoundManager soundManager;
         NetworkManager networkManager;
 
         /**
@@ -36,6 +38,7 @@ namespace Drought
                 Components.Add(new GamerServicesComponent(this));
             }
             gameManager = new GameManager(this);
+            soundManager = SoundManager.getInstance();
             networkManager = NetworkManager.getInstance();
         }
 
@@ -99,6 +102,7 @@ namespace Drought
 
             gameManager.update(gameTime);
 
+            soundManager.update();
             networkManager.update();
 
             base.Update(gameTime);
@@ -129,6 +133,11 @@ namespace Drought
         public NetworkManager getNetworkManager()
         {
             return networkManager;
+        }
+
+        public SoundManager getSoundManager()
+        {
+            return soundManager;
         }
 
         public static void Main(string[] args) {

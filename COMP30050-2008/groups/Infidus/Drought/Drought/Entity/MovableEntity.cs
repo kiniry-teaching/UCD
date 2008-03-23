@@ -40,14 +40,11 @@ namespace Drought.Entity
 
         private LineTool lineTool;
 
-        private Camera cam;
-
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(DroughtGame game, Camera camera, Model model, Texture2D[] modelTextures, Path path, int uid)
+        public MovableEntity(DroughtGame game, Model model, Texture2D[] modelTextures, Path path, int uid)
         {
-            this.cam = camera;
             uniqueID = uid;
             this.path = path;
             position = path.getPosition();
@@ -56,7 +53,7 @@ namespace Drought.Entity
             rotation = new Vector3(0, 0, 0);
             normal = path.getNormal();
             orientation = Matrix.Identity;
-            velocity = 0.05f;
+            velocity = 0.1f;
             this.model = model;
             this.modelTextures = modelTextures;
             selected = false;
@@ -66,8 +63,7 @@ namespace Drought.Entity
 
         public void move()
         {
-            if (!path.isFinished())
-            {
+            if (!path.isFinished()) {
                 path.addDistance(velocity);
                 prevPosition.X = position.X;
                 prevPosition.Y = position.Y;
@@ -95,7 +91,8 @@ namespace Drought.Entity
             this.path = path;
         }
 
-        public Path getPath() {
+        public Path getPath()
+        {
             return path;
         }
 
@@ -115,10 +112,8 @@ namespace Drought.Entity
             Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
 
             int i = 0;
-            foreach (ModelMesh mesh in model.Meshes)
-            {
-                foreach (Effect currentEffect in mesh.Effects)
-                {
+            foreach (ModelMesh mesh in model.Meshes) {
+                foreach (Effect currentEffect in mesh.Effects) {
                     currentEffect.CurrentTechnique = effect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorld"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix);
@@ -129,15 +124,14 @@ namespace Drought.Entity
                 mesh.Draw();
             }
 
-            lineTool.render(cam.getViewMatrix(), cam.getProjectionMatrix());
+            lineTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
 
             if (selected) {
-                Vector3 v3 = graphics.Viewport.Project(position, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
-                if (v3.Z < 1) {
+                Vector3 ringPos = graphics.Viewport.Project(position, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+                if (ringPos.Z < 1) {
                     batch.Begin();
-                    Vector3 dist = camera.getPosition() - position;
                     int radius = 20;
-                    Rectangle recty = new Rectangle((int)v3.X - radius, (int)v3.Y - radius, radius*2, radius*2);
+                    Rectangle recty = new Rectangle((int)ringPos.X - radius, (int)ringPos.Y - radius, radius * 2, radius * 2);
                     batch.Draw(selector, recty, Color.White);
                     batch.End();
                 }

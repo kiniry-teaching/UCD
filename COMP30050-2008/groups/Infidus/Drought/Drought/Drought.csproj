@@ -70,6 +70,7 @@
     <Compile Include="Menu\GameMenuItem.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\RemoteGame.cs" />
+    <Compile Include="Sound\SoundManager.cs" />
     <Compile Include="World\Camera.cs" />
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Input\DeviceInput.cs" />
@@ -95,6 +96,9 @@
       <Project>077aa3f0-6388-4f0f-b446-5153fd0f4ad7</Project>
       <Visible>False</Visible>
     </NestedContentProject>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Drought.xap" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v2.0\Microsoft.Xna.GameStudio.Common.targets" />

@@ -53,6 +53,11 @@ namespace Drought.World
             return eyeVector;
         }
 
+        public float getOrientation()
+        {
+            return cameraRotationAngles.Z;
+        }
+
         public Matrix getViewMatrix()
         {
             return Matrix.CreateLookAt(eyeVector, focusVector, upVector);
