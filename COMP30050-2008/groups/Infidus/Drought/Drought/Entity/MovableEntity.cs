@@ -144,19 +144,33 @@ namespace Drought.Entity
             }
         }
 
-        public Vector3 getPosition() {
+        public Vector3 getPosition()
+        {
             return position;
         }
 
-        public void setPosition(Vector3 aPosition) {
+        public void setPosition(Vector3 aPosition)
+        {
             position = aPosition;
         }
 
-        public void setSelected(bool selected) {
+        public Matrix getOrientation()
+        {
+            return orientation;
+        }
+
+        public void setOrientation(Matrix anOrientation)
+        {
+            orientation = anOrientation;
+        }
+
+        public void setSelected(bool selected)
+        {
             this.selected = selected;
         }
 
-        public bool isSelected() {
+        public bool isSelected()
+        {
             return selected;
         }
     }

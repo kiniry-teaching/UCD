@@ -28,6 +28,8 @@ namespace Drought.Network
 
         /** TEMP: hacky! */
         private int cachedID;
+        private Vector3 cachedPosition;
+        private Matrix cachedOrientation;
 
         /** Internal constructor; user classes should obtain a reference through SoundManager.getInstance() */
         private NetworkManager() { }
@@ -90,27 +92,35 @@ namespace Drought.Network
         }
 
         public void sendPos(MovableEntity entity) {
-            //packetWriter.Write(NetworkManager.SENDCODE_POS);
-            int uid = entity.uniqueID;
-            packetWriter.Write(uid);
+            packetWriter.Write(entity.uniqueID);
             packetWriter.Write(entity.getPosition());
+            packetWriter.Write(entity.getOrientation());
             session.LocalGamers[0].SendData(packetWriter, SendDataOptions.None);
         }
 
-        public Vector3 recievePos() {
+        public int recieveUID()
+        {
             if (session.LocalGamers[0].IsDataAvailable) {
                 NetworkGamer sender;
                 session.LocalGamers[0].ReceiveData(packetReader, out sender);
                 cachedID = packetReader.ReadInt32();
-                return packetReader.ReadVector3();
+                cachedPosition = packetReader.ReadVector3();
+                cachedOrientation = packetReader.ReadMatrix();
+                return cachedID;
             }
             else {
-                return new Vector3();
+                return -1;
             }
         }
+        
+        public Vector3 recievePos()
+        {
+            return cachedPosition;
+        }
 
-        public int recieveUID() {
-            return cachedID;
+        public Matrix recieveOri()
+        {
+            return cachedOrientation;
         }
 
         public bool anyoneElseHere() {

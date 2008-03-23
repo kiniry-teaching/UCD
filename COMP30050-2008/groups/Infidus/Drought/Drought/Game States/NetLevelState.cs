@@ -112,13 +112,6 @@ namespace Drought.GameStates
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
             remoteEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
-
-            /** Hack! */
-            /*if (hosting) {
-                List<MovableEntity> tempList = localEntities;
-                localEntities = remoteEntities;
-                remoteEntities = tempList;
-            }*/
         }
 
         public override void loadContent()
@@ -191,17 +184,17 @@ namespace Drought.GameStates
 
             foreach (MovableEntity entity in localEntities) {
                 networkManager.sendPos(entity);
-                //Console.WriteLine("sent: " + entity.getPosition());
             }
             
             while (networkManager.hasMoreData()) {
-                Vector3 vec = networkManager.recievePos();
-                int uid = networkManager.recieveUID();
-                //Console.WriteLine("uid: " + uid + " recieved");
+                int uid = networkManager.recieveUID(); 
+                Vector3 pos = networkManager.recievePos();
+                Matrix ori = networkManager.recieveOri();
                 foreach (MovableEntity entity in remoteEntities)
-                    if (entity.uniqueID == uid)
-                        entity.setPosition(vec);
-                //if (vec != new Vector3()) Console.WriteLine("recieved: " + vec);
+                    if (entity.uniqueID == uid) {
+                        entity.setPosition(pos);
+                        entity.setOrientation(ori);
+                    }
             }
 
             /* Selecting Units */
