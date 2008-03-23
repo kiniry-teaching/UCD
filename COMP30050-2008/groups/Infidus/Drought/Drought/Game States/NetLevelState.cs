@@ -27,8 +27,6 @@ namespace Drought.GameStates
 
         private TextureMap textureMap;
 
-        //private WaterMap waterMap;
-
         private NormalMap normalMap;
 
         private DeviceInput input;
@@ -71,6 +69,8 @@ namespace Drought.GameStates
 
             modelLoader = new ModelLoader(game.Content, game.getGraphics());
 
+            lineTool = new LineTool(getGraphics());
+
             loadContent();
 
             normalMap = new NormalMap(heightMap);
@@ -109,17 +109,12 @@ namespace Drought.GameStates
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
             remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             
+            /** Hack! */
             if (hosting) {
                 List<MovableEntity> tempList = localEntities;
                 localEntities = remoteEntities;
                 remoteEntities = tempList;
             }
-
-            foreach (MovableEntity entity in localEntities) {
-                entity.setSelected(true);
-            }
-
-            lineTool = new LineTool(getGraphics());
         }
 
         public override void loadContent()
