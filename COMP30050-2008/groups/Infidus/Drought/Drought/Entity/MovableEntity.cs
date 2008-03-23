@@ -36,7 +36,7 @@ namespace Drought.Entity
 
         private Texture2D selector;
 
-        private bool selected, oldSelected;
+        private bool selected;
 
         private LineTool lineTool;
 
@@ -60,7 +60,6 @@ namespace Drought.Entity
             this.model = model;
             this.modelTextures = modelTextures;
             selected = false;
-            oldSelected = false;
             lineTool = new LineTool(game.GraphicsDevice);
             selector = game.Content.Load<Texture2D>("Textures/selector");
         }
@@ -88,14 +87,6 @@ namespace Drought.Entity
                 orientation.Right = Vector3.Normalize(orientation.Right);
                 orientation.Forward = Vector3.Cross(-orientation.Right, orientation.Up);
                 orientation.Forward = Vector3.Normalize(orientation.Forward);
-
-                if (selected && !oldSelected) {
-                    //Console.WriteLine("selected!");
-                }
-                if (!selected && oldSelected) {
-                    //Console.WriteLine("unselected!");
-                }
-                oldSelected = selected;
             }
         }
 

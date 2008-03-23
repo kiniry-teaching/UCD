@@ -60,9 +60,9 @@ namespace Drought.GameStates
             input = DeviceInput.getInput();
             heightMap = new HeightMap(fileName);
             textureMap = new TextureMap(fileName);
+            normalMap = new NormalMap(heightMap);
 
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap);
-
             camera = new Camera(game, heightMap);
 
             skybox = new Skybox(camera);
@@ -73,48 +73,52 @@ namespace Drought.GameStates
 
             loadContent();
 
-            normalMap = new NormalMap(heightMap);
+            initializeEntities();
+        }
 
+        private void initializeEntities()
+        {
             localEntities = new List<MovableEntity>();
             int uid = 0;
+            if (!hosting) uid = 3;
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            localEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            localEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
-            
+            localEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            localEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
-            uid = 0;
+            if (!hosting) uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
-            
+            remoteEntities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+
             /** Hack! */
-            if (hosting) {
+            /*if (hosting) {
                 List<MovableEntity> tempList = localEntities;
                 localEntities = remoteEntities;
                 remoteEntities = tempList;
-            }
+            }*/
         }
 
         public override void loadContent()

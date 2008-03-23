@@ -48,10 +48,10 @@ namespace Drought.GameStates
             input = DeviceInput.getInput();
             heightMap = new HeightMap(fileName);
             textureMap = new TextureMap(fileName);
+            normalMap = new NormalMap(heightMap); 
             waterMap = new WaterMap(heightMap, textureMap);
 
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap);
-
             camera = new Camera(game, heightMap);
 
             skybox = new Skybox(camera);
@@ -62,8 +62,11 @@ namespace Drought.GameStates
             
             loadContent();
 
-            normalMap = new NormalMap(heightMap);
+            initializeEntities();
+        }
 
+        private void initializeEntities() 
+        {
             entities = new List<MovableEntity>();
             int uid = 0;
             int hw = heightMap.getMapWidth() / 2;
@@ -72,36 +75,35 @@ namespace Drought.GameStates
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw + i, hh, heightMap.getHeight(hw + i, hh)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw - i, hh, heightMap.getHeight(hw - i, hh)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw, hh + i, heightMap.getHeight(hw, hh + i)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw, hh - i, heightMap.getHeight(hw, hh - i)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw + i, hh + i, heightMap.getHeight(hw + i, hh + i)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw - i, hh - i, heightMap.getHeight(hw - i, hh - i)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw + i, hh - i, heightMap.getHeight(hw + i, hh - i)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(new Vector3(hw - i, hh + i, heightMap.getHeight(hw - i, hh + i)));
-            entities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
-            
+            entities.Add(new MovableEntity(getGame(), camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
         }
 
         public override void loadContent()

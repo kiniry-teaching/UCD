@@ -6,7 +6,7 @@ namespace Drought.Graphics {
 
     /**
      * A general purpose line drawing tool.
-     * Can draw to world coordinates give View and Projection matrices, or directly to the screen.
+     * Can draw to world coordinates given View and Projection matrices, or directly to the screen.
      * Lines are drawn as a strip; each line segment starts where the previous one ended.
      * So to draw 3 lines, for example, 4 points are needed.
      */
@@ -15,19 +15,19 @@ namespace Drought.Graphics {
         /** The GraphicsDevice to draw to. */
         private GraphicsDevice graphics;
 
-        VertexDeclaration vertexDeclaration;
+        private VertexDeclaration vertexDeclaration;
 
-        BasicEffect basicEffect;
+        private BasicEffect basicEffect;
 
         /** The number of points in the line. */
-        int numPoints;
+        private int numPoints;
 
         /** The list of points in the line. */
-        VertexPositionNormalTexture[] pointList;
+        private VertexPositionNormalTexture[] pointList;
 
-        VertexBuffer vertexBuffer;
+        private VertexBuffer vertexBuffer;
 
-        IndexBuffer indexBuffer;
+        private IndexBuffer indexBuffer;
 
         public LineTool(GraphicsDevice graphicsDevice)
         {
@@ -36,6 +36,8 @@ namespace Drought.Graphics {
 
             basicEffect = new BasicEffect(graphics, null);
             basicEffect.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+
+            numPoints = 0;
         }
 
         /** Specify a new list of points to be used to draw the line. */
