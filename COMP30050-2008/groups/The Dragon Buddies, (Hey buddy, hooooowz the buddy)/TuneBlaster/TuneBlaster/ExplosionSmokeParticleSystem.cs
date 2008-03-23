@@ -22,6 +22,8 @@ namespace TuneBlaster_
         protected override void InitializeConstants()
         {
             textureFilename = "smoke";
+            
+          
 
             // less initial speed than the explosion itself
             minInitialSpeed = 20;

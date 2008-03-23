@@ -40,7 +40,11 @@ namespace TuneBlaster_
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
         public static ExplosionParticleSystem explosion;
         public static ExplosionSmokeParticleSystem smoke;
-        
+        public static RedParticle redblast;
+        public static GreenParticle greenblast;
+        public static BlueParticle blueblast;
+        public static PurpleParticle purpleblast;
+
         public Engine()
         {
 
@@ -53,8 +57,16 @@ namespace TuneBlaster_
             this.graphics.PreferredBackBufferHeight = 600;
             explosion = new ExplosionParticleSystem(this,1);
             Components.Add(explosion);
-            smoke = new ExplosionSmokeParticleSystem(this,2);
+            smoke = new ExplosionSmokeParticleSystem(this, 2);
             Components.Add(smoke);
+            blueblast = new BlueParticle(this,1);
+            Components.Add(blueblast);
+            redblast = new RedParticle(this,1);
+            Components.Add(redblast);
+            greenblast = new GreenParticle(this, 1);
+            Components.Add(greenblast);
+            purpleblast = new PurpleParticle(this, 1);
+            Components.Add(purpleblast);
 
             //this.graphics.IsFullScreen = true;
         }

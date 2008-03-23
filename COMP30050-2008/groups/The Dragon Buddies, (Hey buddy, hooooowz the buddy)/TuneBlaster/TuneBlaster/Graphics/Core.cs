@@ -162,8 +162,7 @@ namespace TuneBlaster_.Graphics
         {
 
             Vector2 where;
-           // where.X = balls[i].Position.X;
-           // where.Y = balls[i].Position.Y;
+      
             for (int i = 0; i < ballsSize; i++)
             {
                 if (balls[i] != null)
@@ -176,6 +175,10 @@ namespace TuneBlaster_.Graphics
                        where.Y = balls[i].Position.Y;
                        Engine.explosion.AddParticles(where);
                        Engine.smoke.AddParticles(where);
+                       Engine.greenblast.AddParticles(where);
+                       Engine.purpleblast.AddParticles(where);
+                       Engine.redblast.AddParticles(where);
+                       Engine.blueblast.AddParticles(where);
 
                         //to put in code for explosion
                       
