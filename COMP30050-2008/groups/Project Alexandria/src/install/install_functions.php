@@ -104,10 +104,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_onloan 
 	(
-		no int NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(no),
-		isbn varchar(13) NOT NULL,
-		username varchar(30) NOT NULL,
+		isbnUsername varchar(239) NOT NULL,
+		PRIMARY KEY(isbnUsername ),
 		date int
 	)";
 	mysql_query($sql,$con);	
@@ -117,12 +115,10 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_requests 
 	(
-		no int NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(no),
-		isbn varchar(13) NOT NULL,
-		username varchar(30) NOT NULL
+		requestNo bigint NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(requestNo),
+		isbnUsername text
 	)";
-	
 	mysql_query($sql,$con);	
 	
 	$sql = 'DROP TABLE IF EXISTS `books_returned`';
@@ -130,29 +126,48 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	$sql = "CREATE TABLE books_returned 
 	(
-		no int NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(no),
-		isbn varchar(13) NOT NULL,
-		username varchar(30) NOT NULL
+		returnNo bigint NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(returnNo),
+		isbnUsername text
 	)";
-	
 	mysql_query($sql,$con);	
 	
-	$sql = 'DROP TABLE IF EXISTS `books_review`';
+	$sql = 'DROP TABLE IF EXISTS `books_reviews`';
 	mysql_query($sql,$con);	
 	
 	$sql = "CREATE TABLE books_review 
 	(
-		no int NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(no),
-		isbn varchar(13) NOT NULL,
-		username varchar(30) NOT NULL,
+		reviewNo bigint NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(reviewNo),
+		isbnUsername text,
 		rating int(5),
 		review text
 	)";
 	mysql_query($sql,$con);	
 
-	//TODO - Thomas - Create tables	
+	/*
+	*	create user systems tables
+	*	added: 19/3/08
+	*/
+	$sql = 'DROP TABLE IF EXISTS `users`';
+	mysql_query($sql,$con);	
+
+	$sql =	"CREATE TABLE users (
+ 		username varchar(30) primary key,
+ 		password varchar(32),
+ 		userlevel tinyint(1) unsigned not null,
+ 		email varchar(50),
+ 		timestamp int(11) unsigned not null
+	)";
+
+
+	$sql = 'DROP TABLE IF EXISTS `users_online`';
+	mysql_query($sql,$con);	
+
+	$sql =	"CREATE TABLE users_online (
+ 		username varchar(30) primary key,
+ 		timestamp int(11) unsigned not null
+	)";
 	
 	/****************************************************************
 	* 																*
