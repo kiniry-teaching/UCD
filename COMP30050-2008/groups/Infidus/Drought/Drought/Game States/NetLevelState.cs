@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Drought;
-using Drought.State;
-using Drought.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Drought.State;
+using Drought.Graphics;
+using Drought.World;
 using Drought.Entity;
 using Drought.Input;
 using Drought.Network;
-using Drought.Core;
 
 namespace Drought.GameStates
 {
@@ -37,12 +35,6 @@ namespace Drought.GameStates
 
         private Effect modelEffect;
 
-        private Dictionary<int, Texture2D[]> modelTextures;
-
-        private enum modelIndexes { Skybox, XYZ, Truck, Car };
-
-        private Model[] models;
-
         private List<MovableEntity> localEntities;
 
         private List<MovableEntity> remoteEntities;
@@ -57,7 +49,9 @@ namespace Drought.GameStates
         private int startClickX, startClickY;
         private int currClickX, currClickY;
 
-        LineTool lineTool;
+        private LineTool lineTool;
+
+        private ModelLoader modelLoader;
 
         public NetLevelState(IStateManager manager, DroughtGame game, string fileName, bool isHost) :
             base(manager, game)
@@ -75,8 +69,7 @@ namespace Drought.GameStates
 
             skybox = new Skybox(camera);
 
-            models = new Model[4];
-            modelTextures = new Dictionary<int, Texture2D[]>();
+            modelLoader = new ModelLoader(game.Content, game.getGraphics());
 
             loadContent();
 
@@ -87,34 +80,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            localEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            localEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            localEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, i, heightMap.getHeight(i, i)));
-            remoteEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(i, 200, heightMap.getHeight(i, 200)));
-            remoteEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(new Vector3(200, i, heightMap.getHeight(200, i)));
-            remoteEntities.Add(new MovableEntity(game, camera, models[(int)modelIndexes.Car], modelTextures[(int)modelIndexes.Car], new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(game, camera, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             
             if (hosting) {
                 List<MovableEntity> tempList = localEntities;
@@ -133,39 +126,11 @@ namespace Drought.GameStates
         {
             modelEffect = getContentManager().Load<Effect>("EffectFiles/model");
 
-            //initialise models
-            models[(int)modelIndexes.Truck] = getContentManager().Load<Model>("Models/Truck/truck");
-            models[(int)modelIndexes.XYZ] = getContentManager().Load<Model>("Models/xyz");
-            models[(int)modelIndexes.Car] = getContentManager().Load<Model>("Models/Car/car");
-            models[(int)modelIndexes.Skybox] = getContentManager().Load<Model>("Models/Skybox/skybox");
-
             terrain.loadContent();
             terrain.setProjectionMatrix(camera.getProjectionMatrix());
             terrain.setViewMatrix(camera.getViewMatrix());
 
             skybox.loadContent(getContentManager(), getGraphics());
-
-            for (int index = 0; index < models.Length; index++) {
-                Model model = models[index];
-
-                int textureCount = 0;
-                foreach (ModelMesh mesh in model.Meshes)
-                    textureCount += mesh.Effects.Count;
-
-                Texture2D[] textures = new Texture2D[textureCount];
-
-                int i = 0;
-                foreach (ModelMesh mesh in model.Meshes)
-                    //foreach (BasicEffect basicEffect in mesh.Effects)
-                    foreach (BasicEffect basicEffect in mesh.Effects)
-                        textures[i++] = basicEffect.Texture;
-
-                modelTextures.Add(index, textures);
-
-                foreach (ModelMesh mesh in model.Meshes)
-                    foreach (ModelMeshPart meshPart in mesh.MeshParts)
-                        meshPart.Effect = modelEffect.Clone(getGraphics());
-            }
         }
 
         public override void background()
@@ -245,17 +210,21 @@ namespace Drought.GameStates
                 clickCurrent = true;
                 startClickX = input.getMouseX();
                 startClickY = input.getMouseY();
-                currClickX = startClickX;
-                currClickY = startClickY;
             }
             else if (clickCurrent && !input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
                 clickCurrent = false;
-                Rectangle bounds = new Rectangle(startClickX, startClickY, input.getMouseX() - startClickX, input.getMouseY() - startClickY);
+                currClickX = input.getMouseX();
+                currClickY = input.getMouseY();
+                int topX = Math.Min(startClickX, currClickX);
+                int topY = Math.Min(startClickY, currClickY);
+                int bottomX = Math.Max(startClickX, currClickX);
+                int bottomY = Math.Max(startClickY, currClickY);
+                Rectangle bounds = new Rectangle(topX, topY, bottomX - topX, bottomY - topY);
                 foreach (MovableEntity entity in localEntities) {
                     entity.setSelected(false);
-                    Vector3 v3 = getGraphics().Viewport.Project(entity.getPosition(), camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
-                    if (v3.Z < 1) {
-                        if (bounds.Contains(new Point((int)v3.X, (int)v3.Y))) {
+                    Vector3 entityPos = getGraphics().Viewport.Project(entity.getPosition(), camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+                    if (entityPos.Z < 1) {
+                        if (bounds.Contains(new Point((int)entityPos.X, (int)entityPos.Y))) {
                             entity.setSelected(true);
                         }
                     }

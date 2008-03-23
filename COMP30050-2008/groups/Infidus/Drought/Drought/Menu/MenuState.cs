@@ -185,18 +185,21 @@ namespace Drought.Menu
                 case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
                 case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
 
-                case MenuFunctions.LOCAL: getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
-                case MenuFunctions.HOST: ((DroughtGame)getGame()).getNetworkManager().host(); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", true)); break;
+                case MenuFunctions.LOCAL: 
+                    getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
+                case MenuFunctions.HOST: getGame().getNetworkManager().host();
+                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", true)); break;
+                
                 case MenuFunctions.GAMELIST: makeGameList(); currMenu = joinMenu; joinMenu.activate(); break;
-
                 case MenuFunctions.GAMELIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
-                case MenuFunctions.JOIN: ((DroughtGame)getGame()).getNetworkManager().connectToGame(((GameMenuItem)item).getGame()); getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "water", false)); break;
+                case MenuFunctions.JOIN: getGame().getNetworkManager().connectToGame(((GameMenuItem)item).getGame());
+                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", false)); break;
             }
         }
 
         /** Populates the list of joinable games. */
-        public void makeGameList() {
-            List<RemoteGame> remoteGames = ((DroughtGame)getGame()).getNetworkManager().getLocalGames();
+        private void makeGameList() {
+            List<RemoteGame> remoteGames = getGame().getNetworkManager().getLocalGames();
             joinMenu = new Menu(this);
             float scale = 0.35f * (screenHeight / 600.0f);
             float gameX = 500.0f * (screenWidth / 800.0f);

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Drought.Core {
+namespace Drought.Graphics {
 
     /**
      * A general purpose line drawing tool.

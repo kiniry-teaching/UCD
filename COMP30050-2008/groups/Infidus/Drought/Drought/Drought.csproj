@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DroughtGame.cs" />
-    <Compile Include="Core\LineTool.cs" />
+    <Compile Include="Graphics\LineTool.cs" />
     <Compile Include="Entity\MovableEntity.cs" />
     <Compile Include="Entity\NormalMap.cs" />
     <Compile Include="Entity\Path.cs" />
@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Game States\SignInState.cs" />
+    <Compile Include="Graphics\ModelLoader.cs" />
     <Compile Include="Menu\GameMenuItem.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\RemoteGame.cs" />
