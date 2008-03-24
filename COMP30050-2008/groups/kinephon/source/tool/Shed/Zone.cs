@@ -10,7 +10,6 @@ namespace Shed
 	public class Zone
 	{
 
-		protected int _order;
 		protected float _x;
 		protected float _y;
 		protected float _enterRadius;
@@ -105,14 +104,6 @@ namespace Shed
 			set { _exitArc = value; }
 		}
 
-		[DescriptionAttribute("Ordering in all zones of which this zone must be entered"),
-		 CategoryAttribute("Position")]
-		public int Order
-		{
-			get { return _order; }
-			set { _order = value; }
-		}
-
 	}
 
 	internal class ZoneConverter : ExpandableObjectConverter
@@ -128,7 +119,7 @@ namespace Shed
 			if(destinationType == typeof(string) && value is Zone)
 			{
 				Zone zone = (Zone)value;
-				return zone.Order + ": (" + zone.X + ", " + zone.Y + ")";
+				return "(" + zone.X + ", " + zone.Y + ")";
 			}
 
 			return base.ConvertTo(context, culture, value, destinationType);

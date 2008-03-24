@@ -33,7 +33,7 @@ public:
 	 * Get the IR blob's id being tracked by this
 	 * @return The IR blob's id
 	 */
-	irid		iid					(void)	const;
+	irid		iid					(void)		const;
 	/**
 	 * Returns the first frame in this Track.
 	 * Following frams can be accessed by this->frame()->next()..
@@ -41,31 +41,21 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Frame *		first				(void)	const;
+	Frame *		first				(void)		const;
 	/**
-	 * Returns the number of frames.
-	 * @return The number of frames held by this track
+	 * Returns true if there are Frames in the track, else false
+	 * @return true if there are Frames in the track, else false
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint		length				(void)	const;
-
+	bool		hasFrames			(void)		const;
 	/**
-	 * Returns the indexed Frame.
-	 * Index should be in the range (0..length()-1)
-	 * @param index Index of frame to return, from 0 to length() - 1
-	 * @return Indexed frame. If Index is out of range, 0 is returned
-	 * @warning It is slower to access each frame by index than sequentially
-	 *	from first() and Frame::next() as each indexed frame needs to first
-	 *	find the frame.
+	 * Calculate the number of frames in this track
+	 * @return the number of frames in this track
 	 * @author EB
 	 * @version 1.0
-	 * @pre index >= 0 && index < length();
-	 * @post /result != 0;
 	 */
-	Frame *		operator []
-				(	uint const		index
-				)	const;
+	uint		length				(void)		const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend *tor
@@ -80,6 +70,12 @@ private:
 				Track
 				(	irid const		iid
 				);
+	/**
+	 * Destory all frames in this track
+	 * @author EB
+	 * @version 1.0
+	 */
+				~Track				(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend commands
@@ -98,17 +94,14 @@ private:
 				(	Frame * const	frame
 				);
 	/**
-	 * Remove a frame and all before.
-	 * @param frame The frame to remove from the track
-	 * @return A reference to this
+	 * Erase all frames up to and including frameIndex
+	 * If frameIndex is not specified, all frames are erased
+	 * @param frameIndex Erase from first frame to frameIndex
 	 * @author EB
 	 * @version 1.0
-	 * @pre frame must exist in the track
-	 * @warning This does not deallocate frames
-	 * @warning If the specified frame does not exist, all frames are removed
 	 */
-	Frame *		operator -=
-				(	Frame * const	frame
+	void		erase
+				(	uint const		frameIndex	= ~0ul
 				);
 	/**
 	 * Store whether this track has been lost, is no longer in use. A track
@@ -116,7 +109,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	bool		isLost				(void)	const;
+	bool		isLost				(void)		const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields
@@ -129,13 +122,6 @@ private:
 	 * @see id()
 	 */
 	irid		_iid;
-	/**
-	 * length()'s field
-	 * @author EB
-	 * @version 1.0
-	 * @see length()
-	 */
-	uint		_length;
 	/**
 	 * first()'s field
 	 * @author EB
@@ -165,18 +151,25 @@ private:
 inline Track::Track
 (	irid const		iid
 ) :	_iid			(iid),
-	_length			(0),
 	_frameFirst		(0),
 	_frameLast		(0),
 	_isLost			(false)
 { }
 
+inline Track::~Track(void)
+{	erase();
+}
+
 inline irid Track::iid(void) const
 {	return _iid;
 }
 
+inline bool Track::hasFrames(void) const
+{	return _frameFirst != 0;
+}
+
 inline uint Track::length(void) const
-{	return _length;
+{	return _frameFirst->length();
 }
 
 inline Frame * Track::first(void) const

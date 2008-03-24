@@ -1,12 +1,12 @@
 #ifndef __INTERPRETER_RECORDER_H__
 #define __INTERPRETER_RECORDER_H__
 
-#include <map>
+#include <vector>
 #include "../../type.h"
 #include "IParserRecorder.h"
 #include "Track.h"
 #include "Recording.h"
-using std::map;
+using std::vector;
 
 namespace interpreter
 {
@@ -48,7 +48,7 @@ public:
 	 */
 	void				erase
 						(	irid const	iid,
-							int const	frameIndex	= -1
+							uint const	frameIndex	= ~0
 						);
 	/**
 	 * Erase a Recording previously obtained through eject()
@@ -106,6 +106,16 @@ public:
 //
 private:
 	/**
+	 * Get a track by it's IR id
+	 * @param iid The id of the track to get
+	 * @return A pointer to the requested track or 0 if not found
+	 * @author EB
+	 * @version 1.0
+	 */
+	Track *				findTrack
+						(	irid const	iid
+						)	const;
+	/**
 	 * control() econtrol::FOUND Helper
 	 * @param iid IR blob whose track is to be erased
 	 * @return always 0
@@ -143,7 +153,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	map<irid, Track *>	_tracks;
+	vector<Track *>		_tracks;
 
 };
 

@@ -188,6 +188,19 @@ private:
 		 */
 		uint		nData;
 		/**
+		 * Number of grid elements left and right to bound the test to
+		 * 
+		 * @author EB
+		 * @version 1.0
+		 */
+		uint		hBound;
+		/**
+		 * Number of grid elements top and bottom to bound the test to
+		 * @author EB
+		 * @version 1.0
+		 */
+		uint		vBound;
+		/**
 		 * Number of zones in this shape
 		 * @author EB
 		 * @version 1.0
@@ -218,11 +231,12 @@ private:
 		 */
 		bool		zoneReverse;
 		/**
-		 * Pad the structure out to 4 byte alignment
+		 * Pad to 4 byte alignment
 		 * @author EB
 		 * @version 1.0
 		 */
-		char		padding[2];
+		uchar		padding[2];
+
 	};
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -238,12 +252,6 @@ private:
 	class SEZone
 	{
 	public:
-		/**
-		 * Zone's order, zone 0 must be entered before zone 1
-		 * @author EB
-		 * @version 1.0
-		 */
-		uint		order;
 		/**
 		 * Zone's x position
 		 * @author EB

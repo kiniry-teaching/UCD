@@ -109,7 +109,6 @@ private:
 	/**
 	 * Create a new zone. This will only be called by ShapeLoader. All
 	 *	angles are in radians
-	 * @param order The order this zone must be entered
 	 * @param x The x co-ordinate of the zone
 	 * @param y The y co-ordinate of the zone
 	 * @param enterRadius The radius a point must be from the zone to be
@@ -132,8 +131,7 @@ private:
 	 * @version 1.0
 	 */
 			Zone
-			(	uint const	order,
-				float const	x,
+			(	float const	x,
 				float const	y,
 				float const	enterRadius,
 				float const	exitRadius,
@@ -169,18 +167,10 @@ private:
 				bool const	isEntered
 			)	const;
 
-	uint	order			(void)		const;
-
 ///////////////////////////////////////////////////////////////////////////////
 // fields
 //
 private:
-	/**
-	 * Store the order this zone must be tested
-	 * @author EB
-	 * @version 1.0
-	 */
-	uint	_order;
 	/**
 	 * Store the x co-ordinate of this zone
 	 * @author EB
@@ -235,8 +225,7 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 inline Zone::Zone
-(	uint const		order,
-	float const		x,
+(	float const		x,
 	float const		y,
 	float const		enterRadius,
 	float const		exitRadius,
@@ -244,8 +233,7 @@ inline Zone::Zone
 	float const		exitAngle,
 	float const		enterArc,
 	float const		exitArc
-) :	_order			(order),
-	_x				(x),
+) :	_x				(x),
 	_y				(y),
 	_enterRadius	(enterRadius),
 	_exitRadius		(exitRadius),
@@ -254,10 +242,6 @@ inline Zone::Zone
 	_enterArc		(enterArc),
 	_exitArc		(exitArc)
 { }
-
-inline uint Zone::order(void) const
-{	return _order;
-}
 
 }
 

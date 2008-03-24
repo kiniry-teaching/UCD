@@ -147,6 +147,7 @@ namespace Shed
 
 				float mul = mnuViewZone.CheckState == CheckState.Indeterminate ? 1 : 2;
 				float mul2 = 1;
+				int order = 0;
 
 				foreach(Zone zone in _shape.Zones)
 					if(zone.Highlight == true)
@@ -169,6 +170,7 @@ namespace Shed
 					Pen exitRad = new Pen(Color.FromArgb((int)(63 * mul * mul2), 255, 0, 0));
 					Pen exitAngle = new Pen(Color.FromArgb((int)(127 * mul * mul2), 255, 0, 0));
 					Brush exitArc = new SolidBrush(Color.FromArgb((int)(31 * mul * mul2), 255, 0, 0));
+					Brush text = new SolidBrush(Color.Black);
 					
 					float x = zone.X * dx;
 					float y = zone.Y * dy;
@@ -234,6 +236,9 @@ namespace Shed
 					p.CloseFigure();
 					e.Graphics.FillPath(exitArc, p);
 					e.Graphics.DrawPath(exitAngle, p);
+
+					e.Graphics.DrawString("(" + order + ")", Font, text, x, y);
+					order++;
 
 
 				}
@@ -324,7 +329,6 @@ namespace Shed
 							MapXY(ref mx, ref my);
 							_zone.X = mx;
 							_zone.Y = my;
-							_zone.Order = _shape.Zones.Count;
 							_shape.Zones.Add(_zone);
 							_zoneMode = ModesOfZone.SetEnterRadiusAngle;
 							break;

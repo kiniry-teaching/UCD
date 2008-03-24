@@ -323,7 +323,6 @@ namespace Shed
 			for(int zi = 0; zi < zc; zi++)
 			{
 				Zone zone = new Zone(shape);
-				zone.Order = int.Parse(stream.ReadLine());
 				zone.X = float.Parse(stream.ReadLine());
 				zone.Y = float.Parse(stream.ReadLine());
 				zone.EnterRadius = float.Parse(stream.ReadLine());
@@ -405,8 +404,7 @@ namespace Shed
 
 			// Zones
 			for(int i = 0; i < shape.Zones.Count; i++)
-			{	stream.WriteLine(shape.Zones[i].Order);
-				stream.WriteLine(shape.Zones[i].X);
+			{	stream.WriteLine(shape.Zones[i].X);
 				stream.WriteLine(shape.Zones[i].Y);
 				stream.WriteLine(shape.Zones[i].EnterRadius);
 				stream.WriteLine(shape.Zones[i].ExitRadius);
@@ -651,6 +649,8 @@ namespace Shed
 				stream.Write(shape.UseSID);
 				stream.Write(shape.Width);
 				stream.Write(shape.Width * shape.Height);
+				stream.Write(shape.HBound);
+				stream.Write(shape.VBound);
 				stream.Write(shape.Zones.Count);
 				stream.Write(speedShapes);
 				stream.Write(accelShapes);
@@ -675,11 +675,9 @@ namespace Shed
 		{	float Angle;
 			float Arc;
 
-			zones.Sort(new ZoneComparer());
 			foreach(Zone zone in zones)
 			{
 
-				stream.Write(zone.Order);
 				stream.Write(zone.X);
 				stream.Write(zone.Y);
 

@@ -255,8 +255,7 @@ bool ShapesLoader::loadZone
 	int x= file.gcount();
 
 	zone = new Zone
-	(	seZone.order,
-		seZone.x,
+	(	seZone.x,
 		seZone.y,
 		seZone.enterRadius,
 		seZone.exitRadius,

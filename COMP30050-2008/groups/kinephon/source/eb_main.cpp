@@ -25,6 +25,8 @@ int lx = 0, ly = 0;
 int main(int argc, char * * argv)
 {
 
+	Frame::RunTest();
+
 	glutInit(&argc, argv);
 	glutInitWindowSize(800, 600);
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
@@ -56,6 +58,8 @@ int main(int argc, char * * argv)
 
 void display(void)
 {
+
+	g_recorder.erase(0, 10);
 
 	Recording * recording = g_recorder.eject();
 

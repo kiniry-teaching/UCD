@@ -71,7 +71,7 @@ namespace Shed
 			PropertyDescriptorCollection pds = new PropertyDescriptorCollection(null);
 
 			// Iterate the list of employees
-			for(int i = 0; i < Count; i++)
+			for(int i = Count - 1; i >= 0; i--)
 				pds.Add(new ZonesPD(this, i));
 
 			return pds;
@@ -103,7 +103,7 @@ namespace Shed
 			{
 				Zone zone = _zones[_index];
 				StringBuilder sb = new StringBuilder();
-				sb.Append(zone.Order + ": (" + zone.X + ", " + zone.Y + ") ");
+				sb.Append("(" + zone.X + ", " + zone.Y + ") ");
 				sb.Append("[" + zone.EnterRadius);
 				sb.Append(",");
 				sb.Append(zone.EnterAngle);
@@ -129,20 +129,6 @@ namespace Shed
 		public override bool ShouldSerializeValue(object component) { return true; }
 		public override void SetValue(object component, object value) { /* this.collection[index] = value; */ }
 
-	}
-
-	public class ZoneComparer : Comparer<Zone>
-	{
-		public override int Compare(Zone x, Zone y)
-		{
-			if(x.Order == y.Order)
-				return 0;
-			else
-			if(x.Order < y.Order)
-				return -1;
-			else
-				return 1;
-		}
 	}
 
 }
