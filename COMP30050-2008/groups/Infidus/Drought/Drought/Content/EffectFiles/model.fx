@@ -1,11 +1,10 @@
 //------- Constants --------
 float4x4 xWorld;
-float4x4 xView;
-float4x4 xProjection;
+float4x4 xWorldViewProjection;
+float3 xLightPosition;
+float xLightPower;
 float3 xLightDirection;
-float xAmbient;
 bool xEnableLighting;
-bool xShowNormals;
 
 //------- Texture Samplers --------
 
@@ -14,12 +13,19 @@ sampler TextureSampler = sampler_state { texture = <xTexture> ; magfilter = LINE
 
 //------- Technique: Textured --------
 
+float DotProduct(float3 LightPos, float3 Pos3D, float3 Normal)
+{
+    float3 LightDir = normalize(LightPos - Pos3D);
+    return dot(LightDir, Normal);
+}
+
 struct VertexToPixel
 {
     float4 Position          : POSITION;
-    float4 Color             : COLOR0;
-    float  LightingFactor    : TEXCOORD0;
-    float2 TextureCoords     : TEXCOORD1;
+    float2 TextureCoords     : TEXCOORD0;
+    float3 Position3D        : TEXCOORD1;
+    float3 Normal            : TEXCOORD2;
+
 };
 
 struct PixelToFrame
@@ -27,19 +33,14 @@ struct PixelToFrame
     float4 Color : COLOR0;
 };
 
-VertexToPixel TexturedVertexShader( float4 inPos : POSITION, float3 inNormal: NORMAL, float2 inTexCoords: TEXCOORD0)
+VertexToPixel TexturedVertexShader( float4 inPos : POSITION0, float3 inNormal: NORMAL0, float2 inTextureCoords: TEXCOORD0)
 {	
 	VertexToPixel Output = (VertexToPixel)0;
-	float4x4 preViewProjection = mul (xView, xProjection);
-	float4x4 preWorldViewProjection = mul (xWorld, preViewProjection);
-    
-	Output.Position = mul(inPos, preWorldViewProjection);	
-	Output.TextureCoords = inTexCoords;
 	
-	float3 Normal = normalize(mul(normalize(inNormal), xWorld));	
-	Output.LightingFactor = 1;
-	if (xEnableLighting)
-		Output.LightingFactor = dot(Normal, -xLightDirection);
+    Output.Position = mul(inPos, xWorldViewProjection);
+    Output.TextureCoords = inTextureCoords;
+	Output.Normal = normalize(mul(inNormal, (float3x3)xWorld));
+	Output.Position3D = mul(inPos, xWorld);
     
 	return Output;    
 }
@@ -48,7 +49,12 @@ PixelToFrame TexturedPixelShader(VertexToPixel PSIn)
 {
 	PixelToFrame Output = (PixelToFrame)0;		
 	
-	Output.Color = tex2D(TextureSampler, PSIn.TextureCoords)*clamp(PSIn.LightingFactor + xAmbient,0,1);
+	float DiffuseLightingFactor = DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
+	
+	Output.Color =  tex2D(TextureSampler, PSIn.TextureCoords);
+	
+	if(xEnableLighting)
+		Output.Color = Output.Color * DiffuseLightingFactor * xLightPower;
 
 	return Output;
 }
@@ -58,8 +64,8 @@ technique Textured
 {
     pass Pass0
     {        
-        VertexShader = compile vs_1_1 TexturedVertexShader();
-        PixelShader = compile ps_1_1 TexturedPixelShader();
+        VertexShader = compile vs_2_0 TexturedVertexShader();
+        PixelShader = compile ps_2_0 TexturedPixelShader();
     }
 
 } 

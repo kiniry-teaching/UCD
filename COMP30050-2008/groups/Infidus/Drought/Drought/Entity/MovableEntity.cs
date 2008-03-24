@@ -116,10 +116,15 @@ namespace Drought.Entity
                 foreach (Effect currentEffect in mesh.Effects) {
                     currentEffect.CurrentTechnique = effect.Techniques["Textured"];
 
-                    currentEffect.Parameters["xWorld"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix);
-                    currentEffect.Parameters["xView"].SetValue(camera.getViewMatrix());
-                    currentEffect.Parameters["xProjection"].SetValue(camera.getProjectionMatrix());
+                    currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
+                    currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
                     currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
+
+                    //HLSL testing
+                    //HardCoded Light params need to be replaced with the values from the Sun.
+                    currentEffect.Parameters["xEnableLighting"].SetValue(true);
+                    currentEffect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
+                    currentEffect.Parameters["xLightPower"].SetValue(1);
                 }
                 mesh.Draw();
             }
