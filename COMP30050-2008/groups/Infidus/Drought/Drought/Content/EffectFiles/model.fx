@@ -25,7 +25,6 @@ struct VertexToPixel
     float2 TextureCoords     : TEXCOORD0;
     float3 Position3D        : TEXCOORD1;
     float3 Normal            : TEXCOORD2;
-
 };
 
 struct PixelToFrame

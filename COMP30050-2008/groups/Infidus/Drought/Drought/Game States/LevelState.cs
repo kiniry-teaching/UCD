@@ -51,8 +51,9 @@ namespace Drought.GameStates
             normalMap = new NormalMap(heightMap); 
             waterMap = new WaterMap(heightMap, textureMap);
 
-            terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap);
             camera = new Camera(game, heightMap);
+
+            terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap, camera);
 
             skybox = new Skybox(camera);
 
@@ -111,8 +112,6 @@ namespace Drought.GameStates
             modelEffect = getContentManager().Load<Effect>("EffectFiles/model");
 
             terrain.loadContent();
-            terrain.setProjectionMatrix(camera.getProjectionMatrix());
-            terrain.setViewMatrix(camera.getViewMatrix());
 
             skybox.loadContent(getContentManager(), getGraphics());
         }
@@ -149,7 +148,9 @@ namespace Drought.GameStates
             if (input.isKeyPressed(GameKeys.CAM_ZOOM_IN))
             {
                 camera.zoomIn();
-                waterMap.addWater(1);
+                waterMap.addWater();
+                terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap,camera);
+                terrain.loadContent();
             }
             else if (input.isKeyPressed(GameKeys.CAM_ZOOM_OUT))
                 camera.zoomOut();
@@ -170,7 +171,6 @@ namespace Drought.GameStates
             }
 
             camera.update(gameTime);
-            terrain.setViewMatrix(camera.getViewMatrix());
             terrain.update(gameTime);
 
             for (int i = 0; i < entities.Count; i++)

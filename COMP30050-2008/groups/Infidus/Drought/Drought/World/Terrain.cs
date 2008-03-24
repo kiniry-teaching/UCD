@@ -30,6 +30,8 @@ namespace Drought.World
         Effect effect;
         ContentManager content;
 
+        Camera camera;
+
         VertexBuffer vb;
         IndexBuffer ib;
 
@@ -51,12 +53,14 @@ namespace Drought.World
         public double counter = Math.PI;
         public Vector3 lightDirection = new Vector3(0,0,-1);//0.5f, (float)Math.Sin(Math.PI), (float)Math.Sin(Math.PI));
 
-        public Terrain(GraphicsDevice device, ContentManager content, HeightMap heightMap, TextureMap textureMap)
+        public Terrain(GraphicsDevice device, ContentManager content, HeightMap heightMap, TextureMap textureMap, Camera camera)
         {
             this.device = device;
             this.content = content;
             this.heightMap = heightMap;
             this.textureMap = textureMap;
+
+            this.camera = camera;
 
             initialise();
         }
@@ -150,15 +154,7 @@ namespace Drought.World
 
         public void update(GameTime gameTime)
         {
-            double currTime = gameTime.TotalGameTime.Ticks;
-            if (currTime > oldTime + 10)
-            {
-                float lightDir = (float)(Math.Sin(counter % (Math.PI * 2)));
-                counter += lightDir < 0 ? 0.001 : 0.01;
-                //lightDirection.Y = lightDir;
-                //lightDirection.Z = lightDir;
-                oldTime = currTime;
-            }
+
         }
 
         public void render()
@@ -173,8 +169,12 @@ namespace Drought.World
             effect.Parameters["xErrorTexture"].SetValue(errorTexture);
 
             effect.Parameters["xWorld"].SetValue(worldMatrix);
+            effect.Parameters["xWorldViewProjection"].SetValue(worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
+            //HLSL testing
+            //HardCoded Light params need to be replaced with the values from the Sun.
             effect.Parameters["xEnableLighting"].SetValue(true);
-            effect.Parameters["xLightDirection"].SetValue(lightDirection); 
+            effect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
+            effect.Parameters["xLightPower"].SetValue(1);
 
             effect.Begin();
 
@@ -190,16 +190,6 @@ namespace Drought.World
                 pass.End();
             }
             effect.End();
-        }
-
-        public void setViewMatrix(Matrix viewMatrix)
-        {
-            effect.Parameters["xView"].SetValue(viewMatrix);
-        }
-
-        public void setProjectionMatrix(Matrix projectionMatrix)
-        {
-            effect.Parameters["xProjection"].SetValue(projectionMatrix);
         }
 
         /**

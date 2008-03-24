@@ -2,10 +2,12 @@
 float4x4 xView;
 float4x4 xProjection;
 float4x4 xWorld;
-float3 xLightDirection;
+float4x4 xWorldViewProjection;
+float3 xLightPosition;
+float xLightPower;
 float xAmbient;
 bool xEnableLighting;
-bool xShowNormals;
+
 
 //------- Texture Samplers --------
 
@@ -23,56 +25,62 @@ sampler ErrorTextureSampler = sampler_state { texture = <xErrorTexture> ; magfil
 
 //------- Technique: MultiTextured --------
 
-//Output struct from the vertex shader
+float DotProduct(float3 LightPos, float3 Pos3D, float3 Normal)
+{
+    float3 LightDir = normalize(LightPos - Pos3D);
+    return dot(LightDir, Normal);
+}
+
 struct MultiTexturedVertexToPixel
 {
     float4 Position         : POSITION;    
-    float4 Color            : COLOR0;
-    float3 Normal            : TEXCOORD0;
-    float4 TextureCoords    : TEXCOORD1;
-    float4 LightDirection    : TEXCOORD2;
-    float4 TextureWeights    : TEXCOORD3;
+    float4 TextureCoords    : TEXCOORD0;
+    float4 TextureWeights   : TEXCOORD1;
+    float3 Position3D       : TEXCOORD2;
+    float3 Normal           : TEXCOORD3;
 };
+
+struct MultiTexturedPixelToFrame
+{
+    float4 Color : COLOR0;
+};
+
 
 //The vertex shader (VS). It returns the struct above.
 MultiTexturedVertexToPixel MultiTexturedVS( float4 inPos : POSITION, float3 inNormal: NORMAL, float4 inTexCoords: TEXCOORD0, float4 inTexWeights: TEXCOORD1)
 {
     MultiTexturedVertexToPixel Output = (MultiTexturedVertexToPixel)0;
     
-    float4x4 preViewProjection = mul (xView, xProjection);
-    float4x4 preWorldViewProjection = mul (xWorld, preViewProjection);
-    
-    Output.Position = mul(inPos, preWorldViewProjection);
-    Output.Normal = mul(normalize(inNormal), xWorld);
+    Output.Position = mul(inPos, xWorldViewProjection);
     Output.TextureCoords = inTexCoords;
-    Output.LightDirection.xyz = -xLightDirection;
-    Output.LightDirection.w = 1;
     Output.TextureWeights = inTexWeights;
-    
+    Output.Position3D = mul(inPos, xWorld);
+    Output.Normal = mul(normalize(inNormal), xWorld);
+     
     return Output;    
 }
-
-//The pixel shader output
-struct MultiTexturedPixelToFrame
-{
-    float4 Color : COLOR0;
-};
 
 //The actual pixel shader. The output colour of each pixel is the sum of the colours*weights for each texture.
 MultiTexturedPixelToFrame MultiTexturedPS(MultiTexturedVertexToPixel PSIn)
 {
     MultiTexturedPixelToFrame Output = (MultiTexturedPixelToFrame)0;
     
+
+/*
     float lightingFactor = 1;
     if (xEnableLighting)
         lightingFactor = saturate(saturate(dot(PSIn.Normal, PSIn.LightDirection)) + xAmbient);
+*/
+
+	float DiffuseLightingFactor = DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
 
 	Output.Color = tex2D(WaterTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.x;
 	Output.Color += tex2D(SandTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.y;
 	Output.Color += tex2D(StoneTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.z;
 	Output.Color += tex2D(ErrorTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.w;
 
-    Output.Color *= saturate(lightingFactor);
+	if (xEnableLighting)
+	    Output.Color = Output.Color * DiffuseLightingFactor * xLightPower + xAmbient;
 
     return Output;
 }
