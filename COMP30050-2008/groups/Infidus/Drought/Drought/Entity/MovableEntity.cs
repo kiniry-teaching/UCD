@@ -105,6 +105,9 @@ namespace Drought.Entity
         public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect)
         {
             //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
+            graphics.RenderState.DepthBufferEnable = true;
+            graphics.RenderState.AlphaBlendEnable = false;
+            graphics.RenderState.AlphaTestEnable = false;
 
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
