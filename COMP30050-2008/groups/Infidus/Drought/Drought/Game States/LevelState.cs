@@ -146,12 +146,7 @@ namespace Drought.GameStates
                 camera.descend();
 
             if (input.isKeyPressed(GameKeys.CAM_ZOOM_IN))
-            {
                 camera.zoomIn();
-                waterMap.addWater();
-                terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap,camera);
-                terrain.loadContent();
-            }
             else if (input.isKeyPressed(GameKeys.CAM_ZOOM_OUT))
                 camera.zoomOut();
             
