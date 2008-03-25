@@ -1,5 +1,5 @@
 Shed        (Shape Editor)
-  Language:  C#
+  Language:  C# - requires .NET 2.0
   OS:        Windows Only
   About:     Draw gesture weight-maps and compile them into a single file that
               will be loaded into Kinephon
