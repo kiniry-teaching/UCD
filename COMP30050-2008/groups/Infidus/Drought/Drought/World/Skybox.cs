@@ -21,7 +21,7 @@ namespace Drought.World
 
         public void loadContent(ContentManager content, GraphicsDevice graphics)
         {
-            model = content.Load<Model>("Models/Skydome/dome");
+            model = content.Load<Model>("Models/SkySphere/skysphere");
             effect = content.Load<Effect>("EffectFiles/model");
 
             int textureCount = 0;
@@ -45,7 +45,7 @@ namespace Drought.World
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
-            Matrix worldMatrix = Matrix.CreateScale(5000, 5000, 5000) * Matrix.CreateTranslation(camera.getPosition() - new Vector3(0, 0, 1000));
+            Matrix worldMatrix = Matrix.CreateScale(10, 10, 10) * Matrix.CreateRotationX(MathHelper.PiOver2) * Matrix.CreateTranslation(camera.getPosition() + new Vector3(0,0,50)); 
 
             int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
