@@ -7,6 +7,7 @@
 #include "rai/analyser/shapes.h"
 #include "rai/analyser/shapesloader.h"
 #include "rai/recorder/frame.h"
+#include "rai/recorder/track.h"
 #include "rai/recorder/recorder.h"
 
 using namespace interpreter;
@@ -25,7 +26,12 @@ int lx = 0, ly = 0;
 int main(int argc, char * * argv)
 {
 
+#ifdef __TEST__
+
 	Frame::RunTest();
+	Track::RunTest();
+
+#else
 
 	glutInit(&argc, argv);
 	glutInitWindowSize(800, 600);
@@ -51,6 +57,8 @@ int main(int argc, char * * argv)
 	g_shapes = ShapesLoader::loadShapes("C:\\Data\\College\\COMP30050 - Software Engerineering Project III\\kinephon\\source\\rai\\kinephon.sec");
 
 	glutMainLoop();
+
+#endif
 
 	return 0;
 

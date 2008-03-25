@@ -29,8 +29,8 @@ void Recorder::erase
 
 	track->erase(frameIndex);
 
-	if(track->_isLost == true)
-		track->_isLost = false;
+	if(track->isLost() == true)
+		track->isLost() = false;
 
 }
 
@@ -69,9 +69,8 @@ void Recorder::record
 	int const	y,
 	int const	size,
 	tick const	time
-){	Frame *		frame;
-
-	Track * track = _tracks[iid];
+){	Track *		track	= findTrack(iid);
+	Frame *		frame	;
 
 	// Don't record frames for unknown tracks
 	if(track == 0)
@@ -112,8 +111,8 @@ int Recorder::controlFound
 	}
 	else
 	// Track has been found before it was deallocated
-	if(track->_isLost == true)
-		track->_isLost = false;
+	if(track->isLost() == true)
+		track->isLost() = false;
 
 	return 0;
 
@@ -134,8 +133,8 @@ int Recorder::controlLost
 	if(track->hasFrames() == false)
 		erase(iid);
 	else
-	if(track->_isLost == false)
-		track->_isLost = true;
+	if(track->isLost() == false)
+		track->isLost() = true;
 
 	return 0;
 

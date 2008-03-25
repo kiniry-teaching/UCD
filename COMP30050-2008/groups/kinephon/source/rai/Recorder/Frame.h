@@ -50,17 +50,18 @@ class Frame
 					Frame *		frame
 				);
 
+#if __TEST__
+///////////////////////////////////////////////////////////////////////////////
+// tests
+//
 public:
 	/**
 	 * Execute a number of test cases for this class
 	 * @author EB
 	 * @version 1.0
 	 */
-#	if __TEST__
-		static void	RunTest			(void);
-#	else
-		static void	RunTest			(void) { };
-#	endif
+	static void	RunTest			(void);
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // queries
@@ -294,7 +295,7 @@ inline int Frame::y(void) const
 }
 
 inline bool Frame::gap(void) const
-{	// If there's a next and the time between
+{	// If there's a next, and the time between
 	//	this and the next is significant..
 	if(_next != 0 && _next->_time - _time > timeGap())
 		// ..There's a gap
@@ -304,7 +305,7 @@ inline bool Frame::gap(void) const
 }
 
 inline int Frame::u(void) const
-{	// If there's a next and no gap between this and next..
+{	// If there's a next, and no gap between this and next..
 	if(_next != 0 && gap() == false)
 		// ..Return the x vector
 		return _next->x() - _x;
@@ -313,7 +314,7 @@ inline int Frame::u(void) const
 }
 
 inline int Frame::v(void) const
-{	// If there's a next and no gap between this and next..
+{	// If there's a next, and no gap between this and next..
 	if(_next != 0 && gap() == false)
 		// ..Return the y vector
 		return _next->y() - _y;
@@ -345,7 +346,7 @@ inline ostream & operator <<
 	return stream
 		<< "(" << frame->_x << ", " << frame->_y << ") "
 		<< "[" << frame->u() << ", " << frame->v() << "] "
-		<< " : " << frame->_size << ", "  << frame->_time;
+		<< " : size:" << frame->_size << ", time:"  << frame->_time;
 }
 
 }

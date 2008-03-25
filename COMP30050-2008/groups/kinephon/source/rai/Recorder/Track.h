@@ -25,6 +25,19 @@ class Track
 	 */
 	friend		class Recorder;
 
+#if __TEST__
+///////////////////////////////////////////////////////////////////////////////
+// tests
+//
+public:
+	/**
+	 * Execute a number of test cases for this class
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void	RunTest				(void);
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // queries
 //
@@ -109,7 +122,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	bool		isLost				(void)		const;
+	bool &		isLost				(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields
@@ -176,7 +189,7 @@ inline Frame * Track::first(void) const
 {	return _frameFirst;
 }
 
-inline bool Track::isLost(void) const
+inline bool & Track::isLost(void)
 {	return _isLost;
 }
 
