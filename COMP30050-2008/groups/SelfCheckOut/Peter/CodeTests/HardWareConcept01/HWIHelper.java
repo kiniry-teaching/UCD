@@ -5,7 +5,7 @@
 	 * This class can not be instantiated.
 	 * 
 	 * @author Peter Gibney
-	 * @version 10th March 2008.
+	 * @version 19th March 2008.
 	 */
 
 public class HWIHelper {
