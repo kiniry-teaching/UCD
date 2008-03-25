@@ -120,7 +120,7 @@ namespace TuneBlaster_
          * */
         public void ResetColour()
         {
-            int temp = generator.Next(4);
+            int temp = generator.Next(2);
             if (temp == 0)
             {
                 colour = Image.value.green;

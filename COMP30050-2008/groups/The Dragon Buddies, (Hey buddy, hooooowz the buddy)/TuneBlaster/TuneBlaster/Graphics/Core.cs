@@ -59,10 +59,11 @@ namespace TuneBlaster_.Graphics
             {
                 balls[i].Draw(gameTime);
             }
+            
             for (int i = 0; i < looseBallsSize; i++)
             {
                 looseBalls[i].Draw(gameTime);
-            } 
+            }
         }
 
         /*
@@ -138,7 +139,7 @@ namespace TuneBlaster_.Graphics
 
         public void UpdateLoose()
         {
-            for (int i = ballsSize -1; i >= 0; i--)
+            for (int i = 0; i < ballsSize; i++)
             {
                 balls[i].CheckSupports();
                 if (!balls[i].IsAgainstCore() && balls[i].Unsupported() && !balls[i].IsDead())
