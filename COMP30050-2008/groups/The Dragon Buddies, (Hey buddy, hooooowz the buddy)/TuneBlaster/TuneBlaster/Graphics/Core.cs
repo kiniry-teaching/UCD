@@ -146,6 +146,10 @@ namespace TuneBlaster_.Graphics
             for (int i = 0; i < ballsSize; i++)
             {
                 balls[i].CheckSupports();
+            }
+
+            for (int i = 0; i < ballsSize; i++)
+            {
                 if (!balls[i].IsAgainstCore() && balls[i].Unsupported() && !balls[i].IsDead())
                 {
                     MovingBall m = new MovingBall(this, balls[i].colour);

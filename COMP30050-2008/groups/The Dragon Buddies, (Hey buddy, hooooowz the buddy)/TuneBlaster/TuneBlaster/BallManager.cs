@@ -44,6 +44,7 @@ namespace TuneBlaster_
         {
             ResetColour();
             ball = new MovingBall(core, colour);
+            Console.WriteLine("new ball");
             ball.Initialise(new Vector2(50f, 50f), StartPosition(), game);
         }
 
@@ -120,7 +121,7 @@ namespace TuneBlaster_
          * */
         public void ResetColour()
         {
-            int temp = generator.Next(4);
+            int temp = generator.Next(2);
             if (temp == 0)
             {
                 colour = Image.value.green;
