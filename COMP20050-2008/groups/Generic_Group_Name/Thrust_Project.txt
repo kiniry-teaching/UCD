@@ -1,0 +1,53 @@
+-[Generic Group Name]-
+
+David McGinn : 05420091 : davemcg (Moodle), dmcginn (Linux)
+Michael Fahey : 06895719 : mickfah (Moodle), mfahey (Linux)
+Cillian O'Neill : 0664472 : cill88 (Moodle), coneill (Linux)
+
+This project aims to recreate the classic Commodore 64 game 'Thrust', as
+part of the stage 2 module COMP20050, 'Software Engineering Project II'.
+
+Requirements:
+-The project must be a replica of the C64 game 'Thrust'
+-It must be written in the Java programming language
+-It must compile with no errors
+-It must run with no errors
+-Each member of the team must complete roughly the same amount of java code
+-Members must use a Unix-based operating system
+
+Purpose:
+-To introduce students to Software Engineering through a more advanced environment
+than the previous year (ie. Unix)
+-To equip students with the necessary skills to complete a medium-sized software
+engineering project
+-To encourage students to collaborate as part of a team, thus preparing them for
+work in the IT sector
+
+Summary of analysis & design to date:
+-We have analysed the 'Thrust' game on a low level, noting and defining key concepts (13/3/08)
+
+Dictionary:
+SPACESHIP 	- The main yellowish, triangular ENTITY controlled
+by the player.
+CHAIN 		- The red ENTITY that connects SPACESHIP and BALL.
+BALL 		- The green ENTITY that must be transported by the SPACESHIP to complete the mission.
+WEIGHT 		- A FORCE associated with GRAVITY that affects the SPACESHIP's flight.
+BALL-HOLDER 	- The green ENTITY that holds the BALL.
+ENTITY 		- A visual object in the game.
+FACTORY 	- An ENTITY which may be destroyed for bonus points.
+SPACE 		- The black background which contains STARS.
+GROUND 		- The uneven red ENTITY on which other ENTITIES rest (ie. BALL-HOLDER, FACTORY).
+FUEL 		- An integer that reduces with thrusting and can be increased.
+LIVES 		- An integer that reduces when the SPACESHIP hits the ground or a BULLET.
+SCORE 		- An integer that increases when a mission is complete or a FACTORY is destroyed.
+NAME 		- A string to record the name of the player and keep track of who got the highest SCORE.
+ENEMY 		- An ENTITY whose purpose is to stop the SPACESHIP completing the mission by firing BULLETs.
+BULLETS 	- Small ENTITIES which are fired by ENEMIES and the SPACESHIP and can destroy other ENTITIES.
+EXPLOSIONS 	- Result when ENTITIES are destroyed.
+COLOUR 		- Is a characteristic of all ENTITIES (ie. SPACESHIP-yellow, GROUND-red, BALL-green).
+STARS 		- Decorative background ENTITIES in SPACE.
+GRAVITY 	- A relation to which forces the SPACESHIP and BALL towards the GROUND.
+TRACKER 	- Method by which the ENEMY locates the SPACESHIP.
+SENSOR 		- Method by which the SPACESHIP knows when to extend the CHAIN.
+
+

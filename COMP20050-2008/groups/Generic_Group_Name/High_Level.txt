@@ -1,0 +1,415 @@
+system_chart THRUST_GAME
+	cluster GRAPHICS description "All moving and static ENTITIES displayed on the SCREEN"
+	cluster PHYSICS description "Determines the movements permitted for ENTITIES"
+	cluster VARIABLES description "All variables required for functionality"
+	cluster SOUND description "Noises created by the game"
+	cluster CHARACTERS description "The SPACESHIP and all ENEMIES in the game"
+end
+
+cluster_chart GRAPHICS
+	class CHAIN description "The red ENTITY that connects SPACESHIP and BALL"
+	class BALL description "The green ENTITY that must be transported by the SPACESHIP to complete the mission"
+	class BALL-HOLDER description "The green ENTITY that holds the BALL"
+	class ENTITY description "A visual object in the game"
+	class FACTORY description "An ENTITY which may be destroyed for bonus points"
+	class SPACE description "The black background which contains STARS"
+	class GROUND description "The uneven red ENTITY on which other ENTITIES rest (ie. BALL-HOLDER, FACTORY)"
+	class BULLET description "Small ENTITIES which are fired by ENEMIES and the SPACESHIP and can destroy other ENTITIES"
+	class EXPLOSION description "Event that occurs when ENTITIES are destroyed"
+	class COLOUR description "Is a characteristic of all ENTITIES (ie. SPACESHIP-yellow, GROUND-red, BALL-green)"
+	class STARS description "Decorative background ENTITIES in SPACE"
+	class POSITION description "Your location on the screen"
+	class HIT description "An event that occurs when >1 ENTITY have the same POSITION"
+end
+
+cluster_chart PHYSICS
+	class GRAVITY description "A relation to which forces the SPACESHIP and BALL towards the GROUND"
+	class WEIGHT  description "A force associated with GRAVITY that affects the SPACESHIP's flight"
+	class SENSOR description "Method by which the SPACESHIP knows when to extend the CHAIN"
+	class TRACKER description "Method by which the ENEMY locates the SPACESHIP"
+	class THRUST description "A force exerted from the rear of the SPACESHIP which propels it in the opposite direction"
+end
+
+cluster_chart VARIABLES
+	class SCORE description "An integer that increases when a mission is completed, or a FACTORY or ENEMY is destroyed"
+	class NAME description "A string to record the name of the player and keep track of who got the highest SCORE"
+	class LIVES description "An integer that reduces when the SPACESHIP HITS the ground or a BULLET"
+	class FUEL description "An integer that reduces with thrusting and can be increased"
+	class ENERGY description "An integer value that decreases when HIT with BULLETS. When <=0, ENTITY is destroyed"
+	class COUNTDOWN description "A decreasing integer which begins at 10. Mission must be completed before COUNTDOWN == 0"
+end
+
+cluster_chart SOUND
+
+end
+
+cluster_chart CHARACTERS
+	class ENEMY description "An ENTITY whose purpose is to stop the SPACESHIP completing the mission by firing BULLETS"
+	class SPACESHIP description "The main yellowish, triangular ENTITY controlled by the player"
+end
+
+
+
+
+
+class_chart POSITION
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14";
+
+	explanation
+		"Your location on the screen"
+
+	query
+		"Where are you on the screen?"
+end
+
+class_chart COLOUR
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14";
+
+	explanation
+		"A characteristic of all ENTITIES (ie. SPACESHIP-yellow, GROUND-red, BALL-green)"
+
+	query
+		"What colour are you?"
+
+	command
+		"Be colour X"
+
+	constraint
+		"Be constant", "Do not overlap"
+end
+
+
+class_chart ENTITY
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14";
+
+	explanation
+		"A visual object in the game"
+
+	inherits POSITION, COLOUR
+
+	query
+		"What type of ENTITY are you?", "What COLOUR are you?", "Are you static or mobile?"
+end
+
+
+class_chart SPACESHIP
+	indexing
+		cluster: "CHARACTERS";
+		created: "2008-03-14";
+
+	explanation
+		"The main yellowish, triangular ENTITY controlled by the player"
+
+	inherits ENTITY
+
+	query
+		"How many LIVES have you got?", "How much FUEL have you got?", "Have you got BALL?", "What is your SCORE?", "What direction are you facing?"
+
+	command
+		"Extend CHAIN", "Fire BULLET", "Use THRUST", "Change direction", "Increase SCORE by 1500", "Increase LIVES"
+
+	constraint
+		"FUEL must be >0", "LIVES must be >0", "Is destroyed when touches GROUND", "Is destroyed when HIT by BULLETS"
+
+end
+
+class_chart ENEMY
+	indexing
+		cluster: "CHARACTERS";
+		created: "2008-03-14";
+
+	explanation
+		"An ENTITY whose purpose is to stop the SPACESHIP completing the mission, by firing BULLETS"
+
+	inherits ENTITY
+
+	query
+		"What is your ENERGY?", "What is your POSITION?"
+
+	command
+		"Fire BULLET", "Explode", "Increase SCORE by 1000"
+
+	constraint
+		"Remain static", "Cannot increase ENERGY"
+end
+
+
+class_chart CHAIN
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"The red ENTITY that connects SPACESHIP and BALL"
+
+	inherits ENTITY
+
+	query
+		"When do you extend?", "What length are you?"
+	command
+		"Extend when at X distance from BALL", "Connect BALL to SPACESHIP", 
+	constraint
+		"Cannot extend when >X distance from BALL"
+end
+
+class_chart BALL
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"The green ENTITY that must be transported by the SPACESHIP to complete the mission"
+
+	inherits ENTITY, PHYSICS
+
+	query
+		"What size are you?", "What WEIGHT are you?", "What is your role in the game?"
+	command
+		"Connect to CHAIN", "End level when you leave the screen", 
+	constraint
+		"Remain static when not connected to CHAIN", "Cannot be destroyed"
+end
+
+class_chart BALL_HOLDER
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"The green ENTITY that holds the BALL"
+
+	inherits ENTITY
+
+	query
+		"What is your role?"
+	command
+		"Hold ball"
+	constraint
+		"Must remain static"
+end
+
+class_chart FACTORY
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"An ENTITY which may be destroyed for bonus points"
+
+	inherits ENTITY
+
+	query
+		"What is your ENERGY value?", "What size are you?"
+	command
+		"Explode", "Lose ENERGY", "Spark when HIT", "Begin COUNTDOWN", "Increase SCORE by 2000"
+	constraint
+		"Must remain static", "Only 1 FACTORY per level"
+end
+
+class_chart SPACE
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"The black background which contains STARS"
+
+	inherits ENTITY, PHYSICS
+
+	constraint
+		"Remain static"
+end
+
+class_chart GROUND
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"The uneven red ENTITY on which other ENTITIES rest (ie. BALL-HOLDER, FACTORY)"
+
+	inherits ENTITY
+
+	query
+		"What is resting on you?"
+	command
+		"Destroy SPACESHIP", "Hold ENTITIES" 
+	constraint
+		"Remain static", "Must not encircle screen"
+end
+
+class_chart BULLET
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"Small ENTITY which is fired by ENEMIES and the SPACESHIP and can destroy other ENTITIES"
+
+	inherits ENTITY
+
+	query
+		"What is your POSITION?"
+	command
+		"Move forward", "Explode"
+	constraint
+		"Must continue in same direction", "Explodes when it HITS an ENTITY that is not SPACE"
+end
+
+
+class_chart EXPLOSION
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"Event that occurs when ENTITIES are destroyed"
+
+	query
+		"When do you occur?"
+	command
+		"Occur"
+	constraint
+		"Can only occur once for each ENTITY"
+end
+
+class_chart STARS
+	indexing
+		cluster: "GRAPHICS";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"Decorative background ENTITIES in SPACE"
+
+	inherits ENTITY
+
+	query
+		"What is your POSITION?"
+	constraint
+		"Remains static"
+end
+
+
+
+
+	class SCORE description "An integer that increases when a mission is complete or a FACTORY is destroyed"
+	class NAME description "A string to record the name of the player and keep track of who got the highest SCORE"
+	class LIVES description "An integer that reduces when the SPACESHIP HITS the ground or a BULLET"
+	class FUEL description "An integer that reduces with thrusting and can be increased"
+	class ENERGY description "An integer value that decreases when HIT with BULLETS. When <=0, ENTITY is destroyed"
+	class COUNTDOWN description "A decreasing integer which begins at 10. Mission must be completed before COUNTDOWN == 0"
+
+
+class_chart SCORE
+	indexing
+		cluster: "VARIABLES";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"An integer that increases when a mission is completed, or a FACTORY or ENEMY is destroyed"
+
+	command
+		"Increase by X", "Decrease by X"
+
+	query
+		"What is your value?"
+
+	constraint
+		"Must be a positive integer"
+end
+
+class_chart NAME
+	indexing
+		cluster: "VARIABLES";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"A string to record the name of the player and keep track of who got the highest SCORE"
+
+	command
+		"Be = X"
+
+	query
+		"What is your value?"
+
+	constraint
+		"Maximum of 3 characters"
+end
+
+class_chart LIVES
+	indexing
+		cluster: "VARIABLES";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"An integer that reduces when the SPACESHIP HITS the ground or a BULLET"
+
+	command
+		"Increase by X", "Decrease by X"
+
+	query
+		"What is your value?"
+
+	constraint
+		"At start of game == 3", "Must be > 0"
+end
+
+class_chart FUEL
+	indexing
+		cluster: "VARIABLES";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"An integer that reduces with thrusting and can be increased"
+
+	command
+		"Increase by X", "Decrease by X"
+
+	query
+		"What is your value?"
+
+	constraint
+		"Must be > 0"
+end
+
+class_chart ENERGY
+	indexing
+		cluster: "VARIABLES";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"An integer value that decreases when HIT with BULLETS. When <=0, ENTITY is destroyed"
+
+	command
+		"Decrease by X"
+
+	query
+		"What is your value?"
+
+	constraint
+		"Must be > 0"
+end
+
+class_chart COUNTDOWN
+	indexing
+		cluster: "VARIABLES";
+		created: "2008-03-14 dave";
+ 
+	explanation
+		"A decreasing integer which begins at 10. Mission must be completed before COUNTDOWN == 0"
+
+	command
+		"Decrease by 1"
+
+	query
+		"What is your value?"
+
+	constraint
+		"Must be =<10 && >0"
+end
