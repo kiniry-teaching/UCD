@@ -18,8 +18,6 @@ namespace Drought.Entity
 
         private Vector3 heading;
 
-        private Vector3 rotation;
-
         private Vector3 normal;
 
         private Vector3 prevNormal;
@@ -49,10 +47,10 @@ namespace Drought.Entity
             this.path = path;
             position = path.getPosition();
             prevPosition = path.getPosition();
-            heading = new Vector3(0, 0, 0);
-            rotation = new Vector3(0, 0, 0);
+            heading = new Vector3((float)Math.Cos(uid), (float)Math.Sin(uid), 0);
             normal = path.getNormal();
             orientation = Matrix.Identity;
+            setOrientation();
             velocity = 0.1f;
             this.model = model;
             this.modelTextures = modelTextures;
@@ -61,7 +59,7 @@ namespace Drought.Entity
             selector = game.Content.Load<Texture2D>("Textures/selector");
         }
 
-        public void move()
+        private void move()
         {
             if (!path.isFinished()) {
                 path.addDistance(velocity);
@@ -78,12 +76,17 @@ namespace Drought.Entity
                 heading = position - prevPosition;
                 heading.Normalize();
 
-                orientation.Up = normal;
-                orientation.Right = Vector3.Cross(orientation.Up, heading);
-                orientation.Right = Vector3.Normalize(orientation.Right);
-                orientation.Forward = Vector3.Cross(-orientation.Right, orientation.Up);
-                orientation.Forward = Vector3.Normalize(orientation.Forward);
+                setOrientation();
             }
+        }
+
+        private void setOrientation()
+        {
+            orientation.Up = normal;
+            orientation.Right = Vector3.Cross(orientation.Up, heading);
+            orientation.Right = Vector3.Normalize(orientation.Right);
+            orientation.Forward = Vector3.Cross(-orientation.Right, orientation.Up);
+            orientation.Forward = Vector3.Normalize(orientation.Forward);
         }
 
         public void setPath(Path path)

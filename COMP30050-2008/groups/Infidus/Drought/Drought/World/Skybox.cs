@@ -21,7 +21,8 @@ namespace Drought.World
 
         public void loadContent(ContentManager content, GraphicsDevice graphics)
         {
-            model = content.Load<Model>("Models/SkySphere/skysphere");
+            //model = content.Load<Model>("Models/SkySphere/skysphere");
+            model = content.Load<Model>("Models/SkyDome/dome");
             effect = content.Load<Effect>("EffectFiles/model");
 
             int textureCount = 0;
