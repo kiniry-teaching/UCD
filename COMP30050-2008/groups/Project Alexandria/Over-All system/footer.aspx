@@ -59,7 +59,8 @@ function doGotIt(){
 	&nbsp;&nbsp;&nbsp;&nbsp;
 <asp:LinkButton runat="server" id="LinkButton2">Top of Page</asp:LinkButton>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-<asp:LinkButton runat="server" id="LinkButton3">Top of Page</asp:LinkButton>
+<asp:LinkButton runat="server" id="LinkButton3">Home
+</asp:LinkButton>
 	</div>
 </form>
 
