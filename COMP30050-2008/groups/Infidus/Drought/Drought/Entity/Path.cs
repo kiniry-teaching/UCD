@@ -108,7 +108,8 @@ namespace Drought.Entity
             if (coveredDist >= length) //we're finished
             {
                 coveredDist = length;
-                position = nodes[nodes.Count - 1];
+                currNode = nodes.Count - 1;
+                position = nodes[currNode];
                 return;
             }
 
@@ -140,6 +141,7 @@ namespace Drought.Entity
         public List<Vector3> getRemainingPath() {
             List<Vector3> remainingPath = new List<Vector3>();
             remainingPath.Add(position);
+
             for (int i = currNode + 1; i < nodes.Count; i++) {
                 remainingPath.Add(nodes[i]);
             }
