@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Drought.Graphics {
 
@@ -25,6 +26,8 @@ namespace Drought.Graphics {
         /** The list of points in the line. */
         private VertexPositionNormalTexture[] pointList;
 
+        short[] indices;
+
         private VertexBuffer vertexBuffer;
 
         private IndexBuffer indexBuffer;
@@ -32,7 +35,6 @@ namespace Drought.Graphics {
         public LineTool(GraphicsDevice graphicsDevice)
         {
             graphics = graphicsDevice;
-            vertexDeclaration = new VertexDeclaration(graphics, VertexPositionNormalTexture.VertexElements);
 
             basicEffect = new BasicEffect(graphics, null);
             basicEffect.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
@@ -51,18 +53,10 @@ namespace Drought.Graphics {
                 pointList[x++] = new VertexPositionNormalTexture(point, Vector3.Forward, new Vector2());
             }
 
-            vertexBuffer = new VertexBuffer(graphics, 
-                VertexPositionNormalTexture.SizeInBytes * (pointList.Length), BufferUsage.None);
-            vertexBuffer.SetData<VertexPositionNormalTexture>(pointList);
-
-            short[] indices = new short[points.Count];
+            indices = new short[points.Count];
             for (short i = 0; i < points.Count; i++) {
                 indices[i] = i;
             }
-
-            indexBuffer = new IndexBuffer(graphics,
-                sizeof(short) * indices.Length, BufferUsage.None, IndexElementSize.SixteenBits);
-            indexBuffer.SetData<short>(indices);
         }
 
         /** Draw the lines, using the specified transformational matrices. */
@@ -71,27 +65,23 @@ namespace Drought.Graphics {
             // if there's less than 2 points, we're not going to draw any lines
             if (numPoints < 2) return;
 
-            graphics.VertexDeclaration = vertexDeclaration; 
-            
+            graphics.VertexDeclaration = new VertexDeclaration(graphics, VertexPositionNormalTexture.VertexElements);
+
             basicEffect.View = view;
             basicEffect.Projection = projection;
 
             basicEffect.Begin();
             foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes) {
                 pass.Begin();
-
-                graphics.Vertices[0].SetSource(vertexBuffer, 0, VertexPositionNormalTexture.SizeInBytes);
-
-                graphics.Indices = indexBuffer;
-
-                graphics.DrawIndexedPrimitives(
-                    PrimitiveType.LineStrip,
-                    0, // vertex buffer offset to add to each element of the index buffer
-                    0, // minimum vertex index
-                    numPoints, // number of vertices
-                    0, // first index element to read
-                    numPoints-1);// number of primitives to draw
-
+                
+                graphics.DrawUserIndexedPrimitives<VertexPositionNormalTexture>(PrimitiveType.LineStrip,
+                    pointList,
+                    0,
+                    pointList.Length,
+                    indices,
+                    0,
+                    numPoints - 1);
+                
                 pass.End();
             }
             basicEffect.End();
