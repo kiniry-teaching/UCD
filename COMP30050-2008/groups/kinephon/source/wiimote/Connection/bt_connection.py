@@ -1,23 +1,13 @@
+import time
 import bluetooth
 import converter
-import time
+from Communication import const
 
 
 WIIMOTE_NAME = "Nintendo RVL-CNT-01"
 NOT_FOUND = "NF"
 
-##
-#I found the two following ports in the output of the spdtool
-#on this site:
-#http://www.wiili.org/index.php/Wii_bluetooth_specs#spd_info
-#All other port numbers that I tried (remembering that L2CAP
-#only uses odd numbered ports) either timed out of failed to
-#connect completely.
-#Even swapping these two ports breaks the whole thing.
-#Why? I honestly don't know. :(
-##
-RECEIVE_PORT_NUMBER = 0x13
-SEND_PORT_NUMBER = 0x11
+
 
 global send_socket
 global receive_socket
@@ -30,7 +20,6 @@ def find_wiimote():
     #look for a device with matching name
     wiimote_address = _find_wiimote_bluetooth_address(all_devices)
     
-    print "Wiimote found."
     return wiimote_address
     
 def _find_all_devices():
@@ -48,9 +37,9 @@ def _find_wiimote_bluetooth_address(some_bt_devices):
     
     #if we didn't find any match
     print "Wiimote BT address: NOT FOUND"
-    return "NF"
+    return NOT_FOUND
 
-def establish_connection(a_wiimote_address):
+def establish_connection(wiimote_address):
     """'connect', 'connect_ex', 'close',
         'fileno', 'getpeername', 'getsockname', 'gettimeout',
         'getsockopt', 'listen', 'makefile', 'recv', 'recvfrom', 'sendall',
@@ -65,37 +54,25 @@ def establish_connection(a_wiimote_address):
     send_socket = bluetooth.BluetoothSocket(bluetooth.L2CAP)
 
     #and then connect to the wiimote
-    receive_socket.connect((a_wiimote_address, RECEIVE_PORT_NUMBER))
-    send_socket.connect((a_wiimote_address, SEND_PORT_NUMBER))
+    receive_socket.connect((wiimote_address, const.RECEIVE_PORT_NUMBER))
+    send_socket.connect((wiimote_address, const.SEND_PORT_NUMBER))
     
     print "Connection established."
 
-def receive_data():
-
-    last_time = time.gmtime()
-    current_time = last_time
-    
+def receive_data():    
     counter = 0
     
-    while True:
-        counter+=1
+    for n in range(1,100000):
+        counter += 1
         if (counter%10000 == 1):
             fout = open("results.dat", "a")
 
         try:
-            data = receive_socket.recv(23)
+            data = receive_socket.recv(const.MAX_PACKET_SIZE)
         except bluetooth.BluetoothError:
             print "connection closed"
-            pass
-                
-        current_time = time.gmtime()
                 
         if len(data):
-        #if (len(data) & (current_time[5] != last_time[5])):
-            #last_time = current_time
-            #print current_time[5]
-            #print converter.toBytes(data)
-            #print data
             dict_data = converter.toBytes(data)
             
             i = 0
@@ -103,14 +80,13 @@ def receive_data():
             for byte in dict_data:
                 if (i>=7):
                     result.append(byte)
-                i+=1
-            #print result
+                i += 1
             fout.write(str(result)+"\n")
-    if (counter%10000 == 0):
+        if (counter%10000 == 0):
             fout.close()
     
-    print "Receiving finished."
     fout.close()
+    print "Receiving finished."
     
 def initialise_ir_camera():
     """
@@ -122,25 +98,30 @@ def initialise_ir_camera():
     
     #First we need to tell the wiimote to start sending data to us
     #SET_REPORT to OUTPUT_WHEN_CHANGED on READ_IR_DATA_ONLY
-    string1 = converter.toString((0x52, 0x12, 0x00, 0x33))
+    string1 = converter.toString((const.PACKET_HEADER, const.SET_REPORT, const.OUTPUT_WHEN_CHANGED, const.REPORT_ACC_IR))
     
     #Then we have to turn on the IR camera
     #set IR_ENABLER_1  to CONTINUOUS_OUTPUT
-    string2 = converter.toString((0x52, 0x13, 0x04))
+    string2 = converter.toString((const.PACKET_HEADER, const.IR_SENSOR_ENABLER_1, const.OUTPUT_CONTINUOUSLY))
     #set IR_ENABLER_2  to CONTINUOUS_OUTPUT
-    string3 = converter.toString((0x52, 0x1a, 0x04))
+    string3 = converter.toString((const.PACKET_HEADER, const.IR_SENSOR_ENABLER_2, const.OUTPUT_CONTINUOUSLY))
     #send_socket.send(string)
     
     ##
     # Now we need to write to the wiimote memory some information about
     # sensitivity of the sensors. The last memory write sets the wiimote
     # to output specific data format.
+    #
+    # Note: The format of the memory writes is as follows:
+    # packet header (1byte), memory-write report ID (1byte),
+    # flags (1byte), memory location (3bytes), data size (1byte),
+    # data (16bytes)
     ##
-    string4 = converter.toString((0x52, 0x16, 0x04, 0xB0, 0x00, 0x30, 0x01, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
-    string5 = converter.toString((0x52, 0x16, 0x04, 0xB0, 0x00, 0x06, 0x01, 0x90, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
-    string6 = converter.toString((0x52, 0x16, 0x04, 0xB0, 0x00, 0x08, 0x01, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
-    string7 = converter.toString((0x52, 0x16, 0x04, 0xB0, 0x00, 0x1a, 0x01, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
-    string9 = converter.toString((0x52, 0x16, 0x04, 0xB0, 0x00, 0x33, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
+    string4 = converter.toString((const.PACKET_HEADER, const.WRITE_DATA_TO_MEMORY, 0x04, 0xB0, 0x00, 0x30, 0x01, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
+    string5 = converter.toString((const.PACKET_HEADER, const.WRITE_DATA_TO_MEMORY, 0x04, 0xB0, 0x00, 0x06, 0x01, 0x90, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
+    string6 = converter.toString((const.PACKET_HEADER, const.WRITE_DATA_TO_MEMORY, 0x04, 0xB0, 0x00, 0x08, 0x01, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
+    string7 = converter.toString((const.PACKET_HEADER, const.WRITE_DATA_TO_MEMORY, 0x04, 0xB0, 0x00, 0x1a, 0x01, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
+    string9 = converter.toString((const.PACKET_HEADER, const.WRITE_DATA_TO_MEMORY, 0x04, 0xB0, 0x00, 0x33, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
     
     ##
     # Now that we have all the sequences prepared, we can send them to the 
