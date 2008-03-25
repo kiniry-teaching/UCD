@@ -102,7 +102,8 @@ namespace TuneBlaster_.Graphics
             {
                 balls[i].Move(rotation - oldRotation);
             }
-
+            CheckLoose();
+            
             for (int i = 0; i < looseBallsSize; i++)
             {
                 looseBalls[i].Move();
@@ -119,6 +120,7 @@ namespace TuneBlaster_.Graphics
             balls.Add(f);
             ballsSize++;
             CheckExplosions();
+            UpdateLoose();
             UpdateLoose();
         }
 
