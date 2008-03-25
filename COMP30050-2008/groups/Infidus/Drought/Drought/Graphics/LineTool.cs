@@ -28,13 +28,10 @@ namespace Drought.Graphics {
 
         short[] indices;
 
-        private VertexBuffer vertexBuffer;
-
-        private IndexBuffer indexBuffer;
-
         public LineTool(GraphicsDevice graphicsDevice)
         {
             graphics = graphicsDevice;
+            vertexDeclaration = new VertexDeclaration(graphics, VertexPositionNormalTexture.VertexElements);
 
             basicEffect = new BasicEffect(graphics, null);
             basicEffect.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
@@ -65,7 +62,7 @@ namespace Drought.Graphics {
             // if there's less than 2 points, we're not going to draw any lines
             if (numPoints < 2) return;
 
-            graphics.VertexDeclaration = new VertexDeclaration(graphics, VertexPositionNormalTexture.VertexElements);
+            graphics.VertexDeclaration = vertexDeclaration;
 
             basicEffect.View = view;
             basicEffect.Projection = projection;
