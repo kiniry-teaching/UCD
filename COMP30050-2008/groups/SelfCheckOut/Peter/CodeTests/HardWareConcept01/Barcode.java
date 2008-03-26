@@ -12,7 +12,7 @@ public class Barcode {
 	private int[] barNums = new int[BAR_CODE_LEN];
 	private boolean hasEntry = false;
 
-	// ------------------------------------------------------	
+	// -----------------------------------------------------	
 	/**
 	 * Creates a Barcode object from an array of ints.
 	 * @param barNums the array of ints, 13 long
