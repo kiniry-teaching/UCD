@@ -39,6 +39,11 @@ namespace Drought.Graphics {
             numPoints = 0;
         }
 
+        public void setColor(Vector3 color)
+        {
+            basicEffect.DiffuseColor = color;
+        }
+
         /** Specify a new list of points to be used to draw the line. */
         public void setPointsList(List<Vector3> points)
         {
@@ -74,7 +79,7 @@ namespace Drought.Graphics {
                 graphics.DrawUserIndexedPrimitives<VertexPositionNormalTexture>(PrimitiveType.LineStrip,
                     pointList,
                     0,
-                    pointList.Length,
+                    numPoints,
                     indices,
                     0,
                     numPoints - 1);

@@ -195,11 +195,11 @@ namespace Drought.World
         /**
          * Projects a mouseclick point on the screen onto the surface of terrain.
          */
-        public Vector3 projectToTerrain(GraphicsDevice graphics, Camera camera, int mouseX, int mouseY) {
+        public Vector3 projectToTerrain(int mouseX, int mouseY) {
             Vector3 nearScreenPoint = new Vector3(mouseX, mouseY, 0);
             Vector3 farScreenPoint = new Vector3(mouseX, mouseY, 1);
-            Vector3 nearWorldPoint = graphics.Viewport.Unproject(nearScreenPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
-            Vector3 farWorldPoint = graphics.Viewport.Unproject(farScreenPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+            Vector3 nearWorldPoint = device.Viewport.Unproject(nearScreenPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+            Vector3 farWorldPoint = device.Viewport.Unproject(farScreenPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
 
             Vector3 direction = farWorldPoint - nearWorldPoint;
 
@@ -210,6 +210,7 @@ namespace Drought.World
                 Vector3 start = camera.getPosition();
                 Vector3 end = zeroWorldPoint;
                 Vector3 mid = (start + end) / 2;
+                //TODO: binary search may not be the best way to go here, sometimes misses things
                 while ((end - start).Length() > 1) {
                     mid = (start + end) / 2;
                     if (heightMap.getHeight(mid.X, mid.Y) < mid.Z) {
@@ -222,6 +223,13 @@ namespace Drought.World
                 return new Vector3(mid.X, mid.Y, heightMap.getHeight(mid.X, mid.Y));
             }
             return new Vector3(500, 100, heightMap.getHeight(500, 100));
+        }
+
+        /**
+         * Projects a point in the game world onto the screen.
+         */
+        public Vector3 projectToScreen(Vector3 worldPoint) {
+            return device.Viewport.Project(worldPoint, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
         }
     }
 }

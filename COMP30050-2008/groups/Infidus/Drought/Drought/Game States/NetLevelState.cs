@@ -202,12 +202,12 @@ namespace Drought.GameStates
             }
 
             /* Selecting Units */
-            if (!clickCurrent && input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
+            if (!clickCurrent && input.isKeyPressed(GameKeys.UNIT_SELECT)) {
                 clickCurrent = true;
                 startClickX = input.getMouseX();
                 startClickY = input.getMouseY();
             }
-            else if (clickCurrent && !input.isKeyPressed(GameKeys.MOUSE_CLICK)) {
+            else if (clickCurrent && !input.isKeyPressed(GameKeys.UNIT_SELECT)) {
                 clickCurrent = false;
                 currClickX = input.getMouseX();
                 currClickY = input.getMouseY();
@@ -218,7 +218,7 @@ namespace Drought.GameStates
                 Rectangle bounds = new Rectangle(topX, topY, bottomX - topX, bottomY - topY);
                 foreach (MovableEntity entity in localEntities) {
                     entity.setSelected(false);
-                    Vector3 entityPos = getGraphics().Viewport.Project(entity.getPosition(), camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
+                    Vector3 entityPos = terrain.projectToScreen(entity.getPosition());
                     if (entityPos.Z < 1) {
                         if (bounds.Contains(new Point((int)entityPos.X, (int)entityPos.Y))) {
                             entity.setSelected(true);
@@ -241,14 +241,14 @@ namespace Drought.GameStates
             }
 
             /* Commanding Units */
-            if (!rightClickCurrent && input.isKeyPressed(GameKeys.MOUSE_RIGHT_CLICK)) {
+            if (!rightClickCurrent && input.isKeyPressed(GameKeys.UNIT_COMMAND)) {
                 rightClickCurrent = true;
                 foreach (MovableEntity entity in localEntities) {
                     if (entity.isSelected()) {
                         List<Vector3> newPathList = new List<Vector3>();
                         newPathList.Add(entity.getPath().getRemainingPath()[0]);
                         Vector3 startPos = newPathList[0];
-                        Vector3 endPos = terrain.projectToTerrain(getGraphics(), camera, input.getMouseX(), input.getMouseY());
+                        Vector3 endPos = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
                         Vector3 distLeft = endPos - startPos;
                         Vector3 currPos = startPos;
                         int steps = 0;
@@ -268,7 +268,7 @@ namespace Drought.GameStates
                     }
                 }
             }
-            else if (rightClickCurrent && !input.isKeyPressed(GameKeys.MOUSE_RIGHT_CLICK)) {
+            else if (rightClickCurrent && !input.isKeyPressed(GameKeys.UNIT_COMMAND)) {
                 rightClickCurrent = false;
             }
         }

@@ -32,11 +32,9 @@ namespace Drought.Entity
 
         private Texture2D[] modelTextures;
 
-        private Texture2D selector;
-
         private bool selected;
 
-        private LineTool lineTool;
+        private LineTool pathTool, ringTool;
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
@@ -55,8 +53,9 @@ namespace Drought.Entity
             this.model = model;
             this.modelTextures = modelTextures;
             selected = false;
-            lineTool = new LineTool(game.GraphicsDevice);
-            selector = game.Content.Load<Texture2D>("Textures/selector");
+            pathTool = new LineTool(game.GraphicsDevice);
+            ringTool = new LineTool(game.GraphicsDevice);
+            ringTool.setColor(new Vector3(1.0f, 0.0f, 0.0f));
         }
 
         private void move()
@@ -102,12 +101,29 @@ namespace Drought.Entity
         public void update()
         {
             move();
-            lineTool.setPointsList(path.getRemainingPath());
+            pathTool.setPointsList(path.getRemainingPath());
+            if (selected) {
+                List<Vector3> pointsList = new List<Vector3>();
+                float step = MathHelper.Pi/16;
+                for (float i = 0; i <= 32; i++) {
+                    Vector3 pointy = new Vector3(position.X + (float)Math.Cos(i*step) * 2.5f, position.Y + (float)Math.Sin(i*step) * 2.5f, position.Z);
+                    pointsList.Add(pointy);
+                }
+                ringTool.setPointsList(pointsList);
+            }
         }
 
         public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect)
         {
-            //Console.WriteLine("heading:" + heading + " normal:" + normal + " rotation:"+model.rotationAngles);
+            pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+
+            
+            if (selected) {
+                graphics.RenderState.DepthBufferEnable = false;
+                ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+                graphics.RenderState.DepthBufferEnable = true;
+            }
+
             graphics.RenderState.DepthBufferEnable = true;
             graphics.RenderState.AlphaBlendEnable = false;
             graphics.RenderState.AlphaTestEnable = false;
@@ -133,19 +149,6 @@ namespace Drought.Entity
                     currentEffect.Parameters["xLightPower"].SetValue(1);
                 }
                 mesh.Draw();
-            }
-
-            lineTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
-
-            if (selected) {
-                Vector3 ringPos = graphics.Viewport.Project(position, camera.getProjectionMatrix(), camera.getViewMatrix(), Matrix.Identity);
-                if (ringPos.Z < 1) {
-                    batch.Begin();
-                    int radius = 20;
-                    Rectangle recty = new Rectangle((int)ringPos.X - radius, (int)ringPos.Y - radius, radius * 2, radius * 2);
-                    batch.Draw(selector, recty, Color.White);
-                    batch.End();
-                }
             }
         }
 
