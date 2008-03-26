@@ -14,7 +14,7 @@ namespace interpreter
 namespace econtrol
 {
 	/**
-	 * A new IR blob has been found by the parser. Data should contain the
+	 * A new IR blob has been found by the parser. iid should contain the
 	 *	id of the blob that will be used when calling Record for that blob.
 	 *	Return value will always be 0
 	 * @author EB
@@ -23,7 +23,7 @@ namespace econtrol
 	ect const	FOUND	= 0;
 	/**
 	 * An IR blob has been lost, either because it was physically removed, or
-	 *	because it's data packets have been lost. Data should contain the
+	 *	because it's data packets have been lost. iid should contain the
 	 *	id of the blob lost
 	 *	Return value will always be 0
 	 * @author EB
@@ -31,8 +31,8 @@ namespace econtrol
 	 */
 	ect const	LOST	= 1;
 	/**
-	 * The Parser is no longer receiving data. Connection may be lost. Data is
-	 *	ignored
+	 * The Parser is no longer receiving data. Connection may be lost. iid is
+	 *	ignored and can be any value
 	 *	Return value will always be 0
 	 * @author EB
 	 * @version 1.0
@@ -55,15 +55,15 @@ public:
 	 * Issue a control switch.
 	 * Used to add or remove IR blob ids, or indicate errors
 	 * @param control Control switch to make. Values are enumerated in econtrol
-	 * @param data If the control requires extra data, it is passed here. Each
-	 *	control will specify the type of data to pass
+	 * @param iid If the control requires the IRId, it is passed here. Each
+	 *	control will specify whether it needs this data
 	 * @return If the control needs to respond, it will be returned here. Each
 	 *	control will specify what is returned.
 	 * @see econtrol
 	 */
 	virtual int		control
 					(	ect const	control,
-						void *		data
+						irid const	iid
 					)				pure;
 	/**
 	 * Record the current position of an IR blob.

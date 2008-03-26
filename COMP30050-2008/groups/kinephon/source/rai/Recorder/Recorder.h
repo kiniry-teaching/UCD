@@ -21,6 +21,19 @@ namespace interpreter
 class Recorder : public IParserRecorder
 {
 
+#if __TEST__
+///////////////////////////////////////////////////////////////////////////////
+// tests
+//
+public:
+	/**
+	 * Execute a number of test cases for this class
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void	RunTest			(void);
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // commands
 //
@@ -69,16 +82,15 @@ public:
 	 * Issue a control switch.
 	 * Used to add or remove IR blob ids, indicate errors
 	 * @param control Control switch to make.
-	 * @param data If the control requires extra data, it is passed here. Each
-	 *	control will specify the type of data to pass
+	 * @param iid If IR id for which the control action has occurred
 	 * @return If the control needs to respond, it will be returned here. Each
 	 *	control will specify what is returned. Values are enumerated in
 	 *	econtrol
 	 * @see econtrol
 	 */
 	virtual int			control
-						(	uchar const	control,
-							void *		data
+						(	ect const	control,
+							irid const	iid
 						);
 	/**
 	 * Record the current position of an IR blob.
@@ -107,6 +119,8 @@ public:
 private:
 	/**
 	 * Get a track by it's IR id
+	 * This is a const function, but I couldn't specify that it's const
+	 *	as the vector iterator complains
 	 * @param iid The id of the track to get
 	 * @return A pointer to the requested track or 0 if not found
 	 * @author EB
@@ -114,7 +128,16 @@ private:
 	 */
 	Track *				findTrack
 						(	irid const	iid
-						)	const;
+						);
+	/**
+	 * Find and remove a track from the recorder
+	 * @param iid The id of the track to erase
+	 * @author EB
+	 * @version 1.0
+	 */
+	void				eraseTrack
+						(	irid const	iid
+						);
 	/**
 	 * control() econtrol::FOUND Helper
 	 * @param iid IR blob whose track is to be erased
@@ -153,7 +176,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	vector<Track *>		_tracks;
+	vector<Track*>		_tracks;
 
 };
 

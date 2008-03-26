@@ -48,6 +48,7 @@ typedef uint			sid;
  * Enumerated control type
  * @author EB
  * @version 1.0
+ * @see econtrol
  */
 typedef uchar			ect;
 /**

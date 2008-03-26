@@ -30,6 +30,7 @@ int main(int argc, char * * argv)
 
 	Frame::RunTest();
 	Track::RunTest();
+	Recorder::RunTest();
 
 #else
 

@@ -43,13 +43,13 @@ void Track::RunTest(void)
 	cout << "HasFrames: " << track->hasFrames() << endl;
 	cout << "Length: " << track->length() << endl;
 
-//	try { cout << frame << endl; }
-//	catch(void*)
-//	{	cout << "All frames were deleted" << endl;
-//		except = true;
-//	}
-//	if(except == false)
-//		cout << "All frames were not deleted!" << endl;
+	try { cout << frame << endl; }
+	catch(...)
+	{	cout << "All frames were deleted" << endl;
+		except = true;
+	}
+	if(except == false)
+		cout << "All frames were NOT deleted!" << endl;
 
 	cout << "Test private lostness" << endl;
 	cout << "IsLost: " << track->isLost() << endl;

@@ -1,6 +1,8 @@
 #pragma warning(disable: 4786)
 #include "Recorder.h"
 
+using namespace std;
+
 namespace interpreter
 {
 
@@ -29,8 +31,10 @@ void Recorder::erase
 
 	track->erase(frameIndex);
 
-	if(track->isLost() == true)
-		track->isLost() = false;
+	// If the track is empty and was lost, erase the track
+	if(track->hasFrames() == false
+	&& track->isLost() == true)
+		eraseTrack(iid);
 
 }
 
@@ -46,13 +50,13 @@ void Recorder::erase
 // control
 //
 int Recorder::control
-(	uchar const control,
-	void *		data
+(	ect const	control,
+	irid const	iid
 ){
 
 	switch(control)
-	{	case econtrol::FOUND:	return controlFound((int)data);
-		case econtrol::LOST:	return controlLost((int)data);
+	{	case econtrol::FOUND:	return controlFound(iid);
+		case econtrol::LOST:	return controlLost(iid);
 		case econtrol::BADCOM:	return controlBadcom();
 	}
 
@@ -73,7 +77,7 @@ void Recorder::record
 	Frame *		frame	;
 
 	// Don't record frames for unknown tracks
-	if(track == 0)
+	if(track == 0 || track->isLost() == true)
 		return;
 
 	frame = new Frame(x, y, size, time);
@@ -82,18 +86,32 @@ void Recorder::record
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// control found
+// find track
 //
 Track * Recorder::findTrack
-(	irid const	iid
-)	const
-{	int			index;
+(	irid const					iid
+){	vector<Track*>::iterator	iTrack;
 
-	for(index = 0; index < _tracks.size(); index++)
-		if(_tracks[index]->iid() == iid)
-			return _tracks[index];
+	for(iTrack = _tracks.begin(); iTrack != _tracks.end(); iTrack++)
+		if((*iTrack)->iid() == iid)
+			return (*iTrack);
 
 	return 0;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// find track
+//
+void Recorder::eraseTrack
+(	irid const	iid
+){	vector<Track*>::iterator	iTrack;
+
+	for(iTrack = _tracks.begin(); iTrack != _tracks.end(); iTrack++)
+		if((*iTrack)->iid() == iid)
+		{	_tracks.erase(iTrack);
+			break;
+		}
 
 }
 
@@ -131,7 +149,7 @@ int Recorder::controlLost
 	// If there are no frames in the track, erase its ass
 	//	otherwise, mark it for deletion when all its frames are used
 	if(track->hasFrames() == false)
-		erase(iid);
+		eraseTrack(iid);
 	else
 	if(track->isLost() == false)
 		track->isLost() = true;
