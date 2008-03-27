@@ -2,7 +2,7 @@
 #define __INTERPRETER_SHAPE_H__
 
 #include "../../type.h"
-#include "../Recorder/Track.h"
+#include "../recorder/Track.h"
 #include "Zone.h"
 #include "ShapeMatches.h"
 

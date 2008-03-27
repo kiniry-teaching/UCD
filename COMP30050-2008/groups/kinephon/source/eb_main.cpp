@@ -4,11 +4,11 @@
 #include <GL/glut.h>
 #include <iostream>
 #include "type.h"
-#include "rai/analyser/shapes.h"
-#include "rai/analyser/shapesloader.h"
-#include "rai/recorder/frame.h"
-#include "rai/recorder/track.h"
-#include "rai/recorder/recorder.h"
+#include "rai/analyser/Shapes.h"
+#include "rai/analyser/ShapesLoader.h"
+#include "rai/recorder/Frame.h"
+#include "rai/recorder/Track.h"
+#include "rai/recorder/Recorder.h"
 
 using namespace interpreter;
 

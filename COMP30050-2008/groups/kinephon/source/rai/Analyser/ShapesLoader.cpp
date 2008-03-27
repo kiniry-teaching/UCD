@@ -1,8 +1,8 @@
-#include "shapesloader.h"
-#include "zone.h"
-#include "shapemovement.h"
-#include "shapespeed.h"
-#include "shapeaccel.h"
+#include "ShapesLoader.h"
+#include "Zone.h"
+#include "ShapeMovement.h"
+#include "ShapeSpeed.h"
+#include "ShapeAccel.h"
 
 namespace interpreter
 {

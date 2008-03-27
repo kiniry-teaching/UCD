@@ -1,5 +1,5 @@
-#include "shapematch.h"
-#include "shape.h"
+#include "ShapeMatch.h"
+#include "Shape.h"
 
 namespace interpreter
 {
