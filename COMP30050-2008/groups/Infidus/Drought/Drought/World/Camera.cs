@@ -65,13 +65,15 @@ namespace Drought.World
 
         public Matrix getProjectionMatrix()
         {
-            return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, game.GraphicsDevice.Viewport.Width / game.GraphicsDevice.Viewport.Height, 1.0f, 5000.0f); ;
+            return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, game.GraphicsDevice.Viewport.Width / game.GraphicsDevice.Viewport.Height, 1.0f, 50000.0f); ;
         }
 
         public void forward()
         {
             Vector3 forward = focusVector - eyeVector;
-            
+            forward.Z = 0;
+            forward.Normalize();
+
             eyeVector.X += forward.X * 0.5f;
             eyeVector.Y += forward.Y * 0.5f;
         }
@@ -79,6 +81,8 @@ namespace Drought.World
         public void back()
         {
             Vector3 forward = focusVector - eyeVector;
+            forward.Z = 0;
+            forward.Normalize();
             
             eyeVector.X -= forward.X * 0.5f;
             eyeVector.Y -= forward.Y * 0.5f;
@@ -87,6 +91,8 @@ namespace Drought.World
         public void left()
         {
             Vector3 forward = focusVector - eyeVector;
+            forward.Z = 0;
+            forward.Normalize();
             
             eyeVector.X -= forward.Y * 0.5f;
             eyeVector.Y += forward.X * 0.5f;
@@ -95,6 +101,8 @@ namespace Drought.World
         public void right()
         {
             Vector3 forward = focusVector - eyeVector;
+            forward.Z = 0;
+            forward.Normalize();
  
             eyeVector.X += forward.Y * 0.5f;
             eyeVector.Y -= forward.X * 0.5f;
@@ -114,14 +122,16 @@ namespace Drought.World
         public void zoomOut()
         {
             Vector3 forward = focusVector - eyeVector;
-            forward *= 2f;
+            forward *= 2.0f;
+
             eyeVector = focusVector - forward;
         }
 
         public void zoomIn()
         {
             Vector3 forward = focusVector - eyeVector;            
-            forward *= -2f;
+            forward *= -2.0f;
+
             eyeVector = focusVector - forward;
         }
 
