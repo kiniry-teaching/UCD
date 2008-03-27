@@ -1,0 +1,78 @@
+event_chart THRUST
+outgoing
+explanation
+"Internal Events"
+
+event
+  "SPACESHIP is destroyed."
+involves
+SPACESHIP, BULLET, EXPLOSION, TURRET
+
+event
+  "TURRET is destroyed"
+involves
+TURRET, BULLET, EXPLOSION
+
+event
+  "BALL is destroyed"
+involves
+BALL, PEDESTAL, BULLET, EXPLOSION
+
+event
+  "FACTORY is destroyed, TIMER begins"
+involves
+FACTORY, BULLET, EXPLOSION, TIMER
+
+event
+  "BALL collected"
+involves
+BALL, PEDESTAL, SPACESHIP, ROD
+
+event
+  "FUEL_BOX collected"
+involves
+FUEL_BOX, SPACESHIP, TRACTOR_BEAM, FUEL_AMOUNT
+
+event
+  "TIMER runs out"
+involves
+TIMER, EXPLOSION
+
+event
+  "FUEL_AMOUNT reaches zero"
+involves
+FUEL_AMOUNT, SPACESHIP, EXPLOSION
+
+end
+
+
+event_chart THRUST
+outgoing
+"External Events"
+
+event
+  "New GAME"
+involves
+MENU, PLAYER
+
+event
+  "Pause the GAME mid-play"
+involves
+GAME, PLAYER
+
+event
+  "PLAYER exits the GAME"
+involves
+GAME, PLAYER
+
+event
+  "External Movement Commands to SPACESHIP"
+involves
+PLAYER, SPACESHIP, THRUST, ROTATE
+
+event
+  "External Action Commands to SPACESHIP"
+involves
+PLAYER, SPACESHIP, FIRE, BULLET, ROD, TRACTOR_BEAM
+
+end

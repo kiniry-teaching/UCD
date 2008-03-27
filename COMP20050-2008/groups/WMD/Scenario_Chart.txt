@@ -1,0 +1,73 @@
+scenario_chart THRUST
+
+scenario
+  "START_LEVEL"
+description
+  "LEVEL, and SPACESHIP are generated."
+
+scenario
+  "END_S"
+description
+  "When the PLAYER successfully completes LEVEL."
+
+scenario
+  "END_F"
+description
+  "When the PLAYER unsuccessfully completes LEVEL."
+
+scenario
+  "SPACE_FIRE"
+description
+  "When the SPACESHIP fires a BULLET."
+
+scenario
+  "TURRET_FIRE"
+description
+  "When a TURRET fires a BULLET."
+
+scenario
+  "SPAWN_SOUND"
+description
+  "SOUND_EFFECT played at beginning of LEVEL."
+
+scenario
+  "BULLET_SOUND"
+description
+  "SOUND_EFFECT played when a BULLET is fired"
+
+scenario
+  "EXPLOSION_SOUND"
+description
+  "SOUND_EFFECT played when an ENTITY is destroyed."
+
+scenario
+  "QUIT"
+description
+  "When the PLAYER exits the GAME."
+
+scenario
+  "TURR_LOCK"
+description
+  "When a TURRET finds the SPACESHIP."
+
+scenario
+  "FACT_SMOKE"
+description
+  "Undamaged FACTORY emits SMOKE from it's chimney."
+
+scenario
+  "BALL_COLL"
+description
+  "BALL is taken from PEDESTAL and attached to SPACESHIP by ROD"
+
+scenario
+  "FUEL_COLL"
+description
+  "FUEL_BOX is collected and FUEL value transferred to SPACESHIP."
+
+scenario
+  "TIMER"
+description
+  "TIMER begins once FACTORY is destroyed."
+
+end

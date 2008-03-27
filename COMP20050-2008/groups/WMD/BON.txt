@@ -1,0 +1,164 @@
+system_chart THRUST
+  cluster ENTITY description "An object present within THRUST"
+  cluster SOUND_EFFECTS description "Sounds heard while in-game"
+  cluster STRING description "Character-based entries, and values"
+end
+
+cluster_chart ENTITY
+  class SPACESHIP description "An ENTITY controlled by the player."
+  class BALL description "An ENTITY which must be collected to complete level"
+  class PEDESTAL description "The object which the ball rests upon"
+  class FACTORY description "A destructable ENTITY which begins timer when destroyed"
+  class TURRET description "A computer controlled ENTITY which fires Bullets at the Spaceship"
+  class BULLET description "An ENTITY ejected by Spaceship and Turret"
+  class FUEL_BOX description "An ENTITY which contains a static Fuel value"
+  class GROUND description "ENTITY upon which Pedastal, Factory, and Turret rest"
+end
+
+cluster_chart SOUND_EFFECTS
+  class FIRE description "Sound heard when bullet ejected"
+  class EXPLOSION_SOUND description "Sound heard on destruction of Factory" 
+  class WIN_SOUND description "Sound heard on successful completion of level"
+  class LOSE_SOUND description "Sound heard on failure to successfully complete level"
+  class MUSIC description "Sound heard consistently throughout game"
+end
+
+cluster_chart STRING
+  class SCORE description "STRING displaying value of player's score"
+  class MENU description "Is a collection of interactive options"
+  class FUEL_AMOUNT description "STRING which displays user's remaining fuel value"
+  class HIGH_SCORE description "A collection of STRINGS which display current highest Score values"
+  class TIMER description "A countdown which begins after Factory destruction"
+end
+
+class_chart SPACESHIP
+indexing
+  in_cluster: "ENTITY" ;
+  created: "2008-03-11 WMD";
+explanation
+  "User-contolled object"
+part "1/8 "
+query
+  "Fuel" 
+command
+  "Thrust", "Rotate Left", "Rotate Right", "Collect", "Shoot"
+constraint
+  "At most one Spaceship allowed",
+  "Destroyed if touches Ground",
+  "Must Collect Ball to successfully complete to next level",
+  "Destroyed if hit by Bullet",
+  "Affected by Gravity",
+  "Destroyed if hits FUEL_BOX",
+  "Destroyed if hits FACTORY",
+  "Consumes it's own fuel when Thrusting"
+end
+
+class_chart BALL
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "A circular object"
+part " 2/8 "
+constraint
+  "At most one Ball allowed",
+  "Destroyed if touches Ground",
+  "Must Be Collected for player to successfully complete level",
+  "Destroyed if hit by Bullet",
+  "Affected by Gravity",
+  "Depletes Spaceship's fuel once collected"
+end
+
+class_chart PEDESTAL
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "A graphical object which the Ball sits upon"
+part "3/8 "
+constraint
+  "At most one Pedastal allowed",
+  "Disappears when Ball is collected"
+end
+
+class_chart FACTORY
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "A destructible object present in level"
+part "4/8 "
+query
+  "Colour", "Smoke"
+constraint
+  "At most one Factory allowed",
+  "Stops emitting smoke if hit by Bullet",
+  "Destroyed if repeatedly shot",
+  "Begins Timer once destroyed"
+end
+
+class_chart TURRET
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "A computer-controlled Entity which fires bullets at Spaceship"
+part "5/8"
+query
+  "Colour"
+command
+  "Seek", "Fire"
+constraint
+  "At least one Turret allowed",
+  "Destroyed if shot",
+  "Fires Bullets at Spaceship"
+end
+
+class_chart BULLET
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "An ENTITY ejected by spaceship or turret, capable of destroying other ENTITIES"
+part "6/8"
+
+constraint
+  "Fired by SPACESHIP",
+  "Fired by TURRET",
+  "Travels in a straight line",
+  "Destroys SPACESHIP on contact",
+  "Destroys BALL on contact", 
+  "Destroys TURRET on contact",
+  "Damages FACTORY on contact"
+  
+end
+
+class_chart FUEL_BOX
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "An ENTITY containing static fuel value"
+part "7/8"
+
+constraint
+  "Collectable by SPACESHIP",
+  "Disappears after collection",
+  "Transfers fuel value to SPACESHIP upon collection"
+  
+end
+
+class_chart GROUND
+indexing
+  in_cluster: "ENTITY " ;
+  created: "2008-03-11 WMD";
+explanation
+  "A static ENTITY which defines layout of level, and upon which FACTORY, PEDESTAL, FUEL_BOX and TURRET rest"
+part "8/8"
+
+query
+ "Colour", "Shape"
+
+constraint
+    "Shape remains static for duration of LEVEL"
+end

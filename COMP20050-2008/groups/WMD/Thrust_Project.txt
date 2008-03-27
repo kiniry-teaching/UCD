@@ -1,0 +1,103 @@
+Group name: WMD
+Group members: 		Stephen Walker - prometheos - 06672281
+			Keith Madden - Vespasian - 06551408
+			Siobhan Dunne - sivie - 06464599
+
+Introduction:
+	This project will involve designing and building a game in the image of 'Thrust'. 'Thrust' is a 
+	game in which a spaceship, controlled by the user, travels to different planets. The aim is to collect 
+	a ball using the ship's ray and escape from the planet alive. There are enemies and obstacles to 
+	make the task more challenging, including the existence of gravity and momentum. If the spaceship is
+	shot by an enemy or crashes into a wall it explodes and the game is over. There is also a time limit, 
+	which is brought into effect once the ball has been collected, meaning the ship must leave as 
+	quickly as possible. Our project aims to replicate the 'Thrust'game, while including aspects of our own 
+	ideas and developing the existing concepts.  
+
+Requirements:
+	The requirements for this project include an analysis of the existing 'Thrust' game so that we 
+	can successfully design our adapted version, a plan of how to properly implement our concept and 
+	finally	to program our own version of 'Thrust' using Java.  
+
+Overview:
+	The purpose of this project is to successfully program a game as a team and to develop team-working
+	skills as well as a general understanding of a multitude of software that until recently we had no practical
+	knowledge of.
+
+Summary of Analysis and Design:
+	We tested the game in order to decide on the key concepts essential to the correct programming of the
+	finished product. Through careful analysis and detailed observation we feel we have developed a basic 
+	understanding of the many facets of the gaming environment. We hope through further analysis and design 
+	we can gain a more layered understanding of thrust and its main components.
+
+Project Dictionary:
+
+*CONCEPT* *DEFINITION*
+-----------------------------------
+SPACESHIP - The main YELLOW ENTITY. 
+ENTITY - A visual object in the game.
+MENU - Displays interactive list of options.
+BALL - Round ENTITY that the SPACESHIP can pick up.
+PEDESTAL - Where the BALL sits.
+FACTORY - Destructible ENTITY that is on the GROUND.
+TURRETS - ENTITY that fires BULLETS at the SPACESHIP.  
+GROUND - Where the SPACESHIP cannot go.
+SKY - Where the SPACESHIP can go.
+STARS - Visual embellishment of the SKY.
+BULLETS - ENTITIES that are fired at other ENTITIES.
+RAY - The SPACESHIP uses this to collect a FUEL BOX.
+FUEL_BOX - This gives the SPACESHIP more FUEL.
+TRACTORBEAM - Used by the SPACESHIP to pick up the BALL.
+SMOKE - Comes out of the FATORY.
+HAPPYFUNGOAWAYTIME - This is where the SPACESHIP disappears in the SKY.
+TIMER - Times how long you have to escape once you destroy the FACTORY.
+SCORE - Keeps a record of your achievements in the game, in a numeric field.
+HIGH_SCORES - Keeps track of the best SCORES.
+FUEL_AMOUNT - The amount of FUEL in the SPACESHIP.
+EXPLOSION - When an ENTITY is destroyed.
+GRAVITY - Pulls the SPACESHIP down towards the GROUND.
+MOMENTUM - Keeps ENTITIES moving. 
+SOUND EFFECTS - Sounds that react to events.
+MUSIC - Sound that plays during the game.
+FIRE - Sound that plays when an ENTITY shoots.
+EXPLOSION_SOUND - Sound that plays when there's an EXPLOSION.
+WIN_SOUNDS - Sound that plays when HAPPYFUNGOAWAYTIME happens.
+LOSE_SOUNDS - Sound that plays when the SPACESHIP explodes.
+END - When the game is over.
+
+
+*IS-A RELATIONS*
+----------------
+SPACESHIP is-a ENTITY
+BALL is-a ENTITY
+PEDESTAL is-a ENTITY
+FACTORY is-a ENTITY
+TURRETS is-a ENTITY
+BULLET is-a ENTITY
+FUEL_BOX is-a ENTITY
+FIRE is-a SOUND EFFECT
+EXPLOSION_SOUND is-a SOUND EFFECT
+WIN_SOUND is-a SOUND EFFECT
+LOSE_SOUND is-a SOUND EFFECT
+
+*HAS-A RELATIONS*
+-----------------
+SPACESHIP has FUEL
+SKY has STARS
+FACTORY has SMOKE
+GROUND has FACTORIES
+GROUND has TURRETS
+SPACESHIP has-a RAY
+SPACESHIP has-a TRACTORBEAM
+ENTITY has-an EXPLOSION
+SPACESHIP has MOMENTUM
+BALL has MOMENTUM
+
+*IS-A-KIND-OF RELATIONS*
+------------------------
+HIGH SCORE is-a-kind-of STRING
+MENU is-a-kind-of STRING
+FUEL_AMOUNT is-a-kind-of STRING
+SCORE is-a-kind-of STRING
+TIMER is-a-kind-of STRING
+HAPPYFUNGOAWAYTIME is-a-kind-of END
+
