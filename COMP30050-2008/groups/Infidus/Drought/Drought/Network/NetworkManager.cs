@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Net;
 using Drought.Entity;
+using Drought.GameStates;
 
 namespace Drought.Network
 {
@@ -45,8 +46,10 @@ namespace Drought.Network
         }
 
         /** Host a subnet game. */
-        public void host() 
+        public void host(Level levelToHost) 
         {
+            NetworkSessionProperties properties = new NetworkSessionProperties();
+            properties[0] = (int) levelToHost;
             session = NetworkSession.Create(NetworkSessionType.SystemLink, 1, MAX_PLAYERS, 0, null);
             session.GameStarted += new EventHandler<GameStartedEventArgs>(GameStarted);
             session.GameEnded += new EventHandler<GameEndedEventArgs>(GameEnded);

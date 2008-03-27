@@ -1,5 +1,6 @@
 using System.IO;
 using Microsoft.Xna.Framework;
+using Drought.GameStates;
 
 namespace Drought.World
 {
@@ -8,12 +9,12 @@ namespace Drought.World
         Vector4[,] map;
         int width, height;
 
-        string fileName;
+        Level level;
         public bool changed;
 
-        public TextureMap(string fileName)
+        public TextureMap(Level theLevel)
         {
-            this.fileName = fileName;
+            level = theLevel;
             changed = false;
 
             initalise();
@@ -22,7 +23,16 @@ namespace Drought.World
 
         public void initalise()
         {
-            FileStream fs = new FileStream("Content/TextureMaps/" + fileName + ".bmp", FileMode.Open, FileAccess.Read);
+            string fileName;
+            switch (level) {
+                case Level.Valley: fileName = "level_0"; break;
+                case Level.Rugged: fileName = "level_1"; break;
+                case Level.RuggedSplitTextures: fileName = "level_2"; break;
+                case Level.Square: fileName = "square"; break;
+                case Level.WaterTest: fileName = "water"; break;
+                default: fileName = "level_1"; break;
+            }
+            FileStream fs = new FileStream("Content/TextureMaps/"+fileName+".bmp", FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
 
             r.BaseStream.Seek(10, SeekOrigin.Current);

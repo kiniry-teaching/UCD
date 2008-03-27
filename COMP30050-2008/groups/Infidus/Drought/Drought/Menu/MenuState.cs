@@ -14,30 +14,20 @@ using Microsoft.Xna.Framework.GamerServices;
 namespace Drought.Menu
 {
     /** All the possible functions that can be performed from the menu. */
-    enum MenuFunctions { NONE, QUIT, QUIT_YES, QUIT_NO, LOCAL, HOST, GAMELIST, GAMELIST_BACK, JOIN };
-
+    enum MenuFunctions { NONE, LOCALLIST, LOCALLIST_BACK, LOCAL, HOSTLIST, HOSTLIST_BACK, HOST,
+                            JOINLIST, JOINLIST_BACK, JOIN, QUIT, QUIT_YES, QUIT_NO };
 
     class MenuState : GameState, IMenuListener
     {
         private DeviceInput input; 
 
-        private Menu mainMenu;
-
-        private Menu quitMenu;
-
-        private Menu joinMenu;
+        private Menu mainMenu, localMenu, hostMenu, joinMenu, quitMenu;
 
         private Menu currMenu;
 
         private SpriteFont defaultFont;
 
-        private Color defaultColor;
-
-        private bool canNext;
-
-        private bool canPrev;
-
-        private bool canPress;
+        private bool canNext, canPrev, canPress;
 
         private int screenWidth;
 
@@ -56,7 +46,6 @@ namespace Drought.Menu
         private void initialise()
         {
             input = DeviceInput.getInput();
-            defaultColor = Color.White;
 
             canNext = true;
             canPrev = true;
@@ -71,19 +60,19 @@ namespace Drought.Menu
             mainMenu = new Menu(this);
             mainMenu.activate();
 
-            MenuItem localGame = new MenuItem(MenuFunctions.LOCAL, "Local Game (Test)", defaultFont);
+            MenuItem localGame = new MenuItem(MenuFunctions.LOCALLIST, "Local Game", defaultFont);
             localGame.setScale(scale);
             localGame.position = new Vector2(mainX, mainY);
             mainMenu.addSelectableItem(localGame);
             mainY += mainSpacing;
 
-            MenuItem hostGame = new MenuItem(MenuFunctions.HOST, "Host Game", defaultFont);
+            MenuItem hostGame = new MenuItem(MenuFunctions.HOSTLIST, "Host Game", defaultFont);
             hostGame.setScale(scale);
             hostGame.position = new Vector2(mainX, mainY);
             mainMenu.addSelectableItem(hostGame);
             mainY += mainSpacing;
 
-            MenuItem joinGame = new MenuItem(MenuFunctions.GAMELIST, "Join Game", defaultFont);
+            MenuItem joinGame = new MenuItem(MenuFunctions.JOINLIST, "Join Game", defaultFont);
             joinGame.setScale(scale);
             joinGame.position = new Vector2(mainX, mainY);
             mainMenu.addSelectableItem(joinGame);
@@ -95,6 +84,11 @@ namespace Drought.Menu
             mainMenu.addSelectableItem(quit);
             mainY += mainSpacing;
 
+            localMenu = new Menu(this);
+            
+            hostMenu = new Menu(this);
+
+            joinMenu = new Menu(this);
 
             float quitX = 500.0f * (screenWidth / 800.0f);
             float quitY = 300.0f * (screenHeight / 600.0f);
@@ -117,8 +111,6 @@ namespace Drought.Menu
             quitNo.setScale(scale);
             quitNo.position = new Vector2(quitX, quitY);
             quitMenu.addSelectableItem(quitNo);
-
-            joinMenu = new Menu(this); 
             
             currMenu = mainMenu;
         }
@@ -172,8 +164,10 @@ namespace Drought.Menu
         {
             spriteBatch.Begin();
             mainMenu.render(spriteBatch);
-            quitMenu.render(spriteBatch);
+            localMenu.render(spriteBatch);
+            hostMenu.render(spriteBatch);
             joinMenu.render(spriteBatch);
+            quitMenu.render(spriteBatch);
             spriteBatch.End();
         }
 
@@ -181,24 +175,87 @@ namespace Drought.Menu
         {
             switch (item.getFunction())
             {
+                case MenuFunctions.LOCALLIST: makeLocalList(); currMenu = localMenu; localMenu.activate(); break;
+                case MenuFunctions.LOCALLIST_BACK: currMenu = mainMenu; localMenu.deactivate(); break;
+                case MenuFunctions.LOCAL: 
+                    getStateManager().pushState(new LevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel())); break;
+
+                case MenuFunctions.HOSTLIST: makeHostList(); currMenu = hostMenu; hostMenu.activate(); break;
+                case MenuFunctions.HOSTLIST_BACK: currMenu = mainMenu; hostMenu.deactivate(); break;
+                case MenuFunctions.HOST: getGame().getNetworkManager().host(((LevelMenuItem)item).getLevel());
+                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel(), true)); break;
+                
+                case MenuFunctions.JOINLIST: makeJoinList(); currMenu = joinMenu; joinMenu.activate(); break;
+                case MenuFunctions.JOINLIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
+                case MenuFunctions.JOIN: getGame().getNetworkManager().connectToGame(((JoinLevelMenuItem)item).getGame());
+                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel(), false)); break;
+                
                 case MenuFunctions.QUIT: currMenu = quitMenu; quitMenu.activate(); break;
                 case MenuFunctions.QUIT_YES: getStateManager().popState(); break;
                 case MenuFunctions.QUIT_NO: currMenu = mainMenu; quitMenu.deactivate(); break;
-
-                case MenuFunctions.LOCAL: 
-                    getStateManager().pushState(new LevelState(getStateManager(), getGame(), "level_0")); break;
-                case MenuFunctions.HOST: getGame().getNetworkManager().host();
-                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", true)); break;
-                
-                case MenuFunctions.GAMELIST: makeGameList(); currMenu = joinMenu; joinMenu.activate(); break;
-                case MenuFunctions.GAMELIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
-                case MenuFunctions.JOIN: getGame().getNetworkManager().connectToGame(((GameMenuItem)item).getGame());
-                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), "level_0", false)); break;
             }
         }
 
+        /** Populates the list of playable maps. */
+        private void makeLocalList()
+        {
+            localMenu = new Menu(this);
+            float scale = 0.35f * (screenHeight / 600.0f);
+            float gameX = 500.0f * (screenWidth / 800.0f);
+            float gameY = 100.0f * (screenHeight / 600.0f);
+            float spacing = 70.0f * (screenHeight / 600.0f);
+            MenuItem header = new MenuItem(MenuFunctions.NONE, "Pick a Level:", defaultFont);
+            header.setScale(scale);
+            header.position = new Vector2(gameX, gameY);
+            header.setDefaultColor(Color.Blue);
+            localMenu.addNonSelectableItem(header);
+            gameY += spacing;
+            foreach (Level bleh in Enum.GetValues(typeof(Level))) {
+                MenuItem aLevel = new LevelMenuItem(MenuFunctions.LOCAL, bleh.ToString(), defaultFont, bleh);
+                aLevel.setScale(scale);
+                aLevel.position = new Vector2(gameX, gameY);
+                localMenu.addSelectableItem(aLevel);
+                gameY += spacing;
+            }
+            MenuItem back = new MenuItem(MenuFunctions.LOCALLIST_BACK, "Back", defaultFont);
+            back.setScale(scale);
+            back.position = new Vector2(gameX, gameY);
+            back.setDefaultColor(Color.Gray);
+            localMenu.addSelectableItem(back);
+        }
+
+        /** Populates the list of playable maps. */
+        private void makeHostList()
+        {
+            hostMenu = new Menu(this);
+            float scale = 0.35f * (screenHeight / 600.0f);
+            float gameX = 500.0f * (screenWidth / 800.0f);
+            float gameY = 100.0f * (screenHeight / 600.0f);
+            float spacing = 70.0f * (screenHeight / 600.0f);
+            MenuItem header = new MenuItem(MenuFunctions.NONE, "Pick a Level:", defaultFont);
+            header.setScale(scale);
+            header.position = new Vector2(gameX, gameY);
+            header.setDefaultColor(Color.Blue);
+            hostMenu.addNonSelectableItem(header);
+            gameY += spacing;
+            foreach (Level bleh in Enum.GetValues(typeof(Level))) {
+                MenuItem aLevel = new LevelMenuItem(MenuFunctions.HOST, bleh.ToString(), defaultFont, bleh);
+                aLevel.setScale(scale);
+                aLevel.position = new Vector2(gameX, gameY);
+                hostMenu.addSelectableItem(aLevel);
+                gameY += spacing;
+            }
+            MenuItem back = new MenuItem(MenuFunctions.HOSTLIST_BACK, "Back", defaultFont);
+            back.setScale(scale);
+            back.position = new Vector2(gameX, gameY);
+            back.setDefaultColor(Color.Gray);
+            hostMenu.addSelectableItem(back);
+
+        }
+
         /** Populates the list of joinable games. */
-        private void makeGameList() {
+        private void makeJoinList()
+        {
             List<RemoteGame> remoteGames = getGame().getNetworkManager().getLocalGames();
             joinMenu = new Menu(this);
             float scale = 0.35f * (screenHeight / 600.0f);
@@ -212,13 +269,14 @@ namespace Drought.Menu
             joinMenu.addNonSelectableItem(gameCount);
             gameY += spacing;
             foreach (RemoteGame remoteGame in remoteGames) {
-                MenuItem aGame = new GameMenuItem(MenuFunctions.JOIN, remoteGame.getDescription(), defaultFont, remoteGame);
+                Level theLevel = (Level) remoteGame.getSession().SessionProperties[0];
+                MenuItem aGame = new JoinLevelMenuItem(MenuFunctions.JOIN, remoteGame.getDescription(), defaultFont, theLevel, remoteGame);
                 aGame.setScale(scale);
                 aGame.position = new Vector2(gameX, gameY);
                 joinMenu.addSelectableItem(aGame);
                 gameY += spacing;
             }
-            MenuItem back = new MenuItem(MenuFunctions.GAMELIST_BACK, "Back", defaultFont);
+            MenuItem back = new MenuItem(MenuFunctions.JOINLIST_BACK, "Back", defaultFont);
             back.setScale(scale);
             back.position = new Vector2(gameX, gameY);
             joinMenu.addSelectableItem(back);

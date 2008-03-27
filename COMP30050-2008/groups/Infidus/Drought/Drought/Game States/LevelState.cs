@@ -7,9 +7,12 @@ using Drought.Graphics;
 using Drought.World;
 using Drought.Entity;
 using Drought.Input;
+using Drought.Sound;
 
 namespace Drought.GameStates
 {
+    public enum Level : int { Valley, Rugged, RuggedSplitTextures, Square, WaterTest };
+
     class LevelState : GameState 
     {
         private Terrain terrain;
@@ -45,18 +48,20 @@ namespace Drought.GameStates
 
         private ModelLoader modelLoader;
 
-        public LevelState(IStateManager manager, DroughtGame game, string fileName) :
+        public LevelState(IStateManager manager, DroughtGame game, Level aLevel) :
             base(manager, game)
         {
             input = DeviceInput.getInput();
-            heightMap = new HeightMap(fileName);
-            textureMap = new TextureMap(fileName);
-            normalMap = new NormalMap(heightMap); 
+            heightMap = new HeightMap(aLevel);
+            textureMap = new TextureMap(aLevel);
+            normalMap = new NormalMap(heightMap);
             waterMap = new WaterMap(heightMap, textureMap);
 
             camera = new Camera(game, heightMap);
 
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap, camera);
+
+            game.getSoundManager().setListener(camera);
 
             skybox = new Skybox(camera);
 
@@ -67,6 +72,10 @@ namespace Drought.GameStates
             loadContent();
 
             initializeEntities();
+
+            foreach (MovableEntity entity in entities) {
+                game.getSoundManager().playSound(SoundHandle.Truck, entity);
+            }
         }
 
         private void initializeEntities() 
@@ -138,9 +147,6 @@ namespace Drought.GameStates
             camera.update(gameTime);
             terrain.update(gameTime);
 
-            for (int i = 0; i < entities.Count; i++)
-                entities[i].update();
-
             updateUnits();
         }
 
@@ -176,14 +182,18 @@ namespace Drought.GameStates
             else if (input.isKeyPressed(GameKeys.CAM_ROTATE_RIGHT))
                 camera.rotateRight();
 
-            if (input.isKeyPressed(GameKeys.RESET)) {
+            if (input.isKeyPressed(GameKeys.ADD_WATER))
+                waterMap.addWater(10);
+
+            if (input.isKeyPressed(GameKeys.RESET))
                 getStateManager().popState();
-                return;
-            }
         }
 
         private void updateUnits()
         {
+            for (int i = 0; i < entities.Count; i++)
+                entities[i].update();
+
             /* Selecting Units */
             if (!selectCurrent && input.isKeyPressed(GameKeys.UNIT_SELECT)) {
                 selectCurrent = true;

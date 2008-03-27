@@ -1,19 +1,20 @@
 using System.IO;
 using Microsoft.Xna.Framework;
 using System;
+using Drought.GameStates;
 
 namespace Drought.World
 {
     public class HeightMap
     {
         float[,] map;
-        string fileName;
+        Level level;
 
         int width, height;
 
-        public HeightMap(string fileName)
+        public HeightMap(Level theLevel)
         {
-            this.fileName = fileName;
+            level = theLevel;
 
             initalise();
         }
@@ -28,6 +29,15 @@ namespace Drought.World
 
         public void initalise()
         {
+            string fileName;
+            switch (level) {
+                case Level.Valley: fileName = "level_0"; break;
+                case Level.Rugged: fileName = "level_1"; break;
+                case Level.RuggedSplitTextures: fileName = "level_2"; break;
+                case Level.Square: fileName = "square"; break;
+                case Level.WaterTest: fileName = "water"; break;
+                default: fileName = "level_1"; break;
+            }
             FileStream fs = new FileStream("Content/HeightMaps/"+fileName+".bmp", FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
 

@@ -67,7 +67,7 @@
     </Compile>
     <Compile Include="Game States\SignInState.cs" />
     <Compile Include="Graphics\ModelLoader.cs" />
-    <Compile Include="Menu\GameMenuItem.cs" />
+    <Compile Include="Menu\LevelMenuItem.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\RemoteGame.cs" />
     <Compile Include="Sound\SoundManager.cs" />

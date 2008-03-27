@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
@@ -74,7 +75,9 @@ namespace Drought
             input.bind(GameKeys.UNIT_COMMAND, MouseButtons.RIGHT, ModifierKeys.NONE);
             input.bind(GameKeys.UNIT_SPAWN, MouseButtons.LEFT, ModifierKeys.SHIFT);
             input.bind(GameKeys.UNIT_DELETE, MouseButtons.RIGHT, ModifierKeys.SHIFT);
+            
             input.bind(GameKeys.RESET, Keys.R, ModifierKeys.CTRL);
+            input.bind(GameKeys.ADD_WATER, Keys.W, ModifierKeys.NONE);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
@@ -108,6 +111,8 @@ namespace Drought
             networkManager.update();
 
             base.Update(gameTime);
+
+            Console.WriteLine("Update Called");
         }
 
         /**
@@ -120,6 +125,8 @@ namespace Drought
             gameManager.render(graphics.GraphicsDevice, spriteBatch);
 
             base.Draw(gameTime);
+
+            Console.WriteLine("Render Called");
         }
 
         public GraphicsDevice getGraphics()
