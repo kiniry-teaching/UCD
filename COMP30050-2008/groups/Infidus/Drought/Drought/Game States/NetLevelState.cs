@@ -59,6 +59,9 @@ namespace Drought.GameStates
         public NetLevelState(IStateManager manager, DroughtGame game, Level aLevel, bool isHost) :
             base(manager, game)
         {
+            networkManager = game.getNetworkManager();
+            hosting = isHost;
+
             input = DeviceInput.getInput();
             heightMap = new HeightMap(aLevel);
             textureMap = new TextureMap(aLevel);
@@ -84,9 +87,6 @@ namespace Drought.GameStates
             foreach (MovableEntity entity in localEntities) {
                 game.getSoundManager().playSound(SoundHandle.Truck, entity);
             }
-
-            networkManager = game.getNetworkManager();
-            hosting = isHost;
         }
 
         private void initializeEntities()
