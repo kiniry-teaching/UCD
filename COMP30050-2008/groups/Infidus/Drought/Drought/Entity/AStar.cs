@@ -22,11 +22,13 @@ namespace Drought.Entity
 
         private Node[,] nodeMap;
 
+        /** Width of the map. */
         private int width;
 
+        /** Height of the map. */
         private int height;
 
-        public AStar(NormalMap normalMap)
+        public AStar()
         {
 
         }
@@ -82,16 +84,15 @@ namespace Drought.Entity
                 for (int i = 0, m = successors.Count; i < m; i++)
                 {
                     Node s = successors[i];
-                    s.setParent(n);
+
                     //s.h is estimate distance to goal
                     //s.g is n.g + cost from n to s
-                    //s.f is g.s + s.h
+                    //s.f is s.g + s.h
 
                     //if s is on the OPEN list and the existing one is as good or better then discard s and continue
                     //if s is on the CLOSED list and the existing one is as good or better then discard s and continue
                     //Remove occurrences of s from OPEN and CLOSED
                     //Add s to the OPEN list
-
                 }
             }
 
@@ -119,6 +120,7 @@ namespace Drought.Entity
 
         /**
          * Gets a list of successor nodes for a specified node.
+         * Each successor node's parent is set to the speified node.
          * 
          * @param node The node to get successors for.
          */
@@ -135,9 +137,7 @@ namespace Drought.Entity
                 {
                     Node s = new Node((int)pos.X, (int)pos.Y);
                     s.setParent(n);
-                    s.distanceToParent = Vector2.Distance(n.getPosition(), s.getPosition());
-
-                    //add node to the list and compute its new values
+                    successors.Add(s);
                 }
             }
 
@@ -147,16 +147,22 @@ namespace Drought.Entity
 
     class Node
     {
+        /** Node's parent or null if no parent exists. */
         private Node parent;
 
+        /** Node's position. */
         private Vector2 pos;
 
+        /** The estimated cost to move from the start node to the goal node going through this node. */
         private float f;
 
+        /** The cost to get to this node from the start node. */
         private float g;
 
+        /** Heuristic value to move from this node to the goal node. */
         private float h;
 
+        /** The distance to the node's parent or 0 if no parent exists. */
         private float distToParent;
 
 
@@ -170,40 +176,68 @@ namespace Drought.Entity
             pos = new Vector2(x, y);
         }
 
-        public float heuristic
+        public float h
         {
             set { h = value; }
             get { return h; }
         }
 
-        public float cost
+        public float g
         {
             set { g = value; }
             get { return g; }
         }
 
-        public float heuristicCost
+        public float f
         {
             set { f = value; }
             get { return f; }
         }
 
-        public float distanceToParent
+        /**
+         * Gets the distance from this node to its parent
+         * node. If no parent exists then 0.0f is returned.
+         * 
+         * @return The distance to the parent node.
+         */
+        public float getDistanceToParent()
         {
-            set { distToParent = value; }
-            get { return distToParent; }
+            return distToParent;
         }
 
+        /**
+         * Gets the node's parent. Returns null if no
+         * parent node exists.
+         * 
+         * @return Node's parent.
+         */
         public Node getParent()
         {
             return parent;
         }
 
+        /**
+         * Sets the parent of this node and calculates the
+         * distance to it. If a null parameter is provided
+         * then this node has no parent.
+         * 
+         * @param parent The parent node to set or null if the node is to have no parent.
+         */
         public void setParent(Node parent)
         {
             this.parent = parent;
+
+            if (parent != null)
+                distToParent = Vector2.Distance(pos, parent.pos);
+            else
+                distToParent = 0.0f;
         }
 
+        /**
+         * Gets the node's position.
+         * 
+         * @return node's position.
+         */
         public Vector2 getPosition()
         {
             return pos;
