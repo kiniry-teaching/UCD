@@ -7,6 +7,17 @@ namespace Drought.Entity
 {
     class AStar
     {
+        /** Offsets of the nodes surrounding a node */
+        private static Vector2[] BORDER_NODES = new Vector2[] { 
+            new Vector2(-1, -1), //bottom left
+            new Vector2(0, -1), //bottom centre
+            new Vector2(1, -1), //bottom right
+            new Vector2(-1, 0), //left
+            new Vector2(1, 0), //right
+            new Vector2(-1, 1), //top left
+            new Vector2(0, 1), //top center
+            new Vector2(1, 1), }; //top right
+
         private NormalMap normalMap;
 
         private Node[,] nodeMap;
@@ -30,7 +41,7 @@ namespace Drought.Entity
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                 {
-
+                    //if traversable add node
                 }
         }
 
@@ -48,8 +59,22 @@ namespace Drought.Entity
                 Node n = open[0];
                 closed.Add(n);
 
-                if (n.Equals(goal)) //do data equals
-                    ;//return solution
+                if (n.Equals(goal)) //TODO do data equals //found a path
+                {
+                    Node curr = n;
+                    Node parent = n.getParent();
+                    List<Vector3> pathNodes = new List<Vector3>();
+                    Vector2 pos = n.getPosition();
+                    pathNodes.Add(new Vector3(pos.X, pos.Y, heightMap.getHeight(pos.X, pos.Y)));
+
+                    while (parent != null)
+                    {
+                        pos = parent.getPosition();
+                        pathNodes.Add(new Vector3(pos.X, pos.Y, heightMap.getHeight(pos.X, pos.Y)));
+                    }
+                    
+                    return new Path(pathNodes, normalMap);
+                }
 
                 //generate successors for n
                 List<Node> successors = new List<Node>();
@@ -73,7 +98,7 @@ namespace Drought.Entity
 
             //couldn't find a path so return a path containing just the start node
             List<Vector3> nodes = new List<Vector3>();
-            nodes.Add(new Vector3(startX, startY));
+            nodes.Add(new Vector3(startX, startY, heightMap.getHeight(startX, startY)));
             return new Path(nodes, normalMap);
         }
 
@@ -88,8 +113,35 @@ namespace Drought.Entity
         private Node getNode(int x, int y)
         {
             if(x >= 0 && x < width && y >= 0 && y < height)
-                return nodes[x,y];
+                return nodeMap[x,y];
             return null;
+        }
+
+        /**
+         * Gets a list of successor nodes for a specified node.
+         * 
+         * @param node The node to get successors for.
+         */
+        private List<Node> getSuccessors(Node node)
+        {
+            List<Node> successors = new List<Node>();
+
+            for(int i = 0; i < BORDER_NODES.Length; i++)
+            {
+                Vector2 pos = node.getPosition() + BORDER_NODES[i];
+                Node n = getNode((int)pos.X, (int)pos.Y);
+
+                if (n != null)
+                {
+                    Node s = new Node((int)pos.X, (int)pos.Y);
+                    s.setParent(n);
+                    s.distanceToParent = Vector2.Distance(n.getPosition(), s.getPosition());
+
+                    //add node to the list and compute its new values
+                }
+            }
+
+            return successors;
         }
     }
 
@@ -97,12 +149,26 @@ namespace Drought.Entity
     {
         private Node parent;
 
+        private Vector2 pos;
+
         private float f;
 
         private float g;
 
         private float h;
 
+        private float distToParent;
+
+
+        public Node()
+        {
+            pos = new Vector2();
+        }
+
+        public Node(int x, int y)
+        {
+            pos = new Vector2(x, y);
+        }
 
         public float heuristic
         {
@@ -122,6 +188,12 @@ namespace Drought.Entity
             get { return f; }
         }
 
+        public float distanceToParent
+        {
+            set { distToParent = value; }
+            get { return distToParent; }
+        }
+
         public Node getParent()
         {
             return parent;
@@ -130,6 +202,11 @@ namespace Drought.Entity
         public void setParent(Node parent)
         {
             this.parent = parent;
+        }
+
+        public Vector2 getPosition()
+        {
+            return pos;
         }
     }
 }
