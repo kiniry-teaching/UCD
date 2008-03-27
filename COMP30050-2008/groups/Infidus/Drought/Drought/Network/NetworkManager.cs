@@ -50,7 +50,7 @@ namespace Drought.Network
         {
             NetworkSessionProperties properties = new NetworkSessionProperties();
             properties[0] = (int) levelToHost;
-            session = NetworkSession.Create(NetworkSessionType.SystemLink, 1, MAX_PLAYERS, 0, null);
+            session = NetworkSession.Create(NetworkSessionType.SystemLink, 1, MAX_PLAYERS, 0, properties);
             session.GameStarted += new EventHandler<GameStartedEventArgs>(GameStarted);
             session.GameEnded += new EventHandler<GameEndedEventArgs>(GameEnded);
             session.SessionEnded += new EventHandler<NetworkSessionEndedEventArgs>(NetworkSessionEnded);
