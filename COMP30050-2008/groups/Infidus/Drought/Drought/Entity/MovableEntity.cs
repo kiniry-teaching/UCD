@@ -54,7 +54,7 @@ namespace Drought.Entity
             normal = path.getNormal();
             orientation = Matrix.Identity;
             setOrientation();
-            velocity = 0.1f;
+            velocity = 0.5f;
             this.model = model;
             this.modelTextures = modelTextures;
             selected = false;
@@ -146,7 +146,7 @@ namespace Drought.Entity
             }
         }
 
-        public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect)
+        public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect, Sun sun)
         {
             pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
 
@@ -178,8 +178,8 @@ namespace Drought.Entity
                     //HLSL testing
                     //HardCoded Light params need to be replaced with the values from the Sun.
                     currentEffect.Parameters["xEnableLighting"].SetValue(true);
-                    currentEffect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
-                    currentEffect.Parameters["xLightPower"].SetValue(1);
+                    currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
+                    currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
                 }
                 mesh.Draw();
             }

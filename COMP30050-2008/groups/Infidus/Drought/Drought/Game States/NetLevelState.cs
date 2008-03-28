@@ -22,6 +22,8 @@ namespace Drought.GameStates
 
         private Skybox skybox;
 
+        private Sun sun;
+
         private Camera camera;
 
         private HeightMap heightMap;
@@ -71,6 +73,8 @@ namespace Drought.GameStates
             camera = new Camera(game, heightMap);
             
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap, camera);
+
+            sun = new Sun(new Vector3(0, -200, 0));
 
             game.getSoundManager().setListener(camera);
 
@@ -138,13 +142,13 @@ namespace Drought.GameStates
 
         public override void background()
         {
-            Console.WriteLine("NetLevelState in background");
+            //Console.WriteLine("NetLevelState in background");
             //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void foreground()
         {
-            Console.WriteLine("NetLevelState in foreground");
+            //Console.WriteLine("NetLevelState in foreground");
             //throw new Exception("The method or operation is not implemented.");
         }
 
@@ -368,13 +372,13 @@ namespace Drought.GameStates
 
             graphics.Clear(ClearOptions.DepthBuffer, Color.Black, 1.0f, 0);
 
-            terrain.render();
+            terrain.render(sun);
             skybox.render();
 
             for (int i = 0; i < localEntities.Count; i++)
-                localEntities[i].render(graphics, spriteBatch, camera, modelEffect);
+                localEntities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
             for (int i = 0; i < remoteEntities.Count; i++)
-                remoteEntities[i].render(graphics, spriteBatch, camera, modelEffect);
+                remoteEntities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
 
             if (selectCurrent) {
                 lineTool.render();

@@ -19,6 +19,8 @@ namespace Drought.GameStates
 
         private Skybox skybox;
 
+        private Sun sun;
+
         private Camera camera; 
         
         private HeightMap heightMap;
@@ -56,6 +58,8 @@ namespace Drought.GameStates
             textureMap = new TextureMap(aLevel);
             normalMap = new NormalMap(heightMap);
             waterMap = new WaterMap(heightMap, textureMap);
+
+            sun = new Sun(new Vector3(0, -200, 0));
 
             camera = new Camera(game, heightMap);
 
@@ -130,13 +134,13 @@ namespace Drought.GameStates
 
         public override void background()
         {
-            Console.WriteLine("LevelState in background");
+            //Console.WriteLine("LevelState in background");
             //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void foreground()
         {
-            Console.WriteLine("LevelState in foreground");
+            //Console.WriteLine("LevelState in foreground");
             //throw new Exception("The method or operation is not implemented.");
         }
 
@@ -144,10 +148,13 @@ namespace Drought.GameStates
         {
             updateInput();
 
+            sun.update(gameTime);
             camera.update(gameTime);
             terrain.update(gameTime);
 
             updateUnits();
+
+            //Console.WriteLine(Vector3.Transform(new Vector3(0, 0, heightMap.getHeight(0, 0)), camera.getViewMatrix() * camera.getProjectionMatrix()).Z);
         }
 
         private void updateInput()
@@ -346,13 +353,11 @@ namespace Drought.GameStates
             graphics.RenderState.AlphaBlendEnable = false;
             graphics.RenderState.AlphaTestEnable = false;
 
-            graphics.Clear(ClearOptions.DepthBuffer, Color.Black, 1.0f, 0);
-
-            terrain.render();
+            terrain.render(sun);
             skybox.render();
 
             for (int i = 0; i < entities.Count; i++)
-                entities[i].render(graphics, spriteBatch, camera, modelEffect);
+                entities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
 
             if (selectCurrent) {
                 lineTool.render();

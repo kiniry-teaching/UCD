@@ -51,7 +51,7 @@ namespace Drought.World
 
         public double oldTime = 0;
         public double counter = Math.PI;
-        public Vector3 lightDirection = new Vector3(0,0,-1);//0.5f, (float)Math.Sin(Math.PI), (float)Math.Sin(Math.PI));
+        public Vector3 lightDirection = new Vector3(0,0,-1);
 
         public Terrain(GraphicsDevice device, ContentManager content, HeightMap heightMap, TextureMap textureMap, Camera camera)
         {
@@ -157,7 +157,7 @@ namespace Drought.World
 
         }
 
-        public void render()
+        public void render(Sun sun)
         {
             Matrix worldMatrix = Matrix.Identity;
 
@@ -174,8 +174,8 @@ namespace Drought.World
             //HLSL testing
             //HardCoded Light params need to be replaced with the values from the Sun.
             effect.Parameters["xEnableLighting"].SetValue(true);
-            effect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
-            effect.Parameters["xLightPower"].SetValue(1);
+            effect.Parameters["xLightPosition"].SetValue(sun.getPosition());
+            effect.Parameters["xLightPower"].SetValue(sun.getPower());
 
             effect.Begin();
 
