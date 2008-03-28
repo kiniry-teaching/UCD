@@ -1,0 +1,32 @@
+head	1.1;
+access;
+symbols;
+locks
+	mzieniewicz:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.02.11.12.34.22;	author mzieniewicz;	state Exp;
+branches;
+next	;
+
+
+desc
+@hello and power .
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@
+
+public class HelloWorld{
+    public static void main (String[] args){
+	System.out.println("Hello, world!"); 
+	System.out.print(Math.pow(2, 20));
+    }
+}@

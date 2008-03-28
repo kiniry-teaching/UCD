@@ -1,0 +1,8 @@
+$Id: nums.txt,v 1.5 2008/02/12 14:17:16 mzieniewicz Exp mzieniewicz $
+
+1 jeden
+2 dwa
+3 trzy
+4 cztery 
+5 piec
+6 szesc

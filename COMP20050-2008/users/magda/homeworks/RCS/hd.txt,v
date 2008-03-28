@@ -1,0 +1,89 @@
+head	1.5;
+access;
+symbols;
+locks
+	mzieniewicz:1.5; strict;
+comment	@# @;
+
+
+1.5
+date	2008.02.11.17.09.08;	author mzieniewicz;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.02.11.17.07.23;	author mzieniewicz;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.02.11.17.05.27;	author mzieniewicz;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.11.17.03.41;	author mzieniewicz;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.11.16.54.21;	author mzieniewicz;	state Exp;
+branches;
+next	;
+
+
+desc
+@hd on a walk
+@
+
+
+1.5
+log
+@hd, walk, forg, castles, swords and skate-boards
+@
+text
+@Humpty Dumpty went for a walk.
+Humpty Dumpty saw a fat frog.
+All the king's castles
+and all the king's swords
+couldn't go faster on their skate-boards.
+@
+
+
+1.4
+log
+@hd, frog, castles, swords
+@
+text
+@d5 1
+@
+
+
+1.3
+log
+@hd, frog and castles
+.
+@
+text
+@d3 2
+a4 1
+All the kings castles
+@
+
+
+1.2
+log
+@frog
+@
+text
+@d3 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+@
