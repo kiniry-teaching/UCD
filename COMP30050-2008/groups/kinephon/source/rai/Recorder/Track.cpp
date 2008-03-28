@@ -4,6 +4,19 @@ namespace interpreter
 {
 
 ///////////////////////////////////////////////////////////////////////////////
+// copy constructor
+//
+Track::Track
+(	Track const * const	track
+) :	_iid				(track->_iid),
+	_isLost				(track->_isLost),
+	_frameFirst			(0),
+	_frameLast			(0)
+{	// Copy constructor of Frame will copy all other frames
+	(*this) += new Frame(track->_frameFirst);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // add frame(s)
 //
 Frame * Track::operator +=
@@ -20,6 +33,11 @@ Frame * Track::operator +=
 	else
 	// Make this frame the first and last frame
 		_frameFirst = _frameLast = frame;
+
+	// Make sure the last frame is actually on the last
+	//	If the frame added was a group, it won't be
+	while(_frameLast->_next != 0)
+		_frameLast = _frameLast->_next;
 
 	return frame;
 

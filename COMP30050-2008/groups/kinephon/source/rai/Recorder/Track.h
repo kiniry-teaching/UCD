@@ -24,6 +24,12 @@ class Track
 	 * @version 1.0
 	 */
 	friend		class Recorder;
+	/**
+	 * Be friends with Recording so it can add frames
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend		class Recording;
 
 #if __TEST__
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,7 +41,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	static void	RunTest				(void);
+	static void	RunTest					(void);
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -46,7 +52,7 @@ public:
 	 * Get the IR blob's id being tracked by this
 	 * @return The IR blob's id
 	 */
-	irid		iid					(void)		const;
+	irid		iid						(void)		const;
 	/**
 	 * Returns the first frame in this Track.
 	 * Following frams can be accessed by this->frame()->next()..
@@ -54,21 +60,21 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Frame *		first				(void)		const;
+	Frame *		first					(void)		const;
 	/**
 	 * Returns true if there are Frames in the track, else false
 	 * @return true if there are Frames in the track, else false
 	 * @author EB
 	 * @version 1.0
 	 */
-	bool		hasFrames			(void)		const;
+	bool		hasFrames				(void)		const;
 	/**
 	 * Calculate the number of frames in this track
 	 * @return the number of frames in this track
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint		length				(void)		const;
+	uint		length					(void)		const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend *tor
@@ -81,14 +87,25 @@ private:
 	 * @version 1.0
 	 */
 				Track
-				(	irid const		iid
+				(	irid const			iid
+				);
+	/**
+	 * Copy constructor
+	 * Copy all properties and frames (don't copy pointer to frames) make
+	 *	complete new copy of all frames
+	 * @param track The track to copy
+	 * @author EB
+	 * @version 1.0
+	 */
+				Track
+				(	Track const * const	track
 				);
 	/**
 	 * Destory all frames in this track
 	 * @author EB
 	 * @version 1.0
 	 */
-				~Track				(void);
+				~Track					(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend commands
@@ -104,7 +121,7 @@ private:
 	 * @version 1.0
 	 */
 	Frame *		operator +=
-				(	Frame * const	frame
+				(	Frame * const		frame
 				);
 	/**
 	 * Erase all frames up to and including frameIndex
@@ -114,7 +131,7 @@ private:
 	 * @version 1.0
 	 */
 	void		erase
-				(	uint const		frameIndex	= ~0ul
+				(	uint const			frameIndex	= ~0ul
 				);
 	/**
 	 * Store whether this track has been lost, is no longer in use. A track
@@ -122,7 +139,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	bool &		isLost				(void);
+	bool &		isLost					(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields

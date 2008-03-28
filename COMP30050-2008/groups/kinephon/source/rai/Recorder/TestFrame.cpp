@@ -1,5 +1,7 @@
 #ifdef __TEST__
+#include <cassert>
 #include "Frame.h"
+#include "TestMemory.h"
 using std::cout;
 using std::endl;
 
@@ -9,85 +11,139 @@ namespace interpreter
 void Frame::RunTest(void)
 {
 
-	Frame * frameA = new Frame(0, 0, 0, 0);
-	Frame * frameB = new Frame(7, 7, 7, 7);
+	cout << "Running Frame tests.. ";
+
+	resetMemoryReport();
+
+	stage++; Frame * frameA = new Frame(1, 2, 3, 4);
+	stage++; Frame * frameB = new Frame(5, 6, 7, 8);
 	Frame * frameC;
 	Frame * frameD;
-	Frame * frame;
-	bool except = false;
+	Frame * frameCopy;
+	bool except = true;
 
-	cout << "Two new frames" << endl;
-	cout << frameA << endl;
-	cout << frameB << endl;
+	// Test a frame is created correctly
+	assert(frameA->x() == 1);
+	assert(frameA->y() == 2);
+	assert(frameA->size() == 3);
+	assert(frameA->time() == 4);
+	assert(frameA->gap() == false);
+	assert(frameA->next() == 0);
+	assert(frameA->last() == frameA);
+	assert(frameA->length() == 1);
+	assert(frameA->u() == 0);
+	assert(frameA->v() == 0);
 
-	cout << "Append frameA to frameB" << endl;
+	// Join two frames and test they join correctly
 	(*frameA) += frameB;
+	assert(frameA->gap() == false);
+	assert(frameA->next() == frameB);
+	assert(frameA->last() == frameB);
+	assert(frameA->length() == 2);
+	assert(frameB->length() == 1);
+	assert(frameA->u() == frameB->x() - frameA->x());
+	assert(frameA->v() == frameB->y() - frameA->y());
+	assert(frameB->u() == 0);
+	assert(frameB->v() == 0);
 
-	cout << "Updated frames" << endl;
-	cout << frameA << endl;
-	cout << frameB << endl;
-
-	cout << "Store frameA in frameC" << endl;
+	// Erase one frame (0 means, erase frame at index 0)
 	frameC = frameA;
-	cout << "Erase one frame from C and store new C" << endl;
-	frameC = frameC->erase(0);
-	cout << "Output A and C" << endl;
-	cout << (void*)frameA << endl;
-	cout << (void*)frameC << endl;
-	cout << "Erase another frame from C and store in C" << endl;
-	frameC = frameC->erase(0);
-	cout << "Output C" << endl;
-	cout << frameC << endl;
-	cout << "Erase another frame from C and store in C" << endl;
 	frameC = frameC->erase(0);
 
-	frameA = new Frame(1, 1, 1, 0);
-	frameB = new Frame(2, 2, 2, 0);
-	frameC = new Frame(3, 3, 3, 0);
-	frameD = new Frame(4, 4, 4, 0);
+	assert(frameC == frameB);
+	assert(frameC->gap() == false);
+	assert(frameC->next() == 0);
+	assert(frameC->last() == frameB);
+	assert(frameC->length() == 1);
+	assert(frameB->length() == 1);
+	assert(frameC->u() == 0);
+	assert(frameC->v() == 0);
+	assert(frameB->u() == 0);
+	assert(frameB->v() == 0);
 
+	frameC = frameC->erase(0);
+	assert(frameC == 0);
+
+	// Don't crash if erase on a 0 frame
+	frameC = frameC->erase(0);
+	assert(frameC == 0);
+
+	// Create two groups of frames
+	stage++; frameA = new Frame(1, 1, 1, 0);
+	stage++; frameB = new Frame(2, 2, 2, 1000);
+	stage++; frameC = new Frame(3, 3, 3, 0);
+	stage++; frameD = new Frame(4, 4, 4, -1);
 	(*frameA) += frameB;
 	(*frameC) += frameD;
+	assert(frameA->gap() == true);
+	assert(frameB->gap() == false);
+	assert(frameC->gap() == true);
+	assert(frameD->gap() == false);
+	assert(frameA->next() == frameB);
+	assert(frameB->next() == 0);
+	assert(frameC->next() == frameD);
+	assert(frameD->next() == 0);
+	assert(frameA->length() == 2);
+	assert(frameC->length() == 2);
 
-	cout << "Attach frame groups A(1)->B(2) and C(3)->D(4) on A, so it's A->C->D->B" << endl;
+	// Join two groups of frames
 	(*frameA) += frameC;
-	cout << "Iterate frames" << endl;
-	for(frame = frameA; frame != 0; frame = frame->next())
-		cout << frame << endl;
+	assert(frameA->next() == frameC);
+	assert(frameC->next() == frameD);
+	assert(frameD->next() == frameB);
+	assert(frameB->next() == 0);
+	assert(frameA->length() == 4);
+	assert(frameC->length() == 3);
+	assert(frameD->length() == 2);
+	assert(frameB->length() == 1);
+	assert(frameA->last() == frameB);
+	assert(frameC->last() == frameB);
+	assert(frameD->last() == frameB);
+	assert(frameB->last() == frameB);
 
-	cout << "Get the total number of frames from the POV of A, B, and C" << endl;
-	cout << frameA->length() << ", " << frameB->length() << ", " << frameC->length() << endl;
+	// Run copy constructor
+	stage++; frameCopy = new Frame(frameA);
+	assert(frameCopy->length() == frameA->length());
+	assert(frameCopy->x() == frameA->x());
+	assert(frameCopy->next()->x() == frameA->next()->x());
+	assert(frameCopy->last()->x() == frameA->last()->x());
+	assert(frameCopy != frameA);
+	assert(frameCopy->next() != frameA->next());
+	assert(frameCopy->last() != frameA->last());
+	delete frameCopy;
 
-	cout << "What is the last frame from POV of A, B, and C" << endl;
-	cout << frameA->last() << endl << frameB->last() << endl << frameC->last() << endl;
-
-	cout << "Get frame A to erase 2 frames and update so frame A points to the start of the new list" << endl;
+	// Erase 1 frame test links are still correct
 	// erase(1) - 1 means frame index, so erases frames 0 and 1
 	frameA = frameA->erase(1);
-	for(frame = frameA; frame != 0; frame = frame->next())
-		cout << frame << endl;
+	assert(frameA->next() == frameB);
+	assert(frameB->next() == 0);
+	assert(frameA->length() == 2);
+	assert(frameB->length() == 1);
+	assert(frameA->last() == frameB);
+	assert(frameB->last() == frameB);
 
-	cout << "Erase all frames" << endl;
 	frameA = frameA->erase();
-	for(frame = frameA; frame != 0; frame = frame->next())
-		cout << frame << endl;
+	assert(frameA == 0);
 
-	cout << "Create 3 frames joined together" << endl;
-	frameA = new Frame(1, 1, 1, 0);
-	frameB = new Frame(2, 2, 2, 0);
-	frameC = new Frame(3, 3, 3, 0);
+	// Create 3 frames linked together and delete the first
+	//	one - destructor should delete all 3
+	stage++; frameA = new Frame(1, 1, 1, 0);
+	stage++; frameB = new Frame(2, 2, 2, 0);
+	stage++; frameC = new Frame(3, 3, 3, 0);
+	stage = -1;
 	(*((*frameA) += frameB)) += frameC;
-	cout << "Delete the first one" << endl;
 	delete frameA;
-	cout << "Were all 3 deleted" << endl;
-
-	try { cout << frameC << endl; }
-	catch(...)
-	{	cout << "All frames were deleted" << endl;
-		except = true;
-	}
+	// Test all 3 were deleted by accessing the 3rd one, if
+	//	it throws an exception, it was deleted OK
+	try { cout << frameA << endl; except = false; } catch(...) { }
+	try { cout << frameB << endl; except = false; } catch(...) { }
+	try { cout << frameC << endl; except = false; } catch(...) { }
 	if(except == false)
-		cout << "All frames were NOT deleted!" << endl;
+		assert(false);
+
+	cout << "Done" << endl;
+
+	dumpMemoryReport();
 
 }
 

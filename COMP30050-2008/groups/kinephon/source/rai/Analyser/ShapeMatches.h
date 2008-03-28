@@ -28,7 +28,7 @@ class ShapeMatches
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend					class Shape;
+	friend				class Shape;
 
 ///////////////////////////////////////////////////////////////////////////////
 // *tor
@@ -46,10 +46,10 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-							ShapeMatches
-							(	float const					weight,
-								uint const					total	= 1
-							);
+						ShapeMatches
+						(	float const					weight,
+							uint const					total	= 1
+						);
 
 	/**
 	 * Create a shape match collection based on an existing ShapeMatches.
@@ -62,9 +62,9 @@ public:
 	 * @version 1.0
 	 * @pre shapeMatches != 0;
 	 */
-							ShapeMatches
-							(	ShapeMatches *				shapeMatches
-							);
+						ShapeMatches
+						(	ShapeMatches *				shapeMatches
+						);
 
 ///////////////////////////////////////////////////////////////////////////////
 // queries
@@ -76,14 +76,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	float					weight							(void)	const;
+	float				weight							(void)	const;
 	/**
 	 * Return the total number of shapes matched
 	 * @return The total number of shapes matched
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint					length							(void)	const;
+	uint				length							(void)	const;
 
 	/**
 	 * Return the indexed matched shape.
@@ -96,9 +96,9 @@ public:
 	 * @pre index >= 0 && index < length();
 	 * @post /value != 0;
 	 */
-	ShapeMatch *			operator []
-							(	uint const					index
-							)	const;
+	ShapeMatch *		operator []
+						(	uint const					index
+						)	const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend commands
@@ -115,9 +115,9 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	ShapeMatches &			operator +=
-							(	ShapeMatch const * const	shapeMatch
-							);
+	ShapeMatches &		operator +=
+						(	ShapeMatch const * const	shapeMatch
+						);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields
@@ -129,20 +129,19 @@ private:
 	 * @version 1.0
 	 * @see weight()
 	 */
-	float const				_weight;
+	float const			_weight;
 	/**
 	 * The maximum number of shapes that can be stored
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint const				_total;
+	uint const			_total;
 	/**
 	 * Sorted array of matching shapes
 	 * @author EB
 	 * @version 1.0
 	 */
-	vector<ShapeMatch *>	_shapeMatches;
-
+	vector<ShapeMatch*>	_shapeMatches;
 
 };
 

@@ -4,6 +4,22 @@ namespace interpreter
 {
 
 ///////////////////////////////////////////////////////////////////////////////
+// copy constructor
+//
+Frame::Frame
+(	Frame const * const	frame
+) :	_x					(frame->_x),
+	_y					(frame->_y),
+	_size				(frame->_size),
+	_time				(frame->_time)
+{	// Get this frame to copy the next frame
+	if(frame->_next != 0)
+		_next = new Frame(frame->_next);
+	else
+		_next = 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // get last frame
 //
 Frame * Frame::last(void) const
@@ -15,7 +31,7 @@ Frame * Frame::last(void) const
 	if(_next == 0)
 		// last() doesn't modify this object, but the
 		//	returned value can be modified outside
-		return const_cast<Frame *>(this);
+		return const_cast<Frame*>(this);
 
 	return _next->last();
 

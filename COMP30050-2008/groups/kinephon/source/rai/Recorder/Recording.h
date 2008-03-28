@@ -48,7 +48,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint				length					(void)	const;
+	uint				length						(void)	const;
 	/**
 	 * Returns the indexed Track.
 	 * Index should be in the range (0..length()-1)
@@ -63,7 +63,7 @@ public:
 	 * @post /result != 0;
 	 */
 	Track const * const	operator []
-						(	uint const			index
+						(	uint const				index
 						)	const;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -80,7 +80,7 @@ private:
 	 * @post this->length() == length;
 	 */
 						Recording
-						(	vector<Track *> &	tracks
+						(	vector<Track*> const &	tracks
 						);
 	/**
 	 * Destruct a Recording.
@@ -88,7 +88,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-						~Recording				(void);
+						~Recording					(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields
@@ -100,7 +100,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	vector<Track *>		_tracks;
+	vector<Track*>		_tracks;
 
 };
 
@@ -108,6 +108,12 @@ private:
 
 inline uint Recording::length(void) const
 {	return _tracks.size();
+}
+
+inline Track const * const Recording::operator []
+(	uint const	index
+)	const
+{	return _tracks[index];
 }
 
 }

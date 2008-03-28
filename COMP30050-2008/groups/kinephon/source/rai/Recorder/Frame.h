@@ -46,8 +46,8 @@ class Frame
 	 */
 	friend
 	ostream &	operator <<
-				(	ostream &	stream,
-					Frame *		frame
+				(	ostream &			stream,
+					Frame *				frame
 				);
 
 #if __TEST__
@@ -60,7 +60,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	static void	RunTest			(void);
+	static void	RunTest					(void);
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -73,14 +73,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int			x				(void)	const;
+	int			x						(void)	const;
 	/**
 	 * The y co-ordinate of the blob at the recorded time
 	 * @return Get the y co-ordinate of the blob
 	 * @author EB
 	 * @version 1.0
 	 */
-	int			y				(void)	const;
+	int			y						(void)	const;
 	/**
 	 * Test if the Frame following this one is disjoint.
 	 * This will be true if there is a gap in the recording that couldn't be
@@ -91,7 +91,7 @@ public:
 	 * @post gap() == true ==> (u() == 0 && v() == 0)
 	 * @post next() == 0 ==> gap() == false
 	 */
-	bool		gap				(void)	const;
+	bool		gap						(void)	const;
 	/**
 	 * The x vector amount from the blob at the recorded time to the
 	 *	blob at the following time. This will be 0 if there is no next
@@ -102,7 +102,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int			u				(void)	const;
+	int			u						(void)	const;
 	/**
 	 * The y vector amount from the blob at the recorded time to the
 	 *	blob at the following time. This will be 0 if there is no next
@@ -113,14 +113,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int			v				(void)	const;
+	int			v						(void)	const;
 	/**
 	 * The size of the IR blob
 	 * @return Get the size of the IR blob
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint		size			(void)	const;
+	uint		size					(void)	const;
 	/**
 	 * The time this Frame was created counted in milliseconds from the
 	 *	beginning of the program
@@ -128,14 +128,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	tick		time			(void)	const;
+	tick		time					(void)	const;
 	/**
 	 * The next frame on the track. This will be 0 if there are no more frames
 	 * @return Get the next frame on the track
 	 * @author EB
 	 * @version 1.0
 	 */
-	Frame *		next			(void)	const;
+	Frame *		next					(void)	const;
 	/**
 	 * The last frame in the list
 	 * @return The last frame
@@ -143,14 +143,14 @@ public:
 	 * @version 1.0
 	 * @post this != 0 ==> \result->next() == 0;
 	 */
-	Frame *		last			(void)	const;
+	Frame *		last					(void)	const;
 	/**
 	 * Calculate the number of frames in this track
 	 * @return the number of frames in this track
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint		length			(void)	const;
+	uint		length					(void)	const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // private queries
@@ -163,7 +163,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	tick		timeGap			(void)	const;
+	tick		timeGap					(void)	const;
 ///////////////////////////////////////////////////////////////////////////////
 // private commands
 //
@@ -179,7 +179,7 @@ private:
 	 * @version 1.0
 	 */
 	Frame *		operator +=
-				(	Frame *		frame
+				(	Frame *				frame
 				);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -198,17 +198,25 @@ private:
 	 * @version 1.0
 	 */
 				Frame
-				(	int const	x,
-					int const	y,
-					int const	size,
-					uint const	time
+				(	int const			x,
+					int const			y,
+					int const			size,
+					uint const			time
+				);
+	/**
+	 * Copy constructor
+	 * Will copy and attach all linked frames too
+	 * @param frame The frame (and by extension, linked frames) to copy
+	 */
+				Frame
+				(	Frame const * const	frame
 				);
 	/**
 	 * Delete all following frames along with this one
 	 * @author EB
 	 * @version 1.0
 	 */
-				~Frame			(void);
+				~Frame					(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // private commands
@@ -223,7 +231,7 @@ private:
 	 * @version 1.0
 	 */
 	Frame *		erase
-				(	uint const	frameIndex	= ~0ul
+				(	uint const			frameIndex	= ~0ul
 				);
 
 ///////////////////////////////////////////////////////////////////////////////

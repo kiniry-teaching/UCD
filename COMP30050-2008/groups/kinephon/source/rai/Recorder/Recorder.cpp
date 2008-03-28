@@ -10,11 +10,11 @@ namespace interpreter
 // eject
 //
 Recording * Recorder::eject(void) const
-{	//Recording * recording;
+{	Recording * recording;
 
-//	recording = new Recording(_tracks);
+	recording = new Recording(_tracks);
 
-	return 0;//recording;
+	return recording;
 
 }
 
