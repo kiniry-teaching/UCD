@@ -5,9 +5,9 @@ float4x4 xWorld;
 float4x4 xWorldViewProjection;
 float3 xLightPosition;
 float xLightPower;
-float xAmbient;
+float4 xAmbient;
 bool xEnableLighting;
-
+bool xEnabledTextures;
 
 //------- Texture Samplers --------
 
@@ -38,6 +38,7 @@ struct MultiTexturedVertexToPixel
     float4 TextureWeights   : TEXCOORD1;
     float3 Position3D       : TEXCOORD2;
     float3 Normal           : TEXCOORD3;
+    float  Depth            : TEXCOORD4;
 };
 
 struct MultiTexturedPixelToFrame
@@ -51,12 +52,13 @@ MultiTexturedVertexToPixel MultiTexturedVS( float4 inPos : POSITION, float3 inNo
 {
     MultiTexturedVertexToPixel Output = (MultiTexturedVertexToPixel)0;
     
-    Output.Position = mul(inPos, xWorldViewProjection);
-    Output.TextureCoords = inTexCoords;
+    Output.Position       = mul(inPos, xWorldViewProjection);
+    Output.TextureCoords  = inTexCoords;
     Output.TextureWeights = inTexWeights;
-    Output.Position3D = mul(inPos, xWorld);
-    Output.Normal = mul(normalize(inNormal), xWorld);
-     
+    Output.Position3D     = mul(inPos, xWorld);
+    Output.Normal         = mul(normalize(inNormal), xWorld);
+	Output.Depth          = Output.Position.z;
+	 
     return Output;    
 }
 
@@ -64,23 +66,33 @@ MultiTexturedVertexToPixel MultiTexturedVS( float4 inPos : POSITION, float3 inNo
 MultiTexturedPixelToFrame MultiTexturedPS(MultiTexturedVertexToPixel PSIn)
 {
     MultiTexturedPixelToFrame Output = (MultiTexturedPixelToFrame)0;
-    
 
-/*
-    float lightingFactor = 1;
-    if (xEnableLighting)
-        lightingFactor = saturate(saturate(dot(PSIn.Normal, PSIn.LightDirection)) + xAmbient);
-*/
+	float textureDetailBlendThreshold   = 60;
+	float textureDetailBlendDistance       = 60;
+	float textureDetailBlendFactor = clamp((PSIn.Depth - textureDetailBlendThreshold) / textureDetailBlendDistance, 0, 1);
 
-	float DiffuseLightingFactor = DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
+	float4 lessDetailedColor;
+	float4 moreDetailedColor;
+	
+	lessDetailedColor  = tex2D(WaterTextureSampler, PSIn.TextureCoords) * PSIn.TextureWeights.x;
+	lessDetailedColor += tex2D( SandTextureSampler, PSIn.TextureCoords) * PSIn.TextureWeights.y;
+	lessDetailedColor += tex2D(StoneTextureSampler, PSIn.TextureCoords) * PSIn.TextureWeights.z;
+	lessDetailedColor += tex2D(ErrorTextureSampler, PSIn.TextureCoords) * PSIn.TextureWeights.w;
 
-	Output.Color = tex2D(WaterTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.x;
-	Output.Color += tex2D(SandTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.y;
-	Output.Color += tex2D(StoneTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.z;
-	Output.Color += tex2D(ErrorTextureSampler,PSIn.TextureCoords)*PSIn.TextureWeights.w;
+	float4 foo = PSIn.TextureCoords*5;
+	moreDetailedColor  = tex2D(WaterTextureSampler, foo) * PSIn.TextureWeights.x;
+	moreDetailedColor += tex2D( SandTextureSampler, foo) * PSIn.TextureWeights.y;
+	moreDetailedColor += tex2D(StoneTextureSampler, foo) * PSIn.TextureWeights.z;
+	moreDetailedColor += tex2D(ErrorTextureSampler, foo) * PSIn.TextureWeights.w;
+
+
+	Output.Color = (lessDetailedColor * textureDetailBlendFactor) + (moreDetailedColor * (1 - textureDetailBlendFactor));
 
 	if (xEnableLighting)
+	{
+		float DiffuseLightingFactor = DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
 	    Output.Color = Output.Color * DiffuseLightingFactor * xLightPower + xAmbient;
+	}
 
     return Output;
 }

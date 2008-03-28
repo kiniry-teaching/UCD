@@ -70,12 +70,12 @@ namespace Drought.World
             width  = heightMap.getMapWidth();
             height = heightMap.getMapHeight();
 
-            textureZoom = 40.0f;
+            textureZoom = 80.0f;
 
             setUpVertices();
             setUpIndices();
             setUpNormals();
-            finaliseBuffers();
+            //finaliseBuffers();
         }
 
         public void loadContent()
@@ -170,6 +170,7 @@ namespace Drought.World
 
             effect.Parameters["xWorld"].SetValue(worldMatrix);
             effect.Parameters["xWorldViewProjection"].SetValue(worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
+
             //HLSL testing
             //HardCoded Light params need to be replaced with the values from the Sun.
             effect.Parameters["xEnableLighting"].SetValue(true);
@@ -182,10 +183,11 @@ namespace Drought.World
             {
                 pass.Begin();
 
-                device.Vertices[0].SetSource(vb, 0, VertexMultiTextured.SizeInBytes);
-                device.Indices = ib;
+                //device.Vertices[0].SetSource(vb, 0, VertexMultiTextured.SizeInBytes);
+                //device.Indices = ib;
                 device.VertexDeclaration = new VertexDeclaration(device, VertexMultiTextured.VertexElements);
-                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, height * width, 0, (width - 1) * (height - 1) * 2);
+                //device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, height * width, 0, (width - 1) * (height - 1) * 2);
+                device.DrawUserIndexedPrimitives<VertexMultiTextured>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, (width - 1) * (height - 1) * 2);
 
                 pass.End();
             }
