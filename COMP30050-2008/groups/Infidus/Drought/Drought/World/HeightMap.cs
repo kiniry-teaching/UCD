@@ -30,7 +30,8 @@ namespace Drought.World
         public void initalise()
         {
             string fileName;
-            switch (level) {
+            switch (level)
+            {
                 case Level.Valley: fileName = "level_0"; break;
                 case Level.Rugged: fileName = "level_1"; break;
                 case Level.RuggedSplitTextures: fileName = "level_2"; break;
@@ -38,7 +39,8 @@ namespace Drought.World
                 case Level.WaterTest: fileName = "water"; break;
                 default: fileName = "level_1"; break;
             }
-            FileStream fs = new FileStream("Content/HeightMaps/"+fileName+".bmp", FileMode.Open, FileAccess.Read);
+
+            FileStream fs = new FileStream("Content/HeightMaps/" + fileName + ".bmp", FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
 
             r.BaseStream.Seek(10, SeekOrigin.Current);
@@ -64,6 +66,16 @@ namespace Drought.World
                 }
             }
             r.Close();
+
+            for (int x = 1; x < width - 2; x++)
+            {
+                for (int y = 1; y < height - 2; y++)
+                {
+                    map[x, y] = (map[x - 1, y - 1] + map[x - 1, y] + map[x - 1, y + 1] +
+                                map[x, y - 1] + map[x, y] + map[x, y + 1] +
+                                map[x + 1, y - 1] + map[x + 1, y] + map[x + 1, y + 1]) / 9;
+                }
+            }
         }
 
         private float distanceFromALine(float pX, float pY, float lX0, float lY0, float lX1, float lY1)
