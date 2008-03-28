@@ -16,7 +16,6 @@ void Recorder::RunTest(void)
 
 	bool except = true;
 
-	resetMemoryReport();
 	{
 
 	// Test initial state

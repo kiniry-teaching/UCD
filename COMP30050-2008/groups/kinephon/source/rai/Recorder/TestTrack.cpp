@@ -13,7 +13,7 @@ void Track::RunTest(void)
 
 	cout << "Running Track tests.. ";
 
-	resetMemoryReport();
+	{
 
 	stage++; Track * track = new Track(5);
 	Track * trackCopy;
@@ -94,6 +94,7 @@ void Track::RunTest(void)
 
 	cout << "Done" << endl;
 
+	}
 	dumpMemoryReport();
 
 }

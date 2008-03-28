@@ -13,7 +13,7 @@ void Frame::RunTest(void)
 
 	cout << "Running Frame tests.. ";
 
-	resetMemoryReport();
+	{
 
 	stage++; Frame * frameA = new Frame(1, 2, 3, 4);
 	stage++; Frame * frameB = new Frame(5, 6, 7, 8);
@@ -143,6 +143,7 @@ void Frame::RunTest(void)
 
 	cout << "Done" << endl;
 
+	}
 	dumpMemoryReport();
 
 }
