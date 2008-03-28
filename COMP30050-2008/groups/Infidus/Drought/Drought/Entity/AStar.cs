@@ -51,9 +51,12 @@ namespace Drought.Entity
         {
             List<Node> open = new List<Node>();
             List<Node> closed = new List<Node>();
-            Node goal = new Node();
-            Node start = new Node();
-            open.Add(start);
+            Node goal = nodeMap[(int)endX, (int)endY];
+            Node start = nodeMap[(int)startX, (int)startY];
+
+            if(goal != null && start != null)
+                open.Add(start);
+            //else a path can't be found so skip to the end and return default path.
 
             while (open.Count > 0)
             {
@@ -61,7 +64,7 @@ namespace Drought.Entity
                 Node n = open[0];
                 closed.Add(n);
 
-                if (n.Equals(goal)) //TODO do data equals //found a path
+                if (n.getPosition().Equals(goal.getPosition())) //TODO do data equals //found a path
                 {
                     Node curr = n;
                     Node parent = n.getParent();
