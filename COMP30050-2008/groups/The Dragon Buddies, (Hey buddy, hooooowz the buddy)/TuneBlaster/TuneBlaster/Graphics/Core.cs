@@ -70,8 +70,8 @@ namespace TuneBlaster_.Graphics
          * Update variables for each frame
          */
         public void Update(GameTime gameTime, KeyboardState keyBoardState, GamePadState gamePadState)
-        {   
-            for (int i = 0; i < balls.Count; i++)
+        {
+            for (int i = ballsSize - 1; i >= 0; i--)
             {
                 if (balls[i] != null)
                 {
@@ -178,7 +178,7 @@ namespace TuneBlaster_.Graphics
                 {
                     if (balls[i].numInContact > 4)
                     {
-                        balls[i].Destroy();
+                       balls[i].Destroy();
 
                        where.X = balls[i].Position.X;
                        where.Y = balls[i].Position.Y;
