@@ -28,10 +28,10 @@ namespace Drought.Entity
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                 {
-                    Vector3 p0 = new Vector3(x, y, heightMap.getHeight(x, y));
-                    Vector3 p1 = new Vector3(x + 1, y, heightMap.getHeight(x + 1, y));
-                    Vector3 p2 = new Vector3(x, y + 1, heightMap.getHeight(x, y + 1));
-                    Vector3 p3 = new Vector3(x + 1, y + 1, heightMap.getHeight(x + 1, y + 1));
+                    Vector3 p0 = heightMap.getPositionAt(x, y);
+                    Vector3 p1 = heightMap.getPositionAt(x + 1, y);
+                    Vector3 p2 = heightMap.getPositionAt(x, y + 1);
+                    Vector3 p3 = heightMap.getPositionAt(x + 1, y + 1);
 
                     Vector3 v0 = p2 - p0;
                     Vector3 v1 = p3 - p2;

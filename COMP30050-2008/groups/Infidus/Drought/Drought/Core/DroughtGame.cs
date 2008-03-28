@@ -77,7 +77,7 @@ namespace Drought
             input.bind(GameKeys.UNIT_DELETE, MouseButtons.RIGHT, ModifierKeys.SHIFT);
             
             input.bind(GameKeys.RESET, Keys.R, ModifierKeys.CTRL);
-            input.bind(GameKeys.ADD_WATER, Keys.W, ModifierKeys.NONE);
+            input.bind(GameKeys.ADD_WATER, Keys.W, ModifierKeys.CTRL);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
@@ -103,6 +103,8 @@ namespace Drought
          */
         protected override void Update(GameTime gameTime)
         {
+            //Console.WriteLine("Update Called");
+
             DeviceInput.getInput().poll();
 
             gameManager.update(gameTime);
@@ -111,8 +113,6 @@ namespace Drought
             networkManager.update();
 
             base.Update(gameTime);
-
-            Console.WriteLine("Update Called");
         }
 
         /**
@@ -120,13 +120,13 @@ namespace Drought
          */
         protected override void Draw(GameTime gameTime)
         {
+            //Console.WriteLine("Render Called");
+
             graphics.GraphicsDevice.Clear(Color.Black);
             
             gameManager.render(graphics.GraphicsDevice, spriteBatch);
 
             base.Draw(gameTime);
-
-            Console.WriteLine("Render Called");
         }
 
         public GraphicsDevice getGraphics()

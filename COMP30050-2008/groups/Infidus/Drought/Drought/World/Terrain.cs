@@ -96,7 +96,7 @@ namespace Drought.World
             {
                 for (int y = 0; y < height; y++)
                 {
-                    vertices[x + y * width].Position = new Vector3(x, y, heightMap.getHeight(x, y));
+                    vertices[x + y * width].Position = heightMap.getPositionAt(x, y);
                     vertices[x + y * width].Normal = new Vector3(0, 0, 0);
                     vertices[x + y * width].TextureCoordinate.X = (float)x / textureZoom;
                     vertices[x + y * width].TextureCoordinate.Y = (float)y / textureZoom;
@@ -220,9 +220,9 @@ namespace Drought.World
                         end = mid;
                     }
                 }
-                return new Vector3(mid.X, mid.Y, heightMap.getHeight(mid.X, mid.Y));
+                return heightMap.getPositionAt(mid.X, mid.Y);
             }
-            return new Vector3(500, 100, heightMap.getHeight(500, 100));
+            return heightMap.getPositionAt(float.PositiveInfinity, float.PositiveInfinity);
         }
 
         /**

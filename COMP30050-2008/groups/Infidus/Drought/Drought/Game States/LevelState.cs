@@ -67,7 +67,7 @@ namespace Drought.GameStates
 
             modelLoader = new ModelLoader(getContentManager(), game.getGraphics());
 
-            lineTool = new LineTool(getGraphics()); 
+            lineTool = new LineTool(getGraphics());
             
             loadContent();
 
@@ -87,35 +87,35 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw + i, hh, heightMap.getHeight(hw + i, hh)));
+                nodes.Add(heightMap.getPositionAt(hw + i, hh));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw - i, hh, heightMap.getHeight(hw - i, hh)));
+                nodes.Add(heightMap.getPositionAt(hw - i, hh));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw, hh + i, heightMap.getHeight(hw, hh + i)));
+                nodes.Add(heightMap.getPositionAt(hw, hh + i));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw, hh - i, heightMap.getHeight(hw, hh - i)));
+                nodes.Add(heightMap.getPositionAt(hw, hh - i));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw + i, hh + i, heightMap.getHeight(hw + i, hh + i)));
+                nodes.Add(heightMap.getPositionAt(hw + i, hh + i));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw - i, hh - i, heightMap.getHeight(hw - i, hh - i)));
+                nodes.Add(heightMap.getPositionAt(hw - i, hh - i));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw + i, hh - i, heightMap.getHeight(hw + i, hh - i)));
+                nodes.Add(heightMap.getPositionAt(hw + i, hh - i));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
-                nodes.Add(new Vector3(hw - i, hh + i, heightMap.getHeight(hw - i, hh + i)));
+                nodes.Add(heightMap.getPositionAt(hw - i, hh + i));
             entities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
         }
 
@@ -191,9 +191,6 @@ namespace Drought.GameStates
 
         private void updateUnits()
         {
-            for (int i = 0; i < entities.Count; i++)
-                entities[i].update();
-
             /* Selecting Units */
             if (!selectCurrent && input.isKeyPressed(GameKeys.UNIT_SELECT)) {
                 selectCurrent = true;
@@ -208,15 +205,15 @@ namespace Drought.GameStates
                 currClickY = input.getMouseY();
                 // select a single unit
                 if ((startClickX == currClickX && startClickY == currClickY) || selectTimer < 6) {
-                    Console.WriteLine("Single Select");
+                    //Console.WriteLine("Single Select");
                     Vector3 mousePoint = terrain.projectToTerrain(startClickX, startClickY);
-                    float minDist = 5.0f;
+                    float minDist = 2.5f;
                     MovableEntity selected = null;
                     foreach (MovableEntity entity in entities) {
                         entity.setSelected(false);
                         Vector3 dist = mousePoint - entity.getPosition();
-                        if (dist.LengthSquared() < minDist) {
-                            minDist = dist.LengthSquared();
+                        if (dist.Length() < minDist) {
+                            minDist = dist.Length();
                             selected = entity;
                         }
                     }
@@ -224,7 +221,7 @@ namespace Drought.GameStates
                 }
                 //select a group of units
                 else {
-                    Console.WriteLine("Multi Select");
+                    //Console.WriteLine("Multi Select");
                     int topX = Math.Min(startClickX, currClickX);
                     int topY = Math.Min(startClickY, currClickY);
                     int bottomX = Math.Max(startClickX, currClickX);
@@ -260,29 +257,13 @@ namespace Drought.GameStates
 
             /* Commanding Units */
             if (!commandCurrent && input.isKeyPressed(GameKeys.UNIT_COMMAND)) {
-                Console.WriteLine("Commanded Units");
+                //Console.WriteLine("Commanded Units");
                 commandCurrent = true;
                 foreach (MovableEntity entity in entities) {
                     if (entity.isSelected()) {
-                        List<Vector3> newPathList = new List<Vector3>();
-                        newPathList.Add(entity.getPath().getRemainingPath()[0]);
-                        Vector3 startPos = newPathList[0];
-                        Vector3 endPos = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
-                        Vector3 distLeft = endPos - startPos;
-                        Vector3 currPos = startPos;
-                        int steps = 0;
-                        while (distLeft.Length() > 1 && steps < 1000) {
-                            Vector3 pleh = new Vector3(distLeft.X, distLeft.Y, distLeft.Z);
-                            currPos = currPos + Vector3.Normalize(pleh);
-                            currPos.Z = heightMap.getHeight(currPos.X, currPos.Y);
-                            newPathList.Add(currPos);
-                            distLeft = endPos - currPos;
-                            steps++;
-                        }
-                        newPathList.Add(endPos);
-
-                        Path newPath = new Path(newPathList, normalMap);
-                        entity.setPath(newPath);
+                        Vector3 clickPoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
+                        entity.setDestination(clickPoint);
+                        entity.computeNewPath(heightMap, normalMap);
                     }
                 }
             }
@@ -319,6 +300,37 @@ namespace Drought.GameStates
                     }
                 }
                 if (deleted != null) entities.Remove(deleted);
+            }
+
+            for (int i = 0; i < entities.Count; i++)
+                entities[i].update();
+
+            for (int i = 0; i < entities.Count; i++) {
+                MovableEntity a = entities[i];
+                for (int j = i+1; j < entities.Count; j++) {
+                    MovableEntity b = entities[j];
+                    if (MovableEntity.checkStaticCollision(a, b)) {
+                        float xDiff = a.getPosition().X - b.getPosition().X;
+                        float yDiff = a.getPosition().Y - b.getPosition().Y;
+                        Vector3 diff = new Vector3(xDiff, yDiff, 0);
+                        Vector3 dist = diff;
+                        diff.Normalize();
+                        diff *= a.radius + b.radius;
+                        Vector3 displacement = diff - dist;
+                        Vector3 aNewPos = a.getPosition() + displacement / 2;
+                        aNewPos.Z = heightMap.getHeight(aNewPos.X, aNewPos.Y);
+                        a.setPosition(aNewPos);
+                        Vector3 bNewPos = b.getPosition() - displacement / 2;
+                        bNewPos.Z = heightMap.getHeight(bNewPos.X, bNewPos.Y);
+                        b.setPosition(bNewPos);
+                        List<Vector3> aPos = new List<Vector3>();
+                        aPos.Add(a.getPosition());
+                        a.setPath(new Path(aPos, normalMap));
+                        List<Vector3> bPos = new List<Vector3>();
+                        bPos.Add(b.getPosition());
+                        b.setPath(new Path(bPos, normalMap));
+                    }
+                }
             }
         }
 

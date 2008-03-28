@@ -147,6 +147,10 @@ namespace Drought.World
             map[(int)x, (int)y] = height;
         }
 
+        public Vector3 getPositionAt(float x, float y) {
+            return new Vector3(x, y, getHeight(x, y));
+        }
+
         public HeightMap clone()
         {
             HeightMap heightMap = new HeightMap(width, height);

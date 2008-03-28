@@ -18,6 +18,8 @@ namespace Drought.Entity
 
         private Vector3 heading;
 
+        private Vector3 destination;
+
         private Vector3 normal;
 
         private Vector3 prevNormal;
@@ -36,11 +38,14 @@ namespace Drought.Entity
 
         private LineTool pathTool, ringTool;
 
+        public readonly float radius;
+
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
         public MovableEntity(DroughtGame game, Model model, Texture2D[] modelTextures, Path path, int uid)
         {
+            radius = 2.5f;
             uniqueID = uid;
             this.path = path;
             position = path.getPosition();
@@ -88,6 +93,11 @@ namespace Drought.Entity
             orientation.Forward = Vector3.Normalize(orientation.Forward);
         }
 
+        public void setDestination(Vector3 newDestination)
+        {
+            destination = newDestination;
+        }
+
         public void setPath(Path path)
         {
             this.path = path;
@@ -98,6 +108,29 @@ namespace Drought.Entity
             return path;
         }
 
+        public void computeNewPath(HeightMap heightMap, NormalMap normalMap)
+        {
+            List<Vector3> newPathList = new List<Vector3>();
+            newPathList.Add(position);
+            Vector3 startPos = position;
+            Vector3 endPos = destination;
+            Vector3 distLeft = endPos - startPos;
+            Vector3 currPos = startPos;
+            int steps = 0;
+            while (distLeft.Length() > 1 && steps < 1000) {
+                Vector3 distCopy = new Vector3(distLeft.X, distLeft.Y, distLeft.Z);
+                currPos = currPos + Vector3.Normalize(distCopy);
+                currPos.Z = heightMap.getHeight(currPos.X, currPos.Y);
+                newPathList.Add(currPos);
+                distLeft = endPos - currPos;
+                steps++;
+            }
+            newPathList.Add(endPos);
+
+            Path newPath = new Path(newPathList, normalMap);
+            setPath(newPath);
+        }
+
         public void update()
         {
             move();
@@ -106,7 +139,7 @@ namespace Drought.Entity
                 List<Vector3> pointsList = new List<Vector3>();
                 float step = MathHelper.Pi/16;
                 for (float i = 0; i <= 32; i++) {
-                    Vector3 pointy = new Vector3(position.X + (float)Math.Cos(i*step) * 2.5f, position.Y + (float)Math.Sin(i*step) * 2.5f, position.Z);
+                    Vector3 pointy = new Vector3(position.X + (float)Math.Cos(i*step) * radius, position.Y + (float)Math.Sin(i*step) * radius, position.Z);
                     pointsList.Add(pointy);
                 }
                 ringTool.setPointsList(pointsList);
@@ -180,6 +213,15 @@ namespace Drought.Entity
         public bool isSelected()
         {
             return selected;
+        }
+
+        /* Given 2 MovableEntities, check whether they overlap. */
+        public static bool checkStaticCollision(MovableEntity a, MovableEntity b)
+        {
+            float xDiff = a.position.X - b.position.X;
+            float yDiff = a.position.Y - b.position.Y;
+            double dist = Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
+            return (dist < a.radius + b.radius);
         }
     }
 }
