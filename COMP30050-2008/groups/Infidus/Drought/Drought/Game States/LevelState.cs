@@ -194,6 +194,9 @@ namespace Drought.GameStates
 
             if (input.isKeyPressed(GameKeys.RESET))
                 getStateManager().popState();
+
+            if (input.isKeyPressed(GameKeys.UNIT_SELECT_ALL))
+                selectAllUnits();
         }
 
         private void updateUnits()
@@ -340,6 +343,28 @@ namespace Drought.GameStates
                 }
             }
         }
+
+        public void selectAllUnits()
+        {
+            int topX = 0;
+            int topY = 0;
+            int bottomX = getGraphics().Viewport.Width;
+            int bottomY = getGraphics().Viewport.Height;
+            Rectangle bounds = new Rectangle(topX, topY, bottomX - topX, bottomY - topY);
+            foreach (MovableEntity entity in entities)
+            {
+                entity.setSelected(false);
+                Vector3 entityPos = terrain.projectToScreen(entity.getPosition());
+                if (entityPos.Z < 1)
+                {
+                    if (bounds.Contains(new Point((int)entityPos.X, (int)entityPos.Y)))
+                    {
+                        entity.setSelected(true);
+                    }
+                }
+            }
+        }
+        
 
         public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
         {

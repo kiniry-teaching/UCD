@@ -202,6 +202,9 @@ namespace Drought.GameStates
                 networkManager.disconnect();
                 getStateManager().popState();
             }
+
+            if (input.isKeyPressed(GameKeys.UNIT_SELECT_ALL))
+                selectAllUnits();
         }
 
         private void updateUnits()
@@ -333,6 +336,27 @@ namespace Drought.GameStates
                         Vector3 displacement = diffRad - diff;
                         a.setPosition(a.getPosition() + displacement/2);
                         b.setPosition(a.getPosition() - displacement/2);
+                    }
+                }
+            }
+        }
+
+        public void selectAllUnits()
+        {
+            int topX = 0;
+            int topY = 0;
+            int bottomX = getGraphics().Viewport.Width;
+            int bottomY = getGraphics().Viewport.Height;
+            Rectangle bounds = new Rectangle(topX, topY, bottomX - topX, bottomY - topY);
+            foreach (MovableEntity entity in localEntities)
+            {
+                entity.setSelected(false);
+                Vector3 entityPos = terrain.projectToScreen(entity.getPosition());
+                if (entityPos.Z < 1)
+                {
+                    if (bounds.Contains(new Point((int)entityPos.X, (int)entityPos.Y)))
+                    {
+                        entity.setSelected(true);
                     }
                 }
             }
