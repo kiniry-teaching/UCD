@@ -61,7 +61,8 @@ namespace Drought.Entity
             while (open.Count > 0)
             {
                 //get node with lowest f value from open list
-                Node n = open[0];
+                Node n = open[open.Count - 1];
+                open.RemoveAt(open.Count - 1);
                 closed.Add(n);
 
                 if (n.getPosition().Equals(goal.getPosition())) //TODO do data equals //found a path
@@ -89,13 +90,28 @@ namespace Drought.Entity
                     Node s = successors[i];
 
                     //s.h is estimate distance to goal
+                    s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
                     //s.g is n.g + cost from n to s
-                    //s.f is s.g + s.h
+                    s.gVal = n.gVal + s.getDistanceToParent();
 
-                    //if s is on the OPEN list and the existing one is as good or better then discard s and continue
-                    //if s is on the CLOSED list and the existing one is as good or better then discard s and continue
-                    //Remove occurrences of s from OPEN and CLOSED
-                    //Add s to the OPEN list
+
+                    //If it isn’t on the open list, add it to the open list.
+                    Node oldNode = contains(open, s);
+                    if (oldNode != null)
+                        orderedAdd(open, s);
+                    else
+                    {
+                        //If it is on the open list already, check to see if this path to that square is better,
+                        //using G cost as the measure. A lower G cost means that this is a better path.
+                        //If so, change the parent of the square to the current square, and recalculate the G and F scores of the square.
+                        //If you are keeping your open list sorted by F score, you may need to resort the list to account for the change.
+                        if (s.gVal < oldNode.gVal)
+                        {
+                            oldNode.setParent(n);
+                            oldNode.gVal = s.gVal;
+                        }
+                    }
+
                 }
             }
 
@@ -146,7 +162,22 @@ namespace Drought.Entity
 
             return successors;
         }
+
+        private Node contains(List<Node> list, Node node)
+        {
+            for (int i = 0, n = list.Count; i < n; i++)
+                if (list[i].getPosition() == node.getPosition())
+                    return list[i];
+            return null;
+        }
+
+        private void orderedAdd(List<Node> list, Node node)
+        {
+            //TODO
+            //keep open list sorted by f value ranging from lowest to highest
+        }
     }
+
 
     class Node
     {
@@ -179,22 +210,21 @@ namespace Drought.Entity
             pos = new Vector2(x, y);
         }
 
-        public float h
+        public float hVal
         {
             set { h = value; }
             get { return h; }
         }
 
-        public float g
+        public float gVal
         {
             set { g = value; }
             get { return g; }
         }
 
-        public float f
+        public float getFVal()
         {
-            set { f = value; }
-            get { return f; }
+            return g + h;
         }
 
         /**
