@@ -36,9 +36,9 @@ namespace Drought.Sound
         /** Internal constructor; user classes should obtain a reference through SoundManager.getInstance() */
         private SoundManager()
         {
-            audioengine = new AudioEngine("../../../Content/Audio/Win.xgs");
-            soundBank = new SoundBank(audioengine, "../../../Content/Audio/Win Sound Bank.xsb");
-            waveBank = new WaveBank(audioengine, "../../../Content/Audio/Win Wave Bank.xwb");
+            audioengine = new AudioEngine("Content/Audio/Win.xgs");
+            soundBank = new SoundBank(audioengine, "Content/Audio/Win Sound Bank.xsb");
+            waveBank = new WaveBank(audioengine, "Content/Audio/Win Wave Bank.xwb");
             //playSound(SoundHandle.BGM);
             listener = new AudioListener();
             soundOn = true;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Drought.World;
 
 namespace Drought.Entity
 {
@@ -19,6 +20,8 @@ namespace Drought.Entity
             new Vector2(1, 1), }; //top right
 
         private NormalMap normalMap;
+
+        private HeightMap heightMap;
 
         private Node[,] nodeMap;
 
