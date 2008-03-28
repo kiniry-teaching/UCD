@@ -22,18 +22,16 @@ namespace Drought.World
             get { return enabled; }
             set { enabled = value; }
         }
-        
-        
 
         public Sun(Vector3 position)
         {
             this.position = position;
 
-            power   = 0;
+            power   = 1;
             step    = 100;
             oldTime = 0;
 
-            enabled = true;
+            enabled = false;
         }
 
         public Vector3 getPosition()
