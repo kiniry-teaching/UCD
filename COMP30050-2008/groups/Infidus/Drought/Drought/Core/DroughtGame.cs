@@ -79,6 +79,7 @@ namespace Drought
             
             input.bind(GameKeys.RESET, Keys.R, ModifierKeys.CTRL);
             input.bind(GameKeys.ADD_WATER, Keys.W, ModifierKeys.CTRL);
+            input.bind(GameKeys.PAUSE_SUN, Keys.P, ModifierKeys.CTRL);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 

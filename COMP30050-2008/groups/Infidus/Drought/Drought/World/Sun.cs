@@ -15,6 +15,16 @@ namespace Drought.World
         private int step;
         private double oldTime;
 
+        private bool enabled;
+
+        public bool isEnabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
+        
+        
+
         public Sun(Vector3 position)
         {
             this.position = position;
@@ -22,6 +32,8 @@ namespace Drought.World
             power   = 0;
             step    = 100;
             oldTime = 0;
+
+            enabled = true;
         }
 
         public Vector3 getPosition()
@@ -50,21 +62,22 @@ namespace Drought.World
          */
         public void update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldTime > step/2)
-            {
-                Vector3 normal = new Vector3(0, position.Z, -position.Y);
-                normal.Normalize();
-                position += normal;
+            if (enabled)
+                if (gameTime.TotalGameTime.TotalMilliseconds - oldTime > step / 2)
+                {
+                    Vector3 normal = new Vector3(0, position.Z, -position.Y);
+                    normal.Normalize();
+                    position += normal;
 
-                //Power scaling. Power is clamped to 0  below the vertical and 1 above 30 degrees to the vertical. 
-                //Power  is lerped between 0 and 30 degrees. 
-                float limit = position.Length() * (float)Math.Sin(MathHelper.Pi / 6);
-                power = MathHelper.Clamp(position.Z / limit, 0, 1);
+                    //Power scaling. Power is clamped to 0  below the vertical and 1 above 30 degrees to the vertical. 
+                    //Power  is lerped between 0 and 30 degrees. 
+                    float limit = position.Length() * (float)Math.Sin(MathHelper.Pi / 6);
+                    power = MathHelper.Clamp(position.Z / limit, 0, 1);
 
-                //Console.WriteLine("position: {2}\nangle: {0}\npower: {1}\n\n", MathHelper.ToDegrees((float)Math.Asin(position.Z / position.Length())), power, position);
+                    //Console.WriteLine("position: {2}\nangle: {0}\npower: {1}\n\n", MathHelper.ToDegrees((float)Math.Asin(position.Z / position.Length())), power, position);
 
-                oldTime = gameTime.TotalGameTime.TotalMilliseconds;
-            }
+                    oldTime = gameTime.TotalGameTime.TotalMilliseconds;
+                }
         }
     }
 }

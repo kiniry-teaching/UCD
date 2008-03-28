@@ -197,6 +197,9 @@ namespace Drought.GameStates
 
             if (input.isKeyPressed(GameKeys.UNIT_SELECT_ALL))
                 selectAllUnits();
+
+            if (input.isKeyPressed(GameKeys.PAUSE_SUN))
+                sun.isEnabled = !sun.isEnabled;
         }
 
         private void updateUnits()
