@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Drought.Graphics 
 {
-    public enum modelType : int { XYZ, Truck, Car, Skybox };
+    public enum modelType : int { XYZ, Truck, Car, Tank, Skybox };
 
     public class ModelLoader 
     {
@@ -60,6 +60,7 @@ namespace Drought.Graphics
                 case modelType.XYZ: modelString = "Models/xyz"; break;
                 case modelType.Truck: modelString = "Models/Truck/truck"; break;
                 case modelType.Car: modelString = "Models/Car/car"; break;
+                case modelType.Tank: modelString = "Models/Tank/tank"; break;
                 case modelType.Skybox: modelString = "Models/Skybox/skybox"; break;
             }
 

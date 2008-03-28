@@ -164,7 +164,7 @@ namespace Drought.Entity
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
-            Matrix worldMatrix = orientation * Matrix.CreateTranslation(position);
+            Matrix worldMatrix = Matrix.CreateScale(0.01f) * orientation * Matrix.CreateTranslation(position);
 
             int i = 0;
             foreach (ModelMesh mesh in model.Meshes) {
