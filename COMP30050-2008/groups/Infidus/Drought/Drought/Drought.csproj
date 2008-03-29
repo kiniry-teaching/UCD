@@ -16,7 +16,7 @@
     <ManifestCertificateThumbprint>05176E232125333313A632639319929AD149036F</ManifestCertificateThumbprint>
     <ManifestKeyFile>Drought_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>C:\Documents and Settings\rashid\Desktop\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -93,6 +93,7 @@
     <Compile Include="World\Camera.cs" />
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Input\DeviceInput.cs" />
+    <Compile Include="World\LevelInfo.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Sun.cs" />
     <Compile Include="World\Terrain.cs" />

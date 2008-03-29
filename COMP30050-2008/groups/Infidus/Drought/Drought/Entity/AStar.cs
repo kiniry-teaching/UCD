@@ -69,12 +69,13 @@ namespace Drought.Entity
                 open.RemoveAt(open.Count - 1);
                 closed.Add(n);
 
-                if (n.getPosition().Equals(goal.getPosition())) //found a path
+                if (n.getPosition() == goal.getPosition()) //found a path
                 {
                     Node curr = n;
                     Node parent = n.getParent();
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
+                    
                     pathNodes.Add(new Vector3(pos.X, pos.Y, heightMap.getHeight(pos.X, pos.Y)));
 
                     while (parent != null)
@@ -142,7 +143,7 @@ namespace Drought.Entity
 
         /**
          * Gets the node at the specified location. If the location is
-         * invalid then null is returned.
+         * invalid or the location is not traversable then null is returned.
          * 
          * @param x The x coordinate of the location.
          * @param y The y coordinate of the location.
@@ -170,7 +171,7 @@ namespace Drought.Entity
                 Vector2 pos = node.getPosition() + BORDER_NODES[i];
                 Node n = getNode((int)pos.X, (int)pos.Y);
 
-                if (n != null)
+                if (n != null && canMove(node, n))
                 {
                     Node s = new Node((int)pos.X, (int)pos.Y);
                     s.setParent(n);
@@ -181,6 +182,27 @@ namespace Drought.Entity
             return successors;
         }
 
+        /**
+         * Determines if it is possible to move between two adjacent nodes.
+         * 
+         * @param a The first node.
+         * @param b The second node.
+         * @return True if it is possible to move from a to b.
+         */
+        private bool canMove(Node a, Node b)
+        {
+            //TODO
+            return false;
+        }
+
+        /**
+         * Checks if a node is contained in a list. Equality is determined
+         * by the node's position.
+         * 
+         * @param list The list to check in.
+         * @param node The node to check for.
+         * @return The node if found of null if not found.
+         */
         private Node contains(List<Node> list, Node node)
         {
             for (int i = 0, n = list.Count; i < n; i++)
