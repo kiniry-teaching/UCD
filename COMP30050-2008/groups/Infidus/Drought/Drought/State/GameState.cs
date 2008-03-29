@@ -40,7 +40,7 @@ namespace Drought.State
             stateManager = manager;
             this.content = new ContentManager(game.Services);
             this.content.RootDirectory = "Content";
-            this.graphics = game.GraphicsDevice;
+            this.graphics = game.getGraphics();
             this.spriteBatch = game.getSpriteBatch();
         }
 

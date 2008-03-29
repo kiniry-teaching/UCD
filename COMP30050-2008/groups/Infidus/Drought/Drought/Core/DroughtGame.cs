@@ -17,11 +17,12 @@ namespace Drought
      */
     public class DroughtGame : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        GameManager gameManager;
-        SoundManager soundManager;
-        NetworkManager networkManager;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private GameManager gameManager;
+        private SoundManager soundManager;
+        private NetworkManager networkManager;
+        private bool fullscreening;
 
         /**
          * So we can turn it off for testing, since it takes so damn long to start up.
@@ -80,11 +81,12 @@ namespace Drought
             input.bind(GameKeys.RESET, Keys.R, ModifierKeys.CTRL);
             input.bind(GameKeys.ADD_WATER, Keys.W, ModifierKeys.CTRL);
             input.bind(GameKeys.PAUSE_SUN, Keys.P, ModifierKeys.CTRL);
+            input.bind(GameKeys.TOGGLE_FULLSCREEN, Keys.F, ModifierKeys.CTRL);
 
             MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             gameManager.pushState(menu);
-            gameManager.pushState(new SignInState(gameManager, this, true));
+            if (NETWORKED) gameManager.pushState(new SignInState(gameManager, this, true));
 
             base.Initialize();
         }
@@ -109,12 +111,33 @@ namespace Drought
 
             DeviceInput.getInput().poll();
 
+            checkFullscreen();
+
             gameManager.update(gameTime);
 
             soundManager.update();
             networkManager.update();
 
             base.Update(gameTime);
+        }
+
+        private void checkFullscreen() {
+            if (!fullscreening && DeviceInput.getInput().isKeyPressed(GameKeys.TOGGLE_FULLSCREEN)) {
+                if (graphics.IsFullScreen) {
+                    graphics.PreferredBackBufferWidth = 800;
+                    graphics.PreferredBackBufferHeight = 600;
+                    graphics.IsFullScreen = false;
+                }
+                else {
+                    graphics.PreferredBackBufferWidth = 1280;
+                    graphics.PreferredBackBufferHeight = 800;
+                    graphics.IsFullScreen = true;
+                }
+                graphics.ApplyChanges();
+            }
+            else if (fullscreening && !DeviceInput.getInput().isKeyPressed(GameKeys.TOGGLE_FULLSCREEN)) {
+                fullscreening = false;
+            }
         }
 
         /**

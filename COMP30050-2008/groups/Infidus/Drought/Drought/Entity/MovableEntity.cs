@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Graphics;
 using Drought.World;
+using Drought.State;
 
 namespace Drought.Entity
 {
@@ -43,7 +44,7 @@ namespace Drought.Entity
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(DroughtGame game, Model model, Texture2D[] modelTextures, Path path, int uid)
+        public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, int uid)
         {
             radius = 2.5f;
             uniqueID = uid;
@@ -58,8 +59,8 @@ namespace Drought.Entity
             this.model = model;
             this.modelTextures = modelTextures;
             selected = false;
-            pathTool = new LineTool(game.GraphicsDevice);
-            ringTool = new LineTool(game.GraphicsDevice);
+            pathTool = new LineTool(gameState.getGraphics());
+            ringTool = new LineTool(gameState.getGraphics());
             ringTool.setColor(new Vector3(1.0f, 0.0f, 0.0f));
         }
 
@@ -150,11 +151,8 @@ namespace Drought.Entity
         {
             pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
 
-            
             if (selected) {
-                graphics.RenderState.DepthBufferEnable = false;
                 ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
-                graphics.RenderState.DepthBufferEnable = true;
             }
 
             graphics.RenderState.DepthBufferEnable = true;

@@ -1,0 +1,29 @@
+
+------------------------------------
+List of things that need doing:
+(in rough order they should be done)
+------------------------------------
+
+
+Bugs:
+----------
+ - strips of triangles missing from the terrain(!)
+ - Projecting to surface is kind of borked
+, can miss hills
+ - Silly fullscreen behaviour, Render takes too long resulting in choppiness
+ - Sounds keep playing if you press Ctrl+R to exit the level
+ - Zooming "nuance"
+ - The map "Square" is insanely laggy on my laptop (Eugene), presumably from drawing the water texture over and over
+ - Switching to fullscreen doesn't change the size of the menu items
+ - Switching to fullscreen doesn't work in-game!
+ - new Entities added in one networked game don't show up in the other, deletes don't work either
+
+
+New Features:
+----------
+ - Health bars above units, unit health in general - EUGENE'S CURRENT GOAL
+ - Pathfinding - RASHID'S CURRENT GOAL
+ - Water pooling - EOIN'S CURRENT GOAL
+ - Lobby State
+ - Particle System
+ - Weather

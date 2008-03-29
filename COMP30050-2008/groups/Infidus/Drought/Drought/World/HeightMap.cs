@@ -97,12 +97,7 @@ namespace Drought.World
 
         public float getHeight(float x, float y)
         {
-            int x1 = (int)x;
-            int x2 = x1 + 1;
-            int y1 = (int)y;
-            int y2 = y1 + 1;
             bool outOfBounds = false;
-
 
             if (x >= width - 1)
             {
@@ -127,6 +122,11 @@ namespace Drought.World
             if (outOfBounds)
                 return map[(int)x, (int)y];
 
+
+            int x1 = (int)x;
+            int x2 = x1 + 1;
+            int y1 = (int)y;
+            int y2 = y1 + 1;
 
             if (x - x1 == 0.0f && y - y1 == 0.0f)
                 return map[(int)x, (int)y];

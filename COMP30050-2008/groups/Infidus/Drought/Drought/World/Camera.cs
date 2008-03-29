@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Drought.State;
 
 namespace Drought.World
 {
     public class Camera
     {
-        private Game game;
+        private GameState gameState;
         private HeightMap heightMap;
 
         private Vector3 eyeVector;
@@ -18,9 +19,9 @@ namespace Drought.World
         private float cameraStand = 10.0f;
         private float angleIncrement = 0.025f;
 
-        public Camera(Game game, HeightMap heightMap)
+        public Camera(GameState gameState, HeightMap heightMap)
         {
-            this.game = game;
+            this.gameState = gameState;
             this.heightMap = heightMap;
 
             initialize();
@@ -65,7 +66,7 @@ namespace Drought.World
 
         public Matrix getProjectionMatrix()
         {
-            return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, game.GraphicsDevice.Viewport.Width / game.GraphicsDevice.Viewport.Height, 1.0f, 50000.0f); ;
+            return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, gameState.getGraphics().Viewport.Width / gameState.getGraphics().Viewport.Height, 1.0f, 50000.0f); ;
         }
 
         public void forward()

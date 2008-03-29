@@ -55,12 +55,15 @@ namespace Drought.GameStates
 
         private ModelLoader modelLoader;
 
+        private SoundManager soundManager;
+
         private NetworkManager networkManager;
         private bool hosting;
 
         public NetLevelState(IStateManager manager, DroughtGame game, Level aLevel, bool isHost) :
             base(manager, game)
         {
+            soundManager = game.getSoundManager();
             networkManager = game.getNetworkManager();
             hosting = isHost;
 
@@ -70,17 +73,17 @@ namespace Drought.GameStates
             normalMap = new NormalMap(heightMap);
             waterMap = new WaterMap(heightMap, textureMap);
 
-            camera = new Camera(game, heightMap);
+            camera = new Camera(this, heightMap);
             
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap, camera);
 
-            sun = new Sun(new Vector3(0, -200, 0));
+            sun = new Sun(new Vector3(0, -200, 200));
 
-            game.getSoundManager().setListener(camera);
+            soundManager.setListener(camera);
 
             skybox = new Skybox(camera);
 
-            modelLoader = new ModelLoader(getContentManager(), game.getGraphics());
+            modelLoader = new ModelLoader(getContentManager(), getGraphics());
 
             lineTool = new LineTool(getGraphics());
 
@@ -89,7 +92,7 @@ namespace Drought.GameStates
             initializeEntities();
 
             foreach (MovableEntity entity in localEntities) {
-                game.getSoundManager().playSound(SoundHandle.Truck, entity);
+                soundManager.playSound(SoundHandle.Truck, entity);
             }
         }
 
@@ -101,34 +104,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            localEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            localEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            localEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             if (!hosting) uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            remoteEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            remoteEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            remoteEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), uid++));
         }
 
         public override void loadContent()
@@ -225,17 +228,19 @@ namespace Drought.GameStates
                 if ((startClickX == currClickX && startClickY == currClickY) || selectTimer < 6) {
                     //Console.WriteLine("Single Select");
                     Vector3 mousePoint = terrain.projectToTerrain(startClickX, startClickY);
-                    float minDist = 2.5f;
-                    MovableEntity selected = null;
-                    foreach (MovableEntity entity in localEntities) {
-                        entity.setSelected(false);
-                        Vector3 dist = mousePoint - entity.getPosition();
-                        if (dist.Length() < minDist) {
-                            minDist = dist.Length();
-                            selected = entity;
+                    if (mousePoint != Terrain.BAD_POSITION) {
+                        float minDist = 2.5f;
+                        MovableEntity selected = null;
+                        foreach (MovableEntity entity in localEntities) {
+                            entity.setSelected(false);
+                            Vector3 dist = mousePoint - entity.getPosition();
+                            if (dist.Length() < minDist) {
+                                minDist = dist.Length();
+                                selected = entity;
+                            }
                         }
+                        if (selected != null) selected.setSelected(true);
                     }
-                    if (selected != null) selected.setSelected(true);
                 }
                 //select a group of units
                 else {
@@ -277,11 +282,13 @@ namespace Drought.GameStates
             if (!commandCurrent && input.isKeyPressed(GameKeys.UNIT_COMMAND)) {
                 //Console.WriteLine("Commanded Units");
                 commandCurrent = true;
-                foreach (MovableEntity entity in localEntities) {
-                    if (entity.isSelected()) {
-                        Vector3 clickPoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
-                        entity.setDestination(clickPoint);
-                        entity.computeNewPath(heightMap, normalMap);
+                Vector3 mousePoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
+                if (mousePoint != Terrain.BAD_POSITION) {
+                    foreach (MovableEntity entity in localEntities) {
+                        if (entity.isSelected()) {
+                            entity.setDestination(mousePoint);
+                            entity.computeNewPath(heightMap, normalMap);
+                        }
                     }
                 }
             }
@@ -296,9 +303,13 @@ namespace Drought.GameStates
             else if (spawnCurrent && !input.isKeyPressed(GameKeys.UNIT_SPAWN)) {
                 spawnCurrent = false;
                 Vector3 mousePoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
-                List<Vector3> dummyPath = new List<Vector3>();
-                dummyPath.Add(mousePoint);
-                localEntities.Add(new MovableEntity(getGame(), modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(dummyPath, normalMap), 0));
+                if (mousePoint != Terrain.BAD_POSITION) {
+                    List<Vector3> dummyPath = new List<Vector3>();
+                    dummyPath.Add(mousePoint);
+                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(dummyPath, normalMap), 0);
+                    localEntities.Add(newEntity);
+                    soundManager.playSound(SoundHandle.Truck, newEntity);
+                }
             }
 
             /* Deleting Units */
@@ -308,16 +319,18 @@ namespace Drought.GameStates
             else if (deleteCurrent && !input.isKeyPressed(GameKeys.UNIT_DELETE)) {
                 deleteCurrent = false;
                 Vector3 mousePoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
-                float minDist = 5.0f;
-                MovableEntity deleted = null;
-                foreach (MovableEntity entity in localEntities) {
-                    Vector3 dist = mousePoint - entity.getPosition();
-                    if (dist.Length() < minDist) {
-                        minDist = dist.Length();
-                        deleted = entity;
+                if (mousePoint != Terrain.BAD_POSITION) {
+                    float minDist = 5.0f;
+                    MovableEntity deleted = null;
+                    foreach (MovableEntity entity in localEntities) {
+                        Vector3 dist = mousePoint - entity.getPosition();
+                        if (dist.Length() < minDist) {
+                            minDist = dist.Length();
+                            deleted = entity;
+                        }
                     }
+                    if (deleted != null) localEntities.Remove(deleted);
                 }
-                if (deleted != null) localEntities.Remove(deleted);
             }
 
             for (int i = 0; i < localEntities.Count; i++)
@@ -364,8 +377,6 @@ namespace Drought.GameStates
 
         public void updateNetwork()
         {
-            //TODO: Networking needs some updating, to take into account units being added/deleted
-
             foreach (MovableEntity entity in localEntities) {
                 networkManager.sendPos(entity);
             }

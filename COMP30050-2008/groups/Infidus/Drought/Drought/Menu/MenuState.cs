@@ -33,6 +33,7 @@ namespace Drought.Menu
 
         private int screenHeight;
 
+        private NetworkManager networkManager;
 
         public MenuState(IStateManager manager, DroughtGame game, int width, int height)
             : base(manager, game)
@@ -41,6 +42,7 @@ namespace Drought.Menu
             screenHeight = height;
             loadContent();
             initialise();
+            networkManager = game.getNetworkManager();
         }
 
         private void initialise()
@@ -182,12 +184,12 @@ namespace Drought.Menu
 
                 case MenuFunctions.HOSTLIST: makeHostList(); currMenu = hostMenu; hostMenu.activate(); break;
                 case MenuFunctions.HOSTLIST_BACK: currMenu = mainMenu; hostMenu.deactivate(); break;
-                case MenuFunctions.HOST: getGame().getNetworkManager().host(((LevelMenuItem)item).getLevel());
+                case MenuFunctions.HOST: networkManager.host(((LevelMenuItem)item).getLevel());
                     getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel(), true)); break;
                 
                 case MenuFunctions.JOINLIST: makeJoinList(); currMenu = joinMenu; joinMenu.activate(); break;
                 case MenuFunctions.JOINLIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;
-                case MenuFunctions.JOIN: getGame().getNetworkManager().connectToGame(((JoinLevelMenuItem)item).getGame());
+                case MenuFunctions.JOIN: networkManager.connectToGame(((JoinLevelMenuItem)item).getGame());
                     getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel(), false)); break;
                 
                 case MenuFunctions.QUIT: currMenu = quitMenu; quitMenu.activate(); break;
@@ -256,7 +258,7 @@ namespace Drought.Menu
         /** Populates the list of joinable games. */
         private void makeJoinList()
         {
-            List<RemoteGame> remoteGames = getGame().getNetworkManager().getLocalGames();
+            List<RemoteGame> remoteGames = networkManager.getLocalGames();
             joinMenu = new Menu(this);
             float scale = 0.35f * (screenHeight / 600.0f);
             float gameX = 500.0f * (screenWidth / 800.0f);

@@ -26,6 +26,9 @@ namespace Drought.World
               };
         }
 
+        /* Nonsense value indicating that there is no corresponding position on the heightmap. */
+        public static readonly Vector3 BAD_POSITION = new Vector3(float.PositiveInfinity);
+
         GraphicsDevice device;
         Effect effect;
         ContentManager content;
@@ -212,7 +215,6 @@ namespace Drought.World
                 Vector3 start = camera.getPosition();
                 Vector3 end = zeroWorldPoint;
                 Vector3 mid = (start + end) / 2;
-                //TODO: binary search may not be the best way to go here, sometimes misses things
                 while ((end - start).Length() > 1) {
                     mid = (start + end) / 2;
                     if (heightMap.getHeight(mid.X, mid.Y) < mid.Z) {
@@ -224,7 +226,7 @@ namespace Drought.World
                 }
                 return heightMap.getPositionAt(mid.X, mid.Y);
             }
-            return heightMap.getPositionAt(float.PositiveInfinity, float.PositiveInfinity);
+            return BAD_POSITION;
         }
 
         /**
