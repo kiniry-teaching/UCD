@@ -39,7 +39,7 @@ namespace Drought.World
 
         public void update(GameTime gameTime)
         {
-            //Console.WriteLine(eyeVector);
+            ////Console.WriteLine(eyeVector);
 
             if (eyeVector.Z < heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand)
                 eyeVector.Z = heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand;
@@ -77,6 +77,9 @@ namespace Drought.World
 
             eyeVector.X += forward.X * 0.5f;
             eyeVector.Y += forward.Y * 0.5f;
+
+            focusVector.X += forward.X * 0.5f;
+            focusVector.Y += forward.Y * 0.5f;
         }
 
         public void back()
@@ -87,6 +90,9 @@ namespace Drought.World
             
             eyeVector.X -= forward.X * 0.5f;
             eyeVector.Y -= forward.Y * 0.5f;
+
+            focusVector.X -= forward.X * 0.5f;
+            focusVector.Y -= forward.Y * 0.5f;
         }
 
         public void left()
@@ -97,6 +103,9 @@ namespace Drought.World
             
             eyeVector.X -= forward.Y * 0.5f;
             eyeVector.Y += forward.X * 0.5f;
+
+            focusVector.X -= forward.Y * 0.5f;
+            focusVector.Y += forward.X * 0.5f;
         }
 
         public void right()
@@ -107,6 +116,9 @@ namespace Drought.World
  
             eyeVector.X += forward.Y * 0.5f;
             eyeVector.Y -= forward.X * 0.5f;
+
+            focusVector.X += forward.Y * 0.5f;
+            focusVector.Y -= forward.X * 0.5f;
         }
 
         public void ascend()
@@ -123,17 +135,17 @@ namespace Drought.World
         public void zoomOut()
         {
             Vector3 forward = focusVector - eyeVector;
-            forward *= 2.0f;
 
-            eyeVector = focusVector - forward;
+            eyeVector -= forward;
+            focusVector -= forward;
         }
 
         public void zoomIn()
         {
-            Vector3 forward = focusVector - eyeVector;            
-            forward *= -2.0f;
+            Vector3 forward = focusVector - eyeVector;
 
-            eyeVector = focusVector - forward;
+            eyeVector += forward;
+            focusVector += forward;
         }
 
         public void rotateUp()
@@ -157,26 +169,6 @@ namespace Drought.World
         public void rotateLeft()
         {
             cameraRotationAngles.Z += angleIncrement;
-        }
-
-        public void orbitRight()
-        {
-            throw new NotImplementedException("Based on a design decision");
-        }
-
-        public void orbitLeft()
-        {
-            throw new NotImplementedException("Based on a design decision");
-        }
-
-        public void orbitUp()
-        {
-            throw new NotImplementedException("Based on a design decision");
-        }
-
-        public void orbitDown()
-        {
-            throw new NotImplementedException("Based on a design decision");
         }
     }
 }
