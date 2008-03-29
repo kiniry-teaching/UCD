@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Drought.World
 {
-    class LevelInfo
+    public class LevelInfo
     {
         /** The width of the level. */
         private int width;
@@ -258,6 +258,22 @@ namespace Drought.World
             }
 
             return new Vector3(0, 0, 0);
+        }
+
+        /**
+         * Gets the texture value at the specified location.
+         * If the location is out of bounds a Vector4 with all its
+         * components initialised to 0 is returned.
+         * 
+         * @param x x coordinate of the location to get texture value at.
+         * @param y y coordinate of the location to get texture value at.
+         * @return Vector3 containing the texture value at x, y.
+         */
+        public Vector4 getTextureValue(float x, float y)
+        {
+            if(x >= 0 && x < width && y >= 0 && y < height)
+                return textureMap[(int)x, (int)y];
+            return new Vector4(0, 0, 0, 0);
         }
 
 

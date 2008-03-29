@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Drought.World;
 
 namespace Drought.Entity
 {
@@ -43,6 +44,11 @@ namespace Drought.Entity
             }
 
             initialise();
+        }
+
+        public Path(List<Vector3> nodes, LevelInfo level)
+        {
+            //TODO use this constructor when game uses LevelInfo
         }
 
         private void initialise()

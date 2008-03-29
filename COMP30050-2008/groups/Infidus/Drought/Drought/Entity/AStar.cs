@@ -19,9 +19,7 @@ namespace Drought.Entity
             new Vector2(0, 1), //top center
             new Vector2(1, 1), }; //top right
 
-        private NormalMap normalMap;
-
-        private HeightMap heightMap;
+        private LevelInfo level;
 
         /** Map to lookup whether a specific node is traversable. True indicates a traversable node. */
         private bool[,] traversable;
@@ -32,15 +30,17 @@ namespace Drought.Entity
         /** Height of the map. */
         private int height;
 
-        public AStar()
-        {
 
+        public AStar(LevelInfo level)
+        {
+            initialise(level);
         }
 
-        public void initialise(NormalMap normalMap)
+        public void initialise(LevelInfo level)
         {
-            width = 0; //TODO map width
-            height = 0; //TODO map height
+            this.level = level;
+            width = level.getWidth();
+            height = level.getHeight();
             traversable = new bool[width, height];
 
             //create nodes
@@ -76,15 +76,15 @@ namespace Drought.Entity
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
                     
-                    pathNodes.Add(new Vector3(pos.X, pos.Y, heightMap.getHeight(pos.X, pos.Y)));
+                    pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
 
                     while (parent != null)
                     {
                         pos = parent.getPosition();
-                        pathNodes.Add(new Vector3(pos.X, pos.Y, heightMap.getHeight(pos.X, pos.Y)));
+                        pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
                     }
                     
-                    return new Path(pathNodes, normalMap);
+                    return new Path(pathNodes, level);
                 }
 
                 //generate successors for n
@@ -124,8 +124,8 @@ namespace Drought.Entity
 
             //couldn't find a path so return a path containing just the start node
             List<Vector3> nodes = new List<Vector3>();
-            nodes.Add(new Vector3(startX, startY, heightMap.getHeight(startX, startY)));
-            return new Path(nodes, normalMap);
+            nodes.Add(new Vector3(startX, startY, level.getHeight(startX, startY)));
+            return new Path(nodes, level);
         }
 
         /**
