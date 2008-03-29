@@ -167,8 +167,6 @@ void displayAccel(Track const & track, uint nPoints)
 		if(yb < 0) yb = -yb;
 		y = ya - yb;
 		y += 200;
-//		x *= 5;
-//		y *= 2;
 
 		if(lx == 0)
 		{	sx = lx = x;
@@ -201,8 +199,8 @@ void display(void)
 		displaySpeed(*recording[i], nPoints);
 		displayAccel(*recording[i], nPoints);
 
-		if(nPoints > 640)
-			g_recorder.erase(0, nPoints - 640);
+		if(nPoints > 800)
+			g_recorder.erase(0, nPoints - 800);
 
 	}
 
