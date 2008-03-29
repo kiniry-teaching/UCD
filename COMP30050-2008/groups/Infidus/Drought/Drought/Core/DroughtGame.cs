@@ -129,8 +129,8 @@ namespace Drought
                     graphics.IsFullScreen = false;
                 }
                 else {
-                    graphics.PreferredBackBufferWidth = 1280;
-                    graphics.PreferredBackBufferHeight = 800;
+                    graphics.PreferredBackBufferWidth = graphics.GraphicsDevice.DisplayMode.Width;
+                    graphics.PreferredBackBufferHeight = graphics.GraphicsDevice.DisplayMode.Height;
                     graphics.IsFullScreen = true;
                 }
                 graphics.ApplyChanges();
