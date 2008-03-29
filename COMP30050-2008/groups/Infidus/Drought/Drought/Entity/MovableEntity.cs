@@ -13,6 +13,8 @@ namespace Drought.Entity
 
     public class MovableEntity
     {
+        private Terrain terrain;
+
         private Vector3 position;
 
         private Vector3 prevPosition;
@@ -44,8 +46,9 @@ namespace Drought.Entity
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, int uid)
+        public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, Terrain terrain, int uid)
         {
+            this.terrain = terrain;
             radius = 2.5f;
             uniqueID = uid;
             this.path = path;
@@ -140,7 +143,8 @@ namespace Drought.Entity
                 List<Vector3> pointsList = new List<Vector3>();
                 float step = MathHelper.Pi/16;
                 for (float i = 0; i <= 32; i++) {
-                    Vector3 pointy = new Vector3(position.X + (float)Math.Cos(i*step) * radius, position.Y + (float)Math.Sin(i*step) * radius, position.Z);
+                    Vector3 pointy = terrain.getHeightMap().getPositionAt(position.X + (float)Math.Cos(i*step)*radius, position.Y + (float)Math.Sin(i*step)*radius);
+                    pointy.Z += 0.25f;
                     pointsList.Add(pointy);
                 }
                 ringTool.setPointsList(pointsList);

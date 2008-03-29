@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Drought.World
 {
-    class Terrain
+    public class Terrain
     {
         public struct VertexMultiTextured
         {
@@ -153,6 +153,11 @@ namespace Drought.World
 
             ib = new IndexBuffer(device, typeof(int), (width - 1) * (height - 1) * 6, BufferUsage.WriteOnly);
             ib.SetData(indices);
+        }
+
+        public HeightMap getHeightMap()
+        {
+            return heightMap;
         }
 
         public void update(GameTime gameTime)
