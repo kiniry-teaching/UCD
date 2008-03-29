@@ -5,6 +5,7 @@
 #endif
 #include <GL/glut.h>
 #include <iostream>
+#include <cmath>
 #include "type.h"
 #include "rai/Analyser/Shapes.h"
 #include "rai/Analyser/ShapesLoader.h"
@@ -18,11 +19,15 @@ void display(void);
 void motion(int x, int y);
 void timer(int t);
 void entry(int state);
+void key(unsigned char key, int x, int y);
 Shapes * g_shapes;
 Recorder g_recorder;
 tick g_time = 0;
 int mx = 0;
 int my = 0;
+int speedDelay = 10;
+int accelDelay = 2;
+int recordTime = 1;
 
 int main(int argc, char * * argv)
 {
@@ -37,13 +42,14 @@ int main(int argc, char * * argv)
 
 	glutInit(&argc, argv);
 	glutInitWindowSize(800, 600);
-	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 
 	glutCreateWindow("rai test");
 	glutDisplayFunc(display);
 	glutPassiveMotionFunc(motion);
 	glutTimerFunc(10, timer, 0);
 	glutTimerFunc(1231, timer, 1);
+	glutKeyboardFunc(key);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -82,7 +88,7 @@ void displayMovement(Track const & track, uint nPoints)
 		frame = frame->next()
 	){
 
-		glColor3f(0.5f * m, 0.0f, 0.0f);
+		glColor3f(0.0f, 0.0f, 0.5f * m);
 		m = (m == 2 ? 1 : 2);
 
 		glVertex3i(lx, ly, 0);
@@ -104,32 +110,63 @@ void displaySpeed(Track const & track, uint nPoints)
 	int x;
 	int y;
 
+	Frame * frameDelay;
+	Frame * frameSmooth;
+	int ySmooth;
+	int lySmooth;
+	int delay = 0;
+	int smooth;
+
 	if(nPoints <= 1)
 		return;
 
-	glColor3f(0.0f, 1.0f, 0.0f);
 	glBegin(GL_LINES);
 
 	for
-	(	frame = track.first();
+	(	frameDelay = frame = track.first();
 		frame->next() != 0;
 		frame = frame->next()
 	){
 
 		x = frame->time();
-		y = ((frame->u() << 1) + (frame->v() << 1));
-		if(y < 0) y = -y;
+		y = abs((frame->u() << 1) + (frame->v() << 1));
 		y = 400 - y;
+
+		if(delay < speedDelay)
+			delay++;
+		else
+			frameDelay = frameDelay->next();
+
+		for
+		(	smooth = 0,
+			frameSmooth = frameDelay,
+			ySmooth = 0;
+			smooth < (delay << 1)
+		 && frameSmooth != 0;
+			smooth++,
+			frameSmooth = frameSmooth->next()
+		)	ySmooth += abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1));
+		
+		ySmooth /= smooth;
+		ySmooth = 400 - ySmooth;
 
 		if(lx == 0)
 		{	sx = lx = x;
 			ly = y;
+			lySmooth = ySmooth;
 		}
 
+		glColor3f(0.0f, 0.25f, 0.0f);
 		glVertex3i(lx - sx, ly, 0);
 		glVertex3i(x - sx, y, 0);
+
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3i(lx - sx, lySmooth, 0);
+		glVertex3i(x - sx, ySmooth, 0);
+
 		lx = x;
 		ly = y;
+		lySmooth = ySmooth;
 
 	}
 
@@ -148,14 +185,22 @@ void displayAccel(Track const & track, uint nPoints)
 	int ya;
 	int yb;
 
+	Frame * frameDelay;
+	Frame * frameSmooth;
+	Frame * frameSmoothLast;
+	int ySmooth;
+	int lySmooth;
+	int delay = 0;
+	int smooth;
+
 	if(nPoints <= 2)
 		return;
 
-	glColor3f(0.0f, 0.0f, 1.0f);
 	glBegin(GL_LINES);
 
+	delay = 0;
 	for
-	(	frameLast = track.first(),
+	(	frameDelay = frameLast = track.first(),
 		frame = frameLast->next();
 		frame->next() != 0;
 		frameLast = frame,
@@ -163,22 +208,48 @@ void displayAccel(Track const & track, uint nPoints)
 	){
 
 		x = frame->time();
-		ya = (frame->u() << 1) + (frame->v() << 1);
-		yb = (frameLast->u() << 1) + (frameLast->v() << 1);
-		if(ya < 0) ya = -ya;
-		if(yb < 0) yb = -yb;
+		ya = abs((frame->u() << 1) + (frame->v() << 1));
+		yb = abs((frameLast->u() << 1) + (frameLast->v() << 1));
 		y = ya - yb;
 		y += 200;
+
+		if(delay < accelDelay)
+			delay++;
+		else
+			frameDelay = frameDelay->next();
+
+		for
+		(	smooth = 0,
+			frameSmoothLast = frameDelay,
+			frameSmooth = frameDelay->next(),
+			ySmooth = 0;
+			smooth < (delay << 1)
+		 && frameSmooth->next() != 0;
+			smooth++,
+			frameSmoothLast = frameSmooth,
+			frameSmooth = frameSmooth->next()
+		)	ySmooth += abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1)) - abs((frameSmoothLast->u() << 1) + (frameSmoothLast->v() << 1));
+
+		ySmooth /= smooth;
+		ySmooth += 200;
 
 		if(lx == 0)
 		{	sx = lx = x;
 			ly = y;
+			lySmooth = ySmooth;
 		}
 
+		glColor3f(0.25f, 0.0f, 0.0f);
 		glVertex3i(lx - sx, ly, 0);
 		glVertex3i(x - sx, y, 0);
+
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3i(lx - sx, lySmooth, 0);
+		glVertex3i(x - sx, ySmooth, 0);
+
 		lx = x;
 		ly = y;
+		lySmooth = ySmooth;
 
 	}
 
@@ -201,14 +272,14 @@ void display(void)
 		displaySpeed(*recording[i], nPoints);
 		displayAccel(*recording[i], nPoints);
 
-		if(nPoints > 800)
-			g_recorder.erase(0, nPoints - 800);
+		if(nPoints > (800 / recordTime))
+			g_recorder.erase(0, nPoints - (800 / recordTime));
 
 	}
 
 	g_recorder.erase(&recording);
 
-	glFlush();
+    glutSwapBuffers();
 
 }
 
@@ -222,7 +293,7 @@ void timer(int t)
 {
 
 	if(t == 0)
-	{	g_time++;
+	{	g_time += recordTime;
 		g_recorder.record(0, mx, my, 1, g_time);
 		glutPostRedisplay();
 		glutTimerFunc(10, timer, 0);
@@ -231,6 +302,28 @@ void timer(int t)
 	{	glutPostRedisplay();
 //		glutTimerFunc(1231, timer, 1);
 	}
+
+}
+
+void key(unsigned char key, int x, int y)
+{
+
+	switch(key)
+	{
+		case '=':	speedDelay++;	break;
+		case '-':	speedDelay--;	break;
+		case ']':	accelDelay++;	break;
+		case '[':	accelDelay--;	break;
+		case '2':	recordTime++;	break;
+		case '1':	recordTime--;	break;
+	}
+
+	if(speedDelay < 1)
+		speedDelay = 1;
+	if(accelDelay < 1)
+		accelDelay = 1;
+	if(recordTime < 1)
+		recordTime = 1;
 
 }
 
