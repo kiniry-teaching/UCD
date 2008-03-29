@@ -23,7 +23,8 @@ namespace Drought.Entity
 
         private HeightMap heightMap;
 
-        private Node[,] nodeMap;
+        /** Map to lookup whether a specific node is traversable. True indicates a traversable node. */
+        private bool[,] traversable;
 
         /** Width of the map. */
         private int width;
@@ -40,13 +41,13 @@ namespace Drought.Entity
         {
             width = 0; //TODO map width
             height = 0; //TODO map height
-            nodeMap = new Node[width, height];
+            traversable = new bool[width, height];
 
             //create nodes
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                 {
-                    //if traversable add node
+                    //TODO initialise traversable map to appropriate values
                 }
         }
 
@@ -54,8 +55,8 @@ namespace Drought.Entity
         {
             List<Node> open = new List<Node>();
             List<Node> closed = new List<Node>();
-            Node goal = nodeMap[(int)endX, (int)endY];
-            Node start = nodeMap[(int)startX, (int)startY];
+            Node goal = getNode((int)endX, (int)endY);
+            Node start = getNode((int)startX, (int)startY);
 
             if(goal != null && start != null)
                 open.Add(start);
@@ -63,12 +64,12 @@ namespace Drought.Entity
 
             while (open.Count > 0)
             {
-                //get node with lowest f value from open list
+                //get node with lowest f value from open list (last entry in list)
                 Node n = open[open.Count - 1];
                 open.RemoveAt(open.Count - 1);
                 closed.Add(n);
 
-                if (n.getPosition().Equals(goal.getPosition())) //TODO do data equals //found a path
+                if (n.getPosition().Equals(goal.getPosition())) //found a path
                 {
                     Node curr = n;
                     Node parent = n.getParent();
@@ -86,13 +87,13 @@ namespace Drought.Entity
                 }
 
                 //generate successors for n
-                List<Node> successors = new List<Node>();
+                List<Node> successors = getSuccessors(n);
 
                 for (int i = 0, m = successors.Count; i < m; i++)
                 {
                     Node s = successors[i];
 
-                    //s.h is estimate distance to goal
+                    //s.h is estimated distance to goal
                     s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
                     //s.g is n.g + cost from n to s
                     s.gVal = n.gVal + s.getDistanceToParent();
@@ -112,6 +113,7 @@ namespace Drought.Entity
                         {
                             oldNode.setParent(n);
                             oldNode.gVal = s.gVal;
+                            //TODO reorder open list
                         }
                     }
 
@@ -126,6 +128,19 @@ namespace Drought.Entity
         }
 
         /**
+         * Sets whether a point in the map is traversable.
+         * 
+         * @param x The x coordinate of the point.
+         * @param y The y coordinate of the point.
+         * @param value True for the point to be traversable, false otherwise.
+         */
+        public void setTraversable(int x, int y, bool value)
+        {
+            if(x >= 0 && x < width && y >= 0 && y < height)
+                traversable[x, y] = value;
+        }
+
+        /**
          * Gets the node at the specified location. If the location is
          * invalid then null is returned.
          * 
@@ -136,7 +151,7 @@ namespace Drought.Entity
         private Node getNode(int x, int y)
         {
             if(x >= 0 && x < width && y >= 0 && y < height)
-                return nodeMap[x,y];
+                return traversable[x, y] ? new Node(x, y) : null;
             return null;
         }
 
@@ -215,19 +230,19 @@ namespace Drought.Entity
 
         public float hVal
         {
-            set { h = value; }
+            set { h = value; f = g + h;  }
             get { return h; }
         }
 
         public float gVal
         {
-            set { g = value; }
+            set { g = value; f = g + h; }
             get { return g; }
         }
 
         public float getFVal()
         {
-            return g + h;
+            return f;
         }
 
         /**
