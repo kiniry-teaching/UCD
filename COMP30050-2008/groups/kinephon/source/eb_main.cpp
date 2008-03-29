@@ -1,14 +1,16 @@
 #ifdef __EB__
 
-#pragma warning(disable: 4786)
+#ifdef WIN32
+#	pragma warning(disable: 4786)
+#endif
 #include <GL/glut.h>
 #include <iostream>
 #include "type.h"
-#include "rai/analyser/Shapes.h"
-#include "rai/analyser/ShapesLoader.h"
-#include "rai/recorder/Frame.h"
-#include "rai/recorder/Track.h"
-#include "rai/recorder/Recorder.h"
+#include "rai/Analyser/Shapes.h"
+#include "rai/Analyser/ShapesLoader.h"
+#include "rai/Recorder/Frame.h"
+#include "rai/Recorder/Track.h"
+#include "rai/Recorder/Recorder.h"
 
 using namespace interpreter;
 

@@ -1,4 +1,6 @@
-#pragma warning(disable: 4786)
+#ifdef WIN32
+#	pragma warning(disable: 4786)
+#endif
 #include "Recorder.h"
 
 using namespace std;
@@ -173,7 +175,7 @@ int Recorder::controlLost
 // control bad communication
 //
 int Recorder::controlBadcom(void)
-{	int			index;
+{	uint index;
 
 	// Mark all tracks as being up for deletion
 	for(index = 0; index < _tracks.size(); index++)

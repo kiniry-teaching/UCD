@@ -2,7 +2,7 @@
 #define __INTERPRETER_SHAPES_H__
 
 #include "../../type.h"
-#include "../recorder/Track.h"
+#include "../Recorder/Track.h"
 #include "Shape.h"
 
 namespace interpreter

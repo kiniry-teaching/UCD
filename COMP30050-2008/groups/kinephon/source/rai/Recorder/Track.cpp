@@ -9,9 +9,9 @@ namespace interpreter
 Track::Track
 (	Track const * const	track
 ) :	_iid				(track->_iid),
-	_isLost				(track->_isLost),
 	_frameFirst			(0),
-	_frameLast			(0)
+	_frameLast			(0),
+	_isLost				(track->_isLost)
 {	// Copy constructor of Frame will copy all other frames
 	if(track->_frameFirst != 0)
 		(*this) += new Frame(track->_frameFirst);

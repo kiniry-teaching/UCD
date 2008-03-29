@@ -1,7 +1,9 @@
 #ifndef __INTERPRETER_RECORDING_H__
 #define __INTERPRETER_RECORDING_H__
 
-#pragma warning(disable: 4786)
+#ifdef WIN32
+#	pragma warning(disable: 4786)
+#endif
 #include <vector>
 #include "../../type.h"
 #include "Track.h"

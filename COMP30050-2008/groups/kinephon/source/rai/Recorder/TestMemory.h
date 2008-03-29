@@ -1,13 +1,20 @@
 #ifdef __TEST__
 
-#pragma warning(disable: 4786)
+#ifdef WIN32
+#	pragma warning(disable: 4786)
+#endif
 #include <iostream>
 using namespace std;
 using std::cout;
 using std::endl;
 
-int const MS = 3;
-int const MM = 100*MS;
+#ifdef WIN32
+	int const MS = 3;
+	int const MM = 100*MS;
+#else
+#	define MS 3
+#	define MM = 100*MS;
+#endif
 extern int stage;
 extern int mm[MM];
 
