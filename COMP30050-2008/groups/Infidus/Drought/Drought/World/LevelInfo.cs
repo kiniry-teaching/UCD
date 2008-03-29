@@ -23,6 +23,9 @@ namespace Drought.World
         /** Map of the level's textures. */
         private Vector4[,] textureMap;
 
+
+
+        #region Initialising methods
         /**
          * Initialises the level information from file.
          */
@@ -33,6 +36,11 @@ namespace Drought.World
             initTextureMap(level);
         }
 
+        /**
+         * Initialise the height map from file.
+         * 
+         * @param fileName The name of the height map file without the extension.
+         */
         private void initHeightMap(String fileName)
         {
             FileStream fs = new FileStream("Content/HeightMaps/" + fileName + ".bmp", FileMode.Open, FileAccess.Read);
@@ -73,6 +81,10 @@ namespace Drought.World
             }
         }
 
+        /**
+         * Initialise the normal map. This must be done after the height map has
+         * been initialised.
+         */
         private void initNormalMap()
         {
             /* Initialise normals */
@@ -95,6 +107,11 @@ namespace Drought.World
                 }
         }
 
+        /**
+         * Initialise the texture map from file.
+         * 
+         * @param fileName The name of the texture map file without the extension.
+         */
         private void initTextureMap(String fileName)
         {
             FileStream fs = new FileStream("Content/TextureMaps/" + fileName + ".bmp", FileMode.Open, FileAccess.Read);
@@ -127,7 +144,9 @@ namespace Drought.World
             }
             r.Close();
         }
+        #endregion
 
+        #region public getter methods
         /**
          * Gets the width of the level.
          * 
@@ -275,7 +294,9 @@ namespace Drought.World
                 return textureMap[(int)x, (int)y];
             return new Vector4(0, 0, 0, 0);
         }
+        #endregion
 
+        #region private helper methods
 
         /**
         * Gets the distance from a point to a line.
@@ -311,5 +332,7 @@ namespace Drought.World
             Vector2 v = new Vector2(pX - lX0, pY - lY0);
             return Math.Abs(Vector2.Dot(new Vector2(-n.Y, n.X), v));
         }
+
+        #endregion
     }
 }
