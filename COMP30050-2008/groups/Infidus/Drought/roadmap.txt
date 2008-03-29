@@ -17,7 +17,7 @@ Bugs:
  - Switching to fullscreen doesn't change the size of the menu items
     - We already discussed that there would be no options like this in game but to fix it we need to rebuild the menu ~Rashid
  - Switching to fullscreen doesn't work in-game!
-    - same as above ~Rashid
+    - same as above and we'd need to reset the graphics device to change the aspect ratio and reload all content ~Rashid
  - new Entities added in one networked game don't show up in the other, deletes don't work either
 
 
