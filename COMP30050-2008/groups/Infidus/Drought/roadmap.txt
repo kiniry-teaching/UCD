@@ -15,7 +15,9 @@ Bugs:
  - Zooming "nuance"
  - The map "Square" is insanely laggy on my laptop (Eugene), presumably from drawing the water texture over and over
  - Switching to fullscreen doesn't change the size of the menu items
+    - We already discussed that there would be no options like this in game but to fix it we need to rebuild the menu ~Rashid
  - Switching to fullscreen doesn't work in-game!
+    - same as above ~Rashid
  - new Entities added in one networked game don't show up in the other, deletes don't work either
 
 
