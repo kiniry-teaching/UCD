@@ -13,7 +13,7 @@ using std::endl;
 	int const MM = 100*MS;
 #else
 #	define MS 3
-#	define MM = 100*MS;
+#	define MM 100*MS
 #endif
 extern int stage;
 extern int mm[MM];

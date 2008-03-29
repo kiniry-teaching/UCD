@@ -105,10 +105,12 @@ void Recorder::RunTest(void)
 	::stage++; assert((*recording)[0]->first()->time() == recorder.findTrack(5)->first()->time());
 	::stage++; recorder.erase(recording);
 
+#	ifdef WIN32
 	::stage++;
 	try { cout << (*recording)[0]->first() << endl; except = false; } catch(...) { }
 	if(except == false)
 		assert(false);
+#	endif
 	::stage = -1;
 
 	cout << "Done" << endl;

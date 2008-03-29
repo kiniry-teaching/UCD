@@ -88,9 +88,11 @@ void Track::RunTest(void)
 	stage = -1;
 	delete track;
 
+#	ifdef WIN32
 	try { cout << frameA << endl; except = false; } catch(...) { }
 	if(except == false)
 		assert(false);
+#	endif
 
 	cout << "Done" << endl;
 

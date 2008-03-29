@@ -71,8 +71,8 @@ void Frame::RunTest(void)
 	// Create two groups of frames
 	stage++; frameA = new Frame(1, 1, 1, 0);
 	stage++; frameB = new Frame(2, 2, 2, 1000);
-	stage++; frameC = new Frame(3, 3, 3, 0);
-	stage++; frameD = new Frame(4, 4, 4, -1);
+	stage++; frameC = new Frame(3, 3, 3, 1);
+	stage++; frameD = new Frame(4, 4, 4, 0);
 	(*frameA) += frameB;
 	(*frameC) += frameD;
 	assert(frameA->gap() == true);
@@ -133,6 +133,7 @@ void Frame::RunTest(void)
 	stage = -1;
 	(*((*frameA) += frameB)) += frameC;
 	delete frameA;
+#	ifdef WIN32
 	// Test all 3 were deleted by accessing the 3rd one, if
 	//	it throws an exception, it was deleted OK
 	try { cout << frameA << endl; except = false; } catch(...) { }
@@ -140,6 +141,7 @@ void Frame::RunTest(void)
 	try { cout << frameC << endl; except = false; } catch(...) { }
 	if(except == false)
 		assert(false);
+#	endif
 
 	cout << "Done" << endl;
 
