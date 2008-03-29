@@ -1,3 +1,5 @@
+#ifdef __TEST__
+
 #pragma warning(disable: 4786)
 #include <iostream>
 using namespace std;
@@ -34,3 +36,5 @@ inline void dumpMemoryReport(void)
 {	for(int i = 0; i < MM; i += MS)
 		if(mm[i] != 0 && mm[i+2] != -1) { cout << "Leak at " << mm[i] << ", size " << mm[i+1] << ", stage " << mm[i+2] << endl; }
 }
+
+#endif

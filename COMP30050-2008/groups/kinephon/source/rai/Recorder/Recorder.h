@@ -31,8 +31,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	static void	RunTest			(void);
+	static void			RunTest			(void);
 #endif
+
+///////////////////////////////////////////////////////////////////////////////
+// ctor
+//
+public:
+						~Recorder		(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // commands
@@ -136,7 +142,7 @@ private:
 	 * @version 1.0
 	 */
 	void				eraseTrack
-						(	irid const	iid
+						(	irid const	iid			= ~0
 						);
 	/**
 	 * control() econtrol::FOUND Helper
@@ -179,6 +185,12 @@ private:
 	vector<Track*>		_tracks;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+inline Recorder::~Recorder(void)
+{	eraseTrack();
+}
 
 }
 

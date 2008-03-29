@@ -13,7 +13,8 @@ Track::Track
 	_frameFirst			(0),
 	_frameLast			(0)
 {	// Copy constructor of Frame will copy all other frames
-	(*this) += new Frame(track->_frameFirst);
+	if(track->_frameFirst != 0)
+		(*this) += new Frame(track->_frameFirst);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

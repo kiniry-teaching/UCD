@@ -104,14 +104,25 @@ Track * Recorder::findTrack
 // find track
 //
 void Recorder::eraseTrack
-(	irid const	iid
+(	irid const					iid		//= ~0
 ){	vector<Track*>::iterator	iTrack;
 
-	for(iTrack = _tracks.begin(); iTrack != _tracks.end(); iTrack++)
-		if((*iTrack)->iid() == iid)
-		{	_tracks.erase(iTrack);
-			break;
-		}
+	if(iid == ~0)
+	{
+	
+		for(iTrack = _tracks.begin(); iTrack != _tracks.end(); iTrack++)
+			delete (*iTrack);
+
+		_tracks.erase(_tracks.begin(), _tracks.end());
+
+	}
+	else
+		for(iTrack = _tracks.begin(); iTrack != _tracks.end(); iTrack++)
+			if((*iTrack)->iid() == iid)
+			{	delete (*iTrack);
+				_tracks.erase(iTrack);
+				break;
+			}
 
 }
 
