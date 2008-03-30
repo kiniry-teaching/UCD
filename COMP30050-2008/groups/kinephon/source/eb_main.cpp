@@ -129,7 +129,7 @@ void displaySpeed(Track const & track, uint nPoints)
 	){
 
 		x = frame->time();
-		y = abs((frame->u() << 1) + (frame->v() << 1));
+		y = (int)(sqrt(abs((frame->u() << 1) + (frame->v() << 1))) * 10);
 		y = 400 - y;
 
 		if(delay < speedDelay)
@@ -145,7 +145,7 @@ void displaySpeed(Track const & track, uint nPoints)
 		 && frameSmooth != 0;
 			smooth++,
 			frameSmooth = frameSmooth->next()
-		)	ySmooth += abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1));
+		)	ySmooth += (int)(sqrt(abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1))) * 10);
 		
 		ySmooth /= smooth;
 		ySmooth = 400 - ySmooth;
@@ -182,8 +182,6 @@ void displayAccel(Track const & track, uint nPoints)
 	int ly;
 	int x;
 	int y;
-	int ya;
-	int yb;
 
 	Frame * frameDelay;
 	Frame * frameSmooth;
@@ -208,9 +206,7 @@ void displayAccel(Track const & track, uint nPoints)
 	){
 
 		x = frame->time();
-		ya = abs((frame->u() << 1) + (frame->v() << 1));
-		yb = abs((frameLast->u() << 1) + (frameLast->v() << 1));
-		y = ya - yb;
+		y = (int)((sqrt(abs((frame->u() << 1) + (frame->v() << 1))) - sqrt(abs((frameLast->u() << 1) + (frameLast->v() << 1)))) * 20);
 		y += 200;
 
 		if(delay < accelDelay)
@@ -228,7 +224,7 @@ void displayAccel(Track const & track, uint nPoints)
 			smooth++,
 			frameSmoothLast = frameSmooth,
 			frameSmooth = frameSmooth->next()
-		)	ySmooth += abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1)) - abs((frameSmoothLast->u() << 1) + (frameSmoothLast->v() << 1));
+		)	ySmooth += (int)((sqrt(abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1))) - sqrt(abs((frameSmoothLast->u() << 1) + (frameSmoothLast->v() << 1)))) * 80);
 
 		ySmooth /= smooth;
 		ySmooth += 200;
