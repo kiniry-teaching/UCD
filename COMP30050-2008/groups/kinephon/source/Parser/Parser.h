@@ -1,7 +1,7 @@
 #ifndef PARSER_H_
 #define PARSER_H_
 
-#include "IParserRecorder.h"
+#include "../rai/Recorder/IParserRecorder.h"
 #include <string>
 #include <iostream>
 #include <stdlib.h>
