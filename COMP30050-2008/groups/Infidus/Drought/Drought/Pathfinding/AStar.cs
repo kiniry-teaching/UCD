@@ -20,6 +20,7 @@ namespace Drought.Entity
             new Vector2(0, 1), //top center
             new Vector2(1, 1), }; //top right
 
+        /** The level information to search for paths. */
         private LevelInfo level;
 
         /** Map to lookup whether a specific node is traversable. True indicates a traversable node. */
@@ -31,12 +32,24 @@ namespace Drought.Entity
         /** Height of the map. */
         private int height;
 
-
+        /**
+         * Constructs and initialises AStar to search for paths in the
+         * current level info.
+         * 
+         * @param level The level information to search.
+         */
         public AStar(LevelInfo level)
         {
             initialise(level);
         }
 
+        /**
+         * Initialises AStar to search for paths in a level.
+         * This method must be called whenever levelInfo changes
+         * to keep AStar up to date with the latest level.
+         * 
+         * @param level The level information to search.
+         */
         public void initialise(LevelInfo level)
         {
             this.level = level;
