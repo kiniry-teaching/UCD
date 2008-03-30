@@ -2,6 +2,7 @@
 #define __INTERPRETER_RECORDER_H__
 
 #include <vector>
+#include "TestMemory.h"
 #include "../../type.h"
 #include "IParserRecorder.h"
 #include "Track.h"

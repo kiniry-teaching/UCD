@@ -6,6 +6,8 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
+#include <stdio.h>
+#include "rai/Recorder/TestMemory.h"
 #include "type.h"
 #include "rai/Analyser/Shapes.h"
 #include "rai/Analyser/ShapesLoader.h"
@@ -25,9 +27,9 @@ Recorder g_recorder;
 tick g_time = 0;
 int mx = 0;
 int my = 0;
-int speedDelay = 10;
-int accelDelay = 2;
-int recordTime = 1;
+int speedDelay = 4;
+int accelDelay = 10;
+int recordTime = 4;
 
 int main(int argc, char * * argv)
 {
@@ -172,6 +174,8 @@ void displaySpeed(Track const & track, uint nPoints)
 
 	glEnd();
 
+	
+
 }
 
 void displayAccel(Track const & track, uint nPoints)
@@ -207,7 +211,7 @@ void displayAccel(Track const & track, uint nPoints)
 
 		x = frame->time();
 		y = (int)((sqrt(abs((frame->u() << 1) + (frame->v() << 1))) - sqrt(abs((frameLast->u() << 1) + (frameLast->v() << 1)))) * 20);
-		y += 200;
+		y = 200 - y;
 
 		if(delay < accelDelay)
 			delay++;
@@ -227,7 +231,7 @@ void displayAccel(Track const & track, uint nPoints)
 		)	ySmooth += (int)((sqrt(abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1))) - sqrt(abs((frameSmoothLast->u() << 1) + (frameSmoothLast->v() << 1)))) * 80);
 
 		ySmooth /= smooth;
-		ySmooth += 200;
+		ySmooth = 200 - ySmooth;
 
 		if(lx == 0)
 		{	sx = lx = x;
@@ -250,6 +254,12 @@ void displayAccel(Track const & track, uint nPoints)
 	}
 
 	glEnd();
+
+#ifdef __MEMORY__
+	char memdump[16];
+	sprintf(memdump, "%ld", ::alloc);
+	glutSetWindowTitle(memdump);
+#endif
 
 }
 

@@ -5,6 +5,7 @@
 #	pragma warning(disable: 4786)
 #endif
 #include <vector>
+#include "TestMemory.h"
 #include "../../type.h"
 #include "Track.h"
 using std::vector;

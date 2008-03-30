@@ -2,6 +2,7 @@
 #define __INTERPRETER_FRAME_H__
 
 #include <iostream>
+#include "TestMemory.h"
 #include "../../type.h"
 using std::ostream;
 

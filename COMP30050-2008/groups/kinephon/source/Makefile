@@ -6,10 +6,10 @@ phoney:
 	#  todo: support for Mac OS X
 
 ceb:
-	g++ eb_main.cpp rai/*/*.cpp -D __EB__ -lglut32 -lopengl32 -o kinephon.exe
+	g++ rai/*/*.cpp eb_main.cpp -D __EB__ -lglut32 -lopengl32 -o kinephon.exe
 
 cet:
-	g++ eb_main.cpp rai/*/*.cpp -D __EB__ -D __TEST__ -lglut32 -lopengl32 -o kinephon.exe
+	g++ rai/*/*.cpp eb_main.cpp -D __EB__ -D __TEST__ -lglut32 -lopengl32 -o kinephon.exe
 
 leb:
-	g++ eb_main.cpp rai/*/*.cpp -D __EB__ -lglut -lGL -o kinephon.exe
+	g++ rai/*/*.cpp eb_main.cpp -D __EB__ -lglut -lGL -o kinephon.exe
