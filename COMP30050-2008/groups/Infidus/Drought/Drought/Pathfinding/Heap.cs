@@ -31,15 +31,15 @@ namespace Drought.Pathfinding
             size++;
 
             //parent of element i is floor of (i - 1)/2
-            int currNodeIndex = size;
+            int currNodeIndex = size - 1;
             bool done = false;
-            while(!done)
+            while (!done)
             {
                 int parentIndex = (currNodeIndex - 1) / 2;
-                
+
                 if (currNodeIndex == parentIndex)
                     done = true;
-                else if (nodes[parentIndex].getFVal() < nodes[currNodeIndex].getFVal())
+                else if (nodes[parentIndex].getFVal() > nodes[currNodeIndex].getFVal())
                 {
                     swap(parentIndex, currNodeIndex);
                     currNodeIndex = parentIndex;
@@ -59,7 +59,7 @@ namespace Drought.Pathfinding
             size--;
 
             //children of element i are (2 * i) + 1 and (2 * i) + 2
-            int currNodeIndex = size;
+            int currNodeIndex = 0;
             bool done = false;
             while (!done)
             {
@@ -69,7 +69,7 @@ namespace Drought.Pathfinding
                 if (child1 < size && child2 < size)
                 {
                     int minChild = nodes[child1].getFVal() < nodes[child2].getFVal() ? child1 : child2;
-                    if (nodes[currNodeIndex].getFVal() < nodes[minChild].getFVal())
+                    if (nodes[currNodeIndex].getFVal() > nodes[minChild].getFVal())
                     {
                         swap(currNodeIndex, minChild);
                         currNodeIndex = minChild;
@@ -79,7 +79,7 @@ namespace Drought.Pathfinding
                 }
                 else if (child1 < size)
                 {
-                    if (nodes[currNodeIndex].getFVal() < nodes[child1].getFVal())
+                    if (nodes[currNodeIndex].getFVal() > nodes[child1].getFVal())
                     {
                         swap(currNodeIndex, child1);
                         currNodeIndex = child1;
@@ -89,7 +89,7 @@ namespace Drought.Pathfinding
                 }
                 else if (child2 < size)
                 {
-                    if (nodes[currNodeIndex].getFVal() < nodes[child2].getFVal())
+                    if (nodes[currNodeIndex].getFVal() > nodes[child2].getFVal())
                     {
                         swap(currNodeIndex, child2);
                         currNodeIndex = child2;
@@ -105,12 +105,13 @@ namespace Drought.Pathfinding
         }
 
         /**
-         * Removes a node with the same position as the specified
-         * position. If no node exists then null is returned.
+         * Checks if the heap contains a node with the same position as
+         * the specified position. If a node is found then it is returned
+         * else if no node exists then null is returned.
          * 
-         * @param The position of the node to remove.
+         * @param The position of the node to search for.
          */
-        public Node remove(Vector2 position)
+        public Node contains(Vector2 position)
         {
             for (int i = 0; i < size; i++)
                 if (position == nodes[i].getPosition())
@@ -160,6 +161,15 @@ namespace Drought.Pathfinding
             Node[] old = nodes;
             nodes = new Node[old.Length * 2];
             Array.Copy(old, 0, nodes, 0, size);
+        }
+
+        public String ToString()
+        {
+            String s = "[ ";
+            for (int i = 0; i < size; i++)
+                s += nodes[i].getFVal() + " ";
+            s += "]";
+            return s;
         }
     }
 }

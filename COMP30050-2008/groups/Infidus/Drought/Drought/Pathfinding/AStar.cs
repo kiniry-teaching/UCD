@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Drought.World;
 using Drought.Pathfinding;
+using Drought.World;
 
 namespace Drought.Entity
 {
@@ -59,7 +59,7 @@ namespace Drought.Entity
             Node goal = getNode((int)endX, (int)endY);
             Node start = getNode((int)startX, (int)startY);
 
-            if(goal != null && start != null)
+            if (goal != null && start != null)
                 open.insert(start);
             //else a path can't be found so skip to the end and return default path.
 
@@ -75,7 +75,7 @@ namespace Drought.Entity
                     Node parent = n.getParent();
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
-                    
+
                     pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
 
                     while (parent != null)
@@ -83,7 +83,7 @@ namespace Drought.Entity
                         pos = parent.getPosition();
                         pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
                     }
-                    
+
                     return new Path(pathNodes, level);
                 }
 
@@ -103,8 +103,8 @@ namespace Drought.Entity
 
 
                         //If it isn’t on the open list, add it to the open list.
-                        Node oldNode = open.remove(s.getPosition());
-                        if (oldNode != null)
+                        Node oldNode = open.contains(s.getPosition());
+                        if (oldNode == null)
                             open.insert(s);
                         else
                         {
@@ -116,9 +116,8 @@ namespace Drought.Entity
                             {
                                 oldNode.setParent(n);
                                 oldNode.gVal = s.gVal;
+                                //TODO reorder heap!
                             }
-
-                            open.insert(oldNode);
                         }
                     }
 
@@ -141,7 +140,7 @@ namespace Drought.Entity
          */
         public void setTraversable(int x, int y, bool value)
         {
-            if(x >= 0 && x < width && y >= 0 && y < height)
+            if (x >= 0 && x < width && y >= 0 && y < height)
                 traversable[x, y] = value;
         }
 
@@ -155,7 +154,7 @@ namespace Drought.Entity
          */
         private Node getNode(int x, int y)
         {
-            if(x >= 0 && x < width && y >= 0 && y < height)
+            if (x >= 0 && x < width && y >= 0 && y < height)
                 return traversable[x, y] ? new Node(x, y) : null;
             return null;
         }
@@ -170,7 +169,7 @@ namespace Drought.Entity
         {
             List<Node> successors = new List<Node>();
 
-            for(int i = 0; i < BORDER_NODES.Length; i++)
+            for (int i = 0; i < BORDER_NODES.Length; i++)
             {
                 Vector2 pos = node.getPosition() + BORDER_NODES[i];
                 Node n = getNode((int)pos.X, (int)pos.Y);

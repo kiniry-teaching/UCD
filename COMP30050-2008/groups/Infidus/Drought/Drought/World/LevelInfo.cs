@@ -20,7 +20,7 @@ namespace Drought.World
         /** Map of the level's heights. [x][y] */
         private float[,] heightMap;
 
-        /** Map of the level's textures. */
+        /** Map of the level's textures. [x][y] */
         private Vector4[,] textureMap;
 
 
@@ -87,8 +87,9 @@ namespace Drought.World
          */
         private void initNormalMap()
         {
-            /* Initialise normals */
+            /* each square region is made up of two triangles. */
             normals = new Vector3[width, height, 2];
+
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                 {
