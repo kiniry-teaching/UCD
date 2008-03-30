@@ -94,29 +94,32 @@ namespace Drought.Entity
                 {
                     Node s = successors[i];
 
-                    //s.h is estimated distance to goal
-                    s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
-                    //s.g is n.g + cost from n to s
-                    s.gVal = n.gVal + s.getDistanceToParent();
-
-
-                    //If it isn’t on the open list, add it to the open list.
-                    Node oldNode = open.remove(s.getPosition());
-                    if (oldNode != null)
-                        open.insert(s);
-                    else
+                    if (!contains(closed, n))
                     {
-                        //If it is on the open list already, check to see if this path to that square is better,
-                        //using G cost as the measure. A lower G cost means that this is a better path.
-                        //If so, change the parent of the square to the current square, and recalculate the G and F scores of the square.
-                        //If you are keeping your open list sorted by F score, you may need to resort the list to account for the change.
-                        if (s.gVal < oldNode.gVal)
+                        //s.h is estimated distance to goal
+                        s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
+                        //s.g is n.g + cost from n to s
+                        s.gVal = n.gVal + s.getDistanceToParent();
+
+
+                        //If it isn’t on the open list, add it to the open list.
+                        Node oldNode = open.remove(s.getPosition());
+                        if (oldNode != null)
+                            open.insert(s);
+                        else
                         {
-                            oldNode.setParent(n);
-                            oldNode.gVal = s.gVal;
+                            //If it is on the open list already, check to see if this path to that square is better,
+                            //using G cost as the measure. A lower G cost means that this is a better path.
+                            //If so, change the parent of the square to the current square, and recalculate the G and F scores of the square.
+                            //If you are keeping your open list sorted by F score, you may need to resort the list to account for the change.
+                            if (s.gVal < oldNode.gVal)
+                            {
+                                oldNode.setParent(n);
+                                oldNode.gVal = s.gVal;
+                            }
+
+                            open.insert(oldNode);
                         }
-                        
-                        open.insert(oldNode);
                     }
 
                 }
@@ -194,6 +197,22 @@ namespace Drought.Entity
         {
             //TODO
             return false;
+        }
+
+        /**
+         * Checks if a node is contained in a list. Equality is determined
+         * by the node's position.
+         * 
+         * @param list The list to check in.
+         * @param node The node to check for.
+         * @return The node if found of null if not found.
+         */
+        private Node contains(List<Node> list, Node node)
+        {
+            for (int i = 0, n = list.Count; i < n; i++)
+                if (list[i].getPosition() == node.getPosition())
+                    return list[i];
+            return null;
         }
     }
 }
