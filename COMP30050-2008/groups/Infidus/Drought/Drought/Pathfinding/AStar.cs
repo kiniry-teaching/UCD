@@ -54,20 +54,19 @@ namespace Drought.Entity
 
         public Path computePath(float startX, float startY, float endX, float endY)
         {
-            List<Node> open = new List<Node>();
+            Heap open = new Heap();
             List<Node> closed = new List<Node>();
             Node goal = getNode((int)endX, (int)endY);
             Node start = getNode((int)startX, (int)startY);
 
             if(goal != null && start != null)
-                open.Add(start);
+                open.insert(start);
             //else a path can't be found so skip to the end and return default path.
 
-            while (open.Count > 0)
+            while (!open.isEmpty())
             {
                 //get node with lowest f value from open list (last entry in list)
-                Node n = open[open.Count - 1];
-                open.RemoveAt(open.Count - 1);
+                Node n = open.removeMin();
                 closed.Add(n);
 
                 if (n.getPosition() == goal.getPosition()) //found a path
@@ -102,9 +101,9 @@ namespace Drought.Entity
 
 
                     //If it isn’t on the open list, add it to the open list.
-                    Node oldNode = contains(open, s);
+                    Node oldNode = open.remove(s.getPosition());
                     if (oldNode != null)
-                        orderedAdd(open, s);
+                        open.insert(s);
                     else
                     {
                         //If it is on the open list already, check to see if this path to that square is better,
@@ -115,8 +114,9 @@ namespace Drought.Entity
                         {
                             oldNode.setParent(n);
                             oldNode.gVal = s.gVal;
-                            //TODO reorder open list
                         }
+                        
+                        open.insert(oldNode);
                     }
 
                 }
@@ -194,28 +194,6 @@ namespace Drought.Entity
         {
             //TODO
             return false;
-        }
-
-        /**
-         * Checks if a node is contained in a list. Equality is determined
-         * by the node's position.
-         * 
-         * @param list The list to check in.
-         * @param node The node to check for.
-         * @return The node if found of null if not found.
-         */
-        private Node contains(List<Node> list, Node node)
-        {
-            for (int i = 0, n = list.Count; i < n; i++)
-                if (list[i].getPosition() == node.getPosition())
-                    return list[i];
-            return null;
-        }
-
-        private void orderedAdd(List<Node> list, Node node)
-        {
-            //TODO
-            //keep open list sorted by f value ranging from lowest to highest
         }
     }
 }

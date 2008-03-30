@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Drought.Pathfinding
 {
@@ -101,6 +102,20 @@ namespace Drought.Pathfinding
             }
 
             return min;
+        }
+
+        /**
+         * Removes a node with the same position as the specified
+         * position. If no node exists then null is returned.
+         * 
+         * @param The position of the node to remove.
+         */
+        public Node remove(Vector2 position)
+        {
+            for (int i = 0; i < size; i++)
+                if (position == nodes[i].getPosition())
+                    return nodes[i];
+            return null;
         }
 
         /**
