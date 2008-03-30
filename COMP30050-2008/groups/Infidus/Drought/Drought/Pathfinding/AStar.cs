@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Drought.World;
+using Drought.Pathfinding;
 
 namespace Drought.Entity
 {
@@ -215,105 +216,6 @@ namespace Drought.Entity
         {
             //TODO
             //keep open list sorted by f value ranging from lowest to highest
-        }
-    }
-
-
-    class Node
-    {
-        /** Node's parent or null if no parent exists. */
-        private Node parent;
-
-        /** Node's position. */
-        private Vector2 pos;
-
-        /** The estimated cost to move from the start node to the goal node going through this node. */
-        private float f;
-
-        /** The cost to get to this node from the start node. */
-        private float g;
-
-        /** Heuristic value to move from this node to the goal node. */
-        private float h;
-
-        /** The distance to the node's parent or 0 if no parent exists. */
-        private float distToParent;
-
-
-        public Node()
-        {
-            pos = new Vector2();
-        }
-
-        public Node(int x, int y)
-        {
-            pos = new Vector2(x, y);
-        }
-
-        public float hVal
-        {
-            set { h = value; f = g + h;  }
-            get { return h; }
-        }
-
-        public float gVal
-        {
-            set { g = value; f = g + h; }
-            get { return g; }
-        }
-
-        public float getFVal()
-        {
-            return f;
-        }
-
-        /**
-         * Gets the distance from this node to its parent
-         * node. If no parent exists then 0.0f is returned.
-         * 
-         * @return The distance to the parent node.
-         */
-        public float getDistanceToParent()
-        {
-            return distToParent;
-        }
-
-        /**
-         * Gets the node's parent. Returns null if no
-         * parent node exists.
-         * 
-         * @return Node's parent.
-         */
-        public Node getParent()
-        {
-            return parent;
-        }
-
-        /**
-         * Sets the parent of this node and calculates the
-         * distance to it. If a null parameter is provided
-         * then this node has no parent.
-         * 
-         * @param parent The parent node to set or null if the node is to have no parent.
-         */
-        public void setParent(Node parent)
-        {
-            this.parent = parent;
-
-            if (parent != null)
-                distToParent = Vector2.Distance(pos, parent.pos);
-            else
-                distToParent = 0.0f;
-        }
-
-        /**
-         * Gets the node's position.
-         * 
-         * @return node's position.
-         */
-        public Vector2 getPosition()
-        {
-            return pos;
         }
     }
 }

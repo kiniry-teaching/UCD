@@ -19,6 +19,7 @@ namespace Drought.Entity
 
         private NormalMap normalMap;
 
+        /** The total length of the path. */
         private float length;
 
         /** The amount of distance along the path covered so far. */
@@ -86,6 +87,11 @@ namespace Drought.Entity
             return position;
         }
 
+        /** 
+         * Gets the normal at the current position along the path.
+         * 
+         * @return The normal at the current position.
+         */
         public Vector3 getNormal()
         {
             return normal;
@@ -144,7 +150,14 @@ namespace Drought.Entity
         }
         */
 
-        public List<Vector3> getRemainingPath() {
+        /**
+         * Gets a list containing the current position and all
+         * positions that have not yet been passed.
+         * 
+         * @return List containing the current and remaining positions in the path.
+         */
+        public List<Vector3> getRemainingPath()
+        {
             List<Vector3> remainingPath = new List<Vector3>();
             remainingPath.Add(position);
 

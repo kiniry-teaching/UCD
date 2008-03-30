@@ -74,11 +74,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DroughtGame.cs" />
-    <Compile Include="Entity\AStar.cs" />
+    <Compile Include="Pathfinding\AStar.cs" />
     <Compile Include="Graphics\LineTool.cs" />
     <Compile Include="Entity\MovableEntity.cs" />
     <Compile Include="Entity\NormalMap.cs" />
-    <Compile Include="Entity\Path.cs" />
+    <Compile Include="Pathfinding\Heap.cs" />
+    <Compile Include="Pathfinding\Node.cs" />
+    <Compile Include="Pathfinding\Path.cs" />
     <Compile Include="Game States\NetLevelState.cs" />
     <Compile Include="Game States\LevelState.cs">
       <SubType>Code</SubType>
