@@ -205,14 +205,14 @@ namespace Drought.Entity
          * 
          * @param list The list to check in.
          * @param node The node to check for.
-         * @return The node if found of null if not found.
+         * @return True if the node was found.
          */
-        private Node contains(List<Node> list, Node node)
+        private bool contains(List<Node> list, Node node)
         {
             for (int i = 0, n = list.Count; i < n; i++)
                 if (list[i].getPosition() == node.getPosition())
-                    return list[i];
-            return null;
+                    return true;
+            return false;
         }
     }
 }
