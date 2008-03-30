@@ -16,7 +16,7 @@ namespace TuneBlaster_
     /// <summary>
     /// The Class that calls everything
     /// Defalt Class
-    /// Authors Hugh Corrigan, Ahmed Warreth
+    /// Authors Hugh Corrigan, Ahmed Warreth, Dermot Kirby
     /// </summary>
     /// 
 
@@ -37,6 +37,7 @@ namespace TuneBlaster_
         Core core;
         BallManager ball;
         Image background;
+        GameAudio music;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
         public static ExplosionParticleSystem explosion;
         public static ExplosionSmokeParticleSystem smoke;
@@ -44,6 +45,7 @@ namespace TuneBlaster_
         public static GreenParticle greenblast;
         public static BlueParticle blueblast;
         public static PurpleParticle purpleblast;
+        Image.value colour;
 
         public Engine()
         {
@@ -53,6 +55,8 @@ namespace TuneBlaster_
             core = new Core();
             ball = new BallManager(core, this);
             background = new Image();
+            music = new GameAudio();
+
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
             explosion = new ExplosionParticleSystem(this,1);
@@ -95,6 +99,7 @@ namespace TuneBlaster_
             background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
             ball.Initialise();
             base.Initialize();
+            music.Initialise();
             //Content.RootDirectory = "Content";
         }
 
@@ -153,11 +158,24 @@ namespace TuneBlaster_
             // Allows the default game to exit on Xbox 360 and Windows
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-           core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
-           ball.Update(gameTime);
-            // TODO: Add your update logic here
 
-            base.Update(gameTime);
+           colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+
+           if (colour == Image.value.green)
+               music.InstrChanger(Image.value.green);
+
+           /* if (colour == Image.value.blue)
+               music.InstrChanger(Image.value.blue); */
+
+           if (colour == Image.value.red)
+               music.InstrChanger(Image.value.red);
+
+           if (colour == Image.value.purple)
+               music.InstrChanger(Image.value.purple);
+
+           ball.Update(gameTime);
+           music.UpdateAudio();
+           base.Update(gameTime);
         }
 
 
