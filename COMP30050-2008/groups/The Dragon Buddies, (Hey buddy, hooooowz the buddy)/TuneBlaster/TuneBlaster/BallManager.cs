@@ -9,7 +9,7 @@ namespace TuneBlaster_
 {
     /// <summary>
     /// The class in charge of creating all the balls in the regular game mode
-    /// Author Hugh Corrigan, Ahmed Warreth
+    /// Author Hugh Corrigan, Ahmed Warreth, Dermot Kirby
     /// </summary>
     class BallManager
     {
@@ -104,7 +104,7 @@ namespace TuneBlaster_
                 ball.LoadGraphicsContent(s, red);
             }
 
-            else if (ball.colour == Image.value.yellow)
+            else if (ball.colour == Image.value.purple)
             {
                 ball.LoadGraphicsContent(s, purple);
             }
@@ -129,7 +129,7 @@ namespace TuneBlaster_
 
             else if (temp == 1)
             {
-                colour = Image.value.yellow;
+                colour = Image.value.purple;
             }
 
             else if (temp == 2)
