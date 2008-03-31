@@ -6,6 +6,14 @@ public class Course {
    private int[] par; // the par for each hole 
    
    /*
+    * Class Constructor
+    */
+   Course(String n, int[] p){
+      name = n;
+      par = p;
+   }
+   
+   /*
    * Set the name of the course
    */
    /*@
