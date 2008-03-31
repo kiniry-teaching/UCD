@@ -30,8 +30,8 @@ public class Course {
    /*@
    @ assignable par;
    @*/
-   public void setPar(/*@ non_null @*/ int[] par) {
-     this.par = par;
+   public void setPar(/*@ non_null @*/ int[] p) {
+     this.par = p;
    }
 
    /*
