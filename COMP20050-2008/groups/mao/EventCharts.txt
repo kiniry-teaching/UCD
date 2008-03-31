@@ -1,0 +1,29 @@
+Thrust event charts 
+by Magdalena
+
+external incoming events			objects involved
+
+Request to move the SPACESHIP			SPACESHIP, GRAVITY
+
+Request to shoot from the SPACESHIP		SPACESHIP, BULLET
+
+Request to take the FUEL			SPACESHIP, FUEL
+
+Request to pick up the BALL			SPACESHIP, BALL, STRING, GRAVITY
+
+Request to start the game			ENTITY, WINDOW
+
+Request to stop the game			ENTITY, WINDOW
+
+
+
+
+
+external outcoming events			objects involved
+
+
+internal incoming events			objects involved
+
+internal outcoming events			objects involved
+
+
