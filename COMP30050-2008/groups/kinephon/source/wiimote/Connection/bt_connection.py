@@ -60,8 +60,10 @@ def establish_connection(wiimote_address):
     print "Connection established."
 
 def receive_data():    
+    send_socket.send(converter.toString((0x52, 0x11, 240)))
     counter = 0
     fout = open("results.dat", "a")
+    previous_leds = 0
     for n in range(1, 10000):
         counter += 1
         if (counter%1000 == 0):
@@ -85,15 +87,19 @@ def receive_data():
             
             #now we will report the points that are visible on the wiimote
             leds = 0
-            if (result[0] != 255):
-                leds += 128
-            if (result[3] != 255):
-                leds += 64
-            if (result[6] != 255):
-                leds += 32
-            if (result[9] != 255):
-                leds += 16
-            send_socket.send(0x52, 0x11, leds)
+            if (len(result) > 0):
+                if (result[0] != 255):
+                    leds += 16
+                if (result[3] != 255):
+                    leds += 32
+                if (result[6] != 255):
+                    leds += 64
+                if (result[9] != 255):
+                    leds += 128
+            if (leds != previous_leds) :
+                send_socket.send(converter.toString((0x52, 0x11, leds)))
+                previous_leds = leds
+                print leds
     
     fout.close()
     print "Receiving finished."
