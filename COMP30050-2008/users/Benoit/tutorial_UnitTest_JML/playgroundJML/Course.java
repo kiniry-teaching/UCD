@@ -2,8 +2,8 @@ package playgroundJML;
 
 public class Course {
 
-   private String name; // name of course
-   private int[] par; // the par for each hole 
+   public String name; // name of course
+   public int[] par; // the par for each hole 
    
    /*
     * Class Constructor
