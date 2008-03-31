@@ -44,7 +44,7 @@ public class Course {
    /*
    * Return the par for a given hole
    */
-   public int parForHole(int hole) {
+   public /*@ pure @*/ int parForHole(int hole) {
      return par[hole-1];
    }  
    
