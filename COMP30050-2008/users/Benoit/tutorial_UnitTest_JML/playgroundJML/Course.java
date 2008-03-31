@@ -44,7 +44,7 @@ public class Course {
    * Return the par from hole 1 and up to a given hole
    */
    /*@
-   @ requires 0 < hole <= par.length;
+   @ requires 0 < hole && hole <= par.length;
    @ ensures 0 < \result;
    @*/
    public /*@ pure @*/ int parUpToHole(int hole) {
