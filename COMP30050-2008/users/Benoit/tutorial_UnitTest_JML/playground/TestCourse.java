@@ -21,10 +21,6 @@ public class TestCourse extends TestCase{
         assertEquals(18, c.getNumberOfHoles());
      }
      
-     public void testDefaultCourse(){
-        Course def = new Course();
-        assertEquals(0, def.getNumberOfHoles());
-     }
      
      public void testParUpToHole() {
        assertEquals(0, c.parUpToHole(0));
