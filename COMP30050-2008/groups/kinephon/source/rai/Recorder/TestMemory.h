@@ -10,6 +10,7 @@
 #ifdef WIN32
 #	pragma warning(disable: 4786)
 #endif
+#include <cassert>
 #include <iostream>
 using namespace std;
 using std::cout;
