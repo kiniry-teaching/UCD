@@ -66,10 +66,8 @@ public class Course {
    
    
    public static void main(String[] arg){
-      Course c = new Course();
-      c.setName("St. Andrews");
       int[] par = {4,4,4,4,5,4,4,3,4,4,3,4,4,5,4,4,4,4};
-      c.setPar(par);
+      Course c = new Course("St. Andrews");
       
       System.out.println(0 == c.parUpToHole(0));
       System.out.println(8 == c.parUpToHole(2));
