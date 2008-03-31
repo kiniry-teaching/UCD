@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include "../type.h"
 using namespace std;
 
 namespace audio
@@ -56,14 +58,15 @@ public:
 	 * @param trackNo trackNo number this event belongs to
 	 * @returns true if write is successful
 	 */
-	bool write(vector<uchar>* event, int trackNo);
+	bool write(vector<uchar> event, int trackNo);
 		
 private:
 	string fileName_;
+    ofstream myFile_;
 	//buffer
-	vector<uchar> trackOne;
-	vector<uchar> trackTwo;
-	vector<uchar> trackThree;
+	vector<uchar> trackOne_;
+	vector<uchar> trackTwo_;
+	vector<uchar> trackThree_;
 	//other needed I/O devices, needs further research.
 };
 
