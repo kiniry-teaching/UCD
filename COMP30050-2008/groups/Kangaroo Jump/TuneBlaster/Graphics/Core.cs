@@ -125,6 +125,8 @@ namespace TuneBlaster_.Graphics
             ballsSize++;
             CheckExplosions();
             UpdateLoose();
+            UpdateLoose();
+            UpdateLoose();
         }
 
         /*

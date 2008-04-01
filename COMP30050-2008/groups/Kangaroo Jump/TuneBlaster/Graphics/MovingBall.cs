@@ -105,9 +105,12 @@ namespace TuneBlaster_.Graphics
                 if (collisionBall == null)
                 {
                     f.SetAgainstCore();
+                    f.DoAngles();
                 } 
                 else 
                 {
+                    f.CorrectPostion(collisionBall);
+                    f.DoAngles();
                     f.AddSupport(collisionBall);
                     f.SetCollisionBall(collisionBall);
                 }
