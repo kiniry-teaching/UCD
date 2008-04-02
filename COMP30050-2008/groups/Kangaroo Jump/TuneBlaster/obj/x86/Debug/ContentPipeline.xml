@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Resources\Textures\space-background.xnb</Output>
-      <Time>2008-03-31T20:44:03.0737679+01:00</Time>
+      <Time>2008-04-02T22:47:34.1997449+01:00</Time>
     </Item>
     <Item>
       <Source>Resources\Textures\Core.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Resources\Textures\Core.xnb</Output>
-      <Time>2008-03-31T20:44:03.0617679+01:00</Time>
+      <Time>2008-04-02T22:47:34.1547449+01:00</Time>
     </Item>
     <Item>
       <Source>Resources\Textures\Blue.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Resources\Textures\Blue.xnb</Output>
-      <Time>2008-03-31T20:44:03.0557679+01:00</Time>
+      <Time>2008-04-02T22:47:34.1337449+01:00</Time>
     </Item>
     <Item>
       <Source>Resources\Textures\Green.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Resources\Textures\Green.xnb</Output>
-      <Time>2008-03-31T20:44:02.9897679+01:00</Time>
+      <Time>2008-04-02T22:47:34.0407449+01:00</Time>
     </Item>
     <Item>
       <Source>Resources\Textures\Pur.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Resources\Textures\Pur.xnb</Output>
-      <Time>2008-03-31T20:44:03.0517679+01:00</Time>
+      <Time>2008-04-02T22:47:34.1147449+01:00</Time>
     </Item>
     <Item>
       <Source>Resources\Textures\Red.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Resources\Textures\Red.xnb</Output>
-      <Time>2008-03-31T20:44:03.0797679+01:00</Time>
+      <Time>2008-04-02T22:47:34.2187449+01:00</Time>
     </Item>
     <Item>
       <Source>explosion.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\explosion.xnb</Output>
-      <Time>2008-03-31T20:44:03.7487679+01:00</Time>
+      <Time>2008-04-02T22:46:32.2927449+01:00</Time>
     </Item>
     <Item>
       <Source>smoke.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\smoke.xnb</Output>
-      <Time>2008-03-31T20:44:03.7417679+01:00</Time>
+      <Time>2008-04-02T22:46:32.2727449+01:00</Time>
     </Item>
     <Item>
       <Source>blueparticle.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\blueparticle.xnb</Output>
-      <Time>2008-03-31T20:44:03.7337679+01:00</Time>
+      <Time>2008-04-02T22:46:32.2327449+01:00</Time>
     </Item>
     <Item>
       <Source>greenparticle.png</Source>
@@ -89,7 +89,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\greenparticle.xnb</Output>
-      <Time>2008-03-31T20:44:03.7537679+01:00</Time>
+      <Time>2008-04-02T22:46:32.3177449+01:00</Time>
     </Item>
     <Item>
       <Source>purpleparticle.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\purpleparticle.xnb</Output>
-      <Time>2008-03-31T20:44:03.7837679+01:00</Time>
+      <Time>2008-04-02T22:47:36.0007449+01:00</Time>
     </Item>
     <Item>
       <Source>redparticle.png</Source>
@@ -107,37 +107,37 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\redparticle.xnb</Output>
-      <Time>2008-03-31T20:44:03.7137679+01:00</Time>
+      <Time>2008-04-02T22:46:32.1497449+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>C:\Users\Burt\Documents\Visual Studio 2005\Projects\New Folder\TuneBlaster\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Burt\Documents\Visual Studio 2005\Projects\New Folder\TuneBlaster\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Burt\Documents\Visual Studio 2005\Projects\New Folder\TuneBlaster\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Burt\Documents\Visual Studio 2005\Projects\New Folder\TuneBlaster\bin\x86\Debug\</OutputDirectory>
+      <RootDirectory>C:\Users\Ahmed\Documents\Game\TuneBlaster\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Ahmed\Documents\Game\TuneBlaster\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Ahmed\Documents\Game\TuneBlaster\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Ahmed\Documents\Game\TuneBlaster\bin\x86\Debug\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2007-11-28T12:08:00+00:00</Value>
+        <Value>2007-11-28T13:08:00+00:00</Value>
       </Assembly>
       <Assembly>
         <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2007-11-28T12:08:42+00:00</Value>
+        <Value>2007-11-28T13:08:42+00:00</Value>
       </Assembly>
       <Assembly>
         <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2007-11-28T12:08:30+00:00</Value>
+        <Value>2007-11-28T13:08:30+00:00</Value>
       </Assembly>
       <Assembly>
         <Key>c:\Program Files\Microsoft XNA\XNA Game Studio\v2.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2007-11-28T12:07:44+00:00</Value>
+        <Value>2007-11-28T13:07:44+00:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\2.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2008-03-30T19:49:49.2305605+01:00</Value>
+        <Value>2008-02-20T00:12:11.151+00:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
