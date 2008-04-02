@@ -58,9 +58,7 @@
     <Compile Include="BallManager.cs">
       <Name>BallManager</Name>
     </Compile>
-    <Compile Include="BlueParticle.cs" />
-    <Compile Include="ExplosionParticleSystem.cs" />
-    <Compile Include="ExplosionSmokeParticleSystem.cs" />
+    <Compile Include="ColouredParticle.cs" />
     <Compile Include="GameAudio.cs" />
     <Compile Include="Graphics\Core.cs">
       <Name>Core</Name>
@@ -74,7 +72,6 @@
     <Compile Include="Graphics\MovingBall.cs">
       <Name>MovingBall</Name>
     </Compile>
-    <Compile Include="GreenParticle.cs" />
     <Compile Include="particle.cs" />
     <Compile Include="ParticleSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,17 +81,12 @@
     <Compile Include="Engine.cs">
       <Name>Engine</Name>
     </Compile>
-    <Compile Include="PurpleParticle.cs" />
-    <Compile Include="RedParticle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico">
       <Name>Game</Name>
     </Content>
     <Content Include="Graphics\explosion.png" />
-    <Content Include="Graphics\ParticleSample.png" />
-    <Content Include="Graphics\smoke.png" />
-    <Content Include="testparticle.png" />
   </ItemGroup>
   <ItemGroup>
     <NestedContentProject Include="Content.contentproj">
