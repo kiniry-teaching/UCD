@@ -23,7 +23,7 @@ namespace TuneBlaster_.Graphics
         public List<FixedBall> balls;
         public List<MovingBall> looseBalls;
         static float maxAcceleration = 0.05f;
-        value colour;
+        
         
 
         #endregion
@@ -69,30 +69,26 @@ namespace TuneBlaster_.Graphics
         /*
          * Update variables for each frame
          */
-
-        public value Update(GameTime gameTime, KeyboardState keyBoardState, GamePadState gamePadState)
+        public void Update(GameTime gameTime, KeyboardState keyBoardState, GamePadState gamePadState)
         {
-            colour = value.none;
             for (int i = ballsSize - 1; i >= 0; i--)
-
             {
                 if (balls[i] != null)
                 {
                     if (balls[i].IsDead())
                     {
-                        colour = balls[i].colour;
                         balls.Remove(balls[i]);
                         ballsSize--;
                     }
                 }
             }
-            Move(keyBoardState, gamePadState);
-            return colour;
+
+            Move(keyBoardState, gamePadState);            
         }
 
         #endregion
 
-        #region Action Methods (Move, AddBall, CheckLoose, UpdateLoose, CheckExplosions)
+        #region Action Methods (Move, AddBall, CheckExplosions)
 
         /*
          * Move the core based on the input
@@ -124,6 +120,7 @@ namespace TuneBlaster_.Graphics
             balls.Add(f);
             ballsSize++;
             CheckExplosions();
+            UpdateLoose();
             UpdateLoose();
             UpdateLoose();
             UpdateLoose();
@@ -191,6 +188,9 @@ namespace TuneBlaster_.Graphics
                        Engine.purpleblast.AddParticles(where);
                        Engine.redblast.AddParticles(where);
                        Engine.blueblast.AddParticles(where);
+
+
+                    
 
                         //to put in code for explosion
                       
