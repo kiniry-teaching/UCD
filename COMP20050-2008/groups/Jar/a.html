@@ -1,0 +1,2912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+
+<title>BON Documentation: THRUST_GAME</title>
+
+<script type="text/javascript">
+<!--
+
+var items = ['system_chart:THRUST_GAME','class_chart:INFORMATION','class_chart:TOW_LINE','class_chart:SOUND','class_chart:DOOR','class_chart:BULLET','class_chart:HIGH_SCORE','class_chart:MOVABLE','class_chart:SOUND_CONFIGURATION','class_chart:FUEL_TANK','class_chart:NUCLEAR_POWER_PLANT','class_chart:LIVES','class_chart:GROUND','class_chart:BUTTON','class_chart:ENTITY','class_chart:SCORE','class_chart:LEVEL','class_chart:FUEL','class_chart:CONTROL_CONFIGURATION','class_chart:LIMPET_GUN','class_chart:USER_CONTROL','class_chart:POD_STAND','class_chart:NON_MOVABLE','class_chart:SHIP','class_chart:POD','class_chart:TIMER','class_chart:PHYSICS','class_chart:HUD','class_chart:BONUS','class_chart:DRAW','cluster_chart:CONFIGURATION','cluster_chart:INFORMATION_CLUSTER','cluster_chart:ENTITY_CLUSTER','cluster_chart:GAME','event_chart:1','event_chart:2','event_chart:3','event_chart:4','creation_chart:1','scenario_chart:1','class_dictionary:1','class_dictionary:2'];
+var topOptions = [ 'System Chart', 'system_chart', 'Class Dictionaries', 'class_dictionary', 'Cluster Charts', 'cluster_chart', 'Class Charts', 'class_chart', 'Event Charts', 'event_chart', 'Scenario Charts', 'scenario_chart', 'Creation Charts', 'creation_chart' ];
+var subOptions = [];
+subOptions['system_chart'] = [ 'THRUST_GAME', 'system_chart:THRUST_GAME' ];
+subOptions['cluster_chart'] = [ 'CONFIGURATION','cluster_chart:CONFIGURATION','ENTITY_CLUSTER','cluster_chart:ENTITY_CLUSTER','GAME','cluster_chart:GAME','INFORMATION_CLUSTER','cluster_chart:INFORMATION_CLUSTER' ];
+subOptions['class_chart'] = [ 'BONUS','class_chart:BONUS','BULLET','class_chart:BULLET','BUTTON','class_chart:BUTTON','CONTROL_CONFIGURATION','class_chart:CONTROL_CONFIGURATION','DOOR','class_chart:DOOR','DRAW','class_chart:DRAW','ENTITY','class_chart:ENTITY','FUEL','class_chart:FUEL','FUEL_TANK','class_chart:FUEL_TANK','GROUND','class_chart:GROUND','HIGH_SCORE','class_chart:HIGH_SCORE','HUD','class_chart:HUD','INFORMATION','class_chart:INFORMATION','LEVEL','class_chart:LEVEL','LIMPET_GUN','class_chart:LIMPET_GUN','LIVES','class_chart:LIVES','MOVABLE','class_chart:MOVABLE','NON_MOVABLE','class_chart:NON_MOVABLE','NUCLEAR_POWER_PLANT','class_chart:NUCLEAR_POWER_PLANT','PHYSICS','class_chart:PHYSICS','POD','class_chart:POD','POD_STAND','class_chart:POD_STAND','SCORE','class_chart:SCORE','SHIP','class_chart:SHIP','SOUND','class_chart:SOUND','SOUND_CONFIGURATION','class_chart:SOUND_CONFIGURATION','TIMER','class_chart:TIMER','TOW_LINE','class_chart:TOW_LINE','USER_CONTROL','class_chart:USER_CONTROL' ];
+subOptions['event_chart'] = [ 'Event Chart 1','event_chart:1','Event Chart 2','event_chart:2','Event Chart 3','event_chart:3','Event Chart 4','event_chart:4' ];
+subOptions['creation_chart'] = [ 'Creation Chart 1','creation_chart:1' ];
+subOptions['scenario_chart'] = [ 'Scenario Chart 1','scenario_chart:1' ];
+subOptions['class_dictionary'] = [ 'Class Dictionary 1','class_dictionary:1','Class Dictionary 2','class_dictionary:2' ];
+
+
+var showAll = false;
+var sysTitle = 'system_title';
+var topMenu = 'top-menu';
+var subMenu = 'sub-menu';
+
+function setElText(id,text) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    elem.innerHTML = text;
+  }
+}
+
+function toggleShowAll() {
+  showAll = !showAll;
+  if (showAll) {
+    displayAll();
+    setElText('showlink', 'Show One');
+  } else {
+    hideAll();
+    setElText('showlink', 'Show All');
+  }
+  showSelected();
+  return false;
+}
+
+function select(id) {
+  if (showAll) {
+//    setHash(id);
+    return true;
+  } else {
+    showOnly(id);
+    return true;
+  }
+}
+
+function showOnly(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hideAll();
+    showElem(id);
+  }
+}
+
+function hideAll() {
+  for (var i=0; i<items.length; i++) {
+    hideElem(items[i]);
+  }
+}
+
+function displayAll() {
+  for (var i=0; i<items.length; i++) {
+    showElem(items[i]);
+  }
+}
+
+function showElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    show(elem);
+  }
+}
+
+function hideElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hide(elem);
+  }
+}
+
+function hide(elem) {
+  addClass(elem,'hidden');
+}
+
+function show(elem) {
+  removeClass(elem,'hidden');
+}
+
+function addClass(elem,cName) {
+  if (!elem.className) {
+    elem.className = cName;
+  } else if (elem.className.indexOf(cName) == -1) {
+    elem.className += ' ' + cName;
+  }
+}
+
+function removeClass(elem,cName) {
+  if (elem.className) {
+    var toReplace = elem.className.match(' ' + cName);
+    elem.className = elem.className.replace(toReplace, '');
+  }
+}
+
+function setBack(id) {
+//Not yet...
+}
+
+function initialPopulate() {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    topSelect.options.length = 0;
+    for (var i=0; i < topOptions.length; i+=2) {
+      topSelect.options[i/2] = new Option(topOptions[i],topOptions[i+1]);
+    }
+  }
+  if (window.location.hash) {
+    hashSelect(window.location.hash.substr(1));    
+  } else {
+    populate();
+    showSelected();
+  }
+  lastHash = window.location.hash;
+  //Trigger checkHash
+  setInterval(checkHash,100);
+}
+
+function hashSelect(hash) {
+  var parts = hash.split(':');
+  if (parts.length == 2) {
+    linkSelect(parts[0],hash);
+  } else {
+    populate();
+  }
+}
+
+var lastHash = '';
+
+function checkHash() {
+
+  if (window.location.hash) {
+    if (window.location.hash != lastHash) {
+      hashSelect(window.location.hash.substr(1));
+      lastHash = window.location.hash;
+    }
+  }
+}
+
+function setHash(hash) {
+  lastHash = '#' + hash;
+  window.location.hash = hash;
+}
+
+function populate() {
+
+  var subSelect = document.getElementById(subMenu);
+  var topSelect = document.getElementById(topMenu);
+
+  if (subSelect && topSelect) {
+    var selected = topSelect.options[topSelect.selectedIndex].value;
+    if (selected) {
+      var chosenSubOptions = subOptions[selected];
+      subSelect.options.length = 0;
+      for (var i=0; i < chosenSubOptions.length; i+=2) {
+        subSelect.options[i/2] = new Option(chosenSubOptions[i],chosenSubOptions[i+1]);
+      }
+    }
+  }
+}
+
+function showSelected() {
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    var selected = subSelect.options[subSelect.selectedIndex].value;
+    if (selected) {
+      select(selected);
+      setHash(selected);
+    }
+  }
+}
+
+function linkSelect(top, sub) {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    for (var i=0; i < topSelect.options.length; i++) {
+      if (topSelect.options[i].value == top) {
+        topSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }  
+  populate();
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    for (var i=0; i < subSelect.options.length; i++) {
+      if (subSelect.options[i].value == sub) {
+        subSelect.selectedIndex = i;
+        showSelected();
+        return false;
+      }
+    }
+    showSelected();
+  }
+  return true;
+}
+
+
+//-->
+</script>
+
+<style type="text/css">
+
+.hidden {
+  position:absolute;
+  left:0px;
+  top:-500px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+body {
+  font-family: Optima, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, sans-serif;
+}
+
+.list-entry {
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+#main {
+  padding-bottom: 100px;
+}
+
+#footer {
+  z-index: 1;
+  position: fixed; 
+  bottom: 0px;
+  right: 0px; 
+  width: 100%;
+  border-top: 2px solid #000000;
+  background-color: #cccccc;
+}
+
+#left-footer {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+#left-footer select {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+#showlink {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  min-width: 125px;
+}
+
+#top-menu {
+  min-width: 160px;
+}
+
+#sub-menu {
+  min-width: 220px;
+}
+
+#right-footer {
+  margin: 5px 5px 0px 0px;
+  padding: 0;
+  text-align: right;
+}
+
+#footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+dl {
+  margin: 0 0 0 10px;
+}
+
+dd {
+  margin-left: 20px;
+} 
+
+.scenario_entry dt {
+  font-weight: bold;
+}
+
+.indexing dt, .explanation dt {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+.top-level {
+  width: 98%;
+  margin: auto;
+}
+
+.outer {
+  width: 100%;
+  background-color: #a2a2a2;
+  border: 2px solid #000000;
+  margin-bottom: 30px;
+}
+
+.type, .name, .part {
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+
+.explanation, .indexing {
+  padding: 5px 5px 5px 10px;
+  background-color: #ffffff;
+  vertical-align: top;
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+}
+
+.name {
+  background-color: #f3f0f0;
+  font-size: 1.1em;
+}
+
+.part {
+  background-color: #cccccc;
+}
+
+.type, .part {
+  width: 25%;
+}
+
+.type {
+  background-color: #bcbcbc;
+}
+
+.name, .indexing, .explanation {
+  width: 50%;
+}
+
+.top, .middle, .bottom {
+  width: 100%;
+}
+
+.bottom table {
+  border: 4px groove #c0c0c0;
+  width: 100%;
+}
+
+.bottom tr {
+  width: 100%;
+}
+
+.bottom td, .bottom th {
+  border: 1px inset #c0c0c0;
+  vertical-align: top;
+  padding: 8px 20px 8px 20px;
+}
+
+.spaced-lines {
+  line-height: 1.5em;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.light-grey {
+  background-color: #f3f0f0;
+}
+
+.grey {
+  background-color: #cccccc;
+}
+</style>
+
+</head>
+<body onload="initialPopulate();">
+
+<div id="main">
+
+<div class="top-level" id="system_chart:THRUST_GAME">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SYSTEM</th>
+      <td class="name" colspan="2">THRUST_GAME</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:CONFIGURATION" onclick="return linkSelect('cluster_chart','cluster_chart:CONFIGURATION');">CONFIGURATION</a></td>
+            <td class="white">&#8220;Setting up the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></td>
+            <td class="white">&#8220;initialisation of game state&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></td>
+            <td class="white">&#8220;Cluster of ENTITYs in game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></td>
+            <td class="white">&#8220;dynamically changing data defining the state of the game&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:CONFIGURATION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">CONFIGURATION</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+<table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:CONTROL_CONFIGURATION" onclick="return linkSelect('class_chart','class_chart:CONTROL_CONFIGURATION');">CONTROL_CONFIGURATION</a></td>
+            <td class="white">&#8220;Configure controls for fire, accept/shields/attach/pickup, left, right, thrust&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SOUND_CONFIGURATION" onclick="return linkSelect('class_chart','class_chart:SOUND_CONFIGURATION');">SOUND_CONFIGURATION</a></td>
+            <td class="white">&#8220;Turn sound on and off&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:GAME">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">GAME</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+<table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></td>
+            <td class="white">&#8220;A round of the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DRAW" onclick="return linkSelect('class_chart','class_chart:DRAW');">DRAW</a></td>
+            <td class="white">&#8220;On level load, objects to be drawn to screen, HUD, stars, grounds, etc.&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></td>
+            <td class="white">&#8220;visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet, shows menu when not being played&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SOUND" onclick="return linkSelect('class_chart','class_chart:SOUND');">SOUND</a></td>
+            <td class="white">&#8220;Outputs event sounds&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:PHYSICS" onclick="return linkSelect('class_chart','class_chart:PHYSICS');">PHYSICS</a></td>
+            <td class="white">&#8220;Calculates the physics, IE (handles movement based on input thrust and gravity)&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:ENTITY_CLUSTER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">ENTITY_CLUSTER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+<table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></td>
+            <td class="white">&#8220;An interactive visual object in the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></td>
+            <td class="white">&#8220;ENTITIES in game that can be moved&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></td>
+            <td class="white">&#8220;MOVABLEs that user control directly&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></td>
+            <td class="white">&#8220;Entities in game that have a fixed position&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></td>
+            <td class="white">&#8220;The main yellowish, triangular ENTITY controlled by the player&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BULLET" onclick="return linkSelect('class_chart','class_chart:BULLET');">BULLET</a></td>
+            <td class="white">&#8220;ENTITIES that collide with other ENTITIES&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:POD" onclick="return linkSelect('class_chart','class_chart:POD');">POD</a></td>
+            <td class="white">&#8220;The objective of the level is to retrieve this&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TOW_LINE" onclick="return linkSelect('class_chart','class_chart:TOW_LINE');">TOW_LINE</a></td>
+            <td class="white">&#8220;An ENTITY which holds the POD at a fixed distance from the SHIP&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:POD_STAND" onclick="return linkSelect('class_chart','class_chart:POD_STAND');">POD_STAND</a></td>
+            <td class="white">&#8220;This is a stand shaped object that holds the POD until it becomes attached&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></td>
+            <td class="white">&#8220;A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BUTTON" onclick="return linkSelect('class_chart','class_chart:BUTTON');">BUTTON</a></td>
+            <td class="white">&#8220;An entity which opens the door when a bullet has a COLLISION with it&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></td>
+            <td class="white">&#8220;This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FUEL_TANK" onclick="return linkSelect('class_chart','class_chart:FUEL_TANK');">FUEL_TANK</a></td>
+            <td class="white">&#8220;An ENTITY from which the SPACESHIP can get FUEL&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></td>
+            <td class="white">&#8220;An AI controlled ENTITY that fires BULLETS&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:GROUND" onclick="return linkSelect('class_chart','class_chart:GROUND');">GROUND</a></td>
+            <td class="white">&#8220;Area of screen through which ENTITIES can not travel&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:INFORMATION_CLUSTER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">INFORMATION_CLUSTER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+<table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></td>
+            <td class="white">&#8220;visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></td>
+            <td class="white">&#8220;dynamically changing data defining the state of the game.&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FUEL" onclick="return linkSelect('class_chart','class_chart:FUEL');">FUEL</a></td>
+            <td class="white">&#8220;Consumed by the SPACESHIP through forward movement and use of the shields&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SCORE" onclick="return linkSelect('class_chart','class_chart:SCORE');">SCORE</a></td>
+            <td class="white">&#8220;Summation of points received in game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIVES" onclick="return linkSelect('class_chart','class_chart:LIVES');">LIVES</a></td>
+            <td class="white">&#8220;Number of COLLISIONs the SPACESHIP can have before the game is over&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HIGH_SCORE" onclick="return linkSelect('class_chart','class_chart:HIGH_SCORE');">HIGH_SCORE</a></td>
+            <td class="white">&#8220;largest score attained in the game history, matched with the name of the player who scored it&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BONUS" onclick="return linkSelect('class_chart','class_chart:BONUS');">BONUS</a></td>
+            <td class="white">&#8220;Extra score achieved by finishing levels and destroying planets&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TIMER" onclick="return linkSelect('class_chart','class_chart:TIMER');">TIMER</a></td>
+            <td class="white">&#8220;a timer created by an EVENT or action which counts to another EVENT or ACTION&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:CONTROL_CONFIGURATION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">CONTROL_CONFIGURATION</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Configure controls for fire, accept/shields/attach/pickup, left, right, thrust&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;CONFIGURATION&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Whats key is this mapped to?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Map key&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Cannot be mapped to quit button&#8221;<br/>&#8220;Cannot be mapped to pause button&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:SOUND_CONFIGURATION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">SOUND_CONFIGURATION</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Turn sound on and off&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;CONFIGURATION&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Is music on?&#8221;<br/>&#8220;IS SOUND on?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Turn music on&#8221;<br/>&#8220;Turn music off&#8221;<br/>&#8220;Turn SOUND on&#8221;<br/>&#8220;Turn SOUND off&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LEVEL">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LEVEL</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Creates all objects in game and keeps track of the state of the game&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+          <dd>
+            revised: &#8220;11-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Is the NUCLEAR_POWER_PLANT destroyed?&#8221;<br/>&#8220;What level are you on?&#8221;<br/>&#8220;Has the ship left the planet?&#8221;<br/>&#8220;Did the ship have the pod?&#8221;<br/>&#8220;On last collision did the ship have more than one life or more than 0 fuel?&#8221;<br/>&#8220;On last collision was ship involved?&#8221;<br/>&#8220;On last collision was POD attached?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Create GROUND&#8221;<br/>&#8220;Create LIMPET_GUN&#8221;<br/>&#8220;Create FUEL&#8221;<br/>&#8220;Create DOOR&#8221;<br/>&#8220;Create BUTTON&#8221;<br/>&#8220;Create SHIP&#8221;<br/>&#8220;Create POD&#8221;<br/>&#8220;End Level&#8221;<br/>&#8220;Draw level&#8221;<br/>&#8220;Re-spawn ship&#8221;<br/>&#8220;Re-spawn ship + POD&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Can only read specific map depending on level number&#8221;<br/>&#8220;Cannot create ENTITIES within the ground&#8221;<br/>&#8220;Will not re-spawn if LIVES = 0, or FUEL = 0 and ship has had a collision&#8221;<br/>&#8220;Re-spawns ship with POD if POD was attached when it last had a collision&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:HUD">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">HUD</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+          <dd>
+            revised: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Is the power plant destroyed?&#8221;<br/>&#8220;Has the ship/pod been destroyed?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Get score&#8221;<br/>&#8220;Get fuel&#8221;<br/>&#8220;Get lives&#8221;<br/>&#8220;Read timer&#8221;<br/>&#8220;Display end of level dialog&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DRAW">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DRAW</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Draws objects to screen, HUD, stars, grounds, etc., also tracks ship position using a three by three grid and moves the perspective to match&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;THRUST_GAME&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Is it a new level?&#8221;<br/>&#8220;What grid section is the ship in?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Refresh screen&#8221;<br/>&#8220;Move perspective relative what grid the ship is currently in&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:SOUND">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">SOUND</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Outputs event sounds&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;GAME&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Play collision&#8221;<br/>&#8220;Play successful pickup&#8221;<br/>&#8220;Play thrust&#8221;<br/>&#8220;Play ship fire&#8221;<br/>&#8220;Play shield&#8221;<br/>&#8220;Play enemy fire&#8221;<br/>&#8220;Play timer&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Is dependant on the sound configuration&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PHYSICS">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PHYSICS</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Controls the physics of the game and calculate the movement of the MOVABLE entities&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;GAME&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;11-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;What is resultant force of ship?&#8221;<br/>&#8220;What is resultant force of pod?&#8221;<br/>&#8220;What is the mass of the ship?&#8221;<br/>&#8220;What is the mass of the pod?&#8221;<br/>&#8220;What is the value of gravity?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Move system&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Gravity has a constant magnitude, but can be negative or positive which indicates direction&#8221;<br/>&#8220;The mass of the ship is static&#8221;<br/>&#8220;The mass of the pod is static&#8221;<br/>&#8220;The towline has zero mass&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ENTITY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ENTITY</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;An interactive visual object in the game&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;6-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Are you in a Collision?&#8221;<br/>&#8220;What is your position?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Remove from current level&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;There is a max firing rate.&#8221;<br/>&#8220;You can not cross borders with other entities.&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:MOVABLE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">MOVABLE</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;ENTITIES in game that can be moved&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+          <dd>
+            revised: &#8220;8-3-2008 S Russell&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;What is your mass&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;There is a max velocity.&#8221;<br/>&#8220;Position must stay within the bounds of the level.&#8221;<br/>&#8220;The magnitude of the velocity must be between 0 and Max_Velocity.&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:USER_CONTROL">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">USER_CONTROL</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Movable entities that are controlled by the player&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Are you attached?&#8221;<br/>&#8220;What is your current velocity?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Apply thrust&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Always feels a constant force directly down&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:NON_MOVABLE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">NON_MOVABLE</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Entities in game that have a fixed position&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Timer at zero?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Start timer&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Must have a velocity of zero&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:SHIP">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">SHIP</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;The main yellowish, triangular ENTITY controlled by the player&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;6-3-2008&#8221;;
+          </dd>
+          <dd>
+            revised: &#8220;9-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Information&#8221;<br/>&#8220;Are the shields active?&#8221;<br/>&#8220;Is the POD attached?&#8221;<br/>&#8220;What direction are you facing?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Pick up FUEL/Activate Shields/Attach POD&#8221;<br/>&#8220;Fire Bullet&#8221;<br/>&#8220;Rotate left&#8221;<br/>&#8220;Rotate Right&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;There is a max firing rate.&#8221;<br/>&#8220;You can not cross borders with other entities without having a collision&#8221;<br/>&#8220;Can only use shields while fuel is greater than 0&#8221;<br/>&#8220;Can only thrust while fuel is greater than 0&#8221;<br/>&#8220;When POD is attached it is always attached to the opposite end of the TOW_LINE to SHIP&#8221;<br/>&#8220;Ship is not destroyed by collision with bullets if shield is up&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:BULLET">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">BULLET</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;6-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Do you Exist&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Create&#8221;<br/>&#8220;Remove&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Only exists while has no collision&#8221;<br/>&#8220;Unaffected by gravity&#8221;<br/>&#8220;Has static velocity&#8221;<br/>&#8220;Can only travel a fixed distance before it disappears&#8221;<br/>&#8220;Can only travel in straight lines&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:POD">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">POD</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;the object of the level is to retrieve this&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;6-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Motionless until attached to ship&#8221;<br/>&#8220;Only experiences force (excluding gravity) towards the ship&#8221;<br/>&#8220;Experiences movement relative to SHIP only&#8221;<br/>&#8220;When attached is always attached to opposite end of TOW_LINE to SHIP&#8221;<br/>&#8220;Must be within a minimum distance of the ship to attach&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:TOW_LINE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">TOW_LINE</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;an ENTITY which holds the POD at a fixed distance from the SHIP&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;6-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Do you exist&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Is always positioned between the POD and the SHIP&#8221;<br/>&#8220;Has a fixed length&#8221;<br/>&#8220;Only exist when the player attaches the pod to the ship&#8221;<br/>&#8220;Has 0 mass only&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:POD_STAND">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">POD_STAND</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;This is a stand shaped object that holds the POD until it becomes attached&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;9-3-2008 K Byrne&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Has the pod been picked up&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Remove&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Can not be destroyed&#8221;<br/>&#8220;Can only exist while the pod is not attached to the ship&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:NUCLEAR_POWER_PLANT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">NUCLEAR_POWER_PLANT</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;How much damage have you taken?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Turn on LIMPET_GUNs&#8221;<br/>&#8220;Turn off LIMPET_GUNs&#8221;<br/>&#8220;Change to destroyed&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Has a maximum level of damage it can take before the planet is destroyed.&#8221;<br/>&#8220;Amount of damage taken is reduced over time&#8221;<br/>&#8220;Minimum level of damage is 0&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:FUEL_TANK">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">FUEL_TANK</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;is an ENTITY from which the SPACESHIP can get FUEL&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;How much fuel do you have?&#8221;<br/>&#8220;Are you being picked up?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Reduce fuel&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Fuel must be between 0 and a maximum value&#8221;<br/>&#8220;When fuel is equal to zero the FUEL_TANK is removed from the level&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LIMPET_GUN">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LIMPET_GUN</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;An AI controlled ENTITY that fires BULLETS&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Are you powered?&#8221;<br/>&#8220;Is Power Plant deactivated?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Fire Bullet&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Has a maximum firing rate&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DOOR">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DOOR</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Are you open?&#8221;<br/>&#8220;Are you closed?&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Open the door and start the timer&#8221;<br/>&#8220;Close&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Can only be open for a set amount of time after which it automatically closes&#8221;<br/>&#8220;Can only be opened by activating a specific button&#8221;<br/>&#8220;Can not be destroyed&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:GROUND">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">GROUND</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Area of level through which ENTITIES can not travel&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3208&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Can not move&#8221;<br/>&#8220;NON_MOVABLE ENTITIES must be placed in a position close to it&#8221;<br/>&#8220;Cannot be destroyed&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:BUTTON">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">BUTTON</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;An entity which opens the door when a bullet has a COLLISION with it&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;ENTITY_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Is the door open&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Open door&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Can only be activated when the door is closed&#8221;<br/>&#8220;Cannot be destroyed&#8221;<br/>&#8220;Is associated with a specific door&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:INFORMATION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">INFORMATION</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;dynamically changing data defining the state of the game.&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220; 7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;What value do you have&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Increase value&#8221;<br/>&#8220;Decrease value&#8221;<br/>&#8220;Set Value&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Value must be greater than 0&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:FUEL">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">FUEL</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Consumed by the SPACESHIP through forward movement and use of the shields&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Consumption multiplier&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Set shield multiplier&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Must be greater than or equal to 0&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:SCORE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">SCORE</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Summation of points received in game&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220; 7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Must be greater than or equal to zero&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LIVES">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LIVES</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Number of COLLISIONs the SPACESHIP can have before the game is over&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220; 7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;The SHIP will not re-spawn if this reaches zero.&#8221;<br/>&#8220;The initial value is three&#8221;<br/>&#8220;It can only be decreased when the SHIP or POD has a collision&#8221;<br/>&#8220;It can only be increased when the SCORE goes over a multiple of 10,000&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:HIGH_SCORE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">HIGH_SCORE</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Largest scores attained in the game history, matched with the name of the player who scored it&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+          <dd>
+            revised: &#8220;10-3-2008 srussell&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Store&#8221;<br/>&#8220;List&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Will only store 8 values&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:BONUS">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">BONUS</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;Extra score achieved by finishing levels and destroying planets&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220; 7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;Has the planet been destroyed&#8221;<br/>&#8220;What level is it&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Add to score&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Multiplier based on level number&#8221;<br/>&#8220;Addition if NUCLEAR_POWER_PLANT is destroyed&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:TIMER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">TIMER</td>
+      <td class="part"><strong>Part:</strong> 1/1 </td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&#8220;a timer created by an EVENT or action which counts to another EVENT or ACTION&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            in_cluster: &#8220;INFORMATION_CLUSTER&#8221;;
+          </dd>
+          <dd>
+            created: &#8220; 7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+<tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&#8220;What time is remaining&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&#8220;Start timer&#8221;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&#8220;Length of time is dependant on what event has activated it&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="creation_chart:1">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CREATION</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;List of classes creating objects in the system.&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Creates instances of</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></td>
+            <td class="white"><span class="list-entry"><a href="#class_chart:FUEL" onclick="return linkSelect('class_chart','class_chart:FUEL');">FUEL</a></span>, <span class="list-entry"><a href="#class_chart:LIVES" onclick="return linkSelect('class_chart','class_chart:LIVES');">LIVES</a></span>, <span class="list-entry"><a href="#class_chart:SCORE" onclick="return linkSelect('class_chart','class_chart:SCORE');">SCORE</a></span>, <span class="list-entry"><a href="#class_chart:BONUS" onclick="return linkSelect('class_chart','class_chart:BONUS');">BONUS</a></span>, <span class="list-entry"><a href="#class_chart:HIGH_SCORE" onclick="return linkSelect('class_chart','class_chart:HIGH_SCORE');">HIGH_SCORE</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></td>
+            <td class="white"><span class="list-entry"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></span>, <span class="list-entry"><a href="#class_chart:POD" onclick="return linkSelect('class_chart','class_chart:POD');">POD</a></span>, <span class="list-entry"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></span>, <span class="list-entry"><a href="#class_chart:POD_STAND" onclick="return linkSelect('class_chart','class_chart:POD_STAND');">POD_STAND</a></span>, <span class="list-entry"><a href="#class_chart:DRAW" onclick="return linkSelect('class_chart','class_chart:DRAW');">DRAW</a></span>, <span class="list-entry"><a href="#class_chart:FUEL_TANK" onclick="return linkSelect('class_chart','class_chart:FUEL_TANK');">FUEL_TANK</a></span>, <span class="list-entry"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></span>, <span class="list-entry"><a href="#class_chart:BUTTON" onclick="return linkSelect('class_chart','class_chart:BUTTON');">BUTTON</a></span>, <span class="list-entry"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></td>
+            <td class="white"><span class="list-entry"><a href="#class_chart:BULLET" onclick="return linkSelect('class_chart','class_chart:BULLET');">BULLET</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></td>
+            <td class="white"><span class="list-entry"><a href="#class_chart:BULLET" onclick="return linkSelect('class_chart','class_chart:BULLET');">BULLET</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></td>
+            <td class="white"><span class="list-entry"><a href="#class_chart:TIMER" onclick="return linkSelect('class_chart','class_chart:TIMER');">TIMER</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></td>
+            <td class="white"><span class="list-entry"><a href="#class_chart:TIMER" onclick="return linkSelect('class_chart','class_chart:TIMER');">TIMER</a></span></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="scenario_chart:1">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SCENARIOS</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;A number of common scenarios in game&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>Two ENTITIES collide</dt>
+                <dd>&#8220;Two ENTITIES in game collide with each other&#8221;</dd>
+              </dl>
+            </td>
+          </tr>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>Start level</dt>
+                <dd>&#8220;The current level loads&#8221;</dd>
+              </dl>
+            </td>
+          </tr>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>Game over</dt>
+                <dd>&#8220;Reset game to Menu screen&#8221;</dd>
+              </dl>
+            </td>
+          </tr>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>Level complete</dt>
+                <dd>&#8220;Displays level complete information before loading the next level&#8221;</dd>
+              </dl>
+            </td>
+          </tr>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>Re-spawn</dt>
+                <dd>&#8220;Re-spawns the ship or the ship and POD at a specific position&#8221;</dd>
+              </dl>
+            </td>
+          </tr>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>Quit</dt>
+                <dd>&#8220;Ends and exits the game&#8221;</dd>
+              </dl>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="event_chart:1">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">EVENT</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 1/2</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;Internal events&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">External (incoming)</th>
+            <th class="grey">Involved object types</th>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Get value&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Start timer&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></span>, <span class="list-entry"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Get state&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></span>, <span class="list-entry"><a href="#class_chart:TOW_LINE" onclick="return linkSelect('class_chart','class_chart:TOW_LINE');">TOW_LINE</a></span>, <span class="list-entry"><a href="#class_chart:POD" onclick="return linkSelect('class_chart','class_chart:POD');">POD</a></span>, <span class="list-entry"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Collision&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Get forces&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></span>, <span class="list-entry"><a href="#class_chart:PHYSICS" onclick="return linkSelect('class_chart','class_chart:PHYSICS');">PHYSICS</a></span></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="event_chart:2">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">EVENT</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 2/2</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;Internal events&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Internal (outgoing)</th>
+            <th class="grey">Involved object types</th>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Set value&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Timer ended&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></span>, <span class="list-entry"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Set state&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Collision&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Move the ship/pod system&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:DRAW" onclick="return linkSelect('class_chart','class_chart:DRAW');">DRAW</a></span>, <span class="list-entry"><a href="#class_chart:PHYSICS" onclick="return linkSelect('class_chart','class_chart:PHYSICS');">PHYSICS</a></span>, <span class="list-entry"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="event_chart:3">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">EVENT</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 1/2</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;External events&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">External (incoming)</th>
+            <th class="grey">Involved object types</th>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Thrust&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></span>, <span class="list-entry"><a href="#class_chart:FUEL" onclick="return linkSelect('class_chart','class_chart:FUEL');">FUEL</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Turn&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Fire&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></span>, <span class="list-entry"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></span>, <span class="list-entry"><a href="#class_chart:BULLET" onclick="return linkSelect('class_chart','class_chart:BULLET');">BULLET</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Activate (IE attach/pickup/shield)&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></span>, <span class="list-entry"><a href="#class_chart:POD" onclick="return linkSelect('class_chart','class_chart:POD');">POD</a></span>, <span class="list-entry"><a href="#class_chart:TOW_LINE" onclick="return linkSelect('class_chart','class_chart:TOW_LINE');">TOW_LINE</a></span>, <span class="list-entry"><a href="#class_chart:BUTTON" onclick="return linkSelect('class_chart','class_chart:BUTTON');">BUTTON</a></span>, <span class="list-entry"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></span>, <span class="list-entry"><a href="#class_chart:FUEL_TANK" onclick="return linkSelect('class_chart','class_chart:FUEL_TANK');">FUEL_TANK</a></span>, <span class="list-entry"><a href="#class_chart:FUEL" onclick="return linkSelect('class_chart','class_chart:FUEL');">FUEL</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Quit&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Start&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="event_chart:4">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">EVENT</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 2/2</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;External events&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>
+            created: &#8220;7-3-2008&#8221;;
+          </dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Internal (outgoing)</th>
+            <th class="grey">Involved object types</th>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Fall&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></span>, <span class="list-entry"><a href="#class_chart:PHYSICS" onclick="return linkSelect('class_chart','class_chart:PHYSICS');">PHYSICS</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Collision&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:SOUND" onclick="return linkSelect('class_chart','class_chart:SOUND');">SOUND</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Thrust&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:SOUND" onclick="return linkSelect('class_chart','class_chart:SOUND');">SOUND</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Information change&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Re-spawn&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></span>, <span class="list-entry"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></span>, <span class="list-entry"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></span></td>
+          </tr>
+          <tr>
+            <td class="light-grey">&#8220;Play sound&#8221;</td>
+            <td class="white spaced-lines"><span class="list-entry"><a href="#class_chart:SOUND" onclick="return linkSelect('class_chart','class_chart:SOUND');">SOUND</a></span></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_dictionary:1">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS DICTIONARY</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;Class dictionary for THRUST_GAME system.&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;dynamically changing data defining the state of the game.&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TOW_LINE" onclick="return linkSelect('class_chart','class_chart:TOW_LINE');">TOW_LINE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;an ENTITY which holds the POD at a fixed distance from the SHIP&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SOUND" onclick="return linkSelect('class_chart','class_chart:SOUND');">SOUND</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Outputs event sounds&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BULLET" onclick="return linkSelect('class_chart','class_chart:BULLET');">BULLET</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HIGH_SCORE" onclick="return linkSelect('class_chart','class_chart:HIGH_SCORE');">HIGH_SCORE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Largest scores attained in the game history, matched with the name of the player who scored it&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;ENTITIES in game that can be moved&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SOUND_CONFIGURATION" onclick="return linkSelect('class_chart','class_chart:SOUND_CONFIGURATION');">SOUND_CONFIGURATION</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:CONFIGURATION" onclick="return linkSelect('cluster_chart','cluster_chart:CONFIGURATION');">CONFIGURATION</a></span></td>
+            <td class="white">&#8220;Turn sound on and off&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FUEL_TANK" onclick="return linkSelect('class_chart','class_chart:FUEL_TANK');">FUEL_TANK</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;is an ENTITY from which the SPACESHIP can get FUEL&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIVES" onclick="return linkSelect('class_chart','class_chart:LIVES');">LIVES</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Number of COLLISIONs the SPACESHIP can have before the game is over&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:GROUND" onclick="return linkSelect('class_chart','class_chart:GROUND');">GROUND</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;Area of level through which ENTITIES can not travel&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BUTTON" onclick="return linkSelect('class_chart','class_chart:BUTTON');">BUTTON</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;An entity which opens the door when a bullet has a COLLISION with it&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;An interactive visual object in the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SCORE" onclick="return linkSelect('class_chart','class_chart:SCORE');">SCORE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Summation of points received in game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Creates all objects in game and keeps track of the state of the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FUEL" onclick="return linkSelect('class_chart','class_chart:FUEL');">FUEL</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Consumed by the SPACESHIP through forward movement and use of the shields&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:CONTROL_CONFIGURATION" onclick="return linkSelect('class_chart','class_chart:CONTROL_CONFIGURATION');">CONTROL_CONFIGURATION</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:CONFIGURATION" onclick="return linkSelect('cluster_chart','cluster_chart:CONFIGURATION');">CONFIGURATION</a></span></td>
+            <td class="white">&#8220;Configure controls for fire, accept/shields/attach/pickup, left, right, thrust&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;An AI controlled ENTITY that fires BULLETS&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;Movable entities that are controlled by the player&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:POD_STAND" onclick="return linkSelect('class_chart','class_chart:POD_STAND');">POD_STAND</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;This is a stand shaped object that holds the POD until it becomes attached&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;Entities in game that have a fixed position&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;The main yellowish, triangular ENTITY controlled by the player&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:POD" onclick="return linkSelect('class_chart','class_chart:POD');">POD</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;the object of the level is to retrieve this&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TIMER" onclick="return linkSelect('class_chart','class_chart:TIMER');">TIMER</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;a timer created by an EVENT or action which counts to another EVENT or ACTION&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:PHYSICS" onclick="return linkSelect('class_chart','class_chart:PHYSICS');">PHYSICS</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Controls the physics of the game and calculate the movement of the MOVABLE entities&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span>, <span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BONUS" onclick="return linkSelect('class_chart','class_chart:BONUS');">BONUS</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Extra score achieved by finishing levels and destroying planets&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DRAW" onclick="return linkSelect('class_chart','class_chart:DRAW');">DRAW</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Draws objects to screen, HUD, stars, grounds, etc., also tracks ship position using a three by three grid and moves the perspective to match&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div><div class="top-level" id="class_dictionary:2">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS DICTIONARY</th>
+      <td class="name" colspan="2"><a href="#system_chart:THRUST_GAME" onclick="return linkSelect('system_chart','system_chart:THRUST_GAME');">THRUST_GAME</a></td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&#8220;BONc automatically generated class dictionary.&#8221;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BONUS" onclick="return linkSelect('class_chart','class_chart:BONUS');">BONUS</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Extra score achieved by finishing levels and destroying planets&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BULLET" onclick="return linkSelect('class_chart','class_chart:BULLET');">BULLET</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;ENTITIES fired by the SHIP and LIMPET_GUNs that collide with other ENTITIES&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BUTTON" onclick="return linkSelect('class_chart','class_chart:BUTTON');">BUTTON</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;An entity which opens the door when a bullet has a COLLISION with it&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:CONTROL_CONFIGURATION" onclick="return linkSelect('class_chart','class_chart:CONTROL_CONFIGURATION');">CONTROL_CONFIGURATION</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:CONFIGURATION" onclick="return linkSelect('cluster_chart','cluster_chart:CONFIGURATION');">CONFIGURATION</a></span></td>
+            <td class="white">&#8220;Configure controls for fire, accept/shields/attach/pickup, left, right, thrust&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DOOR" onclick="return linkSelect('class_chart','class_chart:DOOR');">DOOR</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;A movable piece of terrain which blocks the player from continuing the mission until a BUTTON has been pressed&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DRAW" onclick="return linkSelect('class_chart','class_chart:DRAW');">DRAW</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Draws objects to screen, HUD, stars, grounds, etc., also tracks ship position using a three by three grid and moves the perspective to match&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:ENTITY" onclick="return linkSelect('class_chart','class_chart:ENTITY');">ENTITY</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;An interactive visual object in the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FUEL" onclick="return linkSelect('class_chart','class_chart:FUEL');">FUEL</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Consumed by the SPACESHIP through forward movement and use of the shields&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FUEL_TANK" onclick="return linkSelect('class_chart','class_chart:FUEL_TANK');">FUEL_TANK</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;is an ENTITY from which the SPACESHIP can get FUEL&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:GROUND" onclick="return linkSelect('class_chart','class_chart:GROUND');">GROUND</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;Area of level through which ENTITIES can not travel&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HIGH_SCORE" onclick="return linkSelect('class_chart','class_chart:HIGH_SCORE');">HIGH_SCORE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Largest scores attained in the game history, matched with the name of the player who scored it&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:HUD" onclick="return linkSelect('class_chart','class_chart:HUD');">HUD</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span>, <span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;visual tracking of LIVES, SCORE, FUEL and Timer for destruction of planet&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:INFORMATION" onclick="return linkSelect('class_chart','class_chart:INFORMATION');">INFORMATION</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;dynamically changing data defining the state of the game.&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LEVEL" onclick="return linkSelect('class_chart','class_chart:LEVEL');">LEVEL</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Creates all objects in game and keeps track of the state of the game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIMPET_GUN" onclick="return linkSelect('class_chart','class_chart:LIMPET_GUN');">LIMPET_GUN</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;An AI controlled ENTITY that fires BULLETS&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LIVES" onclick="return linkSelect('class_chart','class_chart:LIVES');">LIVES</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Number of COLLISIONs the SPACESHIP can have before the game is over&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:MOVABLE" onclick="return linkSelect('class_chart','class_chart:MOVABLE');">MOVABLE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;ENTITIES in game that can be moved&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NON_MOVABLE" onclick="return linkSelect('class_chart','class_chart:NON_MOVABLE');">NON_MOVABLE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;Entities in game that have a fixed position&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:NUCLEAR_POWER_PLANT" onclick="return linkSelect('class_chart','class_chart:NUCLEAR_POWER_PLANT');">NUCLEAR_POWER_PLANT</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;This powers the LIMPET_GUNs and destroys the planet when sufficiently damaged&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:PHYSICS" onclick="return linkSelect('class_chart','class_chart:PHYSICS');">PHYSICS</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Controls the physics of the game and calculate the movement of the MOVABLE entities&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:POD" onclick="return linkSelect('class_chart','class_chart:POD');">POD</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;the object of the level is to retrieve this&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:POD_STAND" onclick="return linkSelect('class_chart','class_chart:POD_STAND');">POD_STAND</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;This is a stand shaped object that holds the POD until it becomes attached&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SCORE" onclick="return linkSelect('class_chart','class_chart:SCORE');">SCORE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;Summation of points received in game&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SHIP" onclick="return linkSelect('class_chart','class_chart:SHIP');">SHIP</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;The main yellowish, triangular ENTITY controlled by the player&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SOUND" onclick="return linkSelect('class_chart','class_chart:SOUND');">SOUND</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:GAME" onclick="return linkSelect('cluster_chart','cluster_chart:GAME');">GAME</a></span></td>
+            <td class="white">&#8220;Outputs event sounds&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:SOUND_CONFIGURATION" onclick="return linkSelect('class_chart','class_chart:SOUND_CONFIGURATION');">SOUND_CONFIGURATION</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:CONFIGURATION" onclick="return linkSelect('cluster_chart','cluster_chart:CONFIGURATION');">CONFIGURATION</a></span></td>
+            <td class="white">&#8220;Turn sound on and off&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TIMER" onclick="return linkSelect('class_chart','class_chart:TIMER');">TIMER</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:INFORMATION_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:INFORMATION_CLUSTER');">INFORMATION_CLUSTER</a></span></td>
+            <td class="white">&#8220;a timer created by an EVENT or action which counts to another EVENT or ACTION&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TOW_LINE" onclick="return linkSelect('class_chart','class_chart:TOW_LINE');">TOW_LINE</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;an ENTITY which holds the POD at a fixed distance from the SHIP&#8221;</td>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:USER_CONTROL" onclick="return linkSelect('class_chart','class_chart:USER_CONTROL');">USER_CONTROL</a></td>
+            <td class="light-grey"><span class="list-entry"><a href="#cluster_chart:ENTITY_CLUSTER" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITY_CLUSTER');">ENTITY_CLUSTER</a></span></td>
+            <td class="white">&#8220;Movable entities that are controlled by the player&#8221;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="footer">
+  <p id="left-footer">
+    <button id="showlink" onclick="return toggleShowAll();">Show all</button>
+    Chart type:
+    <select id="top-menu" onchange="populate(); showSelected();"><option>processing...</option></select>
+    Chart:
+    <select id="sub-menu" onchange="showSelected();"><option>processing...</option></select>
+  </p>
+  <p id="right-footer">
+    Generated by <a href="http://kind.ucd.ie/products/opensource/BONc">BONc</a> (version: bonc-0.1.4) <a href="http://validator.w3.org/check?uri=referer">XHTML</a> output, Mon Mar 31 11:34:31 IST 2008.
+  </p>
+</div>
+
+</div> <!-- End main -->
+
+</body>
+</html>
