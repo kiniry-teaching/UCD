@@ -21,7 +21,7 @@ namespace TuneBlaster_
     {
 
         int Colour;
-        public ColouredParticle(Engine game, int howManyEffects,int Colour)
+        public ColouredParticle(Engine game, int howManyEffects, int Colour)
             : base(game, howManyEffects)
         {
 
@@ -37,7 +37,8 @@ namespace TuneBlaster_
 
 
 
-            switch (Colour) { 
+            switch (Colour)
+            {
                 case 1:
                     textureFilename = "redparticle";
                     break;
@@ -68,7 +69,7 @@ namespace TuneBlaster_
                     break;
             }
 
-               
+
 
 
             minInitialSpeed = 40;
@@ -97,7 +98,8 @@ namespace TuneBlaster_
 
 
 
-            if (textureFilename== "smoke"){
+            if (textureFilename == "smoke")
+            {
 
 
 
@@ -125,12 +127,12 @@ namespace TuneBlaster_
                 minNumParticles = 10;
                 maxNumParticles = 20;
 
-              //  minRotationSpeed = -MathHelper.PiOver4;
-               // maxRotationSpeed = MathHelper.PiOver4;
+                //  minRotationSpeed = -MathHelper.PiOver4;
+                // maxRotationSpeed = MathHelper.PiOver4;
 
-               // spriteBlendMode = SpriteBlendMode.AlphaBlend;
+                // spriteBlendMode = SpriteBlendMode.AlphaBlend;
 
-               // DrawOrder = AlphaBlendDrawOrder;
+                // DrawOrder = AlphaBlendDrawOrder;
 
 
 
