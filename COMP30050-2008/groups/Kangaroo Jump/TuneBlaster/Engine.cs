@@ -16,7 +16,7 @@ namespace TuneBlaster_
     /// <summary>
     /// The Class that calls everything
     /// Defalt Class
-    /// Authors Hugh Corrigan, Ahmed Warreth, Dermot Kirby
+    /// Authors Hugh Corrigan, Ahmed Warreth
     /// </summary>
     /// 
 
@@ -37,15 +37,14 @@ namespace TuneBlaster_
         Core core;
         BallManager ball;
         Image background;
-        GameAudio music;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-        public static ExplosionParticleSystem explosion;
-        public static ExplosionSmokeParticleSystem smoke;
-        public static RedParticle redblast;
-        public static GreenParticle greenblast;
-        public static BlueParticle blueblast;
-        public static PurpleParticle purpleblast;
-        Image.value colour;
+        public static ColouredParticle explosion;
+        public static ColouredParticle smoke;
+        public static ColouredParticle redblast;
+        public static ColouredParticle greenblast;
+        public static ColouredParticle purpleblast;
+        public static ColouredParticle blueblast;
+
 
         public Engine()
         {
@@ -55,22 +54,20 @@ namespace TuneBlaster_
             core = new Core();
             ball = new BallManager(core, this);
             background = new Image();
-            music = new GameAudio();
-
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
-            explosion = new ExplosionParticleSystem(this,1);
+            explosion = new ColouredParticle(this, 1,5);
             Components.Add(explosion);
-            smoke = new ExplosionSmokeParticleSystem(this, 2);
+            smoke = new ColouredParticle(this, 2,6);
             Components.Add(smoke);
-            blueblast = new BlueParticle(this,1);
-            Components.Add(blueblast);
-            redblast = new RedParticle(this,1);
+            redblast = new ColouredParticle(this, 2, 1);
             Components.Add(redblast);
-            greenblast = new GreenParticle(this, 1);
+            greenblast = new ColouredParticle(this, 1, 4);
             Components.Add(greenblast);
-            purpleblast = new PurpleParticle(this, 1);
+            purpleblast = new ColouredParticle(this, 1, 3);
             Components.Add(purpleblast);
+            blueblast = new ColouredParticle(this, 1, 2);
+            Components.Add(blueblast);
 
             //this.graphics.IsFullScreen = true;
         }
@@ -99,7 +96,6 @@ namespace TuneBlaster_
             background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
             ball.Initialise();
             base.Initialize();
-            music.Initialise();
             //Content.RootDirectory = "Content";
         }
 
@@ -158,24 +154,11 @@ namespace TuneBlaster_
             // Allows the default game to exit on Xbox 360 and Windows
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-           colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
-
-           if (colour == Image.value.green)
-               music.InstrChanger(Image.value.green);
-
-           /* if (colour == Image.value.blue)
-               music.InstrChanger(Image.value.blue); */
-
-           if (colour == Image.value.red)
-               music.InstrChanger(Image.value.red);
-
-           if (colour == Image.value.purple)
-               music.InstrChanger(Image.value.purple);
-
+           core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
            ball.Update(gameTime);
-           music.UpdateAudio();
-           base.Update(gameTime);
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
         }
 
 
