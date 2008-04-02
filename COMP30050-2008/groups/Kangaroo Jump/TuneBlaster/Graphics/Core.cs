@@ -182,14 +182,15 @@ namespace TuneBlaster_.Graphics
 
                        where.X = balls[i].Position.X;
                        where.Y = balls[i].Position.Y;
-                       Engine.explosion.AddParticles(where);
+                     
+
+
+		       Engine.explosion.AddParticles(where);
                        Engine.smoke.AddParticles(where);
                        Engine.greenblast.AddParticles(where);
                        Engine.purpleblast.AddParticles(where);
                        Engine.redblast.AddParticles(where);
                        Engine.blueblast.AddParticles(where);
-
-
                     
 
                         //to put in code for explosion

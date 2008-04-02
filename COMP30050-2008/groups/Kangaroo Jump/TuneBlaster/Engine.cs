@@ -69,6 +69,7 @@ namespace TuneBlaster_
             blueblast = new ColouredParticle(this, 1, 2);
             Components.Add(blueblast);
 
+
             //this.graphics.IsFullScreen = true;
         }
 
