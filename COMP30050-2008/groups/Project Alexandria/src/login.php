@@ -1,7 +1,8 @@
 
 <?php
+include("include/header.php"); //page header
 
-include("loginMethods.php"); //including all the methods that will be needed to login
+include("include/loginMethods.php"); //including all the methods that will be needed to login
 
 <form action="login.php" method="post">
 Username: <input type="text" name="username" />
@@ -14,4 +15,5 @@ $EnteredPassword = $_POST[password];
 
 login($EnteredUsername, $EnteredPassword);
 
+include("include/footer.php"); //page footer
 ?>

@@ -1,5 +1,7 @@
 
 <?php
+include("include/header.php"); //page header
+
 <form action="register.php" method="post">
 Enter a Username: <input type="text" name="username" />
 Enter your e-mail: <input type="text" name="e-mail1" />
@@ -48,4 +50,6 @@ else{
 	echo "Account registered for ".$username."!";		
 	}
 }
+
+include("include/footer.php"); //page footer
 ?>

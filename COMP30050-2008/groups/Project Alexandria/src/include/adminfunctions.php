@@ -1,10 +1,10 @@
 
 <?php
-/* admin_user_functions
-*
-*
+/* 	admin_user_functions
+*	All the functions needed to admin the user system
+*	
 */
-include "userfunctions.php";
+include "include/userfunctions.php";
 if(isAdmin=="true")//this loop is to prevent any non-admins from acessing the admin functions
 {
 	function updateUser($username, $e-mail, $userlevel)	{
