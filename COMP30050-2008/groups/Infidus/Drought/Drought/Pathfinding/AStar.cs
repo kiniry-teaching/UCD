@@ -97,18 +97,28 @@ namespace Drought.Entity
 
                 if (n.getPosition() == goal.getPosition()) //found a path
                 {
-                    Node curr = n;
                     Node parent = n.getParent();
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
 
                     pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
 
+                    Console.WriteLine("Start: {0}", start.getPosition());
+                    Console.WriteLine("Goal: {0}", goal.getPosition());
+
                     while (parent != null)
                     {
+                        Console.WriteLine("Adding " + pos.X + ", " + pos.Y);
                         pos = parent.getPosition();
                         pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
+                        parent = parent.getParent();
                     }
+                    Console.WriteLine("Adding " + pos.X + ", " + pos.Y);
+
+                    foreach (Vector3 v in pathNodes)
+                        Console.WriteLine("{0}",v);
+
+                    Console.WriteLine("\n");
 
                     return new Path(pathNodes, level);
                 }
@@ -120,7 +130,7 @@ namespace Drought.Entity
                 {
                     Node s = successors[i];
 
-                    if (!contains(closed, n))
+                    if (!contains(closed, s))
                     {
                         //s.h is estimated distance to goal
                         s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
@@ -203,7 +213,7 @@ namespace Drought.Entity
                 if (n != null && canMove(node, n))
                 {
                     Node s = new Node((int)pos.X, (int)pos.Y);
-                    s.setParent(n);
+                    s.setParent(node);
                     successors.Add(s);
                 }
             }
