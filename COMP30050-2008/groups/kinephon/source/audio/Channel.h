@@ -2,6 +2,7 @@
 #define CHANNEL_H_
 
 #include "RtMidi.h"
+#include "MidiRecorder.h"
 #include "../type.h"
 #include <vector>
 using namespace std;
@@ -42,7 +43,7 @@ public:
 	 * @param number the number of this channel   
 	 * @throws RtError if anything went wrong          
 	 */
-	Channel(RtMidiOut* midiout, int number);
+	Channel(RtMidiOut* midiout, int number, MidiRecorder* recorder);
 	
     /**
      * Destroy this Channel.
@@ -102,7 +103,6 @@ public:
      * @throws RtError if anything went wrong  
      */
     void release(uchar pitch);
-	
 		
 	
 private:
@@ -112,7 +112,7 @@ private:
 	uchar note_[2];			  //note and velocity of last played
 	uchar controls_[93]; 
 	RtMidiOut* midiout_;
-	
+	MidiRecorder* recorder_;
 	
 };
 }

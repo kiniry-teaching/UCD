@@ -32,11 +32,12 @@ Conductor::~Conductor() {
 	delete midi_;
 }
 
-bool Conductor::initialize() {
+bool Conductor::initialize(bool recording) {
 	midi_ = new MidiPlayer();
-	if (!midi_->initialize())
+	if (!midi_->initialize(recording))
     	return false;
     else {
+        setInstrument(INSTRUMENT_CLASSIC);
         setDynamics(DYNAMICS_FORTE);
         setModulation(0); //just in case someone forgot to switch it off last time
     	return true;//now we have 4 channels to play on

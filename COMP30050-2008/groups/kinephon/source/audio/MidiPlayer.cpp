@@ -5,6 +5,7 @@ namespace audio
     
 MidiPlayer::MidiPlayer():
 	midiout_(NULL),
+    recorder_(NULL),
     chords_(3),
 	isConnected_(false),
 	leadChannel_(NULL),
@@ -20,10 +21,18 @@ MidiPlayer::~MidiPlayer() {
     delete chordChannel_;
     delete accompanyChannel_;
     delete percussionChannel_;
+    
+    //close file first, before we delete the class, at least try it...
+    try {
+        recorder_->closeFile();
+    }
+    catch (...) {}
+    if (recorder_ != NULL)
+        delete recorder_;
 }
 
 
-bool MidiPlayer::initialize() {
+bool MidiPlayer::initialize(bool recording) {
 	// RtMidiOut constructor
 	midiout_ = new RtMidiOut();
   	
@@ -65,16 +74,23 @@ bool MidiPlayer::initialize() {
   		midiout_->openPort(i);
   		isConnected_ = true;
   	}
-  	if(isConnected_){
-        try{//sending messages, so catch expections
-  		    leadChannel_ = new Channel(midiout_, 0);//default acoustic grand
-            accompanyChannel_ = new Channel(midiout_, 1);//default accoustic grand
-            chordChannel_ = new Channel(midiout_, 2);
-            chordChannel_->setProgram(48);//string ensemble 1, INSTRUMENT_CLASSIC
-           //chordChannel_->setControl(93, 127);
-            percussionChannel_ = new Channel(midiout_, 3);
-            percussionChannel_->setProgram(118);//synth drum, INSTRUMENT_CLASSIC
-           
+  	if (isConnected_){
+        try {//sending messages, so catch expections
+            if (recording) {//set up MidiRecorder
+                recorder_ = new MidiRecorder();
+                try {
+                    recorder_->openFile(1);
+                }
+                catch (...) {
+                    //if we cannot open the file, no point passing it to the Channels
+                    delete recorder_;
+                    recorder_ = NULL;
+                }
+            } 
+            leadChannel_ = new Channel(midiout_, 0, recorder_);
+            accompanyChannel_ = new Channel(midiout_, 1, recorder_);
+            chordChannel_ = new Channel(midiout_, 2, recorder_);
+            percussionChannel_ = new Channel(midiout_, 3, recorder_);
   		    return true;
         }
         catch (RtError &error) {

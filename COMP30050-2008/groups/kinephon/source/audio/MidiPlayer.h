@@ -47,10 +47,11 @@ public:
 	
 	/**
 	 * Attempts to connect to an available MIDI port.
-	 * If more than one port is available, then a choice is given.       
+	 * If more than one port is available, then a choice is given.
+     * @param recording true if music piece is to be recorded       
 	 * @return true if connection has been established, false if an error occured     
 	 */
-	bool initialize();
+	bool initialize(bool recording);
 	
 	/**
 	 * Releases all notes except for the chords.
@@ -199,6 +200,7 @@ public:
 	
 private:
 	RtMidiOut* midiout_;
+    MidiRecorder* recorder_;
 	vector<uchar> chords_;	
 	bool isConnected_;
 	Channel* leadChannel_;

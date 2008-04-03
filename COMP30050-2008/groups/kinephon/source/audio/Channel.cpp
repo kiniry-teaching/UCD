@@ -1,18 +1,22 @@
 #include "Channel.h"
 namespace audio
 {
-Channel::Channel(RtMidiOut* midi, int no):
+Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	channelNo_(no),
 	programNo_(0),//default acoustic grand piano
 	octaveNo_(0),
-	midiout_(midi)
+	midiout_(midi),
+    recorder_(recorder)
 {
 	//set acoustic grand piano as default
 	vector<uchar> message(2);
 	message[0] = 192 + channelNo_;
 	message[1] = programNo_;
   	midiout_->sendMessage(&message);
-  	
+  	if (recorder_ != NULL)
+        //recorder_->write(message, 1);       
+    
+    
   	for (int i = 0; i < 93; i++)
 		controls_[i] = 0;
 		
@@ -22,7 +26,9 @@ Channel::Channel(RtMidiOut* midi, int no):
 	message.push_back(127);
 	midiout_->sendMessage(&message);
 	controls_[7] = 127;		
-	
+	if (recorder_ != NULL);
+       // recorder_->write(message, 1);       
+    
 }
 
 Channel::~Channel() {
@@ -46,6 +52,10 @@ void Channel::setControl(uchar function, uchar value) {
   	message[1] = function;
   	message[2] = value;
 	midiout_->sendMessage(&message);
+    
+    if (recorder_ != NULL);
+       // recorder_->write(message, 1);       
+    
 }
 	 
 //Change the instrument.
@@ -55,6 +65,10 @@ void Channel::setProgram(uchar program) {
 	message[0] = 192 + channelNo_;
 	message[1] = programNo_;
   	midiout_->sendMessage(&message);
+
+    if (recorder_ != NULL);
+        //recorder_->write(message, 1);       
+    
 }
 	
 //Plays the given note in default octave.
@@ -67,6 +81,10 @@ void Channel::play(uchar note, uchar velocity, int octave) {
   	message[1] = note + octave;
   	message[2] = velocity;
   	midiout_->sendMessage(&message);
+    
+    if (recorder_ != NULL)
+        recorder_->write(message, 1);       
+    
 }
 	
 	
@@ -77,6 +95,10 @@ void Channel::release() {
 	message[1] = note_[0] + octaveNo_;
   	message[2] = note_[1];
   	midiout_->sendMessage(&message);
+    
+    if (recorder_ != NULL)
+        recorder_->write(message, 1);       
+    
 }
 
 void Channel::release(uchar pitch) {
@@ -85,5 +107,12 @@ void Channel::release(uchar pitch) {
     message[1] = pitch + octaveNo_;
     message[2] = note_[1];
     midiout_->sendMessage(&message);
+    
+    if (recorder_ != NULL)
+        recorder_->write(message, 1);       
+    
 }
+
+  
+
 }

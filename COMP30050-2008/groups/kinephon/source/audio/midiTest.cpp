@@ -1,5 +1,6 @@
 #include "Conductor.h"
 #include <string>
+#include <fstream>
 #include <iostream>
 using namespace std;
 using namespace audio;
@@ -20,9 +21,44 @@ using namespace audio;
  */
 #ifdef __ED__
 int main(){
-	
+    
+    
+    char byte;
+    string str;
+    ifstream input ("Together_Again.mid");
+    ofstream output ("together_again_txt.txt");
+    output << "M "<< (short) 'M' << endl;
+    output << "T "<< (short) 'T' << endl;
+    output << "h "<< (short) 'h' << endl;
+    output << "d "<< (short) 'd' << endl<<endl;
+    
+    output << "M "<< (short) 'M' << endl;
+    output << "T "<< (short) 'T' << endl;
+    output << "r "<< (short) 'r' << endl;
+    output << "k "<< (short) 'k' << endl << endl;
+    
+    for(int i = 0; i < 14; i++){
+        input >> byte;
+        str = byte;
+        output << (short) byte << " "; 
+    }
+    output << "\n";
+    for(int i = 0; i < 8; i++){
+        input >> byte;
+        output << (short) byte << " "; 
+    }
+    for (int j = 0; j < 5; j++){
+        output << "\n";
+        for(int i = 0; i < 4; i++){
+            input >> byte;
+            output << (short) byte << " "; 
+        }
+    }
+    input.close();
+    output.close();
+    	
 	Conductor audio;
-	if(!audio.initialize())
+	if(!audio.initialize(true))
     	exit( EXIT_FAILURE ); 
 
     vector<uchar> melody(60);
@@ -75,7 +111,7 @@ bool testingPlayLeadAcc = false;
 int tempo = 200; //set the miliseconds to sleep between each note, here for once
 //uncomment these for overall settings, or include them somewhere in the middle of the code
 //audio.setPedaling(true, 16);
-//audio.setInstrument(INSTRUMENT_WIND);
+//audio.setInstrument(INSTRUMENT_CRAZY);
 //audio.setModulation(127);
 //audio.setPan(127);
 //audio.setReverberation(true);
@@ -130,8 +166,8 @@ if (testingPlayLead) {
     cout << "playing lead only "<< endl; 
     
     //audio.setMelody(melody);
-    audio.setAccompaniment(true, 0);
-    audio.setChords(true,CHORDS_FIRST);
+    //audio.setAccompaniment(true, 0);
+    //audio.setChords(true,CHORDS_FIRST);
     audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;
     if (piano) {
@@ -244,6 +280,7 @@ if (testingPlayLeadAcc) {
     }
     audio.pressPanicButton();
 }  
+
 	return 0;
 }
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
 #include "../type.h"
 using namespace std;
 

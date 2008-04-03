@@ -64,9 +64,10 @@ public:
 	 * This will open available Midi ports. 
 	 * If this method returns false, all subsequent calls to the other classes
 	 * will not have any effect. 
+     * @param recording true if the music should be recorded to a MIDI file
 	 * @return true if connection established, false if no connection to a MIDI port
 	 */
-	bool initialize();
+	bool initialize(bool recording);
 	
 	/**
 	 * Produces a sound based on the settings specified previously.
