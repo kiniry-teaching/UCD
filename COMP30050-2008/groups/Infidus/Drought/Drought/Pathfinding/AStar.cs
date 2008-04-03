@@ -103,23 +103,13 @@ namespace Drought.Entity
 
                     pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
 
-                    Console.WriteLine("Start: {0}", start.getPosition());
-                    Console.WriteLine("Goal: {0}", goal.getPosition());
-
                     while (parent != null)
                     {
-                        Console.WriteLine("Adding " + pos.X + ", " + pos.Y);
                         pos = parent.getPosition();
                         pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
                         parent = parent.getParent();
                     }
-                    Console.WriteLine("Adding " + pos.X + ", " + pos.Y);
-
-                    foreach (Vector3 v in pathNodes)
-                        Console.WriteLine("{0}",v);
-
-                    Console.WriteLine("\n");
-
+ 
                     return new Path(pathNodes, level);
                 }
 
@@ -212,9 +202,8 @@ namespace Drought.Entity
 
                 if (n != null && canMove(node, n))
                 {
-                    Node s = new Node((int)pos.X, (int)pos.Y);
-                    s.setParent(node);
-                    successors.Add(s);
+                    n.setParent(node);
+                    successors.Add(n);
                 }
             }
 
