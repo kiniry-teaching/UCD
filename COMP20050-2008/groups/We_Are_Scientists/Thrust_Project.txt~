@@ -1,0 +1,52 @@
+We Are Scientists
+
+Ursula Redmond - Ursula - 06371337
+Holly Baker - Holly - 06588115
+
+Introduction
+"Thrust" is a computer game with two-dimensional perspective. The player pilots a spaceship whose mission is to take fuel and a power pod on a planet, destroy gun turrets and possibly the planet itself by causing its factory to go critical. A cross section of the planet is seen as the spaceship navigates. The player must not let the spaceship run out of fuel and must use the right amount of thrust to delicately manouever the spaceship without touching any walls or structures. Once the power pod is in tow, the physics of pulling an unpowered object takes effect and makes for more challenging piloting.
+
+Requirements
+* Strong concept analysis
+* Ensure all charts pass the BONc compiler with no warnings
+* Every team member to be available for over an hour a day
+* Commit changes to SVN several times a week during programming process
+* Create a game that's fun to play
+* The game should mimic to some extent the C-64 version
+
+Purpose
+We aim to develop team-work skills such as communication and committment.
+We will learn:
+* advantages of the object oriented approach to software construction
+* to acclimatise to the Linux operating system
+* benefits of SVN
+* how BON greatly aids the programmers understanding of a system
+
+
+Summary of Analysis and Design Process to Date
+We have done brainstorming to identify our concept names and defined these concepts in terms of others. We have also analysed the relationships between entities.
+
+CONCEPT DEFINITIONS:
+
+SPACESHIP:		An object which moves through space, has a shield and a tractor beam. Aim is to take Power pod and avoid Attacker. Can explode.
+SHIP:			Triangular Shape of Spaceship.
+FACTORY:		An object without movement that resides on the ground and emits smoke. It will explode 10 seconds after being attacked.
+FACTO:			Shape of factory.
+SMOKE:			Is a grey colour that rises into space in circles.
+FUEL:			Is placed on the ground. Spaceship is able to use tractor beam to pick it up.
+ATTACKER:		An object on ground that shoots at Spaceship.
+ACKER: 			Shape of Attacker.
+BULLET:			Can be fired from Spaceship and Attacker.
+POWER_POD:		Rests on stand until string from Spaceship picks it up. A pendulum motion then happens between the power pod and Spaceship. Explodes when 					far	enough into space.
+POD:			Circular Shape of Power pod.
+STAND:			Supports power pod, on ground.
+SHIELD:			Protects Spaceship from Bullets of Attacker.
+TRACTOR_BEAM:	Comes out from Spaceship when near to fuel and consumes fuel.
+BEAM:			Comes out from Spaceship when near Power pod and maintains a pendulum motion between Spaceship and Power pod.
+COLOUR:			Visual aid to help tell things apart on the screen.
+BACKGROUND:		Area of the screen in which ship, facto, acker and pod appear.
+GROUND:			The planetary terrain the ship and pod must not collide with.
+SPACE:			Area above ground, excluding all objects residing on ground.
+STARS:			Shapes in Space(cirles, triangles).
+SHAPES:			Outline of Objects.
+BAR:			Visual track of variables (lives, fuel, score) at top of screen, independent of planet's movement.
