@@ -37,8 +37,8 @@ namespace Drought.Entity
         private int height;
 
 
-        private Stopwatch timer;
-        private Stopwatch listTimer;
+        private Stopwatch timer = new Stopwatch();
+        private Stopwatch listTimer = new Stopwatch();
 
 
         /**
@@ -119,6 +119,11 @@ namespace Drought.Entity
                         pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
                         parent = parent.getParent();
                     }
+
+
+                    Console.WriteLine("List searching took " + listTimer.ElapsedMilliseconds + "ms to search list");
+                    Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to compute path");
+                    timer.Stop();
  
                     return new Path(pathNodes, level);
                 }
@@ -158,14 +163,13 @@ namespace Drought.Entity
                             }
                         }
                     }
-
                 }
-
-                Console.WriteLine("List searching took " + listTimer.ElapsedMilliseconds() + "ms to search list");
-                Console.WriteLine("Took " + timer.ElapsedMilliseconds() + "ms to compute path");
-                timer.Stop();
             }
 
+
+            Console.WriteLine("List searching took " + listTimer.ElapsedMilliseconds + "ms to search list");
+            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not fina a path");
+            timer.Stop();
 
             //couldn't find a path so return a path containing just the start node
             List<Vector3> nodes = new List<Vector3>();
