@@ -2,6 +2,7 @@ We Are Scientists
 
 Ursula Redmond - Ursula - 06371337
 Holly Baker - Holly - 06588115
+Simon Markey -Mewtio - 06361536
 
 Introduction
 "Thrust" is a computer game with two-dimensional perspective. The player pilots a spaceship whose mission is to take fuel and a power pod on a planet, destroy gun turrets and possibly the planet itself by causing its factory to go critical. A cross section of the planet is seen as the spaceship navigates. The player must not let the spaceship run out of fuel and must use the right amount of thrust to delicately manouever the spaceship without touching any walls or structures. Once the power pod is in tow, the physics of pulling an unpowered object takes effect and makes for more challenging piloting.
