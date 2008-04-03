@@ -91,7 +91,8 @@ namespace Drought.Entity
             timer.Start();
 
             Heap open = new Heap();
-            List<Node> closed = new List<Node>();
+            //List<Node> closed = new List<Node>();
+            bool[,] closed = new bool[width, height];
             Node goal = getNode((int)endX, (int)endY);
             Node start = getNode((int)startX, (int)startY);
 
@@ -103,7 +104,8 @@ namespace Drought.Entity
             {
                 //get node with lowest f value from open list (last entry in list)
                 Node n = open.removeMin();
-                closed.Add(n);
+                //closed.Add(n);
+                closed[(int)n.getPosition().X, (int)n.getPosition().Y] = true;
 
                 if (n.getPosition() == goal.getPosition()) //found a path
                 {
@@ -135,7 +137,8 @@ namespace Drought.Entity
                 {
                     Node s = successors[i];
 
-                    if (!contains(closed, s))
+                    //if (!contains(closed, s))
+                    if(closed[(int)s.getPosition().X, (int)s.getPosition().Y] == false)
                     {
                         //s.h is estimated distance to goal
                         s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
