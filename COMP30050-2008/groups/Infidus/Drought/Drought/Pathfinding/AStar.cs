@@ -22,7 +22,7 @@ namespace Drought.Entity
             new Vector2(1, 1), }; //top right
 
         /** Can move from one node to another if the other node is not greater than MAX_MOVE_DIST. */
-        private static float MAX_MOVE_DIST = 2.0f;
+        private static float MAX_MOVE_DIST = 0.15f;
 
         /** The level information to search for paths. */
         private LevelInfo level;
@@ -38,9 +38,6 @@ namespace Drought.Entity
 
 
         private Stopwatch timer = new Stopwatch();
-        private Stopwatch listTimer = new Stopwatch();
-        private Stopwatch heapTimer = new Stopwatch();
-        private Stopwatch createTimer = new Stopwatch();
 
 
         /**
@@ -84,14 +81,22 @@ namespace Drought.Entity
                 traversable[0, y] = false;
                 traversable[width - 1, y] = false;
             }
+
+            /*
+            StringBuilder sb = new StringBuilder();
+            for (int x = 0; x < width; x++)
+            {
+                sb.Append("\n");
+                for (int y = 0; y < height; y++)
+                    sb.Append(level.getHeight(x, y) + " ");
+            }
+            Console.WriteLine(sb);
+             */
         }
 
         public Path computePath(float startX, float startY, float endX, float endY)
         {
             timer.Reset();
-            listTimer.Reset();
-            heapTimer.Reset();
-            createTimer.Reset();
             timer.Start();
 
             Heap open = new Heap();
@@ -119,7 +124,6 @@ namespace Drought.Entity
 
                 if (n.getPosition() == goal.getPosition()) //found a path
                 {
-                    createTimer.Start();
                     Node parent = n.getParent();
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
@@ -133,12 +137,8 @@ namespace Drought.Entity
                         parent = parent.getParent();
                     }
 
-
-                    Console.WriteLine(heapTimer.ElapsedMilliseconds + "ms to heap search");
-                    Console.WriteLine(createTimer.ElapsedMilliseconds + "ms to create computed path from nodes");
                     Console.WriteLine(timer.ElapsedMilliseconds + "ms total to run A*");
                     timer.Stop();
-                    createTimer.Stop();
  
                     return new Path(pathNodes, level);
                 }
@@ -161,12 +161,10 @@ namespace Drought.Entity
 
 
                         //If it isn’t on the open list, add it to the open list.
-                        heapTimer.Start();
                         //Node oldNode = open.contains(s.getPosition(), out oldNodePos);
                         int sx = (int)s.getPosition().X;
                         int sy = (int)s.getPosition().Y;
                         Node oldNode = openMap[sx, sy];
-                        heapTimer.Stop();
 
                         if (oldNode == null)
                         {
@@ -190,8 +188,6 @@ namespace Drought.Entity
                 }
             }
 
-
-            Console.WriteLine("Heap searching took " + heapTimer.ElapsedMilliseconds + "ms");
             Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not fina a path");
             timer.Stop();
 
@@ -266,32 +262,10 @@ namespace Drought.Entity
             Vector2 posA = a.getPosition();
             Vector2 posB = b.getPosition();
 
-            float diff = Math.Abs(level.getHeight(posA.X, posB.Y) - level.getHeight(posB.X, posB.Y));
+            float diff = Math.Abs(level.getHeight((int)posA.X, (int)posB.Y) - level.getHeight((int)posB.X, (int)posB.Y));
 
             return diff <= MAX_MOVE_DIST;
         }
 
-        /**
-         * Checks if a node is contained in a list. Equality is determined
-         * by the node's position.
-         * 
-         * @param list The list to check in.
-         * @param node The node to check for.
-         * @return True if the node was found.
-         */
-        private bool contains(List<Node> list, Node node)
-        {
-            listTimer.Start();
-
-            for (int i = 0, n = list.Count; i < n; i++)
-                if (list[i].getPosition() == node.getPosition())
-                {
-                    listTimer.Stop();
-                    return true;
-                }
-
-            listTimer.Stop();
-            return false;
-        }
     }
 }

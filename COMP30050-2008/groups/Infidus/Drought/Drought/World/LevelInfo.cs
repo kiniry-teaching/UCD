@@ -169,8 +169,24 @@ namespace Drought.World
         }
 
         /**
-         * Gets the height at a specified point in the level. If the
-         * location given is out of bounds, then the height at the 
+         * Gets the height at a specific point in the level by performing
+         * a lookup in the height map. If the location provided is out of 
+         * range then 0 is returned.
+         * 
+         * @param x x coordinate of the location to get height at.
+         * @param y y coordinate of the location to get height at.
+         * @return Height at x, y.
+         */
+        public float getHeight(int x, int y)
+        {
+            if (x >= 0 && x < width && y >= 0 && y < height)
+                return heightMap[x, y];
+            return 0.0f;
+        }
+
+        /**
+         * Gets the interpolated height at a specified point in the level.
+         * If the location given is out of bounds, then the height at the 
          * closest valid position is returned.
          * 
          * @param x x coordinate of the location to get height at.
