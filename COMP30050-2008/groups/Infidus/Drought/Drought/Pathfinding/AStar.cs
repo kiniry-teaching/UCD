@@ -129,7 +129,8 @@ namespace Drought.Entity
 
 
                         //If it isn’t on the open list, add it to the open list.
-                        Node oldNode = open.contains(s.getPosition());
+                        int oldNodePos = 0;
+                        Node oldNode = open.contains(s.getPosition(), out oldNodePos);
                         if (oldNode == null)
                             open.insert(s);
                         else
@@ -142,6 +143,7 @@ namespace Drought.Entity
                             {
                                 oldNode.setParent(n);
                                 oldNode.gVal = s.gVal;
+                                open.reorderNode(oldNodePos);
                                 //TODO reorder heap!
                             }
                         }
