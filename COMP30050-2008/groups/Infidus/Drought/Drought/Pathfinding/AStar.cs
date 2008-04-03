@@ -39,6 +39,7 @@ namespace Drought.Entity
 
         private Stopwatch timer = new Stopwatch();
         private Stopwatch listTimer = new Stopwatch();
+        private Stopwatch heapTimer = new Stopwatch();
 
 
         /**
@@ -88,6 +89,7 @@ namespace Drought.Entity
         {
             timer.Reset();
             listTimer.Reset();
+            heapTimer.Reset();
             timer.Start();
 
             Heap open = new Heap();
@@ -123,7 +125,7 @@ namespace Drought.Entity
                     }
 
 
-                    Console.WriteLine("List searching took " + listTimer.ElapsedMilliseconds + "ms to search list");
+                    Console.WriteLine("Heap searching took " + heapTimer.ElapsedMilliseconds + "ms");
                     Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to compute path");
                     timer.Stop();
  
@@ -148,7 +150,9 @@ namespace Drought.Entity
 
                         //If it isn’t on the open list, add it to the open list.
                         int oldNodePos = 0;
+                        heapTimer.Start();
                         Node oldNode = open.contains(s.getPosition(), out oldNodePos);
+                        heapTimer.Stop();
                         if (oldNode == null)
                             open.insert(s);
                         else
@@ -170,7 +174,7 @@ namespace Drought.Entity
             }
 
 
-            Console.WriteLine("List searching took " + listTimer.ElapsedMilliseconds + "ms to search list");
+            Console.WriteLine("Heap searching took " + heapTimer.ElapsedMilliseconds + "ms");
             Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not fina a path");
             timer.Stop();
 
