@@ -6,6 +6,7 @@ package thrust.physics;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  */
+//test
 public interface Physics {
   //@ constraint (* The gravitational constant never changes. *);
   //@ constraint gravitational_constant() == \old(gravitational_constant());
