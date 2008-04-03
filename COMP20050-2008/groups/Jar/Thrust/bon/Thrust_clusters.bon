@@ -1,0 +1,242 @@
+-- ===================================================================
+-- Cluster Charts
+-- ===================================================================
+
+-- ===================================================================
+-- Built-in BON types
+-- ===================================================================
+
+cluster_chart BUILT_IN_TYPES
+  class TUPLE
+    description "A tuple of typed values."
+  class BOOLEAN
+    description "The boolean type."
+  class VALUE
+    description "A generic value type that is comparable."
+  class INTEGER
+    description "The integer type."
+  class REAL
+    description "The real type."
+  class STRING
+    description "The string type."
+  class SEQUENCE
+    description "The sequence type."
+  class SET
+    description "The set type."
+  class BAG
+    description "The bag type."
+end
+
+cluster_chart DISPLAY
+  class HIGH_SCORE_DISPLAY
+    description "Top scores of past players."
+  class INFO_PANEL
+    description "Information about the game."
+end
+
+cluster_chart INPUT
+  class KEYBOARD_INPUT
+    description "A single keypress."
+  class INPUT_HANDLER
+    description "Processes and delegates each keyboard input received."
+  cluster GAME_INPUT
+    description "Accept and process input to control the game's behavior."
+  cluster PLAYER_INPUT
+    description "Accept and process input to control the spaceship."
+end
+
+cluster_chart GAME_INPUT
+  class DISPLAY_HIGH_SCORES
+    description "Display the high score table."
+  class TOGGLE_MUSIC_OR_SOUND_EFFECTS
+    description "Toggle between hearing music or sound effects."
+  class START_GAME
+    description "Start a game."
+  class STOP_GAME
+    description "Stop a game."
+end
+
+cluster_chart PLAYER_INPUT
+  class FIRE_GUN
+    description "Fire a bullet from the spaceship's gun."
+  class TURN_LEFT
+    description "Rotate the spaceship counterclockwise."
+  class TURN_RIGHT
+    description "Rotate the spaceship clockwise."
+  class USE_ENGINE
+    description "Use the spaceship's engine to apply thrust forward."
+  class USE_SHIELD
+    description "Use the spaceships shield to protect itself or to gather fuel."
+end
+
+cluster_chart ENTITIES
+  class ENTITY
+    description "Any entity in the game that is drawn in space or on \
+               \ the terrain."
+  class DYNAMIC_ENTITY
+    description "Entities whose position or orientation change."
+  class STATIC_ENTITY
+    description "Entities whose position or orientation change."
+  class ENEMY_ENTITY
+    description "An entity that is a threat to the spaceship."
+  class FRIEND_ENTITY
+    description "An entity that is helpful to the spaceship."
+  class NEUTRAL_ENTITY
+    description "An entity that is not a threat and is not helpful to \
+               \ the spaceship."
+  cluster ABOUT_GAME
+    description "Information relating to entities in the game."
+  cluster BEHAVIORS
+    description "Autonomous behaviors of in-game entities."
+  cluster IN_GAME
+    description "Entities seen and heard in the game."
+  cluster PROPERTIES
+    description "General properties of entities."
+end
+
+cluster_chart ABOUT_GAME
+  class BONUS
+    description "The bonus points associated with finishing a level."
+  class FUEL
+    description "Fuel that a spaceship or a fuel pod possesses."
+  class FUELABLE
+    description "An entity that can contain fuel."
+  class HIGH_SCORES
+    description "The highest scores ever recorded in the game."
+  class LIVES
+    description "The number of lives a player has left."
+  class SCORE
+    description "The current score of a player."
+end
+
+cluster_chart IN_GAME
+  class BARRIER
+    description "A barrier and trigger to block the spaceship's way."
+  class BULLET
+    description "A bullet shot from the spaceship or a gun turret."
+  class EXPLOSION
+    description "An explosion."
+  class FACTORY
+    description "An enemy factory."
+  class FACTORY_CHIMNEY
+    description "A chimney of a factory."
+  class FACTORY_SPHERE
+    description "A sphere of a factory."
+  class FUEL_POD
+    description "A fuel pod from which the spaceship can obtain fuel."
+  class GOAL_SPHERE
+    description "The goal sphere that the spaceship needs to tow into \
+               \ space away from the terrain to escape."
+  class GUN_TURRET
+    description "An enemy gun turret that shoots bullets at the \
+               \ spaceship."
+  class SPACE
+    description "The vacuum in which entities exist."
+  class SPACESHIP
+    description "The player's main vehicle."
+  class STAR
+    description "A blinking star in space."
+  class TERRAIN
+    description "The planet on which some entities rest."
+end
+
+cluster_chart BEHAVIORS
+  class ACTION
+    description "An action that an entity can take."
+  class AI
+    description "The autonomous behaviors that entities exhibit."
+  class TOW
+    description "The towing action taken by the spaceship with the goal sphere."
+  class ATTACK
+    description "An attacking action of an enemy entity."
+  class DISTURB
+    description "A disturbing, non-attacking, action of an enemy entity."
+end
+
+cluster_chart PROPERTIES
+  class COLOR
+    description "A color."
+  class SHAPE
+    description "A shape."
+  class PROPERTIES
+    description "The color and shape of an entity."
+end
+
+cluster_chart ANIMATIONS
+  explanation
+    "Animate moving entities."
+  class FRAME
+    description "A single snapshot of an animation."
+  class ANIMATION
+    description "The frames in an animation."
+  class ANIMATABLE
+    description "An entity that moves or changes independent of the \
+               \ player via an animation."
+  class ANIMATION_ENGINE
+    description "The rendering engine that keeps track of all animations."
+  class BARRIER_ANIMATION
+    description "Opening and closing."
+  class ESCAPE_ANIMATION
+    description "Warp away."
+  class EXPLOSION_ANIMATION
+    description "Blow up."
+  class CHIMNEY_ANIMATION
+    description "Smoking."
+  class STAR_ANIMATION
+    description "Twinkle."
+  class PLANET_EXPLODING_ANIMATION
+    description "The terrain explodes."
+  class WELCOME_ANIMATION
+    description "Welcoming the player to the game and rotating between \
+               \ a demo and the instructions."
+end
+
+cluster_chart AUDIO
+  explanation
+    "Music and sound effects."
+  class MUSIC
+    description "In-game music."
+  class SOUND_EFFECT
+    description "Any sound made in response to a event."
+  class SOUND_EFFECTS
+    description "The set of all game sounds."
+end
+
+cluster_chart PHYSICS
+  class ACCELERATION
+    description "Increase in the rate of speed of something."
+  class GRAVITY
+    description "The force that attracts the spaceship and goal sphere toward the terrain."
+  class MASS
+    description "The quantity of matter that an entity contains."
+  class MOMENTUM
+    description "The quantity of motion of a moving entity."
+  class ORIENTATION
+    description "The relative physical direction of entities."
+  class POSITION
+    description "The place where an entity is located."
+  class VELOCITY
+    description "The speed of an entity in a given direction."
+end
+
+cluster_chart SIMULATION
+  explanation
+    "Simulating all of the entities in the game to realize the game."
+  class THRUST_GAME
+    description "The Thrust game."
+  cluster DISPLAY
+    description "Display the game to the player."
+  cluster INPUT
+    description "Accept and process input from the player."
+  cluster ENTITIES
+    description "The primary entities simulated within the game."
+  cluster PHYSICS
+    description "Computing the behavior of entities according to physical \
+               \ simulation in two dimensions."
+  cluster ANIMATIONS
+    description "Animations of entities."
+  cluster AUDIO
+    description "Sound effects and music."
+  cluster BUILT_IN_TYPES
+    description "The built-in types of BON."
+end
