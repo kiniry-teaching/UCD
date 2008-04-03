@@ -40,6 +40,7 @@ namespace Drought.Entity
         private Stopwatch timer = new Stopwatch();
         private Stopwatch listTimer = new Stopwatch();
         private Stopwatch heapTimer = new Stopwatch();
+        private Stopwatch createTimer = new Stopwatch();
 
 
         /**
@@ -90,6 +91,7 @@ namespace Drought.Entity
             timer.Reset();
             listTimer.Reset();
             heapTimer.Reset();
+            createTimer.Reset();
             timer.Start();
 
             Heap open = new Heap();
@@ -117,6 +119,7 @@ namespace Drought.Entity
 
                 if (n.getPosition() == goal.getPosition()) //found a path
                 {
+                    createTimer.Start();
                     Node parent = n.getParent();
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
@@ -131,9 +134,11 @@ namespace Drought.Entity
                     }
 
 
-                    Console.WriteLine("Heap searching took " + heapTimer.ElapsedMilliseconds + "ms");
-                    Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to compute path");
+                    Console.WriteLine(heapTimer.ElapsedMilliseconds + "ms to heap search");
+                    Console.WriteLine(createTimer.ElapsedMilliseconds + "ms to create computed path from nodes");
+                    Console.WriteLine(timer.ElapsedMilliseconds + "ms total to run A*");
                     timer.Stop();
+                    createTimer.Stop();
  
                     return new Path(pathNodes, level);
                 }
@@ -149,7 +154,8 @@ namespace Drought.Entity
                     if(closed[(int)s.getPosition().X, (int)s.getPosition().Y] == false)
                     {
                         //s.h is estimated distance to goal
-                        s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
+                        //s.hVal = Vector2.Distance(s.getPosition(), goal.getPosition());
+                        s.hVal = Vector2.DistanceSquared(s.getPosition(), goal.getPosition());
                         //s.g is n.g + cost from n to s
                         s.gVal = n.gVal + s.getDistanceToParent();
 
@@ -161,6 +167,7 @@ namespace Drought.Entity
                         int sy = (int)s.getPosition().Y;
                         Node oldNode = openMap[sx, sy];
                         heapTimer.Stop();
+
                         if (oldNode == null)
                         {
                             open.insert(s);

@@ -146,6 +146,20 @@ namespace Drought.GameStates
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw - i, hh + i));
             entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+        
+            nodes = new List<Vector3>();
+            nodes.Add(levelInfo.getPositionAt(1, 1));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            nodes = new List<Vector3>();
+            nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, 0));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            nodes = new List<Vector3>();
+            nodes.Add(levelInfo.getPositionAt(0, levelInfo.getHeight() - 1));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            nodes = new List<Vector3>();
+            nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, levelInfo.getHeight() - 1));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+
         }
 
         public override void loadContent()
