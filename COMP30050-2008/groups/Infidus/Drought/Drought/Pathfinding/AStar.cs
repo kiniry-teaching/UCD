@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Drought.Pathfinding;
 using Drought.World;
+using System.Diagnostics;
 
 namespace Drought.Entity
 {
@@ -34,6 +35,11 @@ namespace Drought.Entity
 
         /** Height of the map. */
         private int height;
+
+
+        private Stopwatch timer;
+        private Stopwatch listTimer;
+
 
         /**
          * Constructs and initialises AStar to search for paths in the
@@ -80,6 +86,10 @@ namespace Drought.Entity
 
         public Path computePath(float startX, float startY, float endX, float endY)
         {
+            timer.Reset();
+            listTimer.Reset();
+            timer.Start();
+
             Heap open = new Heap();
             List<Node> closed = new List<Node>();
             Node goal = getNode((int)endX, (int)endY);
@@ -150,6 +160,10 @@ namespace Drought.Entity
                     }
 
                 }
+
+                Console.WriteLine("List searching took " + listTimer.ElapsedMilliseconds() + "ms to search list");
+                Console.WriteLine("Took " + timer.ElapsedMilliseconds() + "ms to compute path");
+                timer.Stop();
             }
 
 
@@ -239,9 +253,16 @@ namespace Drought.Entity
          */
         private bool contains(List<Node> list, Node node)
         {
+            listTimer.Start();
+
             for (int i = 0, n = list.Count; i < n; i++)
                 if (list[i].getPosition() == node.getPosition())
+                {
+                    listTimer.Stop();
                     return true;
+                }
+
+            listTimer.Stop();
             return false;
         }
     }
