@@ -181,7 +181,7 @@ void MidiPlayer::sendProgramChange(Channels channel, uchar program) {
 void MidiPlayer::playLead(uchar pitch, uchar velocity) {
     if(isConnected_) 
         try {
-            leadChannel_->play(pitch, velocity, 0);
+            leadChannel_->play(pitch, velocity);
         }
         catch (RtError &error) {}
 }
@@ -189,7 +189,7 @@ void MidiPlayer::playLead(uchar pitch, uchar velocity) {
 void MidiPlayer::playAccompaniment(uchar pitch, uchar velocity) {
     if(isConnected_)
         try {
-            accompanyChannel_->play(pitch, velocity, 0);
+            accompanyChannel_->play(pitch, velocity);
         }
         catch (RtError &error) {}
 }
@@ -197,11 +197,11 @@ void MidiPlayer::playAccompaniment(uchar pitch, uchar velocity) {
 void MidiPlayer::playChord(uchar chord, uchar velocity) {
     if(isConnected_)
         try {
-            chordChannel_->play(chord, velocity, 0);
+            chordChannel_->play(chord, velocity);
             chords_[0] = chord;
-            chordChannel_->play(chord + 4, velocity, 0);
+            chordChannel_->play(chord + 4, velocity);
             chords_[1] = chord + 4;
-            chordChannel_->play(chord + 7, velocity, 0);
+            chordChannel_->play(chord + 7, velocity);
             chords_[2] = chord + 7;
         }
         catch (RtError &error) {}
@@ -210,7 +210,7 @@ void MidiPlayer::playChord(uchar chord, uchar velocity) {
 void MidiPlayer::playPercussion(uchar pitch, uchar velocity) {
     if(isConnected_)
         try {
-            percussionChannel_->play(pitch, velocity, 0);
+            percussionChannel_->play(pitch, velocity);
         }
         catch (RtError &error) {}
 }
@@ -219,13 +219,13 @@ void MidiPlayer::playNote(Channels channel, uchar pitch, uchar velocity) {
     if (isConnected_) {
         try {
             if (channel == CHANNEL_LEAD)
-                leadChannel_->play(pitch, velocity, 0);
+                leadChannel_->play(pitch, velocity);
             else if(channel == CHANNEL_ACCOMPANY)
-                accompanyChannel_->play(pitch, velocity, 0);
+                accompanyChannel_->play(pitch, velocity);
             else if(channel == CHANNEL_CHORD)
-                chordChannel_->play(pitch, velocity, 0);
+                chordChannel_->play(pitch, velocity);
             else if(channel == CHANNEL_PERCUSSION)
-                percussionChannel_->play(pitch, velocity, 0);  
+                percussionChannel_->play(pitch, velocity);  
         }
         catch (RtError &error) {}
     }

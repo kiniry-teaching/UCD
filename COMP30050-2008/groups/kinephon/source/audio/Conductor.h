@@ -87,11 +87,16 @@ public:
 	 * Note that if a melody has been set previously, it will be ignored until play()
 	 * is called again.
      * If no lead note should be played, but the other effects none the less, (e.g. if the last
-     * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then. 
-	 * @param pitch the pitch of the lead  
+     * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then.
+     * <p>
+     * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
+     * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
+     * but you have to specify the octave number as 0.
+	 * @param note the note of the lead 
+     * @param octave play the note in this octave
      * @param pitchVelocity attack velocity of note
 	 */
-	void play(uchar pitch, uchar pitchVelocity);
+	void play(uchar note, int octave, uchar pitchVelocity);
 	
 	
 	/**
@@ -103,22 +108,39 @@ public:
 	 * however not turned off.
      * If no lead note should be played, but the other effects none the less, (e.g. if the last
      * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then. 
-	 * @param pitch the pitch of the lead
+     * <p>
+     * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
+     * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
+     * but you have to specify the octave number such that the pitches will still be in the range of
+     * 0-127. Otherwise the output will be unpredictable (the wrong notes will either be played, if valid,
+     * or ignored, if you run out of range).
+     * The octave parameter can also be used to lower/increase the octaves.
+	 * @param note the note of the lead
+     * @param octave play the note in this octave
      * @param pitchVelocity attack velocity of note
-	 * @param accompany the pitch of the accompanying melody  
+	 * @param accompany the pitch of the accompanying melody
+     * @param accOctave play the accompaniment in this octave  
      * @param accompanyVelocity attack velocity of accompaniment note
 	 */
-	void play(uchar pitch, uchar pitchVelocity, uchar accompany, uchar accompanyVelocity);
+	void play(uchar note, int octave, uchar pitchVelocity, uchar accNote, int accOctave, uchar accVelocity);
 	
 	/**
 	 * Plays given note immediately.
 	 * This methods caters for notes of a melody played outside
 	 * of the normal rhythm. The note will be played with the same
 	 * instrument as the usual lead notes.
-	 * @param pitch	pitch of the note
+     * <p>
+     * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
+     * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
+     * but you have to specify the octave number such that the pitches will still be in the range of
+     * 0-127. Otherwise the output will be unpredictable (the wrong notes will either be played, if valid,
+     * or ignored, if you run out of range).
+     * The octave parameter can also be used to lower/increase the octaves.
+	 * @param note pitch of the note
+     * @param octave play the note in this octave
 	 * @param velocity velocity of the note
 	 */
-	void playImmediate(uchar pitch, uchar velocity);
+	void playImmediate(uchar note, int octave, uchar velocity);
 	
     /**
      * Returns the currently set instruments.

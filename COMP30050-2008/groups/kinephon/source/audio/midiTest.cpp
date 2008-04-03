@@ -174,7 +174,10 @@ if (testingPlayLead) {
         audio.setDynamics(DYNAMICS_PIANO);
         i = 0;
         while(i < 60){
-            audio.play(melody[i], melody[i+1]);    
+            if(melody[i] == NO_NOTE)
+                audio.play(melody[i], 0, melody[i+1]); 
+            else
+                audio.play(melody[i],0, melody[i+1]);    
             SLEEP(tempo);
             i += 2;
         }
@@ -183,7 +186,10 @@ if (testingPlayLead) {
         audio.setDynamics(DYNAMICS_PIANISSIMO);
         i = 0;
         while(i < 60){
-            audio.play(melody[i], melody[i+1]);    
+            if(melody[i] == NO_NOTE)
+                audio.play(melody[i], 0, melody[i+1]); 
+            else
+                audio.play(melody[i], 0, melody[i+1]);    
              SLEEP(tempo/2);
            // audio.playImmediate(88,60);
             SLEEP(tempo/2);
@@ -194,7 +200,10 @@ if (testingPlayLead) {
         audio.setDynamics(DYNAMICS_FORTE);
         i = 0;
         while(i < 60){
-            audio.play(melody[i], melody[i+1]); 
+            if(melody[i] == NO_NOTE)
+                audio.play(melody[i], 0, melody[i+1]); 
+            else
+                audio.play(melody[i], -2, melody[i+1]); 
             if (i == 30) {  //audio.setPan(0); 
             }    
             SLEEP(tempo);
@@ -206,7 +215,10 @@ if (testingPlayLead) {
         i = 0;
         while(i < 60){
             if ((i % 4) == 0)//test if melody counter is being updated correctly
-                audio.play(melody[i], melody[i+1]);
+                if(melody[i] == NO_NOTE)
+                    audio.play(melody[i], 0, melody[i+1]); 
+                else
+                    audio.play(melody[i], 0, melody[i+1]);
             else 
                 audio.play();    
             SLEEP(tempo);
@@ -227,10 +239,10 @@ if (testingPlayLeadAcc) {
         i = 0;
         while(i < 60){
             if (melody[i] != NO_NOTE) {
-                audio.play(melody[i], melody[i+1], melody[i]-8, melody[i+1]);
+                audio.play(melody[i],0, melody[i+1], melody[i]-8,0, melody[i+1]);
             }
             else {
-                audio.play(melody[i], melody[i+1], melody[i], melody[i+1]);   
+                audio.play(melody[i],0, melody[i+1], melody[i],0, melody[i+1]);   
             } 
             SLEEP(tempo);
             i += 2;
@@ -241,10 +253,10 @@ if (testingPlayLeadAcc) {
         i = 0;
         while(i < 60){
             if (melody[i] != NO_NOTE) {
-                audio.play(melody[i], melody[i+1], melody[i]-8, melody[i+1]);
+                audio.play(melody[i],0, melody[i+1], melody[i]-8,0, melody[i+1]);
             }
             else {
-                audio.play(melody[i], melody[i+1], melody[i], melody[i+1]);   
+                audio.play(melody[i],0, melody[i+1], melody[i],0, melody[i+1]);   
             } 
             SLEEP(tempo);
             i += 2;
@@ -255,10 +267,10 @@ if (testingPlayLeadAcc) {
         i = 0;
         while(i < 60){
             if (melody[i] != NO_NOTE) {
-                audio.play(melody[i], melody[i+1], melody[i]-8, melody[i+1]);
+                audio.play(melody[i],0, melody[i+1], melody[i]-8,0, melody[i+1]);
             }
             else {
-                audio.play(melody[i], melody[i+1], melody[i], melody[i+1]);   
+                audio.play(melody[i],0, melody[i+1], melody[i],0, melody[i+1]);   
             }
             SLEEP(tempo);
             i += 2;
@@ -269,10 +281,10 @@ if (testingPlayLeadAcc) {
         i = 0;
         while(i < 60){
             if (melody[i] != NO_NOTE) {
-                audio.play(melody[i], melody[i+1], melody[i]-8, melody[i+1]);
+                audio.play(melody[i],0, melody[i+1], melody[i]-8,0, melody[i+1]);
             }
             else {
-                audio.play(melody[i], melody[i+1], melody[i], melody[i+1]);   
+                audio.play(melody[i],0, melody[i+1], melody[i],0, melody[i+1]);   
             }    
             SLEEP(tempo);
             i += 2;

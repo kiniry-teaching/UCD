@@ -10,21 +10,21 @@ using namespace std;
 namespace audio
 { 
 	/* 
-	 * Define middle notes as constants, these are essential.
+	 * Define notes as constants, these are essential.
 	 * What octave we are in is less important for the tune. 
 	 */
-	const uchar MIDDLE_C = 60;
-	const uchar MIDDLE_CSHARP = 61;
-	const uchar MIDDLE_D = 62;
-	const uchar MIDDLE_DSHARP = 63;
-	const uchar MIDDLE_E = 64;
-	const uchar MIDDLE_F = 65;
-	const uchar MIDDLE_FSHARP = 66;
-	const uchar MIDDLE_G = 67;
-	const uchar MIDDLE_GSHARP = 68;
-	const uchar MIDDLE_A = 69;
-	const uchar MIDDLE_ASHARP = 70;
-	const uchar MIDDLE_B = 71;
+	const uchar NOTE_C = 60;
+	const uchar NOTE_CSHARP = 61;
+	const uchar NOTE_D = 62;
+	const uchar NOTE_DSHARP = 63;
+	const uchar NOTE_E = 64;
+	const uchar NOTE_F = 65;
+	const uchar NOTE_FSHARP = 66;
+	const uchar NOTE_G = 67;
+	const uchar NOTE_GSHARP = 68;
+	const uchar NOTE_A = 69;
+	const uchar NOTE_ASHARP = 70;
+	const uchar NOTE_B = 71;
 
 /**
  * Represents a single Midi channel.
@@ -82,12 +82,11 @@ public:
 
   	/**
 	 * Sends a Note On message to play a note.
-	 * @param note the pitch to be played
-	 * @param velocity the velocity with which the note sounds 
-	 * @param octave the octave the specified pitch is in     
+	 * @param pitch the pitch to be played
+	 * @param velocity the velocity with which the note sounds      
 	 * @throws RtError if anything went wrong       
 	 */
-	void play(uchar note, uchar velocity, int octave);
+	void play(uchar pitch, uchar velocity);
 	
 	/**
 	 * Sends a Note Off message for the last played pitch.
@@ -108,7 +107,6 @@ public:
 private:
 	uchar channelNo_;
 	uchar programNo_;
-	uchar octaveNo_;
 	uchar note_[2];			  //note and velocity of last played
 	uchar controls_[93]; 
 	RtMidiOut* midiout_;

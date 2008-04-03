@@ -164,7 +164,9 @@ void Conductor::play() {
     timeStep_ = (timeStep_ + 1) % 4;
 }
 //quarter notes, maybe later we'll need eigth notes
-void Conductor::play(uchar pitch, uchar pitchVelocity){
+void Conductor::play(uchar note, int octave, uchar pitchVelocity){
+    uchar pitch = note + octave * 12;
+    
     if (timeStep_ == 0) {//1st quarter 
         if (pitch != NO_NOTE) {
             
@@ -261,7 +263,10 @@ void Conductor::play(uchar pitch, uchar pitchVelocity){
     timeStep_ = (timeStep_ + 1) % 4;
 }
 	
-void Conductor::play(uchar pitch, uchar pitchVelocity, uchar accompany, uchar accompanyVelocity) {
+void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote, int accOctave, uchar accVelocity) {
+    uchar pitch = note + octave * 12;
+    uchar accompany = accNote + accOctave * 12;
+        
     if (timeStep_ == 0) {//1st quarter 
         if (pitch != NO_NOTE) {
             if (hasAccompaniment_) {}
@@ -328,7 +333,7 @@ void Conductor::play(uchar pitch, uchar pitchVelocity, uchar accompany, uchar ac
     }
     if (accompany != NO_NOTE) {
         midi_->releaseChannel(CHANNEL_ACCOMPANY);
-        midi_->playAccompaniment(accompany, accompanyVelocity); 
+        midi_->playAccompaniment(accompany, accVelocity); 
     }
     if (hasPedaling_){
         cout << " time: "<< timeStep_ << " pedalingCounter: " << pedalingCounter_ << endl;
@@ -347,7 +352,9 @@ void Conductor::play(uchar pitch, uchar pitchVelocity, uchar accompany, uchar ac
     timeStep_ = (timeStep_ + 1) % 4;
 }
 
-void Conductor::playImmediate(uchar pitch, uchar velocity) {
+void Conductor::playImmediate(uchar note, int octave, uchar velocity) {
+    uchar pitch = note + octave * 12;
+    
     midi_->releaseChannel(CHANNEL_LEAD);
     midi_->playLead(pitch, velocity);
 }	
