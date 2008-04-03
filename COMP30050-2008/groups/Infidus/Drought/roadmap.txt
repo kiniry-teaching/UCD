@@ -29,3 +29,7 @@ New Features:
  - Lobby State
  - Particle System
  - Weather
+ 
+ Debug Features:
+ ----------
+ - Function to draw each point on the terrain (a point for each entry in the heightmap)
