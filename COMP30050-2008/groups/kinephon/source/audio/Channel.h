@@ -13,18 +13,18 @@ namespace audio
 	 * Define notes as constants, these are essential.
 	 * What octave we are in is less important for the tune. 
 	 */
-	const uchar NOTE_C = 60;
-	const uchar NOTE_CSHARP = 61;
-	const uchar NOTE_D = 62;
-	const uchar NOTE_DSHARP = 63;
-	const uchar NOTE_E = 64;
-	const uchar NOTE_F = 65;
-	const uchar NOTE_FSHARP = 66;
-	const uchar NOTE_G = 67;
-	const uchar NOTE_GSHARP = 68;
-	const uchar NOTE_A = 69;
-	const uchar NOTE_ASHARP = 70;
-	const uchar NOTE_B = 71;
+	const uchar NOTE_C = 12;
+	const uchar NOTE_CSHARP = 13;
+	const uchar NOTE_D = 14;
+	const uchar NOTE_DSHARP = 15;
+	const uchar NOTE_E = 16;
+	const uchar NOTE_F = 17;
+	const uchar NOTE_FSHARP = 18;
+	const uchar NOTE_G = 19;
+	const uchar NOTE_GSHARP = 20;
+	const uchar NOTE_A = 21;
+	const uchar NOTE_ASHARP = 22;
+	const uchar NOTE_B = 23;
 
 /**
  * Represents a single Midi channel.
