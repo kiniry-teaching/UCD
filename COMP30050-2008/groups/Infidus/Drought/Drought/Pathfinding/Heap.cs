@@ -28,6 +28,7 @@ namespace Drought.Pathfinding
                 growArray();
 
             nodes[size] = node;
+            node.positionInHeap = size;
             size++;
 
             percolateUp(size - 1);
@@ -40,6 +41,7 @@ namespace Drought.Pathfinding
 
             Node min = nodes[0];
             nodes[0] = nodes[size - 1];
+            nodes[0].positionInHeap = 0;
             size--;
 
             percolateDown(0);
@@ -202,6 +204,8 @@ namespace Drought.Pathfinding
             Node temp = nodes[a];
             nodes[a] = nodes[b];
             nodes[b] = temp;
+            nodes[a].positionInHeap = a;
+            nodes[b].positionInHeap = b;
         }
 
         /**

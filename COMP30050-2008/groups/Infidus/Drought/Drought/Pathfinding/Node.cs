@@ -28,6 +28,12 @@ namespace Drought.Pathfinding
         /** The distance to the node's parent or 0 if no parent exists. */
         private float distToParent;
 
+        /** 
+         * The position of the node in the heap's internal data array.
+         * This is used to speed up the search.
+         */
+        private int heapPos;
+
 
         /**
          * Constructs a new node with the specified coordinates. All other
@@ -116,6 +122,17 @@ namespace Drought.Pathfinding
         public Vector2 getPosition()
         {
             return pos;
+        }
+
+        /**
+         * Gets/sets the position of the node in the heap's
+         * internal data array. This is used to speed up the
+         * search.
+         */
+        public int positionInHeap
+        {
+            set { heapPos = value; }
+            get { return heapPos; }
         }
     }
 }

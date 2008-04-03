@@ -95,17 +95,23 @@ namespace Drought.Entity
             Heap open = new Heap();
             //List<Node> closed = new List<Node>();
             bool[,] closed = new bool[width, height];
+            Node[,] openMap = new Node[width, height];
             Node goal = getNode((int)endX, (int)endY);
             Node start = getNode((int)startX, (int)startY);
 
             if (goal != null && start != null)
+            {
                 open.insert(start);
+                openMap[(int)start.getPosition().X, (int)start.getPosition().Y] = start;
+            }
             //else a path can't be found so skip to the end and return default path.
 
             while (!open.isEmpty())
             {
                 //get node with lowest f value from open list (last entry in list)
                 Node n = open.removeMin();
+                openMap[(int)n.getPosition().X, (int)n.getPosition().Y] = null;
+
                 //closed.Add(n);
                 closed[(int)n.getPosition().X, (int)n.getPosition().Y] = true;
 
@@ -149,12 +155,17 @@ namespace Drought.Entity
 
 
                         //If it isn’t on the open list, add it to the open list.
-                        int oldNodePos = 0;
                         heapTimer.Start();
-                        Node oldNode = open.contains(s.getPosition(), out oldNodePos);
+                        //Node oldNode = open.contains(s.getPosition(), out oldNodePos);
+                        int sx = (int)s.getPosition().X;
+                        int sy = (int)s.getPosition().Y;
+                        Node oldNode = openMap[sx, sy];
                         heapTimer.Stop();
                         if (oldNode == null)
+                        {
                             open.insert(s);
+                            openMap[sx, sy] = s;
+                        }
                         else
                         {
                             //If it is on the open list already, check to see if this path to that square is better,
@@ -165,8 +176,7 @@ namespace Drought.Entity
                             {
                                 oldNode.setParent(n);
                                 oldNode.gVal = s.gVal;
-                                open.reorderNode(oldNodePos);
-                                //TODO reorder heap!
+                                open.reorderNode(oldNode.positionInHeap);
                             }
                         }
                     }
