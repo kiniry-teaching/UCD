@@ -60,6 +60,10 @@ namespace Drought.GameStates
         private NetworkManager networkManager;
         private bool hosting;
 
+        private LevelInfo levelInfo;
+
+        private AStar aStar;
+
         public NetLevelState(IStateManager manager, DroughtGame game, Level aLevel, bool isHost) :
             base(manager, game)
         {
@@ -72,6 +76,23 @@ namespace Drought.GameStates
             textureMap = new TextureMap(aLevel);
             normalMap = new NormalMap(heightMap);
             waterMap = new WaterMap(heightMap, textureMap);
+
+            //init the level information
+            String lev = "";
+            switch (aLevel)
+            {
+                case Level.Valley: lev = "level_0"; break;
+                case Level.Rugged: lev = "level_1"; break;
+                case Level.RuggedSplitTextures: lev = "level_2"; break;
+                case Level.Square: lev = "square"; break;
+                case Level.WaterTest: lev = "water"; break;
+                default: lev = "level_1"; break;
+            }
+            levelInfo = new LevelInfo();
+            levelInfo.initialise(lev);
+
+            aStar = new AStar(levelInfo);
+
 
             camera = new Camera(this, heightMap);
             
@@ -104,34 +125,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), terrain, uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), terrain, uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), terrain, uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             if (!hosting) uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), terrain, uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), terrain, uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, normalMap), terrain, uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
         }
 
         public override void loadContent()
@@ -286,8 +307,10 @@ namespace Drought.GameStates
                 if (mousePoint != Terrain.BAD_POSITION) {
                     foreach (MovableEntity entity in localEntities) {
                         if (entity.isSelected()) {
-                            entity.setDestination(mousePoint);
-                            entity.computeNewPath(heightMap, normalMap);
+                            //entity.setDestination(mousePoint);
+                            //entity.computeNewPath(heightMap, normalMap);
+                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y);
+                            entity.setPath(p);
                         }
                     }
                 }
@@ -306,7 +329,7 @@ namespace Drought.GameStates
                 if (mousePoint != Terrain.BAD_POSITION) {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(dummyPath, normalMap), terrain, 0);
+                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(dummyPath, levelInfo), terrain, 0);
                     localEntities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }

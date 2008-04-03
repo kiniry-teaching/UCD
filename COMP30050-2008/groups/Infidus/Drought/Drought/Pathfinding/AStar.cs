@@ -20,6 +20,9 @@ namespace Drought.Entity
             new Vector2(0, 1), //top center
             new Vector2(1, 1), }; //top right
 
+        /** Can move from one node to another if the other node is not greater than MAX_MOVE_DIST. */
+        private static float MAX_MOVE_DIST = 2.0f;
+
         /** The level information to search for paths. */
         private LevelInfo level;
 
@@ -57,12 +60,22 @@ namespace Drought.Entity
             height = level.getHeight();
             traversable = new bool[width, height];
 
-            //create nodes
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
-                {
-                    //TODO initialise traversable map to appropriate values
-                }
+                    traversable[x, y] = level.getTextureValue(x, y).X > 0 ? false : true;
+
+            //set the border of the map to be non-traversable
+            for (int x = 0; x < width; x++)
+            {
+                traversable[x, 0] = false;
+                traversable[x, height - 1] = false;
+            }
+
+            for (int y = 0; y < height; y++)
+            {
+                traversable[0, y] = false;
+                traversable[width - 1, y] = false;
+            }
         }
 
         public Path computePath(float startX, float startY, float endX, float endY)
@@ -207,8 +220,12 @@ namespace Drought.Entity
          */
         private bool canMove(Node a, Node b)
         {
-            //TODO
-            return false;
+            Vector2 posA = a.getPosition();
+            Vector2 posB = b.getPosition();
+
+            float diff = Math.Abs(level.getHeight(posA.X, posB.Y) - level.getHeight(posB.X, posB.Y));
+
+            return diff <= MAX_MOVE_DIST;
         }
 
         /**

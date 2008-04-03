@@ -17,7 +17,7 @@ namespace Drought.Entity
         /** The total length of the path. */
         private Vector3 normal;
 
-        private NormalMap normalMap;
+        private LevelInfo levelInfo;
 
         /** The total length of the path. */
         private float length;
@@ -31,10 +31,11 @@ namespace Drought.Entity
         /** Index of the node the position is either at or just passed. */
         private int currNode;
 
-        public Path(List<Vector3> nodes, NormalMap normalMap)
+
+        public Path(List<Vector3> nodes, LevelInfo level)
         {
             this.nodes = nodes;
-            this.normalMap = normalMap;
+            this.levelInfo = level;
             nodeDist = new List<float>();
 
             //can't have an empty list of nodes
@@ -47,16 +48,11 @@ namespace Drought.Entity
             initialise();
         }
 
-        public Path(List<Vector3> nodes, LevelInfo level)
-        {
-            //TODO use this constructor when game uses LevelInfo
-        }
-
         private void initialise()
         {
             currNode = 0;
             position = nodes[0];
-            normal = normalMap.getNormal((int)position.X, (int)position.Y);
+            normal = levelInfo.getNormal((int)position.X, (int)position.Y);
             length = 0.0f;
 
             for (int i = 0; i < nodes.Count - 1; i++)
@@ -135,7 +131,7 @@ namespace Drought.Entity
             //Vector3 currNorm = normalMap.getNormal((int)curr.X, (int)curr.Y);
             //Vector3 nextNorm = normalMap.getNormal((int)next.X, (int)next.Y);
             //normal = Vector3.Lerp(currNorm, nextNorm, amt);
-            normal = normalMap.getNormal(position.X, position.Y);
+            normal = levelInfo.getNormal(position.X, position.Y);
         }
 
         /**

@@ -21,8 +21,6 @@ namespace Drought.Entity
 
         private Vector3 heading;
 
-        private Vector3 destination;
-
         private Vector3 normal;
 
         private Vector3 prevNormal;
@@ -97,11 +95,6 @@ namespace Drought.Entity
             orientation.Forward = Vector3.Normalize(orientation.Forward);
         }
 
-        public void setDestination(Vector3 newDestination)
-        {
-            destination = newDestination;
-        }
-
         public void setPath(Path path)
         {
             this.path = path;
@@ -112,6 +105,7 @@ namespace Drought.Entity
             return path;
         }
 
+        /*
         public void computeNewPath(HeightMap heightMap, NormalMap normalMap)
         {
             List<Vector3> newPathList = new List<Vector3>();
@@ -134,6 +128,7 @@ namespace Drought.Entity
             Path newPath = new Path(newPathList, normalMap);
             setPath(newPath);
         }
+        */
 
         public void update()
         {
