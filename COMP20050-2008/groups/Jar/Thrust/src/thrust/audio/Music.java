@@ -17,7 +17,7 @@ public class Music {
   // @ public model boolean is_playing;
 
   /** File for music. */
-  private File clipFile = new File("/home/keith/1.WAV");
+  private File clipFile = new File("../../../media/Thrust_music.WAV");
   /** Clip to be played. */
   private Clip clip;
   
