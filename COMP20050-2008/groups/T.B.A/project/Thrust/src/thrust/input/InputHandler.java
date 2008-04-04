@@ -8,31 +8,35 @@ package thrust.input;
 public class InputHandler {
   /** An unknown character code. */
   private static final char UNKNOWN_CHAR = '\0';
-  /** Fill in this comment. */
-  public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char START_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char STOP_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char FIRE_GUN = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_LEFT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_RIGHT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_SHIELD = UNKNOWN_CHAR;
+  /** Press 'h' to display the high score */
+  public static final char DISPLAY_HIGH_SCORES = 'h';
+  /** Press 'm' to toggle music/sound effects */
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
+  /** Press [space] to start the game */
+  public static final char START_GAME = ' ';
+  /** Press [Esc] to end the game. */
+  public static final char STOP_GAME = (char)27;
+  /** Press [Enter] to fire the gun */
+  public static final char FIRE_GUN = '\r';
+  /** Press 'a' to turn left */
+  public static final char TURN_LEFT = 'a';
+  /** Press 's' to turn right */
+  public static final char TURN_RIGHT = 's';
+  /** Press [shift] to use engine */
+  public static final char USE_ENGINE = (char) 14;
+  /** Press [space] to use shield and/or pick up object. */
+  public static final char USE_SHIELD = ' ';
 
   /**
    * @return What are the legal keyboard inputs?
    */
   public /*@ pure @*/ char[] legal_inputs() {
-    assert false; //@ assert false;
-    return null;
+    /* Array of the legal inputs */
+    char[] legal_inputs_array = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME, STOP_GAME, FIRE_GUN,
+                                TURN_LEFT, TURN_RIGHT, USE_ENGINE, USE_SHIELD};
+    //@ assert legal_inputs_array != null;
+    return legal_inputs_array;
+    
   }
 
   /**
@@ -50,7 +54,14 @@ public class InputHandler {
     @                      (the_character == USE_SHIELD);
     @*/
   public /*@ pure @*/ boolean legal_input(char the_character) {
-    assert false; //@ assert false;
+    char[] legal_input_array = legal_inputs();
+    // Search through array for the char, if found, return true
+    for(int i = 1 ; i<legal_input_array.length; i++){
+      if(legal_input_array[i] == the_character){
+        return true;
+      }
+    }
+    //If it isn't found, false will be returned
     return false;
   }
 
