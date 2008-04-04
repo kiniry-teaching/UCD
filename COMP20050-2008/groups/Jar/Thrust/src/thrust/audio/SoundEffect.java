@@ -1,4 +1,4 @@
-ppackage thrust.audio;
+package thrust.audio;
 
 import java.io.File;
 import javax.sound.sampled.AudioFormat;
