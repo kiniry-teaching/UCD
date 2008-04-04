@@ -17,9 +17,10 @@ public class Music {
   // @ public model boolean is_playing;
 
   /** File for music. */
-  private File clipFile = new File("../../../media/Thrust_music.WAV");
+  private final transient File clipFile = 
+    new File("../../../media/Thrust_music.wav");
   /** Clip to be played. */
-  private Clip clip;
+  private transient Clip clip;
   
   /** Constructor, sets up audio stream. */
   public Music() {
@@ -27,15 +28,15 @@ public class Music {
     try {
       audioInputStream = AudioSystem.getAudioInputStream(clipFile);
     } catch (Exception e) {
-      e.printStackTrace();
+      e.fillInStackTrace();
     }
-    AudioFormat format = audioInputStream.getFormat();
-    DataLine.Info info = new DataLine.Info(Clip.class, format);
+    final AudioFormat format = audioInputStream.getFormat();
+    final DataLine.Info info = new DataLine.Info(Clip.class, format);
     try {
       clip = (Clip) AudioSystem.getLine(info);
       clip.open(audioInputStream);
     } catch (Exception e) {
-      e.printStackTrace();
+      e.fillInStackTrace();
     }
 
   }

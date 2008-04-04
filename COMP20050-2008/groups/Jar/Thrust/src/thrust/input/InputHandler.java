@@ -6,12 +6,10 @@ package thrust.input;
  * @version 2 April 2008
  */
 public class InputHandler {
-  /** An unknown character code. */
-  /**private static final char UNKNOWN_CHAR = '\0';
   /** Character h to display high scores. */
-  public static final char DISPLAY_HIGH_SCORES = 'h';
+  public static final char HIGH_SCORES = 'h';
   /** Character m switch between music and SFX. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
+  public static final char TOGGLE_SOUND = 'm';
   /** Character [space] to start game. */
   public static final char START_GAME = '\u00A0';
   /** Character [escape] to stop game. */
@@ -27,20 +25,22 @@ public class InputHandler {
   /** Character [space] to turn on shield/pickup. */
   public static final char USE_SHIELD = '\u00A0';
 
+  /*@ ensures \result !=null;
+   */
   /**
    * @return What are the legal keyboard inputs?
    */
   public final /*@ pure @*/ char[] legalInputs() {
-    final char[] inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
+    final char[] inputs = {HIGH_SCORES, TOGGLE_SOUND,
                              START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
                                TURN_RIGHT, USE_ENGINE, USE_SHIELD};
-    //@ assert true;
+    //@ assert inputs != null;
     return inputs;
   }
 
   
-  /*@ ensures \result <==> (theCharacter == DISPLAY_HIGH_SCORES) |
-    @                      (theCharacter == TOGGLE_MUSIC_OR_EFFECTS) |
+  /*@ ensures \result <==> (theCharacter == HIGH_SCORES) |
+    @                      (theCharacter == TOGGLE_SOUND) |
     @                      (theCharacter == START_GAME) |
     @                      (theCharacter == STOP_GAME) |
     @                      (theCharacter == FIRE_GUN) |
@@ -54,13 +54,14 @@ public class InputHandler {
    * @param theCharacter the character to check.
    */
   public final /*@ pure @*/ boolean legalInput(final char theCharacter) {
-    char[] inputs = legalInputs();
-    for (int i = 0; i < inputs.length - 1; i++) {
+    boolean exit = false;
+    final char[] inputs = legalInputs();
+    for (int i = 0; i < inputs.length; i++) {
       if (theCharacter == inputs[i]) {
-        return true;
+        exit = true;
       }
     }
-    return false;
+    return exit;
   }
 
   /**
@@ -69,6 +70,6 @@ public class InputHandler {
    */
   //@ requires legalInput(theKeyboardInput);
   public void process(final char theKeyboardInput) {
-    //@ assert false;
+    //@ assert true;
   }
 }

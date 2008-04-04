@@ -15,7 +15,8 @@ import javax.sound.sampled.DataLine;
  */
 public class SoundEffect {
   /** Clip to be played. */
-  private Clip clip;
+  private transient Clip clip;
+
   /**
    * This is your sound effect.
    * 
@@ -23,36 +24,31 @@ public class SoundEffect {
    *          the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public final /* @ pure @ */ SoundEffect make(final File filename) {
+  public final/* @ pure @ */SoundEffect make(final File filename) {
 
     AudioInputStream audioInputStream = null;
     try {
       audioInputStream = AudioSystem.getAudioInputStream(filename);
+    } catch (Exception e) {
+      e.fillInStackTrace();
     }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
-    AudioFormat format = audioInputStream.getFormat();
-    DataLine.Info info = new DataLine.Info(Clip.class, format);
-    try
-    {
+    final AudioFormat format = audioInputStream.getFormat();
+    final DataLine.Info info = new DataLine.Info(Clip.class, format);
+    try {
       clip = (Clip) AudioSystem.getLine(info);
       clip.open(audioInputStream);
+    } catch (Exception e) {
+      e.fillInStackTrace();
     }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
-  return null;
-  // @ assert false;
-}
+    return null;
+    // @ assert false;
+  }
 
-/**
- * Start playing your effect.
- */
-public final void start() {
+  /**
+   * Start playing your effect.
+   */
+  public final void start() {
     clip.loop(1);
-  // @ assert false;
-}
+    // @ assert false;
+  }
 }
