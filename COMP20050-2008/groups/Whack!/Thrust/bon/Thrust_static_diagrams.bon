@@ -1,0 +1,140 @@
+-- ===================================================================
+-- Static Diagrams
+-- ===================================================================
+static_diagram BUILT_IN_BON_TYPES
+  component
+    effective class BOOLEAN reused
+    effective class VALUE reused
+    effective class INTEGER reused
+    effective class SEQUENCE reused
+    effective class SET reused
+end
+
+static_diagram ENTITY_RELATIONS
+  -- A summarization of all "is-a" relations on entities in this system.
+  component
+    cluster ENTITIES reused -- "import the cluster ENTITIES"
+    cluster ENTITY_PROPERTIES reused
+    cluster PHYSICS reused
+    cluster ABOUT_GAME reused
+
+    deferred class ENTITY reused
+    deferred class ENEMY_ENTITY reused
+      inherit ENTITY; ATTACK; DISTURB
+      feature
+        attack_behavior, disturb_behavior: BOOLEAN
+    end
+    FRIEND_ENTITY inherit ENTITY
+    deferred class FRIEND_ENTITY reused
+    NEUTRAL_ENTITY inherit ENTITY
+    deferred class NEUTRAL_ENTITY reused
+  
+    BARRIER inherit NEUTRAL_ENTITY
+    BARRIER inherit STATIC_ENTITY
+    BARRIER inherit  ANIMATABLE
+    BULLET inherit ENEMY_ENTITY
+    BULLET inherit DYNAMIC_ENTITY
+    EXPLOSION inherit NEUTRAL_ENTITY
+    BULLET inherit STATIC_ENTITY
+    BULLET inherit  ANIMATABLE
+    FACTORY inherit NEUTRAL_ENTITY
+    FACTORY inherit STATIC_ENTITY
+    FACTORY inherit ANIMATABLE
+    FACTORY_CHIMNEY inherit NEUTRAL_ENTITY
+    FACTORY_CHIMNEY inherit STATIC_ENTITY
+    FACTORY_CHIMNEY inherit ANIMATABLE
+    FACTORY_SPHERE inherit NEUTRAL_ENTITY
+    FACTORY_SPHERE inherit STATIC_ENTITY
+    FUEL_POD inherit NEUTRAL_ENTITY
+    FUEL_POD inherit FUELABLE
+    FUEL_POD inherit STATIC_ENTITY
+    GOAL_SPHERE inherit NEUTRAL_ENTITY
+    GOAL_SPHERE inherit DYNAMIC_ENTITY
+    GUN_TURRENT inherit ENEMY_ENTITY
+    GUN_TURRENT inherit STATIC_ENTITY
+    SPACE inherit NEUTRAL_ENTITY
+    SPACE inherit STATIC_ENTITY
+    SPACESHIP inherit FRIEND_ENTITY
+    SPACESHIP inherit FUELABLE
+    SPACESHIP inherit DYNAMIC_ENTITY
+    STAR inherit NEUTRAL_ENTITY
+    STAR inherit STATIC_ENTITY
+    STAR inherit ANIMATABLE
+    TERRAIN inherit NEUTRAL_ENTITY
+    TERRAIN inherit STATIC_ENTITY
+    TOW_CABLE inherit NEUTRAL_ENTITY
+    TOW_CABLE inherit DYNAMIC_ENTITY
+  
+    ENTITY client ENTITY_PROPERTIES
+    ENTITY client PHYSICS
+  
+    FUELABLE client FUEL
+    SPACESHIP client LIVES
+    SPACESHIP client SCORE
+end
+
+static_diagram INPUT_INHERITANCE_RELATIONS
+  -- A summarization of all "is-a" relations in input.  Note the use
+  -- of cluster inheritance to summarize that each class of the child
+  -- cluster inherits from the same parent class.
+  component
+    -- cluster INPUT reused
+
+    GAME_INPUT inherit KEYBOARD_INPUT
+    PLAYER_INPUT inherit KEYBOARD_INPUT
+end
+
+static_diagram BEHAVIOR_RELATIONS
+  -- A summarization of all relations between classes of behavior.
+  component
+    -- cluster ENTITY_BEHAVIORS reused
+    -- cluster PHYSICS reused
+
+    ACTION client PHYSICS
+
+    TOW inherit ACTION
+    ATTACK inherit ACTION
+    DISTURB inherit ACTION
+
+    ATTACK client AI
+    DISTURB client AI
+end
+
+static_diagram ANIMATION_RELATIONS
+  --
+  component
+    cluster ANIMATIONS reused
+
+    BARRIER_ANIMATION inherit ANIMATION
+    ESCAPE_ANIMATION inherit ANIMATION
+    EXPLOSION_ANIMATION inherit ANIMATION
+    CHIMNEY_ANIMATION inherit ANIMATION
+    STAR_ANIMATION inherit ANIMATION
+    WELCOME_ANIMATION inherit ANIMATION
+end
+
+static_diagram AUDIO_RELATIONS
+  -- Relations to and within the AUDIO subsystem.
+  component
+    cluster SIMULATION reused
+    cluster AUDIO reused
+
+    SOUND_EFFECTS client SOUND_EFFECT
+    THRUST_GAME client MUSIC
+    THRUST_GAME client SOUND_EFFECTS
+end
+
+static_diagram GAME
+  --
+  component
+    -- cluster ABOUT_GAME reused
+    -- cluster SIMULATION reused
+    -- cluster DISPLAY reused
+    -- cluster INPUT reused
+
+    root class THRUST_GAME
+    class HIGH_SCORES persistent
+    class HIGH_SCORE_DISPLAY interfaced
+    class INFO_PANEL interfaced
+    class KEYBOARD_INPUT interfaced
+end
