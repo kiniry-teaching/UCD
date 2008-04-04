@@ -60,10 +60,8 @@ public class InputHandler {
   public /*@ pure @*/ boolean legal_input(char the_character) {   
     char[] legal_inputs = legal_inputs();
     assert legal_inputs != null; //@ assert legal_inputs != null;
-    for(int i = 0; i < legal_inputs.length; i++)
-    {
-      if(legal_inputs[i] == the_character)
-      {
+    for(int i = 0; i < legal_inputs.length; i++)  {
+      if(legal_inputs[i] == the_character)  {
         return true;
       }     
     }
