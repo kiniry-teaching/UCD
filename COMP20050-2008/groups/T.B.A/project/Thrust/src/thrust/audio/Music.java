@@ -10,7 +10,7 @@ import javax.sound.sampled.*;
 public class Music {
   //@ public model boolean is_playing;
 
-  private File musicFile = new File("../../../media/Thrust_music.wav");
+  private File musicFile = new File("../../../media/Thrust_music.mp3");
   Clip music = null;
   
   /**
