@@ -82,7 +82,7 @@ public class InputHandler {
     
     else/* Game has started */{
       switch(the_keyboard_input){
-        case TOGGLE_MUSIC_OR_EFFECTS: /* change music */
+        case TOGGLE_MUSIC_OR_EFFECTS: /* change music mode*/
         case STOP_GAME: /* stop game */
         case FIRE_GUN: /* Fire a bullet*/
         case TURN_LEFT: /*Rotate ship left*/
