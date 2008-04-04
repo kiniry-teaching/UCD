@@ -12,7 +12,7 @@ public class Music {
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
-  public /*@ pure @*/ boolean playing() {
+  public final/*@ pure @*/ boolean playing() {
     assert false; //@ assert false;
     return false;
   }
