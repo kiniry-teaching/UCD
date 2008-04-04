@@ -6,6 +6,7 @@ package thrust.audio;
  * @version 2 April 2008
  */
 public class Music {
+  public boolean is_playing();
   //@ public model boolean is_playing;
 
   /**
@@ -13,8 +14,7 @@ public class Music {
    */
   //@ ensures \result == is_playing;
   public /*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
-    return false;
+    return is_playing;
   }
 
   /**
