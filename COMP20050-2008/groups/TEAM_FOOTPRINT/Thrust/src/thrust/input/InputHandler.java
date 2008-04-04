@@ -5,6 +5,7 @@
 package thrust.input;
 
 public class InputHandler {
+  
  
   private static final char UNKNOWN_CHAR = '\0';
     public static final char 
