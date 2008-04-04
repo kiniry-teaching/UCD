@@ -7,56 +7,56 @@ package thrust.input;
  */
 public class InputHandler {
   /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
-  /** Character to display high scores. */
-  public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
-  /** Character to switch between music and SFX. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
-  /** Character to start game. */
-  public static final char START_GAME = UNKNOWN_CHAR;
-  /** Character to stop game. */
-  public static final char STOP_GAME = UNKNOWN_CHAR;
-  /** Character to fire gun. */
-  public static final char FIRE_GUN = UNKNOWN_CHAR;
-  /** Character to turn left. */
-  public static final char TURN_LEFT = UNKNOWN_CHAR;
-  /** Character to turn right. */
-  public static final char TURN_RIGHT = UNKNOWN_CHAR;
-  /** Character to thrust. */
-  public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Character to turn on shield/pickup. */
-  public static final char USE_SHIELD = UNKNOWN_CHAR;
+  /**private static final char UNKNOWN_CHAR = '\0';
+  /** Character h to display high scores. */
+  public static final char DISPLAY_HIGH_SCORES = 'h';
+  /** Character m switch between music and SFX. */
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
+  /** Character [space] to start game. */
+  public static final char START_GAME = '\u00A0';
+  /** Character [escape] to stop game. */
+  public static final char STOP_GAME = '\u001B';
+  /** Character [enter] to fire gun. */
+  public static final char FIRE_GUN = '\n';
+  /** Character a to turn left. */
+  public static final char TURN_LEFT = 'a';
+  /** Character s to turn right. */
+  public static final char TURN_RIGHT = 's';
+  /** Character [shift] to thrust. */
+  public static final char USE_ENGINE = '\u000F';
+  /** Character [space] to turn on shield/pickup. */
+  public static final char USE_SHIELD = '\u00A0';
 
   /**
    * @return What are the legal keyboard inputs?
    */
-  public final /*@ pure @*/ char[] legal_inputs() {
+  public final /*@ pure @*/ char[] legalInputs() {
     final char[] inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
                              START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
                                TURN_RIGHT, USE_ENGINE, USE_SHIELD};
-    assert false; //@ assert false;
+    //@ assert true;
     return inputs;
   }
 
+  
+  /*@ ensures \result <==> (theCharacter == DISPLAY_HIGH_SCORES) |
+    @                      (theCharacter == TOGGLE_MUSIC_OR_EFFECTS) |
+    @                      (theCharacter == START_GAME) |
+    @                      (theCharacter == STOP_GAME) |
+    @                      (theCharacter == FIRE_GUN) |
+    @                      (theCharacter == TURN_LEFT) |
+    @                      (theCharacter == TURN_RIGHT) |
+    @                      (theCharacter == USE_ENGINE) |
+    @                      (theCharacter == USE_SHIELD);
+    @*/
   /**
    * @return Is this character a legal keyboard input?
-   * @param the_character the character to check.
-   * @param inputs array containing legal inputs
+   * @param theCharacter the character to check.
    */
-  /*@ ensures \result <==> (the_character == DISPLAY_HIGH_SCORES) |
-    @                      (the_character == TOGGLE_MUSIC_OR_EFFECTS) |
-    @                      (the_character == START_GAME) |
-    @                      (the_character == STOP_GAME) |
-    @                      (the_character == FIRE_GUN) |
-    @                      (the_character == TURN_LEFT) |
-    @                      (the_character == TURN_RIGHT) |
-    @                      (the_character == USE_ENGINE) |
-    @                      (the_character == USE_SHIELD);
-    @*/
-  public /*@ pure @*/ boolean legal_input(final char the_character) {
-    char[] inputs = legal_inputs();
+  public final /*@ pure @*/ boolean legalInput(final char theCharacter) {
+    char[] inputs = legalInputs();
     for (int i = 0; i < inputs.length - 1; i++) {
-      if (the_character == inputs[i]) {
+      if (theCharacter == inputs[i]) {
         return true;
       }
     }
@@ -65,10 +65,10 @@ public class InputHandler {
 
   /**
    * Process this keyboard input character.
-   * @param the_keyboard_input the input character to process.
+   * @param theKeyboardInput the input character to process.
    */
-  //@ requires legal_input(the_keyboard_input);
-  public void process(final char the_keyboard_input) {
-    assert false; //@ assert false;
+  //@ requires legalInput(theKeyboardInput);
+  public void process(final char theKeyboardInput) {
+    //@ assert false;
   }
 }

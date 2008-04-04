@@ -13,7 +13,7 @@ public class Music {
    */
   //@ ensures \result == is_playing;
   public final/*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
+    //@ assert false;
     return false;
   }
 
@@ -22,7 +22,7 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
-    assert false; //@ assert false;
+    //@ assert false;
   }
 
   /**
@@ -30,6 +30,6 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
-    assert false; //@ assert false;
+    //@ assert false;
   }
 }
