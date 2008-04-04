@@ -52,7 +52,7 @@ public class SoundEffect {
  * Start playing your effect.
  */
 public final void start() {
-    clip.start();
+    clip.loop(1);
   // @ assert false;
 }
 }
