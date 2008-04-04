@@ -1,5 +1,7 @@
 package thrust.audio;
 
+import java.io.File;
+import javax.sound.sampled.*;
 /**
  * In-game music.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -8,13 +10,36 @@ package thrust.audio;
 public class Music {
   //@ public model boolean is_playing;
 
+  private File musicFile = new File("../../../media/Thrust_music.wav");
+  Clip music = null;
+  
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
+  public Music(){
+     AudioInputStream audioStream = null;
+    
+    try{
+      audioStream = AudioSystem.getAudioInputStream(musicFile);
+    }  catch (Exception e){
+      e.printStackTrace();
+    }
+    
+    final AudioFormat aFormat = audioStream.getFormat();
+    final DataLine.Info info = new DataLine.Info(SourceDataLine.class, aFormat);
+  
+    try {
+      music = (Clip) AudioSystem.getLine(info);
+      music.open(audioStream);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    
+  }
   public /*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
-    return false;
+    return music.isRunning();
+    //@ assert false;
   }
 
   /**
@@ -22,7 +47,7 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
-    assert false; //@ assert false;
+    music.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
   /**
@@ -30,6 +55,6 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
-    assert false; //@ assert false;
+    music.stop();
   }
 }
