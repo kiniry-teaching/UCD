@@ -71,6 +71,27 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(char the_keyboard_input) {
-    assert false; //@ assert false;
+    //@ legal_input(the_keyboard_input);
+    
+    if(true/*game has not started*/){
+      switch(the_keyboard_input){
+        case START_GAME: /* start game */
+        case DISPLAY_HIGH_SCORES: /* start game */
+      }
+    }
+    
+    else/* Game has started */{
+      switch(the_keyboard_input){
+        case TOGGLE_MUSIC_OR_EFFECTS: /* change music */
+        case STOP_GAME: /* stop game */
+        case FIRE_GUN: /* Fire a bullet*/
+        case TURN_LEFT: /*Rotate ship left*/
+        case TURN_RIGHT: /* Rotate ship right*/
+        case USE_ENGINE: /*Accelerate ship */
+        case USE_SHIELD: /*Use shield/pick up */
+      }
+    }
+    
+   
   }
 }
