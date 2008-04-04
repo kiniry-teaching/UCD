@@ -1,0 +1,40 @@
+head	1.2;
+access;
+symbols;
+locks
+	smurphy:1.2; strict;
+comment	@ * @;
+
+
+1.2
+date	2008.02.14.18.08.48;	author smurphy;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.14.17.53.36;	author smurphy;	state Exp;
+branches;
+next	;
+
+
+desc
+@Creation of first RCS file, it is empty.
+@
+
+
+1.2
+log
+@Edited f.c file.
+@
+text
+@This is a document.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+@

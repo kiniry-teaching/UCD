@@ -1,0 +1,25 @@
+head	1.1;
+access;
+symbols;
+locks
+	smurphy:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.02.14.18.14.59;	author smurphy;	state Exp;
+branches;
+next	;
+
+
+desc
+@a file i created to practice on.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@@
