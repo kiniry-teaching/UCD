@@ -22,24 +22,18 @@ public class InputHandler {
   public static final char TURN_RIGHT = 's';
   /** Press , to Use the spaceship's engine to apply thrust forward. */
   public static final char USE_ENGINE = ',';
-  /** Press space to Use the spaceships shield to protect itself or to gather fuel. */
+  /** Press space to Use the spaceships shield
+   * to protect itself or to gather fuel. */
   public static final char USE_SHIELD = ' ';
 
   /**
    * @return What are the legal keyboard inputs?
    */
-  public /*@ pure @*/ char[] legal_inputs() {   
-    char[] legal_inputs = new char[9];
+  public /*@ pure @*/ char[] legal_inputs() {
+    final char[] legal_inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
+                                 START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
+                                 TURN_RIGHT, USE_ENGINE, USE_SHIELD};
     assert legal_inputs != null; //@ assert legal_inputs != null;
-    legal_inputs[0] = DISPLAY_HIGH_SCORES;
-    legal_inputs[1] = TOGGLE_MUSIC_OR_EFFECTS;
-    legal_inputs[2] = START_GAME;
-    legal_inputs[3] = STOP_GAME;
-    legal_inputs[4] = FIRE_GUN;
-    legal_inputs[5] = TURN_LEFT;
-    legal_inputs[6] = TURN_RIGHT;
-    legal_inputs[7] = USE_ENGINE;
-    legal_inputs[8] = USE_SHIELD;
     return legal_inputs;
   }
 
@@ -57,13 +51,13 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {   
-    char[] legal_inputs = legal_inputs();
+  public /*@ pure @*/ boolean legal_input(final char the_character) {
+    final char[] legal_inputs = legal_inputs();
     assert legal_inputs != null; //@ assert legal_inputs != null;
-    for(int i = 0; i < legal_inputs.length; i++)  {
-      if(legal_inputs[i] == the_character)  {
+    for (int i = 0; i < legal_inputs.length; i++)  {
+      if (legal_inputs[i] == the_character)  {
         return true;
-      }     
+      }
     }
     return false;
   }
@@ -73,7 +67,7 @@ public class InputHandler {
    * @param the_keyboard_input the input character to process.
    */
   //@ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
+  public void process(final char the_keyboard_input) {
     assert false; //@ assert false;
   }
 }
