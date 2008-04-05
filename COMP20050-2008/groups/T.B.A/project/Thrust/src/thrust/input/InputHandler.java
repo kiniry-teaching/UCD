@@ -56,7 +56,7 @@ public class InputHandler {
   public /*@ pure @*/ boolean legal_input(char the_character) {
     char[] legal_input_array = legal_inputs();
     // Search through array for the char, if found, return true
-    for(int i = 1 ; i<legal_input_array.length; i++){
+    for(int i = 0 ; i<legal_input_array.length; i++){
       if(legal_input_array[i] == the_character){
         return true;
       }
@@ -71,7 +71,7 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(char the_keyboard_input) {
-    //@ legal_input(the_keyboard_input);
+    //@assert legal_input(the_keyboard_input);
     
     if(true/*game has not started*/){
       switch(the_keyboard_input){

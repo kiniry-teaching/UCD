@@ -13,10 +13,7 @@ public class Music {
   private File musicFile = new File("../../../media/Thrust_music.mp3");
   Clip music = null;
   
-  /**
-   * @return Is music playing?
-   */
-  //@ ensures \result == is_playing;
+
   public Music(){
      AudioInputStream audioStream = null;
     
@@ -37,9 +34,14 @@ public class Music {
     }
     
   }
+  
+  /**
+   * @return Is music playing?
+   */
+  //@ ensures \result == is_playing;
   public /*@ pure @*/ boolean playing() {
+    //@ assert music.isRunning() || !music.isRunning();
     return music.isRunning();
-    //@ assert false;
   }
 
   /**
@@ -47,6 +49,7 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
+    //@ assert !playing();
     music.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
@@ -55,6 +58,7 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
+    //@ assert playing();
     music.stop();
   }
 }
