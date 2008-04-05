@@ -1,5 +1,6 @@
-#ifndef __INTERPRETER_SHAPE_H__
-#define __INTERPRETER_SHAPE_H__
+
+#ifndef __INTERPRETER_SHAPEID_H__
+#define __INTERPRETER_SHAPEID_H__
 
 namespace interpreter
 {
@@ -17,7 +18,13 @@ namespace esid
 	sid const TRI_SOFT  = 2; // - Speed
 	sid const TRI_SHARP = 3; // - Speed
 	sid const TRI_SLOW  = 4; // - Accel
-
+	
+	//commmads for audio
+	sid const DYNAMICS_PIANO = 0;//for soft music dynamics
+	sid const DYNAMICS_FORTE = 0;//for loud music dynamics
+	sid const DYNAMICS_PIANISSIMO = 0;//for very quiet music dynamics
+	sid const DYNAMICS_FORTISSIMO = 0;//for very loud music dynamics
+	sid const RHYTHM_1_4 = 0;//for rythm music
 }
 
 }
