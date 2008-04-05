@@ -164,6 +164,16 @@ inline float ShapeMatches::weight(void) const
 {	return _weight;
 }
 
+inline uint ShapeMatches::length(void) const
+{	return _shapeMatches.size();
+}
+
+inline ShapeMatch * ShapeMatches::operator []
+(	uint const index
+)	const
+{	return _shapeMatches[index];
+}
+
 }
 
 #endif

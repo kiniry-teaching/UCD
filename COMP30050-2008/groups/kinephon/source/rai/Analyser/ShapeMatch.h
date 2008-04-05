@@ -106,6 +106,10 @@ inline ShapeMatch::ShapeMatch
 	_weight			(weight)
 { }
 
+inline Shape * ShapeMatch::shape(void) const
+{	return _shape;
+}
+
 inline ShapeMatches * & ShapeMatch::shapeMatches(void)
 {	return _shapeMatches;
 }
