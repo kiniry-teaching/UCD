@@ -30,7 +30,7 @@ public class Music {
     AudioInputStream audio_stream = /*@ null */ null;
     try {
       audio_stream = AudioSystem.getAudioInputStream(my_music_file);
-    }  catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
     final AudioFormat aFormat = audio_stream.getFormat();
