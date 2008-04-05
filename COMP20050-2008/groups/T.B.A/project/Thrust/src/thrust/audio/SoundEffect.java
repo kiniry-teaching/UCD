@@ -15,7 +15,8 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public /*@ pure @*/ SoundEffect(File the_sound_effect_file) {
+  public /*@ pure @*/ SoundEffect(File the_sound_effect_file) {/* changed make to constructor, didn't make sense
+                                                                for it to return a SoundEffect, without it being defined */
      AudioInputStream audioStream = null;
     
     try{
@@ -39,7 +40,6 @@ public class SoundEffect {
    * Start playing your effect.
    */
   public void start() {
-    sound.loop(1);
-    assert false; //@ assert false;
+    sound.loop(1); /* play file once */
   }
 }
