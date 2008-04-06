@@ -11,7 +11,7 @@ public class Music  {
   public static void main(String[] args) throws Exception {
 
     
-    File soundFile = new File("Thrust_music.wav");
+    File soundFile = new File("Thrust_music.mp3");
     AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
 
     DataLine.Info info = new DataLine.Info(Clip.class, sound.getFormat());
