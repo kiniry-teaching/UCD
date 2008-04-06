@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><system xmlns="http://www.eiffel.com/developers/xml/configuration-1-0-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-0-0 http://www.eiffel.com/developers/xml/configuration-1-0-0.xsd" name="thrust" uuid="54248BEE-90E9-4955-A733-84B855ED381A">
+	<description>A port of the Thrust game from the Commodore 64.</description>
+	<target name="thrust">
+		<description>The main build of the Thrust game.</description>
+		<root class="THRUST_GAME" feature="make"/>
+		<version major="1" minor="0" release="0" build="0" company="COMP 30050, CSI, UCD" product="Thrust" copyright="(C) Joe Kiniry"/>
+		<option warning="true">
+			<assertions precondition="true" postcondition="false" check="false" invariant="false" loop="false"/>
+		</option>
+		<precompile name="base_pre" location="$ISE_PRECOMP\base.ecf"/>
+		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<cluster name="simulation" location=".\">
+			<description>Simulating all of the entities in the game to realize the game.</description>
+			<file_rule>
+				<exclude>EIFGENs</exclude>
+				<exclude>.svn</exclude>
+				<exclude>CVS</exclude>
+			</file_rule>
+			<file_rule>
+				<exclude>^/test$</exclude>
+			</file_rule>
+			<file_rule>
+				<exclude>^/entities/entity_behaviors$</exclude>
+			</file_rule>
+			<cluster name="animation" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\animations\">
+				<description>Animations that run as part of the game.</description>
+			</cluster>
+			<cluster name="audio" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\.\audio\">
+				<description>Attract mode and in-game music and sound effects.</description>
+			</cluster>
+			<cluster name="display" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\display\">
+				<description>Displaying the game to the player.</description>
+			</cluster>
+			<cluster name="entities" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\entities\">
+				<description>The primary entities simulated within the game.</description>
+				<cluster name="about_game" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\entities\about_game\">
+					<description>Non-visual entities within the game.</description>
+				</cluster>
+				<cluster name="behaviors" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\entities\behaviors\">
+					<description>The behaviors that entities exhibit.</description>
+				</cluster>
+				<cluster name="in_game" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\entities\in_game\">
+					<description>In-game entities that have a visual representation.</description>
+				</cluster>
+				<cluster name="properties" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\entities\properties\">
+					<description>Properties that entities have.</description>
+				</cluster>
+			</cluster>
+			<cluster name="input" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\input\">
+				<description>Accepting and processing input from the keyboard.</description>
+				<cluster name="game_input" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\input\game_input\">
+					<description>Accepting and processing input to control the game's behavior.</description>
+				</cluster>
+				<cluster name="player_input" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\input\player_input\">
+					<description>Accepting and processing input from the player to control the spaceship.</description>
+				</cluster>
+			</cluster>
+			<cluster name="physics" location="\Users\kiniry\Documents\Teaching\COMP30050\thrust\Eiffel\physics\">
+				<description>The physical simulation of in-game entities.</description>
+			</cluster>
+		</cluster>
+	</target>
+</system>
