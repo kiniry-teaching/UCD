@@ -1,12 +1,15 @@
 package thrust.audio;
 
 import java.io.File;
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.Clip;
+import java.io.IOException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.LineUnavailableException;
+
 /**
  * In-game music.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -14,41 +17,45 @@ import javax.sound.sampled.Clip;
  */
 public class Music {
   //@ public model boolean is_playing;
-/**
- * Create new File for opening music file.
- */
-  File my_music_file = new File("../../../media/Thrust_music.mp3");
   /**
    *  Create new clip for music.
    */
-  Clip my_music;
+  Clip my_clip;
 
   /**
    * Opens music file.
    */
-  public Music() {
-    AudioInputStream audio_stream = /*@ null */ null;
+  public void openMusic() {
+    final File music_file =
+      new File("../../../media/Thrust_music.mp3");
+
+    AudioInputStream my_audio_stream = /*@ null */ null;
     try {
-      audio_stream = AudioSystem.getAudioInputStream(my_music_file);
-    } catch (Exception e) {
+      my_audio_stream = AudioSystem.getAudioInputStream(music_file);
+    } catch (UnsupportedAudioFileException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
       e.printStackTrace();
     }
-    final AudioFormat aFormat = audio_stream.getFormat();
-    final DataLine.Info info = new DataLine.Info(SourceDataLine.class, aFormat);
+    final DataLine.Info info =
+      new DataLine.Info(SourceDataLine.class, my_audio_stream.getFormat());
     try {
-      my_music = (Clip) AudioSystem.getLine(info);
-      my_music.open(audio_stream);
-    } catch (Exception e) {
+      my_clip = (Clip) AudioSystem.getLine(info);
+      my_clip.open(my_audio_stream);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
   }
+
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
   public /*@ pure @*/ boolean playing() {
     //@ assert music.isRunning() || !music.isRunning();
-    return my_music.isRunning();
+    return my_clip.isRunning();
   }
 
   /**
@@ -57,7 +64,7 @@ public class Music {
   //@ ensures is_playing;
   public void start() {
     //@ assert !playing();
-    my_music.loop(Clip.LOOP_CONTINUOUSLY);
+    my_clip.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
   /**
@@ -66,6 +73,6 @@ public class Music {
   //@ ensures !is_playing;
   public void stop() {
     //@ assert playing();
-    my_music.stop();
+    my_clip.stop();
   }
 }

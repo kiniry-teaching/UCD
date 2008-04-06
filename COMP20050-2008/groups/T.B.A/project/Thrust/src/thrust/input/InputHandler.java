@@ -15,7 +15,7 @@ public class InputHandler {
   /** Press 'n' to start the game. */
   private static final char START_GAME = 'n';
   /** Press [Esc] to end the game. */
-  private static final char STOP_GAME = (char)27;
+  private static final char STOP_GAME = (char) 27;
   /** Press [Enter] to fire the gun. */
   private static final char FIRE_GUN = '\r';
   /** Press 'a' to turn left. */
@@ -74,7 +74,6 @@ public class InputHandler {
   //@ requires legal_input(the_keyboard_input);
   public void process(final char the_keyboard_input) {
     //@assert legal_input(the_keyboard_input);
-
     switch(the_keyboard_input) {
       case START_GAME: /* start game */
       case DISPLAY_HIGH_SCORES: /* start game */
