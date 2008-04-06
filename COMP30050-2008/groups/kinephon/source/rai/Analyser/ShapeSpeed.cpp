@@ -36,6 +36,9 @@ bool ShapeSpeed::compare
 		points[index + 1]	= (frame->u() << 1)
 							+ (frame->v() << 1);
 
+	if(shapeEditHook != 0)
+		shapeEditHook(points, nPoints * 2);
+
 	shapeMatch = Shape::test
 	(	points,
 		length * 2,

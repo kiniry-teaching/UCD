@@ -25,20 +25,18 @@ bool ShapeAccel::compare
 
 	points = new int[length * 2];
 
-	// Store time and difference-in-speed between
-	//	this vector and last vector as co-ordinates
+	// Store time and speed as co-ordinates
 	for
-	(	frameLast = track->first(),
-		frame = frameLast->next();
+	(	frame = track->first();
 		frame->next() != 0;
-		frameLast = frame,
 		frame = frame->next(),
 		index += 2
 	)	points[index    ]	= frame->time(),
 		points[index + 1]	= (frame->u() << 1)
-							+ (frame->v() << 1)
-							- (frameLast->u() << 1)
-							+ (frameLast->v() << 1);
+							+ (frame->v() << 1);
+
+	if(shapeEditHook != 0)
+		shapeEditHook(points, nPoints * 2);
 
 	shapeMatch = Shape::test
 	(	points,

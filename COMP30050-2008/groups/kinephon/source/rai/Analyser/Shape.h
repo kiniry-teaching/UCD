@@ -9,6 +9,12 @@
 namespace interpreter
 {
 
+typedef void			(*SHAPE_EDIT_HOOK)
+						(	int * const	points,
+							uint const	length
+						);
+extern SHAPE_EDIT_HOOK	shapeEditHook;
+
 /**
  * Store data of a single shape gesture for comparison against a track
  * @author EB
@@ -105,6 +111,24 @@ protected:
 						uint const					length,
 						ShapeMatches * const		shapeMatches
 					);
+	/**
+	 * Given an array of (x, y) points, smooth them to remove spikes in the
+	 *	data
+	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
+	 *	x[length], y[length])
+	 * @param length The number of points in the array
+	 * @param range The number of points either side of a point to smooth
+	 *	across
+	 * @author EB
+	 * @version 1.0
+	 * @pre /length(points) == length * 2;
+	 * @pre length > 0;
+	 */
+	void			smooth
+					(	int * const					points,
+						uint const					length,
+						uint const					range
+					)								const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // private commands

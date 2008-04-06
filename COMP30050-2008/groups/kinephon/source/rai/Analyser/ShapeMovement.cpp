@@ -34,6 +34,9 @@ bool ShapeMovement::compare
 	)	points[index    ]	= frame->x(),
 		points[index + 1]	= frame->y();
 
+	if(shapeEditHook != 0)
+		shapeEditHook(points, nPoints * 2);
+
 	shapeMatch = Shape::test
 	(	points,
 		nPoints * 2,
