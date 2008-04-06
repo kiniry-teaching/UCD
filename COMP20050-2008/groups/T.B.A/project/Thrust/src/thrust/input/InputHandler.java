@@ -74,6 +74,7 @@ public class InputHandler {
   //@ requires legal_input(the_keyboard_input);
   public void process(final char the_keyboard_input) {
     //@assert legal_input(the_keyboard_input);
+
     switch(the_keyboard_input) {
       case START_GAME: /* start game */
       case DISPLAY_HIGH_SCORES: /* start game */
