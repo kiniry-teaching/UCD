@@ -36,7 +36,7 @@ public class Music {
       e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
-    }
+    } //Catch all possible exceptions.
     final DataLine.Info info =
       new DataLine.Info(SourceDataLine.class, my_audio_stream.getFormat());
     try {
