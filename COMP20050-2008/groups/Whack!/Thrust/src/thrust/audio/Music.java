@@ -52,8 +52,11 @@ public class Music extends Exception {
    * @return
    */
   public final  /*@ pure @*/ boolean playing() {
+    /** 
+     * @return music 
+     */  
     return music.isRunning();
-    //@ ensures is_playing;
+    
   }
 
   /**
