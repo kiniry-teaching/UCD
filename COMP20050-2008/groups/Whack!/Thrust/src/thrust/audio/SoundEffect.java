@@ -18,7 +18,7 @@ public class SoundEffect extends Exception {
   /**
    * 
    */
-  private transient Clip bit;
+  private Clip bit;
   /**
    * 
    */
@@ -30,7 +30,7 @@ public class SoundEffect extends Exception {
      * 
      */
     try{
-      File soundeffectFile = new File("Thrust.wav");
+      File soundeffectFile = new File("/media/Thrust.wav");
       AudioInputStream effect = AudioSystem.getAudioInputStream(soundeffectFile);
 
       // load the sound into memory (a Clip)
