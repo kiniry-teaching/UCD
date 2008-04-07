@@ -9,23 +9,22 @@ public class InputHandler {
   /** An unknown character code. */
   private static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
-  public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
+  public static final char DISPLAY_HIGH_SCORES = 'd';
   /** Fill in this comment. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Fill in this comment. */
-  public static final char START_GAME = UNKNOWN_CHAR;
+  public static final char START_GAME = 's';
   /** Fill in this comment. */
-  public static final char STOP_GAME = UNKNOWN_CHAR;
+  public static final char STOP_GAME = 'q';
   /** Fill in this comment. */
-  public static final char FIRE_GUN = UNKNOWN_CHAR;
+  public static final char FIRE_GUN = 'f';
   /** Fill in this comment. */
-  public static final char TURN_LEFT = UNKNOWN_CHAR;
+  public static final char TURN_LEFT = 37;
   /** Fill in this comment. */
-  public static final char TURN_RIGHT = UNKNOWN_CHAR;
+  public static final char TURN_RIGHT = 39;
+  public static final char USE_ENGINE = 38;
   /** Fill in this comment. */
-  public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_SHIELD = UNKNOWN_CHAR;
+  public static final char USE_SHIELD = 32;
 
   /**
    * @return What are the legal keyboard inputs?
