@@ -8,28 +8,33 @@ import java.io.File;
  */
 public class Music  {
   //@ public model boolean is_playing;
-  public static void main(String[] args) throws Exception {
-
+  private transient Clip clip;
+  //public static void main(String[] args) throws Exception {
+  private final transient File soundFile = new File("Thrust_music.wav");
+  
+  public Music() {
+    try{
     
-    File soundFile = new File("Thrust_music.mp3");
+    //File soundFile = new File("Thrust_music.mp3");
     AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
 
     DataLine.Info info = new DataLine.Info(Clip.class, sound.getFormat());
+   
     Clip clip = (Clip) AudioSystem.getLine(info);
     clip.open(sound);
+    }catch(Exception e){System.out.println("error");}
 
 
-    while(menu = true)
-    { clip.loop(Clip.LOOP_CONTINUOUSLY);}
+  
   }
-public static boolean menu =false;
+
 boolean is_playing;
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
-  public /*@ pure @*/ boolean playing() {
-    return true;
+  public final /*@ pure @*/ boolean playing() {
+    return clip.isRunning();
     
   }
 
@@ -38,7 +43,7 @@ boolean is_playing;
    */
   //@ ensures is_playing;
   public void start() {
-    menu = true;
+    clip.start();
    
   
   }
@@ -48,6 +53,7 @@ boolean is_playing;
    */
   //@ ensures !is_playing;
   public void stop() {
-    menu = false; //@ assert false;
+    clip.stop();
+    //@ assert false;
   }
 }

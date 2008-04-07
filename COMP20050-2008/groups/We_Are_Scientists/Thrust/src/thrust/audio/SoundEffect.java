@@ -33,8 +33,6 @@ public class SoundEffect {
    * Start playing your effect.
    */
   public void start() {
-    String SFX;
-    if(SFX.equals("BEAM"))
-    {clip.start();}
+  
   }
 }
