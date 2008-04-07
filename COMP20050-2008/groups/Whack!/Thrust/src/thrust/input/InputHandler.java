@@ -22,16 +22,18 @@ public class InputHandler {
   public static final char TURN_LEFT = 37;
   /** Fill in this comment. */
   public static final char TURN_RIGHT = 39;
-  public static final char USE_ENGINE = 38;
+  public static final char USE_ENGINE = 32;
   /** Fill in this comment. */
-  public static final char USE_SHIELD = 32;
+  public static final char USE_SHIELD = 38;
 
   /**
    * @return What are the legal keyboard inputs?
    */
   public /*@ pure @*/ char[] legal_inputs() {
-    assert false; //@ assert false;
-    return null;
+    final char[] inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME, STOP_GAME, FIRE_GUN,
+                           TURN_LEFT, TURN_RIGHT, USE_ENGINE, USE_SHIELD};
+
+    return inputs;
   }
 
   /**
@@ -49,8 +51,14 @@ public class InputHandler {
     @                      (the_character == USE_SHIELD);
     @*/
   public /*@ pure @*/ boolean legal_input(char the_character) {
-    assert false; //@ assert false;
-    return false;
+    boolean quit = false;
+    char[] inputs = legal_inputs();
+    for(int i = 0; i < inputs.length; i++){
+      if(the_character == inputs[i]){
+        quit = true;
+      }
+    }
+    return quit;
   }
 
   /**
@@ -59,6 +67,34 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(char the_keyboard_input) {
+
+    if(the_keyboard_input == 'd'){
+      System.out.println("Should call the DISPLAY_HIGH_SCORES method");
+    }
+    if(the_keyboard_input == 'm'){
+      System.out.println("Should call the TOGGLE_MUSIC_OR_EFFECTS method");
+    }
+    if(the_keyboard_input == 's'){
+      System.out.println("Should call the START_GAME method");
+    }
+    if(the_keyboard_input == 'q'){
+      System.out.println("Should call the STOP_GAME method");
+    }
+    if(the_keyboard_input == 'f'){
+      System.out.println("Should call the FIRE_GUN method");
+    }
+    if(the_keyboard_input == 37){
+      System.out.println("Should call the TURN_LEFT method");
+    }
+    if(the_keyboard_input == 39){
+      System.out.println("Should call the TURN_RIGHT method");
+    }
+    if(the_keyboard_input == 32){
+      System.out.println("Should call the USE_ENGINE method");
+    }
+    if(the_keyboard_input == 38){
+      System.out.println("Should call the USE_SHIELD method");
+    }
     assert false; //@ assert false;
   }
 }
