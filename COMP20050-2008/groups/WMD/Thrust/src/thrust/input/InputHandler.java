@@ -8,23 +8,23 @@ package thrust.input;
 public class InputHandler {
   /** An unknown character code. */
   private static final char UNKNOWN_CHAR = '\0';
-  /** Fill in this comment. */
+  /** Display high scores */
   public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Toggle music or sound effects */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Start the game */
   public static final char START_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Stop the game */
   public static final char STOP_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Fire Gun */
   public static final char FIRE_GUN = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Turn left */
   public static final char TURN_LEFT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Turn right */
   public static final char TURN_RIGHT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Use engine */
   public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Fill in this comment. */
+  /** Use shield */
   public static final char USE_SHIELD = UNKNOWN_CHAR;
 
   /**
@@ -32,6 +32,7 @@ public class InputHandler {
    */
   public /*@ pure @*/ char[] legal_inputs() {
     assert false; //@ assert false;
+    char[] inputs = new char[9]; 
     return null;
   }
 
@@ -60,6 +61,9 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(char the_keyboard_input) {
-    assert false; //@ assert false;
+    assert false; //@ assert false
+    if(legal_input(the_keyboard_input)){
+      //call method depending on the keyboard input
+    }
   }
 }
