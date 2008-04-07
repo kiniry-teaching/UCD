@@ -22,9 +22,8 @@ using namespace audio;
  */
 #ifdef __ED__
 int main(){
-    MidiRecorder rec;
-    rec.closeFile();
-    /*
+   
+    
 	Conductor audio;
 	if(!audio.initialize(true))
     	exit( EXIT_FAILURE ); 
@@ -136,7 +135,7 @@ if (testingPlayLead) {
     //audio.setMelody(melody);
     //audio.setAccompaniment(true, 0);
     //audio.setChords(true,CHORDS_FIRST);
-    audio.setRhythm(true, RHYTHM_4_4);   
+    //audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);
@@ -167,13 +166,12 @@ if (testingPlayLead) {
     if (forte) { 
         audio.setDynamics(DYNAMICS_FORTE);
         i = 0;
-        while(i < 30){
+        while(i < 60){
             if(melody[i] == NO_NOTE)
                 audio.play(melody[i], 0, melody[i+1]); 
             else
                 audio.play(melody[i], -2, melody[i+1]); 
-            if (i == 30) {  //audio.setPan(0); 
-            }    
+               
             SLEEP(tempo);
             i += 2;
         }
@@ -260,7 +258,7 @@ if (testingPlayLeadAcc) {
     }
     audio.pressPanicButton();
 }  
-*/
+
 	return 0;
 }
 

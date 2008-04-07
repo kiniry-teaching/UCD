@@ -59,7 +59,7 @@ public:
 	 * @param trackNo trackNo number this event belongs to
 	 * @returns true if write is successful
 	 */
-	bool write(vector<uchar> event, int trackNo);
+	bool write(vector<uchar> event);
 		
 private:
 	string fileName_;
