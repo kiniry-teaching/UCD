@@ -8,7 +8,7 @@ package thrust.physics;
  */
 public interface Physics {
   //@ constraint (* The gravitational constant never changes. *);
-  //@ constraint gravitational_constant() == \old(gravitational_constant());
+  //@ constraint gravitationalConstant() == \old(gravitationalConstant());
 
   /**
    * @return What is your acceleration in meters per second squared?

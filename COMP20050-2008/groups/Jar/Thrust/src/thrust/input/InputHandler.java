@@ -71,5 +71,8 @@ public class InputHandler {
   //@ requires legalInput(theKeyboardInput);
   public void process(final char theKeyboardInput) {
     //@ assert true;
+    /* Unsure as to the purpose of this method, while of
+     * context with the rest of the architecture.
+     */
   }
 }
