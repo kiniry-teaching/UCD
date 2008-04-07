@@ -65,6 +65,7 @@ namespace Drought.Entity
             height = level.getHeight();
             traversable = new bool[width, height];
 
+            //if a water texture then a node is not traversable
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                     traversable[x, y] = level.getTextureValue(x, y).X > 0 ? false : true;
@@ -139,7 +140,8 @@ namespace Drought.Entity
 
                     Console.WriteLine(timer.ElapsedMilliseconds + "ms total to run A*");
                     timer.Stop();
- 
+
+                    pathNodes.Reverse();
                     return new Path(pathNodes, level);
                 }
 
@@ -262,7 +264,7 @@ namespace Drought.Entity
             Vector2 posA = a.getPosition();
             Vector2 posB = b.getPosition();
 
-            float diff = Math.Abs(level.getHeight((int)posA.X, (int)posB.Y) - level.getHeight((int)posB.X, (int)posB.Y));
+            float diff = Math.Abs(level.getHeight((int)posA.X, (int)posA.Y) - level.getHeight((int)posB.X, (int)posB.Y));
 
             return diff <= MAX_MOVE_DIST;
         }
