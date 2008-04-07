@@ -34,7 +34,7 @@ public class Music {
       }
 
       /**
-       * Start playing the music. blahhhhh
+       * Start playing the music.
        */
       //@ ensures is_playing;
       public void start() {
