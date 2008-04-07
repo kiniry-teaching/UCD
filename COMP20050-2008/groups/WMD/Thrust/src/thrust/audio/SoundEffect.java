@@ -13,7 +13,6 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    * 
-   * siobhan 
    */
   public /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
     assert false; //@ assert false;
