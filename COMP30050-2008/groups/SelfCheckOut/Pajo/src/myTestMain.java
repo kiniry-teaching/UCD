@@ -1,4 +1,4 @@
-//main.java Test Class
+//myTestMain.java Test Class
 //@author Patrick McDonagh
 public class myTestMain {
 
