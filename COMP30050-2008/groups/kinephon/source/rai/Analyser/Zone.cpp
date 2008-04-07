@@ -1,3 +1,4 @@
+#include "../Math.h"
 #include "Zone.h"
 
 namespace interpreter
@@ -11,9 +12,7 @@ inline bool Zone::isInside
 	float const	y,
 	float const	radius
 )	const
-{	float const	dx = x - _x;
-	float const	dy = y - _y;
-	return dx * dx + dy * dy <= radius * radius;
+{	return Math::isPointInsideCircle(x, y, _x, _y, radius);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -28,11 +27,36 @@ inline bool Zone::isInside
 	float const	angle,
 	float const	arc
 )	const
-{
+{	float		ix;
+	float		iy;
+	float		iAngle;
 
-	// @todo isInside. Get intersect on radius and angle to intersect
+	// Calculate where the line impacts the circle
+	if(Math::calcLineIntersectCircle
+	(	x, y,
+		u, v,
+		_x, _y,
+		radius,
+		ix, iy
+	) == true)
+	{
 
-	return false;
+		// Calculate the angle between the circle centre and the impact point
+		iAngle = Math::calcSegmentAngle(_x, _y, ix, iy);
+
+		if(Math::isValueInsideCyclicRange
+		(	iAngle,
+			angle,
+			arc,
+			(float)(Math::PI() * 2)
+		) == false)
+			return false;
+
+	}
+	else
+		return false;
+
+	return true;
 
 }
 

@@ -13,19 +13,19 @@ bool ShapeSpeed::compare
 	Frame *					frame;
 	int						index;
 	ShapeMatch *			shapeMatch;
-	uint					length;
+	uint					nPoints;
 
 	// Need at least two points to calculate an speed
-	length = track->length() - 1;
+	nPoints = track->length() - 1;
 
 	// Nothing to test, exit
-	if(length <= 0)
+	if(nPoints <= 0)
 		return false;
 
-	points = new int[length * 2];
+	points = new int[nPoints * 2];
 
-	// Store time and proportional length of vector as co-ordinates
-	//	Don't bother get actual length - it will be scaled to fit
+	// Store time and proportional nPoints of vector as co-ordinates
+	//	Don't bother get actual nPoints - it will be scaled to fit
 	//	the shape's grid anyways
 	for
 	(	frame = track->first();
@@ -41,7 +41,7 @@ bool ShapeSpeed::compare
 
 	shapeMatch = Shape::test
 	(	points,
-		length * 2,
+		nPoints * 2,
 		shapeMatches
 	);
 

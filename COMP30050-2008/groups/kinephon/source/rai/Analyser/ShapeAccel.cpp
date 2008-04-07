@@ -11,19 +11,18 @@ bool ShapeAccel::compare
 	ShapeMatches * const	shapeMatches
 ){	int *					points;
 	Frame *					frame;
-	Frame *					frameLast;
 	int						index;
 	ShapeMatch *			shapeMatch;
-	uint					length;
+	uint					nPoints;
 
 	// Need at least three points to calculate an acceleration
-	length = track->length() - 2;
+	nPoints = track->length() - 2;
 
 	// Nothing to test, exit
-	if(length <= 0)
+	if(nPoints <= 0)
 		return false;
 
-	points = new int[length * 2];
+	points = new int[nPoints * 2];
 
 	// Store time and speed as co-ordinates
 	for
@@ -40,7 +39,7 @@ bool ShapeAccel::compare
 
 	shapeMatch = Shape::test
 	(	points,
-		length * 2,
+		nPoints * 2,
 		shapeMatches
 	);
 
