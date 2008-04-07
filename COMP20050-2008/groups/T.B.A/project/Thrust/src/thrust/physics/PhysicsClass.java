@@ -1,13 +1,13 @@
 package thrust.physics;
 /**
  * Abstract class implemented by the Physics interface.
- * @author Dave Haughton (Dave.haughton1@gmail.com)
+ * @author DH, JD and EH (Dave.haughton1@gmail.com)
  * @version 7 April 2008
  */
-public abstract class PhysicsClass {
+public abstract class PhysicsClass implements Physics {
 
 /**
-   * The angle of the ship.
+   * The angle of an object, in radians.
    */
   double my_angleRadians;
 
@@ -29,12 +29,12 @@ public abstract class PhysicsClass {
   /**
    * The acceleration of an object.
    */
-  abstract double[] acceleration();
+  public abstract double[] acceleration();
 
   /**
    * @return the downward acceleration due to gravity.
    */
-  double gravitational_constant()
+  public double gravitational_constant()
   {
     final double gravity = -9.81;
     return gravity;
@@ -51,7 +51,7 @@ public abstract class PhysicsClass {
   /**
    * @return the mass of an object.
    */
-  double mass()
+  public double mass()
   {
     return my_mass;
   }
@@ -59,7 +59,7 @@ public abstract class PhysicsClass {
   /**
    * @return the momentum of an object
    */
-  double momentum()
+  public double momentum()
   {
     final int numberOfElements = 2;
     double[] speed = new double[numberOfElements];
@@ -78,7 +78,7 @@ public abstract class PhysicsClass {
   /**
    * @return the angle of an object.
    */
-  double orientation()
+  public double orientation()
   {
     return my_angleRadians;
   }
@@ -97,7 +97,7 @@ public abstract class PhysicsClass {
   /**
    * @return the x and y coordinates of an object.
    */
-  double[] position()
+  public double[] position()
   {
     return my_xyPosition;
   }
