@@ -1,4 +1,9 @@
+
 package thrust.audio;
+
+import  sun.audio.*;    //import the sun.audio package
+import  java.io.*;
+
 
 /**
  * In-game music.
@@ -8,7 +13,10 @@ package thrust.audio;
 public class Music {
   //@ public model boolean is_playing;
 
+  FileInputStream myMusicFile = new FileInputStream();
+  AudioStream mySong = new AudioStream(myMusicFile);
   /**
+   * 
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
@@ -22,6 +30,9 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
+    
+    AudioPlayer.player.start(mySong); 
+    
     assert false; //@ assert false;
   }
 
@@ -30,6 +41,8 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
+   
+    AudioPlayer.player.stop(mySong);
     assert false; //@ assert false;
   }
 }
