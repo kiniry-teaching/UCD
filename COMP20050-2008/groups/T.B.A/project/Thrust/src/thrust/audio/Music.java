@@ -27,7 +27,7 @@ public class Music {
    */
   public void openMusic() {
     final File music_file =
-      new File("../../../media/Thrust_music.mp3");
+      new File("../../../media/thrustmusic.mp3");
 
     AudioInputStream my_audio_stream = /*@ null */ null;
     try {
