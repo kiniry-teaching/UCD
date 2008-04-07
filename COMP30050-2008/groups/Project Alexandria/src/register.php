@@ -2,6 +2,9 @@
 <?php
 include("include/header.php"); //page header
 
+?>
+<div>
+<?php
 <form action="register.php" method="post">
 Enter a Username: <input type="text" name="username" />
 Enter your e-mail: <input type="text" name="e-mail1" />
@@ -11,7 +14,9 @@ Re-Enter your password: <input type="password" name="password2" />
 
 <input type="submit" />
 </form>
-
+?>
+</div>
+<?php
 $username = $_POST[username];
 $email1 = $_POST[email1];
 $email2 = $_POST[email2];
