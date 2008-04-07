@@ -1,0 +1,60 @@
+GROUP NAME: Better Late That Never
+
+GROUP MEMBERS:
+
+1. Nicholas McCarthy, SID: 06694870
+2. Stephen Murphy, SID: 06685811 
+3. Matthew Mackle, SID: 06911749
+
+INTRODUCTION:
+	
+  The aim of our project is to create our own implementation of
+  the classic Commodore 64 game "Thrust" using Java.
+REQUIREMENTS:
+
+  A Unix-based working environment.
+  Analysis and implementation of key concepts.
+  A working knowledge of:
+	* Java 
+	* Subversion
+	* BON Compilers
+
+PURPOSE:
+
+  The purpose of this project is to teach us the basics of software
+  development and promote teamwork and communication. It also aims to
+  teach us how to use the necessary tools to achieve this, such as 
+  Subversion, Eclipse and BON Compilers.
+
+CONCEPT DEFINITIONS:
+
+ENTITY 	 	A visual object in the game
+COORDINATES 	Where an ENTITY is placed in the world.
+SPACESHIP  	User-controlled ENTITY in the world.
+SHIELD  	Protects the SPACESHIP from BULLETs.
+ENEMY  		Stationary ENTITYs on the TERRAIN that fire BULLETS.
+BULLET  	Pixel that can destroy SPACESHIP, ENEMY, FACTORY
+POD  		User tries to retrieve this and bring it to SPACE to win the LEVEL.
+PODHOLDER  	Holds POD on TERRAIN until attached to SPACESHIP by TRACTORBEAM.
+FACTORY  	ENTITY on TERRAIN that can be destroyed for a higher SCORE.
+FUEL  		SPACESHIP needs this to move.
+TRACTORBEAM  	Picks up FUEL & attaches POD to SPACESHIP.
+SPACE  		Area at top of screen where SPACESHIP brings POD to win LEVEL.
+TERRAIN  	Area where SPACESHIP cannot fly, on contact causes EXPLOSION in SPACESHIP.
+LEVEL  		Area with different TERRAIN.
+BACKGROUND  	Everywhere flown that is not TERRAIN.
+HUD  		Shows LIVES, SCORE, TIME at top of screen.
+LIVES  		Amount of SPACESHIPs left to be destroyed before game is over.
+SCORE  		Total amount of points accumulated by user.
+TIMER  		Time left to complete LEVEL.
+SOUND  		Sound effects in game caused by user.
+MUSIC 	 	Constant background sound.
+COLOUR  	Fancy visuals.
+GRAPHICS  	All visual ENTITYs.
+EXPLOSION  	GRAPHICS caused by SPACESHIP colliding with BULLET, TERRAIN.
+STRING  	Letters on screen.
+INT  		Used to depict TIMER, LIVES, SCORE in HUD.
+GRAVITY  	Force pulling SPACESHIP down.
+MOMENTUM  	Combined SPEED and DIRECTION of SPACESHIP.
+SPEED 		How fast SPACESHIP is moving.
+DIRECTION	Where the SPACESHIP is moving towards on the screen.
