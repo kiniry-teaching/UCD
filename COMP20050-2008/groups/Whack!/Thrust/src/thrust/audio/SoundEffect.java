@@ -8,6 +8,7 @@ import java.io.File;
  * @version 2 April 2008
  */
 public class SoundEffect {
+  //Allison
   /**
    * This is your sound effect.
    * @param the_sound_effect_file the sound effect to make.
