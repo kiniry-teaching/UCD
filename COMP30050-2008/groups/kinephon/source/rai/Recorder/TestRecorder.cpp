@@ -1,7 +1,7 @@
 #ifdef __TEST__
 #include <cassert>
 #include "Recorder.h"
-#include "TestMemory.h"
+#include "../TestMemory.h"
 using std::cout;
 using std::endl;
 

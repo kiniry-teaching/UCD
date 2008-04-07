@@ -7,7 +7,7 @@
 #include <iostream>
 #include <cmath>
 #include <stdio.h>
-#include "rai/Recorder/TestMemory.h"
+#include "rai/TestMemory.h"
 #include "type.h"
 #include "rai/Analyser/Shapes.h"
 #include "rai/Analyser/ShapesLoader.h"
@@ -39,6 +39,7 @@ int main(int argc, char * * argv)
 	Frame::RunTest();
 	Track::RunTest();
 	Recorder::RunTest();
+	Zone::RunTest();
 
 #else
 

@@ -64,6 +64,19 @@ class Zone
 	 */
 	friend	class Shape;
 
+#if __TEST__
+///////////////////////////////////////////////////////////////////////////////
+// tests
+//
+public:
+	/**
+	 * Execute a number of test cases for this class
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void	RunTest(void);
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // private commands
 //

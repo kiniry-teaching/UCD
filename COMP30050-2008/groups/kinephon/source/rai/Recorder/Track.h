@@ -1,7 +1,7 @@
 #ifndef __INTERPRETER_TRACK_H__
 #define __INTERPRETER_TRACK_H__
 
-#include "TestMemory.h"
+#include "../TestMemory.h"
 #include "../../type.h"
 #include "Frame.h"
 
