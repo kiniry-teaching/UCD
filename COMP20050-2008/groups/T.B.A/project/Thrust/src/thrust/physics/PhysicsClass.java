@@ -1,9 +1,8 @@
 package thrust.physics;
 /**
- * Computing the behavior of entities according to physical
- * simulation in two dimensions.
+ * Abstract class implemented by the Physics interface.
  * @author Dave Haughton (Dave.haughton1@gmail.com)
- * @version 2 April 2008
+ * @version 7 April 2008
  */
 public abstract class PhysicsClass {
 
@@ -27,25 +26,39 @@ public abstract class PhysicsClass {
    */
   double my_speed;
 
-
+  /**
+   * The acceleration of an object.
+   */
   abstract double[] acceleration();
 
+  /**
+   * @return the downward acceleration due to gravity.
+   */
   double gravitational_constant()
   {
-    final double gravity = 9.81;
+    final double gravity = -9.81;
     return gravity;
   }
 
+  /**
+   * @param takes the mass of an object.
+   */
   public void setMass(final double some_mass)
   {
     my_mass = some_mass;
   }
 
+  /**
+   * @return the mass of an object.
+   */
   double mass()
   {
     return my_mass;
   }
 
+  /**
+   * @return the momentum of an object
+   */
   double momentum()
   {
     final int numberOfElements = 2;
@@ -54,24 +67,21 @@ public abstract class PhysicsClass {
     return mass() * speed[0];
   }
 
+  /**
+   * @param takes the angle of an object.
+   */
   public void getOrientation(final double an_angle)
   {
     my_angleRadians = an_angle;
   }
 
+  /**
+   * @return the angle of an object.
+   */
   double orientation()
   {
     return my_angleRadians;
   }
-
-  /**
-   * @return the x and y coordinates of an object.
-   */
-  double[] position()
-  {
-    return my_xyPosition;
-  }
-
 
   /**
    * @param takes an x coordinate and a y coordinate.
@@ -82,6 +92,14 @@ public abstract class PhysicsClass {
     my_xyPosition = new double[xyCoordinate];
     my_xyPosition[0] = a_position_x;
     my_xyPosition[1] = a_position_y;
+  }
+
+  /**
+   * @return the x and y coordinates of an object.
+   */
+  double[] position()
+  {
+    return my_xyPosition;
   }
 
   /**
