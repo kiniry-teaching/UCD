@@ -1,5 +1,6 @@
 package thrust.input;
 
+
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
