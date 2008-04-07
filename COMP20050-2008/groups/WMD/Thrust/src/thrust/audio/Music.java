@@ -3,7 +3,7 @@ package thrust.audio;
 
 
 import javax.sound.sampled.*;
-import java.io.*;
+import java.io.File;
 
 public class Music {
 //@ public model boolean is_playing;
@@ -64,7 +64,6 @@ public class Music {
   public final void stop() {
     if(playing())
       clip.stop();
-    
     
     
   }
