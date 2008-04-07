@@ -2,23 +2,49 @@ package thrust.audio;
 
 import java.io.File;
 
-
-public class SoundEffect {
-  //Allison
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+/**
+ * An example of loading and playing a sound using a Clip. This complete class
+ * isn't in the book ;)
+ */
+public class SoundEffect extends Exception {
+/**
+ * 
+ */
+  private static final long serialVersionUID = 1L;
   /**
-   * This is your sound effect.
-   * @param the_sound_effect_file the sound effect to make.
-   * @return the new sound effect for the effect stored in 's'.
+   * 
    */
-  public /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
-    assert false; //@ assert false;
-    return null;
-  }
-
+  private transient Clip bit;
   /**
-   * Start playing your effect.
+   * 
    */
-  public void start() {
-    assert false; //@ assert false;
+  public final/*@pure@*/ SoundEffect make(final File soundeffectfile){
+
+    // specify the sound to play
+    // (assuming the sound can be played by the audio system)
+    /**
+     * 
+     */
+    try{
+      File soundeffectFile = new File("Thrust.wav");
+      AudioInputStream effect = AudioSystem.getAudioInputStream(soundeffectFile);
+
+      // load the sound into memory (a Clip)
+      DataLine.Info info = new DataLine.Info(Clip.class, effect.getFormat());
+      Clip clip = (Clip) AudioSystem.getLine(info);
+      clip.open(effect);
+      return null;
+      }catch(Exception e){
+      System.out.println("Error");
+    }
+      
+      while(true){
+        bit.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+      
   }
-}
+}        
