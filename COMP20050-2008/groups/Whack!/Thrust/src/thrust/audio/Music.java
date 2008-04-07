@@ -32,8 +32,8 @@ public class Music extends Exception {
   /**
    * 
    */
-  public Music(){
-    try{
+  public Music() {
+    try {
       File musicFile = new File("/media/Thrustmusic.wav");
       AudioInputStream mus = AudioSystem.getAudioInputStream(musicFile);
 
@@ -42,7 +42,7 @@ public class Music extends Exception {
       Clip clip = (Clip) AudioSystem.getLine(info);
       clip.open(mus);
 
-    }catch(Exception e){
+    } catch (Exception e) {
       System.out.println("Error");
     }
 
