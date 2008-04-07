@@ -1,46 +1,71 @@
 package thrust.audio;
 
-import java.applet.AudioClip;
+
+
+import javax.sound.sampled.*;
+import java.io.*;
 
 public class Music {
+//@ public model boolean is_playing;
+
+  /** File for music. */
+
+  private transient Clip clip;
+  private final transient File wavfile = new File("../../../media/Thrust_music.wav");
+  private AudioInputStream stream = null;
 
 
+  /** Constructor, sets up audio stream. */
+  public Music() {
+    try {
+      stream = AudioSystem.getAudioInputStream(wavfile);
 
+      //AudioFormat format = stream.getFormat(); 
+    } catch (Exception e) {
+      e.fillInStackTrace();
+    }
+    // specify what kind of line we want to create 
+    final DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat());
+    
+    try {
+      // create the line
+      clip = (Clip) AudioSystem.getLine(info);
+      // load the samples from the stream 
+      clip.open(stream);
+      
+    } catch (Exception e) {
+      e.fillInStackTrace();
+    }
+  }
 
-  int clipTotal   = 0;
-  int clipsLoaded = 0;
-
-  AudioClip crashSound;
-  AudioClip explosionSound;
-  AudioClip fireSound;
-  AudioClip missleSound;
-  AudioClip saucerSound;
-  AudioClip thrustersSound;
-  AudioClip warpSound;
-  //@ public model boolean is_playing;
 
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
-  public /*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
-    return false;
+  public final/*@ pure @*/ boolean playing() {
+    //@ assert false;
+    return clip.isRunning();
   }
 
   /**
    * Start playing the music.
    */
   //@ ensures is_playing;
-  public void start() {
-    assert false; //@ assert false;
+  public final void start() {
+  //begin playback of the sound clip and loop over and over
+    clip.loop(Clip.LOOP_CONTINUOUSLY); //@ assert false;
   }
 
   /**
    * Stop playing the music.
    */
   //@ ensures !is_playing;
-  public void stop() {
-    assert false; //@ assert false;
+  public final void stop() {
+    if(playing())
+      clip.stop();
+    
+    
+    
   }
 }
