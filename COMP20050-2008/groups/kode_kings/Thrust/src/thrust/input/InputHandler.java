@@ -68,6 +68,33 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(final char the_keyboard_input) {
-    assert false; //@ assert false;
+    if (the_keyboard_input == DISPLAY_HIGH_SCORES) {
+      //Display high scores
+      assert true;
+    }   else if (the_keyboard_input == TOGGLE_MUSIC_OR_EFFECTS) {
+      //Toggle music or effects on or off
+      assert true;
+    }   else if (the_keyboard_input == START_GAME) {
+      //Start the game
+      assert true;
+    }   else if (the_keyboard_input == STOP_GAME) {
+      //Stop the game
+      assert true;
+    }   else if (the_keyboard_input == FIRE_GUN) {
+      //Fire gun
+      assert true;
+    }   else if (the_keyboard_input == TURN_LEFT) {
+      //Turn ship left
+      assert true;
+    }   else if (the_keyboard_input == TURN_RIGHT) {
+      //Turn ship right
+      assert true;
+    }   else if (the_keyboard_input == USE_ENGINE) {
+      //Use engine
+      assert true;
+    }   else {
+      //Use shield
+      assert true;
+    }
   }
 }
