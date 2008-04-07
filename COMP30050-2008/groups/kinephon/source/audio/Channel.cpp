@@ -13,7 +13,7 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	message[1] = programNo_;
   	midiout_->sendMessage(&message);
   	if (recorder_ != NULL)
-        //recorder_->write(message, 1);       
+        recorder_->write(message, 1);       
     
     
   	for (int i = 0; i < 93; i++)
@@ -26,7 +26,7 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	midiout_->sendMessage(&message);
 	controls_[7] = 127;		
 	if (recorder_ != NULL);
-       // recorder_->write(message, 1);       
+        recorder_->write(message, 1);       
     
 }
 
@@ -53,7 +53,7 @@ void Channel::setControl(uchar function, uchar value) {
 	midiout_->sendMessage(&message);
     
     if (recorder_ != NULL);
-       // recorder_->write(message, 1);       
+        recorder_->write(message, 1);       
     
 }
 	 
@@ -66,7 +66,7 @@ void Channel::setProgram(uchar program) {
   	midiout_->sendMessage(&message);
 
     if (recorder_ != NULL);
-        //recorder_->write(message, 1);       
+       recorder_->write(message, 1);       
     
 }
 	

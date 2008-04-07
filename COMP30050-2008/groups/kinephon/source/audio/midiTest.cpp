@@ -1,4 +1,5 @@
 #include "Conductor.h"
+#include "MidiRecorder.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -21,42 +22,9 @@ using namespace audio;
  */
 #ifdef __ED__
 int main(){
-    
-    
-    char byte;
-    string str;
-    ifstream input ("Together_Again.mid");
-    ofstream output ("together_again_txt.txt");
-    output << "M "<< (short) 'M' << endl;
-    output << "T "<< (short) 'T' << endl;
-    output << "h "<< (short) 'h' << endl;
-    output << "d "<< (short) 'd' << endl<<endl;
-    
-    output << "M "<< (short) 'M' << endl;
-    output << "T "<< (short) 'T' << endl;
-    output << "r "<< (short) 'r' << endl;
-    output << "k "<< (short) 'k' << endl << endl;
-    
-    for(int i = 0; i < 14; i++){
-        input >> byte;
-        str = byte;
-        output << (short) byte << " "; 
-    }
-    output << "\n";
-    for(int i = 0; i < 8; i++){
-        input >> byte;
-        output << (short) byte << " "; 
-    }
-    for (int j = 0; j < 5; j++){
-        output << "\n";
-        for(int i = 0; i < 4; i++){
-            input >> byte;
-            output << (short) byte << " "; 
-        }
-    }
-    input.close();
-    output.close();
-    	
+    MidiRecorder rec;
+    rec.closeFile();
+    /*
 	Conductor audio;
 	if(!audio.initialize(true))
     	exit( EXIT_FAILURE ); 
@@ -199,7 +167,7 @@ if (testingPlayLead) {
     if (forte) { 
         audio.setDynamics(DYNAMICS_FORTE);
         i = 0;
-        while(i < 60){
+        while(i < 30){
             if(melody[i] == NO_NOTE)
                 audio.play(melody[i], 0, melody[i+1]); 
             else
@@ -292,7 +260,7 @@ if (testingPlayLeadAcc) {
     }
     audio.pressPanicButton();
 }  
-
+*/
 	return 0;
 }
 
