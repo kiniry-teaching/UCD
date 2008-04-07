@@ -12,7 +12,7 @@ import javax.sound.sampled.DataLine;
  */
 public class SoundEffect extends Exception {
 /**
- * 
+ *
  */
   private static final long serialVersionUID = 1L;
   /**
@@ -22,27 +22,28 @@ public class SoundEffect extends Exception {
   /**
    * 
    */
-  public final/*@pure@*/ SoundEffect make(final File soundeffectfile){
+  public final/*@pure@*/ SoundEffect make(final File soundeffectfile) {
 
     // specify the sound to play
     // (assuming the sound can be played by the audio system)
     /**
      * 
      */
-    try{
-      File soundeffectFile = new File("/media/Thrust.wav");
-      AudioInputStream effect = AudioSystem.getAudioInputStream(soundeffectFile);
+    
+try {
+  File soundeffectFile = new File("/media/Thrust.wav");
+  AudioInputStream effect = AudioSystem.getAudioInputStream(soundeffectFile);
 
       // load the sound into memory (a Clip)
       DataLine.Info info = new DataLine.Info(Clip.class, effect.getFormat());
       Clip clip = (Clip) AudioSystem.getLine(info);
       clip.open(effect);
       return null;
-      }catch(Exception e){
+      } catch (Exception e) {
       System.out.println("Error");
     }
       
-      while(true){
+      while (true) {
         bit.loop(Clip.LOOP_CONTINUOUSLY);
         }
       
