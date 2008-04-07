@@ -35,5 +35,29 @@ include("connection.php"); //Connects to database
 	else
 	{return true;}
 }
-
+ 
+function addFriend($ownusername, $friendusername){
+/*
+	addfriend
+	$ownusername is the username of the person adding the friend
+	$friendusername is the username of the friend being added as a friend.
+*/
+$result = mysql_query("SELECT friend FROM users_friends
+		WHERE username='$username'");
+		
+	if($result==$friendusername)
+	{echo($friendusername." is already one of your friends. <br />");}		
+	else
+	{
+	include("connection.php"); //Connects to database
+	$sql="INSERT INTO users_friends (username, friend, timestamp)
+	VALUES ('$ownusername','$friendusername', NOW())";
+				if (!mysql_query($sql,$con))
+			{
+				die('Error: ' . mysql_error());
+			}
+	echo ($friendusername." added as a friend!");		
+	}
+/*	addfriend */	
+} 
 ?>

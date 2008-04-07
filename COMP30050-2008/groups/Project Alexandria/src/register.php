@@ -52,7 +52,7 @@ else{
 			{
 				die('Error: ' . mysql_error());
 			}
-	echo "Account registered for ".$username."!";		
+	echo ("Account registered for ".$username."!");		
 	}
 }
 

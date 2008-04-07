@@ -169,6 +169,15 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
  		timestamp int(11) unsigned not null
 	)";
 	
+		$sql = 'DROP TABLE IF EXISTS `users_friends`';
+	mysql_query($sql,$con);	
+
+	$sql =	"CREATE TABLE users_friends (
+ 		username varchar(30) primary key,
+ 		friend varchar(30),
+		timestamp int(11) unsigned not null
+	)";
+	
 	/****************************************************************
 	* 																*
 	* Ends the installation.										*
