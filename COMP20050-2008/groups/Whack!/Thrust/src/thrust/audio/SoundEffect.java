@@ -19,15 +19,16 @@ public class SoundEffect extends Exception {
    * 
    */
   private Clip bit;
-  /**
-   * 
-   */
+  
+  /** 
+   * Set the value of Sound. 
+   * @param SoundEffectfile. 
+   */  
   public final/*@pure@*/ SoundEffect make(final File soundeffectfile) {
-
     // specify the sound to play
     // (assuming the sound can be played by the audio system)
     /**
-     * 
+     * @return SoundEffect.
      */
     
 try {
