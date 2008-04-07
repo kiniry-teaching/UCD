@@ -29,7 +29,7 @@ public class Music {
       //@ ensures \result == is_playing;
       public /*@ pure @*/ boolean playing() {
         assert false; //@ assert false;
-        return false;
+        return true;
        
       }
 
