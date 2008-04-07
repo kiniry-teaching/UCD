@@ -2,11 +2,7 @@ package thrust.audio;
 
 import java.io.File;
 
-/**
- * Any sound made in response to a event.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
- */
+
 public class SoundEffect {
   //Allison
   /**
