@@ -35,11 +35,13 @@ public class Physicswhack implements Physics{
   /*@ pure @*/public double momentum(){
     return whack_mass * whack_velocity;
   }
+  
   /**
    * @return What is your orientation in radians?
    */
   /*@ pure @*/ public double orientation(){
     
+    double whack_orientation;
   }
 
   /**
@@ -51,14 +53,16 @@ public class Physicswhack implements Physics{
   /*@ pure @*/public double[] position(){
     final double[] whack_position = {x, y};
     return whack_position;
-    
   }
 
   /**
    * @return What is your velocity in meters per second?
    */
+  double[] whack_velocity = {whack_orientation, /*whack_speed*/};
   /*@ pure @*/public double[] velocity(){
     //speed and direction
+    
+    return whack_velocity;
   }
 
 }
