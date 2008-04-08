@@ -13,7 +13,7 @@ public class InputHandler {
   /** Toggle music or sound effects. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_M;
   /** Start the game. */
-  public static final char START_GAME = KeyEvent.VK_SPACE;
+  public static final char START_GAME = KeyEvent.VK_S;
   /** Stop the game. */
   public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
   /** Fire the gun. */
@@ -21,7 +21,7 @@ public class InputHandler {
   /** Turn left. */
   public static final char TURN_LEFT = KeyEvent.VK_A;
   /** Turn right. */
-  public static final char TURN_RIGHT = KeyEvent.VK_S;
+  public static final char TURN_RIGHT = KeyEvent.VK_D;
   /** Use engine. */
   public static final char USE_ENGINE = KeyEvent.VK_SHIFT;
   /** Use shield. */
@@ -31,7 +31,7 @@ public class InputHandler {
    * @return What are the legal keyboard inputs?
    */
   public final/*@ pure @*/ char[] legal_inputs() {
-   // assert false; //@ assert false;
+    // assert false; //@ assert false;
     final char[] legal_inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
                                  START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
                                  TURN_RIGHT, USE_ENGINE, USE_SHIELD };
@@ -70,14 +70,36 @@ public class InputHandler {
   //@ requires legal_input(theKeyboardInput);
   public void process(final char the_keyboard_input) {
     assert false; //@ assert false
-    final char[] inputs = legal_inputs();
-    if (legal_input(the_keyboard_input)) {
-      for (int i = 0; i < inputs.length; i++) {
-        if (inputs[i] == the_keyboard_input) {
-          //call method depending on the keyboard input
-          System.out.print("Call a method for " + inputs[i]);
-        }
-      }
+    switch (the_keyboard_input) {
+      case DISPLAY_HIGH_SCORES:
+        System.out.print("Call method to display the high scores.");
+        break;
+      case TOGGLE_MUSIC_OR_EFFECTS:
+        System.out.print("Call method to toggle music or effects.");
+        break;
+      case START_GAME:
+        System.out.print("Start the game.");
+        break;
+      case STOP_GAME:
+        System.out.print("Stop the game.");
+        break;
+      case FIRE_GUN:
+        System.out.print("Fire.");
+        break;
+      case TURN_LEFT:
+        System.out.print("Turn left.");
+        break;
+      case TURN_RIGHT:
+        System.out.print("Turn right.");
+        break;
+      case USE_ENGINE:
+        System.out.print("Use engine.");
+        break;
+      case USE_SHIELD:
+        System.out.print("Use shield.");
+        break;
+      default:
+        break;
     }
   }
 }
