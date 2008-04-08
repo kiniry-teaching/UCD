@@ -6,8 +6,8 @@ package thrust.audio;
  * @version 2 April 2008
  */
 public class Music {
-  public boolean is_playing();
   //@ public model boolean is_playing;
+  public boolean is_playing;
 
   /**
    * @return Is music playing?
