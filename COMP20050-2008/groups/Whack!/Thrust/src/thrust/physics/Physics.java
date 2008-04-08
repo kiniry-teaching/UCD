@@ -13,7 +13,7 @@ public interface Physics {
   /**
    * gravitational_constant which is kept constant threw out the game.
    */
-  double Gravitational_Constant = 9.8;
+  double GRAVITATIONAL_CONSTANT = 9.8;
 
   /**
    * @return What is your acceleration in meters per second squared?

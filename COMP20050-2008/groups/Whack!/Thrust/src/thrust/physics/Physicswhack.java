@@ -31,7 +31,7 @@ public class Physicswhack implements Physics {
    * @return What is the gravitational constant?
    */
   /*@ pure @*/ public double gravitational_constant() {
-    return Gravitational_Constant;
+    return GRAVITATIONAL_CONSTANT;
   }
 
   /**
