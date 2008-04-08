@@ -1,4 +1,5 @@
 package thrust.input;
+import java.awt.event.KeyEvent;
 
 /**
  * Processes and delegates each keyboard input received.
@@ -8,24 +9,24 @@ package thrust.input;
 public class InputHandler {
   /** An unknown character code. */
   private static final char UNKNOWN_CHAR = '\0';
-  /** Display high scores */
-  public static final char DISPLAY_HIGH_SCORES = 'h';
-  /** Toggle music or sound effects */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
-  /** Start the game */
-  public static final char START_GAME = "space";
-  /** Stop the game */
-  public static final char STOP_GAME = "escape";
-  /** Fire Gun */
-  public static final char FIRE_GUN = "return";
-  /** Turn left */
-  public static final char TURN_LEFT = 'a';
-  /** Turn right */
-  public static final char TURN_RIGHT = 's';
-  /** Use engine */
-  public static final char USE_ENGINE = "shift";
-  /** Use shield */
-  public static final char USE_SHIELD = "space";
+  /** Display high scores.*/
+  public static final char DISPLAY_HIGH_SCORES = KeyEvent.VK_H;
+  /** Toggle music or sound effects. */
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_M;
+  /** Start the game. */
+  public static final char START_GAME = KeyEvent.VK_SPACE;
+  /** Stop the game. */
+  public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
+  /** Fire Gun. */
+  public static final char FIRE_GUN = KeyEvent.VK_ENTER;
+  /** Turn left. */
+  public static final char TURN_LEFT = KeyEvent.VK_A;
+  /** Turn right. */
+  public static final char TURN_RIGHT = KeyEvent.VK_S;
+  /** Use engine. */
+  public static final char USE_ENGINE = KeyEvent.VK_SHIFT;
+  /** Use shield. */
+  public static final char USE_SHIELD = KeyEvent.VK_SPACE;
 
   /**
    * @return What are the legal keyboard inputs?
@@ -82,6 +83,7 @@ public class InputHandler {
     if(legal_input(the_keyboard_input)){
       for(int i=0; i<inputs.length; i++){
         if(inputs[i] == the_keyboard_input){
+          System.out.println("Call method for "+ inputs[i]);
           //call method depending on the keyboard input
         }
       }
