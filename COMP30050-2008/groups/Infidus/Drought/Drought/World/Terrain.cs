@@ -78,14 +78,15 @@ namespace Drought.World
             setUpVertices();
             setUpIndices();
             setUpNormals();
-            //finaliseBuffers();
+            finaliseBuffers();
         }
 
         public void loadContent()
         {
             effect = content.Load<Effect>("EffectFiles/terrain");
 
-            sandTexture  = content.Load<Texture2D>("Textures/sand");
+//            sandTexture = content.Load<Texture2D>("Textures/sand_triton");
+            sandTexture = content.Load<Texture2D>("Textures/sand");
             waterTexture = content.Load<Texture2D>("Textures/water");
             stoneTexture = content.Load<Texture2D>("Textures/stone");
             errorTexture = content.Load<Texture2D>("Textures/error");
@@ -191,11 +192,11 @@ namespace Drought.World
             {
                 pass.Begin();
 
-                //device.Vertices[0].SetSource(vb, 0, VertexMultiTextured.SizeInBytes);
-                //device.Indices = ib;
+                device.Vertices[0].SetSource(vb, 0, VertexMultiTextured.SizeInBytes);
+                device.Indices = ib;
                 device.VertexDeclaration = new VertexDeclaration(device, VertexMultiTextured.VertexElements);
-                //device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, height * width, 0, (width - 1) * (height - 1) * 2);
-                device.DrawUserIndexedPrimitives<VertexMultiTextured>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, (width - 1) * (height - 1) * 2);
+                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, height * width, 0, (width - 1) * (height - 1) * 2);
+                //device.DrawUserIndexedPrimitives<VertexMultiTextured>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, (width - 1) * (height - 1) * 2);
 
                 pass.End();
             }
