@@ -9,8 +9,13 @@ package thrust.physics;
 public interface Physics {
   //@ constraint (* The gravitational constant never changes. *);
   //@ constraint gravitational_constant() == \old(gravitational_constant());
-  final double whack_gravitational_constant = 9.8;
-  //6.67*10^ - 11
+
+  /**
+   * gravitational_constant which is kept constant threw out the game.
+   */
+
+  double Gravitational_Constant = 9.8;
+
   /**
    * @return What is your acceleration in meters per second squared?
    */
@@ -27,7 +32,6 @@ public interface Physics {
    */
   //@ ensures 0 <= \result;
   /*@ pure @*/ double mass();
-  
   /**
    * @return What is your momentum in kilograms*meters per second?
    */
