@@ -28,7 +28,7 @@ public interface Physics {
    * @return What is your mass in kilograms?
    */
   //@ ensures 0 <= \result;
-  /*@ pure @*/ double get_mass(){
+  /*@ pure @*/ double mass(){
     return mass;
   }
 
@@ -46,7 +46,17 @@ public interface Physics {
    * @return What is your position in meters from the origin?
    */
   //@ ensures \result.length == 2;
-  /*@ pure @*/ double[] position();
+  /*@ pure @*/ double[] position(){
+    double orig_X = get_X; //have when the key press for move forward is pressed
+    double orig_Y = get_Y; // to record the orginal X/Y position and then when the key press is over to get the new current X/Y
+    
+    double current_X = get_X;
+    double current_Y = get_Y;
+    testing
+    
+    double Displaced_X;
+    double Displaced_Y;
+  }
 
   /**
    * @return What is your velocity in meters per second?
