@@ -1,10 +1,14 @@
 package thrust.audio;
 
 import java.io.File;
+import java.io.IOException;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Any sound made in response to a event.
@@ -16,27 +20,32 @@ public class SoundEffect {
   /**
    * The sound effect clip.
    */
-  private Clip theClip;
+  private Clip my_clip;
   /**
    * This is your sound effect.
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
   public final /*@ pure @*/ SoundEffect make(final File the_sound_effect_file) {
-    AudioInputStream inputStream;
-    DataLine.Info dataLineInfo;
-    inputStream = null;
+    AudioInputStream input_stream;
+    DataLine.Info data_line_info;
+    input_stream = null;
     try {
-      inputStream = AudioSystem.getAudioInputStream(the_sound_effect_file);
-    } catch (Exception e) {
-      e.printStackTrace(System.err);
+      input_stream = AudioSystem.getAudioInputStream(the_sound_effect_file);
+    } catch (UnsupportedAudioFileException uafe) {
+      uafe.printStackTrace(System.err);
+    } catch (IOException ioe) {
+      ioe.printStackTrace(System.err);
     }
-    dataLineInfo = new DataLine.Info(Clip.class, inputStream.getFormat());
+    data_line_info = new DataLine.Info(Clip.class, input_stream.getFormat());
     try {
-      theClip = (Clip) AudioSystem.getLine(dataLineInfo);
-      theClip.open(inputStream);
-    } catch (Exception e) {
-      e.printStackTrace(System.err);
+      my_clip = (Clip) AudioSystem.getLine(data_line_info);
+      my_clip.open(input_stream);
+    } catch (LineUnavailableException lue) {
+      // TODO Auto-generated catch block
+      lue.printStackTrace(System.err);
+    } catch (IOException ioe) {
+      ioe.printStackTrace(System.err);
     }
     return this;
   }
@@ -45,6 +54,6 @@ public class SoundEffect {
    * Start playing your effect.
    */
   public final void start() {
-    theClip.loop(1);
+    my_clip.loop(1);
   }
 }

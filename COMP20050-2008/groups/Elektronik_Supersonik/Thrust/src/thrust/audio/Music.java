@@ -4,7 +4,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.io.File;
+import java.io.IOException;
 
 /**
  * In-game music.
@@ -16,26 +20,26 @@ public class Music {
    * The boolean that tells you whether music is playing.
    */
   //@ public model boolean is_playing;
-  private boolean playing;
-  
+  private transient boolean my_is_playing;
+
   /**
    * The in-game music clip.
    */
-  private Clip theClip;
-  
+  private Clip my_clip;
+
   /**
    * Constructor method. Creates theClip.
    */
   public Music() {
     prepareMusicFile();
   }
-  
+
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
   public final /*@ pure @*/ boolean playing() {
-    return playing;
+    return my_is_playing;
   }
 
   /**
@@ -43,7 +47,7 @@ public class Music {
    */
   //@ ensures is_playing;
   public final void start() {
-    theClip.loop(Clip.LOOP_CONTINUOUSLY);
+    my_clip.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
   /**
@@ -51,29 +55,35 @@ public class Music {
    */
   //@ ensures !is_playing;
   public final void stop() {
-    theClip.stop();
-    theClip.setMicrosecondPosition(0);
+    my_clip.stop();
+    my_clip.setMicrosecondPosition(0);
   }
-  
+
   /**
    * Constructor helper method. Loads up the music file to a clip.
    */
   private void prepareMusicFile() {
-    AudioInputStream inputStream;
-    DataLine.Info dataLineInfo;
-    File music = new File("../../media/Thrust_music");
-    inputStream = null;
+    AudioInputStream input_stream;
+    DataLine.Info data_line_info;
+    final File music = new File("../../media/Thrust_music");
+    input_stream = null;
+
     try {
-      inputStream = AudioSystem.getAudioInputStream(music);
-    } catch (Exception e) {
-      e.printStackTrace(System.err);
+      input_stream = AudioSystem.getAudioInputStream(music);
+    } catch (UnsupportedAudioFileException uafe) {
+      uafe.printStackTrace(System.err);
+    } catch (IOException ioe) {
+      ioe.printStackTrace(System.err);
     }
-    dataLineInfo = new DataLine.Info(Clip.class, inputStream.getFormat());
+
+    data_line_info = new DataLine.Info(Clip.class, input_stream.getFormat());
     try {
-      theClip = (Clip) AudioSystem.getLine(dataLineInfo);
-      theClip.open(inputStream);
-    } catch (Exception e) {
-      e.printStackTrace(System.err);
+      my_clip = (Clip) AudioSystem.getLine(data_line_info);
+      my_clip.open(input_stream);
+    } catch (LineUnavailableException lue) {
+      lue.printStackTrace(System.err);
+    } catch (IOException ioe) {
+      ioe.printStackTrace(System.err);
     }
   }
 }

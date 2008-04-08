@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 
 /**
  * Processes and delegates each keyboard input received.
- * 
+ *
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  */
@@ -34,10 +34,10 @@ public class InputHandler {
    * @return What are the legal keyboard inputs?
    */
   public final /* @ pure @ */ char[] legal_inputs() {
-    char[] legal =
-                   { DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
-                    STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
-                    USE_SHIELD };
+    final char[] legal =
+    {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
+     STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+      USE_SHIELD};
     return legal;
   }
 
@@ -55,18 +55,18 @@ public class InputHandler {
    *          the character to check.
    */
   public final /* @ pure @ */ boolean legal_input(final char the_character) {
-    boolean retBool = false;
+    boolean ret_bool = false;
     for (int i = 0; i < legal_inputs().length; ++i) {
       if (legal_inputs()[i] == the_character) {
-        retBool = true;
+        ret_bool = true;
       }
     }
-    return retBool;
+    return ret_bool;
   }
 
   /**
    * Process this keyboard input character.
-   * 
+   *
    * @param the_keyboard_input
    *          the input character to process.
    */
