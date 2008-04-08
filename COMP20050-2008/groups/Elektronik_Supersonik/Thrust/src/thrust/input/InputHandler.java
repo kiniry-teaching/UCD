@@ -33,7 +33,7 @@ public class InputHandler {
   /**
    * @return What are the legal keyboard inputs?
    */
-  public/* @ pure @ */char[] legal_inputs() {
+  public final /* @ pure @ */ char[] legal_inputs() {
     char[] legal =
                    { DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
                     STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
@@ -41,11 +41,6 @@ public class InputHandler {
     return legal;
   }
 
-  /**
-   * @return Is this character a legal keyboard input?
-   * @param the_character
-   *          the character to check.
-   */
   /*
    * @ ensures \result <==> (the_character == DISPLAY_HIGH_SCORES) | @
    * (the_character == TOGGLE_MUSIC_OR_EFFECTS) | @ (the_character ==
@@ -54,7 +49,12 @@ public class InputHandler {
    * TURN_RIGHT) | @ (the_character == USE_ENGINE) | @ (the_character ==
    * USE_SHIELD); @
    */
-  public/* @ pure @ */boolean legal_input(char the_character) {
+  /**
+   * @return Is this character a legal keyboard input?
+   * @param the_character
+   *          the character to check.
+   */
+  public final /* @ pure @ */ boolean legal_input(final char the_character) {
     boolean retBool = false;
     for (int i = 0; i < legal_inputs().length; ++i) {
       if (legal_inputs()[i] == the_character) {
@@ -71,7 +71,7 @@ public class InputHandler {
    *          the input character to process.
    */
   // @ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
-    assert false; //@ assert false;
+  public final void process(final char the_keyboard_input) {
+    assert false; // @ assert false;
   }
 }
