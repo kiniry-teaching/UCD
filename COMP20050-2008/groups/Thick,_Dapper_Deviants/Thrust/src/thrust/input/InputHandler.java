@@ -17,11 +17,11 @@ public class InputHandler {
   /** Calls high score screen. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Sets music playing and effects to false. */
-  public static final char START_GAME = 13;
-  /** Started by Enter (Ascii code equivilant). */
-  public static final char STOP_GAME = 'escape';
+  public static final char START_GAME = 'enter';
+  /** Started by Enter or Ascii code equivilant(?)). */
+  public static final char STOP_GAME = 'esc';
   /** Halts game using Esc key. */
-  public static final char FIRE_GUN = 32;
+  public static final char FIRE_GUN = 'spacebar';
   /** Spacebar. */
   public static final char TURN_LEFT = 'a';
   /** hit a to turn left. */
@@ -35,8 +35,10 @@ public class InputHandler {
    * @return What are the legal keyboard inputs?
    */
   public /*@ pure @*/ char[] legal_inputs() {
-    assert false; //@ assert false;
-    return null;
+    //assert false; //@ assert false;
+    //return null;
+	legal_inputs[0] = FIRE_GUN;
+	
   }
 
   /**
