@@ -1,10 +1,13 @@
 
-//class written by Daire O'Doherty 06535691 3/4/08
+/**class written by Daire O'Doherty 06535691 3/4/08
 
-//Just trying to set up what the legal inputs for the game are, and how the computer checks if what is pressed is legal
+Just trying to set up what the legal inputs for the game are, and how the computer checks if what is pressed is legal
 
-//Daire O'Doherty 06535691 reworked on it 5/4/08, havn't been able to get in touch with one of my team members in a few weeks, other member Sinead morley
-//said that she would implement the audio, I have started a bit of the Physics myself, as i don't know if Lane is going to do it
+Daire O'Doherty 06535691 reworked on it 5/4/08, havn't been able to get in touch with one of my team members in a few weeks, other member Sinead morley
+said that she would implement the audio, I have started a bit of the Physics myself, as i don't know if Lane is going to do it
+Revised again on 8/4/08 with a little help from Fintan, still can't get rid of some of the errors, told to ignore them,
+told to use System.out.print, this pulled up more errors, told to ignore them
+*/
 package thrust.input;
 
 public class InputHandler {
@@ -12,18 +15,24 @@ public class InputHandler {
  
 
     
+  /** when h is pressed, the high scores will be displayed. */
   public static final char DISPLAY_SCORES = 'h'; 
-//when h is pressed, the high scores will be displayed
+  /**when m is pressed the music will be toggled.*/
   public static final char TOGGLE_MUSIC = 'm'; 
-//when m is pressed the music will be toggled
-  public static final char START_GAME = '32'; 
-//space key is pressed the game will start
-  public static final char STOP_GAME = '27'; //when escape is pressed the game will stop
-  public static final char FIRE_GUN = '\r'; //when return is pressed the ship will fire
-  public static final char     TURN_LEFT = 'a';  // when a is pressed the ship will turn right
-  public static final char     TURN_RIGHT = 's'; // when s is pressed the ship will turn right
-  public static final char     USE_ENGINE = '15'; //  when [shift] is pressed the ship will use its engine
-  public static final char     USE_SHIELD = 'd'; //  when d is pressed the shield will be used
+/**space key is pressed the game will start.*/
+  public static final char START_GAME = 32; 
+/**when escape is pressed the game will stop.*/
+  public static final char STOP_GAME = 27; 
+/**when return is pressed the ship will fire.*/
+  public static final char FIRE_GUN = '\r'; 
+  /** when a is pressed the ship will turn right.*/
+  public static final char     TURN_LEFT = 'a'; 
+/**when s is pressed the ship will turn right.*/
+  public static final char     TURN_RIGHT = 's'; 
+/**when [shift] is pressed the ship will use its engine.*/
+  public static final char     USE_ENGINE = 15; 
+/**when d is pressed the shield will be used.*/
+  public static final char     USE_SHIELD = 'd'; 
   
     //researched ASCII code online and found 32,27,15 the ones im looking for
   /**
@@ -32,7 +41,7 @@ public class InputHandler {
   public /*@ pure @*/ char[] legal_inputs() {
      //@ assert false;
     
-    char[] legal_inputs={DISPLAY_SCORES,TOGGLE_MUSIC,
+    char[] legal_inputs = {DISPLAY_SCORES,TOGGLE_MUSIC,
                            START_GAME,STOP_GAME,FIRE_GUN,TURN_LEFT,
                            TURN_RIGHT ,USE_ENGINE, USE_SHIELD};
   
@@ -53,17 +62,19 @@ public class InputHandler {
     @                     (k == USE_SHIELD);
     @*/
   //@requires true
-  public /*@ pure @*/ boolean legal_input(char k) {
+  /**loop through the array and check if char entered is the same */
+  public /*@ pure @*/ boolean legal_input(char leagalInput) {
      
     
     //loop through the legal_inputs array
     for(int i = 0; i <= legal_inputs().length; i++)
       {
-                                if (legal_inputs()[i] == k){
-                                        return true; //if the character typed is the same as one of the characters in the input
+                                if (legal_inputs()[i] == leagalInput){
+                                        return true; 
+      /**character typed is same as characters in the input*/
                                 }
       }
-    return false;//otherwise return false
+    return false; //otherwise return false
   }
 
   /**
@@ -80,37 +91,31 @@ public class InputHandler {
       //toggle music or sound effects
       
     }
-    else if(k == START_GAME){
-      
+    else if ( k ==START_GAME){
+      System.out.print("start the game");
       //start the game
-    }
-    
-    else if(k == STOP_GAME){     
+    }else if ( k ==STOP_GAME){     
       //stop the game
-    }
-    else if(k == FIRE_GUN){
+      System.out.print("stop the game");
+    }else if ( k ==FIRE_GUN){
       //Fire the gun
-    }
-    else if(k == TURN_LEFT ){
+      System.out.print("fire the gun");
+    }else if ( k ==TURN_LEFT ){
       //turn ship left
-         }
-    else if(k==TURN_RIGHT){
+      System.out.println("turn the ship left");
+    }else if ( k ==TURN_RIGHT){
       //turn ship right
-     
-      
-    }
-    else if(k==USE_ENGINE){
-     
-    }
-    else if(k == USE_SHIELD){
-      //use the shield
-     
-      
-    }
-   }
-   else{
+     System.out.print("turn ship right");
+    }else if ( k ==USE_ENGINE){
+     System.out.print("use the engine");
+    }else if ( k ==USE_SHIELD){
+      //use the shield   
+      System.out.print("use the shield");    
+    }else{
      //this is not a legal input
+     System.out.print("this is not a legal input");
       }
+}
 }
 }
   
