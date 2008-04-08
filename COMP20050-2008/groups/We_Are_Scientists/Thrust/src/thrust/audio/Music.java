@@ -1,70 +1,70 @@
 package thrust.audio;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.io.File;
+import java.io.IOException;
+
 /**
  * In-game music.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  */
-public class Music  {
-  //@ public model boolean is_playing;
+public class Music {
+  // @ public model boolean is_playing;
   /**
-   * In-game music.
-   * @ the clip
-   * @
+   * In-game music. @ the clip @
    */
-  private transient Clip clip;
+  private transient Clip my_clip;
   /**
-   * In-game music.
-   * @ the soundfile java.io input
-   * @
+   * In-game music. @ the soundfile java.io input @
    */
-  private final transient File soundFile = new File("Thrust_music.wav");
-  /**
-   * In-game music.
-   * @Music method loads clips
-   * @
-   */
-  public Music() {
-    try {
-    //File soundFile = new File("Thrust_music.mp3");
-    AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
+  private final transient File my_soundFile = new File("Thrust_music.wav");
 
-    DataLine.Info info = new DataLine.Info(Clip.class, sound.getFormat());
-    Clip clip = (Clip) AudioSystem.getLine(info);
-    clip.open(sound);
-    } catch (Exception e) {
-     System.out.println("error");
-    }
+  /**
+   * In-game music.
+   * @Music method loads clips @
+   */
+  public Music()throws IOException , UnsupportedAudioFileException ,
+  LineUnavailableException
 
+  {
+    final AudioInputStream my_sound =
+          AudioSystem.getAudioInputStream(my_soundFile);
+    final DataLine.Info info =
+        new DataLine.Info(Clip.class, my_sound.getFormat());
+    final Clip clip = (Clip) AudioSystem.getLine(info);
+    clip.open(my_sound);
 
   }
-
   /**
    * In-game music.
    * @boolean to tell when music is playing
    * @true or false
    */
-private boolean isplaying;
+  //private boolean is_playing;
+
   /**
    * @return Is music playing?
    */
-  //@ ensures \result == is_playing;
-  public final /*@ pure @*/ boolean playing() {
-    isplaying = true;
-    return clip.isRunning();
+  // @ ensures \result == is_playing;
+  public final/* @ pure @ */boolean playing() {
+   // is_playing = true;
+    return my_clip.isRunning();
 
   }
 
   /**
    * Start playing the music.
    */
-  //@ ensures is_playing;
+  // @ ensures is_playing;
   public final void start() {
-    clip.start();
+    my_clip.start();
   }
 
   /**
@@ -72,7 +72,7 @@ private boolean isplaying;
    */
   //@ ensures !is_playing;
   public final void stop() {
-    clip.stop();
+    my_clip.stop();
     //@ assert false;
   }
 }

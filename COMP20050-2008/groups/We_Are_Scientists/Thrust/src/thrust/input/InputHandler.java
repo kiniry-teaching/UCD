@@ -1,4 +1,4 @@
-package thrust.input; 
+package thrust.input;
 
 
 //import java.awt.event.KeyEvent;
@@ -10,7 +10,7 @@ package thrust.input;
  */
 public class InputHandler {
   /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
+ // private static final char UNKNOWN_CHAR = '\0';
   /** this is the command to display the high scores. */
   public static final char DISPLAY_HIGH_SCORES = 'h';
   /** command to turn the music effects on or off.*/
@@ -33,12 +33,13 @@ public class InputHandler {
   /**
    * @return What are the legal keyboard inputs?
    */
-  public final /*@ pure @*/ char[] legalInputs() {
-char[] legalInputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
-STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
-       USE_SHIELD };
+  public final /*@ pure @*/  char[] legal_inputs() {
+    final char[] legal_inputs = {DISPLAY_HIGH_SCORES,
+      TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
+      STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+      USE_SHIELD };
     //assert false; //@ assert false;
-    return legalInputs;
+    return legal_inputs;
   }
 
   /**
@@ -59,20 +60,16 @@ STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
    * @return Is this character a legal keyboard input?
    * @stuff
    */
-  public final /*@ pure @*/ boolean legalInput(char theCharacter) {
-    if ((theCharacter == 'h')
-        ||
-        (theCharacter == 'm')
-        ||
-        (theCharacter == '\u00A0')
-        ||
-        (theCharacter == '\u001B') || (theCharacter == '\n')
-        ||
-        (theCharacter == 'a')
-        || (theCharacter == 's') || (theCharacter == '\u000F')) {
+  public final /*@ pure @*/ boolean legalInput(final char the_character) {
+    if ((the_character == 'h') ||
+        (the_character == 'm')  ||
+        (the_character == '\u00A0') ||
+        (the_character == '\u001B') || (the_character == '\n') ||
+        (the_character == 'a') ||
+        (the_character == 's') || (the_character == '\u000F')) {
 
       return true;
-     }
+    }
     //assert false; //@ assert false;
     return false;
   }
@@ -82,7 +79,7 @@ STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
    * @param the_keyboard_input the input character to process.
    */
   //@ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
+  public void process(final char the_keyboard_input) {
     //assert false; //@ assert false;
   }
 }
