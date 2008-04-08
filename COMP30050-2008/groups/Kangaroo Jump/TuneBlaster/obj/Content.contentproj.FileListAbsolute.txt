@@ -1,3 +1,0 @@
-C:\Documents and Settings\Hugh\My Documents\Software Project\fagaer\TuneBlaster\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Burt\Documents\Visual Studio 2005\Projects\New Folder\TuneBlaster\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Burt\Documents\Visual Studio 2005\Projects\New Folder\TuneBlaster\obj\x86\Debug\TuneBlaster!.pdb
