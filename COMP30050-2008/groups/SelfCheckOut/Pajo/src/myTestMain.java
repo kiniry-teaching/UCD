@@ -6,6 +6,7 @@ public class myTestMain {
 	public static void main(String[] args) {
 		
 		//test values to use
+		//
 		double barcode = 2;
 		String name = "Joe Bloggs";
 		String emailaddress = "joebloggsgmail.com";
