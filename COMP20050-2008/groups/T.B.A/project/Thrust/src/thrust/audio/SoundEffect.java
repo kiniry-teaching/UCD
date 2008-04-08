@@ -16,8 +16,6 @@ import javax.sound.sampled.LineUnavailableException;
  * @version 2 April 2008
  */
 public class SoundEffect {
-  /** Create an AudioInputStream. **/
-  AudioInputStream my_audio_stream;
   /**
    * Clip for playing sound effect.
    */
@@ -28,7 +26,8 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public /*@ pure @*/ SoundEffect make(final File the_sound_effect_file) {
+  public final SoundEffect make(final File the_sound_effect_file) {
+    AudioInputStream my_audio_stream = null;
     try {
       my_audio_stream = AudioSystem.getAudioInputStream(the_sound_effect_file);
     } catch (IOException e) {

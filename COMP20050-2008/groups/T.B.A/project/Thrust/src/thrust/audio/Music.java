@@ -27,9 +27,9 @@ public class Music {
    */
   public void openMusic() {
     final File music_file =
-      new File("../../../media/thrustmusic.mp3");
+      new File("../../media/thrustmusic.wav");
 
-    AudioInputStream my_audio_stream = /*@ null */ null;
+    AudioInputStream my_audio_stream = null;
     try {
       my_audio_stream = AudioSystem.getAudioInputStream(music_file);
     } catch (UnsupportedAudioFileException e) {
@@ -54,7 +54,6 @@ public class Music {
    */
   //@ ensures \result == is_playing;
   public /*@ pure @*/ boolean playing() {
-    //@ assert music.isRunning() || !music.isRunning();
     return my_clip.isRunning();
   }
 
