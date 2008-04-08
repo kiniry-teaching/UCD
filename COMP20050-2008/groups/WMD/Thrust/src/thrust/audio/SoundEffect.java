@@ -45,7 +45,7 @@ public class SoundEffect {
     } catch (Exception e) {
       e.fillInStackTrace();
     }
-    SoundEffect s = (SoundEffect) clip;
+    final SoundEffect s = (SoundEffect) clip;
     return s;
   }
   
