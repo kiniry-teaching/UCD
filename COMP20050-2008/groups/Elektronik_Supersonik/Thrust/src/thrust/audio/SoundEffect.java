@@ -20,7 +20,7 @@ public class SoundEffect {
   /**
    * The sound effect clip.
    */
-  private Clip my_clip;
+  private transient Clip my_clip;
   /**
    * This is your sound effect.
    * @param the_sound_effect_file the sound effect to make.
@@ -42,7 +42,6 @@ public class SoundEffect {
       my_clip = (Clip) AudioSystem.getLine(data_line_info);
       my_clip.open(input_stream);
     } catch (LineUnavailableException lue) {
-      // TODO Auto-generated catch block
       lue.printStackTrace(System.err);
     } catch (IOException ioe) {
       ioe.printStackTrace(System.err);

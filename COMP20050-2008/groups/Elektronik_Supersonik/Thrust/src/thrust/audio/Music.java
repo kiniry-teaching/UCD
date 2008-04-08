@@ -20,12 +20,12 @@ public class Music {
    * The boolean that tells you whether music is playing.
    */
   //@ public model boolean is_playing;
-  private transient boolean my_is_playing;
+  private transient boolean my_isplaying;
 
   /**
    * The in-game music clip.
    */
-  private Clip my_clip;
+  private transient Clip my_clip;
 
   /**
    * Constructor method. Creates theClip.
@@ -39,7 +39,7 @@ public class Music {
    */
   //@ ensures \result == is_playing;
   public final /*@ pure @*/ boolean playing() {
-    return my_is_playing;
+    return my_isplaying;
   }
 
   /**
