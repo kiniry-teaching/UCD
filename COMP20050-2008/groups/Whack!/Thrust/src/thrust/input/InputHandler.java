@@ -12,7 +12,7 @@ public class InputHandler {
   /** Toggles music on and off when the m button is pressed. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_M;
   /** Starts the game when the [space] button is pressed. */
-  public static final char START_GAME = KeyEvent.VK_SPACE;
+  public static final char START_GAME = KeyEvent.VK_N;
   /** Quits the game when the [escape] button is pressed. */
   public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
   /** Fires the gun of the spaceship when the [enter] button is pressed. */
@@ -90,7 +90,7 @@ public class InputHandler {
     if (the_keyboard_input == KeyEvent.VK_M) {
       System.out.print("Should call the TOGGLE_MUSIC_OR_EFFECTS method");
     }
-    if (the_keyboard_input == KeyEvent.VK_SPACE) {
+    if (the_keyboard_input == KeyEvent.VK_N) {
       System.out.print("Should call the START_GAME method");
     }
     if (the_keyboard_input == KeyEvent.VK_ESCAPE) {
