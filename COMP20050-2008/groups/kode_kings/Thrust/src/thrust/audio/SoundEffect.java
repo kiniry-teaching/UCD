@@ -1,7 +1,7 @@
 package thrust.audio;
 
 import java.io.File;
-
+import javax.sound.sampled.*;
 /**
  * Any sound made in response to a event.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -14,7 +14,14 @@ public class SoundEffect {
    * @return the new sound effect for the effect stored in 's'.
    */
   public /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
-    assert false; //@ assert false;
+	
+	private TargetDataLine s_f;
+	private AudioInputStream s_f_x;
+	DataLine.Info data = new DataLine.Info(TargetDataLine.class, audioFormat);
+	
+	.getAudioInputStream(.wav, the_sound_effect_file);
+	  
+	assert false; //@ assert false;
     return null;
   }
 
