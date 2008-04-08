@@ -18,15 +18,19 @@ public interface Physics {
 
   /**
    * @return What is the gravitational constant?
-   * @return  gravitional constant of 9.8 m/s
+   * @return Will return the gravitional constant of 9.8 m/s
    */
-  /*@ pure @*/ double gravitational_constant();
+  /*@ pure @*/ double gravitational_constant(){
+    return double 9.8;
+  }
 
   /**
    * @return What is your mass in kilograms?
    */
   //@ ensures 0 <= \result;
-  /*@ pure @*/ double mass();
+  /*@ pure @*/ double get_mass(){
+    return mass;
+  }
 
   /**
    * @return What is your momentum in kilograms*meters per second?
