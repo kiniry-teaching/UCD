@@ -39,16 +39,16 @@ public class Music {
    */
   public Music() throws LineUnavailableException, IOException,
   UnsupportedAudioFileException {
-    final File soundFile = new File("/.../media/Thrustmusic.wav");
-    final AudioInputStream effect;
-    effect = AudioSystem.getAudioInputStream(soundFile);
+    final File musicFile = new File("/.../media/Thrustmusic.wav");
+    final AudioInputStream sound;
+    sound = AudioSystem.getAudioInputStream(musicFile);
     final DataLine.Info info;
-    info = new DataLine.Info(Clip.class, effect.getFormat());
+    info = new DataLine.Info(Clip.class, sound.getFormat());
     Clip clip;
 
     clip = (Clip) AudioSystem.getLine(info);
 
-    clip.open(effect);
+    clip.open(sound);
 
   }
   /**
