@@ -6,62 +6,59 @@ package thrust.audio;
  * @version 2 April 2008
  */
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 /**
- * 
- * @author Allison
- *
+ An example of loading and playing a sound using a Clip. This complete class
+ * isn't in the book ;)
+ * @author Joe Kiniry (kiniry@acm.org)
+ * @version 2 April 2008
  */
-public class Music extends Exception {
-  
+public class Music {
+
   //@ public model boolean is_playing;
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
+
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
   /**
-   * 
+   *
    */
-  private Clip music;
+  private Clip my_music;
 
   /**
-   * 
+   *
    */
-  public Music() {
-    try {
-      File musicFile = new File("/.../media/Thrustmusic.wav");
-      AudioInputStream mus = AudioSystem.getAudioInputStream(musicFile);
+  public Music() throws LineUnavailableException, IOException,
+  UnsupportedAudioFileException {
+    final File soundFile = new File("/.../media/Thrustmusic.wav");
+    final AudioInputStream effect;
+    effect = AudioSystem.getAudioInputStream(soundFile);
+    final DataLine.Info info;
+    info = new DataLine.Info(Clip.class, effect.getFormat());
+    Clip clip;
 
-      // load the sound into memory (a Clip)
-      DataLine.Info info = new DataLine.Info(Clip.class, mus.getFormat());
-      Clip clip = (Clip) AudioSystem.getLine(info);
-      clip.open(mus);
+    clip = (Clip) AudioSystem.getLine(info);
 
-    } catch (Exception e) {
-      System.out.println("Error");
-    }
+    clip.open(effect);
 
   }
-  
-  
-
   /**
-   *@return music.isRunning().; 
+   *@return music.isRunning().;
    */
-  
+
   public final  /*@ pure @*/ boolean playing() {
-    
-    return music.isRunning();
-    
+
+    return my_music.isRunning();
+
   }
 
   /**
@@ -69,7 +66,7 @@ public class Music extends Exception {
    */
 
   public final void start() {
-    music.loop(Clip.LOOP_CONTINUOUSLY);
+    my_music.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
   /**
@@ -77,7 +74,7 @@ public class Music extends Exception {
    */
   //@ ensures !is_playing;
   public final void stop() {
-    music.stop();
+    my_music.stop();
   }
-  
+
 }
