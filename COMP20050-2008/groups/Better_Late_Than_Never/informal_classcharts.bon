@@ -3,8 +3,9 @@ system_chart THRUST
 	cluster GAME description "Menu, levels."
 	cluster GRAPHICS description "All visuals displayed on the screen except HUD."
 	cluster SOUND description "All sound effects and music."
-	cluster PHYSICS descripton "How the ship moves."
+	cluster PHYSICS description "How the ship moves."
 	cluster HUD description "Shows lives, fuel, time left and score."
+	
 end
 
 cluster_chart GRAPHICS
@@ -25,26 +26,27 @@ cluster_chart GRAPHICS
 	class BACKGROUND description "Everywhere flown that is not TERRAIN."
 	class DOOR description "Blocks access to further BACKGROUND, opened by SWITCH."
 	class SWITCH description "Opens DOOR when hit by BULLET."
+	
 end
 	
 cluster_chart SOUND
 
 	class MUSIC description "Constant background sound."
-	class MENU_MUSIC description "Music played during the MENU screen.
+	class MENU_MUSIC description "Sound played during the MENU screen."
 	class BULLET_FIRE description "Noise BULLET makes when fired."
 	class FUEL_BURN description "Noise made when spaceship uses FUEL."	
 	class EXPLOSION description "Noise caused by SPACESHIP colliding with BULLET, TERRAIN."
 	class LEVEL_WIN description "Sound-byte for winning level."
 	class LEVEL_LOSE description "Sound-byte for losing level."
 end
-## IS AN ENTIRE CLUSTER_CHART NECESSARY FOR PHYSICS? ENTIRE CLASS FOR 'SPEED'?
+
 cluster_chart PHYSICS	
 
 	class SPEED description "Speed of SPACESHIP, BULLET."
 	class DIRECTION description "Direction of SPACESHIP, BULLET."
-	class MOMENTUM
-	class GRAVITY
-	class INT
+	class MOMENTUM description ".."
+	class GRAVITY description "Force pulling SPACESHIP down."
+	class INT description "A number."
 end
 
 cluster_chart HUD
@@ -52,24 +54,24 @@ cluster_chart HUD
 	class MENU description "Screen displayed when game begins, displays Game options."
 	class LIVES description "INT to depict amount of SPACESHIPS left to be destroyed before game over."
 	class SCORE description "Total amount of points accumulated by user."
-	class TIMER description "Time left to complete LEVEL.
+	class TIMER description "Time left to complete LEVEL."
 	class INT description "A number."
 	class STRING description "Letters on screen."
 end
-
+end
 	class_chart ENTITY
 		indexing
-  			cluster: "GRAPHICS" ;
-  			created: "07/04/2008 nm" ;
+			cluster: "GRAPHICS";
+			created: "07/04/2008 nm";
 		explanation
- 			"A visual object in the game."
+			"A visual object in the game."
 		part "1/1 "
 		query
-  			"Co-ordinates"
-	  	command
-  			"Display"
+			"Co-ordinates"
+  		command
+			"Display"
 		constraint
-  			"Must be a visual object."
+			"Must be a visual object."
 	end
 	
 	class_chart SPACESHIP
@@ -199,7 +201,7 @@ end
 		constraint
   			""
 	end
-## DON'T CONFUSE THIS FUEL WITH HUD FUEL <-- correct?
+	
 	class_chart FUEL
 		indexing
   			cluster: "GRAPHICS" ;
@@ -332,28 +334,17 @@ end
   			"Is door closed"
 	  	command
   			"Open door."
-  			"Close door.
+  			"Close door."
 		constraint
 			"Must be positioned on TERRAIN by DOOR."
 	end
 	
-cluster_chart SOUND
-
-	class MUSIC description "Constant background sound."
-	class MENU_MUSIC description "Music played during the MENU screen."
-	class BULLET_FIRE description "Noise BULLET makes when fired."
-	class FUEL_BURN description "Noise made when spaceship uses FUEL to thrust."	
-	class EXPLOSION description "Noise caused by SPACESHIP colliding with BULLET, TERRAIN."
-	class LEVEL_WIN description "Sound-byte for winning level."
-	class LEVEL_LOSE description "Sound-byte for losing level."
-end
 	class_chart MUSIC
 		indexing
   			cluster: "SOUND" ;
   			created: "08/04/2008 nm" ;
 		explanation
  			"Constant background sound during play."
- 		inherit ENTITY
 		part "1/1 "
 		query
   			"Is music playing."
@@ -369,10 +360,9 @@ end
 	class_chart MENU_MUSIC
 		indexing
   			cluster: "SOUND" ;
-  			created: "08/04/2008 nm" ;
+  			created: "08/04/2008 nm";
 		explanation
- 			"Music played during the MENU screen."
- 		inherit ENTITY
+ 			"Sound played during the MENU screen."
 		part "1/1 "
 		query
   			"Is music playing."
@@ -391,7 +381,6 @@ end
   			created: "08/04/2008 nm" ;
 		explanation
  			"Noise BULLET makes when fired."
- 		inherit ENTITY
 		part "1/1 "
 		query
   			""
@@ -407,7 +396,6 @@ end
   			created: "08/04/2008 nm" ;
 		explanation
  			"Noise made when spaceship uses FUEL to thrust."
- 		inherit ENTITY
 		part "1/1 "
 		query
   			"Is ship burning fuel?"
@@ -424,7 +412,6 @@ end
   			created: "08/04/2008 nm" ;
 		explanation
  			"Noise caused by SPACESHIP colliding with BULLET, TERRAIN."
- 		inherit ENTITY
 		part "1/1 "
 		query
   			"Did SPACESHIP just collide with BULLET, TERRAIN?"
@@ -440,7 +427,6 @@ end
   			created: "08/04/2008 nm" ;
 		explanation
  			"Sound-byte for winning level."
- 		inherit ENTITY
 		part "1/1 "
 		query
   			"Has SPACESHIP reached SPACE?"
@@ -456,7 +442,6 @@ end
   			created: "08/04/2008 nm" ;
 		explanation
  			"Sound-byte for losing level."
- 		inherit ENTITY
 		part "1/1 "
 		query
   			"Has SPACESHIP been destroyed?"
