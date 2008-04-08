@@ -67,10 +67,17 @@ public class InputHandler {
    * @stuff
    */
   public final /*@ pure @*/ boolean legalInput(char theCharacter) {
-    if ((theCharacter == 'h') ||
-        (theCharacter == 'm') || (theCharacter == '\u00A0')
-        || (theCharacter == '\u001B') || (theCharacter == '\n') || (theCharacter == 'a')
-        || (theCharacter == 's') || (theCharacter == '\u000F')){
+    if ((theCharacter == 'h')
+        ||
+        (theCharacter == 'm')
+        ||
+        (theCharacter == '\u00A0')
+        ||
+        (theCharacter == '\u001B') || (theCharacter == '\n')
+        ||
+        (theCharacter == 'a')
+        || (theCharacter == 's') || (theCharacter == '\u000F')) {
+
       return true;
      }
     //assert false; //@ assert false;
