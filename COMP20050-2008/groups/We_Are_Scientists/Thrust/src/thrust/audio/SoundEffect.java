@@ -38,23 +38,12 @@ public class SoundEffect {
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(sound);
          } catch (Exception e) {
-            e.fillInStackTrace();
+            System.out.println("error");
           }
           return null;
           // @ assert false;
         }
- /* public final SoundEffect make(final File soundFile) {
 
-    try{
-
-    // File soundFile = new File("Thrust_music.wav");
-    sound = AudioSystem.getAudioInputStream(soundFile);
-  DataLine.Info info = new DataLine.Info(Clip.class, sound.getFormat());
-  clip = (Clip) AudioSystem.getLine(info);
-  clip.open(sound);
-
-  }catch(Exception e){System.out.println("error");}
-  }
   /**
    * Start playing your effect.
    */
