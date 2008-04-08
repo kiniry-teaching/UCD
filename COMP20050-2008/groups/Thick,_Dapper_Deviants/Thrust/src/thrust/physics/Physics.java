@@ -20,9 +20,7 @@ public interface Physics {
    * @return What is the gravitational constant?
    * @return  gravitional constant of 9.8 m/s
    */
-  /*@ pure @*/ double gravitational_constant(){
-	  return double 9.8;
-	  }
+  /*@ pure @*/ double gravitational_constant();
 
   /**
    * @return What is your mass in kilograms?
