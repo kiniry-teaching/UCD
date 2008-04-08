@@ -20,27 +20,26 @@ public class SoundEffect extends Exception {
    */
   private Clip bit;
   
-  /** 
-   * Set the value of Sound. 
-   * @param SoundEffectfile. 
-   */  
-  public final/*@pure@*/ SoundEffect make(final File soundeffectfile) {
+   /**
+   *@return SoundEffect.;
+   *@param soundfile inputs a sound.; 
+   */
+  public final/*@pure@*/ SoundEffect  make(final File soundfile) {
     // specify the sound to play
     // (assuming the sound can be played by the audio system)
-    /**
-     * @return SoundEffect.
-     */
     
-try {
-  File soundeffectFile = new File("/media/Thrust.wav");
-  AudioInputStream effect = AudioSystem.getAudioInputStream(soundeffectFile);
+     
+    
+    try {
+      File soundFile = new File("/.../media/Thrust.wav");
+      AudioInputStream effect = AudioSystem.getAudioInputStream(soundFile);
 
       // load the sound into memory (a Clip)
       DataLine.Info info = new DataLine.Info(Clip.class, effect.getFormat());
       Clip clip = (Clip) AudioSystem.getLine(info);
       clip.open(effect);
       return null;
-      } catch (Exception e) {
+    } catch (Exception e) {
       System.out.println("Error");
     }
       
