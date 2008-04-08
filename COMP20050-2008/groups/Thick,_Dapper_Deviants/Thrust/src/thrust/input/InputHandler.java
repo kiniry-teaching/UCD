@@ -8,11 +8,11 @@ package thrust.input;
  */
 public class InputHandler {
   /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
+  //private static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
-  public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
+  public static final char DISPLAY_HIGH_SCORES = 'h';
   /** Fill in this comment. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Fill in this comment. */
   public static final char START_GAME = UNKNOWN_CHAR;
   /** Fill in this comment. */
