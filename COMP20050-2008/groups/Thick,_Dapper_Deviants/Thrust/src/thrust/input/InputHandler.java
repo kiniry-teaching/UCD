@@ -10,11 +10,14 @@ public class InputHandler {
   /** An unknown character code. */
   //private static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
+	public boolean my_keyDown (final Event a_e, final int an_key) {
+		return 
+	}
   public static final char DISPLAY_HIGH_SCORES = 'h';
   /** Fill in this comment. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Fill in this comment. */
-  public static final char START_GAME = UNKNOWN_CHAR;
+  public static final char START_GAME = ;
   /** Fill in this comment. */
   public static final char STOP_GAME = UNKNOWN_CHAR;
   /** Fill in this comment. */
