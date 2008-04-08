@@ -15,24 +15,50 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public static void main(String[] args) throws Exception {
+  //public static void main(String[] args) throws Exception {
+  private  Clip clip;
+  /**
+   * Any sound made in response to a event.
+   * @author simon
+   * @param  soundFile sound file
+   */
+  public final/* @ pure @ */SoundEffect make(final File soundFile) {
 
-  File soundFile = new File("Thrust_music.wav");
-  AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
+    AudioInputStream sound = null;
 
+      try {
+            sound = AudioSystem.getAudioInputStream(soundFile);
+          } catch (Exception e) {
+            System.out.println("error");
+          }
+          //final AudioFormat format = audioInputStream.getFormat();
+          final DataLine.Info info =
+            new DataLine.Info(Clip.class, sound.getFormat());
+          try {
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(sound);
+         } catch (Exception e) {
+            e.fillInStackTrace();
+          }
+          return null;
+          // @ assert false;
+        }
+ /* public final SoundEffect make(final File soundFile) {
+
+    try{
+
+    // File soundFile = new File("Thrust_music.wav");
+    sound = AudioSystem.getAudioInputStream(soundFile);
   DataLine.Info info = new DataLine.Info(Clip.class, sound.getFormat());
-  Clip clip = (Clip) AudioSystem.getLine(info);
+  clip = (Clip) AudioSystem.getLine(info);
   clip.open(sound);
-  }
-  public /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
-    assert false; //@ assert false;
-    return null;
-  }
 
+  }catch(Exception e){System.out.println("error");}
+  }
   /**
    * Start playing your effect.
    */
-  public void start() {
-  
+  public final void start() {
+  clip.start();
   }
 }

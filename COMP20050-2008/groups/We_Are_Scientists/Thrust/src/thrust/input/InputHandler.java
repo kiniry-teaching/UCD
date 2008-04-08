@@ -1,5 +1,7 @@
-package thrust.input;
-import java.awt.event.KeyEvent;
+package thrust.input; 
+
+
+//import java.awt.event.KeyEvent;
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -31,17 +33,17 @@ public class InputHandler {
   /**
    * @return What are the legal keyboard inputs?
    */
-  public /*@ pure @*/ char[] legal_inputs() {
-    char[] array = new char[9];
+  public final /*@ pure @*/ char[] legalInputs() {
+    char[] array = new char[2 + 2 + 2 + 2 + 1];
     array[0] = '\0';
     array[1] = 'h';
     array[2] = 'm';
-    array[3] = '\u00A0';
-    array[4] = '\u001B';
-    array[5] = '\n';
-    array[6] = 'a';
-    array[7] = 's';
-    array[8] = '\u000F';
+    array[2 + 1 ] = '\u00A0';
+    array[2 + 2] = '\u001B';
+    array[2 + 2 + 1] = '\n';
+    array[2 + 2 + 2] = 'a';
+    array[2 + 2 + 2 + 1] = 's';
+    array[2 + 2 + 2 + 2] = '\u000F';
     //assert false; //@ assert false;
     return array;
   }
@@ -60,12 +62,17 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {
-    if((the_character == 'h') || (the_character == 'm') || (the_character == '\u00A0')
-        || (the_character == '\u001B') || (the_character == '\n') || (the_character == 'a')
-        || (the_character == 's') || (the_character == '\u000F'))
+  /**
+   * @return Is this character a legal keyboard input?
+   * @stuff
+   */
+  public final /*@ pure @*/ boolean legalInput(char theCharacter) {
+    if ((theCharacter == 'h') ||
+        (theCharacter == 'm') || (theCharacter == '\u00A0')
+        || (theCharacter == '\u001B') || (theCharacter == '\n') || (theCharacter == 'a')
+        || (theCharacter == 's') || (theCharacter == '\u000F')){
       return true;
-    
+     }
     //assert false; //@ assert false;
     return false;
   }
