@@ -11,41 +11,34 @@ package thrust.input;
 public class InputHandler {
   /** An unknown character code. */
   private static final char UNKNOWN_CHAR = '\0';
-  /** Fill in this comment. */
+  /** this is the command to display the high scores. */
   public static final char DISPLAY_HIGH_SCORES = 'h';
-  /** Fill in this comment. */
+  /** command to turn the music effects on or off.*/
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
-  /** Fill in this comment. */
+  /** begins the game on level one. */
   public static final char START_GAME = '\u00A0';
-  /** Fill in this comment. */
+  /** quits the game. */
   public static final char STOP_GAME = '\u001B';
-  /** Fill in this comment. */
+  /** fires the ships gun 4 bullets. */
   public static final char FIRE_GUN = '\n';
-  /** Fill in this comment. */
+  /** the key a turns the ship anti anti_clockwise. */
   public static final char TURN_LEFT = 'a';
-  /** Fill in this comment. */
+  /** turns the ship clockwise. */
   public static final char TURN_RIGHT = 's';
-  /** Fill in this comment. */
+  /** thrust usees fuel.*/
   public static final char USE_ENGINE = '\u000F';
-  /** Fill in this comment. */
+  /** use the shiel and tractor beam. Uses fuel.*/
   public static final char USE_SHIELD = '\u00A0';
 
   /**
    * @return What are the legal keyboard inputs?
    */
   public final /*@ pure @*/ char[] legalInputs() {
-    char[] array = new char[2 + 2 + 2 + 2 + 1];
-    array[0] = '\0';
-    array[1] = 'h';
-    array[2] = 'm';
-    array[2 + 1 ] = '\u00A0';
-    array[2 + 2] = '\u001B';
-    array[2 + 2 + 1] = '\n';
-    array[2 + 2 + 2] = 'a';
-    array[2 + 2 + 2 + 1] = 's';
-    array[2 + 2 + 2 + 2] = '\u000F';
+char[] legalInputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
+STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+       USE_SHIELD };
     //assert false; //@ assert false;
-    return array;
+    return legalInputs;
   }
 
   /**
