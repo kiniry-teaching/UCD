@@ -1,0 +1,468 @@
+system_chart THRUST
+
+	cluster GAME description "Menu, levels."
+	cluster GRAPHICS description "All visuals displayed on the screen except HUD."
+	cluster SOUND description "All sound effects and music."
+	cluster PHYSICS descripton "How the ship moves."
+	cluster HUD description "Shows lives, fuel, time left and score."
+end
+
+cluster_chart GRAPHICS
+
+	class ENTITY description "A visual object in the game."
+	class SPACESHIP description "User-controlled ENTITY in the world."
+	class SHIELD description "Protects the SPACESHIP from BULLETs."
+	class ENEMY description "Stationary ENTITYs on the TERRAIN that fire BULLETS."
+	class BULLET description "Pixel that can destroy SPACESHIP, ENEMY, FACTORY."
+	class POD description "User tries to retrieve this and bring it to SPACE to win the LEVEL."
+	class PODHOLDER description "Holds POD on TERRAIN until attached to SPACESHIP by TRACTORBEAM."
+	class FACTORY description "ENTITY on TERRAIN that can be destroyed for a higher SCORE."
+	class FUEL description "SPACESHIP needs this to move."
+	class TRACTORBEAM description "Picks up FUEL & attaches POD to SPACESHIP."
+	class SPACE description "Area at top of screen where SPACESHIP brings POD to win LEVEL."
+	class TERRAIN description "Area where SPACESHIP cannot fly, on contact causes EXPLOSION in SPACESHIP."
+	class EXPLOSION description "GRAPHICS caused by SPACESHIP colliding with BULLET, TERRAIN."
+	class BACKGROUND description "Everywhere flown that is not TERRAIN."
+	class DOOR description "Blocks access to further BACKGROUND, opened by SWITCH."
+	class SWITCH description "Opens DOOR when hit by BULLET."
+end
+	
+cluster_chart SOUND
+
+	class MUSIC description "Constant background sound."
+	class MENU_MUSIC description "Music played during the MENU screen.
+	class BULLET_FIRE description "Noise BULLET makes when fired."
+	class FUEL_BURN description "Noise made when spaceship uses FUEL."	
+	class EXPLOSION description "Noise caused by SPACESHIP colliding with BULLET, TERRAIN."
+	class LEVEL_WIN description "Sound-byte for winning level."
+	class LEVEL_LOSE description "Sound-byte for losing level."
+end
+## IS AN ENTIRE CLUSTER_CHART NECESSARY FOR PHYSICS? ENTIRE CLASS FOR 'SPEED'?
+cluster_chart PHYSICS	
+
+	class SPEED description "Speed of SPACESHIP, BULLET."
+	class DIRECTION description "Direction of SPACESHIP, BULLET."
+	class MOMENTUM
+	class GRAVITY
+	class INT
+end
+
+cluster_chart HUD
+	
+	class MENU description "Screen displayed when game begins, displays Game options."
+	class LIVES description "INT to depict amount of SPACESHIPS left to be destroyed before game over."
+	class SCORE description "Total amount of points accumulated by user."
+	class TIMER description "Time left to complete LEVEL.
+	class INT description "A number."
+	class STRING description "Letters on screen."
+end
+
+	class_chart ENTITY
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"A visual object in the game."
+		part "1/1 "
+		query
+  			"Co-ordinates"
+	  	command
+  			"Display"
+		constraint
+  			"Must be a visual object."
+	end
+	
+	class_chart SPACESHIP
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"User-controlled ENTITY in the world."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Speed"
+  			"Direction"
+  			"Has pod"
+  			"Is tractor beam in use."
+  			"Is shield activated."
+	  	command
+  			"Thrust (use fuel)"
+  			"Turn <direction>"
+  			"Fire bullet"
+  			"Use Tractor Beam"
+  			"Activate shield"
+		constraint
+  			"Can only fly on BACKGROUND."
+	end
+	
+	class_chart SHIELD
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Protects the SPACESHIP from BULLETs."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"On"
+  			"Off"
+	  	command
+  			"Activate shield"
+  			"Deactivate shield"
+		constraint
+  			"Must be around SPACESHIP ENTITY."
+  			"Must stop BULLETs."
+	end
+	
+	class_chart ENEMY
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Stationary ENTITYs on the TERRAIN that fire BULLETS."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			""
+	  	command
+  			"Turn"
+  			"Fire"
+		constraint
+  			"Must be postitioned stationary on TERRAIN."
+  
+	end
+	
+	class_chart BULLET
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Pixel that can destroy SPACESHIP, ENEMY, FACTORY."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Hit ENTITY", "Hit TERRAIN", 
+	  	command
+  			"Cause explosion"
+		constraint
+  			"Not affected by gravity."
+	end
+	
+	class_chart POD
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"User tries to retrieve this and bring it to SPACE to win the LEVEL."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Is POD still in PODHOLDER?"
+  			"Is POD attached to SPACESHIP by TRACTORBEAM." 
+	  	command
+  			"Attach to ship"
+		constraint
+  			"Causes EXPLOSION if it hits TERRAIN."
+  			"Cannot unattach from SPACESHIP."
+	end
+	
+	class_chart PODHOLDER
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Holds POD on TERRAIN until attached to SPACESHIP by TRACTORBEAM."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Has pod?"
+	  	command
+  			"Release pod"
+		constraint
+  			"Must be on level terrain."
+	end
+	
+	class_chart FACTORY
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"ENTITY on TERRAIN that can be destroyed to increase SCORE, cause World Explosion Countdown."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Amount of bullets until destroyed"
+  			"Destroyed"
+	  	command
+  			"Begin World Explosion countdown"
+		constraint
+  			""
+	end
+## DON'T CONFUSE THIS FUEL WITH HUD FUEL <-- correct?
+	class_chart FUEL
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"SPACESHIP needs this to move."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Fuel left"
+  			"Fuel depleted"
+	  	command
+  			"Re-fuel SPACESHIP"
+  			"Dissapear when depleted"
+		constraint
+			"Dissapears once fuel depleted."
+  			"Cannot reeappear once depleted."
+  			"Can only give out fixed amount of fuel."
+	end
+	
+	class_chart TRACTORBEAM
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Picks up FUEL & attaches POD to SPACESHIP."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Deployed", "POD attached", "Taking in fuel"
+	  	command
+  			"Attach POD", "Refuel SPACESHIP from FUEL"
+		constraint
+			"Must be within certain distance to attach POD."
+			"Must be within certain distance to refuel using FUEL."
+			"Once POD attached cannot unattach."
+	end
+	
+	class_chart SPACE
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Area at top of screen where SPACESHIP brings POD to win LEVEL."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Reached by SPACESHIP"
+	  	command
+  			"Cause LEVEL win"
+		constraint
+			"Must be at top of the BACKGROUND."
+	end
+
+	class_chart TERRAIN
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Area where SPACESHIP cannot fly, on contact causes EXPLOSION in SPACESHIP."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Hit by spaceship"
+	  	command
+  			"Cause EXPLOSION in SPACESHIP"
+		constraint
+			"SPACESHIP cannot fly past terrain boundary."
+	end
+	
+	class_chart EXPLOSION
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"GRAPHICS caused by SPACESHIP colliding with BULLET, TERRAIN."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			""
+	  	command
+  			"EXPLODE"
+		constraint
+			"S"
+	end
+	
+	class_chart BACKGROUND
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "07/04/2008 nm" ;
+		explanation
+ 			"Everywhere flown that is not TERRAIN."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			""
+	  	command
+  			""
+		constraint
+			"Must be outside boundary of TERRAIN on screen."
+	end
+		class DOOR description "."
+	class SWITCH description ""
+		class_chart DOOR
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Blocks access to further BACKGROUND, opened by SWITCH."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			""
+	  	command
+  			""
+		constraint
+			"Must be outside boundary of TERRAIN on screen."
+	end	
+	
+	class_chart SWITCH
+		indexing
+  			cluster: "GRAPHICS" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Opens DOOR when hit by BULLET."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Is door open"
+  			"Is door closed"
+	  	command
+  			"Open door."
+  			"Close door.
+		constraint
+			"Must be positioned on TERRAIN by DOOR."
+	end
+	
+cluster_chart SOUND
+
+	class MUSIC description "Constant background sound."
+	class MENU_MUSIC description "Music played during the MENU screen."
+	class BULLET_FIRE description "Noise BULLET makes when fired."
+	class FUEL_BURN description "Noise made when spaceship uses FUEL to thrust."	
+	class EXPLOSION description "Noise caused by SPACESHIP colliding with BULLET, TERRAIN."
+	class LEVEL_WIN description "Sound-byte for winning level."
+	class LEVEL_LOSE description "Sound-byte for losing level."
+end
+	class_chart MUSIC
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Constant background sound during play."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Is music playing."
+  			"Is music turned off."
+	  	command
+  			"Start playing."
+  			"Stop playing."
+  			"Mute."
+		constraint
+			""
+	end
+	
+	class_chart MENU_MUSIC
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Music played during the MENU screen."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Is music playing."
+  			"Is music turned off."
+	  	command
+  			"Start playing."
+  			"Stop playing."
+  			"Mute."
+		constraint
+			"Can only play when menu screen is displayed."
+	end
+	
+	class_chart BULLET_FIRE
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Noise BULLET makes when fired."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			""
+	  	command
+  			"Play sound."
+		constraint
+			"Must only be played as bullet is fired."
+	end
+	
+	class_chart FUEL_BURN
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Noise made when spaceship uses FUEL to thrust."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Is ship burning fuel?"
+	  	command
+  			"Play sound."
+		constraint
+			"Can only be used if FUEL is positive."
+			"Can only be used while ship is thrusting."
+	end	
+	
+	class_chart EXPLOSION
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Noise caused by SPACESHIP colliding with BULLET, TERRAIN."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Did SPACESHIP just collide with BULLET, TERRAIN?"
+	  	command
+  			"Play sound."
+		constraint
+			"Only used when SPACESHIP has just been destroyed."
+	end	
+	
+	class_chart LEVEL_WIN
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Sound-byte for winning level."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Has SPACESHIP reached SPACE?"
+	  	command
+  			"Play sound."
+		constraint
+			"Only used when SPACESHIP has reached SPACE."
+	end		
+	
+	class_chart LEVEL_LOSE
+		indexing
+  			cluster: "SOUND" ;
+  			created: "08/04/2008 nm" ;
+		explanation
+ 			"Sound-byte for losing level."
+ 		inherit ENTITY
+		part "1/1 "
+		query
+  			"Has SPACESHIP been destroyed?"
+	  	command
+  			"Play sound."
+		constraint
+			"Only used when SPACESHIP has been destroyed."
+	end		
+	
