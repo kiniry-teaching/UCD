@@ -33,7 +33,7 @@ public class InputHandler {
     final char[] legal_inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
                                  START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
                                  TURN_RIGHT, USE_ENGINE, USE_SHIELD};
-    assert legal_inputs != null; //@ assert legal_inputs != null;
+    assert (legal_inputs != null); //@ assert (legal_inputs != null);
     return legal_inputs;
   }
 
@@ -53,7 +53,7 @@ public class InputHandler {
     @*/
   public /*@ pure @*/ boolean legal_input(final char the_character) {
     final char[] legal_inputs = legal_inputs();
-    assert legal_inputs != null; //@ assert legal_inputs != null;
+    assert (legal_inputs != null); //@ assert (legal_inputs != null);
     for (int i = 0; i < legal_inputs.length; i++)  {
       if (legal_inputs[i] == the_character)  {
         return true;
