@@ -153,30 +153,35 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	mysql_query($sql,$con);	
 
 	$sql =	"CREATE TABLE users (
- 		username varchar(30) primary key,
+ 		username varchar(30),
+		PRIMARY KEY(username), 
  		password varchar(32),
  		userlevel tinyint(1) unsigned not null,
  		email varchar(50),
  		timestamp int(11) unsigned not null
 	)";
-
+	mysql_query($sql,$con);	
 
 	$sql = 'DROP TABLE IF EXISTS `users_online`';
 	mysql_query($sql,$con);	
 
 	$sql =	"CREATE TABLE users_online (
- 		username varchar(30) primary key,
+ 		username varchar(30),
+		PRIMARY KEY(username),
  		timestamp int(11) unsigned not null
 	)";
+	mysql_query($sql,$con);	
 	
 		$sql = 'DROP TABLE IF EXISTS `users_friends`';
 	mysql_query($sql,$con);	
 
 	$sql =	"CREATE TABLE users_friends (
- 		username varchar(30) primary key,
+ 		username varchar(30),
+		PRIMARY KEY(username),
  		friend varchar(30),
 		timestamp int(11) unsigned not null
 	)";
+	mysql_query($sql,$con);	
 	
 	/****************************************************************
 	* 																*
