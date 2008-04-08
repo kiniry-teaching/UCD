@@ -10,27 +10,27 @@ public class InputHandler {
   /** An unknown character code. */
   //private static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
-	public boolean my_keyDown (final Event a_e, final int an_key) {
-		return 
-	}
+	//public boolean my_keyDown (final Event a_e, final int an_key) {
+	//	
+	//}
   public static final char DISPLAY_HIGH_SCORES = 'h';
-  /** Fill in this comment. */
+  /** Calls high score screen. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
-  /** Fill in this comment. */
-  public static final char START_GAME = ;
-  /** Fill in this comment. */
-  public static final char STOP_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char FIRE_GUN = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_LEFT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_RIGHT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_SHIELD = UNKNOWN_CHAR;
-
+  /** Sets music playing and effects to false. */
+  public static final char START_GAME = 13;
+  /** Started by Enter (Ascii code equivilant). */
+  public static final char STOP_GAME = 'escape';
+  /** Halts game using Esc key. */
+  public static final char FIRE_GUN = 32;
+  /** Spacebar. */
+  public static final char TURN_LEFT = 'a';
+  /** hit a to turn left. */
+  public static final char TURN_RIGHT = 'd';
+  /** hit d to turn right. */
+  public static final char USE_ENGINE = 'w';
+  /** hit w to thrust. */
+  public static final char USE_SHIELD = 'i';
+  /** hit i to use shield. */
   /**
    * @return What are the legal keyboard inputs?
    */
