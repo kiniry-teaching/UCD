@@ -1,44 +1,43 @@
 package thrust.physics;
 
 /**
+ * This class implements Physics.
  * @author Dominic Carr (dominiccarr@gmail.com)
  * @version 8 April 2008
- * This class implements Physics
  */
 public class EntityPhysics implements Physics {
   /**
    * The gravitational constant.
    */
-  private final double my_grav_constant;
+  private static final double GRAV_CONST = 0.0000000000667300;
   /**
    * The Mass.
    */
-  private final double my_mass;
+  private transient double my_mass;
   /**
    * The speed.
    */
-  private final double my_speed;
+  private transient double my_speed;
   /**
    * the orientation.
    */
-  private final double my_orientation;
+  private transient double my_orientation;
   /**
    * the weight.
    */
-  private final double my_weight_kilograms;
+  private transient double my_weight;
   /**
    * the velocity.
    */
-  private final double[] my_velocity;
+  private transient double[] my_velocity = {0, 0};
   /**
    * the position.
    */
-  private final double[] my_position;
+  private transient double[] my_position = {0, 0};
   /**
-   * the accelaration.
+   * the acceleration.
    */
-  private final double[] my_acceleration;
-  
+  private transient double[] my_acceleration = {0, 0};
 
   //@ constraint (* The gravitational constant never changes. *);
   //@ constraint gravitational_constant() == \old(gravitational_constant());
@@ -46,31 +45,35 @@ public class EntityPhysics implements Physics {
   /**
    * @return What is your acceleration in meters per second squared?
    */
-  //@ ensures \result.length == 2;
+  //@also ensures \result.length == 2;
   public/*@ pure @*/double[] acceleration() {
-    return my_acceleration;
+    return new double[] {my_acceleration[0], my_acceleration[1]};
   }
 
   /**
    * @return What is the gravitational constant?
    */
   public /*@ pure @*/double gravitational_constant() {
-    return my_grav_constant;
+    return GRAV_CONST;
   }
 
   /**
    * @return What is your mass in kilograms?
    */
-  //@ ensures 0 <= \result;
+  //@also ensures 0 <= \result;
   public/*@ pure @*/double mass() {
-    return my_mass;
+    double ret = 0;
+    if (my_mass >= 0) {
+      ret = my_mass;
+    }
+    return ret;
   }
 
   /**
    * @return What is your momentum in kilograms*meters per second?
    */
   public/*@ pure @*/double momentum() {
-    return my_speed * my_weight_kilograms;
+    return my_speed * my_weight;
   }
 
   /**
@@ -83,15 +86,15 @@ public class EntityPhysics implements Physics {
   /**
    * @return What is your position in meters from the origin?
    */
-  //@ ensures \result.length == 2;
+  //@also ensures \result.length == 2;
   public/*@ pure @*/double[] position() {
-    return my_position;
+    return new double[] {my_position[0], my_position[1]};
   }
 
   /**
    * @return What is your velocity in meters per second?
    */
   public/*@ pure @*/double[] velocity() {
-    return my_velocity;
+    return new double[] {my_velocity[0], my_velocity[1]};
   }
 }
