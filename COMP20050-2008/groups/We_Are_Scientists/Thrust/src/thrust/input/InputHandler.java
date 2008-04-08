@@ -28,7 +28,7 @@ public class InputHandler {
   /** thrust uses fuel.*/
   public static final char USE_ENGINE = '\u000F';
   /** use the shield and tractor beam. Uses fuel.*/
-  public static final char USE_SHIELD = '\u00A0';
+  public static final char USE_SHIELD = '\u00A1';
 
   /**
    * @return What are the legal keyboard inputs?
@@ -61,7 +61,41 @@ public class InputHandler {
    * @stuff
    */
   public final /*@ pure @*/ boolean legalInput(final char the_character) {
-    if ((the_character == 'h') ||
+
+    switch (the_character)
+    {
+      case DISPLAY_HIGH_SCORES:
+        System.out.print("display the scores");
+        break;
+      case TOGGLE_MUSIC_OR_EFFECTS:
+        System.out.print("turn music on or off");
+        break;
+      case START_GAME:
+        System.out.print("begin the game");
+        break;
+      case STOP_GAME:
+        System.out.print("end and quit the game");
+        break;
+      case FIRE_GUN:
+        System.out.print("fires the gun of the ship 4 bullets max");
+        break;
+      case TURN_LEFT:
+        System.out.print("turn left");
+        break;
+      case TURN_RIGHT:
+        System.out.print("display the scores");
+        break;
+      case USE_ENGINE:
+        System.out.print("display the scores");
+        break;
+      case USE_SHIELD:
+        System.out.print("display the scores");
+        break;
+      default:
+        break;
+    }
+    return true;
+   /* if ((the_character == 'h') ||
         (the_character == 'm')  ||
         (the_character == '\u00A0') ||
         (the_character == '\u001B') || (the_character == '\n') ||
@@ -72,6 +106,7 @@ public class InputHandler {
     }
     //assert false; //@ assert false;
     return false;
+    */
   }
 
   /**
