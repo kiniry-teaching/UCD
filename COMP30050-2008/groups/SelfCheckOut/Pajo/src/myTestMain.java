@@ -5,24 +5,34 @@ public class myTestMain {
 	
 	public static void main(String[] args) {
 		
-		//test value to use
-		double barcode = 3;
+		//test values to use
+		double barcode = 2;
+		String name = "Joe Bloggs";
+		String emailaddress = "joebloggsgmail.com";
+		int phonenumber = 1234567;
+		int customerid = 2;
 		
-		//create a new Product object
-//		Product myProduct = new Product(barcode);
-//		
-//		//Test print outs of Product member variables
-//		System.out.println("Product Barcode is: " +myProduct.barcode);
-//		System.out.println("Product Name is: " +myProduct.name);
-//		System.out.println("Product Price is: "+myProduct.price);
-//		System.out.println("Product Weight is: "+myProduct.weight+"g");
+
+		//Various Test Code Placed Here
 		
-		ProductQuery myPQ = new ProductQuery(barcode);
+	
+		//1. Creates a Query For a Product and prints out returned data
+//		ItemQuery myItem = new ItemQuery(barcode);
+//		System.out.println("Product Barcode is: " +barcode);
+//		System.out.println("Product Name is: " +myItem.name);
+//		System.out.println("Product Price is: "+myItem.price);
+//		System.out.println("Product Weight is: "+myItem.minweight+"g");
 		
-		System.out.println("Barcode is: "+barcode);
-		System.out.println("Name is: "+ProductQuery.name);
-		System.out.println("Price is: "+ProductQuery.price);
-		System.out.println("Weight is: "+ProductQuery.weight);
+		
+		//2. Creates a new customer in the database
+		//createCustomer myCST = new createCustomer(name, emailaddress, phonenumber);
+		
+		//3. Retrieve a customer from the database
+		getCustomer myReturnedCustomer = new getCustomer(2);
+		System.out.println("Name = "+myReturnedCustomer.myname);
+		System.out.println("Email Address is: "+myReturnedCustomer.myemailaddress);
+		System.out.println("Phone Number is: "+myReturnedCustomer.myphonenumber);
+			
 		//System.out.println("GREAT SUCCESS");
 	}
 
