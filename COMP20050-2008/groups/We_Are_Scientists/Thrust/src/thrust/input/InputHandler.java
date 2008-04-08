@@ -25,9 +25,9 @@ public class InputHandler {
   public static final char TURN_LEFT = 'a';
   /** turns the ship clockwise. */
   public static final char TURN_RIGHT = 's';
-  /** thrust usees fuel.*/
+  /** thrust uses fuel.*/
   public static final char USE_ENGINE = '\u000F';
-  /** use the shiel and tractor beam. Uses fuel.*/
+  /** use the shield and tractor beam. Uses fuel.*/
   public static final char USE_SHIELD = '\u00A0';
 
   /**
