@@ -7,9 +7,8 @@ import java.awt.event.KeyEvent;
  * @version 2 April 2008
  */
 public class InputHandler {
-  /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
-  /** Display high scores.*/
+
+  /** Display the high scores.*/
   public static final char DISPLAY_HIGH_SCORES = KeyEvent.VK_H;
   /** Toggle music or sound effects. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_M;
@@ -17,7 +16,7 @@ public class InputHandler {
   public static final char START_GAME = KeyEvent.VK_SPACE;
   /** Stop the game. */
   public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
-  /** Fire Gun. */
+  /** Fire the gun. */
   public static final char FIRE_GUN = KeyEvent.VK_ENTER;
   /** Turn left. */
   public static final char TURN_LEFT = KeyEvent.VK_A;
@@ -31,19 +30,12 @@ public class InputHandler {
   /**
    * @return What are the legal keyboard inputs?
    */
-  public /*@ pure @*/ char[] legal_inputs() {
-    assert false; //@ assert false;
-    char[] input = new char[9];
-    input[0] = DISPLAY_HIGH_SCORES;
-    input[1] = TOGGLE_MUSIC_OR_EFFECTS;
-    input[2] = START_GAME;
-    input[3] = STOP_GAME;
-    input[4] = FIRE_GUN;
-    input[5] = TURN_LEFT;
-    input[6] = TURN_RIGHT;
-    input[7] = USE_ENGINE;
-    input[8] = USE_SHIELD;
-    return input;
+  public final/*@ pure @*/ char[] legal_inputs() {
+   // assert false; //@ assert false;
+    final char[] legal_inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
+                                 START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
+                                 TURN_RIGHT, USE_ENGINE, USE_SHIELD };
+    return legal_inputs;
   }
 
   /**
@@ -60,12 +52,11 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {
+  public /*@ pure @*/ boolean legal_input(final char the_character) {
     assert false; //@ assert false;
-   
-    char[] legal_input = legal_inputs();
-    for(int i=0; i<legal_input.length; i++){
-      if(legal_input[i] == the_character){
+    final char[] legalInput = legal_inputs();
+    for (int i = 0; i < legalInput.length; i++) {
+      if (legalInput[i] == the_character) {
         return true;
       }
     }
@@ -76,15 +67,15 @@ public class InputHandler {
    * Process this keyboard input character.
    * @param the_keyboard_input the input character to process.
    */
-  //@ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
+  //@ requires legal_input(theKeyboardInput);
+  public void process(final char the_keyboard_input) {
     assert false; //@ assert false
-    char[] inputs = legal_inputs();
-    if(legal_input(the_keyboard_input)){
-      for(int i=0; i<inputs.length; i++){
-        if(inputs[i] == the_keyboard_input){
-          System.out.println("Call method for "+ inputs[i]);
+    final char[] inputs = legal_inputs();
+    if (legal_input(the_keyboard_input)) {
+      for (int i = 0; i < inputs.length; i++) {
+        if (inputs[i] == the_keyboard_input) {
           //call method depending on the keyboard input
+          System.out.print("Call a method for " + inputs[i]);
         }
       }
     }
