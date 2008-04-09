@@ -39,12 +39,19 @@ namespace TuneBlaster_
         Image background;
         GameAudio music;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-        public static ExplosionParticleSystem explosion;
-        public static ExplosionSmokeParticleSystem smoke;
-        public static RedParticle redblast;
-        public static GreenParticle greenblast;
-        public static BlueParticle blueblast;
-        public static PurpleParticle purpleblast;
+
+        public static ColouredParticle explosion;
+        public static ColouredParticle smoke;
+        public static ColouredParticle redblast;
+        public static ColouredParticle greenblast;
+        public static ColouredParticle purpleblast;
+        public static ColouredParticle blueblast;
+
+        public static int Score;
+        SpriteFont lucidaConsole;
+        Vector2 scorePosition = new Vector2(100, 50);
+
+    
         Image.value colour;
 
         public Engine()
@@ -59,18 +66,20 @@ namespace TuneBlaster_
 
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 720;
-            explosion = new ExplosionParticleSystem(this,1);
+
+
+            explosion = new ColouredParticle(this, 1, 5);
             Components.Add(explosion);
-            smoke = new ExplosionSmokeParticleSystem(this, 2);
+            smoke = new ColouredParticle(this, 2, 6);
             Components.Add(smoke);
-            blueblast = new BlueParticle(this,1);
-            Components.Add(blueblast);
-            redblast = new RedParticle(this,1);
+            redblast = new ColouredParticle(this, 2, 1);
             Components.Add(redblast);
-            greenblast = new GreenParticle(this, 1);
+            greenblast = new ColouredParticle(this, 1, 4);
             Components.Add(greenblast);
-            purpleblast = new PurpleParticle(this, 1);
+            purpleblast = new ColouredParticle(this, 1, 3);
             Components.Add(purpleblast);
+            blueblast = new ColouredParticle(this, 1, 2);
+            Components.Add(blueblast);
 
             //this.graphics.IsFullScreen = true;
         }
@@ -120,6 +129,8 @@ namespace TuneBlaster_
                 texture = content.Load<Texture2D>(@"Resources\Textures\Core");
                 core.LoadGraphicsContent(spriteBatch, texture);
                 ball.LoadGraphicsContent(spriteBatch);
+                lucidaConsole = Content.Load<SpriteFont>("Fonts/Lucida Console");
+
                 // TODO: Load any ResourceManagementMode.Automatic content
             }
 
@@ -191,6 +202,16 @@ namespace TuneBlaster_
             core.Draw(gameTime);
             ball.Draw(gameTime);
             spriteBatch.End();
+
+
+
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend,
+                 SpriteSortMode.Immediate, SaveStateMode.None);
+            spriteBatch.DrawString(lucidaConsole, "Score: " + Score,
+                                   scorePosition, Color.LightGreen);
+            spriteBatch.End();
+
+
 
             base.Draw(gameTime);
         }
