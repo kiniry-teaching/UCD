@@ -15,20 +15,19 @@ public class SoundEffect {
    */
   public /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
   
-  private TargetDataLine s_f;
-  private AudioInputStream s_f_x;
-  private Clip sound_clip;
+  AudioInputStream s_f_x;
+  Clip sound_clip;
   
   s_f_x = AudioSystem.getAudioInputStream(.wav, the_sound_effect_file);
-  DataLine.Info data = new DataLine.Info(TargetDataLine.class, s_f_x.audioFormat);
+  DataLine.Info data = new DataLine.Info(TargetDataLine.class, s_f_x.getFormat());
   sound_clip = (Clip) AudioSystem.getLine(data);
-    
+  sound_clip.open(s_f_x);  
   }
 
   /**
    * Start playing your effect.
    */
   public void start() {
-    assert false; //@ assert false;
+    sound_clip.loop(0);
   }
 }
