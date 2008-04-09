@@ -9,8 +9,10 @@ include("include/userfunctions.php");
  ?>
 
 <div>
-<b>Change Your e-mail:</b><br /> 
+<b>Edit Your Profile:</b><br />
+ <?php echo("<b>".$username."</b><br />");?>
 <form action="editprofile.php" method="post">
+<b>Change Your e-mail:</b><br />
 Enter new e-mail: <input type="text" name="e-mail1" /><br />
 Re-Enter new e-mail: <input type="text" name="e-mail2" /><br />
 <input type="submit" />
@@ -27,8 +29,10 @@ else
 </div>
 
 <div>
-<b>Change Your Password:</b><br />
+
+
 <form action="editprofile.php" method="post">
+<b>Change Your Password:</b><br />
 Enter new password: <input type="password" name="password1" /><br />
 Re-Enter new password: <input type="password" name="password2" /><br />
 <input type="submit" />
