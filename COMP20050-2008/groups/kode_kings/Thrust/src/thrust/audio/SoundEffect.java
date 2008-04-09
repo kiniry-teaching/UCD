@@ -14,15 +14,15 @@ public class SoundEffect {
    * @return the new sound effect for the effect stored in 's'.
    */
   public /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
-	
-	private TargetDataLine s_f;
-	private AudioInputStream s_f_x;
-	DataLine.Info data = new DataLine.Info(TargetDataLine.class, audioFormat);
-	
-	.getAudioInputStream(.wav, the_sound_effect_file);
-	  
-	assert false; //@ assert false;
-    return null;
+  
+  private TargetDataLine s_f;
+  private AudioInputStream s_f_x;
+  private Clip sound_clip;
+  
+  s_f_x = AudioSystem.getAudioInputStream(.wav, the_sound_effect_file);
+  DataLine.Info data = new DataLine.Info(TargetDataLine.class, s_f_x.audioFormat);
+  sound_clip = (Clip) AudioSystem.getLine(data);
+    
   }
 
   /**
