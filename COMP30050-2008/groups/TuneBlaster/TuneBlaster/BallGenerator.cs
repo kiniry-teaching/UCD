@@ -119,6 +119,20 @@ namespace TuneBlaster_
             }
         }
 
+        public MovingBall Remove()
+        {
+            MovingBall removed = balls.First.Value;
+
+            balls.RemoveFirst();
+
+            MovingBall temp = new MovingBall(core, ResetColour());
+            balls.AddLast(temp);
+            balls.Last.Value.Initialise(new Vector2(50f, 50f), balls.Last.Previous.Value.Position - new Vector2(0f, 50f), game);
+            LoadBallGraphicsContent(balls.Last.Value);
+
+            return removed;
+        }
+
         public void Draw(GameTime gameTime)
         {
             LinkedListNode<MovingBall> temp = balls.First.Next;
