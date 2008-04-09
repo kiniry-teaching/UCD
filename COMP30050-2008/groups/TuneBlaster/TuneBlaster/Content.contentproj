@@ -284,6 +284,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\Textures\sidemenu 2.png">
+      <Name>sidemenu 2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Content\Audio\Xbox\" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

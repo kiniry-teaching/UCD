@@ -39,6 +39,7 @@ namespace TuneBlaster_
         BallGenerator ballGenerator;
         Image background;
         GameAudio music;
+        Image frame;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 
         public static ColouredParticle explosion;
@@ -64,6 +65,7 @@ namespace TuneBlaster_
             ballGenerator = new BallGenerator(core, this);
             ball = new BallManager(core, this,ballGenerator);
             background = new Image();
+            frame = new Image();
             music = new GameAudio();
             
             this.graphics.PreferredBackBufferWidth = 1280;
@@ -110,6 +112,7 @@ namespace TuneBlaster_
             background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
             ball.Initialise();
             ballGenerator.Initialise();
+            frame.Initialise(new Vector2(1280, 720), new Vector2(640, 360), this);
             base.Initialize();
             music.Initialise();
             //Content.RootDirectory = "Content";
@@ -132,6 +135,8 @@ namespace TuneBlaster_
                 background.LoadGraphicsContent(spriteBatch, texture);
                 texture = content.Load<Texture2D>(@"Resources\Textures\Core");
                 core.LoadGraphicsContent(spriteBatch, texture);
+                texture = content.Load<Texture2D>(@"Resources\Textures\sidemenu 2");
+                frame.LoadGraphicsContent(spriteBatch, texture);
                 ball.LoadGraphicsContent(spriteBatch);
                 ballGenerator.LoadGraphicsContent(spriteBatch, texture);
                 lucidaConsole = Content.Load<SpriteFont>("Fonts/Lucida Console");
@@ -207,6 +212,7 @@ namespace TuneBlaster_
             background.Draw(gameTime);
             core.Draw(gameTime);
             ball.Draw(gameTime);
+            frame.Draw(gameTime);
             ballGenerator.Draw(gameTime);
             spriteBatch.End();
 
