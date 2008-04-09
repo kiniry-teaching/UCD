@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BallGenerator.cs" />
     <Compile Include="BallManager.cs">
       <Name>BallManager</Name>
     </Compile>

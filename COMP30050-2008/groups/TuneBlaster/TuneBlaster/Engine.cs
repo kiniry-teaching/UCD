@@ -36,6 +36,7 @@ namespace TuneBlaster_
         Texture2D texture;
         Core core;
         BallManager ball;
+        BallGenerator ballGenerator;
         Image background;
         GameAudio music;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -124,11 +125,14 @@ namespace TuneBlaster_
             if (loadAllContent)
             {
                 spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+                ballGenerator = new BallGenerator(core, spriteBatch, texture, this);
+                ballGenerator.Initialise();
                 texture = content.Load<Texture2D>(@"Resources\Textures\space-background");
                 background.LoadGraphicsContent(spriteBatch, texture);
                 texture = content.Load<Texture2D>(@"Resources\Textures\Core");
                 core.LoadGraphicsContent(spriteBatch, texture);
                 ball.LoadGraphicsContent(spriteBatch);
+                ballGenerator.LoadGraphicsContent();
                 lucidaConsole = Content.Load<SpriteFont>("Fonts/Lucida Console");
 
                 // TODO: Load any ResourceManagementMode.Automatic content
@@ -201,6 +205,7 @@ namespace TuneBlaster_
             background.Draw(gameTime);
             core.Draw(gameTime);
             ball.Draw(gameTime);
+            ballGenerator.Draw(gameTime);
             spriteBatch.End();
 
 
