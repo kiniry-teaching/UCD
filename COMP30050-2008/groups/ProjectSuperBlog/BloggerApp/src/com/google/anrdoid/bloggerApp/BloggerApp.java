@@ -10,9 +10,13 @@ public class BloggerApp extends Activity {
     {
        super.onCreate(savedValues);
 
-       // Load the compiled layout resource into the window's
-       // default ViewGroup
-        setContentView(R.layout.main);
+       /* FOR TESTING PURPOSES: Load view from XML source.
+        * Load the compiled layout resource into the window's
+        * default ViewGroup 
+        * */
+       //setContentView(R.layout.main);
+       
+       setContentView(R.layout.screen_1_main_menu);
       
        //restoreValues(savedValues);
     } 

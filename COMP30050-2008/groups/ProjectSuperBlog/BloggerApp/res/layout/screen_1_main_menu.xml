@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Screen1: Main Menu -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/solid_white"
+	> 
+
+	<ImageView android:id="@+id/superblogIcon"
+   		android:src="@drawable/superblog_icon_big"
+		android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="20px"
+        android:maxWidth="20px"
+        android:padding="20px"
+   		>
+	</ImageView>
+
+	<TextView android:id="@+id/welcome_text" 
+		android:text="Welcome to the Superblog Application"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/superblogIcon"
+		>
+	</TextView>
+
+	<Button android:id="@+id/feeds_button"
+		android:text="Feeds"
+		android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_text"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="20dip"
+		>
+	</Button>
+
+	<Button android:id="@+id/blogger_button" 
+		android:text="Blogger"
+		android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dip"
+		>
+	</Button>
+
+</RelativeLayout>
