@@ -16,6 +16,7 @@ namespace TuneBlaster_
         Texture2D texture;
         Texture2D green, red, purple, blue;
         Game game;
+        Vector2 startPoint;
         
 
         public BallGenerator(Core c, Game g)
@@ -24,6 +25,7 @@ namespace TuneBlaster_
             generator = new Random();
             core = c;
             game = g;
+            startPoint = new Vector2(1140f, 600f);
         }
 
         public void Initialise()
@@ -38,7 +40,7 @@ namespace TuneBlaster_
                 balls.AddLast(new MovingBall(core, ResetColour()));
             }
 
-            balls.First.Value.Initialise(new Vector2(50f, 50f), new Vector2(1140f, 600f),game);
+            balls.First.Value.Initialise(new Vector2(50f, 50f), startPoint,game);
 
             
             LinkedListNode<MovingBall> temp = balls.First.Next;
@@ -128,17 +130,17 @@ namespace TuneBlaster_
 
             MovingBall temp = new MovingBall(core, ResetColour());
             balls.AddLast(temp);
-            balls.Last.Value.Initialise(new Vector2(50f, 50f), balls.Last.Previous.Value.Position - new Vector2(0f, 50f), game);
+            balls.Last.Value.Initialise(new Vector2(50f, 50f), new Vector2(1140f, 0f), game);
             LoadBallGraphicsContent(balls.Last.Value);
 
             LinkedListNode<MovingBall> spot = balls.First;
 
-            while (spot.Next != null)
-            {
-                spot.Value.Position += new Vector2(0f, 50f) ;
-                spot = spot.Next;
-            }
-            spot.Value.Position += new Vector2(0f, 50f);
+            //while (spot.Next != null)
+            //{
+            //    spot.Value.Position += new Vector2(0f, 50f) ;
+            //    spot = spot.Next;
+            //}
+            //spot.Value.Position += new Vector2(0f, 50f);
 
             return removed;
         }
@@ -153,6 +155,32 @@ namespace TuneBlaster_
                 temp = temp.Next;
             }
             temp.Value.Draw(gameTime);
+        }
+
+        public void Update()
+        {
+            LinkedListNode<MovingBall> temp = balls.First;
+
+            if (temp.Value.Position != startPoint)
+            {
+                temp.Value.Position = temp.Value.Position + new Vector2(0f, 2f);
+            }
+
+            temp = temp.Next;
+
+            while (temp.Next != null)
+            {
+                if (temp.Value.Position.Y - temp.Previous.Value.Position.Y != -50f)
+                {
+                    temp.Value.Position = temp.Value.Position + new Vector2(0f, 2f);
+                }
+                temp = temp.Next;
+            }
+
+            if (temp.Value.Position.Y - temp.Previous.Value.Position.Y != -50f)
+            {
+                temp.Value.Position = temp.Value.Position + new Vector2(0f, 2f);
+            }
         }
 
     }

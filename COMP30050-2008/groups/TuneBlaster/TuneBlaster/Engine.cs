@@ -189,6 +189,7 @@ namespace TuneBlaster_
            if (colour == Image.value.purple)
                music.InstrChanger(Image.value.purple);
 
+           ballGenerator.Update();
            ball.Update(gameTime);
            music.UpdateAudio();
            base.Update(gameTime);
