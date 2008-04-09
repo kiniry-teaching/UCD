@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<TextView android:id="@+id/blog_post_title" 
+		android:text="Title: "
+	>
+	</TextView>
+
+	<TextView android:id="@+id/blog_post"
+	android:lines="20"
+	android:scrollbars="vertical"
+	>
+	</TextView>
+</LinearLayout>

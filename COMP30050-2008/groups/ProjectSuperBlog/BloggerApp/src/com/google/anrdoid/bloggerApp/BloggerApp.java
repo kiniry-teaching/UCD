@@ -16,7 +16,8 @@ public class BloggerApp extends Activity {
         * */
        //setContentView(R.layout.main);
        
-       setContentView(R.layout.screen_1_main_menu);
+       //setContentView(R.layout.screen_1_main_menu);
+       setContentView(R.layout.screen_2_atom_feeds);
       
        //restoreValues(savedValues);
     } 
