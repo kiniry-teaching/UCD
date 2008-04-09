@@ -18,13 +18,11 @@ namespace TuneBlaster_
         Game game;
         
 
-        public BallGenerator(Core c, SpriteBatch s, Texture2D t, Game g)
+        public BallGenerator(Core c, Game g)
         {
             balls = new LinkedList<MovingBall>();
             generator = new Random();
             core = c;
-            spritebatch = s;
-            texture = t;
             game = g;
         }
 
@@ -53,8 +51,11 @@ namespace TuneBlaster_
             temp.Value.Initialise(new Vector2(50f, 50f), temp.Previous.Value.Position - new Vector2(0f, 50f), game);
         }
 
-        public void LoadGraphicsContent()
+        public void LoadGraphicsContent(SpriteBatch s, Texture2D t)
         {
+            spritebatch = s;
+            texture = t;
+
             LinkedListNode<MovingBall> temp = balls.First;
 
             while (temp.Next != null)
@@ -130,12 +131,21 @@ namespace TuneBlaster_
             balls.Last.Value.Initialise(new Vector2(50f, 50f), balls.Last.Previous.Value.Position - new Vector2(0f, 50f), game);
             LoadBallGraphicsContent(balls.Last.Value);
 
+            LinkedListNode<MovingBall> spot = balls.First;
+
+            while (spot.Next != null)
+            {
+                spot.Value.Position += new Vector2(0f, 50f) ;
+                spot = spot.Next;
+            }
+            spot.Value.Position += new Vector2(0f, 50f);
+
             return removed;
         }
 
         public void Draw(GameTime gameTime)
         {
-            LinkedListNode<MovingBall> temp = balls.First.Next;
+            LinkedListNode<MovingBall> temp = balls.First;
 
             while (temp.Next != null)
             {

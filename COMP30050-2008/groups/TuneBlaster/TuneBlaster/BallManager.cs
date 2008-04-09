@@ -22,6 +22,7 @@ namespace TuneBlaster_
         Texture2D green, red, purple, blue;
         Game game;
         Image.value colour;
+        BallGenerator ballGenerator;
 
         #endregion
 
@@ -30,11 +31,12 @@ namespace TuneBlaster_
         /*
          * Constructor
          * */
-        public BallManager(Core c, Game g)
+        public BallManager(Core c, Game g, BallGenerator gen)
         {
             core = c;
             game = g;
             generator = new Random();
+            ballGenerator = gen;
         }
 
         /*
@@ -44,8 +46,10 @@ namespace TuneBlaster_
         {
             ResetColour();
             ball = new MovingBall(core, colour);
-            Console.WriteLine("new ball");
+            //Console.WriteLine("new ball");
             ball.Initialise(new Vector2(50f, 50f), StartPosition(), game);
+            //ball = ballGenerator.Remove();
+            //ball.Position = StartPosition();
         }
 
         /*
@@ -139,8 +143,9 @@ namespace TuneBlaster_
             }
             else
             {
-                Initialise();
-                LoadBallGraphicsContent();
+                ball = ballGenerator.Remove();
+                ball.Position = StartPosition();
+                //LoadBallGraphicsContent();
             }
         }
 

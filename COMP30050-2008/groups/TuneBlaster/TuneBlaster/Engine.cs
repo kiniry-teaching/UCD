@@ -61,10 +61,11 @@ namespace TuneBlaster_
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
             core = new Core();
-            ball = new BallManager(core, this);
+            ballGenerator = new BallGenerator(core, this);
+            ball = new BallManager(core, this,ballGenerator);
             background = new Image();
             music = new GameAudio();
-
+            
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 720;
 
@@ -108,6 +109,7 @@ namespace TuneBlaster_
             core.Initialise(new Vector2(150f, 150f), new Vector2(620f,360f), this);
             background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
             ball.Initialise();
+            ballGenerator.Initialise();
             base.Initialize();
             music.Initialise();
             //Content.RootDirectory = "Content";
@@ -125,14 +127,13 @@ namespace TuneBlaster_
             if (loadAllContent)
             {
                 spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-                ballGenerator = new BallGenerator(core, spriteBatch, texture, this);
-                ballGenerator.Initialise();
+                
                 texture = content.Load<Texture2D>(@"Resources\Textures\space-background");
                 background.LoadGraphicsContent(spriteBatch, texture);
                 texture = content.Load<Texture2D>(@"Resources\Textures\Core");
                 core.LoadGraphicsContent(spriteBatch, texture);
                 ball.LoadGraphicsContent(spriteBatch);
-                ballGenerator.LoadGraphicsContent();
+                ballGenerator.LoadGraphicsContent(spriteBatch, texture);
                 lucidaConsole = Content.Load<SpriteFont>("Fonts/Lucida Console");
 
                 // TODO: Load any ResourceManagementMode.Automatic content
