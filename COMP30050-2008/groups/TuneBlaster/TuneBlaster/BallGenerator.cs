@@ -130,10 +130,17 @@ namespace TuneBlaster_
 
             MovingBall temp = new MovingBall(core, ResetColour());
             balls.AddLast(temp);
-            balls.Last.Value.Initialise(new Vector2(50f, 50f), new Vector2(1140f, 0f), game);
+            if (balls.Last.Previous.Value.Position.Y < 25f)
+            {
+                balls.Last.Value.Initialise(new Vector2(50f, 50f), balls.Last.Previous.Value.Position - new Vector2(0, 50f), game);
+            }
+            else
+            {
+                balls.Last.Value.Initialise(new Vector2(50f, 50f), new Vector2(1140f, 0f), game);
+            }
             LoadBallGraphicsContent(balls.Last.Value);
 
-            LinkedListNode<MovingBall> spot = balls.First;
+            //LinkedListNode<MovingBall> spot = balls.First;
 
             //while (spot.Next != null)
             //{
