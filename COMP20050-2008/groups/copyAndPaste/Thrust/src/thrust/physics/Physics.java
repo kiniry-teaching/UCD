@@ -22,18 +22,18 @@ public interface Physics {
   /*@ pure @*/ double gravitational_constant();
 
   /**
-   * @return What is your mass in kilograms?
+   * @return What is your mass in kg's?
    */
   //@ ensures 0 <= \result;
   /*@ pure @*/ double mass();
 
   /**
-   * @return What is your momentum in kilograms*meters per second?
+   * @return What is your momentum in kg's*meters per second?
    */
   /*@ pure @*/ double momentum();
 
   /**
-   * @return What is your orientation in radians?
+   * @return What is your orientation in rad's?
    */
   /*@ pure @*/ double orientation();
 
