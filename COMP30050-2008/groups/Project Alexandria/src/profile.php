@@ -10,6 +10,7 @@ include("include/header.php"); //page header
 *	2. as viewed by any user viewing their own page
 *	3. as viewed by an admin		
 */
+include("connection.php");
 include("include/userfunctions.php");
 
 $username=mysql_query("SELECT * FROM users	

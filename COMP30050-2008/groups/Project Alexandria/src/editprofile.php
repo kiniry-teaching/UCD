@@ -7,33 +7,44 @@ include("include/userfunctions.php");
  *	e.g. password, e-mail
  */
  ?>
- 
-<table align="center" width="600">
-	<td>
-		<tr>
 
-echo("<b>Edit Your Profile</b>");
-		</tr>
-	</td>
-	
-	<td>
-		<tr>
-	<?php
-echo("<b>Change Your Password</b>");
+<div>
+<b>Change Your e-mail:</b><br /> 
 <form action="editprofile.php" method="post">
-Enter new e-mail: <input type="text" name="e-mail1" />
-Re-Enter new e-mail: <input type="text" name="e-mail2" />
-enter your password <input type="password" name="password" />
+Enter new e-mail: <input type="text" name="e-mail1" /><br />
+Re-Enter new e-mail: <input type="text" name="e-mail2" /><br />
 <input type="submit" />
 </form>
-?>
-		</tr>
-	</td>
-</table>
 <?php
+$email1 = $_POST[e-mail1];
+$email2 = $_POST[e-mail2];
 
+if($email1!=$email2)
+{$email3=$email1;}
+else
+{echo("The emails do not match, please try again.");}
+?>
+</div>
+
+<div>
+<b>Change Your Password:</b><br />
+<form action="editprofile.php" method="post">
+Enter new password: <input type="password" name="password1" /><br />
+Re-Enter new password: <input type="password" name="password2" /><br />
+<input type="submit" />
+</form>
+</div>
+<?php
+$password1 = $_POST[password1];
+$password = $_POST[password2];
+
+if($password1==$password2)
+{$password3=$password1;}
+else
+{echo("The passwords do not match, please try again.");}
+
+echo($password3);
  //TODO - lots more coding
-
 
 include("include/footer.php"); //page footer
 ?>

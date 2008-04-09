@@ -4,17 +4,16 @@ include("include/header.php"); //page header
 
 ?>
 <div>
-<?php
+
 <form action="register.php" method="post">
-Enter a Username: <input type="text" name="username" />
-Enter your e-mail: <input type="text" name="e-mail1" />
-Re-Enter e-mail: <input type="text" name="e-mail2" />
-Enter a password: <input type="password" name="password1" />
-Re-Enter your password: <input type="password" name="password2" />
+Enter a Username: <input type="text" name="username" /><br />
+Enter your e-mail: <input type="text" name="e-mail1" /><br />
+Re-Enter e-mail: <input type="text" name="e-mail2" /><br />
+Enter a password: <input type="password" name="password1" /><br />
+Re-Enter your password: <input type="password" name="password2" /><br />
 
 <input type="submit" />
 </form>
-?>
 </div>
 <?php
 $username = $_POST[username];

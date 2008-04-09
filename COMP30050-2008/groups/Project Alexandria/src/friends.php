@@ -2,22 +2,19 @@
 <div>
 <?php
 include("include/header.php");
-include("userfunctions.php");
+include("connection.php");
+include("include/userfunctions.php");
 
 $result = mysql_query("SELECT * FROM users_friends
 		WHERE username='$username'");
 ?>
-<table align="center" width="500">
-<tr>
-	<td>
+<div align="center">
 	Username:
-	</td>
-</tr>	
+	
 <?php
 echo("".$username."");
 ?>
-
-</table>
+</div>
 <?php
 include("include/footer.php");
 ?>

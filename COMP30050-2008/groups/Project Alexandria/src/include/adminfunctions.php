@@ -7,12 +7,12 @@
 include "include/userfunctions.php";
 if(isAdmin=="true")//this loop is to prevent any non-admins from acessing the admin functions
 {
-	function updateUser($username, $e-mail, $userlevel)	{
+	function updateUser($username, $email, $userlevel)	{
 	/*function allow the admin to change certain details of a members account*/	
 	include("connection.php"); //Connects to database
 
 	mysql_query("UPDATE users 
-		SET e-mail = '$e-mail',
+		SET e-mail = '$email',
 		userlevel = '$userlevel',
 	
 		WHERE username = '$username'");
