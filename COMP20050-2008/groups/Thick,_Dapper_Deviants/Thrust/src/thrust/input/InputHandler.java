@@ -17,11 +17,11 @@ public class InputHandler {
   /** Calls high score screen. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Sets music playing and effects to false. */
-  public static final char START_GAME = 'enter';
+  public static final char START_GAME = 'en';
   /** Started by Enter or Ascii code equivilant(?)). */
   public static final char STOP_GAME = 'esc';
   /** Halts game using Esc key. */
-  public static final char FIRE_GUN = 'spacebar';
+  public static final char FIRE_GUN = (char) 32;
   /** Spacebar. */
   public static final char TURN_LEFT = 'a';
   /** hit a to turn left. */
@@ -37,7 +37,7 @@ public class InputHandler {
   public /*@ pure @*/ char[] legal_inputs() {
     //assert false; //@ assert false;
     //return null;
-	legal_inputs[0] = FIRE_GUN;
+	char[] legal_inputs = new char[]{FIRE_GUN,}
 	
   }
 
