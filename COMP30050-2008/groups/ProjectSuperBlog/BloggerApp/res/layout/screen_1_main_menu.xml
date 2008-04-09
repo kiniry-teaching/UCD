@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:maxHeight="20px"
         android:maxWidth="20px"
-        android:padding="20px"
+        android:paddingLeft="120px"
    		>
 	</ImageView>
 
@@ -21,6 +21,7 @@
 		android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 		android:layout_below="@id/superblogIcon"
+		android:textAlign="center"
 		>
 	</TextView>
 
@@ -29,8 +30,8 @@
 		android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/welcome_text"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="20dip"
+        android:layout_marginRight="100px"	
+        android:layout_alignParentRight="true"	
 		>
 	</Button>
 
@@ -38,9 +39,8 @@
 		android:text="Blogger"
 		android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/welcome_text"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="20dip"
+        android:layout_toLeft="@id/feeds_button"
+        android:layout_alignTop="@id/feeds_button"
 		>
 	</Button>
 
