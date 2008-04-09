@@ -1,4 +1,7 @@
 package thrust.input;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 
 
 /**sfsa
@@ -17,9 +20,9 @@ public class InputHandler {
   /** Calls high score screen. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Sets music playing and effects to false. */
-  public static final char START_GAME = 'en';
-  /** Started by Enter or Ascii code equivilant(?)). */
-  public static final char STOP_GAME = 'esc';
+  public static final char START_GAME = (char) 13;
+  /** Started by Enter. */
+  public static final char STOP_GAME = (char) 27;
   /** Halts game using Esc key. */
   public static final char FIRE_GUN = (char) 32;
   /** Spacebar. */
@@ -29,7 +32,7 @@ public class InputHandler {
   /** hit d to turn right. */
   public static final char USE_ENGINE = 'w';
   /** hit w to thrust. */
-  public static final char USE_SHIELD = 'i';
+  public static final char USE_SHIELD = 'k';
   /** hit i to use shield. */
   /**
    * @return What are the legal keyboard inputs?
@@ -37,7 +40,16 @@ public class InputHandler {
   public /*@ pure @*/ char[] legal_inputs() {
     //assert false; //@ assert false;
     //return null;
-	char[] legal_inputs = new char[]{FIRE_GUN,}
+	char[] legal_inputs = new char[9];
+legal_inputs[0] = DISPLAY_HIGH_SCORES;
+	legal_inputs[1] = TOGGLE_MUSIC_OR_EFFECTS;
+	legal_inputs[2] = START_GAME;
+	legal_inputs[3] = STOP_GAME;
+	legal_inputs[4] = FIRE_GUN;
+	legal_inputs[5] = TURN_LEFT;
+	legal_inputs[6] = TURN_RIGHT;
+	legal_inputs[7] = USE_ENGINE;
+	legal_inputs[8] = USE_SHIELD;
 	
   }
 
@@ -55,10 +67,17 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {
+ 
+  public int keyPressed(KeyEvent e){
+     final int keyCode = e.getKeyCode();
+     return keyCode;
+  }
+  
+  public /*@ pure @*/ boolean legal_input(char the_character){
+      
     assert false; //@ assert false;
     return false;
-  }
+  } 
 
   /**
    * Process this keyboard input character.
