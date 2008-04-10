@@ -36,7 +36,7 @@ public class Music {
       new DataLine.Info(SourceDataLine.class, myaudioInputStream.getFormat());
 
     try {
-      myaudioInputStream = AudioSystem.getAudioInputStream(clipFile);
+      myaudioInputStream = AudioSystem.getAudioInputStream(my_clipFile);
     } catch (UnsupportedAudioFileException e) {
       e.printStackTrace();
     } catch (IOException e) {
@@ -44,11 +44,11 @@ public class Music {
     }
 
     try {
-      myclip = (Clip) AudioSystem.getLine(info);
+      my_clip = (Clip) AudioSystem.getLine(info);
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
-    myclip.open(myaudioInputStream);
+    my_clip.open(myaudioInputStream);
   }
     /**
      * @return Is music playing?
@@ -63,7 +63,7 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
-    myclip.loop(Clip.LOOP_CONTINUOUSLY);
+    my_clip.loop(Clip.LOOP_CONTINUOUSLY);
     assert false; //@ assert false;
   }
 
@@ -72,7 +72,7 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
-    myclip.stop();
+    my_clip.stop();
     assert false; //@ assert false;
   }
 }
