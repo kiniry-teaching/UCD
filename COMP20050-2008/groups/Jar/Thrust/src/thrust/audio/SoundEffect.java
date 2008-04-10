@@ -30,7 +30,7 @@ public class SoundEffect {
   public final/* @ pure @ */SoundEffect make(final File the_filename) {
 
     AudioInputStream audiois = null;
-
+    // @ assert the_filename != null;
     try {
       audiois = AudioSystem.getAudioInputStream(the_filename);
     } catch (UnsupportedAudioFileException e) {
@@ -44,6 +44,7 @@ public class SoundEffect {
 
     try {
       my_clip = (Clip) AudioSystem.getLine(info);
+      // @ assert my_clip !=null;
       my_clip.open(audiois);
     } catch (LineUnavailableException e) {
       e.printStackTrace(System.err);
@@ -60,6 +61,6 @@ public class SoundEffect {
    */
   public final void start() {
     my_clip.loop(1);
-    // @ assert false;
+    // @ assert my_clip().isRunning();
   }
 }

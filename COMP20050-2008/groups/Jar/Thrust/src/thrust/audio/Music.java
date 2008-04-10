@@ -23,6 +23,7 @@ public class Music {
   private final transient File my_clipFile =
           new File("../../../media/Thrust_music.wav");
   /** Clip to be played. */
+  // @ assert my_clipFile != null;
   private final transient Clip my_clip;
 
   /** Constructor, sets up audio stream. */
@@ -33,6 +34,7 @@ public class Music {
     final AudioFormat format = audiois.getFormat();
     final DataLine.Info info = new DataLine.Info(Clip.class, format);
     my_clip = (Clip) AudioSystem.getLine(info);
+ // @ assert my_clip != null;
     my_clip.open(audiois);
   }
 
