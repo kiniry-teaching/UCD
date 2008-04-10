@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /****************************************************************
 * 																*
 * install() - 													*
@@ -181,6 +181,7 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
  		friend varchar(30),
 		timestamp int(11) unsigned not null
 	)";
+
 	mysql_query($sql,$con);	
 	
 	/****************************************************************
