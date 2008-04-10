@@ -47,15 +47,8 @@ public interface Physics {
    */
   //@ ensures \result.length == 2;
   /*@ pure @*/ double[] position(){
-    double orig_X = get_X; //have when the key press for move forward is pressed
-    double orig_Y = get_Y; // to record the orginal X/Y position and then when the key press is over to get the new current X/Y
-    
-    double current_X = get_X;
-    double current_Y = get_Y;
-    testing
-    
-    double Displaced_X;
-    double Displaced_Y;
+    // to be done along with the animation part    
+    // everytime the game frame is redrawn place the new x/y into this array
   }
 
   /**
