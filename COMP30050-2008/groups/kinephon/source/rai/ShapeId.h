@@ -25,6 +25,20 @@ namespace esid
 	sid const DYNAMICS_PIANISSIMO = 0;//for very quiet music dynamics
 	sid const DYNAMICS_FORTISSIMO = 0;//for very loud music dynamics
 	sid const RHYTHM_1_4 = 0;//for rythm music
+	sid const RHYTHM_2_4 = 0;
+	sid const RHYTHM_3_4 = 0;
+	sid const RHYTHM_4_4 = 0;
+	sid const RHYTHM_1_2 = 0;
+	sid const RHYTHM_2_3 = 0;
+	sid const RHYTHM_NONE  = 0;
+	sid const CHORDS_FIRST = 0;
+	sid const CHORDS_SECOND = 0;
+	sid const CHORDS_THIRD = 0;
+	sid const CHORDS_ONEOFF = 0;
+	sid const CHORDS_NONE  = 0;
+	sid const INSTRUMENT_CLASSIC = 0;
+	sid const INSTRUMENT_CRAZY = 0;
+	sid const INSTRUMENT_WIND = 0;
 }
 
 }
