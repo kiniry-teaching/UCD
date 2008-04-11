@@ -38,6 +38,7 @@ class_chart HIGH_SCORE_DISPLAY
     "Are the high scores currently displayed?"
   command
     "Display the high scores.",
+    "Hide the high scores.",
     "Permit the player to add a new name for this high score."
 end
 
@@ -46,9 +47,8 @@ class_chart INFO_PANEL
     "Is the information panel currently displayed?"
   command
     "Display the information panel.",
+    "Hide the information panel.",
     "Update the displayed information panel."
-  constraint
-    "The information panel may only be updated if it is displayed."
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,33 +156,53 @@ class_chart FUELABLE
     "How much fuel can you contain?"
   command
     "This many units is your fuel content.",
-    "Decrease your fuel content this many units."
+    "Change your fuel content by this many units."
   constraint
     "Fuel content is always non-negative and finite."
+end
+
+class_chart HIGH_SCORE
+  query
+    "What is your score?",
+    "What are your initials?"
+  command
+    "This is your score.",
+    "These are your initials."
+  constraint
+    "High scores are always non-negative and finite.",
+    "Initials are always three characters in length."
 end
 
 class_chart HIGH_SCORES
   inherit SEQUENCE
   query
     "What are the current high scores?",
-    "What is the high score number at this index?"
+    "What is the high score number at this index?",
+    "Is this score a new high score?"
   command
-    "Is this score a new high score?",
     "Insert this score into the high score table."
   constraint
     "High scores are ordered from high to low.",
-    "There are eight top high scores.",
+    "There are eight high scores.",
     "There is a fixed initial set of high scores."
 end
 
 class_chart LIVES
   inherit INTEGER
+  query
+    "How many lives do you have?"
+  command
+    "Change the current lives by this many lives."
   constraint
     "Number of lives is always non-negative and finite."
 end
 
 class_chart SCORE
   inherit INTEGER
+  query
+    "What is the current score?"
+  command
+    "Change the current score by this many points."
   constraint
     "Score is always non-negative and finite."
 end
@@ -223,6 +243,7 @@ class_chart ENTITY
 end
 
 class_chart DYNAMIC_ENTITY
+  inherit ENTITY
   query
     "What is your position?",
     "What is your orientation?",
@@ -241,6 +262,7 @@ class_chart DYNAMIC_ENTITY
 end
 
 class_chart STATIC_ENTITY
+  inherit ENTITY
   constraint
     "All queries are constant.",
     "Mass, velocity, acceleration, and momentum are all zero."
@@ -387,7 +409,7 @@ class_chart SPACESHIP
   command
     "You have this many lives remaining.",
     "You have this many points.",
-    "You are now towing the goal sphere.",
+    "You are now towing the goal sphere."
   constraint
     "Number of lives is initially 3.",
     "Score is initially 0.",
@@ -508,7 +530,7 @@ class_chart WELCOME_ANIMATION
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ENTITIES.PROPERTIE cluster classes
+-- ENTITIES.PROPERTIES cluster classes
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class_chart PROPERTIES
