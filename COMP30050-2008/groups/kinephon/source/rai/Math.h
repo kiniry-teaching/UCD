@@ -16,8 +16,24 @@ public:
 	 * @version 1.0
 	 */
 	static double const	PI(void);
+	/**
+	 * Get a value near zero
+	 * @author EB
+	 * @version 1.0
+	 */
+	static float const	ZERO(void);
 
 public:
+	/**
+	 * Calculate if a float value is approx. zero
+	 * @param value The value to test
+	 * @return true if value is approx. zero
+	 * @author EB
+	 * @version 1.0
+	 */
+	static bool			isZero
+						(	float const	value
+						);
 	/**
 	 * Calculate the angle of a line that passes between two points in radians
 	 * @param lineX1 first point, x coordinate, that line passes
@@ -70,6 +86,7 @@ public:
 	 * @param impactY the y coordinate where the line impacts the circle. If
 	 *	the line does not intersect the circle, this value is undefined
 	 * @return true if the line intersected the circle
+	 * @note http://www.vb-helper.com/howto_net_line_circle_intersections.html
 	 * @author EB
 	 * @version 1.0
 	 */
@@ -123,6 +140,15 @@ public:
 
 inline double const Math::PI(void)
 {	return 3.141592653589793238464;
+}
+
+inline float const Math::ZERO(void)
+{	return 1.0e-4f;
+}
+
+inline bool Math::isZero
+(	float const value
+){	return value >= -Math::ZERO() && value <= Math::ZERO();
 }
 
 inline bool Math::isPointInsideCircle

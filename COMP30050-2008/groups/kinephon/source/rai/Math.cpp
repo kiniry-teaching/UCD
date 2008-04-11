@@ -57,11 +57,11 @@ bool Math::calcLineIntersectCircle
 	float		t3;
 
 	// Not intersect
-	if(a < 1.0e-8f || det < 0.0f)
+	if(a <= Math::ZERO() || det < 0.0f)
 		return false;
 	else
-	// Tangent
-	if(det >= -1.0e-8f && det <= 1.0e-8f)
+	// Tangent - almost 
+	if(Math::isZero(det) == true)
 		t = -b / (2 * a);
 	else
 	// Intersect 2 points

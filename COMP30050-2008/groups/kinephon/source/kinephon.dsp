@@ -187,18 +187,62 @@ SOURCE=.\audio\RtMidi.h
 # Begin Source File
 
 SOURCE=.\rai\Interpreter\Interpreter.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\rai\Interpreter\Interpreter.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\rai\Interpreter\movement.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\rai\Interpreter\Movement.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # End Group
 # Begin Group "recorder"
