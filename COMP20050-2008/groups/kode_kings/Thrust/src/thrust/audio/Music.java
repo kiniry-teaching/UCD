@@ -30,13 +30,13 @@ public class Music {
   private transient Clip my_clip;
 
   public Music() throws Exception, Exception {
-    AudioInputStream myaudioInputStream = null;
+    AudioInputStream my_audioInputStream = null;
 
     final DataLine.Info info =
-      new DataLine.Info(SourceDataLine.class, myaudioInputStream.getFormat());
+      new DataLine.Info(SourceDataLine.class, my_audioInputStream.getFormat());
 
     try {
-      myaudioInputStream = AudioSystem.getAudioInputStream(my_clipFile);
+      my_audioInputStream = AudioSystem.getAudioInputStream(my_clipFile);
     } catch (UnsupportedAudioFileException e) {
       e.printStackTrace();
     } catch (IOException e) {
@@ -48,7 +48,7 @@ public class Music {
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
-    my_clip.open(myaudioInputStream);
+    my_clip.open(my_audioInputStream);
   }
     /**
      * @return Is music playing?
