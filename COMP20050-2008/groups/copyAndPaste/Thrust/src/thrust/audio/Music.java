@@ -22,19 +22,19 @@ import javax.sound.sampled.SourceDataLine;
   public class Music {
   
 
-    public boolean isPlaying = false;
+    private boolean isPlaying = false;
 
-    FileInputStream music = new FileInputStream("../media/Thrust_music");
+    FileInputStream music = new FileInputStream("../media/Thrust_music.wav");
 
     AudioInputStream audioInputStream = music;
 
-  AudioFormat aF = music.getFormat();
-        DataLine.Info info = new DataLine.Info ( SourceDataLine.class, aF );
+    AudioFormat aF = music.getFormat();
+    DataLine.Info info = new DataLine.Info ( SourceDataLine.class, aF );
 
 
-  int frameRate = (int)music.getFrameRate();
-  int frameSize = music.getFrameSize();
-  int bufSize = frameRate * frameSize / 10;
+    int frameRate = (int)music.getFrameRate();
+    int frameSize = music.getFrameSize();
+    int bufSize = frameRate * frameSize / 10;
 
 
 
@@ -43,34 +43,28 @@ import javax.sound.sampled.SourceDataLine;
   
   public boolean playing() {
 
-        if(isPlaying = false){
-    return false;
-        }
-      else{ return true;
-    }  
+        return isPlaying;
   }
 
   
   public void start() {
 
-  SourceDataLine line = (SourceDataLine)
-                               AudioSystem.getLine( info );
+	  SourceDataLine line = (SourceDataLine)AudioSystem.getLine( info );
 
-  line.open( music, bufSize );
-        line.start();
+	  line.open( music, bufSize );
+       
+	  line.start();
 
-
-
-    }
+}
     
 
 
   public void stop() {
       
-  line.drain();
-  line.stop();
-  line.close();
-    }
+	  line.drain();
+	  line.stop();
+	  line.close();
+ }
 
 }
 
