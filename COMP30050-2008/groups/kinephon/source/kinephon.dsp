@@ -186,11 +186,19 @@ SOURCE=.\audio\RtMidi.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\rai\Interpreter\Movement.h
+SOURCE=.\rai\Interpreter\Interpreter.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\rai\Interpreter\RecorderSound.h
+SOURCE=.\rai\Interpreter\Interpreter.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\Interpreter\movement.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\Interpreter\Movement.h
 # End Source File
 # End Group
 # Begin Group "recorder"
