@@ -37,11 +37,10 @@ public class InputHandler {
   /**
    * @return What are the legal keyboard inputs?
    */
-  public /*@ pure @*/ char[] legal_inputs() {
+  public static char legal_inputs[]=new char [9]; {
     //assert false; //@ assert false;
     //return null;
-	char[] legal_inputs = new char[9];
-legal_inputs[0] = DISPLAY_HIGH_SCORES;
+	legal_inputs[0] = DISPLAY_HIGH_SCORES;
 	legal_inputs[1] = TOGGLE_MUSIC_OR_EFFECTS;
 	legal_inputs[2] = START_GAME;
 	legal_inputs[3] = STOP_GAME;
@@ -67,15 +66,20 @@ legal_inputs[0] = DISPLAY_HIGH_SCORES;
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
- 
-  public int keyPressed(KeyEvent e){
-     final int keyCode = e.getKeyCode();
+ public char keyCode;
+  public char keyPressed(KeyEvent e){
+     keyCode = (char) e.getKeyCode();
      return keyCode;
   }
   
-  public /*@ pure @*/ boolean legal_input(char the_character){
+  public /*@ pure @*/ boolean legal_input(){
       
-    assert false; //@ assert false;
+    
+    for(int i=0; i<9; i++){
+        if (legal_inputs[i] == keyCode){
+          return true;
+        }
+      }
     return false;
   } 
 
