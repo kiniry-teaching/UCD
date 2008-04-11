@@ -12,7 +12,7 @@ import java.sql.Statement;
  */
 class Query {
     /**
-     * This String returns the name.
+     * This String returns the name..
      */
     private static String returnedName;
     private Connection conn;
