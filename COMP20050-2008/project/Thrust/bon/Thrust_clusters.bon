@@ -101,6 +101,8 @@ cluster_chart ABOUT_GAME
     description "Fuel that a spaceship or a fuel pod possesses."
   class FUELABLE
     description "An entity that can contain fuel."
+  class HIGH_SCORE
+    description "A pair of a sequence of three initials and a score."
   class HIGH_SCORES
     description "The highest scores ever recorded in the game."
   class LIVES
