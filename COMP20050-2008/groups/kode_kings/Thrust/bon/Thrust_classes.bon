@@ -38,6 +38,7 @@ class_chart HIGH_SCORE_DISPLAY
     "Are the high scores currently displayed?"
   command
     "Display the high scores.",
+    "Hide the high scores.",
     "Permit the player to add a new name for this high score."
 end
 
@@ -46,9 +47,8 @@ class_chart INFO_PANEL
     "Is the information panel currently displayed?"
   command
     "Display the information panel.",
+    "Hide the information panel.",
     "Update the displayed information panel."
-  constraint
-    "The information panel may only be updated if it is displayed."
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,7 +156,7 @@ class_chart FUELABLE
     "How much fuel can you contain?"
   command
     "This many units is your fuel content.",
-    "Decrease your fuel content this many units."
+    "Change your fuel content by this many units."
   constraint
     "Fuel content is always non-negative and finite."
 end
@@ -243,6 +243,7 @@ class_chart ENTITY
 end
 
 class_chart DYNAMIC_ENTITY
+  inherit ENTITY
   query
     "What is your position?",
     "What is your orientation?",
@@ -261,6 +262,7 @@ class_chart DYNAMIC_ENTITY
 end
 
 class_chart STATIC_ENTITY
+  inherit ENTITY
   constraint
     "All queries are constant.",
     "Mass, velocity, acceleration, and momentum are all zero."
