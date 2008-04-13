@@ -27,8 +27,6 @@ namespace Drought.GameStates
 
         private TextureMap textureMap;
 
-        private WaterMap waterMap;
-
         private NormalMap normalMap;
 
         private DeviceInput input;
@@ -56,6 +54,8 @@ namespace Drought.GameStates
 
         private AStar aStar;
 
+        private ParticleEmitter rain;
+
         public LevelState(IStateManager manager, DroughtGame game, Level aLevel) :
             base(manager, game)
         {
@@ -65,7 +65,6 @@ namespace Drought.GameStates
             heightMap = new HeightMap(aLevel);
             textureMap = new TextureMap(aLevel);
             normalMap = new NormalMap(heightMap);
-            waterMap = new WaterMap(heightMap, textureMap);
 
             //init the level information
             String lev = "";
@@ -83,6 +82,8 @@ namespace Drought.GameStates
 
             aStar = new AStar(levelInfo);
 
+            rain = new ParticleEmitter(new Vector3(0,0,100), new Vector3(0, 0, 9), new Vector3(1, 0, -9), Color.SkyBlue.ToVector4(), 10000, 50f, 9);
+            rain.initialize();
 
             sun = new Sun(new Vector3(0, -200, 200));
 
@@ -168,6 +169,8 @@ namespace Drought.GameStates
 
             terrain.loadContent();
 
+            rain.loadContent(getContentManager());
+
             skybox.loadContent(getContentManager(), getGraphics());
         }
 
@@ -190,6 +193,7 @@ namespace Drought.GameStates
             sun.update(gameTime);
             camera.update(gameTime);
             terrain.update(gameTime);
+            rain.update(gameTime);
 
             updateUnits();
 
@@ -227,9 +231,6 @@ namespace Drought.GameStates
                 camera.rotateLeft();
             else if (input.isKeyPressed(GameKeys.CAM_ROTATE_RIGHT))
                 camera.rotateRight();
-
-            if (input.isKeyPressed(GameKeys.ADD_WATER))
-                waterMap.addWater(10);
 
             if (input.isKeyPressed(GameKeys.RESET))
                 getStateManager().popState();
@@ -378,7 +379,10 @@ namespace Drought.GameStates
                         float yDiff = a.getPosition().Y - b.getPosition().Y;
                         Vector3 diff = new Vector3(xDiff, yDiff, 0);
                         Vector3 dist = diff;
-                        diff.Normalize();
+                        
+                        if (diff.Length() != 0)
+                            diff.Normalize();
+
                         diff *= a.radius + b.radius;
                         Vector3 displacement = diff - dist;
                         Vector3 aNewPos = a.getPosition() + displacement / 2;
@@ -434,6 +438,7 @@ namespace Drought.GameStates
 
             terrain.render(sun);
             skybox.render();
+            rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
 
             for (int i = 0; i < entities.Count; i++)
                 entities[i].render(graphics, spriteBatch, camera, modelEffect, sun);

@@ -96,6 +96,7 @@
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Input\DeviceInput.cs" />
     <Compile Include="World\LevelInfo.cs" />
+    <Compile Include="World\ParticleEmitter.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Sun.cs" />
     <Compile Include="World\Terrain.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="State\IStateManager.cs" />
     <Compile Include="World\HeightMap.cs" />
     <Compile Include="World\TextureMap.cs" />
-    <Compile Include="World\WaterMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
