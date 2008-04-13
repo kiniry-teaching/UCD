@@ -54,7 +54,7 @@ namespace Drought.GameStates
 
         private AStar aStar;
 
-        private ParticleEmitter rain;
+        private PlainParticleEmitter rain;
 
         public LevelState(IStateManager manager, DroughtGame game, Level aLevel) :
             base(manager, game)
@@ -82,8 +82,7 @@ namespace Drought.GameStates
 
             aStar = new AStar(levelInfo);
 
-            rain = new ParticleEmitter(new Vector3(0,0,100), new Vector3(0, 0, 9), new Vector3(1, 0, -9), Color.SkyBlue.ToVector4(), 10000, 50f, 9);
-            rain.initialize();
+            rain = new PlainParticleEmitter(512,256,new Vector3(256,128,200), new Vector3(0, 0, 0), new Vector3(3f, 0, -9), Color.SkyBlue.ToVector4(), 10000, 9);
 
             sun = new Sun(new Vector3(0, -200, 200));
 
