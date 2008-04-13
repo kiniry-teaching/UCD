@@ -24,6 +24,8 @@ static_diagram ENTITY_RELATIONS
       feature
         attack_behavior, disturb_behavior: BOOLEAN
     end
+    STATIC_ENTITY inherit ENTITY
+    DYNAMIC_ENTITY inherit ENTITY
     FRIEND_ENTITY inherit ENTITY
     deferred class FRIEND_ENTITY reused
     NEUTRAL_ENTITY inherit ENTITY
