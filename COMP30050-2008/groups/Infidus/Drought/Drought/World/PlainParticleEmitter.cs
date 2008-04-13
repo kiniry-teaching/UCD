@@ -110,7 +110,7 @@ namespace Drought.World
 
                 particles[i].colour = colour;
 
-                particles[i].size = 1000;
+                particles[i].size = 10;
 
                 particles[i].startTime = -1;
 
@@ -154,7 +154,7 @@ namespace Drought.World
         public void update(GameTime gameTime)
         {
             timeStep += (float)(1.0f / 60.0f);
-            addParticle(); 
+            addParticle(); addParticle(); 
         }
 
         public void render(GraphicsDevice graphics, Matrix viewMatrix, Matrix projectionMatrix)
