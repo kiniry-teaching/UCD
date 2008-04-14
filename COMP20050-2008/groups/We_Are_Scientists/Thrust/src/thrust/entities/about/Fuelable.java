@@ -25,11 +25,14 @@ public class Fuelable {
   //@ ensures \result <= maximum_fuel();
   /*@ pure @*/
 
+  /**
+   * @return your fuel
+   */
   int my_fuel;
   int fuel()
   {
 
-     my_fuel = maximum_fuel();
+    my_fuel = maximum_fuel();
     return my_fuel;
 
 
@@ -49,7 +52,7 @@ public class Fuelable {
    */
   //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
   //@ ensures fuel() == the_fuel_content;
-  void set_fuel_content(int the_fuel_content)
+  void set_fuel_content(final int the_fuel_content)
   {
     if (the_fuel_content > 0)
     {
