@@ -12,14 +12,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  * An example of loading and playing a sound using a Clip. This complete class
  * isn't in the book ;)
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author allison fallon (allifalli2005@gmail.com)
  * @version 2 April 2008
  */
-public class SoundEffect extends Exception {
-  /**
-   *
-   */
-  private static final long serialVersionUID = 1L;
+public class SoundEffect {
+
   /**
    *
    */
