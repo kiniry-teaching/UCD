@@ -58,7 +58,7 @@ public:
 	 * This function needs to be called before new notes are played, 
      * otherwise they will just melt together in one big blur.
      */
-	void panic();
+	void panic(ulong deltaTime);
 
     /**
      * Releases all notes played on the given channel.
@@ -66,7 +66,7 @@ public:
      * They have to be released regularly, or the result will be an
      * indistinguishable blur.
      */
-    void releaseChannel(Channels channel);
+    void releaseChannel(Channels channel, ulong deltaTime);
     
     /**
 	 * Set if music piece is to be recorded.
@@ -152,28 +152,28 @@ public:
 	 * @param pitch the value of the note to be played  
 	 * @param velocity velocity of lead note          
 	 */
-	void playLead(uchar pitch, uchar velocity);
+	void playLead(uchar pitch, uchar velocity, ulong deltaTime);
 	
 	/**
 	 * Plays a accompaniment note.
 	 * @param pitch the value of the note to be played  
 	 * @param velocity velocity of the note          
 	 */
-	void playAccompaniment(uchar pitch, uchar velocity);
+	void playAccompaniment(uchar pitch, uchar velocity, ulong deltaTime);
 	
 	/**
 	 * Plays a chord.
 	 * @param chord the chord to be played  
 	 * @param velocity velocity of the chord          
 	 */
-	void playChord(uchar chord, uchar velocity);
+	void playChord(uchar chord, uchar velocity, ulong deltaTime);
 	
   	/**
 	 * Plays a percussion note.
 	 * @param pitch the pitch of the note to be played  
 	 * @param velocity velocity of the note          
 	 */
-	void playPercussion(uchar pitch, uchar velocity);
+	void playPercussion(uchar pitch, uchar velocity, ulong deltaTime);
 	
 	
   	/**
@@ -183,14 +183,14 @@ public:
 	 * @param pitch the value of the note to be played
 	 * @param velocity the velocity of the note
 	 */
-	void playNote(Channels channel, uchar pitch, uchar velocity);
+	void playNote(Channels channel, uchar pitch, uchar velocity, ulong deltaTime);
     
     /**
      * Releases the last played note on given channel.
      * @param channel the chnnel to be used
      * @param pitch the value of the note to be played
      */
-	void releaseNote(Channels channel, uchar pitch);
+	void releaseNote(Channels channel, uchar pitch, ulong deltaTime);
     
 	/**
 	 * Additional methods may be included if need arises.

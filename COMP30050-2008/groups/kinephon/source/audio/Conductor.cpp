@@ -46,30 +46,34 @@ bool Conductor::initialize(bool recording) {
 
 //expects 1/4 note steps
 void Conductor::play() {
+    ulong deltaTime = 90;
 	if (timeStep_ == 0) {//1st quarter 
         if (hasMelody_) {// if no melody, no accompaniment/chords, only rhythm can be played
             uchar pitch = melody_[melodyStep_];
             uchar pitchVelocity = melody_[melodyStep_];
             melodyStep_ = (melodyStep_ + 2) % melodyLength_;
             if (pitch != NO_NOTE) {
+                midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
+                deltaTime = 0;
+                midi_->playLead(pitch, pitchVelocity, 90);
                 if (hasAccompaniment_) {
-                    midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                    midi_->playAccompaniment(pitch-12, pitchVelocity); 
+                    midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                    midi_->playAccompaniment(pitch-12, pitchVelocity, 0); 
                 }
                 if (hasChords_) {
-                    midi_->releaseChannel(CHANNEL_CHORD);
+                    midi_->releaseChannel(CHANNEL_CHORD, 0);
                     midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
-                    midi_->playChord(pitch-12,10);
+                    midi_->playChord(pitch-12,10, 0);
                     midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
                 }
-                midi_->releaseChannel(CHANNEL_LEAD);
-                midi_->playLead(pitch, pitchVelocity);
+                
             }
             
         }
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
-            midi_->releaseChannel(CHANNEL_PERCUSSION);
-            midi_->playPercussion(60, 127);//high attack velocity
+            midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+            deltaTime = 0;
+            midi_->playPercussion(60, 127, 0);//high attack velocity
         }
         if (hasAutoDynamics_) {}
         
@@ -80,19 +84,21 @@ void Conductor::play() {
             uchar pitchVelocity = melody_[melodyStep_];
             melodyStep_ = (melodyStep_ + 2) % melodyLength_;
             if (pitch != NO_NOTE) {
+                midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
+                deltaTime = 0;
+                midi_->playLead(pitch, pitchVelocity, 90);
                 if (hasAccompaniment_) {
-                  midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                  midi_->playAccompaniment(pitch-12, pitchVelocity);
+                  midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                  midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
                 }
                 if (hasChords_) {}
-                midi_->releaseChannel(CHANNEL_LEAD);
-                midi_->playLead(pitch, pitchVelocity);
             }
         }
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
             if (rhythm_ == RHYTHM_2_4 || rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -105,19 +111,22 @@ void Conductor::play() {
             uchar pitchVelocity = melody_[melodyStep_];
             melodyStep_ = (melodyStep_ + 2) % melodyLength_;
             if (pitch != NO_NOTE) {
+                midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
+                deltaTime = 0;
+                midi_->playLead(pitch, pitchVelocity, 90);
                 if (hasAccompaniment_) {
-                  midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                  midi_->playAccompaniment(pitch-12, pitchVelocity);
+                  midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                  midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
                 }
                 if (hasChords_) {}
-                midi_->releaseChannel(CHANNEL_LEAD);
-                midi_->playLead(pitch, pitchVelocity);
+                
             }
         }
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
             if (rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4 || rhythm_ == RHYTHM_1_2) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -130,19 +139,21 @@ void Conductor::play() {
             uchar pitchVelocity = melody_[melodyStep_];
             melodyStep_ = (melodyStep_ + 2) % melodyLength_;
             if (pitch != NO_NOTE) {
+                midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
+                deltaTime = 0;
+                midi_->playLead(pitch, pitchVelocity, 90);
                 if (hasAccompaniment_) {
-                  midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                  midi_->playAccompaniment(pitch-12, pitchVelocity);
+                    midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                    midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
                 }
                 if (hasChords_) {}
-                midi_->releaseChannel(CHANNEL_LEAD);
-                midi_->playLead(pitch, pitchVelocity);
             }
         }
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
             if (rhythm_ == RHYTHM_4_4) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -150,7 +161,6 @@ void Conductor::play() {
     }
     //do this in any case:
     if (hasPedaling_){
-        cout << " time: "<< timeStep_ << " pedalingCounter: " << pedalingCounter_ << endl;
         if (pedalingCounter_ == 0) {
             
             midi_->sendControlChange(CHANNEL_LEAD, 64, 0); //turn hold OFF
@@ -165,24 +175,31 @@ void Conductor::play() {
 }
 //quarter notes, maybe later we'll need eigth notes
 void Conductor::play(uchar note, int octave, uchar pitchVelocity){
+    ulong deltaTime = 90;
     uchar pitch = note + octave * 12;
-    
+    if (pitch != NO_NOTE) {//if we dont have NO_NOTE message
+        midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
+         deltaTime = 0;
+        midi_->playLead(pitch, pitchVelocity, 0);
+       
+    }
     if (timeStep_ == 0) {//1st quarter 
         if (pitch != NO_NOTE) {
             
             if (hasAccompaniment_) {
-                midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                midi_->playAccompaniment(pitch-12, pitchVelocity); 
+                midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                midi_->playAccompaniment(pitch-12, pitchVelocity, 0); 
             }
             if (hasChords_) {
-                midi_->playChord(pitch-12,10);
+                midi_->playChord(pitch-12,10, 0);
                 midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
             }
         }
         if (hasRhythm_) {
             
-            midi_->releaseChannel(CHANNEL_PERCUSSION);
-            midi_->playPercussion(60, 127);//high attack velocity
+            midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+            deltaTime = 0;
+            midi_->playPercussion(60, 127, 0);//high attack velocity
         }
         if (hasAutoDynamics_) {}  
        
@@ -190,15 +207,16 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
     else if (timeStep_ == 1) {//2nd quarter
         if (pitch != NO_NOTE) {
             if (hasAccompaniment_) {
-                midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                midi_->playAccompaniment(pitch-12, pitchVelocity);
+                midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
             }
             if (hasChords_) {}
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_2_4 || rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -207,15 +225,16 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
     else if (timeStep_ == 2) {//3rd quarter
         if (pitch != NO_NOTE) {
             if (hasAccompaniment_) {
-                midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                midi_->playAccompaniment(pitch-12, pitchVelocity);
+                midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
             }
             if (hasChords_) {}
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4 || rhythm_ == RHYTHM_1_2) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -224,28 +243,26 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
     else if (timeStep_ == 3) {//4th quarter
         if (pitch != NO_NOTE) {
             if (hasAccompaniment_) {
-                midi_->releaseChannel(CHANNEL_ACCOMPANY);
-                midi_->playAccompaniment(pitch-12, pitchVelocity);
+                midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
+                midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
             }
             if (hasChords_) {
                 midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
-                midi_->releaseChannel(CHANNEL_CHORD);
+                midi_->releaseChannel(CHANNEL_CHORD, 0);
             }
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_4_4) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
         
     }
     //do this in every case:
-    if (pitch != NO_NOTE) {//if we dont have NO_NOTE message
-        midi_->releaseChannel(CHANNEL_LEAD);
-        midi_->playLead(pitch, pitchVelocity);
-    }
+    
     if (hasPedaling_){
         cout << " time: "<< timeStep_ << " pedalingCounter: " << pedalingCounter_ << endl;
         if (pedalingCounter_ == 0) {
@@ -264,22 +281,34 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
 }
 	
 void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote, int accOctave, uchar accVelocity) {
+    ulong deltaTime = 90;
     uchar pitch = note + octave * 12;
     uchar accompany = accNote + accOctave * 12;
+    if (pitch != NO_NOTE) {//if we dont have NO_NOTE message
+        midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
+        deltaTime = 0;
+        midi_->playLead(pitch, pitchVelocity, 0);
+    }
+    if (accompany != NO_NOTE) {
+        midi_->releaseChannel(CHANNEL_ACCOMPANY, deltaTime);
+        deltaTime = 0;
+        midi_->playAccompaniment(accompany, accVelocity, 0); 
+    }
         
     if (timeStep_ == 0) {//1st quarter 
         if (pitch != NO_NOTE) {
             if (hasAccompaniment_) {}
             if (hasChords_) {
-                midi_->releaseChannel(CHANNEL_CHORD);
+                midi_->releaseChannel(CHANNEL_CHORD, 0);
                 midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
-                midi_->playChord(pitch-12,10);
+                midi_->playChord(pitch-12,10, 0);
                 midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
             }
         }
         if (hasRhythm_) {
-            midi_->releaseChannel(CHANNEL_PERCUSSION);
-            midi_->playPercussion(60, 127);//high attack velocity
+            midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+            deltaTime = 0;
+            midi_->playPercussion(60, 127, 0);//high attack velocity
         }
         if (hasAutoDynamics_) {}  
        
@@ -291,8 +320,9 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_2_4 || rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -305,8 +335,9 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4 || rhythm_ == RHYTHM_1_2) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
@@ -319,22 +350,15 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
         }
         if (hasRhythm_) {
             if (rhythm_ == RHYTHM_4_4) {
-                midi_->releaseChannel(CHANNEL_PERCUSSION);
-                midi_->playPercussion(60, 127);
+                midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
+                deltaTime = 0;
+                midi_->playPercussion(60, 127, 0);
             }
         }
         if (hasAutoDynamics_) {}
         
     }
     //do this in every case:
-    if (pitch != NO_NOTE) {//if we dont have NO_NOTE message
-        midi_->releaseChannel(CHANNEL_LEAD);
-        midi_->playLead(pitch, pitchVelocity);
-    }
-    if (accompany != NO_NOTE) {
-        midi_->releaseChannel(CHANNEL_ACCOMPANY);
-        midi_->playAccompaniment(accompany, accVelocity); 
-    }
     if (hasPedaling_){
         cout << " time: "<< timeStep_ << " pedalingCounter: " << pedalingCounter_ << endl;
         if (pedalingCounter_ == 0) {
@@ -354,9 +378,9 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
 
 void Conductor::playImmediate(uchar note, int octave, uchar velocity) {
     uchar pitch = note + octave * 12;
-    
-    midi_->releaseChannel(CHANNEL_LEAD);
-    midi_->playLead(pitch, velocity);
+    //TODO: fix deltaTime
+    midi_->releaseChannel(CHANNEL_LEAD, 0);
+    midi_->playLead(pitch, velocity, 0);
 }	
 
 Instrument Conductor::getInstrument() {
@@ -518,9 +542,9 @@ void Conductor::setReverberation(bool isOn) {
 }
 
 void Conductor::pressPanicButton() {
-    midi_->releaseChannel(CHANNEL_CHORD);//in case a message is lost
+    midi_->releaseChannel(CHANNEL_CHORD, 90);//in case a message is lost
     midi_->sendControlChange(CHANNEL_CHORD, 64, 0); //turn hold OFF
-   	midi_->panic();
+   	midi_->panic(0);
 }
 
 void Conductor::setModulation(uchar position) {

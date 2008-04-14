@@ -86,7 +86,7 @@ if (testingPlayOnly) {
     
    cout << "playing only preset settings"<< endl; 
     audio.setMelody(melody);
-    audio.setAccompaniment(true, 0);
+    //audio.setAccompaniment(true, 0);
    // audio.setChords(true,CHORDS_FIRST);
    // audio.setRhythm(true, RHYTHM_1_2);	
     int i = 0;
@@ -133,7 +133,7 @@ if (testingPlayLead) {
     cout << "playing lead only "<< endl; 
     
     //audio.setMelody(melody);
-    //audio.setAccompaniment(true, 0);
+    audio.setAccompaniment(true, 0);
     //audio.setChords(true,CHORDS_FIRST);
     //audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;

@@ -34,7 +34,7 @@ public:
 	 * @param noTracks number of tracks to be used
 	 * @returns Returns false if, for any reason, fails to open a file.
 	 */
-	bool openFile(int noTracks);
+	bool openFile();
 		
 	/** 
 	 * Opens the given file to write to.
@@ -43,7 +43,7 @@ public:
 	 * @param noTracks number of tracks to be used
 	 * @returns false if, for any reason, fails to open a file.
 	 */
-	bool openFile(string fileName, int noTracks);
+	bool openFile(string fileName);
 		
 	/** 
 	 * Closes (saves) the file.
@@ -59,16 +59,14 @@ public:
 	 * @param trackNo trackNo number this event belongs to
 	 * @returns true if write is successful
 	 */
-	bool write(vector<uchar> event);
+	bool write(vector<uchar> event, ulong deltaTime);
 		
 private:
 	string fileName_;
     ofstream myFile_;
 	//buffer
-	vector<uchar> trackOne_;
-	vector<uchar> trackTwo_;
-	vector<uchar> trackThree_;
-	//other needed I/O devices, needs further research.
+	vector<uchar> buffer_;
+
 };
 
 }

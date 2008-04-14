@@ -13,7 +13,7 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	message[1] = programNo_;
   	midiout_->sendMessage(&message);
   	if (recorder_ != NULL)
-        recorder_->write(message);       
+        recorder_->write(message, 0);       
     
     
   	for (int i = 0; i < 93; i++)
@@ -26,11 +26,12 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	midiout_->sendMessage(&message);
 	controls_[7] = 127;		
 	if (recorder_ != NULL);
-        recorder_->write(message);       
+        recorder_->write(message, 0);       
     
 }
 
 Channel::~Channel() {
+    release(0);
 }
 
 // Returns the mode of the specified function. 
@@ -53,7 +54,7 @@ void Channel::setControl(uchar function, uchar value) {
 	midiout_->sendMessage(&message);
     
     if (recorder_ != NULL);
-        recorder_->write(message);       
+        recorder_->write(message, 0);       
     
 }
 	 
@@ -66,12 +67,12 @@ void Channel::setProgram(uchar program) {
   	midiout_->sendMessage(&message);
 
     if (recorder_ != NULL);
-       recorder_->write(message);       
+       recorder_->write(message, 0);       
     
 }
 	
 //Plays the given note in default octave.
-void Channel::play(uchar pitch, uchar velocity) {
+void Channel::play(uchar pitch, uchar velocity, ulong deltaTime) {
 	note_[0] = pitch;
 	note_[1] = velocity;
 	vector<uchar> message(3);
@@ -81,13 +82,13 @@ void Channel::play(uchar pitch, uchar velocity) {
   	midiout_->sendMessage(&message);
     
     if (recorder_ != NULL)
-        recorder_->write(message);       
-    
+        recorder_->write(message, deltaTime);       
+       
 }
 	
 	
 //Stops the playing note.
-void Channel::release() {
+void Channel::release(ulong deltaTime) {
 	vector<uchar> message(3);
 	message[0] = 128 + channelNo_;
 	message[1] = note_[0];
@@ -95,11 +96,11 @@ void Channel::release() {
   	midiout_->sendMessage(&message);
     
     if (recorder_ != NULL)
-        recorder_->write(message);       
-    
+        recorder_->write(message, deltaTime);       
+        
 }
 
-void Channel::release(uchar pitch) {
+void Channel::release(uchar pitch, ulong deltaTime) {
     vector<uchar> message(3);
     message[0] = 128 + channelNo_;
     message[1] = pitch;
@@ -107,7 +108,7 @@ void Channel::release(uchar pitch) {
     midiout_->sendMessage(&message);
     
     if (recorder_ != NULL)
-        recorder_->write(message);       
+        recorder_->write(message, deltaTime);       
     
 }
 

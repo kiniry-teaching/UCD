@@ -83,25 +83,28 @@ public:
   	/**
 	 * Sends a Note On message to play a note.
 	 * @param pitch the pitch to be played
-	 * @param velocity the velocity with which the note sounds      
+	 * @param velocity the velocity with which the note sounds
+     * @param deltaTime delay to be used when writing the MIDI file      
 	 * @throws RtError if anything went wrong       
 	 */
-	void play(uchar pitch, uchar velocity);
+	void play(uchar pitch, uchar velocity, ulong deltaTime);
 	
 	/**
 	 * Sends a Note Off message for the last played pitch.
+     * @param deltaTime delay to be used when writing the MIDI file
 	 * @throws RtError if anything went wrong  
 	 */
-	void release();
+	void release(ulong deltaTime);
 	
 	/**
      * Sends a Note Off message for a specific pitch.
      * This method is necessary to cater for chords, since we have 3 simultaneous
      * pitches there.
      * @param pitch the pitch of the note to be released
+     * @param deltaTime delay to be used when writing the MIDI file
      * @throws RtError if anything went wrong  
      */
-    void release(uchar pitch);
+    void release(uchar pitch, ulong deltaTime);
 		
 	
 private:
