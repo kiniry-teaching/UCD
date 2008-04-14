@@ -28,11 +28,7 @@ float4 getCurrentPosition(float4 initialPosition, float4 initialVelocity, float4
 {
     float4 currentPosition;
     float time = timeStep - startTime;
-    
-    if(time > lifeTime)
-    {
-		time %= lifeTime;
-	}
+    time %= lifeTime;
 
     currentPosition.x = initialPosition.x + ((initialVelocity.x * time) + (0.5 * gravity.x * time * time));    
     currentPosition.y = initialPosition.y + ((initialVelocity.y * time) + (0.5 * gravity.y * time * time));
