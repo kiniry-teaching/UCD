@@ -11,14 +11,14 @@
 package thrust.entities.about;
 
 /**
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 11 April 2008
+ * @author Stephen Walker (stephen.walker@ucdconnect.ie)
+ * @version 14 April 2008
  */
 public class Fuelable {
   /**variable which holds value of fuel. */
   int my_fuel;
   /**variable which holds value of max fuel.*/
-  int my_maximum_fuel;
+  final int my_maximum_fuel = 9999;
   /**
    * @return How much fuel do you contain?
    */
