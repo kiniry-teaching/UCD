@@ -16,7 +16,7 @@ public class FuelableWhack implements Fuelable {
   //@ ensures \result <= maximum_fuel();
   public /*@ pure @*/ int fuel() {
     if (my_fuel > maximum_fuel()) {
-      System.out.print("Cannot exceed max fuel");
+      my_fuel = maximum_fuel();
     }
 
     return my_fuel;
