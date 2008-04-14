@@ -40,7 +40,7 @@ public class Physicswhack implements Physics {
 
   //@ ensures 0 <= \result;
   /*@ pure @*/public double mass() {
-    final double my_whackmass = 0;
+    final double my_whackmass = 50000;
     return my_whackmass;
   }
 
@@ -67,12 +67,7 @@ public class Physicswhack implements Physics {
 
   //@ ensures \result.length == 2;
   /*@ pure @*/public double[] position() {
-    /** the x position. */
-    final double my_x = 0;
-   /** the y position. */
-    final double my_y = 0;
-    final double[] whack_position = {my_x, my_y};
-    return whack_position;
+    return null;
   }
 
   /**
@@ -82,7 +77,7 @@ public class Physicswhack implements Physics {
 
   /*@ pure @*/public double[] velocity() {
   //speed and direction
-    final double[] my_whackvelocity = {my_whackspeed, my_whackorientation};
+    final double[] my_whackvelocity = {my_whackspeed * my_whackorientation};
     return my_whackvelocity;
   }
 
