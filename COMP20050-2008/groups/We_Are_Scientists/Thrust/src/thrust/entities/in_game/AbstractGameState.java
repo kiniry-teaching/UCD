@@ -28,7 +28,7 @@ public abstract /*@ pure @*/ class AbstractGameState {
 
   /**
    * @return How much fuel do you contain?
-   * @love The current fuel of the spaceship
+   * @design The current fuel of the spaceship
    * @note Note that the {@link Spaceship} class should be the
    * actual owner of this data; this is just a convenience method.
    */
@@ -37,7 +37,7 @@ public abstract /*@ pure @*/ class AbstractGameState {
 
   /**
    * @return How much fuel can you contain?
-   * @love The maximum fuel of the spaceship.
+   * @design The maximum fuel of the spaceship.
    */
   //@ ensures 0 <= \result;
   public abstract /*@ pure @*/ int maximum_fuel();
