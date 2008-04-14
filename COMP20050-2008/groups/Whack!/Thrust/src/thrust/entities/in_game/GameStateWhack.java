@@ -3,7 +3,7 @@ package thrust.entities.in_game;
  * @author Tara Flood (0361188@ucdconnect.ie)
  * @version 14 April 2008
  */
-public class s extends AbstractGameState {
+public class GameStateWhack extends AbstractGameState {
 
   /**
    * @return What is the current bonus?
@@ -19,8 +19,7 @@ public class s extends AbstractGameState {
    */
   //@ requires 0 <= the_new_value;
   //@ ensures bonus() == the_new_value;
-  public void new_bonus(int the_new_value) {
-
+  public void new_bonus(final int the_new_value) {
   }
 
   /**
