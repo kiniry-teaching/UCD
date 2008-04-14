@@ -27,7 +27,7 @@ float Math::calcSegmentAngle
 
 	}
 	else
-		angle = (float)(dy == 0 ? 0 : dy < 0 ? (PI() + PI() / 2) : (PI() / 2));
+		angle = (dy == 0 ? 0 : dy < 0 ? (PI() + PI() / 2) : (PI() / 2));
 
 	return (float)angle;
 
