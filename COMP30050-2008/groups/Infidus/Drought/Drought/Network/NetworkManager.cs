@@ -85,6 +85,7 @@ namespace Drought.Network
             Console.WriteLine("Connected to game: " + game.getDescription());
         }
 
+        /** Ends the current session. */
         public void disconnect() {
             session.Dispose();
             session = null;
@@ -103,7 +104,7 @@ namespace Drought.Network
 
         public int recieveUID()
         {
-            if (session.LocalGamers[0].IsDataAvailable) {
+            if (hasMoreData()) {
                 NetworkGamer sender;
                 session.LocalGamers[0].ReceiveData(packetReader, out sender);
                 cachedID = packetReader.ReadInt32();
@@ -142,7 +143,7 @@ namespace Drought.Network
         
         private void NetworkSessionEnded(object sender, NetworkSessionEndedEventArgs args)
         {
-
+            
         }
 
         private void GamerJoined(object sender, GamerJoinedEventArgs args)

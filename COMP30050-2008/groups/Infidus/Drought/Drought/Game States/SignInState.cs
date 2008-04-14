@@ -10,8 +10,6 @@ namespace Drought.GameStates {
 
     class SignInState : GameState {
 
-        private delegate void Sort(int[] items);
-
         /**
          * If a profile is set to sign in automatically, it isn't recognised for 
          * a few milliseconds after starting the game; waiting 10 game updates

@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DroughtGame.cs" />
+    <Compile Include="Entity\InfoBox.cs" />
+    <Compile Include="Game States\HostWaitState.cs" />
     <Compile Include="Pathfinding\AStar.cs" />
     <Compile Include="Graphics\LineTool.cs" />
     <Compile Include="Entity\MovableEntity.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Input\DeviceInput.cs" />
     <Compile Include="World\LevelInfo.cs" />
     <Compile Include="World\ParticleEmitter.cs" />
+    <Compile Include="World\PlainParticleEmitter.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Sun.cs" />
     <Compile Include="World\Terrain.cs" />

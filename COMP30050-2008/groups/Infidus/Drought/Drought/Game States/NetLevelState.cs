@@ -30,8 +30,6 @@ namespace Drought.GameStates
 
         private TextureMap textureMap;
 
-        private WaterMap waterMap;
-
         private NormalMap normalMap;
 
         private DeviceInput input;
@@ -75,7 +73,6 @@ namespace Drought.GameStates
             heightMap = new HeightMap(aLevel);
             textureMap = new TextureMap(aLevel);
             normalMap = new NormalMap(heightMap);
-            waterMap = new WaterMap(heightMap, textureMap);
 
             //init the level information
             String lev = "";
@@ -218,9 +215,6 @@ namespace Drought.GameStates
                 camera.rotateLeft();
             else if (input.isKeyPressed(GameKeys.CAM_ROTATE_RIGHT))
                 camera.rotateRight();
-
-            if (input.isKeyPressed(GameKeys.ADD_WATER))
-                waterMap.addWater(10); 
             
             if (input.isKeyPressed(GameKeys.RESET)) {
                 networkManager.disconnect();

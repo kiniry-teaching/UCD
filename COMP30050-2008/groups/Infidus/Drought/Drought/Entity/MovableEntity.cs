@@ -15,6 +15,8 @@ namespace Drought.Entity
     {
         private Terrain terrain;
 
+        private InfoBox infoBar;
+
         private Vector3 position;
 
         private Vector3 prevPosition;
@@ -47,6 +49,7 @@ namespace Drought.Entity
         public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, Terrain terrain, int uid)
         {
             this.terrain = terrain;
+            infoBar = new InfoBox(gameState);
             radius = 2.5f;
             uniqueID = uid;
             this.path = path;
@@ -144,6 +147,7 @@ namespace Drought.Entity
                 }
                 ringTool.setPointsList(pointsList);
             }
+            infoBar.updatePosition(position);
         }
 
         public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect, Sun sun)
@@ -152,6 +156,7 @@ namespace Drought.Entity
 
             if (selected) {
                 ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+                infoBar.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
             }
 
             graphics.RenderState.DepthBufferEnable = true;

@@ -185,7 +185,8 @@ namespace Drought.Menu
                 case MenuFunctions.HOSTLIST: makeHostList(); currMenu = hostMenu; hostMenu.activate(); break;
                 case MenuFunctions.HOSTLIST_BACK: currMenu = mainMenu; hostMenu.deactivate(); break;
                 case MenuFunctions.HOST: networkManager.host(((LevelMenuItem)item).getLevel());
-                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel(), true)); break;
+                    getStateManager().pushState(new NetLevelState(getStateManager(), getGame(), ((LevelMenuItem)item).getLevel(), true));
+                    getStateManager().pushState(new HostWaitState(getStateManager(), getGame())); break;
                 
                 case MenuFunctions.JOINLIST: makeJoinList(); currMenu = joinMenu; joinMenu.activate(); break;
                 case MenuFunctions.JOINLIST_BACK: currMenu = mainMenu; joinMenu.deactivate(); break;

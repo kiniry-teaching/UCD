@@ -192,7 +192,7 @@ namespace Drought.GameStates
             sun.update(gameTime);
             camera.update(gameTime);
             terrain.update(gameTime);
-            rain.update(gameTime);
+            //rain.update(gameTime);
 
             updateUnits();
 
@@ -437,7 +437,7 @@ namespace Drought.GameStates
 
             terrain.render(sun);
             skybox.render();
-            rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
+            //rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
 
             for (int i = 0; i < entities.Count; i++)
                 entities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
