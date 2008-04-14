@@ -17,7 +17,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  An example of loading and playing a sound using a Clip. This complete class
  * isn't in the book ;)
- * @author allison fallon (allifalli2005@gmail.com)
+ * @author allison fallon (allison.fallon@ucdconnect.ie)
  * @version 2 April 2008
  */
 public class Music {
