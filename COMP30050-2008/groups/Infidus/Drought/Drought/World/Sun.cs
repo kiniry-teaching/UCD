@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace Drought.World
 {
     class Sun
     {
-        //TODO add ambient lighting.....
-
         private Vector3 position;
         private float power;
 
@@ -67,7 +63,7 @@ namespace Drought.World
                     position += normal;
 
                     //Power scaling. Power is clamped to 0  below the vertical and 1 above 30 degrees to the vertical. 
-                    //Power  is lerped between 0 and 30 degrees. 
+                    //Power is lerped between 0 and 30 degrees. 
                     float limit = position.Length() * (float)Math.Sin(MathHelper.Pi / 6);
                     power = MathHelper.Clamp(position.Z / limit, 0, 1);
 

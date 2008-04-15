@@ -12,11 +12,14 @@ namespace Drought.World
     {
         private Camera camera;
 
+        private Sun sun;
+
         private Model3D model;
 
-        public Skybox(Camera camera, Model3D model)
+        public Skybox(Camera camera, Sun sun, Model3D model)
         {
             this.camera = camera;
+            this.sun = sun;
             this.model = model;
         }
 
@@ -40,6 +43,9 @@ namespace Drought.World
                     currentEffect.Parameters["xEnableLighting"].SetValue(false);
                     currentEffect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
                     currentEffect.Parameters["xLightPower"].SetValue(1);
+                    //currentEffect.Parameters["xEnableLighting"].SetValue(true);
+                    //currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
+                    //currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
                 }
                 mesh.Draw();
             }

@@ -101,7 +101,7 @@ namespace Drought.GameStates
 
             modelLoader = new ModelLoader(getContentManager(), getGraphics()); 
             
-            skybox = new Skybox(camera, modelLoader.getModel3D(modelType.Skybox));
+            skybox = new Skybox(camera, sun, modelLoader.getModel3D(modelType.Skybox));
 
             lineTool = new LineTool(getGraphics());
 
