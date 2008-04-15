@@ -13,7 +13,6 @@ void Recorder::RunTest(void)
 
 	cout << "Running Recorder/Recording tests.. ";
 
-
 	bool except = true;
 
 	{

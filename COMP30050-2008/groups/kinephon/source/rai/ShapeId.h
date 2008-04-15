@@ -1,6 +1,5 @@
-
-#ifndef __INTERPRETER_SHAPEID_H__
-#define __INTERPRETER_SHAPEID_H__
+#ifndef __INTERPRETER_SHAPE_H__
+#define __INTERPRETER_SHAPE_H__
 
 namespace interpreter
 {
@@ -14,31 +13,30 @@ namespace interpreter
 namespace esid
 {
 
-	sid const TRIANGLE  = 1; // Movement
-	sid const TRI_SOFT  = 2; // - Speed
-	sid const TRI_SHARP = 3; // - Speed
-	sid const TRI_SLOW  = 4; // - Accel
-	
-	//commmads for audio
-	sid const DYNAMICS_PIANO = 0;//for soft music dynamics
-	sid const DYNAMICS_FORTE = 0;//for loud music dynamics
-	sid const DYNAMICS_PIANISSIMO = 0;//for very quiet music dynamics
-	sid const DYNAMICS_FORTISSIMO = 0;//for very loud music dynamics
-	sid const RHYTHM_1_4 = 0;//for rythm music
-	sid const RHYTHM_2_4 = 0;
-	sid const RHYTHM_3_4 = 0;
-	sid const RHYTHM_4_4 = 0;
-	sid const RHYTHM_1_2 = 0;
-	sid const RHYTHM_2_3 = 0;
-	sid const RHYTHM_NONE  = 0;
-	sid const CHORDS_FIRST = 0;
-	sid const CHORDS_SECOND = 0;
-	sid const CHORDS_THIRD = 0;
-	sid const CHORDS_ONEOFF = 0;
-	sid const CHORDS_NONE  = 0;
-	sid const INSTRUMENT_CLASSIC = 0;
-	sid const INSTRUMENT_CRAZY = 0;
-	sid const INSTRUMENT_WIND = 0;
+	sid const TRIANGLE            = 1; // Movement
+	sid const TRI_SOFT            = 2; // - Speed
+	sid const TRI_SHARP           = 3; // - Speed
+	sid const TRI_SLOW            = 4; // - Accel
+	sid const DYNAMICS_PIANO      = 5; // Movement
+	sid const DYNAMICS_FORTE      = 6; // Movement
+	sid const DYNAMICS_PIANISSIMO = 7; // Movement
+	sid const DYNAMICS_FORTISSIMO = 8; // Movement
+	sid const RHYTHM_1_4          = 9; // Movement
+	sid const RHYTHM_2_4          = 10; // Movement
+	sid const RHYTHM_3_4          = 11; // Movement
+	sid const RHYTHM_4_4          = 12; // Movement
+	sid const RHYTHM_1_2          = 13; // Movement
+	sid const RHYTHM_2_3          = 14; // Movement
+	sid const RHYTHM_NONE         = 15; // Movement
+	sid const CHORDS_FIRST        = 16; // Movement
+	sid const CHORDS_SECOND       = 17; // Movement
+	sid const CHORDS_THIRD        = 18; // Movement
+	sid const CHORDS_ONEOFF       = 19; // Movement
+	sid const CHORDS_NONE         = 20; // Movement
+	sid const INSTRUMENT_CLASSIC  = 21; // Movement
+	sid const INSTRUMENT_CRAZY    = 22; // Movement
+	sid const INSTRUMENT_WIND     = 23; // Movement
+
 }
 
 }

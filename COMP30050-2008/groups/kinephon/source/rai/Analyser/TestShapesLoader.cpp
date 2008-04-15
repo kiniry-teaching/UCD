@@ -4,72 +4,13 @@
 #include "ShapeMovement.h"
 #include "ShapesLoader.h"
 #include "../TestMemory.h"
+#include "../TestImage.h"
+#include "../Math.h"
 using std::cout;
 using std::endl;
 
 namespace interpreter
 {
-
-uchar * * createImage
-(	uint		width,
-	uint		height
-){	uchar * *	image;
-	uchar *		data;
-	int			y;
-
-	data = new uchar[width * height];
-	image = new uchar*[height];
-
-	for(y = 0; y < height; y++)
-		image[y] = data + y * width;
-
-	return image;
-
-}
-
-void destroyImage
-(	uchar * *	image
-){
-
-	delete [] image[0];
-	delete [] image;
-
-}
-
-bool writeImage
-(	char const * const	filename,
-	uchar * *			image,
-	uint				width,
-	uint				height
-){	FILE *				file;
-	uint				y;
-	uint				x;
-
-	file = (FILE*)fopen(filename, "w");
-
-	if(file == NULL)
-		return false;
-
-	fprintf(file, "P2\n");
-	fprintf
-	(	file,
-		"%d %d\n",
-			width,
-			height
-	);
-	fprintf(file, "255\n");
-
-	for(y = 0; y < height; y++)
-	for(x = 0; x < width; x++)
-		fprintf(file, "%d%c", image[y][x], (x == width - 1 ? '\n' : ' '));
-
-	fprintf(file, "\n");
-
-	fclose(file);
-
-	return true;
-
-}
 
 void ShapesLoader::drawImageFromShape
 (	Shape *	shape,
@@ -89,13 +30,13 @@ void ShapesLoader::drawImageFromShape
 	if(sindex == -1)
 		sprintf
 		(	filename,
-			"C:\\Data\\College\\COMP30050 - Software Engerineering Project III\\kinephon\\source\\rai\\Analyser\\TestShapesLoader\\%ld.pgm",
+			"_%ld.pgm",
 			index
 		);
 	else
 		sprintf
 		(	filename,
-			"C:\\Data\\College\\COMP30050 - Software Engerineering Project III\\kinephon\\source\\rai\\Analyser\\TestShapesLoader\\%ld%c%ld.pgm",
+			"_%ld%c%ld.pgm",
 			index,
 			detail,
 			sindex
@@ -112,7 +53,7 @@ void ShapesLoader::drawImageFromShape
 		Zone const * const zone = shape->_zones[i];
 		float a;
 
-		for(a = 0; a < 6.2831853; a += 0.05f)
+		for(a = 0; a < Math::PI() * 2; a += 0.05f)
 		{	x = (int)(zone->_x * 8 + cos(a) * zone->_exitRadius * 8);
 			y = (int)(zone->_y * 8 + sin(a) * zone->_exitRadius * 8);
 			if(x >= 0 && y >= 0 && x < width && y < height)
@@ -130,7 +71,7 @@ void ShapesLoader::drawImageFromShape
 				image[y][x] = 0;
 		}
 
-		for(a = 0; a < 6.2831853; a += 0.05f)
+		for(a = 0; a < Math::PI() * 2; a += 0.05f)
 		{	x = (int)(zone->_x * 8 + cos(a) * zone->_enterRadius * 8);
 			y = (int)(zone->_y * 8 + sin(a) * zone->_enterRadius * 8);
 			if(x >= 0 && y >= 0 && x < width && y < height)
@@ -158,42 +99,50 @@ void ShapesLoader::drawImageFromShape
 	::stage++; destroyImage(image);
 
 }
-
+#include <windows.h>
 void ShapesLoader::RunTest(void)
 {
 
 	cout << "Running ShapesLoader tests.. ";
 	{
 
-	::stage++; Shapes * shapes = ShapesLoader::loadShapes("C:\\Data\\College\\COMP30050 - Software Engerineering Project III\\kinephon\\source\\rai\\kinephon.sec");
-	::stage++; int index;
-	::stage++; int indexMove;
-	::stage++; ShapeMovement * shapeMovement;
+	::stage++; Shapes * shapes = ShapesLoader::loadShapes("rai/kinephon.sec");
 
-	for(index = 0; index < shapes->_shapeIndex; index++)
+	if(shapes != 0)
 	{
 
-		drawImageFromShape(shapes->_shapes[index], index);
+		::stage++; int index;
+		::stage++; int indexMove;
+		::stage++; ShapeMovement * shapeMovement;
 
-//		if((shapeMovement = dynamic_cast<ShapeMovement*>(shapes->_shapes[index])) != 0)
-
-		shapeMovement = (ShapeMovement*)shapes->_shapes[index];
-		
+		for(index = 0; index < shapes->_shapeIndex; index++)
 		{
 
-			if(shapeMovement->_speedShapes != 0)
-				for(indexMove = 0; indexMove < shapeMovement->_speedShapes->_shapeIndex; indexMove++)
-					drawImageFromShape(shapeMovement->_speedShapes->_shapes[indexMove], index, 's', indexMove);
+			drawImageFromShape(shapes->_shapes[index], index);
 
-			if(shapeMovement->_accelShapes != 0)
-				for(indexMove = 0; indexMove < shapeMovement->_accelShapes->_shapeIndex; indexMove++)
-					drawImageFromShape(shapeMovement->_accelShapes->_shapes[indexMove], index, 'a', indexMove);
+	//		if((shapeMovement = dynamic_cast<ShapeMovement*>(shapes->_shapes[index])) != 0)
+
+			shapeMovement = (ShapeMovement*)shapes->_shapes[index];
+			
+			{
+
+				if(shapeMovement->_speedShapes != 0)
+					for(indexMove = 0; indexMove < shapeMovement->_speedShapes->_shapeIndex; indexMove++)
+						drawImageFromShape(shapeMovement->_speedShapes->_shapes[indexMove], index, 's', indexMove);
+
+				if(shapeMovement->_accelShapes != 0)
+					for(indexMove = 0; indexMove < shapeMovement->_accelShapes->_shapeIndex; indexMove++)
+						drawImageFromShape(shapeMovement->_accelShapes->_shapes[indexMove], index, 'a', indexMove);
+
+			}
 
 		}
 
-	}
+		delete shapes;
 
-	delete shapes;
+	}
+	else
+		cout << "Couldn't open kinephon.sec ";
 
 	::stage = -1;
 	cout << "Done" << endl;

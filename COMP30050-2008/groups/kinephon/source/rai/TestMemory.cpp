@@ -1,11 +1,7 @@
-#ifdef __TEST__
-#	define __MEMORY__
-#endif
-
-#ifdef __MEMORY__
-
 #include <cassert>
 #include "TestMemory.h"
+
+#ifdef __MEMORY__
 
 #ifdef __TEST__
 	int stage = -1;

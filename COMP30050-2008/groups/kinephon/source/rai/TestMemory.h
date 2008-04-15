@@ -1,9 +1,9 @@
-#ifndef __INTERPRETER_TESTMEMORY_H__
-#define __INTERPRETER_TESTMEMORY_H__
-
 #ifdef __TEST__
 #	define __MEMORY__
 #endif
+
+#ifndef __INTERPRETER_TESTMEMORY_H__
+#define __INTERPRETER_TESTMEMORY_H__
 
 #ifdef __MEMORY__
 
@@ -19,10 +19,10 @@ using std::endl;
 #ifdef __TEST__
 #	ifdef WIN32
 		int const MS = 3;
-		int const MM = 100*MS;
+		int const MM = 1000*MS;
 #	else
 #		define MS 3
-#		define MM 100*MS
+#		define MM 1000*MS
 #	endif
 	extern int stage;
 	extern int mm[MM];

@@ -306,6 +306,14 @@ SOURCE=.\rai\Recorder\TestFrame.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\rai\TestImage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\TestImage.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\rai\TestMemory.cpp
 # End Source File
 # Begin Source File

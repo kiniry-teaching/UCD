@@ -1,9 +1,10 @@
-#ifdef __TEST__
 #include <cassert>
 #include "Frame.h"
 #include "../TestMemory.h"
 using std::cout;
 using std::endl;
+
+#ifdef __TEST__
 
 namespace interpreter
 {
