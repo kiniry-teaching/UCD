@@ -11,6 +11,7 @@
 package thrust.audio;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioFormat;
@@ -25,8 +26,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * In-game music.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
+ * @author JCiaran Hale (Ciaran.hale@ucdconnect.ie)
+ * @version 15 April 2008
  */
 public class Music {
   //@ public model boolean is_playing;
@@ -39,33 +40,27 @@ public class Music {
    */
   private transient Clip my_clip;
 
-  public Music() throws Exception, Exception {
-    AudioInputStream my_audioInputStream = null;
+  public Music() throws Exception {
+    AudioInputStream my_audio_input_stream = null;
 
     final DataLine.Info info =
-      new DataLine.Info(SourceDataLine.class, my_audioInputStream.getFormat());
+      new DataLine.Info(SourceDataLine.class,
+        my_audio_input_stream.getFormat());
 
-    try {
-      my_audioInputStream = AudioSystem.getAudioInputStream(my_clipFile);
-    } catch (UnsupportedAudioFileException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
-    try {
-      my_clip = (Clip) AudioSystem.getLine(info);
-    } catch (LineUnavailableException e) {
-      e.printStackTrace();
-    }
-    my_clip.open(my_audioInputStream);
+
+    my_audio_input_stream = AudioSystem.getAudioInputStream(my_clipFile);
+
+    my_clip = (Clip) AudioSystem.getLine(info);
+
+    my_clip.open(my_audio_input_stream);
   }
     /**
      * @return Is music playing?
     */
     //@ ensures \result == is_playing;
   public /*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
+
     return false;
   }
   /**
@@ -74,7 +69,7 @@ public class Music {
   //@ ensures is_playing;
   public void start() {
     my_clip.loop(Clip.LOOP_CONTINUOUSLY);
-    assert false; //@ assert false;
+
   }
 
  /**
@@ -83,6 +78,6 @@ public class Music {
   //@ ensures !is_playing;
   public void stop() {
     my_clip.stop();
-    assert false; //@ assert false;
+
   }
 }
