@@ -74,7 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DroughtGame.cs" />
+    <Compile Include="Entity\Attacker.cs" />
     <Compile Include="Entity\InfoBox.cs" />
+    <Compile Include="Entity\Scout.cs" />
+    <Compile Include="Entity\Tanker.cs" />
     <Compile Include="Graphics\Model3D.cs" />
     <Compile Include="Game States\HostWaitState.cs" />
     <Compile Include="Pathfinding\AStar.cs" />
