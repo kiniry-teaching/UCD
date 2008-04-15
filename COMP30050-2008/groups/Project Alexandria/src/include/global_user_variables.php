@@ -7,6 +7,6 @@
 global $username,
 	$password,
 	$userlevel,
-	$;
+	$remember;
 	//incomplete
 ?>

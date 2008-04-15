@@ -11,11 +11,12 @@ function login($enteredUsername, $enteredPassword)
 //
 
 	/* 
-	 *	Username and password correct, register session variables 
+	 *	Username and password correct, register session variables
+	 *	$password is encrypted using the md5 hash function
 	 */
-   $_POST['user'] = stripslashes($_POST['user']);
-   $_SESSION['username'] = $username;
-   $_SESSION['password'] = $md5pass;
+	$md5pass = md5($password);	 
+	$_SESSION['username'] = $username;
+	$_SESSION['password'] = $md5pass;
 
    /*
    	*	sets a cookie if the user has selected the remember me option on the login form
