@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Graphics;
 using Drought.World;
@@ -11,7 +9,7 @@ using Drought.State;
 namespace Drought.Entity
 {
 
-    public class MovableEntity
+    class MovableEntity
     {
         private int health, maxHealth;
 
@@ -35,9 +33,7 @@ namespace Drought.Entity
 
         private Path path;
 
-        private Model model;
-
-        private Texture2D[] modelTextures;
+        private Model3D model;
 
         private bool selected;
         private float selectTime;
@@ -50,7 +46,7 @@ namespace Drought.Entity
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, Terrain terrain, int uid)
+        public MovableEntity(GameState gameState, Model3D model, Path path, Terrain terrain, int uid)
         {
             health = 5;
             maxHealth = 5;
@@ -67,7 +63,6 @@ namespace Drought.Entity
             setOrientation();
             velocity = 0.5f;
             this.model = model;
-            this.modelTextures = modelTextures;
             selected = false;
             pathTool = new LineTool(gameState.getGraphics());
             ringTool = new LineTool(gameState.getGraphics());
@@ -114,31 +109,6 @@ namespace Drought.Entity
             return path;
         }
 
-        /*
-        public void computeNewPath(HeightMap heightMap, NormalMap normalMap)
-        {
-            List<Vector3> newPathList = new List<Vector3>();
-            newPathList.Add(position);
-            Vector3 startPos = position;
-            Vector3 endPos = destination;
-            Vector3 distLeft = endPos - startPos;
-            Vector3 currPos = startPos;
-            int steps = 0;
-            while (distLeft.Length() > 1 && steps < 1000) {
-                Vector3 distCopy = new Vector3(distLeft.X, distLeft.Y, distLeft.Z);
-                currPos = currPos + Vector3.Normalize(distCopy);
-                currPos.Z = heightMap.getHeight(currPos.X, currPos.Y);
-                newPathList.Add(currPos);
-                distLeft = endPos - currPos;
-                steps++;
-            }
-            newPathList.Add(endPos);
-
-            Path newPath = new Path(newPathList, normalMap);
-            setPath(newPath);
-        }
-        */
-
         public void update()
         {
             move();
@@ -177,22 +147,19 @@ namespace Drought.Entity
             graphics.RenderState.AlphaBlendEnable = false;
             graphics.RenderState.AlphaTestEnable = false;
 
-            Matrix[] transforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(transforms);
+            Matrix[] transforms = new Matrix[model.Model.Bones.Count];
+            model.Model.CopyAbsoluteBoneTransformsTo(transforms);
 
             Matrix worldMatrix = Matrix.CreateScale(0.005f) * orientation * Matrix.CreateTranslation(position);
 
             int i = 0;
-            foreach (ModelMesh mesh in model.Meshes) {
+            foreach (ModelMesh mesh in model.Model.Meshes) {
                 foreach (Effect currentEffect in mesh.Effects) {
                     currentEffect.CurrentTechnique = effect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
-                    currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
-
-                    //HLSL testing
-                    //HardCoded Light params need to be replaced with the values from the Sun.
+                    currentEffect.Parameters["xTexture"].SetValue(model.ModelTextures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(true);
                     currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());

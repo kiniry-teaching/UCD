@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Drought.Entity
 {
-    public class NormalMap
+    class NormalMap
     {
         private Vector3[,,] normals;
 
@@ -73,7 +73,7 @@ namespace Drought.Entity
         * @param line2 Last point on the line segment.
         * @param p The point to find the distance to.
         */
-        public float distance(Vector3 line1, Vector3 line2, Vector3 p)
+        public static float distance(Vector3 line1, Vector3 line2, Vector3 p)
         {
             float distance = 0.0f;
 
@@ -102,7 +102,7 @@ namespace Drought.Entity
         * @param px x coordinate of the point to find the distance to.
         * @param py y coordinate of the point to find the distance to.
         */
-        public float distance(float line1x, float line1y , float line2x, float line2y, float px, float py)
+        public static float distance(float line1x, float line1y , float line2x, float line2y, float px, float py)
         {
             float distance = 0.0f;
 
@@ -112,7 +112,7 @@ namespace Drought.Entity
             float y = n.Y;
             n.X = -y;
             n.Y = x;
-            distance = (Vector2.Dot(n , v) / n.Length());
+            distance = (Vector2.Dot(n, v) / n.Length());
 
             return distance;
         }

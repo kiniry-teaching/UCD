@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Core\DroughtGame.cs" />
     <Compile Include="Entity\InfoBox.cs" />
+    <Compile Include="Graphics\Model3D.cs" />
     <Compile Include="Game States\HostWaitState.cs" />
     <Compile Include="Pathfinding\AStar.cs" />
     <Compile Include="Graphics\LineTool.cs" />

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Drought.World
 {
-    class PlainParticleEmitter
+    class PlaneParticleEmitter
     {
         /*
          * Effect file used to render the particles
@@ -69,7 +69,7 @@ namespace Drought.World
 
         private int height;
 
-        public PlainParticleEmitter(int width, int height, Vector3 position, 
+        public PlaneParticleEmitter(int width, int height, Vector3 position, 
             Vector3 initialVelocity, Vector3 gravity, 
             Vector4 colour, 
             int numberOfParticles, float lifeTime)
@@ -109,6 +109,7 @@ namespace Drought.World
                 particles[i].lifeTime = lifeTime;
 
                 particles[i].colour = colour;
+                particles[i].colour.W = 0.5f * (1.0f + (float)random.NextDouble());
 
                 particles[i].size = 10;
 

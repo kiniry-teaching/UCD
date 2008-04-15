@@ -9,7 +9,7 @@ namespace Drought.Network
     /**
      * Represents a joinable game.
      */
-    public class RemoteGame 
+    class RemoteGame 
     {
         private AvailableNetworkSession session;
 

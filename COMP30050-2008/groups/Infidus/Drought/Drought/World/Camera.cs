@@ -5,7 +5,7 @@ using Drought.State;
 
 namespace Drought.World
 {
-    public class Camera
+    class Camera
     {
         private GameState gameState;
         private HeightMap heightMap;

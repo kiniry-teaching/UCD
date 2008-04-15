@@ -190,7 +190,7 @@ namespace Drought.Entity
                 }
             }
 
-            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not fina a path");
+            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not find a path");
             timer.Stop();
 
             //couldn't find a path so return a path containing just the start node

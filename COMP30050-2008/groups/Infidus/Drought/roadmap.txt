@@ -19,7 +19,7 @@ Bugs:
  - Switching to fullscreen doesn't work in-game!
     - same as above and we'd need to reset the graphics device to change the aspect ratio and reload all content ~Rashid
  - new Entities added in one networked game don't show up in the other, deletes don't work either
-
+ - Skybox still uses hardcoded lighting values
 
 New Features:
 ----------

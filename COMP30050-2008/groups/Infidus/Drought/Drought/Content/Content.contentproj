@@ -230,11 +230,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
-    <Compile Include="Models\SkySphere\skysphere.fbx">
-      <Name>skysphere</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\Win Sound Bank.xsb">
@@ -248,11 +243,6 @@
     <None Include="Audio\Win.xgs">
       <Name>Win</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Models\SkySphere\triton.jpg">
-      <Name>triton</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
     </None>
     <None Include="Models\Tank\engine_diff_tex.tga">
       <Name>engine_diff_tex</Name>

@@ -8,7 +8,7 @@ namespace Drought.State
      * <code>IStateManager</code> describes the interface for states to
      * communicate with the class that is responsible for them.
      */
-    public interface IStateManager
+    interface IStateManager
     {
        /**
         * Pushes a state on top of the states stack. The state's

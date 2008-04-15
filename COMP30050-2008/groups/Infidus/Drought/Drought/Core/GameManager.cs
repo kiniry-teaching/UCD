@@ -7,7 +7,7 @@ using Drought.State;
 
 namespace Drought
 {
-    public class GameManager : IStateManager
+    class GameManager : IStateManager
     {
         /** Possible state change operations used when storing changes */
         private enum changeOperation { PUSH, POP };

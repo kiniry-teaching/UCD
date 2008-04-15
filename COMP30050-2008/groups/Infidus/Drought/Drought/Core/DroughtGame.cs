@@ -15,7 +15,7 @@ namespace Drought
      * The entry point of a game.
      * Initialises the GameManager and NetworkManager, sets up the initial states and binds game keys.
      */
-    public class DroughtGame : Microsoft.Xna.Framework.Game
+    class DroughtGame : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;

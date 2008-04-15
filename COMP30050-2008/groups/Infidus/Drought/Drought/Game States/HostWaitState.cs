@@ -10,7 +10,7 @@ namespace Drought.GameStates
      */
     class HostWaitState : GameState
     {
-        /**  */
+        /** The StateManager this state is located in, so it can pop itself. */
         private IStateManager stateManager;
         
         /** The NetworkManager to wait for a connection on. */
@@ -31,13 +31,12 @@ namespace Drought.GameStates
 
         public override void loadContent() {
             waiting = getContentManager().Load<Texture2D>("Textures/waiting");
-            int showX = (waiting.GraphicsDevice.Viewport.Width - waiting.Width) / 2;
-            int showY = (waiting.GraphicsDevice.Viewport.Height - waiting.Height) / 2;
-            drawPos = new Vector2(showX, showY);
+            int drawX = (waiting.GraphicsDevice.Viewport.Width - waiting.Width) / 2;
+            int drawY = (waiting.GraphicsDevice.Viewport.Height - waiting.Height) / 2;
+            drawPos = new Vector2(drawX, drawY);
         }
 
         public override void background() { }
-
         public override void foreground() { }
 
         public override void update(Microsoft.Xna.Framework.GameTime gameTime)

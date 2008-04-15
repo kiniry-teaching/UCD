@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Drought.World
 {
-    public struct Particle
+    struct Particle
     {
         public Vector3 position;
         public Vector3 velocity;

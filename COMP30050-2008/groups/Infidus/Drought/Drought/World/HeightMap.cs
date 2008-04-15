@@ -5,7 +5,7 @@ using Drought.GameStates;
 
 namespace Drought.World
 {
-    public class HeightMap
+    class HeightMap
     {
         float[,] map;
         Level level;

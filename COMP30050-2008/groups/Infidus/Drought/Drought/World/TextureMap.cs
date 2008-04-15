@@ -4,7 +4,7 @@ using Drought.GameStates;
 
 namespace Drought.World
 {
-    public class TextureMap
+    class TextureMap
     {
         Vector4[,] map;
         int width, height;

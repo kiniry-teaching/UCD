@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Drought.World
 {
-    public class Sun
+    class Sun
     {
         //TODO add ambient lighting.....
 
@@ -56,7 +56,6 @@ namespace Drought.World
 
         /**
          * Sun Moves in circle around the x=0 line or "the origin in the yz plane".
-         * 
          */
         public void update(GameTime gameTime)
         {

@@ -13,7 +13,7 @@ namespace Drought.Sound
     /**
      * Provides methods to play sounds.
      */
-    public class SoundManager
+    class SoundManager
     {
         /* XNA sound components */
         private AudioEngine audioengine;

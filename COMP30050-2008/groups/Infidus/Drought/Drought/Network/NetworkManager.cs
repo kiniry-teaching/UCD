@@ -10,7 +10,7 @@ namespace Drought.Network
     /**
      * Manages network communication.
      */
-    public class NetworkManager
+    class NetworkManager
     {
         /** The maximum amount of players allowed in any one game. */
         private static readonly int MAX_PLAYERS = 2;

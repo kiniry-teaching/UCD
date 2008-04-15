@@ -6,7 +6,7 @@ using Drought.World;
 
 namespace Drought.Entity
 {
-    public class Path
+    class Path
     {
         /** The nodes that make up the path. */
         private List<Vector3> nodes;

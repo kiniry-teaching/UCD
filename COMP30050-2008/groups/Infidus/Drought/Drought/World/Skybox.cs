@@ -4,66 +4,42 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Drought.Graphics;
 
 namespace Drought.World
 {
     class Skybox
     {
-        Camera camera;
-        Effect effect;
-        Model model;
-        Texture2D[] modelTextures;
+        private Camera camera;
 
-        public Skybox(Camera camera)
+        private Model3D model;
+
+        public Skybox(Camera camera, Model3D model)
         {
             this.camera = camera;
-        }
-
-        public void loadContent(ContentManager content, GraphicsDevice graphics)
-        {
-            //model = content.Load<Model>("Models/SkySphere/skysphere");
-            model = content.Load<Model>("Models/SkyDome/dome");
-            effect = content.Load<Effect>("EffectFiles/model");
-
-            int textureCount = 0;
-            foreach (ModelMesh mesh in model.Meshes)
-                textureCount += mesh.Effects.Count;
-
-            modelTextures = new Texture2D[textureCount];
-
-            int i = 0;
-            foreach (ModelMesh mesh in model.Meshes)
-                foreach (BasicEffect basicEffect in mesh.Effects)
-                    modelTextures[i++] = basicEffect.Texture;
-
-            foreach (ModelMesh mesh in model.Meshes)
-                foreach (ModelMeshPart meshPart in mesh.MeshParts)
-                    meshPart.Effect = effect.Clone(graphics);
+            this.model = model;
         }
 
         public void render()
         {
-            Matrix[] transforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(transforms);
+            Matrix[] transforms = new Matrix[model.Model.Bones.Count];
+            model.Model.CopyAbsoluteBoneTransformsTo(transforms);
 
             Matrix worldMatrix = Matrix.CreateScale(10, 10, 10) * Matrix.CreateRotationX(MathHelper.PiOver2) * Matrix.CreateTranslation(camera.getPosition() + new Vector3(0,0,50)); 
 
             int i = 0;
-            foreach (ModelMesh mesh in model.Meshes)
+            foreach (ModelMesh mesh in model.Model.Meshes)
             {
                 foreach (Effect currentEffect in mesh.Effects)
                 {
-                    currentEffect.CurrentTechnique = effect.Techniques["Textured"];
+                    currentEffect.CurrentTechnique = model.ModelEffect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
-                    currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
-
-                    //HLSL testing
+                    currentEffect.Parameters["xTexture"].SetValue(model.ModelTextures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(false);
                     currentEffect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
                     currentEffect.Parameters["xLightPower"].SetValue(1);
-
                 }
                 mesh.Draw();
             }

@@ -328,7 +328,7 @@ namespace Drought.World
         * @param px x coordinate of the point to find the distance to.
         * @param py y coordinate of the point to find the distance to.
         */
-        private float distance(float line1x, float line1y, float line2x, float line2y, float px, float py)
+        private static float distance(float line1x, float line1y, float line2x, float line2y, float px, float py)
         {
             float distance = 0.0f;
 
@@ -343,7 +343,7 @@ namespace Drought.World
             return distance;
         }
 
-        private float distanceFromALine(float pX, float pY, float lX0, float lY0, float lX1, float lY1)
+        private static float distanceFromALine(float pX, float pY, float lX0, float lY0, float lX1, float lY1)
         {
             Vector2 n = Vector2.Normalize(new Vector2(lX0 - lX1, lY0 - lY1));
             Vector2 v = new Vector2(pX - lX0, pY - lY0);

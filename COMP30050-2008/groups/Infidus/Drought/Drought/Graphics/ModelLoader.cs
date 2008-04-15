@@ -6,15 +6,13 @@ namespace Drought.Graphics
 {
     public enum modelType : int { XYZ, Truck, Car, Tank, Skybox };
 
-    public class ModelLoader 
+    class ModelLoader 
     {
-        private static readonly int MODEL_COUNT = 4;
+        private static readonly int MODEL_COUNT = 5;
 
-        private Model[] models = new Model[MODEL_COUNT];
+        private Model3D[] models = new Model3D[MODEL_COUNT];
 
-        private Texture2D[][] textures = new Texture2D[MODEL_COUNT][];
-
-        private Effect[] effects = new Effect[MODEL_COUNT];
+        private Effect modelEffect;
 
         private bool[] isLoaded = new bool[MODEL_COUNT];
 
@@ -27,12 +25,11 @@ namespace Drought.Graphics
             content = contentManager;
             graphics = graphicsDevice;
             
-            for (int i=0; i<effects.Length; i++) {
-                effects[i] = contentManager.Load<Effect>("EffectFiles/model");
-            }
+            modelEffect = contentManager.Load<Effect>("EffectFiles/model");
         }
 
-        public Model getModel(modelType model) {
+        public Model3D getModel3D(modelType model)
+        {
             if (isLoaded[(int)model]) {
                 return models[(int)model];
             }
@@ -40,19 +37,8 @@ namespace Drought.Graphics
                 return loadModel(model);
             }
         }
-
-        public Texture2D[] getModelTextures(modelType model)
-        {
-            if (isLoaded[(int)model]) {
-                return textures[(int)model];
-            }
-            else {
-                loadModel(model);
-                return textures[(int)model];
-            }
-        }
-
-        private Model loadModel(modelType model)
+        
+        private Model3D loadModel(modelType model)
         {
             String modelString = "";
 
@@ -61,11 +47,10 @@ namespace Drought.Graphics
                 case modelType.Truck: modelString = "Models/Truck/truck"; break;
                 case modelType.Car: modelString = "Models/Car/car"; break;
                 case modelType.Tank: modelString = "Models/Tank/tank"; break;
-                case modelType.Skybox: modelString = "Models/Skybox/skybox"; break;
+                case modelType.Skybox: modelString = "Models/Skysphere/skysphere2"; break;
             }
 
             Model newModel = content.Load<Model>(modelString);
-            models[(int)model] = newModel;
 
             int textureCount = 0;
             foreach (ModelMesh mesh in newModel.Meshes)
@@ -78,15 +63,15 @@ namespace Drought.Graphics
                 foreach (BasicEffect basicEffect in mesh.Effects)
                     newTextures[i++] = basicEffect.Texture;
 
-            textures[(int)model] = newTextures;
-
             foreach (ModelMesh mesh in newModel.Meshes)
                 foreach (ModelMeshPart meshPart in mesh.MeshParts)
-                    meshPart.Effect = effects[(int)model].Clone(graphics);
+                    meshPart.Effect = modelEffect.Clone(graphics);
 
             isLoaded[(int)model] = true;
 
-            return newModel;
+            models[(int)model] = new Model3D(newModel, newTextures, modelEffect);
+
+            return models[(int)model];
         }
     }
 }

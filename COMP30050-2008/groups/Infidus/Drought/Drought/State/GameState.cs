@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 namespace Drought.State
 {
 
-    public abstract class GameState
+    abstract class GameState
     {
         /** The <code>StateManager</code> managing this state */
         private IStateManager stateManager;

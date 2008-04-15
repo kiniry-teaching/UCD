@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Drought.World
 {
-    public class Terrain
+    class Terrain
     {
         public struct VertexMultiTextured
         {
@@ -84,7 +84,7 @@ namespace Drought.World
         {
             effect = content.Load<Effect>("EffectFiles/terrain");
 
-//            sandTexture = content.Load<Texture2D>("Textures/sand_triton");
+            //sandTexture = content.Load<Texture2D>("Textures/sand_triton");
             sandTexture = content.Load<Texture2D>("Textures/sand");
             waterTexture = content.Load<Texture2D>("Textures/water");
             stoneTexture = content.Load<Texture2D>("Textures/stone");
@@ -178,9 +178,6 @@ namespace Drought.World
 
             effect.Parameters["xWorld"].SetValue(worldMatrix);
             effect.Parameters["xWorldViewProjection"].SetValue(worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
-
-            //HLSL testing
-            //HardCoded Light params need to be replaced with the values from the Sun.
             effect.Parameters["xEnableLighting"].SetValue(true);
             effect.Parameters["xLightPosition"].SetValue(sun.getPosition());
             effect.Parameters["xLightPower"].SetValue(sun.getPower());
