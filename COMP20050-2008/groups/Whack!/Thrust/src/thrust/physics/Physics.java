@@ -34,6 +34,7 @@ public interface Physics {
   /**
    * @return What is your momentum in kilograms*meters per second?
    */
+  //@ ensures \result == mass()*velocity();
   /*@ pure @*/ double momentum();
 
   /**
@@ -51,4 +52,9 @@ public interface Physics {
    * @return What is your velocity in meters per second?
    */
   /*@ pure @*/ double[] velocity();
+
+  /**
+   * @param a_time_interval the amount of time that has passed.
+   */
+  void simulate(double a_time_interval);
 }
