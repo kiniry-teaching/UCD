@@ -14,7 +14,28 @@ package thrust.entities.about;
  * @author Colin Casey (colin.casey.2@gmail.com)
  * @version 15 April 2008
  */
-public abstract class AbstractFuelable {
+public abstract class AbstractFuelable implements Fuelable {
+  
+  private final int MAXIMUM_FUEL;
+  private int my_fuel;
+  
+  public int fuel()
+  {
+    return my_fuel;
+  }
+  
+  public int maximum_fuel()
+  {
+    return MAXIMUM_FUEL;
+  }
 
-
+  public void set_fuel_content(int the_fuel_content)
+  {
+    my_fuel = the_fuel_content;
+  }
+  
+  public void change_fuel_content(int the_fuel_change)
+  {
+    my_fuel = my_fuel + the_fuel_change;
+  }
 }
