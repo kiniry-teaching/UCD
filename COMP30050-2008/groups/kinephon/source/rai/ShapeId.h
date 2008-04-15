@@ -1,5 +1,5 @@
-#ifndef __INTERPRETER_SHAPE_H__
-#define __INTERPRETER_SHAPE_H__
+#ifndef __INTERPRETER_SHAPEID_H__
+#define __INTERPRETER_SHAPEID_H__
 
 namespace interpreter
 {

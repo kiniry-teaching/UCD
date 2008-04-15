@@ -468,8 +468,8 @@ namespace Shed
 			uint SID = 1;
 			StringBuilder sb = new StringBuilder();
 
-			stream.WriteLine("#ifndef __INTERPRETER_SHAPE_H__");
-			stream.WriteLine("#define __INTERPRETER_SHAPE_H__");
+			stream.WriteLine("#ifndef __INTERPRETER_SHAPEID_H__");
+			stream.WriteLine("#define __INTERPRETER_SHAPEID_H__");
 			stream.WriteLine();
 			stream.WriteLine("namespace interpreter");
 			stream.WriteLine("{");
