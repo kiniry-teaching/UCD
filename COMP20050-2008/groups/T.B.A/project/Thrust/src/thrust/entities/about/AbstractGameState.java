@@ -46,7 +46,7 @@ public abstract class AbstractGameState {
   /**
    * Stores the highScore in an array.
    */
-  private HighScoreInterface[] some_highScore;
+  private HighScoreInterface[] my_highScore;
   //@ ensures 0 <= some_highScore[];
 
   /**
@@ -151,7 +151,7 @@ public abstract class AbstractGameState {
   //@ ensures \nonnullelements(\result);
   public /*@ pure @*/ HighScoreInterface[] high_scores()
   {
-    return some_highScore;
+    return my_highScore;
   }
 
   /*@ invariant (\forall int i, j; 0 <= i & i < j & j < HIGH_SCORE_COUNT &
@@ -172,7 +172,7 @@ public abstract class AbstractGameState {
   public /*@ pure non_null @*/
   HighScoreInterface high_score(final int the_index)
   {
-    return some_highScore[the_index];
+    return my_highScore[the_index];
   }
 
   /**
@@ -186,9 +186,9 @@ public abstract class AbstractGameState {
   public /*@ pure @*/ boolean
   new_high_score(final HighScoreInterface the_highscore)
   {
-    for (int j = 0; j < some_highScore.length; j++)
+    for (int j = 0; j < my_highScore.length; j++)
     {
-      if (some_highScore[j].score() < the_highscore.score())
+      if (my_highScore[j].score() < the_highscore.score())
       {
         return true;
       }
@@ -214,16 +214,16 @@ public abstract class AbstractGameState {
     boolean found = false;
     if (new_high_score(the_new_high_score))
     {
-      for (int j = 0; j < some_highScore.length; j++)
+      for (int j = 0; j < my_highScore.length; j++)
       {
-        if (some_highScore[j].score() < the_new_high_score.score() && !found)
+        if (my_highScore[j].score() < the_new_high_score.score() && !found)
         {
-          some_highScore[j] = the_new_high_score;
+          my_highScore[j] = the_new_high_score;
           found = true;
         }
         if (found)
         {
-          some_highScore[j - 1] = some_highScore[j];
+          my_highScore[j - 1] = my_highScore[j];
         }
       }
     }
