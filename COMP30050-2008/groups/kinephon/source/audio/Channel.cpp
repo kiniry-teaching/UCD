@@ -25,7 +25,7 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	message.push_back(127);
 	midiout_->sendMessage(&message);
 	controls_[7] = 127;		
-	if (recorder_ != NULL);
+	if (recorder_ != NULL)
         recorder_->write(message, 0);       
     
 }
@@ -52,7 +52,7 @@ void Channel::setControl(uchar function, uchar value) {
   	message[2] = value;
 	midiout_->sendMessage(&message);
     
-    if (recorder_ != NULL);
+    if (recorder_ != NULL)
         recorder_->write(message, 0);       
     
 }
@@ -65,7 +65,7 @@ void Channel::setProgram(uchar program) {
 	message[1] = programNo_;
   	midiout_->sendMessage(&message);
 
-    if (recorder_ != NULL);
+    if (recorder_ != NULL)
        recorder_->write(message, 0);       
     
 }

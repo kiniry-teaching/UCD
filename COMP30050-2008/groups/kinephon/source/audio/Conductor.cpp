@@ -57,13 +57,13 @@ void Conductor::play() {
             if (pitch != NO_NOTE) {
                 midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
                 deltaTime = 0;
+                noNoteCount_ = 0;
                 midi_->playLead(pitch, pitchVelocity, 0);
                 currentChord_ = pitch-12;   
                 if (hasAccompaniment_) {
                 midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
                 midi_->playAccompaniment(pitch-12, pitchVelocity, 0); 
                 }
-            noNoteCount_ = 0;
             }
             else 
                 noNoteCount_++;
@@ -74,6 +74,7 @@ void Conductor::play() {
                     if (chords_ == CHORDS_THIRD)        midi_->playChord(currentChord_-7,20, deltaTime);
                     if (chords_ == CHORDS_123)              midi_->playNote(CHANNEL_CHORD, currentChord_,30, deltaTime);
                deltaTime = 0;
+               noNoteCount_ = 0;
                midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
              }
         }
@@ -94,19 +95,24 @@ void Conductor::play() {
             if (pitch != NO_NOTE) {
                 midi_->releaseChannel(CHANNEL_LEAD, deltaTime);
                 deltaTime = 0;
+                noNoteCount_ = 0;
                 midi_->playLead(pitch, pitchVelocity, 0);
                 if (hasAccompaniment_) {
                   midi_->releaseChannel(CHANNEL_ACCOMPANY, 0);
                   midi_->playAccompaniment(pitch-12, pitchVelocity, 0);
                 }
-            noNoteCount_ = 0;
             }
             else
-                noNoteCount_++;
-        }
-        if (hasChords_) {
-            if (chords_ == CHORDS_123)    midi_->playNote(CHANNEL_CHORD, currentChord_+4,30, deltaTime);
-         deltaTime = 0;
+            noNoteCount_++;
+            
+             if (hasChords_) {
+                    if (chords_ == CHORDS_123){
+                    midi_->playNote(CHANNEL_CHORD, currentChord_+4,30, deltaTime);
+                    deltaTime = 0;
+                    noNoteCount_ = 0;
+                    }
+            }
+          
         }
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
             if (rhythm_ == RHYTHM_2_4 || rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4) {
@@ -138,11 +144,16 @@ void Conductor::play() {
             }
             else
                 noNoteCount_++;
+        
+            if (hasChords_) {
+                if (chords_ == CHORDS_123){
+                midi_->playNote(CHANNEL_CHORD, currentChord_+7,30, deltaTime);
+                deltaTime = 0;
+                noNoteCount_ = 0;
+                }
+            }
         }
-        if (hasChords_) {
-            if (chords_ == CHORDS_123)    midi_->playNote(CHANNEL_CHORD, currentChord_+7,30, deltaTime);
-         deltaTime = 0;
-        }
+        
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
             if (rhythm_ == RHYTHM_3_4 || rhythm_ == RHYTHM_4_4 || rhythm_ == RHYTHM_1_2) {
                 midi_->releaseChannel(CHANNEL_PERCUSSION, deltaTime);
@@ -172,17 +183,20 @@ void Conductor::play() {
             }
             else
                 noNoteCount_++;
+        
+           if (hasChords_) {
+            midi_->sendControlChange(CHANNEL_CHORD, 64, deltaTime); //turn hold OFF
+            deltaTime = 0;
+            noNoteCount_ = 0;
+            midi_->releaseChannel(CHANNEL_CHORD, 0);
+                if (chords_ == CHORDS_123){
+                midi_->releaseNote(CHANNEL_CHORD, currentChord_, 0);
+                midi_->releaseNote(CHANNEL_CHORD, currentChord_+4, 0);
+                midi_->releaseNote(CHANNEL_CHORD, currentChord_+7, 0);
+                }
+            }
         }
-       if (hasChords_) {
-        midi_->sendControlChange(CHANNEL_CHORD, 64, deltaTime); //turn hold OFF
-        deltaTime = 0;
-        midi_->releaseChannel(CHANNEL_CHORD, 0);
-           if (chords_ == CHORDS_123){
-            midi_->releaseNote(CHANNEL_CHORD, currentChord_, 0);
-            midi_->releaseNote(CHANNEL_CHORD, currentChord_+4, 0);
-            midi_->releaseNote(CHANNEL_CHORD, currentChord_+7, 0);
-           }
-       }
+        
                 
         if (hasRhythm_) {//RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3
             if (rhythm_ == RHYTHM_4_4) {
@@ -221,9 +235,9 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
         midi_->playLead(pitch, pitchVelocity, 0);
         noNoteCount_ = 0;
     }
-    else {//now we need to put in a break
+    else //now we need to put in a break
         noNoteCount_++;
-    }
+    
     if (timeStep_ == 0) {//1st quarter 
         if (pitch != NO_NOTE) {
          currentChord_ = pitch-12; //save this for later in case we have a NO_NOTE
@@ -238,7 +252,8 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
             if (chords_ == CHORDS_SECOND)   midi_->playChord(currentChord_-4,20, deltaTime);
             if (chords_ == CHORDS_THIRD)        midi_->playChord(currentChord_-7,20, deltaTime);
             if (chords_ == CHORDS_123)              midi_->playNote(CHANNEL_CHORD, currentChord_,30,deltaTime);
-         deltaTime = 0;        
+         deltaTime = 0;
+         noNoteCount_ = 0;        
          midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
         }
         
@@ -262,6 +277,7 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
             if (chords_ == CHORDS_123) {
             midi_->playNote(CHANNEL_CHORD, currentChord_+4,30, deltaTime);
             deltaTime = 0;
+            noNoteCount_ = 0;
             }
         }
         if (hasRhythm_) {
@@ -286,6 +302,7 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
             if (chords_ == CHORDS_123) {
             midi_->playNote(CHANNEL_CHORD, currentChord_+7,30, deltaTime);
             deltaTime = 0;
+            noNoteCount_ = 0;
             }
         }
         
@@ -310,6 +327,7 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
         if (hasChords_) {
         midi_->sendControlChange(CHANNEL_CHORD, 64, deltaTime); //turn hold OFF
         deltaTime = 0;
+        noNoteCount_ = 0;
         midi_->releaseChannel(CHANNEL_CHORD, 0);
            if (chords_ == CHORDS_123){
             midi_->releaseNote(CHANNEL_CHORD, currentChord_, 0);
@@ -375,14 +393,14 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
     if (timeStep_ == 0) {//1st quarter 
         if (pitch != NO_NOTE) {
             currentChord_ = pitch-12;
-            if (hasAccompaniment_) {}
         }
          if (hasChords_) {
             if (chords_ == CHORDS_FIRST)        midi_->playChord(currentChord_,20, deltaTime);
             if (chords_ == CHORDS_SECOND)   midi_->playChord(currentChord_-4,20, deltaTime);
             if (chords_ == CHORDS_THIRD)        midi_->playChord(currentChord_-7,20, deltaTime);
             if (chords_ == CHORDS_123)              midi_->playNote(CHANNEL_CHORD, currentChord_,30,deltaTime);
-         deltaTime = 0;        
+         deltaTime = 0;   
+         noNoteCount_ = 0;     
          midi_->sendControlChange(CHANNEL_CHORD, 64, 127); //turn hold ON
         }
         if (hasRhythm_) {
@@ -395,13 +413,12 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
        
     }
     else if (timeStep_ == 1) {//2nd quarter
-        if (pitch != NO_NOTE) {//nothing to do here
-            if (hasAccompaniment_) {}
-        }
+        
          if (hasChords_) {
             if (chords_ == CHORDS_123) {
             midi_->playNote(CHANNEL_CHORD, currentChord_+4,30, deltaTime);
             deltaTime = 0;
+            noNoteCount_ = 0;
             }
         }
         if (hasRhythm_) {
@@ -416,13 +433,11 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
         
     }
     else if (timeStep_ == 2) {//3rd quarter
-        if (pitch != NO_NOTE) {//nothing to do here
-            if (hasAccompaniment_) {}
-        }
          if (hasChords_) {
             if (chords_ == CHORDS_123) {
             midi_->playNote(CHANNEL_CHORD, currentChord_+7,30, deltaTime);
             deltaTime = 0;
+            noNoteCount_ = 0;
             }
         }
         if (hasRhythm_) {
@@ -437,12 +452,10 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
               
     }
     else if (timeStep_ == 3) {//4th quarter
-        if (pitch != NO_NOTE) {//nothing to do here
-            if (hasAccompaniment_) {}
-        }
         if (hasChords_) {
         midi_->sendControlChange(CHANNEL_CHORD, 64, deltaTime); //turn hold OFF
         deltaTime = 0;
+        noNoteCount_ = 0;
         midi_->releaseChannel(CHANNEL_CHORD, 0);
            if (chords_ == CHORDS_123){
             midi_->releaseNote(CHANNEL_CHORD, currentChord_, 0);

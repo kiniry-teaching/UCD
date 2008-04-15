@@ -133,9 +133,9 @@ if (testingPlayLead) {
     cout << "playing lead only "<< endl; 
     
     //audio.setMelody(melody);
-    //audio.setAccompaniment(true, 0);
+   //audio.setAccompaniment(true);
     audio.setChords(true,CHORDS_123);
-    //audio.setRhythm(true, RHYTHM_4_4);   
+    audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);
