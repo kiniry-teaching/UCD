@@ -11,8 +11,6 @@ namespace Drought.Entity
 
     class MovableEntity
     {
-        private int health, maxHealth;
-
         private Terrain terrain;
 
         private InfoBox infoBar;
@@ -35,16 +33,27 @@ namespace Drought.Entity
 
         private Model3D model;
 
+        private float modelScale;
+
         private bool selected;
         private float selectTime;
         private float selectTimeStep = 0.025f;
 
         private LineTool pathTool, ringTool;
 
-        public readonly float radius;
+        public float radius;
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
+
+        private int health;
+
+        private int water;
+
+        private int maxHealth;
+
+        private int maxWater;
+
 
         public MovableEntity(GameState gameState, Model3D model, Path path, Terrain terrain, int uid)
         {
@@ -206,6 +215,70 @@ namespace Drought.Entity
             return selected;
         }
 
+        protected void setVecocity(float vel)
+        {
+            velocity = vel;
+        }
+
+        protected void setRadius(float radius)
+        {
+            this.radius = radius;
+        }
+
+        public float getRadius()
+        {
+            return radius;
+        }
+
+        /** Takes "oww" health away from this Entity. */
+        public void hurt(int oww)
+        {
+            health -= oww;
+
+            if (health < 0)
+                health = 0;
+        }
+
+        public bool isDead()
+        {
+            return health <= 0;
+        }
+
+        public void addWater(int amt)
+        {
+            water += amt;
+
+            if (water > maxWater)
+                water = maxWater;
+        }
+
+        public void removeAllWater()
+        {
+            water = 0;
+        }
+
+        public bool isFullOfWater()
+        {
+            return water == maxWater;
+        }
+
+        protected void setMaxHealth(int max)
+        {
+            maxHealth = max;
+        }
+
+        protected void setMaxWater(int max)
+        {
+            maxWater = max;
+        }
+
+        protected void setModelScale(float scale)
+        {
+            modelScale = scale;
+        }
+
+
+
         /* Given 2 MovableEntities, check whether they overlap. */
         public static bool checkStaticCollision(MovableEntity a, MovableEntity b)
         {
@@ -213,13 +286,6 @@ namespace Drought.Entity
             float yDiff = a.position.Y - b.position.Y;
             double dist = Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
             return (dist < a.radius + b.radius);
-        }
-
-        /** Takes "oww" health away from this Entity. */
-        public void hurt(int oww)
-        {
-            health -= oww;
-            if (health < 0) health = maxHealth;
         }
     }
 }

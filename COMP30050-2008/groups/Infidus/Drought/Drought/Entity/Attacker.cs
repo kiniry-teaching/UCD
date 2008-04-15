@@ -4,6 +4,7 @@ using System.Text;
 using Drought.State;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.World;
+using Drought.Graphics;
 
 namespace Drought.Entity
 {
@@ -22,8 +23,8 @@ namespace Drought.Entity
         private const float ATTACK_RADIUS = 10.0f;
 
 
-        public Attacker(GameState gameState, Model model, Texture2D[] modelTextures, Path path, Terrain terrain, int uid) :
-            base(gameState, model, modelTextures, path, terrain, uid)
+        public Attacker(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
+            base(gameState, model, path, terrain, uid)
         {
             setVecocity(VELOCITY);
             setRadius(RADIUS);
