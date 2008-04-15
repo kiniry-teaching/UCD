@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">"SuperBlog"</string>
     <string name="atom_feed_list_empty"> "No items added yet." </string>
+    <string name="blog_post_title"></string>
 </resources>

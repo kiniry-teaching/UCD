@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
 	>
 
-	<TextView android:id="@+id/your_feeds"
+	<TextView android:id="@+id/s2_your_feeds"
 		android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 		android:text="Your Feeds"
@@ -14,7 +14,7 @@
 
     <!-- The frame layout is here since we will be showing either
     the empty view or the list view.  -->
-    <FrameLayout
+    <FrameLayout android:id="@+id/s2_frame_view"
         android:layout_width="fill_parent" 
         android:layout_height="0dip"
         android:layout_weight="1" >
@@ -29,7 +29,7 @@
         </ListView>
         
         <!-- Here is the view to show if the list is empty -->
-        <TextView android:id="@+id/empty"
+        <TextView android:id="@+id/s2_empty_list"
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
             android:text="@string/atom_feed_list_empty"
@@ -38,7 +38,7 @@
             
     </FrameLayout>
 	
-	<Button android:id="@+id/new_feed"
+	<Button android:id="@+id/s2_new_feed"
 	    android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
 		android:text="New Feed"

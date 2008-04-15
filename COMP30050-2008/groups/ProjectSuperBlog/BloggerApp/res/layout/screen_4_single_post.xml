@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<TextView android:id="@+id/blog_post_title" 
-		android:text="Title: "
+<!-- java will grab the name of the post from gData and store it in the blog_post_title variable. it will be displayed here. -->
+	<TextView android:id="@+id/s4_blog_post_title" 
+		android:text="@string/blog_post_title"
 	>
 	</TextView>
 
-	<TextView android:id="@+id/blog_post"
+	<TextView android:id="@+id/s4_blog_post"
 	android:lines="20"
 	android:scrollbars="vertical"
 	>
