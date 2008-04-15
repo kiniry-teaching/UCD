@@ -22,7 +22,7 @@ namespace Drought.Entity
             new Vector2(1, 1), }; //top right
 
         /** Can move from one node to another if the other node is not greater than MAX_MOVE_DIST. */
-        private static float MAX_MOVE_DIST = 0.15f;
+        private static float MAX_MOVE_DIST = 0.5f;
 
         /** The level information to search for paths. */
         private LevelInfo level;

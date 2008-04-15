@@ -13,6 +13,8 @@ namespace Drought.Entity
 
     public class MovableEntity
     {
+        private int health, maxHealth;
+
         private Terrain terrain;
 
         private InfoBox infoBar;
@@ -38,6 +40,8 @@ namespace Drought.Entity
         private Texture2D[] modelTextures;
 
         private bool selected;
+        private float selectTime;
+        private float selectTimeStep = 0.025f;
 
         private LineTool pathTool, ringTool;
 
@@ -48,6 +52,8 @@ namespace Drought.Entity
 
         public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, Terrain terrain, int uid)
         {
+            health = 5;
+            maxHealth = 5;
             this.terrain = terrain;
             infoBar = new InfoBox(gameState);
             radius = 2.5f;
@@ -146,8 +152,14 @@ namespace Drought.Entity
                     pointsList.Add(pointy);
                 }
                 ringTool.setPointsList(pointsList);
+                selectTime += selectTimeStep;
+                if (selectTime > 1) selectTime = 1;
             }
-            infoBar.updatePosition(position);
+            else {
+                selectTime -= selectTimeStep;
+                if (selectTime < 0) selectTime = 0;
+            }
+            infoBar.update(position, selectTime, health, maxHealth);
         }
 
         public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect, Sun sun)
@@ -156,6 +168,8 @@ namespace Drought.Entity
 
             if (selected) {
                 ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+            }
+            if (selectTime > 0) {
                 infoBar.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
             }
 
@@ -224,6 +238,13 @@ namespace Drought.Entity
             float yDiff = a.position.Y - b.position.Y;
             double dist = Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
             return (dist < a.radius + b.radius);
+        }
+
+        /** Takes "oww" health away from this Entity. */
+        public void hurt(int oww)
+        {
+            health -= oww;
+            if (health < 0) health = maxHealth;
         }
     }
 }

@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Drought.World
 {
@@ -220,17 +219,12 @@ namespace Drought.World
                 Vector3 zeroWorldPoint = nearWorldPoint + direction * zFactor;
                 Vector3 start = camera.getPosition();
                 Vector3 end = zeroWorldPoint;
-                Vector3 mid = (start + end) / 2;
-                while ((end - start).Length() > 1) {
-                    mid = (start + end) / 2;
-                    if (heightMap.getHeight(mid.X, mid.Y) < mid.Z) {
-                        start = mid;
-                    }
-                    else {
-                        end = mid;
-                    }
+                Vector3 current = start;
+                Vector3 step = Vector3.Normalize(end - start);
+                while (heightMap.getHeight(current.X, current.Y) < current.Z) {
+                    current = current + step;
                 }
-                return heightMap.getPositionAt(mid.X, mid.Y);
+                return heightMap.getPositionAt(current.X, current.Y);
             }
             return BAD_POSITION;
         }
