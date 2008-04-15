@@ -21,24 +21,60 @@ public abstract class AbstractGameState {
   /**
    * There are eight high scores.
    */
-  public static final int HIGH_SCORE_COUNT;
+  public static final int HIGH_SCORE_COUNT = 8;
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
+
+  /**
+   * Stores a bonus value.
+   */
+  private int my_bonus;
+  //@ ensures 0 <= bonus;
+
+  /**
+   * Stores a fuel value.
+   */
+  private int my_fuel;
+  //@ ensures 0 <= myfuel;
+
+  /**
+   * Stores the current score.
+   */
+  private int my_score;
+  //@ ensures 0 <= my_score;
+
+  /**
+   * Stores the highScore in an array.
+   */
+  private HighScoreInterface the_highScore[];
+  //@ ensures 0 <= highScore;
+
+  /**
+   * Stores the current number of lives.
+   */
+  private byte my_lives;
+  //@ ensures 0 <= lives;
 
   /**
    * @return What is the current bonus?
    * @bon BONUS What is your value?
    */
-  //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ int bonus();
 
+  public /*@ pure @*/ int bonus()
+  {
+    return my_bonus;
+  }
+  //@ ensures 0 <= \result;
+  
   /**
    * @param the_new_value This is your new value.
    */
   //@ requires 0 <= the_new_value;
   //@ ensures bonus() == the_new_value;
-  public abstract void new_bonus(int the_new_value);
-
+  public void new_bonus(final int the_new_value)
+  {
+    my_bonus = the_new_value;
+  }
   //@ invariant (* Bonus values are always non-negative. *);
   //@ invariant 0 <= bonus();
 
@@ -49,20 +85,30 @@ public abstract class AbstractGameState {
    * actual owner of this data; this is just a convenience method.
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ int current_fuel();
+  public /*@ pure @*/ int current_fuel()
+  {
+    return my_fuel;
+  }
 
   /**
    * @return How much fuel can you contain?
    * @idea The maximum fuel of the spaceship.
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ int maximum_fuel();
+  public  /*@ pure @*/  int maximum_fuel()
+  {
+    final int the_max_feul = 2000;
+    return the_max_feul;
+  }
 
   /**
    * @return What is the current score?
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ int score();
+  public  /*@ pure @*/  int score()
+  {
+    return my_score;
+  }
 
   //@ invariant (* Score is always non-negative and finite. *);
   //@ invariant 0 <= score();
@@ -72,13 +118,19 @@ public abstract class AbstractGameState {
    * @param some_new_points the new points to add to the current score.
    */
   //@ ensures score() == \old(score() + some_new_points);
-  public abstract void change_score(int some_new_points);
+  public void change_score(final int some_new_points)
+  {
+    my_score = some_new_points;
+  }
 
   /**
    * @return How many lives do you have?
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ byte lives();
+  public  /*@ pure @*/  byte lives()
+  {
+    return my_lives;
+  }
 
   //@ invariant (* Number of lives is always non-negative and finite. *);
   //@ invariant 0 <= lives();
@@ -87,14 +139,20 @@ public abstract class AbstractGameState {
    * @param some_new_lives Change the current lives by this many lives.
    */
   //@ ensures lives() == \old(lives() + some_new_lives);
-  public abstract /*@ pure @*/ void change_lives(byte some_new_lives);
+  public /*@ pure @*/ void change_lives(final byte some_new_lives)
+  {
+    my_lives = some_new_lives;
+  }
 
   /**
    * @return What are the current high scores?
    */
   //@ ensures \result.length == HIGH_SCORE_COUNT;
   //@ ensures \nonnullelements(\result);
-  public abstract /*@ pure @*/ HighScoreInterface[] high_scores();
+  public /*@ pure @*/ HighScoreInterface[] high_scores()
+  {
+    return the_highScore;
+  }
 
   /*@ invariant (\forall int i, j; 0 <= i & i < j & j < HIGH_SCORE_COUNT &
     @            high_scores()[i].score() >= high_scores()[j].score());
