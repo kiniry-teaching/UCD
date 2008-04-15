@@ -41,11 +41,8 @@ namespace Drought.World
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
                     currentEffect.Parameters["xTexture"].SetValue(model.ModelTextures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(false);
-                    currentEffect.Parameters["xLightPosition"].SetValue(new Vector3(0, 0, 200));
+                    currentEffect.Parameters["xLightPosition"].SetValue(camera.getPosition());
                     currentEffect.Parameters["xLightPower"].SetValue(1);
-                    //currentEffect.Parameters["xEnableLighting"].SetValue(true);
-                    //currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
-                    //currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
                 }
                 mesh.Draw();
             }
