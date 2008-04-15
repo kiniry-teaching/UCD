@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Graphics;
 using Drought.World;
@@ -11,8 +9,10 @@ using Drought.State;
 namespace Drought.Entity
 {
 
-    public class MovableEntity
+    class MovableEntity
     {
+        private int health, maxHealth;
+
         private Terrain terrain;
 
         private InfoBox infoBar;
@@ -33,37 +33,26 @@ namespace Drought.Entity
 
         private Path path;
 
-        private Model model;
-
-        private Texture2D[] modelTextures;
-
-        private float modelScale;
+        private Model3D model;
 
         private bool selected;
+        private float selectTime;
+        private float selectTimeStep = 0.025f;
 
         private LineTool pathTool, ringTool;
 
-        private float radius;
+        public readonly float radius;
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        private int health;
-
-        private int water;
-
-        private int maxHealth;
-
-        private int maxWater;
-
-
-
-        public MovableEntity(GameState gameState, Model model, Texture2D[] modelTextures, Path path, Terrain terrain, int uid)
+        public MovableEntity(GameState gameState, Model3D model, Path path, Terrain terrain, int uid)
         {
+            health = 5;
+            maxHealth = 5;
             this.terrain = terrain;
             infoBar = new InfoBox(gameState);
             radius = 2.5f;
-            modelScale = 0.005f;
             uniqueID = uid;
             this.path = path;
             position = path.getPosition();
@@ -74,7 +63,6 @@ namespace Drought.Entity
             setOrientation();
             velocity = 0.5f;
             this.model = model;
-            this.modelTextures = modelTextures;
             selected = false;
             pathTool = new LineTool(gameState.getGraphics());
             ringTool = new LineTool(gameState.getGraphics());
@@ -83,7 +71,8 @@ namespace Drought.Entity
 
         private void move()
         {
-            if (!path.isFinished()) {
+            if (!path.isFinished())
+            {
                 path.addDistance(velocity);
                 prevPosition.X = position.X;
                 prevPosition.Y = position.Y;
@@ -121,54 +110,42 @@ namespace Drought.Entity
             return path;
         }
 
-        /*
-        public void computeNewPath(HeightMap heightMap, NormalMap normalMap)
-        {
-            List<Vector3> newPathList = new List<Vector3>();
-            newPathList.Add(position);
-            Vector3 startPos = position;
-            Vector3 endPos = destination;
-            Vector3 distLeft = endPos - startPos;
-            Vector3 currPos = startPos;
-            int steps = 0;
-            while (distLeft.Length() > 1 && steps < 1000) {
-                Vector3 distCopy = new Vector3(distLeft.X, distLeft.Y, distLeft.Z);
-                currPos = currPos + Vector3.Normalize(distCopy);
-                currPos.Z = heightMap.getHeight(currPos.X, currPos.Y);
-                newPathList.Add(currPos);
-                distLeft = endPos - currPos;
-                steps++;
-            }
-            newPathList.Add(endPos);
-
-            Path newPath = new Path(newPathList, normalMap);
-            setPath(newPath);
-        }
-        */
-
         public void update()
         {
             move();
             pathTool.setPointsList(path.getRemainingPath());
-            if (selected) {
+            if (selected)
+            {
                 List<Vector3> pointsList = new List<Vector3>();
-                float step = MathHelper.Pi/16;
-                for (float i = 0; i <= 32; i++) {
-                    Vector3 pointy = terrain.getHeightMap().getPositionAt(position.X + (float)Math.Cos(i*step)*radius, position.Y + (float)Math.Sin(i*step)*radius);
+                float step = MathHelper.Pi / 16;
+                for (float i = 0; i <= 32; i++)
+                {
+                    Vector3 pointy = terrain.getHeightMap().getPositionAt(position.X + (float)Math.Cos(i * step) * radius, position.Y + (float)Math.Sin(i * step) * radius);
                     pointy.Z += 0.25f;
                     pointsList.Add(pointy);
                 }
                 ringTool.setPointsList(pointsList);
+                selectTime += selectTimeStep;
+                if (selectTime > 1) selectTime = 1;
             }
-            infoBar.updatePosition(position);
+            else
+            {
+                selectTime -= selectTimeStep;
+                if (selectTime < 0) selectTime = 0;
+            }
+            infoBar.update(position, selectTime, health, maxHealth);
         }
 
         public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect, Sun sun)
         {
             pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
 
-            if (selected) {
+            if (selected)
+            {
                 ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+            }
+            if (selectTime > 0)
+            {
                 infoBar.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
             }
 
@@ -176,22 +153,21 @@ namespace Drought.Entity
             graphics.RenderState.AlphaBlendEnable = false;
             graphics.RenderState.AlphaTestEnable = false;
 
-            Matrix[] transforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(transforms);
+            Matrix[] transforms = new Matrix[model.Model.Bones.Count];
+            model.Model.CopyAbsoluteBoneTransformsTo(transforms);
 
-            Matrix worldMatrix = Matrix.CreateScale(modelScale) * orientation * Matrix.CreateTranslation(position);
+            Matrix worldMatrix = Matrix.CreateScale(0.005f) * orientation * Matrix.CreateTranslation(position);
 
             int i = 0;
-            foreach (ModelMesh mesh in model.Meshes) {
-                foreach (Effect currentEffect in mesh.Effects) {
+            foreach (ModelMesh mesh in model.Model.Meshes)
+            {
+                foreach (Effect currentEffect in mesh.Effects)
+                {
                     currentEffect.CurrentTechnique = effect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
-                    currentEffect.Parameters["xTexture"].SetValue(modelTextures[i++]);
-
-                    //HLSL testing
-                    //HardCoded Light params need to be replaced with the values from the Sun.
+                    currentEffect.Parameters["xTexture"].SetValue(model.ModelTextures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(true);
                     currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
@@ -230,67 +206,6 @@ namespace Drought.Entity
             return selected;
         }
 
-        protected void setVecocity(float vel)
-        {
-            velocity = vel;
-        }
-
-        protected void setRadius(float radius)
-        {
-            this.radius = radius;
-        }
-
-        public float getRadius()
-        {
-            return radius;
-        }
-
-        public void damage(int damage)
-        {
-            health -= damage;
-            
-            if (health < 0)
-                health = 0;
-        }
-
-        public bool isDead()
-        {
-            return health <= 0;
-        }
-
-        public void addWater(int amt)
-        {
-            water += amt;
-
-            if (water > maxWater)
-                water = maxWater;
-        }
-
-        public void removeAllWater()
-        {
-            water = 0;
-        }
-
-        public bool isFullOfWater()
-        {
-            return water == maxWater;
-        }
-
-        protected void setMaxHealth(int max)
-        {
-            maxHealth = max;
-        }
-
-        protected void setMaxWater(int max)
-        {
-            maxWater = max;
-        }
-
-        protected void setModelScale(float scale)
-        {
-            modelScale = scale;
-        }
-
         /* Given 2 MovableEntities, check whether they overlap. */
         public static bool checkStaticCollision(MovableEntity a, MovableEntity b)
         {
@@ -298,6 +213,13 @@ namespace Drought.Entity
             float yDiff = a.position.Y - b.position.Y;
             double dist = Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
             return (dist < a.radius + b.radius);
+        }
+
+        /** Takes "oww" health away from this Entity. */
+        public void hurt(int oww)
+        {
+            health -= oww;
+            if (health < 0) health = maxHealth;
         }
     }
 }
