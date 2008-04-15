@@ -23,13 +23,11 @@ Shapes * ShapesLoader::loadShapes
 	SEHeader			seHeader;
 	uint				index;
 	Shapes *			shapes;
-
 	if(file.good() == false)
 		return 0;
 
 	// Read the header
 	file.read((char*)&seHeader, sizeof(seHeader));
-	int x= file.gcount();
 
 	// Don't continue if the filetype
 	//	is wrong, or there's no shape data

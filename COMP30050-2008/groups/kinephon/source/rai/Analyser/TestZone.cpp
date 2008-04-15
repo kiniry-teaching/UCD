@@ -15,7 +15,6 @@ void Zone::RunTest(void)
 	cout << "Running Zone tests.. ";
 	{
 
-	const float DTP = 3.141592653589f / 180.0f;
 	Zone zone
 	(	10, 10,
 		7, 10,
@@ -35,6 +34,7 @@ void Zone::RunTest(void)
 	dumpMemoryReport();
 
 }
+#undef DP
 
 }
 

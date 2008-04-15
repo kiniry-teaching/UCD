@@ -39,6 +39,29 @@ namespace etype
 class ShapesLoader
 {
 
+#if __TEST__
+///////////////////////////////////////////////////////////////////////////////
+// tests
+//
+public:
+	/**
+	 * Execute a number of test cases for this class
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void	RunTest				(void);
+	/**
+	 * Output the shape to a PGM image file for testing
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void drawImageFromShape	(	Shape *	shape,
+										uint	index,
+										char	detail	= '\0',
+										uint	sindex	= -1
+									);
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // commands
 //
@@ -271,29 +294,29 @@ private:
 		 */
 		float		enterRadius;
 		/**
-		 * Zone's exit radius
-		 * @author EB
-		 * @version 1.0
-		 */
-		float		exitRadius;
-		/**
 		 * Zone's enter angle
 		 * @author EB
 		 * @version 1.0
 		 */
 		float		enterAngle;
 		/**
-		 * Zone's exit angle
-		 * @author EB
-		 * @version 1.0
-		 */
-		float		exitAngle;
-		/**
 		 * Zone's enter arc (angles off enter angle that are valid)
 		 * @author EB
 		 * @version 1.0
 		 */
 		float		enterArc;
+		/**
+		 * Zone's exit radius
+		 * @author EB
+		 * @version 1.0
+		 */
+		float		exitRadius;
+		/**
+		 * Zone's exit angle
+		 * @author EB
+		 * @version 1.0
+		 */
+		float		exitAngle;
 		/**
 		 * Zone's exit arc (angles off exit angle that are valid)
 		 * @author EB

@@ -24,6 +24,25 @@ class Shape
 {
 
 ///////////////////////////////////////////////////////////////////////////////
+// friends
+//
+	/**
+	 * Be friends with Shapes so it can destroy this object
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend			class Shapes;
+
+#ifdef __TEST__
+	/**
+	 * Be friends with ShapesLoader so it can test the data is correct
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend			class ShapesLoader;
+#endif
+
+///////////////////////////////////////////////////////////////////////////////
 // queries
 //
 public:
@@ -89,6 +108,10 @@ protected:
 						Zone const * const * const	zones,
 						uint const					nZones
 					);
+	/**
+	 * Destroy a shape
+	 */
+	virtual			~Shape							(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // protected commands
@@ -250,6 +273,21 @@ inline Shape::Shape
 	_zones						(zones),
 	_nZones						(nZones)
 { }
+
+inline Shape::~Shape(void)
+{	uint	index;
+
+	delete [] const_cast<float *>(_data);
+
+	// Though the ShapeLoader created the zone object,
+	//	because it is internal in the Analyser, don't
+	//	bother get the ShapeLoader to destroy it, both
+	//	are guaranteed to operate on the same heap
+	for(index = 0; index < _nZones; index++)
+		delete const_cast<Zone *>(*(_zones + index));
+	delete [] const_cast<Zone * *>(_zones);
+
+}
 
 inline sid Shape::shapeId(void) const
 {	return _shapeId;

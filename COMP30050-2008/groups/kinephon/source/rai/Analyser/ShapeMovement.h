@@ -51,6 +51,7 @@ protected:
 						Shapes *					speedShapes,
 						Shapes *					accelShapes
 					);
+	virtual			~ShapeMovement					(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields
@@ -101,6 +102,14 @@ inline ShapeMovement::ShapeMovement
 	_speedShapes				(speedShapes),
 	_accelShapes				(accelShapes)
 {}
+
+inline ShapeMovement::~ShapeMovement(void)
+{
+
+	delete _speedShapes;
+	delete _accelShapes;
+
+}
 
 }
 

@@ -35,7 +35,7 @@ void Shapes::operator +=
 
 	// Only add the shape if there's space to do so
 	if(_shapeIndex < _nShapes)
-		*(_shapes + _shapeIndex) = shape;
+		*(_shapes + _shapeIndex++) = shape;
 
 }
 
@@ -61,7 +61,7 @@ Shapes::~Shapes(void)
 	//	are guaranteed to operate on the same heap
 	for(index = 0; index < _shapeIndex; index++)
 		delete *(_shapes + index);
-	delete (*_shapes);
+	delete _shapes;
 
 }
 

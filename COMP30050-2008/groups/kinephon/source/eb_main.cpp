@@ -36,10 +36,13 @@ int main(int argc, char * * argv)
 
 #ifdef __TEST__
 
+	dumpMemoryReport();
+	dumpMemoryReport();
 	Frame::RunTest();
 	Track::RunTest();
 	Recorder::RunTest();
 	Zone::RunTest();
+	ShapesLoader::RunTest();
 
 #else
 

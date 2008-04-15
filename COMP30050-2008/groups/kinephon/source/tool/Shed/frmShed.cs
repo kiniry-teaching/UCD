@@ -640,7 +640,7 @@ namespace Shed
 						if(cShape.Type == TypesOfShape.Speed)
 							speedShapes++;
 						else
-						if(cShape.Type == TypesOfShape.Speed)
+						if(cShape.Type == TypesOfShape.Acceleration)
 							accelShapes++;
 					}
 
@@ -684,7 +684,7 @@ namespace Shed
 				Angle = zone.EnterAngle;
 				Arc = zone.EnterArc;
 				if(Angle < 0) Angle += 360;
-				if(Arc < 0) Arc -= Arc;
+				if(Arc < 0) Arc = -Arc;
 				Angle *= (float)(Math.PI / 180);
 				Arc *= (float)(Math.PI / 180);
 
@@ -695,7 +695,7 @@ namespace Shed
 				Angle = zone.ExitAngle;
 				Arc = zone.ExitArc;
 				if(Angle < 0) Angle += 360;
-				if(Arc < 0) Arc -= Arc;
+				if(Arc < 0) Arc = -Arc;
 				Angle *= (float)(Math.PI / 180);
 				Arc *= (float)(Math.PI / 180);
 

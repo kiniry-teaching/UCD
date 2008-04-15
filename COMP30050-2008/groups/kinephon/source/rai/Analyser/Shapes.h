@@ -25,6 +25,12 @@ class Shapes
 	 * @version 1.0
 	 */
 	friend			class ShapesLoader;
+	/**
+	 * Be friends with ShapeMovement so it can delete this object
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend			class ShapeMovement;
 
 ///////////////////////////////////////////////////////////////////////////////
 // commands
