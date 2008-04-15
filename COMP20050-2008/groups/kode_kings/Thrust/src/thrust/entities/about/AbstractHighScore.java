@@ -7,7 +7,7 @@ import thrust.entities.about.AbstractGameState.HighScoreInterface;
  * @version 15 April 2008
  */
 
-public class AbstractHighScore implements HighScoreInterface {
+public abstract class AbstractHighScore implements HighScoreInterface {
 
   public char[] initials() {
 
