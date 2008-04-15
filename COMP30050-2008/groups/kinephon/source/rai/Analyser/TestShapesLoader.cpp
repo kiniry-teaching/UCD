@@ -30,13 +30,13 @@ void ShapesLoader::drawImageFromShape
 	if(sindex == -1)
 		sprintf
 		(	filename,
-			"_%ld.pgm",
+			"rai/Analyser/TestShapesLoader/%ld.pgm",
 			index
 		);
 	else
 		sprintf
 		(	filename,
-			"_%ld%c%ld.pgm",
+			"rai/Analyser/TestShapesLoader/%ld%c%ld.pgm",
 			index,
 			detail,
 			sindex
