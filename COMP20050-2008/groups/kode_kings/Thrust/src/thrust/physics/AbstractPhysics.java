@@ -2,7 +2,7 @@ package thrust.physics;
 
 /**
  * Implementation of Physics methods.
- * @author Colin Casey (colin.casey.2@gmail.com)
+ * @author Colin Casey (colin.casey@org.com)
  * @version 7 April 2008
  */
 public abstract class AbstractPhysics implements Physics {
