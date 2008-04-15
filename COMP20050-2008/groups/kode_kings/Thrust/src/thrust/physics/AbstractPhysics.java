@@ -8,7 +8,7 @@ package thrust.physics;
 public abstract class AbstractPhysics implements Physics {
   /** The force that attracts the spaceship and
    * goal sphere toward the terrain. */
-  final double my_gravity_constant = -9.8;
+  static final double GRAVITY_CONSTANT = -9.8;
   /** The quantity of matter that an entity contains. */
   double my_mass;
   /** The rate of motion. */
