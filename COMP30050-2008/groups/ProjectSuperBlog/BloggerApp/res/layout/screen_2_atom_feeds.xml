@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
 	>
 
 	<TextView android:id="@+id/s2_your_feeds"
@@ -11,6 +12,7 @@
 		android:text="Your Feeds"
 		>
 	</TextView>
+
 
     <!-- The frame layout is here since we will be showing either
     the empty view or the list view.  -->
@@ -32,16 +34,17 @@
         <TextView android:id="@+id/s2_empty_list"
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
-            android:text="@string/atom_feed_list_empty"
+            android:text="The feed list is empty"
             >
         </TextView>
             
     </FrameLayout>
-	
-	<Button android:id="@+id/s2_new_feed"
+    
+    	<Button android:id="@+id/s2_new_feed"
 	    android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
 		android:text="New Feed"
 		>
 	</Button>
+
 </LinearLayout>

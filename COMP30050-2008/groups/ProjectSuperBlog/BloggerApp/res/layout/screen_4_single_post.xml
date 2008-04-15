@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+>
 
 <!-- java will grab the name of the post from gData and store it in the blog_post_title variable. it will be displayed here. -->
 	<TextView android:id="@+id/s4_blog_post_title" 
