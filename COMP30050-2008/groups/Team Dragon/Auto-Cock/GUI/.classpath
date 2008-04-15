@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/lejos_nxj/lib/classes.jar"/>
+	<classpathentry kind="lib" path="C:/lejos_nxj/lib/pccomm.jar" sourcepath="C:/lejos_nxj/lib/pccomm.jar"/>
+	<classpathentry kind="lib" path="C:/lejos_nxj/3rdparty/lib/bluecove.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
