@@ -329,8 +329,10 @@ namespace Drought.GameStates
                     {
                         if (entity.isSelected())
                         {
-                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y);
-                            entity.setPath(p);
+                            bool pathFound;
+                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y, out pathFound);
+                            if (pathFound)
+                                entity.setPath(p);
                         }
                     }
                 }
