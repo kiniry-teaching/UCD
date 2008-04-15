@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /****************************************************************
 * 																*
 * install() - 													*
@@ -104,8 +104,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_onloan 
 	(
-		isbnUsername varchar(239) NOT NULL,
-		PRIMARY KEY(isbnUsername ),
+		isbnUsername varchar(44) NOT NULL,
+		PRIMARY KEY(isbnUsername),
 		date int
 	)";
 	mysql_query($sql,$con);	
@@ -115,9 +115,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 
 	$sql = "CREATE TABLE books_requests 
 	(
-		requestNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(requestNo),
-		isbnUsername text
+		isbnUsername varchar(44) NOT NULL,
+		PRIMARY KEY(isbnUsername)
 	)";
 	mysql_query($sql,$con);	
 	
@@ -126,9 +125,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	$sql = "CREATE TABLE books_returned 
 	(
-		returnNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(returnNo),
-		isbnUsername text
+		isbnUsername varchar(44) NOT NULL,
+		PRIMARY KEY(isbnUsername)
 	)";
 	mysql_query($sql,$con);	
 	
@@ -137,9 +135,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	
 	$sql = "CREATE TABLE books_review 
 	(
-		reviewNo bigint NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(reviewNo),
-		isbnUsername text,
+		isbnUsername varchar(44) NOT NULL,
+		PRIMARY KEY(isbnUsername),
 		rating int(5),
 		review text
 	)";
