@@ -99,8 +99,8 @@
     <Compile Include="Core\GameManager.cs" />
     <Compile Include="Input\DeviceInput.cs" />
     <Compile Include="World\LevelInfo.cs" />
-    <Compile Include="World\ParticleEmitter.cs" />
-    <Compile Include="World\PlaneParticleEmitter.cs" />
+    <Compile Include="Graphics\ParticleEmitter.cs" />
+    <Compile Include="Graphics\PlaneParticleEmitter.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Sun.cs" />
     <Compile Include="World\Terrain.cs" />
