@@ -29,4 +29,5 @@ public class HighScore implements HighScoreInterface {
     return score();
   }
 
+
 }
