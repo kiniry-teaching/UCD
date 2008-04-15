@@ -123,6 +123,7 @@ namespace Drought
 
         private void checkFullscreen() {
             if (!fullscreening && DeviceInput.getInput().isKeyPressed(GameKeys.TOGGLE_FULLSCREEN)) {
+                fullscreening = true;
                 if (graphics.IsFullScreen) {
                     graphics.PreferredBackBufferWidth = 800;
                     graphics.PreferredBackBufferHeight = 600;

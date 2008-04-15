@@ -100,7 +100,7 @@
     <Compile Include="Input\DeviceInput.cs" />
     <Compile Include="World\LevelInfo.cs" />
     <Compile Include="World\ParticleEmitter.cs" />
-    <Compile Include="World\PlainParticleEmitter.cs" />
+    <Compile Include="World\PlaneParticleEmitter.cs" />
     <Compile Include="World\Skybox.cs" />
     <Compile Include="World\Sun.cs" />
     <Compile Include="World\Terrain.cs" />
@@ -125,9 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Drought.xap" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Drought_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
