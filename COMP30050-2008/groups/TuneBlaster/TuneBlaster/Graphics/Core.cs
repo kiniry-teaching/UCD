@@ -24,12 +24,12 @@ namespace TuneBlaster_.Graphics
         public List<MovingBall> looseBalls;
         static float maxAcceleration = 0.05f;
         value colour;
-        
+        Vector3 pos;
 
         #endregion
 
         #region Main Methods (Core, Initialise, Draw, Update)
-        
+
         /*
          * Constructor for core
          */
@@ -55,11 +55,11 @@ namespace TuneBlaster_.Graphics
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            for (int i = 0; i < ballsSize; i++) 
+            for (int i = 0; i < ballsSize; i++)
             {
                 balls[i].Draw(gameTime);
             }
-            
+
             for (int i = 0; i < looseBallsSize; i++)
             {
                 looseBalls[i].Draw(gameTime);
@@ -74,7 +74,6 @@ namespace TuneBlaster_.Graphics
         {
             colour = value.none;
             for (int i = ballsSize - 1; i >= 0; i--)
-
             {
                 if (balls[i] != null)
                 {
@@ -102,12 +101,12 @@ namespace TuneBlaster_.Graphics
             oldRotation = rotation;
             SetKeyboardRotation(keyBoardState);
             SetControllerRotation(gamePadState);
-            for (int i = 0; i < ballsSize; i++) 
+            for (int i = 0; i < ballsSize; i++)
             {
                 balls[i].Move(rotation - oldRotation);
             }
             CheckLoose();
-            
+
             for (int i = 0; i < looseBallsSize; i++)
             {
                 looseBalls[i].Move();
@@ -175,37 +174,49 @@ namespace TuneBlaster_.Graphics
          */
         public void CheckExplosions()
         {
-
+            Vector3 ballSound;
             Vector2 where;
-      
+
             for (int i = 0; i < ballsSize; i++)
             {
                 if (balls[i] != null)
                 {
                     if (balls[i].numInContact > 2)
                     {
-                       balls[i].Destroy();
+                        balls[i].Destroy();
 
-                       where.X = balls[i].Position.X;
-                       where.Y = balls[i].Position.Y;
+                        where.X = balls[i].Position.X;
+                        where.Y = balls[i].Position.Y;
 
+                        ballSound = new Vector3(where.X, where.Y, 0f);
+                        setPos(ballSound);
 
-                       Engine.explosion.AddParticles(where);
-                       Engine.smoke.AddParticles(where);
-                       Engine.greenblast.AddParticles(where);
-                       Engine.purpleblast.AddParticles(where);
-                       Engine.redblast.AddParticles(where);
-                       Engine.blueblast.AddParticles(where);
-                       Engine.Score++;
-                       Engine.blast = true;
-                       Engine.blastTime = 30;
+                        Engine.explosion.AddParticles(where);
+                        Engine.smoke.AddParticles(where);
+                        Engine.greenblast.AddParticles(where);
+                        Engine.purpleblast.AddParticles(where);
+                        Engine.redblast.AddParticles(where);
+                        Engine.blueblast.AddParticles(where);
+                        Engine.Score++;
+                        Engine.blast = true;
+                        Engine.blastTime = 30;
 
 
                         //to put in code for explosion
-                      
+
                     }
                 }
             }
+        }
+
+        public void setPos(Vector3 v)
+        {
+            pos = v;
+        }
+
+        public Vector3 getPos()
+        {
+            return pos;
         }
 
 
@@ -272,6 +283,6 @@ namespace TuneBlaster_.Graphics
 
         }
 
-#endregion
+        #endregion
     }
 }

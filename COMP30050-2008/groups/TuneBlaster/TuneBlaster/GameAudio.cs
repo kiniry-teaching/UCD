@@ -23,15 +23,17 @@ namespace TuneBlaster_
 
         private AudioEngine musicEngine;
         private WaveBank musicWaveBank;
-        private SoundBank musicSoundBank;
-        private SoundBank pianoBank;
-        private SoundBank stringBank;
-        private SoundBank bellBank;
-        public Cue baseCue1, baseCue2;
-        public Cue pianoCue1, pianoCue2, pianoCue3, pianoCue4;
-        public Cue stringCue1, stringCue2, stringCue3, stringCue4;
-        public Cue bellCue1, bellCue2;
-        public Image.value ballColour;
+        private SoundBank musicSoundBank, pianoBank, stringBank, bellBank, ballBank;
+
+        Cue baseCue1, baseCue2;
+        Cue pianoCue1, pianoCue2, pianoCue3, pianoCue4;
+        Cue stringCue1, stringCue2, stringCue3, stringCue4;
+        Cue bellCue1, bellCue2;
+        Cue ballCue1;
+        Image.value ballColour;
+
+        public AudioListener listener;
+        public AudioEmitter emitter;
 
         #endregion
 
@@ -43,9 +45,12 @@ namespace TuneBlaster_
             //pianoBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Piano Bank.xsb");
             stringBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\String Bank.xsb");
             bellBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Bell Bank.xsb");
+            ballBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Ball Noise Bank.xsb");
+            listener = new AudioListener();
+            emitter = new AudioEmitter();
         }
 
-        #region Initialisation Methods (Initialise, resetBaseCues, resetBellCues, resetPianoCues, resetStringCues)
+        #region Initialisation Methods (Initialise, Cue Resetters)
 
         /// <summary>
         /// Plays the initial melody.
@@ -53,10 +58,19 @@ namespace TuneBlaster_
         public void Initialise()
         {
             resetBaseCues();
+            resetBallCues();
             //resetPianoCues();
             resetStringCues();
             resetBellCues();
             baseCue1.Play();
+        }
+
+        /// <summary>
+        /// Sets the cues equal to the specified files from the sound bank to make them ready to be played again.
+        /// </summary>
+        public void resetBallCues()
+        {
+            ballCue1 = ballBank.GetCue("Ball Noise 1");
         }
 
         /// <summary>
@@ -103,6 +117,14 @@ namespace TuneBlaster_
         #region Disposer Methods (disposePianoCues, disposeStringCues, disposeBellCues)
 
         /// <summary>
+        /// Dispose of all the ball noise cues in memory
+        /// </summary>
+        public void disposeBallCues()
+        {
+            ballCue1.Dispose();
+        }
+
+        /// <summary>
         /// Dispose of all the piano cues in memory
         /// </summary>
         public void disposePianoCues()
@@ -141,7 +163,13 @@ namespace TuneBlaster_
         /// </summary>
         public void InstrChanger(Image.value colour)
         {
-            Console.Write("New Thread");
+            disposeBallCues();
+            resetBallCues();
+
+            Console.Write("Listener: " + listener.Position + " Emitter: " + emitter.Position);
+            ballCue1.Apply3D(listener, emitter);
+            ballCue1.Play();
+
             Thread Alter = new Thread(new ParameterizedThreadStart(ChangeMelody));
             Alter.Start(colour);
         }
@@ -192,7 +220,7 @@ namespace TuneBlaster_
             if (baseCue1 != null && baseCue1.IsPlaying)
             {
                 baseCue1.Stop(AudioStopOptions.AsAuthored);
-                while (!baseCue1.IsStopped) {}
+                while (!baseCue1.IsStopped) { }
                 resetBaseCues();
                 baseCue2.Play();
             }
@@ -200,7 +228,7 @@ namespace TuneBlaster_
             else if (baseCue2 != null && baseCue2.IsPlaying)
             {
                 baseCue2.Stop(AudioStopOptions.AsAuthored);
-                while (!baseCue2.IsStopped) {}
+                while (!baseCue2.IsStopped) { }
                 resetBaseCues();
                 baseCue1.Play();
             }
@@ -365,12 +393,12 @@ namespace TuneBlaster_
                         disposePianoCues();
                         resetPianoCues();
                     }
-                    
+
                     // Wait until the base melody has finished.
                     while (!baseCue1.IsStopped && !baseCue2.IsStopped)
                     {
                         // TO DO
-                    }                                                                           
+                    }
                     pianoCue1.Play();                                                           // Play the piano now so that it is in sync.
                 }
 
@@ -396,7 +424,7 @@ namespace TuneBlaster_
                     while (!baseCue1.IsStopped && !baseCue2.IsStopped)
                     {
                         // TO DO
-                    }                                                                           
+                    }
                     stringCue1.Play();                                                          // Play the piano now so that it is in sync.
                 }
 
@@ -422,7 +450,7 @@ namespace TuneBlaster_
                     while (!baseCue1.IsStopped && !baseCue2.IsStopped)
                     {
                         // TO DO
-                    }                                                                           
+                    }
                     bellCue1.Play();                                                           // Play the bell now so that it is in sync.
                 }
 
@@ -438,6 +466,14 @@ namespace TuneBlaster_
         public void UpdateAudio()
         {
             musicEngine.Update();
+        }
+
+        /// <summary>
+        /// Sets the position of the ball that caused an explosion.
+        /// </summary>
+        public void setPosition(Vector3 pos)
+        {
+            emitter.Position = pos;
         }
     }
 }

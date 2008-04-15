@@ -24,14 +24,14 @@ namespace TuneBlaster_
 
     public class Engine : Microsoft.Xna.Framework.Game
     {
-        
+
         public GraphicsDeviceManager graphics;
         ContentManager content;
         public SpriteBatch spriteBatch;
 
         // a random number generator 
         public static Random Random = new Random();
-        
+
 
         Texture2D texture;
         Core core;
@@ -40,6 +40,8 @@ namespace TuneBlaster_
         Image background;
         GameAudio music;
         Image frame;
+        Vector3 cameraPos;
+        Vector3 ballPos;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 
         public static ColouredParticle explosion;
@@ -54,7 +56,7 @@ namespace TuneBlaster_
         SpriteFont lucidaConsole;
         Vector2 scorePosition = new Vector2(100, 50);
 
-    
+
         Image.value colour;
 
         public Engine()
@@ -64,11 +66,12 @@ namespace TuneBlaster_
             content = new ContentManager(Services);
             core = new Core();
             ballGenerator = new BallGenerator(core, this);
-            ball = new BallManager(core, this,ballGenerator);
+            ball = new BallManager(core, this, ballGenerator);
             background = new Image();
             frame = new Image();
             music = new GameAudio();
-            
+            cameraPos = new Vector3(400f, 300f, 0f);
+
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 720;
 
@@ -109,13 +112,14 @@ namespace TuneBlaster_
         /// </summary>
         protected override void Initialize()
         {
-            core.Initialise(new Vector2(150f, 150f), new Vector2(620f,360f), this);
-            background.Initialise(new Vector2(1200, 800), new Vector2(600,400), this);
+            core.Initialise(new Vector2(150f, 150f), new Vector2(620f, 360f), this);
+            background.Initialise(new Vector2(1200, 800), new Vector2(600, 400), this);
             ball.Initialise();
             ballGenerator.Initialise();
             frame.Initialise(new Vector2(1280, 720), new Vector2(640, 360), this);
             base.Initialize();
             music.Initialise();
+            music.listener.Position = cameraPos;
             //Content.RootDirectory = "Content";
         }
 
@@ -131,7 +135,7 @@ namespace TuneBlaster_
             if (loadAllContent)
             {
                 spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-                
+
                 texture = content.Load<Texture2D>(@"Resources\Textures\space-background");
                 background.LoadGraphicsContent(spriteBatch, texture);
                 texture = content.Load<Texture2D>(@"Resources\Textures\Core");
@@ -150,7 +154,7 @@ namespace TuneBlaster_
 
 
 
-      
+
 
 
 
@@ -181,36 +185,49 @@ namespace TuneBlaster_
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-           colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+            colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+            ballPos = core.getPos();
 
-           if (colour == Image.value.green)
-               music.InstrChanger(Image.value.green);
+            if (colour == Image.value.green)
+            {
+                music.setPosition(ballPos);
+                music.InstrChanger(Image.value.green);
+            }
 
-           /* if (colour == Image.value.blue)
-               music.InstrChanger(Image.value.blue); */
+            /*   if (colour == Image.value.blue) {
+                     music.setPosition(ballPos);
+                     music.InstrChanger(Image.value.blue);
+                 } */
 
-           if (colour == Image.value.red)
-               music.InstrChanger(Image.value.red);
+            if (colour == Image.value.red)
+            {
+                music.setPosition(ballPos);
+                music.InstrChanger(Image.value.red);
+            }
 
-           if (colour == Image.value.purple)
-               music.InstrChanger(Image.value.purple);
-
-
-           if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
-           if (blastTime > 0) blastTime--;
-           if (blastTime == 0) {
-
-               blast = false;
-               GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
-           
-           }
+            if (colour == Image.value.purple)
+            {
+                music.setPosition(ballPos);
+                music.InstrChanger(Image.value.purple);
+            }
 
 
+            if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+            if (blastTime > 0) blastTime--;
+            if (blastTime == 0)
+            {
 
-           ballGenerator.Update();
-           ball.Update(gameTime);
-           music.UpdateAudio();
-           base.Update(gameTime);
+                blast = false;
+                GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
+
+            }
+
+
+
+            ballGenerator.Update();
+            ball.Update(gameTime);
+            music.UpdateAudio();
+            base.Update(gameTime);
         }
 
 
