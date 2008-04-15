@@ -99,9 +99,9 @@ namespace Drought.GameStates
 
             soundManager.setListener(camera);
 
-            modelLoader = new ModelLoader(getContentManager(), getGraphics()); 
-            
-            skybox = new Skybox(camera, sun, modelLoader.getModel3D(modelType.Skybox));
+            skybox = new Skybox(camera);
+
+            modelLoader = new ModelLoader(getContentManager(), getGraphics());
 
             lineTool = new LineTool(getGraphics());
 
@@ -122,34 +122,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            localEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             if (!hosting) uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
         }
 
         public override void loadContent()
@@ -157,16 +157,20 @@ namespace Drought.GameStates
             modelEffect = getContentManager().Load<Effect>("EffectFiles/model");
 
             terrain.loadContent();
+
+            skybox.loadContent(getContentManager(), getGraphics());
         }
 
         public override void background()
         {
             //Console.WriteLine("NetLevelState in background");
+            //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void foreground()
         {
             //Console.WriteLine("NetLevelState in foreground");
+            //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void update(GameTime gameTime)
@@ -297,8 +301,12 @@ namespace Drought.GameStates
                 if (mousePoint != Terrain.BAD_POSITION) {
                     foreach (MovableEntity entity in localEntities) {
                         if (entity.isSelected()) {
-                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y);
-                            entity.setPath(p);
+                            //entity.setDestination(mousePoint);
+                            //entity.computeNewPath(heightMap, normalMap);
+                            bool pathFound;
+                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y, out pathFound);
+                            if (pathFound)
+                                entity.setPath(p);
                         }
                     }
                 }
@@ -317,7 +325,7 @@ namespace Drought.GameStates
                 if (mousePoint != Terrain.BAD_POSITION) {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(dummyPath, levelInfo), terrain, 0);
+                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(dummyPath, levelInfo), terrain, 0);
                     localEntities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -356,7 +364,7 @@ namespace Drought.GameStates
                         Vector3 diff = a.getPosition() - b.getPosition();
                         Vector3 diffRad = diff;
                         diffRad.Normalize();
-                        diffRad *= a.radius + b.radius;
+                        diffRad *= a.getRadius() + b.getRadius();
                         Vector3 displacement = diffRad - diff;
                         a.setPosition(a.getPosition() + displacement/2);
                         b.setPosition(a.getPosition() - displacement/2);

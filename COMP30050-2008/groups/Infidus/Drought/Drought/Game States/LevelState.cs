@@ -54,7 +54,7 @@ namespace Drought.GameStates
 
         private AStar aStar;
 
-        private PlaneParticleEmitter rain;
+        private PlainParticleEmitter rain;
 
         public LevelState(IStateManager manager, DroughtGame game, Level aLevel) :
             base(manager, game)
@@ -82,7 +82,7 @@ namespace Drought.GameStates
 
             aStar = new AStar(levelInfo);
 
-            rain = new PlaneParticleEmitter(512,256,new Vector3(256,128,200), new Vector3(0, 0, 0), new Vector3(3f, 0, -19f), Color.LightBlue.ToVector4(), 100000, 9);
+            rain = new PlainParticleEmitter(512,256,new Vector3(256,128,200), new Vector3(0, 0, 0), new Vector3(3f, 0, -9), Color.SkyBlue.ToVector4(), 10000, 9);
 
             sun = new Sun(new Vector3(0, -200, 200));
 
@@ -92,9 +92,9 @@ namespace Drought.GameStates
 
             soundManager.setListener(camera);
 
-            modelLoader = new ModelLoader(getContentManager(), getGraphics()); 
-            
-            skybox = new Skybox(camera, sun, modelLoader.getModel3D(modelType.Skybox));
+            skybox = new Skybox(camera);
+
+            modelLoader = new ModelLoader(getContentManager(), getGraphics());
 
             lineTool = new LineTool(getGraphics());
             
@@ -117,48 +117,48 @@ namespace Drought.GameStates
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw + i, hh));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new Attacker(this, modelLoader.getModel(modelType.Truck), modelLoader.getModelTextures(modelType.Truck), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw - i, hh));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new Scout(this, modelLoader.getModel(modelType.Car), modelLoader.getModelTextures(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw, hh + i));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw, hh - i));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw + i, hh + i));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw - i, hh - i));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw + i, hh - i));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(heightMap.getPositionAt(hw - i, hh + i));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
         
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(1, 1));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, 0));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(0, levelInfo.getHeight() - 1));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, levelInfo.getHeight() - 1));
-            entities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
+            entities.Add(new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(nodes, levelInfo), terrain, uid++));
 
         }
 
@@ -169,16 +169,20 @@ namespace Drought.GameStates
             terrain.loadContent();
 
             rain.loadContent(getContentManager());
+
+            skybox.loadContent(getContentManager(), getGraphics());
         }
 
         public override void background()
         {
             //Console.WriteLine("LevelState in background");
+            //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void foreground()
         {
             //Console.WriteLine("LevelState in foreground");
+            //throw new Exception("The method or operation is not implemented.");
         }
 
         public override void update(GameTime gameTime)
@@ -188,9 +192,11 @@ namespace Drought.GameStates
             sun.update(gameTime);
             camera.update(gameTime);
             terrain.update(gameTime);
-            rain.update(gameTime);
+            //rain.update(gameTime);
 
             updateUnits();
+
+            //Console.WriteLine(Vector3.Transform(new Vector3(0, 0, heightMap.getHeight(0, 0)), camera.getViewMatrix() * camera.getProjectionMatrix()).Z);
         }
 
         private void updateInput()
@@ -311,8 +317,12 @@ namespace Drought.GameStates
                 if (mousePoint != Terrain.BAD_POSITION) {
                     foreach (MovableEntity entity in entities) {
                         if (entity.isSelected()) {
-                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y);
-                            entity.setPath(p);
+                            //entity.setDestination(mousePoint);
+                            //entity.computeNewPath(heightMap, normalMap);
+                            bool pathFound;
+                            Path p = aStar.computePath(entity.getPosition().X, entity.getPosition().Y, mousePoint.X, mousePoint.Y, out pathFound);
+                            if(pathFound)
+                                entity.setPath(p);
                         }
                     }
                 }
@@ -331,7 +341,7 @@ namespace Drought.GameStates
                 if (mousePoint != Terrain.BAD_POSITION) {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel3D(modelType.Tank), new Path(dummyPath, levelInfo), terrain, 0);
+                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel(modelType.Tank), modelLoader.getModelTextures(modelType.Tank), new Path(dummyPath, levelInfo), terrain, 0);
                     entities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -374,7 +384,7 @@ namespace Drought.GameStates
                         if (diff.Length() != 0)
                             diff.Normalize();
 
-                        diff *= a.radius + b.radius;
+                        diff *= a.getRadius() + b.getRadius();
                         Vector3 displacement = diff - dist;
                         Vector3 aNewPos = a.getPosition() + displacement / 2;
                         aNewPos.Z = heightMap.getHeight(aNewPos.X, aNewPos.Y);
@@ -385,11 +395,9 @@ namespace Drought.GameStates
                         List<Vector3> aPos = new List<Vector3>();
                         aPos.Add(a.getPosition());
                         a.setPath(new Path(aPos, levelInfo));
-                        a.hurt(1);
                         List<Vector3> bPos = new List<Vector3>();
                         bPos.Add(b.getPosition());
                         b.setPath(new Path(bPos, levelInfo));
-                        b.hurt(1);
                     }
                 }
             }
@@ -431,7 +439,7 @@ namespace Drought.GameStates
 
             terrain.render(sun);
             skybox.render();
-            rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
+            //rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
 
             for (int i = 0; i < entities.Count; i++)
                 entities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
