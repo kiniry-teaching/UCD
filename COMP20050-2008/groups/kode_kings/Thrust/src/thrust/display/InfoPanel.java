@@ -16,4 +16,19 @@ package thrust.display;
  */
 public class InfoPanel extends AbstractInfoPanel {
 
+  public boolean displayed() {
+
+  }
+
+  public void display() {
+
+  }
+
+  public void hide() {
+
+  }
+
+  public void update() {
+
+  }
 }
