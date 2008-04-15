@@ -7,27 +7,26 @@ List of things that need doing:
 
 Bugs:
 ----------
- - strips of triangles missing from the terrain(!)
- - Projecting to surface is kind of borked
-, can miss hills
- - Silly fullscreen behaviour, Render takes too long resulting in choppiness
  - Sounds keep playing if you press Ctrl+R to exit the level
- - Zooming "nuance"
- - The map "Square" is insanely laggy on my laptop (Eugene), presumably from drawing the water texture over and over
- - Switching to fullscreen doesn't change the size of the menu items
-    - We already discussed that there would be no options like this in game but to fix it we need to rebuild the menu ~Rashid
- - Switching to fullscreen doesn't work in-game!
-    - same as above and we'd need to reset the graphics device to change the aspect ratio and reload all content ~Rashid
  - new Entities added in one networked game don't show up in the other, deletes don't work either
+ - Seperate Infobard rendering to entities
  - Skybox still uses hardcoded lighting values
 
 New Features:
 ----------
+ - Base
+ - Energybards and car explosion.
+ - Energy fields -  health, attack radius, damage, water capacity, speed
+ - rain on and off with day/night
+ - Camera Restriction
+ - Clock syncing tests - day/night
+ - Update/Draw tests 
+ - Water rendering && Detection
+ - Models (tanker?)
+ - Mipmapping
+ - Networking.
  - Health bars above units, unit health in general - EUGENE'S CURRENT GOAL
- - Pathfinding - RASHID'S CURRENT GOAL
- - Water pooling - EOIN'S CURRENT GOAL
  - Lobby State
- - Particle System
  - Weather
  
  Debug Features:
