@@ -32,19 +32,9 @@ MidiPlayer::~MidiPlayer() {
 }
 
 
-bool MidiPlayer::initialize(bool recording) {
+bool MidiPlayer::initialize(bool recording, string portNm) {
 	// RtMidiOut constructor
 	midiout_ = new RtMidiOut();
-  	
-  	// Call function to select port.
-    //NOTE: THIS CHOICE OF PORTS ONLY WORKS FOR LINUX WHEN USING FLUIDSYNTH
-    //Output port #1: Synth input port (5597:0)
-    //TODO: we have to do this ourselves...
-    //1. get number ports available
-    //2. check each for some sort of ID
-    //3. if we find the fluidsynth one, open that
-  	/*cout << "\nWould you like to open a virtual output port? [y/N] ";
-    */
   	
 #if defined(__LINUX_ALSASEQ__)
 
@@ -61,23 +51,17 @@ bool MidiPlayer::initialize(bool recording) {
   	else {
     	for (i=0; i<nPorts; i++) {
         	portName = midiout_->getPortName(i);
-            cout << "Checking port number " << i << "has name>"<< portName << "<"<< endl;
-        	//cout << "  Output port #" << i << ": " << portName << '\n';
-            
-            //only compare first 16 characters, assuming most recent synth port is last...
-            if (portName.compare(0, 16, "Synth input port") == 0){
+            if (portName.compare(0, portNm.length(), portNm.data()) == 0){
                 portNumber = i;
-                cout << "  Output port #" << i << ": " << portName << '\n';
             }
             
     	}
   	}
-  	cout << "\n";
-  		midiout_->openPort(portNumber);
-        
-  		isConnected_ = true;
+	midiout_->openPort(portNumber);
+	isConnected_ = true;
 # endif
-#if defined(__WINDOWS_MM__)
+#if defined(__WINDOWS_MM__)//for testing purposes only, since some are using Windows
+    cout << "\nWould you like to open a virtual output port? [y/N] ";
     string keyHit;
     getline(cin, keyHit);
     if (keyHit == "y") {
@@ -89,7 +73,7 @@ bool MidiPlayer::initialize(bool recording) {
         }
         isConnected_ = true;
     }
-    else {*/
+    else {
     string portName;
     unsigned int i = 0, nPorts = midiout_->getPortCount();
     if (nPorts == 0) {
@@ -148,9 +132,9 @@ void MidiPlayer::panic(ulong deltaTime) {
         try {
 		  leadChannel_->release(deltaTime);
           accompanyChannel_->release(deltaTime);
-          chordChannel_->release(chords_[0]);        
-          chordChannel_->release(chords_[1]);
-          chordChannel_->release(chords_[2]);
+          chordChannel_->release(chords_[0], deltaTime);        
+          chordChannel_->release(chords_[1], deltaTime);
+          chordChannel_->release(chords_[2], deltaTime);
           percussionChannel_->release(deltaTime);
         }
         catch (RtError &error) {}
@@ -166,9 +150,9 @@ void MidiPlayer::releaseChannel(Channels channel, ulong deltaTime) {
             else if(channel == CHANNEL_ACCOMPANY)
                 accompanyChannel_->release(deltaTime);
             else if(channel == CHANNEL_CHORD){
-                chordChannel_->release(chords_[0]);        
-                chordChannel_->release(chords_[1]);
-                chordChannel_->release(chords_[2]);
+                chordChannel_->release(chords_[0], deltaTime);        
+                chordChannel_->release(chords_[1], deltaTime);
+                chordChannel_->release(chords_[2], deltaTime);
             }
             else if(channel == CHANNEL_PERCUSSION)
                 percussionChannel_->release(deltaTime);
@@ -180,10 +164,6 @@ void MidiPlayer::releaseChannel(Channels channel, ulong deltaTime) {
 bool MidiPlayer::setRecording(bool setOn) {
 	return false;
 }
-	
-	
-//TODO: find out which ones we will use
-void MidiPlayer::sendChannelMode(uchar mode ) {}
 	
 void MidiPlayer::sendControlChange(Channels channel, uchar function, uchar value) {
 	if (isConnected_) {
@@ -217,7 +197,6 @@ void MidiPlayer::sendProgramChange(Channels channel, uchar program) {
     }
 }
 	
-//TODO: figure out what to do with the octave
 void MidiPlayer::playLead(uchar pitch, uchar velocity, ulong deltaTime) {
     if(isConnected_) 
         try {

@@ -17,10 +17,8 @@ As for now (we might try to simplify this in the future):
 2.) download the soundfont "PC51f.sf2" and place it in some directory 
 	you'll find later.
 3.) start fluidsynth in a terminal window, by typing:
-	$ fluidsynth -m alsa_seq -a alsa
-4.) load the soundfont by typing:
-	> load <path-to-soundfont>PC51f.sf2
-		(Don't worry about any error messages, as long as it says in 
+	$ fluidsynth <path-to-soundfont>PC51f.sf2 -m alsa_seq -a alsa
+	(Don't worry about any error messages, as long as it says in 
 	 	 the end it's laoded...)
 	IMPORTANT: DON'T CLOSE THIS TERMINAL WINDOW UNTIL FINISHED WITH
 				ANY MIDI OUTPUT!

@@ -31,7 +31,6 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 }
 
 Channel::~Channel() {
-    release(0);
 }
 
 // Returns the mode of the specified function. 

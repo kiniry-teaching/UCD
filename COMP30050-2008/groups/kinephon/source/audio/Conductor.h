@@ -17,7 +17,7 @@ enum Rhythm { RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM
  * Which notes the chords should be based on.
  * Assuming a chord will be composed of 3 notes.
  */
-enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_ONEOFF, CHORDS_NONE };
+enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_123, CHORDS_NONE };
 
 /** 
  * What dynamics should be used, i.e. loud or quiet.
@@ -65,9 +65,10 @@ public:
 	 * If this method returns false, all subsequent calls to the other classes
 	 * will not have any effect. 
      * @param recording true if the music should be recorded to a MIDI file
+     * @param portName name of port to be used (varies depending on synthesizer)     
 	 * @return true if connection established, false if no connection to a MIDI port
 	 */
-	bool initialize(bool recording);
+	bool initialize(bool recording, string portName);
 	
 	/**
 	 * Produces a sound based on the settings specified previously.
@@ -139,8 +140,9 @@ public:
 	 * @param note pitch of the note
      * @param octave play the note in this octave
 	 * @param velocity velocity of the note
+     * @param deltaTime time difference when this note should be played
 	 */
-	void playImmediate(uchar note, int octave, uchar velocity);
+	void playImmediate(uchar note, int octave, uchar velocity, ulong deltaTime);
 	
     /**
      * Returns the currently set instruments.
@@ -149,11 +151,10 @@ public:
     Instrument getInstrument();
     
     /**
-     * Returns the current accompaniment parameter.
-     * If no accompaniment is set, the return value will be -1.
-     * @return the accompaniment parameter
+     * Returns whether accompaniment is turned on.
+     * @return true if accompaniment is set
      */
-    int getAccompaniment();
+    bool getAccompaniment();
     
     /**
      * Returns the currently set chords. 
@@ -241,9 +242,8 @@ public:
 	 * e.g. one can play always the third or fourth. For a more interesting piece, these intervals
 	 * can be varied.
 	 * @param isOn true if accompaniment is set on
-	 * @param paramOne to be decided
 	 */
-	void setAccompaniment(bool isOn, int paramOne);
+	void setAccompaniment(bool isOn);
 	
 	/**
 	 * Sets whether chords are to be played.
@@ -276,19 +276,6 @@ public:
 	 * @param rhythm selected rhythm 
 	 */
 	void setRhythm(bool isOn, Rhythm rhythm);
-	
-	/**
-	 * Modifies the basic rhythm.
-	 * The parameters will specify the modification.
-	 * This function will be used to make the rhythm of the piece more interesting, 
-	 * i.e. less monotonous, but ensuring that the changes made will be appropriate.
-	 * Rhythm will be automatically set ON, if this has not happened previously.
-	 * Note that the definitive structure will be based on further 
-	 * development of the project.
-	 * @param paramOne to be decided
-	 * @param paramTwo to be decided
-	 */
-	void modifyRhythm(int paramOne, int paramTwo);
 	
 	/**
 	 * Sets the dynamics for the next note.
@@ -394,6 +381,7 @@ public:
 	
 private:
 	MidiPlayer *midi_;		//midi output
+    int noNoteCount_;
 	int timeStep_;
 	int melodyStep_;
     int melodyLength_;      //save length for safety check, if vector has invalid format
@@ -411,12 +399,12 @@ private:
 	bool hasReverb_;
 	
     uchar modulation_;
-    int accompaniment_;//TODO: temporary solution till we come up with something better
     int harmony_;
     
     
 	Rhythm rhythm_;
 	Chords chords_;
+    uchar currentChord_;
 	Dynamics dynamics_;
     Instrument instrument_;
 };

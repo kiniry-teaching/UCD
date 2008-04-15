@@ -48,10 +48,11 @@ public:
 	/**
 	 * Attempts to connect to an available MIDI port.
 	 * If more than one port is available, then a choice is given.
-     * @param recording true if music piece is to be recorded       
+     * @param recording true if music piece is to be recorded  
+     * @param portName name of port to be used (varies depending on synthesizer)     
 	 * @return true if connection has been established, false if an error occured     
 	 */
-	bool initialize(bool recording);
+	bool initialize(bool recording, string portName);
 	
 	/**
 	 * Releases all notes except for the chords.
@@ -74,20 +75,6 @@ public:
 	 * @return true if recording is ready/file has been closed
 	 */
 	bool setRecording(bool setOn);
-	
-	/**
-	 * Sends a Channel Mode message affecting all channels.
-	 * The following options are available: 
-	 * #121 Local Control  Off
-	 * #122 Local Control On
-	 * #123 All Notes Off
-	 * #124 Omni Mode Off
-	 * #125 Omni Mode ON
-	 * #126 Mono mode On
-	 * #127 Poly Mode On
-	 * @param mode messageto be sent      
-	 */
-	void sendChannelMode(uchar mode );
 	
 	/**
 	 * Sends a Control Change message to one channel.
