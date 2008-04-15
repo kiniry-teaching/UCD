@@ -14,6 +14,28 @@ package thrust.display;
  * @author Colin Casey (colin.casey@org.com)
  * @version 15 April 2008
  */
-public class HighScoreDisplay implements AbstractHighScore {
+public class HighScoreDisplay extends AbstractHighScoreDisplay {
+
+  //HighScore my_high_scores = new HighScore();
+
+  public boolean displayed()
+  {
+
+  }
+
+  public void display()
+  {
+
+  }
+
+  public void hide()
+  {
+
+  }
+
+  public void add_new_high_score()
+  {
+
+  }
 
 }
