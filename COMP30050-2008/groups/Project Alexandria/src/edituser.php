@@ -6,6 +6,7 @@ include("include/header.php"); //page header
  *	e.g userlevel, etc
  */
 include("include/adminfunctions.php");
+include("include/global_user_variables.php");
 /*the above inclusion is to ensure that only admins may access this page*/
 	//TODO - code
 ?>
@@ -22,8 +23,6 @@ Re-Enter New Username:	<input type="text" name="username2" /><br />
 <?php
 $username1 = $_POST[username1];
 $username2 = $_POST[username2];
-//$email1 = $_POST[e-mail1];
-//$email2 = $_POST[e-mail2];
 
 if($username1==$username2)
 {$username3=$username1}
@@ -38,19 +37,22 @@ echo($password1." - ".$password2);
 <b>Change Userlevel:</b><br />
 WARNING: Changing the userlevel will change a users access levels to the Library.<br /> 
 <input type="radio" name="userlevel" value="user">General User (Default Setting)<br />
+<input type="radio" name="userlevel" value="librarian">Librarian<br />
 <input type="radio" name="userlevel" value="admin">Administrator<br />
 <input type="radio" name="userlevel" value="banned">Banned<br />
 <input type="submit" />
 </form>
 </div>
 <?php
-$userlevel1 = $_POST[userlevel];
+$userlevel = $_POST[userlevel];
 
-if($userlevel1=="user")
+if($userlevel=="user")
 {$userlevel=1;}
-if($userlevel1=="admin")
+if($userlevel=="admin")
 {$userlevel=9;}
-if($userlevel1=="banned")
+if($userlevel=="librarian")
+{$userlevel=8;}
+if($userlevel=="banned")
 {$userlevel=0;} 
 
 function editUserLevel($username, $userlevel){
@@ -66,13 +68,12 @@ function editUserLevel($username, $userlevel){
 	{echo($username." has been made a General User!");}
 	if($userlevel==9)
 	{echo($username." has been made an Administrator!");}
+	if($userlevel==8)
+	{echo($username." has been made a Librarian!");}
 	if(userlevel==0)
 	{echo($username." has been banned!");}				
 	}
 
 }
-
-//TODO - more code
-
 include("include/footer.php"); //page footer
 ?>

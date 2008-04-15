@@ -1,34 +1,52 @@
 
 <?php
-login($enteredUsername, $enteredPassword)
+
+function login($enteredUsername, $enteredPassword)
 
 /*	Master method for Login
 *	This method will call checkMatch, 
 *	which will in turn call checkName() & checkPassword()
 */
+
+//
+
+	/* 
+	 *	Username and password correct, register session variables 
+	 */
+   $_POST['user'] = stripslashes($_POST['user']);
+   $_SESSION['username'] = $username;
+   $_SESSION['password'] = $md5pass;
+
+   /*
+   	*	sets a cookie if the user has selected the remember me option on the login form
+ 	*/
+   if($remember=="true"){
+      setcookie("cookname", $_SESSION['username'], time()+60*60*24*100, "/");
+      setcookie("cookpass", $_SESSION['password'], time()+60*60*24*100, "/");
+   }
+
 {
 }
 
-checkMatch($enteredUsername, $enteredPassword){
+function checkMatch($enteredUsername, $enteredPassword){
 /*
 *	compares the username and the password that were entered to see if they match those stored in the database
 */
 }/*checkMatch*/
 
-checkName($enteredUsername){
+function checkName($enteredUsername){
 /*
 * 	checks to see if the entered name exsists in the database
 *	if it exsists the checkPassword method is called
 */
 }/*checkName*/
 
-checkPassword($username, $enteredUsername){
+function checkPassword($username, $enteredUsername){
 /*
 *	checks to see if the entered password matches that which corresponds to the entered username
 */
 }/*checkPassword*/
 
-getName($enteredUsername){} //may not be needed
-getPassword($enteredUsername){} //may not be needed
+
 
 ?>

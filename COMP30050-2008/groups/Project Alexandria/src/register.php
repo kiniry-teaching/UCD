@@ -4,7 +4,6 @@ include("include/header.php"); //page header
 
 ?>
 <div>
-
 <form action="register.php" method="post">
 Enter a Username: <input type="text" name="username" /><br />
 Enter your e-mail: <input type="text" name="e-mail1" /><br />
@@ -16,6 +15,8 @@ Re-Enter your password: <input type="password" name="password2" /><br />
 </form>
 </div>
 <?php
+include("include/user_variables.php");
+
 $username = $_POST[username];
 $email1 = $_POST[email1];
 $email2 = $_POST[email2];
@@ -33,11 +34,11 @@ else if($email1 != $email2) //compares the two entered email addresses
 else if($password1 != $password2) //compares the two entered passwords
 	{echo "passwords do not match, please try again";}
 else{
-	if($username==$ADMIN_NAME)
-	{$userlevl=='9';}else{$userlevel="1";}
+	if($username==ADMIN)
+	{$userlevel='9';}else{$userlevel="1";}
 		/*	sets the userlevel to 1(standard user) 
-		*	if the username given matches the given name for the admin then that user is given the admin userlevel
-		*	as the admin will be the first registered user they should register under the given name to gain admin functions
+		*	if the username given is admin then that user is given the admin userlevel
+		*	the admin should be the first registered user to attempt to use the name adminfunctions
 		*/
 	
 	function createUser($username, $password1, $userlevel, $e-mail1)

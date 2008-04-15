@@ -15,6 +15,16 @@ else
 {return false;}
 }
 
+function isLibrarian($username){
+include("connection.php"); //Connects to database
+	$result = mysql_query("SELECT userlevel FROM users
+		WHERE username='$username'");
+if($result==8)	//A Librarian has a userlevel of 8
+{return true;}
+else
+{return false;}
+}
+
 function isBanned($username){
 include("connection.php"); //Connects to database
 	$result = mysql_query("SELECT userlevel FROM users
