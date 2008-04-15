@@ -182,7 +182,7 @@ namespace TuneBlaster_.Graphics
             {
                 if (balls[i] != null)
                 {
-                    if (balls[i].numInContact > 4)
+                    if (balls[i].numInContact > 2)
                     {
                        balls[i].Destroy();
 
@@ -197,7 +197,8 @@ namespace TuneBlaster_.Graphics
                        Engine.redblast.AddParticles(where);
                        Engine.blueblast.AddParticles(where);
                        Engine.Score++;
-
+                       Engine.blast = true;
+                       Engine.blastTime = 30;
 
 
                         //to put in code for explosion

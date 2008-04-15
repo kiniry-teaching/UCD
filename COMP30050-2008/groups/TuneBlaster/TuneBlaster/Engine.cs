@@ -48,7 +48,8 @@ namespace TuneBlaster_
         public static ColouredParticle greenblast;
         public static ColouredParticle purpleblast;
         public static ColouredParticle blueblast;
-
+        public static bool blast = false;
+        public static int blastTime = 0;
         public static int Score;
         SpriteFont lucidaConsole;
         Vector2 scorePosition = new Vector2(100, 50);
@@ -194,6 +195,18 @@ namespace TuneBlaster_
            if (colour == Image.value.purple)
                music.InstrChanger(Image.value.purple);
 
+
+           if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+           if (blastTime > 0) blastTime--;
+           if (blastTime == 0) {
+
+               blast = false;
+               GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
+           
+           }
+
+
+
            ballGenerator.Update();
            ball.Update(gameTime);
            music.UpdateAudio();
@@ -221,7 +234,7 @@ namespace TuneBlaster_
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend,
                  SpriteSortMode.Immediate, SaveStateMode.None);
             spriteBatch.DrawString(lucidaConsole, "Score: " + Score,
-                                   scorePosition, Color.LightGreen);
+                                   scorePosition, Color.Black);
             spriteBatch.End();
 
 
