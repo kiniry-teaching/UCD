@@ -1,0 +1,2 @@
+INDEX VERSION 1.121+/home/2006/smurphy/users/smurphy/Thrust/.metadata/.plugins/org.eclipse.jdt.core
+1521663450.index

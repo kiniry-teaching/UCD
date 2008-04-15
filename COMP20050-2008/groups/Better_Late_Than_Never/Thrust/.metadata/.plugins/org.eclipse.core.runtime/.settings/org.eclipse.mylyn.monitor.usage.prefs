@@ -1,0 +1,9 @@
+#Mon Apr 14 18:09:14 IST 2008
+org.eclipse.mylyn.monitor.ui.enabled=true
+org.eclipse.mylyn.monitor.enable.submission=true
+eclipse.preferences.version=1
+org.eclipse.mylyn.monitor.submission.initially.enabled=true
+org.eclipse.mylyn.monitor.monitoring.started=true
+org.eclipse.mylyn.monitor.ui.events.observed=306
+org.eclipse.mylyn.monitor.initially.enabled=true
+org.eclipse.mylyn.monitor.ui.upload.previousTransmit=1208188502964
