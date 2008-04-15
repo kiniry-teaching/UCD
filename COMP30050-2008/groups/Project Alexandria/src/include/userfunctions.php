@@ -36,6 +36,18 @@ include("connection.php"); //Connects to database
 	{return true;}
 }
  
+function getUserInfo($username){
+	include("connection.php"); //Connects to the database
+	
+	$result = mysql_query("SELECT * FROM users
+		WHERE username='$username'");
+
+	while($row = mysql_fetch_array($result)){
+		$username=$row['username'];
+		$userlevel=$row['userlevel'];
+		$dateregistered=$row['timestamp'];
+	}
+ 
 function addFriend($ownusername, $friendusername){
 /*
 	addfriend
