@@ -29,13 +29,13 @@ public abstract class AbstractGameState {
    * Stores a bonus value.
    */
   private int my_bonus;
-  //@ ensures 0 <= bonus;
+  //@ ensures 0 <= my_bonus;
 
   /**
    * Stores a fuel value.
    */
   private int my_fuel;
-  //@ ensures 0 <= myfuel;
+  //@ ensures 0 <= my_fuel;
 
   /**
    * Stores the current score.
@@ -46,8 +46,8 @@ public abstract class AbstractGameState {
   /**
    * Stores the highScore in an array.
    */
-  private HighScoreInterface the_highScore[];
-  //@ ensures 0 <= highScore;
+  private HighScoreInterface[] some_highScore;
+  //@ ensures 0 <= some_highScore[];
 
   /**
    * Stores the current number of lives.
@@ -65,7 +65,7 @@ public abstract class AbstractGameState {
     return my_bonus;
   }
   //@ ensures 0 <= \result;
-  
+
   /**
    * @param the_new_value This is your new value.
    */
@@ -151,7 +151,7 @@ public abstract class AbstractGameState {
   //@ ensures \nonnullelements(\result);
   public /*@ pure @*/ HighScoreInterface[] high_scores()
   {
-    return the_highScore;
+    return some_highScore;
   }
 
   /*@ invariant (\forall int i, j; 0 <= i & i < j & j < HIGH_SCORE_COUNT &
@@ -169,8 +169,11 @@ public abstract class AbstractGameState {
    */
   //@ requires 0 <= the_index & the_index < HIGH_SCORE_COUNT;
   //@ ensures \result.equals(high_scores()[the_index]);
-  public abstract /*@ pure non_null @*/
-  HighScoreInterface high_score(int the_index);
+  public /*@ pure non_null @*/
+  HighScoreInterface high_score(final int the_index)
+  {
+    return some_highScore[the_index];
+  }
 
   /**
    *
@@ -180,8 +183,18 @@ public abstract class AbstractGameState {
   /*@ ensures \result <==> high_scores()[0].score() >= the_high_score.score() &
     @                      the_high_score.score() >= high_scores()[HIGH_SCORE_COUNT-1].score();
     @*/
-  public abstract /*@ pure @*/
-  boolean new_high_score(/*@ non_null @*/ HighScoreInterface the_high_score);
+  public /*@ pure @*/ boolean
+  new_high_score(final HighScoreInterface the_highscore)
+  {
+    for (int j = 0; j < some_highScore.length; j++)
+    {
+      if (some_highScore[j].score() < the_highscore.score())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /**
    * @param the_new_high_score Insert this score into the high score table.
@@ -190,8 +203,31 @@ public abstract class AbstractGameState {
     @         (\exists int i; 0 <= i & i < HIGH_SCORE_COUNT;
     @          high_score(i).equals(the_new_high_score));
     @*/
-  public abstract void
-  add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score);
+  public void
+  add_high_score(/*@ non_null @*/ final HighScoreInterface the_new_high_score)
+  {
+    /**
+     * the found variable is true if the value in
+     * score variable in the HighScoreInterface array
+     * is less than the current score.
+     */
+    boolean found = false;
+    if (new_high_score(the_new_high_score))
+    {
+      for (int j = 0; j < some_highScore.length; j++)
+      {
+        if (some_highScore[j].score() < the_new_high_score.score() && !found)
+        {
+          some_highScore[j] = the_new_high_score;
+          found = true;
+        }
+        if (found)
+        {
+          some_highScore[j - 1] = some_highScore[j];
+        }
+      }
+    }
+  }
 
   /**
    * A pair of a sequence of three initials and a score.
