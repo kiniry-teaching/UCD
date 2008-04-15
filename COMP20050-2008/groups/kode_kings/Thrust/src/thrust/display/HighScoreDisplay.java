@@ -18,23 +18,19 @@ public class HighScoreDisplay extends AbstractHighScoreDisplay {
 
   //HighScore my_high_scores = new HighScore();
 
-  public boolean displayed()
-  {
+  public boolean displayed() {
 
   }
 
-  public void display()
-  {
+  public void display() {
 
   }
 
-  public void hide()
-  {
+  public void hide() {
 
   }
 
-  public void add_new_high_score()
-  {
+  public void add_new_high_score() {
 
   }
 
