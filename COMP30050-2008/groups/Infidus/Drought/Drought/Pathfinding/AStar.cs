@@ -22,10 +22,15 @@ namespace Drought.Entity
             new Vector2(1, 1), }; //top right
 
         /** Can move from one node to another if the other node is not greater than MAX_MOVE_DIST. */
-        private static float MAX_MOVE_DIST = 0.5f;
+        private const float MAX_MOVE_DIST = 0.5f;
+
+        private const int SCALE = 5;
 
         /** The level information to search for paths. */
         private LevelInfo level;
+
+        /** A scaled down of LevelInfo's heightmap for A* to search. */
+        private float[,] scaledHeightMap;
 
         /** Map to lookup whether a specific node is traversable. True indicates a traversable node. */
         private bool[,] traversable;
@@ -61,14 +66,19 @@ namespace Drought.Entity
         public void initialise(LevelInfo level)
         {
             this.level = level;
-            width = level.getWidth();
-            height = level.getHeight();
+            width = level.getWidth() / SCALE;
+            height = level.getHeight() / SCALE;
+            scaledHeightMap = new float[width, height];
             traversable = new bool[width, height];
 
-            //if a water texture then a node is not traversable
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
-                    traversable[x, y] = level.getTextureValue(x, y).X > 0 ? false : true;
+                {
+                    scaledHeightMap[x, y] = level.getHeight(x * SCALE, y * SCALE);
+
+                    //if a water texture then a node is not traversable
+                    traversable[x, y] = level.getTextureValue(x * SCALE, y * SCALE).X > 0 ? false : true;
+                }
 
             //set the border of the map to be non-traversable
             for (int x = 0; x < width; x++)
@@ -95,7 +105,7 @@ namespace Drought.Entity
              */
         }
 
-        public Path computePath(float startX, float startY, float endX, float endY)
+        public Path computePath(float startX, float startY, float endX, float endY, out bool pathFound)
         {
             timer.Reset();
             timer.Start();
@@ -103,9 +113,10 @@ namespace Drought.Entity
             Heap open = new Heap();
             //List<Node> closed = new List<Node>();
             bool[,] closed = new bool[width, height];
+            int closedSize = 0;
             Node[,] openMap = new Node[width, height];
-            Node goal = getNode((int)endX, (int)endY);
-            Node start = getNode((int)startX, (int)startY);
+            Node goal = getNode((int)endX / SCALE, (int)endY / SCALE);
+            Node start = getNode((int)startX / SCALE, (int)startY / SCALE);
 
             if (goal != null && start != null)
             {
@@ -122,6 +133,7 @@ namespace Drought.Entity
 
                 //closed.Add(n);
                 closed[(int)n.getPosition().X, (int)n.getPosition().Y] = true;
+                closedSize++;
 
                 if (n.getPosition() == goal.getPosition()) //found a path
                 {
@@ -129,19 +141,21 @@ namespace Drought.Entity
                     List<Vector3> pathNodes = new List<Vector3>();
                     Vector2 pos = n.getPosition();
 
-                    pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
+                    pathNodes.Add(new Vector3(pos.X * SCALE, pos.Y * SCALE, scaledHeightMap[(int)pos.X, (int)pos.Y]));
 
                     while (parent != null)
                     {
                         pos = parent.getPosition();
-                        pathNodes.Add(new Vector3(pos.X, pos.Y, level.getHeight(pos.X, pos.Y)));
+                        pathNodes.Add(new Vector3(pos.X * SCALE, pos.Y * SCALE, scaledHeightMap[(int)pos.X, (int)pos.Y]));
                         parent = parent.getParent();
                     }
 
+                    Console.WriteLine("closed size: " + closedSize);
                     Console.WriteLine(timer.ElapsedMilliseconds + "ms total to run A*");
                     timer.Stop();
 
                     pathNodes.Reverse();
+                    pathFound = true;
                     return new Path(pathNodes, level);
                 }
 
@@ -190,12 +204,14 @@ namespace Drought.Entity
                 }
             }
 
-            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not find a path");
+            Console.WriteLine("closed size: " + closedSize);
+            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not fina a path");
             timer.Stop();
 
             //couldn't find a path so return a path containing just the start node
             List<Vector3> nodes = new List<Vector3>();
             nodes.Add(new Vector3(startX, startY, level.getHeight(startX, startY)));
+            pathFound = false;
             return new Path(nodes, level);
         }
 
@@ -264,7 +280,7 @@ namespace Drought.Entity
             Vector2 posA = a.getPosition();
             Vector2 posB = b.getPosition();
 
-            float diff = Math.Abs(level.getHeight((int)posA.X, (int)posA.Y) - level.getHeight((int)posB.X, (int)posB.Y));
+            float diff = Math.Abs(scaledHeightMap[(int)posA.X, (int)posA.Y] - scaledHeightMap[(int)posB.X, (int)posB.Y]);
 
             return diff <= MAX_MOVE_DIST;
         }
