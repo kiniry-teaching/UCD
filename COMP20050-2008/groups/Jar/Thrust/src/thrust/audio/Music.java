@@ -25,17 +25,16 @@ public class Music {
   /** Clip to be played. */
   // @ assert my_clipFile != null;
   private final transient Clip my_clip;
+  /** Audio Input Stream. */
+  private final transient AudioInputStream my_audiois;
 
   /** Constructor, sets up audio stream. */
   public Music() throws LineUnavailableException, IOException,
       UnsupportedAudioFileException {
-    final AudioInputStream audiois =
-          AudioSystem.getAudioInputStream(my_clipFile);
-    final AudioFormat format = audiois.getFormat();
+    my_audiois = AudioSystem.getAudioInputStream(my_clipFile);
+    final AudioFormat format = my_audiois.getFormat();
     final DataLine.Info info = new DataLine.Info(Clip.class, format);
     my_clip = (Clip) AudioSystem.getLine(info);
- // @ assert my_clip != null;
-    my_clip.open(audiois);
   }
 
   /**
@@ -43,8 +42,8 @@ public class Music {
    */
   // @ ensures \result == is_playing;
   public final/* @ pure @ */boolean playing() {
+    // @ assert my_clip != null;
     return my_clip.isRunning();
-    // @ assert true;
   }
 
   /**
@@ -52,9 +51,16 @@ public class Music {
    */
   // @ ensures is_playing;
   public final void start() {
+    // @ assert my_clip != null;
+    try {
+      my_clip.open(my_audiois);
+    } catch (LineUnavailableException e) {
+      e.fillInStackTrace();
+    } catch (IOException e) {
+      e.fillInStackTrace();
+    }
     my_clip.loop(Clip.LOOP_CONTINUOUSLY);
     // @ assert playing();
-
   }
 
   /**
@@ -63,6 +69,8 @@ public class Music {
   // @ ensures !is_playing;
   public final void stop() {
     my_clip.stop();
+    my_clip.flush();
+    my_clip.close();
     my_clip.setMicrosecondPosition(0);
     // @ assert !playing();
   }
