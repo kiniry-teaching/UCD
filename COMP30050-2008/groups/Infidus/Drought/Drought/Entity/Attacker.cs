@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Drought.State;
-using Microsoft.Xna.Framework.Graphics;
-using Drought.World;
 using Drought.Graphics;
+using Drought.State;
+using Drought.World;
 
 namespace Drought.Entity
 {
@@ -26,7 +22,7 @@ namespace Drought.Entity
         public Attacker(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
             base(gameState, model, path, terrain, uid)
         {
-            setVecocity(VELOCITY);
+            setVelocity(VELOCITY);
             setRadius(RADIUS);
             setMaxHealth(FULL_HEALTH);
             setMaxWater(WATER_CAPACITY);
@@ -40,6 +36,5 @@ namespace Drought.Entity
             /* attack logic */
 
         }
-
     }
 }

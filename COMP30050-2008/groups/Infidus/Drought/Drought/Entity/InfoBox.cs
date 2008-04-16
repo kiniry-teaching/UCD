@@ -5,18 +5,18 @@ using Drought.Graphics;
 
 namespace Drought.Entity
 {
-    /** For passing to the graphics card. */
+    /** The parameters InfoBox needs to pass to the graphics card to be rendered. */
     public struct InfoBoxVertex
     {
         public Vector3 Position;
         public Vector3 Offset;
-        public Vector2 TextureCoordinate;
+        public Vector2 TexCoord;
 
-        public InfoBoxVertex(Vector3 aPosition, Vector3 anOffset, Vector2 tex)
+        public InfoBoxVertex(Vector3 aPosition, Vector3 anOffset, Vector2 aTexCoord)
         {
             Position = aPosition;
             Offset = anOffset;
-            TextureCoordinate = tex;
+            TexCoord = aTexCoord;
         }
 
         public static int SizeInBytes = sizeof(float) * 8;
@@ -40,8 +40,8 @@ namespace Drought.Entity
         private Texture2D heartEmpty, heartFull;
         private Texture2D waterEmpty, waterFull;
 
-        private int fullHearts;
-        private int totalHearts;
+        private int fullHearts, totalHearts;
+        private int fullWater, totalWater;
 
         private Vector4 position;
 
@@ -61,6 +61,9 @@ namespace Drought.Entity
             fullHearts = 5;
             totalHearts = 5;
 
+            fullWater = 5;
+            totalWater = 5;
+
             box = state.getContentManager().Load<Texture2D>("Textures/infobox");
             heartEmpty = state.getContentManager().Load<Texture2D>("Textures/heart-empty");
             heartFull = state.getContentManager().Load<Texture2D>("Textures/heart-full");
@@ -68,15 +71,6 @@ namespace Drought.Entity
             waterFull = state.getContentManager().Load<Texture2D>("Textures/water-full");
 
             billboardEffect = state.getContentManager().Load<Effect>("EffectFiles/infobox");
-
-            /*vertexDeclaration = new VertexDeclaration(state.getGraphics(), InfoBoxVertex.VertexElements);
-
-            pointList = new InfoBoxVertex[4];
-
-            pointList[0] = new InfoBoxVertex(new Vector2(), new Vector2(1, 1));
-            pointList[1] = new InfoBoxVertex(new Vector2(), new Vector2(1, 0));
-            pointList[2] = new InfoBoxVertex(new Vector2(), new Vector2(0, 1));
-            pointList[3] = new InfoBoxVertex(new Vector2(), new Vector2(0, 0));*/
 
             vertexDeclaration = new VertexDeclaration(state.getGraphics(), InfoBoxVertex.VertexElements);
 
@@ -97,10 +91,12 @@ namespace Drought.Entity
         }
 
         /** Should be called whenever the unit is moved to update the box's position. */
-        public void update(Vector3 newPosition, float newOpacity, int currHealth, int maxHealth)
+        public void update(Vector3 newPosition, float newOpacity, int currHealth, int maxHealth, int currWater, int maxWater)
         {
             fullHearts = currHealth;
             totalHearts = maxHealth;
+            fullWater = currWater;
+            totalWater = maxWater;
             position = new Vector4(newPosition.X, newPosition.Y, newPosition.Z, 0);
             pointList[0].Position = newPosition;
             pointList[1].Position = newPosition;
@@ -113,8 +109,10 @@ namespace Drought.Entity
         {
             for (int j = 0; j < pointList.Length; j++) {
                 pointList[j].Offset.X = 0;
+                pointList[j].Offset.Y = 0;
                 pointList[j].Offset.Z = 0;
             }
+
             graphics.VertexDeclaration = vertexDeclaration;
 
             billboardEffect.CurrentTechnique = billboardEffect.Techniques["Billboard"];
@@ -134,65 +132,85 @@ namespace Drought.Entity
             
             pass = billboardEffect.CurrentTechnique.Passes["Box"];
             pass.Begin();
-            graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(PrimitiveType.TriangleList,
-                pointList,
-                0,
-                4,
-                indices,
-                0,
-                2);
+            graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(
+                PrimitiveType.TriangleList, pointList, 0, 4, indices, 0, 2);
             pass.End();
             
             for (int j = 0; j < pointList.Length; j++) {
-                pointList[j].Offset.X = -3;
+                pointList[j].Offset.X = -6.75f;
+                pointList[j].Offset.Y = -1.5f;
                 pointList[j].Offset.Z = .01f;
             }
 
-            int i = 0;
-            while (i < fullHearts) {
+            int hearts = 0;
+            bool nextRow = false;
+            while (hearts < fullHearts) {
+                if (hearts >= 10 && !nextRow) {
+                    nextRow = true;
+                    for (int j = 0; j < pointList.Length; j++) {
+                        pointList[j].Offset.X = -6.75f;
+                        pointList[j].Offset.Y = 0;
+                    }
+                }
                 pass = billboardEffect.CurrentTechnique.Passes["HeartFull"];
                 pass.Begin();
-                graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(PrimitiveType.TriangleList,
-                    pointList,
-                    0,
-                    4,
-                    indices,
-                    0,
-                    2);
+                graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(
+                PrimitiveType.TriangleList, pointList, 0, 4, indices, 0, 2);
                 pass.End();
-                i++;
+                hearts++;
                 for (int j = 0; j < pointList.Length; j++ ) {
                     pointList[j].Offset.X += 1.5f;
                 }
             }
             
-            while (i < totalHearts) {
+            while (hearts < totalHearts) {
+                if (hearts >= 10 && !nextRow) {
+                    nextRow = true;
+                    for (int j = 0; j < pointList.Length; j++) {
+                        pointList[j].Offset.X = -6.75f;
+                        pointList[j].Offset.Y = 0;
+                    }
+                }
                 pass = billboardEffect.CurrentTechnique.Passes["HeartEmpty"];
                 pass.Begin();
-                graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(PrimitiveType.TriangleList,
-                    pointList,
-                    0,
-                    4,
-                    indices,
-                    0,
-                    2);
+                graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(
+                    PrimitiveType.TriangleList, pointList, 0, 4, indices, 0, 2);
                 pass.End();
-                i++;
+                hearts++;
                 for (int j = 0; j < pointList.Length; j++) {
                     pointList[j].Offset.X += 1.5f;
                 }
             }
 
-            /*pass = billboardEffect.CurrentTechnique.Passes["Water"];
-            pass.Begin();
-            graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(PrimitiveType.TriangleList,
-                pointList,
-                0,
-                4,
-                indices,
-                0,
-                2);
-            pass.End();*/
+            for (int j = 0; j < pointList.Length; j++) {
+                pointList[j].Offset.X = -6.75f;
+                pointList[j].Offset.Y = 1.5f;
+            }
+
+            int water = 0;
+            while (water < fullWater) {
+                pass = billboardEffect.CurrentTechnique.Passes["WaterFull"];
+                pass.Begin();
+                graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(
+                PrimitiveType.TriangleList, pointList, 0, 4, indices, 0, 2);
+                pass.End();
+                water++;
+                for (int j = 0; j < pointList.Length; j++) {
+                    pointList[j].Offset.X += 1.5f;
+                }
+            }
+
+            while (water < totalWater) {
+                pass = billboardEffect.CurrentTechnique.Passes["WaterEmpty"];
+                pass.Begin();
+                graphics.DrawUserIndexedPrimitives<InfoBoxVertex>(
+                    PrimitiveType.TriangleList, pointList, 0, 4, indices, 0, 2);
+                pass.End();
+                water++;
+                for (int j = 0; j < pointList.Length; j++) {
+                    pointList[j].Offset.X += 1.5f;
+                }
+            }
 
             billboardEffect.End();
         }

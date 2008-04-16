@@ -1,40 +1,37 @@
 
 ------------------------------------
-List of things that need doing:
+ List of things that need doing:
 (in rough order they should be done)
 ------------------------------------
 
 
-Bugs:
+ Bugs:
 ----------
+ - Skybox still uses hardcoded lighting values
  - Sounds keep playing if you press Ctrl+R to exit the level
  - new Entities added in one networked game don't show up in the other, deletes don't work either
- - Seperate InfoBar rendering to entities
- - Skybox still uses hardcoded lighting values
- - Sun on/off needs a control variable
 
-New Features:
+
+ New Features:
 ----------
+ - Energybars and car explosion.
  - Base
- - Energybards and car explosion.
- - Energy fields -  health, attack radius, damage, water capacity, speed
  - rain on and off with day/night
  - Camera Restriction
  - Water rendering && Detection
  - Models (tanker?)
  - Mipmapping
  - Networking.
- - Health bars above units, unit health in general - EUGENE'S CURRENT GOAL
  - Lobby State
  - Weather
  - Sun ambient lighting
 
  Debug Features:
- ----------
+----------
 
 
 
  Tests:
- ----------
+----------
  - Clock syncing tests - day/night
  - Update/Draw tests

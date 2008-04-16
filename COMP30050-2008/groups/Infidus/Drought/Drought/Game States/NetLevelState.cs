@@ -18,13 +18,18 @@ namespace Drought.GameStates
      */
     class NetLevelState : GameState
     {
-        private Terrain terrain;
+        private DeviceInput input;
+
+        private Camera camera;
 
         private Skybox skybox;
 
-        private Sun sun;
+        private Terrain terrain;
 
-        private Camera camera;
+        private Sun sun;
+        private bool sunpause;
+
+        private PlaneParticleEmitter rain;
 
         private HeightMap heightMap;
 
@@ -32,9 +37,9 @@ namespace Drought.GameStates
 
         private NormalMap normalMap;
 
-        private DeviceInput input;
+        private LevelInfo levelInfo;
 
-        private Effect modelEffect;
+        private AStar aStar;
 
         private List<MovableEntity> localEntities;
 
@@ -58,13 +63,8 @@ namespace Drought.GameStates
         private NetworkManager networkManager;
         private bool hosting;
 
-        private LevelInfo levelInfo;
-
-        private AStar aStar;
-
         public NetLevelState(IStateManager manager, DroughtGame game, Level aLevel, bool isHost)
-            :
-            base(manager, game)
+            : base(manager, game)
         {
             soundManager = game.getSoundManager();
             networkManager = game.getNetworkManager();
@@ -75,28 +75,18 @@ namespace Drought.GameStates
             textureMap = new TextureMap(aLevel);
             normalMap = new NormalMap(heightMap);
 
-            //init the level information
-            String lev = "";
-            switch (aLevel)
-            {
-                case Level.Valley: lev = "level_0"; break;
-                case Level.Rugged: lev = "level_1"; break;
-                case Level.RuggedSplitTextures: lev = "level_2"; break;
-                case Level.Square: lev = "square"; break;
-                case Level.WaterTest: lev = "water"; break;
-                default: lev = "level_1"; break;
-            }
             levelInfo = new LevelInfo();
-            levelInfo.initialise(lev);
+            levelInfo.initialise(aLevel);
 
             aStar = new AStar(levelInfo);
 
+            rain = new PlaneParticleEmitter(512, 256, new Vector3(256, 128, 200), new Vector3(0, 0, 0), new Vector3(3f, 0, -19f), Color.LightBlue.ToVector4(), 100000, 9);
+
+            sun = new Sun(new Vector3(0, -200, 200));
 
             camera = new Camera(this, heightMap);
 
             terrain = new Terrain(getGraphics(), getContentManager(), heightMap, textureMap, camera);
-
-            sun = new Sun(new Vector3(0, -200, 200));
 
             soundManager.setListener(camera);
 
@@ -124,41 +114,41 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            localEntities.Add(new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            localEntities.Add(new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            localEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            localEntities.Add(new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             if (!hosting) uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, i));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            remoteEntities.Add(new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(i, 200));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            remoteEntities.Add(new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(heightMap.getPositionAt(200, i));
-            remoteEntities.Add(new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
+            remoteEntities.Add(new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(nodes, levelInfo), terrain, uid++));
         }
 
         public override void loadContent()
         {
-            modelEffect = getContentManager().Load<Effect>("EffectFiles/model");
-
             terrain.loadContent();
+
+            rain.loadContent(getContentManager());
         }
 
         public override void background()
@@ -175,8 +165,10 @@ namespace Drought.GameStates
         {
             updateInput();
 
+            sun.update(gameTime);
             camera.update(gameTime);
             terrain.update(gameTime);
+            rain.update(gameTime);
 
             updateUnits();
             updateNetwork();
@@ -222,6 +214,16 @@ namespace Drought.GameStates
 
             if (input.isKeyPressed(GameKeys.UNIT_SELECT_ALL))
                 selectAllUnits();
+            
+            if (!sunpause && input.isKeyPressed(GameKeys.PAUSE_SUN))
+            {
+                sunpause = true;
+                sun.isEnabled = !sun.isEnabled;
+            }
+            else if (sunpause && !input.isKeyPressed(GameKeys.PAUSE_SUN))
+            {
+                sunpause = false;
+            }
         }
 
         private void updateUnits()
@@ -342,7 +344,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new MovableEntity(this, modelLoader.getModel3D(modelType.Car), new Path(dummyPath, levelInfo), terrain, 0);
+                    MovableEntity newEntity = new Scout(this, modelLoader.getModel3D(modelType.Car), new Path(dummyPath, levelInfo), terrain, 0);
                     localEntities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -383,16 +385,32 @@ namespace Drought.GameStates
                 for (int j = i + 1; j < localEntities.Count; j++)
                 {
                     MovableEntity b = localEntities[j];
-                    if (a == b) Console.WriteLine("fail!");
-                    if (a != b && MovableEntity.checkStaticCollision(a, b))
+                    if (MovableEntity.checkStaticCollision(a, b))
                     {
-                        Vector3 diff = a.getPosition() - b.getPosition();
-                        Vector3 diffRad = diff;
-                        diffRad.Normalize();
-                        diffRad *= a.radius + b.radius;
-                        Vector3 displacement = diffRad - diff;
-                        a.setPosition(a.getPosition() + displacement / 2);
-                        b.setPosition(a.getPosition() - displacement / 2);
+                        float xDiff = a.getPosition().X - b.getPosition().X;
+                        float yDiff = a.getPosition().Y - b.getPosition().Y;
+                        Vector3 diff = new Vector3(xDiff, yDiff, 0);
+                        Vector3 dist = diff;
+
+                        if (diff.Length() != 0)
+                            diff.Normalize();
+
+                        diff *= a.radius + b.radius;
+                        Vector3 displacement = diff - dist;
+                        Vector3 aNewPos = a.getPosition() + displacement / 2;
+                        aNewPos.Z = heightMap.getHeight(aNewPos.X, aNewPos.Y);
+                        a.setPosition(aNewPos);
+                        Vector3 bNewPos = b.getPosition() - displacement / 2;
+                        bNewPos.Z = heightMap.getHeight(bNewPos.X, bNewPos.Y);
+                        b.setPosition(bNewPos);
+                        List<Vector3> aPos = new List<Vector3>();
+                        aPos.Add(a.getPosition());
+                        a.setPath(new Path(aPos, levelInfo));
+                        a.hurt(1);
+                        List<Vector3> bPos = new List<Vector3>();
+                        bPos.Add(b.getPosition());
+                        b.setPath(new Path(bPos, levelInfo));
+                        b.hurt(1);
                     }
                 }
             }
@@ -456,11 +474,17 @@ namespace Drought.GameStates
 
             terrain.render(sun);
             skybox.render();
+            rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
 
             for (int i = 0; i < localEntities.Count; i++)
-                localEntities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
+                localEntities[i].render(graphics, camera, sun);
+            for (int i = 0; i < localEntities.Count; i++)
+                localEntities[i].renderInfoBox(graphics, camera);
+            
             for (int i = 0; i < remoteEntities.Count; i++)
-                remoteEntities[i].render(graphics, spriteBatch, camera, modelEffect, sun);
+                remoteEntities[i].render(graphics, camera, sun);
+            for (int i = 0; i < remoteEntities.Count; i++)
+                remoteEntities[i].renderInfoBox(graphics, camera);
 
             if (selectCurrent)
             {

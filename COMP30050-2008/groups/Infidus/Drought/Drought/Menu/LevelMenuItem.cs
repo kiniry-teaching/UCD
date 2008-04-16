@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Drought.Network;
-using Drought.GameStates;
+using Drought.World;
 
 namespace Drought.Menu
 {

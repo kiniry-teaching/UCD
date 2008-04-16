@@ -9,12 +9,8 @@ using Drought.State;
 namespace Drought.Entity
 {
 
-    class MovableEntity
+    abstract class MovableEntity
     {
-        private Terrain terrain;
-
-        private InfoBox infoBar;
-
         private Vector3 position;
 
         private Vector3 prevPosition;
@@ -33,6 +29,10 @@ namespace Drought.Entity
 
         private Model3D model;
 
+        private Terrain terrain;
+        
+        public float radius;
+
         private float modelScale;
 
         private bool selected;
@@ -41,7 +41,7 @@ namespace Drought.Entity
 
         private LineTool pathTool, ringTool;
 
-        public float radius;
+        private InfoBox infoBar;
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
@@ -57,8 +57,8 @@ namespace Drought.Entity
 
         public MovableEntity(GameState gameState, Model3D model, Path path, Terrain terrain, int uid)
         {
-            health = 5;
-            maxHealth = 5;
+            //health = 105;
+            //maxHealth = 5;
             this.terrain = terrain;
             infoBar = new InfoBox(gameState);
             radius = 2.5f;
@@ -142,20 +142,16 @@ namespace Drought.Entity
                 selectTime -= selectTimeStep;
                 if (selectTime < 0) selectTime = 0;
             }
-            infoBar.update(position, selectTime, health, maxHealth);
+            infoBar.update(position, selectTime, health, maxHealth, water, maxWater);
         }
 
-        public void render(GraphicsDevice graphics, SpriteBatch batch, Camera camera, Effect effect, Sun sun)
+        public void render(GraphicsDevice graphics, Camera camera, Sun sun)
         {
             pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
 
             if (selected)
             {
                 ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
-            }
-            if (selectTime > 0)
-            {
-                infoBar.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
             }
 
             graphics.RenderState.DepthBufferEnable = true;
@@ -172,7 +168,7 @@ namespace Drought.Entity
             {
                 foreach (Effect currentEffect in mesh.Effects)
                 {
-                    currentEffect.CurrentTechnique = effect.Techniques["Textured"];
+                    currentEffect.CurrentTechnique = model.ModelEffect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
@@ -182,6 +178,13 @@ namespace Drought.Entity
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
                 }
                 mesh.Draw();
+            }
+        }
+
+        public void renderInfoBox(GraphicsDevice graphics, Camera camera) {
+            if (selectTime > 0)
+            {
+                infoBar.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
             }
         }
 
@@ -215,7 +218,7 @@ namespace Drought.Entity
             return selected;
         }
 
-        protected void setVecocity(float vel)
+        protected void setVelocity(float vel)
         {
             velocity = vel;
         }
@@ -265,6 +268,7 @@ namespace Drought.Entity
         protected void setMaxHealth(int max)
         {
             maxHealth = max;
+            health = maxHealth;
         }
 
         protected void setMaxWater(int max)

@@ -6,6 +6,8 @@ using System.IO;
 
 namespace Drought.World
 {
+    public enum Level : int { Valley, Rugged, RuggedSplitTextures, Square, WaterTest };
+
     public class LevelInfo
     {
         /** The width of the level. */
@@ -29,11 +31,21 @@ namespace Drought.World
         /**
          * Initialises the level information from file.
          */
-        public void initialise(String level)
+        public void initialise(Level aLevel)
         {
-            initHeightMap(level);
+            String fileName = "";
+            switch (aLevel) {
+                case Level.Valley: fileName = "level_0"; break;
+                case Level.Rugged: fileName = "level_1"; break;
+                case Level.RuggedSplitTextures: fileName = "level_2"; break;
+                case Level.Square: fileName = "square"; break;
+                case Level.WaterTest: fileName = "water"; break;
+                default: fileName = "level_1"; break;
+            }
+
+            initHeightMap(fileName);
             initNormalMap();
-            initTextureMap(level);
+            initTextureMap(fileName);
         }
 
         /**

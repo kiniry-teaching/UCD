@@ -80,6 +80,7 @@ VertexShaderOutput GenericVertexShader(VertexShaderInput input, int width, int h
 
 	float3 viewDirection = View._m02_m12_m22;
 	float3 zAxis = float3(0, 0, -1);
+	float4 zAxis4 = float4(0, 0, -1, 0);
 	float3 cross = cross(viewDirection, zAxis);
 	float3 right = normalize(cross);
 	float4 rightVector = float4(right.x, right.y, right.z, 0);
@@ -87,6 +88,7 @@ VertexShaderOutput GenericVertexShader(VertexShaderInput input, int width, int h
 	float4 position = input.Position;
 	position += rightVector * (input.TexCoord.x - 0.5) * width;
 	position += rightVector * input.Offset.x;
+	position += zAxis4 * input.Offset.y;
 	float4 newView = float4(viewDirection.x, viewDirection.y, viewDirection.z, 0);
 	position += (float4) newView * input.Offset.z;
 
@@ -140,7 +142,7 @@ float4 HeartEmptyPixelShader(VertexShaderOutput input) : COLOR0
 
 float4 WaterFullPixelShader(VertexShaderOutput input) : COLOR0
 {
-	float4 output = float4(1, 0, 0, 0);
+	float4 output = float4(0, 0, 1, 0);
     output += tex2D(WaterFullSampler, input.TexCoord);
 	if (output[3] > opacity) output[3] = opacity;
 	
@@ -149,7 +151,7 @@ float4 WaterFullPixelShader(VertexShaderOutput input) : COLOR0
 
 float4 WaterEmptyPixelShader(VertexShaderOutput input) : COLOR0
 {
-	float4 output = float4(1, 0, 0, 0);
+	float4 output = float4(0, 0, 0, 0);
     output += tex2D(WaterEmptySampler, input.TexCoord);
 	if (output[3] > opacity) output[3] = opacity;
 	

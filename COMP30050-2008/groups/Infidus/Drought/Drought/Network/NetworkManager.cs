@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Net;
 using Drought.Entity;
-using Drought.GameStates;
+using Drought.World;
 
 namespace Drought.Network
 {
