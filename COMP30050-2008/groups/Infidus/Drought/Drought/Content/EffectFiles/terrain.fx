@@ -91,7 +91,7 @@ MultiTexturedPixelToFrame MultiTexturedPS(MultiTexturedVertexToPixel PSIn)
 	if (xEnableLighting)
 	{
 		float DiffuseLightingFactor = DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
-	    Output.Color = Output.Color * DiffuseLightingFactor * xLightPower + xAmbient;
+	    Output.Color = Output.Color * DiffuseLightingFactor * xLightPower;
 	}
 
     return Output;

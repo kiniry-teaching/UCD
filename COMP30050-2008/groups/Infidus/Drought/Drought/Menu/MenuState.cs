@@ -56,7 +56,7 @@ namespace Drought.Menu
             float mainX = 25.0f * (screenWidth / 800.0f);
             float mainY = 300.0f * (screenHeight / 600.0f);
             float mainSpacing = 70.0f * (screenHeight / 600.0f);
-            Console.WriteLine("scale = " + scale + ", x = " + mainX + ", y = " + mainY + ", yspacing = " + mainSpacing);
+            //Console.WriteLine("scale = " + scale + ", x = " + mainX + ", y = " + mainY + ", yspacing = " + mainSpacing);
             
             mainMenu = new Menu(this);
             mainMenu.activate();

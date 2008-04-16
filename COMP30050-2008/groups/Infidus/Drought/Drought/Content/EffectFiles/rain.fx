@@ -82,10 +82,6 @@ technique SimpleParticle
 {
     pass Pass1
     {
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
-        AlphaBlendEnable = true;
-        
         VertexShader = compile vs_1_1 VertexShaderFunction();
         PixelShader = compile ps_1_1 PixelShaderFunction();
     }

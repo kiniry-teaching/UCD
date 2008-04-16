@@ -51,6 +51,7 @@ namespace Drought
         {
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
+            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             DeviceInput input = DeviceInput.getInput();
@@ -147,7 +148,6 @@ namespace Drought
         protected override void Draw(GameTime gameTime)
         {
             //Console.WriteLine("Render Called");
-
             graphics.GraphicsDevice.Clear(Color.Black);
             
             gameManager.render(graphics.GraphicsDevice, spriteBatch);

@@ -115,6 +115,7 @@
     <Compile Include="State\IStateManager.cs" />
     <Compile Include="World\HeightMap.cs" />
     <Compile Include="World\TextureMap.cs" />
+    <Compile Include="World\Water.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -56,14 +56,14 @@ namespace Drought.Network
             session.SessionEnded += new EventHandler<NetworkSessionEndedEventArgs>(NetworkSessionEnded);
             session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(GamerJoined);
             session.GamerLeft += new EventHandler<GamerLeftEventArgs>(GamerLeft);
-            Console.WriteLine("Hosted Game");
+            //Console.WriteLine("Hosted Game");
         }
 
         /** Search the local subnet for joinable games, and return a list of RemoteGames representing them. */
         public List<RemoteGame> getLocalGames() 
         {
             AvailableNetworkSessionCollection sessions = NetworkSession.Find(NetworkSessionType.SystemLink, 1, null);
-            Console.WriteLine("Found " + sessions.Count + " games");
+            //Console.WriteLine("Found " + sessions.Count + " games");
             List<RemoteGame> remoteGames = new List<RemoteGame>();
             foreach (AvailableNetworkSession session in sessions) {
                 if (session.CurrentGamerCount < MAX_PLAYERS) {
@@ -82,7 +82,7 @@ namespace Drought.Network
             session.SessionEnded += new EventHandler<NetworkSessionEndedEventArgs>(NetworkSessionEnded);
             session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(GamerJoined);
             session.GamerLeft += new EventHandler<GamerLeftEventArgs>(GamerLeft);
-            Console.WriteLine("Connected to game: " + game.getDescription());
+            //Console.WriteLine("Connected to game: " + game.getDescription());
         }
 
         /** Ends the current session. */
@@ -148,12 +148,12 @@ namespace Drought.Network
 
         private void GamerJoined(object sender, GamerJoinedEventArgs args)
         {
-            Console.WriteLine(args.Gamer.Gamertag + " joined the game");
+            //Console.WriteLine(args.Gamer.Gamertag + " joined the game");
         }
 
         private void GamerLeft(object sender, GamerLeftEventArgs args)
         {
-            Console.WriteLine(args.Gamer.Gamertag + " left the game");
+            //Console.WriteLine(args.Gamer.Gamertag + " left the game");
         }
     }
 }

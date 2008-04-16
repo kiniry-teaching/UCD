@@ -54,6 +54,8 @@ namespace Drought.GameStates
 
         private SoundManager soundManager;
 
+        private Water[] waters;
+
         public LevelState(IStateManager manager, DroughtGame game, Level aLevel)
             : base(manager, game)
         {
@@ -64,6 +66,13 @@ namespace Drought.GameStates
             textureMap = new TextureMap(aLevel);
             normalMap = new NormalMap(heightMap);
 
+            List<List<Vector3>> waterList = textureMap.findWater();
+            waters = new Water[waterList.Count];
+
+            for (int i = 0; i < waters.Length; i++)
+            {
+                waters[i] = new Water(waterList[i].ToArray(), heightMap);
+            }
             levelInfo = new LevelInfo();
             levelInfo.initialise(aLevel);
 
@@ -455,6 +464,12 @@ namespace Drought.GameStates
 
             terrain.render(sun);
             skybox.render();
+
+            foreach (Water w in waters)
+            {
+                w.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
+            }
+
             rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
 
             for (int i = 0; i < entities.Count; i++)

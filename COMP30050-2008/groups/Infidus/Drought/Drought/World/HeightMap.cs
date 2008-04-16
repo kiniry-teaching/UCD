@@ -122,7 +122,6 @@ namespace Drought.World
             if (outOfBounds)
                 return map[(int)x, (int)y];
 
-
             int x1 = (int)x;
             int x2 = x1 + 1;
             int y1 = (int)y;
