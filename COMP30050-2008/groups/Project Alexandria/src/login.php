@@ -17,7 +17,7 @@ $EnteredUsername = $_POST[username];
 $EnteredPassword = $_POST[password];
 $remember = $_POST[remember];
 
-login($EnteredUsername, $EnteredPassword);
+login($EnteredUsername, $EnteredPassword, $remember);
 
 include("include/footer.php"); //page footer
 ?>

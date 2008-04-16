@@ -46,7 +46,7 @@ else{
 		*	creates a new entry in the users database using the given details
 		*/
 	{include("connection.php"); //Connects to database
-	$sql="INSERT INTO users (username, password, userlevel, e-mail, timestamp)
+		$sql="INSERT INTO users_online (username, password, userlevel, e-mail, timestamp)
 	VALUES ('$username','$password1','$userlevel','$e-mail1', NOW())";
 				if (!mysql_query($sql,$con))
 			{
