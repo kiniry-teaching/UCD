@@ -6,16 +6,24 @@
 import java.sql.*;
 
 public class ItemQuery {
-	static String name;
-	static int price;
-	static int minweight;
+	String name;
+	int price;
+	int minweight;
+	//Barcode bcode;
+	
+
+	//public ItemQuery (BarCode bc)
+	//
 	
 	
-	
-	public ItemQuery (double barcode) {
+	public ItemQuery (long barcode) {
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String url  = "jdbc:mysql://localhost:3306/SelfCheckout";
+			
+			//String url  = "jdbc:mysql://sql104.hostwq.net:3306/hq_1793448_SelfCheckout";
+			String url  = "jdbc:mysql://169.254.117.255:3306/SelfCheckout";
+			//String url  = "jdbc:mysql://localhost:3306/SelfCheckout";
+			//Connection conn = DriverManager.getConnection(url, "hq_1793448", "password");
 			Connection conn = DriverManager.getConnection(url, "me", "pass");
 			//Two Following prints are verification data
 			//System.out.println("URL: " +url);
@@ -27,7 +35,7 @@ public class ItemQuery {
 			Statement stmt = conn.createStatement();
 			ResultSet rs;
 			
-			
+			//rs = stmt.executeQuery("SELECT Name,Price,MinWeight FROM Items WHERE Barcode = "+bc.asLong +"");
 			rs = stmt.executeQuery("SELECT Name,Price,MinWeight FROM Items WHERE Barcode = "+barcode +"");
 			
 			while ( rs.next() ) {
