@@ -21,20 +21,20 @@ public class Music {
 
   /** File for music. */
   private final transient File my_clipFile =
-          new File("../../../media/Thrust_music.wav");
+          new File("/home/keith/work/Jar/Thrust/media/Thrust_music.wav");
   /** Clip to be played. */
   // @ assert my_clipFile != null;
   private final transient Clip my_clip;
-  /** Audio Input Stream. */
-  private final transient AudioInputStream my_audiois;
 
   /** Constructor, sets up audio stream. */
   public Music() throws LineUnavailableException, IOException,
       UnsupportedAudioFileException {
-    my_audiois = AudioSystem.getAudioInputStream(my_clipFile);
+    final AudioInputStream my_audiois =
+      AudioSystem.getAudioInputStream(my_clipFile);
     final AudioFormat format = my_audiois.getFormat();
     final DataLine.Info info = new DataLine.Info(Clip.class, format);
     my_clip = (Clip) AudioSystem.getLine(info);
+    my_clip.open(my_audiois);
   }
 
   /**
@@ -52,13 +52,6 @@ public class Music {
   // @ ensures is_playing;
   public final void start() {
     // @ assert my_clip != null;
-    try {
-      my_clip.open(my_audiois);
-    } catch (LineUnavailableException e) {
-      e.fillInStackTrace();
-    } catch (IOException e) {
-      e.fillInStackTrace();
-    }
     my_clip.loop(Clip.LOOP_CONTINUOUSLY);
     // @ assert playing();
   }
@@ -69,9 +62,25 @@ public class Music {
   // @ ensures !is_playing;
   public final void stop() {
     my_clip.stop();
-    my_clip.flush();
-    my_clip.close();
     my_clip.setMicrosecondPosition(0);
     // @ assert !playing();
+  }
+
+  public static void main(final String[] the_args) {
+    Music sound = null;
+    try {
+      sound = new Music();
+    } catch (LineUnavailableException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (UnsupportedAudioFileException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    sound.start();
+    while(true);
   }
 }
