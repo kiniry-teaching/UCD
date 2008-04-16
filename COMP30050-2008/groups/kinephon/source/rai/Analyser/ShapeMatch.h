@@ -26,6 +26,15 @@ class ShapeMatch
 	 */
 	friend				class Shape;
 
+#ifdef __TEST__
+	/**
+	 * Be friends with ShapeMatches so it can create instance of this
+	 * @author EB
+	 * @version 1.0
+	 */
+	friend				class ShapeMatches;
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // queries
 //
@@ -103,11 +112,16 @@ inline ShapeMatch::ShapeMatch
 (	Shape * const	shape,
 	float const		weight
 ) :	_shape			(shape),
-	_weight			(weight)
+	_weight			(weight),
+	_shapeMatches	(0)
 { }
 
 inline Shape * ShapeMatch::shape(void) const
 {	return _shape;
+}
+
+inline float ShapeMatch::weight(void) const
+{	return _weight;
 }
 
 inline ShapeMatches * & ShapeMatch::shapeMatches(void)

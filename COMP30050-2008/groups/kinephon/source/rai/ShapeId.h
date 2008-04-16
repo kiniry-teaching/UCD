@@ -17,8 +17,8 @@ namespace esid
 	sid const TRI_SOFT            = 2; // - Speed
 	sid const TRI_SHARP           = 3; // - Speed
 	sid const TRI_SLOW            = 4; // - Accel
-	sid const DYNAMICS_PIANO      = 5; // Movement
-	sid const DYNAMICS_FORTE      = 6; // Movement
+	sid const DYNAMICS_PIANO      = 5; // Speed
+	sid const DYNAMICS_FORTE      = 6; // Accel
 	sid const DYNAMICS_PIANISSIMO = 7; // Movement
 	sid const DYNAMICS_FORTISSIMO = 8; // Movement
 	sid const RHYTHM_1_4          = 9; // Movement

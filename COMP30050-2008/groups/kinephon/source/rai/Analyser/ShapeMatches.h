@@ -28,7 +28,20 @@ class ShapeMatches
 	 * @author EB
 	 * @version 1.0
 	 */
-	friend				class Shape;
+	friend			class Shape;
+
+#if __TEST__
+///////////////////////////////////////////////////////////////////////////////
+// tests
+//
+public:
+	/**
+	 * Execute a number of test cases for this class
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void	RunTest	(void);
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // *tor
@@ -46,10 +59,10 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-						ShapeMatches
-						(	float const					weight,
-							uint const					total	= 1
-						);
+					ShapeMatches
+					(	float const			weight,
+						uint const			total	= 1
+					);
 
 	/**
 	 * Create a shape match collection based on an existing ShapeMatches.
@@ -62,9 +75,9 @@ public:
 	 * @version 1.0
 	 * @pre shapeMatches != 0;
 	 */
-						ShapeMatches
-						(	ShapeMatches *				shapeMatches
-						);
+					ShapeMatches
+					(	ShapeMatches *		shapeMatches
+					);
 
 ///////////////////////////////////////////////////////////////////////////////
 // queries
@@ -76,14 +89,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	float				weight							(void)	const;
+	float			weight					(void)	const;
 	/**
 	 * Return the total number of shapes matched
 	 * @return The total number of shapes matched
 	 * @author EB
 	 * @version 1.0
 	 */
-	uint				length							(void)	const;
+	uint			length					(void)	const;
 
 	/**
 	 * Return the indexed matched shape.
@@ -96,9 +109,9 @@ public:
 	 * @pre index >= 0 && index < length();
 	 * @post /value != 0;
 	 */
-	ShapeMatch *		operator []
-						(	uint const					index
-						)	const;
+	ShapeMatch *	operator []
+					(	uint const			index
+					)	const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend commands
@@ -107,17 +120,19 @@ private:
 	/**
 	 * Add a shape match to the collection.
 	 * This may change the order of the indexed shapes so calling this[0]
-	 *	before and after calling this may return different values as the
+	 *	before and after calling += may return different values as the
 	 *	matched shapes will be sorted and possibly trimmed to meet the
 	 *	maximum total set in the constructor
+	 *	The shapeMatch won't be added if its weight is less than the minimum
+	 *	required weight, or if all space is filled and the shapeMatch is
+	 *	not better weight than any existing shapeMatch
 	 * @param shapeMatch The new matched shape to add
-	 * @return Reference to this
 	 * @author EB
 	 * @version 1.0
 	 */
-	ShapeMatches &		operator +=
-						(	ShapeMatch const * const	shapeMatch
-						);
+	void			operator +=
+					(	ShapeMatch * const	shapeMatch
+					);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields

@@ -3,6 +3,7 @@
 #include <cmath>
 #include "ShapeMovement.h"
 #include "ShapesLoader.h"
+#include "../ShapeId.h"
 #include "../TestMemory.h"
 #include "../TestImage.h"
 #include "../Math.h"
@@ -99,7 +100,7 @@ void ShapesLoader::drawImageFromShape
 	::stage++; destroyImage(image);
 
 }
-#include <windows.h>
+
 void ShapesLoader::RunTest(void)
 {
 
@@ -122,10 +123,11 @@ void ShapesLoader::RunTest(void)
 
 	//		if((shapeMovement = dynamic_cast<ShapeMovement*>(shapes->_shapes[index])) != 0)
 
-			shapeMovement = (ShapeMovement*)shapes->_shapes[index];
-			
+			if(shapes->_shapes[index]->shapeId() == esid::TRIANGLE)
 			{
 
+				shapeMovement = (ShapeMovement*)shapes->_shapes[index];
+			
 				if(shapeMovement->_speedShapes != 0)
 					for(indexMove = 0; indexMove < shapeMovement->_speedShapes->_shapeIndex; indexMove++)
 						drawImageFromShape(shapeMovement->_speedShapes->_shapes[indexMove], index, 's', indexMove);

@@ -9,11 +9,13 @@
 #include <stdio.h>
 #include "rai/TestMemory.h"
 #include "type.h"
+#include "rai/Analyser/ShapeMatches.h"
 #include "rai/Analyser/Shapes.h"
 #include "rai/Analyser/ShapesLoader.h"
 #include "rai/Recorder/Frame.h"
 #include "rai/Recorder/Track.h"
 #include "rai/Recorder/Recorder.h"
+#include "rai/ShapeId.h"
 
 using namespace interpreter;
 
@@ -29,20 +31,25 @@ int mx = 0;
 int my = 0;
 int speedDelay = 4;
 int accelDelay = 10;
-int recordTime = 4;
+int recordTime = 10;
 
 int main(int argc, char * * argv)
 {
 
 #ifdef __TEST__
 
+	// Dump memory report twice to stabilise the latent memory use
+	//	After each test is run, the memory dump memory usage should
+	//	match the value of the second dump here, if the test didn't
+	//	introduce memory leaks
 	dumpMemoryReport();
 	dumpMemoryReport();
 	Frame::RunTest();
 	Track::RunTest();
 	Recorder::RunTest();
 	Zone::RunTest();
-	ShapesLoader::RunTest();
+//	ShapesLoader::RunTest();
+	ShapeMatches::RunTest();
 
 #else
 
@@ -77,193 +84,42 @@ int main(int argc, char * * argv)
 
 }
 
-void displayMovement(Track const & track, uint nPoints)
-{	Frame * frame;
-	int	lx;
-	int ly;
-	int m = 2;
+void ExamineShape
+(	sid const	shapeId,
+	int * const	points,
+	uint const	nPoints
+){	uint		i;
 
-	if(nPoints <= 0)
-		return;
-
-	glBegin(GL_LINES);
-
-	for
-	(	frame = track.first(), lx = frame->x(), ly = frame->y();
-		frame->next() != 0;
-		frame = frame->next()
-	){
-
-		glColor3f(0.0f, 0.0f, 0.5f * m);
-		m = (m == 2 ? 1 : 2);
-
-		glVertex3i(lx, ly, 0);
-		glVertex3i(frame->x(), frame->y(), 0);
-		lx = frame->x();
-		ly = frame->y();
-
+	switch(shapeId)
+	{
+		case esid::TRIANGLE:
+			glColor3f(0.0f, 0.0f, 1.0f);
+			for(i = 2; i < nPoints; i += 2)
+			{	glBegin(GL_LINES);
+				glVertex3i(points[i - 2], points[i - 1], 0);
+				glVertex3i(points[i], points[i + 1], 0);
+				glEnd();
+			}
+			break;
+		case esid::DYNAMICS_PIANO:
+			glColor3f(0.0f, 1.0f, 0.0f);
+			for(i = 2; i < nPoints; i += 2)
+			{	glBegin(GL_LINES);
+				glVertex3i(points[i - 2] - points[0], -points[i - 1] + 100, 0);
+				glVertex3i(points[i] - points[0], -points[i + 1] + 100, 0);
+				glEnd();
+			}
+			break;
+		case esid::DYNAMICS_FORTE:
+			glColor3f(1.0f, 0.0f, 0.0f);
+			for(i = 2; i < nPoints; i += 2)
+			{	glBegin(GL_LINES);
+				glVertex3i(points[i - 2] - points[0], -points[i - 1] + 400, 0);
+				glVertex3i(points[i] - points[0], -points[i + 1] + 400, 0);
+				glEnd();
+			}
+			break;
 	}
-
-	glEnd();
-
-}
-
-void displaySpeed(Track const & track, uint nPoints)
-{	Frame * frame;
-	int sx;
-	int	lx = 0;
-	int ly;
-	int x;
-	int y;
-
-	Frame * frameDelay;
-	Frame * frameSmooth;
-	int ySmooth;
-	int lySmooth;
-	int delay = 0;
-	int smooth;
-
-	if(nPoints <= 1)
-		return;
-
-	glBegin(GL_LINES);
-
-	for
-	(	frameDelay = frame = track.first();
-		frame->next() != 0;
-		frame = frame->next()
-	){
-
-		x = frame->time();
-		y = (int)(sqrt(abs((frame->u() << 1) + (frame->v() << 1))) * 10);
-		y = 400 - y;
-
-		if(delay < speedDelay)
-			delay++;
-		else
-			frameDelay = frameDelay->next();
-
-		for
-		(	smooth = 0,
-			frameSmooth = frameDelay,
-			ySmooth = 0;
-			smooth < (delay << 1)
-		 && frameSmooth != 0;
-			smooth++,
-			frameSmooth = frameSmooth->next()
-		)	ySmooth += (int)(sqrt(abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1))) * 10);
-		
-		ySmooth /= smooth;
-		ySmooth = 400 - ySmooth;
-
-		if(lx == 0)
-		{	sx = lx = x;
-			ly = y;
-			lySmooth = ySmooth;
-		}
-
-		glColor3f(0.0f, 0.25f, 0.0f);
-		glVertex3i(lx - sx, ly, 0);
-		glVertex3i(x - sx, y, 0);
-
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3i(lx - sx, lySmooth, 0);
-		glVertex3i(x - sx, ySmooth, 0);
-
-		lx = x;
-		ly = y;
-		lySmooth = ySmooth;
-
-	}
-
-	glEnd();
-
-	
-
-}
-
-void displayAccel(Track const & track, uint nPoints)
-{	Frame * frame;
-	Frame * frameLast;
-	int sx;
-	int	lx = 0;
-	int ly;
-	int x;
-	int y;
-
-	Frame * frameDelay;
-	Frame * frameSmooth;
-	Frame * frameSmoothLast;
-	int ySmooth;
-	int lySmooth;
-	int delay = 0;
-	int smooth;
-
-	if(nPoints <= 2)
-		return;
-
-	glBegin(GL_LINES);
-
-	delay = 0;
-	for
-	(	frameDelay = frameLast = track.first(),
-		frame = frameLast->next();
-		frame->next() != 0;
-		frameLast = frame,
-		frame = frame->next()
-	){
-
-		x = frame->time();
-		y = (int)((sqrt(abs((frame->u() << 1) + (frame->v() << 1))) - sqrt(abs((frameLast->u() << 1) + (frameLast->v() << 1)))) * 20);
-		y = 200 - y;
-
-		if(delay < accelDelay)
-			delay++;
-		else
-			frameDelay = frameDelay->next();
-
-		for
-		(	smooth = 0,
-			frameSmoothLast = frameDelay,
-			frameSmooth = frameDelay->next(),
-			ySmooth = 0;
-			smooth < (delay << 1)
-		 && frameSmooth->next() != 0;
-			smooth++,
-			frameSmoothLast = frameSmooth,
-			frameSmooth = frameSmooth->next()
-		)	ySmooth += (int)((sqrt(abs((frameSmooth->u() << 1) + (frameSmooth->v() << 1))) - sqrt(abs((frameSmoothLast->u() << 1) + (frameSmoothLast->v() << 1)))) * 80);
-
-		ySmooth /= smooth;
-		ySmooth = 200 - ySmooth;
-
-		if(lx == 0)
-		{	sx = lx = x;
-			ly = y;
-			lySmooth = ySmooth;
-		}
-
-		glColor3f(0.25f, 0.0f, 0.0f);
-		glVertex3i(lx - sx, ly, 0);
-		glVertex3i(x - sx, y, 0);
-
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex3i(lx - sx, lySmooth, 0);
-		glVertex3i(x - sx, ySmooth, 0);
-
-		lx = x;
-		ly = y;
-		lySmooth = ySmooth;
-
-	}
-
-	glEnd();
-
-#ifdef __MEMORY__
-	char memdump[16];
-	sprintf(memdump, "%ld", ::alloc);
-	glutSetWindowTitle(memdump);
-#endif
 
 }
 
@@ -272,15 +128,16 @@ void display(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	shapeEditHook = ExamineShape;
+	ShapeMatches shapeMatches(0.75f, 1);
+
 	Recording & recording = *g_recorder.eject();
 	for(uint i = 0; i < recording.length(); i++)
 	{
 
 		nPoints = recording[i]->length();
 
-		displayMovement(*recording[i], nPoints);
-		displaySpeed(*recording[i], nPoints);
-		displayAccel(*recording[i], nPoints);
+		g_shapes->compare(recording[i], &shapeMatches);
 
 		if(nPoints > (800 / recordTime))
 			g_recorder.erase(0, nPoints - (800 / recordTime));

@@ -326,6 +326,10 @@ SOURCE=.\rai\Recorder\TestRecorder.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\rai\Analyser\TestShapeMatches.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\rai\Analyser\TestShapesLoader.cpp
 # End Source File
 # Begin Source File

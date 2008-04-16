@@ -10,8 +10,9 @@ namespace interpreter
 {
 
 typedef void			(*SHAPE_EDIT_HOOK)
-						(	int * const	points,
-							uint const	length
+						(	sid const	shapeId,
+							int * const	points,
+							uint const	nPoints
 						);
 extern SHAPE_EDIT_HOOK	shapeEditHook;
 
@@ -121,36 +122,41 @@ protected:
 	 * Test an array of (x, y) points against this data and add it if it's
 	 *	in range
 	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
-	 *	x[length], y[length])
-	 * @param length The number of points in the array.
+	 *	x[nPoints], y[nPoints])
+	 * @param nPoints The number of points in the array.
 	 * @param shapeMatches A filter and collection for the matched shapes
 	 * @author EB
 	 * @version 1.0
-	 * @pre /length(points) == length * 2;
-	 * @pre length > 0;
+	 * @pre /length(points) == nPoints * 2;
+	 * @pre nPoints > 0;
 	 */
 	ShapeMatch *	test
 					(	int const * const			points,
-						uint const					length,
+						uint const					nPoints,
 						ShapeMatches * const		shapeMatches
 					);
 	/**
 	 * Given an array of (x, y) points, smooth them to remove spikes in the
 	 *	data
 	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
-	 *	x[length], y[length])
-	 * @param length The number of points in the array
+	 *	x[nPoints], y[nPoints])
+	 * @param nPoints The number of points in the array
 	 * @param range The number of points either side of a point to smooth
 	 *	across
+	 * @param affect Affect the even points (0) or the odd points (1). Depending
+	 *	on the caller, even points may be x coordinates or time, and odd points
+	 *	may be y coordinates or speed or acceleration
 	 * @author EB
 	 * @version 1.0
-	 * @pre /length(points) == length * 2;
-	 * @pre length > 0;
+	 * @pre /length(points) == nPoints * 2;
+	 * @pre nPoints > 0;
+	 * @pre affect == 0 || affect == 1;
 	 */
 	void			smooth
 					(	int * const					points,
-						uint const					length,
-						uint const					range
+						uint const					nPoints,
+						uchar const					range,
+						uchar const					affect
 					)								const;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -160,18 +166,18 @@ private:
 	/**
 	 * Compare an array of (x, y) points against this data.
 	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
-	 *	x[length], y[length])
-	 * @param length The number of points in the array.
+	 *	x[nPoints], y[nPoints])
+	 * @param nPoints The number of points in the array.
 	 * @return A weight from (0..1) of how close the (x, y) array matches the
 	 *	shape
 	 * @author EB
 	 * @version 1.0
-	 * @pre /length(points) == length * 2;
-	 * @pre length > 0;
+	 * @pre /length(points) == nPoints * 2;
+	 * @pre nPoints > 0;
 	 */
 	float			compare
 					(	int const * const			points,
-						uint const					length
+						uint const					nPoints
 					)	const;
 	/**
 	 * Add this to shapeMatches

@@ -15,31 +15,44 @@ bool ShapeAccel::compare
 	ShapeMatch *			shapeMatch;
 	uint					nPoints;
 
-	// Need at least three points to calculate an acceleration
-	nPoints = track->length() - 2;
+	nPoints = track->length();
 
-	// Nothing to test, exit
-	if(nPoints <= 0)
+	// Need at least three points to calculate an acceleration
+	if(nPoints < 3)
 		return false;
 
-	points = new int[nPoints * 2];
+	nPoints = (nPoints - 1) << 1;
+	points = new int[nPoints];
 
 	// Store time and speed as co-ordinates
+	// Because all calculations are ints, multiply the speed
+	//	by 10 to give the acceleration more levels of detail
 	for
-	(	frame = track->first();
+	(	index = 0,
+		frame = track->first();
 		frame->next() != 0;
 		frame = frame->next(),
 		index += 2
 	)	points[index    ]	= frame->time(),
-		points[index + 1]	= (frame->u() << 1)
-							+ (frame->v() << 1);
+		points[index + 1]	= abs((frame->u() << 1))
+							+ abs((frame->v() << 1)) * 10;
+
+	Shape::smooth(points, nPoints, 6, 1);
+
+	nPoints -= 2;
+
+	// Calculate acceleration based on smoothed speed
+	for(index = 1; index < nPoints; index += 2)
+		points[index] = points[index + 2] - points[index];
+
+	Shape::smooth(points, nPoints, 3, 1);
 
 	if(shapeEditHook != 0)
-		shapeEditHook(points, nPoints * 2);
+		shapeEditHook(shapeId(), points, nPoints);
 
 	shapeMatch = Shape::test
 	(	points,
-		nPoints * 2,
+		nPoints,
 		shapeMatches
 	);
 

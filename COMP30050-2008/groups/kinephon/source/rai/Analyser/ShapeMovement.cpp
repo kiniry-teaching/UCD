@@ -16,30 +16,35 @@ bool ShapeMovement::compare
 	uint					nPoints;
 	ShapeMatches *			subShapeMatches;
 
-	// Need at least one point to calculate an movement
 	nPoints = track->length();
 
-	// Nothing to test, exit
-	if(nPoints <= 0)
+	// Need at least one point to calculate a movement
+	if(nPoints < 1)
 		return false;
 
-	points = new int[nPoints * 2];
+	nPoints <<= 1;
+	points = new int[nPoints];
 
 	// Store x and y as co-ordinates
 	for
-	(	frame = track->first();
-		frame->next() != 0;
+	(	index = 0,
+		frame = track->first();
+		frame != 0;
 		frame = frame->next(),
 		index += 2
 	)	points[index    ]	= frame->x(),
 		points[index + 1]	= frame->y();
 
+	// Smooth the x and y coordinates
+	Shape::smooth(points, nPoints, 2, 0);
+	Shape::smooth(points, nPoints, 2, 1);
+
 	if(shapeEditHook != 0)
-		shapeEditHook(points, nPoints * 2);
+		shapeEditHook(shapeId(), points, nPoints);
 
 	shapeMatch = Shape::test
 	(	points,
-		nPoints * 2,
+		nPoints,
 		shapeMatches
 	);
 

@@ -16,7 +16,7 @@ bool Shapes::compare
 	// Compare against each shape and set anyCompare to true if
 	//	one or more matches are made
 	for(index = 0; index < _shapeIndex; index++)
-		anyCompare = (*_shapes)[index].compare
+		anyCompare = _shapes[index]->compare
 		(	track,
 			shapeMatches
 		)
