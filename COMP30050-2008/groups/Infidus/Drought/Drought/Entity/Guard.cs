@@ -4,7 +4,7 @@ using Drought.World;
 
 namespace Drought.Entity
 {
-    class Attacker : MovableEntity
+    class Guard : MovableEntity
     {
         private const float VELOCITY = 0.4f;
 
@@ -19,7 +19,7 @@ namespace Drought.Entity
         private const float ATTACK_RADIUS = 10.0f;
 
 
-        public Attacker(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
+        public Guard(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
             base(gameState, model, path, terrain, uid)
         {
             setVelocity(VELOCITY);
