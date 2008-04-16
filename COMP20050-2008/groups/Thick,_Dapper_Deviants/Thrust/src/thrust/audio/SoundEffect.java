@@ -28,4 +28,8 @@ public class SoundEffect {
   public void start() {
     AudioPlayer.player.start(run);
   }
+  public static void main(String[] args){
+    SoundEffect s = new SoundEffect("./media/Thrust_music.wav");
+    s.start();
+  }
 }
