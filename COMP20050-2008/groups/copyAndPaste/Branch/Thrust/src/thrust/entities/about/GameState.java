@@ -1,6 +1,6 @@
-package thrust.entities.in_game;
+package thrust.entities.about;
 
-import thrust.entities.in_game.AbstractGameState.HighScoreInterface;
+import thrust.entities.about.AbstractGameState.HighScoreInterface;
 
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
