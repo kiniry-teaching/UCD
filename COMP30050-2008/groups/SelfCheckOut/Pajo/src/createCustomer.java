@@ -27,7 +27,7 @@ public class createCustomer {
 			
 			pstmt.executeUpdate();
 					
-		
+			System.out.println("Insertion Complete.");
 			conn.close();
 			//System.out.println("CONNECTION TERMINATED");
 		} 
