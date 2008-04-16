@@ -8,18 +8,18 @@ package thrust.entities.about;
  * @version 14 April 2008
  */
 
-public abstract class Fueling implements Fuelable {
+public class Fueling implements Fuelable {
   /**
    * @return How much fuel do you contain?
    */
-  
-    public int myFuel;
-    
-    public int myMaxi = 100;
-  
+
+  private int myFuel;
+  /** integer myMaxi.*/
+  private final int myMaxi = 100;
+
   //@ ensures 0 <= \result;
   //@ ensures \result <= maximum_fuel();
-  /*@ pure @*/ 
+  /*@ pure @*/
   public int fuel() {
     return myFuel;
   }
@@ -27,24 +27,25 @@ public abstract class Fueling implements Fuelable {
    * @return How much fuel can you contain?
    */
   //@ ensures 0 <= \result;
-  /*@ pure @*/ 
-public final int maximum_fuel() {
-  if (myMaxi >= 0){
-    return myMaxi;
+  /*@ pure @*/
+  public final int maxiumumFuel() {
+    if (myMaxi >= 0) {
+      return myMaxi;
+    }
+    return 0;
   }
-}
 
   /**
    * @param the_fuel_content This many units is your fuel content.
    */
   //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
   //@ ensures fuel() == the_fuel_content;
-  public final void set_fuel_content(final int the_fuel_content) {
-    if(the_fuel_content >= 0 && the_fuel_content <= myMaxi){
-    myFuel = the_fuel_content;
+  public final void setFuelContent(final int the_fuel_content) {
+    if (the_fuel_content >= 0 && the_fuel_content <= myMaxi) {
+      myFuel = the_fuel_content;
     }
-    }
-  
+  }
+
 
 
   /*@ ensures (\old(fuel() + the_fuel_change < 0) ?
@@ -56,23 +57,18 @@ public final int maximum_fuel() {
   /**
    * @param the_fuel_change Change your fuel content by this many units.
    */
-  public final void change_fuel_content(final int the_fuel_change) {
+  public final void changeFuelContent(final int the_fuel_change) {
     if (fuel() + the_fuel_change < 0) {
       myFuel = 0;
-    }
-    else if (maximum_fuel() < (fuel() + the_fuel_change)) {
-      myFuel = maximum_fuel();
-    }
-    else {
+    } else if (maxiumumFuel() < (fuel() + the_fuel_change)) {
+      myFuel = maxiumumFuel();
+    } else {
       myFuel = fuel() + the_fuel_change;
     }
   }
 
   //@ invariant (* Fuel content is always non-negative and finite. *);
   //@ invariant 0 <= fuel();
-  
-  
- 
-  
-  }
-  
+
+}
+
