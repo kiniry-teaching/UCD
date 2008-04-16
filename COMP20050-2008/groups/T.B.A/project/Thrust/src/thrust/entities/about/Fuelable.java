@@ -49,3 +49,4 @@ public interface Fuelable {
   //@ invariant (* Fuel content is always non-negative and finite. *);
   //@ invariant 0 <= fuel();
 }
+
