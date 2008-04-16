@@ -18,7 +18,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class SoundEffect {
   /** Clip to be played. */
-  private transient Clip my_clip;
+  private static Clip my_clip;
 
   /**
    * This is your sound effect.
@@ -27,7 +27,7 @@ public class SoundEffect {
    *          the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public final/* @ pure @ */SoundEffect make(final File the_filename) {
+  public static/* @ pure @ */SoundEffect make(final File the_filename) {
 
     AudioInputStream audiois = null;
     // @ assert the_filename != null;
