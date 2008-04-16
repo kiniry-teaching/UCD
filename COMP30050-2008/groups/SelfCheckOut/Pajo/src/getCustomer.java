@@ -6,9 +6,9 @@
 import java.sql.*;
 
 public class getCustomer {
- static String myname;
- static String myemailaddress;
- static int myphonenumber;
+ String myname;
+ String myemailaddress;
+ int myphonenumber;
 	
 		public getCustomer (int CustomerID) {
 		try{
