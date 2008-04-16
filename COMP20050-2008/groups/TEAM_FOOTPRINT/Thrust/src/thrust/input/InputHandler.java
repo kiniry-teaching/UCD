@@ -41,7 +41,7 @@ public class InputHandler {
   public /*@ pure @*/ char[] legalInputs() {
      //@ assert false;
     char[] legalInputs = {DISPLAY_SCORES, TOGGLE_MUSIC,
-                          START_GAME, STOP_GAME,FIRE_GUN, TURN_LEFT,
+                          START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
                           TURN_RIGHT , USE_ENGINE, USE_SHIELD};
     return legalInputs;
   }
@@ -104,8 +104,7 @@ public class InputHandler {
       } else if (the_input == USE_SHIELD) {
       //use the shield
         System.out.print("use the shield");
-        }
-      else {
+      } else {
      //this is not a legal input
         System.out.print("this is not a legal input");
       }
