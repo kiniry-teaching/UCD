@@ -101,7 +101,7 @@ public class HTTPpost {
                ByteArrayInputStream baos = new ByteArrayInputStream(POSTbytes);
                rQueue.queueRequest(url, "POST", headers, myEvH, baos, POSTbytes.length, false);               
           }
-          
+          //t
           /* Wait until the request is complete.*/
           rQueue.waitUntilComplete();
      }
