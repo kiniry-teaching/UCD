@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package thrust.entities.in_game;
 
@@ -29,7 +29,7 @@ public abstract /*@ pure @*/ class AbstractGameState {
   /**
    * @return How much fuel do you contain?
    * @design The current fuel of the spaceship.
-   * @note Note that the {@link Spaceship} class should be the 
+   * @note Note that the {@link Spaceship} class should be the
    * actual owner of this data; this is just a convenience method.
    */
   //@ ensures 0 <= \result;
