@@ -46,11 +46,12 @@
 		<li>There's a good chance you won't have to change "localhost".</li>
 		<li>Username and password may be optional.</li>
 		<li>For further information contact your host.</li>
+		<li>"Full path" means the full path to your Alexandria installation (eg. <?php echo $_SERVER['DOCUMENT_ROOT'];?>/library)</li>
 	</ul>
 	<?php
 		if($_POST["dbname"] != NULL){
 			include("install_functions.php");
-			install($_POST["host"], $_POST["username"], $_POST["password"], $_POST["dbname"], $_POST["awskey"], $_POST["isbndbkey"]);	
+			install($_POST["host"], $_POST["username"], $_POST["password"], $_POST["dbname"], $_POST["awskey"], $_POST["isbndbkey"], $_POST['address']);	
 		}
 		else{
 	?>
@@ -61,6 +62,7 @@
 			<div class="formrow"><div class="formtext">Database Name: </div><div class="forminput"><input type="text" name="dbname" /></div></div>
 			<div class="formrow"><div class="formtext">AWS Access Key: </div><div class="forminput"><input type="text" name="awskey" /></div></div>
 			<div class="formrow"><div class="formtext">isbndb.com Access Key: </div><div class="forminput"><input type="text" name="isbndbkey" /></div></div>
+			<div class="formrow"><div class="formtext">Full path: </div><div class="forminput"><input type="text" name="address" value="<?php echo $_SERVER['DOCUMENT_ROOT'];?>" /></div></div>
 			<div class="formbutton"><input type="submit" /></div>
 		</form>
 	<?php

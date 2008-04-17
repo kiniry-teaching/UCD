@@ -8,7 +8,7 @@
 * 																*
 ****************************************************************/
 
-function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
+function install($host, $username, $password, $dbname, $awskey, $isbndbkey, $address){
 
 	/****************************************************************
 	* 																*
@@ -56,6 +56,19 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey){
 	fclose($file);
 
 	chmod("../config.php",0644);
+	
+	/****************************************************************
+	* 																*
+	* Edits the config.txt file with the full path					*
+	* 																*
+	****************************************************************/
+
+	$file = fopen("../config.txt","w");
+	fwrite($file,"$address");
+	fclose($file);
+
+	chmod("../config.txt",0644);
+
 
 	/****************************************************************
 	* 																*
