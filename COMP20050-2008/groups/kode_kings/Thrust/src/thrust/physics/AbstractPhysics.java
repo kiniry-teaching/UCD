@@ -8,26 +8,27 @@ package thrust.physics;
 public abstract class AbstractPhysics implements PhysicsInterface {
   /** The force that attracts the spaceship and
    * goal sphere toward the terrain. */
-  static final double GRAVITY_CONSTANT = -9.8;
+  private static final double GRAVITY_CONSTANT = -9.8;
   /** The quantity of matter that an entity contains. */
-  double my_mass;
+  private static double my_mass;
   /** The rate of motion. */
-  double my_speed;
+  private static double my_speed;
   /** Change in the speed of something. */
-  double my_rate_of_speed;
+  private static double my_rate_of_speed;
+  /** Increase in the rate of speed of something. */
+  private static double[] my_acceleration = {my_speed, my_rate_of_speed};
   /** The relative physical direction of entities. */
-  double my_orientation;
+  private static double my_orientation;
   /** The x co-ordinate where an entity is located. */
-  double my_position_x;
+  private static double my_position_x;
   /** The y co-ordinate where an entity is located. */
-  double my_position_y;
+  private static double my_position_y;
 
   /**
    * @return What is your acceleration in meters per second squared?
    */
   public double[] acceleration() {
-    final double[] acceleration = {my_speed, my_rate_of_speed};
-    return acceleration;
+    return my_acceleration;
   }
 
   /**
