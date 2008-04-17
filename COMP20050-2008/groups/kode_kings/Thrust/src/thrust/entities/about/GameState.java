@@ -72,22 +72,31 @@ public class GameState extends AbstractGameState {
 
   }
 
+  /**
+   * A pair of a sequence of three initials and a score.
+   *
+   * @author Colin Casey (colin.casey@org.com)
+   * @version 17 April 2008
+   */
   public abstract class AbstractHighScore implements HighScoreInterface {
 
-    int score() {
+    /** The initials of the player. */
+    char[] my_initials;
 
+    public int score() {
+      return my_score;
     }
 
-    char[] initials() {
-
+    public char[] initials() {
+      return my_initials;
     }
 
-    void new_score(final int the_new_score) {
-
+    public void new_score(final int the_new_score) {
+      my_score = the_new_score;
     }
 
-    void new_initials(final char[] the_new_initials) {
-
+    public void new_initials(final char[] the_new_initials) {
+      my_initials = the_new_initials;
     }
   }
 }
