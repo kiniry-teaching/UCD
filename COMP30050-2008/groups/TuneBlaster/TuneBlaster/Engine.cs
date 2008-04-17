@@ -74,7 +74,7 @@ namespace TuneBlaster_
 
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 720;
-
+            //this.graphics.IsFullScreen;
 
             explosion = new ColouredParticle(this, 1, 5);
             Components.Add(explosion);
