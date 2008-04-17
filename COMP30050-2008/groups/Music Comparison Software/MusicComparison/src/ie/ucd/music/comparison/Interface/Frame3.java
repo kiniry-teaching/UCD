@@ -93,8 +93,6 @@ public class Frame3 extends JFrame {
         JOptionPane.showMessageDialog(this, "The delete button was pressed i will now delete the files");
     }
 }
-Reply
-		
-Forward
+
 		
 	
