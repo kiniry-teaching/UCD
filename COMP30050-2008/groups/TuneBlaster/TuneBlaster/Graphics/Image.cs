@@ -65,7 +65,7 @@ namespace TuneBlaster_.Graphics
         /*
          * Load info to Graphics memory
          */
-        public void LoadGraphicsContent(SpriteBatch spriteBatch, Texture2D texture)
+        public virtual void LoadGraphicsContent(SpriteBatch spriteBatch, Texture2D texture)
         {
             this.spriteBatch = spriteBatch;
             this.texture = texture;

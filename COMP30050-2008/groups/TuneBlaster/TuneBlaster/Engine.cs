@@ -242,6 +242,7 @@ namespace TuneBlaster_
             background.Draw(gameTime);
             core.Draw(gameTime);
             ball.Draw(gameTime);
+            core.DrawSearchLight(gameTime);
             frame.Draw(gameTime);
             ballGenerator.Draw(gameTime);
             spriteBatch.End();

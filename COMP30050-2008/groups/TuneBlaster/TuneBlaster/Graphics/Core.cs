@@ -17,14 +17,21 @@ namespace TuneBlaster_.Graphics
     {
         #region Fields (ballsSize, oldRotation, acceleration, balls, maxAcceleration)
 
+        Game game;
         public int ballsSize, looseBallsSize;
         float oldRotation;
         public float acceleration;
         public List<FixedBall> balls;
         public List<MovingBall> looseBalls;
         static float maxAcceleration = 0.05f;
+        KeyboardState keyState;
+        GamePadState padState;
         value colour;
         Vector3 pos;
+        bool searchLightOn;
+        Image searchLight;
+        Texture2D searchLightTexture;
+
 
         #endregion
 
@@ -37,6 +44,7 @@ namespace TuneBlaster_.Graphics
         {
             balls = new List<FixedBall>();
             looseBalls = new List<MovingBall>();
+            searchLight = new Image();
         }
 
         /*
@@ -47,6 +55,9 @@ namespace TuneBlaster_.Graphics
             base.Initialise(mySize, myPosition, g);
             acceleration = 0f;
             oldRotation = 0f;
+            game = g;
+            searchLight.Initialise(new Vector2(1200, 1200), Position, g);
+            searchLightOn = true;
         }
 
         /*
@@ -86,6 +97,8 @@ namespace TuneBlaster_.Graphics
                 }
             }
             Move(keyBoardState, gamePadState);
+
+            
             return colour;
         }
 
@@ -111,8 +124,28 @@ namespace TuneBlaster_.Graphics
             {
                 looseBalls[i].Move();
             }
-
             CheckLoose();
+            if (keyBoardState.IsKeyDown(Keys.A))
+            {
+                searchLightOn = true;
+            }
+
+            if (keyBoardState.IsKeyDown(Keys.S))
+            {
+                searchLightOn = false;
+            }
+            if (searchLightOn)
+            {
+                MoveSearchLight(keyBoardState, gamePadState);
+            }
+        }
+
+        public override void LoadGraphicsContent(SpriteBatch spriteBatch, Texture2D texture)
+        {
+            this.spriteBatch = spriteBatch;
+            this.texture = texture;
+            searchLightTexture = game.Content.Load<Texture2D>(@"Resources\Textures\spotlight300");
+            searchLight.LoadGraphicsContent(spriteBatch, searchLightTexture);
         }
 
         /*
@@ -281,6 +314,37 @@ namespace TuneBlaster_.Graphics
 
             rotation += acceleration;
 
+        }
+
+        public void DrawSearchLight(GameTime gameTime)
+        {
+            if (searchLightOn)
+            {
+                searchLight.Draw(gameTime);
+            }
+        }
+
+
+        public void MoveSearchLight(KeyboardState keyboard, GamePadState gamepad)
+        {
+
+            if (keyboard.IsKeyDown(Keys.Up)) 
+            {
+                searchLight.Position = new Vector2(searchLight.Position.X, searchLight.Position.Y - 1);
+            }
+
+            float tempX = gamepad.ThumbSticks.Right.X*10;
+            float tempy = gamepad.ThumbSticks.Right.Y*10;
+
+            searchLight.Position = new Vector2(searchLight.Position.X + tempX, searchLight.Position.Y - tempy);
+
+            if (Vector2.Distance(Position, searchLight.Position) > 210) 
+            {
+                Vector2 d = Position - searchLight.Position;
+                d.Normalize();
+                d = d * 210;
+                searchLight.Position = Position - d;
+            }
         }
 
         #endregion
