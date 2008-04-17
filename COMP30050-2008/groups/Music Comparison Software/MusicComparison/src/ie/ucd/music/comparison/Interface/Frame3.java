@@ -70,9 +70,10 @@ public class Frame3 extends JFrame {
     }
 
     public void Show_actionPerformed(ActionEvent e) {
-     /*for (int i = 0; i < HigherBR; i++){
-      JOptionPane.showMessageDialog(this, "Aritist:"+HigherBR.getArtist[i]+" Song:"+HigherBR.getSong[i]+" Bitrate:"+HigherBR.getBitrate[i]+" is similar to "+"Aritist:"+LowerBR.getArtist[i]+" Song:"+LowerBR.getSong[i]+" Bitrate:"+LowerBR.getBitrate[i]);
-     }*/
+    	/*for (int i = 0; i < higher; i++){
+    		JOptionPane.showMessageDialog(this, "Aritist:"+higher.getArtist[i]+/n"Song:"+higher.getSong[i]+/n"Bitrate:"+higher.getBitrate[i]+/n"is similar to "+/n"Aritist:"+lower.getArtist[i]+/n"Song:"+lower.getSong[i]+/n"Bitrate:"+lower.getBitrate[i]);
+    	}*/
+    	JOptionPane.showMessageDialog(this, "Aritist: Beatles Song: Penny Lane Bitrate: 256 is similar to Aritist:The Beatles Song: Penny Lane Bitrate: 128");
         System.out.println("The Show command was pressed");
         JOptionPane.showMessageDialog(this, "The Show button was pressed i will now Show you the similar files");
     }
@@ -93,6 +94,55 @@ public class Frame3 extends JFrame {
         JOptionPane.showMessageDialog(this, "The delete button was pressed i will now delete the files");
     }
 }
+
+
+class Frame3_Delete_actionAdapter implements ActionListener {
+    private Frame3 adaptee;
+    Frame3_Delete_actionAdapter(Frame3 adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        adaptee.Delete_actionPerformed(e);
+    }
+}
+
+
+class Frame3_Cancel_actionAdapter implements ActionListener {
+    private Frame3 adaptee;
+    Frame3_Cancel_actionAdapter(Frame3 adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        adaptee.Cancel_actionPerformed(e);
+    }
+}
+
+
+class Frame3_Move_actionAdapter implements ActionListener {
+    private Frame3 adaptee;
+    Frame3_Move_actionAdapter(Frame3 adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        adaptee.Move_actionPerformed(e);
+    }
+}
+
+class Frame3_Show_actionAdapter implements ActionListener {
+    private Frame3 adaptee;
+    Frame3_Show_actionAdapter(Frame3 adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        adaptee.Show_actionPerformed(e);
+    }
+}
+
+
 
 		
 	

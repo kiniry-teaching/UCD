@@ -1,6 +1,6 @@
 package ie.ucd.music.comparison.Interface;
 
- 
+
 
 
 import ie.ucd.music.comparison.FindID3.FindID3;
@@ -41,7 +41,12 @@ public class Frame1 extends JFrame {
     JMenuBar jMenuBar1 = new JMenuBar();
     JMenu jMenuFile = new JMenu();
     JMenuItem jMenuFileExit = new JMenuItem();
-  
+    /*ImageIcon image1 = new ImageIcon(interfac.Frame1.class.getResource(
+            "openFile.png"));
+    ImageIcon image2 = new ImageIcon(interfac.Frame1.class.getResource(
+            "closeFile.png"));
+    ImageIcon image3 = new ImageIcon(interfac.Frame1.class.getResource(
+            "help.png"));*/
     XYLayout xYLayout1 = new XYLayout();
     JButton Run = new JButton();
     JButton Cancel = new JButton();
@@ -52,11 +57,12 @@ public class Frame1 extends JFrame {
     String I2 = "";
     private FindID3 findid3;
 
-   
+    
     public Frame1() {
-     I1 = Input1.getText();
-     I2 = Input2.getText();
-     
+    	I1 = Input1.getText();
+    	I2 = Input2.getText();
+    	findid3 = new FindID3();
+    	
         try {
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             jbInit();
@@ -111,18 +117,17 @@ public class Frame1 extends JFrame {
 
     public void Run_actionPerformed(ActionEvent e) {
         //frame.setVisible(false);
-     I1 = Input1.getText();
-     I2 = Input2.getText();
-     System.out.println(I1);
-     System.out.println(I2);
-     if(Input1.getText().length() == 0 || Input2.getText().length() == 0){
-      JOptionPane.showMessageDialog(this, "Please enter two directories");
-      System.out.println("Please enter two directories");
-     }
-     else{
-    	 findid3.FindDirectory(I1,I2);
-    	 
-    	 Frame3 frame = new Frame3();
+    	I1 = Input1.getText();
+    	I2 = Input2.getText();
+    	System.out.println(I1);
+    	System.out.println(I2);
+    	if(Input1.getText().length() == 0 || Input2.getText().length() == 0){
+    		JOptionPane.showMessageDialog(this, "Please enter two directories");
+    		System.out.println("Please enter two directories");
+    	}
+    	else{
+    	findid3.FindDirectory(I1, I2);
+    Frame3 frame = new Frame3();
        // Validate frames that have preset sizes
        // Pack frames that have useful preferred size info, e.g. from their layout
        if (packFrame) {
@@ -145,7 +150,8 @@ public class Frame1 extends JFrame {
        frame.setVisible(true);
        System.out.println("The Run command was pressed");
         //JOptionPane.showMessageDialog(this, "The Run command was pressed");
-     }
+    	
+    	}
     }
 
     public void Cancel_actionPerformed(ActionEvent e) {
@@ -190,4 +196,6 @@ class Frame1_jMenuFileExit_ActionAdapter implements ActionListener {
         adaptee.jMenuFileExit_actionPerformed(actionEvent);
     }
 }
+
+
 
