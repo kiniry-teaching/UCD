@@ -39,7 +39,7 @@
 		<li>Enter the below details.</li>
 		<li>Click submit and wait for welcome message.</li>
 		<li>Then delete the "/install" folder to prevent anyone overwriting your installation.</li>
-		<li>To access the administration functions intially, a user must register as ADMIN (all upper case)</li>
+		<li>To access the administration functions intially, a user must register as admin (all lower case)</li>
 	</ol>
 	<h2>Note:</h2>
 	<ul>

@@ -6,58 +6,28 @@ include("include/header.php"); //page header
 <div>
 <form action="register.php" method="post">
 Enter a Username: <input type="text" name="username" /><br />
-Enter your e-mail: <input type="text" name="e-mail1" /><br />
-Re-Enter e-mail: <input type="text" name="e-mail2" /><br />
+(Maximum Username Length 30 Chararcters)<br />
+Enter your e-mail: <input type="text" name="email1" /><br />
+Re-Enter e-mail: <input type="text" name="email2" /><br />
 Enter a password: <input type="password" name="password1" /><br />
+(Max Password Length 32 Chararcters)<br />
 Re-Enter your password: <input type="password" name="password2" /><br />
 
-<input type="submit" />
+<input type="hidden" name="state" value="1" /><input type="submit" />
 </form>
 </div>
 <?php
 include("include/user_variables.php");
 
-$username = $_POST[username];
-$email1 = $_POST[email1];
-$email2 = $_POST[email2];
-$password1 = $_POST[password1];
-$password2 = $_POST[password2];
-
-//the following checks if the entered username already exsists in the database#
-include("connection.php"); //Connects to database
-$result = mysql_query("SELECT * FROM users	
-   WHERE username ='$username'");
-$ANOTHER_VARIABLE = mysql_num_rows($result);
-if($ANOTHER_VARIABLE != 0)
-	{echo "<p>". $username ."already exists, please try another username</p>";}
-else 
-	if($email1 != $email2) //compares the two entered email addresses
-	{echo "e-mail addresses do not match, please try again";}
-else 
-	if($password1 != $password2) //compares the two entered passwords
-	{echo "passwords do not match, please try again";}
-else{
-	if($username=="ADMIN")
-	{$userlevel='9';}else{$userlevel="1";}
-		/*	sets the userlevel to 1(standard user) 
-		*	if the username given is admin then that user is given the admin userlevel
-		*	the admin should be the first registered user to attempt to use the name adminfunctions
-		*/
+if($_POST['state'] == 1){		
+	$username = $_POST[username];
+	$email1 = $_POST[email1];
+	$email2 = $_POST[email2];
+	$password1 = $_POST[password1];
+	$password2 = $_POST[password2];
 	
-	function createUser($username, $password1, $userlevel, $email1){
-		/* 	createUser
-		*	creates a new entry in the users database using the given details
-		*/
-		include("connection.php"); //Connects to database
-			$sql="INSERT INTO users_online (username, password, userlevel, e-mail, timestamp)
-			VALUES ('$username','$password1','$userlevel','$email1', NOW())";
-				if (!mysql_query($sql,$con))
-				{
-				die('Error: ' . mysql_error());
-				}
-			echo ("Account registered for ".$username."!");		
-		}
-	}
-
+	include("include/registerfunctions.php");
+	createUser($username, $password1, $userlevel, $email1, $email2, $password1, $password2);
+}
 include("include/footer.php"); //page footer
 ?>
