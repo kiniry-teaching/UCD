@@ -338,11 +338,11 @@ namespace TuneBlaster_.Graphics
 
             searchLight.Position = new Vector2(searchLight.Position.X + tempX, searchLight.Position.Y - tempy);
 
-            if (Vector2.Distance(Position, searchLight.Position) > 210) 
+            if (Vector2.Distance(Position, searchLight.Position) > 230) 
             {
                 Vector2 d = Position - searchLight.Position;
                 d.Normalize();
-                d = d * 210;
+                d = d * 230;
                 searchLight.Position = Position - d;
             }
         }
