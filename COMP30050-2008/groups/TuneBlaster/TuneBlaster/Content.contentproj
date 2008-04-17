@@ -295,20 +295,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\Textures\frame.png">
-      <Name>frame</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Resources\Textures\spotlight.png">
-      <Name>spotlight</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Resources\Textures\spotlight300.png">
       <Name>spotlight300</Name>
       <Importer>TextureImporter</Importer>
