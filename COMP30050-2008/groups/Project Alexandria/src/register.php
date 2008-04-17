@@ -23,38 +23,41 @@ $email2 = $_POST[email2];
 $password1 = $_POST[password1];
 $password2 = $_POST[password2];
 
-//the following checks if the entered username already exsists in the database
+//the following checks if the entered username already exsists in the database#
+{include("connection.php"); //Connects to database
 $result = mysql_query("SELECT * FROM users	
    WHERE username ='$username'");
 $ANOTHER_VARIABLE = mysql_num_rows($result);
 if($ANOTHER_VARIABLE != 0)
 	{echo "<p>". $username ."already exists, please try another username</p>";}
-else if($email1 != $email2) //compares the two entered email addresses
+else 
+	if($email1 != $email2) //compares the two entered email addresses
 	{echo "e-mail addresses do not match, please try again";}
-else if($password1 != $password2) //compares the two entered passwords
+else 
+	if($password1 != $password2) //compares the two entered passwords
 	{echo "passwords do not match, please try again";}
 else{
-	if($username==ADMIN)
+	if($username=="ADMIN")
 	{$userlevel='9';}else{$userlevel="1";}
 		/*	sets the userlevel to 1(standard user) 
 		*	if the username given is admin then that user is given the admin userlevel
 		*	the admin should be the first registered user to attempt to use the name adminfunctions
 		*/
 	
-	function createUser($username, $password1, $userlevel, $e-mail1)
+	function createUser($username, $password1, $userlevel, $email1){
 		/* 	createUser
 		*	creates a new entry in the users database using the given details
 		*/
-	{include("connection.php"); //Connects to database
-		$sql="INSERT INTO users_online (username, password, userlevel, e-mail, timestamp)
-	VALUES ('$username','$password1','$userlevel','$e-mail1', NOW())";
+		include("connection.php"); //Connects to database
+			$sql="INSERT INTO users_online (username, password, userlevel, e-mail, timestamp)
+			VALUES ('$username','$password1','$userlevel','$e-mail1', NOW())";
 				if (!mysql_query($sql,$con))
-			{
+				{
 				die('Error: ' . mysql_error());
-			}
-	echo ("Account registered for ".$username."!");		
+				}
+			echo ("Account registered for ".$username."!");		
+		}
 	}
-}
 
 include("include/footer.php"); //page footer
 ?>
