@@ -24,7 +24,7 @@ $password1 = $_POST[password1];
 $password2 = $_POST[password2];
 
 //the following checks if the entered username already exsists in the database#
-{include("connection.php"); //Connects to database
+include("connection.php"); //Connects to database
 $result = mysql_query("SELECT * FROM users	
    WHERE username ='$username'");
 $ANOTHER_VARIABLE = mysql_num_rows($result);
@@ -50,7 +50,7 @@ else{
 		*/
 		include("connection.php"); //Connects to database
 			$sql="INSERT INTO users_online (username, password, userlevel, e-mail, timestamp)
-			VALUES ('$username','$password1','$userlevel','$e-mail1', NOW())";
+			VALUES ('$username','$password1','$userlevel','$email1', NOW())";
 				if (!mysql_query($sql,$con))
 				{
 				die('Error: ' . mysql_error());
