@@ -12,14 +12,14 @@ public class FindID3 {
 	public static void main (String args[]){
 		
 		
-		 public void FindDirectory(String path1,String path2){
+		public void FindDirectory(String path1,String path2){
 		
 		File I1 = new File(path1);
 		File I2 = new File(path2);
 		FindAllID3(I1);
 		FindAllID3(I2);
 	 }
-	}
+	
         
        if((args.length!=0)||(args.length>9)) {
            System.out.println("searching for mp3s");
