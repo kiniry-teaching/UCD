@@ -150,6 +150,8 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey, $add
 	(
 		isbnUsername varchar(44) NOT NULL,
 		PRIMARY KEY(isbnUsername),
+		isbn varchar(13);
+		username varchar(30);
 		rating int(5),
 		review text
 	)";
