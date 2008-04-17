@@ -41,12 +41,7 @@ public class Frame1 extends JFrame {
     JMenuBar jMenuBar1 = new JMenuBar();
     JMenu jMenuFile = new JMenu();
     JMenuItem jMenuFileExit = new JMenuItem();
-    /*ImageIcon image1 = new ImageIcon(interfac.Frame1.class.getResource(
-            "openFile.png"));
-    ImageIcon image2 = new ImageIcon(interfac.Frame1.class.getResource(
-            "closeFile.png"));
-    ImageIcon image3 = new ImageIcon(interfac.Frame1.class.getResource(
-            "help.png"));*/
+  
     XYLayout xYLayout1 = new XYLayout();
     JButton Run = new JButton();
     JButton Cancel = new JButton();
