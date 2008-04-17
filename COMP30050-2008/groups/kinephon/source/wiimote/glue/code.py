@@ -5,6 +5,7 @@ from struct import pack
 
 #User-friendly bluetooth name of the wiimote
 WIIMOTE_NAME = "Nintendo RVL-CNT-01"
+NOT_FOUND = "NOT_FOUND"
 
 ##
 #I found the two following ports in the output of the spdtool
@@ -71,13 +72,6 @@ def toString(a_list_of_bytes):
         result = result+bstr
         
     return result
-
-
-
-WIIMOTE_NAME = "Nintendo RVL-CNT-01"
-NOT_FOUND = "NF"
-
-
 
 global send_socket
 global receive_socket
@@ -250,7 +244,7 @@ def receive_report():
         if (leds != previous_leds) :
             send_socket.send(toString((0x52, 0x11, leds)))
             previous_leds = leds
-            print leds
+            #print leds
         return result
       
 def close_connection():
