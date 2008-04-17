@@ -10,8 +10,6 @@
 
 package thrust.entities.about;
 
-import thrust.entities.about.AbstractGameState.HighScoreInterface;
-
 /**
  * @author Ciaran Hale (ciaran.hale@ucd.ie)
  * @author Colin Casey (colin.casey@org.com)
@@ -19,52 +17,77 @@ import thrust.entities.about.AbstractGameState.HighScoreInterface;
  */
 public class GameState extends AbstractGameState {
 
+  /** The bonus points associated with finishing a level. */
+  private static int my_bonus;
+  /** The current score of a player. */
+  private static int my_score;
+  /** The number of lives a player has left. */
+  private static byte my_lives;
+
   public int bonus() {
-
+    return my_bonus;
   }
 
-  public void new_bonus(int the_new_value) {
-
+  public void new_bonus(final int the_new_value) {
+    my_bonus = the_new_value;
   }
 
-  public  int current_fuel() {
+  public int current_fuel() {
 
   }
 
   public int maximum_fuel() {
-    
+
   }
 
   public int score() {
-    
+    return my_score;
   }
 
-  public void change_score(int some_new_points) {
-    
+  public void change_score(final int some_new_points) {
+    my_score = my_score + some_new_points;
   }
 
   public byte lives() {
-    
+    return my_lives;
   }
 
-  public void change_lives(byte some_new_lives) {
-    
+  public void change_lives(final byte some_new_lives) {
+    my_lives = (byte)(my_lives + some_new_lives);
   }
 
   public HighScoreInterface[] high_scores() {
-    
+
   }
 
-  public HighScoreInterface high_score(int the_index) {
-    
+  public HighScoreInterface high_score(final int the_index) {
+
   }
 
-  public boolean new_high_score(HighScoreInterface the_high_score) {
-    
+  public boolean new_high_score(final HighScoreInterface the_high_score) {
+
   }
 
-  public void add_high_score(HighScoreInterface the_new_high_score) {
-    
+  public void add_high_score(final HighScoreInterface the_new_high_score) {
+
   }
-  
+
+  public abstract class AbstractHighScore implements HighScoreInterface {
+
+    int score() {
+
+    }
+
+    char[] initials() {
+
+    }
+
+    void new_score(final int the_new_score) {
+
+    }
+
+    void new_initials(final char[] the_new_initials) {
+
+    }
+  }
 }
