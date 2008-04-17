@@ -14,8 +14,8 @@ class Query {
      * This String returns the name.
      */
     private static String returnedName;
-    public static void main(final String args[]) {
-    private Connection conn;
+    public static void main(final String args[]){ 
+    private final Connection conn;
     public Query() {
         
         
@@ -41,11 +41,13 @@ class Query {
     
         
     }
-       System.out.println(""); 
+       
+    System.out.println(""); 
 
-     Statement stmt = conn.createStatement();
+    Statement stmt = conn.createStatement();
 
-     ResultSet rs;
+    ResultSet rs;
+    {
 
      rs = stmt.executeQuery("SELECT Artist_Name FROM mp3_files WHERE Bit_Rate = 128");
      while (rs.next()) {
@@ -57,7 +59,7 @@ class Query {
          // TODO put information into item here
          
      }
-}
+}{
     /**
      * Connects to mysql database and runs specific query.
      * @param args
@@ -85,3 +87,4 @@ try{
         }
     }
 }
+
