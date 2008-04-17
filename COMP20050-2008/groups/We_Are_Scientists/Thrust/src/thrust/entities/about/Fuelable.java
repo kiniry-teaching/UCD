@@ -54,11 +54,10 @@ public class Fuelable {
   //@ ensures fuel() == the_fuel_content;
   void set_fuel_content(final int the_fuel_content)
   {
-    if (the_fuel_content > 0)
+    if (the_fuel_content >= 0 && the_fuel_content <= maximum_fuel())
     {
       my_fuel = the_fuel_content;
     }
-
   }
 
   /**
