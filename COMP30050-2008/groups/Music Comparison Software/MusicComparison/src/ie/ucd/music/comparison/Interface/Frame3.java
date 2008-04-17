@@ -1,5 +1,6 @@
 package ie.ucd.music.comparison.Interface;
 
+
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -27,6 +28,7 @@ public class Frame3 extends JFrame {
     XYLayout xYLayout1 = new XYLayout();
     JButton Cancel = new JButton();
     JButton Move = new JButton();
+    JButton Show = new JButton();
     JButton Delete = new JButton();
     JLabel jLabel1 = new JLabel();
 
@@ -45,6 +47,8 @@ public class Frame3 extends JFrame {
         Cancel.addActionListener(new Frame3_Cancel_actionAdapter(this));
         Move.setText("Move");
         Move.addActionListener(new Frame3_Move_actionAdapter(this));
+        Show.setText("Show");
+        Show.addActionListener(new Frame3_Show_actionAdapter(this));
         Delete.addActionListener(new Frame3_Delete_actionAdapter(this));
         jLabel1.setText(
                 "There were duplicates found, what would you like to do with them?");
@@ -52,7 +56,8 @@ public class Frame3 extends JFrame {
         this.getContentPane().add(jLabel1, new XYConstraints(38, 65, 336, 57));
         this.getContentPane().add(Move, new XYConstraints(225, 197, 80, 40));
         this.getContentPane().add(Cancel, new XYConstraints(310, 197, 80, 40));
-        this.getContentPane().add(Delete, new XYConstraints(139, 197, 80, 40));
+        this.getContentPane().add(Delete, new XYConstraints(140, 197, 80, 40));
+        this.getContentPane().add(Show, new XYConstraints(55, 197, 80, 40));
     }
 
     public void Cancel_actionPerformed(ActionEvent e) {
@@ -64,6 +69,13 @@ public class Frame3 extends JFrame {
         JOptionPane.showMessageDialog(this, "The move button was pressed i will now move the files");
     }
 
+    public void Show_actionPerformed(ActionEvent e) {
+     /*for (int i = 0; i < HigherBR; i++){
+      JOptionPane.showMessageDialog(this, "Aritist:"+HigherBR.getArtist[i]+" Song:"+HigherBR.getSong[i]+" Bitrate:"+HigherBR.getBitrate[i]+" is similar to "+"Aritist:"+LowerBR.getArtist[i]+" Song:"+LowerBR.getSong[i]+" Bitrate:"+LowerBR.getBitrate[i]);
+     }*/
+        System.out.println("The Show command was pressed");
+        JOptionPane.showMessageDialog(this, "The Show button was pressed i will now Show you the similar files");
+    }
 
 
     public void Delete_actionPerformed(ActionEvent e) {
@@ -81,40 +93,8 @@ public class Frame3 extends JFrame {
         JOptionPane.showMessageDialog(this, "The delete button was pressed i will now delete the files");
     }
 }
-
-
-class Frame3_Delete_actionAdapter implements ActionListener {
-    private Frame3 adaptee;
-    Frame3_Delete_actionAdapter(Frame3 adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.Delete_actionPerformed(e);
-    }
-}
-
-
-class Frame3_Cancel_actionAdapter implements ActionListener {
-    private Frame3 adaptee;
-    Frame3_Cancel_actionAdapter(Frame3 adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.Cancel_actionPerformed(e);
-    }
-}
-
-
-class Frame3_Move_actionAdapter implements ActionListener {
-    private Frame3 adaptee;
-    Frame3_Move_actionAdapter(Frame3 adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.Move_actionPerformed(e);
-    }
-}
-
+Reply
+		
+Forward
+		
+	

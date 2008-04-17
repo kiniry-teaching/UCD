@@ -1,5 +1,7 @@
 package ie.ucd.music.comparison.Interface;
 
+ 
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -66,4 +68,6 @@ class Frame2_Cancel_actionAdapter implements ActionListener {
         adaptee.Cancel_actionPerformed(e);
     }
 }
+
+
 

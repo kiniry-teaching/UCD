@@ -1,15 +1,27 @@
 package ie.ucd.music.comparison.Interface;
 
-import java.awt.BorderLayout;
+ 
+
+
+import ie.ucd.music.comparison.FindID3.FindID3;
+
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.borland.jbcl.layout.XYConstraints;
 import com.borland.jbcl.layout.XYLayout;
-import com.borland.jbcl.layout.*;
-import java.awt.Toolkit;
 
 /**
  * <p>Title: </p>
@@ -29,19 +41,27 @@ public class Frame1 extends JFrame {
     JMenuBar jMenuBar1 = new JMenuBar();
     JMenu jMenuFile = new JMenu();
     JMenuItem jMenuFileExit = new JMenuItem();
-    //ImageIcon image1 = new ImageIcon(ie.ucd.music.comparison.Interface.Frame1.class.getResource(
-            //"openFile.png"));
-    //ImageIcon image2 = new ImageIcon(ie.ucd.music.comparison.Interface.Frame1.class.getResource(
-            //"closeFile.png"));
-    //ImageIcon image3 = new ImageIcon(ie.ucd.music.comparison.Interface.Frame1.class.getResource(
-            //"help.png"));
+    /*ImageIcon image1 = new ImageIcon(interfac.Frame1.class.getResource(
+            "openFile.png"));
+    ImageIcon image2 = new ImageIcon(interfac.Frame1.class.getResource(
+            "closeFile.png"));
+    ImageIcon image3 = new ImageIcon(interfac.Frame1.class.getResource(
+            "help.png"));*/
     XYLayout xYLayout1 = new XYLayout();
     JButton Run = new JButton();
     JButton Cancel = new JButton();
     JTextField Input1 = new JTextField();
     JTextField Input2 = new JTextField();
     JLabel jLabel1 = new JLabel();
+    String I1 = "";
+    String I2 = "";
+    private FindID3 findid3;
+
+   
     public Frame1() {
+     I1 = Input1.getText();
+     I2 = Input2.getText();
+     
         try {
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             jbInit();
@@ -71,6 +91,8 @@ public class Frame1 extends JFrame {
         Input1.setText("");
         Input2.setToolTipText("");
         Input2.setText("");
+        //I1 = Input1.getText();
+        //I2 = Input2.getText();
         jLabel1.setText(
                 "Please enter two different directories to be searched for mp3 files");
         jMenuBar1.add(jMenuFile);
@@ -94,7 +116,18 @@ public class Frame1 extends JFrame {
 
     public void Run_actionPerformed(ActionEvent e) {
         //frame.setVisible(false);
-    Frame3 frame = new Frame3();
+     I1 = Input1.getText();
+     I2 = Input2.getText();
+     System.out.println(I1);
+     System.out.println(I2);
+     if(Input1.getText().length() == 0 || Input2.getText().length() == 0){
+      JOptionPane.showMessageDialog(this, "Please enter two directories");
+      System.out.println("Please enter two directories");
+     }
+     else{
+    	 findid3.FindDirectory(I1,I2);
+    	 
+    	 Frame3 frame = new Frame3();
        // Validate frames that have preset sizes
        // Pack frames that have useful preferred size info, e.g. from their layout
        if (packFrame) {
@@ -117,6 +150,7 @@ public class Frame1 extends JFrame {
        frame.setVisible(true);
        System.out.println("The Run command was pressed");
         //JOptionPane.showMessageDialog(this, "The Run command was pressed");
+     }
     }
 
     public void Cancel_actionPerformed(ActionEvent e) {
