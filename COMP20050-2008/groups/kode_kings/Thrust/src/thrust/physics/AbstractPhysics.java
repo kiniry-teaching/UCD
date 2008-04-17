@@ -5,7 +5,7 @@ package thrust.physics;
  * @author Colin Casey (colin.casey@org.com)
  * @version 7 April 2008
  */
-public abstract class AbstractPhysics implements Physics {
+public abstract class AbstractPhysics implements PhysicsInterface {
   /** The force that attracts the spaceship and
    * goal sphere toward the terrain. */
   static final double GRAVITY_CONSTANT = -9.8;
@@ -34,7 +34,7 @@ public abstract class AbstractPhysics implements Physics {
    * @return What is the gravitational constant?
    */
   public double gravitational_constant() {
-    return my_gravity_constant;
+    return GRAVITY_CONSTANT;
   }
 
   /**
