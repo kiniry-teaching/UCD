@@ -212,8 +212,8 @@ namespace Drought.Menu
             header.setDefaultColor(Color.Blue);
             localMenu.addNonSelectableItem(header);
             gameY += spacing;
-            foreach (Level bleh in Enum.GetValues(typeof(Level))) {
-                MenuItem aLevel = new LevelMenuItem(MenuFunctions.LOCAL, bleh.ToString(), defaultFont, bleh);
+            foreach (Level levelName in Enum.GetValues(typeof(Level))) {
+                MenuItem aLevel = new LevelMenuItem(MenuFunctions.LOCAL, levelName.ToString(), defaultFont, levelName);
                 aLevel.setScale(scale);
                 aLevel.position = new Vector2(gameX, gameY);
                 localMenu.addSelectableItem(aLevel);

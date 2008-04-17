@@ -7,11 +7,12 @@ namespace Drought.Menu
 {
     class LevelMenuItem : MenuItem 
     {
-        Level level;
+        private Level level;
 
-        public LevelMenuItem(MenuFunctions function, String text, SpriteFont font, Level level)
-            : base(function, text, font) {
-            this.level = level;
+        public LevelMenuItem(MenuFunctions function, String text, SpriteFont font, Level aLevel)
+            : base(function, text, font)
+        {
+            level = aLevel;
         }
 
         public Level getLevel()
@@ -23,12 +24,15 @@ namespace Drought.Menu
     class JoinLevelMenuItem : LevelMenuItem
     {
         private RemoteGame remoteGame;
-        public JoinLevelMenuItem(MenuFunctions function, String text, SpriteFont font, Level level, RemoteGame game)
-            : base(function, text, font, level) {
+
+        public JoinLevelMenuItem(MenuFunctions function, String text, SpriteFont font, Level aLevel, RemoteGame game)
+            : base(function, text, font, aLevel)
+        {
             remoteGame = game;
         }
 
-        public RemoteGame getGame() {
+        public RemoteGame getGame()
+        {
             return remoteGame;
         }
     }

@@ -7,10 +7,12 @@
 
  Bugs:
 ----------
- - Skybox still uses hardcoded lighting values
+ - Skybox lighting is borked
  - Sounds keep playing if you press Ctrl+R to exit the level
  - new Entities added in one networked game don't show up in the other, deletes don't work either
-
+ - NormalMap, HeightMap and TextureMap are redundant; replace all usage with a LevelInfo
+ - Water smoothing algorithm only works for one winding order (not sure which)
+ - other Water approach is a mess...
 
  New Features:
 ----------

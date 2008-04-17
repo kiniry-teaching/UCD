@@ -71,7 +71,7 @@ namespace Drought.GameStates
 
             for (int i = 0; i < waters.Length; i++)
             {
-                waters[i] = new Water(waterList[i].ToArray(), heightMap);
+                waters[i] = new Water(waterList[i], heightMap, getGraphics());
             }
             levelInfo = new LevelInfo();
             levelInfo.initialise(aLevel);

@@ -24,7 +24,7 @@ namespace Drought.World
             this.position = position;
 
             power   = 1;
-            step    = 100;
+            step    = 10;
             oldTime = 0;
 
             enabled = false;

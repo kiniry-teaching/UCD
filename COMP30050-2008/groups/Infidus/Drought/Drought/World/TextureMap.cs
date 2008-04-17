@@ -8,37 +8,33 @@ namespace Drought.World
 {
     class TextureMap
     {
-        private readonly float waterThreshold = 0.3f;
+        /** For depth first search; indicates that there is no path onward from the provided node. */
+        private static readonly Vector3 DEAD_END = new Vector3(float.PositiveInfinity);
 
-        private Vector3 nullVector;
+        /** How much water texture weight a point must have to be considered "water". */
+        private static readonly float WATER_THRESHOLD = 0.3f;
+
         private bool[,] waterMap;
 
-        Vector4[,] map;
-        int width, height;
+        private Vector4[,] map;
+        private int width, height;
 
-        Level level;
-        public bool changed;
+        private Level level;
+        private bool changed;
+        public bool Changed { get { return changed; } }
 
         public TextureMap(Level theLevel)
         {
             level = theLevel;
             changed = false;
 
-            initalise();
+            initialise();
         }
 
-        public void initalise()
+        public void initialise()
         {
-            string fileName;
-            switch (level)
-            {
-                case Level.Valley: fileName = "level_0"; break;
-                case Level.Rugged: fileName = "level_1"; break;
-                case Level.RuggedSplitTextures: fileName = "level_2"; break;
-                case Level.Square: fileName = "square"; break;
-                case Level.WaterTest: fileName = "water"; break;
-                default: fileName = "level_1"; break;
-            }
+            string fileName = LevelInfo.getFileName(level);
+
             FileStream fs = new FileStream("Content/TextureMaps/" + fileName + ".bmp", FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
 
@@ -85,17 +81,19 @@ namespace Drought.World
         {
             List<List<Vector3>> waterPoints = new List<List<Vector3>>();
             waterMap = new bool[width, height];
-            nullVector = new Vector3(-1.0f);
-            for (int x = 1; x < width - 1; x++)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 1; y < height - 1; y++)
+                for (int y = 0; y < height; y++)
                 {
                     if (!waterMap[x, y] && isEdge(x, y))
                     {
                         waterMap[x, y] = true;
                         List<Vector3> edgePoints = depthFirstSearch(new Vector3(x, y, 0), new Vector3(x + 1, y, 0));
-                        edgePoints.Reverse();
-                        waterPoints.Add(edgePoints);
+                        if (edgePoints.Count > 0)
+                        {
+                            edgePoints.Reverse();
+                            waterPoints.Add(edgePoints);
+                        }
                     }
                 }
             }
@@ -122,7 +120,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X - 1, (int)curr.Y - 1] = true;
                 newPoint = new Vector3((int)curr.X - 1, (int)curr.Y - 1, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -133,7 +131,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X - 1, (int)curr.Y] = true;
                 newPoint = new Vector3((int)curr.X - 1, (int)curr.Y, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -144,7 +142,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X - 1, (int)curr.Y + 1] = true;
                 newPoint = new Vector3((int)curr.X - 1, (int)curr.Y + 1, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -155,7 +153,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X, (int)curr.Y + 1] = true;
                 newPoint = new Vector3((int)curr.X, (int)curr.Y + 1, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -166,7 +164,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X, (int)curr.Y - 1] = true;
                 newPoint = new Vector3((int)curr.X, (int)curr.Y - 1, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -177,7 +175,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X + 1, (int)curr.Y + 1] = true;
                 newPoint = new Vector3((int)curr.X + 1, (int)curr.Y + 1, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -188,7 +186,7 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X + 1, (int)curr.Y - 1] = true;
                 newPoint = new Vector3((int)curr.X + 1, (int)curr.Y - 1, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
@@ -199,30 +197,30 @@ namespace Drought.World
             {
                 waterMap[(int)curr.X + 1, (int)curr.Y] = true;
                 newPoint = new Vector3((int)curr.X + 1, (int)curr.Y, 0);
-                if (!depthFirstSearch(newPoint, goal, path).Equals(nullVector))
+                if (!depthFirstSearch(newPoint, goal, path).Equals(DEAD_END))
                 {
                     path.Add(curr);
                     return curr;
                 }
             }
 
-            return nullVector;
+            return DEAD_END;
         }
 
         private bool isEdge(int x, int y)
         {
-            if (map[x, y].X >= waterThreshold)
+            if (map[x, y].X >= WATER_THRESHOLD)
             {
                 if (y > 0)
                 {
-                    if (map[x, y - 1].X < waterThreshold)
+                    if (map[x, y - 1].X < WATER_THRESHOLD)
                     {
                         return true;
                     }
 
                     if (x > 0)
                     {
-                        if (map[x - 1, y - 1].X < waterThreshold || map[x - 1, y].X < waterThreshold)
+                        if (map[x - 1, y - 1].X < WATER_THRESHOLD || map[x - 1, y].X < WATER_THRESHOLD)
                         {
                             return true;
                         }
@@ -235,7 +233,7 @@ namespace Drought.World
 
                     if (x < width - 1)
                     {
-                        if (map[x + 1, y - 1].X < waterThreshold || map[x + 1, y].X < waterThreshold)
+                        if (map[x + 1, y - 1].X < WATER_THRESHOLD || map[x + 1, y].X < WATER_THRESHOLD)
                         {
                             return true;
                         }
@@ -253,14 +251,14 @@ namespace Drought.World
 
                 if (y < height - 1)
                 {
-                    if (map[x, y + 1].X < waterThreshold)
+                    if (map[x, y + 1].X < WATER_THRESHOLD)
                     {
                         return true;
                     }
 
                     if (x > 0)
                     {
-                        if (map[x - 1, y + 1].X < waterThreshold)
+                        if (map[x - 1, y + 1].X < WATER_THRESHOLD)
                         {
                             return true;
                         }
@@ -273,7 +271,7 @@ namespace Drought.World
 
                     if (x < width - 1)
                     {
-                        if (map[x + 1, y + 1].X < waterThreshold)
+                        if (map[x + 1, y + 1].X < WATER_THRESHOLD)
                         {
                             return true;
                         }

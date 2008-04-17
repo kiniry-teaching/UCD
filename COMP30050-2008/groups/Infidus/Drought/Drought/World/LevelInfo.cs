@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
 using System.IO;
+using Microsoft.Xna.Framework;
 
 namespace Drought.World
 {
-    public enum Level : int { Valley, Rugged, RuggedSplitTextures, Square, WaterTest };
+    public enum Level : int { Valley, Rugged, RuggedSplitTextures, River, Square, WaterTest };
 
     public class LevelInfo
     {
@@ -16,16 +14,14 @@ namespace Drought.World
         /** The height of the level. */
         private int height;
 
-        /** Map of the level's normals. [x][y][triangle] */
-        private Vector3[,,] normals;
-
         /** Map of the level's heights. [x][y] */
         private float[,] heightMap;
 
+        /** Map of the level's normals. [x][y][triangle] */
+        private Vector3[, ,] normals;
+
         /** Map of the level's textures. [x][y] */
         private Vector4[,] textureMap;
-
-
 
         #region Initialising methods
         /**
@@ -33,15 +29,7 @@ namespace Drought.World
          */
         public void initialise(Level aLevel)
         {
-            String fileName = "";
-            switch (aLevel) {
-                case Level.Valley: fileName = "level_0"; break;
-                case Level.Rugged: fileName = "level_1"; break;
-                case Level.RuggedSplitTextures: fileName = "level_2"; break;
-                case Level.Square: fileName = "square"; break;
-                case Level.WaterTest: fileName = "water"; break;
-                default: fileName = "level_1"; break;
-            }
+            string fileName = getFileName(aLevel);
 
             initHeightMap(fileName);
             initNormalMap();
@@ -363,5 +351,18 @@ namespace Drought.World
         }
 
         #endregion
+
+        /** Takes in a Level value and returns the name that all of that Level's resources are saved under. */
+        public static string getFileName(Level aLevel) {
+            switch (aLevel) {
+                case Level.Valley: return "level_0";
+                case Level.Rugged: return "level_1";
+                case Level.RuggedSplitTextures: return "level_2";
+                case Level.River: return "river";
+                case Level.Square: return "square";
+                case Level.WaterTest: return "water";
+                default: return "level_1";
+            }
+        }
     }
 }
