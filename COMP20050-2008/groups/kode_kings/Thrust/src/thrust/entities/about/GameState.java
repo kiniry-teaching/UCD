@@ -11,8 +11,8 @@
 package thrust.entities.about;
 
 /**
- * @author Ciaran Hale (ciaran.hale@ucd.ie)
  * @author Colin Casey (colin.casey@org.com)
+ * @author Ciaran Hale (ciaran.hale@ucd.ie)
  * @version 17 April 2008
  */
 public class GameState extends AbstractGameState {
@@ -23,6 +23,8 @@ public class GameState extends AbstractGameState {
   private static int my_score;
   /** The number of lives a player has left. */
   private static byte my_lives;
+  /** The highest scores ever recorded in the game. */
+  private static HighScoreInterface[] my_high_scores;
 
   public int bonus() {
     return my_bonus;
@@ -57,19 +59,33 @@ public class GameState extends AbstractGameState {
   }
 
   public HighScoreInterface[] high_scores() {
-
+    return my_high_scores;
   }
 
   public HighScoreInterface high_score(final int the_index) {
-
+    return my_high_scores[the_index];
   }
 
   public boolean new_high_score(final HighScoreInterface the_high_score) {
-
+    return (the_high_score.score() >
+      high_scores()[HIGH_SCORE_COUNT - 1].score());
   }
 
   public void add_high_score(final HighScoreInterface the_new_high_score) {
 
+    HighScoreInterface temp;
+
+    for (int i = HIGH_SCORE_COUNT - 1; i > -1; i--) {
+      temp = high_scores()[i];
+      if (the_new_high_score.score() > high_scores()[i].score())
+      {
+        high_scores()[i] = the_new_high_score;
+      }
+      if (i + 1 > HIGH_SCORE_COUNT - 1)
+      {
+        high_scores()[i + 1] = temp;
+      }
+    }
   }
 
   /**
@@ -81,7 +97,7 @@ public class GameState extends AbstractGameState {
   public abstract class AbstractHighScore implements HighScoreInterface {
 
     /** The initials of the player. */
-    char[] my_initials;
+    private char[] my_initials;
 
     public int score() {
       return my_score;
