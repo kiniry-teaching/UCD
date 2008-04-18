@@ -17,7 +17,7 @@ package thrust.input;
  */
 public class InputHandler {
   /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
+  public static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
   public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
   /** Fill in this comment. */
