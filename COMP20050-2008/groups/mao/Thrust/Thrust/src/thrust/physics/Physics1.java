@@ -2,6 +2,7 @@ package thrust.physics;
 
 /**
  * First implementation of Physics class.
+ * Stores current values of parameters of Entity's state.
  * @author Magdalena Zieniewicz (mazienie@gmail.com)
  * @version 14 April 2008
  * */
@@ -9,16 +10,16 @@ package thrust.physics;
 public class Physics1 implements Physics {
 
   /** Value of the gravitational constant. */
-  public static final int Gravitational_const = 5;
+  public static final int THE_GRAV_CONST = 5;
   /** Length of an array storing vector parameter. */
   private final int my_array_length_2 = 2;
-  /** Current mass of the Entity.  */
+  /** Current mass of the Entity.*/
   private double my_mass;
   /** Current speed of the Entity.  */
   private double my_speed;
-  /** Value of current acceleration of the Entity.  */
+  /** Value of current acceleration of the Entity.*/
   private double my_acceleration;
-  /** Orientation of the Entity.  */
+  /** Orientation of the Entity. */
   private double my_orientation;
   /** Horizontal position of the Entity.  */
   private double my_position_x;
@@ -35,10 +36,10 @@ public class Physics1 implements Physics {
 
   }
 
-  public int getArrayLength(){
+  public int getArrayLength() {
     return my_array_length_2;
   }
-  
+
   /* public Physics1(double the_mass){
     the_mass = this.my_mass;
   }
@@ -52,8 +53,7 @@ public class Physics1 implements Physics {
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return gravitational_const;
+    return THE_GRAV_CONST;
   }
 
   public double mass() {
@@ -76,8 +76,6 @@ public class Physics1 implements Physics {
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-
     final double [] velocity = new double[getArrayLength()];
     velocity[0] = my_speed;
     velocity[1] = my_orientation;
