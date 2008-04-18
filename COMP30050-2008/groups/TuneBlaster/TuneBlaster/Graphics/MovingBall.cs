@@ -155,7 +155,7 @@ namespace TuneBlaster_.Graphics
                         f.SetCollisionBall(collisionBall);
                     }
                     f.UpdateContactBalls();
-                    f.LoadGraphicsContent(spriteBatch, texture);
+                    f.LoadGraphicsContent(spriteBatch, colourTexture);
                     core.AddBall(f);
                     live = false;
                 }
