@@ -187,16 +187,8 @@
       <Name>Base Bank</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\Audio\Win\Bell Bank.xsb">
-      <Name>Bell Bank</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Content\Audio\Win\Game Sounds.xgs">
       <Name>Game Sounds</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\Audio\Win\Piano Bank.xsb">
-      <Name>Piano Bank</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Audio\Win\Sound Bank.xsb">
@@ -279,6 +271,18 @@
     </None>
     <None Include="Content\Audio\Win\Ball Noise Bank.xsb">
       <Name>Ball Noise Bank</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Audio\Win\Drum Bank.xsb">
+      <Name>Drum Bank</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Audio\Win\Harp Bank.xsb">
+      <Name>Harp Bank</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Audio\Win\Synth Bank.xsb">
+      <Name>Synth Bank</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="Fonts\Lucida Console.spritefont">

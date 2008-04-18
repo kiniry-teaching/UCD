@@ -19,16 +19,17 @@ namespace TuneBlaster_
     /// </summary>
     class GameAudio
     {
-        #region Fields (musicEngine, musicWaveBank, soundBanks, baseCues, pianoCues, stringCues, ballColour)
+        #region Fields (musicEngine, musicWaveBank, soundBanks, baseCues, drumCues, stringCues, harpCues, synthCues, ballColour)
 
         private AudioEngine musicEngine;
         private WaveBank musicWaveBank;
-        private SoundBank musicSoundBank, pianoBank, stringBank, bellBank, ballBank;
+        private SoundBank musicSoundBank, synthBank, stringBank, drumBank, ballBank, harpBank;
 
         Cue baseCue1, baseCue2;
-        Cue pianoCue1, pianoCue2, pianoCue3, pianoCue4;
+        Cue drumCue1, drumCue2, drumCue3, drumCue4;
         Cue stringCue1, stringCue2, stringCue3, stringCue4;
-        Cue bellCue1, bellCue2;
+        Cue harpCue1, harpCue2, harpCue3, harpCue4;
+        Cue synthCue1, synthCue2, synthCue3, synthCue4;
         Cue ballCue1;
         Image.value ballColour;
 
@@ -41,11 +42,14 @@ namespace TuneBlaster_
         {
             musicEngine = new AudioEngine("Content\\Audio\\Win\\Game Sounds.xgs");
             musicWaveBank = new WaveBank(musicEngine, "Content\\Audio\\Win\\Wave Bank.xwb");
+
             musicSoundBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Base Bank.xsb");
-            //pianoBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Piano Bank.xsb");
             stringBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\String Bank.xsb");
-            bellBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Bell Bank.xsb");
+            drumBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Drum Bank.xsb");
             ballBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Ball Noise Bank.xsb");
+            synthBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Synth Bank.xsb");
+            harpBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Harp Bank.xsb");
+
             listener = new AudioListener();
             emitter = new AudioEmitter();
         }
@@ -59,9 +63,11 @@ namespace TuneBlaster_
         {
             resetBaseCues();
             resetBallCues();
-            //resetPianoCues();
             resetStringCues();
-            resetBellCues();
+            resetDrumCues();
+            resetSynthCues();
+            resetHarpCues();
+
             baseCue1.Play();
         }
 
@@ -85,12 +91,34 @@ namespace TuneBlaster_
         /// <summary>
         /// Sets the cues equal to the specified files from the sound bank to make them ready to be played again.
         /// </summary>
-        public void resetPianoCues()
+        public void resetDrumCues()
         {
-            pianoCue1 = pianoBank.GetCue("Piano Melody 1");
-            pianoCue2 = pianoBank.GetCue("Piano Melody 2");
-            pianoCue3 = pianoBank.GetCue("Piano Melody 3");
-            pianoCue4 = pianoBank.GetCue("Piano Melody 4");
+            drumCue1 = drumBank.GetCue("Drum Loop 1");
+            drumCue2 = drumBank.GetCue("Drum Loop 2");
+            drumCue3 = drumBank.GetCue("Drum Loop 3");
+            drumCue4 = drumBank.GetCue("Drum Loop 4");
+        }
+
+        /// <summary>
+        /// Sets the cues equal to the specified files from the sound bank to make them ready to be played again.
+        /// </summary>
+        public void resetSynthCues()
+        {
+            synthCue1 = synthBank.GetCue("Synth Melody 1");
+            synthCue2 = synthBank.GetCue("Synth Melody 2");
+            synthCue3 = synthBank.GetCue("Synth Melody 3");
+            synthCue4 = synthBank.GetCue("Synth Melody 4");
+        }
+
+        /// <summary>
+        /// Sets the cues equal to the specified files from the sound bank to make them ready to be played again.
+        /// </summary>
+        public void resetHarpCues()
+        {
+            harpCue1 = harpBank.GetCue("Harp Melody 1");
+            harpCue2 = harpBank.GetCue("Harp Melody 2");
+            harpCue3 = harpBank.GetCue("Harp Melody 3");
+            harpCue4 = harpBank.GetCue("Harp Melody 4");
         }
 
         /// <summary>
@@ -103,18 +131,10 @@ namespace TuneBlaster_
             stringCue3 = stringBank.GetCue("String Melody 3");
             stringCue4 = stringBank.GetCue("String Melody 4");
         }
-        /// <summary>
-        /// Sets the cues equal to the specified files from the sound bank to make them ready to be played again.
-        /// </summary>
-        public void resetBellCues()
-        {
-            bellCue1 = bellBank.GetCue("Bell Melody 1");
-            bellCue2 = bellBank.GetCue("Bell Melody 2");
-        }
 
         #endregion
 
-        #region Disposer Methods (disposePianoCues, disposeStringCues, disposeBellCues)
+        #region Disposer Methods (disposeBallCues, disposeDrumCues, disposeStringCues, disposeSynthCues, disposeHarpCues)
 
         /// <summary>
         /// Dispose of all the ball noise cues in memory
@@ -125,14 +145,45 @@ namespace TuneBlaster_
         }
 
         /// <summary>
-        /// Dispose of all the piano cues in memory
+        /// Dispose of all the base melody cues in memory
         /// </summary>
-        public void disposePianoCues()
+        public void disposeBaseCues()
         {
-            pianoCue1.Dispose();
-            pianoCue2.Dispose();
-            pianoCue3.Dispose();
-            pianoCue4.Dispose();
+            baseCue1.Dispose();
+            baseCue2.Dispose();
+        }
+
+        /// <summary>
+        /// Dispose of all the drum cues in memory
+        /// </summary>
+        public void disposeDrumCues()
+        {
+            drumCue1.Dispose();
+            drumCue2.Dispose();
+            drumCue3.Dispose();
+            drumCue4.Dispose();
+        }
+
+        /// <summary>
+        /// Dispose of all the synth cues in memory
+        /// </summary>
+        public void disposeSynthCues()
+        {
+            synthCue1.Dispose();
+            synthCue2.Dispose();
+            synthCue3.Dispose();
+            synthCue4.Dispose();
+        }
+
+        /// <summary>
+        /// Dispose of all the harp cues in memory
+        /// </summary>
+        public void disposeHarpCues()
+        {
+            harpCue1.Dispose();
+            harpCue2.Dispose();
+            harpCue3.Dispose();
+            harpCue4.Dispose();
         }
 
         /// <summary>
@@ -145,18 +196,10 @@ namespace TuneBlaster_
             stringCue3.Dispose();
             stringCue4.Dispose();
         }
-        /// <summary>
-        /// Dispose of all the bell cues in memory
-        /// </summary>
-        public void disposeBellCues()
-        {
-            bellCue1.Dispose();
-            bellCue2.Dispose();
-        }
 
         #endregion
 
-        #region Threads (InstrChanger, ChangeBase, ChangePiano, ChangeStrings, ChangeBells)
+        #region Threads (InstrChanger, ChangeBase, ChangeDrum, ChangeStrings, ChangeHarp, ChangeSynth)
 
         /// <summary>
         /// Starts the thread for instrument modification depending on the colour.
@@ -186,10 +229,10 @@ namespace TuneBlaster_
         /// <summary>
         /// Starts the thread for piano melody modification.
         /// </summary>
-        public void ChangePiano()
+        public void ChangeDrums()
         {
-            Thread Pianos = new Thread(new ThreadStart(ModifyPiano));
-            Pianos.Start();
+            Thread Drums = new Thread(new ThreadStart(ModifyDrums));
+            Drums.Start();
         }
 
         /// <summary>
@@ -202,16 +245,27 @@ namespace TuneBlaster_
         }
 
         /// <summary>
-        /// Starts the thread for bell melody modification.
+        /// Starts the thread for synth melody modification.
         /// </summary>
-        public void ChangeBells()
+        public void ChangeSynth()
         {
-            Thread Bells = new Thread(new ThreadStart(ModifyBells));
-            Bells.Start();
+            Thread Synth = new Thread(new ThreadStart(ModifySynth));
+            Synth.Start();
         }
+
+        /// <summary>
+        /// Starts the thread for harp melody modification.
+        /// </summary>
+        public void ChangeHarp()
+        {
+            Thread Harps = new Thread(new ThreadStart(ModifyHarp));
+            Harps.Start();
+        }
+
         #endregion
 
-        #region Melody Modifiers (ModifyBase, ModifyPiano, ModifyStrings, ModifyBells)
+        #region Melody Modifiers (ModifyBase, ModifyDrums, ModifyStrings, ModifySynth, ModifyHarp)
+
         /// <summary>
         /// Modifies the initial melody.
         /// </summary>
@@ -235,55 +289,55 @@ namespace TuneBlaster_
         }
 
         /// <summary>
-        /// Modifies the piano melody.
+        /// Modifies the drum loop.
         /// </summary>
-        public void ModifyPiano()
+        public void ModifyDrums()
         {
-            if (pianoCue1 != null && pianoCue1.IsPlaying)
+            if (drumCue1 != null && drumCue1.IsPlaying)
             {
-                pianoCue1.Stop(AudioStopOptions.AsAuthored);
-                while (!pianoCue1.IsStopped) { }
-                if (pianoCue1 != null && !pianoCue1.IsPlaying)
+                drumCue1.Stop(AudioStopOptions.AsAuthored);
+                while (!drumCue1.IsStopped) { }
+                if (drumCue1 != null && !drumCue2.IsPlaying && !drumCue3.IsPlaying && !drumCue4.IsPlaying)
                 {
-                    pianoCue1.Dispose();
-                    resetPianoCues();
-                    pianoCue2.Play();
+                    drumCue1.Dispose();
+                    resetDrumCues();
+                    drumCue2.Play();
                 }
             }
 
-            else if (pianoCue2 != null && pianoCue2.IsPlaying)
+            else if (drumCue2 != null && drumCue2.IsPlaying)
             {
-                pianoCue2.Stop(AudioStopOptions.AsAuthored);
-                while (!pianoCue2.IsStopped) { }
-                if (pianoCue2 != null && !pianoCue2.IsPlaying)
+                drumCue2.Stop(AudioStopOptions.AsAuthored);
+                while (!drumCue2.IsStopped) { }
+                if (drumCue1 != null && !drumCue2.IsPlaying && !drumCue3.IsPlaying && !drumCue4.IsPlaying)
                 {
-                    pianoCue2.Dispose();
-                    resetPianoCues();
-                    pianoCue3.Play();
+                    drumCue2.Dispose();
+                    resetDrumCues();
+                    drumCue3.Play();
                 }
             }
 
-            else if (pianoCue3 != null && pianoCue3.IsPlaying)
+            else if (drumCue3 != null && drumCue3.IsPlaying)
             {
-                pianoCue3.Stop(AudioStopOptions.AsAuthored);
-                while (!pianoCue3.IsStopped) { }
-                if (pianoCue3 != null && !pianoCue3.IsPlaying)
+                drumCue3.Stop(AudioStopOptions.AsAuthored);
+                while (!drumCue3.IsStopped) { }
+                if (drumCue1 != null && !drumCue2.IsPlaying && !drumCue3.IsPlaying && !drumCue4.IsPlaying)
                 {
-                    pianoCue3.Dispose();
-                    resetPianoCues();
-                    pianoCue4.Play();
+                    drumCue3.Dispose();
+                    resetDrumCues();
+                    drumCue4.Play();
                 }
             }
 
-            else if (pianoCue4 != null && pianoCue4.IsPlaying)
+            else if (drumCue4 != null && drumCue4.IsPlaying)
             {
-                pianoCue4.Stop(AudioStopOptions.AsAuthored);
-                while (!pianoCue4.IsStopped) { }
-                if (pianoCue4 != null && !pianoCue4.IsPlaying)
+                drumCue4.Stop(AudioStopOptions.AsAuthored);
+                while (!drumCue4.IsStopped) { }
+                if (drumCue1 != null && !drumCue2.IsPlaying && !drumCue3.IsPlaying && !drumCue4.IsPlaying)
                 {
-                    pianoCue4.Dispose();
-                    resetPianoCues();
-                    pianoCue1.Play();
+                    drumCue4.Dispose();
+                    resetDrumCues();
+                    drumCue1.Play();
                 }
             }
         }
@@ -343,34 +397,113 @@ namespace TuneBlaster_
         }
 
         /// <summary>
-        /// Modifies the bell melody.
+        /// Modifies the synth melody.
         /// </summary>
-        public void ModifyBells()
+        public void ModifySynth()
         {
-            if (bellCue1 != null && bellCue1.IsPlaying)
+            if (synthCue1 != null && synthCue1.IsPlaying)
             {
-                bellCue1.Stop(AudioStopOptions.AsAuthored);
-                while (!bellCue1.IsStopped) { }
-                if (bellCue1 != null && !bellCue1.IsPlaying)
+                synthCue1.Stop(AudioStopOptions.AsAuthored);
+                while (!synthCue1.IsStopped) { }
+                if (synthCue1 != null && !synthCue1.IsPlaying)
                 {
-                    bellCue1.Dispose();
-                    resetBellCues();
-                    bellCue2.Play();
+                    synthCue1.Dispose();
+                    resetSynthCues();
+                    synthCue2.Play();
                 }
             }
 
-            else if (bellCue2 != null && bellCue2.IsPlaying)
+            else if (synthCue2 != null && synthCue2.IsPlaying)
             {
-                bellCue2.Stop(AudioStopOptions.AsAuthored);
-                while (!bellCue2.IsStopped) { }
-                if (bellCue2 != null && !bellCue2.IsPlaying)
+                synthCue2.Stop(AudioStopOptions.AsAuthored);
+                while (!synthCue2.IsStopped) { }
+                if (synthCue2 != null && !synthCue2.IsPlaying)
                 {
-                    bellCue2.Dispose();
-                    resetBellCues();
-                    bellCue1.Play();
+                    synthCue2.Dispose();
+                    resetSynthCues();
+                    synthCue3.Play();
+                }
+            }
+
+            else if (synthCue3 != null && synthCue3.IsPlaying)
+            {
+                synthCue3.Stop(AudioStopOptions.AsAuthored);
+                while (!synthCue3.IsStopped) { }
+                if (synthCue3 != null && !synthCue3.IsPlaying)
+                {
+                    synthCue3.Dispose();
+                    resetSynthCues();
+                    synthCue4.Play();
+                }
+            }
+
+            else if (synthCue4 != null && synthCue4.IsPlaying)
+            {
+                synthCue4.Stop(AudioStopOptions.AsAuthored);
+                while (!synthCue4.IsStopped) { }
+                if (synthCue4 != null && !synthCue4.IsPlaying)
+                {
+                    synthCue4.Dispose();
+                    resetSynthCues();
+                    synthCue1.Play();
                 }
             }
         }
+
+        /// <summary>
+        /// Modifies the harp melody.
+        /// </summary>
+        public void ModifyHarp()
+        {
+            if (harpCue1 != null && harpCue1.IsPlaying)
+            {
+                harpCue1.Stop(AudioStopOptions.AsAuthored);
+                while (!harpCue1.IsStopped) { }
+                if (harpCue1 != null && !harpCue1.IsPlaying)
+                {
+                    harpCue1.Dispose();
+                    resetHarpCues();
+                    harpCue2.Play();
+                }
+            }
+
+            else if (harpCue2 != null && harpCue2.IsPlaying)
+            {
+                harpCue2.Stop(AudioStopOptions.AsAuthored);
+                while (!harpCue2.IsStopped) { }
+                if (harpCue2 != null && !harpCue2.IsPlaying)
+                {
+                    harpCue2.Dispose();
+                    resetHarpCues();
+                    harpCue3.Play();
+                }
+            }
+
+            else if (harpCue3 != null && harpCue3.IsPlaying)
+            {
+                harpCue3.Stop(AudioStopOptions.AsAuthored);
+                while (!harpCue3.IsStopped) { }
+                if (harpCue3 != null && !harpCue3.IsPlaying)
+                {
+                    harpCue3.Dispose();
+                    resetHarpCues();
+                    harpCue4.Play();
+                }
+            }
+
+            else if (harpCue4 != null && harpCue4.IsPlaying)
+            {
+                harpCue4.Stop(AudioStopOptions.AsAuthored);
+                while (!harpCue4.IsStopped) { }
+                if (harpCue4 != null && !harpCue4.IsPlaying)
+                {
+                    harpCue4.Dispose();
+                    resetHarpCues();
+                    harpCue1.Play();
+                }
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -379,19 +512,21 @@ namespace TuneBlaster_
         public void ChangeMelody(Object colour)
         {
             ballColour = (Image.value)colour;
-            ChangeBase();                                                                       // Base melody is modified every time balls are destroyed.
+
+            // Base melody is modified every time balls are destroyed.
+            ChangeBase();
 
             // If the destoyed balls are blue
             if (ballColour == Image.value.blue)
             {
-                // If the piano isn't playing
-                if (!pianoCue1.IsPlaying && !pianoCue2.IsPlaying)
+                // If the drums aren't playing
+                if (!drumCue1.IsPlaying && !drumCue2.IsPlaying && !drumCue3.IsPlaying && !drumCue4.IsPlaying)
                 {
-                    // If there's a piano cue in memory, destroy it
-                    if (pianoCue1 != null)
+                    // If there's a drum cue in memory, destroy it
+                    if (drumCue1 != null)
                     {
-                        disposePianoCues();
-                        resetPianoCues();
+                        disposeDrumCues();
+                        resetDrumCues();
                     }
 
                     // Wait until the base melody has finished.
@@ -399,12 +534,14 @@ namespace TuneBlaster_
                     {
                         // TO DO
                     }
-                    pianoCue1.Play();                                                           // Play the piano now so that it is in sync.
+
+                    // Play the drums now so that it is in sync.
+                    drumCue1.Play();
                 }
 
-                // Modify the currently playing piano
+                // Modify the currently playing drums
                 else
-                    ChangePiano();
+                    ChangeDrums();
             }
 
             // If the destoyed balls are green
@@ -425,7 +562,9 @@ namespace TuneBlaster_
                     {
                         // TO DO
                     }
-                    stringCue1.Play();                                                          // Play the piano now so that it is in sync.
+
+                    // Play the strings now so that it is in sync.
+                    stringCue1.Play();                                                          
                 }
 
                 // Modify the currently playing stringed instrument
@@ -436,14 +575,14 @@ namespace TuneBlaster_
             // If the destoyed balls are red
             if (ballColour == Image.value.red)
             {
-                // If the piano isn't playing
-                if (!bellCue1.IsPlaying && !bellCue2.IsPlaying)
+                // If the harp isn't playing
+                if (!harpCue1.IsPlaying && !harpCue2.IsPlaying && !harpCue3.IsPlaying && !harpCue4.IsPlaying)
                 {
-                    // If there's a piano cue in memory, destroy it
-                    if (bellCue1 != null)
+                    // If there's a harp cue in memory, destroy it
+                    if (harpCue1 != null)
                     {
-                        disposeBellCues();
-                        resetBellCues();
+                        disposeHarpCues();
+                        resetHarpCues();
                     }
 
                     // Wait until the base melody has finished.
@@ -451,12 +590,42 @@ namespace TuneBlaster_
                     {
                         // TO DO
                     }
-                    bellCue1.Play();                                                           // Play the bell now so that it is in sync.
+
+                    // Play the harp now so that it is in sync.
+                    harpCue1.Play();
                 }
 
-                // Modify the currently playing piano
+                // Modify the currently playing harp
                 else
-                    ChangeBells();
+                    ChangeHarp();
+            }
+
+            // If the destoyed balls are purple
+            if (ballColour == Image.value.purple)
+            {
+                // If the synth isn't playing
+                if (!synthCue1.IsPlaying && !synthCue2.IsPlaying && !synthCue3.IsPlaying && !synthCue4.IsPlaying)
+                {
+                    // If there's a synth cue in memory, destroy it
+                    if (synthCue1 != null)
+                    {
+                        disposeSynthCues();
+                        resetSynthCues();
+                    }
+
+                    // Wait until the base melody has finished.
+                    while (!baseCue1.IsStopped && !baseCue2.IsStopped)
+                    {
+                        // TO DO
+                    }
+
+                    // Play the synth now so that it is in sync.
+                    synthCue1.Play();
+                }
+
+                // Modify the currently playing synth
+                else
+                    ChangeSynth();
             }
         }
 

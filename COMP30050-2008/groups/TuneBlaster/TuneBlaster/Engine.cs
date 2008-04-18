@@ -194,10 +194,10 @@ namespace TuneBlaster_
                 music.InstrChanger(Image.value.green);
             }
 
-            /*   if (colour == Image.value.blue) {
-                     music.setPosition(ballPos);
-                     music.InstrChanger(Image.value.blue);
-                 } */
+            if (colour == Image.value.blue) {
+                music.setPosition(ballPos);
+                music.InstrChanger(Image.value.blue);
+            }
 
             if (colour == Image.value.red)
             {
@@ -210,7 +210,6 @@ namespace TuneBlaster_
                 music.setPosition(ballPos);
                 music.InstrChanger(Image.value.purple);
             }
-
 
             if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
             if (blastTime > 0) blastTime--;
