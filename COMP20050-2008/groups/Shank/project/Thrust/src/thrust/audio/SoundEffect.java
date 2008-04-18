@@ -4,11 +4,11 @@ import java.io.File;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;
+//import javax.sound.sampled.DataLine;
+//import javax.sound.sampled.FloatControl;
+//import javax.sound.sampled.LineUnavailableException;
+//import javax.sound.sampled.SourceDataLine;
+//import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  * Any sound made in response to a event.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -35,7 +35,7 @@ public class SoundEffect
      * Count of 1 for 'LITERAL_ASSERT' descendant 'METHOD_CALL'
      * exceeds maximum count
      */
-    //assert !soundEffectFile.exists();
+    assert !soundEffectFile.exists();
     my_clipInStream = AudioSystem.getAudioInputStream(the_sound_effect_file);
     return null;
   }
