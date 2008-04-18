@@ -31,7 +31,7 @@ namespace TuneBlaster_.Graphics
         bool searchLightOn;
         Image searchLight;
         Texture2D searchLightTexture;
-        bool blackwhite;
+        public bool blackwhite;
 
 
         #endregion
@@ -135,6 +135,17 @@ namespace TuneBlaster_.Graphics
             {
                 searchLightOn = false;
             }
+
+            if (keyBoardState.IsKeyDown(Keys.Q))
+            {
+                BlackWhite();
+            }
+
+            if (keyBoardState.IsKeyDown(Keys.W))
+            {
+                Colour();
+            }
+
             if (searchLightOn)
             {
                 MoveSearchLight(keyBoardState, gamePadState);
@@ -154,6 +165,12 @@ namespace TuneBlaster_.Graphics
         {
             texture = game.Content.Load<Texture2D>(@"Resources\Textures\graynew-core");
             blackwhite = true;
+        }
+
+        public void Colour()
+        {
+            texture = game.Content.Load<Texture2D>(@"Resources\Textures\Core");
+            blackwhite = false;
         }
 
 

@@ -39,6 +39,8 @@ namespace TuneBlaster_.Graphics
             locked = true;
             dead = false;
             onCore = false;
+            game = g;
+            bw = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
             inContact = new List<FixedBall>();
             supports = new List<FixedBall>();
             inContact.Add(this);
@@ -121,6 +123,11 @@ namespace TuneBlaster_.Graphics
          * */
         public void Move(float rotate)
         {
+            if (colourTexture == null)
+            {
+                colourTexture = texture;
+            }
+            SwitchBlack();
             GetRotation(rotate);
         }
 

@@ -21,6 +21,10 @@ namespace TuneBlaster_.Graphics
         FixedBall collisionBall;
         MovingBall toFollow;
         Vector2 oldPosition;
+        protected Texture2D bw;
+        protected Texture2D colourTexture;
+        Game game;
+        bool blackwhite;
 
         #endregion
 
@@ -43,6 +47,9 @@ namespace TuneBlaster_.Graphics
             base.Initialise(g);
             oldPosition = Position;
             live = true;
+            game =g;
+            blackwhite = false;
+            bw = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
         }
 
         /*
@@ -87,11 +94,38 @@ namespace TuneBlaster_.Graphics
             return false;
         }
 
+        public void SwitchBlack()
+        {
+            if (core.blackwhite)
+            {
+                if (!blackwhite)
+                {
+                    colourTexture = texture;
+                    texture = bw;
+                    blackwhite = true;
+                }
+            }
+
+            else
+            {
+                if (blackwhite)
+                {
+                    texture = colourTexture;
+                    blackwhite = false;
+                }
+            }
+        }
+
         /*
          * Move towards the core
          */
         public virtual void Move()
         {
+            if (colourTexture == null)
+            {
+                colourTexture = texture;
+            }
+            SwitchBlack();
             if (toFollow == null)
             {
                 if (!Collide())
@@ -149,7 +183,7 @@ namespace TuneBlaster_.Graphics
                         f.SetCollisionBall(collisionBall);
                     }
                     f.UpdateContactBalls();
-                    f.LoadGraphicsContent(spriteBatch, texture);
+                    f.LoadGraphicsContent(spriteBatch, colourTexture);
                     core.AddBall(f);
                     live = false;
                 }

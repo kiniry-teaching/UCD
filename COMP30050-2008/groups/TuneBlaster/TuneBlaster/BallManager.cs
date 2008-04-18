@@ -19,7 +19,7 @@ namespace TuneBlaster_
         Random generator;
         Core core;
         SpriteBatch s;
-        Texture2D green, red, purple, blue;
+        public Texture2D green, red, purple, blue;
         Game game;
         Image.value colour;
         BallGenerator ballGenerator;
@@ -61,7 +61,6 @@ namespace TuneBlaster_
             float temp = (float) generator.NextDouble() * 5;
             Vector2 startPosition = Vector2.One;
             startPosition = core.Position + new Vector2((float)(400 * Math.Cos(temp)), (float)(400 * Math.Sin(temp)));
-
             return startPosition;
         }
 
@@ -70,10 +69,7 @@ namespace TuneBlaster_
          * */
         public void LoadGraphicsContent(SpriteBatch spriteBatch)
         {
-            green = game.Content.Load<Texture2D>(@"Resources\Textures\Green");
-            blue = game.Content.Load<Texture2D>(@"Resources\Textures\Blue");
-            purple = game.Content.Load<Texture2D>(@"Resources\Textures\Pur");
-            red = game.Content.Load<Texture2D>(@"Resources\Textures\Red");
+            Color();            
             s = spriteBatch;
             LoadBallGraphicsContent();
         }
@@ -84,6 +80,14 @@ namespace TuneBlaster_
             blue = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
             purple = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
             red = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
+        }
+
+        public void Color()
+        {
+            green = game.Content.Load<Texture2D>(@"Resources\Textures\Green");
+            blue = game.Content.Load<Texture2D>(@"Resources\Textures\Blue");
+            purple = game.Content.Load<Texture2D>(@"Resources\Textures\Pur");
+            red = game.Content.Load<Texture2D>(@"Resources\Textures\Red");
         }
 
 
@@ -155,7 +159,7 @@ namespace TuneBlaster_
             {
                 ball = ballGenerator.Remove();
                 ball.Position = StartPosition();
-                //LoadBallGraphicsContent();
+                //LoadGraphicsContent();
             }
         }
 
