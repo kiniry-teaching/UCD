@@ -1,6 +1,4 @@
-<?php session_start();?>
-<?php 
-include("include/header.php"); //page header
+<?php include("include/header.php"); //page header
 	$username = $_SESSION['username'];
 
 	include("connection.php"); //Connects to database

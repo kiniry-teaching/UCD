@@ -1,10 +1,4 @@
-<?php session_start();?>
-
-<?php
-include("include/header.php"); //page header
-
-
-?>
+<?php include("include/header.php"); ?>
 <form action="login.php" method="post">
 Username: <input type="text" name="username" /><br />
 Password: <input type="password" name="password" /><br />

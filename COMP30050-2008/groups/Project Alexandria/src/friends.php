@@ -1,8 +1,8 @@
-<?php session_start();?>
+<?php include("include/header.php");?>
 <div>
 
 <?php
-//include("include/header.php");
+//
 //include("connection.php");
 //include("include/userfunctions.php");
 	$username = $_SESSION['username'];
