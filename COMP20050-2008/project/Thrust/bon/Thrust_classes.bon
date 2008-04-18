@@ -39,7 +39,7 @@ class_chart HIGH_SCORE_DISPLAY
   command
     "Display the high scores.",
     "Hide the high scores.",
-    "Permit the player to add a new name for this high score."
+    "Let the player to add a new name for this high score."
 end
 
 class_chart INFO_PANEL
@@ -77,55 +77,55 @@ class_chart INPUT_HANDLER
     "Player input only works while the game is being played."
 end
 
-class_chart DISPLAY_HIGH_SCORES
+class_chart DISPLAY_HIGH_SCORES_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is 'h'."
 end
 
-class_chart TOGGLE_MUSIC_OR_SOUND_EFFECTS
+class_chart TOGGLE_MUSIC_OR_SOUND_EFFECTS_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is 'm'."
 end
 
-class_chart START_GAME
+class_chart START_GAME_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is '[space]'."
 end
 
-class_chart STOP_GAME
+class_chart STOP_GAME_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is '[escape]'."
 end
 
-class_chart FIRE_GUN
+class_chart FIRE_GUN_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is '[return]'."
 end
 
-class_chart TURN_LEFT
+class_chart TURN_LEFT_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is 'a'."
 end
 
-class_chart TURN_RIGHT
+class_chart TURN_RIGHT_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is 's'."
 end
 
-class_chart USE_ENGINE
+class_chart USE_ENGINE_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is '[shift]'."
 end
 
-class_chart USE_SHIELD
+class_chart USE_SHIELD_INPUT
   inherit KEYBOARD_INPUT
   constraint
     "My keycode is '[space]'."
