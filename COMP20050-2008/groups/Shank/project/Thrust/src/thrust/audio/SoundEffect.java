@@ -35,7 +35,6 @@ public class SoundEffect
      * Count of 1 for 'LITERAL_ASSERT' descendant 'METHOD_CALL'
      * exceeds maximum count
      */
-    assert !soundEffectFile.exists();
     my_clipInStream = AudioSystem.getAudioInputStream(the_sound_effect_file);
     return null;
   }
