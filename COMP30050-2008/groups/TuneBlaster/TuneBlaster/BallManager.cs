@@ -78,6 +78,16 @@ namespace TuneBlaster_
             LoadBallGraphicsContent();
         }
 
+        public void BlackWhite()
+        {
+            green = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
+            blue = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
+            purple = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
+            red = game.Content.Load<Texture2D>(@"Resources\Textures\blackwhite");
+        }
+
+
+
         /*
          * Load the correct texture depending on the ball's colour
          * */

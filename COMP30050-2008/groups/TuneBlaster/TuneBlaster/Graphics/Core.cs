@@ -31,6 +31,7 @@ namespace TuneBlaster_.Graphics
         bool searchLightOn;
         Image searchLight;
         Texture2D searchLightTexture;
+        bool blackwhite;
 
 
         #endregion
@@ -147,6 +148,15 @@ namespace TuneBlaster_.Graphics
             searchLightTexture = game.Content.Load<Texture2D>(@"Resources\Textures\spotlight300");
             searchLight.LoadGraphicsContent(spriteBatch, searchLightTexture);
         }
+
+
+        public void BlackWhite()
+        {
+            texture = game.Content.Load<Texture2D>(@"Resources\Textures\graynew-core");
+            blackwhite = true;
+        }
+
+
 
         /*
          * Add a ball to the core's ball list
