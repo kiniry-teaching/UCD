@@ -161,28 +161,48 @@ class_chart FUELABLE
     "Fuel content is always non-negative and finite."
 end
 
+class_chart HIGH_SCORE
+  query
+    "What is your score?",
+    "What are your initials?"
+  command
+    "This is your score.",
+    "These are your initials."
+  constraint
+    "High scores are always non-negative and finite.",
+    "Initials are always three characters in length."
+end
+
 class_chart HIGH_SCORES
   inherit SEQUENCE
   query
     "What are the current high scores?",
-    "What is the high score number at this index?"
+    "What is the high score number at this index?",
+    "Is this score a new high score?"
   command
-    "Is this score a new high score?",
     "Insert this score into the high score table."
   constraint
     "High scores are ordered from high to low.",
-    "There are eight top high scores.",
+    "There are eight high scores.",
     "There is a fixed initial set of high scores."
 end
 
 class_chart LIVES
   inherit INTEGER
+  query
+    "How many lives do you have?"
+  command
+    "Change the current lives by this many lives."
   constraint
     "Number of lives is always non-negative and finite."
 end
 
 class_chart SCORE
   inherit INTEGER
+  query
+    "What is the current score?"
+  command
+    "Change the current score by this many points."
   constraint
     "Score is always non-negative and finite."
 end
@@ -387,7 +407,7 @@ class_chart SPACESHIP
   command
     "You have this many lives remaining.",
     "You have this many points.",
-    "You are now towing the goal sphere.",
+    "You are now towing the goal sphere."
   constraint
     "Number of lives is initially 3.",
     "Score is initially 0.",
@@ -508,7 +528,7 @@ class_chart WELCOME_ANIMATION
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ENTITIES.PROPERTIE cluster classes
+-- ENTITIES.PROPERTIES cluster classes
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class_chart PROPERTIES

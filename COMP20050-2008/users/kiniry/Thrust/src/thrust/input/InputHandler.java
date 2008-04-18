@@ -7,7 +7,7 @@ package thrust.input;
  */
 public class InputHandler {
   /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
+  public static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
   public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
   /** Fill in this comment. */
@@ -49,7 +49,7 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {
+  public /*@ pure @*/ boolean legal_input(final char the_character) {
     assert false; //@ assert false;
     return false;
   }
@@ -59,7 +59,7 @@ public class InputHandler {
    * @param the_keyboard_input the input character to process.
    */
   //@ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
+  public void process(final char the_keyboard_input) {
     assert false; //@ assert false;
   }
 }
