@@ -25,7 +25,7 @@ namespace TuneBlaster_
             generator = new Random();
             core = c;
             game = g;
-            startPoint = new Vector2(1140f, 600f);
+            startPoint = new Vector2(1140f, 150f);
         }
 
         public void Initialise()
@@ -47,10 +47,10 @@ namespace TuneBlaster_
 
             while (temp.Next != null)
             {
-                temp.Value.Initialise(new Vector2(50f, 50f), temp.Previous.Value.Position - new Vector2(0f, 50f), game);
+                temp.Value.Initialise(new Vector2(50f, 50f), temp.Previous.Value.Position + new Vector2(0f, 50f), game);
                 temp = temp.Next;
             }
-            temp.Value.Initialise(new Vector2(50f, 50f), temp.Previous.Value.Position - new Vector2(0f, 50f), game);
+            temp.Value.Initialise(new Vector2(50f, 50f), temp.Previous.Value.Position + new Vector2(0f, 50f), game);
         }
 
         public void LoadGraphicsContent(SpriteBatch s, Texture2D t)
@@ -132,11 +132,11 @@ namespace TuneBlaster_
             balls.AddLast(temp);
             if (balls.Last.Previous.Value.Position.Y < 25f)
             {
-                balls.Last.Value.Initialise(new Vector2(50f, 50f), balls.Last.Previous.Value.Position - new Vector2(0, 50f), game);
+                balls.Last.Value.Initialise(new Vector2(50f, 50f), balls.Last.Previous.Value.Position + new Vector2(0, 50f), game);
             }
             else
             {
-                balls.Last.Value.Initialise(new Vector2(50f, 50f), new Vector2(1140f, 0f), game);
+                balls.Last.Value.Initialise(new Vector2(50f, 50f), new Vector2(1140f, 720f), game);
             }
             LoadBallGraphicsContent(balls.Last.Value);
 
@@ -170,23 +170,23 @@ namespace TuneBlaster_
 
             if (temp.Value.Position != startPoint)
             {
-                temp.Value.Position = temp.Value.Position + new Vector2(0f, 2f);
+                temp.Value.Position = temp.Value.Position + new Vector2(0f, -2f);
             }
 
             temp = temp.Next;
 
             while (temp.Next != null)
             {
-                if (temp.Value.Position.Y - temp.Previous.Value.Position.Y != -50f)
+                if (temp.Value.Position.Y - temp.Previous.Value.Position.Y != 50f)
                 {
-                    temp.Value.Position = temp.Value.Position + new Vector2(0f, 2f);
+                    temp.Value.Position = temp.Value.Position + new Vector2(0f, -2f);
                 }
                 temp = temp.Next;
             }
 
-            if (temp.Value.Position.Y - temp.Previous.Value.Position.Y != -50f)
+            if (temp.Value.Position.Y - temp.Previous.Value.Position.Y != 50f)
             {
-                temp.Value.Position = temp.Value.Position + new Vector2(0f, 2f);
+                temp.Value.Position = temp.Value.Position + new Vector2(0f, -2f);
             }
         }
 
