@@ -1,48 +1,62 @@
 package thrust.audio;
-
 import java.io.File;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-//import javax.sound.sampled.DataLine;
-//import javax.sound.sampled.FloatControl;
-//import javax.sound.sampled.LineUnavailableException;
-//import javax.sound.sampled.SourceDataLine;
-//import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.Clip;
+import java.io.IOException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.LineUnavailableException;
 /**
- * Any sound made in response to a event.
- * @author Joe Kiniry (kiniry@acm.org)
+ * In-game music.
+ * @author Roger Thomas (roger.thomas@ucdconnect.ie)
  * @version 2 April 2008
- * Edited by Ben Fitzgerald on 07/04/2008
+ * Implpemented friday 18 April 2008
  */
-public class SoundEffect
-{
-  /** The current sound clip that is in a the file.*/
-  private Clip my_soundEffect;
-  /**`Takes the clip and take the information inside the file.*/
-  private AudioInputStream my_clipInStream;
+public class SoundEffect {
+  //@ public model boolean is_playing;
   /**
-   * This is your sound effect.
-   * @param the_sound_effect_file the sound effect to make.
-   * @return the new sound effect for the effect stored in 's'.
+   * @return music clip
    */
-  public /*@ pure @*/ SoundEffect make(final File the_sound_effect_file)
-  {
-    // File that contains a sound effect
-    final File soundEffectFile = the_sound_effect_file;
-    /** tried to use instead of try and catch
-     * causes error
-     * Count of 1 for 'LITERAL_ASSERT' descendant 'METHOD_CALL'
-     * exceeds maximum count
-     */
-    my_clipInStream = AudioSystem.getAudioInputStream(the_sound_effect_file);
-    return null;
+  private Clip my_sound_effect;
+
+
+  //@ ensures \result == my_sound_effect_is_playing;
+  public SoundEffect play(final File the_sound_file) {
+    //final File music_clip = new Clip;
+    AudioInputStream game_audio_stream = null;
+    try {
+      game_audio_stream = AudioSystem.getAudioInputStream(the_sound_file);
+    } catch (UnsupportedAudioFileException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    final DataLine.Info info =
+      new DataLine.Info(SourceDataLine.class, game_audio_stream.getFormat());
+    try {
+      my_sound_effect = (Clip)AudioSystem.getLine(info);
+      my_sound_effect.open(game_audio_stream);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (LineUnavailableException e)
+    {
+      e.printStackTrace();
+    }
+    return (SoundEffect) my_sound_effect;
+  }
+
+  public /*@ pure @*/ boolean playing() {
+    //assert false; //@ assert false;
+    return my_sound_effect.isRunning();
   }
 
   /**
-   * Start playing your effect.
+   * Start playing the music.
    */
+  //@ ensures is_playing;
   public void start() {
-    my_soundEffect.loop(1);
+    my_sound_effect.loop(1);
   }
 }

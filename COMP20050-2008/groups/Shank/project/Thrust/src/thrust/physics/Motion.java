@@ -2,30 +2,54 @@ package thrust.physics;
 
 /**
  * Implementing the physics interface.
- * @author KevinLambe kevinlamb@hotmail.com
+ * @author Kevin Lambe (kwlambe@hotmail.com)
  * @version 7 April 2008
- * edited 8 April 2008
+ * edited 18 April 2008 by Roger Thomas & Kevin Lambe
  */
 public abstract class Motion implements Physics
 {
   //Creating all the double variables required
-  /**Put javadoc comments in please.*/
-  private double accel;
-  /**Put javadoc comments in please.*/
-  private double[] acc;
-  /**Put javadoc comments in please.*/
-  private double[] vel;
-  /**Put javadoc comments in please.*/
-  private double[] pos;
-  /**Put javadoc comments in please.*/
-  private double mass;
-  /**Put javadoc comments in please.*/
-  private double moment;
-  /**Put javadoc comments in please.*/
-  private double radian;
-  /**Put javadoc comments in please.*/
-  private double velocity;
-  public void acceleration(final double vel, final double time)
+  /**
+   * double field.
+   * acceleration of ship
+   */
+  private double my_accel;
+  /**
+   * Array of doubles.
+   * holds my_accel and orientation
+   */
+  private double[] my_acc;
+  /**
+   * double field.
+   * Sets the speed of the ship
+   */
+  private double my_speed;
+  /**
+   * Array of doubles.
+   * Holds speed and orientation
+   */
+  private double[] my_vel;
+  /**
+   * Array of doubles.
+   * holds x position and y position
+   */
+  private double[] my_pos;
+  /**
+   * Double field.
+   * holds the mass of the ship
+   */
+  private double my_mass;
+  /**
+   * Double field.
+   * Holds momentum of ship
+   */
+  private double my_moment;
+  /**
+   * Double field.
+   * Holds the angle of the orientation of the ship
+   */
+  private double my_radian;
+  public void acceleration(final double the_vel, final double the_time)
   {
    /*
     * calculating acceleration
@@ -34,14 +58,14 @@ public abstract class Motion implements Physics
     *calculates magnitude of acceleration and direction
     */
     final int accCoordinates = 2;
-    acc = new double[accCoordinates];
-    accel = vel / time;
-    acc[0] = accel;
-    acc[1] = orientation();
+    my_acc = new double[accCoordinates];
+    my_accel = the_vel / the_time;
+    my_acc[0] = my_accel;
+    my_acc[1] = orientation();
   }
   public double[] acceleration()
   {
-    return  acc;
+    return  my_acc;
   }
   public double gravitational_constant()
   {
@@ -51,51 +75,54 @@ public abstract class Motion implements Physics
   public double mass()
   {
     //returns mass of entity
-    return mass;
+    return my_mass;
   }
-  public void momentum(final double mass, final double vel)
+  public void momentum(final double the_mass, final double the_vel)
   {
     //calculating momentum
     //momentum = mass * velocity
-    moment = mass * vel;
+    my_moment = the_mass * the_vel;
   }
   public double momentum()
   {
     //returns momentum
-    return moment;
+    return my_moment;
   }
   public double orientation()
   {
     //returns orientation of the entity
-    return radian;
+    return my_radian;
   }
-  public void myPosition(final double myXPos, final double myYPos)
+  public void myPosition(final double the_xpos, final double the_ypos)
   {
     final int size = 2;
-    pos = new double[size];
-    pos[0] = myXPos;
-    pos[1] = myYPos;
+    my_pos = new double[size];
+    my_pos[0] = the_xpos;
+    my_pos[1] = the_ypos;
   }
   public double[] position()
   {
   //returns position in meters
-    return pos;
+    return my_pos;
   }
-  public void myVelocity(final double p1, final double p2, final double t)
+  public void setSpeed(final double a_speed)
   {
-    /*Change in position with respect to time
-    *p2-p1/time
-    *calculates direction and magnitude of velocity
-    */
-    velocity = (p2 - p1) / t;
+    my_speed = a_speed;
+  }
+  public void myVelocity()
+  {
+    /*
+     * Change in position with respect to time
+     *calculates direction and magnitude of velocity
+     */
     final int size = 2;
-    vel = new double[size];
-    vel[0] = velocity;
-    vel[1] = orientation();
+    my_vel = new double[size];
+    my_vel[0] = my_speed;
+    my_vel[1] = orientation();
   }
   public double[] velocity()
   {
     //returns velocity in meters per second
-    return vel;
+    return my_vel;
   }
 }
