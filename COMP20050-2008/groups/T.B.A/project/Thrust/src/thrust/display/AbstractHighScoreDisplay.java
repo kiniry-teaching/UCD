@@ -35,7 +35,7 @@ public abstract class AbstractHighScoreDisplay {
   public abstract void hide();
 
   /**
-   * Permit the player to add a new name for this high score.
+   * Let the player to add a new name for this high score.
    */
   public abstract void add_new_high_score();
 }

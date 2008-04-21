@@ -4,7 +4,7 @@ package thrust.physics;
  * @author DH, JD and EH (Dave.haughton1@gmail.com)
  * @version 7 April 2008
  */
-public abstract class PhysicsClass implements Physics {
+public abstract class PhysicsClass implements PhysicsInterface {
 
 /**
    * The angle of an object, in radians.

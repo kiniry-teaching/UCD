@@ -17,7 +17,7 @@ package thrust.input;
  */
 public class InputHandler {
   /** An unknown character code. */
-  private static final char UNKNOWN_CHAR = '\0';
+  public static final char UNKNOWN_CHAR = '\0';
   /** Press 'h' to display the high score. */
   private static final char DISPLAY_HIGH_SCORES = 'h';
   /** Press 'm' to toggle music/sound effects. */
@@ -88,7 +88,7 @@ public class InputHandler {
     switch(the_keyboard_input) {
       case START_GAME: /* start game */
       case DISPLAY_HIGH_SCORES: /* start game */
-      case TOGGLE_MUSIC_OR_EFFECTS: /* change music mode*/
+      case TOGGLE_MUSIC_OR_EFFECTS: /* Toggle Music/Effects */
       case STOP_GAME: /* stop game */
       case FIRE_GUN: /* Fire a bullet*/
       case TURN_LEFT: /*Rotate ship left*/
@@ -98,6 +98,5 @@ public class InputHandler {
       default:
         break;
     }
-
   }
 }
