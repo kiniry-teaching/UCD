@@ -396,11 +396,9 @@ namespace Drought.GameStates
                         List<Vector3> aPos = new List<Vector3>();
                         aPos.Add(a.getPosition());
                         a.setPath(new Path(aPos));
-                        a.hurt(1);
                         List<Vector3> bPos = new List<Vector3>();
                         bPos.Add(b.getPosition());
                         b.setPath(new Path(bPos));
-                        b.hurt(1);
                     }
                 }
             }

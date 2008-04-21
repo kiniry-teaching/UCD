@@ -71,8 +71,8 @@ namespace Drought.Entity
                     //attack!
                     if (attackTarget != null)
                     {
-                        projectiles.addProjectile(getPosition(), attackTarget.getPosition());
-                        attackTarget.hurt(1);
+                        projectiles.addProjectile(this, attackTarget);
+                        //attackTarget.hurt(1);
                         timeToWait = ATTACK_WAIT_TIME;
                         if (attackTarget.isDead()) attackTarget = null;
                     }

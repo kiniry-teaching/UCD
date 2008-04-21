@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Drought.Entity;
 
 namespace Drought.Graphics.Particles
 {
@@ -18,9 +19,9 @@ namespace Drought.Graphics.Particles
             projectileTrailParticles = projectileTrail;
         }
 
-        public void addProjectile(Vector3 pos, Vector3 tar)
+        public void addProjectile(MovableEntity org, MovableEntity tar)
         {
-            projectiles.Add(new Projectile(explosionParticles, explosionSmokeParticles, projectileTrailParticles, pos, tar));
+            projectiles.Add(new Projectile(explosionParticles, explosionSmokeParticles, projectileTrailParticles, org, tar));
         }
 
         public void update(GameTime gameTime)

@@ -45,6 +45,7 @@ namespace Drought.Graphics.Particles
 
         Vector3 position;
         Vector3 target;
+        MovableEntity targetEntity;
         Path myPath;
 
         #endregion
@@ -53,14 +54,15 @@ namespace Drought.Graphics.Particles
         /// <summary>
         /// Constructs a new projectile.
         /// </summary>
-        public Projectile(ParticleSystem explosionParticles, ParticleSystem explosionSmokeParticles, ParticleSystem projectileTrailParticles, Vector3 aPosition, Vector3 aTarget)
+        public Projectile(ParticleSystem explosionParticles, ParticleSystem explosionSmokeParticles, ParticleSystem projectileTrailParticles, MovableEntity origin, MovableEntity aTarget)
         {
             this.explosionParticles = explosionParticles;
             this.explosionSmokeParticles = explosionSmokeParticles;
 
             // Start at the origin, firing in a random (but roughly upward) direction.
-            position = aPosition;
-            target = aTarget;
+            position = origin.getPosition();
+            target = aTarget.getPosition();
+            targetEntity = aTarget;
 
             //velocity.X = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
             //velocity.Y = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
@@ -68,13 +70,13 @@ namespace Drought.Graphics.Particles
 
             double step = Math.PI / 60;
             //Vector3 mid = (aTarget + aPosition) / 2;
-            float radius = Math.Abs(Vector3.Distance(aTarget, aPosition) / 2);
+            float radius = Math.Abs(Vector3.Distance(target, position) / 2);
             List<Vector3> path = new List<Vector3>();
             for (int i = 0; i <= 60; i++)
             {
-                float thisX = MathHelper.Lerp(aPosition.X, aTarget.X, ((float)i) / 60);
-                float thisY = MathHelper.Lerp(aPosition.Y, aTarget.Y, ((float)i) / 60);
-                float thisZ = MathHelper.Lerp(aPosition.Z, aTarget.Z, ((float)i) / 60) + radius * (float)Math.Cos(step*(i - 30));
+                float thisX = MathHelper.Lerp(position.X, target.X, ((float)i) / 60);
+                float thisY = MathHelper.Lerp(position.Y, target.Y, ((float)i) / 60);
+                float thisZ = MathHelper.Lerp(position.Z, target.Z, ((float)i) / 60) + radius * (float)Math.Cos(step*(i - 30));
                 path.Add(new Vector3(thisX, thisY, thisZ));
             }
             myPath = new Path(path);
@@ -102,6 +104,7 @@ namespace Drought.Graphics.Particles
             // by the speed and direction of the projectile which created it.
             if (myPath.isFinished())
             {
+                if (Vector3.Distance(targetEntity.getPosition(), target) < 10.0f) targetEntity.hurt(1);
                 for (int i = 0; i < numExplosionParticles; i++)
                     explosionParticles.AddParticle(position, new Vector3());
 
