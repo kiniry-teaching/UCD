@@ -1,19 +1,17 @@
 package GUI;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Vector;
+import java.util.LinkedList;
 
 public class GUI extends JFrame implements ActionListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	JButton preB, cusB, adminB, backBP, backBC, backBA, makeBP, makeBC, addBC,
 			remBC, applyBA;
-	JRadioButton stirRB, alc1RB, alc2RB, alc3RB;
+	JRadioButton stirRB, iceRB, alc1RB, alc2RB, alc3RB;
 	JFrame chFrame, cusFrame, preFrame, adFrame;
 	JPanel contentPanel;
 	JLabel selectL, eSymbol, costL;
@@ -22,20 +20,25 @@ public class GUI extends JFrame implements ActionListener {
 	JComboBox cocktail, cusIngreds, drink1, drink2, drink3;
 	int numIngreds;
 	double cost, temp;
-	boolean stir;
+	boolean stir, ice;
 	String[] cocktailsAvail = { "Screwdriver", "Sex on the Beach" };
 	String[] ingredsList = { "None", "Vodka", "Whiskey", "Malibu", "Gin",
 			"Pineapple Juice", "Red Bull", "Coke", "Lime", "Orange Juice",
 			"Cranberry Juice" };
 	Beverage bev1, bev2, bev3;
-	Beverage vodka, whiskey, malibu, gin, coke, pineapple, rBull, lime, oj,
-			cranberry;
 	Vector<Cocktail> cocktails = new Vector<Cocktail>();
 	Vector<Beverage> bevVec = new Vector<Beverage>();
 	Vector<Beverage> allBevVec = new Vector<Beverage>();
 	Vector<String> ingredsVec = new Vector<String>();
 	Vector<String> cocktailsVec = new Vector<String>();
+	Cocktail none;
 
+	public GUI(){
+		initCocktails();
+		setupPanel();
+		ChoiceFrame();
+	}
+	
 	public void setupPanel() {
 		contentPanel = new JPanel();
 		contentPanel.setBackground(Color.white);
@@ -43,39 +46,46 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	public void initCocktails() {
-		allBevVec.clear();
-		// Just temporary
-		vodka = new Beverage("Vodka", 300, true, 0);
-		whiskey = new Beverage("Whiskey", 300, true, 0);
-		malibu = new Beverage("Malibu", 280, true, 0);
-		gin = new Beverage("Gin", 290, true, 0);
-		coke = new Beverage("Coke", 180, false, 0);
-		pineapple = new Beverage("Pineapple", 120, false, 0);
-		rBull = new Beverage("Red Bull", 200, false, 0);
-		lime = new Beverage("Lime", 100, false, 0);
-		oj = new Beverage("Orange Juice", 120, false, 0);
-		cranberry = new Beverage("Cranberry Juice", 120, false, 0);
-		allBevVec.add(vodka);
-		allBevVec.add(whiskey);
-		allBevVec.add(malibu);
-		allBevVec.add(gin);
-		allBevVec.add(coke);
-		allBevVec.add(pineapple);
-		allBevVec.add(rBull);
-		allBevVec.add(lime);
-		allBevVec.add(oj);
-		allBevVec.add(cranberry);
-		
+		none = new Cocktail("None");
 		Cocktail tempCock = new Cocktail("Vodka + Coke");
-		tempCock.addDrink(coke);
-		tempCock.addDrink(vodka);
+		tempCock.addDrink("Coke");
+		tempCock.addDrink("Vodka");
 		cocktails.add(tempCock);
 		
 		tempCock = new Cocktail("Whiskey + Coke");
-		tempCock.addDrink(whiskey);
-		tempCock.addDrink(coke);
+		tempCock.addDrink("Whiskey");
+		tempCock.addDrink("Coke");
 		cocktails.add(tempCock);
-
+	}
+	
+	public Beverage matchBev(String s){
+		Beverage matchedBev = new Beverage("None", 0, false, 0);
+		for(int i=0; i<bevVec.size(); i++){
+			if(bevVec.get(i).getName().equalsIgnoreCase(s)){
+				matchedBev = bevVec.get(i);
+				break;
+			}
+		}
+		return matchedBev;
+	}
+	
+	public Cocktail matchCocktail(String s){
+		Cocktail matchedCocktail = new Cocktail("None");
+		for(int i=0; i<cocktails.size(); i++){
+			if(s.equalsIgnoreCase(cocktails.get(i).getName())){
+				matchedCocktail = cocktails.get(i);
+			}
+		}
+		return matchedCocktail;
+	}
+	
+	public boolean bevAvail(String s){
+		for(int i=0; i<bevVec.size(); i++){
+			if(bevVec.get(i).getName().equalsIgnoreCase(s)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setAvail() {
@@ -93,7 +103,23 @@ public class GUI extends JFrame implements ActionListener {
 	}
 	
 	public void cocktailsAvail() {
-		
+		cocktailsVec.clear();
+		cocktailsVec.add(none.getName());
+		for(int i=0; i<cocktails.size(); i++){
+			LinkedList<String> toCheck = cocktails.get(i).getList();
+			for(int j=0; j<toCheck.size(); j++){
+				if(!bevAvail(toCheck.get(j))){
+					cocktails.get(i).setAvail(false);
+					break;
+				}
+				else{
+					cocktails.get(i).setAvail(true);
+				}
+			}
+			if(cocktails.get(i).getAvail()){
+				cocktailsVec.add(cocktails.get(i).getName());
+			}
+		}
 	}
 
 	public void updateCCost() {
@@ -130,9 +156,10 @@ public class GUI extends JFrame implements ActionListener {
 		alc1RB.setOpaque(false);
 		alc1RB.addActionListener(this);
 
-		cost1 = new JTextField();
+		cost1 = new JTextField("0");
 		cost1.setLocation(390, 80);
 		cost1.setSize(100, 30);
+		cost1.setHorizontalAlignment(JTextField.RIGHT);
 
 		drink2 = new JComboBox(ingredsList);
 		drink2.setLocation(50, 120);
@@ -146,9 +173,10 @@ public class GUI extends JFrame implements ActionListener {
 		alc2RB.setOpaque(false);
 		alc2RB.addActionListener(this);
 
-		cost2 = new JTextField();
+		cost2 = new JTextField("0");
 		cost2.setLocation(390, 120);
 		cost2.setSize(100, 30);
+		cost2.setHorizontalAlignment(JTextField.RIGHT);
 
 		drink3 = new JComboBox(ingredsList);
 		drink3.setLocation(50, 160);
@@ -162,9 +190,10 @@ public class GUI extends JFrame implements ActionListener {
 		alc3RB.setOpaque(false);
 		alc3RB.addActionListener(this);
 
-		cost3 = new JTextField();
+		cost3 = new JTextField("0");
 		cost3.setLocation(390, 160);
 		cost3.setSize(100, 30);
+		cost3.setHorizontalAlignment(JTextField.RIGHT);
 
 		backBA = new JButton("Back");
 		backBA.setLocation(50, 320);
@@ -263,7 +292,7 @@ public class GUI extends JFrame implements ActionListener {
 		preIngredsList.setRows(10);
 		preIngredsList.setSize(250, 240);
 		preIngredsList.setEditable(false);
-		preIngredsList.setText("Ingredients go here");
+		preIngredsList.setText("Ingredients");
 
 		eSymbol = new JLabel("€");
 		eSymbol.setLocation(330, 320);
@@ -273,6 +302,7 @@ public class GUI extends JFrame implements ActionListener {
 		costP.setLocation(350, 320);
 		costP.setSize(100, 30);
 		costP.setEditable(false);
+		costP.setHorizontalAlignment(JTextField.RIGHT);
 
 		makeBP = new JButton("Make");
 		makeBP.setLocation(450, 320);
@@ -328,6 +358,12 @@ public class GUI extends JFrame implements ActionListener {
 		stirRB.setOpaque(false);
 		stirRB.addActionListener(this);
 
+		iceRB = new JRadioButton("Ice?", false);
+		iceRB.setLocation(50, 230);
+		iceRB.setSize(100, 30);
+		iceRB.setOpaque(false);
+		iceRB.addActionListener(this);
+
 		backBC = new JButton("Back");
 		backBC.setLocation(50, 320);
 		backBC.setSize(100, 30);
@@ -359,6 +395,7 @@ public class GUI extends JFrame implements ActionListener {
 		cusFrame.add(addBC);
 		cusFrame.add(remBC);
 		cusFrame.add(stirRB);
+		cusFrame.add(iceRB);
 		cusFrame.add(backBC);
 		cusFrame.add(cusIngredsList);
 		cusFrame.add(eSymbol);
@@ -406,15 +443,44 @@ public class GUI extends JFrame implements ActionListener {
 			chFrame.setVisible(true);
 		} else if (src == makeBP) {
 			System.out.println("Making your drink!");
+			Cocktail selected = matchCocktail((String)cocktail.getSelectedItem());
+			int[] toSend = selected.getArray(bevVec);
 		} else if (src == makeBC) {
-			System.out.println("Making your drink!");
+			if (numIngreds != 0) {
+				System.out.println("Making your drink!");
+				BufferedReader in = new BufferedReader(new StringReader(
+						cusIngredsList.getText()));
+				String line;
+				int[] position = new int[numIngreds + 2];
+				try {
+					for (int i = 0; i < numIngreds; i++) {
+						line = in.readLine();
+						Beverage tempBev = matchBev(line);
+						position[i] = tempBev.getId();
+						// System.out.println(tempBev.getId());
+					}
+				} catch (Exception e) {
+				}
+				if(iceRB.isSelected()){
+					position[numIngreds] = 499;
+				}
+				else{
+					position[numIngreds] = 498;
+				}
+				if(stirRB.isSelected()){
+					position[numIngreds+1] = 999;
+				}
+				else{
+					position[numIngreds+1] = 998;
+				}
+			}
 		} else if (src == addBC) {
-			if (numIngreds < 8) {
+			if (numIngreds < 6) {
 				String selIngred = (String) cusIngreds.getSelectedItem();
 				cusIngredsList.append(selIngred + "\n");
 				numIngreds++;
 				// int curIndex = cusIngreds.getSelectedIndex();
-				// cost += bev.getPrice();
+				cost += matchBev(selIngred).getPrice();
 				updateCCost();
 			} else {
 				System.out
@@ -432,7 +498,7 @@ public class GUI extends JFrame implements ActionListener {
 					if (line.equalsIgnoreCase(selIngred) && removed == false) {
 						System.out.println("Removing: " + selIngred + "\n");
 						// int curIndex = cusIngreds.getSelectedIndex();
-						// cost -= bev.getPrice();
+						cost -= matchBev(selIngred).getPrice();
 						updateCCost();
 						numIngreds--;
 						removed = true;
@@ -447,7 +513,17 @@ public class GUI extends JFrame implements ActionListener {
 		} else if (src == cocktail) {
 			JComboBox tempBox = (JComboBox) src;
 			String drink = (String) tempBox.getSelectedItem();
-			System.out.println(drink);
+			//System.out.println(drink);
+			Cocktail selected = matchCocktail(drink);
+			selected.calcPrice(bevVec);
+			Double tempCost = Double.valueOf(selected.getPrice()/100).doubleValue();
+			//costP.setText(String.valueOf(selected.getPrice()));
+			costP.setText(String.valueOf(tempCost));
+			preIngredsList.setText("");
+			LinkedList<String> list = selected.getList();
+			for(int i=0; i<list.size(); i++){
+				preIngredsList.append(list.get(i) + "\n");
+			}
 		} else if (src == applyBA) {
 			Double tempCost;
 			int tempCost2;
@@ -470,7 +546,6 @@ public class GUI extends JFrame implements ActionListener {
 			tempBox = (JComboBox) drink2;
 			if ((String) tempBox.getSelectedItem() == "None"
 					|| cost2.getText() == "") {
-
 			} else {
 				tempCost = Double.valueOf(cost2.getText()).doubleValue();
 				tempCost2 = (int) (tempCost * 100);
