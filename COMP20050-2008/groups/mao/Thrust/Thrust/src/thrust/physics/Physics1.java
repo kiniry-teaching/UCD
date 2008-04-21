@@ -7,7 +7,7 @@ package thrust.physics;
  * @version 14 April 2008
  * */
 
-public class Physics1 implements Physics {
+public class Physics1 implements PhysicsInterface {
 
   /** Value of the gravitational constant. */
   public static final int THE_GRAV_CONST = 5;
@@ -25,14 +25,17 @@ public class Physics1 implements Physics {
   private double my_position_x;
   /** Vertical position of the Entity.  */
   private double my_position_y;
+  /** Time for stimulation  */
+  private double my_time;
 
-  public Physics1() {
-    my_mass = 0;
-    my_speed = 0;
-    my_acceleration = 0;
-    my_orientation = 0;
-    my_position_x = 0;
-    my_position_y = 0;
+  public Physics1(PhysicsInterface phi) {
+    
+    my_mass = phi.mass();
+    my_speed = (phi.velocity())[0];
+    my_acceleration = (phi.acceleration())[0];
+    my_orientation = phi.orientation();
+    my_position_x = (phi.position())[0];;
+    my_position_y = (phi.position())[1];;
 
   }
 
@@ -40,10 +43,6 @@ public class Physics1 implements Physics {
     return my_array_length_2;
   }
 
-  /* public Physics1(double the_mass){
-    the_mass = this.my_mass;
-  }
-  */
 
   public double[] acceleration() {
     final double[] acceleration = new double[getArrayLength()];
@@ -80,6 +79,10 @@ public class Physics1 implements Physics {
     velocity[0] = my_speed;
     velocity[1] = my_orientation;
     return velocity;
+  }
+  
+  public void simulate(double time){
+    time = my_time;
   }
 
 }
