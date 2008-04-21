@@ -2,12 +2,13 @@
 #define PARSER_H_
 
 #include "../rai/Recorder/IParserRecorder.h"
+#include "../wiimote/IRReport.h"
 #include <string>
 #include <iostream>
 #include <stdlib.h>
 #include <cmath>
 using namespace std;
-using namespace econtrol;
+using namespace interpreter;
 
 class Parser
 {
@@ -16,6 +17,7 @@ public:
 	Parser(IParserRecorder* ipr);
 	//The format of supply will be changed to accept an array
 	void supply(string in){parser(in, in.size());};
+	void supplyReport(IRReport);
 	virtual ~Parser();
 private:
 	void parser(string,int);
@@ -23,6 +25,7 @@ private:
 	void binary(int);
 	int MSB_Extract(int,int);
 	int Size_Extract();
+	IParserRecorder* iprp;
 	int reportData[12],MSB_Size_Array[8],control[4],binaryPosition,binaryX[8], binaryY[8];
 };
 

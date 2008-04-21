@@ -19,6 +19,7 @@ Parser::Parser()
 
 Parser::Parser(IParserRecorder* ipr)
 {
+	iprp = ipr;
 	binaryPosition = 0;
 	for(int i=0; i<12; i++)
 		reportData[i] = 0;
@@ -84,10 +85,9 @@ void Parser::parser(string in, int size_of)
 	provide();
 }
 
-void Parser::provide()
+void Parser::supplyReport(IRReport report)
 {
 	int tmp[3];
-	tmp[0]=0,tmp[1]=0,tmp[2]=0;
 	int c_switch=0;
 	for(int j=0;j<12;j+=3)
 	{
@@ -96,16 +96,20 @@ void Parser::provide()
 		if(j==6)c_switch=2;
 		if(j==9)c_switch=3;
 		
-		tmp[0] = reportData[j];
-		tmp[1] = reportData[j+1];
-		tmp[2] = reportData[j+2];
+		tmp[0] = report.getValues()[j];
+		tmp[1] = report.getValues()[j+1];
+		tmp[2] = report.getValues()[j+2];
 		
 		if(tmp[0]==255 || tmp[1]==255 || tmp[2]==255)
+		{
 			control[c_switch]=1;
+			iprp->control(control[c_switch],c_switch+1);
+		}
 		else
+		{
 			control[c_switch]=0;
-		
-		//control(control[0],k+1);
+			iprp->control(control[c_switch],c_switch+1);
+		}
 			
 		if(control[c_switch]==0)
 		{
@@ -117,9 +121,8 @@ void Parser::provide()
 		  	tmp[0] += MSB_Extract(MSB_Size_Array[2],MSB_Size_Array[3]);
 		  	tmp[1] += MSB_Extract(MSB_Size_Array[0],MSB_Size_Array[1]);
 		  	tmp[2] = Size_Extract();
-		  	setX(tmp[0]);
-		  	setY(tmp[1]);
 		  	cout << " REPORTID: " << c_switch+1 << " X: " << tmp[0] << " Y: " << tmp[1] << " Size: " << tmp[2] <<  endl;
+		  	iprp->record(c_switch+1, tmp[0], tmp[1], tmp[2], report.getTimestamp());
 		}
 	}
 	for(int k=0;k<4;k++)
@@ -155,12 +158,12 @@ int Parser::MSB_Extract(int first,int second)
 
 int Parser::Size_Extract()
 {
-	int counterWeight=7,total=0;
-	for(int i=7;i>3;i--)
+	int counterWeight=0,total=0;
+	for(int i=4;i<7;i++)
 	{
 		if(MSB_Size_Array[i]==1)
-			total+=(int)pow(2.0,i-(double)counterWeight);
-		counterWeight-=2;
+			total+=(int)pow(2.0,counterWeight);
+		counterWeight++;
 	}
 	return total;	
 }
