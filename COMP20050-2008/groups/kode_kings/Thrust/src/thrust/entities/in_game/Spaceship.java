@@ -39,7 +39,7 @@ public class Spaceship extends DynamicEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Shape shape() {
@@ -48,8 +48,8 @@ public class Spaceship extends DynamicEntity
   }
 
   public void shape(Shape the_shape) {
-    // TODO Auto-generated method stub
-    
+
+
   }
 
   public String shape_name() {
@@ -64,12 +64,12 @@ public class Spaceship extends DynamicEntity
 
   public void state(byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public void change_fuel_content(int the_fuel_change) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public int fuel() {
@@ -89,12 +89,12 @@ public class Spaceship extends DynamicEntity
 
   public void set_fuel_content(int the_fuel_content) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public void tow() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public boolean towed() {
@@ -134,7 +134,7 @@ public class Spaceship extends DynamicEntity
 
   public void simulate(double some_seconds) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public double[] velocity() {
@@ -149,7 +149,7 @@ public class Spaceship extends DynamicEntity
 
   public void color(Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
 
   //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;

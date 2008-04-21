@@ -29,6 +29,7 @@ public abstract class Entity implements GameColor {
                             Shape the_initial_shape,
                             byte the_initial_state) {
     assert false; //@ assert false;
+    return null;
   }
 
   /**
