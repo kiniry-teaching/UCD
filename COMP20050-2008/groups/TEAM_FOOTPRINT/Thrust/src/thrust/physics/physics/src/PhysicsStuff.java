@@ -1,3 +1,5 @@
+package thrust.physics.physics.src;
+
 
 //class written by Daire O'Doherty 06535691 3/4/08
 public class PhysicsStuff {
@@ -64,7 +66,8 @@ public class PhysicsStuff {
 	  /*@ pure @*/ double[] velocity (double p1,double p2,double t){
 		  //change in position versus time
 		  //position 2 - position1%time
-		  return p1-p2 % t;
+		  return (p1-p2%t);
+		  
 		  
 		  
 	  }
