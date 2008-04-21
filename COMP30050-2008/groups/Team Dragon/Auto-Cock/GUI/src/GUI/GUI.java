@@ -2,6 +2,9 @@ package GUI;
 
 import java.awt.*;
 import javax.swing.*;
+
+import snd.BTSendObject;
+
 import java.awt.event.*;
 import java.io.*;
 import java.util.Vector;
@@ -32,6 +35,7 @@ public class GUI extends JFrame implements ActionListener {
 	Vector<String> ingredsVec = new Vector<String>();
 	Vector<String> cocktailsVec = new Vector<String>();
 	Cocktail none;
+	BTSendObject send = new BTSendObject();
 
 	public GUI(){
 		initCocktails();
@@ -445,6 +449,8 @@ public class GUI extends JFrame implements ActionListener {
 			System.out.println("Making your drink!");
 			Cocktail selected = matchCocktail((String)cocktail.getSelectedItem());
 			int[] toSend = selected.getArray(bevVec);
+			send.startClient(toSend);
+			send.stopClient();
 		} else if (src == makeBC) {
 			if (numIngreds != 0) {
 				System.out.println("Making your drink!");
@@ -473,6 +479,8 @@ public class GUI extends JFrame implements ActionListener {
 				else{
 					position[numIngreds+1] = 998;
 				}
+				send.startClient(position);
+				send.stopClient();
 			}
 		} else if (src == addBC) {
 			if (numIngreds < 6) {
