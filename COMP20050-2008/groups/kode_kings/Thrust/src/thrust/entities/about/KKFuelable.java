@@ -14,7 +14,7 @@ package thrust.entities.about;
  * @author Colin Casey (colin.casey@org.com)
  * @version 15 April 2008
  */
-public abstract class AbstractFuelable implements Fuelable {
+public class KKFuelable implements Fuelable {
 
   /** The maximum amount of fuel that can be contained. */
   static final int MAXIMUM_FUEL;
