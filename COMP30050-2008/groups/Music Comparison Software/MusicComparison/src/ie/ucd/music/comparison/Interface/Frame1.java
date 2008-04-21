@@ -121,11 +121,11 @@ public class Frame1 extends JFrame {
     	I2 = Input2.getText();
     	System.out.println(I1);
     	System.out.println(I2);
-    	if(Input1.getText().length() == 0 || Input2.getText().length() == 0){
+    	if(Input1.getText().length() == 0 || Input2.getText().length() == 0) {
     		JOptionPane.showMessageDialog(this, "Please enter two directories");
     		System.out.println("Please enter two directories");
     	}
-    	else{
+    	else {
     	findid3.FindDirectory(I1, I2);
     Frame3 frame = new Frame3();
        // Validate frames that have preset sizes
