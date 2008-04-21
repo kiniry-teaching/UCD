@@ -1,7 +1,7 @@
 package thrust.physics.src;
 //class written by Daire O'Doherty 06535691 3/4/08
 /**
- * @author Daire O'Doherty 06535691
+ * @author "Daire O'Doherty 06535691 (daireod@gmail.com)"
  * @version 16 Apr 2008
  */
 public class PhysicsStuff implements Physics {
