@@ -165,17 +165,17 @@ bool MidiPlayer::setRecording(bool setOn) {
 	return false;
 }
 	
-void MidiPlayer::sendControlChange(Channels channel, uchar function, uchar value) {
+void MidiPlayer::sendControlChange(Channels channel, uchar function, uchar value, ulong deltaTime) {
 	if (isConnected_) {
         try {
 		  if (channel == CHANNEL_LEAD)
-		      leadChannel_->setControl(function, value);
+		      leadChannel_->setControl(function, value, deltaTime);
 		  else if(channel == CHANNEL_ACCOMPANY)
-		      accompanyChannel_->setControl(function, value);
+		      accompanyChannel_->setControl(function, value, deltaTime);
 		  else if(channel == CHANNEL_CHORD)
-		      chordChannel_->setControl(function, value);
+		      chordChannel_->setControl(function, value, deltaTime);
 		  else if(channel == CHANNEL_PERCUSSION)
-		      percussionChannel_->setControl(function, value);	
+		      percussionChannel_->setControl(function, value, deltaTime);	
         }
         catch (RtError &error) {}	   
     }

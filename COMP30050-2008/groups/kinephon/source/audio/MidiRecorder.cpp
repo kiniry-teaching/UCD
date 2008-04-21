@@ -11,7 +11,7 @@ MidiRecorder::MidiRecorder() {
 MidiRecorder::~MidiRecorder() {}
 
 bool MidiRecorder::openFile() {
-    myFile_.open("writeFile.mid", ios::out | ios::binary);
+    myFile_.open("midi_kinephon.mid", ios::out | ios::binary);
     if( !myFile_.is_open() ) {
         return false;
     }

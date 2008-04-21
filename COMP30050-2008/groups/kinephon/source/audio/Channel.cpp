@@ -44,7 +44,7 @@ uchar Channel::getProgram() {
 }
 	
 //Adjusts this channel's settings 
-void Channel::setControl(uchar function, uchar value) {
+void Channel::setControl(uchar function, uchar value, ulong deltaTime) {
 	controls_[function] = value;
 	vector<uchar> message(3);
   	message[0] = 176 + channelNo_;
@@ -53,7 +53,7 @@ void Channel::setControl(uchar function, uchar value) {
 	midiout_->sendMessage(&message);
     
     if (recorder_ != NULL)
-        recorder_->write(message, 0);       
+        recorder_->write(message, deltaTime);       
     
 }
 	 

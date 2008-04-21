@@ -106,8 +106,9 @@ public:
 	 * @param channel the channel the message is to be sent to      
 	 * @param function the chosen function 
 	 * @param value the value of the function
+    * @param deltaTime delay to be used when writing the MIDI file  
 	 */
-	void sendControlChange(Channels channel, uchar function, uchar value);
+	void sendControlChange(Channels channel, uchar function, uchar value, ulong deltaTime);
 	
 	/**
 	 * Sends a Program Change message to one channel.
@@ -137,28 +138,32 @@ public:
   	/**
 	 * Plays a lead note.
 	 * @param pitch the value of the note to be played  
-	 * @param velocity velocity of lead note          
+	 * @param velocity velocity of lead note   
+    * @param deltaTime delay to be used when writing the MIDI file         
 	 */
 	void playLead(uchar pitch, uchar velocity, ulong deltaTime);
 	
 	/**
 	 * Plays a accompaniment note.
 	 * @param pitch the value of the note to be played  
-	 * @param velocity velocity of the note          
+	 * @param velocity velocity of the note     
+    * @param deltaTime delay to be used when writing the MIDI file       
 	 */
 	void playAccompaniment(uchar pitch, uchar velocity, ulong deltaTime);
 	
 	/**
 	 * Plays a chord.
 	 * @param chord the chord to be played  
-	 * @param velocity velocity of the chord          
+	 * @param velocity velocity of the chord     
+    * @param deltaTime delay to be used when writing the MIDI file       
 	 */
 	void playChord(uchar chord, uchar velocity, ulong deltaTime);
 	
   	/**
 	 * Plays a percussion note.
 	 * @param pitch the pitch of the note to be played  
-	 * @param velocity velocity of the note          
+	 * @param velocity velocity of the note  
+    * @param deltaTime delay to be used when writing the MIDI file          
 	 */
 	void playPercussion(uchar pitch, uchar velocity, ulong deltaTime);
 	
@@ -169,6 +174,7 @@ public:
 	 * @param channel the chnnel to be used
 	 * @param pitch the value of the note to be played
 	 * @param velocity the velocity of the note
+    * @param deltaTime delay to be used when writing the MIDI file  
 	 */
 	void playNote(Channels channel, uchar pitch, uchar velocity, ulong deltaTime);
     
@@ -176,6 +182,7 @@ public:
      * Releases the last played note on given channel.
      * @param channel the chnnel to be used
      * @param pitch the value of the note to be played
+     * @param deltaTime delay to be used when writing the MIDI file  
      */
 	void releaseNote(Channels channel, uchar pitch, ulong deltaTime);
     

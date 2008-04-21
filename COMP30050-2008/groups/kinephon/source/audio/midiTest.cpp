@@ -88,7 +88,7 @@ if (testingPlayOnly) {
     audio.setMelody(melody);
     audio.setAccompaniment(true);
     audio.setChords(true,CHORDS_FIRST);
-    audio.setRhythm(true, RHYTHM_1_2);	
+    audio.setRhythm(true, RHYTHM_2_3);	
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);
@@ -135,7 +135,7 @@ if (testingPlayLead) {
     //audio.setMelody(melody);
    //audio.setAccompaniment(true);
     audio.setChords(true,CHORDS_123);
-    audio.setRhythm(true, RHYTHM_4_4);   
+    //audio.setRhythm(true, RHYTHM_4_4);   
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);
@@ -198,8 +198,8 @@ if (testingPlayLead) {
 if (testingPlayLeadAcc) {
     cout << "playing lead and accompaniment "<< endl; 
     audio.setAccompaniment(false);
-    audio.setChords(true,CHORDS_FIRST);
-    audio.setRhythm(true, RHYTHM_4_4);   
+    audio.setChords(true,CHORDS_THIRD);
+    audio.setRhythm(true, RHYTHM_3_4);   
     int i = 0;
     if (piano) {
         audio.setDynamics(DYNAMICS_PIANO);

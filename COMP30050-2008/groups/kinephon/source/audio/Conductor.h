@@ -176,19 +176,7 @@ public:
      */
     Dynamics getDynamics();
     
-    /**
-     * Returns whether the automatic dynamics function is enabled. 
-     * @return true if automatic dynamics is on
-     */
-    bool getAutomaticDynamics();
-    
-    /**
-     * Returns whether the harmony function is enabled. 
-     * @return true if harmony is on
-     */
-    bool getHarmony();
-    
-    /**
+      /**
      * Returns the currently set melody.
      * If no melody set, returns empty vector.
      * @return vector with melody notes
@@ -298,29 +286,6 @@ public:
 	void setDynamics(Dynamics dynamics);
 	
 	/**
-	 * Sets the class to automatically vary the dynamics.
-	 * Some algorithm will vary the dynamics based on the lead melody
-	 * played, adding crescendos and diminuendos (gradually getting
-	 * louder or quieter) 
-	 * @param isOn true if automaticDynamics is to be used
-	 */
-	void setAutomaticDynamics(bool isOn);
-	
-	/**
-	 * Controls the interaction when two or more notes are played simultaneously.
-	 * If harmony is to be turned off, the second argument is irrelevant.
-	 * <p>
-	 * <i> Effect </i>
-	 * Harmony has an abiguous meaning in music, 
-	 * it may mean the (perfect) intervals between two pitches, so as to make them sound 'nice' or consonant
-	 * or the whole structure of the piece (only consonant notes will sound very boring).
-	 * The exact behaviour of this method is dependent on future development. 
-	 * @param isOn true if interaction is set on, false if it is to be ignored
-	 * @param paramOne to be decided
-	 */
-	void setHarmony(bool isOn, int paramOne);
-	
-	/**
 	 * Plays the given melody repeatedly. 
 	 * The format of the vector data is to be as follows:
 	 * each note consists of a pitch and a velocity value
@@ -392,16 +357,11 @@ private:
 	bool hasAccompaniment_;
 	bool hasChords_;
 	bool hasRhythm_;
-	bool hasAutoDynamics_;
-	bool hasHarmony_;
     bool hasMelody_;
     bool hasPedaling_;
 	bool hasReverb_;
 	
-    uchar modulation_;
-    int harmony_;
-    
-    
+    uchar modulation_;    
 	Rhythm rhythm_;
 	Chords chords_;
     uchar currentChord_;
