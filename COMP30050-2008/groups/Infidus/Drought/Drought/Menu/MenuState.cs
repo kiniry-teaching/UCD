@@ -161,7 +161,7 @@ namespace Drought.Menu
                 canPress = true;
         }
 
-        public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
+        public override void render(GameTime gameTime, GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             mainMenu.render(spriteBatch);

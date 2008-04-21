@@ -109,8 +109,9 @@ namespace Drought.Entity
          * along the path. distance >= 0.
          * 
          * @param distance The distance to add on. distance >= 0
+         * @returns whether or not any distance was covered.
          */
-        public void addDistance(float distance)
+        public bool addDistance(float distance)
         {
             coveredDist += distance;
             if (coveredDist >= length) //we're finished
@@ -118,7 +119,7 @@ namespace Drought.Entity
                 coveredDist = length;
                 currNode = nodes.Count - 1;
                 position = nodes[currNode];
-                return;
+                return false;
             }
 
             while (coveredDist > nodeDist[currNode + 1])
@@ -132,6 +133,7 @@ namespace Drought.Entity
             //Vector3 nextNorm = normalMap.getNormal((int)next.X, (int)next.Y);
             //normal = Vector3.Lerp(currNorm, nextNorm, amt);
             normal = levelInfo.getNormal(position.X, position.Y);
+            return true;
         }
 
         /**

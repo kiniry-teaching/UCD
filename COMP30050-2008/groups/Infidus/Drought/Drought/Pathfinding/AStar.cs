@@ -22,7 +22,7 @@ namespace Drought.Entity
             new Vector2(1, 1), }; //top right
 
         /** Can move from one node to another if the other node is not greater than MAX_MOVE_DIST. */
-        private const float MAX_MOVE_DIST = 0.5f;
+        private const float MAX_MOVE_DIST = 2.5f;
 
         private const int SCALE = 5;
 
@@ -115,8 +115,8 @@ namespace Drought.Entity
             bool[,] closed = new bool[width, height];
             int closedSize = 0;
             Node[,] openMap = new Node[width, height];
-            Node goal = getNode((int)endX / SCALE, (int)endY / SCALE);
-            Node start = getNode((int)startX / SCALE, (int)startY / SCALE);
+            Node goal = getNode((int) Math.Round(endX / SCALE), (int) Math.Round(endY / SCALE));
+            Node start = getNode((int) Math.Round(startX / SCALE), (int) Math.Round(startY / SCALE));
 
             if (goal != null && start != null)
             {
@@ -150,11 +150,14 @@ namespace Drought.Entity
                         parent = parent.getParent();
                     }
 
+                    pathNodes.Add(level.getPositionAt(startX, startY));
+
                     Console.WriteLine("closed size: " + closedSize);
                     Console.WriteLine(timer.ElapsedMilliseconds + "ms total to run A*");
                     timer.Stop();
 
                     pathNodes.Reverse();
+                    pathNodes.Add(level.getPositionAt(endX, endY));
                     pathFound = true;
                     return new Path(pathNodes, level);
                 }
@@ -205,14 +208,14 @@ namespace Drought.Entity
             }
 
             Console.WriteLine("closed size: " + closedSize);
-            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not fina a path");
+            Console.WriteLine("Took " + timer.ElapsedMilliseconds + "ms to not find a path");
             timer.Stop();
 
             //couldn't find a path so return a path containing just the start node
-            List<Vector3> nodes = new List<Vector3>();
-            nodes.Add(new Vector3(startX, startY, level.getHeight(startX, startY)));
+            List<Vector3> noPath = new List<Vector3>();
+            noPath.Add(level.getPositionAt(startX, startY));
             pathFound = false;
-            return new Path(nodes, level);
+            return new Path(noPath, level);
         }
 
         /**

@@ -36,7 +36,7 @@ namespace Drought.Graphics
               };
     }
 
-    class ParticleEmitter
+    class ParticleSpemitter
     {
         /*
          * Effect file used to render the particles
@@ -99,7 +99,7 @@ namespace Drought.Graphics
          */
         private float timeStep;
 
-        public ParticleEmitter(Vector3 position, Vector3 initialVelocity, Vector3 gravity, Vector4 colour, int numberOfParticles, float chaosity, float lifeTime)
+        public ParticleSpemitter(Vector3 position, Vector3 initialVelocity, Vector3 gravity, Vector4 colour, int numberOfParticles, float chaosity, float lifeTime)
         {
             this.colour = colour;
             this.position = position;

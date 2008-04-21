@@ -5,6 +5,7 @@ float3 xLightPosition;
 float xLightPower;
 float3 xLightDirection;
 bool xEnableLighting;
+bool xGreyScale;
 
 //------- Texture Samplers --------
 
@@ -54,7 +55,12 @@ PixelToFrame TexturedPixelShader(VertexToPixel PSIn)
 	
 	if(xEnableLighting)
 		Output.Color = Output.Color * DiffuseLightingFactor * xLightPower;
-
+	
+	if (xGreyScale) {
+		float avg = (Output.Color.r + Output.Color.g + Output.Color.b) / 3;
+		Output.Color = float4(avg, avg, avg, Output.Color.a);
+	}
+	
 	return Output;
 }
 
@@ -62,9 +68,8 @@ PixelToFrame TexturedPixelShader(VertexToPixel PSIn)
 technique Textured
 {
     pass Pass0
-    {        
+    {
         VertexShader = compile vs_2_0 TexturedVertexShader();
         PixelShader = compile ps_2_0 TexturedPixelShader();
     }
-
-} 
+}

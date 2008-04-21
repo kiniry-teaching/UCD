@@ -8,7 +8,7 @@ namespace Drought.World
     class Camera
     {
         private GameState gameState;
-        private HeightMap heightMap;
+        private LevelInfo levelInfo;
 
         private Vector3 eyeVector;
         private Vector3 focusVector;
@@ -19,10 +19,13 @@ namespace Drought.World
         private float cameraStand = 10.0f;
         private float angleIncrement = 0.025f;
 
-        public Camera(GameState gameState, HeightMap heightMap)
+        private bool isRestricted;
+
+        public Camera(GameState gameState, LevelInfo levelInfo, bool isRestricted)
         {
             this.gameState = gameState;
-            this.heightMap = heightMap;
+            this.levelInfo = levelInfo;
+            this.isRestricted = isRestricted;
 
             initialize();
         }
@@ -32,17 +35,15 @@ namespace Drought.World
             cameraRotationAngles = new Vector3(0, 0, -35 * angleIncrement);
             Matrix cameraRotation = Matrix.CreateRotationX(cameraRotationAngles.X) * Matrix.CreateRotationZ(cameraRotationAngles.Z);
 
-            eyeVector   = new Vector3(0.0f, 0.0f, heightMap.getHeight(0, 0)+cameraStand);
+            eyeVector   = new Vector3(0.0f, 0.0f, levelInfo.getHeight(0, 0)+cameraStand);
             focusVector = eyeVector + Vector3.Transform(new Vector3(0, 1, 0), cameraRotation);
             upVector    = new Vector3(0, 0, 1);
         }
 
-        public void update(GameTime gameTime)
+        public void update()
         {
-            ////Console.WriteLine(eyeVector);
-
-            if (eyeVector.Z < heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand)
-                eyeVector.Z = heightMap.getHeight(eyeVector.X, eyeVector.Y) + cameraStand;
+            if (isRestricted && eyeVector.Z < levelInfo.getHeight(eyeVector.X, eyeVector.Y) + cameraStand)
+                eyeVector.Z = levelInfo.getHeight(eyeVector.X, eyeVector.Y) + cameraStand;
 
             Matrix cameraRotation = Matrix.CreateRotationX(cameraRotationAngles.X) * Matrix.CreateRotationZ(cameraRotationAngles.Z);
             focusVector = eyeVector + Vector3.Transform(new Vector3(0, 1, 0), cameraRotation);
@@ -150,13 +151,13 @@ namespace Drought.World
 
         public void rotateUp()
         {
-            if (cameraRotationAngles.X < 0)
+            if (!isRestricted || cameraRotationAngles.X < 0)
                 cameraRotationAngles.X += angleIncrement;
         }
 
         public void rotateDown()
         {
-            if (cameraRotationAngles.X > -Math.PI*9 /20)
+            if (!isRestricted || cameraRotationAngles.X > -Math.PI*9 /20)
                cameraRotationAngles.X -= angleIncrement;
         }
 

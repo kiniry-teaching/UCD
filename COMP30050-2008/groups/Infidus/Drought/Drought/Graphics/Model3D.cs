@@ -11,23 +11,29 @@ namespace Drought.Graphics
             get { return model; }
         }
 
-        private Texture2D[] modelTextures;
-        public Texture2D[] ModelTextures
+        private Texture2D[] textures;
+        public Texture2D[] Textures
         {
-            get { return modelTextures; }
+            get { return textures; }
         }
 
-        private Effect modelEffect;
-        public Effect ModelEffect
+        private Effect effect;
+        public Effect Effect
         {
-            get { return modelEffect; }
+            get { return effect; }
         }
 
-        public Model3D(Model aModel, Texture2D[] someTextures, Effect anEffect)
+        private float scale;
+        public float Scale {
+            get { return scale; } 
+        }
+
+        public Model3D(Model aModel, Texture2D[] someTextures, Effect anEffect, float aScale)
         {
             model = aModel;
-            modelTextures = someTextures;
-            modelEffect = anEffect;
+            textures = someTextures;
+            effect = anEffect;
+            scale = aScale;
         }
     }
 }

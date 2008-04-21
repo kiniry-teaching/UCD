@@ -78,7 +78,7 @@ namespace Drought.State
          * @param graphics The graphics device manager to draw with.
          * @param spriteBatch A sprite batch to use to draw sprites.
          */
-        public abstract void render(GraphicsDevice graphics, SpriteBatch spriteBatch);
+        public abstract void render(GameTime gameTime, GraphicsDevice graphics, SpriteBatch spriteBatch);
         
         /**
          * Gets the <code>StateManager</code> that is managing this state.

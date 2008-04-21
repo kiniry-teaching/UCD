@@ -28,18 +28,18 @@ namespace Drought.World
             Matrix[] transforms = new Matrix[model.Model.Bones.Count];
             model.Model.CopyAbsoluteBoneTransformsTo(transforms);
 
-            Matrix worldMatrix = Matrix.CreateScale(10, 10, 10) * Matrix.CreateRotationX(MathHelper.PiOver2) * Matrix.CreateTranslation(camera.getPosition() + new Vector3(0,0,50)); 
+            Matrix worldMatrix = Matrix.CreateScale(model.Scale) * Matrix.CreateRotationX(MathHelper.PiOver2) * Matrix.CreateTranslation(camera.getPosition() + new Vector3(0,0,50)); 
 
             int i = 0;
             foreach (ModelMesh mesh in model.Model.Meshes)
             {
                 foreach (Effect currentEffect in mesh.Effects)
                 {
-                    currentEffect.CurrentTechnique = model.ModelEffect.Techniques["Textured"];
+                    currentEffect.CurrentTechnique = model.Effect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
-                    currentEffect.Parameters["xTexture"].SetValue(model.ModelTextures[i++]);
+                    currentEffect.Parameters["xTexture"].SetValue(model.Textures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(false);
                     currentEffect.Parameters["xLightPosition"].SetValue(camera.getPosition() + sun.getPosition()); //???
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());

@@ -6,25 +6,15 @@ namespace Drought.Entity
 {
     class Scout : MovableEntity
     {
-        private const float VELOCITY = 1.0f;
+        public static readonly float SPEED = 1.0f;
 
-        private const float RADIUS = 1.5f;
+        public static readonly float RADIUS = 1.5f;
 
-        private const int FULL_HEALTH = 5;
+        public static readonly int FULL_HEALTH = 5;
 
-        private const int WATER_CAPACITY = 4;
+        public static readonly int WATER_CAPACITY = 4;
 
-        private const float MODEL_SCALE = 1.0f;
-
-
-        public Scout(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
-            base(gameState, model, path, terrain, uid)
-        {
-            setVelocity(VELOCITY);
-            setRadius(RADIUS);
-            setMaxHealth(FULL_HEALTH);
-            setMaxWater(WATER_CAPACITY);
-            setModelScale(MODEL_SCALE);
-        }
+        public Scout(GameState gameState, LevelInfo levelInfo, ModelLoader modelLoader, Path path, int uid) :
+            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Car), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY) { }
     }
 }

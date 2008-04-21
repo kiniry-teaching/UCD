@@ -152,7 +152,7 @@ namespace Drought.Graphics
             }
         }
 
-        public void update(GameTime gameTime)
+        public void update()
         {
             timeStep += (float)(1.0f / 60.0f);
             addParticle(); addParticle(); 

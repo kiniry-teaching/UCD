@@ -23,21 +23,22 @@ namespace Drought.Entity
 
         private Matrix orientation;
 
-        private float velocity;
+        private float speed;
 
         private Path path;
 
         private Model3D model;
 
-        private Terrain terrain;
+        private LevelInfo levelInfo;
+        public LevelInfo LevelInfo { get { return levelInfo; } }
         
         public float radius;
 
-        private float modelScale;
-
         private bool selected;
+        public bool IsSelected { get { return selected; } }
+        
         private float selectTime;
-        private float selectTimeStep = 0.025f;
+        private static readonly float selectTimeStep = 0.025f;
 
         private LineTool pathTool, ringTool;
 
@@ -45,6 +46,8 @@ namespace Drought.Entity
 
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
+
+        public bool wasUpdated;
 
         private int health;
 
@@ -54,25 +57,33 @@ namespace Drought.Entity
 
         private int maxWater;
 
+        /* how many updates (if any) this unit is waiting to resolve a collision. */
+        private int waiting;
 
-        public MovableEntity(GameState gameState, Model3D model, Path path, Terrain terrain, int uid)
+        public MovableEntity(GameState gameState, LevelInfo aLevelInfo, Model3D aModel, Path aPath, int uid, float spd, float rad, int maxh, int maxw)
         {
-            //health = 105;
-            //maxHealth = 5;
-            this.terrain = terrain;
-            infoBar = new InfoBox(gameState);
-            radius = 2.5f;
+            levelInfo = aLevelInfo;
+            this.model = aModel;
+            path = aPath;
             uniqueID = uid;
-            this.path = path;
+            speed = spd;
+            radius = rad;
+            maxHealth = maxh;
+            health = maxh;
+            maxWater = maxw;
+            water = 0;
+            
             position = path.getPosition();
             prevPosition = path.getPosition();
+            wasUpdated = true;
+            waiting = 0;
             heading = new Vector3((float)Math.Cos(uid), (float)Math.Sin(uid), 0);
             normal = path.getNormal();
             orientation = Matrix.Identity;
             setOrientation();
-            velocity = 0.5f;
-            this.model = model;
+
             selected = false;
+            infoBar = new InfoBox(gameState);
             pathTool = new LineTool(gameState.getGraphics());
             ringTool = new LineTool(gameState.getGraphics());
             ringTool.setColor(new Vector3(1.0f, 0.0f, 0.0f));
@@ -80,9 +91,9 @@ namespace Drought.Entity
 
         private void move()
         {
-            if (!path.isFinished())
+            if (!path.isFinished() && waiting == 0)
             {
-                path.addDistance(velocity);
+                wasUpdated = path.addDistance(speed);
                 prevPosition.X = position.X;
                 prevPosition.Y = position.Y;
                 prevPosition.Z = position.Z;
@@ -98,42 +109,21 @@ namespace Drought.Entity
 
                 setOrientation();
             }
+            if (waiting > 0) waiting--;
         }
 
-        private void setOrientation()
+        public virtual void update()
         {
-            orientation.Up = normal;
-            orientation.Right = Vector3.Cross(orientation.Up, heading);
-            orientation.Right = Vector3.Normalize(orientation.Right);
-            orientation.Forward = Vector3.Cross(-orientation.Right, orientation.Up);
-            orientation.Forward = Vector3.Normalize(orientation.Forward);
-        }
-
-        public void setPath(Path path)
-        {
-            this.path = path;
-        }
-
-        public Path getPath()
-        {
-            return path;
-        }
-
-        public void update()
-        {
-            move();
-            pathTool.setPointsList(path.getRemainingPath());
+            wasUpdated = false;
+            if (!isDead())
+            {
+                move();
+                pathTool.setPointsList(path.getRemainingPath());
+            }
             if (selected)
             {
-                List<Vector3> pointsList = new List<Vector3>();
-                float step = MathHelper.Pi / 16;
-                for (float i = 0; i <= 32; i++)
-                {
-                    Vector3 pointy = terrain.getHeightMap().getPositionAt(position.X + (float)Math.Cos(i * step) * radius, position.Y + (float)Math.Sin(i * step) * radius);
-                    pointy.Z += 0.25f;
-                    pointsList.Add(pointy);
-                }
-                ringTool.setPointsList(pointsList);
+                if (wasUpdated)
+                    rebuildRing();
                 selectTime += selectTimeStep;
                 if (selectTime > 1) selectTime = 1;
             }
@@ -145,14 +135,26 @@ namespace Drought.Entity
             infoBar.update(position, selectTime, health, maxHealth, water, maxWater);
         }
 
-        public void render(GraphicsDevice graphics, Camera camera, Sun sun)
+        public void rebuildRing()
         {
-            pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+            List<Vector3> pointsList = new List<Vector3>();
+            float step = MathHelper.Pi / 16;
+            for (float i = 0; i <= 32; i++)
+            {
+                Vector3 pointy = levelInfo.getPositionAt(position.X + (float)Math.Cos(i * step) * radius, position.Y + (float)Math.Sin(i * step) * radius);
+                pointy.Z += 0.25f;
+                pointsList.Add(pointy);
+            }
+            ringTool.setPointsList(pointsList);
+        }
+
+        public virtual void render(GraphicsDevice graphics, Camera camera, Sun sun)
+        {
+            if (!isDead())
+                pathTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
 
             if (selected)
-            {
                 ringTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
-            }
 
             graphics.RenderState.DepthBufferEnable = true;
             graphics.RenderState.AlphaBlendEnable = false;
@@ -161,21 +163,24 @@ namespace Drought.Entity
             Matrix[] transforms = new Matrix[model.Model.Bones.Count];
             model.Model.CopyAbsoluteBoneTransformsTo(transforms);
 
-            Matrix worldMatrix = Matrix.CreateScale(0.005f) * orientation * Matrix.CreateTranslation(position);
+            Matrix worldMatrix = Matrix.CreateScale(model.Scale) * orientation * Matrix.CreateTranslation(position);
+            //"sink" the units a bit if they're dead, just to conceptually remove them from play
+            if (isDead()) worldMatrix *= Matrix.CreateTranslation(new Vector3(0, 0, -0.5f));
 
             int i = 0;
             foreach (ModelMesh mesh in model.Model.Meshes)
             {
                 foreach (Effect currentEffect in mesh.Effects)
                 {
-                    currentEffect.CurrentTechnique = model.ModelEffect.Techniques["Textured"];
+                    currentEffect.CurrentTechnique = model.Effect.Techniques["Textured"];
 
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
-                    currentEffect.Parameters["xTexture"].SetValue(model.ModelTextures[i++]);
+                    currentEffect.Parameters["xTexture"].SetValue(model.Textures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(true);
                     currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
+                    currentEffect.Parameters["xGreyScale"].SetValue(isDead());
                 }
                 mesh.Draw();
             }
@@ -188,64 +193,49 @@ namespace Drought.Entity
             }
         }
 
-        public Vector3 getPosition()
-        {
-            return position;
-        }
-
-        public void setPosition(Vector3 aPosition)
-        {
-            position = aPosition;
-        }
-
-        public Matrix getOrientation()
-        {
-            return orientation;
-        }
-
-        public void setOrientation(Matrix anOrientation)
-        {
-            orientation = anOrientation;
-        }
-
-        public void setSelected(bool selected)
-        {
-            this.selected = selected;
-        }
-
-        public bool isSelected()
-        {
-            return selected;
-        }
-
-        protected void setVelocity(float vel)
-        {
-            velocity = vel;
-        }
-
-        protected void setRadius(float radius)
-        {
-            this.radius = radius;
-        }
-
-        public float getRadius()
-        {
-            return radius;
-        }
-
         /** Takes "oww" health away from this Entity. */
         public void hurt(int oww)
         {
             health -= oww;
 
-            if (health < 0)
+            if (health <= 0) //you died!
+            {
+                selected = false;
                 health = 0;
+            }
         }
 
-        public bool isDead()
+        /* Tells this unit to wait a certain number of updates before attempting to move again. */
+        public void wait(int numUpdates)
         {
-            return health <= 0;
+            waiting = numUpdates;
+            if (waiting < 0) waiting = 0;
         }
+
+        public Vector3 getPosition() { return position; }
+
+        public void setPosition(Vector3 aPosition) { position = aPosition; }
+
+        public Matrix getOrientation() { return orientation; }
+
+        private void setOrientation()
+        {
+            orientation.Up = normal;
+            orientation.Right = Vector3.Cross(orientation.Up, heading);
+            orientation.Right = Vector3.Normalize(orientation.Right);
+            orientation.Forward = Vector3.Cross(-orientation.Right, orientation.Up);
+            orientation.Forward = Vector3.Normalize(orientation.Forward);
+        }
+
+        public void setPath(Path aPath) { path = aPath; }
+
+        public Path getPath() { return path; }
+
+        public void setOrientation(Matrix anOrientation) { orientation = anOrientation; }
+
+        public void setSelected(bool aSelected) { selected = aSelected; }
+
+        public bool isDead() { return health <= 0; }
 
         public void addWater(int amt)
         {
@@ -255,33 +245,9 @@ namespace Drought.Entity
                 water = maxWater;
         }
 
-        public void removeAllWater()
-        {
-            water = 0;
-        }
+        public void removeAllWater() { water = 0; }
 
-        public bool isFullOfWater()
-        {
-            return water == maxWater;
-        }
-
-        protected void setMaxHealth(int max)
-        {
-            maxHealth = max;
-            health = maxHealth;
-        }
-
-        protected void setMaxWater(int max)
-        {
-            maxWater = max;
-        }
-
-        protected void setModelScale(float scale)
-        {
-            modelScale = scale;
-        }
-
-
+        public bool isFullOfWater() { return water == maxWater; }
 
         /* Given 2 MovableEntities, check whether they overlap. */
         public static bool checkStaticCollision(MovableEntity a, MovableEntity b)

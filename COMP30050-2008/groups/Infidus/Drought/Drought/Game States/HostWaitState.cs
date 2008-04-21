@@ -46,7 +46,7 @@ namespace Drought.GameStates
             }
         }
 
-        public override void render(GraphicsDevice graphics, SpriteBatch spriteBatch) {
+        public override void render(GameTime gameTime, GraphicsDevice graphics, SpriteBatch spriteBatch) {
             spriteBatch.Begin();
             spriteBatch.Draw(waiting, drawPos, Color.White);
             spriteBatch.End();

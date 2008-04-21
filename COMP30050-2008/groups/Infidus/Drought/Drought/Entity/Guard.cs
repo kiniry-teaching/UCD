@@ -1,40 +1,98 @@
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Drought.Graphics;
 using Drought.State;
 using Drought.World;
+using Drought.Graphics.Particles;
 
 namespace Drought.Entity
 {
     class Guard : MovableEntity
     {
-        private const float VELOCITY = 0.4f;
+        public static readonly float SPEED = 0.4f;
 
-        private const float RADIUS = 2.0f;
+        public static readonly float RADIUS = 2.0f;
 
-        private const int FULL_HEALTH = 10;
+        public static readonly int FULL_HEALTH = 10;
 
-        private const int WATER_CAPACITY = 0;
+        public static readonly int WATER_CAPACITY = 0;
 
-        private const float MODEL_SCALE = 0.05f;
+        public static readonly float ATTACK_RADIUS = 25.0f;
 
-        private const float ATTACK_RADIUS = 10.0f;
+        public static readonly int ATTACK_WAIT_TIME = 120;
 
+        private int timeToWait;
+        
+        private LineTool attackRadiusTool;
 
-        public Guard(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
-            base(gameState, model, path, terrain, uid)
+        private MovableEntity attackTarget;
+        public MovableEntity AttackTarget
         {
-            setVelocity(VELOCITY);
-            setRadius(RADIUS);
-            setMaxHealth(FULL_HEALTH);
-            setMaxWater(WATER_CAPACITY);
-            setModelScale(MODEL_SCALE);
+            get { return attackTarget; }
+            set { attackTarget = value; }
         }
 
-        public new void update()
+        private ProjectileManager projectiles;
+
+        public Guard(GameState gameState, LevelInfo levelInfo, ModelLoader modelLoader, Path path, int uid, ProjectileManager proj) :
+            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Tank), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY)
+        {
+            attackRadiusTool = new LineTool(gameState.getGraphics());
+            attackRadiusTool.setColor(Color.Green.ToVector3());
+            attackTarget = null;
+            projectiles = proj;
+        }
+
+        public override void update()
         {
             base.update();
 
-            /* attack logic */
+            if (isDead()) return;
 
+            List<Vector3> pointsList = new List<Vector3>();
+            float step = MathHelper.Pi / 16;
+            for (float i = 0; i <= 32; i++)
+            {
+                Vector3 pointy = LevelInfo.getPositionAt(getPosition().X + (float)Math.Cos(i * step) * ATTACK_RADIUS, getPosition().Y + (float)Math.Sin(i * step) * ATTACK_RADIUS);
+                pointy.Z += 0.25f;
+                pointsList.Add(pointy);
+            }
+            attackRadiusTool.setPointsList(pointsList);
+            
+            if (timeToWait > 0) timeToWait--;
+
+            if (!wasUpdated) //if we stayed still since the last update
+            {
+                /* attack logic */
+                if (timeToWait == 0)
+                {
+                    //attack!
+                    if (attackTarget != null)
+                    {
+                        projectiles.addProjectile(getPosition());
+                        attackTarget.hurt(1);
+                        timeToWait = ATTACK_WAIT_TIME;
+                        if (attackTarget.isDead()) attackTarget = null;
+                    }
+                }
+            }
+            else
+            {
+                attackTarget = null;
+            }
+        }
+
+        public override void render(GraphicsDevice graphics, Camera camera, Sun sun)
+        {
+            base.render(graphics, camera, sun);
+            if (IsSelected) attackRadiusTool.render(camera.getViewMatrix(), camera.getProjectionMatrix());
+        }
+
+        public bool canSetTarget()
+        {
+            return timeToWait == 0 && attackTarget == null;
         }
     }
 }

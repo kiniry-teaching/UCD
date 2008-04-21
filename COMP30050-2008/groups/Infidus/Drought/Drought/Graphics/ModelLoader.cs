@@ -41,13 +41,14 @@ namespace Drought.Graphics
         private Model3D loadModel(modelType model)
         {
             String modelString = "";
+            float modelScale = 1.0f;
 
             switch (model) {
-                case modelType.XYZ: modelString = "Models/xyz"; break;
-                case modelType.Truck: modelString = "Models/Truck/truck"; break;
-                case modelType.Car: modelString = "Models/Car/car"; break;
-                case modelType.Tank: modelString = "Models/Tank/tank"; break;
-                case modelType.Skybox: modelString = "Models/Skysphere/skysphere2"; break;
+                case modelType.XYZ: modelString = "Models/xyz"; modelScale = 1.0f; break;
+                case modelType.Truck: modelString = "Models/Truck/newtruck"; modelScale = 0.5f; break;
+                case modelType.Car: modelString = "Models/Car/car"; modelScale = 0.75f; break;
+                case modelType.Tank: modelString = "Models/Tank/tank"; modelScale = 0.005f; break;
+                case modelType.Skybox: modelString = "Models/Skysphere/skysphere2"; modelScale = 10.0f; break;
             }
 
             Model newModel = content.Load<Model>(modelString);
@@ -69,7 +70,7 @@ namespace Drought.Graphics
 
             isLoaded[(int)model] = true;
 
-            models[(int)model] = new Model3D(newModel, newTextures, modelEffect);
+            models[(int)model] = new Model3D(newModel, newTextures, modelEffect, modelScale);
 
             return models[(int)model];
         }

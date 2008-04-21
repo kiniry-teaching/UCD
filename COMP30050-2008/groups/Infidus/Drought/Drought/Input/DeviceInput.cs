@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework.Input;
 namespace Drought.Input
 {
     /** The game's available commands */
-    public enum GameKeys : int { MENU_NEXT, MENU_PREV, MENU_PRESS, UP, DOWN, LEFT, RIGHT, QUIT, CHANGE_STATE,
+    public enum GameKeys : int { MENU_NEXT, MENU_PREV, MENU_PRESS, UP, DOWN, LEFT, RIGHT, QUIT,
                                 CAM_FORWARD, CAM_BACK, CAM_LEFT, CAM_RIGHT, CAM_ASCEND, CAM_DESCEND, CAM_ZOOM_IN, CAM_ZOOM_OUT,
                                 CAM_ROTATE_UP, CAM_ROTATE_DOWN, CAM_ROTATE_LEFT, CAM_ROTATE_RIGHT,
-                                UNIT_SELECT, UNIT_COMMAND, UNIT_SPAWN, UNIT_DELETE, UNIT_SELECT_ALL, RESET, 
-                                ADD_WATER, TERRAIN_RISE, TERRAIN_LOWER, PAUSE_SUN, TOGGLE_FULLSCREEN};
+                                UNIT_SELECT, UNIT_COMMAND, UNIT_SPAWN, UNIT_DELETE, UNIT_SELECT_ALL,
+                                RESET, TOGGLE_FULLSCREEN, PAUSE_SUN, BURN_BABY_BURN, BOOM_BOOM };
 
     /** Keys that can be used as modifier keys */
     public enum ModifierKeys : int { NONE, CTRL, ALT, SHIFT };
@@ -55,6 +55,12 @@ namespace Drought.Input
          */
         private int gameKeyCount;
 
+        /** 
+         * The number of modifier keys.
+         * (same as the number of elements in the ModifierKeys enumeration)
+         */
+        private int modifierKeyCount;
+
         /** Stores a mapping from game keys to the devices they are bound to */
         private Devices[] deviceBindings;
 
@@ -63,6 +69,16 @@ namespace Drought.Input
 
         /** Stores a mapping from games keys to the mouse button they are bound to */
         private MouseButtons[] mouseBindings;
+
+        /** Stores whether a key was just pressed in the last update */
+        private bool[] keyJustPressed;
+        /** The previous state to compare all new keys states to */
+        private bool[] keyPreviouslyPressed;
+
+        /** Stores whether a mouse button was just pressed in the last update */
+        private bool[] mouseJustPressed;
+        /** The previous state to compare all new mouse states to */
+        private bool[] mousePreviouslyPressed;
 
         /** The current state of the keyboard's buttons */
         private KeyboardState keyboard;
@@ -80,10 +96,15 @@ namespace Drought.Input
         private DeviceInput()
         {
             gameKeyCount = Enum.GetValues(typeof(GameKeys)).Length;
-            int modifierKeyCount = Enum.GetValues(typeof(ModifierKeys)).Length;
+            modifierKeyCount = Enum.GetValues(typeof(ModifierKeys)).Length;
             deviceBindings = new Devices[gameKeyCount];
             keyboardBindings = new Keys[gameKeyCount * modifierKeyCount];
             mouseBindings = new MouseButtons[gameKeyCount * modifierKeyCount];
+
+            keyJustPressed = new bool[gameKeyCount * modifierKeyCount];
+            keyPreviouslyPressed = new bool[gameKeyCount * modifierKeyCount];
+            mouseJustPressed = new bool[gameKeyCount * modifierKeyCount];
+            mousePreviouslyPressed = new bool[gameKeyCount * modifierKeyCount];
 
             //set all keys to be binded to nothing initially.
             clearBindings();
@@ -92,7 +113,7 @@ namespace Drought.Input
         /**
          * Gets the single instance of the input class.
          * 
-         * @return Input.
+         * @return DeviceInput.
          */
         public static DeviceInput getInput()
         {
@@ -108,6 +129,24 @@ namespace Drought.Input
         {
             keyboard = Keyboard.GetState();
             mouse = Mouse.GetState();
+            //note: do modifier keys
+            for (int i = 0; i < gameKeyCount; i++)
+                for (int j = 0; j < modifierKeyCount; j++)
+                {
+                    int index = i + (j * gameKeyCount);
+                    keyPreviouslyPressed[index] = keyJustPressed[index];
+                    if (keyboardBindings[index] != Keys.None)
+                        keyJustPressed[index] = keyboard.IsKeyDown(keyboardBindings[index]);
+                }
+
+            for (int i = 0; i < gameKeyCount; i++)
+                for (int j = 0; j < modifierKeyCount; j++)
+                {
+                    int index = i + (j * gameKeyCount);
+                    mousePreviouslyPressed[index] = mouseJustPressed[index];
+                    if (mouseBindings[index] != MouseButtons.NONE)
+                        mouseJustPressed[index] = isMouseButtonPressed(mouseBindings[index]);
+                }
         }
 
         /**
@@ -211,7 +250,95 @@ namespace Drought.Input
                     else
                         return isMouseButtonPressed(mouseBindings[(int)gameKey]);
                 case Devices.NONE:
-                    //Console.WriteLine("request for key \"" + gameKey + "\" state but it's not bound!");
+                    Console.WriteLine("request for key \"" + gameKey + "\" state but it's not bound!");
+                    return false;
+                default:
+                    return false;
+            }
+        }
+
+        /**
+         * Checks whether a game key has been pressed since the last update.
+         * 
+         * @param gameKey The key to check.
+         * @return True if gameKey is pressed.
+         */
+        public bool wasKeyJustPressed(GameKeys gameKey)
+        {
+            switch (deviceBindings[(int)gameKey])
+            {
+                case Devices.KEYBOARD:
+                    if (keyboard.IsKeyDown(Keys.LeftControl))
+                        return keyJustPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)]
+                            && !keyPreviouslyPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftAlt))
+                        return keyJustPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)]
+                            && !keyPreviouslyPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftShift))
+                        return keyJustPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)]
+                            && !keyPreviouslyPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)];
+                    else
+                    {
+                        return keyJustPressed[(int)gameKey] && !keyPreviouslyPressed[(int)gameKey];
+                    }
+                case Devices.MOUSE:
+                    if (keyboard.IsKeyDown(Keys.LeftControl))
+                        return mouseJustPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)]
+                            && !mousePreviouslyPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftAlt))
+                        return mouseJustPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)]
+                            && !mousePreviouslyPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftShift))
+                        return mouseJustPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)]
+                            && !mousePreviouslyPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)];
+                    else
+                        return mouseJustPressed[(int)gameKey] && !mousePreviouslyPressed[(int)gameKey];
+                case Devices.NONE:
+                    Console.WriteLine("request for key \"" + gameKey + "\" state but it's not bound!");
+                    return false;
+                default:
+                    return false;
+            }
+        }
+        
+        /**
+         * Checks whether a game key has been released since the last update.
+         * 
+         * @param gameKey The key to check.
+         * @return True if gameKey is pressed.
+         */
+        public bool wasKeyJustReleased(GameKeys gameKey)
+        {
+            switch (deviceBindings[(int)gameKey])
+            {
+                case Devices.KEYBOARD:
+                    if (keyboard.IsKeyDown(Keys.LeftControl))
+                        return !keyJustPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)]
+                            && keyPreviouslyPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftAlt))
+                        return !keyJustPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)]
+                            && keyPreviouslyPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftShift))
+                        return !keyJustPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)]
+                            && keyPreviouslyPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)];
+                    else
+                    {
+                        return !keyJustPressed[(int)gameKey] && keyPreviouslyPressed[(int)gameKey];
+                    }
+                case Devices.MOUSE:
+                    if (keyboard.IsKeyDown(Keys.LeftControl))
+                        return !mouseJustPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)]
+                            && mousePreviouslyPressed[(int)gameKey + ((int)ModifierKeys.CTRL * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftAlt))
+                        return !mouseJustPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)]
+                            && mousePreviouslyPressed[(int)gameKey + ((int)ModifierKeys.ALT * gameKeyCount)];
+                    else if (keyboard.IsKeyDown(Keys.LeftShift))
+                        return !mouseJustPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)]
+                            && mousePreviouslyPressed[(int)gameKey + ((int)ModifierKeys.SHIFT * gameKeyCount)];
+                    else
+                        return !mouseJustPressed[(int)gameKey] && mousePreviouslyPressed[(int)gameKey];
+                case Devices.NONE:
+                    Console.WriteLine("request for key \"" + gameKey + "\" state but it's not bound!");
                     return false;
                 default:
                     return false;

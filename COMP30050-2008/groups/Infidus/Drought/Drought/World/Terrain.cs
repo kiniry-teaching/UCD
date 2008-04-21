@@ -45,22 +45,19 @@ namespace Drought.World
         Texture2D stoneTexture;
         Texture2D errorTexture;
 
-		HeightMap heightMap;
+		LevelInfo levelInfo;
 		int width, height;
-
-        TextureMap textureMap;
         float textureZoom;
 
         public double oldTime = 0;
         public double counter = Math.PI;
         public Vector3 lightDirection = new Vector3(0,0,-1);
 
-        public Terrain(GraphicsDevice device, ContentManager content, HeightMap heightMap, TextureMap textureMap, Camera camera)
+        public Terrain(GraphicsDevice device, ContentManager content, LevelInfo levelInfo, Camera camera)
         {
             this.device = device;
             this.content = content;
-            this.heightMap = heightMap;
-            this.textureMap = textureMap;
+            this.levelInfo = levelInfo;
 
             this.camera = camera;
 
@@ -69,8 +66,8 @@ namespace Drought.World
 
         public void initialise()
         {
-            width  = heightMap.getMapWidth();
-            height = heightMap.getMapHeight();
+            width  = levelInfo.getWidth();
+            height = levelInfo.getHeight();
 
             textureZoom = 80.0f;
 
@@ -99,12 +96,12 @@ namespace Drought.World
             {
                 for (int y = 0; y < height; y++)
                 {
-                    vertices[x + y * width].Position = heightMap.getPositionAt(x, y);
+                    vertices[x + y * width].Position = levelInfo.getPositionAt(x, y);
                     vertices[x + y * width].Normal = new Vector3(0, 0, 0);
                     vertices[x + y * width].TextureCoordinate.X = (float)x / textureZoom;
                     vertices[x + y * width].TextureCoordinate.Y = (float)y / textureZoom;
                     
-                    vertices[x + y * width].TextureWeights = textureMap.getValue(x,y);
+                    vertices[x + y * width].TextureWeights = levelInfo.getTextureValue(x,y);
                 }
             }
         }
@@ -153,16 +150,6 @@ namespace Drought.World
 
             ib = new IndexBuffer(device, typeof(int), (width - 1) * (height - 1) * 6, BufferUsage.WriteOnly);
             ib.SetData(indices);
-        }
-
-        public HeightMap getHeightMap()
-        {
-            return heightMap;
-        }
-
-        public void update(GameTime gameTime)
-        {
-
         }
 
         public void render(Sun sun)
@@ -218,10 +205,10 @@ namespace Drought.World
                 Vector3 end = zeroWorldPoint;
                 Vector3 current = start;
                 Vector3 step = Vector3.Normalize(end - start);
-                while (heightMap.getHeight(current.X, current.Y) < current.Z) {
+                while (levelInfo.getHeight(current.X, current.Y) < current.Z) {
                     current = current + step;
                 }
-                return heightMap.getPositionAt(current.X, current.Y);
+                return levelInfo.getPositionAt(current.X, current.Y);
             }
             return BAD_POSITION;
         }

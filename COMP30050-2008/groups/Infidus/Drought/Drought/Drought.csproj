@@ -78,8 +78,19 @@
     <Compile Include="Entity\InfoBox.cs" />
     <Compile Include="Entity\Scout.cs" />
     <Compile Include="Entity\Tanker.cs" />
+    <Compile Include="Graphics\Particles\ExplosionEffect.cs" />
+    <Compile Include="Graphics\Particles\ExplosionParticleSystem.cs" />
+    <Compile Include="Graphics\Particles\ExplosionSmokeParticleSystem.cs" />
+    <Compile Include="Graphics\Particles\FireParticleSystem.cs" />
     <Compile Include="Graphics\Model3D.cs" />
     <Compile Include="Game States\HostWaitState.cs" />
+    <Compile Include="Graphics\Particles\ParticleEmitter.cs" />
+    <Compile Include="Graphics\Particles\ParticleSettings.cs" />
+    <Compile Include="Graphics\Particles\ParticleSystem.cs" />
+    <Compile Include="Graphics\Particles\ParticleVertex.cs" />
+    <Compile Include="Graphics\Particles\Projectile.cs" />
+    <Compile Include="Graphics\Particles\ProjectileTrailParticleSystem.cs" />
+    <Compile Include="Graphics\Particles\SmokePlumeParticleSystem.cs" />
     <Compile Include="Pathfinding\AStar.cs" />
     <Compile Include="Graphics\LineTool.cs" />
     <Compile Include="Entity\MovableEntity.cs" />
@@ -136,6 +147,9 @@
       <ProductName>.NET Framework 2.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Particles\ProjectileManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v2.0\Microsoft.Xna.GameStudio.Common.targets" />

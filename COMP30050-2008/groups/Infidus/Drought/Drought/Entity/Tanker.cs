@@ -6,25 +6,15 @@ namespace Drought.Entity
 {
     class Tanker : MovableEntity
     {
-        private const float VELOCITY = 0.3f;
+        public static readonly float SPEED = 0.3f;
 
-        private const float RADIUS = 2.5f;
+        public static readonly float RADIUS = 2.5f;
 
-        private const int FULL_HEALTH = 15;
+        public static readonly int FULL_HEALTH = 15;
 
-        private const int WATER_CAPACITY = 10;
+        public static readonly int WATER_CAPACITY = 10;
 
-        private const float MODEL_SCALE = 0.1f;
-
-
-        public Tanker(GameState gameState, Model3D model, Path path, Terrain terrain, int uid) :
-            base(gameState, model, path, terrain, uid)
-        {
-            setVelocity(VELOCITY);
-            setRadius(RADIUS);
-            setMaxHealth(FULL_HEALTH);
-            setMaxWater(WATER_CAPACITY);
-            setModelScale(MODEL_SCALE);
-        }
+        public Tanker(GameState gameState, LevelInfo levelInfo, ModelLoader modelLoader, Path path, int uid) :
+            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Truck), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY) { }
     }
 }

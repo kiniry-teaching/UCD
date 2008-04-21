@@ -9,10 +9,16 @@
 ----------
  - Skybox lighting is borked
  - Sounds keep playing if you press Ctrl+R to exit the level
- - new Entities added in one networked game don't show up in the other, deletes don't work either
  - NormalMap, HeightMap and TextureMap are redundant; replace all usage with a LevelInfo
  - Water smoothing algorithm only works for one winding order (not sure which)
- - other Water approach is a mess...
+ - static version of findWater in LevelInfo doesn't work
+ - if a pool of water is too big, the recursive DFS crashes with a StackOverflowException
+ - if the mean centre of a pool is not in the pool, the pool draws badly
+ - pathfinding does silly things sometimes, going forward to go back again
+ - if one unit bumpercars another unit, it's path will have to be updated before it
+	can continue so it doesn't snap back to it's old position
+ - InfoBoxes display in an unsorted order, which screws them up; sort them!
+
 
  New Features:
 ----------
@@ -20,12 +26,8 @@
  - Base
  - rain on and off with day/night
  - Camera Restriction
- - Water rendering && Detection
- - Models (tanker?)
- - Mipmapping
+ - Models(tanker?)
  - Networking.
- - Lobby State
- - Weather
  - Sun ambient lighting
 
  Debug Features:

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +12,8 @@ namespace Drought
 {
     /**
      * The entry point of a game.
-     * Initialises the GameManager and NetworkManager, sets up the initial states and binds game keys.
+     * Initialises the GameManager, SoundManager and NetworkManager,
+     * sets up the initial states and binds game keys.
      */
     class DroughtGame : Microsoft.Xna.Framework.Game
     {
@@ -22,23 +22,20 @@ namespace Drought
         private GameManager gameManager;
         private SoundManager soundManager;
         private NetworkManager networkManager;
-        private bool fullscreening;
 
         /**
          * So we can turn it off for testing, since it takes so damn long to start up.
          * NOTE: Only prevents the Gamer Services component from being initialized; if
          * a game tries to host or join a game, nasty exceptions will ensue.
          */
-        public static readonly bool NETWORKED = true;
+        public static readonly bool NETWORKED = false;
 
         public DroughtGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            if (NETWORKED) {
-                Components.Add(new GamerServicesComponent(this));
-            }
+            if (NETWORKED) Components.Add(new GamerServicesComponent(this));
             gameManager = new GameManager(this);
             soundManager = SoundManager.getInstance();
             networkManager = NetworkManager.getInstance();
@@ -51,11 +48,21 @@ namespace Drought
         {
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
-            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
+            createKeyBindings();
+
+            MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            gameManager.pushState(menu);
+            if (NETWORKED) gameManager.pushState(new SignInState(gameManager, this, true));
+
+            base.Initialize();
+        }
+        
+        private void createKeyBindings()
+        {
             DeviceInput input = DeviceInput.getInput();
-            input.bind(GameKeys.CHANGE_STATE, Keys.C, ModifierKeys.NONE);
+
             input.bind(GameKeys.MENU_NEXT, Keys.Down, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_PREV, Keys.Up, ModifierKeys.NONE);
             input.bind(GameKeys.MENU_PRESS, Keys.Enter, ModifierKeys.NONE);
@@ -80,16 +87,10 @@ namespace Drought
             input.bind(GameKeys.UNIT_SELECT_ALL, Keys.E, ModifierKeys.NONE);
             
             input.bind(GameKeys.RESET, Keys.R, ModifierKeys.CTRL);
-            input.bind(GameKeys.ADD_WATER, Keys.W, ModifierKeys.CTRL);
             input.bind(GameKeys.PAUSE_SUN, Keys.P, ModifierKeys.CTRL);
             input.bind(GameKeys.TOGGLE_FULLSCREEN, Keys.F, ModifierKeys.CTRL);
-
-            MenuState menu = new MenuState(gameManager, this, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
-            gameManager.pushState(menu);
-            if (NETWORKED) gameManager.pushState(new SignInState(gameManager, this, true));
-
-            base.Initialize();
+            input.bind(GameKeys.BURN_BABY_BURN, Keys.F, ModifierKeys.NONE);
+            input.bind(GameKeys.BOOM_BOOM, Keys.B, ModifierKeys.NONE);
         }
 
         protected override void LoadContent()
@@ -107,9 +108,7 @@ namespace Drought
          * Gets the latest input state and updates the GameManager and NetworkManager.
          */
         protected override void Update(GameTime gameTime)
-        {
-            //Console.WriteLine("Update Called");
-
+        {   
             DeviceInput.getInput().poll();
 
             checkFullscreen();
@@ -122,23 +121,23 @@ namespace Drought
             base.Update(gameTime);
         }
 
-        private void checkFullscreen() {
-            if (!fullscreening && DeviceInput.getInput().isKeyPressed(GameKeys.TOGGLE_FULLSCREEN)) {
-                fullscreening = true;
-                if (graphics.IsFullScreen) {
+        private void checkFullscreen()
+        {
+            if (DeviceInput.getInput().wasKeyJustPressed(GameKeys.TOGGLE_FULLSCREEN))
+            {
+                if (graphics.IsFullScreen)
+                {
                     graphics.PreferredBackBufferWidth = 800;
                     graphics.PreferredBackBufferHeight = 600;
                     graphics.IsFullScreen = false;
                 }
-                else {
+                else
+                {
                     graphics.PreferredBackBufferWidth = graphics.GraphicsDevice.DisplayMode.Width;
                     graphics.PreferredBackBufferHeight = graphics.GraphicsDevice.DisplayMode.Height;
                     graphics.IsFullScreen = true;
                 }
                 graphics.ApplyChanges();
-            }
-            else if (fullscreening && !DeviceInput.getInput().isKeyPressed(GameKeys.TOGGLE_FULLSCREEN)) {
-                fullscreening = false;
             }
         }
 
@@ -147,10 +146,9 @@ namespace Drought
          */
         protected override void Draw(GameTime gameTime)
         {
-            //Console.WriteLine("Render Called");
             graphics.GraphicsDevice.Clear(Color.Black);
             
-            gameManager.render(graphics.GraphicsDevice, spriteBatch);
+            gameManager.render(gameTime, graphics.GraphicsDevice, spriteBatch);
 
             base.Draw(gameTime);
         }

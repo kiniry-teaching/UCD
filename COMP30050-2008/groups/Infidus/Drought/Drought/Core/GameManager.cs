@@ -90,9 +90,9 @@ namespace Drought
          * 
          * @param graphics The graphics device to render to.
          */
-        public void render(GraphicsDevice graphics, SpriteBatch spriteBatch)
+        public void render(GameTime gameTime, GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
-            stateStack[stateStack.Count - 1].render(graphics, spriteBatch);
+            stateStack[stateStack.Count - 1].render(gameTime, graphics, spriteBatch);
         }
 
         /**
