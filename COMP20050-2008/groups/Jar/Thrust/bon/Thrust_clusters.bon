@@ -46,26 +46,26 @@ cluster_chart INPUT
 end
 
 cluster_chart GAME_INPUT
-  class DISPLAY_HIGH_SCORES
+  class DISPLAY_HIGH_SCORES_INPUT
     description "Display the high score table."
-  class TOGGLE_MUSIC_OR_SOUND_EFFECTS
+  class TOGGLE_MUSIC_OR_SOUND_EFFECTS_INPUT
     description "Toggle between hearing music or sound effects."
-  class START_GAME
+  class START_GAME_INPUT
     description "Start a game."
-  class STOP_GAME
+  class STOP_GAME_INPUT
     description "Stop a game."
 end
 
 cluster_chart PLAYER_INPUT
-  class FIRE_GUN
+  class FIRE_GUN_INPUT
     description "Fire a bullet from the spaceship's gun."
-  class TURN_LEFT
+  class TURN_LEFT_INPUT
     description "Rotate the spaceship counterclockwise."
-  class TURN_RIGHT
+  class TURN_RIGHT_INPUT
     description "Rotate the spaceship clockwise."
-  class USE_ENGINE
+  class USE_ENGINE_INPUT
     description "Use the spaceship's engine to apply thrust forward."
-  class USE_SHIELD
+  class USE_SHIELD_INPUT
     description "Use the spaceships shield to protect itself or to gather fuel."
 end
 

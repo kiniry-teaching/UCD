@@ -1,5 +1,5 @@
 package thrust.input;
-
+import java.util.logging.*;
 /**
  * Processes and delegates each keyboard input received.
  *
@@ -7,6 +7,8 @@ package thrust.input;
  * @version 2 April 2008
  */
 public class InputHandler {
+  /** Logger for input package. */
+  protected static final Logger LOG = Logger.getLogger("Input");
   /** Character h to display high scores. */
   public static final char HIGH_SCORES = 'h';
   /** Character m switch between music and SFX. */
@@ -26,6 +28,7 @@ public class InputHandler {
   /** Character [space] to turn on shield/pickup. */
   public static final char USE_SHIELD = '\u00A0';
 
+
   /*
    * @ ensures \result !=null;
    */
@@ -35,8 +38,8 @@ public class InputHandler {
   public final/* @ pure @ */char[] legalInputs() {
     final char[] inputs =
     {HIGH_SCORES, TOGGLE_SOUND, START_GAME, STOP_GAME,
-      FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
-      USE_SHIELD };
+     FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+     USE_SHIELD };
     // @ assert inputs != null;
     return inputs;
   }
@@ -78,28 +81,28 @@ public class InputHandler {
     // @ assert true;
     switch (the_key_input) {
       case HIGH_SCORES:
-        System.out.println("Display high Scores");
+        LOG.warning("Display high Scores");
         break;
       case TOGGLE_SOUND:
-        System.out.println("Toggle the sound");
+        LOG.warning("Toggle Sound");
         break;
       case START_GAME:
-        System.out.println("Start the game");
+        LOG.warning("Start the game");
         break;
       case STOP_GAME:
-        System.out.println("Stop the game");
+        LOG.warning("Stop the game");
         break;
       case FIRE_GUN:
-        System.out.println("Fire the Gun");
+        LOG.warning("Fire the Gun");
         break;
       case TURN_LEFT:
-        System.out.println("Turn left");
+        LOG.warning("Turn left");
         break;
       case TURN_RIGHT:
-        System.out.println("Turn right");
+        LOG.warning("Turn right");
         break;
       case USE_ENGINE:
-        System.out.println("Engage thrust");
+        LOG.warning("Engage thrust");
         break;
       default:
         break;

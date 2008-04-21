@@ -45,8 +45,9 @@ public abstract class AbstractGameState {
   /**
    * @return How much fuel do you contain?
    * @idea The current fuel of the spaceship.
-   * @note Note that the {@link Spaceship} class should be the
-   * actual owner of this data; this is just a convenience method.
+   * @note Note that the {@link thrust.entities.in_game.Spaceship}
+   * class should be the actual owner of this data; this is just
+   * a convenience method.
    */
   //@ ensures 0 <= \result;
   public abstract /*@ pure @*/ int current_fuel();
