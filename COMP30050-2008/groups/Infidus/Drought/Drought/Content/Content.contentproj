@@ -293,21 +293,17 @@
       <Name>truck</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Models\Truck\newtruck.x">
-      <Name>newtruck</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="EffectFiles\particles.fx">
       <Name>particles</Name>
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </Compile>
-    <None Include="Models\Truck\newtruck.fbx">
+    <Compile Include="Models\Truck\newtruck.fbx">
       <Name>newtruck</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="EffectFiles\infobox.fx">
       <Name>infobox</Name>
       <Importer>EffectImporter</Importer>

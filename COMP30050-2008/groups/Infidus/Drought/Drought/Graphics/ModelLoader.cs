@@ -45,7 +45,7 @@ namespace Drought.Graphics
 
             switch (model) {
                 case modelType.XYZ: modelString = "Models/xyz"; modelScale = 1.0f; break;
-                case modelType.Truck: modelString = "Models/Truck/newtruck"; modelScale = 0.5f; break;
+                case modelType.Truck: modelString = "Models/Truck/newtruck"; modelScale = 0.005f; break;
                 case modelType.Car: modelString = "Models/Car/car"; modelScale = 0.75f; break;
                 case modelType.Tank: modelString = "Models/Tank/tank"; modelScale = 0.005f; break;
                 case modelType.Skybox: modelString = "Models/Skysphere/skysphere2"; modelScale = 10.0f; break;

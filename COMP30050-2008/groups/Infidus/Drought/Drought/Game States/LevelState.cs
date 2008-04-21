@@ -385,7 +385,31 @@ namespace Drought.GameStates
             }
 
             /* Spawning Units */
-            if (input.wasKeyJustReleased(GameKeys.UNIT_SPAWN))
+            if (input.wasKeyJustReleased(GameKeys.UNIT_SPAWN_GUARD))
+            {
+                Vector3 mousePoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
+                if (mousePoint != Terrain.BAD_POSITION)
+                {
+                    List<Vector3> dummyPath = new List<Vector3>();
+                    dummyPath.Add(mousePoint);
+                    MovableEntity newEntity = new Guard(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0, projectileManager);
+                    entities.Add(newEntity);
+                    soundManager.playSound(SoundHandle.Truck, newEntity);
+                }
+            }
+            else if (input.wasKeyJustReleased(GameKeys.UNIT_SPAWN_SCOUT))
+            {
+                Vector3 mousePoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
+                if (mousePoint != Terrain.BAD_POSITION)
+                {
+                    List<Vector3> dummyPath = new List<Vector3>();
+                    dummyPath.Add(mousePoint);
+                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
+                    entities.Add(newEntity);
+                    soundManager.playSound(SoundHandle.Truck, newEntity);
+                }
+            }
+            else if (input.wasKeyJustReleased(GameKeys.UNIT_SPAWN_TANKER))
             {
                 Vector3 mousePoint = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
                 if (mousePoint != Terrain.BAD_POSITION)

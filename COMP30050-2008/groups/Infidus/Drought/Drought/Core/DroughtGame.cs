@@ -82,7 +82,9 @@ namespace Drought
             
             input.bind(GameKeys.UNIT_SELECT, MouseButtons.LEFT, ModifierKeys.NONE);
             input.bind(GameKeys.UNIT_COMMAND, MouseButtons.RIGHT, ModifierKeys.NONE);
-            input.bind(GameKeys.UNIT_SPAWN, MouseButtons.LEFT, ModifierKeys.SHIFT);
+            input.bind(GameKeys.UNIT_SPAWN_TANKER, MouseButtons.LEFT, ModifierKeys.SHIFT);
+            input.bind(GameKeys.UNIT_SPAWN_SCOUT, MouseButtons.LEFT, ModifierKeys.CTRL);
+            input.bind(GameKeys.UNIT_SPAWN_GUARD, MouseButtons.LEFT, ModifierKeys.ALT);
             input.bind(GameKeys.UNIT_DELETE, MouseButtons.RIGHT, ModifierKeys.SHIFT);
             input.bind(GameKeys.UNIT_SELECT_ALL, Keys.E, ModifierKeys.NONE);
             
