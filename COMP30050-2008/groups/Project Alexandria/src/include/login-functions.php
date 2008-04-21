@@ -7,6 +7,7 @@
 	/*	all the functions necessary for loging a user in 	*/
 	/*	and ensuring that all their details are correct		*/
 	/********************************************************/
+include "include/userfunctions.php";
 
 function login($username, $password, $remember){
 	/********************************************************************/
@@ -46,9 +47,11 @@ function login($username, $password, $remember){
 					/************************************************/
 					/*	this sets a cookie if the user has selected	*/
 					/*	the "remember me" option on the login form	*/
+					/*	the cookie will expire in 30 days unless 	*/
+					/*	renewed										*/
 					/************************************************/
-					setcookie("cookname", $_SESSION['username'], time()+60*60*24*100, "/");
-					setcookie("cookpass", $_SESSION['password'], time()+60*60*24*100, "/");
+					setcookie("cookname", $_SESSION['username'], time()+60*60*24*30, "/");
+					setcookie("cookpass", $_SESSION['password'], time()+60*60*24*30, "/");
 				}
 		
 			echo($username." Logged in Sucessfully.<br />");
@@ -69,11 +72,23 @@ function checkMatch($username, $password){
 	/*	have returned true, if they have checkMatch()   */
 	/*	returns true									*/
 	/****************************************************/
+	
+	
+	
 if (checkName($username)==True)
 {
+	
 	 if(checkPassword($username, $password)==True)
 		{
-		return True;
+			if(isBanned($username)==True)
+			{
+			echo("<b>The user ".$username." is Banned!</b><br />");
+			return False;
+			}
+			else
+			{
+			return True;
+			}
 		}
 	else
 		{

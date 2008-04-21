@@ -4,19 +4,20 @@ session_start();
 ?>
 <div>
 <?php
-
+/*	Project Alexandria 2008	*/
+	
+	/*****************************************************/
+	/*	userprofile.php									*/
+	/*	This is the profile page of a user				*/
+	/*	This page can be viewed in 3 different ways		*/
+	/*	1. as viewed by any user						*/
+	/*	2. as viewed by any user viewing their own page	*/
+	/*	3. as viewed by an admin						*/
+	/****************************************************/
 include("include/header.php"); //page header
-/*
-*	profile.php
-*	This is the profile page of a user
-*	This page can be viewed in 3 different ways
-*	1. as viewed by any user
-*	2. as viewed by any user viewing their own page
-*	3. as viewed by an admin		
-*/
 include("include/userfunctions.php");
 
-$username = $_SESSION['username']; //Gets the username from the session
+	$username = $_SESSION['username']; //Gets the username from the session
 
 
 	include("connection.php"); //Connects to the database

@@ -5,33 +5,39 @@
 *	
 */
 include "include/userfunctions.php";
-if(isAdmin=="true")//this loop is to prevent any non-admins from acessing the admin functions
+if(isAdmin==True)//this loop is to prevent any non-admins from acessing the admin functions
 {
-	function updateUser($username, $email, $userlevel)	{
-	/*function allow the admin to change certain details of a members account*/	
-	include("connection.php"); //Connects to database
-
-	mysql_query("UPDATE users 
-		SET e-mail = '$email',
-		userlevel = '$userlevel',
+	function updateUser($username, $email, $userlevel)	
+		{
+		/*function allow the admin to change certain details of a members account*/	
+		include("connection.php"); //Connects to database
 	
-		WHERE username = '$username'");
-
-	mysql_close($con);
-	}
-
-if(isAdmin=="true")//this loop is to prevent any non-admins from acessing the admin functions
-{
-	function banUser($username){
-	/*this function allows an admin to ban a user*/
-	include("connection.php"); //Connects to database
-
-	mysql_query("UPDATE users 
-		userlevel = '0',
+		mysql_query("UPDATE users 
+			SET e-mail = '$email',
+			userlevel = '$userlevel',
+		
+			WHERE username = '$username'");
 	
-		WHERE username = '$username'");
+		mysql_close($con);
+		}
 
-	mysql_close($con);
+	function editUserLevel($username, $userlevel)
+	{
+		include("connection.php"); //Connects to database
+		$sql="INSERT INTO users (userlevel,)
+		VALUES ('$userlevel') WHERE username=$username";
+					if (!mysql_query($sql,$con))
+				{
+					die('Error: ' . mysql_error());
+				}
+		if($userlevel==0)
+		{echo($username." has been made a General User!");}
+		if($userlevel==9)
+		{echo($username." has been made an Administrator!");}
+		if($userlevel==8)
+		{echo($username." has been made a Librarian!");}
+		if(userlevel==0)
+		{echo($username." has been banned!");}				
 	}
 
 
