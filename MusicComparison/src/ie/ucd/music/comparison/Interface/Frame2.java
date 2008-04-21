@@ -2,17 +2,18 @@ package ie.ucd.music.comparison.Interface;
 
 
 
-    import java.awt.BorderLayout;
+    import java.awt.Dimension;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    import javax.swing.JFrame;
-    import javax.swing.JButton;
-    import java.awt.*;
-    import com.borland.jbcl.layout.XYLayout;
-    import com.borland.jbcl.layout.*;
-    import javax.swing.JProgressBar;
-    import java.awt.event.ActionEvent;
-    import java.awt.event.ActionListener;
-    import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+
+import com.borland.jbcl.layout.XYConstraints;
+import com.borland.jbcl.layout.XYLayout;
 
     /**
      * <p>Title: </p>

@@ -3,12 +3,14 @@ public  class MusicItem {
     String artist;
     String song;
     int bitRate;
+    String fileName;
 
-       public void setMusicItem (String Aname, String Ttitle, int Brate) {
+       public void setMusicItem (String Aname, String Ttitle, int Brate, String fname) {
 
         artist = Aname;
         song = Ttitle;
         bitRate = Brate; 
+        fileName = fname;
 
     }
     public String getArtist () {
@@ -23,4 +25,9 @@ public  class MusicItem {
         return bitRate;
 
     }
+
+public String getfileName () {
+    return fileName;
+
+}
 }

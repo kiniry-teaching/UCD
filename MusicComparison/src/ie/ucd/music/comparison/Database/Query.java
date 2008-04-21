@@ -2,6 +2,7 @@ package ie.ucd.music.comparison.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -44,7 +45,7 @@ public class Query {
         }
 
         catch (Exception e) {
-
+            returnedName = "";
             // System.err.println("Got an Exception");
             // System.err.println(e.getMessage());
 
@@ -54,7 +55,6 @@ public class Query {
 
     /**
      * Connects to the database and runs a query that returns the bit rate.
-     * 
      * @param lib =
      *                the table name
      * @param ident =
@@ -90,26 +90,53 @@ public class Query {
             }
 
             conn.close();
-            returnedValue = 0;
 
             // System.out.println("CONNECTION TERMINATED");
 
         }
 
         catch (Exception e) {
-
+            returnedValue = 0;
             // System.err.println("Got an Exception");
             // System.err.println(e.getMessage());
 
         }
         return returnedValue;
-    }
-
-    public static void main(String[] args) {
+    } 
+    
+    public String getInsertValues(String art, track, brate) {
+        
+      try {
+        
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        String url = "jdbc:mysql://localhost:3306/Music";
+        Connection conn = DriverManager.getConnection(url, "root", "");
+          PreparedStatement mystmt = conn.prepareStatement("INSERT INTO Audio_Files (Artist_Name,Track_Title,Bit_Rate) VALUES(+art+,track +,+brate)");
+          mystmt.setString(1,"");
+          mystmt.setString(2,"");
+          mystmt.setInt(3, 128);
+          
+          mystmt.executeUpdate();
+    
+        System.out.println("1 row affected");
+        
+          conn.close();
+          }
+      catch (Exception e)
+      {
+          e.printStackTrace();
+      }
+    }  
+/**
+ * 
+ * @param args
+ */
+    public static void findDuplicates(MusicItem[] higher, MusicItem[] lower) {
         Query qart = new Query();
         MusicItem track1 = new MusicItem();
         MusicItem track2 = new MusicItem();
         CompareString compS = new CompareString();
+        int counter = 0;
         for (int i = 1; i <= 4; i++) {
             String artist1 = qart.getInfo("Artist_Name", "Audio_Files", i);
             String song1 = qart.getInfo("Track_Title", "Audio_Files", i);
@@ -128,22 +155,23 @@ public class Query {
                     if ((compS.compareTwoStrings(clean1, clean2))
                             && (compS.compareTwoStrings(clean2, clean1))) {
                         if (bitrate2 > bitrate1) {
-                            System.out
-                                    .println("These two tracks were found similar and(higher): "
-                                            + artist2 + " " + song2);
-                            System.out.println("(lower)" + artist1 + " "
-                                    + song1);
+                            higher[counter] = track2;
+                            lower[counter] = track1;
+                            counter++;
                         } else {
-                            System.out
-                                    .println("These two tracks were found similar and(higher): "
-                                            + artist1 + " " + song1);
-                            System.out.println("(lower)" + artist2 + " "
-                                    + song2);
+                            higher[counter] = track1;
+                            lower[counter] = track2;
+                            counter++;
                         }
                     }
                 }
 
             }
         }
+       System.out.print(higher[0].getArtist());
     }
+    
+        
+    
 }
+
