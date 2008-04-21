@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace Drought.Graphics.Particles
@@ -9,20 +7,20 @@ namespace Drought.Graphics.Particles
 	{
         private List<Projectile> projectiles = new List<Projectile>();
 
-        private ParticleSystem explosionParticles;
-        private ParticleSystem explosionSmokeParticles;
-        private ParticleSystem projectileTrailParticles;
+        private ExplosionParticleSystem explosionParticles;
+        private ExplosionSmokeParticleSystem explosionSmokeParticles;
+        private ProjectileTrailParticleSystem projectileTrailParticles;
 
-        public ProjectileManager(ParticleSystem explosion, ParticleSystem explosionSmoke, ParticleSystem projectileTrail)
+        public ProjectileManager(ExplosionParticleSystem explosion, ExplosionSmokeParticleSystem explosionSmoke, ProjectileTrailParticleSystem projectileTrail)
         {
             explosionParticles = explosion;
             explosionSmokeParticles = explosionSmoke;
             projectileTrailParticles = projectileTrail;
         }
 
-        public void addProjectile(Vector3 pos)
+        public void addProjectile(Vector3 pos, Vector3 tar)
         {
-            projectiles.Add(new Projectile(explosionParticles, explosionSmokeParticles, projectileTrailParticles, pos));
+            projectiles.Add(new Projectile(explosionParticles, explosionSmokeParticles, projectileTrailParticles, pos, tar));
         }
 
         public void update(GameTime gameTime)

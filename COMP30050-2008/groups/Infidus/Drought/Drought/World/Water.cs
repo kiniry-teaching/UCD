@@ -102,7 +102,7 @@ namespace Drought.World
             vertices[vertices.Length - 1] = vertices[1];
         }
 
-        private int lastTime = 0;
+        //private int lastTime = 0;
         public void update(GameTime gameTime)
         {
             //automatic water drainage

@@ -159,7 +159,7 @@ namespace Drought.Entity
                     pathNodes.Reverse();
                     pathNodes.Add(level.getPositionAt(endX, endY));
                     pathFound = true;
-                    return new Path(pathNodes, level);
+                    return new Path(pathNodes);
                 }
 
                 //generate successors for n
@@ -215,7 +215,7 @@ namespace Drought.Entity
             List<Vector3> noPath = new List<Vector3>();
             noPath.Add(level.getPositionAt(startX, startY));
             pathFound = false;
-            return new Path(noPath, level);
+            return new Path(noPath);
         }
 
         /**

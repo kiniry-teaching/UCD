@@ -21,7 +21,7 @@ namespace Drought.Entity
 
         public static readonly float ATTACK_RADIUS = 25.0f;
 
-        public static readonly int ATTACK_WAIT_TIME = 120;
+        public static readonly int ATTACK_WAIT_TIME = 320;
 
         private int timeToWait;
         
@@ -71,7 +71,7 @@ namespace Drought.Entity
                     //attack!
                     if (attackTarget != null)
                     {
-                        projectiles.addProjectile(getPosition());
+                        projectiles.addProjectile(getPosition(), attackTarget.getPosition());
                         attackTarget.hurt(1);
                         timeToWait = ATTACK_WAIT_TIME;
                         if (attackTarget.isDead()) attackTarget = null;

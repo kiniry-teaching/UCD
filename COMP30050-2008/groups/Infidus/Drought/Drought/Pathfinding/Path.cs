@@ -15,11 +15,6 @@ namespace Drought.Entity
         private List<float> nodeDist;
 
         /** The total length of the path. */
-        private Vector3 normal;
-
-        private LevelInfo levelInfo;
-
-        /** The total length of the path. */
         private float length;
 
         /** The amount of distance along the path covered so far. */
@@ -32,10 +27,9 @@ namespace Drought.Entity
         private int currNode;
 
 
-        public Path(List<Vector3> nodes, LevelInfo level)
+        public Path(List<Vector3> nodes)
         {
             this.nodes = nodes;
-            this.levelInfo = level;
             nodeDist = new List<float>();
 
             //can't have an empty list of nodes
@@ -52,7 +46,6 @@ namespace Drought.Entity
         {
             currNode = 0;
             position = nodes[0];
-            normal = levelInfo.getNormal((int)position.X, (int)position.Y);
             length = 0.0f;
 
             for (int i = 0; i < nodes.Count - 1; i++)
@@ -81,16 +74,6 @@ namespace Drought.Entity
         public Vector3 getPosition()
         {
             return position;
-        }
-
-        /** 
-         * Gets the normal at the current position along the path.
-         * 
-         * @return The normal at the current position.
-         */
-        public Vector3 getNormal()
-        {
-            return normal;
         }
 
         /**
@@ -129,10 +112,6 @@ namespace Drought.Entity
             Vector3 next = nodes[currNode + 1];
             float amt = (coveredDist - nodeDist[currNode]) / Vector3.Distance(curr, next);
             position = Vector3.Lerp(curr, next, amt);
-            //Vector3 currNorm = normalMap.getNormal((int)curr.X, (int)curr.Y);
-            //Vector3 nextNorm = normalMap.getNormal((int)next.X, (int)next.Y);
-            //normal = Vector3.Lerp(currNorm, nextNorm, amt);
-            normal = levelInfo.getNormal(position.X, position.Y);
             return true;
         }
 

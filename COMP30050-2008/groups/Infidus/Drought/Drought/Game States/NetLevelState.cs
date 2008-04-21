@@ -105,34 +105,34 @@ namespace Drought.GameStates
             List<Vector3> nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(levelInfo.getPositionAt(i, i));
-            localEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            localEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(levelInfo.getPositionAt(i, 200));
-            localEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            localEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i < 200; i++)
                 nodes.Add(levelInfo.getPositionAt(200, i));
-            localEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            localEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
 
             if (!hosting) uid = 0;
             remoteEntities = new List<MovableEntity>();
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(levelInfo.getPositionAt(i, i));
-            remoteEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            remoteEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(levelInfo.getPositionAt(i, 200));
-            remoteEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            remoteEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
 
             nodes = new List<Vector3>();
             for (int i = 100; i > 0; i--)
                 nodes.Add(levelInfo.getPositionAt(200, i));
-            remoteEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            remoteEntities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
         }
 
         public override void loadContent()
@@ -315,8 +315,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    //MovableEntity newEntity = new Guard(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0, projectileManager);
-                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
+                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath), 0);
                     localEntities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -328,7 +327,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
+                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath), 0);
                     localEntities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -340,7 +339,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new Tanker(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
+                    MovableEntity newEntity = new Tanker(this, levelInfo, modelLoader, new Path(dummyPath), 0);
                     localEntities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -396,11 +395,11 @@ namespace Drought.GameStates
                         b.setPosition(bNewPos);
                         List<Vector3> aPos = new List<Vector3>();
                         aPos.Add(a.getPosition());
-                        a.setPath(new Path(aPos, levelInfo));
+                        a.setPath(new Path(aPos));
                         a.hurt(1);
                         List<Vector3> bPos = new List<Vector3>();
                         bPos.Add(b.getPosition());
-                        b.setPath(new Path(bPos, levelInfo));
+                        b.setPath(new Path(bPos));
                         b.hurt(1);
                     }
                 }

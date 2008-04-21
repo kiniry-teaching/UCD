@@ -10,6 +10,8 @@
 #region Using Statements
 using System;
 using Microsoft.Xna.Framework;
+using Drought.Entity;
+using System.Collections.Generic;
 #endregion
 
 namespace Drought.Graphics.Particles
@@ -27,11 +29,11 @@ namespace Drought.Graphics.Particles
 
         const float trailParticlesPerSecond = 200;
         const int numExplosionParticles = 30;
-        const int numExplosionSmokeParticles = 50;
+        const int numExplosionSmokeParticles = 0;
         const float projectileLifespan = 1.5f;
         const float sidewaysVelocityRange = 60;
         const float verticalVelocityRange = 40;
-        const float gravity = 15;
+        //const float gravity = 15;
 
         #endregion
 
@@ -42,10 +44,8 @@ namespace Drought.Graphics.Particles
         ParticleEmitter trailEmitter;
 
         Vector3 position;
-        Vector3 velocity;
-        float age;
-
-        static Random random = new Random();
+        Vector3 target;
+        Path myPath;
 
         #endregion
 
@@ -53,17 +53,31 @@ namespace Drought.Graphics.Particles
         /// <summary>
         /// Constructs a new projectile.
         /// </summary>
-        public Projectile(ParticleSystem explosionParticles, ParticleSystem explosionSmokeParticles, ParticleSystem projectileTrailParticles, Vector3 aPosition)
+        public Projectile(ParticleSystem explosionParticles, ParticleSystem explosionSmokeParticles, ParticleSystem projectileTrailParticles, Vector3 aPosition, Vector3 aTarget)
         {
             this.explosionParticles = explosionParticles;
             this.explosionSmokeParticles = explosionSmokeParticles;
 
             // Start at the origin, firing in a random (but roughly upward) direction.
             position = aPosition;
+            target = aTarget;
 
-            velocity.X = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
-            velocity.Y = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
-            velocity.Z = (float)(random.NextDouble() + 0.5) * verticalVelocityRange;
+            //velocity.X = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
+            //velocity.Y = (float)(random.NextDouble() - 0.5) * sidewaysVelocityRange;
+            //velocity.Z = (float)(random.NextDouble() + 0.5) * verticalVelocityRange;
+
+            double step = Math.PI / 60;
+            //Vector3 mid = (aTarget + aPosition) / 2;
+            float radius = Math.Abs(Vector3.Distance(aTarget, aPosition) / 2);
+            List<Vector3> path = new List<Vector3>();
+            for (int i = 0; i <= 60; i++)
+            {
+                float thisX = MathHelper.Lerp(aPosition.X, aTarget.X, ((float)i) / 60);
+                float thisY = MathHelper.Lerp(aPosition.Y, aTarget.Y, ((float)i) / 60);
+                float thisZ = MathHelper.Lerp(aPosition.Z, aTarget.Z, ((float)i) / 60) + radius * (float)Math.Cos(step*(i - 30));
+                path.Add(new Vector3(thisX, thisY, thisZ));
+            }
+            myPath = new Path(path);
 
             // Use the particle emitter helper to output our trail particles.
             trailEmitter = new ParticleEmitter(projectileTrailParticles, trailParticlesPerSecond, position);
@@ -77,10 +91,8 @@ namespace Drought.Graphics.Particles
         {
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Simple projectile physics.
-            position += velocity * elapsedTime;
-            velocity.Y -= elapsedTime * gravity;
-            age += elapsedTime;
+            myPath.addDistance(1);
+            position = myPath.getPosition();
 
             // Update the particle emitter, which will create our particle trail.
             trailEmitter.Update(gameTime, position);
@@ -88,13 +100,13 @@ namespace Drought.Graphics.Particles
             // If enough time has passed, explode! Note how we pass our velocity
             // in to the AddParticle method: this lets the explosion be influenced
             // by the speed and direction of the projectile which created it.
-            if (age > projectileLifespan)
+            if (myPath.isFinished())
             {
                 for (int i = 0; i < numExplosionParticles; i++)
-                    explosionParticles.AddParticle(position, velocity);
+                    explosionParticles.AddParticle(position, new Vector3());
 
                 for (int i = 0; i < numExplosionSmokeParticles; i++)
-                    explosionSmokeParticles.AddParticle(position, velocity);
+                    explosionSmokeParticles.AddParticle(position, new Vector3());
 
                 return false;
             }

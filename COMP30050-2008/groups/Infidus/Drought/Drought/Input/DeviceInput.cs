@@ -10,7 +10,7 @@ namespace Drought.Input
                                 CAM_FORWARD, CAM_BACK, CAM_LEFT, CAM_RIGHT, CAM_ASCEND, CAM_DESCEND, CAM_ZOOM_IN, CAM_ZOOM_OUT,
                                 CAM_ROTATE_UP, CAM_ROTATE_DOWN, CAM_ROTATE_LEFT, CAM_ROTATE_RIGHT,
                                 UNIT_SELECT, UNIT_COMMAND, UNIT_SPAWN_TANKER, UNIT_SPAWN_GUARD, UNIT_SPAWN_SCOUT, UNIT_DELETE, UNIT_SELECT_ALL,
-                                RESET, TOGGLE_FULLSCREEN, PAUSE_SUN, BURN_BABY_BURN, BOOM_BOOM };
+                                RESET, TOGGLE_FULLSCREEN, PAUSE_SUN, BURN_BABY_BURN };
 
     /** Keys that can be used as modifier keys */
     public enum ModifierKeys : int { NONE, CTRL, ALT, SHIFT };

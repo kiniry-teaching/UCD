@@ -181,9 +181,7 @@ VertexShaderOutput VertexShader(VertexShaderInput input)
     float normalizedAge = saturate(age / Duration);
 
     // Compute the particle position, size, color, and rotation.
-    output.Position = ComputeParticlePosition(input.Position, input.Velocity,
-                                              age, normalizedAge);
-    
+    output.Position = ComputeParticlePosition(input.Position, input.Velocity, age, normalizedAge);
     output.Size = ComputeParticleSize(output.Position, input.Random.y, normalizedAge);
     output.Color = ComputeParticleColor(output.Position, input.Random.z, normalizedAge);
     output.Rotation = ComputeParticleRotation(input.Random.w, age);

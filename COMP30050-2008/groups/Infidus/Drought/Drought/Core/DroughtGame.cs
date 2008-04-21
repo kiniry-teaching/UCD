@@ -92,7 +92,6 @@ namespace Drought
             input.bind(GameKeys.PAUSE_SUN, Keys.P, ModifierKeys.CTRL);
             input.bind(GameKeys.TOGGLE_FULLSCREEN, Keys.F, ModifierKeys.CTRL);
             input.bind(GameKeys.BURN_BABY_BURN, Keys.F, ModifierKeys.NONE);
-            input.bind(GameKeys.BOOM_BOOM, Keys.B, ModifierKeys.NONE);
         }
 
         protected override void LoadContent()

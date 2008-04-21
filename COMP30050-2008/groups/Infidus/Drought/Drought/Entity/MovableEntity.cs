@@ -88,7 +88,7 @@ namespace Drought.Entity
             hasMoved = true;
             waiting = 0;
             heading = new Vector3((float)Math.Cos(uid), (float)Math.Sin(uid), 0);
-            normal = path.getNormal();
+            normal = levelInfo.getNormal(position.X, position.Y);
             orientation = Matrix.Identity;
             setOrientation();
 
@@ -111,7 +111,7 @@ namespace Drought.Entity
                 prevNormal.X = normal.X;
                 prevNormal.Y = normal.Y;
                 prevNormal.Z = normal.Z;
-                normal = path.getNormal();
+                normal = levelInfo.getNormal(position.X, position.Y);
                 normal.Normalize();
 
                 heading = position - prevPosition;

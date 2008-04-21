@@ -16,11 +16,11 @@ namespace Drought.GameStates
     class LevelState : GameState
     {
         /* Temp */
-        ParticleSystem explosionParticles;
-        ParticleSystem explosionSmokeParticles;
-        ParticleSystem projectileTrailParticles;
-        ParticleSystem smokePlumeParticles;
-        ParticleSystem fireParticles;
+        ExplosionParticleSystem explosionParticles;
+        ExplosionSmokeParticleSystem explosionSmokeParticles;
+        ProjectileTrailParticleSystem projectileTrailParticles;
+        SmokePlumeParticleSystem smokePlumeParticles;
+        FireParticleSystem fireParticles;
         ProjectileManager projectileManager;
 
         private DeviceInput input;
@@ -128,55 +128,55 @@ namespace Drought.GameStates
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw + i, hh));
             nodes.Reverse();
-            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw - i, hh));
             nodes.Reverse();
-            entities.Add(new Tanker(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            entities.Add(new Tanker(this, levelInfo, modelLoader, new Path(nodes), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw, hh + i));
             nodes.Reverse();
-            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw, hh - i));
             nodes.Reverse();
-            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw + i, hh + i));
             nodes.Reverse();
-            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++));
+            entities.Add(new Scout(this, levelInfo, modelLoader, new Path(nodes), uid++));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw - i, hh - i));
             nodes.Reverse();
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw + i, hh - i));
             nodes.Reverse();
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
             nodes = new List<Vector3>();
             for (int i = 0; i < 100; i++)
                 nodes.Add(levelInfo.getPositionAt(hw - i, hh + i));
             nodes.Reverse();
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
 
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(1, 1));
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, 1));
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(1, levelInfo.getHeight() - 1));
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, levelInfo.getHeight() - 1));
-            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes, levelInfo), uid++, projectileManager));
+            entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
 
         }
 
@@ -261,11 +261,6 @@ namespace Drought.GameStates
                     fireParticles.AddParticle(randomFirePosition(), Vector3.Zero);
                 }
                 smokePlumeParticles.AddParticle(randomFirePosition(), Vector3.Zero);
-            }
-            if (input.wasKeyJustPressed(GameKeys.BOOM_BOOM))
-            {
-                Vector3 terrainSurface = terrain.projectToTerrain(input.getMouseX(), input.getMouseY());
-                projectileManager.addProjectile(terrainSurface);
             }
         }
 
@@ -392,7 +387,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new Guard(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0, projectileManager);
+                    MovableEntity newEntity = new Guard(this, levelInfo, modelLoader, new Path(dummyPath), 0, projectileManager);
                     entities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -404,7 +399,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
+                    MovableEntity newEntity = new Scout(this, levelInfo, modelLoader, new Path(dummyPath), 0);
                     entities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
@@ -416,7 +411,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new Tanker(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
+                    MovableEntity newEntity = new Tanker(this, levelInfo, modelLoader, new Path(dummyPath), 0);
                     entities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }
