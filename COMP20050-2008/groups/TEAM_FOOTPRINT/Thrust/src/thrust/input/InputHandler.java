@@ -61,7 +61,7 @@ public class InputHandler {
     @*/
   //@requires true
   /**loop through the array and check if char entered is the same. */
-  public /*@ pure @*/ boolean legalInput(char the_legal_input) {
+  public /*@ pure @*/ boolean legalInput(final char the_legal_input) {
     //loop through the legal_inputs array
     for (int i = 0; i <= legalInputs().length; i++)
     {
@@ -77,9 +77,9 @@ public class InputHandler {
    * Process keyboard input character 'k'.
    */
   //@ requires legal_input(k);
-  public void process(char the_input) {
+  public void process(final char the_input) {
      //@ assert false;
-    if (legalInput(the_input) == true) {
+    if (legalInput(the_input)) {
       if (the_input == DISPLAY_SCORES) {
       //display high scores
       } else if (the_input == TOGGLE_MUSIC) {
