@@ -16,8 +16,8 @@ Global Settings
     Header File = Game Sounds.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 3883737264;
-    Last Modified High = 29925391;
+    Last Modified Low = 2225692586;
+    Last Modified High = 29926134;
 
     Category
     {
@@ -221,7 +221,7 @@ Global Settings
 
         RPC Curve
         {
-            Name = Sound::58dab664-ea2a-4028-8aa6-5eb0c0925f73;
+            Name = Sound::1f848793-5f03-4193-8c06-28736cd9e508;
             Property = 0;
             Sound = 1;
             Line Color = 4293881351;
@@ -262,6 +262,8 @@ Wave Bank
     Xbox Bank Last Modified High = 0;
     PC Bank Last Modified Low = 1425041778;
     PC Bank Last Modified High = 29925407;
+    Header Last Modified Low = 0;
+    Header Last Modified High = 0;
     Bank Last Revised Low = 3883737264;
     Bank Last Revised High = 29925391;
 
@@ -756,8 +758,8 @@ Sound Bank
     Windows File = Win\Base Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 1428323028;
-    Bank Last Modified High = 29925407;
+    Bank Last Modified Low = 2225692586;
+    Bank Last Modified High = 29926134;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -937,8 +939,8 @@ Sound Bank
     Windows File = Win\String Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 3885768514;
-    Bank Last Modified High = 29925391;
+    Bank Last Modified Low = 2225692586;
+    Bank Last Modified High = 29926134;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1218,8 +1220,8 @@ Sound Bank
     Windows File = Win\Ball Noise Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 3885768514;
-    Bank Last Modified High = 29925391;
+    Bank Last Modified Low = 2225692586;
+    Bank Last Modified High = 29926134;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1302,8 +1304,8 @@ Sound Bank
     Windows File = Win\Drum Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 3885768514;
-    Bank Last Modified High = 29925391;
+    Bank Last Modified Low = 2225692586;
+    Bank Last Modified High = 29926134;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1583,8 +1585,8 @@ Sound Bank
     Windows File = Win\Harp Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 1315743080;
-    Bank Last Modified High = 29925395;
+    Bank Last Modified Low = 2225692586;
+    Bank Last Modified High = 29926134;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1864,8 +1866,8 @@ Sound Bank
     Windows File = Win\Synth Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 1533166778;
-    Bank Last Modified High = 29925407;
+    Bank Last Modified Low = 2225692586;
+    Bank Last Modified High = 29926134;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 

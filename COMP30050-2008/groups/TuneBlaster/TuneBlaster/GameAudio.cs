@@ -24,6 +24,8 @@ namespace TuneBlaster_
         private AudioEngine musicEngine;
         private WaveBank musicWaveBank;
         private SoundBank musicSoundBank, synthBank, stringBank, drumBank, ballBank, harpBank;
+        public AudioListener listener;
+        public AudioEmitter emitter;
 
         Cue baseCue1, baseCue2;
         Cue drumCue1, drumCue2, drumCue3, drumCue4;
@@ -31,10 +33,8 @@ namespace TuneBlaster_
         Cue harpCue1, harpCue2, harpCue3, harpCue4;
         Cue synthCue1, synthCue2, synthCue3, synthCue4;
         Cue ballCue1;
+        int cue;
         Image.value ballColour;
-
-        public AudioListener listener;
-        public AudioEmitter emitter;
 
         #endregion
 
@@ -513,6 +513,12 @@ namespace TuneBlaster_
         {
             ballColour = (Image.value)colour;
 
+            if (baseCue1.IsPlaying)
+                cue = 1;
+
+            if (baseCue2.IsPlaying)
+                cue = 2;
+
             // Base melody is modified every time balls are destroyed.
             ChangeBase();
 
@@ -522,18 +528,19 @@ namespace TuneBlaster_
                 // If the drums aren't playing
                 if (!drumCue1.IsPlaying && !drumCue2.IsPlaying && !drumCue3.IsPlaying && !drumCue4.IsPlaying)
                 {
-                    // If there's a drum cue in memory, destroy it
+                    // If there's a drum cue in memory, reset it
                     if (drumCue1 != null)
-                    {
-                        disposeDrumCues();
                         resetDrumCues();
-                    }
 
-                    // Wait until the base melody has finished.
-                    while (!baseCue1.IsStopped && !baseCue2.IsStopped)
-                    {
-                        // TO DO
-                    }
+                    if (cue == 1)
+                        // Wait until the base melody has finished.
+                        while (!baseCue1.IsStopped)
+                        {}
+
+                    else if (cue == 2)
+                        // Wait until the base melody has finished.
+                        while (!baseCue2.IsStopped)
+                        {}
 
                     // Play the drums now so that it is in sync.
                     drumCue1.Play();
@@ -550,21 +557,22 @@ namespace TuneBlaster_
                 // If the strings aren't playing
                 if (!stringCue1.IsPlaying && !stringCue2.IsPlaying && !stringCue3.IsPlaying && !stringCue4.IsPlaying)
                 {
-                    // If there's a string cue in memory, destroy it
+                    // If there's a string cue in memory, reset it
                     if (stringCue1 != null)
-                    {
-                        disposeStringCues();
                         resetStringCues();
-                    }
 
-                    // Wait until the base melody has finished
-                    while (!baseCue1.IsStopped && !baseCue2.IsStopped)
-                    {
-                        // TO DO
-                    }
+                    if (cue == 1)
+                        // Wait until the base melody has finished.
+                        while (!baseCue1.IsStopped)
+                        { }
+
+                    else if (cue == 2)
+                        // Wait until the base melody has finished.
+                        while (!baseCue2.IsStopped)
+                        { }
 
                     // Play the strings now so that it is in sync.
-                    stringCue1.Play();                                                          
+                    stringCue1.Play();                                 
                 }
 
                 // Modify the currently playing stringed instrument
@@ -578,18 +586,19 @@ namespace TuneBlaster_
                 // If the harp isn't playing
                 if (!harpCue1.IsPlaying && !harpCue2.IsPlaying && !harpCue3.IsPlaying && !harpCue4.IsPlaying)
                 {
-                    // If there's a harp cue in memory, destroy it
+                    // If there's a harp cue in memory, reset it
                     if (harpCue1 != null)
-                    {
-                        disposeHarpCues();
                         resetHarpCues();
-                    }
 
-                    // Wait until the base melody has finished.
-                    while (!baseCue1.IsStopped && !baseCue2.IsStopped)
-                    {
-                        // TO DO
-                    }
+                    if (cue == 1)
+                        // Wait until the base melody has finished.
+                        while (!baseCue1.IsStopped)
+                        { }
+
+                    else if (cue == 2)
+                        // Wait until the base melody has finished.
+                        while (!baseCue2.IsStopped)
+                        { }
 
                     // Play the harp now so that it is in sync.
                     harpCue1.Play();
@@ -608,26 +617,121 @@ namespace TuneBlaster_
                 {
                     // If there's a synth cue in memory, destroy it
                     if (synthCue1 != null)
-                    {
-                        disposeSynthCues();
                         resetSynthCues();
-                    }
 
-                    // Wait until the base melody has finished.
-                    while (!baseCue1.IsStopped && !baseCue2.IsStopped)
-                    {
-                        // TO DO
-                    }
+                    if (cue == 1)
+                        // Wait until the base melody has finished.
+                        while (!baseCue1.IsStopped)
+                        { }
+
+                    else if (cue == 2)
+                        // Wait until the base melody has finished.
+                        while (!baseCue2.IsStopped)
+                        { }
 
                     // Play the synth now so that it is in sync.
                     synthCue1.Play();
                 }
 
-                // Modify the currently playing synth
-                else
+                 // Modify the currently playing synth
+                 else
                     ChangeSynth();
             }
         }
+
+        /// <summary>
+        /// In the event of a special mode, pause all the currently playing cues.
+        /// </summary>
+        public void pauseAllCues()
+        {
+            if (drumCue1.IsPlaying)
+                drumCue1.Pause();
+            if (drumCue2.IsPlaying)
+                drumCue2.Pause();
+            if (drumCue3.IsPlaying)
+                drumCue3.Pause();
+            if (drumCue4.IsPlaying)
+                drumCue4.Pause();
+
+            if (stringCue1.IsPlaying)
+                stringCue1.Pause();
+            if (stringCue2.IsPlaying)
+                stringCue2.Pause();
+            if (stringCue3.IsPlaying)
+                stringCue3.Pause();
+            if (stringCue4.IsPlaying)
+                stringCue4.Pause();
+
+            if (harpCue1.IsPlaying)
+                harpCue1.Pause();
+            if (harpCue2.IsPlaying)
+                harpCue2.Pause();
+            if (harpCue3.IsPlaying)
+                harpCue3.Pause();
+            if (harpCue4.IsPlaying)
+                harpCue4.Pause();
+
+            if (synthCue1.IsPlaying)
+                synthCue1.Pause();
+            if (synthCue2.IsPlaying)
+                synthCue2.Pause();
+            if (synthCue3.IsPlaying)
+                synthCue3.Pause();
+            if (synthCue4.IsPlaying)
+                synthCue4.Pause();
+
+            if (baseCue1.IsPlaying)
+                baseCue1.Pause();
+            if (baseCue2.IsPlaying)
+                baseCue2.Pause();
+        }
+
+        /// <summary>
+        /// When a special mode ends, resume the cues that were paused.
+        /// </summary>
+        public void resumeAllCues()
+        {
+            if (baseCue2.IsPaused)
+                baseCue2.Resume();
+            if (baseCue1.IsPaused)
+                baseCue1.Resume();
+
+            if (synthCue4.IsPaused)
+                synthCue4.Resume();
+            if (synthCue3.IsPaused)
+                synthCue3.Resume();
+            if (synthCue2.IsPaused)
+                synthCue2.Resume();
+            if (synthCue1.IsPaused)
+                synthCue1.Resume();
+
+            if (harpCue4.IsPaused)
+                harpCue4.Resume();
+            if (harpCue3.IsPaused)
+                harpCue3.Resume();
+            if (harpCue2.IsPaused)
+                harpCue2.Resume();
+            if (harpCue1.IsPaused)
+                harpCue1.Resume();
+
+            if (stringCue4.IsPaused)
+                stringCue4.Resume();
+            if (stringCue3.IsPaused)
+                stringCue3.Resume();
+            if (stringCue2.IsPaused)
+                stringCue2.Resume();
+            if (stringCue1.IsPaused)
+                stringCue1.Resume();
+
+            if (drumCue4.IsPaused)
+                drumCue4.Resume();
+            if (drumCue3.IsPaused)
+                drumCue3.Resume();
+            if (drumCue2.IsPaused)
+                drumCue2.Resume();
+            if (drumCue1.IsPaused)
+                drumCue1.Resume();
+        }            
 
         /// <summary>
         /// Updates the audio in the game.
