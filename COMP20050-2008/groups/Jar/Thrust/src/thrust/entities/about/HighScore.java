@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package thrust.entities.about;
 
@@ -26,14 +26,16 @@ public class HighScore implements HighScoreInterface {
   }
 
   /*
-   * @see thrust.entities.about.AbstractGameState.HighScoreInterface#new_initials(char[])
+   * @see thrust.entities.about.AbstractGameState.HighScoreInterface#
+   *      new_initials(char[])
    */
   public void new_initials(final char[] the_new_initials) {
     my_initials = the_new_initials;
   }
 
   /*
-   * @see thrust.entities.about.AbstractGameState.HighScoreInterface#new_score(int)
+   * @see thrust.entities.about.AbstractGameState.HighScoreInterface#
+   *       new_score(int)
    */
   public void new_score(final int the_new_score) {
     my_high_score = the_new_score;

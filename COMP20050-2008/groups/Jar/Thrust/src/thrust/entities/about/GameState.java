@@ -9,7 +9,7 @@ package thrust.entities.about;
  */
 public class GameState extends AbstractGameState {
 
-  /** The current score.*/
+  /** The current score. */
   private int my_score;
   /** The end of level bonus if any. */
   private int my_bonus;
@@ -18,10 +18,12 @@ public class GameState extends AbstractGameState {
   /** The amount of fuel the ship has. */
   private int my_fuel;
   /** The high scores of the game. */
-  private HighScoreInterface[] my_high_scores = new HighScore[HIGH_SCORE_COUNT]; 
+  private HighScoreInterface[] my_high_scores = new HighScore[HIGH_SCORE_COUNT];
+
   /*
    * @see thrust.entities.about.AbstractGameState#
-   *  add_high_score(thrust.entities.about.AbstractGameState.HighScoreInterface)
+   *      add_high_score(thrust.entities.about.
+   *      AbstractGameState.HighScoreInterface)
    */
   public void add_high_score(final HighScoreInterface the_new_high_score) {
     for (int i = 0; i < HIGH_SCORE_COUNT - 1; i++) {
@@ -103,7 +105,8 @@ public class GameState extends AbstractGameState {
   }
 
   /*
-   * @see thrust.entities.about.AbstractGameState#new_high_score(thrust.entities.about.AbstractGameState.HighScoreInterface)
+   * @see thrust.entities.about.AbstractGameState#new_high_score
+   *        (thrust.entities.about.AbstractGameState.HighScoreInterface)
    */
   public boolean new_high_score(final HighScoreInterface the_high_score) {
     for (int i = my_high_scores.length; i > 0; i--) {
