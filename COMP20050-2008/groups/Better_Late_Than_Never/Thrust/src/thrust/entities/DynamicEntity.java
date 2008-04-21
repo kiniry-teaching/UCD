@@ -12,7 +12,7 @@ package thrust.entities;
 
 import thrust.physics.PhysicsInterface;
 
-/**
+/** HELLO !!!!!!
  * Entities whose position or orientation change.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
@@ -28,7 +28,6 @@ public abstract class DynamicEntity extends Entity
    * @param the_mass the initial mass.
    * @param the_velocity the initial velocity.
    */
-  hey nick ur sick
   public static DynamicEntity make(double[] the_position,
                                    double the_orientation,
                                    double[] the_acceleration,
