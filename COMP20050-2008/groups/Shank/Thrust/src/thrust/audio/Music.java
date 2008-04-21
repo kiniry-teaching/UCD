@@ -1,30 +1,56 @@
-/*
- * A re-implementation of the classic C=64 game 'Thrust'.
- *
- * @author "Joe Kiniry (kiniry@acm.org)"
- * @module "COMP 20050, COMP 30050"
- * @creation_date "March 2007"
- * @last_updated_date "April 2008"
- * @keywords "C=64", "Thrust", "game"
- */
-
 package thrust.audio;
-
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.Clip;
+import java.io.IOException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.LineUnavailableException;
 /**
  * In-game music.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Roger Thomas (roger.thomas@ucdconnect.ie)
  * @version 2 April 2008
+ * Implpemented friday 18 April 2008
  */
 public class Music {
   //@ public model boolean is_playing;
+  /**
+   * @return music clip
+   */
+  private Clip my_clip;
 
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
+  public void openMusic() {
+    final File music_file = new File("");
+    AudioInputStream game_audio_stream = null;
+    try {
+      game_audio_stream = AudioSystem.getAudioInputStream(music_file);
+    } catch (UnsupportedAudioFileException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    final DataLine.Info info =
+      new DataLine.Info(SourceDataLine.class, game_audio_stream.getFormat());
+    try {
+      my_clip = (Clip)AudioSystem.getLine(info);
+      my_clip.open(game_audio_stream);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (LineUnavailableException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   public /*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
-    return false;
+    //assert false; //@ assert false;
+    return my_clip.isRunning();
   }
 
   /**
@@ -32,7 +58,7 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
-    assert false; //@ assert false;
+    my_clip.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
   /**
@@ -40,6 +66,6 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
-    assert false; //@ assert false;
+    my_clip.stop();
   }
 }
