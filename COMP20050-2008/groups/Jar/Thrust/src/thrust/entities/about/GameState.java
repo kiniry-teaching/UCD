@@ -9,6 +9,7 @@ package thrust.entities.about;
  */
 public class GameState extends AbstractGameState {
 
+  private int current_high_score;
   /*
    * @see thrust.entities.about.AbstractGameState#
    *  add_high_score(thrust.entities.about.AbstractGameState.HighScoreInterface)

@@ -65,22 +65,4 @@ public class Music {
     my_clip.setMicrosecondPosition(0);
     // @ assert !playing();
   }
-
-  public static void main(final String[] the_args) {
-    Music sound = null;
-    try {
-      sound = new Music();
-    } catch (LineUnavailableException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } catch (UnsupportedAudioFileException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    sound.start();
-    while(true);
-  }
 }

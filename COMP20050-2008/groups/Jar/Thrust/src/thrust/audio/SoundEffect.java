@@ -62,11 +62,4 @@ public class SoundEffect {
     my_clip.loop(1);
     // @ assert my_clip().isRunning();
   }
-
-  public static void main(final String[] the_args) {
-    final SoundEffect sound = new SoundEffect();
-    sound.make(new File("/home/keith/work/Jar/Thrust/media/Thrust_music.wav"));
-    sound.start();
-    while(true);
-  }
 }
