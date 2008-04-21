@@ -15,13 +15,15 @@ IRReport::~IRReport()
 
 bool IRReport::isValid() 
 {
-	if (_values.size() != 12) {
-		cout << "size = " << _values.size() << " ";
+	//A report is only valid when the vector has
+	//12 elements and the stamp has a non-zero value
+	if (_values.size() != 12 && _timestamp > 0) {
+//		optional cout output...
+//		cout << "size = " << _values.size() << " ";
 		return false;
 	} else {
 		return true;
 	}
-	//TODO check for something else as well?
 }
 
 void IRReport::print() 
