@@ -15,6 +15,8 @@ import java.io.File;
 /**
  * Any sound made in response to a event.
  * @author Joe Kiniry (kiniry@acm.org)
+ * @revised Ciaran Flynn: 06516564
+ *         Robert Plunkett: 06038883
  * @version 2 April 2008
  */
 public class SoundEffect {

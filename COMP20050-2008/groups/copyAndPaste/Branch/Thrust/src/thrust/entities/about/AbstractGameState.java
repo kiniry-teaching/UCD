@@ -21,7 +21,7 @@ public abstract class AbstractGameState {
   /**
    * There are eight high scores.
    */
-  public static final int HIGH_SCORE_COUNT;
+  public static final int HIGH_SCORE_COUNT = 8;
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
 
@@ -142,6 +142,10 @@ public abstract class AbstractGameState {
    * @version 11 April 2008
    */
   public interface HighScoreInterface {
+    /**
+     * the size of the array.
+     */
+    int MY_SIZE = 3;
     /**
      * @return What is your score?
      */

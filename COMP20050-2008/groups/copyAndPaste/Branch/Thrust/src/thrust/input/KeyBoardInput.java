@@ -1,10 +1,9 @@
-/**
- * @author  patrick Nevin: 06754155
- * @created 02/04/08 version 0.1
- */
 package thrust.input;
-
-public class KeyBoardInput {   
+/**
+ * @author Patrick Nevin (patrick.nevin@ucdconnect.ie)
+ * @version 20 April 2008
+ */
+public class KeyBoardInput {
   /**
    * @requires (int)key_code >= 0 && (int)key_code <= 255
      * ensures true;
@@ -12,23 +11,20 @@ public class KeyBoardInput {
   /**
    * @ invariant Key codes are set exactly once per keyboard input.
    */
-  
-  private char key_code;
-  
- 
+  private char my_key_code;
   /**
    * @return  What is your key code?
-   */ 
+   */
   public char key_code() {
-    return this.key_code;
+    return this.my_key_code;
   }
   /**
    * @param key
    * @return This character "key", is your key  code
    */
 
-  public void set_key_code(char key) {
-    this.key_code = key;
+  public void set_key_code(final char a_key) {
+    this.my_key_code = a_key;
   }
 }
 

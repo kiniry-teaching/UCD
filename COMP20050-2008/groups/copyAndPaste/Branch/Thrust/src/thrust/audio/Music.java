@@ -23,7 +23,6 @@ import javax.sound.sampled.SourceDataLine;
 /**
  * In-game music.
  * @author Ciaran Flynn: 06516564
- *         Patrick Nevin: 06754155  
  *         Robert Plunkett: 06038883
  * @version 7 April 2008
  */

@@ -22,7 +22,7 @@ public interface Physics {
   /*@ pure @*/ double gravitational_constant();
 
   /**
-   * @return What is your mass in kilograms?
+   * @return What is your mass in kilogram's?
    */
   //@ ensures 0 <= \result;
   /*@ pure @*/ double mass();

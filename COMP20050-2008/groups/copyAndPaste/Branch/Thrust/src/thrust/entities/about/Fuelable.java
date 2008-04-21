@@ -45,7 +45,4 @@ public interface Fuelable {
     @           fuel() == \old(fuel() + the_fuel_change)));
     @*/
   void change_fuel_content(int the_fuel_change);
-
-  //@ invariant (* Fuel content is always non-negative and finite. *);
-  //@ invariant 0 <= fuel();
 }
