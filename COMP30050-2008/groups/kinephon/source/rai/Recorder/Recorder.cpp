@@ -71,9 +71,9 @@ int Recorder::control
 //
 void Recorder::record
 (	irid const	iid,
-	int const	x,
-	int const	y,
-	int const	size,
+	short const	x,
+	short const	y,
+	short const	size,
 	tick const	time
 ){	Track *		track	= findTrack(iid);
 	Frame *		frame	;
@@ -106,10 +106,10 @@ Track * Recorder::findTrack
 // find track
 //
 void Recorder::eraseTrack
-(	irid const					iid		//= ~0
+(	irid const					iid		//= ~0u
 ){	vector<Track*>::iterator	iTrack;
 
-	if(iid == ~0)
+	if(iid == ~0u)
 	{
 	
 		for(iTrack = _tracks.begin(); iTrack != _tracks.end(); iTrack++)

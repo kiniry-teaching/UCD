@@ -1,4 +1,4 @@
-#ifndef __INTERPRETER_RECORDER_H__
+	#ifndef __INTERPRETER_RECORDER_H__
 #define __INTERPRETER_RECORDER_H__
 
 #include <vector>
@@ -32,14 +32,14 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	static void			RunTest			(void);
+	static void			RunTest				(void);
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // ctor
 //
 public:
-						~Recorder		(void);
+	virtual				~Recorder			(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // commands
@@ -55,7 +55,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Recording *			eject			(void)		const;
+	Recording *			eject				(void)		const;
 	/**
 	 * Erase frames from a track.
 	 * All frames before and including the specified frame are removed from
@@ -67,8 +67,8 @@ public:
 	 * @version 1.0
 	 */
 	void				erase
-						(	irid const	iid,
-							uint const	frameIndex	= ~0
+						(	irid const		iid,
+							uint const		frameIndex	= ~0
 						);
 	/**
 	 * Erase a Recording previously obtained through eject()
@@ -78,7 +78,7 @@ public:
 	 * @version 1.0
 	 */
 	void				erase
-						(	Recording *	recording
+						(	Recording *		recording
 						);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -96,8 +96,8 @@ public:
 	 * @see econtrol
 	 */
 	virtual int			control
-						(	ect const	control,
-							irid const	iid
+						(	ect const		control,
+							irid const		iid
 						);
 	/**
 	 * Record the current position of an IR blob.
@@ -113,11 +113,11 @@ public:
 	 * @pre size > 0;
 	 */
 	virtual void		record
-						(	irid const	iid,
-							int const	x,
-							int const	y,
-							int const	size,
-							tick const	time
+						(	irid const		iid,
+							short const		x,
+							short const		y,
+							short const		size,
+							tick const		time
 						);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ private:
 	 * @version 1.0
 	 */
 	Track *				findTrack
-						(	irid const	iid
+						(	irid const		iid
 						);
 	/**
 	 * Find and remove a track from the recorder
@@ -143,7 +143,7 @@ private:
 	 * @version 1.0
 	 */
 	void				eraseTrack
-						(	irid const	iid			= ~0
+						(	irid const		iid			= ~0
 						);
 	/**
 	 * control() econtrol::FOUND Helper
@@ -153,7 +153,7 @@ private:
 	 * @version 1.0
 	 */
 	int					controlFound
-						(	irid const	iid
+						(	irid const		iid
 						);
 	/**
 	 * control() econtrol::LOST Helper
@@ -163,7 +163,7 @@ private:
 	 * @version 1.0
 	 */
 	int					controlLost
-						(	irid const	iid
+						(	irid const		iid
 						);
 	/**
 	 * control() econtrol::BADCOM Helper
@@ -171,7 +171,7 @@ private:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int					controlBadcom	(void);
+	int					controlBadcom		(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // fields

@@ -1,3 +1,4 @@
+#include "Math.h"
 #include "ShapeSpeed.h"
 
 namespace interpreter
@@ -9,9 +10,9 @@ namespace interpreter
 bool ShapeSpeed::compare
 (	Track const * const		track,
 	ShapeMatches * const	shapeMatches
-){	int *					points;
+){	Points					points;
 	Frame *					frame;
-	int						index;
+	uint					index;
 	ShapeMatch *			shapeMatch;
 	uint					nPoints;
 
@@ -21,8 +22,8 @@ bool ShapeSpeed::compare
 	if(nPoints < 2)
 		return false;
 
-	nPoints = (nPoints - 1) << 1;
-	points = new int[nPoints];
+	nPoints--;
+	points.initialize(nPoints);
 
 	// Store time and proportional nPoints of vector as co-ordinates
 	//	Don't bother get actual nPoints - it will be scaled to fit
@@ -32,23 +33,22 @@ bool ShapeSpeed::compare
 		frame = track->first();
 		frame->next() != 0;
 		frame = frame->next(),
-		index += 2
-	)	points[index    ]	= frame->time(),
-		points[index + 1]	= abs((frame->u() << 1))
+		index++
+	)	points[index].time	= index,
+		points[index].time	= static_cast<short>(frame->time()
+							- track->first()->time()),
+		points[index].y		= abs((frame->u() << 1))
 							+ abs((frame->v() << 1));
 
-	Shape::smooth(points, nPoints, 6, 1);
+	points.smoothen(6, epoint::Y);
 
 	if(shapeEditHook != 0)
-		shapeEditHook(shapeId(), points, nPoints);
+		shapeEditHook(shapeId(), points);
 
-	shapeMatch = Shape::test
+	shapeMatch = Shape::compare
 	(	points,
-		nPoints,
 		shapeMatches
 	);
-
-	delete [] points;
 
 	return shapeMatch != 0;
 

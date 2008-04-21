@@ -7,36 +7,50 @@ namespace interpreter
 {
 
 /**
- * List of possible results from Zone::test()
+ * List of possible modes for Zone::compare()
  * @author EB
  * @version 1.0
  */
-namespace ezone
+namespace ezmode
+{
+	/**
+	 * Follow zones normally, entering and exiting at correct angles
+	 */
+	ezm const	NORMAL		= 0;
+	/**
+	 * Follow startup, exiting at correct angles, but entering anywhichway
+	 */
+	ezm const	INITIALIZE	= 1;
+}
+
+/**
+ * List of possible results from Zone::compare()
+ * @author EB
+ * @version 1.0
+ */
+namespace ezresult
 {
 	/**
 	 * The zone was neither entered nor exited. This means it's either still
 	 *	outside the zone, or still inside the zone
 	 */
-	ezt const	NOCHANGE	= 0;
+	ezr const	NOCHANGE	= 0;
 	/**
 	 * The zone was entered correctly
-	 * @author EB
-	 * @version 1.0
 	 */
-	ezt const	ENTERED		= 1;
+	ezr const	ENTERED		= 1;
 	/**
 	 * The zone was exited correctly
-	 * @author EB
-	 * @version 1.0
 	 */
-	ezt const	EXITED		= 2;
+	ezr const	EXITED		= 2;
 	/**
-	 * The zone was exited incorrectly. The zone should be considered as not
-	 *	entered in this case
-	 * @author EB
-	 * @version 1.0
+	 * The zone was entered and exited correctly in a single motion
 	 */
-	ezt const	FAILED		= 3;
+	ezr const	PASSED		= ENTERED | EXITED;
+	/**
+	 * The zone was entered and exited correctly in a single motion
+	 */
+	ezr const	FAILED		= 4;
 }
 
 /**
@@ -76,44 +90,6 @@ public:
 	 */
 	static void	RunTest(void);
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-// private commands
-//
-private:
-	/**
-	 * Determine whether a point is inside a given radius
-	 * @param x The x co-ordinate of the point to test
-	 * @param y The y co-ordinate of the point to test
-	 * @param radius The radius to test, will be either enterRadius or
-	 *	exitRadius
-	 */
-	bool	isInside
-			(	float const	x,
-				float const	y,
-				float const	radius
-			)	const;
-	/**
-	 * Determine if the entry point (point at which a line segment intersects
-	 *	a given radius) is within the zone's radius, angle and arc
-	 * @param x The x co-ordinate of the segment start to test
-	 * @param y The y co-ordinate of the segment start to test
-	 * @param u The x co-ordinate of the segment's vector to test
-	 * @param v The y co-ordinate of the segment's vector to test
-	 * @param radius The radius to test, will be either enterRadius or
-	 *	exitRadius
-	 * @param angle The angle to test, will be either enterAngle or exitAngle
-	 * @param arc The arc to test, will be either enterArc or exitArc
-	 */
-	bool	isInside
-			(	float const	x,
-				float const	y,
-				float const	u,
-				float const	v,
-				float const	radius,
-				float const	angle,
-				float const	arc
-			)	const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // friend (ShapeLoader) *tor
@@ -160,24 +136,55 @@ private:
 private:
 	/**
 	 * Tests a movement segment to see how the move interacted with this zone
-	 * @param x The x co-ordinate of the movement to test
-	 * @param y The y co-ordinate of the movement to test
-	 * @param u The x vector the movement is making
-	 * @param v The y vector the movement is making
-	 * @param isEntered True if this zone has been entered (a previous test
-	 *	returned ezone::ENTERED), false otherwise
-	 * @return Returns how the move interacted with the zone. Values are
-	 *	enumerated in ezone
-	 * @see ezone
+	 * @param x1 The x co-ordinate of the movement to test
+	 * @param y1 The y co-ordinate of the movement to test
+	 * @param x2 The x vector the movement is making
+	 * @param y2 The y vector the movement is making
+	 * @param result [out] Return updated result, @see ezresult
+	 * @param mode @see ezmode
+	 *	returned ezresult::ENTERED), false otherwise
+	 * @see ezresult
 	 * @author EB
 	 * @version 1.0
 	 */
-	ezt		test
+	void	compare
+			(	float const	x1,
+				float const	y1,
+				float const	x2,
+				float const	y2,
+				ezr &		result,
+				ezm const	mode			= ezmode::NORMAL
+			)	const;
+
+///////////////////////////////////////////////////////////////////////////////
+// private commands
+//
+private:
+	/**
+	 * Determine whether a point is inside a given radius
+	 * @param x The x co-ordinate of the point to test
+	 * @param y The y co-ordinate of the point to test
+	 * @param radius The radius to test, will be either enterRadius or
+	 *	exitRadius
+	 */
+	bool	isInside
 			(	float const	x,
 				float const	y,
-				float const	u,
-				float const	v,
-				bool const	isEntered
+				float const	radius
+			)	const;
+	/**
+	 * Determine if the entry point (point at which a line segment intersects
+	 *	a given radius) is within the zone's radius, angle and arc
+	 * @param x The x co-ordinate of the segment start to test
+	 * @param y The y co-ordinate of the segment start to test
+	 * @param angle The angle to test, will be either enterAngle or exitAngle
+	 * @param arc The arc to test, will be either enterArc or exitArc
+	 */
+	bool	testAngle
+			(	float const	x,
+				float const	y,
+				float const	angle,
+				float const	arc
 			)	const;
 
 ///////////////////////////////////////////////////////////////////////////////

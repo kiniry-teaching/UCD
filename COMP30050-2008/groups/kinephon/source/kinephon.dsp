@@ -41,9 +41,10 @@ RSC=rc.exe
 # PROP Use_Debug_Libraries 0
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
+# ADD CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "__WINDOWS_MM__" /D "__EB__" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x1809 /d "NDEBUG"
@@ -53,7 +54,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /profile /machine:I386
 
 !ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
 
@@ -79,8 +80,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib winmm.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
-# SUBTRACT LINK32 /pdb:none
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib winmm.lib /nologo /subsystem:console /debug /machine:I386
+# SUBTRACT LINK32 /profile
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Cmds="C:\Data\College\COMP30050 - Software Engerineering Project III\kinephon\source\dox"
@@ -132,50 +133,182 @@ PostBuild_Cmds="C:\Data\College\COMP30050 - Software Engerineering Project III\k
 # Begin Source File
 
 SOURCE=.\audio\Channel.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\Channel.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\Conductor.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\Conductor.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\MidiPlayer.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\MidiPlayer.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\MidiRecorder.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\MidiRecorder.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\midiTest.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\RtError.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\RtMidi.cpp
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\audio\RtMidi.h
+
+!IF  "$(CFG)" == "kinephon - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "kinephon - Win32 Test"
+
+!ENDIF 
+
 # End Source File
 # End Group
 # Begin Group "rai"
@@ -228,6 +361,26 @@ SOURCE=.\rai\Recorder\Track.h
 # Begin Group "analyser"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\rai\Analyser\Math.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\Analyser\Math.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\Analyser\Point.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\Analyser\Points.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\rai\Analyser\Points.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\rai\Analyser\Shape.cpp
@@ -343,20 +496,24 @@ SOURCE=.\rai\Analyser\TestZone.cpp
 # End Group
 # Begin Source File
 
-SOURCE=.\rai\Math.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\rai\Math.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\rai\ShapeId.h
 # End Source File
 # End Group
 # Begin Source File
 
+SOURCE=.\config.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\config.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\eb_main.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\main.cpp
 # End Source File
 # Begin Source File
 

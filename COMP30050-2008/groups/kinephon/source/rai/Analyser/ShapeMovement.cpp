@@ -1,3 +1,5 @@
+#include "Math.h"
+#include "Points.h"
 #include "ShapeMovement.h"
 
 namespace interpreter
@@ -9,9 +11,9 @@ namespace interpreter
 bool ShapeMovement::compare
 (	Track const * const		track,
 	ShapeMatches * const	shapeMatches
-){	int *					points;
+){	Points					points;
 	Frame *					frame;
-	int						index;
+	uint					index;
 	ShapeMatch *			shapeMatch;
 	uint					nPoints;
 	ShapeMatches *			subShapeMatches;
@@ -22,8 +24,7 @@ bool ShapeMovement::compare
 	if(nPoints < 1)
 		return false;
 
-	nPoints <<= 1;
-	points = new int[nPoints];
+	points.initialize(nPoints);
 
 	// Store x and y as co-ordinates
 	for
@@ -31,24 +32,23 @@ bool ShapeMovement::compare
 		frame = track->first();
 		frame != 0;
 		frame = frame->next(),
-		index += 2
-	)	points[index    ]	= frame->x(),
-		points[index + 1]	= frame->y();
+		index++
+	)	points[index].frame	= index,
+		points[index].x		= frame->x(),
+		points[index].y		= frame->y();
 
 	// Smooth the x and y coordinates
-	Shape::smooth(points, nPoints, 2, 0);
-	Shape::smooth(points, nPoints, 2, 1);
+	points.smoothen(2, epoint::X);
+	points.smoothen(2, epoint::Y);
+	points.sharpen(static_cast<float>(20.0f * Math::PI() / 180));
 
 	if(shapeEditHook != 0)
-		shapeEditHook(shapeId(), points, nPoints);
+		shapeEditHook(shapeId(), points);
 
-	shapeMatch = Shape::test
+	shapeMatch = Shape::compare
 	(	points,
-		nPoints,
 		shapeMatches
 	);
-
-	delete [] points;
 
 	// Match this shape against it's speed and accel shapes
 	if(shapeMatch != 0)

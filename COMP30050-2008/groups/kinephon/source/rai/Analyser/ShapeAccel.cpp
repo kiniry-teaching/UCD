@@ -1,3 +1,4 @@
+#include "Math.h"
 #include "ShapeAccel.h"
 
 namespace interpreter
@@ -9,9 +10,9 @@ namespace interpreter
 bool ShapeAccel::compare
 (	Track const * const		track,
 	ShapeMatches * const	shapeMatches
-){	int *					points;
+){	Points					points;
 	Frame *					frame;
-	int						index;
+	uint					index;
 	ShapeMatch *			shapeMatch;
 	uint					nPoints;
 
@@ -21,8 +22,7 @@ bool ShapeAccel::compare
 	if(nPoints < 3)
 		return false;
 
-	nPoints = (nPoints - 1) << 1;
-	points = new int[nPoints];
+	points.initialize(nPoints - 1);
 
 	// Store time and speed as co-ordinates
 	// Because all calculations are ints, multiply the speed
@@ -32,31 +32,30 @@ bool ShapeAccel::compare
 		frame = track->first();
 		frame->next() != 0;
 		frame = frame->next(),
-		index += 2
-	)	points[index    ]	= frame->time(),
-		points[index + 1]	= abs((frame->u() << 1))
+		index++
+	)	points[index].frame	= index,
+		points[index].time	= static_cast<short>(frame->time()
+							- track->first()->time()),
+		points[index].y		= abs((frame->u() << 1)) * 10
 							+ abs((frame->v() << 1)) * 10;
 
-	Shape::smooth(points, nPoints, 6, 1);
+	points.smoothen(6, epoint::Y);
 
-	nPoints -= 2;
+	points.length()--;
 
 	// Calculate acceleration based on smoothed speed
-	for(index = 1; index < nPoints; index += 2)
-		points[index] = points[index + 2] - points[index];
+	for(index = 0; index < points.length(); index++)
+		points[index].y = points[index + 1].y - points[index].y;
 
-	Shape::smooth(points, nPoints, 3, 1);
+	points.smoothen(3, epoint::Y);
 
 	if(shapeEditHook != 0)
-		shapeEditHook(shapeId(), points, nPoints);
+		shapeEditHook(shapeId(), points);
 
-	shapeMatch = Shape::test
+	shapeMatch = Shape::compare
 	(	points,
-		nPoints,
 		shapeMatches
 	);
-
-	delete [] points;
 
 	return shapeMatch != 0;
 

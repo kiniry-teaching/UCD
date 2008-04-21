@@ -1,6 +1,8 @@
 #ifndef __INTERPRETER_SHAPEMATCH_H__
 #define __INTERPRETER_SHAPEMATCH_H__
 
+#include "../../type.h"
+
 namespace interpreter
 {
 
@@ -20,20 +22,11 @@ class ShapeMatch
 // friends
 //
 	/**
-	 * Be friends with Shape so it can create matches
-	 * @author EB
-	 * @version 1.0
-	 */
-	friend				class Shape;
-
-#ifdef __TEST__
-	/**
 	 * Be friends with ShapeMatches so it can create instance of this
 	 * @author EB
 	 * @version 1.0
 	 */
 	friend				class ShapeMatches;
-#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // queries
@@ -45,7 +38,7 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	Shape *				shape						(void)	const;
+	Shape const * const	shape						(void)	const;
 	/**
 	 * Return the weight the shape matched by
 	 * @return The weight the shape matched by
@@ -53,6 +46,27 @@ public:
 	 * @version 1.0
 	 */
 	float				weight						(void)	const;
+	/**
+	 * Return the angle the shape had to be rotated to get this match
+	 * @return The angle the shape had to be rotated to get this match
+	 * @author EB
+	 * @version 1.0
+	 */
+	float				angle						(void)	const;
+	/**
+	 * Return the value the shape had to be scaled by to get this match
+	 * @return The value the shape had to be scaled by to get this match
+	 * @author EB
+	 * @version 1.0
+	 */
+	float				scale						(void)	const;
+	/**
+	 * Return the frame index where the match stopped
+	 * @return The frame index where the match stopped
+	 * @author EB
+	 * @version 1.0
+	 */
+	uint				frame						(void)	const;
 	/**
 	 * Return a collection of any sub-shapes (speed/accel) that matched
 	 * @return A collection of any sub-shapes (speed/accel) that matched. If
@@ -68,14 +82,20 @@ public:
 private:
 	/**
 	 * Create a shape match.
-	 * @param shape The shape that made the match
-	 * @param weight The weight the shape matched by
+	 * @param shape The shape that matched
+	 * @param weight The weight by which the shape matched
+	 * @param angle The angle by which the shape matched
+	 * @param scale The scale by which the shape matched
+	 * @param frame The last frame that was used in the match
 	 * @author EB
 	 * @version 1.0
 	 */
 						ShapeMatch
-						(	Shape * const			shape,
-							float const				weight
+						(	Shape const * const		shape,
+							float const				weight,
+							float const				angle,
+							float const				scale,
+							uint const				frame
 						);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -88,14 +108,35 @@ private:
 	 * @version 1.0
 	 * @see shape()
 	 */
-	Shape *				_shape;
+	Shape const * const	_shape;
 	/**
 	 * weight() field
 	 * @author EB
 	 * @version 1.0
 	 * @see weight()
 	 */
-	float				_weight;
+	float const			_weight;
+	/**
+	 * angle() field
+	 * @author EB
+	 * @version 1.0
+	 * @see angle()
+	 */
+	float const			_angle;
+	/**
+	 * scale() field
+	 * @author EB
+	 * @version 1.0
+	 * @see scale()
+	 */
+	float const			_scale;
+	/**
+	 * frame() field
+	 * @author EB
+	 * @version 1.0
+	 * @see frame()
+	 */
+	uint const			_frame;
 	/**
 	 * shapeMatches() field
 	 * @author EB
@@ -109,14 +150,20 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 inline ShapeMatch::ShapeMatch
-(	Shape * const	shape,
-	float const		weight
-) :	_shape			(shape),
-	_weight			(weight),
-	_shapeMatches	(0)
+(	Shape const * const	shape,
+	float const			weight,
+	float const			angle,
+	float const			scale,
+	uint const			frame
+) :	_shape				(shape),
+	_weight				(weight),
+	_angle				(angle),
+	_scale				(scale),
+	_frame				(frame),
+	_shapeMatches		(0)
 { }
 
-inline Shape * ShapeMatch::shape(void) const
+inline Shape const * const ShapeMatch::shape(void) const
 {	return _shape;
 }
 

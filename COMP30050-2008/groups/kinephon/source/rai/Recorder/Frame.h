@@ -74,14 +74,43 @@ public:
 	 * @author EB
 	 * @version 1.0
 	 */
-	int			x						(void)	const;
+	short		x						(void)	const;
 	/**
 	 * The y co-ordinate of the blob at the recorded time
 	 * @return Get the y co-ordinate of the blob
 	 * @author EB
 	 * @version 1.0
 	 */
-	int			y						(void)	const;
+	short		y						(void)	const;
+	/**
+	 * The x vector amount from the blob at the recorded time to the
+	 *	blob at the following time. This will be 0 if there is no next
+	 *	frame, or if it's been determined that this and the next blob
+	 *	positions are unrelated. i.e. If the parser found that frames
+	 *	were dropped or an IR light was off for a period of time
+	 * @return Get the x vector from this blob to the next
+	 * @author EB
+	 * @version 1.0
+	 */
+	short		u						(void)	const;
+	/**
+	 * The y vector amount from the blob at the recorded time to the
+	 *	blob at the following time. This will be 0 if there is no next
+	 *	frame, or if it's been determined that this and the next blob
+	 *	positions are unrelated. i.e. If the parser found that frames
+	 *	were dropped or an IR light was off for a period of time
+	 * @return Get the y vector from this blob to the next
+	 * @author EB
+	 * @version 1.0
+	 */
+	short		v						(void)	const;
+	/**
+	 * The size of the IR blob
+	 * @return Get the size of the IR blob
+	 * @author EB
+	 * @version 1.0
+	 */
+	short		size					(void)	const;
 	/**
 	 * Test if the Frame following this one is disjoint.
 	 * This will be true if there is a gap in the recording that couldn't be
@@ -93,35 +122,6 @@ public:
 	 * @post next() == 0 ==> gap() == false
 	 */
 	bool		gap						(void)	const;
-	/**
-	 * The x vector amount from the blob at the recorded time to the
-	 *	blob at the following time. This will be 0 if there is no next
-	 *	frame, or if it's been determined that this and the next blob
-	 *	positions are unrelated. i.e. If the parser found that frames
-	 *	were dropped or an IR light was off for a period of time
-	 * @return Get the x vector from this blob to the next
-	 * @author EB
-	 * @version 1.0
-	 */
-	int			u						(void)	const;
-	/**
-	 * The y vector amount from the blob at the recorded time to the
-	 *	blob at the following time. This will be 0 if there is no next
-	 *	frame, or if it's been determined that this and the next blob
-	 *	positions are unrelated. i.e. If the parser found that frames
-	 *	were dropped or an IR light was off for a period of time
-	 * @return Get the y vector from this blob to the next
-	 * @author EB
-	 * @version 1.0
-	 */
-	int			v						(void)	const;
-	/**
-	 * The size of the IR blob
-	 * @return Get the size of the IR blob
-	 * @author EB
-	 * @version 1.0
-	 */
-	uint		size					(void)	const;
 	/**
 	 * The time this Frame was created counted in milliseconds from the
 	 *	beginning of the program
@@ -137,6 +137,14 @@ public:
 	 * @version 1.0
 	 */
 	Frame *		next					(void)	const;
+	/**
+	 * The previous frame on the track. This will be 0 if there are no more
+	 *	frames
+	 * @return Get the previous frame on the track
+	 * @author EB
+	 * @version 1.0
+	 */
+	Frame *		prev					(void)	const;
 	/**
 	 * The last frame in the list
 	 * @return The last frame
@@ -199,10 +207,10 @@ private:
 	 * @version 1.0
 	 */
 				Frame
-				(	int const			x,
-					int const			y,
-					int const			size,
-					uint const			time
+				(	short const			x,
+					short const			y,
+					short const			size,
+					tick const			time
 				);
 	/**
 	 * Copy constructor
@@ -245,21 +253,21 @@ private:
 	 * @version 1.0
 	 * @see x()
 	 */
-	int			_x;
+	short		_x;
 	/**
 	 * y() field
 	 * @author EB
 	 * @version 1.0
 	 * @see y()
 	 */
-	int			_y;
+	short		_y;
 	/**
 	 * size() field
 	 * @author EB
 	 * @version 1.0
 	 * @see size()
 	 */
-	uint		_size;
+	short		_size;
 	/**
 	 * time() field
 	 * @author EB
@@ -274,32 +282,44 @@ private:
 	 * @see next()
 	 */
 	Frame *		_next;
+	/**
+	 * next() field
+	 * @author EB
+	 * @version 1.0
+	 * @see next()
+	 */
+	Frame *		_prev;
 
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 
+inline tick Frame::timeGap(void) const
+{	return static_cast<tick>(50);
+}
+
 inline Frame::Frame
-(	int const	x,
-	int const	y,
-	int const	size,
-	uint const	time
+(	short const	x,
+	short const	y,
+	short const	size,
+	tick const	time
 ) :	_x			(x),
 	_y			(y),
 	_size		(size),
 	_time		(time),
-	_next		(0)
+	_next		(0),
+	_prev		(0)
 { }
 
 inline Frame::~Frame(void)
 {	delete _next;
 }
 
-inline int Frame::x(void) const
+inline short Frame::x(void) const
 {	return _x;
 }
 
-inline int Frame::y(void) const
+inline short Frame::y(void) const
 {	return _y;
 }
 
@@ -313,7 +333,7 @@ inline bool Frame::gap(void) const
 	return false;
 }
 
-inline int Frame::u(void) const
+inline short Frame::u(void) const
 {	// If there's a next, and no gap between this and next..
 	if(_next != 0 && gap() == false)
 		// ..Return the x vector
@@ -322,7 +342,7 @@ inline int Frame::u(void) const
 	return 0;
 }
 
-inline int Frame::v(void) const
+inline short Frame::v(void) const
 {	// If there's a next, and no gap between this and next..
 	if(_next != 0 && gap() == false)
 		// ..Return the y vector
@@ -331,7 +351,7 @@ inline int Frame::v(void) const
 	return 0;
 }
 
-inline uint Frame::size(void) const
+inline short Frame::size(void) const
 {	return _size;
 }
 
@@ -343,8 +363,8 @@ inline Frame * Frame::next(void) const
 {	return _next;
 }
 
-inline tick Frame::timeGap(void) const
-{	return (tick)50;
+inline Frame * Frame::prev(void) const
+{	return _prev;
 }
 
 inline ostream & operator <<

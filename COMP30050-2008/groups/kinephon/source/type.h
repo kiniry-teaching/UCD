@@ -55,14 +55,37 @@ typedef uchar			ect;
  * Enumerated shape type
  * @author EB
  * @version 1.0
+ * @see etype
  */
 typedef uchar			est;
 /**
- * Enumerated zone type
+ * Enumerated zone compare mode
  * @author EB
  * @version 1.0
+ * @see ezmode
  */
-typedef uchar			ezt;
+typedef uchar			ezm;
+/**
+ * Enumerated zone result
+ * @author EB
+ * @version 1.0
+ * @see ezresult
+ */
+typedef uchar			ezr;
+/**
+ * Enumerated sharp side prune
+ * @author EB
+ * @version 1.0
+ * @see eprune
+ */
+typedef bool			esp;
+/**
+ * Enumerated point raw access
+ * @author EB
+ * @version 1.0
+ * @see epoint
+ */
+typedef int				epr;
 
 /**
  * Pure virtual function modifier

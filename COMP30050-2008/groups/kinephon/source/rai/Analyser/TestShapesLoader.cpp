@@ -6,7 +6,7 @@
 #include "../ShapeId.h"
 #include "../TestMemory.h"
 #include "../TestImage.h"
-#include "../Math.h"
+#include "Math.h"
 using std::cout;
 using std::endl;
 

@@ -14,33 +14,52 @@ bool sortShapeMatches
 ///////////////////////////////////////////////////////////////////////////////
 // add
 //
-void ShapeMatches::operator +=
-(	ShapeMatch * const	shapeMatch
-){
+ShapeMatch * ShapeMatches::add
+(	Shape const * const	shape,
+	float const			weight,
+	float const			angle,
+	float const			scale,
+	uint const			frame
+){	ShapeMatch *		shapeMatch	= 0;
+	bool				add			= false;
 
 	// Don't add this shape if it's not within the shapeMatches threshold
-	if(shapeMatch->weight() < _weight)
-		return;
+	if(weight < _weight)
+		return 0;
 
 	// If there's an upper limit on total matches, and it's been reached
 	if(_total != 0 && _shapeMatches.size() == _total)
 	{
 
 		// Don't add this shape last stored is a better match than this one
-		if(_shapeMatches.back()->weight() >= shapeMatch->weight())
-			return;
+		if(_shapeMatches.back()->weight() >= weight)
+			return 0;
 
 		// If new is better than stored worst, remove worst and store new
+		delete _shapeMatches.back();
 		_shapeMatches.pop_back();
-		_shapeMatches.push_back(shapeMatch);
+		add = true;
 
 	}
 	else
 	// No upper limit or limit not reached, stick this match on the list
-		_shapeMatches.push_back(shapeMatch);
+		add = true;
+
+	if(add == true)
+		_shapeMatches.push_back
+		(	shapeMatch = new ShapeMatch
+			(	shape,
+				weight,
+				angle,
+				scale,
+				frame
+			)
+		);
 
 	// Sort shapes in descending order, so best match is at start
 	sort(_shapeMatches.begin(), _shapeMatches.end(), sortShapeMatches);
+
+	return shapeMatch;
 
 }
 

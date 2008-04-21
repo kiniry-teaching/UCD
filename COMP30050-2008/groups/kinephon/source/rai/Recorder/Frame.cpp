@@ -11,10 +11,13 @@ Frame::Frame
 ) :	_x					(frame->_x),
 	_y					(frame->_y),
 	_size				(frame->_size),
-	_time				(frame->_time)
+	_time				(frame->_time),
+	_prev				(0)
 {	// Get this frame to copy the next frame
 	if(frame->_next != 0)
-		_next = new Frame(frame->_next);
+	{	_next = new Frame(frame->_next);
+		_next->_prev = this;
+	}
 	else
 		_next = 0;
 }
@@ -67,9 +70,13 @@ Frame * Frame::operator +=
 		return last();
 
 	// Move current next to the added frame's last next
-	frame->last()->_next = _next;
+	if(_next != 0)
+	{	_next->_prev = frame->last();
+		_next->_prev->_next = _next;
+	}
 	// Set added frame as new next
 	_next = frame;
+	frame->_prev = this;
 
 	return last();
 
@@ -88,7 +95,9 @@ Frame * Frame::erase
 	if(frameIndex != 0)
 		frameFirst = _next->erase(frameIndex - 1);
 	else
-		frameFirst = _next;
+	{	frameFirst = _next;
+		_next->_prev = 0;
+	}
 
 	// Detach this frame before deleting it so
 	//	the dtor doesn't erase the linked frames

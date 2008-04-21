@@ -27,7 +27,7 @@ Shapes * ShapesLoader::loadShapes
 		return 0;
 
 	// Read the header
-	file.read((char*)&seHeader, sizeof(seHeader));
+	file.read(reinterpret_cast<char*>(&seHeader), sizeof(seHeader));
 
 	// Don't continue if the filetype
 	//	is wrong, or there's no shape data
@@ -72,7 +72,7 @@ bool ShapesLoader::loadShape
 	//-------------------------------------------------------------------------
 	// Read the shape header
 
-	file.read((char*)&seShape, sizeof(seShape));
+	file.read(reinterpret_cast<char*>(&seShape), sizeof(seShape));
 	if(file.good() == false)
 		return false;
 
@@ -220,6 +220,9 @@ bool ShapesLoader::loadShape
 				);
 				break;
 
+			default:
+				shape = 0;
+
 		}
 
 		// Store it
@@ -249,8 +252,7 @@ bool ShapesLoader::loadZone
 	Zone * &	zone
 ){	SEZone		seZone;
 
-	file.read((char*)&seZone, sizeof(seZone));
-	int x= file.gcount();
+	file.read(reinterpret_cast<char*>(&seZone), sizeof(seZone));
 
 	zone = new Zone
 	(	seZone.x,
@@ -279,10 +281,10 @@ bool ShapesLoader::loadData
 
 	seData = new SEData[nData];
 
-	file.read((char*)seData, sizeof(seData->data) * nData);
+	file.read(reinterpret_cast<char*>(seData), sizeof(seData->data) * nData);
 
 	for(index = 0; index < nData; index++)
-		*(data + index) = (float)(seData + index)->data / 255;
+		*(data + index) = static_cast<float>((seData + index)->data) / 255.0f;
 
 	delete [] seData;
 

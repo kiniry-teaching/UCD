@@ -56,12 +56,20 @@ public:
 	irid		iid						(void)		const;
 	/**
 	 * Returns the first frame in this Track.
-	 * Following frams can be accessed by this->frame()->next()..
+	 * Following frames can be accessed by this->frame()->next()..
 	 * @return The first frame in this Track
 	 * @author EB
 	 * @version 1.0
 	 */
 	Frame *		first					(void)		const;
+	/**
+	 * Returns the last frame in this Track.
+	 * Previous frames can be accessed by this->frame()->prev()..
+	 * @return The last frame in this Track
+	 * @author EB
+	 * @version 1.0
+	 */
+	Frame *		last					(void)		const;
 	/**
 	 * Returns true if there are Frames in the track, else false
 	 * @return true if there are Frames in the track, else false
@@ -188,7 +196,7 @@ inline Track::Track
 { }
 
 inline Track::~Track(void)
-{	erase();
+{	delete _frameFirst;//erase();
 }
 
 inline irid Track::iid(void) const
@@ -205,6 +213,10 @@ inline uint Track::length(void) const
 
 inline Frame * Track::first(void) const
 {	return _frameFirst;
+}
+
+inline Frame * Track::last(void) const
+{	return _frameFirst->last();
 }
 
 inline bool & Track::isLost(void)

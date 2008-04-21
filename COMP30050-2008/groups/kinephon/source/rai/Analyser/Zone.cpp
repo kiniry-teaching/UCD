@@ -1,4 +1,4 @@
-#include "../Math.h"
+#include "Math.h"
 #include "Zone.h"
 
 namespace interpreter
@@ -18,128 +18,96 @@ inline bool Zone::isInside
 ///////////////////////////////////////////////////////////////////////////////
 // is inside angle arc
 //
-inline bool Zone::isInside
+inline bool Zone::testAngle
 (	float const	x,
 	float const	y,
-	float const	u,
-	float const	v,
-	float const	radius,
 	float const	angle,
 	float const	arc
 )	const
-{	float		ix;
-	float		iy;
-	float		iAngle;
+{	float		impactAngle;
 
-	// Calculate where the line impacts the circle
-	if(Math::calcLineIntersectCircle
-	(	x, y,
-		u, v,
-		_x, _y,
-		radius,
-		ix, iy
-	) == true)
-	{
+	// Calculate the angle between the circle centre and the impact point
+	impactAngle = Math::calcSegmentAngle(_x, _y, x, y);
 
-		// Calculate the angle between the circle centre and the impact point
-		iAngle = Math::calcSegmentAngle(_x, _y, ix, iy);
-
-		if(Math::isValueInsideCyclicRange
-		(	iAngle,
-			angle,
-			arc,
-			(float)(Math::PI() * 2)
-		) == false)
-			return false;
-
-	}
-	else
-		return false;
-
-	return true;
+	return Math::isValueDeltaInsideCyclicSetRange
+	(	impactAngle,
+		angle,
+		arc,
+		static_cast<float>(Math::PI() + Math::PI())
+	);
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // test
 //
-ezt Zone::test
-(	float const	x,
-	float const	y,
-	float const	u,
-	float const	v,
-	bool const	isEntered
+void Zone::compare
+(	float const	x1,
+	float const	y1,
+	float const	x2,
+	float const	y2,
+	ezr &		result,
+	ezm const	mode			//= ezmode::NORMAL
 )	const
-{	bool		isStartInside;
-	bool		isEndInside;
-	int			result;
+{	float		enterImpactX;
+	float		enterImpactY;
+	float		exitImpactX;
+	float		exitImpactY;
 
-	// If we're not suppose to be inside this zone..
-	if(isEntered == false)
-	{
-
-		isStartInside	= isInside(x, y, _enterRadius);
-		isEndInside		= isInside(x + u, y + v, _enterRadius);
-
-		// ..and we're not inside this zone
-		if(isStartInside == false)
-			// ..and we've just gone inside this zone
-			if(isEndInside == true)
-				// ..and we've entered through the correct angle/arc,
-				//	we've entered
-				if(isInside
-				(	x, y,
-					u, v,
-					_enterRadius,
-					_enterAngle,
-					_enterArc
-				) == true)
-					result = ezone::ENTERED;
-				else
-				// ..or we've not entered correctly, we've not entered
-					result = ezone::NOCHANGE;
+	// Test if this move entered the zone
+	if(Math::calcSegmentIntersectCircle
+	(	x1, y1,
+		x2, y2,
+		_x, _y,
+		_enterRadius,
+		enterImpactX, enterImpactY,
+		true	// Enter impact point
+	) == true
+	// If it didn't enter during init, is the start point already inside?
+	|| mode == ezmode::INITIALIZE
+	&& isInside(x1, y1, _enterRadius) == true)
+		// If normal mode, must test that the impact point was on angle
+		if(mode == ezmode::NORMAL)
+			if(testAngle
+			(	enterImpactX,
+				enterImpactY,
+				_enterAngle,
+				_enterArc
+			) == true)
+				result = ezresult::ENTERED;
 			else
-			// ..or we're still not inside this zone, ignore
-				result = ezone::NOCHANGE;
+				// If it didn't enter the correct angle, it just didn't enter
+				//	so it's a no change, rather than an erro
+				result = ezresult::NOCHANGE;
+		// If initalise mode, it's entered
 		else
-		// ..or we're inside this zone, there's a problem
-			result = ezone::FAILED;
-
-	}
+			result = ezresult::ENTERED;
 	else
-	// ..or we are suppose to be inside this zone..
-	{
+		result = ezresult::NOCHANGE;
 
-		isStartInside	= isInside(x, y, _exitRadius);
-		isEndInside		= isInside(x + u, y + v, _exitRadius);
-
-		// ..and we are inside this zone
-		if(isStartInside == true)
-			// ..and we've just gone outside this zone
-			if(isEndInside == false)
-				// ..and we've exited through the correct angle/arc,
-				//	we've exited
-				if(isInside
-				(	x, y,
-					u, v,
-					_exitRadius,
-					_exitAngle,
-					_exitArc
-				) == false)
-					result = ezone::EXITED;
-				else
-				// ..or we've not exited correctly, there's a problem
-					result = ezone::FAILED;
+	// Test if this move exited the zone. But only do the test if the zone has
+	//	been entered before
+	if((result & ezresult::ENTERED) == ezresult::ENTERED)
+		if(Math::calcSegmentIntersectCircle
+		(	x1, y1,
+			x2, y2,
+			_x, _y,
+			_exitRadius,
+			exitImpactX, exitImpactY,
+			false	// Exit impact point
+		) == true)
+			// Must always exit correctly regardless of mode
+			if(testAngle
+			(	exitImpactX,
+				exitImpactX,
+				_exitAngle,
+				_exitArc
+			) == true)
+				// If it exited, include the exited information
+				result = ezresult::PASSED;
 			else
-			// ..or we've still inside this zone, ignore
-				result = ezone::NOCHANGE;
-		else
-		// ..or we are outside this zone, there's a problem
-			result = ezone::FAILED;
-
-	}
-
-	return result;
+				// If it exited at a bad angle, it's an error, 
+				result = ezresult::FAILED;
 
 }
 

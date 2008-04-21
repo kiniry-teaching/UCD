@@ -3,6 +3,7 @@
 
 #include "../../type.h"
 #include "../Recorder/Track.h"
+#include "Points.h"
 #include "Zone.h"
 #include "ShapeMatches.h"
 
@@ -10,9 +11,8 @@ namespace interpreter
 {
 
 typedef void			(*SHAPE_EDIT_HOOK)
-						(	sid const	shapeId,
-							int * const	points,
-							uint const	nPoints
+						(	sid			shapeId,
+							Points &	points
 						);
 extern SHAPE_EDIT_HOOK	shapeEditHook;
 
@@ -62,7 +62,7 @@ public:
 	/**
 	 * Compare a track against this data.
 	 * This must be overloaded to say what track data will be compared against
-	 *	and compare(int *, int *) should be called to do the actual comparison
+	 *	and compare(Points&) should be called to do the actual comparison
 	 * @param track The track to compare against
 	 * @param shapeMatches A filter and collection for the matched shapes
 	 * @return A true if any match was fould, else false
@@ -119,65 +119,69 @@ protected:
 //
 protected:
 	/**
-	 * Test an array of (x, y) points against this data and add it if it's
-	 *	in range
-	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
-	 *	x[nPoints], y[nPoints])
-	 * @param nPoints The number of points in the array.
+	 * Compare points against this data and add it if it's in range
+	 * @param origPoints Original collection of points. An unoriginal version
+	 *	will be created to rotate and scale repeatedly until a match is found
 	 * @param shapeMatches A filter and collection for the matched shapes
+	 * @return The shape match with the weight of how close the match was
+	 *	or 0 if no match was made
 	 * @author EB
 	 * @version 1.0
-	 * @pre /length(points) == nPoints * 2;
-	 * @pre nPoints > 0;
 	 */
-	ShapeMatch *	test
-					(	int const * const			points,
-						uint const					nPoints,
+	ShapeMatch *	compare
+					(	Points &					origPoints,
 						ShapeMatches * const		shapeMatches
-					);
-	/**
-	 * Given an array of (x, y) points, smooth them to remove spikes in the
-	 *	data
-	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
-	 *	x[nPoints], y[nPoints])
-	 * @param nPoints The number of points in the array
-	 * @param range The number of points either side of a point to smooth
-	 *	across
-	 * @param affect Affect the even points (0) or the odd points (1). Depending
-	 *	on the caller, even points may be x coordinates or time, and odd points
-	 *	may be y coordinates or speed or acceleration
-	 * @author EB
-	 * @version 1.0
-	 * @pre /length(points) == nPoints * 2;
-	 * @pre nPoints > 0;
-	 * @pre affect == 0 || affect == 1;
-	 */
-	void			smooth
-					(	int * const					points,
-						uint const					nPoints,
-						uchar const					range,
-						uchar const					affect
-					)								const;
+					)	const;
 
 ///////////////////////////////////////////////////////////////////////////////
 // private commands
 //
 private:
 	/**
-	 * Compare an array of (x, y) points against this data.
-	 * @param points An array of x, y co-ordinates (x1, y1, x2, y2, ..,
-	 *	x[nPoints], y[nPoints])
-	 * @param nPoints The number of points in the array.
-	 * @return A weight from (0..1) of how close the (x, y) array matches the
-	 *	shape
+	 * Prepare the original data by rotating, scaling, and cropping it.
+	 * @param origPoints The original point data
+	 * @param points The point data rotated, scaled, and cropped
+	 * @param index The first point to match against the first zone. Decides
+	 *	angle and scaling
+	 * @param angle [out] Get the angle used
+	 * @param scale [out] Get the scale used
+	 * @param zoneAngle Precalculated angle of the first zone to the second
+	 * @param zoneScale Precalculated scale of the first zone to the second
+	 * @returns true if the data is usable
 	 * @author EB
 	 * @version 1.0
-	 * @pre /length(points) == nPoints * 2;
-	 * @pre nPoints > 0;
+	 * @post points.length() <= origPoints.length();
 	 */
-	float			compare
-					(	int const * const			points,
-						uint const					nPoints
+	bool			prepare
+					(	Points &					origPoints,
+						Points &					points,
+						uint						index,
+						float &						angle,
+						float &						scale,
+						float						zoneAngle,
+						float						zoneScale
+					)	const;
+	/**
+	 * Trace the prepared points to make sure they pass through all the zones.
+	 * @param points The prepared point data
+	 * @returns true if all zones were passed in the correct order and angle
+	 * @author EB
+	 * @version 1.0
+	 */
+	bool			follow
+					(	Points &					points
+					)	const;
+	/**
+	 * Get a weight of how close the point data matches the shape data
+	 * @param points The prepared and followed point data
+	 * @returns A value from 0 to 1 of how close the point data matches the
+	 *	shape data, with 0 meaning no match, and 1 is perfect match
+	 * @author EB
+	 * @version 1.0
+	 * @post /result >= 0.0f && /result <= 1.0f;
+	 */
+	float			weigh
+					(	Points &					points
 					)	const;
 	/**
 	 * Add this to shapeMatches

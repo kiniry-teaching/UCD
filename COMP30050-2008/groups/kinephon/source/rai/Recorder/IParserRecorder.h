@@ -62,9 +62,9 @@ public:
 	 * @see econtrol
 	 */
 	virtual int		control
-					(	ect const	control,
-						irid const	iid
-					)				pure;
+					(	ect const		control,
+						irid const		iid
+					)					pure;
 	/**
 	 * Record the current position of an IR blob.
 	 * @param iid Identification of the IR blob. This id will be used to link
@@ -79,12 +79,12 @@ public:
 	 * @pre size > 0;
 	 */
 	virtual void	record
-					(	irid const	iid,
-						int const	x,
-						int const	y,
-						int const	size,
-						tick const	time
-					)				pure;
+					(	irid const		iid,
+						short const		x,
+						short const		y,
+						short const		size,
+						tick const		time
+					)					pure;
 
 };
 

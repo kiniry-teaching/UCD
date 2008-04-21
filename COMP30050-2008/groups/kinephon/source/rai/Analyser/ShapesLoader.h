@@ -77,6 +77,15 @@ public:
 	static Shapes *	loadShapes
 					(	char const * const	filename
 					);
+	/**
+	 * Unloads all shape data
+	 * @param shapes Pointer to shape data returned from loadShapes
+	 * @author EB
+	 * @version 1.0
+	 */
+	static void 	unloadShapes
+					(	Shapes *			shapes
+					);
 
 ///////////////////////////////////////////////////////////////////////////////
 // private commands
@@ -348,6 +357,13 @@ private:
 	};
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+inline void ShapesLoader::unloadShapes
+(	Shapes *	shapes
+){	delete shapes;
+}
 
 }
 

@@ -58,6 +58,7 @@ public:
 	 *	weight range are included
 	 * @author EB
 	 * @version 1.0
+	 * @pre weight >= 0 && weight <= 1
 	 */
 					ShapeMatches
 					(	float const			weight,
@@ -126,12 +127,21 @@ private:
 	 *	The shapeMatch won't be added if its weight is less than the minimum
 	 *	required weight, or if all space is filled and the shapeMatch is
 	 *	not better weight than any existing shapeMatch
-	 * @param shapeMatch The new matched shape to add
+	 * @param shape The shape that matched
+	 * @param weight The weight by which the shape matched
+	 * @param angle The angle by which the shape matched
+	 * @param scale The scale by which the shape matched
+	 * @param frame The last frame that was used in the match
+	 * @returns The shape match that was added
 	 * @author EB
 	 * @version 1.0
 	 */
-	void			operator +=
-					(	ShapeMatch * const	shapeMatch
+	ShapeMatch *	add
+					(	Shape const * const	shape,
+						float const			weight,
+						float const			angle,
+						float const			scale,
+						uint const			frame
 					);
 
 ///////////////////////////////////////////////////////////////////////////////

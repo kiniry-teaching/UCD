@@ -16,11 +16,12 @@ bool Shapes::compare
 	// Compare against each shape and set anyCompare to true if
 	//	one or more matches are made
 	for(index = 0; index < _shapeIndex; index++)
-		anyCompare = _shapes[index]->compare
-		(	track,
-			shapeMatches
-		)
-		| anyCompare;
+		if(_shapes[index]->_nZones >= 2)
+			anyCompare = _shapes[index]->compare
+			(	track,
+				shapeMatches
+			)
+			| anyCompare;
 
 	return anyCompare;
 

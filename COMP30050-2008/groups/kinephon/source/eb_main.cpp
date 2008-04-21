@@ -12,6 +12,7 @@
 #include "rai/Analyser/ShapeMatches.h"
 #include "rai/Analyser/Shapes.h"
 #include "rai/Analyser/ShapesLoader.h"
+#include "rai/Analyser/Math.h"
 #include "rai/Recorder/Frame.h"
 #include "rai/Recorder/Track.h"
 #include "rai/Recorder/Recorder.h"
@@ -31,7 +32,7 @@ int mx = 0;
 int my = 0;
 int speedDelay = 4;
 int accelDelay = 10;
-int recordTime = 10;
+int recordTime = 4;
 
 int main(int argc, char * * argv)
 {
@@ -48,7 +49,7 @@ int main(int argc, char * * argv)
 	Track::RunTest();
 	Recorder::RunTest();
 	Zone::RunTest();
-//	ShapesLoader::RunTest();
+	ShapesLoader::RunTest();
 	ShapeMatches::RunTest();
 
 #else
@@ -84,38 +85,56 @@ int main(int argc, char * * argv)
 
 }
 
-void ExamineShape
-(	sid const	shapeId,
-	int * const	points,
-	uint const	nPoints
-){	uint		i;
+void examineShape
+(	sid			shapeId,
+	Points &	points
+){	uint			i;
+	static uint		t = 0;
+	int x = t % 25;
+	int y = t / 25;
 
 	switch(shapeId)
 	{
-		case esid::TRIANGLE:
-			glColor3f(0.0f, 0.0f, 1.0f);
-			for(i = 2; i < nPoints; i += 2)
+		case 100:
+			glColor3f(0.0f, 1.0f, 0.0f);
+			for(i = 1; i < points.length(); i++)
 			{	glBegin(GL_LINES);
-				glVertex3i(points[i - 2], points[i - 1], 0);
-				glVertex3i(points[i], points[i + 1], 0);
+				glVertex3i(points[i - 1].x + x * 32, points[i - 1].y + y * 32, 0);
+				glVertex3i(points[i    ].x + x * 32, points[i    ].y + y * 32, 0);
+				glEnd();
+			}
+			t++;
+			if(t >= 768)
+				t = 0;
+			break;
+		case 0:
+		case esid::TRIANGLE:
+			if(shapeId == 0)
+				glColor3f(0.0f, 1.0f, 0.0f);
+			else
+				glColor3f(0.0f, 0.0f, 1.0f);
+			for(i = 1; i < points.length(); i++)
+			{	glBegin(GL_LINES);
+				glVertex3i(points[i - 1].x, points[i - 1].y, 0);
+				glVertex3i(points[i    ].x, points[i    ].y, 0);
 				glEnd();
 			}
 			break;
 		case esid::DYNAMICS_PIANO:
 			glColor3f(0.0f, 1.0f, 0.0f);
-			for(i = 2; i < nPoints; i += 2)
+			for(i = 1; i < points.length(); i++)
 			{	glBegin(GL_LINES);
-				glVertex3i(points[i - 2] - points[0], -points[i - 1] + 100, 0);
-				glVertex3i(points[i] - points[0], -points[i + 1] + 100, 0);
+				glVertex3i(points[i - 1].x - points[0].x, -points[i - 1].y + 200, 0);
+				glVertex3i(points[i    ].x - points[0].x, -points[i    ].y + 200, 0);
 				glEnd();
 			}
 			break;
 		case esid::DYNAMICS_FORTE:
 			glColor3f(1.0f, 0.0f, 0.0f);
-			for(i = 2; i < nPoints; i += 2)
+			for(i = 1; i < points.length(); i++)
 			{	glBegin(GL_LINES);
-				glVertex3i(points[i - 2] - points[0], -points[i - 1] + 400, 0);
-				glVertex3i(points[i] - points[0], -points[i + 1] + 400, 0);
+				glVertex3i(points[i - 1].x - points[0].x, -points[i - 1].y + 400, 0);
+				glVertex3i(points[i    ].x - points[0].x, -points[i    ].y + 400, 0);
 				glEnd();
 			}
 			break;
@@ -128,7 +147,7 @@ void display(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	shapeEditHook = ExamineShape;
+	shapeEditHook = examineShape;
 	ShapeMatches shapeMatches(0.75f, 1);
 
 	Recording & recording = *g_recorder.eject();
@@ -139,11 +158,10 @@ void display(void)
 
 		g_shapes->compare(recording[i], &shapeMatches);
 
-		if(nPoints > (800 / recordTime))
-			g_recorder.erase(0, nPoints - (800 / recordTime));
+		if(nPoints > (800u / recordTime))
+			g_recorder.erase(0, nPoints - (800u / recordTime));
 
 	}
-
 	g_recorder.erase(&recording);
 
     glutSwapBuffers();
@@ -172,7 +190,7 @@ void timer(int t)
 
 }
 
-void key(unsigned char key, int x, int y)
+void key(unsigned char key, int, int)
 {
 
 	switch(key)

@@ -72,7 +72,7 @@ inline ShapeAccel::ShapeAccel
 		zones,
 		nZones
 	)
-{};
+{}
 
 }
 
