@@ -53,11 +53,26 @@ namespace TuneBlaster_
         public static ColouredParticle greenblast;
         public static ColouredParticle purpleblast;
         public static ColouredParticle blueblast;
+        public static ColouredParticle Rnote;
+        public static ColouredParticle Bnote;
+        public static ColouredParticle Gnote;
+        public static ColouredParticle Pnote;
+
+
+       
+        float elapsedTime = 100;
+        Vector2 timePosition = new Vector2(45, 100);
+      
+
+
+
+
         public static bool blast = false;
         public static int blastTime = 0;
         public static int Score;
         SpriteFont lucidaConsole;
-        Vector2 scorePosition = new Vector2(100, 50);
+        SpriteFont specialmode;
+        Vector2 scorePosition = new Vector2(80, 50);
 
 
         Image.value colour;
@@ -91,6 +106,21 @@ namespace TuneBlaster_
             Components.Add(purpleblast);
             blueblast = new ColouredParticle(this, 1, 2);
             Components.Add(blueblast);
+
+            Rnote = new ColouredParticle(this, 1, 7);
+            Components.Add(Rnote);
+
+            Bnote = new ColouredParticle(this, 1, 8);
+            Components.Add(Bnote);
+
+            Gnote = new ColouredParticle(this, 1, 9);
+            Components.Add(Gnote);
+
+            Pnote = new ColouredParticle(this, 1, 10);
+            Components.Add(Pnote);
+
+
+
 
             //this.graphics.IsFullScreen = true;
         }
@@ -143,11 +173,13 @@ namespace TuneBlaster_
                 background.LoadGraphicsContent(spriteBatch, texture);
                 texture = content.Load<Texture2D>(@"Resources\Textures\Core");
                 core.LoadGraphicsContent(spriteBatch, texture);
-                texture = content.Load<Texture2D>(@"Resources\Textures\sidemenu 2");
+                texture = content.Load<Texture2D>(@"Resources\Textures\sidemenu");
                 frame.LoadGraphicsContent(spriteBatch, texture);
                 ball.LoadGraphicsContent(spriteBatch);
                 ballGenerator.LoadGraphicsContent(spriteBatch, texture);
                 lucidaConsole = Content.Load<SpriteFont>("Fonts/Lucida Console");
+                specialmode = Content.Load<SpriteFont>("Fonts/ArialMedium");
+       
 
                 // TODO: Load any ResourceManagementMode.Automatic content
             }
@@ -230,7 +262,29 @@ namespace TuneBlaster_
             ball.Update(gameTime);
             music.UpdateAudio();
             base.Update(gameTime);
+
+
+
+
+
+            this.elapsedTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (this.elapsedTime ==0)
+            {
+
+                elapsedTime = 100;
+                
+                //Do whatever else you need to do
+            }
+               
+
+
+
+
+
+
         }
+
+    
 
 
         /// <summary>
@@ -251,12 +305,19 @@ namespace TuneBlaster_
 
 
 
+
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend,
                  SpriteSortMode.Immediate, SaveStateMode.None);
             spriteBatch.DrawString(lucidaConsole, "Score: " + Score,
-                                   scorePosition, Color.Black);
+                                   scorePosition, Color.WhiteSmoke);
             spriteBatch.End();
 
+
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend,
+                SpriteSortMode.Immediate, SaveStateMode.None);
+            spriteBatch.DrawString(specialmode, "special mode in:" + elapsedTime.ToString("N0"),
+                                   timePosition, Color.Pink);
+            spriteBatch.End();
 
 
             base.Draw(gameTime);

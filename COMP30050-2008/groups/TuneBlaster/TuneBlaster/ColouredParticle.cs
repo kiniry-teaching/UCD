@@ -1,4 +1,5 @@
 
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,7 +61,6 @@ namespace TuneBlaster_
                     break;
 
                 case 5:
-
                     textureFilename = "explosion";
                     break;
 
@@ -68,6 +68,24 @@ namespace TuneBlaster_
                 case 6:
                     textureFilename = "smoke";
                     break;
+
+                case 7:
+                    textureFilename = "Rnote";
+                    break;
+
+                case 8:
+                    textureFilename = "Bnote";
+                    break;
+
+                case 9:
+                    textureFilename = "Gnote";
+                    break;
+
+                case 10:
+                    textureFilename = "Pnote";
+                    break;
+
+
             }
 
 
@@ -103,7 +121,7 @@ namespace TuneBlaster_
 
 
 
-            if (textureFilename == "smoke")
+            if (textureFilename == "null" )
             {
 
 
@@ -123,14 +141,25 @@ namespace TuneBlaster_
 
                 // explosion smoke lasts for longer than the explosion itself, but not
                 // as long as the plumes do.
+               // minLifetime = 1.0f;
+                //maxLifetime = 2.5f;
+
+                //minScale = 1.0f;
+                //maxScale = 2.0f;
+
+                //minNumParticles = 10;
+               // maxNumParticles = 20;
+
+
                 minLifetime = 1.0f;
-                maxLifetime = 2.5f;
+                maxLifetime = 1.5f;
 
                 minScale = 1.0f;
                 maxScale = 2.0f;
 
-                minNumParticles = 10;
-                maxNumParticles = 20;
+                minNumParticles = 5;
+                maxNumParticles = 10;
+
 
                 //  minRotationSpeed = -MathHelper.PiOver4;
                 // maxRotationSpeed = MathHelper.PiOver4;

@@ -28,7 +28,7 @@ namespace TuneBlaster_.Graphics
         GamePadState padState;
         value colour;
         Vector3 pos;
-        bool searchLightOn;
+        public static bool searchLightOn= false;
         Image searchLight;
         Texture2D searchLightTexture;
         public bool blackwhite;
@@ -126,15 +126,15 @@ namespace TuneBlaster_.Graphics
                 looseBalls[i].Move();
             }
             CheckLoose();
-            if (keyBoardState.IsKeyDown(Keys.A))
-            {
-                searchLightOn = true;
-            }
+            //if (keyBoardState.IsKeyDown(Keys.A))
+            //{
+              //  searchLightOn = true;
+            //}
 
-            if (keyBoardState.IsKeyDown(Keys.S))
-            {
-                searchLightOn = false;
-            }
+            //if (keyBoardState.IsKeyDown(Keys.S))
+            //{
+            //    searchLightOn = false;
+            //}
 
             if (keyBoardState.IsKeyDown(Keys.Q))
             {
@@ -156,7 +156,7 @@ namespace TuneBlaster_.Graphics
         {
             this.spriteBatch = spriteBatch;
             this.texture = texture;
-            searchLightTexture = game.Content.Load<Texture2D>(@"Resources\Textures\spotlight300");
+            searchLightTexture = game.Content.Load<Texture2D>(@"Resources\Textures\light1");
             searchLight.LoadGraphicsContent(spriteBatch, searchLightTexture);
         }
 
@@ -251,16 +251,42 @@ namespace TuneBlaster_.Graphics
                         ballSound = new Vector3(where.X, where.Y, 0f);
                         setPos(ballSound);
 
-                        Engine.explosion.AddParticles(where);
-                        Engine.smoke.AddParticles(where);
-                        Engine.greenblast.AddParticles(where);
-                        Engine.purpleblast.AddParticles(where);
-                        Engine.redblast.AddParticles(where);
-                        Engine.blueblast.AddParticles(where);
+                                if(balls[i].colour== Image.value.red){
+                                    Engine.redblast.AddParticles(where);
+                                    Engine.smoke.AddParticles(where);
+                                    Engine.explosion.AddParticles(where);
+                                    Engine.Rnote.AddParticles(where);
+
+                                }
+                                if (balls[i].colour == Image.value.green)
+                                {
+                                    Engine.greenblast.AddParticles(where);
+                                    Engine.smoke.AddParticles(where);
+                                    Engine.explosion.AddParticles(where);
+                                    Engine.Gnote.AddParticles(where);
+
+                                }
+                                if (balls[i].colour == Image.value.purple)
+                                {
+                                    Engine.purpleblast.AddParticles(where);
+                                    Engine.smoke.AddParticles(where);
+                                    Engine.explosion.AddParticles(where);
+                                    Engine.Pnote.AddParticles(where);
+
+                                }
+                                if (balls[i].colour == Image.value.blue)
+                                {
+
+                                    Engine.blueblast.AddParticles(where);
+                                    Engine.smoke.AddParticles(where);
+                                    Engine.explosion.AddParticles(where);
+                                    Engine.Bnote.AddParticles(where);
+
+                                }
                         Engine.Score++;
                         Engine.blast = true;
                         Engine.blastTime = 30;
-
+                       
 
                         //to put in code for explosion
 

@@ -161,6 +161,9 @@ namespace TuneBlaster_
                 ball.Position = StartPosition();
                 //LoadGraphicsContent();
             }
+
+
+
         }
 
         /*

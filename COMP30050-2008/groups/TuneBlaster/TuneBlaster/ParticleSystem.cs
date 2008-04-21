@@ -12,8 +12,7 @@ namespace TuneBlaster_
     /// <summary>
     /// ParticleSystem is an abstract class that provides the basic functionality to
     /// create a particle effect. Different subclasses will have different effects,
-    /// such as fire, explosions, and plumes of smoke. To use these subclasses, 
-    /// simply call AddParticles, and pass in where the particles should exist
+    /// such as fire, explosions, and coloured particles
     /// </summary>
     public abstract class ParticleSystem : DrawableGameComponent
     {
