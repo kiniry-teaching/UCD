@@ -175,18 +175,6 @@ class_chart HIGH_SCORE
     "Initials are always three characters in length."
 end
 
-class_chart HIGH_SCORE
-  query
-    "What is your score?",
-    "What are your initials?"
-  command
-    "This is your score.",
-    "These are your initials."
-  constraint
-    "High scores are always non-negative and finite.",
-    "Initials are always three characters in length."
-end
-
 class_chart HIGH_SCORES
   inherit SEQUENCE
   query
@@ -421,17 +409,6 @@ end
 
 class_chart SPACESHIP
   inherit NEUTRAL_ENTITY, FUELABLE, DYNAMIC_ENTITY, TOW
-<<<<<<< .mine
-=======
-  query
-    "How many lives do you have?",
-    "What is your current score?",
-    "Are you currently towing?"
-  command
-    "You have this many lives remaining.",
-    "You have this many points.",
-    "You are now towing the goal sphere."
->>>>>>> .r1615
   constraint
     "The spaceship is destroyed by the barrier.",
     "The spaceship is destroyed by a bullet.",
@@ -556,16 +533,6 @@ class_chart WELCOME_ANIMATION
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< .mine
-=======
--- ENTITIES.PROPERTIES cluster classes
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class_chart PROPERTIES
-end
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>>>>> .r1615
 -- AUDIO cluster classes
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
