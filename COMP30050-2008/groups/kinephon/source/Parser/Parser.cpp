@@ -16,7 +16,7 @@ Parser::Parser()
 		
 }
 
-/*
+
 Parser::Parser(IParserRecorder* ipr)
 {
 	binaryPosition = 0;
@@ -27,7 +27,10 @@ Parser::Parser(IParserRecorder* ipr)
 	for(int i=0; i<4; i++)
 		control[i] = 0;	
 }
-*/
+
+/*
+ * This is just used for parsing the test data.
+ */
 
 void Parser::parser(string in, int size_of)
 {
