@@ -9,8 +9,12 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -26,6 +30,101 @@ public class Bullet extends DynamicEntity
   public double mass() {
     assert false; //@ assert false;
     return 0;
+  }
+
+  public void render() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Shape shape() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void shape(Shape the_shape) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public String shape_name() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public byte state() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void state(byte the_state) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public AI attack() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void attack(AI the_behavior) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public AI disturb() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void disturb(AI the_behavior) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public double[] acceleration() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double orientation() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] position() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void simulate(double some_seconds) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public double[] velocity() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(Color the_color) {
+    // TODO Auto-generated method stub
+    
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a
