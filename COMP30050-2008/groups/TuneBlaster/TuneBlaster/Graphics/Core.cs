@@ -28,7 +28,7 @@ namespace TuneBlaster_.Graphics
         GamePadState padState;
         value colour;
         Vector3 pos;
-        public static bool searchLightOn= false;
+        public static bool searchLightOn;
         Image searchLight;
         Texture2D searchLightTexture;
         public bool blackwhite;
@@ -58,7 +58,7 @@ namespace TuneBlaster_.Graphics
             oldRotation = 0f;
             game = g;
             searchLight.Initialise(new Vector2(1200, 1200), Position, g);
-            searchLightOn = true;
+            searchLightOn = false;
         }
 
         /*
@@ -126,15 +126,16 @@ namespace TuneBlaster_.Graphics
                 looseBalls[i].Move();
             }
             CheckLoose();
-            //if (keyBoardState.IsKeyDown(Keys.A))
-            //{
-              //  searchLightOn = true;
-            //}
+            
+            if (keyBoardState.IsKeyDown(Keys.A))
+            {
+                searchLightOn = true;
+            }
 
-            //if (keyBoardState.IsKeyDown(Keys.S))
-            //{
-            //    searchLightOn = false;
-            //}
+            if (keyBoardState.IsKeyDown(Keys.S))
+            {
+                searchLightOn = false;
+            }
 
             if (keyBoardState.IsKeyDown(Keys.Q))
             {
