@@ -9,9 +9,17 @@ package thrust.physics;
  */
 
 public class Physicswhack implements Physics {
-/**
- * implementing double speed.
- */
+  /**
+   * Variable X in Position.
+   */
+  double my_x;
+   /**
+   *  Variable Y in Position.
+   */
+  double my_y;
+  /**
+   * implementing double speed.
+   */
   double my_whackspeed;
   /**
    * implementing double Orientation.
@@ -67,7 +75,8 @@ public class Physicswhack implements Physics {
 
   //@ ensures \result.length == 2;
   /*@ pure @*/public double[] position() {
-    return null;
+    final double[] position = {my_x, my_y};
+    return position;
   }
 
   /**
@@ -76,9 +85,14 @@ public class Physicswhack implements Physics {
 
 
   /*@ pure @*/public double[] velocity() {
-  //speed and direction
+    //speed and direction
     final double[] my_whackvelocity = {my_whackspeed * my_whackorientation};
     return my_whackvelocity;
+  }
+  /**
+   * @param a_time_interval the amount of time that has passed.
+   */
+  public void simulate(final double a_time_interval) {
   }
 
 }
