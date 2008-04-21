@@ -111,20 +111,21 @@ namespace Shed
 			// mnuImageDiv2
 			// 
 			mnuImageDiv2.Name = "mnuImageDiv2";
-			mnuImageDiv2.Size = new System.Drawing.Size(149, 6);
+			mnuImageDiv2.Size = new System.Drawing.Size(154, 6);
 			// 
 			// mnuImageDiv3
 			// 
 			mnuImageDiv3.Name = "mnuImageDiv3";
-			mnuImageDiv3.Size = new System.Drawing.Size(149, 6);
+			mnuImageDiv3.Size = new System.Drawing.Size(154, 6);
 			// 
 			// mnuImageDiv1
 			// 
 			mnuImageDiv1.Name = "mnuImageDiv1";
-			mnuImageDiv1.Size = new System.Drawing.Size(149, 6);
+			mnuImageDiv1.Size = new System.Drawing.Size(154, 6);
 			// 
 			// picShape
 			// 
+			this.picShape.BackColor = System.Drawing.SystemColors.AppWorkspace;
 			this.picShape.Location = new System.Drawing.Point(0, 0);
 			this.picShape.Name = "picShape";
 			this.picShape.Size = new System.Drawing.Size(256, 264);
@@ -132,8 +133,8 @@ namespace Shed
 			this.picShape.TabIndex = 0;
 			this.picShape.TabStop = false;
 			this.picShape.MouseLeave += new System.EventHandler(this.picShape_MouseLeave);
-			this.picShape.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picShape_MouseDown);
 			this.picShape.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picShape_MouseMove);
+			this.picShape.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picShape_MouseDown);
 			this.picShape.Paint += new System.Windows.Forms.PaintEventHandler(this.picShape_Paint);
 			this.picShape.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picShape_MouseUp);
 			// 
@@ -146,7 +147,7 @@ namespace Shed
             this.mnuZone});
 			this.mnuShape.Location = new System.Drawing.Point(8, 8);
 			this.mnuShape.Name = "mnuShape";
-			this.mnuShape.Size = new System.Drawing.Size(233, 24);
+			this.mnuShape.Size = new System.Drawing.Size(141, 24);
 			this.mnuShape.TabIndex = 1;
 			this.mnuShape.Text = "mnuShape";
 			this.mnuShape.Visible = false;
@@ -175,7 +176,7 @@ namespace Shed
 			this.mnuViewGrid.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewGrid.Name = "mnuViewGrid";
 			this.mnuViewGrid.ShortcutKeyDisplayString = "G";
-			this.mnuViewGrid.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewGrid.Size = new System.Drawing.Size(142, 22);
 			this.mnuViewGrid.Text = "&Grid";
 			this.mnuViewGrid.Click += new System.EventHandler(this.mnuViewGrid_Click);
 			// 
@@ -185,7 +186,7 @@ namespace Shed
 			this.mnuViewBound.CheckOnClick = true;
 			this.mnuViewBound.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewBound.Name = "mnuViewBound";
-			this.mnuViewBound.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewBound.Size = new System.Drawing.Size(142, 22);
 			this.mnuViewBound.Text = "&Boundaries";
 			this.mnuViewBound.Click += new System.EventHandler(this.mnuViewBound_Click);
 			// 
@@ -196,7 +197,7 @@ namespace Shed
 			this.mnuViewGlow.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewGlow.Name = "mnuViewGlow";
 			this.mnuViewGlow.ShortcutKeyDisplayString = "L";
-			this.mnuViewGlow.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewGlow.Size = new System.Drawing.Size(142, 22);
 			this.mnuViewGlow.Text = "G&low";
 			this.mnuViewGlow.Click += new System.EventHandler(this.mnuViewGlow_Click);
 			// 
@@ -206,7 +207,7 @@ namespace Shed
 			this.mnuViewPixel.CheckOnClick = true;
 			this.mnuViewPixel.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewPixel.Name = "mnuViewPixel";
-			this.mnuViewPixel.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewPixel.Size = new System.Drawing.Size(142, 22);
 			this.mnuViewPixel.Text = "&Pixels";
 			this.mnuViewPixel.Click += new System.EventHandler(this.mnuViewPixel_Click);
 			// 
@@ -216,7 +217,7 @@ namespace Shed
 			this.mnuViewZone.CheckState = System.Windows.Forms.CheckState.Indeterminate;
 			this.mnuViewZone.Name = "mnuViewZone";
 			this.mnuViewZone.ShortcutKeyDisplayString = "Z";
-			this.mnuViewZone.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewZone.Size = new System.Drawing.Size(142, 22);
 			this.mnuViewZone.Text = "&Zones";
 			this.mnuViewZone.Click += new System.EventHandler(this.mnuViewZone_Click);
 			// 
@@ -227,20 +228,20 @@ namespace Shed
 			this.mnuViewNegative.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuViewNegative.Name = "mnuViewNegative";
 			this.mnuViewNegative.ShortcutKeyDisplayString = "N";
-			this.mnuViewNegative.Size = new System.Drawing.Size(152, 22);
+			this.mnuViewNegative.Size = new System.Drawing.Size(142, 22);
 			this.mnuViewNegative.Text = "&Negative";
 			this.mnuViewNegative.Click += new System.EventHandler(this.mnuViewNegative_Click);
 			// 
 			// mnuViewDiv1
 			// 
 			this.mnuViewDiv1.Name = "mnuViewDiv1";
-			this.mnuViewDiv1.Size = new System.Drawing.Size(149, 6);
+			this.mnuViewDiv1.Size = new System.Drawing.Size(139, 6);
 			// 
 			// mnuView1to1
 			// 
 			this.mnuView1to1.Name = "mnuView1to1";
 			this.mnuView1to1.ShortcutKeyDisplayString = "X";
-			this.mnuView1to1.Size = new System.Drawing.Size(152, 22);
+			this.mnuView1to1.Size = new System.Drawing.Size(142, 22);
 			this.mnuView1to1.Text = "1&x1";
 			this.mnuView1to1.Click += new System.EventHandler(this.mnuView1to1_Click);
 			// 
@@ -273,7 +274,7 @@ namespace Shed
 			this.mnuImageSelect.Enabled = false;
 			this.mnuImageSelect.Name = "mnuImageSelect";
 			this.mnuImageSelect.ShortcutKeyDisplayString = "S";
-			this.mnuImageSelect.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageSelect.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageSelect.Text = "&Select";
 			// 
 			// mnuImageSelectAll
@@ -281,7 +282,7 @@ namespace Shed
 			this.mnuImageSelectAll.Enabled = false;
 			this.mnuImageSelectAll.Name = "mnuImageSelectAll";
 			this.mnuImageSelectAll.ShortcutKeyDisplayString = "A";
-			this.mnuImageSelectAll.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageSelectAll.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageSelectAll.Text = "Select &All";
 			// 
 			// mnuImagePaint
@@ -290,7 +291,7 @@ namespace Shed
 			this.mnuImagePaint.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.mnuImagePaint.Name = "mnuImagePaint";
 			this.mnuImagePaint.ShortcutKeyDisplayString = "P";
-			this.mnuImagePaint.Size = new System.Drawing.Size(152, 22);
+			this.mnuImagePaint.Size = new System.Drawing.Size(157, 22);
 			this.mnuImagePaint.Text = "&Paint";
 			this.mnuImagePaint.Click += new System.EventHandler(this.mnuImagePaint_Click);
 			// 
@@ -298,7 +299,7 @@ namespace Shed
 			// 
 			this.mnuImageDraw.Name = "mnuImageDraw";
 			this.mnuImageDraw.ShortcutKeyDisplayString = "D";
-			this.mnuImageDraw.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageDraw.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageDraw.Text = "&Draw";
 			this.mnuImageDraw.Click += new System.EventHandler(this.mnuImageDraw_Click);
 			// 
@@ -306,7 +307,7 @@ namespace Shed
 			// 
 			this.mnuImageLine.Name = "mnuImageLine";
 			this.mnuImageLine.ShortcutKeyDisplayString = "L";
-			this.mnuImageLine.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageLine.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageLine.Text = "&Line";
 			this.mnuImageLine.Click += new System.EventHandler(this.mnuImageLine_Click);
 			// 
@@ -322,7 +323,7 @@ namespace Shed
             this.mnuImageWeightInc,
             this.mnuImageWeightDec});
 			this.mnuImageWeight.Name = "mnuImageWeight";
-			this.mnuImageWeight.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageWeight.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageWeight.Text = "&Weight (1.0)";
 			// 
 			// mnuImageWeight4
@@ -402,7 +403,7 @@ namespace Shed
             this.mnuImageRadiusInc,
             this.mnuImageRadiusDec});
 			this.mnuImageRadius.Name = "mnuImageRadius";
-			this.mnuImageRadius.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageRadius.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageRadius.Text = "&Radius (5.0)";
 			// 
 			// mnuImageRadius01
@@ -510,7 +511,7 @@ namespace Shed
             this.mnuImageFalloffInc,
             this.mnuImageFalloffDec});
 			this.mnuImageFalloff.Name = "mnuImageFalloff";
-			this.mnuImageFalloff.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageFalloff.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageFalloff.Text = "Falloff (0.0)";
 			// 
 			// mnuImageFalloff4
@@ -575,7 +576,7 @@ namespace Shed
 			this.mnuImageCut.Enabled = false;
 			this.mnuImageCut.Name = "mnuImageCut";
 			this.mnuImageCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-			this.mnuImageCut.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageCut.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageCut.Text = "Cu&t";
 			// 
 			// mnuImageCopy
@@ -583,7 +584,7 @@ namespace Shed
 			this.mnuImageCopy.Enabled = false;
 			this.mnuImageCopy.Name = "mnuImageCopy";
 			this.mnuImageCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.mnuImageCopy.Size = new System.Drawing.Size(152, 22);
+			this.mnuImageCopy.Size = new System.Drawing.Size(157, 22);
 			this.mnuImageCopy.Text = "&Copy";
 			// 
 			// mnuImagePaste
@@ -591,7 +592,7 @@ namespace Shed
 			this.mnuImagePaste.Enabled = false;
 			this.mnuImagePaste.Name = "mnuImagePaste";
 			this.mnuImagePaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-			this.mnuImagePaste.Size = new System.Drawing.Size(152, 22);
+			this.mnuImagePaste.Size = new System.Drawing.Size(157, 22);
 			this.mnuImagePaste.Text = "&Paste";
 			// 
 			// mnuImageClear
@@ -752,11 +753,11 @@ namespace Shed
 			this.MainMenuStrip = this.mnuShape;
 			this.Name = "frmShape";
 			this.Text = "Shape";
+			this.Load += new System.EventHandler(this.frmShape_Load);
+			this.Activated += new System.EventHandler(this.frmShape_Activated);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmShape_FormClosed);
 			this.Resize += new System.EventHandler(this.frmShape_Resize);
-			this.Activated += new System.EventHandler(this.frmShape_Activated);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmShape_KeyDown);
-			this.Load += new System.EventHandler(this.frmShape_Load);
 			((System.ComponentModel.ISupportInitialize)(this.picShape)).EndInit();
 			this.mnuShape.ResumeLayout(false);
 			this.mnuShape.PerformLayout();

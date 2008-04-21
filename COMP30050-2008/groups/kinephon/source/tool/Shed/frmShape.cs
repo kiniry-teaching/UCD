@@ -76,6 +76,7 @@ namespace Shed
 			int r = 0, g = 0, b = 0;
 			float DimAmt = 1.0f;
 			bool clear = false;
+			int range = 80;
 
 			if(_tool == TypesOfTool.Draw || _tool == TypesOfTool.Line || _tool == TypesOfTool.Paint)
 				clear = SetPixelLock(_mouseX, _mouseY, true, true);
@@ -99,26 +100,26 @@ namespace Shed
 
 				if(we < 0)
 					if(mnuViewNegative.Checked == true)
-						r = (int)(62 * (-we));
+						r = (int)(range * (-we));
 					else
 						r = 0;
 				else
-					g = (int)(62 * we);
+					g = (int)(range * we);
 
 				// Add or remove a blue tint to the centre pixel
 				if(mnuViewPixel.Checked == true)
 					if(_shape.Pixels.Pixel[x, y].Weight > 0)
-						b = 62;
+						b = range;
 					else
 					if(_shape.Pixels.Pixel[x, y].Weight < 0)
 						if(mnuViewNegative.Checked == true)
-							b = -62;
+							b = -range;
 						else
 							b = 0;
 					else
 						b = 0;
 
-				Brush br = new SolidBrush(Color.FromArgb(193 + r, 193 + g, 193 + b));
+				Brush br = new SolidBrush(Color.FromArgb(155 + r, 155 + g, 155 + b));
 				e.Graphics.FillRectangle(br, x * dx, y * dy, dx, dy);
 			}
 
