@@ -41,12 +41,12 @@ public class FuelPod extends StaticEntity
 
   public void simulate(double some_seconds) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public void change_fuel_content(int the_fuel_change) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public int fuel_mass() {
@@ -66,7 +66,6 @@ public class FuelPod extends StaticEntity
 
   public void set_fuel_content(int the_fuel_content) {
     // TODO Auto-generated method stub
-    
   }
 
   public double[] acceleration() {
@@ -91,7 +90,7 @@ public class FuelPod extends StaticEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -106,7 +105,7 @@ public class FuelPod extends StaticEntity
 
   public void shape(Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public byte state() {
@@ -116,7 +115,7 @@ public class FuelPod extends StaticEntity
 
   public void state(byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Color color() {
@@ -126,7 +125,7 @@ public class FuelPod extends StaticEntity
 
   public void color(Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
   /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);
