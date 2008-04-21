@@ -1,0 +1,44 @@
+Commiting merge
+--This line, and those below, will be ignored--
+
+A    Fuelable.java
+M    .classpath
+M    .project
+A    src/thrust/animation/Animation.java
+A    src/thrust/animation/Animatable.java
+M    src/thrust/input/InputHandler.java
+M    src/thrust/audio/Music.java
+M    src/thrust/audio/SoundEffect.java
+A    src/thrust/physics/PhysicsInterface.java
+A    src/thrust/entities/in_game/GunTurret.java
+A    src/thrust/entities/in_game/Spaceship.java
+A    src/thrust/entities/in_game/Explosion.java
+A    src/thrust/entities/in_game/Terrain.java
+A    src/thrust/entities/in_game/Barrier.java
+A    src/thrust/entities/in_game/Bullet.java
+A    src/thrust/entities/in_game/Factory.java
+A    src/thrust/entities/in_game/GoalSphere.java
+A    src/thrust/entities/in_game/Star.java
+A    src/thrust/entities/in_game/Space.java
+A    src/thrust/entities/in_game/FuelPod.java
+A    src/thrust/entities/DynamicEntity.java
+A    src/thrust/entities/behaviors/AI.java
+A    src/thrust/entities/behaviors/Tow.java
+A    src/thrust/entities/FriendEntity.java
+A    src/thrust/entities/StaticEntity.java
+A    src/thrust/entities/NeutralEntity.java
+A    src/thrust/entities/EnemyEntity.java
+A    src/thrust/entities/about/Fuelable.java
+A    src/thrust/entities/about/AbstractGameState.java
+A    src/thrust/entities/Entity.java
+A    src/thrust/entities/properties/GameColor.java
+M    src/thrust/display/AbstractHighScoreDisplay.java
+M    .externalToolBuilders/BONc informal check.launch
+M    .externalToolBuilders/BONc typecheck.launch
+M    .externalToolBuilders/BONc HTML generation.launch
+M    .checkstyle
+M    bon/Thrust_classes.bon
+M    bon/Thrust_static_diagrams.bon
+M    bon/Thrust_clusters.bon
+M    bon/Thrust_system.bon
+M    support_files/PMD_config
