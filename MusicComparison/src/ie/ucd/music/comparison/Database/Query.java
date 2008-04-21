@@ -103,30 +103,7 @@ public class Query {
         }
         return returnedValue;
     } 
-    
-    public String getInsertValues(String art, track, brate) {
-        
-      try {
-        
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        String url = "jdbc:mysql://localhost:3306/Music";
-        Connection conn = DriverManager.getConnection(url, "root", "");
-          PreparedStatement mystmt = conn.prepareStatement("INSERT INTO Audio_Files (Artist_Name,Track_Title,Bit_Rate) VALUES(+art+,track +,+brate)");
-          mystmt.setString(1,"");
-          mystmt.setString(2,"");
-          mystmt.setInt(3, 128);
-          
-          mystmt.executeUpdate();
-    
-        System.out.println("1 row affected");
-        
-          conn.close();
-          }
-      catch (Exception e)
-      {
-          e.printStackTrace();
-      }
-    }  
+      
 /**
  * 
  * @param args

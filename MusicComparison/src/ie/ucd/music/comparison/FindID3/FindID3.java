@@ -6,14 +6,15 @@ package ie.ucd.music.comparison.FindID3;
 
 
 
+import ie.ucd.music.comparison.Database.InsertValues;
+
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jaudiotagger.audio.*;
-import org.jaudiotagger.tag.*;
-import java.util.logging.*;
-//import org.jaudiotagger.audio.AudioFile;
-//import org.jaudiotagger.audio.AudioFileIO;
+
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.Tag;
 
 
 
@@ -162,8 +163,8 @@ public class FindID3 {
 
 
 
-        static private void PrintID3(File mp3) {
-
+        static private void setID3(File mp3) {
+                //populate Database with id3 tag information
                 try {
 
                         // Turn off all logging. This should be moved??
@@ -182,24 +183,20 @@ public class FindID3 {
 
                         Tag tag = f.getTag();
 
+                        
+                        System.out.println("Track Length: " + f.getAudioHeader().getTrackLength());
 
+                        int bitRate = f.getAudioHeader().getSampleRateAsNumber();
 
-                        System.out.println("Track Length: "
+                        String artist = tag.getFirstArtist();
+                        System.out.println("here " + tag.getFirstArtist());
+                        String album = tag.getFirstAlbum();
 
-                                        + f.getAudioHeader().getTrackLength());
+                        String songTitle = tag.getFirstTitle();
 
-                        System.out.println("Sample Rate: "
-
-                                        + f.getAudioHeader().getSampleRateAsNumber());
-
-
-
-                        System.out.println("Artist: " + tag.getFirstArtist());
-
-                        System.out.println("Album: " + tag.getFirstAlbum());
-
-                        System.out.println("Title: " + tag.getFirstTitle());
-
+                        InsertValues insert1 = new InsertValues();
+                        
+                        insert1.insertInfo(artist, songTitle, bitRate, "Audio_Files");
                         // System.out.println(tag.getFirstComment());
 
                         System.out.println("Year: " + tag.getFirstYear());
@@ -284,7 +281,7 @@ public class FindID3 {
 
                                         System.out.println("examining " + allFiles[i]);
 
-                                        PrintID3(allFiles[i]);
+                                        setID3(allFiles[i]);
 
                                         System.out.println("========================= \n");
 
