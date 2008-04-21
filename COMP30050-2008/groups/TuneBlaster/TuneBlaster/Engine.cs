@@ -48,6 +48,7 @@ namespace TuneBlaster_
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
         bool specialModeOn;
         String theNextMode;
+        Image gameOver;
 
         public static ColouredParticle explosion;
         public static ColouredParticle smoke;
@@ -91,6 +92,7 @@ namespace TuneBlaster_
             frame = new Image();
             music = new GameAudio();
             cameraPos = new Vector3(400f, 300f, 0f);
+            gameOver = new Image();
 
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 720;
@@ -154,6 +156,7 @@ namespace TuneBlaster_
             frame.Initialise(new Vector2(1280, 720), new Vector2(640, 360), this);
             base.Initialize();
             music.Initialise();
+            gameOver.Initialise(new Vector2(720, 720), new Vector2(640, 0),  this);
             music.listener.Position = cameraPos;
             specialModeOn = false;
             theNextMode = "Special Mode in:";
@@ -182,6 +185,8 @@ namespace TuneBlaster_
                 ball.LoadGraphicsContent(spriteBatch);
                 ballGenerator.LoadGraphicsContent(spriteBatch, texture);
                 lucidaConsole = Content.Load<SpriteFont>("Fonts/Lucida Console");
+                texture = Content.Load<Texture2D>(@"Resources\Textures\gameover");
+                gameOver.LoadGraphicsContent(spriteBatch, texture);
                 specialmode = Content.Load<SpriteFont>("Fonts/ArialMedium");
        
 
@@ -220,69 +225,83 @@ namespace TuneBlaster_
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the default game to exit on Xbox 360 and Windows
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-            colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
-            ballPos = core.getPos();
-
-            if (colour == Image.value.green)
+            if (!core.GameOver())
             {
-                music.setPosition(ballPos);
-                music.InstrChanger(Image.value.green);
-            }
+                // Allows the default game to exit on Xbox 360 and Windows
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                    this.Exit();
 
-            if (colour == Image.value.blue) {
-                music.setPosition(ballPos);
-                music.InstrChanger(Image.value.blue);
-            }
+                colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+                ballPos = core.getPos();
 
-            if (colour == Image.value.red)
-            {
-                music.setPosition(ballPos);
-                music.InstrChanger(Image.value.red);
-            }
-
-            if (colour == Image.value.purple)
-            {
-                music.setPosition(ballPos);
-                music.InstrChanger(Image.value.purple);
-            }
-
-            if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
-            if (blastTime > 0) blastTime--;
-            if (blastTime == 0)
-            {
-                blast = false;
-                GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
-
-            }
-            ballGenerator.Update();
-            ball.Update(gameTime);
-            music.UpdateAudio();
-            base.Update(gameTime);
-
-            this.elapsedTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //Console.WriteLine(elapsedTime);
-            if ((int) elapsedTime ==0)
-            {
-
-                elapsedTime = 15;
-                if (!specialModeOn)
+                if (colour == Image.value.green)
                 {
-                    core.NextSpecial();
-                    specialModeOn = true;
-                    theNextMode = "Normal Mode in:";
+                    music.setPosition(ballPos);
+                    music.InstrChanger(Image.value.green);
                 }
-                else
+
+                if (colour == Image.value.blue)
                 {
-                    core.ResetSpecial();
-                    specialModeOn = false;
-                    theNextMode = "Special Mode in:";
+                    music.setPosition(ballPos);
+                    music.InstrChanger(Image.value.blue);
                 }
-                
-                //Do whatever else you need to do
+
+                if (colour == Image.value.red)
+                {
+                    music.setPosition(ballPos);
+                    music.InstrChanger(Image.value.red);
+                }
+
+                if (colour == Image.value.purple)
+                {
+                    music.setPosition(ballPos);
+                    music.InstrChanger(Image.value.purple);
+                }
+
+                if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+                if (blastTime > 0) blastTime--;
+                if (blastTime == 0)
+                {
+                    blast = false;
+                    GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
+
+                }
+                ballGenerator.Update();
+                ball.Update(gameTime);
+                music.UpdateAudio();
+                base.Update(gameTime);
+
+                this.elapsedTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //Console.WriteLine(elapsedTime);
+                if ((int)elapsedTime == 0)
+                {
+
+                    
+                    if (!specialModeOn)
+                    {
+                        core.NextSpecial();
+                        specialModeOn = true;
+                        theNextMode = "Normal Mode in:";
+                        elapsedTime = 20;
+                    }
+                    else
+                    {
+                        core.ResetSpecial();
+                        specialModeOn = false;
+                        theNextMode = "Special Mode in:";
+                        elapsedTime = 30;
+                    }
+
+                    //Do whatever else you need to do
+                }
+            }
+
+            if (core.GameOver())
+            {
+                if (gameOver.Position != new Vector2(640, 360))
+                {
+                    gameOver.Position = new Vector2(gameOver.Position.X, gameOver.Position.Y + 2);
+                }
             }
         }
 
@@ -319,7 +338,14 @@ namespace TuneBlaster_
                 SpriteSortMode.Immediate, SaveStateMode.None);
             spriteBatch.DrawString(specialmode, theNextMode + elapsedTime.ToString("N0"),
                                    timePosition, Color.Pink);
+
+            if (core.GameOver())
+            {
+                gameOver.Draw(gameTime);
+            }
             spriteBatch.End();
+
+            
 
 
             base.Draw(gameTime);

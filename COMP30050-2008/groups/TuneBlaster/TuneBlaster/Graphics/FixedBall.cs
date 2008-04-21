@@ -14,7 +14,7 @@ namespace TuneBlaster_.Graphics
     {
         #region Fields (core, colour, initialRoatation, coreDistance)
 
-        float initialRotation, coreDistance;
+        public float initialRotation, coreDistance;
         bool dead, locked, onCore;
         List<FixedBall> inContact;
         List<FixedBall> supports;

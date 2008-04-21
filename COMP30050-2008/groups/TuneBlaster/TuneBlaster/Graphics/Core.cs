@@ -33,6 +33,7 @@ namespace TuneBlaster_.Graphics
         Texture2D searchLightTexture;
         public bool blackwhite;
         int nextSpecial;
+        bool gameOver;
 
 
         #endregion
@@ -57,6 +58,7 @@ namespace TuneBlaster_.Graphics
             base.Initialise(mySize, myPosition, g);
             acceleration = 0f;
             oldRotation = 0f;
+            gameOver = false;
             game = g;
             nextSpecial = 0;
             searchLight.Initialise(new Vector2(1200, 1200), Position, g);
@@ -91,6 +93,11 @@ namespace TuneBlaster_.Graphics
             {
                 if (balls[i] != null)
                 {
+                    if (balls[i].coreDistance > 310)
+                    {
+                        gameOver = true;
+                        return colour;
+                    }
                     if (balls[i].IsDead())
                     {
                         colour = balls[i].colour;
@@ -338,6 +345,16 @@ namespace TuneBlaster_.Graphics
                 searchLightOn = false;
             }
         }
+
+        /*
+         * Turn the current Special Mode off 
+         * */
+        public bool GameOver()
+        {
+            return gameOver;
+        }
+
+
 
 
         #endregion
