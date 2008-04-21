@@ -57,7 +57,8 @@ OUTPUT_WHEN_CHANGED = 0x00
 #Output continuously
 OUTPUT_CONTINUOUSLY = 0x04
 
-
+global send_socket
+global receive_socket
 
 
 #Turns a string into a list of byte values.
@@ -72,9 +73,6 @@ def toString(a_list_of_bytes):
         result = result+bstr
         
     return result
-
-global send_socket
-global receive_socket
 
 
 def find_wiimote():
@@ -215,6 +213,7 @@ previous_leds = 0
 
 def receive_report():
     global previous_leds
+    global receive_socket
     try:
         data = receive_socket.recv(MAX_PACKET_SIZE)
     except bluetooth.BluetoothError:
@@ -258,7 +257,6 @@ def close_connection():
     
 #wiimote_address = find_wiimote()
 wiimote_address = "00:1E:35:06:74:BD"
-print "wiimote search complete"
 
 """ if (wiimote_address != NOT_FOUND):
     print wiimote_address

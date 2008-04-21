@@ -3,10 +3,51 @@
 #include <iostream>
 #include <string>
 #include "Python.h"
+#include "WiimoteInterface.h"
+#include "IRReport.h"
 using namespace std;
 
 int main(int, char **) {
-	Py_Initialize();
+	WiimoteInterface wiinterface;
+	cout << "interface created" << endl;
+	string wiimote = wiinterface.findWiimote();
+	cout << "search complete" << endl;
+	while (wiimote == "NOT_FOUND") {
+		cout << "wiimote not found, trying again" << endl;
+		wiimote = wiinterface.findWiimote();
+	}
+	wiinterface.connectTo(wiimote);
+	cout << "connected" << endl;
+
+	int intervals = 0;
+	int cur_time = 0;
+	int last_time = 0;
+	int counter = 0;
+	for (int i = 0; i < 1000; i++) {
+		IRReport report  = wiinterface.receiveData();
+		cout << i;
+		//the whole if/else block servers only as feedback and provides
+		//simple statistics, it should not be included in the release.
+		if (report.isValid()) {
+			counter++;
+			last_time = cur_time;
+			cur_time = report.getTimestamp();
+			if (last_time != 0) {
+				intervals += (cur_time - last_time);
+			}
+			report.print();
+		} else {
+			cout << "NOT VALID" << endl;
+		}
+	}
+	
+	cout << intervals/counter;
+
+	cout << "done" << endl;
+	return 0;
+
+
+	/*Py_Initialize();
 
 	//char* FileName = "/media/data/programming/linux/cpp/workspace/Kinephon/source/wiimote/main.py";
 	char* FileName = "code.py";
@@ -23,12 +64,12 @@ int main(int, char **) {
 
 
 
-	PyObject * module = PyImport_AddModule("__main__"); 
+	PyObject * module = PyImport_AddModule("__main__"); // borrowed reference
 
-	assert(module);                                     
-	PyObject * dictionary = PyModule_GetDict(module);   
-	assert(dictionary);                                 
-	
+	assert(module);                                     // __main__ should always exist
+	PyObject * dictionary = PyModule_GetDict(module);   // borrowed reference
+	assert(dictionary);                                 // __main__ should have a dictionary
+
 	PyObject * wiimote_address
 	= PyDict_GetItemString(dictionary, "wiimote_address");    // borrowed reference
 	assert(wiimote_address);
@@ -50,47 +91,38 @@ int main(int, char **) {
 			assert(report);
 			assert(PyList_Check(report));
 			int size = PyList_Size(report);
-			
+
 			for (int j=0; j < size; j++) {
 				PyObject * item = PyList_GetItem(report, j);
 				assert(item);
 				assert(PyInt_Check(item));
 				int item_value = PyInt_AsSsize_t(item);
-				cout << item_value;
-				if (item_value > 99) {
-					cout << " ";
-				} else if (item_value < 10) {
-					cout << "   ";
-				} else {
-					cout << "  ";
-				}
+
+//				if (item_value > 99) {
+//					cout << " ";
+//				} else if (item_value < 10) {
+//					cout << "   ";
+//				} else {
+//					cout << "  ";
+//				}
+//				cout << item_value;
+
 			}
-			cout << "\n";
+			//cout << "\n";
 		}
 
 
 	} else {
 		//try again?
 	}
-	
+
 	PyRun_SimpleString("close_connection()");
 	cout << "transmission complete";
-
-	/*
-  	if (wiimote_address != NOT_FOUND):
-  	    establish_connection(wiimote_address)
-  	    initialise_ir_camera()
-  	    receive_data()
-  	    close_connection()
-  	    print "transmission complete"
-  	else:
-  	    print "transmission failed: wiimote not found"
-	 */
 
 
 	//PyRun_SimpleString("result = 5 ** 2");
 	Py_Finalize();
 	cout << "python stopped";
-	return 0;
+	return 0; */
 }
 
