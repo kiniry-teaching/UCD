@@ -1,0 +1,12 @@
+Fix
+--This line, and those below, will be ignored--
+
+D    .classpath
+M    src/thrust/input/InputHandler.java
+M    src/thrust/audio/Music.java
+M    src/thrust/audio/SoundEffect.java
+A    src/thrust/entities/about/Fuelable.java
+M    .externalToolBuilders/BONc HTML generation.launch
+D    .checkstyle
+D    .pmd
+M    bon/Thrust_classes.bon
