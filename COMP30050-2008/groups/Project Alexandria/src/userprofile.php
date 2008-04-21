@@ -12,8 +12,17 @@ include("include/header.php"); //page header
 */
 include("include/userfunctions.php");
 
-$username = $_GET["username"]; //Gets the username from the address
-getUserInfo($username);
+$username = $_SESSION['username']; //Gets the username from the session
+
+
+	include("connection.php"); //Connects to the database
+	$result = mysql_query("SELECT * FROM users
+		WHERE username='$username'");
+
+	while($row = mysql_fetch_array($result)){
+		$userlevel=$row['userlevel'];
+		$dateregistered=$row['timestamp'];
+	}//gets the user information needed from the user database
 
 ?>
 <div>
@@ -23,16 +32,29 @@ getUserInfo($username);
 			<td width="80%"><?php echo("<b>".$username."</b>");?></td>
 		</tr>
 		<tr>
-			<td>Date Registered:</td>
+			<td>Registered:</td>
 			<td><?php echo($dateregistered);?></td>
 		</tr>
+		
 		<tr>
+			<td>Userlevel:</td>
+			<td><?php
+				if($userlevel==0){echo("Banned");}
+				if($userlevel==1){echo("User");}
+				if($userlevel==8){echo("Librarian");}
+				if($userlevel==9){echo("Administrator");	}
+				?></td>
+		</tr>		
+		
+		
+		
+		<tr>
+			<td>Books Reviewed:</td>
 			<td><?php //TODO - getBooksReviewed ?></td>
-			<td> </td>
 		</tr>
 		<tr>
+			<td>Books Borrowed:</td>
 			<td><?php //TODO - getBooksReturned ?></td>
-			<td> </td>
 		</tr>
 	</table>
 </div>

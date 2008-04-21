@@ -6,11 +6,12 @@ include("include/header.php"); //page header
 <div>
 <form action="register.php" method="post">
 Enter a Username: <input type="text" name="username" /><br />
-(Maximum Username Length 30 Chararcters)<br />
+<b>Maximum Username Length 30 Chararcters</b><br />
 Enter your e-mail: <input type="text" name="email1" /><br />
 Re-Enter e-mail: <input type="text" name="email2" /><br />
 Enter a password: <input type="password" name="password1" /><br />
-(Max Password Length 32 Chararcters)<br />
+<b>	Max Password Length 32 Characters<br />
+	Min Password Length 5 Characters</b><br />
 Re-Enter your password: <input type="password" name="password2" /><br />
 
 <input type="hidden" name="state" value="1" /><input type="submit" />
@@ -28,6 +29,8 @@ if($_POST['state'] == 1){
 	
 	include("include/registerfunctions.php");
 	createUser($username, $password1, $userlevel, $email1, $email2, $password1, $password2);
+
 }
+
 include("include/footer.php"); //page footer
 ?>

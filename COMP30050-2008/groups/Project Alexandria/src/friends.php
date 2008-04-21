@@ -9,8 +9,8 @@
 	//echo($username);
 
 
-//$result = mysql_query("SELECT * FROM users_friends
-	//				WHERE username='$username'");
+$result = mysql_query("SELECT * FROM users_friends
+					WHERE username='$username'");
 			
 ?>
 <div align="center">

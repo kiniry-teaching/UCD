@@ -56,8 +56,14 @@ function check($username, $email1, $email2, $password1, $password2)
 			else
 			if(strlen($password1) > 32)
 			{
-			echo("<p>The Password ".$password1." is too long!<br /> 
-			Please Try a password that is less than 32 character long. </p>");
+			echo("<p>The Password is too long!<br /> 
+			Please Try a password that is shorter than 32 character. </p>");
+			return False;
+			}
+			if(strlen($password1) < 5)
+			{
+			echo("<p>That Password is too short!<br /> 
+			Please Try a password that is longer than 5 character. </p>");
 			return False;
 			}
 			else
@@ -89,14 +95,17 @@ function createUser($username, $password1, $userlevel, $email1, $email2, $passwo
 	
 	if(check($username, $email1, $email2, $password1, $password2)==True)
 		{
-	
+		//test
 		$userlevel = checkUsername($username);
 		include("connection.php"); //Connects to database
 		
-		$md5pass = md5($password1);
+		//$md5pass = md5($password1);  //old hash function
+		$passwordHash = sha1($password1); //encrypts the password before adding it to the database
+				
+		//$date=date(d-F-Y); //add todays date to the datebase as the date of registration
 		$time=time();
 		$sql="INSERT INTO users (username, password, userlevel, email, timestamp)
-								VALUES ('$username', '$md5pass', '$userlevel', '$email1', '$time')";
+								VALUES ('$username', '$passwordHash', '$userlevel', '$email1', '$time')";
 			if (!mysql_query($sql,$con))
 			{
 			die('Error: ' . mysql_error());
