@@ -46,6 +46,8 @@ namespace TuneBlaster_
         Vector3 cameraPos;
         Vector3 ballPos;
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+        bool specialModeOn;
+        String theNextMode;
 
         public static ColouredParticle explosion;
         public static ColouredParticle smoke;
@@ -60,7 +62,7 @@ namespace TuneBlaster_
 
 
        
-        float elapsedTime = 100;
+        float elapsedTime = 15;
         Vector2 timePosition = new Vector2(45, 100);
       
 
@@ -153,6 +155,8 @@ namespace TuneBlaster_
             base.Initialize();
             music.Initialise();
             music.listener.Position = cameraPos;
+            specialModeOn = false;
+            theNextMode = "Special Mode in:";
             //Content.RootDirectory = "Content";
         }
 
@@ -250,38 +254,36 @@ namespace TuneBlaster_
             if (blastTime > 0) blastTime--;
             if (blastTime == 0)
             {
-
                 blast = false;
                 GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
 
             }
-
-
-
             ballGenerator.Update();
             ball.Update(gameTime);
             music.UpdateAudio();
             base.Update(gameTime);
 
-
-
-
-
             this.elapsedTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (this.elapsedTime ==0)
+            //Console.WriteLine(elapsedTime);
+            if ((int) elapsedTime ==0)
             {
 
-                elapsedTime = 100;
+                elapsedTime = 15;
+                if (!specialModeOn)
+                {
+                    core.NextSpecial();
+                    specialModeOn = true;
+                    theNextMode = "Normal Mode in:";
+                }
+                else
+                {
+                    core.ResetSpecial();
+                    specialModeOn = false;
+                    theNextMode = "Special Mode in:";
+                }
                 
                 //Do whatever else you need to do
             }
-               
-
-
-
-
-
-
         }
 
     
@@ -315,7 +317,7 @@ namespace TuneBlaster_
 
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend,
                 SpriteSortMode.Immediate, SaveStateMode.None);
-            spriteBatch.DrawString(specialmode, "special mode in:" + elapsedTime.ToString("N0"),
+            spriteBatch.DrawString(specialmode, theNextMode + elapsedTime.ToString("N0"),
                                    timePosition, Color.Pink);
             spriteBatch.End();
 

@@ -32,6 +32,7 @@ namespace TuneBlaster_.Graphics
         Image searchLight;
         Texture2D searchLightTexture;
         public bool blackwhite;
+        int nextSpecial;
 
 
         #endregion
@@ -57,6 +58,7 @@ namespace TuneBlaster_.Graphics
             acceleration = 0f;
             oldRotation = 0f;
             game = g;
+            nextSpecial = 0;
             searchLight.Initialise(new Vector2(1200, 1200), Position, g);
             searchLightOn = false;
         }
@@ -129,12 +131,12 @@ namespace TuneBlaster_.Graphics
             
             if (keyBoardState.IsKeyDown(Keys.A))
             {
-                searchLightOn = true;
+                NextSpecial();
             }
 
             if (keyBoardState.IsKeyDown(Keys.S))
             {
-                searchLightOn = false;
+                ResetSpecial();
             }
 
             if (keyBoardState.IsKeyDown(Keys.Q))
@@ -216,7 +218,7 @@ namespace TuneBlaster_.Graphics
                     redo = true;
                     MovingBall m = new MovingBall(this, balls[i].colour);
                     m.Initialise(balls[i].Size, balls[i].Position, this.game);
-                    m.LoadGraphicsContent(balls[i].spriteBatch, balls[i].texture);
+                    m.LoadGraphicsContent(balls[i].spriteBatch, balls[i].colourTexture);
                     balls[i].Destroy();
                     balls.Remove(balls[i]);
                     ballsSize--;
@@ -304,6 +306,37 @@ namespace TuneBlaster_.Graphics
         public Vector3 getPos()
         {
             return pos;
+        }
+
+        /*
+         * Turn on the designated next special mode
+         * */
+        public void NextSpecial()
+        {
+            if (nextSpecial % 2 == 1)
+            {
+                BlackWhite();
+            }
+            else
+            {
+                searchLightOn = true;
+            }
+            nextSpecial++;
+        }
+
+        /*
+         * Turn the current Special Mode off 
+         * */
+        public void ResetSpecial()
+        {
+            if (blackwhite)
+            {
+                Colour();
+            }
+            else
+            {
+                searchLightOn = false;
+            }
         }
 
 

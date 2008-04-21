@@ -22,7 +22,7 @@ namespace TuneBlaster_.Graphics
         MovingBall toFollow;
         Vector2 oldPosition;
         protected Texture2D bw;
-        protected Texture2D colourTexture;
+        public Texture2D colourTexture;
         Game game;
         bool blackwhite;
 
