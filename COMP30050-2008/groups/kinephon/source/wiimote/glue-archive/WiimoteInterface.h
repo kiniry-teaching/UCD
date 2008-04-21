@@ -1,18 +1,20 @@
 #ifndef WIIMOTEINTERFACE_H_
 #define WIIMOTEINTERFACE_H_
 #include <string>
+#include "../../Parser/Parser.h"
 #include "IRReport.h"
 using namespace std;
 
 class WiimoteInterface
 {
 public:
-	WiimoteInterface(/*Parser*/);
+	WiimoteInterface();
 	virtual ~WiimoteInterface();
 	
 	string findWiimote();
 	bool connectTo(string);
-	IRReport receiveData();
+	IRReport receiveReport();
+	void feedReport(Parser);
 	bool closeConnection();
 private:
 	PyObject * _module;

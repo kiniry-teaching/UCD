@@ -2,12 +2,12 @@
 #include <sys/time.h>
 #include <string>
 #include "Python.h"
+#include "../../Parser/Parser.h"
 #include "WiimoteInterface.h"
 using namespace std;
 
-WiimoteInterface::WiimoteInterface(/*Parser p*/)
+WiimoteInterface::WiimoteInterface()
 {
-	clock();
 	Py_Initialize();
 
 	char* FileName = "code.py";
@@ -33,16 +33,16 @@ WiimoteInterface::~WiimoteInterface()
 
 string WiimoteInterface::findWiimote()
 {
-//	PyRun_SimpleString("wiimote_address = find_wiimote()");
-//
-//	PyObject * wiimote_address = PyDict_GetItemString(_dictionary, "wiimote_address");    // borrowed reference
-//	assert(wiimote_address);
-//	assert(PyString_Check(wiimote_address));
-//	char* wiimote_address_string = PyString_AsString(wiimote_address);
-//	string string_address(wiimote_address_string);
-	
+	//	PyRun_SimpleString("wiimote_address = find_wiimote()");
+	//
+	//	PyObject * wiimote_address = PyDict_GetItemString(_dictionary, "wiimote_address");    // borrowed reference
+	//	assert(wiimote_address);
+	//	assert(PyString_Check(wiimote_address));
+	//	char* wiimote_address_string = PyString_AsString(wiimote_address);
+	//	string string_address(wiimote_address_string);
+
 	string string_address = "00:1E:35:06:74:BD";
-	
+
 	return string_address;
 }
 
@@ -58,7 +58,7 @@ bool WiimoteInterface::connectTo(string bluetooth_address) {
 
 }
 
-IRReport WiimoteInterface::receiveData() {
+IRReport WiimoteInterface::receiveReport() {
 	PyRun_SimpleString("report = receive_report()");
 
 	PyObject * report = PyDict_GetItemString(_dictionary, "report");
@@ -70,7 +70,7 @@ IRReport WiimoteInterface::receiveData() {
 	struct timeval time;
 	gettimeofday(&time, NULL);
 	int timestamp = time.tv_sec *1000 + time.tv_usec /1000;		//this will give us millisecs (*NIX dependent)
-	
+
 	for (int j=0; j < size; j++) {
 		PyObject * item = PyList_GetItem(report, j);
 		assert(item);
@@ -84,9 +84,14 @@ IRReport WiimoteInterface::receiveData() {
 			//and when it is invalid, it should be dropped before processing.
 		}
 	}
-	
+
 	IRReport report_object(data, timestamp);
 	return report_object;
+}
+
+void WiimoteInterface::feedReport(Parser p) 
+{
+	
 }
 
 bool WiimoteInterface::closeConnection() {
