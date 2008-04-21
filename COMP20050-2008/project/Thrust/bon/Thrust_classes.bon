@@ -153,12 +153,14 @@ end
 class_chart FUELABLE
   query
     "How much fuel do you contain?",
-    "How much fuel can you contain?"
+    "How much fuel can you contain?",
+    "What is the mass of your fuel?"
   command
     "This many units is your fuel content.",
     "Change your fuel content by this many units."
   constraint
-    "Fuel content is always non-negative and finite."
+    "Fuel content is always non-negative and finite.",
+    "One unit of fuel weights 1kg."
 end
 
 class_chart HIGH_SCORE
@@ -217,12 +219,16 @@ class_chart COLOR
   command
     "This is your color."
   constraint
-    "There are exactly 16 different colors available.",
-    "The legal colors are {..}."
+    "There are exactly 12 different colors available.",
+    "The legal colors are black, white, red, green, blue, cyan, \
+   \ magenta, dark gray, gray, light gray, orange, and pink."
 end
 
 class_chart SHAPE
+  query
+    "What shape are you?"
   command
+    "This is your shape.",
     "Render this shape with this orientation and this color."
 end
 
@@ -233,17 +239,15 @@ end
 class_chart ENTITY
   query
     "What is your physical state?",
-    "What are your properties?",
     "What is your shape?"
   command
     "This is your physical state.",
-    "These are your properties.",
     "This is your shape.",
     "Render yourself."
 end
 
 class_chart DYNAMIC_ENTITY
-  inherit ENTITY
+  inherit ENTITY, ACCELERATION, GRAVITY, MASS, MOMENTUM, ORIENTATION, POSITION, VELOCITY, NEWTONIAN_SIMULATION
   query
     "What is your position?",
     "What is your orientation?",
@@ -256,13 +260,14 @@ class_chart DYNAMIC_ENTITY
     "This is your orientation.",
     "This is your mass.",
     "This is your velocity.",
-    "This is your acceleration."
+    "This is your acceleration.",
+    "Simulate yourself for this many seconds."
   constraint
     "Momentum is the product of mass and velocity."
 end
 
 class_chart STATIC_ENTITY
-  inherit ENTITY
+  inherit DYNAMIC_ENTITY
   constraint
     "All queries are constant.",
     "Mass, velocity, acceleration, and momentum are all zero."
@@ -299,6 +304,8 @@ class_chart BARRIER
   command
     "Begin closing.",
     "Begin opening."
+  constraint
+    "Barriers are always in one of the three states of open, closed, or moving."
 end
 
 class_chart BULLET
@@ -315,7 +322,7 @@ class_chart EXPLOSION
 end
 
 class_chart FACTORY
-  inherit NEUTRAL_ENTITY, STATIC_ENTITY, ANIMATABLE
+  inherit ENEMY_ENTITY, STATIC_ENTITY, ANIMATABLE
   query
     "How much damage have you sustained?",
     "What is your chimney?",
@@ -334,7 +341,7 @@ class_chart FACTORY
 end
 
 class_chart FACTORY_CHIMNEY
-  inherit NEUTRAL_ENTITY, STATIC_ENTITY, ANIMATABLE
+  inherit ENEMY_ENTITY, STATIC_ENTITY, ANIMATABLE
   query
     "Are you smoking?"
   command
@@ -367,8 +374,8 @@ end
 class_chart GOAL_SPHERE
   inherit NEUTRAL_ENTITY, DYNAMIC_ENTITY, TOW
   constraint
-    "The fuel pod is destroyed by a bullet.",
-    "If the fuel pod is destroyed, the spaceship is destroyed.",
+    "The goal sphere is destroyed by a bullet.",
+    "If the goal sphere is destroyed, the spaceship is destroyed.",
     "The goal sphere is destroyed by the factory's chimney, but not \
    \ its sphere.",
     "The goal sphere is not affected by the gun turret.",
@@ -384,14 +391,14 @@ class_chart GOAL_SPHERE
 end
 
 class_chart GUN_TURRET
-  inherit ENEMY_ENTITY
+  inherit ENEMY_ENTITY, STATIC_ENTITY
   constraint
     "A gun turret always resides on/adjacent to the terrain.",
     "A gun turret's color is always green."
 end
 
 class_chart SPACE
-  inherit NEUTRAL_ENTITY, STATIC_ENTITY
+  inherit NEUTRAL_ENTITY, STATIC_ENTITY, ANIMATABLE
   query
     "What are your stars?"
   command
@@ -402,17 +409,7 @@ end
 
 class_chart SPACESHIP
   inherit NEUTRAL_ENTITY, FUELABLE, DYNAMIC_ENTITY, TOW
-  query
-    "How many lives do you have?",
-    "What is your current score?",
-    "Are you currently towing?"
-  command
-    "You have this many lives remaining.",
-    "You have this many points.",
-    "You are now towing the goal sphere."
   constraint
-    "Number of lives is initially 3.",
-    "Score is initially 0.",
     "The spaceship is destroyed by the barrier.",
     "The spaceship is destroyed by a bullet.",
     "The spaceship is destroyed by the factory.",
@@ -459,10 +456,16 @@ class_chart ACTION
 end
 
 class_chart AI
+  command
+    "Perform your behavior."
 end
 
 class_chart TOW
   inherit ACTION
+  query
+    "Are you currently towing or being towed?"
+  command
+    "You are now towing or being towed."
 end
 
 class_chart ATTACK
@@ -527,13 +530,6 @@ end
 
 class_chart WELCOME_ANIMATION
   inherit ANIMATION
-end
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ENTITIES.PROPERTIES cluster classes
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class_chart PROPERTIES
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -610,6 +606,11 @@ class_chart VELOCITY
   inherit TUPLE
 end
 
+class_chart NEWTONIAN_SIMULATION
+  command
+    "Simulate the world for this many seconds."
+end
+
 -- class_chart 
 --   indexing
 --     author: "Joe Kiniry";
@@ -639,5 +640,7 @@ class_chart THRUST_GAME
     "Start game.",
     "Quit game."
   constraint
+    "Number of lives is initially 3.",
+    "Score is initially 0.",
     "All games have terrain, space, entities, physics, and audio."
 end
