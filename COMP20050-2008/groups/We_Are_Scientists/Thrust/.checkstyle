@@ -3,7 +3,7 @@
     <local-check-config name="Thrust Checkstyle" location="support_files/csi.xml" type="project" description="">
         <additional-data name="protect-config-file" value="true"/>
     </local-check-config>
-    <fileset name="all" enabled="true" check-config-name="Thrust Checkstyle" local="true">
+    <fileset name="all" enabled="true" check-config-name="foo" local="false">
         <file-match-pattern match-pattern="." include-pattern="true"/>
     </fileset>
 </fileset-config>
