@@ -13,19 +13,28 @@ if(isAdmin==True)//this loop is to prevent any non-admins from acessing the admi
 		include("connection.php"); //Connects to database
 	
 		mysql_query("UPDATE users 
-			SET e-mail = '$email',
-			userlevel = '$userlevel',
-		
+			SET userlevel = '$userlevel',
 			WHERE username = '$username'");
 	
 		mysql_close($con);
 		}
 
+
 	function editUserLevel($username, $userlevel)
 	{
+	/****************************************/
+	/* editUserLevel() 						*/
+	/*  changes the userlevel of any user	*/
+	/****************************************/
+	
 		include("connection.php"); //Connects to database
-		$sql="INSERT INTO users (userlevel,)
-		VALUES ('$userlevel') WHERE username=$username";
+		mysql_query("UPDATE users SET userlevel = '$userlevel',
+		WHERE username = '$username'");
+		
+		/*
+			$sql="INSERT INTO users (userlevel,)
+			VALUES ('$userlevel') WHERE username=$username";
+		*/
 					if (!mysql_query($sql,$con))
 				{
 					die('Error: ' . mysql_error());

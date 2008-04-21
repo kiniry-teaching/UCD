@@ -100,10 +100,10 @@ function createUser($username, $password1, $userlevel, $email1, $email2, $passwo
 		include("connection.php"); //Connects to database
 		
 		$md5pass = md5($password1);  //hash function to encrypt the password before adding it to the database
-		//$date=date(d-F-Y); //add todays date to the datebase as the date of registration
-		$time=time();
-		$sql="INSERT INTO users (username, password, userlevel, email, timestamp)
-								VALUES ('$username', '$md5pass', '$userlevel', '$email1', '$time')";
+		$date=date('d-F-Y'); //add todays date to the datebase as the date of registration
+		//$time=time();
+		$sql="INSERT INTO users (username, password, userlevel, email, date)
+								VALUES ('$username', '$md5pass', '$userlevel', '$email1', '$date')";
 			if (!mysql_query($sql,$con))
 			{
 			die('Error: ' . mysql_error());

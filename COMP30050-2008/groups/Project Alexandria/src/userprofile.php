@@ -26,10 +26,7 @@ include("include/userfunctions.php");
 
 	while($row = mysql_fetch_array($result)){
 		$userlevel=$row['userlevel'];
-		$dateregistered=$row['timestamp'];
-		echo("timestamp = ".$dateregistered."<br />");
-		registered
-		echo("timestamp = ".$dateregistered."<br />");
+		$dateregistered=$row['date'];
 	}//gets the user information needed from the user database
 
 ?>

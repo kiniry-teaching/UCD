@@ -170,7 +170,7 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey, $add
  		password varchar(32),
  		userlevel tinyint(1) unsigned not null,
  		email varchar(50),
- 		timestamp int(11) unsigned not null
+ 		date varchar(30)
 	)";
 	mysql_query($sql,$con);	
 
