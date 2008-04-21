@@ -4,7 +4,7 @@
 
 package thrust.entities.about;
 /**
- * @author Daire O'Doherty 06535691
+ * @author "Daire O'Doherty 06535691 (daireod@gmail.com)"
  * @version 14 April 2008
  */
 
@@ -13,15 +13,15 @@ public class Fueling implements Fuelable {
    * @return How much fuel do you contain?
    */
 
-  private int myFuel;
+  private int my_fuel;
   /** integer myMaxi.*/
-  private final int myMaxi = 100;
+  private final int my_maxi = 100;
 
   //@ ensures 0 <= \result;
   //@ ensures \result <= maximum_fuel();
   /*@ pure @*/
   public int fuel() {
-    return myFuel;
+    return my_fuel;
   }
   /**
    * @return How much fuel can you contain?
@@ -29,8 +29,8 @@ public class Fueling implements Fuelable {
   //@ ensures 0 <= \result;
   /*@ pure @*/
   public final int maxiumumFuel() {
-    if (myMaxi >= 0) {
-      return myMaxi;
+    if (my_maxi >= 0) {
+      return my_maxi;
     }
     return 0;
   }
@@ -41,8 +41,8 @@ public class Fueling implements Fuelable {
   //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
   //@ ensures fuel() == the_fuel_content;
   public final void setFuelContent(final int the_fuel_content) {
-    if (the_fuel_content >= 0 && the_fuel_content <= myMaxi) {
-      myFuel = the_fuel_content;
+    if (the_fuel_content >= 0 && the_fuel_content <= my_maxi) {
+      my_fuel = the_fuel_content;
     }
   }
 
@@ -59,16 +59,24 @@ public class Fueling implements Fuelable {
    */
   public final void changeFuelContent(final int the_fuel_change) {
     if (fuel() + the_fuel_change < 0) {
-      myFuel = 0;
+      my_fuel = 0;
     } else if (maxiumumFuel() < (fuel() + the_fuel_change)) {
-      myFuel = maxiumumFuel();
+      my_fuel = maxiumumFuel();
     } else {
-      myFuel = fuel() + the_fuel_change;
+      my_fuel = fuel() + the_fuel_change;
     }
   }
 
   //@ invariant (* Fuel content is always non-negative and finite. *);
   //@ invariant 0 <= fuel();
 
+
+/**
+ * @return What is the mass of your fuel?
+ */
+//@ ensures \result == fuel * 1;
+  public /*@ pure @*/ int fuel_mass() {
+
+  }
 }
 
