@@ -6,7 +6,7 @@ namespace Drought.World
 {
     public enum Level : int { Valley, Rugged, RuggedSplitTextures, River, Square, WaterTest, Terrain, Terrain2 };
 
-    public class LevelInfo
+    class LevelInfo
     {
         /** The width of the level. */
         private int width;
@@ -22,6 +22,11 @@ namespace Drought.World
 
         /** Map of the level's textures. [x][y] */
         private Vector4[,] textureMap;
+
+        /** Map of the different pools of water in a level. */
+        private Water[,] waterPools;
+
+
         /** TEMP */
         public Vector4[,] TextureMap { get { return textureMap; } }
 
@@ -312,6 +317,18 @@ namespace Drought.World
             if(x >= 0 && x < width && y >= 0 && y < height)
                 return textureMap[(int)x, (int)y];
             return new Vector4(0, 0, 0, 0);
+        }
+
+        public void setWaterPools(Water[,] pools)
+        {
+            waterPools = pools;
+        }
+
+        public Water getPoolAt(int x, int y)
+        {
+            if (x >= 0 && x < width && y >= 0 && y < height)
+                return waterPools[x, y];
+            return null;
         }
         #endregion
 

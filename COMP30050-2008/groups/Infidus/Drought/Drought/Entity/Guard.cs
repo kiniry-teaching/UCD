@@ -37,7 +37,7 @@ namespace Drought.Entity
         private ProjectileManager projectiles;
 
         public Guard(GameState gameState, LevelInfo levelInfo, ModelLoader modelLoader, Path path, int uid, ProjectileManager proj) :
-            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Tank), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY)
+            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Tank), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY, 0, 0)
         {
             attackRadiusTool = new LineTool(gameState.getGraphics());
             attackRadiusTool.setColor(Color.Green.ToVector3());
@@ -63,7 +63,7 @@ namespace Drought.Entity
             
             if (timeToWait > 0) timeToWait--;
 
-            if (!wasUpdated) //if we stayed still since the last update
+            if (!hasMoved) //if we stayed still since the last update
             {
                 /* attack logic */
                 if (timeToWait == 0)

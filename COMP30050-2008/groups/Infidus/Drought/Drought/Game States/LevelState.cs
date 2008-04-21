@@ -77,9 +77,19 @@ namespace Drought.GameStates
             //waters = new Water[waterList.Count];
             waters = new Water[waterListPleh.Count];
 
+            Water[,] waterLocationTable = new Water[levelInfo.getWidth(), levelInfo.getHeight()];
             for (int i = 0; i < waters.Length; i++)
+            {
                 //waters[i] = new Water(waterList[i], levelInfo, getGraphics());
                 waters[i] = new Water(waterListPleh[i], levelInfo, getGraphics());
+
+                for (int j = 0; j < waterListPleh[i].Count; j++)
+                {
+                    Vector3 p = waterListPleh[i][j];
+                    waterLocationTable[(int)p.X, (int)p.Y] = waters[i];
+                }
+            }
+            levelInfo.setWaterPools(waterLocationTable);
 
             camera = new Camera(this, levelInfo, false);
 
@@ -382,7 +392,7 @@ namespace Drought.GameStates
                 {
                     List<Vector3> dummyPath = new List<Vector3>();
                     dummyPath.Add(mousePoint);
-                    MovableEntity newEntity = new Guard(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0, projectileManager);
+                    MovableEntity newEntity = new Tanker(this, levelInfo, modelLoader, new Path(dummyPath, levelInfo), 0);
                     entities.Add(newEntity);
                     soundManager.playSound(SoundHandle.Truck, newEntity);
                 }

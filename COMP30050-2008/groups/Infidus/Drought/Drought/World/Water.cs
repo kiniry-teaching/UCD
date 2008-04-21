@@ -68,7 +68,7 @@ namespace Drought.World
             bottomWaterLevel = zMinInside;
             float waterHeight = zMin - zMinInside;
 
-            totalWater = approximateArea(totalDist, waterHeight) / 1000.0f;
+            totalWater = approximateArea(totalDist, waterHeight) / 333.0f;
             currentWater = totalWater;
 
             averageCenter /= points.Count;
@@ -105,6 +105,8 @@ namespace Drought.World
         private int lastTime = 0;
         public void update(GameTime gameTime)
         {
+            //automatic water drainage
+            /* 
             int time = (int) gameTime.TotalRealTime.TotalMilliseconds;
             if ( time > lastTime + 20) 
             {
@@ -114,6 +116,23 @@ namespace Drought.World
 
                 lastTime = time;
             }
+            */
+
+            setNewWaterLevel();
+        }
+
+        public float removeWater(float amt)
+        {
+            currentWater -= amt;
+            float result = amt;
+
+            if (currentWater < 0)
+            {
+                result += currentWater;
+                currentWater = 0;
+            }
+
+            return result;
         }
 
         public void render(GraphicsDevice graphics, Matrix viewMatrix, Matrix projectionMatrix)

@@ -47,20 +47,28 @@ namespace Drought.Entity
         /** A unique identifier for this entity. */
         public readonly int uniqueID;
 
-        public bool wasUpdated;
+        public bool hasMoved;
+
+        private bool prevHasMoved;
 
         private int health;
 
-        private int water;
+        private float water;
 
         private int maxHealth;
 
-        private int maxWater;
+        private float maxWater;
 
         /* how many updates (if any) this unit is waiting to resolve a collision. */
         private int waiting;
 
-        public MovableEntity(GameState gameState, LevelInfo aLevelInfo, Model3D aModel, Path aPath, int uid, float spd, float rad, int maxh, int maxw)
+        private Water currWaterPool;
+
+        private float waterSuckAmt;
+
+        private int waterRadius;
+
+        public MovableEntity(GameState gameState, LevelInfo aLevelInfo, Model3D aModel, Path aPath, int uid, float spd, float rad, int maxh, int maxw, float waterSuckAmt, int waterRadius)
         {
             levelInfo = aLevelInfo;
             this.model = aModel;
@@ -72,10 +80,12 @@ namespace Drought.Entity
             health = maxh;
             maxWater = maxw;
             water = 0;
+            this.waterSuckAmt = waterSuckAmt;
+            this.waterRadius = waterRadius;
             
             position = path.getPosition();
             prevPosition = path.getPosition();
-            wasUpdated = true;
+            hasMoved = true;
             waiting = 0;
             heading = new Vector3((float)Math.Cos(uid), (float)Math.Sin(uid), 0);
             normal = path.getNormal();
@@ -93,7 +103,7 @@ namespace Drought.Entity
         {
             if (!path.isFinished() && waiting == 0)
             {
-                wasUpdated = path.addDistance(speed);
+                hasMoved = path.addDistance(speed);
                 prevPosition.X = position.X;
                 prevPosition.Y = position.Y;
                 prevPosition.Z = position.Z;
@@ -114,7 +124,8 @@ namespace Drought.Entity
 
         public virtual void update()
         {
-            wasUpdated = false;
+            prevHasMoved = hasMoved;
+            hasMoved = false;
             if (!isDead())
             {
                 move();
@@ -122,7 +133,7 @@ namespace Drought.Entity
             }
             if (selected)
             {
-                if (wasUpdated)
+                if (hasMoved)
                     rebuildRing();
                 selectTime += selectTimeStep;
                 if (selectTime > 1) selectTime = 1;
@@ -132,7 +143,9 @@ namespace Drought.Entity
                 selectTime -= selectTimeStep;
                 if (selectTime < 0) selectTime = 0;
             }
-            infoBar.update(position, selectTime, health, maxHealth, water, maxWater);
+
+
+            infoBar.update(position, selectTime, health, maxHealth, (int)water/1000, (int)maxWater/1000);
         }
 
         public void rebuildRing()
@@ -237,7 +250,7 @@ namespace Drought.Entity
 
         public bool isDead() { return health <= 0; }
 
-        public void addWater(int amt)
+        public void addWater(float amt)
         {
             water += amt;
 
@@ -248,6 +261,35 @@ namespace Drought.Entity
         public void removeAllWater() { water = 0; }
 
         public bool isFullOfWater() { return water == maxWater; }
+
+        protected void suckTehWaterz()
+        {
+            checkForWater();
+            
+            if (currWaterPool != null && !isFullOfWater())
+            {
+                //some water could be wasted but nobody cares about the environment
+                addWater(currWaterPool.removeWater(waterSuckAmt));
+            }
+        }
+
+        protected void checkForWater()
+        {
+            if (prevHasMoved && !hasMoved)
+            {
+                for (int x = -waterRadius; x <= waterRadius; x++)
+                    for (int y = -waterRadius; y <= waterRadius; y++)
+                    {
+                        if (levelInfo.getPoolAt((int)position.X + x, (int)position.Y + y) != null)
+                        {
+                            currWaterPool = levelInfo.getPoolAt((int)position.X + x, (int)position.Y + y);
+                            return;
+                        }
+                    }
+
+                currWaterPool = null;
+            }
+        }
 
         /* Given 2 MovableEntities, check whether they overlap. */
         public static bool checkStaticCollision(MovableEntity a, MovableEntity b)

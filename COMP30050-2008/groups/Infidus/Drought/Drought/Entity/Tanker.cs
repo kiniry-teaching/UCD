@@ -12,9 +12,19 @@ namespace Drought.Entity
 
         public static readonly int FULL_HEALTH = 15;
 
-        public static readonly int WATER_CAPACITY = 10;
+        public static readonly int WATER_CAPACITY = 10000;
+
+        public static readonly int WATER_SUCK_AMOUNT = WATER_CAPACITY / 600;
+
+        public static readonly int WATER_RADIUS = (int)RADIUS + 5;
 
         public Tanker(GameState gameState, LevelInfo levelInfo, ModelLoader modelLoader, Path path, int uid) :
-            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Truck), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY) { }
+            base(gameState, levelInfo, modelLoader.getModel3D(modelType.Truck), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY, WATER_SUCK_AMOUNT, WATER_RADIUS) { }
+
+        public override void update()
+        {
+            base.update();
+            suckTehWaterz();
+        }   
     }
 }
