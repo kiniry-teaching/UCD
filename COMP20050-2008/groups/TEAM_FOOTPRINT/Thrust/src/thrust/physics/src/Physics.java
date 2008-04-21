@@ -15,7 +15,7 @@ public interface Physics {
  	  /**
  	   * @return What is the gravitational constant?
  	   */
- 	  /*@ pure @*/ double gravitational_constant();
+ 	  /*@ pure @*/ double gravitationalConstant();
  	
  	  /**
  	   * @return What is your mass in kilograms?
