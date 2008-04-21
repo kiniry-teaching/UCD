@@ -30,7 +30,7 @@ function check($username, $email1, $email2, $password1, $password2)
 			$ANOTHER_VARIABLE = mysql_num_rows($result);
 			if($ANOTHER_VARIABLE != 0)
 				{
-				echo "<p>". $username ."already exists, please try another username</p>";
+				echo "<p>The username ". $username ." already exists, please try another username</p>";
 				return False;
 				}
 			else if($email1 != $email2) //compares the two entered email addresses
@@ -99,13 +99,11 @@ function createUser($username, $password1, $userlevel, $email1, $email2, $passwo
 		$userlevel = checkUsername($username);
 		include("connection.php"); //Connects to database
 		
-		//$md5pass = md5($password1);  //old hash function
-		$passwordHash = sha1($password1); //encrypts the password before adding it to the database
-				
+		$md5pass = md5($password1);  //hash function to encrypt the password before adding it to the database
 		//$date=date(d-F-Y); //add todays date to the datebase as the date of registration
 		$time=time();
 		$sql="INSERT INTO users (username, password, userlevel, email, timestamp)
-								VALUES ('$username', '$passwordHash', '$userlevel', '$email1', '$time')";
+								VALUES ('$username', '$md5pass', '$userlevel', '$email1', '$time')";
 			if (!mysql_query($sql,$con))
 			{
 			die('Error: ' . mysql_error());

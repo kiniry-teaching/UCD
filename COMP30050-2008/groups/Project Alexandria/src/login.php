@@ -1,4 +1,10 @@
 <?php 
+session_start(); 
+/*starts the session that will be used on all pages from login to logout*/ 
+?>
+<div>
+<?php
+ 
 /*	Project Alexandria 2008	*/
 
 	/************************************************************/
@@ -22,25 +28,26 @@ if($_POST['state'] == 1){
 
 	include("include/user_variables.php");
 	include("include/login-functions.php"); //including all the functions that will be needed to login
-	$EnteredUsername = $_POST[username];
-	$EnteredPassword = $_POST[password];
+	$username = $_POST[username];
+	$password = $_POST[password];
 	$remember = $_POST[remember];
 	
-	if(strlen($EnteredUsername) == 0)
+	if(strlen($username) == 0)
 	{
 	echo("<p>Username field is empty, please enter a username.</p>");
 	}
 	else
-		if(strlen($EnteredPassword) == 0)
+		if(strlen($password) == 0)
 		{
 		echo("<p>Password field is empty, please enter a password.</p>");
 		}
 		else
 		{
-				login($EnteredUsername, $EnteredPassword, $remember);
+				login($username, $password, $remember);
 		}
 }
 
 include("include/footer.php"); //page footer
 /*	login.php	*/
 ?>
+</div>

@@ -1,6 +1,10 @@
-
+<?php 
+session_start(); 
+/*starts the session that will be used on all pages from login to logout*/ 
+?>
 <div>
 <?php
+
 include("include/header.php"); //page header
 /*
 *	profile.php
@@ -22,6 +26,9 @@ $username = $_SESSION['username']; //Gets the username from the session
 	while($row = mysql_fetch_array($result)){
 		$userlevel=$row['userlevel'];
 		$dateregistered=$row['timestamp'];
+		echo("timestamp = ".$dateregistered."<br />");
+		registered
+		echo("timestamp = ".$dateregistered."<br />");
 	}//gets the user information needed from the user database
 
 ?>
@@ -52,10 +59,7 @@ $username = $_SESSION['username']; //Gets the username from the session
 			<td>Books Reviewed:</td>
 			<td><?php //TODO - getBooksReviewed ?></td>
 		</tr>
-		<tr>
-			<td>Books Borrowed:</td>
-			<td><?php //TODO - getBooksReturned ?></td>
-		</tr>
+
 	</table>
 </div>
 

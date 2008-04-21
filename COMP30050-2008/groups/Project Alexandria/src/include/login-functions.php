@@ -8,7 +8,7 @@
 	/*	and ensuring that all their details are correct		*/
 	/********************************************************/
 
-function login($username, $Password, $remember){
+function login($username, $password, $remember){
 	/********************************************************************/
 	/*	Login()															*/
 	/*	if checkMatch() returns true, login continues 					*/
@@ -19,7 +19,7 @@ function login($username, $Password, $remember){
 	/*	if checkMatch() returns false, an error is thrown 				*/
 	/********************************************************************/
 
-	if(checkMatch($username, $Password)==True)
+	if(checkMatch($username, $password)==True)
 	{
 		$time=time();
 		include("connection.php"); //Connects to database
@@ -51,7 +51,7 @@ function login($username, $Password, $remember){
 					setcookie("cookpass", $_SESSION['password'], time()+60*60*24*100, "/");
 				}
 		
-			echo($username." Logged in Sucessfully.<br />");	
+			echo($username." Logged in Sucessfully.<br />");
 			}
 	}
 	else
@@ -62,7 +62,7 @@ function login($username, $Password, $remember){
 		);
    	}	
 }
-function checkMatch($username, $Password){
+function checkMatch($username, $password){
 	/****************************************************/
 	/*	checkMatch()									*/
 	/*	checks to see if checkName() & checkPassword() 	*/
@@ -125,14 +125,9 @@ function checkPassword($username, $password){
    
    /*	encrypts the password to allow comparison */
    /*	to the encrypted password in the database */
-	$passwordHash = md5($password); //encrypts the password entered on the log-in form
-	//testing
-	$md5pass=md5($password);
-	echo("<b>encrypted password on database: </b> ".$DBpassword."<br .>");
-   	echo("<b>encrypted password just entered: </b> ".$passwordHash."<br .>");
-	echo("<b>re-encrypted password just entered: </b> ".$md5pass."<br .>");
- 	//end testing
-	if ($result == "0")
+	$passwordHash = md5($password);
+
+	if ($passwordHash != $DBpassword)
 	{
 		echo("<p>Incorrect Password.</p>");
 		return False;

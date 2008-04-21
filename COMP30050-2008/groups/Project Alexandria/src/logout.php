@@ -1,3 +1,8 @@
+<?php 
+session_start(); 
+/*starts the session that will be used on all pages from login to logout*/ 
+?>
+<div>
 <?php include("include/header.php"); //page header
 	$username = $_SESSION['username'];
 
@@ -9,3 +14,4 @@
 			echo($username." has been logged out.<br />");		
 include("include/footer.php"); //page footer
 ?>
+</div>
