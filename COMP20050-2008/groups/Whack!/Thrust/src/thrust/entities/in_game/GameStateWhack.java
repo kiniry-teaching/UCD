@@ -94,7 +94,8 @@ public class GameStateWhack extends AbstractGameState {
   }
 
   public /*@ pure @*/ boolean new_high_score(/*@ non_null */
-  final HighScoreInterface the_possible_new_high_score) {
+                                             final HighScoreInterface
+                                             the_possible_new_high_score) {
     return true;
   }
 
