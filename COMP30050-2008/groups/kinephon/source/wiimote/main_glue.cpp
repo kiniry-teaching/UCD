@@ -7,7 +7,7 @@
 #include "IRReport.h"
 using namespace std;
 
-int main(int, char **) {
+int main_glue(int, char **) {
 	WiimoteInterface wiinterface;
 	cout << "interface created" << endl;
 	string wiimote = wiinterface.findWiimote();
