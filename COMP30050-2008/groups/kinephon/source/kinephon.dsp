@@ -501,11 +501,11 @@ SOURCE=.\rai\ShapeId.h
 # End Group
 # Begin Source File
 
-SOURCE=.\config.cpp
+SOURCE=.\Config.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\config.h
+SOURCE=.\Config.h
 # End Source File
 # Begin Source File
 
