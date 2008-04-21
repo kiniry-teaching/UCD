@@ -63,7 +63,7 @@ namespace TuneBlaster_
 
 
        
-        float elapsedTime = 15;
+        float elapsedTime = 30;
         Vector2 timePosition = new Vector2(45, 100);
       
 
