@@ -2,7 +2,7 @@
 #define PARSER_H_
 
 //#include "../rai/Recorder/IParserRecorder.h"
-#include "../IRReport.h"
+#include "../wiimote/IRReport.h"
 #include <string>
 #include <vector>
 #include <iostream>
