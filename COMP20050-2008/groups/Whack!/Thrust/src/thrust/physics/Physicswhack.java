@@ -29,7 +29,7 @@ public class Physicswhack implements Physics {
    * @return What is your acceleration in meters per second squared?
    */
   //@ ensures \result.length == 2;
-  double[] my_whackacceleration = {my_whackspeed * my_whackorientation};
+  double[] my_whackacceleration = {my_whackspeed, my_whackorientation};
   /*@ pure @*/public double[] acceleration() {
     //size and direction
     return my_whackacceleration;
@@ -57,7 +57,7 @@ public class Physicswhack implements Physics {
    * @return What is your momentum in kilograms*meters per second?
    */
   /*@ pure @*/public double momentum() {
-    return mass() * (my_whackspeed * my_whackorientation);
+    return (mass() * my_whackspeed);
   }
 
   /**
@@ -86,7 +86,7 @@ public class Physicswhack implements Physics {
 
   /*@ pure @*/public double[] velocity() {
     //speed and direction
-    final double[] my_whackvelocity = {my_whackspeed * my_whackorientation};
+    final double[] my_whackvelocity = {my_whackspeed, my_whackorientation};
     return my_whackvelocity;
   }
   /**
