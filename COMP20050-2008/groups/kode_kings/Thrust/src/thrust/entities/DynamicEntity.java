@@ -28,12 +28,12 @@ public abstract class DynamicEntity extends Entity
    * @param the_mass the initial mass.
    * @param the_velocity the initial velocity.
    */
-  public static DynamicEntity make(double[] the_position,
-                                   double the_orientation,
-                                   double[] the_acceleration,
-                                   double the_grav_constant,
-                                   double the_mass,
-                                   double[] the_velocity) {
+  public static DynamicEntity make(final double[] the_position,
+                                   final double the_orientation,
+                                   final double[] the_acceleration,
+                                   final double the_grav_constant,
+                                   final double the_mass,
+                                   final double[] the_velocity) {
     assert false; //@ assert false;
     return null;
   }

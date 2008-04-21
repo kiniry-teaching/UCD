@@ -5,7 +5,7 @@ package thrust.physics;
  * @author Colin Casey (colin.casey@org.com)
  * @version 7 April 2008
  */
-public abstract class AbstractPhysics implements PhysicsInterface {
+public class KKPhysics implements PhysicsInterface {
   /** The force that attracts the spaceship and
    * goal sphere toward the terrain. */
   private static final double GRAVITY_CONSTANT = -9.8;
@@ -73,5 +73,10 @@ public abstract class AbstractPhysics implements PhysicsInterface {
   public double[] velocity() {
     final double[] velocity = {my_speed, my_orientation};
     return velocity;
+  }
+
+  public void simulate(final double some_seconds)
+  {
+
   }
 }

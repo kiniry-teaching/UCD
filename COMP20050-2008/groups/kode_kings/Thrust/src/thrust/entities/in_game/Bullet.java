@@ -34,7 +34,7 @@ public class Bullet extends DynamicEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Shape shape() {
@@ -44,7 +44,7 @@ public class Bullet extends DynamicEntity
 
   public void shape(Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -59,7 +59,7 @@ public class Bullet extends DynamicEntity
 
   public void state(byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public AI attack() {
@@ -69,7 +69,7 @@ public class Bullet extends DynamicEntity
 
   public void attack(AI the_behavior) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public AI disturb() {
@@ -79,7 +79,7 @@ public class Bullet extends DynamicEntity
 
   public void disturb(AI the_behavior) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public double[] acceleration() {
@@ -109,7 +109,7 @@ public class Bullet extends DynamicEntity
 
   public void simulate(double some_seconds) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public double[] velocity() {
@@ -124,7 +124,7 @@ public class Bullet extends DynamicEntity
 
   public void color(Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a
