@@ -12,7 +12,7 @@ package thrust.entities;
 
 import thrust.physics.PhysicsInterface;
 
-/** HELLO !!!!!!
+/**
  * Entities whose position or orientation change.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008

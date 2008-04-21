@@ -11,9 +11,9 @@ package thrust.entities.in_game;
 
 import java.util.Collection;
 
+import thrust.entities.StaticEntity;
 import thrust.animation.Animatable;
 import thrust.entities.NeutralEntity;
-import thrust.entities.StaticEntity;
 
 /**
  * The vacuum in which entities exist.

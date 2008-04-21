@@ -17,6 +17,7 @@ package thrust.display;
  * @version 11 April 2008
  */
 public abstract class AbstractHighScoreDisplay {
+
   /**
    * @return Are the high scores currently displayed?"
    */
