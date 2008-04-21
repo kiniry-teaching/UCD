@@ -57,4 +57,10 @@ public interface PhysicsInterface {
    * @return What is your velocity in meters per second?
    */
   /*@ pure @*/ double[] velocity();
+
+  /**
+   * Simulate yourself for this many seconds.
+   * @param some_seconds the number of seconds to simulate.
+   */
+  void simulate(double some_seconds);
 }
