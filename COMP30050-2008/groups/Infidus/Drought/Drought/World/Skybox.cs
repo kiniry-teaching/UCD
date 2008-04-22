@@ -40,8 +40,9 @@ namespace Drought.World
                     currentEffect.Parameters["xWorldViewProjection"].SetValue(transforms[mesh.ParentBone.Index] * worldMatrix * camera.getViewMatrix() * camera.getProjectionMatrix());
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
                     currentEffect.Parameters["xTexture"].SetValue(model.Textures[i++]);
-                    currentEffect.Parameters["xEnableLighting"].SetValue(false);
-                    currentEffect.Parameters["xLightPosition"].SetValue(camera.getPosition() + sun.getPosition()); //???
+                    currentEffect.Parameters["xEnableLighting"].SetValue(true);
+                    currentEffect.Parameters["xEnableNormals"].SetValue(false);
+                    currentEffect.Parameters["xLightPosition"].SetValue(camera.getPosition() + sun.getPosition()); //??? //i dunno, i don't remember writing this...
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
                 }
                 mesh.Draw();
