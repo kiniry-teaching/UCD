@@ -3,9 +3,12 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.LinkedList;
 
 public class addTransaction {
 
+	
+	//public addTransaction(int custID, LinkedList<Item> basket){
 	public addTransaction(int custID, String[] basket) {
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -20,6 +23,15 @@ public class addTransaction {
 			
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Transactions(CustID,Item1,Item2,Item3,Item4,Item5,Item6,Item7,Item8,Item9,Item10) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 			pstmt.setInt(1, custID);
+			
+			
+		//Item a	= basket.get(0);
+		//String aname = a.name;
+		
+		
+		
+			
+			
 			pstmt.setString(2, basket[0]);
 			pstmt.setString(3, basket[1]);
 			pstmt.setString(4, basket[2]);
