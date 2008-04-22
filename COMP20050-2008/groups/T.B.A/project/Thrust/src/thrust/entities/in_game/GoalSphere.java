@@ -9,6 +9,9 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
@@ -21,6 +24,96 @@ import thrust.entities.behaviors.Tow;
  */
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
+
+  public void render() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Shape shape() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void shape(Shape the_shape) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public String shape_name() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public byte state() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void state(byte the_state) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void tow() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public double[] acceleration() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double orientation() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] position() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void simulate(double some_seconds) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public double[] velocity() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(Color the_color) {
+    // TODO Auto-generated method stub
+    
+  }
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship
     @                     is destroyed. *);
