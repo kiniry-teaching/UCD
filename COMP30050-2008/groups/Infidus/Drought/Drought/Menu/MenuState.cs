@@ -53,8 +53,8 @@ namespace Drought.Menu
 
             //initialise the title state
             titleState = new TitleState(getStateManager(), getGame(), Level.Title);
-            titleState.getCamera().setEyeVector(new Vector3(250,450,320));
-            titleState.getCamera().setRotation(-3.75f/4.0f, -3.15f);
+            titleState.getCamera().setEyeVector(new Vector3(380,410,370));
+            titleState.getCamera().setRotation(-3.75f/3.5f, -3.15f);
             titleState.getCamera().update();
 
             canNext = true;
