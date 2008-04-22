@@ -4,6 +4,7 @@ float4x4 xWorldViewProjection;
 float3 xLightPosition;
 float xLightPower;
 float3 xLightDirection;
+bool xEnableNormals;
 bool xEnableLighting;
 bool xGreyScale;
 
@@ -49,18 +50,21 @@ PixelToFrame TexturedPixelShader(VertexToPixel PSIn)
 {
 	PixelToFrame Output = (PixelToFrame)0;		
 	
-	float DiffuseLightingFactor = DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
-	
 	Output.Color =  tex2D(TextureSampler, PSIn.TextureCoords);
-	
+		
 	if(xEnableLighting)
-		Output.Color = Output.Color * DiffuseLightingFactor * xLightPower;
+	{
+		Output.Color = Output.Color * xLightPower;
+
+		if(xEnableNormals)
+			Output.Color = Output.Color * DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
+	}
 	
 	if (xGreyScale) {
 		float avg = (Output.Color.r + Output.Color.g + Output.Color.b) / 3;
 		Output.Color = float4(avg, avg, avg, Output.Color.a);
 	}
-	
+		
 	return Output;
 }
 
