@@ -27,7 +27,7 @@ namespace Drought.World
             step    = 10;
             oldTime = 0;
 
-            enabled = false;
+            enabled = true;
         }
 
         public Vector3 getPosition()

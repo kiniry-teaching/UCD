@@ -15,6 +15,8 @@ namespace Drought.World
         /** How much water texture weight a point must have to be considered "water". */
         private static readonly float WATER_THRESHOLD = 0.3f;
 
+        private static Sun sun;
+
         //for drawing the water surface
         private VertexPositionColor[] vertices;
         private VertexDeclaration vd;
@@ -32,11 +34,12 @@ namespace Drought.World
         /** The lowest point in the lake. */
         private float bottomWaterLevel;
 
-        public Water(List<Vector3> points, LevelInfo levelInfo, GraphicsDevice graphics)
+        public Water(List<Vector3> points, LevelInfo levelInfo, Sun aSun, GraphicsDevice graphics)
         {
             initialize(points, levelInfo);
             vd = new VertexDeclaration(graphics, VertexPositionColor.VertexElements);
             effect = new BasicEffect(graphics, null);
+            sun = aSun;
         }
 
         public void initialize(List<Vector3> points, LevelInfo levelInfo)
@@ -139,13 +142,13 @@ namespace Drought.World
         {
             graphics.VertexDeclaration = vd;
 
-            if (vertices.Length > 1)
+            if (vertices.Length > 2)
             {
                 graphics.RenderState.AlphaBlendEnable = true;
                 graphics.RenderState.SourceBlend = Blend.SourceAlpha;
                 graphics.RenderState.DestinationBlend = Blend.InverseSourceAlpha;
 
-                effect.DiffuseColor = Color.LightBlue.ToVector3();
+                effect.DiffuseColor = Color.LightBlue.ToVector3() * sun.getPower(); ;
                 effect.Alpha = 0.5f;
                 effect.World = Matrix.Identity;
                 effect.View = viewMatrix;
