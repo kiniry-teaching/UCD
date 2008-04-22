@@ -5,14 +5,20 @@ namespace Drought.World
 {
     class Sun
     {
+        /* Sun's current position in 3D space */
         private Vector3 position;
+
+        /* Sun's current power */
         private float power;
 
+        /* Timestep used to scale sun's cycle length */
         private int step;
+
+        /* Last time the Sun update was run */
         private double oldTime;
 
+        /* Whether the sun's rotation is enabled or not */
         private bool enabled;
-
         public bool isEnabled
         {
             get { return enabled; }
@@ -24,7 +30,7 @@ namespace Drought.World
             this.position = position;
 
             power   = 1;
-            step    = 10;
+            step    = 80;
             oldTime = 0;
 
             enabled = true;
@@ -56,11 +62,18 @@ namespace Drought.World
         public void update(GameTime gameTime)
         {
             if (enabled)
-                if (gameTime.TotalGameTime.TotalMilliseconds - oldTime > step / 2)
+                if (gameTime.TotalGameTime.TotalMilliseconds > oldTime + step)
                 {
                     Vector3 normal = new Vector3(0, position.Z, -position.Y);
                     normal.Normalize();
                     position += normal;
+
+                    if (power == 0)
+                    {
+                        normal = new Vector3(0, position.Z, -position.Y);
+                        normal.Normalize();
+                        position += normal;
+                    }
 
                     //Power scaling. Power is clamped to 0  below the vertical and 1 above 30 degrees to the vertical. 
                     //Power is lerped between 0 and 30 degrees. 
