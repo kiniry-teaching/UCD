@@ -19,6 +19,19 @@ import thrust.physics.PhysicsInterface;
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
+  /** The position of the entity. */
+  private double[] my_position;
+  /** The orientation of the entity in radians. */
+  private double my_orientation;
+  /** Acceleration of the entity. */
+  private double[] my_acceleration;
+  /** Gravitational constant. */
+  private double my_grav_constant;
+  /** The mass of the entity. */
+  private double my_mass;
+  /** The velocity of the entity. */
+  private double[] my_velocity;
+
   /**
    * @return A new dynamic entity with the given physical state.
    * @param the_position the initial position.
@@ -35,6 +48,45 @@ public abstract class DynamicEntity extends Entity
                                    double the_mass,
                                    double[] the_velocity) {
     assert false; //@ assert false;
+    return null;
+  }
+
+  public double[] acceleration() {
+    return my_acceleration;
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double orientation() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] position() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void simulate(double some_seconds) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public double[] velocity() {
+    // TODO Auto-generated method stub
     return null;
   }
 }

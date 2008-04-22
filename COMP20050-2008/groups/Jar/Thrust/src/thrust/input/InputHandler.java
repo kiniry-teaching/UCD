@@ -7,8 +7,6 @@ import java.util.logging.*;
  * @version 2 April 2008
  */
 public class InputHandler {
-  /** Logger for input package. */
-  protected static final Logger LOG = Logger.getLogger("Input");
   /** Character h to display high scores. */
   public static final char HIGH_SCORES = 'h';
   /** Character m switch between music and SFX. */
@@ -27,7 +25,8 @@ public class InputHandler {
   public static final char USE_ENGINE = '\u000F';
   /** Character [space] to turn on shield/pickup. */
   public static final char USE_SHIELD = '\u00A0';
-
+  /** Logger for input package. */
+  protected static final Logger LOG = Logger.getLogger("Input");
 
   /*
    * @ ensures \result !=null;
