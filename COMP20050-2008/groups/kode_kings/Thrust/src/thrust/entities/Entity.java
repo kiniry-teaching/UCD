@@ -20,10 +20,10 @@ import java.awt.Shape;
  */
 public abstract class Entity implements GameColor {
   /**
+   * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
-   * @return A new entity with this initial shape name, shape, and state.
    */
   public static Entity make(final String the_initial_shape_name,
                             final Shape the_initial_shape,
@@ -35,25 +35,36 @@ public abstract class Entity implements GameColor {
   /**
    * @return What shape are you?
    */
-  public abstract /*@ pure @*/ String shape_name();
+  public /*@ pure @*/ String shape_name() {
+    assert false; //@ assert false;
+    return null;
+  }
 
   /**
    * @return What shape are you?
    */
-  public abstract /*@ pure @*/ Shape shape();
+  public /*@ pure @*/ Shape shape() {
+    assert false; //@ assert false;
+    return null;
+  }
 
   /**
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public abstract void shape(Shape the_shape);
+  public void shape(Shape the_shape) {
+    assert false; //@ assert false;
+  }
 
   /**
    * @return What is your physical state?
    * @note State is encoded by a non-negative number of "hit points".
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ byte state();
+  public /*@ pure @*/ byte state() {
+    assert false; //@ assert false;
+    return 0;
+  }
 
   /**
    * This is your physical state.
@@ -61,10 +72,14 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
-  public abstract void state(byte the_state);
+  public void state(byte the_state) {
+    assert false; //@ assert false;
+  }
 
   /**
    * Render yourself.
    */
-  public abstract void render();
+  public void render() {
+    assert false; //@ assert false;
+  }
 }

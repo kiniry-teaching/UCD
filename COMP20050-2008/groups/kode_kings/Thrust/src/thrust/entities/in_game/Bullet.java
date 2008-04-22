@@ -26,7 +26,7 @@ public class Bullet extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
-  //@ ensures \result == 1;
+  //@ also ensures \result == 1;
   public double mass() {
     assert false; //@ assert false;
     return 0;

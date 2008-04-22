@@ -131,7 +131,7 @@ public class FuelPod extends StaticEntity
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);
     @ public invariant (* The fuel pod is not affected by the spaceship. *);
     @ public invariant (* A fuel pod's color is always yellow. *);
-    @ public invariant color() == thrust.entities.properties.GameColor.YELLOW;
+    @ public invariant color() == java.awt.Color.YELLOW;
     @ public invariant (* A fuel pod's 'fuel' lettering color is
     @                     dictated by the amount of fuel it contains. *);
     @*/
