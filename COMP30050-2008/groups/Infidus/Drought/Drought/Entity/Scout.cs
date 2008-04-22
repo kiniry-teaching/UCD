@@ -16,7 +16,7 @@ namespace Drought.Entity
 
         public static readonly int WATER_SUCK_AMOUNT = WATER_CAPACITY / 600;
 
-        public static readonly int WATER_RADIUS = (int)RADIUS + 5;
+        public static readonly int WATER_RADIUS = (int)RADIUS + 10;
 
         public Scout(GameState gameState, LevelInfo levelInfo, ModelLoader modelLoader, Path path, int uid) :
             base(gameState, levelInfo, modelLoader.getModel3D(modelType.Car), path, uid, SPEED, RADIUS, FULL_HEALTH, WATER_CAPACITY, WATER_SUCK_AMOUNT, WATER_RADIUS) { }

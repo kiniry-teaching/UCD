@@ -73,6 +73,10 @@ namespace Drought.World
                         normal = new Vector3(0, position.Z, -position.Y);
                         normal.Normalize();
                         position += normal;
+                        position += normal;
+                        position += normal;
+                        position += normal;
+                        position += normal;
                     }
 
                     //Power scaling. Power is clamped to 0  below the vertical and 1 above 30 degrees to the vertical. 
