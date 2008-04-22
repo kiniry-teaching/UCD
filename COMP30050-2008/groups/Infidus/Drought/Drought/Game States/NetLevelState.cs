@@ -62,6 +62,8 @@ namespace Drought.GameStates
 
             input = DeviceInput.getInput();
 
+            sun = new Sun(new Vector3(0, -200, 200));
+
             levelInfo = new LevelInfo();
             levelInfo.initialise(aLevel);
 
@@ -69,13 +71,11 @@ namespace Drought.GameStates
             waters = new Water[waterList.Count];
 
             for (int i = 0; i < waters.Length; i++)
-                waters[i] = new Water(waterList[i], levelInfo, getGraphics());
+                waters[i] = new Water(waterList[i], levelInfo, sun, getGraphics());
 
             aStar = new AStar(levelInfo);
 
             rain = new PlaneParticleEmitter(512, 256, new Vector3(256, 128, 200), new Vector3(0, 0, 0), new Vector3(3f, 0, -19f), Color.LightBlue.ToVector4(), 100000, 9);
-
-            sun = new Sun(new Vector3(0, -200, 200));
 
             camera = new Camera(this, levelInfo, false);
 

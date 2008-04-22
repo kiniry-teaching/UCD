@@ -67,7 +67,9 @@ namespace Drought.GameStates
             soundManager = game.getSoundManager();
 
             input = DeviceInput.getInput();
-            
+
+            sun = new Sun(new Vector3(0, -200, 200)); 
+
             levelInfo = new LevelInfo();
             levelInfo.initialise(aLevel);
 
@@ -81,7 +83,7 @@ namespace Drought.GameStates
             for (int i = 0; i < waters.Length; i++)
             {
                 //waters[i] = new Water(waterList[i], levelInfo, getGraphics());
-                waters[i] = new Water(waterListPleh[i], levelInfo, getGraphics());
+                waters[i] = new Water(waterListPleh[i], levelInfo, sun, getGraphics());
 
                 for (int j = 0; j < waterListPleh[i].Count; j++)
                 {
@@ -92,8 +94,6 @@ namespace Drought.GameStates
             levelInfo.setWaterPools(waterLocationTable);
 
             camera = new Camera(this, levelInfo, false);
-
-            sun = new Sun(new Vector3(0, -200, 200)); 
 
             rain = new PlaneParticleEmitter(512, 256, new Vector3(256, 128, 200), new Vector3(0, 0, 0), new Vector3(3f, 0, -19f), Color.LightBlue.ToVector4(), 100000, 9);
 
@@ -543,7 +543,7 @@ namespace Drought.GameStates
 
             terrain.render(sun);
             skybox.render();
-            //rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
+            rain.render(graphics, camera.getViewMatrix(), camera.getProjectionMatrix());
 
             for (int i = 0; i < entities.Count; i++)
                 entities[i].render(graphics, camera, sun);
