@@ -65,10 +65,10 @@ public class Factory extends StaticEntity
     @                     it is destroyed. *);
     @ public invariant (* A factory with more than 10 units of damage
     @                     has a chimney that does not smoke. *);
-    @ public invariant 10 < damage() ==> !chimney.smoking();
+    @ public invariant 10 < damage() ==> !chimney().smoking();
     @ public invariant (* A factory with at most 10 units of damage has
     @                     a smoking chimney. *);
-    @ public invariant damage() <= 10 ==> chimney.smoking();
+    @ public invariant damage() <= 10 ==> chimney().smoking();
     @*/
 
   //@ public invariant (* See constraint on color in FactoryChimney. *);
@@ -116,7 +116,7 @@ public class Factory extends StaticEntity
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
     /*@ public invariant (* A factory sphere's color is always green. *);
-      @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+      @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
