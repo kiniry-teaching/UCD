@@ -27,13 +27,15 @@ namespace Drought.Graphics.Particles
     {
         #region Constants
 
+        /** how near a unit has to be to for it to be hurt by this projectile. */
+        static readonly float BLAST_RADIUS = 10.0f;
+
         const float trailParticlesPerSecond = 200;
         const int numExplosionParticles = 30;
         const int numExplosionSmokeParticles = 0;
         const float projectileLifespan = 1.5f;
         const float sidewaysVelocityRange = 60;
         const float verticalVelocityRange = 40;
-        //const float gravity = 15;
 
         #endregion
 
@@ -104,7 +106,7 @@ namespace Drought.Graphics.Particles
             // by the speed and direction of the projectile which created it.
             if (myPath.isFinished())
             {
-                if (Vector3.Distance(targetEntity.getPosition(), target) < 10.0f) targetEntity.hurt(1);
+                if (Vector3.Distance(targetEntity.getPosition(), target) < BLAST_RADIUS) targetEntity.hurt(1);
                 for (int i = 0; i < numExplosionParticles; i++)
                     explosionParticles.AddParticle(position, new Vector3());
 

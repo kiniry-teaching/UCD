@@ -97,6 +97,8 @@ namespace Drought.Entity
             pathTool = new LineTool(gameState.getGraphics());
             ringTool = new LineTool(gameState.getGraphics());
             ringTool.setColor(new Vector3(1.0f, 0.0f, 0.0f));
+
+            rebuildRing();
         }
 
         private void move()

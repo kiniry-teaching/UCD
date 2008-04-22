@@ -202,6 +202,7 @@ namespace Drought.GameStates
         public override void update(GameTime gameTime)
         {
             updateInput();
+            updateUnitInput();
             
             sun.update(gameTime);
             camera.update();
@@ -285,7 +286,7 @@ namespace Drought.GameStates
             return terrainSurface;
         }
 
-        private void updateUnits()
+        private void updateUnitInput()
         {
             /* Selecting Units */
             if (input.wasKeyJustPressed(GameKeys.UNIT_SELECT))
@@ -338,7 +339,7 @@ namespace Drought.GameStates
                         {
                             Vector3 entityPos = terrain.projectToScreen(entity.getPosition());
                             if (entityPos.Z < 1 && bounds.Contains(new Point((int)entityPos.X, (int)entityPos.Y)))
-                                    entity.setSelected(true);
+                                entity.setSelected(true);
                         }
                     }
                 }
@@ -439,7 +440,10 @@ namespace Drought.GameStates
                     if (deleted != null) entities.Remove(deleted);
                 }
             }
+        }
 
+        private void updateUnits()
+        {
             for (int i = 0; i < entities.Count; i++)
                 entities[i].update();
 
