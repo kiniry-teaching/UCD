@@ -1,4 +1,4 @@
-#include "config.h"
+#include "Config.h"
 
 bool	Config::displayConfig	= false;
 string	Config::configPath		= "kinephon.cfg";
