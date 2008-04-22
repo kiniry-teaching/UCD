@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Thrust</name>
+	<name>Thrust1</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -11,8 +11,13 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder.launch</value>
+				</dictionary>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
@@ -60,11 +65,17 @@
 				</dictionary>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>net.sourceforge.pmd.runtime.pmdBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>mobius.escjava2.plugin.autocheckEscjavaNature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
 		<nature>net.sourceforge.metrics.nature</nature>
+		<nature>net.sourceforge.pmd.runtime.pmdNature</nature>
 	</natures>
 </projectDescription>
