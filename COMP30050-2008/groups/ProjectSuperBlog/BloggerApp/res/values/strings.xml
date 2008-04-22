@@ -3,4 +3,8 @@
     <string name="app_name">"SuperBlog"</string>
     <string name="atom_feed_list_empty"> "No items added yet." </string>
     <string name="blog_post_title"></string>
+    <string name="s6_blogger_username"></string>
+    <string name="s6_blog_name"></string>
+    <string name="s7_blogger_post_title"></string>
+    <string name="s7_blog_post_title"></string>
 </resources>
