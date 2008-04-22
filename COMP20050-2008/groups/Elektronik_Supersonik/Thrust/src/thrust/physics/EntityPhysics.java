@@ -5,7 +5,7 @@ package thrust.physics;
  * @author Dominic Carr (dominiccarr@gmail.com)
  * @version 8 April 2008
  */
-public class EntityPhysics implements Physics {
+public class EntityPhysics implements PhysicsInterface {
   /**
    * The gravitational constant.
    */
@@ -96,5 +96,9 @@ public class EntityPhysics implements Physics {
    */
   public/*@ pure @*/double[] velocity() {
     return new double[] {my_velocity[0], my_velocity[1]};
+  }
+
+  public void simulate(double some_seconds) {
+    // TODO Auto-generated method stub
   }
 }

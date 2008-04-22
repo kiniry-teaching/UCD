@@ -1,3 +1,13 @@
+/*
+ * A re-implementation of the classic C=64 game 'Thrust'.
+ *
+ * @author "Joe Kiniry (kiniry@acm.org)"
+ * @module "COMP 20050, COMP 30050"
+ * @creation_date "March 2007"
+ * @last_updated_date "April 2008"
+ * @keywords "C=64", "Thrust", "game"
+ */
+
 package thrust.audio;
 
 import java.io.File;
@@ -26,6 +36,7 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
+<<<<<<< .working
   public final /*@ pure @*/ SoundEffect make(final File the_sound_effect_file) {
     AudioInputStream input_stream;
     DataLine.Info data_line_info;
@@ -47,6 +58,11 @@ public class SoundEffect {
       ioe.printStackTrace(System.err);
     }
     return this;
+=======
+  public static /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
+    assert false; //@ assert false;
+    return null;
+>>>>>>> .merge-right.r1735
   }
 
   /**
