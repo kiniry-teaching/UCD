@@ -191,6 +191,7 @@ namespace Drought.Entity
                     currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
                     currentEffect.Parameters["xTexture"].SetValue(model.Textures[i++]);
                     currentEffect.Parameters["xEnableLighting"].SetValue(true);
+                    currentEffect.Parameters["xEnableNormals"].SetValue(true);
                     currentEffect.Parameters["xLightPosition"].SetValue(sun.getPosition());
                     currentEffect.Parameters["xLightPower"].SetValue(sun.getPower());
                     currentEffect.Parameters["xGreyScale"].SetValue(isDead());
