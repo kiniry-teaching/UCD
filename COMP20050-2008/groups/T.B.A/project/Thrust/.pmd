@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd>
     <useProjectRuleSet>false</useProjectRuleSet>
-    <ruleSetFile>/Users/kiniry/workspace/Thrust/support_files/PMD_config</ruleSetFile>
+    <ruleSetFile>/home/eoin/College/T.B.A/Thrust/support_files/PMD_config</ruleSetFile>
     <rules>
         <rule>
             <name>AvoidDecimalLiteralsInBigDecimalConstructor</name>
