@@ -19,16 +19,27 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
+
+  /** */
+  private static String my_shape_name;
+  /** */
+  private static Shape my_shape;
+  /** */
+  private static byte my_state;
   /**
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    * @return A new entity with this initial shape name, shape, and state.
    */
-  public static Entity make(String the_initial_shape_name,
-                            Shape the_initial_shape,
-                            byte the_initial_state) {
+  public static Entity make(final String the_initial_shape_name,
+                            final Shape the_initial_shape,
+                            final byte the_initial_state) {
+    my_shape_name = the_initial_shape_name;
+    my_shape = the_initial_shape;
+    my_state = the_initial_state;
     assert false; //@ assert false;
+    return null;
   }
 
   /**

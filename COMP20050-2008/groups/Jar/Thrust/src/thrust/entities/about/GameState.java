@@ -10,15 +10,16 @@ package thrust.entities.about;
 public class GameState extends AbstractGameState {
 
   /** The current score. */
-  private int my_score;
+  private static int my_score;
   /** The end of level bonus if any. */
-  private int my_bonus;
+  private static int my_bonus;
   /** The amount of lives the player has. */
-  private byte my_lives;
+  private static byte my_lives;
   /** The amount of fuel the ship has. */
-  private int my_fuel;
+  private static int my_fuel;
   /** The high scores of the game. */
-  private HighScoreInterface[] my_high_scores = new HighScore[HIGH_SCORE_COUNT];
+  private static HighScoreInterface[] my_high_scores =
+    new HighScore[HIGH_SCORE_COUNT];
 
   /*
    * @see thrust.entities.about.AbstractGameState#
@@ -27,12 +28,11 @@ public class GameState extends AbstractGameState {
    */
   public void add_high_score(final HighScoreInterface the_new_high_score) {
     for (int i = 0; i < HIGH_SCORE_COUNT - 1; i++) {
-      if (my_high_scores[i] != null) {
-        if (my_score > my_high_scores[i].score() && i > 0) {
-          my_high_scores[i - 1] = my_high_scores[i];
-        } else {
-          my_high_scores[i] = the_new_high_score;
-        }
+      if (my_high_scores[i] != null && my_score > my_high_scores[i].score() &&
+          i > 0) {
+        my_high_scores[i - 1] = my_high_scores[i];
+      } else {
+        my_high_scores[i] = the_new_high_score;
       }
     }
   }
@@ -77,8 +77,11 @@ public class GameState extends AbstractGameState {
    * @see thrust.entities.about.AbstractGameState#high_scores()
    */
   public HighScoreInterface[] high_scores() {
-
-    return my_high_scores;
+    final HighScoreInterface[] temp = new HighScoreInterface[HIGH_SCORE_COUNT];
+    for (int i = 0; i < HIGH_SCORE_COUNT; i++) {
+      temp[i] = my_high_scores[0];
+    }
+    return temp;
   }
 
   /*
@@ -109,13 +112,14 @@ public class GameState extends AbstractGameState {
    *        (thrust.entities.about.AbstractGameState.HighScoreInterface)
    */
   public boolean new_high_score(final HighScoreInterface the_high_score) {
-    for (int i = my_high_scores.length; i > 0; i--) {
-      if (my_high_scores[i] != null) {
-        if (my_score > my_high_scores[i].score())
-          return true;
+    boolean check = false;
+    for (int i = HIGH_SCORE_COUNT - 1; i > 0; i--) {
+      if (my_high_scores[i] != null && my_score > my_high_scores[i].score()) {
+        check = true;
+        break;
       }
     }
-    return false;
+    return check;
   }
 
   /*
