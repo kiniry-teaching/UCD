@@ -30,7 +30,7 @@ public class FuelPod extends StaticEntity
   }
 
   public double orientation() {
-    // TODO Auto-generated method stub
+
     return 0;
   }
 

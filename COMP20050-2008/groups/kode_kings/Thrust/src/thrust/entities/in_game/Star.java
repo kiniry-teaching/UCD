@@ -123,4 +123,29 @@ public class Star extends StaticEntity
     @ public invariant (* Each star blinks irregularly. *);
     @ public invariant (* A star's shape is always a small square. *);
     @*/
+
+  public void acceleration(double[] the_acceleration) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void mass(double the_mass) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void orientation(double the_orientation) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void position(double[] the_position) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void velocity(double[] the_velocity) {
+    // TODO Auto-generated method stub
+    
+  }
 }
