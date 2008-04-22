@@ -7,4 +7,7 @@
     <string name="s6_blog_name"></string>
     <string name="s7_blogger_post_title"></string>
     <string name="s7_blog_post_title"></string>
+    <string name="title"></string>
+    <string name="body"></string>
+    <string name="confirm"></string>
 </resources>

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Screen2: Atom Feeds -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-	android:orientation="vertical"
-	android:background="@drawable/solid_white"
+    android:orientation="vertical"
+
 	>
 
-	<TextView android:id="@+id/s3_feed_name" 
-		android:text="Feed: "
+	<TextView android:id="@+id/s3_feed_name"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:text="Your Feeds"
 		>
 	</TextView>
-	
-	<!-- list of posts -->
+
+
+    <!-- The frame layout is here since we will be showing either
+    the empty view or the list view.  -->
     <FrameLayout android:id="@+id/s3_frame_view"
         android:layout_width="fill_parent" 
         android:layout_height="0dip"
@@ -25,14 +30,28 @@
             android:drawSelectorOnTop="false"
         	>
         </ListView>
-        
-        <!-- Here is the view to show if the list is empty -->
-        <TextView android:id="@+id/s3_empty_list"
-            android:layout_width="fill_parent" 
+
+        <!-- Here is the view to show if the list is empty 
+       <TextView android:id="@+id/s3_empty_list"
+           android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
-            android:text="@string/atom_feed_list_empty"
+            android:text="The feed list is empty"
             >
-        </TextView>
+        </TextView>-->
             
     </FrameLayout>
+    
+    	<Button android:id="@+id/s3_back"
+	    android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+		android:text="Back"
+		>
+	</Button>
+
+    	<Button android:id="@+id/s3_newpost"
+	    android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+		android:text="NewPost"
+		>
+	</Button>
 </LinearLayout>
