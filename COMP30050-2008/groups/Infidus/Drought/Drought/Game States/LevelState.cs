@@ -31,15 +31,15 @@ namespace Drought.GameStates
 
         private LevelInfo levelInfo; 
         
-        private Camera camera;
+        public Camera camera;
 
         private Terrain terrain;
 
         private Water[] waters;
 
-        private Sun sun;
+        protected Sun sun;
 
-        private PlaneParticleEmitter rain;
+        protected PlaneParticleEmitter rain;
 
         private Skybox skybox;
 
@@ -120,6 +120,7 @@ namespace Drought.GameStates
         private void initializeEntities()
         {
             entities = new List<MovableEntity>();
+            /*
             int uid = 0;
             int hw = levelInfo.getWidth() / 2;
             int hh = levelInfo.getHeight() / 2;
@@ -177,6 +178,7 @@ namespace Drought.GameStates
             nodes = new List<Vector3>();
             nodes.Add(levelInfo.getPositionAt(levelInfo.getWidth() - 1, levelInfo.getHeight() - 1));
             entities.Add(new Guard(this, levelInfo, modelLoader, new Path(nodes), uid++, projectileManager));
+            */
 
         }
 
@@ -200,7 +202,7 @@ namespace Drought.GameStates
         public override void update(GameTime gameTime)
         {
             updateInput();
-
+            
             sun.update(gameTime);
             camera.update();
             rain.update();

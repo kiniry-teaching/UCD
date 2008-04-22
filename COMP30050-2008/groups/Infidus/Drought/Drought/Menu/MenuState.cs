@@ -9,6 +9,7 @@ using Drought.Input;
 using Drought.GameStates;
 using Drought.World;
 using Drought.Network;
+using Drought.Game_States;
 
 namespace Drought.Menu
 {
@@ -34,6 +35,8 @@ namespace Drought.Menu
 
         private NetworkManager networkManager;
 
+        private TitleState titleState;
+
         public MenuState(IStateManager manager, DroughtGame game, int width, int height)
             : base(manager, game)
         {
@@ -47,6 +50,13 @@ namespace Drought.Menu
         private void initialise()
         {
             input = DeviceInput.getInput();
+
+            //initialise the title state
+            titleState = new TitleState(getStateManager(), getGame(), Level.Title);
+            titleState.getCamera().setEyeVector(new Vector3(256.0f, 300.0f, 512.0f));
+            titleState.getCamera().setRotation(-2.0f, -3.0f);
+            titleState.getCamera().update();
+
 
             canNext = true;
             canPrev = true;
@@ -159,10 +169,14 @@ namespace Drought.Menu
             }
             else
                 canPress = true;
+
+            titleState.update(gameTime);
         }
 
         public override void render(GameTime gameTime, GraphicsDevice graphics, SpriteBatch spriteBatch)
         {
+            titleState.render(gameTime, graphics, spriteBatch);
+
             spriteBatch.Begin();
             mainMenu.render(spriteBatch);
             localMenu.render(spriteBatch);

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Drought.World
 {
-    public enum Level : int { Valley, Rugged, RuggedSplitTextures, River, Square, WaterTest, Terrain, Terrain2 };
+    public enum Level : int { Valley, Rugged, RuggedSplitTextures, River, Square, WaterTest, Terrain, Terrain2, Title };
 
     class LevelInfo
     {
@@ -382,6 +382,7 @@ namespace Drought.World
                 case Level.WaterTest: return "water";
                 case Level.Terrain: return "terrain";
                 case Level.Terrain2: return "terrain2";
+                case Level.Title: return "title";
                 default: return "level_1";
             }
         }

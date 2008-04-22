@@ -48,6 +48,8 @@ namespace Drought.World
             Matrix cameraRotation = Matrix.CreateRotationX(cameraRotationAngles.X) * Matrix.CreateRotationZ(cameraRotationAngles.Z);
             focusVector = eyeVector + Vector3.Transform(new Vector3(0, 1, 0), cameraRotation);
             upVector = Vector3.Transform(new Vector3(0, 0, 1), cameraRotation);
+
+            Console.WriteLine(cameraRotationAngles.Z);
         }
 
         public Vector3 getPosition()
@@ -171,5 +173,19 @@ namespace Drought.World
         {
             cameraRotationAngles.Z += angleIncrement;
         }
+
+        public void setEyeVector(Vector3 v)
+        {
+            eyeVector.X = v.X;
+            eyeVector.Y = v.Y;
+            eyeVector.Z = v.Z;
+        }
+
+        public void setRotation(float x, float z)
+        {
+            cameraRotationAngles.X = x;
+            cameraRotationAngles.Z = z;
+        }
+
     }
 }
