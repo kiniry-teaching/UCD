@@ -5,35 +5,60 @@ package thrust.physics;
  * Date: 22-04-08
  */
 public class Physics implements PhysicsInterface {
+  /* The gravitational constant */
+  public final double gravConstant;
+  /* Current acceleration */
+  private double myAcceleration;
+  /* Current mass */
+  private double myMass;
+  /* Current momentum */
+  private double myMomentum;
+  /* Current orientation (radians) */
+  private double myOrientation;
+  /* Current x coordinate of entity */
+  private double myXPosition;
+  /* Current y coordinate of entity */
+  private double myYPosition;
+  /* Current velocity */
+  private double my_velocity;
+
+
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
+   /* a = ((v1-v0)/t) ... */
+
+    double test = myAcceleration;
+    return acceleration();
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
+    // Doesn't change or need to be private, so public final? - confirm
+    
+    return gravConstant;
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+    
+    return myMass;
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+    // p = m * v
+    myMomentum = myMass * myVelocity;
+    return myMomentum;
   }
 
   public double orientation() {
     // TODO Auto-generated method stub
-    return 0;
+    return myOrientation;
   }
 
   public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
+    final double[] position = new double[2];
+    position[0] = myXPosition;
+    position[1] = myYPosition;
+
+    return position();
   }
 
   public void simulate(double some_seconds) {
@@ -42,8 +67,12 @@ public class Physics implements PhysicsInterface {
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+    // Speed in a given direction (orientation)
+    double[] velocity = new double[2];
+    velocity[0] = myVelocity;
+    velocity[1] = myOrientation;
+
+    return velocity();
   }
 
 }
