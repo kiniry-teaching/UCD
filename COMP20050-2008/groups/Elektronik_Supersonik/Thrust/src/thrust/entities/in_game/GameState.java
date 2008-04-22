@@ -53,7 +53,7 @@ public class GameState extends AbstractGameState {
   }
 
   public boolean new_high_score(
-                                final HighScoreInterface the_possible_new_high_score) {
+      final HighScoreInterface the_possible_new_high_score) {
     // TODO Auto-generated method stub
     return false;
   }
