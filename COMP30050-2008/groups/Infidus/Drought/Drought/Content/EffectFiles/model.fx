@@ -3,7 +3,6 @@ float4x4 xWorld;
 float4x4 xWorldViewProjection;
 float3 xLightPosition;
 float xLightPower;
-float3 xLightDirection;
 bool xEnableNormals;
 bool xEnableLighting;
 bool xGreyScale;
@@ -59,7 +58,7 @@ PixelToFrame TexturedPixelShader(VertexToPixel PSIn)
 		if(xEnableNormals)
 			Output.Color = Output.Color * DotProduct(xLightPosition, PSIn.Position3D, PSIn.Normal);
 	}
-	
+		
 	if (xGreyScale) {
 		float avg = (Output.Color.r + Output.Color.g + Output.Color.b) / 3;
 		Output.Color = float4(avg, avg, avg, Output.Color.a);
