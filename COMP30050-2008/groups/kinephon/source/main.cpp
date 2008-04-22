@@ -124,6 +124,13 @@ void kinephon(void)
 		g_Shapes->compare(recording[index], &shapeMatches);
 
 		// @todo - run interpreter/movement - giving track and shapematches
+		glBegin(GL_LINES);
+			for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = recording[index]->next())
+			{
+					glVertex2i(frame->y(), frame->y());
+					glVertex2i(frame->next()->x(), frame->next()->y());		
+			}
+		glEnd();
 
 		// Perform some cleanup, just force to 100 frames max for now
 		g_Recorder->erase
