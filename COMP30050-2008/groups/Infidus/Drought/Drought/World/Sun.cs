@@ -73,9 +73,23 @@ namespace Drought.World
                         normal = new Vector3(0, position.Z, -position.Y);
                         normal.Normalize();
                         position += normal;
+                    }
+                    if (power == 0)
+                    {
+                        normal = new Vector3(0, position.Z, -position.Y);
+                        normal.Normalize();
                         position += normal;
+                    }
+                    if (power == 0)
+                    {
+                        normal = new Vector3(0, position.Z, -position.Y);
+                        normal.Normalize();
                         position += normal;
-                        position += normal;
+                    }
+                    if (power == 0)
+                    {
+                        normal = new Vector3(0, position.Z, -position.Y);
+                        normal.Normalize();
                         position += normal;
                     }
 
