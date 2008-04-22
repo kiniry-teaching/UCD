@@ -1,4 +1,4 @@
-//Product Query.java class designed to create a new product object,
+//ItemQuery.java class designed to create a new product object,
 //create query based on a barcode, return all necessary data,
 //eliminates need for two seperate classes, replaces Product.java and 
 //Query.java

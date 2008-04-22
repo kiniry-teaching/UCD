@@ -1,4 +1,9 @@
+//addReminder - a class that allows you to add a reminder to the database
+//BEING REPLACED as a unique reminder entry is being created for each customer
+
+
 import java.sql.*;
+
 
 public class addReminder {
 

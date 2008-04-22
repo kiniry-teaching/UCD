@@ -8,10 +8,16 @@ public class myTestMain {
 		//test values to use
 		//
 		long barcode = 5;
-		String name = "Peter V. Gibney";
-		String emailaddress = "peter.gibney@ucdconnect.ie";
-		int phonenumber = 1234575;
+		String name = "Han Solo";
+		String emailaddress = "hansolo@starwars.com";
+		int phonenumber = 125;
 		int customerid = 2;
+		int solosID = 7;
+		
+		int id = 0;
+		String[] toBeAdded = new String[10];
+		toBeAdded[0] = "Pasta";
+		toBeAdded[1] = "Milk";
 		
 
 		//Various Test Code Placed Here
@@ -41,10 +47,10 @@ public class myTestMain {
 		//System.out.println("How to make: "+myNewRecipe.instructions);
 		
 		//5. Retrieve a Reminder Object for a given customerID
-		//getReminder myReminder = new getReminder();
-		//String[] myarray = new String[10];
-		//myarray = myReminder.returnReminder(5);
-		
+//		getReminder myReminder = new getReminder();
+//		String[] myarray = new String[10];
+//		myarray = myReminder.returnReminder(5);
+//		
 //		for(int i=0; i<=9; i++)
 //		{
 //			System.out.println(myarray[i]);
@@ -52,15 +58,26 @@ public class myTestMain {
 		
 		
 		//6. Add reminder to database
-		int id = 3;
-		String[] toBeAdded = new String[10];
-		toBeAdded[0] = "i like";
-		toBeAdded[1] = "food";
 		//System.out.println(toBeAdded[2]);
+		//addReminder theReminder = new addReminder(id, toBeAdded);
 		
-		addReminder theReminder = new addReminder(id, toBeAdded);
 		
+		//7. add a sample transaction to database
+		//addTransaction myTransaction = new addTransaction (id, toBeAdded);
 			
+		
+		//8. Get a Transaction from the database
+		//getTransaction myTransaction = new getTransaction(id);
+		//System.out.println(myTransaction.transaxID);
+		//System.out.println(myTransaction.basket[0]);
+		//System.out.println(myTransaction.basket[1]);
+		
+		//9. Update Reminders for that Customer @Finish and Pay time
+		updateReminder finishandpay = new updateReminder(solosID, toBeAdded);
+		
+
+
+		
 		//System.out.println("GREAT SUCCESS");
 	}
 

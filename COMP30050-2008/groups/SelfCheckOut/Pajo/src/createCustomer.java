@@ -1,7 +1,5 @@
-//Product Query.java class designed to create a new product object,
-//create query based on a barcode, return all necessary data,
-//eliminates need for two seperate classes, replaces Product.java and 
-//Query.java
+//createCustomer allows for the creation of a new customer, allows creates
+//a new unique reminder for that customer
 
 import java.sql.*;
 
@@ -26,8 +24,17 @@ public class createCustomer {
 			pstmt.setInt(3, PhoneNumber);
 			
 			pstmt.executeUpdate();
-					
+			
 			System.out.println("Insertion Complete.");
+			
+			PreparedStatement pstmt1 = conn.prepareStatement("INSERT INTO Reminder(Item1BC) VALUES(?)");
+			pstmt1.setString(1, null);
+			System.out.println("Insertion Complete.");
+			
+			pstmt1.executeUpdate();
+			
+			
+			
 			conn.close();
 			//System.out.println("CONNECTION TERMINATED");
 		} 

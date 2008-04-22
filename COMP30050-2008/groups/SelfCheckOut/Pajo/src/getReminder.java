@@ -1,3 +1,6 @@
+//getReminder - allows for the retrieval of reminders set by a specific customer
+
+
 import java.sql.*;
 
 public class getReminder {
