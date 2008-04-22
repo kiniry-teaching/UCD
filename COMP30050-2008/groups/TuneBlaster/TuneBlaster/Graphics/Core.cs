@@ -28,7 +28,7 @@ namespace TuneBlaster_.Graphics
         GamePadState padState;
         value colour;
         Vector3 pos;
-        public static bool searchLightOn;
+        public bool searchLightOn;
         Image searchLight;
         Texture2D searchLightTexture;
         public bool blackwhite;

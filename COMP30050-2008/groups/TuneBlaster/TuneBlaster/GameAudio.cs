@@ -23,16 +23,23 @@ namespace TuneBlaster_
 
         private AudioEngine musicEngine;
         private WaveBank musicWaveBank;
-        private SoundBank musicSoundBank, synthBank, stringBank, drumBank, ballBank, harpBank;
+        private SoundBank musicSoundBank, synthBank, stringBank, drumBank, ballBank, harpBank, specialBank;
         public AudioListener listener;
         public AudioEmitter emitter;
+        public Cue searchCue, bwCue, gameOverCue, deathCue;
+        public Thread Alter;
+        public Thread Base;
+        public Thread Synth;
+        public Thread Drums;
+        public Thread Strings;
+        public Thread Harps;
 
         Cue baseCue1, baseCue2;
         Cue drumCue1, drumCue2, drumCue3, drumCue4;
         Cue stringCue1, stringCue2, stringCue3, stringCue4;
         Cue harpCue1, harpCue2, harpCue3, harpCue4;
         Cue synthCue1, synthCue2, synthCue3, synthCue4;
-        Cue ballCue1;
+        Cue ballCue;
         int cue;
         Image.value ballColour;
 
@@ -49,6 +56,14 @@ namespace TuneBlaster_
             ballBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Ball Noise Bank.xsb");
             synthBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Synth Bank.xsb");
             harpBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Harp Bank.xsb");
+            specialBank = new SoundBank(musicEngine, "Content\\Audio\\Win\\Special Music.xsb");
+
+            Alter = new Thread(new ParameterizedThreadStart(ChangeMelody));
+            Base = new Thread(new ThreadStart(ModifyBase));
+            Drums = new Thread(new ThreadStart(ModifyDrums));
+            Strings = new Thread(new ThreadStart(ModifyStrings));
+            Harps = new Thread(new ThreadStart(ModifyHarp));
+            Synth = new Thread(new ThreadStart(ModifySynth));
 
             listener = new AudioListener();
             emitter = new AudioEmitter();
@@ -67,6 +82,7 @@ namespace TuneBlaster_
             resetDrumCues();
             resetSynthCues();
             resetHarpCues();
+            resetSpecialCues();
 
             baseCue1.Play();
         }
@@ -76,7 +92,8 @@ namespace TuneBlaster_
         /// </summary>
         public void resetBallCues()
         {
-            ballCue1 = ballBank.GetCue("Ball Noise 1");
+            ballCue = ballBank.GetCue("Ball Noise 1");
+            deathCue = ballBank.GetCue("Game Over Sound");
         }
 
         /// <summary>
@@ -132,6 +149,16 @@ namespace TuneBlaster_
             stringCue4 = stringBank.GetCue("String Melody 4");
         }
 
+        /// <summary>
+        /// Sets the cues equal to the specified files from the sound bank to make them ready to be played again.
+        /// </summary>
+        public void resetSpecialCues()
+        {
+            searchCue = specialBank.GetCue("Search Light Music");
+            bwCue = specialBank.GetCue("Black and White Music");
+            gameOverCue = specialBank.GetCue("Game Over Music");
+        }
+
         #endregion
 
         #region Disposer Methods (disposeBallCues, disposeDrumCues, disposeStringCues, disposeSynthCues, disposeHarpCues)
@@ -141,7 +168,7 @@ namespace TuneBlaster_
         /// </summary>
         public void disposeBallCues()
         {
-            ballCue1.Dispose();
+            ballCue.Dispose();
         }
 
         /// <summary>
@@ -197,6 +224,15 @@ namespace TuneBlaster_
             stringCue4.Dispose();
         }
 
+        /// <summary>
+        /// Dispose of all the special mode cues in memory
+        /// </summary>
+        public void disposeSpecialCues()
+        {
+            searchCue.Dispose();
+            bwCue.Dispose();
+        }
+
         #endregion
 
         #region Threads (InstrChanger, ChangeBase, ChangeDrum, ChangeStrings, ChangeHarp, ChangeSynth)
@@ -210,10 +246,10 @@ namespace TuneBlaster_
             resetBallCues();
 
             Console.Write("Listener: " + listener.Position + " Emitter: " + emitter.Position);
-            ballCue1.Apply3D(listener, emitter);
-            ballCue1.Play();
+            ballCue.Apply3D(listener, emitter);
+            ballCue.Play();
 
-            Thread Alter = new Thread(new ParameterizedThreadStart(ChangeMelody));
+            Alter = new Thread(new ParameterizedThreadStart(ChangeMelody));
             Alter.Start(colour);
         }
 
@@ -222,7 +258,7 @@ namespace TuneBlaster_
         /// </summary>
         public void ChangeBase()
         {
-            Thread Base = new Thread(new ThreadStart(ModifyBase));
+            Base = new Thread(new ThreadStart(ModifyBase));
             Base.Start();
         }
 
@@ -231,7 +267,7 @@ namespace TuneBlaster_
         /// </summary>
         public void ChangeDrums()
         {
-            Thread Drums = new Thread(new ThreadStart(ModifyDrums));
+            Drums = new Thread(new ThreadStart(ModifyDrums));
             Drums.Start();
         }
 
@@ -240,7 +276,7 @@ namespace TuneBlaster_
         /// </summary>
         public void ChangeStrings()
         {
-            Thread Strings = new Thread(new ThreadStart(ModifyStrings));
+            Strings = new Thread(new ThreadStart(ModifyStrings));
             Strings.Start();
         }
 
@@ -249,7 +285,7 @@ namespace TuneBlaster_
         /// </summary>
         public void ChangeSynth()
         {
-            Thread Synth = new Thread(new ThreadStart(ModifySynth));
+            Synth = new Thread(new ThreadStart(ModifySynth));
             Synth.Start();
         }
 
@@ -258,7 +294,7 @@ namespace TuneBlaster_
         /// </summary>
         public void ChangeHarp()
         {
-            Thread Harps = new Thread(new ThreadStart(ModifyHarp));
+            Harps = new Thread(new ThreadStart(ModifyHarp));
             Harps.Start();
         }
 
@@ -747,6 +783,44 @@ namespace TuneBlaster_
         public void setPosition(Vector3 pos)
         {
             emitter.Position = pos;
+        }
+
+        /// <summary>
+        /// Suspend any threads currently executing
+        /// </summary>       
+        public void SuspendThreads()
+        {
+            if (Alter.IsAlive)
+                Alter.Suspend();
+            if (Base.IsAlive)
+                Base.Suspend();
+            if (Synth.IsAlive)
+                Synth.Suspend();
+            if (Harps.IsAlive)
+                Harps.Suspend();
+            if (Strings.IsAlive)
+                Strings.Suspend();
+            if (Drums.IsAlive)
+                Drums.Suspend();
+        }
+
+        /// <summary>
+        /// Resume any threads currently suspended
+        /// </summary>       
+        public void ResumeThreads()
+        {
+            if (Alter.IsAlive)
+                Alter.Resume();
+            if (Base.IsAlive)
+                Base.Resume();
+            if (Synth.IsAlive)
+                Synth.Resume();
+            if (Harps.IsAlive)
+               Harps.Resume();
+            if (Strings.IsAlive)
+                Strings.Resume();
+            if (Drums.IsAlive)
+                Drums.Resume();
         }
     }
 }

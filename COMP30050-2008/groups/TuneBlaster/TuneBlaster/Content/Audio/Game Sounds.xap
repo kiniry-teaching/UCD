@@ -16,8 +16,8 @@ Global Settings
     Header File = Game Sounds.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 2225692586;
-    Last Modified High = 29926134;
+    Last Modified Low = 1077317002;
+    Last Modified High = 29926413;
 
     Category
     {
@@ -221,7 +221,7 @@ Global Settings
 
         RPC Curve
         {
-            Name = Sound::1f848793-5f03-4193-8c06-28736cd9e508;
+            Name = Sound::b57d1687-a8c9-44a3-872a-a960876df382;
             Property = 0;
             Sound = 1;
             Line Color = 4293881351;
@@ -260,12 +260,10 @@ Wave Bank
     Compression Preset Name = <none>;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 1425041778;
-    PC Bank Last Modified High = 29925407;
-    Header Last Modified Low = 0;
-    Header Last Modified High = 0;
-    Bank Last Revised Low = 3883737264;
-    Bank Last Revised High = 29925391;
+    PC Bank Last Modified Low = 911477614;
+    PC Bank Last Modified High = 29926416;
+    Bank Last Revised Low = 792415114;
+    Bank Last Revised High = 29926416;
 
     Wave
     {
@@ -749,6 +747,98 @@ Wave Bank
             Last Modified High = 29925394;
         }
     }
+
+    Wave
+    {
+        Name = Search Light Music;
+        File = Music\Search Light Music.wav;
+        Build Settings Last Modified Low = 2511895474;
+        Build Settings Last Modified High = 29926381;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 88;
+            Play Region Length = 3713688;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1010503764;
+            Last Modified High = 29926391;
+        }
+    }
+
+    Wave
+    {
+        Name = Black and White Music;
+        File = Music\Black and White Music.wav;
+        Build Settings Last Modified Low = 3895914376;
+        Build Settings Last Modified High = 29926394;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 88;
+            Play Region Length = 3231948;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 120823534;
+            Last Modified High = 29926396;
+        }
+    }
+
+    Wave
+    {
+        Name = Game Over Music;
+        File = Music\Game Over Music.wav;
+        Build Settings Last Modified Low = 918098252;
+        Build Settings Last Modified High = 29926413;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 88;
+            Play Region Length = 1882620;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 609660752;
+            Last Modified High = 29926413;
+        }
+    }
+
+    Wave
+    {
+        Name = Game Over Sound;
+        File = Music\Game Over Sound.wav;
+        Build Settings Last Modified Low = 738352614;
+        Build Settings Last Modified High = 29926416;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 88;
+            Play Region Length = 821432;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 623196364;
+            Last Modified High = 29926416;
+        }
+    }
 }
 
 Sound Bank
@@ -758,8 +848,8 @@ Sound Bank
     Windows File = Win\Base Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2225692586;
-    Bank Last Modified High = 29926134;
+    Bank Last Modified Low = 1084817002;
+    Bank Last Modified High = 29926413;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -939,8 +1029,8 @@ Sound Bank
     Windows File = Win\String Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2225692586;
-    Bank Last Modified High = 29926134;
+    Bank Last Modified Low = 1084817002;
+    Bank Last Modified High = 29926413;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1220,8 +1310,8 @@ Sound Bank
     Windows File = Win\Ball Noise Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2225692586;
-    Bank Last Modified High = 29926134;
+    Bank Last Modified Low = 917571364;
+    Bank Last Modified High = 29926416;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1276,6 +1366,52 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = Game Over Sound;
+        Volume = -400;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaer Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Game Over Sound;
+                    Entry Index = 24;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = Ball Noise 1;
@@ -1295,6 +1431,26 @@ Sound Bank
             Weight Max = 255;
         }
     }
+
+    Cue
+    {
+        Name = Game Over Sound;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Game Over Sound;
+            Index = 1;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
 }
 
 Sound Bank
@@ -1304,8 +1460,8 @@ Sound Bank
     Windows File = Win\Drum Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2225692586;
-    Bank Last Modified High = 29926134;
+    Bank Last Modified Low = 1084817002;
+    Bank Last Modified High = 29926413;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1585,8 +1741,8 @@ Sound Bank
     Windows File = Win\Harp Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2225692586;
-    Bank Last Modified High = 29926134;
+    Bank Last Modified Low = 1084817002;
+    Bank Last Modified High = 29926413;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1866,8 +2022,8 @@ Sound Bank
     Windows File = Win\Synth Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2225692586;
-    Bank Last Modified High = 29926134;
+    Bank Last Modified Low = 1084817002;
+    Bank Last Modified High = 29926413;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -2134,6 +2290,218 @@ Sound Bank
         {
             Name = Synth Melody 1;
             Index = 3;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+}
+
+Sound Bank
+{
+    Name = Special Music;
+    Xbox File = Xbox\Special Music.xsb;
+    Windows File = Win\Special Music.xsb;
+    Xbox Bank Path Edited = 0;
+    Windows Bank Path Edited = 0;
+    Bank Last Modified Low = 4056568456;
+    Bank Last Modified High = 29926414;
+    Header Last Modified High = 0;
+    Header Last Modified Low = 0;
+
+    Sound
+    {
+        Name = Search Light Music;
+        Volume = 200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaer Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Search Light Music;
+                    Entry Index = 21;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = Black and White Music;
+        Volume = 0;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaer Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Black and White Music;
+                    Entry Index = 22;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = Game Over Music;
+        Volume = 0;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+
+            Play Wave Event
+            {
+                Loop Count = 255;
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaer Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Game Over Music;
+                    Entry Index = 23;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Cue
+    {
+        Name = Search Light Music;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Search Light Music;
+            Index = 0;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = Black and White Music;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Black and White Music;
+            Index = 1;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = Game Over Music;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Game Over Music;
+            Index = 2;
             Weight Min = 0;
             Weight Max = 255;
         }

@@ -234,30 +234,6 @@ namespace TuneBlaster_
                 colour = core.Update(gameTime, Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
                 ballPos = core.getPos();
 
-                if (colour == Image.value.green)
-                {
-                    music.setPosition(ballPos);
-                    music.InstrChanger(Image.value.green);
-                }
-
-                if (colour == Image.value.blue)
-                {
-                    music.setPosition(ballPos);
-                    music.InstrChanger(Image.value.blue);
-                }
-
-                if (colour == Image.value.red)
-                {
-                    music.setPosition(ballPos);
-                    music.InstrChanger(Image.value.red);
-                }
-
-                if (colour == Image.value.purple)
-                {
-                    music.setPosition(ballPos);
-                    music.InstrChanger(Image.value.purple);
-                }
-
                 if (blast) GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
                 if (blastTime > 0) blastTime--;
                 if (blastTime == 0)
@@ -275,24 +251,67 @@ namespace TuneBlaster_
                 //Console.WriteLine(elapsedTime);
                 if ((int)elapsedTime == 0)
                 {
-
-                    
                     if (!specialModeOn)
                     {
                         core.NextSpecial();
                         specialModeOn = true;
                         theNextMode = "Normal Mode in:";
                         elapsedTime = 20;
+                        music.pauseAllCues();
+
+                        if (core.blackwhite)
+                        {
+                            music.SuspendThreads();
+                            music.bwCue.Play();
+                        }
+
+                        if (core.searchLightOn)
+                        {
+                            music.SuspendThreads();
+                            music.searchCue.Play();
+                        }
                     }
+
                     else
                     {
                         core.ResetSpecial();
                         specialModeOn = false;
                         theNextMode = "Special Mode in:";
                         elapsedTime = 30;
+                        music.resumeAllCues();
+                        music.ResumeThreads();
+                        music.disposeSpecialCues();
+                        music.resetSpecialCues();
                     }
 
                     //Do whatever else you need to do
+                }
+
+                if (!specialModeOn)
+                {
+                    if (colour == Image.value.green)
+                    {
+                        music.setPosition(ballPos);
+                        music.InstrChanger(Image.value.green);
+                    }
+
+                    if (colour == Image.value.blue)
+                    {
+                        music.setPosition(ballPos);
+                        music.InstrChanger(Image.value.blue);
+                    }
+
+                    if (colour == Image.value.red)
+                    {
+                        music.setPosition(ballPos);
+                        music.InstrChanger(Image.value.red);
+                    }
+
+                    if (colour == Image.value.purple)
+                    {
+                        music.setPosition(ballPos);
+                        music.InstrChanger(Image.value.purple);
+                    }
                 }
             }
 
@@ -300,6 +319,17 @@ namespace TuneBlaster_
             {
                 if (gameOver.Position != new Vector2(640, 360))
                 {
+                    music.pauseAllCues();
+                    music.SuspendThreads();
+
+                    if (!music.gameOverCue.IsPlaying)
+                    {
+                        music.setPosition(ballPos);
+                        music.deathCue.Apply3D(music.listener, music.emitter);
+                        music.deathCue.Play();
+                        music.gameOverCue.Play();
+                    }
+
                     gameOver.Position = new Vector2(gameOver.Position.X, gameOver.Position.Y + 2);
                 }
             }
