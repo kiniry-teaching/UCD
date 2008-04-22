@@ -95,7 +95,7 @@ namespace Drought.GameStates
 
             camera = new Camera(this, levelInfo, false);
 
-            rain = new PlaneParticleEmitter(512, 256, new Vector3(256, 128, 200), new Vector3(0, 0, 0), new Vector3(3f, 0, -19f), Color.LightBlue.ToVector4(), 100000, 9);
+            rain = new PlaneParticleEmitter(512, 256, new Vector3(256, 128, 200), new Vector3(0, 0, 0), new Vector3(3f, 0, -19f), Color.LightBlue.ToVector4(), 10000, 9);
 
             terrain = new Terrain(getGraphics(), getContentManager(), levelInfo, camera);
 
