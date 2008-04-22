@@ -1,0 +1,67 @@
+-Introduction------------------------------------------------------------------
+
+kinephon.sec is a binary encoding of the gestures that can be matched by the
+ kinephon analyser. Each gesture has a unique ShapeId that has been hard-coded
+ into kinephon, so, although the gestures' shape can be modified, new gestures
+ cannot be added unless the project is recompiled, having first been updated to
+ understand the new shape ids.
+
+The file format allows gestures to be nested within other gestures, to any
+ level of deepness, but in practice, only two levels are used, a top-level and
+ a child-level. Child level gestures are only matched if their top-level
+ gesture matches.
+
+Gestures can be for movement, speed, or acceleration and only speed or
+ acceleration can be nested, and must be nested under a movement gesture.
+
+Gestures are called shapes internally, and may be referred to as such below
+
+-Format------------------------------------------------------------------------
+
+ _Size_ _Type_ _Description____________________________________________________
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -Header-
+  4     uint   SEV1 - All version 1 .sec files must begin with this constant
+  4     uint   nShapes - Number of top-level gestures (also called shapes
+               below) in this file
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -Shape -
+ (The following sections repeat nShapes times. This includes Shape, Zone Data
+  Sub speed shape, and Sub accel shape)
+  1     byte   Type - 0=movement, 1=speed, 2=acceleration
+  4     uint   ShapeId - unique shape id that matches hard-coded tests
+  4     uint   width - width of gesture (shape) match data
+  4     uint   nData - total size of gesture (shape) match data
+               height = nData / width
+  4     uint   hBound - horizontal boundary of important shape match data. This
+               value is subtracted left and right of the width as the active
+               area of the shape. This value should not be greater than width/2
+  4     uint   vBound - similar to hBound, but vertical
+  4     uint   nZones - number of zones in this shape
+  4     uint   nSpeedShapes - number of child-level shapes that are of speed
+  4     uint   nAccelShapes - number of child-level shapes that are of accel
+  1     bool   zoneAnyStart - Can the zones be traversed in any order -not used
+  1     bool   zoneReverse - Can the zoens be traversed in reverse -not used
+  2     byte   padding - Pads structure to 4 bytes alignment
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Zone -
+ (This section repeats nZones times)
+  4     float  x - Zone's x position
+  4     float  y - Zone's y position
+  4     float  enterRadius - Radius of entry to zone
+  4     float  enterAngle - Angle of entry to zone
+  4     float  enterArc - Angle +/- off enterAngle of entry to zone
+  4     float  exitRadius - Radius of exit from zone
+  4     float  exitAngle - Angle of exit from zone
+  4     float  exitArc - Angle +/- off enterAngle of exit from zone
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Data -
+ (This section repeats nData times)
+  1     uchar  data - Weight of current shape cell. Data is ordered from left-
+               to-right, top-to-bottom. This section is repeated for each cell
+               from [0][0] -> [height - 1][width - 1] incrementing width faster
+               than height
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -Sub speed shape -
+ (This section repeats nSpeedShapes times)
+               This section is a repeat of Shape, Zone, Data sections, but is
+               stored as children to the Shape
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -Sub accel shape -
+ (This section repeats nAccelShapes times)
+               This section is a repeat of Shape, Zone, Data sections, but is
+               stored as children to the Shape
