@@ -19,6 +19,8 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
+  
+
   /**
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
@@ -28,6 +30,7 @@ public abstract class Entity implements GameColor {
   public static Entity make(String the_initial_shape_name,
                             Shape the_initial_shape,
                             byte the_initial_state) {
+    assert false;
     return null;
   }
 

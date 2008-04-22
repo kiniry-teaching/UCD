@@ -25,7 +25,7 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures orientation().equals(the_orientation);
   public static StaticEntity make(double[] the_position,
                                   double the_orientation) {
-    assert false; //@ assert false;
+    assert false;
     return null;
   }
 
