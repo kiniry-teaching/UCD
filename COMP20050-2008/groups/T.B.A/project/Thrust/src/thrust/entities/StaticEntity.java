@@ -16,6 +16,10 @@ package thrust.entities;
  * @version 18 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
+/**
+ * The Position
+ */
+  private static double[] position = {0.0, 0.0};
   /**
    * @return A new static entity with this position and orientation.
    * @param the_position the immutable position.
@@ -23,10 +27,11 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ ensures position().equals(the_position);
   //@ ensures orientation().equals(the_orientation);
-  public static StaticEntity make(double[] the_position,
-                                  double the_orientation) {
+  public static StaticEntity make(final double[] the_position,
+                                  final double the_orientation) {
+    position = the_position;
     assert false; //@ assert false;
-    return null;
+    return null; 
   }
 
   /* (non-Javadoc)

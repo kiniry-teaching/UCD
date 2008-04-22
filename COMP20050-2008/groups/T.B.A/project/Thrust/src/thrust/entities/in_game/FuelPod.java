@@ -23,16 +23,17 @@ import thrust.entities.about.Fuelable;
  */
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
+/**
+ * The Color variable.
+ */
+  private Color my_fuel_Pod_Color;
 
-  private Color fuel_Pod_Color;
-  
   public double[] acceleration() {
     final double[] acceleration = {0.0, 0.0};
     return acceleration;
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
     return 0;
   }
 
@@ -47,7 +48,6 @@ public class FuelPod extends StaticEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
   }
 
   public Shape shape() {
@@ -55,9 +55,9 @@ public class FuelPod extends StaticEntity
     return null;
   }
 
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -70,14 +70,12 @@ public class FuelPod extends StaticEntity
     return 0;
   }
 
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     // TODO Auto-generated method stub
-    
   }
 
-  public void change_fuel_content(int the_fuel_change) {
+  public void change_fuel_content(final int the_fuel_change) {
     // TODO Auto-generated method stub
-    
   }
 
   public int fuel() {
@@ -95,9 +93,8 @@ public class FuelPod extends StaticEntity
     return 0;
   }
 
-  public void set_fuel_content(int the_fuel_content) {
+  public void set_fuel_content(final int the_fuel_content) {
     // TODO Auto-generated method stub
-    
   }
 
   public double gravitational_constant() {
@@ -115,18 +112,17 @@ public class FuelPod extends StaticEntity
     return null;
   }
 
-  public void simulate(double some_seconds) {
+  public void simulate(final double some_seconds) {
     // TODO Auto-generated method stub
-    
   }
 
   public Color color() {
-    return fuel_Pod_Color;
+    return my_fuel_Pod_Color;
   }
 
-  public void color(Color the_color) {
+  public void color(final Color the_color) {
     assert the_color == Color.yellow;
-    fuel_Pod_Color = the_color;
+    my_fuel_Pod_Color = the_color;
   }
   /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);
