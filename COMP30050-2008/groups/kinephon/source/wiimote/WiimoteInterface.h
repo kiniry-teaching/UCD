@@ -1,7 +1,7 @@
 #ifndef WIIMOTEINTERFACE_H_
 #define WIIMOTEINTERFACE_H_
 #include <string>
-#include "../../Parser/Parser.h"
+#include "../Parser/Parser.h"
 #include "IRReport.h"
 using namespace std;
 
@@ -84,6 +84,7 @@ public:
 	
 	//TODO finish documentation
 	void feedReport(Parser);
+	void feedReport();
 	bool closeConnection();
 private:
 	PyObject * _module;

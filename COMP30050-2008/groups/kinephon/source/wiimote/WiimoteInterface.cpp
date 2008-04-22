@@ -2,7 +2,7 @@
 #include <sys/time.h>
 #include <string>
 #include "Python.h"
-#include "../../Parser/Parser.h"
+#include "../Parser/Parser.h"
 #include "WiimoteInterface.h"
 using namespace std;
 
@@ -101,7 +101,7 @@ IRReport WiimoteInterface::receiveReport() {
 		IRReport report_object(data, timestamp);
 		return report_object;
 	} else {
-		return NULL;
+//		return NULL;
 	}
 }
 
