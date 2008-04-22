@@ -36,7 +36,6 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-<<<<<<< .working
   public final /*@ pure @*/ SoundEffect make(final File the_sound_effect_file) {
     AudioInputStream input_stream;
     DataLine.Info data_line_info;
@@ -58,11 +57,6 @@ public class SoundEffect {
       ioe.printStackTrace(System.err);
     }
     return this;
-=======
-  public static /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
-    assert false; //@ assert false;
-    return null;
->>>>>>> .merge-right.r1735
   }
 
   /**

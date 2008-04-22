@@ -28,7 +28,7 @@ public abstract class Entity implements GameColor {
   public static Entity make(String the_initial_shape_name,
                             Shape the_initial_shape,
                             byte the_initial_state) {
-    assert false; //@ assert false;
+    return null;
   }
 
   /**
