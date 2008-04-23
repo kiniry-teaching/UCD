@@ -8,8 +8,7 @@
 #include "../type.h"
 using namespace std;
 
-namespace audio
-{
+namespace audio {
     
 /**
  * Records a MIDI file.
@@ -31,7 +30,6 @@ public:
 	
 	/** 
 	 * Opens a new file to write to and sets up the MIDI header. 
-	 * @param noTracks number of tracks to be used
 	 * @returns Returns false if, for any reason, fails to open a file.
 	 */
 	bool openFile();
@@ -40,7 +38,6 @@ public:
 	 * Opens the given file to write to.
 	 * This will overwrite all old contents of the file. 
 	 * @param fileName fileName of the new file 
-	 * @param noTracks number of tracks to be used
 	 * @returns false if, for any reason, fails to open a file.
 	 */
 	bool openFile(string fileName);
@@ -56,18 +53,17 @@ public:
 	/** 
 	 * Writes a new event to buffer.
 	 * @param event message to be written to file
-	 * @param trackNo trackNo number this event belongs to
 	 * @returns true if write is successful
 	 */
 	bool write(vector<uchar> event, ulong deltaTime);
 		
 private:
 	string fileName_;
-    ofstream myFile_;
+   ofstream myFile_;
 	//buffer
 	vector<uchar> buffer_;
 
 };
 
-}
+}//end namespace
 #endif /*MIDIRECORDER_H_*/

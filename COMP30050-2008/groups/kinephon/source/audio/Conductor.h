@@ -3,42 +3,43 @@
 
 #include "MidiPlayer.h"
 
-namespace audio
-{
+namespace audio {
     
-//Note:
 /** 
- * The following enumerated types may be extended/shortend/changed/discarded
- * depending on whether we will actually use them and how.	
+ * What kind of rhythm should be used. The numbers should be read as 1_4 = 1/4, i.e. play one beat every 4 time steps.
  */
 enum Rhythm { RHYTHM_1_4, RHYTHM_2_4, RHYTHM_3_4, RHYTHM_4_4, RHYTHM_1_2, RHYTHM_2_3, RHYTHM_NONE };
 
 /** 
- * Which notes the chords should be based on.
- * Assuming a chord will be composed of 3 notes.
+ * Which notes the chords should be based on. 
+ * Assuming a chord will be composed of 3 notes. All chords are based on the note played on the first beat.
+ * The first three options play 3 notes simultaneously and hold it, the CHORDS_123 builds the chord gradually.
+ * The difference between the first three options is which note in the chord the note played on first beat is.
+ * Note that if the note on first beat is NO_NOTE, the last first beat note will be used for chords.
+ * 
  */
 enum Chords { CHORDS_FIRST, CHORDS_SECOND, CHORDS_THIRD, CHORDS_123, CHORDS_NONE };
 
 /** 
- * What dynamics should be used, i.e. loud or quiet.
+ * What dynamics should be used, i.e. loud (forte) or quiet(piano).
  */
 enum Dynamics { DYNAMICS_PIANO, DYNAMICS_FORTE, DYNAMICS_PIANISSIMO, DYNAMICS_FORTISSIMO };
 
 /**
- * these instruments will set suitable combinations of instruments for lead and chords
- * to be extended...
+ * These instruments set suitable combinations of instruments for lead and chords.
+ * Can be easily extended.  
  */
 enum Instrument { INSTRUMENT_CLASSIC, INSTRUMENT_CRAZY, INSTRUMENT_WIND };
 /**
- * no note, i.e. temporary pause signal
+ * No note, i.e. temporary pause signal.
  */
 const uchar NO_NOTE = 255;
 
 
 /**
- * Wrapper class for MidiPlayer, hiding the MIDI particular message 
- * passing and providing a musically oriented interface instead.
- * Good webpages for reference:
+ * Wrapper class for MidiPlayer, hiding the MIDI particular message passing and providing a musically oriented interface instead.
+ * It is supposed to be an independent application, hence functions may be included not needed for the project Kinephon.
+ * Good webpages for musical theory reference:
  * wikipedia and google :-)
  * http://www.wonderful-music.com/philosophy.html
  * http://www.classicalarchives.com/tutorial/
@@ -64,8 +65,8 @@ public:
 	 * This will open available Midi ports. 
 	 * If this method returns false, all subsequent calls to the other classes
 	 * will not have any effect. 
-     * @param recording true if the music should be recorded to a MIDI file
-     * @param portName name of port to be used (varies depending on synthesizer)     
+    * @param recording true if the music should be recorded to a MIDI file
+    * @param portName name of port to be used (varies depending on synthesizer)     
 	 * @return true if connection established, false if no connection to a MIDI port
 	 */
 	bool initialize(bool recording, string portName);
@@ -87,15 +88,15 @@ public:
 	 * have been specified before and will be included automatically.
 	 * Note that if a melody has been set previously, it will be ignored until play()
 	 * is called again.
-     * If no lead note should be played, but the other effects none the less, (e.g. if the last
-     * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then.
-     * <p>
-     * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
-     * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
-     * but you have to specify the octave number as 0.
+    * If no lead note should be played, but the other effects none the less, (e.g. if the last
+    * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then.
+    * <p>
+    * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
+    * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
+    * but you have to specify the octave number as 0.
 	 * @param note the note of the lead 
-     * @param octave play the note in this octave
-     * @param pitchVelocity attack velocity of note
+    * @param octave play the note in this octave
+    * @param pitchVelocity attack velocity of note
 	 */
 	void play(uchar note, int octave, uchar pitchVelocity);
 	
@@ -107,21 +108,21 @@ public:
 	 * quarter note has passed. 
 	 * Using this method any previously set accompaniment and melody will be ignored,
 	 * however not turned off.
-     * If no lead note should be played, but the other effects none the less, (e.g. if the last
-     * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then. 
-     * <p>
-     * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
-     * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
-     * but you have to specify the octave number such that the pitches will still be in the range of
-     * 0-127. Otherwise the output will be unpredictable (the wrong notes will either be played, if valid,
-     * or ignored, if you run out of range).
-     * The octave parameter can also be used to lower/increase the octaves.
+    * If no lead note should be played, but the other effects none the less, (e.g. if the last
+    * note should be longer) then pitch is to be set to the value NO_NOTE (255). pitchVelocity is not used then. 
+    * <p>
+    * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
+    * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
+    * but you have to specify the octave number such that the pitches will still be in the range of
+    * 0-127. Otherwise the output will be unpredictable (the wrong notes will either be played, if valid,
+    * or ignored, if you run out of range).
+    * The octave parameter can also be used to lower/increase the octaves.
 	 * @param note the note of the lead
-     * @param octave play the note in this octave
-     * @param pitchVelocity attack velocity of note
+    * @param octave play the note in this octave
+    * @param pitchVelocity attack velocity of note
 	 * @param accompany the pitch of the accompanying melody
-     * @param accOctave play the accompaniment in this octave  
-     * @param accompanyVelocity attack velocity of accompaniment note
+    * @param accOctave play the accompaniment in this octave  
+    * @param accompanyVelocity attack velocity of accompaniment note
 	 */
 	void play(uchar note, int octave, uchar pitchVelocity, uchar accNote, int accOctave, uchar accVelocity);
 	
@@ -130,17 +131,17 @@ public:
 	 * This methods caters for notes of a melody played outside
 	 * of the normal rhythm. The note will be played with the same
 	 * instrument as the usual lead notes.
-     * <p>
-     * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
-     * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
-     * but you have to specify the octave number such that the pitches will still be in the range of
-     * 0-127. Otherwise the output will be unpredictable (the wrong notes will either be played, if valid,
-     * or ignored, if you run out of range).
-     * The octave parameter can also be used to lower/increase the octaves.
-	 * @param note pitch of the note
-     * @param octave play the note in this octave
+    * <p>
+    * Note: the use of unsigned characters ensures that the specified notes have the correct range. 
+    * Also note: If you want to use the absolute pitches, i.e. values ranging 0-127, you can do so,
+    * but you have to specify the octave number such that the pitches will still be in the range of
+    * 0-127. Otherwise the output will be unpredictable (the wrong notes will either be played, if valid,
+    * or ignored, if you run out of range).
+    * The octave parameter can also be used to lower/increase the octaves.
+    * @param note pitch of the note
+    * @param octave play the note in this octave
 	 * @param velocity velocity of the note
-     * @param deltaTime time difference when this note should be played
+    * @param deltaTime time difference when this note should be played
 	 */
 	void playImmediate(uchar note, int octave, uchar velocity, ulong deltaTime);
 	
@@ -207,12 +208,12 @@ public:
 	 * <p>
 	 * <i> Effect </i>
 	 * Since the instruments have idividual characteristics, some go better together than others, i.e.
-     * in some combinations, one instrument would overpower the others. For this, we will have preset
-     * combinations (see the enum type Instrument). 
-     * <ul>
-     * <li>CLASSIC: lead-acoustic grand piano, chords-string ensemble, rhythm-synth drum
-     * <li>CRAZY: lead-woodblock, chords-seashore, rhythm-breath noise  
-     * </ul> 
+    * in some combinations, one instrument would overpower the others. For this, we will have preset
+    * combinations (see the enum type Instrument). 
+    * <ul>
+    * <li>CLASSIC: lead-acoustic grand piano, chords-string ensemble, rhythm-synth drum
+    * <li>CRAZY: lead-woodblock, chords-seashore, rhythm-breath noise  
+    * </ul> 
 	 * @param instrument the instrument to be used
 	 */
 	void setInstrument(Instrument instrument); 
@@ -293,7 +294,7 @@ public:
 	 * will play 3 notes, of which the middle one is 'more forceful' and one note higher.
 	 * The passed vector has to have an EVEN size.
 	 * This format my change later to allow for more complicated melodies. 
-	 * @param melody vector with pitches, if NULL then this option is set OFF
+	 * @param melody vector with pitches, if the vector has length zero then this option is set OFF
 	 */
 	void setMelody(vector<uchar> melody); 
 	
@@ -306,10 +307,10 @@ public:
 	 * <i> Effect </i>
 	 * Pedaling blends notes together, making the music sounding more 'together'.
 	 * If some notes are to be emphasized, however, pedalling might be inappropriate.
-     * Also, pedaling will only affect the lead and the accompaniment, since it would be rather 
-     * contraproductive for the chords or rhythm.
-     * Note: Only frequencies above 8 will have an audible effect. Also the effect is subtle, so in
-     * combination with chords and rhythm it may not be noticable any more.
+    * Also, pedaling will only affect the lead and the accompaniment, since it would be rather 
+    * contraproductive for the chords or rhythm.
+    * Note: Only frequencies above 8 will have an audible effect. Also the effect is subtle, so in
+    * combination with chords and rhythm it may not be noticable any more.
 	 * @param isOn true is pedaling is to be ON
 	 * @param frequency the frequency of pedal-down/pedal-ups
 	 */
@@ -345,15 +346,15 @@ public:
 	void pressPanicButton();
 	
 private:
-	MidiPlayer *midi_;		//midi output
-    int noNoteCount_;
-	int timeStep_;
-	int melodyStep_;
-    int melodyLength_;      //save length for safety check, if vector has invalid format
-    int pedalingFreq_;
+	MidiPlayer *midi_;		       //midi output
+    int noNoteCount_;           //needed for correct timing of recorder
+	int timeStep_;                    //needed for correct timing  
+	int melodyStep_;              //needed for correct timing of the melody vector 
+    int melodyLength_;         //save length for safety check, if vector has invalid format
+    int pedalingFreq_;     
     int pedalingCounter_;
 	
-	vector<uchar> melody_;
+	vector<uchar> melody_; 
 	bool hasAccompaniment_;
 	bool hasChords_;
 	bool hasRhythm_;
@@ -361,13 +362,13 @@ private:
     bool hasPedaling_;
 	bool hasReverb_;
 	
-    uchar modulation_;    
+   uchar modulation_;    
 	Rhythm rhythm_;
 	Chords chords_;
-    uchar currentChord_;
+   uchar currentChord_;
 	Dynamics dynamics_;
-    Instrument instrument_;
+   Instrument instrument_;
 };
-}
+}//end namespace
 
 #endif /*CONDUCTOR_H_*/

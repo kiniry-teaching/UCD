@@ -1,12 +1,11 @@
 #include "MidiPlayer.h"
 
-namespace audio
-{
+namespace audio {
     
 MidiPlayer::MidiPlayer():
 	midiout_(NULL),
-    recorder_(NULL),
-    chords_(3),
+   recorder_(NULL),
+   chords_(3),
 	isConnected_(false),
 	leadChannel_(NULL),
 	chordChannel_(NULL),
@@ -26,7 +25,7 @@ MidiPlayer::~MidiPlayer() {
     try {
         recorder_->closeFile();
     }
-    catch (...) {}
+    catch (...)  {}
     if (recorder_ != NULL)
         delete recorder_;
 }
@@ -35,7 +34,7 @@ MidiPlayer::~MidiPlayer() {
 bool MidiPlayer::initialize(bool recording, string portNm) {
 	// RtMidiOut constructor
 	midiout_ = new RtMidiOut();
-  	
+  	//platform dependent, since Windows has synthesizer build in
 #if defined(__LINUX_ALSASEQ__)
 
 	string portName;
@@ -98,7 +97,7 @@ bool MidiPlayer::initialize(bool recording, string portNm) {
         isConnected_ = true;
     }
 #endif
-  	if (isConnected_){
+  	if (isConnected_) {
         try {//sending messages, so catch expections
             if (recording) {//set up MidiRecorder
                 recorder_ = new MidiRecorder();
@@ -130,7 +129,7 @@ bool MidiPlayer::initialize(bool recording, string portNm) {
 void MidiPlayer::panic(ulong deltaTime) {
 	if(isConnected_) {
         try {
-		  leadChannel_->release(deltaTime);
+		    leadChannel_->release(deltaTime);
           accompanyChannel_->release(deltaTime);
           chordChannel_->release(chords_[0], deltaTime);        
           chordChannel_->release(chords_[1], deltaTime);
@@ -167,8 +166,8 @@ bool MidiPlayer::setRecording(bool setOn) {
 	
 void MidiPlayer::sendControlChange(Channels channel, uchar function, uchar value, ulong deltaTime) {
 	if (isConnected_) {
-        try {
-		  if (channel == CHANNEL_LEAD)
+         try {
+		   if (channel == CHANNEL_LEAD)
 		      leadChannel_->setControl(function, value, deltaTime);
 		  else if(channel == CHANNEL_ACCOMPANY)
 		      accompanyChannel_->setControl(function, value, deltaTime);
@@ -265,7 +264,5 @@ void MidiPlayer::releaseNote(Channels channel, uchar pitch, ulong deltaTime) {
         catch (RtError &error) {}
     }
 }
-
-void MidiPlayer::otherOptions() {}
 
 }

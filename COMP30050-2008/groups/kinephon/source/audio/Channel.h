@@ -7,8 +7,7 @@
 #include <vector>
 using namespace std;
 
-namespace audio
-{ 
+namespace audio { 
 	/* 
 	 * Define notes as constants, these are essential.
 	 * What octave we are in is less important for the tune. 
@@ -68,9 +67,9 @@ public:
 	/**
 	 * Sets the given control to specified value.
 	 * @param function number of control option
-	 * @param value the value of the option      
+	 * @param value the value of the option   
+    * @param deltaTime delay to be used when writing the MIDI file     
 	 * @throws RtError if anything went wrong
-    * @param deltaTime delay to be used when writing the MIDI file  
 	 */
 	void setControl(uchar function, uchar value, ulong deltaTime);
 	 
@@ -114,8 +113,8 @@ private:
 	uchar note_[2];			  //note and velocity of last played
 	uchar controls_[93]; 
 	RtMidiOut* midiout_;
-	MidiRecorder* recorder_;
+	MidiRecorder* recorder_;//may be, may be not, so we need a pointer
 	
 };
-}
+}//end namespace
 #endif /*CHANNEL_H_*/

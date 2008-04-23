@@ -1,24 +1,24 @@
 #include "Conductor.h"
-namespace audio
-{
+namespace audio {
+    
 Conductor::Conductor():
 	midi_(NULL),
-    noNoteCount_(0),
+   noNoteCount_(0),
 	timeStep_(0),
 	melodyStep_(0),
-    melodyLength_(0),
-    pedalingFreq_(0),
-    pedalingCounter_(0),
+   melodyLength_(0),
+   pedalingFreq_(0),
+   pedalingCounter_(0),
 	hasAccompaniment_(false),
 	hasChords_(false),
 	hasRhythm_(false),
-    hasMelody_(false),
-    hasPedaling_(false),
+   hasMelody_(false),
+   hasPedaling_(false),
 	hasReverb_(false),
-    modulation_(0),//default value to NO modulation
+   modulation_(0),//default value to NO modulation
 	rhythm_(RHYTHM_NONE),
 	chords_(CHORDS_NONE),
-    currentChord_(60),//default middle C, since we need something if we start with NO_NOTE
+   currentChord_(60),//default middle C, since we need something if we start with NO_NOTE
 	dynamics_(DYNAMICS_FORTE)
     
 {}
@@ -366,7 +366,7 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity){
     }
     //do this in every case:
     
-    if (hasPedaling_){
+    if (hasPedaling_) {
         cout << " time: "<< timeStep_ << " pedalingCounter: " << pedalingCounter_ << endl;
         if (pedalingCounter_ == 0) {
             
@@ -503,7 +503,7 @@ void Conductor::play(uchar note, int octave, uchar pitchVelocity, uchar accNote,
         
     }
     //do this in every case:
-    if (hasPedaling_){
+    if (hasPedaling_) {
         cout << " time: "<< timeStep_ << " pedalingCounter: " << pedalingCounter_ << endl;
         if (pedalingCounter_ == 0) {
             

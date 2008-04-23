@@ -1,11 +1,11 @@
 #include "Channel.h"
-namespace audio
-{
+namespace audio {
+    
 Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
 	channelNo_(no),
 	programNo_(0),//default acoustic grand piano
 	midiout_(midi),
-    recorder_(recorder)
+   recorder_(recorder)
 {
 	//set acoustic grand piano as default
 	vector<uchar> message(2);
@@ -17,7 +17,7 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
     
     
   	for (int i = 0; i < 93; i++)
-		controls_[i] = 0;
+	   controls_[i] = 0;
 		
   	// Channel Volume (cc#7), default max volume
   	message[0] = 176 + channelNo_;
@@ -30,21 +30,20 @@ Channel::Channel(RtMidiOut* midi, int no, MidiRecorder* recorder):
     
 }
 
-Channel::~Channel() {
-}
+Channel::~Channel()  {}
 
 // Returns the mode of the specified function. 
-uchar Channel::getControl(uchar control) {
+uchar Channel::getControl(uchar control)  {
 	return controls_[control];
 }
 
 // Returns the program 
-uchar Channel::getProgram() {
+uchar Channel::getProgram()  {
 	return programNo_;
 }
 	
 //Adjusts this channel's settings 
-void Channel::setControl(uchar function, uchar value, ulong deltaTime) {
+void Channel::setControl(uchar function, uchar value, ulong deltaTime)  {
 	controls_[function] = value;
 	vector<uchar> message(3);
   	message[0] = 176 + channelNo_;
@@ -58,7 +57,7 @@ void Channel::setControl(uchar function, uchar value, ulong deltaTime) {
 }
 	 
 //Change the instrument.
-void Channel::setProgram(uchar program) {
+void Channel::setProgram(uchar program)  {
 	programNo_ = program;
 	vector<uchar> message(2);
 	message[0] = 192 + channelNo_;
@@ -71,7 +70,7 @@ void Channel::setProgram(uchar program) {
 }
 	
 //Plays the given note in default octave.
-void Channel::play(uchar pitch, uchar velocity, ulong deltaTime) {
+void Channel::play(uchar pitch, uchar velocity, ulong deltaTime)  {
 	note_[0] = pitch;
 	note_[1] = velocity;
 	vector<uchar> message(3);
@@ -87,7 +86,7 @@ void Channel::play(uchar pitch, uchar velocity, ulong deltaTime) {
 	
 	
 //Stops the playing note.
-void Channel::release(ulong deltaTime) {
+void Channel::release(ulong deltaTime)  {
 	vector<uchar> message(3);
 	message[0] = 128 + channelNo_;
 	message[1] = note_[0];
@@ -99,7 +98,7 @@ void Channel::release(ulong deltaTime) {
         
 }
 
-void Channel::release(uchar pitch, ulong deltaTime) {
+void Channel::release(uchar pitch, ulong deltaTime)  {
     vector<uchar> message(3);
     message[0] = 128 + channelNo_;
     message[1] = pitch;
@@ -110,7 +109,4 @@ void Channel::release(uchar pitch, ulong deltaTime) {
         recorder_->write(message, deltaTime);       
     
 }
-
-  
-
 }

@@ -6,16 +6,9 @@
 using namespace std;
 using namespace audio;
 
-// Platform-dependent sleep routines.
-#if defined(__WINDOWS_MM__)
-  #include <windows.h>
-  #define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds ) 
-#else // Unix variants
-  #include <unistd.h>
-  #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
-#endif
 
 /**
+ * Test main for Audio part.
  * @author:	ED
  *
  * Demo test program for MidiPlayer.

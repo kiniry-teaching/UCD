@@ -1,20 +1,16 @@
 #include "MidiRecorder.h"
 
-namespace audio
-{
+namespace audio {
     
-MidiRecorder::MidiRecorder() {
-    
-   
-}
+MidiRecorder::MidiRecorder() {}
 
 MidiRecorder::~MidiRecorder() {}
 
 bool MidiRecorder::openFile() {
-    myFile_.open("midi_kinephon.mid", ios::out | ios::binary);
+   myFile_.open("midi_kinephon.mid", ios::out | ios::binary);
     if( !myFile_.is_open() ) {
         return false;
-    }
+}
     
     /*header chunk looks like: 
       4D 54 68 64 (MThd) 00 00 00 06 (FIXED) ff ff nn nn dd dd
@@ -92,11 +88,6 @@ bool MidiRecorder::closeFile() {
 }
 
 bool MidiRecorder::write(vector<uchar> event, ulong deltaTime) {
-    /**
-     * The following conversion is taken from TODO: find webpage
-     * MidiFileWriter.cpp
-     */
-     
     unsigned long timeBuffer;
     timeBuffer = deltaTime & 0x7F;
     while (deltaTime >>= 7) {
