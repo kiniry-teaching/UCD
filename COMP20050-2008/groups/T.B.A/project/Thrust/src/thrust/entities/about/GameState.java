@@ -10,6 +10,11 @@
 
 package thrust.entities.about;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
@@ -199,6 +204,8 @@ public abstract class GameState extends AbstractGameState{
 
   /**
    * @param the_new_high_score Insert this score into the high score table.
+   * @throws FileNotFoundException 
+   * @throws FileNotFoundException 
    */
   /*@ ensures new_high_score(the_new_high_score) ==>
     @         (\exists int i; 0 <= i & i < HIGH_SCORE_COUNT;
@@ -207,6 +214,22 @@ public abstract class GameState extends AbstractGameState{
   public void
   add_high_score(/*@ non_null @*/ final HighScoreInterface the_new_high_score)
   {
+
+    try {
+      FileReader fis   = new FileReader("HighScore.txt");
+      BufferedReader input   = new BufferedReader(fis);
+      while(input.readLine()!=null)
+      {
+      }
+    }
+   catch (IOException e) {
+
+    System.out.println("File not found");
+    e.printStackTrace();
+
+}
+
+
     /**
      * the found variable is true if the value in
      * score variable in the HighScoreInterface array
