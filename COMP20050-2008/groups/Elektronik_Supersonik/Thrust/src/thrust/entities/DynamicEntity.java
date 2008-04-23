@@ -22,27 +22,49 @@ import thrust.physics.PhysicsInterface;
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
-  
+  /**
+   * A shape which stores the shape of the entity
+   */
   private Shape my_shape;
-  
+  /**
+   * A string to store the name of the shape.
+   */
   private String my_shape_name;
-  
+  /** 
+   * A byte which stores the state.
+   */
   private byte my_state;
-  
+  /**
+   * An array of doubles to store acceleration.
+   */
   private double[] my_acceleration;
-  
+  /**
+   *  A double to store mass.
+   */
   private double my_mass;
-  
+  /**
+   * A double which stores momentum
+   */
   private double my_momentum;
-  
+  /**
+   * A double which stores the orientation
+   */
   private double my_orientation;
-  
+  /**
+   * An array of doubles storing position
+   */
   private double[] my_position;
-  
+  /**
+   * An array of doubles storing velocity
+   */
   private double[] my_velocity;
-  
+  /**
+   * A color which stores the colour of the entity
+   */
   private Color my_color;
-  
+  /**
+   * A double storing our gravitational constant
+   */
   private static final double GRAV_CONST = 0.0000000000667300;
   /**
    * @return A new dynamic entity with the given physical state.

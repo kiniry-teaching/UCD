@@ -4,28 +4,48 @@ package thrust.entities.in_game;
  * @author Dominic Carr (dominiccarr@gmail.com).
  * @version 11 April 2008
  */
+
 public class GameState extends AbstractGameState {
+  
+  /**
+   * An integer to store the bonus.
+   */
+  private int my_bonus;
+  /**
+   * An integer storing the current fuel.
+   */
+  private int my_current_fuel;
+  /**
+   * An byte storing lives.
+   */
+  private byte my_lives; 
+  /**
+   * An integer storing the maximum fuel.
+   */
+  private int my_max_fuel;
+  /**
+   * An integer storing the score.
+   */
+  private int my_score;
 
   public void add_high_score(final HighScoreInterface the_new_high_score) {
     // TODO Auto-generated method stub
   }
 
   public int bonus() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_bonus;
   }
 
   public void change_lives(final byte some_new_lives) {
-    // TODO Auto-generated method stub
+    my_lives += some_new_lives;
   }
 
   public void change_score(final int some_new_points) {
-    // TODO Auto-generated method stub
+    my_score += some_new_points;
   }
 
   public int current_fuel() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_current_fuel;
   }
 
   public HighScoreInterface high_score(final int the_index) {
@@ -39,17 +59,15 @@ public class GameState extends AbstractGameState {
   }
 
   public byte lives() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_lives;
   }
 
   public int maximum_fuel() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_max_fuel;
   }
 
   public void new_bonus(final int the_new_value) {
-    // TODO Auto-generated method stub
+    my_bonus = the_new_value;
   }
 
   public boolean new_high_score(
@@ -59,8 +77,6 @@ public class GameState extends AbstractGameState {
   }
 
   public int score() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_score;
   }
-
 }
