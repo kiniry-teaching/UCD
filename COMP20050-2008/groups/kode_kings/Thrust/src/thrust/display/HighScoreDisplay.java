@@ -16,8 +16,6 @@ package thrust.display;
  */
 public class HighScoreDisplay extends AbstractHighScoreDisplay {
 
-  //HighScore my_high_scores = new HighScore();
-
   public boolean displayed() {
     return true;
   }

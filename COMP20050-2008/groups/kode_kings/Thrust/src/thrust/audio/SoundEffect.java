@@ -14,8 +14,8 @@ import java.io.File;
 import javax.sound.sampled.*;
 /**
  * Any sound made in response to a event.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
+ * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie)
+ * @version 14 April 2008
  */
 public class SoundEffect {
   /**
