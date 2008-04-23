@@ -21,6 +21,7 @@ public class AnimatableWhack implements Animatable {
    */
   //@ ensures animation() == the_animation;
   public void animation(final Animation the_animation) {
+    my_animation = the_animation;
 
   }
 
