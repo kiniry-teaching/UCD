@@ -22,25 +22,34 @@ import thrust.entities.StaticEntity;
  */
 public class Terrain extends StaticEntity
   implements NeutralEntity {
+  
+  double my_mass;
+  double my_speed;
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
+    /**
+     * @return the downward acceleration due to gravity.
+     */
     return null;
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_mass;
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+    final int numberOfElements = 2;
+    double[] speed = new double[numberOfElements];
+    speed = velocity();
+    return mass() * speed[0];
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+    final int numberOfElements = 2;
+    final double[] my_velocity = new double[numberOfElements];
+    my_velocity[0] = my_speed;
+    my_velocity[1] = orientation();
+    return my_velocity;
   }
 
   public void render() {
