@@ -76,7 +76,7 @@ cluster_chart ENTITIES
   class DYNAMIC_ENTITY
     description "Entities whose position or orientation change."
   class STATIC_ENTITY
-    description "Entities whose position or orientation change."
+    description "Entities whose position and orientation do not change."
   class ENEMY_ENTITY
     description "An entity that is a threat to the spaceship."
   class FRIEND_ENTITY
@@ -160,8 +160,6 @@ cluster_chart PROPERTIES
     description "A color."
   class SHAPE
     description "A shape."
-  class PROPERTIES
-    description "The color and shape of an entity."
 end
 
 cluster_chart ANIMATIONS
@@ -219,6 +217,8 @@ cluster_chart PHYSICS
     description "The place where an entity is located."
   class VELOCITY
     description "The speed of an entity in a given direction."
+  class NEWTONIAN_SIMULATION
+    description "Simulate Newtonian physics."
 end
 
 cluster_chart SIMULATION

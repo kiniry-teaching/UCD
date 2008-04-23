@@ -34,7 +34,7 @@ public class Spaceship extends DynamicEntity
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
 
-  //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
+  //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
     @ public invariant (* The spaceship is destroyed by a bullet. *);
@@ -50,10 +50,10 @@ public class Spaceship extends DynamicEntity
     @ public invariant (* A spaceship's mass is the sum of its empty mass,
     @                     plus the mass of its fuel, plus the mass of
     @                     the goal sphere, if it is being towed. *);
-    @ public invariant mass() == EMPTY_MASS + fuel().mass() +
+    @ public invariant mass() == EMPTY_MASS + fuel_mass() +
     @                  (towed() ? GoalSphere.MASS : 0);
     @ public invariant (* The spaceship's shape is always that of a ship. *);
     @ public invariant (* The spaceship's color is always white. *);
-    @ public invariant color() == thrust.entities.properites.GameColor.WHITE;
+    @ public invariant color() == java.awt.Color.WHITE;
     @*/
 }

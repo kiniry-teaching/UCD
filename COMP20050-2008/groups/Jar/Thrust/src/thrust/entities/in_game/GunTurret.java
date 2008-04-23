@@ -22,6 +22,6 @@ public class GunTurret extends StaticEntity
   /*@ public invariant (* A gun turret always resides on/adjacent to
     @                     the terrain. *);
     @ public invariant (* A gun turret's color is always green. *);
-    @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+    @ public invariant color() == java.awt.Color.GREEN;
     @*/
 }

@@ -263,6 +263,8 @@ end
 
 class_chart STATIC_ENTITY
   inherit ENTITY
+  command
+    "Set the position and orientation of this entity."
   constraint
     "All queries are constant.",
     "Mass, velocity, acceleration, and momentum are all zero."
@@ -380,7 +382,8 @@ class_chart GOAL_SPHERE
    \ pedestal.",
     "When being towed, the goal sphere is rendered as a sphere.",
     "The shape of the goal sphere is always a circle.",
-    "The color of the goal sphere is always green."
+    "The color of the goal sphere is always green.",
+    "The mass of the goal sphere is 10,000kg."
 end
 
 class_chart GUN_TURRET
