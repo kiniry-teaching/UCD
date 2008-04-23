@@ -37,120 +37,14 @@ public class Spaceship extends DynamicEntity
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
 
-  public void render() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+ 
 
   public void shape(Shape the_shape) {
 
 
   }
 
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void state(byte the_state) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public void change_fuel_content(int the_fuel_change) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public int fuel() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public int fuel_mass() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public int maximum_fuel() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void set_fuel_content(int the_fuel_content) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public void tow() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public boolean towed() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void simulate(double some_seconds) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public Color color() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void color(Color the_color) {
-    // TODO Auto-generated method stub
-
-  }
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
