@@ -9,9 +9,12 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
 import java.util.Collection;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -34,8 +37,83 @@ public class Space extends StaticEntity
    * Add this star to space.
    * @param the_star the star to add.
    */
-  public void add_star(Star the_star) {
+  public void add_star(final Star the_star) {
     assert false; //@ assert false;
+  }
+
+  public double[] acceleration() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public double mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] velocity() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void render() {
+    // TODO Auto-generated method stub
+
+  }
+
+  public Shape shape() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void shape(final Shape the_shape) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public String shape_name() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public byte state() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void state(final byte the_state) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public void animate() {
+    // TODO Auto-generated method stub
+
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(final Animation the_animation) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
+
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);
