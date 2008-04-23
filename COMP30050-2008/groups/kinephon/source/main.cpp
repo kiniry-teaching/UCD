@@ -14,6 +14,8 @@
 #include "rai/Analyser/ShapesLoader.h"
 #include "Parser/Parser.h"
 #include "wiimote/WiimoteInterface.h"
+#include "Version_Interpreter/Movement.h"
+#include "Version_Interpreter/Interpreter.h"
 #include "type.h"
 
 using std::string;
@@ -26,12 +28,13 @@ using namespace interpreter;
 ///////////////////////////////////////////////////////////////////////////////
 // globals
 //
-Conductor *		g_Conductor		= 0;
-Recorder *		g_Recorder		= 0;
-Shapes *		g_Shapes		= 0;
-Parser *		g_Parser		= 0;
-int				g_BPM			= 256;
-WiimoteInterface * g_WiiMote	= 0;
+Conductor *			g_Conductor		= 0;
+Recorder *			g_Recorder		= 0;
+Shapes *			g_Shapes		= 0;
+Parser *			g_Parser		= 0;
+WiimoteInterface *	g_WiiMote		= 0;
+Interpreter *		g_Interpreter	= 0;
+movement *			g_Movement		= 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 // prototype
@@ -210,19 +213,20 @@ bool initialize(void)
 		startup = false;
 
 	if(startup != false)
-		true; // @todo - start interpreter/movement
+	{	g_Interpreter = new Interpreter();
+		g_Movment = new movement(g_Conductor);
+	}
 
 	if(startup != false)
 	{
 
 		g_Recorder = new Recorder();
 		g_Shapes = ShapesLoader::loadShapes(Config::shapesPath.c_str());
-//		if(g_Shapes == 0)
-//			startup = false;
+		if(g_Shapes == 0)
+			startup = false;
 
 	}
 
-// @todo Get latest parser
 	if(startup != false)
 		g_Parser = new Parser(g_Recorder);
 

@@ -1,8 +1,8 @@
 #ifndef INTERPRETER_H_
 #define INTERPRETER_H_
-#include "ShapeMatches.h"
-#include "Shape.h"
-#include "Conductor.h"
+#include "../rai/Analyser/ShapeMatches.h"
+#include "../rai/Analyser/Shape.h"
+#include "../audio/Conductor.h"
 
 
 using namespace std;
@@ -38,7 +38,7 @@ public:
          // return integer of the last frame(point) use.
          
          int shapeMatching(ShapeMatches*);
-         void shapemovement(Shape*);
+         void shapemovement(Shape const * const) const;
          
   
   

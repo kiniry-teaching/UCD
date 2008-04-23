@@ -314,10 +314,6 @@ SOURCE=.\audio\RtMidi.h
 # Begin Group "rai"
 
 # PROP Default_Filter ""
-# Begin Group "interpreter"
-
-# PROP Default_Filter ""
-# End Group
 # Begin Group "recorder"
 
 # PROP Default_Filter ""
@@ -525,6 +521,34 @@ SOURCE=.\wiimote\WiimoteInterface.cpp
 # Begin Source File
 
 SOURCE=.\wiimote\WiimoteInterface.h
+# End Source File
+# End Group
+# Begin Group "interpreter"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Version_Interpreter\Interpreter.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Version_Interpreter\Interpreter.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Version_Interpreter\Melody.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Version_Interpreter\Melody.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Version_Interpreter\movement.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Version_Interpreter\Movement.h
 # End Source File
 # End Group
 # Begin Source File

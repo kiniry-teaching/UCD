@@ -31,6 +31,7 @@ namespace esid
 	sid const CHORDS_FIRST        = 16; // Movement
 	sid const CHORDS_SECOND       = 17; // Movement
 	sid const CHORDS_THIRD        = 18; // Movement
+	sid const CHORDS_123        = 18; // Movement
 	sid const CHORDS_ONEOFF       = 19; // Movement
 	sid const CHORDS_NONE         = 20; // Movement
 	sid const INSTRUMENT_CLASSIC  = 21; // Movement

@@ -1,8 +1,8 @@
 #ifndef MELODY_H_
 #define MELODY_H_
 #include <vector>
-#include "type.h"
-#include "Conductor.h"
+#include "../type.h"
+#include "../audio/Conductor.h"
 
 using namespace std;
 using namespace audio;

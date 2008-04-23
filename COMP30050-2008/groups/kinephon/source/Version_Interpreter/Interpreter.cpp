@@ -1,9 +1,9 @@
 #include "Interpreter.h"
-#include "type.h"
-#include "ShapeId.h"
-#include "Conductor.h"
-#include "ShapeMatches.h"
-#include "ShapeMatch.h"
+#include "../type.h"
+#include "../rai/ShapeId.h"
+#include "../audio/Conductor.h"
+#include "../rai/Analyser/ShapeMatches.h"
+#include "../rai/Analyser/ShapeMatch.h"
 
 using namespace std;
 using namespace audio;
@@ -72,7 +72,7 @@ int Interpreter::shapeMatching(ShapeMatches* shapeMatches)
 	return 0;
 }
 
-void Interpreter::shapemovement(Shape* shapemovement){
+void Interpreter::shapemovement(Shape const * const shapemovement) const{
 	
 	//determine the values for the music from the movement.
 	//ouput pass to the audio class

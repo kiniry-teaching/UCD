@@ -1,10 +1,10 @@
 #ifndef MOVEMENT_H_
 #define MOVEMENT_H_
-#include "Track.h"
-#include "Conductor.h"
-#include "Channel.h"
+#include "../rai/Recorder/Track.h"
+#include "../audio/Conductor.h"
+#include "../audio/Channel.h"
 #include <map>
-#include "type.h"
+#include "../type.h"
 
 
 /**

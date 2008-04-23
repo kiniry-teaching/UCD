@@ -1,8 +1,8 @@
 #include "movement.h"
-#include "Conductor.h"
-#include "Track.h"
-#include "Frame.h"
-#include "ShapeId.h"
+#include "../audio/Conductor.h"
+#include "../rai/Recorder/Track.h"
+#include "../rai/Recorder/Frame.h"
+#include "../rai/ShapeId.h"
 #include <vector>
 #include <map>
 #include <cstdlib>
