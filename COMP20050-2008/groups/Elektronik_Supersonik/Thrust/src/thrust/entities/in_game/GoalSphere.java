@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
@@ -19,8 +21,28 @@ import thrust.entities.behaviors.Tow;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public class GoalSphere extends DynamicEntity
-  implements NeutralEntity, Tow {
+public class GoalSphere extends DynamicEntity implements NeutralEntity, Tow {
+
+  public GoalSphere(final double[] the_position, final double the_orientation,
+      final double[] the_acceleration, final double the_mass,
+      final double[] the_velocity, final String the_initial_shape_name,
+      final Shape the_initial_shape, final byte the_initial_state) {
+
+    super();
+    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
+                            the_mass, the_velocity, the_initial_shape_name,
+                            the_initial_shape, the_initial_state);
+  }
+
+  public void tow() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship
     @                     is destroyed. *);

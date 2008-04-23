@@ -58,6 +58,16 @@ public class Spaceship extends DynamicEntity
   public void set_fuel_content(final int the_fuel_content) {
     my_fuel.set_fuel_content(the_fuel_content);
   }
+
+  public void tow() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
   
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
