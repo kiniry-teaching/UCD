@@ -60,6 +60,62 @@ public class Star extends StaticEntity
     // TODO Auto-generated method stub
 
   }
+  /**
+   *
+   * @author allison
+   *
+   */
+  public class Point {
+    /**
+     *
+     */
+    int my_rx = 1;
+    /**
+     *
+     */
+    int my_ry = 1;
+
+    public Point(final int the_rx, final int the_ry) {
+      my_rx = the_rx;
+      my_ry = the_ry;
+    }
+  }
+  /**
+   *
+   * @author allison
+   *
+   */
+  public class Rectangle {
+    /**
+     *
+     */
+    final int my_width = 0;
+    /**
+     *
+     */
+    final int my_height = 0;
+    /**
+     *
+     */
+    final Point my_org;
+
+    public Rectangle() {
+      my_org = new Point(0, 0);
+    }
+    public Rectangle(final Point the_p) {
+      my_org = the_p;
+    }
+    public Rectangle(final int the_w, final int the_h) {
+      my_org = new Point(0, 0);
+      my_width = the_w;
+      my_height = the_h;
+    }
+    public Rectangle(final Point the_p, final int the_w, final int the_h) {
+      my_org = the_p;
+      my_width = the_w;
+      my_height = the_h;
+    }
+  }
 
   public Shape shape() {
     /**
@@ -67,14 +123,9 @@ public class Star extends StaticEntity
      * @author allison
      *
      */
-    class Rectangle {
-      int my_rx;
-      int my_ry;
-    }
-
     final Rectangle my_a = new Rectangle();
-    my_a.my_rx = 10;
-    my_a.my_ry = 10;
+    // my_a.my_rx = 10;
+    //my_a.my_ry = 10;
 
     my_starshape = (Shape)my_a;
 
