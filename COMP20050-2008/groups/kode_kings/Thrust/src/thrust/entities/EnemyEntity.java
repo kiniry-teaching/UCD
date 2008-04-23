@@ -21,7 +21,8 @@ public interface EnemyEntity {
   /**
    * @return What is your attack behavior AI?
    */
-  /*@ pure @*/ AI attack();
+  /*@ pure @*/ AI attack(
+                         );
 
   /**
    * @return What is your disturb behavior AI?
