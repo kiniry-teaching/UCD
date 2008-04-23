@@ -14,6 +14,7 @@ public class GameColorWhack implements GameColor {
    * implementing my color.
    */
   Color my_color;
+
   /**
    * @return What color are you?
    */
@@ -21,7 +22,7 @@ public class GameColorWhack implements GameColor {
   public/*@ pure @*/ Color color() {
 
     my_color.equals(Color.BLUE);
-
+    my_color.equals(Color.BLACK);
     return my_color;
   }
 
@@ -31,8 +32,7 @@ public class GameColorWhack implements GameColor {
    */
   //@ ensures color() == the_color;
   public void color(final Color the_color) {
-
-    the_color.equals(Color.BLACK);
+      my_color = the_color;
 
   }
 
