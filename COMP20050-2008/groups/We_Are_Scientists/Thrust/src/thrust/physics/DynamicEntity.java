@@ -78,8 +78,8 @@ public class DynamicEntity {
     final double mone = 0;
     final double[] a = position();
     final double half = 2;
-    final double mtwo = ( a[1] - a[0] )/( a[1]/half - a[0]/half );
-    final double tantheta = Math.abs( ( mone - mtwo )/( 1+( mone * mtwo ) ) );
+    final double mtwo = (a[1] - a[0]) / (a[1] / half - a[0] / half);
+    final double tantheta = Math.abs((mone - mtwo) / (1 + (mone * mtwo)));
     final double theta = Math.atan(tantheta);
     return theta;
   }
@@ -90,8 +90,6 @@ public class DynamicEntity {
   //@ ensures \result.length == 2;
   /*@ pure @*/ double[] position()
   {
-    double originx = 0;
-    double originy = 0;
     return null;
   }
 
