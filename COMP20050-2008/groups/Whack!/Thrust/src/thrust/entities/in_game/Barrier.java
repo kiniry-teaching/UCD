@@ -35,6 +35,8 @@ public class Barrier extends StaticEntity
   private Shape my_shape;
   /** the state of the barrier.*/
   private byte my_state;
+  /**the color of the barrier.*/
+  private Color my_color;
 
 
   /**
@@ -209,11 +211,11 @@ public class Barrier extends StaticEntity
 
   public Color color() {
     // TODO Auto-generated method stub
-    return null;
+    return my_color;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    my_color = the_color;
 
   }
 
