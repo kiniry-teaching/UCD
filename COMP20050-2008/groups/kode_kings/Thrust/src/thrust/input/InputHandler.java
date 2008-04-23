@@ -12,8 +12,9 @@ package thrust.input;
 
 /**
  * Processes and delegates each keyboard input received.
+ * @author Colin Casey (colin.casey@org.com)
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
+ * @version 23 April 2008
  */
 public class InputHandler {
   /** Press h to Display the high score table. */
