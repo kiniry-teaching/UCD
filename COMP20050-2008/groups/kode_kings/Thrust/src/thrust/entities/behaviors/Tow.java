@@ -24,8 +24,7 @@ public interface Tow {
    */
   /*@ pure @*/ boolean towed();
 
-  
-  
+
   /**
    * You are now towing or being towed.
    */
