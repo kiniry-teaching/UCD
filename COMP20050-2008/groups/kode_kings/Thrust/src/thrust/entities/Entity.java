@@ -11,11 +11,14 @@
 package thrust.entities;
 
 import thrust.entities.properties.GameColor;
+
+import java.awt.Color;
 import java.awt.Shape;
 
 /**
  * Any entity in the game that is drawn in space or on the terrain.
- * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie))
+ * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie)
+ * @author Colin Casey (colin.casey@org.com)
  * @version 23 April 2008
  */
 public abstract class Entity implements GameColor {
@@ -28,6 +31,8 @@ public abstract class Entity implements GameColor {
   private String my_shape_name;
   private Shape my_shape;
   private byte my_state;
+  /** The color of this entity. */
+  private Color my_color;
 
   public static Entity make(final String the_initial_shape_name,
                             final Shape the_initial_shape,
@@ -82,5 +87,13 @@ public abstract class Entity implements GameColor {
    */
   public void render() {
     assert false; //@ assert false;
+  }
+
+  public Color color() {
+    return my_color;
+  }
+
+  public void color(final Color the_color) {
+    my_color = the_color;
   }
 }

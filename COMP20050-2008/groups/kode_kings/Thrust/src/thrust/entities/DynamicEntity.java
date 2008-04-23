@@ -20,6 +20,27 @@ import thrust.physics.PhysicsInterface;
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
+
+  /**
+   * Implementation of Physics methods.
+   * @author Colin Casey (colin.casey@org.com)
+   * @version 23 April 2008
+   */
+
+  /** The force that attracts the spaceship and
+   * goal sphere toward the terrain. */
+  private static final double GRAVITY_CONSTANT = -9.8;
+  /** Increase in the rate of speed of something. */
+  private double[] my_acceleration;
+  /** The quantity of matter that an entity contains. */
+  private double my_mass;
+  /** The speed of an entity in a given direction. */
+  private double[] my_velocity;
+  /** The relative physical direction of entities. */
+  private double my_orientation;
+  /** The co-ordinates where an entity is located. */
+  private double[] my_position;;
+
   /**
    * @return A new dynamic entity with the given physical state.
    * @param the_position the initial position.
@@ -38,26 +59,6 @@ public abstract class DynamicEntity extends Entity
     assert false; //@ assert false;
     return null;
   }
-
-  /**
-   * Implementation of Physics methods.
-   * @author Colin Casey (colin.casey@org.com)
-   * @version 23 April 2008
-   */
-
-  /** The force that attracts the spaceship and
-   * goal sphere toward the terrain. */
-  private static final double GRAVITY_CONSTANT = -9.8;
-  /** Increase in the rate of speed of something. */
-  private static double[] my_acceleration;
-  /** The quantity of matter that an entity contains. */
-  private static double my_mass;
-  /** The speed of an entity in a given direction. */
-  private static double[] my_velocity;
-  /** The relative physical direction of entities. */
-  private static double my_orientation;
-  /** The co-ordinates where an entity is located. */
-  private static double[] my_position;;
 
   public double[] acceleration() {
     return my_acceleration;
