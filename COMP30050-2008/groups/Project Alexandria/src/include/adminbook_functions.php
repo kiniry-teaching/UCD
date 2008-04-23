@@ -33,7 +33,7 @@ function fetchBooks($isbn){
 	
 	fetchBooksAmazon($isbn, 0);
 //TODO - Ryan - Fix isbndb timeout
-//	fetchBooksISBNdb($isbn);
+	fetchBooksISBNdb($isbn);
 }
 
 /****************************************************************
