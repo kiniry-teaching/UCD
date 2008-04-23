@@ -19,22 +19,4 @@ import thrust.physics.PhysicsInterface;
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
-  /**
-   * @return A new dynamic entity with the given physical state.
-   * @param the_position the initial position.
-   * @param the_orientation the initial orientation.
-   * @param the_acceleration the initial acceleration.
-   * @param the_grav_constant the initial gravitational constant.
-   * @param the_mass the initial mass.
-   * @param the_velocity the initial velocity.
-   */
-  public static DynamicEntity make(double[] the_position,
-                                   double the_orientation,
-                                   double[] the_acceleration,
-                                   double the_grav_constant,
-                                   double the_mass,
-                                   double[] the_velocity) {
-    assert false; //@ assert false;
-    return null;
-  }
 }
