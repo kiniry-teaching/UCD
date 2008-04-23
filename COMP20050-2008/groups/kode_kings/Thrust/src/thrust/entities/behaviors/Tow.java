@@ -11,17 +11,21 @@ package thrust.entities.behaviors;
 
 /**
  * An entity that is a threat to the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Ciaran Hale (ciaran.hale@ucd.connect.ie)
  * @version 18 April 2008
  */
 public interface Tow {
   //@ initially !towed();
+
+
 
   /**
    * @return Are you currently towing or being towed?
    */
   /*@ pure @*/ boolean towed();
 
+  
+  
   /**
    * You are now towing or being towed.
    */
