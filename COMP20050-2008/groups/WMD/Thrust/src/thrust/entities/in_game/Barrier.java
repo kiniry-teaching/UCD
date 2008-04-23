@@ -186,7 +186,6 @@ public class Barrier extends StaticEntity
    * @the_color the new color.
    */
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
 
   }
 
