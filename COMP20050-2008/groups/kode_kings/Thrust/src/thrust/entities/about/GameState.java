@@ -24,7 +24,7 @@ public class GameState extends AbstractGameState {
   private static byte my_lives;
   /** The highest scores ever recorded in the game. */
   private static HighScoreInterface[] my_high_scores;
-  /** */
+  /** An instance of KKFuelable to allow monitoring of fuel. */
   private static final KKFuelable MY_FUEL_MONITOR = new KKFuelable();
 
   public int bonus() {
@@ -97,7 +97,7 @@ public class GameState extends AbstractGameState {
    * @author Colin Casey (colin.casey@org.com)
    * @version 17 April 2008
    */
-  public abstract class AbstractHighScore implements HighScoreInterface {
+  public class HighScore implements HighScoreInterface {
 
     /** The initials of the player. */
     private char[] my_initials;

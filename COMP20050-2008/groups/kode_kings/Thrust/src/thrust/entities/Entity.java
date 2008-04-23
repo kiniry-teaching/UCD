@@ -28,6 +28,7 @@ public class Entity implements GameColor {
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    */
+
   /** The name of the shape of this entity. */
   private String my_shape_name;
   /** The shape of this entity. */
