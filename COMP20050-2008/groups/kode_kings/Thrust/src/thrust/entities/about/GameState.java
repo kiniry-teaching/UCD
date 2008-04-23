@@ -13,7 +13,7 @@ package thrust.entities.about;
 /**
  * @author Colin Casey (colin.casey@org.com)
  * @author Ciaran Hale (ciaran.hale@ucd.ie)
- * @version 17 April 2008
+ * @version 19 April 2008
  */
 public class GameState extends AbstractGameState {
 
