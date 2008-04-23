@@ -25,13 +25,13 @@ public abstract class Entity implements GameColor {
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    */
+
   public static Entity make(final String the_initial_shape_name,
                             final Shape the_initial_shape,
                             final byte the_initial_state) {
 
     return null;
   }
-
   public void set_state(final String the_initial_shape_name,
                         final Shape the_initial_shape,
                         final byte the_initial_state) {
@@ -59,6 +59,7 @@ public abstract class Entity implements GameColor {
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
+
   public void shape(final Shape the_shape) {
     assert false; //@ assert false;
   }
@@ -79,9 +80,11 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
+
   public void state(final byte the_state) {
     assert false; //@ assert false;
   }
+
 
   /**
    * Render yourself.
