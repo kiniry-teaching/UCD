@@ -22,6 +22,7 @@ public class SoundEffect {
    */
   private Clip my_bit;
 
+
   /**
    *@return SoundEffect.;
    *@param soundfile inputs a sound.;
@@ -31,6 +32,7 @@ public class SoundEffect {
     // (assuming the sound can be played by the audio system)
 
     final File soundFile = new File("/.../media/Thrust.wav");
+
 
     try {
       final AudioInputStream effect;
@@ -55,14 +57,21 @@ public class SoundEffect {
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
+
     }
+
+
     final SoundEffect sou = (SoundEffect) my_bit;
     return sou;
     // load the sound into memory (a Clip)
+
   }
+
+
   public final void start() {
     my_bit.loop(Clip.LOOP_CONTINUOUSLY);
 
 
   }
 }
+
