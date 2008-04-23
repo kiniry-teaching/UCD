@@ -1,5 +1,8 @@
 package selfCheckOut;
 
+import java.util.Scanner;
+import java.util.Scanner;
+
 	/**
 	 * This  class is used to hold a Barcode for the SelfChekcOut project.
 	 * <p>
@@ -13,6 +16,7 @@ public class BarCode {
 	private final int[] barNums = new int[BAR_CODE_LEN];
 	private final long timeStamp;
 	private final double probability;
+	private static final long serialVersionUID = 8421863;
 
 	// ------------------------------------------------------	
 	/**
@@ -144,6 +148,111 @@ public class BarCode {
 	}
 	// ------------------------------------------------------	
 	/**
+	 * Creates a Barcode object from an array of ints,
+	 * and array of doubles for digit probabilities,
+	 * and a long representing the time stamp.
+	 * @param barNums the array of int, 13 long
+	 * @param barProbs the array of double, 13 long
+	 * @param timeStamp the time stamp for the barcode
+	 * @throws IllegalArgumentException if barNums is null.
+	 * @throws IllegalArgumentException if barNums is not length 13.
+	 * @throws IllegalArgumentException if an element of barNums is <0.
+	 * @throws IllegalArgumentException if an element of barNums is >9.
+	 * @throws IllegalArgumentException if the code is not a valid code.
+	 * @throws IllegalArgumentException if barProbs is null.
+	 * @throws IllegalArgumentException if barProbs is not length 13.
+	 * @throws IllegalArgumentException if an element of barProbs is < 0.
+	 * @throws IllegalArgumentException if an element of barProbs is > 1.
+	 * @throws IllegalArgumentException if barProb is NaN.
+	 * @throws IllegalArgumentException if timestamp is <0.
+	 */
+	// ------------------------------------------------------
+	public BarCode(int[] barNums, double[] barProbs, Long timeStamp) {
+		if (barNums == null)
+			throw new IllegalArgumentException("BarCode() barNums[] is null");
+		if (barNums.length != BAR_CODE_LEN)
+			throw new IllegalArgumentException("Barcode() barNums[] " +
+					"is wrong length = " + barNums.length);
+		if (barProbs == null)
+			throw new IllegalArgumentException("BarCode() barProbs[] is null");
+		if (barProbs.length != BAR_CODE_LEN)
+			throw new IllegalArgumentException("Barcode() barProbs[] " +
+					"is wrong length = " + barNums.length);
+		if (timeStamp <0)
+			throw new IllegalArgumentException("BarCode() timeStamp too small");
+		double tempProbability = 1d;
+		for (int i = 0; i < BAR_CODE_LEN; i++) {
+			this.barNums[i] = barNums[i];
+			if (barNums[i] < 0)
+				throw new IllegalArgumentException("BarCode() barNums[] has" +
+						" element less than 0 = " + barNums[i]);
+			if (barNums[i] > 9)
+				throw new IllegalArgumentException("BarCode() barNums[] has" +
+						" element greater than 10 = " + barNums[i]);
+			if (barProbs[i] < 0d)
+				throw new IllegalArgumentException("Barcode() barProbs[] " +
+						"has negative elements = " + barProbs[i]);
+			if (barProbs[i] > 1d)
+				throw new IllegalArgumentException("Barcode() barProbs[] " +
+						"has element too big = " + barProbs[i]);
+			if (Double.isNaN(barProbs[i]))
+				throw new IllegalArgumentException("Barcode() barProb is NaN");
+			tempProbability = tempProbability * barProbs[i];
+		}
+		probability = tempProbability;
+		if (!isValid())
+			throw new IllegalArgumentException("BarCode() is not a valid code");
+		this.timeStamp = timeStamp;
+	}
+	// ------------------------------------------------------
+	/**
+	 * Creates a Barcode object from an array of ints,
+	 * and a double for probality measure .
+	 * @param barNums the array of int, 13 long
+	 * @param barProb the probability that this is the code
+	 * @throws IllegalArgumentException if barNums is null.
+	 * @throws IllegalArgumentException if barNums is not length 13.
+	 * @throws IllegalArgumentException if an element of barNums is <0.
+	 * @throws IllegalArgumentException if an element of barNums is >9.
+	 * @throws IllegalArgumentException if the code is not a valid code.
+	 * @throws IllegalArgumentException if barProb > 1.
+	 * @throws IllegalArgumentException if barProb < 0.
+	 * @throws IllegalArgumentException if barProb is NaN.
+	 * @throws IllegalArgumentException if timestamp is <0.
+	 */
+	// ------------------------------------------------------
+	public BarCode(int[] barNums, double barProb, Long timeStamp) {
+		if (barNums == null)
+			throw new IllegalArgumentException("BarCode() barNums[] is null");
+		if (barNums.length != BAR_CODE_LEN)
+			throw new IllegalArgumentException("Barcode() barNums[] " +
+					"is wrong length = " + barNums.length);
+		if (barProb < 0d)
+			throw new IllegalArgumentException("Barcode() barProb " +
+					"is negative = " + barProb);
+		if (barProb > 1d)
+			throw new IllegalArgumentException("Barcode() barProb " +
+					"is too big = " + barProb);
+		if (Double.isNaN(barProb))
+			throw new IllegalArgumentException("Barcode() barProb is NaN");
+		if (timeStamp <0)
+			throw new IllegalArgumentException("BarCode() timeStamp too small");
+		for (int i = 0; i < BAR_CODE_LEN; i++) {
+			this.barNums[i] = barNums[i];
+			if (barNums[i] < 0)
+				throw new IllegalArgumentException("BarCode() barNums[] has" +
+						" element less than 0 = " + barNums[i]);
+			if (barNums[i] > 9)
+				throw new IllegalArgumentException("BarCode() barNums[] has" +
+						" element greater than 10 = " + barNums[i]);
+		}
+		if (!isValid())
+			throw new IllegalArgumentException("BarCode() is not a valid code");
+		probability = barProb;
+		this.timeStamp = timeStamp;
+	}
+	// ------------------------------------------------------
+	/**
 	 * Creates a Barcode object from a long.
 	 * @param barNum the long to create the barcode from
 	 * @throws IllegalArgumentException if barNum is <1.
@@ -218,6 +327,56 @@ public class BarCode {
 		 if (!isValid())
 			throw new IllegalArgumentException("BarCode() is not a valid code");
 		timeStamp = System.currentTimeMillis();
+		probability = barProb;
+	}
+	// ------------------------------------------------------	
+	/**
+	 * Creates a Barcode object from a long, a stated probability as a 
+	 * double and a timeStamp as a long.
+	 * @param barNum the long to create the barcode from
+	 * @param barProb the probability that this is the code
+	 * @param barNum the long to create the timeStamp from
+	 * @throws IllegalArgumentException if barNum is <1.
+	 * @throws IllegalArgumentException if barNum > 999999999999.
+	 * @throws IllegalArgumentException if the code is not a valid code.
+	 * @throws IllegalArgumentException if barProb > 1.
+	 * @throws IllegalArgumentException if barProb < 0.
+	 * @throws IllegalArgumentException if barProb is NaN.
+	 * @throws IllegalArgumentException if timestamp is <0.
+	 */
+	// ------------------------------------------------------
+	public BarCode(long barNum, double barProb, long timeStamp) {
+		if (barNum < 1)
+			throw new IllegalArgumentException("BarCode() barNum is < 1");
+		if (barNum > 9999999999999l)
+			throw new IllegalArgumentException("Barcode() barNum " +
+					"is too large, max= " + 9999999999999l);
+		if (barProb < 0d)
+			throw new IllegalArgumentException("Barcode() barProb " +
+					"is negative = " + barProb);
+		if (barProb > 1d)
+			throw new IllegalArgumentException("Barcode() barProb " +
+					"is too big = " + barProb);
+		if (Double.isNaN(barProb))
+			throw new IllegalArgumentException("Barcode() barProb is NaN");
+		if (timeStamp <0)
+			throw new IllegalArgumentException("BarCode() timeStamp too small");
+		String tempStr = barNum + "";
+		//pad it with zeroes
+		String zeroes = "0000000000000";
+		tempStr = zeroes.substring(0,13-tempStr.length()) + tempStr;
+		for (int i = 0; i < BAR_CODE_LEN; i++) {
+			barNums[i] = Integer.parseInt(tempStr.substring(i,i+1));
+			if (barNums[i] < 0)
+				throw new IllegalArgumentException("BarCode() barNum has" +
+						" element less than 0 = " + barNums[i]);
+			if (barNums[i] > 9)
+				throw new IllegalArgumentException("BarCode() barNum has" +
+						" element greater than 9 = " + barNums[i]);
+		}
+		 if (!isValid())
+			throw new IllegalArgumentException("BarCode() is not a valid code");
+		this.timeStamp = timeStamp;
 		probability = barProb;
 	}
 	// ------------------------------------------------------	
@@ -423,8 +582,16 @@ public class BarCode {
 	// ---------------------------------------------
 	public boolean sameBarCodeValue(BarCode bc) {
 		boolean result = true; //assume same
-		for (int i= 0; i < BAR_CODE_LEN; i++) {
-			result = result && (barNums[i] == bc.barNums[i]);
+		if (bc == null) {
+			result = false;
+		} else {
+			if (this != bc) {
+				for (int i= 0; i < BAR_CODE_LEN; i++) {
+					result = result && (barNums[i] == bc.barNums[i]);
+					if (!result) 
+						break;
+				}
+			}
 		}
 		return result;
 	}
@@ -451,13 +618,98 @@ public class BarCode {
 	 * @return true if they are equal 
 	 */
 	public boolean equals(Object o) {
-		boolean result = (o == this) && (o instanceof BarCode);
-		BarCode bc = (BarCode)o;
-		result = result && (bc.probability == probability);
-		for (int i= 0; i < BAR_CODE_LEN; i++) {
-			result = result && (barNums[i] == bc.barNums[i]);
-		}
+		//System.out.println("o == this = " + (o == this));
+		//System.out.println("(o instanceof BarCode) = " + (o instanceof BarCode));
+		//System.out.println("o == null = " + (o == null));
+		boolean result = true; //assumes equals
+		if (o != this) {
+			if (o instanceof BarCode) { //includes a null test
+				BarCode bc = (BarCode)o;
+				result = bc.timeStamp == this.timeStamp;
+				//System.out.println(bc.timeStamp + " A " + bc.timeStamp + (bc.timeStamp == this.timeStamp));
+				result = result && (bc.probability == this.probability);
+				//System.out.println(bc.probability + " B " + bc.probability + (bc.probability == this.probability));
+				for (int i= 0; i < BAR_CODE_LEN; i++) {
+					result = result && (this.barNums[i] == bc.barNums[i]);
+					//System.out.println(bc.barNums[i] + " C " + bc.barNums[i] + (bc.barNums[i] == this.barNums[i]));
+					if (!result) 
+						break;
+				}
+			} else {
+				result = false; //null or not BarCode object
+			}
+		}	
 		return result;
 	}
 	// ---------------------------------------------
+	/**
+	 * Exports this object as a formatted string so that it can be
+	 * reconstructed usinig a corresponging importBarCode(),
+	 * These are intended to permit the persistance & transmission as strings.
+	 * @return formatted string representing the object.
+	 */
+	public String exportBarCode() {
+		return "BarCodeStart: BarCode: " + this.toString() +
+			" TimeStamp: " + timeStamp + 
+			" Probability: " + probability +
+			" serialVersionUID: " + serialVersionUID +
+			" BarCodeStop:"; 
+	}
+	// ---------------------------------------------
+	/**
+	 * imports a formatted string reperesntation through a Scanner of a 
+	 * BarCode object and returns an object with those paramaters.
+	 * @param inScan the Scanner object containing the the formatted 
+	 * string representing the BarCode object
+	 * @return a BarCode object made from the formatted string, null if one 
+	 * can not be made from it which indicates an error.
+	 */
+
+	public static BarCode importBarCode(Scanner inScan) {
+		long barNum;
+		double barProb;
+		long barTimeStamp; //the timestamp
+		long verSerial;
+		BarCode retBarCode = null;
+		if (inScan.hasNext("BarCodeStart:")) {
+			inScan.next();//eat it, get rid of "BarCodeStart:"
+			if (inScan.hasNext("BarCode:")) {
+				inScan.next();//get rid of it
+				if (inScan.hasNextLong()) {
+					barNum = inScan.nextLong();
+					if ((barNum >= 1) && 
+							(barNum <= 9999999999999l) &&
+							inScan.hasNext("TimeStamp:")) {
+						inScan.next();//get rid of it , ("TimeStamp:")
+						if (inScan.hasNextLong()) {
+							barTimeStamp = inScan.nextLong();
+							if ((barTimeStamp >= 0) &&
+									(inScan.hasNext("Probability:"))) {
+								inScan.next();//get rid "Probability:"
+								if (inScan.hasNextDouble()) {
+									barProb = inScan.nextDouble();
+									if ((barProb >= 0d) && (barProb <= 1d) && 
+										(inScan.hasNext("serialVersionUID:"))){
+										inScan.next();
+										//get rid "serialVersionUID:"
+										if (inScan.hasNextLong()) {
+											verSerial = inScan.nextLong();
+											if ((verSerial == serialVersionUID)
+													&& (inScan.hasNext("BarCodeStop:"))) {
+												inScan.next();//get rid
+												retBarCode =
+													new BarCode(barNum, barProb, barTimeStamp);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return retBarCode;
+	}
+	// --------------------------------------------------------------
 } //end class BarCode

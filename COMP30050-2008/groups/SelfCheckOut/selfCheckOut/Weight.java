@@ -1,4 +1,8 @@
 package selfCheckOut;
+import java.io.Serializable;
+import java.util.Scanner;
+
+
 /**
  * This  class is used to hold a weight
  *  for the SelfChekcOut project.
@@ -7,10 +11,11 @@ package selfCheckOut;
  * @version 15th April 2008.
  */
 
-public class Weight {
+public class Weight implements Serializable{
 	
 	private final int weight; //weight in grams
 	private final long timeStamp; //when the object was created
+	private static final long serialVersionUID = 2874454;
 	
 	// ------------------------------------------------------	
 	/**
@@ -26,7 +31,27 @@ public class Weight {
 		this.weight = weight;
 		timeStamp = System.currentTimeMillis();
 	}
+	// ------------------------------------------------------	
+	/**
+	 * Creates a Weight object from an int, and a timestamp long.
+	 * @param weight the weight in grams.
+	 * @param timeStamp the timestamp
+	 * @throws IllegalArgumentException if weight is <0.
+	 * @throws IllegalArgumentException if timestamp is <0.
+	 */
+	// ------------------------------------------------------
+	public Weight(int weight, long timeStamp) {
+		if (weight < 0)
+			throw new IllegalArgumentException("Weight is negative = " 
+					+ weight);
+		if (timeStamp < 0)
+			throw new IllegalArgumentException("TimeStamp is negative = " 
+					+ timeStamp);
+		this.weight = weight;
+		this.timeStamp = timeStamp;
+	}
 	// ------------------------------------------------
+
 	/**
 	 * Converts this Weight object to a String.
 	 * 
@@ -65,7 +90,15 @@ public class Weight {
 	 */
 	// ---------------------------------------------
 	public boolean sameWeightValue(Weight weight) {
-		return (this.weight == weight.weight);
+		boolean result = true; //assume same
+		if (weight == null) {
+			result = false;
+		} else {
+			if (this != weight) {
+				result = (this.weight == weight.weight);
+			}
+		}
+		return result;
 	}
 	// ---------------------------------------------
 	/**
@@ -86,10 +119,16 @@ public class Weight {
 	 * @return true if they are equal 
 	 */
 	public boolean equals(Object o) {
-		boolean result = (o == this) && (o instanceof Weight);
-		Weight w = (Weight)o;
-		result = result && (w.weight == this.weight);
-		result = result && (w.timeStamp == this.timeStamp);
+		boolean result = true; //assumes equals
+		if (o != this) {
+			if (o instanceof Weight) { //includes a null test
+				Weight w = (Weight)o;
+				result = result && (w.weight == this.weight);
+				result = result && (w.timeStamp == this.timeStamp);
+			} else {
+				result = false; //null or not Weight object
+			}
+		}	
 		return result;
 	}
 	// ---------------------------------------------
@@ -103,4 +142,63 @@ public class Weight {
 		return ((this.weight <= upper.weight) && (this.weight >= lower.weight)); 
 	}
 	// ---------------------------------------------
+	/**
+	 * Exports this object as a formatted string so that it can be
+	 * reconstructed usinig a corresponging importWeight(),
+	 * These are intended to permit the persistance & transmission as strings.
+	 * @return formatted string representing the object.
+	 */
+	public String exportWeight() {
+		return "WeightStart: Weight: " + weight +
+			" TimeStamp: " + timeStamp + 
+			" serialVersionUID: " + serialVersionUID +
+			" WeightStop:"; 
+	}
+	// ---------------------------------------------
+	/**
+	 * imports a formatted string reperesntation through a Scanner of a 
+	 * Weight object and returns an object with those paramaters.
+	 * @param inScan the Scanner object containing the the formatted 
+	 * string representing the Weight object
+	 * @return a Weight object made from the formatted string, null if one 
+	 * can not be made from it which indicates an error.
+	 */
+	public static Weight importWeight(Scanner inScan) {
+		int weightVal; //the value of weight in grams;
+		long weightTimeStamp; //the timestamp
+		long verSerial;
+		Weight retWgt = null;
+		if (inScan.hasNext("WeightStart:")) {
+			inScan.next();//eat it, get rid of "WeightStart:"
+			if (inScan.hasNext("Weight:")) {
+				inScan.next();//get rid of it
+				if (inScan.hasNextInt()) {
+					weightVal = inScan.nextInt();
+					if ((weightVal >=0) && (inScan.hasNext("TimeStamp:"))) {
+						inScan.next();//get rid
+						if (inScan.hasNextLong()) {
+							weightTimeStamp = inScan.nextLong();
+							if ((weightTimeStamp >= 0) &&
+									(inScan.hasNext("serialVersionUID:"))) {
+								inScan.next();//get rid
+								if (inScan.hasNextLong()) {
+									verSerial = inScan.nextLong();
+									if ((verSerial == serialVersionUID)
+											&& (inScan.hasNext("WeightStop:"))) {
+										inScan.next();//get rid
+										retWgt = 
+												new Weight(weightVal, weightTimeStamp);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return retWgt;
+	}
+	// --------------------------------------------------------------
+	
+	
 } //end class Weight
