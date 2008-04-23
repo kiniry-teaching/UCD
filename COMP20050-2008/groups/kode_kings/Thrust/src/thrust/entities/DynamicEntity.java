@@ -74,7 +74,9 @@ public abstract class DynamicEntity extends Entity
   }
 
   public double momentum() {
-    return my_momentum;
+    /* Calculate momentum */
+    return ((Math.sqrt((my_velocity[0] * my_velocity[0]) +
+                       (my_velocity[1] * my_velocity[1]))) * my_mass);
   }
 
   public double orientation() {
