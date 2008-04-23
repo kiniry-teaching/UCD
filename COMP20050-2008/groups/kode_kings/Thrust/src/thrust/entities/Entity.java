@@ -21,7 +21,7 @@ import java.awt.Shape;
  * @author Colin Casey (colin.casey@org.com)
  * @version 23 April 2008
  */
-public abstract class Entity implements GameColor {
+public class Entity implements GameColor {
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.

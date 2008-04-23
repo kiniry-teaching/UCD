@@ -9,17 +9,15 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.EnemyEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.behaviors.AI;
 
 /**
  * An enemy gun turret that shoots bullets at the spaceship.
+ * @author Colin Casey (colin.casey@org.com)
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @version 23 April 2008
  */
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
@@ -36,7 +34,7 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's attack AI must shoot a bullet toward
    * the spaceship.
    */
-  public void attack(AI the_behavior) {
+  public void attack(final AI the_behavior) {
     assert false; //@ assert false;
   }
 
@@ -53,7 +51,7 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's disturb AI must shoot a bullet
    * in a random direction away from the terrain.
    */
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     assert false; //@ assert false;
   }
   /*@ public invariant (* A gun turret always resides on/adjacent to
