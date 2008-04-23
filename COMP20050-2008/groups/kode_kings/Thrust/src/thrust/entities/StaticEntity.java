@@ -30,45 +30,9 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  public void set_state(double[] the_position,
-                        double the_orientation) {
+  public void set_state(final double[] the_position,
+                        final double the_orientation) {
     assert false; //@ assert false;
-  }
-
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#mass()
-   */
-  //@ also ensures \result == 0;
-  public double mass() {
-    assert false; //@ assert false;
-    return 0;
-  }
-
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#velocity()
-   */
-  //@ also ensures \result[0] == 0 & \result[1] == 0;
-  public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
-  }
-
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#acceleration()
-   */
-  //@ also ensures \result[0] == 0 & \result[1] == 0;
-  public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
-  }
-
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#momentum()
-   */
-  //@ also ensures \result == 0;
-  public double momentum() {
-    assert false; //@ assert false;
-    return 0;
   }
 
   //@ public invariant (* All queries are constant. *);

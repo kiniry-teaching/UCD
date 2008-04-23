@@ -52,8 +52,6 @@ public abstract class DynamicEntity extends Entity
   private static double[] my_acceleration;
   /** The quantity of matter that an entity contains. */
   private static double my_mass;
-  /** The quantity of motion of a moving entity. */
-  private static double my_momentum;
   /** The speed of an entity in a given direction. */
   private static double[] my_velocity;
   /** The relative physical direction of entities. */
