@@ -25,26 +25,16 @@ public abstract class StaticEntity extends DynamicEntity {
    * @param the_position the immutable position.
    * @param the_orientation the immutable orientation.
    */
-<<<<<<< .working
   //@ requires !initialized;
   //@ ensures position()[0] == the_position[0];
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  public void set_state(final double[] the_position,
-                        final double the_orientation) {
-=======
-  //@ requires !initialized;
-  //@ ensures position()[0] == the_position[0];
-  //@ ensures position()[1] == the_position[1];
-  //@ ensures orientation() == the_orientation;
-  //@ ensures initialized;
+
   public void set_state(double[] the_position,
                         double the_orientation) {
->>>>>>> .merge-right.r1783
-    assert false; //@ assert false;
+    assert false; //@assert false;
   }
-
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
