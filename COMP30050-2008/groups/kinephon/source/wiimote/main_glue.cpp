@@ -24,7 +24,7 @@ int main_glue(int, char **) {
 	int last_time = 0;
 	int counter = 0;
 	for (int i = 0; i < 1000; i++) {
-		IRReport report  = wiinterface.receiveData();
+		IRReport report  = wiinterface.receiveReport();
 		cout << i;
 		//the whole if/else block servers only as feedback and provides
 		//simple statistics, it should not be included in the release.

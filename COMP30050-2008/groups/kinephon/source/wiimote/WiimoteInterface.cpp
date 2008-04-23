@@ -6,9 +6,33 @@
 #include "WiimoteInterface.h"
 using namespace std;
 
+string WiimoteInterface::NOT_FOUND = "NOT_FOUND";
+
 WiimoteInterface::WiimoteInterface()
 {
-	active = false;
+	_active = false;
+	_parser_is_setup = false;
+	Py_Initialize();
+
+	char* FileName = "python_interface.py";
+	PyObject* PyFileObject = PyFile_FromString(FileName, "r");
+	if (PyFileObject == NULL) {
+		//TODO we have a problem
+		PyErr_Clear();
+	}
+
+	PyRun_SimpleFile(PyFile_AsFile(PyFileObject), FileName);
+
+	_module = PyImport_AddModule("__main__"); 
+	assert(_module);                                   
+	_dictionary = PyModule_GetDict(_module);   
+	assert(_dictionary);    
+}
+
+WiimoteInterface::WiimoteInterface(Parser * p):_parser(*p)
+{
+	_parser_is_setup = true;
+	_active = false;
 	Py_Initialize();
 
 	char* FileName = "python_interface.py";
@@ -29,7 +53,7 @@ WiimoteInterface::WiimoteInterface()
 WiimoteInterface::~WiimoteInterface()
 {
 	//Close the connection if it hasn't been closed already.
-	if (active) {
+	if (_active) {
 		closeConnection();
 	}
 	//close the interpreter
@@ -61,17 +85,17 @@ bool WiimoteInterface::connectTo(string bluetooth_address) {
 		//TODO check for exceptions
 		PyRun_SimpleString("establish_connection(wiimote_address)");
 		PyRun_SimpleString("initialise_ir_camera()");
-		active = true;
+		_active = true;
 		return true;
 	} else {
-		active = false;
+		_active = false;
 		return false;
 	}
 
 }
 
 IRReport WiimoteInterface::receiveReport() {
-	if (active) {
+	if (_active) {
 		PyRun_SimpleString("report = receive_report()");
 
 		PyObject * report = PyDict_GetItemString(_dictionary, "report");
@@ -107,8 +131,17 @@ IRReport WiimoteInterface::receiveReport() {
 
 void WiimoteInterface::feedReport(Parser p) 
 {
-	if (active) {
-		//TODO feed the parser
+	if (_active) {
+		p.supplyReport(receiveReport());
+	} else {
+		//do nothing
+	}
+}
+
+void WiimoteInterface::feedReport() 
+{
+	if (_active && _parser_is_setup) {
+		_parser.supplyReport(receiveReport());
 	} else {
 		//do nothing
 	}
@@ -116,5 +149,5 @@ void WiimoteInterface::feedReport(Parser p)
 
 bool WiimoteInterface::closeConnection() {
 	PyRun_SimpleString("close_connection()");
-	active = false;
+	_active = false;
 }

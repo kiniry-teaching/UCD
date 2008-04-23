@@ -28,6 +28,7 @@ using namespace std;
 class WiimoteInterface
 {
 public:
+	static string NOT_FOUND;
 	/**
 	 * Create a wiimote interface.
 	 * Initialises the python interpreter and preloads a script
@@ -37,6 +38,7 @@ public:
 	 * @author JD
 	 */
 	WiimoteInterface();
+	WiimoteInterface(Parser*);
 	
 	/**
 	 * Destroy the interface.
@@ -89,7 +91,9 @@ public:
 private:
 	PyObject * _module;
 	PyObject * _dictionary;
-	bool active;
+	bool _active;
+	bool _parser_is_setup;
+	Parser _parser;
 };
 
 #endif /*WIIMOTEINTERFACE_H_*/
