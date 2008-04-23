@@ -11,7 +11,9 @@ package thrust.entities.in_game;
 
 import java.awt.Color;
 import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 
+import thrust.physics.*;
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
@@ -23,14 +25,30 @@ import thrust.entities.StaticEntity;
  * @version 18 April 2008
  */
 public class Barrier extends StaticEntity
-  implements NeutralEntity, Animatable {
+  implements NeutralEntity, Animatable, Shape, Physics {
+
+  /**holds whether barrier is open or not.*/
+  private boolean my_opened;
+  /** holds whether barrier is closed or not.*/
+  private boolean my_closed;
+  /** the  shape of the barrier.*/
+  private Shape my_shape;
+  /** the state of the barrier.*/
+  private byte my_state;
+
 
   /**
    * @return Are you closed?
    */
   public /*@ pure @*/ boolean closed() {
     assert false; //@ assert false;
-    return false;
+    if (moving()) {
+      my_closed = false;
+    } else if (!moving() && !opened()) {
+      my_closed = true;
+    }
+
+    return my_closed;
   }
 
   /**
@@ -38,7 +56,12 @@ public class Barrier extends StaticEntity
    */
   public /*@ pure @*/ boolean opened() {
     assert false; //@ assert false;
-    return false;
+    if (moving()) {
+      my_opened = false;
+    } else if (!moving() && !closed()) {
+      my_opened = true;
+    }
+    return my_opened;
   }
 
   /**
@@ -46,7 +69,11 @@ public class Barrier extends StaticEntity
    */
   public /*@ pure @*/ boolean moving() {
     assert false; //@ assert false;
+    if (!opened() && !closed()) {
+      return true;
+    }
     return false;
+
   }
 
   /**
@@ -55,6 +82,13 @@ public class Barrier extends StaticEntity
   //@ requires opened();
   public void close() {
     assert false; //@ assert false;
+
+    if (opened()) {
+      my_closed = true;
+      my_opened = false;
+
+    }
+
   }
 
   /**
@@ -63,26 +97,35 @@ public class Barrier extends StaticEntity
   //@ requires closed();
   public void open() {
     assert false; //@ assert false;
+
+    if (closed()) {
+      my_opened = true;
+      my_closed = false;
+    }
   }
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
+
+    return acceleration();
   }
 
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+  public double barrierMass() {
+
+    final double barrierMass = 70000;
+    return barrierMass;
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+    final double speed = 10;
+    return barrierMass() * speed;
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+    final double [] acceleration = acceleration();
+    final double speed = acceleration[0];
+    final double orientation = acceleration[1];
+    final double[] velocity = {speed, orientation};
+    return velocity;
   }
 
   public void render() {
@@ -90,29 +133,43 @@ public class Barrier extends StaticEntity
 
   }
 
+
+
   public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
+
+    return my_shape;
   }
 
   public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
+    final int my_d = 10;
+    final int my_a = 20;
+    final int my_t = 10;
+    final int my_s = 20;
+    my_shape = new Rectangle2D.Float(my_d, my_a, my_t, my_s);
 
   }
 
   public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
+    final String name = "Rectangle";
+    return name;
   }
 
   public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
+
+    if (closed()) {
+      my_state = -1;
+    }
+    if (moving()) {
+      my_state = 0;
+    }
+    if (opened()) {
+      my_state = 1;
+    }
+    return my_state;
   }
 
   public void state(final byte the_state) {
-    // TODO Auto-generated method stub
-
+    my_state = the_state;
   }
 
   public void animate() {
