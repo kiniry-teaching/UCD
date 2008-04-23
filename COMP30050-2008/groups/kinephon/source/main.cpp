@@ -7,6 +7,7 @@
 #include <GL/gl.h>
 #include <string>
 #include <iostream>
+#include "Python.h"
 #include "Config.h"
 #include "audio/Conductor.h"
 #include "rai/Recorder/Recorder.h"
@@ -32,7 +33,7 @@ Conductor *			g_Conductor		= 0;
 Recorder *			g_Recorder		= 0;
 Shapes *			g_Shapes		= 0;
 Parser *			g_Parser		= 0;
-WiimoteInterface *	g_WiiMote		= 0;
+WiimoteInterface *	g_Wiimote		= 0;
 Interpreter *		g_Interpreter	= 0;
 movement *			g_Movement		= 0;
 
@@ -127,10 +128,10 @@ void kinephon(void)
 
 		g_Shapes->compare(recording[index], &shapeMatches);
 
-		g_Interpreter->shapeMatch(shapeMatches);
-		g_Movement(recording[index]);
+		g_Interpreter->shapeMatching(&shapeMatches);
+		g_Movement->audioMovement(recording[index]);
 		glBegin(GL_LINES);
-			for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = recording[index]->next())
+			for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = frame ->next())
 			{
 					glVertex2i(frame->y(), frame->y());
 					glVertex2i(frame->next()->x(), frame->next()->y());		
@@ -215,7 +216,7 @@ bool initialize(void)
 
 	if(startup != false)
 	{	g_Interpreter = new Interpreter();
-		g_Movment = new movement(g_Conductor);
+		g_Movement = new movement(g_Conductor);
 	}
 
 	if(startup != false)
@@ -232,13 +233,13 @@ bool initialize(void)
 		g_Parser = new Parser(g_Recorder);
 
 	if(startup != false)
-		g_WiiMote = new WiimoteInterface(g_Parser);
+		g_Wiimote = new WiimoteInterface(g_Parser);
 
 	if(startup != false)
 		for(retry = 0; retry < 4; retry++)
 		{
 
-			Config::wiimote = g_WiiMote->findWiimote();
+			Config::wiimote = g_Wiimote->findWiimote();
 
 			if(Config::wiimote != WiimoteInterface::NOT_FOUND)
 				retry = 5;
@@ -249,7 +250,7 @@ bool initialize(void)
 		startup = false;
 
 	if(startup != false)
-		g_Wiimote->connectTo(Config::wiimote)
+		g_Wiimote->connectTo(Config::wiimote);
 
 	// Start glut
 	if(startup != false)
