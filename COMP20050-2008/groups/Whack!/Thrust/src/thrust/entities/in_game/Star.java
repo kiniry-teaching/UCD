@@ -35,34 +35,64 @@ public class Star extends StaticEntity
    *
    */
   Shape my_starshape;
+  /**
+   *
+   */
+  final double my_speed;
+  /**
+   *
+   */
+  final double my_anglerad;
+  /**
+   *
+   */
+  final double my_mass;
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+
+    return my_mass;
+
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
+    final int my_elements = 2;
+    final double[] my_s = new double[my_elements];
+    my_s = velocity();
+
+    return mass() * my_s[0];
+
+  }
+  public void orientation(final double the_angle) {
+
+    my_anglerad = the_angle;
+
+  }
+  public double orientation() {
+
+    return my_anglerad;
+
+  }
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+
+    final int my_elements = 2;
+    final double[] my_vel = new double[my_elements];
+    my_vel[0] = my_speed;
+    my_vel[1] = orientation();
+    return my_vel;
+
   }
 
   public void render() {
-    // TODO Auto-generated method stub
+
 
   }
   /**
-   *
-   * @author allison
    *
    */
   public class Point {
@@ -76,22 +106,22 @@ public class Star extends StaticEntity
     int my_ry = 1;
 
     public Point(final int the_rx, final int the_ry) {
+
       my_rx = the_rx;
       my_ry = the_ry;
+
     }
   }
   /**
    *
-   * @author allison
-   *
    */
   public class Rectangle {
     /**
-     *
+     * width of rectangle.
      */
     final int my_width = 0;
     /**
-     *
+     * height of rectangle.
      */
     final int my_height = 0;
     /**
@@ -100,36 +130,42 @@ public class Star extends StaticEntity
     final Point my_org;
 
     public Rectangle() {
+
       my_org = new Point(0, 0);
+
     }
+
     public Rectangle(final Point the_p) {
+
       my_org = the_p;
+
     }
     public Rectangle(final int the_w, final int the_h) {
+
       my_org = new Point(0, 0);
       my_width = the_w;
       my_height = the_h;
+
     }
     public Rectangle(final Point the_p, final int the_w, final int the_h) {
+
       my_org = the_p;
       my_width = the_w;
       my_height = the_h;
+
     }
   }
 
   public Shape shape() {
     /**
      *
-     * @author allison
-     *
      */
     final Rectangle my_a = new Rectangle();
-    // my_a.my_rx = 10;
-    //my_a.my_ry = 10;
 
     my_starshape = (Shape)my_a;
 
     return my_starshape;
+
   }
 
   public void shape(final Shape the_shape) {
@@ -139,36 +175,38 @@ public class Star extends StaticEntity
   }
 
   public String shape_name() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public byte state() {
-    // TODO Auto-generated method stub
+
     return 0;
   }
 
   public void state(final byte the_state) {
-    // TODO Auto-generated method stub
+
 
   }
 
   public void animate() {
-    // TODO Auto-generated method stub
+
 
   }
 
   public Animation animation() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
+
 
   }
   public Color color() {
-    my_starcolor.equals(Color.WHITE);
+
+    my_starcolor.equals(Color.DARK_GRAY);
+    my_starcolor.equals(Color.LIGHT_GRAY);
 
     return my_starcolor;
 
