@@ -32,7 +32,6 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   private double my_orientation;
 
   /**
-   * @return A new dynamic entity with the given physical state.
    * @param the_position the initial position.
    * @param the_orientation the initial orientation.
    * @param the_acceleration the initial acceleration.
@@ -40,6 +39,19 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
    * @param the_mass the initial mass.
    * @param the_velocity the initial velocity.
    */
+  public void set_dynamic_state(final double[] the_position,
+                                final double the_orientation,
+                                final double[] the_acceleration,
+                                final double the_grav_constant,
+                                final double the_mass,
+                                final double[] the_velocity) {
+    my_position = new double[]{the_position[0], the_position[1]};
+    my_orientation = the_orientation;
+    my_acceleration = new double[]{the_acceleration[0], the_acceleration[1]};
+    my_gravConstant = the_grav_constant;
+    my_mass = the_mass;
+    my_velocity = new double[]{the_velocity[0], the_acceleration[1]};
+  }
 
   public double[] acceleration() {
     return new double[] {my_acceleration[0], my_acceleration[1] };

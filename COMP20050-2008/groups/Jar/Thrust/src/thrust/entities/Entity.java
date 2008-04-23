@@ -19,40 +19,48 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
+
+  /** The name of the shape. */
+  private String my_shape_name;
+  /** The shape object. */
+  private Shape my_shape;
+  /** The state of the entity. */
+  private byte my_state;
+
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    */
-  public void set_state(String the_initial_shape_name,
-                        Shape the_initial_shape,
-                        byte the_initial_state) {
-    assert false; //@ assert false;
+  public void set_state(final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_initial_state) {
+    my_shape_name = the_initial_shape_name;
+    my_shape =  the_initial_shape;
+    my_state = the_initial_state;
   }
 
   /**
    * @return What shape are you?
    */
   public /*@ pure @*/ String shape_name() {
-    assert false; //@ assert false;
-    return null;
+    return my_shape_name;
   }
 
   /**
    * @return What shape are you?
    */
   public /*@ pure @*/ Shape shape() {
-    assert false; //@ assert false;
-    return null;
+    return my_shape;
   }
 
   /**
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public void shape(Shape the_shape) {
-    assert false; //@ assert false;
+  public void shape(final Shape the_shape) {
+    my_shape = the_shape;
   }
 
   /**
@@ -61,8 +69,8 @@ public abstract class Entity implements GameColor {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    assert false; //@ assert false;
-    return 0;
+    assert my_state != 0; //@ assert my_state != 0;
+    return my_state;
   }
 
   /**
@@ -71,8 +79,8 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
-  public void state(byte the_state) {
-    assert false; //@ assert false;
+  public void state(final byte the_state) {
+    my_state = the_state;
   }
 
   /**
