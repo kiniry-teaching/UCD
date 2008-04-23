@@ -24,6 +24,22 @@ import thrust.entities.StaticEntity;
  */
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
+  /**
+   * The mass of an object.
+   */
+  double my_mass;
+  /**
+   * The speed of an object.
+   */
+  double my_speed;
+  /**
+   * The angle of an object, in radians.
+   */
+  double my_angleRadians;
+  /**
+   * The position of an object.
+   */
+  double[] my_xyPosition;
 
   public double[] acceleration() {
     // TODO Auto-generated method stub
@@ -31,18 +47,22 @@ public class Star extends StaticEntity
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_mass;
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+    final int numberOfElements = 2;
+    double[] speed = new double[numberOfElements];
+    speed = velocity();
+    return mass() * speed[0];
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+    final int numberOfElements = 2;
+    final double[] my_velocity = new double[numberOfElements];
+    my_velocity[0] = my_speed;
+    my_velocity[1] = orientation();
+    return my_velocity;
   }
 
   public void render() {
@@ -91,18 +111,21 @@ public class Star extends StaticEntity
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
+    final double gravity = -9.81;
+    return gravity;
+  }
+  
+  public void getOrientation(final double an_angle)
+  {
+    my_angleRadians = an_angle;
   }
 
   public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_angleRadians;
   }
 
   public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_xyPosition;
   }
 
   public void simulate(double some_seconds) {
