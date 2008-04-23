@@ -20,7 +20,7 @@ public class AnimatableWhack implements Animatable {
    * @param the_animation This is your animation.
    */
   //@ ensures animation() == the_animation;
-  public void animation(final Animation  the_animation) {
+  public void animation(final Animation the_animation) {
 
   }
 

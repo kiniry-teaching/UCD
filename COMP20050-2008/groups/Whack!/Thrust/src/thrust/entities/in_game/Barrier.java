@@ -1,6 +1,5 @@
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
- *
  * @author "Joe Kiniry (kiniry@acm.org)"
  * @module "COMP 20050, COMP 30050"
  * @creation_date "March 2007"
@@ -25,6 +24,7 @@ import thrust.entities.StaticEntity;
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+
   /**
    * @return Are you closed?
    */
