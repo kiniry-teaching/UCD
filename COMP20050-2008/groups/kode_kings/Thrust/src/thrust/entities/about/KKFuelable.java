@@ -17,16 +17,16 @@ package thrust.entities.about;
 public class KKFuelable implements Fuelable {
 
   /** The maximum amount of fuel that can be contained. */
-  static final int MAXIMUM_FUEL;
+  private static final int MAX_FUEL = 10000;
   /** The amount of fuel that is contained. */
-  private int my_fuel;
+  private static int my_fuel;
 
   public int fuel() {
     return my_fuel;
   }
 
   public int maximum_fuel() {
-    return MAXIMUM_FUEL;
+    return MAX_FUEL;
   }
 
   public void set_fuel_content(final int the_fuel_content) {
@@ -35,5 +35,9 @@ public class KKFuelable implements Fuelable {
 
   public void change_fuel_content(final int the_fuel_change) {
     my_fuel = my_fuel + the_fuel_change;
+  }
+
+  public int fuel_mass() {
+    return my_fuel;
   }
 }

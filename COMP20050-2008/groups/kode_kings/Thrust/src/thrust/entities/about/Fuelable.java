@@ -33,9 +33,8 @@ public interface Fuelable {
    */
   //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
   //@ ensures fuel() == the_fuel_content;
-  public void set_fuel_content(int the_fuel_content) {
-    fuel() = the_fuel_content;
-  }
+  void set_fuel_content(int the_fuel_content);
+
 
   /**
    * @param the_fuel_change Change your fuel content by this many units.
