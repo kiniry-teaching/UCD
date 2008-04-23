@@ -10,6 +10,8 @@
 
 package thrust.entities;
 
+import java.awt.Shape;
+
 /**
  * Entities whose position and orientation do not change.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -30,9 +32,14 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  public void set_state(double[] the_position,
-                        double the_orientation) {
-    assert false;
+  public void set_state(final double[] the_position, final double the_orientation,
+                        final double[] the_acceleration, final double the_mass,
+                        final double[] the_velocity, final String the_initial_shape_name,
+                        final Shape the_initial_shape, final byte the_initial_state) {
+    
+    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
+                            the_mass, the_velocity, the_initial_shape_name,
+                            the_initial_shape, the_initial_state);
   }
 
   /* (non-Javadoc)
@@ -49,7 +56,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    return new double[] {0, 0};
+    return new double[] { 0, 0 };
   }
 
   /* (non-Javadoc)
@@ -57,7 +64,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    return new double[] {0, 0};
+    return new double[] { 0, 0 };
   }
 
   /* (non-Javadoc)

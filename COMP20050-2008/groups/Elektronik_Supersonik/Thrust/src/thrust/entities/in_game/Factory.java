@@ -10,9 +10,13 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
+import thrust.animation.EntityAnimation;
+import thrust.entities.EnemyAI;
 import thrust.entities.EnemyEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
@@ -33,6 +37,42 @@ public class Factory extends StaticEntity
    * The factory's sphere.
    */
   private FactorySphere my_sphere;
+  /**
+   * The AI of the factory.
+   */
+  private EnemyAI my_ai;
+  /**
+   * The animation of the factory.
+   */
+  private EntityAnimation my_animation;
+
+  public AI attack() {
+    return my_ai.attack();
+  }
+
+  public void attack(final AI the_behavior) {
+    my_ai.attack(the_behavior);
+  }
+
+  public AI disturb() {
+    return my_ai.disturb();
+  }
+
+  public void disturb(final AI the_behavior) {
+    my_ai.disturb(the_behavior);
+  }
+
+  public void animate() {
+    my_animation.animate();
+  }
+
+  public Animation animation() {
+    return my_animation.animation();
+  }
+
+  public void animation(final Animation the_animation) {
+    my_animation.animation(the_animation);
+  }
   /**
    * @return How much damage have you sustained?
    */
@@ -98,6 +138,41 @@ public class Factory extends StaticEntity
      * Indicates whether the chimney is smoking.
      */
     private boolean my_smoking;
+    /**
+     * The AI of the chimney.
+     */
+    private EnemyAI my_ai;
+    /**
+     * The animation of the chimney.
+     */
+    private EntityAnimation my_animation;
+    public AI attack() {
+      return my_ai.attack();
+    }
+
+    public void attack(final AI the_behavior) {
+      my_ai.attack(the_behavior);
+    }
+
+    public AI disturb() {
+      return my_ai.disturb();
+    }
+
+    public void disturb(final AI the_behavior) {
+      my_ai.disturb(the_behavior);
+    }
+
+    public void animate() {
+      my_animation.animate();
+    }
+
+    public Animation animation() {
+      return my_animation.animation();
+    }
+
+    public void animation(final Animation the_animation) {
+      my_animation.animation(the_animation);
+    }
     /**
      * @return Are you smoking?
      */

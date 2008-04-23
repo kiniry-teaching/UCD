@@ -41,7 +41,9 @@ public abstract class Entity implements GameColor {
   public void set_state(String the_initial_shape_name,
                         Shape the_initial_shape,
                         byte the_initial_state) {
-    assert false;
+    my_shape_name = the_initial_shape_name;
+    my_shape = the_initial_shape;
+    my_state = the_initial_state;
   }
 
   /**
