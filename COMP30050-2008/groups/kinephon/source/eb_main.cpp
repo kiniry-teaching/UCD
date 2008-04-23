@@ -34,8 +34,23 @@ int speedDelay = 4;
 int accelDelay = 10;
 int recordTime = 4;
 
+#include <vector>
+using std::vector;
+
 int main(int argc, char * * argv)
 {
+
+
+	vector<uchar>test(5);
+	vector<vector<uchar> > test2;
+	test[0] = 5;
+	test[1] = 4;
+	test[2] = 3;
+	test[3] = 1;
+	test2.push_back(test);
+	cout << test.size() << endl;
+	cout << test2.size() << endl;
+	cout << test2[0].size() << endl;
 
 #ifdef __TEST__
 

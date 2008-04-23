@@ -40,6 +40,10 @@ public:
 	 * Path to kinephon.sec
 	 */
 	static string	shapesPath;
+	/**
+	 * 
+	 */
+	static string	wiimote;
 
 ///////////////////////////////////////////////////////////////////////////////
 // commands

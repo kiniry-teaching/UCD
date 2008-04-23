@@ -499,6 +499,34 @@ SOURCE=.\rai\Analyser\TestZone.cpp
 SOURCE=.\rai\ShapeId.h
 # End Source File
 # End Group
+# Begin Group "conn"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\wiimote\IRReport.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\wiimote\IRReport.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\wiimote\main_glue.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\wiimote\python_interface.py
+# End Source File
+# Begin Source File
+
+SOURCE=.\wiimote\WiimoteInterface.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\wiimote\WiimoteInterface.h
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\Config.cpp

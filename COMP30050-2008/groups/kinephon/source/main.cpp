@@ -13,6 +13,7 @@
 #include "rai/Analyser/Shapes.h"
 #include "rai/Analyser/ShapesLoader.h"
 #include "Parser/Parser.h"
+#include "wiimote/WiimoteInterface.h"
 #include "type.h"
 
 using std::string;
@@ -30,6 +31,7 @@ Recorder *		g_Recorder		= 0;
 Shapes *		g_Shapes		= 0;
 Parser *		g_Parser		= 0;
 int				g_BPM			= 256;
+WiimoteInterface * g_WiiMote	= 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 // prototype
@@ -114,8 +116,7 @@ void kinephon(void)
 {	uint			index;
 	ShapeMatches	shapeMatches(0.75f, 1);
 
-	// @todo - run connection
-	// @todo - run parser
+	g_Wiimote->feedReport();
 
 	Recording & recording = *g_Recorder->eject();
 	for(index = 0; index < recording.length(); index++)
@@ -197,7 +198,8 @@ bool initializeArgs
 // intialise kinephon
 //
 bool initialize(void)
-{	bool	startup	= true;
+{	int		retry	= 0;
+	bool	startup	= true;
 
 	// Start sub systems in order of output -> input
 	g_Conductor = new Conductor();
@@ -221,11 +223,28 @@ bool initialize(void)
 	}
 
 // @todo Get latest parser
-//	if(startup != false)
-//		g_Parser = new Parser(g_Recorder);
+	if(startup != false)
+		g_Parser = new Parser(g_Recorder);
 
 	if(startup != false)
-		true; // @todo - start connections
+		g_WiiMote = new WiimoteInterface(g_Parser);
+
+	if(startup != false)
+		for(retry = 0; retry < 4; retry++)
+		{
+
+			Config::wiimote = g_WiiMote->findWiimote();
+
+			if(Config::wiimote != WiimoteInterface::NOT_FOUND)
+				retry = 5;
+
+		}
+
+	if(retry == 4)
+		startup = false;
+
+	if(startup != false)
+		g_Wiimote->connectTo(Config::wiimote)
 
 	// Start glut
 	if(startup != false)
@@ -237,7 +256,7 @@ bool initialize(void)
 		// Set callbacks
 		glutCreateWindow("kinephon");
 		glutDisplayFunc(glutOnPaint);
-		glutTimerFunc(1, glutOnTimer, 0);
+		glutIdleFunc(glutOnPaint);
 		glutKeyboardFunc(glutOnKeyDown);
 		glutReshapeFunc(glutOnSize);
 		glutFullScreen();
@@ -275,25 +294,13 @@ bool displayConfig(void)
 void glutOnPaint(void)
 {
 
+	kinephon();
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// @todo - render visualisations
 
     glutSwapBuffers();
-
-}
-
-void glutOnTimer
-(	int
-){
-
-	kinephon();
-
-	// Update visualisations
-	glutPostRedisplay();
-
-	// Delay one beat
-	glutTimerFunc(60000 / g_BPM, glutOnTimer, 0);
 
 }
 
