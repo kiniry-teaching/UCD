@@ -10,7 +10,9 @@
 package thrust.entities.in_game;
 
 import thrust.entities.DynamicEntity;
+import thrust.entities.EnemyAI;
 import thrust.entities.EnemyEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -19,13 +21,29 @@ import thrust.entities.EnemyEntity;
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntity {
+  private EnemyAI my_ai = new EnemyAI();
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
-  //@ ensures \result == 1;
+  //@ also ensures \result == 1;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    return 1;
+  }
+
+  public AI attack() {
+    return my_ai.attack();
+  }
+
+  public void attack(final AI the_behavior) {
+    my_ai.attack(the_behavior);
+  }
+
+  public AI disturb() {
+    return my_ai.disturb();
+  }
+
+  public void disturb(final AI the_behavior) {
+    my_ai.disturb(the_behavior);
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a

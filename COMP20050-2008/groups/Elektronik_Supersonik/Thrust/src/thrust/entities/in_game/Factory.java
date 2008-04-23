@@ -22,28 +22,41 @@ import thrust.entities.StaticEntity;
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
   /**
+   * Stores the health(hit-points) of the factory.
+   */
+  private byte my_health;
+  /**
+   * The factory's chimney.
+   */
+  private FactoryChimney my_chimney;
+  /**
+   * The factory's sphere.
+   */
+  private FactorySphere my_sphere;
+  /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-    assert false; //@ assert false;
-    return 0;
+    byte ret = (byte) (20 - my_health);
+    if(ret < 0) {
+      ret = 0;
+    }
+    return ret;
   }
 
   /**
    * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    assert false; //@ assert false;
-    return null;
+    return my_chimney;
   }
 
   /**
    * @return What is your sphere?
    */
   public /*@ pure @*/ FactorySphere sphere() {
-    assert false; //@ assert false;
-    return null;
+    return my_sphere;
   }
 
   /**
@@ -51,8 +64,8 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(byte the_damage) {
-    assert false; //@ assert false;
+  public void damage(final byte the_damage) {
+    my_health = (byte) (my_health - the_damage);
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -65,10 +78,10 @@ public class Factory extends StaticEntity
     @                     it is destroyed. *);
     @ public invariant (* A factory with more than 10 units of damage
     @                     has a chimney that does not smoke. *);
-    @ public invariant 10 < damage() ==> !chimney.smoking();
+    @ public invariant 10 < damage() ==> !chimney().smoking();
     @ public invariant (* A factory with at most 10 units of damage has
     @                     a smoking chimney. *);
-    @ public invariant damage() <= 10 ==> chimney.smoking();
+    @ public invariant damage() <= 10 ==> chimney().smoking();
     @*/
 
   //@ public invariant (* See constraint on color in FactoryChimney. *);
@@ -82,11 +95,14 @@ public class Factory extends StaticEntity
   public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
     /**
+     * Indicates whether the chimney is smoking.
+     */
+    private boolean my_smoking;
+    /**
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      assert false; //@ assert false;
-      return false;
+      return my_smoking;
     }
 
     /**
@@ -95,11 +111,11 @@ public class Factory extends StaticEntity
      * is smoking or not.
      */
     //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(boolean the_smoking_state) {
-      assert false; //@ assert false;
+    public void smoking(final boolean the_smoking_state) {
+      my_smoking = the_smoking_state;
     }
 
-    /*@ public invariant (* A factories chimney is the same color as
+    /*@ public invariant (* A factories chimney is the same colour as
       @                     its factory. *);
       @ public invariant (* The goal sphere is destroyed by a
       @                     factory's chimney. *);
@@ -116,7 +132,7 @@ public class Factory extends StaticEntity
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
     /*@ public invariant (* A factory sphere's color is always green. *);
-      @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+      @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/

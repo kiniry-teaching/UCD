@@ -76,7 +76,7 @@ cluster_chart ENTITIES
   class DYNAMIC_ENTITY
     description "Entities whose position or orientation change."
   class STATIC_ENTITY
-    description "Entities whose position or orientation do not change."
+    description "Entities whose position and orientation do not change."
   class ENEMY_ENTITY
     description "An entity that is a threat to the spaceship."
   class FRIEND_ENTITY

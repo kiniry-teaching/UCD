@@ -23,18 +23,6 @@ import thrust.physics.PhysicsInterface;
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
   /**
-   * A shape which stores the shape of the entity
-   */
-  private Shape my_shape;
-  /**
-   * A string to store the name of the shape.
-   */
-  private String my_shape_name;
-  /** 
-   * A byte which stores the state.
-   */
-  private byte my_state;
-  /**
    * An array of doubles to store acceleration.
    */
   private double[] my_acceleration;
@@ -75,39 +63,20 @@ public abstract class DynamicEntity extends Entity
    * @param the_mass the initial mass.
    * @param the_velocity the initial velocity.
    */
-  public static DynamicEntity make(double[] the_position,
+  public void set_dynamic_state(double[] the_position,
                                    double the_orientation,
                                    double[] the_acceleration,
-                                   double the_grav_constant,
                                    double the_mass,
-                                   double[] the_velocity) {
-    assert false;
-    return null;
-  }
-
-  public void render() {
-    assert false;
-  }
-
-  public Shape shape() {
-    return my_shape;
-  }
-
-  public void shape(Shape the_shape) {
-    my_shape = the_shape;
-  }
-
-  public String shape_name() {
-    return my_shape_name;
-  }
-
-  public byte state() {
-    return my_state;
-  }
-
-  public void state(byte the_state) {
-    my_state = the_state;
-    
+                                   double[] the_velocity,
+                                   String the_initial_shape_name,
+                                   Shape the_initial_shape,
+                                   byte the_initial_state) {
+    super.set_state(the_initial_shape_name, the_initial_shape, the_initial_state);
+    my_orientation = the_orientation;
+    my_position = new double[] {the_position[0], the_position[1]};
+    my_acceleration = new double[] {the_acceleration[0], the_acceleration[1]};
+    my_mass = the_mass;
+    my_velocity = new double[] {the_velocity[0], the_velocity[1]};
   }
 
   public double[] acceleration() {
@@ -141,7 +110,27 @@ public abstract class DynamicEntity extends Entity
   public double[] velocity() {
     return new double[] {my_velocity[0], my_velocity[1]};
   }
+  
+  public void velocity(double[] the_velocity) {
+    my_velocity = new double[] {the_velocity[0], the_velocity[1]};
+  }
 
+  public void orientation(double the_orientation) {
+    my_orientation = the_orientation;
+  }
+  
+  public void position(double[] the_position) {
+    my_position = new double[] {the_position[0], the_position[1]};
+  }
+  
+  public void acceleration(double[] the_acceleration) {
+    my_acceleration = new double[] {the_acceleration[0], the_acceleration[1]};
+  }
+  
+  public void mass(double the_mass) {
+    my_mass = the_mass;
+  }
+  
   public Color color() {
     return my_color;
   }
