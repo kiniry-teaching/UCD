@@ -106,10 +106,19 @@ public abstract class DynamicEntity extends Entity
   }
 
   public void acceleration(final double[] the_acceleration) {
-    my_acceleration = the_acceleration;
+    my_acceleration[0] = the_acceleration[0];
+    my_acceleration[0] = the_acceleration[0] + GRAVITY_CONSTANT;
   }
 
   public void simulate(final double some_seconds) {
+    /* Calculate new position after time has elapsed */
+    my_position[0] = my_position[0] + (my_velocity[0] * some_seconds) +
+      ((my_acceleration[0] * some_seconds * some_seconds) / 2);
+    my_position[1] = my_position[1] + (my_velocity[1] * some_seconds) +
+      ((my_acceleration[1] * some_seconds * some_seconds) / 2);
 
+    /* Calculate new velocity after time has elapsed */
+    my_velocity[0] = my_velocity[0] + my_acceleration[0] * some_seconds;
+    my_velocity[1] = my_velocity[1] + my_acceleration[1] * some_seconds;
   }
 }
