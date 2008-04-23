@@ -127,7 +127,8 @@ void kinephon(void)
 
 		g_Shapes->compare(recording[index], &shapeMatches);
 
-		// @todo - run interpreter/movement - giving track and shapematches
+		g_Interpreter->shapeMatch(shapeMatches);
+		g_Movement(recording[index]);
 		glBegin(GL_LINES);
 			for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = recording[index]->next())
 			{
