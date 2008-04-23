@@ -36,98 +36,58 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+  private int my_fuel;
 
-  public void render() {
-    // TODO Auto-generated method stub
-    
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#change_fuel_content(int)
+   */
+  public void change_fuel_content(final int the_fuel_change) {
+    if (my_fuel + the_fuel_change < 0)
+    {
+      my_fuel = 0;
+    }
+
+    if (my_fuel + the_fuel_change > maximum_fuel())
+    {
+      my_fuel = maximum_fuel();
+    }
+    my_fuel = my_fuel + the_fuel_change;
+
   }
 
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void shape(Shape the_shape) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void state(byte the_state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public void tow() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public boolean towed() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public double gravitational_constant() {
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#fuel_mass()
+   */
+  public int fuel_mass() {
     // TODO Auto-generated method stub
     return 0;
   }
 
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#fuel()
+   */
+  public int fuel() {
+    my_fuel = maximum_fuel();
+    return my_fuel;
   }
 
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#maximum_fuel()
+   */
+  public int maximum_fuel() {
+    final int maximum_fuel = 9999;
+    return maximum_fuel;
   }
 
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#set_fuel_content(int)
+   */
+  public void set_fuel_content(int the_fuel_content) {
+    if (the_fuel_content >= 0 && the_fuel_content <= maximum_fuel())
+    {
+      my_fuel = the_fuel_content;
+    }
   }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void simulate(double some_seconds) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public Color color() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void color(Color the_color) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
     @ public invariant (* The spaceship is destroyed by a bullet. *);
@@ -143,10 +103,10 @@ public class Spaceship extends DynamicEntity
     @ public invariant (* A spaceship's mass is the sum of its empty mass,
     @                     plus the mass of its fuel, plus the mass of
     @                     the goal sphere, if it is being towed. *);
-    @ public invariant mass() == EMPTY_MASS + fuel().mass() +
+    @ public invariant mass() == EMPTY_MASS + fuel_mass() +
     @                  (towed() ? GoalSphere.MASS : 0);
     @ public invariant (* The spaceship's shape is always that of a ship. *);
     @ public invariant (* The spaceship's color is always white. *);
-    @ public invariant color() == thrust.entities.properites.GameColor.WHITE;
+    @ public invariant color() == java.awt.Color.WHITE;
     @*/
 }

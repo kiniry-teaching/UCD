@@ -17,7 +17,7 @@ package thrust.entities.about;
 
 
 
-public class Fuelable {
+public interface Fuelable {
   /**
    * @return How much fuel do you contain?
    */
@@ -28,37 +28,19 @@ public class Fuelable {
   /**
    * @return your fuel
    */
-  int my_fuel;
-  int fuel()
-  {
-
-    my_fuel = maximum_fuel();
-    return my_fuel;
-
-
-  }
+  int fuel();
 
   /**
    * @return How much fuel can you contain?
    */
   //@ ensures 0 <= \result;
-  /*@ pure @*/ int maximum_fuel()
-  {
-    final int maximum_fuel = 9999;
-    return maximum_fuel;
-  }
+  /*@ pure @*/ int maximum_fuel();
   /**
    * @param the_fuel_content This many units is your fuel content.
    */
   //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
   //@ ensures fuel() == the_fuel_content;
-  void set_fuel_content(final int the_fuel_content)
-  {
-    if (the_fuel_content >= 0 && the_fuel_content <= maximum_fuel())
-    {
-      my_fuel = the_fuel_content;
-    }
-  }
+  void set_fuel_content(int the_fuel_content);
 
   /**
    * @param the_fuel_change Change your fuel content by this many units.
@@ -69,22 +51,14 @@ public class Fuelable {
     @             (fuel() == maximum_fuel()) :
     @           fuel() == \old(fuel() + the_fuel_change)));
     @*/
-  void change_fuel_content(final int the_fuel_change)
-  {
-    if (my_fuel + the_fuel_change < 0)
-    {
-      my_fuel = 0;
-    }
-
-    if (my_fuel + the_fuel_change > maximum_fuel())
-    {
-      my_fuel = maximum_fuel();
-    }
-
-    my_fuel = my_fuel + the_fuel_change;
-
-  }
+  void change_fuel_content(int the_fuel_change);
 
   //@ invariant (* Fuel content is always non-negative and finite. *);
   //@ invariant 0 <= fuel();
+  //@ public invariant (* One unit of fuel weights 1kg. *);
+  /**
+   * @return What is the mass of your fuel?
+   */
+  //@ ensures \result == fuel() * 1;
+  /*@ pure @*/ int fuel_mass();
 }
