@@ -23,10 +23,12 @@ import thrust.entities.about.Fuelable;
  */
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
+  public FuelPod() {
+  }
 /**
  * The Color variable.
  */
-  private Color my_fuel_Pod_Color;
+  private static Color my_fuel_Pod_Color;
 
   public double[] acceleration() {
     final double[] acceleration = {0.0, 0.0};

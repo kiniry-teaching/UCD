@@ -23,6 +23,10 @@ import thrust.entities.behaviors.AI;
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntity {
+
+  public Bullet() {
+
+  }
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */

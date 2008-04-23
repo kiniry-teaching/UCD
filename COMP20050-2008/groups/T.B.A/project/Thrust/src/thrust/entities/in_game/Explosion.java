@@ -25,6 +25,10 @@ import thrust.animation.Animation;
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
 
+  public Explosion() {
+
+  }
+
   public double[] acceleration() {
     // TODO Auto-generated method stub
     return null;

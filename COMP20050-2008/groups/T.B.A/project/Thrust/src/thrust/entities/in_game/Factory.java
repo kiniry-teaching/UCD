@@ -86,6 +86,9 @@ public class Factory extends StaticEntity
    */
   public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
+
+    public FactoryChimney() {
+    }
     /**
      * @return Are you smoking?
      */

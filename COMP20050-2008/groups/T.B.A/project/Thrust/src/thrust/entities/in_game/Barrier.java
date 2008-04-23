@@ -25,6 +25,10 @@ import thrust.entities.StaticEntity;
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  public Barrier() {
+
+  }
   /**
    * @return Are you closed?
    */

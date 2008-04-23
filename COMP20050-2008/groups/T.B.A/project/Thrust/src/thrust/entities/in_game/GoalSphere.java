@@ -25,9 +25,11 @@ import thrust.entities.behaviors.Tow;
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
 
+  public GoalSphere() {
+  }
+
   public void render() {
     // TODO Auto-generated method stub
-    
   }
 
   public Shape shape() {
