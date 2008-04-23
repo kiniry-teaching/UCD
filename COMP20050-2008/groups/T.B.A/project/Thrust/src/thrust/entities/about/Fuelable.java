@@ -53,7 +53,7 @@ public interface Fuelable {
   /**
    * @return What is the mass of your fuel?
    */
-  //@ ensures \result == fuel * 1;
+  //@ ensures \result == fuel() * 1;
   /*@ pure @*/ int fuel_mass();
 }
 

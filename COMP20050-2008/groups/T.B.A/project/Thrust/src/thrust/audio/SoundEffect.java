@@ -31,12 +31,15 @@ public class SoundEffect {
    */
   private static Clip my_sound;
 
+  public SoundEffect() {
+
+  }
   /**
    * This is your sound effect.
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public static SoundEffect make(File the_sound_effect_file) {
+  public static SoundEffect make(final File the_sound_effect_file) {
     AudioInputStream my_audio_stream = null;
     try {
       my_audio_stream = AudioSystem.getAudioInputStream(the_sound_effect_file);
