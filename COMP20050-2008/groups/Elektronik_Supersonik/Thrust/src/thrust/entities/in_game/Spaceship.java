@@ -11,6 +11,7 @@ package thrust.entities.in_game;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
+import thrust.entities.about.EntityFuel;
 import thrust.entities.about.Fuelable;
 import thrust.entities.behaviors.Tow;
 
@@ -33,7 +34,31 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+  /**
+   * The fuel of the Spaceship.
+   */
+  private EntityFuel my_fuel;
+  
+  public void change_fuel_content(final int the_fuel_change) {
+    my_fuel.change_fuel_content(the_fuel_change);
+  }
 
+  public int fuel() {
+    return my_fuel.fuel();
+  }
+
+  public int fuel_mass() {
+    return my_fuel.fuel_mass();
+  }
+
+  public int maximum_fuel() {
+    return my_fuel.fuel();
+  }
+
+  public void set_fuel_content(final int the_fuel_content) {
+    my_fuel.set_fuel_content(the_fuel_content);
+  }
+  
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);

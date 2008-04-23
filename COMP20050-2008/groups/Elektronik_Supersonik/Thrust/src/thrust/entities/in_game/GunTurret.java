@@ -9,16 +9,51 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Shape;
+
+import thrust.entities.EnemyAI;
 import thrust.entities.EnemyEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy gun turret that shoots bullets at the spaceship.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public class GunTurret extends StaticEntity
-  implements EnemyEntity {
+public class GunTurret extends StaticEntity implements EnemyEntity {
+  /**
+   * The AI of the gun turret.
+   */
+  private EnemyAI my_ai;
+  public GunTurret(final double[] the_position, final double the_orientation,
+      final double[] the_acceleration, final double the_mass,
+      final double[] the_velocity, final String the_initial_shape_name,
+      final Shape the_initial_shape, final byte the_initial_state) {
+
+    super();
+    super.set_state(the_position, the_orientation, the_acceleration, the_mass,
+                    the_velocity, the_initial_shape_name, the_initial_shape,
+                    the_initial_state);
+
+  }
+  
+  public AI attack() {
+    return my_ai.attack();
+  }
+
+  public void attack(final AI the_behavior) {
+    my_ai.attack(the_behavior);
+  }
+
+  public AI disturb() {
+    return my_ai.disturb();
+  }
+
+  public void disturb(final AI the_behavior) {
+    my_ai.disturb(the_behavior);
+  }
+
   /*@ public invariant (* A gun turret always resides on/adjacent to
     @                     the terrain. *);
     @ public invariant (* A gun turret's color is always green. *);

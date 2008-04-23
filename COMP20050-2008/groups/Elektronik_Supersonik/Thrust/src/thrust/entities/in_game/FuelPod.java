@@ -36,7 +36,7 @@ public class FuelPod extends StaticEntity implements NeutralEntity, Fuelable {
                     the_initial_state);
   }
 
-  public void change_fuel_content(int the_fuel_change) {
+  public void change_fuel_content(final int the_fuel_change) {
     my_fuel.change_fuel_content(the_fuel_change);
   }
 
