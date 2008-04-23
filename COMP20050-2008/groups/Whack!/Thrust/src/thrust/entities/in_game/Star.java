@@ -24,7 +24,7 @@ import thrust.entities.StaticEntity;
  * @version 18 April 2008
  */
 public class Star extends StaticEntity
-  implements NeutralEntity, Animatable {
+    implements NeutralEntity, Animatable {
   /**
    *
    * @author Allison Fallon(allison.fallon@ucdconnect.ie)
@@ -62,13 +62,28 @@ public class Star extends StaticEntity
   }
 
   public Shape shape() {
-    //Rectangle my_A = new Rectangle();
+    /**
+     *
+     * @author allison
+     *
+     */
+    class Rectangle {
+      int my_rx;
+      int my_ry;
+    }
 
-    return null;
+    final Rectangle my_a = new Rectangle();
+    my_a.my_rx = 10;
+    my_a.my_ry = 10;
+
+    my_starshape = (Shape)my_a;
+
+    return my_starshape;
   }
 
   public void shape(final Shape the_shape) {
 
+    my_starshape = the_shape;
 
   }
 
