@@ -9,20 +9,26 @@ public class ItemQuery {
 	String name;
 	int price;
 	int minweight;
-	//Barcode bcode;
+	int weight;
+	int maxweight;
+	String soundfile;
+	String imagefile;
+	String allergy;
+	int primeitem;
+	BarCode barcode;
 	
 
-	//public ItemQuery (BarCode bc)
+	public ItemQuery (BarCode bc){
 	//
 	
 	
-	public ItemQuery (long barcode) {
+	//public ItemQuery (long barcode) {
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
 			//String url  = "jdbc:mysql://sql104.hostwq.net:3306/hq_1793448_SelfCheckout";
-			String url  = "jdbc:mysql://169.254.117.255:3306/SelfCheckout";
-			//String url  = "jdbc:mysql://localhost:3306/SelfCheckout";
+			//String url  = "jdbc:mysql://169.254.117.255:3306/SelfCheckout";
+			String url  = "jdbc:mysql://localhost:3306/SelfCheckout";
 			//Connection conn = DriverManager.getConnection(url, "hq_1793448", "password");
 			Connection conn = DriverManager.getConnection(url, "me", "pass");
 			//Two Following prints are verification data
@@ -36,12 +42,21 @@ public class ItemQuery {
 			ResultSet rs;
 			
 			//rs = stmt.executeQuery("SELECT Name,Price,MinWeight FROM Items WHERE Barcode = "+bc.asLong +"");
-			rs = stmt.executeQuery("SELECT Name,Price,MinWeight FROM Items WHERE Barcode = "+barcode +"");
+			rs = stmt.executeQuery("SELECT Name,Price,MinWeight,Weight,MaxWeight"
+					+",SoundFileLoc,ImageFileLoc,Allergy,PrimeItem FROM Items WHERE Barcode = "+bc.getBarCodeLong() +"");
 			
 			while ( rs.next() ) {
 				name = rs.getString("Name");
 				price = rs.getInt("Price");
 				minweight = rs.getInt("MinWeight");
+				weight = rs.getInt("Weight");
+				maxweight = rs.getInt("MaxWeight");
+				soundfile = rs.getString("SoundFileLoc");
+				imagefile = rs.getString("ImageFileLoc");
+				allergy = rs.getString("Allergy");
+				primeitem = rs.getInt("PrimeItem");
+				this.barcode = bc;
+				
 				
 				}
 			conn.close();
