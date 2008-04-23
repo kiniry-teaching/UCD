@@ -12,7 +12,7 @@ package thrust.entities.about;
 
 /**
  * @author Colin Casey (colin.casey@org.com)
- * @version 15 April 2008
+ * @version 23 April 2008
  */
 public class KKFuelable implements Fuelable {
 

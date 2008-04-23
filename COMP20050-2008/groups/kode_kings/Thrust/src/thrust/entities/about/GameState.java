@@ -12,8 +12,7 @@ package thrust.entities.about;
 
 /**
  * @author Colin Casey (colin.casey@org.com)
- * @author Ciaran Hale (ciaran.hale@ucd.ie)
- * @version 19 April 2008
+ * @version 23 April 2008
  */
 public class GameState extends AbstractGameState {
 
@@ -25,6 +24,8 @@ public class GameState extends AbstractGameState {
   private static byte my_lives;
   /** The highest scores ever recorded in the game. */
   private static HighScoreInterface[] my_high_scores;
+  /** */
+  private static final KKFuelable MY_FUEL_MONITOR = new KKFuelable();
 
   public int bonus() {
     return my_bonus;
@@ -35,11 +36,11 @@ public class GameState extends AbstractGameState {
   }
 
   public int current_fuel() {
-
+    return MY_FUEL_MONITOR.fuel();
   }
 
   public int maximum_fuel() {
-
+    return MY_FUEL_MONITOR.maximum_fuel();
   }
 
   public int score() {
@@ -59,7 +60,9 @@ public class GameState extends AbstractGameState {
   }
 
   public HighScoreInterface[] high_scores() {
-    return my_high_scores;
+    final HighScoreInterface[] temp = new HighScoreInterface[HIGH_SCORE_COUNT];
+    System.arraycopy(my_high_scores, 0, temp, 0, my_high_scores.length);
+    return temp;
   }
 
   public HighScoreInterface high_score(final int the_index) {
@@ -104,7 +107,9 @@ public class GameState extends AbstractGameState {
     }
 
     public char[] initials() {
-      return my_initials;
+      final char[] temp = new char[my_initials.length];
+      System.arraycopy(my_initials, 0, temp, 0, my_initials.length);
+      return temp;
     }
 
     public void new_score(final int the_new_score) {
