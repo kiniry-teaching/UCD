@@ -6,8 +6,8 @@ public class myTestMain {
 	public static void main(String[] args) {
 		
 		//test values to use
-		//
-		long barcode = 5;
+		long barcode = 1;
+		
 		String name = "Han Solo";
 		String emailaddress = "hansolo@starwars.com";
 		int phonenumber = 125;
@@ -22,13 +22,20 @@ public class myTestMain {
 
 		//Various Test Code Placed Here
 		
-	
+		
+		BarCode myBarcode = new BarCode(9780131246461l);
 		//1. Creates a Query For a Product and prints out returned data
-		//ItemQuery myItem = new ItemQuery(barcode);
-		//System.out.println("Product Barcode is: " +barcode);
-		//System.out.println("Product Name is: " +myItem.name);
-		//System.out.println("Product Price is: "+myItem.price);
-		//System.out.println("Product Minimum Weight is: "+myItem.minweight+"g");
+		Item myItem = new Item(myBarcode);
+		System.out.println("Product Barcode is: " +myItem.barcode.toString());
+		System.out.println("Product Name is: " +myItem.name);
+		System.out.println("Product Price is: "+myItem.price);
+		System.out.println("Product Minimum Weight is: "+myItem.minweight+"g");
+		System.out.println("Product Weight is: "+myItem.weight+"g");
+		System.out.println("Product Max Weight is: "+myItem.maxweight+"g");
+		System.out.println("Product Sound File is at: "+myItem.soundfile);
+		System.out.println("Product Image File is at: "+myItem.imagefile);
+		System.out.println("Product Associated Allergy :"+myItem.allergy);
+		System.out.println("Product PrimeItem = "+myItem.primeitem);
 		
 		
 		//2. Creates a new customer in the database
@@ -73,7 +80,7 @@ public class myTestMain {
 		//System.out.println(myTransaction.basket[1]);
 		
 		//9. Update Reminders for that Customer @Finish and Pay time
-		updateReminder finishandpay = new updateReminder(solosID, toBeAdded);
+		//updateReminder finishandpay = new updateReminder(solosID, toBeAdded);
 		
 
 
