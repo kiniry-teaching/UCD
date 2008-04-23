@@ -21,29 +21,33 @@ import thrust.entities.StaticEntity;
  */
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
+  /** Amount of damage taken by factory. */
+  private byte my_damage;
+  /** This factories chimney. */
+  private FactoryChimney my_chimney;
+  /** This factories sphere. */
+  private FactorySphere my_sphere;
+
   /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-    assert false; //@ assert false;
-    return 0;
+    return my_damage;
   }
 
   /**
    * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    assert false; //@ assert false;
-    return null;
+    return my_chimney;
   }
 
   /**
    * @return What is your sphere?
    */
   public /*@ pure @*/ FactorySphere sphere() {
-    assert false; //@ assert false;
-    return null;
+    return my_sphere;
   }
 
   /**
@@ -52,7 +56,7 @@ public class Factory extends StaticEntity
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
   public void damage(byte the_damage) {
-    assert false; //@ assert false;
+    my_damage += the_damage;
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -81,12 +85,14 @@ public class Factory extends StaticEntity
    */
   public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
+
+    /** . */
+    private boolean my_smoking_state;
     /**
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      assert false; //@ assert false;
-      return false;
+      return my_smoking_state;
     }
 
     /**
@@ -96,7 +102,7 @@ public class Factory extends StaticEntity
      */
     //@ ensures smoking() <==> the_smoking_state;
     public void smoking(boolean the_smoking_state) {
-      assert false; //@ assert false;
+      my_smoking_state = the_smoking_state;
     }
 
     /*@ public invariant (* A factories chimney is the same color as

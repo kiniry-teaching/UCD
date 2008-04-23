@@ -24,8 +24,7 @@ public class Bullet extends DynamicEntity
    */
   //@ also ensures \result == 1;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    return 1;
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a

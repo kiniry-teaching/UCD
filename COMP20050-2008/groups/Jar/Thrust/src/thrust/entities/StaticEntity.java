@@ -30,9 +30,9 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  public void set_state(double[] the_position,
-                        double the_orientation) {
-    assert false; //@ assert false;
+  public void set_state(final double[] the_position,
+                        final double the_orientation) {
+    super.set_dynamic_state(the_position, the_orientation, null, 0, 0, null);
   }
 
   /* (non-Javadoc)
@@ -40,7 +40,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double mass() {
-    assert false; //@ assert false;
+    //@ assert super.mass() == 0;
     return 0;
   }
 
@@ -49,8 +49,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
+    return new double[]{0, 0};
   }
 
   /* (non-Javadoc)
@@ -58,8 +57,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
+    return new double[]{0, 0};
   }
 
   /* (non-Javadoc)
@@ -67,7 +65,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
+    assert false; //@ assert false
     return 0;
   }
 
