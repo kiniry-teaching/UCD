@@ -25,27 +25,29 @@ public abstract class Entity implements GameColor {
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    */
+  public String the_initial_shape_name;
+  public Shape the_initial_shape;
+  public byte the_initial_state;
+  
+  
   public static Entity make(final String the_initial_shape_name,
                             final Shape the_initial_shape,
                             final byte the_initial_state) {
-    assert false; //@ assert false;
-    return null;
+    
   }
 
   /**
-   * @return What shape are you?
+   * @return What name is your shape?
    */
   public /*@ pure @*/ String shape_name() {
-    assert false; //@ assert false;
-    return null;
+    return the_initial_shape_name;
   }
 
   /**
    * @return What shape are you?
    */
   public /*@ pure @*/ Shape shape() {
-    assert false; //@ assert false;
-    return null;
+    return the_initial_shape;
   }
 
   /**
@@ -53,7 +55,7 @@ public abstract class Entity implements GameColor {
    * @param the_shape the shape of this Entity.
    */
   public void shape(Shape the_shape) {
-    assert false; //@ assert false;
+    the_initial_shape = the_shape;
   }
 
   /**
@@ -62,8 +64,7 @@ public abstract class Entity implements GameColor {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    assert false; //@ assert false;
-    return 0;
+    return the_initial_state;
   }
 
   /**
@@ -73,7 +74,7 @@ public abstract class Entity implements GameColor {
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
   public void state(byte the_state) {
-    assert false; //@ assert false;
+    the_initial_state = the_state;
   }
 
   /**
