@@ -22,13 +22,14 @@ public final class Main {
   private Main() {
     assert false; //@ assert false;
   }
+}
 
   /**
    * Run the game.
    * @param the_args The command-line arguments are ignored.
    */
-  public static void main(final String[] the_args) {
-    assert false; //@ assert false;
+ // public static void main(final String[] the_args) {
+ //   assert false; //@ assert false;
     // display the title screen
     // play title music
     // wait for keyboard input
@@ -47,5 +48,5 @@ public final class Main {
     //   if the player has a new high score
     //     ask them to input their initials
     //     save the new high score
-  }
-}
+ // }
+//}

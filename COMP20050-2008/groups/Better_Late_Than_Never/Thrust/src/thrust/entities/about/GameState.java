@@ -2,7 +2,7 @@ package thrust.entities.about;
 
 public class GameState extends AbstractGameState {
 
-  public void add_high_score(HighScoreInterface the_new_high_score) {
+  public void add_high_score(final HighScoreInterface the_new_high_score) {
     // TODO Auto-generated method stub
 
   }
