@@ -27,6 +27,11 @@ public class Explosion extends StaticEntity
   /** The frames in the Explosion animation. */
   private Animation my_animation;
 
+  /** Explosion Constructor. */
+  public Explosion() {
+
+  }
+
   public Animation animation() {
     return my_animation;
   }

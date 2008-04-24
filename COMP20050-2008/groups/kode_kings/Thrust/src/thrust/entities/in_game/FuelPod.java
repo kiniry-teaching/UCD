@@ -36,6 +36,7 @@ public class FuelPod extends StaticEntity
   /** The amount of fuel that is contained. */
   private static int my_fuel;
 
+  /** FuelPod Constructor. */
   public FuelPod() {
     color(java.awt.Color.YELLOW);
   }

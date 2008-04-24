@@ -35,6 +35,11 @@ public class Bullet extends DynamicEntity
   /** The disturb AI of a bullet. */
   private AI my_disturb_ai;
 
+  /** Bullet Constructor. */
+  public Bullet() {
+    mass(1);
+  }
+
   public AI attack() {
     return my_attack_ai;
   }
