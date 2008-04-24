@@ -20,11 +20,24 @@ import thrust.entities.StaticEntity;
 
 /**
  * A barrier and trigger to block the spaceship's way.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
+ * @version 24 April 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  /**
+   * The color of the barrier.
+   */
+  private Color my_color;
+  /**
+   * Is the barrier open.
+   */
+  private boolean my_open;
+  /**
+   * Is the barrier closed.
+   */
+  private boolean my_closed;
 
   /**
    * @return Are you closed?
@@ -32,9 +45,10 @@ public class Barrier extends StaticEntity
   public /*@ pure @*/ boolean closed() {
     assert false; //@ assert false;
     if (!moving() && !opened()) {
-      return true;
+      my_closed = true;
+      my_open = false;
     }
-    return false;
+    return my_closed;
   }
 
   /**
@@ -43,9 +57,10 @@ public class Barrier extends StaticEntity
   public /*@ pure @*/ boolean opened() {
     assert false; //@ assert false;
     if (!closed() && !moving()) {
-      return true;
+      my_open = true;
+      my_closed = false;
     }
-    return false;
+    return my_open;
   }
 
   /**
@@ -66,6 +81,8 @@ public class Barrier extends StaticEntity
   public void close() {
     assert false; //@ assert false;
     if (opened()) {
+      my_open = false;
+      my_closed = true;
       //close
     }
   }
@@ -77,6 +94,8 @@ public class Barrier extends StaticEntity
   public void open() {
     assert false; //@ assert false;
     if (closed()) {
+      my_open = true;
+      my_closed = false;
       //open
     }
   }
@@ -178,7 +197,7 @@ public class Barrier extends StaticEntity
    */
   public Color color() {
     // TODO Auto-generated method stub
-    return null;
+    return my_color;
   }
 
   /**
@@ -186,7 +205,22 @@ public class Barrier extends StaticEntity
    * @the_color the new color.
    */
   public void color(final Color the_color) {
+    my_color = the_color;
+  }
 
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double orientation() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] position() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   /*@ public invariant (* Barriers are always in one of the three states

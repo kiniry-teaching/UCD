@@ -16,20 +16,38 @@ import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
 import thrust.entities.behaviors.AI;
 
+
+
 /**
  * A bullet shot from the spaceship or a gun turret.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
+ * @version 24 April 2008
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntity {
+  /**
+   * The shape of a bullet.
+   */
+  private Shape my_bullet;
+
+  /**
+   * The colour of a bullet.
+   */
+  private Color my_bullet_color;
+
+  /**
+   * The mass of a bullet is 1kg.
+   */
+  private double my_bullet_mass = 1;
+
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
   //@ ensures \result == 1;
+
   public double mass() {
     assert false; //@ assert false;
-    return 0;
+    return my_bullet_mass;
   }
 
   /**
@@ -44,8 +62,7 @@ public class Bullet extends DynamicEntity
    * @return What shape are you?
    */
   public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_bullet;
   }
 
   /**
@@ -53,16 +70,14 @@ public class Bullet extends DynamicEntity
    * @param the_shape the shape of this Entity.
    */
   public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
-
+    my_bullet = the_shape;
   }
 
   /**
    * @return What shape are you?
    */
   public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
+    return "Rectangle";
   }
 
   /**
@@ -108,17 +123,46 @@ public class Bullet extends DynamicEntity
    * @return What color are you?
    */
   public Color color() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_bullet_color;
   }
 
   /**
    * This is your color.
    * @the_color the new color.
    */
-  public void color(Color the_color) {
-    // TODO Auto-generated method stub
+  public void color(final Color the_color) {
+    my_bullet_color = the_color;
 
+  }
+
+  public double[] acceleration() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double orientation() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] position() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public double[] velocity() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a
