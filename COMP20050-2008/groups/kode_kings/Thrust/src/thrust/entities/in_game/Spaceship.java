@@ -41,6 +41,12 @@ public class Spaceship extends DynamicEntity
   /** Tow status of Spaceship. */
   private boolean my_tow_indicator;
 
+  /** Spaceship Constructor. */
+  public Spaceship() {
+    //set_fuel_content(INITIAL_FUEL);
+    //mass(EMPTY_MASS + fuel_mass());
+  }
+
   public boolean towed() {
     return my_tow_indicator;
   }

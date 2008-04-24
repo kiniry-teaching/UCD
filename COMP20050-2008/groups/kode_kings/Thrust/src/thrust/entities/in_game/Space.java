@@ -25,8 +25,15 @@ import thrust.entities.StaticEntity;
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
 
+  //@ public invariant (* Terrain and space are disjoint. *);
+
   /** The frames in the Space animation. */
   private Animation my_animation;
+
+  /** Space Constructor. */
+  public Space() {
+
+  }
 
   /**
    * @return What are your stars?"
@@ -55,6 +62,4 @@ public class Space extends StaticEntity
   public void animate() {
     assert false;
   }
-
-  //@ public invariant (* Terrain and space are disjoint. *);
 }

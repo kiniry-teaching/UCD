@@ -32,6 +32,11 @@ public class Star extends StaticEntity
   /** The frames in the Star animation. */
   private Animation my_animation;
 
+  /** Star Constructor. */
+  public Star() {
+    //shape(small square);
+  }
+
   public Animation animation() {
     return my_animation;
   }
