@@ -14,6 +14,7 @@ import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -64,6 +65,5 @@ public class Bullet extends DynamicEntity
     assert false; //@ assert false;
     return 1;
   }
-
-
+  
 }

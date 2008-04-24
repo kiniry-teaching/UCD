@@ -19,7 +19,7 @@ import java.io.FileReader;
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
  *
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Haughton(dave.haughton1@gmail.com)
  * @version 11 April 2008
  */
 public abstract class GameState extends AbstractGameState {

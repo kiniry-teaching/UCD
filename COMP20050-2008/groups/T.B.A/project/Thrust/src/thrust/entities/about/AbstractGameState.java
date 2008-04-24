@@ -93,7 +93,7 @@ public abstract /*@ pure @*/ class AbstractGameState {
   /**
    * A pair of a sequence of three initials and a score.
    *
-   * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Haughton(dave.haughton1@gmail.com)
    * @version 11 April 2008
    */
   public /*@ pure @*/ interface HighScoreInterface {
