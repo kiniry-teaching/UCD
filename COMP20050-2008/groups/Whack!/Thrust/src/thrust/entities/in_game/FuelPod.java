@@ -33,6 +33,18 @@ public class FuelPod extends StaticEntity
    *
    */
   Shape my_fuelpodshape;
+  /**
+   *
+   */
+  final double my_speed;
+  /**
+   *
+   */
+  final double my_anglerad;
+  /**
+   *
+   */
+  final double my_mass;
 
   public double[] acceleration() {
 
@@ -41,19 +53,38 @@ public class FuelPod extends StaticEntity
 
   public double mass() {
 
-    return 0;
+    return my_mass;
+
   }
 
   public double momentum() {
 
-    return 0;
-  }
+    final int my_elements = 2;
+    final double[] my_s = new double[my_elements];
+    my_s = velocity();
 
+    return mass() * my_s[0];
+
+  }
+  public void orientation(final double the_angle) {
+
+    my_anglerad = the_angle;
+
+  }
+  public double orientation() {
+
+    return my_anglerad;
+
+  }
   public double[] velocity() {
 
-    return null;
-  }
+    final int my_elements = 2;
+    final double[] my_vel = new double[my_elements];
+    my_vel[0] = my_speed;
+    my_vel[1] = orientation();
+    return my_vel;
 
+  }
   public void render() {
 
 
