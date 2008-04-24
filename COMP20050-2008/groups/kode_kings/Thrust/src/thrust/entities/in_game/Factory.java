@@ -18,7 +18,7 @@ import thrust.entities.StaticEntity;
  * An enemy factory.
  * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @version 24 April 2008
  */
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {

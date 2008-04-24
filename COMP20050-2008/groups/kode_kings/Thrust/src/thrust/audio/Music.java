@@ -27,33 +27,26 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  * In-game music.
  * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
- * @version 15 April 2008
+ * @version 24 April 2008
  */
 public class Music {
   //@ public model boolean is_playing;
   /**
    *indicates the music file to load.
    */
-  private final transient File my_clipFile = new File("");
+  private final transient File my_thrust_music =
+    new File("/Thrust/Thrust/media/music.mp3");
   /**
    * the name of our new file.
    */
-  private transient Clip my_clip;
+  private transient Clip my_song;
 
   public Music() throws Exception {
-    AudioInputStream my_audio_input_stream = null;
-
-    final DataLine.Info info =
-      new DataLine.Info(SourceDataLine.class,
-        my_audio_input_stream.getFormat());
+    final AudioInputStream my_audio_song =
+      AudioSystem.getAudioInputStream(my_thrust_music);
 
 
-
-    my_audio_input_stream = AudioSystem.getAudioInputStream(my_clipFile);
-
-    my_clip = (Clip) AudioSystem.getLine(info);
-
-    my_clip.open(my_audio_input_stream);
+    my_song.open(my_audio_song);
   }
     /**
      * @return Is music playing?
@@ -61,14 +54,14 @@ public class Music {
     //@ ensures \result == is_playing;
   public /*@ pure @*/ boolean playing() {
 
-    return false;
+    return my_song.isRunning();
   }
   /**
    * Start playing the music.
    */
   //@ ensures is_playing;
   public void start() {
-    my_clip.loop(Clip.LOOP_CONTINUOUSLY);
+    my_song.loop(Clip.LOOP_CONTINUOUSLY);
 
   }
 
@@ -77,7 +70,9 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
-    my_clip.stop();
+    my_song.stop();
 
   }
 }
+
+
