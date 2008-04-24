@@ -14,8 +14,10 @@ import java.awt.Shape;
 
 import thrust.animation.Animatable;
 import thrust.entities.EnemyEntity;
+import thrust.entities.EnemyAI;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
@@ -41,6 +43,10 @@ public class Factory extends StaticEntity
  * The color of a factory.
  */
   private Color my_color = Color.yellow;
+/**
+ * The AI.
+ */
+  private EnemyAI my_enemy_ai;
   /**
    * @param double[] the_position
    * @param double the_orientation
@@ -155,6 +161,18 @@ public class Factory extends StaticEntity
     public void smoking(final boolean the_smoking_state) {
       my_smoking_state = the_smoking_state;
     }
+    public AI attack() {
+      return my_enemy_ai.attack();
+    }
+    public void attack(final AI the_behavior) {
+      my_enemy_ai.attack(the_behavior);
+    }
+    public AI disturb() {
+      return my_enemy_ai.disturb();
+    }
+    public void disturb(final AI the_behavior) {
+      my_enemy_ai.disturb(the_behavior);
+    }
 
     /*@ public invariant (* A factories chimney is the same color as
       @                     its factory. *);
@@ -198,5 +216,18 @@ public class Factory extends StaticEntity
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
+  }
+
+  public AI attack() {
+    return my_enemy_ai.attack();
+  }
+  public void attack(final AI the_behavior) {
+    my_enemy_ai.attack(the_behavior);
+  }
+  public AI disturb() {
+    return my_enemy_ai.disturb();
+  }
+  public void disturb(final AI the_behavior) {
+    my_enemy_ai.disturb(the_behavior);
   }
 }

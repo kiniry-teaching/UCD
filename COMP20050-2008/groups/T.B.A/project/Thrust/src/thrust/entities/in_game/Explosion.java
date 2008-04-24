@@ -24,6 +24,10 @@ import thrust.animation.Animation;
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
+/**
+ * The color of the explosion.
+ */
+  private Color my_color = Color.ORANGE;
 
   public Explosion(final double[] the_position,
                    final double the_orientation,
@@ -31,20 +35,9 @@ public class Explosion extends StaticEntity
                    final Shape the_initial_shape,
                    final byte the_inital_state) {
 
-  }
-
-  public void animate() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public Animation animation() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void animation(Animation the_animation) {
-    // TODO Auto-generated method stub
+    super.set_state(the_position, the_orientation,
+                    my_color, the_initial_shape_name,
+                    the_initial_shape, the_inital_state);
   }
 
 

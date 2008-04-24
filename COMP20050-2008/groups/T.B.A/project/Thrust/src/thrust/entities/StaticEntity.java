@@ -32,6 +32,12 @@ public abstract class StaticEntity extends DynamicEntity {
    * The angle of an object, in radians.
    */
   double my_angleRadians;
+
+  /**
+   * Empty constructor.
+   */
+  public StaticEntity() {
+  }
   //@ public model boolean initialised;
   //@ public initially initialised == false;
 
@@ -51,6 +57,7 @@ public abstract class StaticEntity extends DynamicEntity {
                         final String the_initial_shape_name,
                         final Shape the_initial_shape,
                         final byte the_initial_state) {
+
     super.set_the_state(the_position, the_orientation, the_color,
                        the_initial_shape_name, the_initial_shape,
                        the_initial_state,

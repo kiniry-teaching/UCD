@@ -21,6 +21,7 @@ import java.awt.Color;
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
+
   /**
    * The angle of an object, in radians.
    */
@@ -60,6 +61,12 @@ public abstract class DynamicEntity extends Entity
    * the momentum of an entity.
    */
   double my_momentum;
+
+  /**
+   * Empty constructor.
+   */
+  public DynamicEntity() {
+  }
 
   public void set_the_state(
           final double[] the_position,

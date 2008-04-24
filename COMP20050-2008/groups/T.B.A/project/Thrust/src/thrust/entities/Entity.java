@@ -38,6 +38,12 @@ public abstract class Entity implements GameColor {
  *  The color of the Entity.
  */
   private Color my_color;
+/**
+ * The Entity.
+ */
+  public Entity() {
+
+  }
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.

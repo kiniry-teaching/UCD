@@ -14,11 +14,12 @@ import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
-import thrust.entities.behaviors.AI;
+/*import thrust.entities.behaviors.AI;
+import thrust.entities.EnemyAI;*/
 
 /**
  * A bullet shot from the spaceship or a gun turret.
- * @author David Haughton(dave.haughton1@gmail.com)
+ * @author David Haughton (dave.haughton1@gmail.com)
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity
@@ -27,10 +28,13 @@ public class Bullet extends DynamicEntity
    * @see thrust.physics.PhysicsInterface#mass()
    */
   //@ ensures \result == 1;
-
+/**
+ * The color of the bullet.
+ */
+  Color my_color = Color.RED;
   public Bullet(
                 final double[] the_position,
-                final double the_orientation, final Color the_color,
+                final double the_orientation,
                 final String the_initial_shape_name,
                 final Shape the_initial_shape,
                 final byte the_initial_state,
@@ -43,7 +47,7 @@ public class Bullet extends DynamicEntity
   {
     super.set_the_state(
                         the_position,
-                        the_orientation, the_color,
+                        the_orientation, my_color,
                         the_initial_shape_name,
                         the_initial_shape,
                         the_initial_state,
@@ -62,8 +66,7 @@ public class Bullet extends DynamicEntity
 //@ public invariant (* Bullets have a mass of 1 kg. *);
 
   public double mass() {
-    assert false; //@ assert false;
     return 1;
   }
-  
+
 }
