@@ -1,4 +1,5 @@
 package thrust.physics;
+
 /**
  * Abstract class implemented by the Physics interface.
  * @author David Haughton (Dave.haughton1@gmail.com)
@@ -25,6 +26,11 @@ public abstract class PhysicsClass implements PhysicsInterface {
    * The speed of an object.
    */
   double my_speed;
+
+  /**
+   * some seconds.
+   */
+  double my_seconds;
 
   /**
    * The acceleration of an object.
@@ -120,5 +126,13 @@ public abstract class PhysicsClass implements PhysicsInterface {
     my_velocity[0] = my_speed;
     my_velocity[1] = orientation();
     return my_velocity;
+  }
+
+  /**
+   * @param some_seconds the number of seconds to simulate.
+   */
+  public void simulate(final double some_seconds)
+  {
+    this.my_seconds = some_seconds;
   }
 }
