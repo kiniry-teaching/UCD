@@ -31,15 +31,15 @@ public class DynamicEntity extends Entity
    * goal sphere toward the terrain. */
   private static final double GRAVITY_CONSTANT = -9.8;
   /** Increase in the rate of speed of something. */
-  protected double[] my_acceleration;
+  private double[] my_acceleration;
   /** The quantity of matter that an entity contains. */
-  protected double my_mass;
+  private double my_mass;
   /** The speed of an entity in a given direction. */
-  protected double[] my_velocity;
+  private double[] my_velocity;
   /** The relative physical direction of entities. */
-  protected double my_orientation;
+  private double my_orientation;
   /** The co-ordinates where an entity is located. */
-  protected double[] my_position;;
+  private double[] my_position;;
 
   public double[] acceleration() {
     final double[] temp = new double[my_acceleration.length];
