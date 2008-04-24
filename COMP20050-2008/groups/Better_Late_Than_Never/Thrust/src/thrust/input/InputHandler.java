@@ -13,30 +13,32 @@ package thrust.input;
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
+ * @author Stephen Murphy
+ * @revised 24 April 2008 (smurphy)
  * @version 2 April 2008
  */
 public class InputHandler {
-  /** An unknown character code. */
-  public static final char UNKNOWN_CHAR = '\0';
-  /** Fill in this comment. */
-  public static final char DISPLAY_HIGH_SCORES = 72;
-  /** Fill in this comment. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char START_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char STOP_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char FIRE_GUN = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_LEFT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_RIGHT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_SHIELD = UNKNOWN_CHAR;
 
+  public static final char DISPLAY_HIGH_SCORES = 'h';
+  /** Press "h" to display high scores. */
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
+  /** Press "m" to toggle music/effects. */
+  public static final char START_GAME = 'p';
+  /** Press "p" used here as a toggle, in this case to start the game. */
+  public static final char STOP_GAME = 'p';
+  /** Press "p" used here as a toggle, in this case to stop the game. */
+  public static final char FIRE_GUN = 'z';
+  /** Press "z" to fire the ships weapon, producing bullets. */
+  public static final char TURN_LEFT = 'a';
+  /** Press "a" to direct the ship left. */
+  public static final char TURN_RIGHT = 'd';
+  /** Press "d" to direct the ship right . */
+  public static final char USE_ENGINE = 'w';
+  /** Press "w" to use engine..was considering code value for space bar ie. 0x09, possible for other values also maybe? */
+  public static final char USE_SHIELD = 's';
+  /** Press "s" to use the ship's shield/tractor beam, to protect oneself or to pick up fuel/ or power pod. */
+  
+  
   /**
    * @return What are the legal keyboard inputs?
    */
@@ -60,8 +62,10 @@ public class InputHandler {
     @                      (the_character == USE_SHIELD);
     @*/
   public /*@ pure @*/ boolean legal_input(char the_character) {
-    assert false; //@ assert false;
-    return false;
+    final char[] inputs = 
+    {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME, STOP_GAME,FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE, USE_SHIELD };
+    // @ assert inputs != null;
+  
   }
 
   /**
@@ -70,6 +74,7 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(char the_keyboard_input) {
+    
     assert false; //@ assert false;
   }
 }
