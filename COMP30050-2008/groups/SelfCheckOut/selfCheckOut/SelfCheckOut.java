@@ -4,17 +4,14 @@
  * <p>
  * 
  * @author Peter Gibney
- * @version 30th March 2008.
+ * @version 14th April 2008.
  */
 
 
 package selfCheckOut;
 
-import java.awt.*;
-import selfCheckOut.hardWareInterface.HardWareResult;
 import selfCheckOut.hardWareInterface.HWIconduit;
-
-import java.util.*;
+import selfCheckOut.hardWareInterface.HardWareResult;
 
 public class SelfCheckOut extends Thread {
 
@@ -38,22 +35,35 @@ public class SelfCheckOut extends Thread {
 			if (temp != null) {
 				BarCode[] barCodes = temp.getBarCodes();
 				System.out.println("\n");
-				for (int i = 0; i < barCodes.length; i++) {
-					System.out.println("Barcode number " 
-										+ i + " is " + 
-										barCodes[i].toString() +
-										", time stamp= " +
-										barCodes[i].getTimeStamp() + 
-										", probability= " +
-										barCodes[i].getProbability());
+				if (barCodes != null) { 
+					for (int i = 0; i < barCodes.length; i++) {
+						System.out.println("Barcode number " 
+											+ i + " is " + 
+											barCodes[i].toString() +
+											", asLong " +
+											barCodes[i].getBarCodeLong() +
+											", time stamp= " +
+											barCodes[i].getTimeStamp() + 
+											", probability= " +
+											barCodes[i].getProbability());
+					}
+				} else {
+					System.out.println("Barcode = NULL");
 				}
 				System.out.println("\n");
+				
 				for (int i = 1; i <= 2; i++) {
-					System.out.println("Weight number " 
-										+ i + " is " + 
-										temp.getWeight(i).toString() +
-										", time stamp= " +
-										temp.getWeight(i).getTimeStamp());
+					Weight wgt = null;
+					wgt = temp.getWeight(i);
+					if (wgt != null) {
+						System.out.println("Weight number " 
+								+ i + " is " + 
+								temp.getWeight(i).toString() +
+								", time stamp= " +
+								temp.getWeight(i).getTimeStamp());
+					} else {
+						System.out.println("Weight " + i + " = NULL");
+					}
 				}
 				System.out.println("**************************************");
 			}

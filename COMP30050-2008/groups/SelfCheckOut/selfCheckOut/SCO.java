@@ -3,7 +3,7 @@ package selfCheckOut;
 /** This class launches the SelfCheckOut program.
  * @author Peter Gibney
  * @version 31st March 2008.
-
+ * to run from withn bin java selfCheckOut.SCO
  */
 public class SCO {
 
