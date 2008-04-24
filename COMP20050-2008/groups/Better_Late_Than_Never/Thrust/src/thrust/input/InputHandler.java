@@ -12,39 +12,47 @@ package thrust.input;
 
 /**
  * Processes and delegates each keyboard input received.
- * @author Joe Kiniry (kiniry@acm.org)
- * @author Stephen Murphy
- * @revised 24 April 2008 (smurphy)
+ * @author Stephen Murphy (StephenMurphy1@ucdconnect.ie)
  * @version 2 April 2008
  */
 public class InputHandler {
 
-  public static final char DISPLAY_HIGH_SCORES = 'h';
   /** Press "h" to display high scores. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
+  public static final char DISPLAY_HIGH_SCORES = 'h';
   /** Press "m" to toggle music/effects. */
-  public static final char START_GAME = 'p';
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Press "p" used here as a toggle, in this case to start the game. */
-  public static final char STOP_GAME = 'p';
+  public static final char START_GAME = 'p';
   /** Press "p" used here as a toggle, in this case to stop the game. */
-  public static final char FIRE_GUN = 'z';
+  public static final char STOP_GAME = 'p';
   /** Press "z" to fire the ships weapon, producing bullets. */
-  public static final char TURN_LEFT = 'a';
+  public static final char FIRE_GUN = 'z';
   /** Press "a" to direct the ship left. */
-  public static final char TURN_RIGHT = 'd';
+  public static final char TURN_LEFT = 'a';
   /** Press "d" to direct the ship right . */
+  public static final char TURN_RIGHT = 'd';
+  /** Press "w" to use engine..was considering code
+   *  value for space bar i.e. 0x09, possible for other values also maybe? */
   public static final char USE_ENGINE = 'w';
-  /** Press "w" to use engine..was considering code value for space bar ie. 0x09, possible for other values also maybe? */
+  /** Press "s" to use the ship's shield/tractor beam
+   * to protect oneself or to pick up fuel/ or power pod. */
   public static final char USE_SHIELD = 's';
-  /** Press "s" to use the ship's shield/tractor beam, to protect oneself or to pick up fuel/ or power pod. */
-  
-  
+
   /**
    * @return What are the legal keyboard inputs?
    */
+
   public /*@ pure @*/ char[] legal_inputs() {
-    assert false; //@ assert false;
-    return null;
+    final char[] legal_inputs = {DISPLAY_HIGH_SCORES,
+                                 TOGGLE_MUSIC_OR_EFFECTS,
+                                 START_GAME,
+                                 STOP_GAME,
+                                 FIRE_GUN,
+                                 TURN_LEFT,
+                                 TURN_RIGHT,
+                                 USE_ENGINE,
+                                 USE_SHIELD };
+    return legal_inputs;
   }
 
   /**
@@ -61,11 +69,15 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {
-    final char[] inputs = 
-    {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME, STOP_GAME,FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE, USE_SHIELD };
-    // @ assert inputs != null;
-  
+  public final /*@ pure @*/ boolean legal_input(final char the_character) {
+
+    boolean return_boolean = false;
+    for (int i = 0; i < legal_inputs().length; ++i) {
+      if (legal_inputs()[i] == the_character) {
+        return_boolean = true;
+      }
+    }
+    return return_boolean;
   }
 
   /**
@@ -73,8 +85,7 @@ public class InputHandler {
    * @param the_keyboard_input the input character to process.
    */
   //@ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
-    
+  public final void process(final char the_keyboard_input) {
     assert false; //@ assert false;
   }
 }
