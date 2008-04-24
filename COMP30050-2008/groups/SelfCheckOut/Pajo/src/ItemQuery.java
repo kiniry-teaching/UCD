@@ -6,6 +6,7 @@
 import java.sql.*;
 
 public class ItemQuery {
+	BarCode barcode;
 	String name;
 	int price;
 	int minweight;
@@ -15,7 +16,8 @@ public class ItemQuery {
 	String imagefile;
 	String allergy;
 	int primeitem;
-	BarCode barcode;
+	
+	String obj;
 	
 
 	public ItemQuery (BarCode bc){
@@ -69,6 +71,22 @@ public class ItemQuery {
 		
 	}
 	
+public String toString(){
 	
 
+	obj = "Product Barcode = "+barcode.getBarCodeLong()+"\n"+"Product Name = "+name
+	+"\n"+"Product Price = "+price+"\n"+"Product MinWeight = "+minweight+"\n"
+	+"Product MaxWeight = "+maxweight+"\n"+"Product Actual Weight = "+weight+"\n"+"Product Sound and Image Files " +
+			"are located @ "+soundfile+"\n"+"Associated Allergy = "+allergy+"\n";
+	
+	return obj;
+	
+	
+
+
 }
+}
+	
+	
+
+
