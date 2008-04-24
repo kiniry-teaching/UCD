@@ -39,9 +39,9 @@ public class Barrier extends StaticEntity
   /** The frames in the barrier animation. */
   private Animation my_animation;
 
-  public Barrier(final double[] the_position, final double the_orientation)
-  {
-    set_state(the_position, the_orientation);
+  /** Barrier Constructor. */
+  public Barrier() {
+
   }
 
   /**

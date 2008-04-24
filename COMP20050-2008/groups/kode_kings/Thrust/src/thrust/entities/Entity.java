@@ -22,12 +22,6 @@ import java.awt.Shape;
  * @version 23 April 2008
  */
 public class Entity implements GameColor {
-  /**
-   * Set the initial shape name, shape, and state of this entity.
-   * @param the_initial_shape_name the initial shape name.
-   * @param the_initial_shape the initial shape.
-   * @param the_initial_state the initial state.
-   */
 
   /** The name of the shape of this entity. */
   private String my_shape_name;
@@ -38,11 +32,16 @@ public class Entity implements GameColor {
   /** The color of this entity. */
   private Color my_color;
 
-  public static Entity make(final String the_initial_shape_name,
-                            final Shape the_initial_shape,
-                            final byte the_initial_state) {
+  /**
+   * Set the initial shape name, shape, and state of this entity.
+   * @param the_initial_shape_name the initial shape name.
+   * @param the_initial_shape the initial shape.
+   * @param the_initial_state the initial state.
+   */
+  public void set_state(final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_initial_state) {
     assert false; //@ assert false;
-    return null;
   }
 
   /**
