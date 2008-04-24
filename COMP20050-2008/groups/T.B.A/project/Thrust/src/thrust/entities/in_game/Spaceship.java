@@ -9,6 +9,9 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -34,6 +37,23 @@ public class Spaceship extends DynamicEntity
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
 
+  public Spaceship(final double[] the_position,
+                   final double the_orientation, final Color the_color,
+                   final String the_initial_shape_name,
+                   final Shape the_initial_shape,
+                   final byte the_initial_state,
+                   final double[] the_acceleration,
+                   final double[] the_velocity,
+                   final double the_mass,
+                   final double some_seconds) {
+
+    super();
+    super.set_the_state(the_position, the_orientation, the_color,
+                   the_initial_shape_name, the_initial_shape,
+                   the_initial_state, the_acceleration, the_velocity,
+                   the_mass, some_seconds);
+  }
+
   //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
@@ -53,7 +73,7 @@ public class Spaceship extends DynamicEntity
     @ public invariant mass() == EMPTY_MASS + fuel().mass() +
     @                  (towed() ? GoalSphere.MASS : 0);
     @ public invariant (* The spaceship's shape is always that of a ship. *);
-    @ public invariant (* The spaceship's color is always white. *);
-    @ public invariant color() == thrust.entities.properites.GameColor.WHITE;
+    @ public invariant (* The spaceship's colour is always white. *);
+    @ public invariant colour() == thrust.entities.properites.GameColor.WHITE;
     @*/
 }
