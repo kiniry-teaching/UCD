@@ -17,7 +17,7 @@ import thrust.entities.behaviors.Tow;
 /**
  * The goal sphere that the spaceship needs to tow into
  * space away from the terrain to escape.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author jdouglas (jd2088@gmail.com)
  * @version 18 April 2008
  */
 public class GoalSphere extends DynamicEntity
@@ -54,7 +54,7 @@ public class GoalSphere extends DynamicEntity
     @ public invariant (* When being towed, the goal sphere is rendered
     @                     as a sphere. *);
     @ public invariant (* The shape of the goal sphere is always a circle. *);
-    @ public invariant (* The color of the goal sphere is always green. *);
-    @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+    @ public invariant (* The colour of the goal sphere is always green. *);
+    @ public invariant colour() == thrust.entities.properties.GameColor.GREEN;
     @*/
 }
