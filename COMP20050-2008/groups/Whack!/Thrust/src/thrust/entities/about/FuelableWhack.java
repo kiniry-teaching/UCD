@@ -5,20 +5,20 @@ package thrust.entities.about;
  */
 public class FuelableWhack implements Fuelable {
 
-  /**
-   * the fuel.
-   */
+  /**the fuel.*/
   int my_fuel;
+  /**maximum fuel.*/
+  final int my_maxFuel = 9999;
+
+  public FuelableWhack(final int the_startfuel) {
+    my_fuel = the_startfuel;
+  }
   /**
    * @return How much fuel do you contain?
    */
   //@ ensures 0 <= \result;
   //@ ensures \result <= maximum_fuel();
   public /*@ pure @*/ int fuel() {
-    if (my_fuel > maximum_fuel()) {
-      my_fuel = maximum_fuel();
-    }
-
     return my_fuel;
   }
 
@@ -27,8 +27,8 @@ public class FuelableWhack implements Fuelable {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ int maximum_fuel() {
-    final int maxFuel = 9999;
-    return maxFuel;
+
+    return my_maxFuel;
   }
 
   /**
@@ -64,6 +64,10 @@ public class FuelableWhack implements Fuelable {
 
     //@ invariant (* Fuel content is always non-negative and finite. *);
     //@ invariant 0 <= fuel();
+  }
+  public int fuel_mass() {
+    return fuel() * 1;
+
   }
 }
 
