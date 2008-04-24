@@ -23,7 +23,7 @@ public class InputHandler {
   /** Press "m" to toggle music/effects. */
   public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
   /** Press "p" used here as a toggle, in this case to start the game. */
-  public static final char START_GAME = 'p';
+  public static final char START_GAME = 'o';
   /** Press "p" used here as a toggle, in this case to stop the game. */
   public static final char STOP_GAME = 'p';
   /** Press "z" to fire the ships weapon, producing bullets. */
@@ -86,7 +86,20 @@ public class InputHandler {
    * @param the_keyboard_input the input character to process.
    */
   //@ requires legal_input(the_keyboard_input);
-  public final void process(final char the_keyboard_input) {
+  public void process(final char the_keyboard_input) {
     assert false; //@ assert false;
+    switch(the_keyboard_input) {
+      case START_GAME: /* Starts the game */
+      case DISPLAY_HIGH_SCORES: /* Displays The High Scores */
+      case TOGGLE_MUSIC_OR_EFFECTS: /* Toggles Music/Effects */
+      case STOP_GAME: /* Stops the game */
+      case FIRE_GUN: /* Fires ships weapon/ fires a bullet*/
+      case TURN_LEFT: /* Turns ship left*/
+      case TURN_RIGHT: /* Turns ship right*/
+      case USE_ENGINE: /* Propell's the ship */
+      case USE_SHIELD: /*Use shield/picks up pod(objective) */
+      default:
+        break;
+    }
   }
 }
