@@ -11,7 +11,7 @@
 package thrust.entities.about;
 /**
  * Abstract class implemented by the Fuelable interface.
- * @author DH, JD and EH (jd2088@gmail.com)
+ * @author jdouglas (jd2088@gmail.com)
  * @version 7 April 2008
  */
 public abstract class FuelableClass implements Fuelable {
