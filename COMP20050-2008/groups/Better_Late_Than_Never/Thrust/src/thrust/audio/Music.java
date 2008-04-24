@@ -87,7 +87,7 @@ public class Music {
   public void stop() {
 
     my_music_clip.stop();
-    my_music_clip.drain();
+    my_music_clip.flush();
     my_is_playing_boolean = false;
 
   }
