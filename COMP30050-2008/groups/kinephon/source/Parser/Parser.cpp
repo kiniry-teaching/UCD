@@ -66,7 +66,8 @@ void Parser::supplyReport(IRReport report)
 			tmp[0] += MSB_Extract(MSB_Size_Array[2],MSB_Size_Array[3]);
 			tmp[1] += MSB_Extract(MSB_Size_Array[0],MSB_Size_Array[1]);
 			tmp[2] = Size_Extract();
-			iprp->record(c_switch+1, tmp[0], tmp[1], tmp[2], report.getTimestamp());
+			if(tmp[0] > 0 && tmp[0] < 1024 && tmp[1] > 0 && tmp[1] < 800)
+				iprp->record(c_switch+1, tmp[0], tmp[1], tmp[2], report.getTimestamp());
 		}
 	}
 }
