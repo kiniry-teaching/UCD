@@ -22,29 +22,42 @@ import thrust.entities.StaticEntity;
  */
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
+
+ /** Amount of damage inflicted upon the factory. */
+
+  private byte my_damage_staus;
+
+  /** This factories chimney. */
+
+  private FactoryChimney my_factory_chimney;
+
+  /** This factories sphere. */
+
+  private FactorySphere my_sphere;
+
   /**
    * @return How much damage have you sustained?
    */
-  //@ ensures 0 <= \result & \result <= 20;
+
   public /*@ pure @*/ byte damage() {
-    assert false; //@ assert false;
-    return 0;
+
+    return my_damage_status;
   }
 
   /**
-   * @return What is your chimney?
+   * return your chimney.
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    assert false; //@ assert false;
-    return null;
+
+    return my_factory_chimney;
   }
 
   /**
    * @return What is your sphere?
    */
   public /*@ pure @*/ FactorySphere sphere() {
-    assert false; //@ assert false;
-    return null;
+
+    return my_sphere;
   }
 
   /**
@@ -52,9 +65,10 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(final byte the_damage) {
-    assert false; //@ assert false;
-  }
+  public void damage(byte the_damage)
+
+my_damage_staus += the_damage;
+
 
   /*@ public invariant (* All factories have exactly one sphere and
     @                     one chimney. *);
@@ -80,25 +94,38 @@ public class Factory extends StaticEntity
    * @author Joe Kiniry (kiniry@acm.org)
    * @version 18 April 2008
    */
-  public class FactoryChimney extends StaticEntity
+public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
-    /**
-     * @return Are you smoking?
-     */
-    public /*@ pure @*/ boolean smoking() {
-      assert false; //@ assert false;
-      return false;
-    }
 
-    /**
-     * Your smoking state is dictated by this flag.
-     * @param the_smoking_state A flag indicating whether the chimney
-     * is smoking or not.
-     */
-    //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(final boolean the_smoking_state) {
-      assert false; //@ assert false;
-    }
+   /**
+    *  Whats my smoking status?.
+    */
+
+
+  private boolean my_smoking_boolean;
+   /**
+    * @return Are you smoking?
+    */
+  public /*@ pure @*/ boolean smoking() {
+
+    return my_smoking_state;
+  }
+
+
+   /**
+    * Your smoking state is dictated by this flag.
+    * @param the_smoking_state A flag indicating whether the chimney
+    * is smoking or not.
+    */
+     //@ ensures smoking() <==> the_smoking_state;
+
+  public void smoking(final the_smoking_state) {
+
+	  my_smoking_state = the_smoking_state;
+  }
+
+    
+    
 
     /*@ public invariant (* A factories chimney is the same color as
       @                     its factory. *);
@@ -107,7 +134,7 @@ public class Factory extends StaticEntity
       @ public invariant (* The spaceship is destroyed by a factory's
       @                     chimney. *);
       @*/
-  }
+  
 
   /**
    * A sphere of a factory.
@@ -116,10 +143,12 @@ public class Factory extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
-    /*@ public invariant (* A factory sphere's color is always green. *);
+    
+	  
+	  /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
   }
-}
+
