@@ -16,7 +16,7 @@ package thrust.entities.about;
  *
  * @author Joe Kiniry (kiniry@acm.org)
  * @author Ciaran Hale (ciaran.hale@ucd.ie)
- * @version 18 April 2008
+ * @version 21 April 2008
  */
 public abstract class AbstractGameState {
   /**

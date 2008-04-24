@@ -15,6 +15,7 @@ import thrust.entities.EnemyEntity;
 /**
  * A bullet shot from the spaceship or a gun turret.
  * @author Colin Casey (colin.casey@org.com)
+ * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */

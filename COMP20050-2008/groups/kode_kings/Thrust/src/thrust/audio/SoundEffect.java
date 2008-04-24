@@ -15,29 +15,58 @@ import javax.sound.sampled.*;
 /**
  * Any sound made in response to a event.
  * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie)
- * @version 14 April 2008
+ * @author Ciaran Hale (ciaran.hale@ucdconnect.ie)
+ * @version 24 April 2008
  */
 public class SoundEffect {
-  /**
-   * This is your sound effect.
-   * @param the_sound_effect_file the sound effect to make.
-   * @return the new sound effect for the effect stored in 's'.
-   */
-  public static /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
-  
-  AudioInputStream s_f_x;
-  Clip sound_clip;
-  
-  s_f_x = AudioSystem.getAudioInputStream(.wav, the_sound_effect_file);
-  DataLine.Info data = new DataLine.Info(TargetDataLine.class, s_f_x.getFormat());
-  sound_clip = (Clip) AudioSystem.getLine(data);
-  sound_clip.open(s_f_x);  
-  }
 
   /**
-   * Start playing your effect.
+   *indicates the sound file to load.
    */
+  private final transient File my_sound_clipFile = new File("");
+  /**
+   * the name of our new sound file.
+   */
+  private transient Clip my_sound_clip;
+
+  public SoundEffect() throws Exception {
+    AudioInputStream my_audio_input_stream = null;
+
+    final DataLine.Info info =
+      new DataLine.Info(SourceDataLine.class,
+        my_audio_input_stream.getFormat());
+
+
+
+    my_audio_input_stream = AudioSystem.getAudioInputStream(my_sound_clipFile);
+
+    my_sound_clip = (Clip) AudioSystem.getLine(info);
+
+    my_sound_clip.open(my_audio_input_stream);
+  }
+    /**
+     * @return Is the sound clip playing?
+     */
+    //@ ensures \result == is_playing;
+  public /*@ pure @*/ boolean playing() {
+
+    return false;
+  }
+  /**
+   * Start playing the sound clip.
+   */
+  //@ ensures is_playing;
   public void start() {
-    sound_clip.loop(0);
+    my_sound_clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+  }
+
+ /**
+   * Stop playing the sound clip.
+   */
+  //@ ensures !is_playing;
+  public void stop() {
+    my_sound_clip.stop();
+
   }
 }

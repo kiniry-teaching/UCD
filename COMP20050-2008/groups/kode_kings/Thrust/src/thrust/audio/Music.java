@@ -26,7 +26,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * In-game music.
- * @author JCiaran Hale (Ciaran.hale@ucdconnect.ie)
+ * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
  * @version 15 April 2008
  */
 public class Music {

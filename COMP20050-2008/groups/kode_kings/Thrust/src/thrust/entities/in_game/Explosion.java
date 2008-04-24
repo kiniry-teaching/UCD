@@ -16,6 +16,7 @@ import thrust.animation.Animatable;
 /**
  * An explosion.
  * @author Colin Casey (colin.casey@org.com)
+ * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */

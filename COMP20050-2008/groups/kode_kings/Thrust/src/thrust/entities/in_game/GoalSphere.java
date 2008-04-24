@@ -17,6 +17,7 @@ import thrust.entities.behaviors.Tow;
  * The goal sphere that the spaceship needs to tow into
  * space away from the terrain to escape.
  * @author Colin Casey (colin.casey@org.com)
+ * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
