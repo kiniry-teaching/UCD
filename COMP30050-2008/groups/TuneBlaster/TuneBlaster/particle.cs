@@ -13,9 +13,7 @@ namespace TuneBlaster_
 
     public class Particle
     {
-        // Position, Velocity, and Acceleration represent exactly what their names
-        // indicate. They are public fields rather than properties so that users
-        // can directly access their .X and .Y properties.
+        
         public Vector2 Position;
         public Vector2 Velocity;
         public Vector2 Acceleration;

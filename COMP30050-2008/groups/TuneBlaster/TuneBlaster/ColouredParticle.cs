@@ -11,12 +11,10 @@ namespace TuneBlaster_
 
     // Author Ahmed Warreth
 
-    // namespace ParticleSample
+    
 
     /// <summary>
-    /// specialization of ParticleSystem which creates a
-    /// fiery explosion.combined with  ExplosionSmokeParticleSystem for
-    /// best effect.
+    /// specialization of ParticleSystem which the particles effects on screen
     /// </summary>
     public class ColouredParticle : ParticleSystem
     {
@@ -31,13 +29,13 @@ namespace TuneBlaster_
         }
 
         /// <summary>
-        /// give this particle system its behavior and
+        /// give this the particle system its behavior and
         /// properties.
         /// </summary>
         protected override void InitializeConstants()
         {
 
-
+            //the textures are loaded here, and given a value from 1-10
 
             switch (Colour)
             {
@@ -92,7 +90,7 @@ namespace TuneBlaster_
 
 
 
-
+            //particle properties
 
 
             minInitialSpeed = 40;
@@ -101,7 +99,7 @@ namespace TuneBlaster_
             minAcceleration = 0;
             maxAcceleration = 0;
 
-            //short life
+            
             minLifetime = .5f;
             maxLifetime = 1.0f;
 
@@ -121,63 +119,14 @@ namespace TuneBlaster_
 
 
 
-            if (textureFilename == "null" )
-            {
-
-
-
-
-                // less initial speed than the explosion itself
-                minInitialSpeed = 20;
-                maxInitialSpeed = 200;
-
-                // acceleration is negative, so particles will accelerate away from the
-                // initial velocity.  this will make them slow down, as if from wind
-                // resistance. we want the smoke to linger a bit and feel wispy, though,
-                // so we don't stop them completely like we do ExplosionParticleSystem
-                // particles.
-                minAcceleration = -10;
-                maxAcceleration = -50;
-
-                // explosion smoke lasts for longer than the explosion itself, but not
-                // as long as the plumes do.
-               // minLifetime = 1.0f;
-                //maxLifetime = 2.5f;
-
-                //minScale = 1.0f;
-                //maxScale = 2.0f;
-
-                //minNumParticles = 10;
-               // maxNumParticles = 20;
-
-
-                minLifetime = 1.0f;
-                maxLifetime = 1.5f;
-
-                minScale = 1.0f;
-                maxScale = 2.0f;
-
-                minNumParticles = 5;
-                maxNumParticles = 10;
-
-
-                //  minRotationSpeed = -MathHelper.PiOver4;
-                // maxRotationSpeed = MathHelper.PiOver4;
-
-                // spriteBlendMode = SpriteBlendMode.AlphaBlend;
-
-                // DrawOrder = AlphaBlendDrawOrder;
-
-
-
-
-            }
 
 
 
 
 
         }
+
+        //exception handler,
 
         private void LoadGraphicsContent(SpriteBatch SpriteBatch, object texture)
         {
@@ -192,16 +141,12 @@ namespace TuneBlaster_
         {
             base.InitializeParticle(p, where);
 
-            // The base works fine except for acceleration. Explosions move outwards,
-            // then slow down and stop because of air resistance. Let's change
+            // Explosions move outwards, then slow down and stop because of air resistance. he i change the
             // acceleration so that when the particle is at max lifetime, the velocity
             // will be zero.
 
-            // We'll use the equation vt = v0 + (a0 * t). (If you're not familar with
-            // this, it's one of the basic kinematics equations for constant
-            // acceleration, and basically says:
             // velocity at time t = initial velocity + acceleration * t)
-            // We'll solve the equation for a0, using t = p.Lifetime and vt = 0.
+            // for a0, using t = p.Lifetime and vt = 0.
             p.Acceleration = -p.Velocity / p.Lifetime;
         }
     }

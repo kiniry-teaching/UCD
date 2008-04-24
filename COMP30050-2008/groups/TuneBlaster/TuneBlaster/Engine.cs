@@ -69,9 +69,12 @@ namespace TuneBlaster_
 
 
 
+        // this bool controls the vibration in the gamepad
 
         public static bool blast = false;
         public static int blastTime = 0;
+
+
         public static int Score;
         SpriteFont lucidaConsole;
         SpriteFont specialmode;
@@ -98,29 +101,28 @@ namespace TuneBlaster_
             this.graphics.PreferredBackBufferHeight = 720;
             //this.graphics.IsFullScreen;
 
-            explosion = new ColouredParticle(this, 1, 5);
+            // sets what texture each methid should load
+            //and how many effects it needs to draw (this, num of effects, which text valuse to load)
+
+            explosion = new ColouredParticle(this, 3, 5);
             Components.Add(explosion);
-            smoke = new ColouredParticle(this, 2, 6);
+            smoke = new ColouredParticle(this, 3, 6);
             Components.Add(smoke);
-            redblast = new ColouredParticle(this, 2, 1);
+            redblast = new ColouredParticle(this, 3, 1);
             Components.Add(redblast);
-            greenblast = new ColouredParticle(this, 1, 4);
+            greenblast = new ColouredParticle(this, 3, 4);
             Components.Add(greenblast);
-            purpleblast = new ColouredParticle(this, 1, 3);
+            purpleblast = new ColouredParticle(this, 3, 3);
             Components.Add(purpleblast);
-            blueblast = new ColouredParticle(this, 1, 2);
+            blueblast = new ColouredParticle(this, 3, 2);
             Components.Add(blueblast);
-
-            Rnote = new ColouredParticle(this, 1, 7);
+            Rnote = new ColouredParticle(this, 3, 7);
             Components.Add(Rnote);
-
-            Bnote = new ColouredParticle(this, 1, 8);
+            Bnote = new ColouredParticle(this, 3, 8);
             Components.Add(Bnote);
-
-            Gnote = new ColouredParticle(this, 1, 9);
+            Gnote = new ColouredParticle(this, 3, 9);
             Components.Add(Gnote);
-
-            Pnote = new ColouredParticle(this, 1, 10);
+            Pnote = new ColouredParticle(this, 3, 10);
             Components.Add(Pnote);
 
 
@@ -284,7 +286,7 @@ namespace TuneBlaster_
                         music.resetSpecialCues();
                     }
 
-                    //Do whatever else you need to do
+                    
                 }
 
                 if (!specialModeOn)

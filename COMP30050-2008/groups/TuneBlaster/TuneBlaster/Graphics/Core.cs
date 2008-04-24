@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 
 
-// Author Hugh, Ahmed
+// Author Hugh, Ahmed Warreth
 
 namespace TuneBlaster_.Graphics
 {
@@ -255,11 +255,16 @@ namespace TuneBlaster_.Graphics
                     {
                         balls[i].Destroy();
 
+                        // sets the positon of the exploins
+
                         where.X = balls[i].Position.X;
                         where.Y = balls[i].Position.Y;
 
                         ballSound = new Vector3(where.X, where.Y, 0f);
                         setPos(ballSound);
+
+
+                        // add exploions depending on clour of balls destroyed
 
                                 if(balls[i].colour== Image.value.red){
                                     Engine.redblast.AddParticles(where);
@@ -298,7 +303,7 @@ namespace TuneBlaster_.Graphics
                         Engine.blastTime = 30;
                        
 
-                        //to put in code for explosion
+                       
 
                     }
                 }

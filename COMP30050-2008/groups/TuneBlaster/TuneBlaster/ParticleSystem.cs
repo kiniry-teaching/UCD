@@ -11,8 +11,7 @@ namespace TuneBlaster_
  
     /// <summary>
     /// ParticleSystem is an abstract class that provides the basic functionality to
-    /// create a particle effect. Different subclasses will have different effects,
-    /// such as fire, explosions, and coloured particles
+    /// create a particle effect. 
     /// </summary>
     public abstract class ParticleSystem : DrawableGameComponent
     {
@@ -24,8 +23,7 @@ namespace TuneBlaster_
         public const int AlphaBlendDrawOrder = 100;
         public const int AdditiveDrawOrder = 200;
 
-        // a reference to the main game; we'll keep this around because it exposes a
-        // content manager and a sprite batch for us to use.
+        // a reference to the main game;
         private Engine game;
 
         // the texture this particle system will use.
@@ -57,11 +55,10 @@ namespace TuneBlaster_
         }
 
 
-        // This region of values control the "look" of the particle system, and should 
+        // This region of values control the "look" of the particle system, and is 
         // be set by deriving particle systems in the InitializeConstants method. The
-        // values are then used by the virtual function InitializeParticle. Subclasses
-        // can override InitializeParticle for further
-        // customization.
+        // values are then used by the virtual function InitializeParticle
+
         #region constants to be set by subclasses
 
         /// <summary>
@@ -140,10 +137,7 @@ namespace TuneBlaster_
         /// content manager and sprite batch for us.</param>
         /// <param name="howManyEffects">the maximum number of particle effects that
         /// are expected on screen at once.</param>
-        /// <remarks>it is tempting to set the value of howManyEffects very high.
-        /// However, this value should be set to the minimum possible, because
-        /// it has a large impact on the amount of memory required, and slows down the
-        /// Update and Draw functions.</remarks>
+        /// </summary>
         protected ParticleSystem(Engine game, int howManyEffects)
             : base(game)
         {            
@@ -153,7 +147,7 @@ namespace TuneBlaster_
 
         /// <summary>
         /// override the base class's Initialize to do some additional work; we want to
-        /// call InitializeConstants to let subclasses set the constants that we'll use.
+        /// call InitializeConstants to let subclasses set the constants that will be used.
         /// 
         /// also, the particle array and freeParticles queue are set up here.
         /// </summary>
@@ -175,12 +169,8 @@ namespace TuneBlaster_
             base.Initialize();
         }
 
-        /// <summary>
-        /// this abstract function must be overriden by subclasses of ParticleSystem.
-        /// It's here that they should set all the constants marked in the region
-        /// "constants to be set by subclasses", which give each ParticleSystem its
-        /// specific flavor.
-        /// </summary>
+        
+
         protected abstract void InitializeConstants();
 
         /// <summary>
@@ -232,13 +222,8 @@ namespace TuneBlaster_
             }
         }
 
-        /// <summary>
-        /// InitializeParticle randomizes some properties for a particle, then
-        /// calls initialize on it. It can be overriden by subclasses if they 
-        /// want to modify the way particles are created. For example, 
-        /// SmokePlumeParticleSystem overrides this function make all particles
-        /// accelerate to the right, simulating wind.
-        /// </summary>
+        
+
         /// <param name="p">the particle to initialize</param>
         /// <param name="where">the position on the screen that the particle should be
         /// </param>
