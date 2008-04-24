@@ -56,6 +56,11 @@ public abstract class DynamicEntity extends Entity
    */
   double my_seconds;
 
+  /**
+   * the momentum of an entity.
+   */
+  double my_momentum;
+
   public void set_the_state(
           final double[] the_position,
           final double the_orientation, final Color the_color,
@@ -65,7 +70,8 @@ public abstract class DynamicEntity extends Entity
           final double[] the_acceleration,
           final double[] the_velocity,
           final double the_mass,
-          final double some_seconds
+          final double some_seconds,
+          final double the_momentum
   )
   {
     super.set_state(the_initial_shape_name,
@@ -113,6 +119,16 @@ public abstract class DynamicEntity extends Entity
   public double orientation()
   {
     return my_angleRadians;
+  }
+
+  /**
+   * @return my_momentum
+   * returns the current entity's
+   * momentum.
+   */
+  public double momentum()
+  {
+    return my_momentum;
   }
 
   /**
@@ -181,6 +197,15 @@ public abstract class DynamicEntity extends Entity
   public void simulate(final double some_seconds)
   {
     this.my_seconds = some_seconds;
+  }
+
+  /**
+   * @param the_momentum
+   * sets the momentum of the current entity.
+   */
+  public void momentum(final double the_momentum)
+  {
+    this.my_momentum = the_momentum;
   }
 
   /**
