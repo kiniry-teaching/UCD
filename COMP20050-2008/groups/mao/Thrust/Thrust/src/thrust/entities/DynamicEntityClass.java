@@ -19,7 +19,7 @@ import thrust.physics.PhysicsClass;
 /**
  * Entities whose position or orientation change.
  * @author Magdalena Zieniewicz (mazienie@gmail.com)
- * @version 18 April 2008
+ * @version 22 April 2008
  */
 public class DynamicEntityClass extends DynamicEntity
   implements PhysicsInterface {
@@ -54,5 +54,38 @@ public class DynamicEntityClass extends DynamicEntity
   }
   
   
-  
+   
+     public double mass(){
+       return physics.mass();
+     }
+
+   
+     public double[] velocity(){
+       return physics.velocity();
+     }
+
+ 
+     public double[] acceleration(){
+       return physics.acceleration();
+     }
+
+     public double momentum(){
+       return physics.momentum();
+     }
+
+    public double orientation(){
+      return physics.orientation();
+    }
+    
+    public double[] position(){
+      return physics.position();
+    }
+    
+    public double gravitational_constant(){
+      return physics.gravitational_constant();
+    }
+    
+    public void simulate(double time){
+      physics.simulate(time);
+    }
 }

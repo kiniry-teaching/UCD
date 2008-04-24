@@ -29,6 +29,7 @@ public abstract class Entity implements GameColor {
                             Shape the_initial_shape,
                             byte the_initial_state) {
     assert false; //@ assert false;
+    return null;
   }
 
   /**
@@ -66,4 +67,6 @@ public abstract class Entity implements GameColor {
    * Render yourself.
    */
   public abstract void render();
+  
+  
 }

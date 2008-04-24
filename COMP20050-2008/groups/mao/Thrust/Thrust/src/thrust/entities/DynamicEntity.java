@@ -17,7 +17,7 @@ import thrust.physics.PhysicsInterface;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public abstract class DynamicEntity extends Entity
+public abstract class DynamicEntity extends EntityClass
   implements PhysicsInterface {
   /**
    * @return A new dynamic entity with the given physical state.

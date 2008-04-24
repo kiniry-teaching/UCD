@@ -3,6 +3,12 @@ package thrust.entities;
 import java.awt.Color;
 import java.awt.Shape;
 
+
+/**
+ * Any entity in the game that is drawn in space or on the terrain.
+ * @author Magdalena Zieniewicz (mazienie@gmail.com)
+ * @version 22 April 2008
+ */
 public class EntityClass extends Entity {
   
   
@@ -10,6 +16,7 @@ public class EntityClass extends Entity {
   private byte state;
   private Color color;
 
+ 
   public  String shape_name(){
     return shape.toString();
   }
@@ -70,6 +77,5 @@ public class EntityClass extends Entity {
   public void color(Color the_color){
     color = the_color;
   }
-  
   
 }
