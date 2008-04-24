@@ -22,10 +22,23 @@ import thrust.entities.about.Fuelable;
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
 
+  /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
+  @ public invariant (* The fuel pod is not affected by the goal sphere. *);
+  @ public invariant (* The fuel pod is not affected by the spaceship. *);
+  @ public invariant (* A fuel pod's color is always yellow. *);
+  @ public invariant color() == java.awt.Color.YELLOW;
+  @ public invariant (* A fuel pod's 'fuel' lettering color is
+  @                     dictated by the amount of fuel it contains. *);
+  @*/
+
   /** The maximum amount of fuel that can be contained. */
   private static final int MAX_FUEL = 1000;
   /** The amount of fuel that is contained. */
   private static int my_fuel;
+
+  public FuelPod() {
+    color(java.awt.Color.YELLOW);
+  }
 
   public int fuel() {
     return my_fuel;
@@ -46,12 +59,4 @@ public class FuelPod extends StaticEntity
   public int fuel_mass() {
     return my_fuel;
   }
-  /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
-    @ public invariant (* The fuel pod is not affected by the goal sphere. *);
-    @ public invariant (* The fuel pod is not affected by the spaceship. *);
-    @ public invariant (* A fuel pod's color is always yellow. *);
-    @ public invariant color() == java.awt.Color.YELLOW;
-    @ public invariant (* A fuel pod's 'fuel' lettering color is
-    @                     dictated by the amount of fuel it contains. *);
-    @*/
 }
