@@ -25,7 +25,7 @@ public abstract class Entity implements GameColor {
    * @param the_initial_state the initial state.
    * @return A new entity with this initial shape name, shape, and state.
    */
-  public static Entity make(String the_initial_shape_name,
+  public Entity make(String the_initial_shape_name,
                             Shape the_initial_shape,
                             byte the_initial_state) {
     assert false; //@ assert false;
