@@ -15,7 +15,7 @@ import java.awt.Shape;
 
 /**
  * Entities whose position or orientation change.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Haughton (dave.haughton@gmail.com)
  * @version 18 April 2008
  */
 public abstract class DynamicEntity extends Entity
@@ -70,9 +70,7 @@ public abstract class DynamicEntity extends Entity
   }
 
 
-    /**
-     * The acceleration of an object.
-     */
+
   public double[] acceleration()
   {
     return the_acceleration;
