@@ -16,11 +16,11 @@ import java.awt.Color;
 
 /**
  * Any entity in the game that is drawn in space or on the terrain.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Eoin Healy (eoin.healy@gmail.com), JD (jd2088@gmail.com),
+ *  Dave Haughton (dave.haughton1@gmail.com)
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
-  
 
   /** the_initial_shape_name.
    * is the name of the initial shape
@@ -43,14 +43,17 @@ public abstract class Entity implements GameColor {
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
+   * @param the_color the color of the entity.
    */
   public void set_state(final String the_initial_shape_name,
                         final Shape the_initial_shape,
-                        final byte the_initial_state) {
+                        final byte the_initial_state,
+                        final Color the_color) {
 
     this.my_initial_shape_name = the_initial_shape_name;
     this.my_initial_shape = the_initial_shape;
     this.my_initial_state = the_initial_state;
+    my_color = the_color;
 
   }
 
@@ -101,10 +104,17 @@ public abstract class Entity implements GameColor {
   public void render() {
     assert false; //@ assert false;
   }
-
+/**
+ * Return your color.
+ * @return What color are you?
+ */
   public Color color() {
     return my_color;
   }
+  /**
+   * Set your color.
+   * @param the_color the color to set the entity to.
+   */
   public void color(final Color the_color) {
     my_color = the_color;
   }
