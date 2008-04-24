@@ -38,6 +38,7 @@ public class GoalSphere extends DynamicEntity
                     the_initial_shape_name, the_initial_shape,
                     the_initial_state, the_acceleration, the_velocity,
                     the_mass, some_seconds);
+  }
 
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship
