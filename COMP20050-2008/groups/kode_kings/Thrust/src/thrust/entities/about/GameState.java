@@ -16,16 +16,18 @@ package thrust.entities.about;
  */
 public class GameState extends AbstractGameState {
 
+  /** The maximum amount of fuel that can be contained. */
+  private static final int MAX_FUEL = 10000;
   /** The bonus points associated with finishing a level. */
   private static int my_bonus;
+  /**The current amount of fuel that is contained. */
+  private static int my_fuel;
   /** The current score of a player. */
   private static int my_score;
   /** The number of lives a player has left. */
   private static byte my_lives;
   /** The highest scores ever recorded in the game. */
   private static HighScoreInterface[] my_high_scores;
-  /** An instance of KKFuelable to allow monitoring of fuel. */
-  private static final KKFuelable MY_FUEL_MONITOR = new KKFuelable();
 
   public int bonus() {
     return my_bonus;
@@ -36,11 +38,11 @@ public class GameState extends AbstractGameState {
   }
 
   public int current_fuel() {
-    return MY_FUEL_MONITOR.fuel();
+    return my_fuel;
   }
 
   public int maximum_fuel() {
-    return MY_FUEL_MONITOR.maximum_fuel();
+    return MAX_FUEL;
   }
 
   public int score() {
@@ -80,12 +82,10 @@ public class GameState extends AbstractGameState {
 
     for (int i = HIGH_SCORE_COUNT - 1; i > -1; i--) {
       temp = high_scores()[i];
-      if (the_new_high_score.score() > high_scores()[i].score())
-      {
+      if (the_new_high_score.score() > high_scores()[i].score()) {
         high_scores()[i] = the_new_high_score;
       }
-      if (i + 1 > HIGH_SCORE_COUNT - 1)
-      {
+      if (i + 1 > HIGH_SCORE_COUNT - 1) {
         high_scores()[i + 1] = temp;
       }
     }
