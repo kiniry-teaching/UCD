@@ -9,6 +9,9 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.EnemyEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.behaviors.AI;
@@ -20,6 +23,20 @@ import thrust.entities.behaviors.AI;
  */
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
+
+  public GunTurret(final double[] the_position,
+                   final double the_orientation, final Color the_color,
+                                final String the_initial_shape_name,
+                                final Shape the_initial_shape,
+                                final byte the_initial_state) {
+
+    super();
+    super.set_state(the_position,
+                                   the_orientation, the_color,
+                                   the_initial_shape_name,
+                                   the_initial_shape,
+                                   the_initial_state);
+  }
 
   /**
    * @return The turret's attack AI must shoot a bullet toward the spaceship.
@@ -33,7 +50,7 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's attack AI must shoot a bullet toward
    * the spaceship.
    */
-  public void attack(AI the_behavior) {
+  public void attack(final AI the_behavior) {
     assert false; //@ assert false;
   }
 
@@ -50,13 +67,13 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's disturb AI must shoot a bullet
    * in a random direction away from the terrain.
    */
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     assert false; //@ assert false;
   }
 
   /*@ public invariant (* A gun turret always resides on/adjacent to
     @                     the terrain. *);
-    @ public invariant (* A gun turret's color is always green. *);
-    @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+    @ public invariant (* A gun turret's colour is always green. *);
+    @ public invariant colour() == thrust.entities.properties.GameColor.GREEN;
     @*/
 }
