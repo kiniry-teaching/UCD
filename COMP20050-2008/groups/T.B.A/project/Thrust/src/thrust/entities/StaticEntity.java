@@ -24,10 +24,14 @@ public abstract class StaticEntity extends DynamicEntity {
   /**
    * The Position.
    */
+  /**
+   * The angle of an object, in radians.
+   */
+  double my_angleRadians;
   private static double[] position = {0.0, 0.0};
 
-  //@ public model boolean initialized;
-  //@ public initially initialized == false;
+  //@ public model boolean initialised;
+  //@ public initially initialised == false;
 
   /**
    * Set the position and orientation of this entity.  You may only
@@ -35,11 +39,11 @@ public abstract class StaticEntity extends DynamicEntity {
    * @param the_position the immutable position.
    * @param the_orientation the immutable orientation.
    */
-  //@ requires !initialized;
+  //@ requires !initialised;
   //@ ensures position()[0] == the_position[0];
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
-  //@ ensures initialized;
+  //@ ensures initialised;
   public static StaticEntity set_state(final double[] the_position,
                         final double the_orientation) {
     position = the_position;
@@ -85,10 +89,25 @@ public abstract class StaticEntity extends DynamicEntity {
     final double my_momentum = 0;
     return my_momentum;
   }
+  /**
+   * @param takes the angle of an object.
+   */
+  public void getOrientation(final double an_angle)
+  {
+    my_angleRadians = an_angle;
+  }
+
+  /**
+   * @return the angle of an object.
+   */
+  public double orientation()
+  {
+    return my_angleRadians;
+  }
 
   //@ public invariant (* All queries are constant. *);
-  //@ public constraint initialized ==> (position() == \old(position()));
-  //@ public constraint initialized ==> (orientation() == \old(orientation()));
+  //@ public constraint initialised ==> (position() == \old(position()));
+  //@ public constraint initialised ==> (orientation() == \old(orientation()));
 
   /*@ public invariant (* Mass, velocity, acceleration, and momentum
     @                     are all zero. *);
