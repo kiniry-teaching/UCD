@@ -51,6 +51,11 @@ public abstract class DynamicEntity extends Entity
    */
   double[] my_position;
 
+  /**
+   * Simulate yourself for this many seconds.
+   */
+  double my_seconds;
+
   public void set_the_state(
           final Shape the_initial_shape,
           final byte the_initial_state,
@@ -60,7 +65,8 @@ public abstract class DynamicEntity extends Entity
           final double[] the_position,
           final double[] the_velocity,
           final double the_orientation,
-          final double the_mass
+          final double the_mass,
+          final double some_seconds
   )
   {
     super.set_state(the_initial_shape_name,
@@ -70,6 +76,7 @@ public abstract class DynamicEntity extends Entity
     this.my_position =  the_position;
     this.my_acceleration = the_acceleration;
     this.my_mass = the_mass;
+    this.my_seconds = some_seconds;
   }
 
   /**
@@ -117,6 +124,11 @@ public abstract class DynamicEntity extends Entity
     return my_velocity;
   }
 
+  public double simulate()
+  {
+    return my_seconds;
+  }
+
   /**
    * @param the_orientation
    * sets the orientation of the entity.
@@ -151,6 +163,15 @@ public abstract class DynamicEntity extends Entity
   public void position(final double[] the_positions)
   {
     this.my_position =  the_positions;
+  }
+
+  /**
+   * Simulate yourself for this many seconds.
+   * @param some_seconds the number of seconds to simulate.
+   */
+  public void simulate(final double some_seconds)
+  {
+    this.my_seconds = some_seconds;
   }
 
   /**
