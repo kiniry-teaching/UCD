@@ -15,6 +15,9 @@ import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 
@@ -175,8 +178,8 @@ public class Star extends StaticEntity
   }
 
   public String shape_name() {
-
-    return null;
+    final String my_name = "Square";
+    return my_name;
   }
 
   public byte state() {
@@ -218,9 +221,12 @@ public class Star extends StaticEntity
 
   }
 
-  /*@ public invariant (* A star's location is in space. *);
+
+
+}
+/*@ public invariant (* A star's location is in space. *);
     @ public invariant (* A star interacts with no other entities. *);
     @ public invariant (* Each star blinks irregularly. *);
     @ public invariant (* A star's shape is always a small square. *);
     @*/
-}
+
