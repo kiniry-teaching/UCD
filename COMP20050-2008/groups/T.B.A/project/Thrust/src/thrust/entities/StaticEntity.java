@@ -10,6 +10,7 @@
 
 package thrust.entities;
 import java.awt.Color;
+import java.awt.Shape;
 
 /**
  * Entities whose position and orientation do not change.
@@ -47,7 +48,10 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures orientation() == the_orientation;
   //@ ensures initialised;
   public static StaticEntity set_state(final double[] the_position,
-                        final double the_orientation, final Color the_color) {
+                        final double the_orientation, final Color the_color,
+                        final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_inital_state) {
     position = the_position;
     assert false; //@ assert false;
     return null;
