@@ -57,12 +57,12 @@ public abstract class DynamicEntity extends Entity
   double my_seconds;
 
   public void set_the_state(
+          final double[] the_position,
           final double the_orientation, final Color the_color,
           final String the_initial_shape_name,
           final Shape the_initial_shape,
-          final byte the_inital_state,
+          final byte the_initial_state,
           final double[] the_acceleration,
-          final double[] the_position,
           final double[] the_velocity,
           final double the_mass,
           final double some_seconds
