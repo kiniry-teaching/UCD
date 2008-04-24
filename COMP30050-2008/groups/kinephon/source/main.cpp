@@ -130,13 +130,6 @@ void kinephon(void)
 
 		g_Interpreter->shapeMatching(&shapeMatches);
 		g_Movement->audioMovement(recording[index]);
-		glBegin(GL_LINES);
-			for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = frame ->next())
-			{
-					glVertex2i(frame->y(), frame->y());
-					glVertex2i(frame->next()->x(), frame->next()->y());		
-			}
-		glEnd();
 
 		// Perform some cleanup, just force to 100 frames max for now
 		g_Recorder->erase
@@ -260,7 +253,7 @@ bool initialize(void)
 		glutInitWindowSize(800, 600);
 		glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 		// Set callbacks
-		glutCreateWindow("kinephon");
+		glutCreateWindow("Kinephon");
 		glutDisplayFunc(glutOnPaint);
 		glutIdleFunc(glutOnPaint);
 		glutKeyboardFunc(glutOnKeyDown);
@@ -287,11 +280,8 @@ bool initialize(void)
 //
 bool displayConfig(void)
 {
-
-	// @todo - Display configuration dialog
-
+	
 	return true;
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -304,7 +294,13 @@ void glutOnPaint(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// @todo - render visualisations
+	glBegin(GL_LINES);
+		for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = frame ->next())
+		{
+			glVertex2i(frame->y(), frame->y());
+			glVertex2i(frame->next()->x(), frame->next()->y());		
+		}
+	glEnd();
 
     glutSwapBuffers();
 
