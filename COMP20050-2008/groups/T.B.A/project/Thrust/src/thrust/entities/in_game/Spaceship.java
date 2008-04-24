@@ -24,10 +24,8 @@ import thrust.entities.behaviors.Tow;
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
-  /*@ public invariant (* A spaceship's mass when empty of all fuel is
-    @                     10000kg. *);
-    @ public invariant EMPTY_MASS <= mass();
-    @*/
+
+
   /** A spaceship's mass when empty of all fuel is 10000kg. */
   public static final int EMPTY_MASS = 10000;
 
@@ -36,6 +34,18 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+  /**
+   * The amount of fuel that is contained.
+   */
+  private int my_fuel;
+   /*@ public invariant (* A spaceship's mass when empty of all fuel is
+     @                     10000kg. *);
+     @ public invariant EMPTY_MASS <= mass();
+     @*/
+   /**
+   * The change in the fuel content by a specific amount of units.
+   */
+  private int my_fuel_content;
 
   public Spaceship(final double[] the_position,
                    final double the_orientation, final Color the_color,
@@ -53,6 +63,34 @@ public class Spaceship extends DynamicEntity
                    the_initial_state, the_acceleration, the_velocity,
                    the_mass, some_seconds);
   }
+
+  /**
+   * returns the maximum amount of fuel that can you contain?
+   */
+  //@ ensures 0 <= \result;
+  /*@ pure @*/
+  public int maximum_fuel() {
+    final int an_max_fuel = 9999;
+    return an_max_fuel;
+  }
+    /**
+     * @param the_fuel_change Change your fuel content by this many units.
+     */
+  public void change_fuel_content(final int the_fuel_change) {
+    my_fuel_content = the_fuel_change;
+  }
+
+  public int fuel() {
+    return my_fuel;
+  }
+  /**
+   * @param the_fuel_content This many units is your fuel content.
+   */
+  public void set_fuel_content(final int the_fuel_content) {
+    my_fuel = the_fuel_content;
+  }
+  
+  
 
   //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
 
