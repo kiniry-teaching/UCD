@@ -51,7 +51,7 @@ public abstract class StaticEntity extends DynamicEntity {
                         final double the_orientation, final Color the_color,
                         final String the_initial_shape_name,
                         final Shape the_initial_shape,
-                        final byte the_inital_state) {
+                        final byte the_initial_state) {
     position = the_position;
     assert false; //@ assert false;
     return null;
