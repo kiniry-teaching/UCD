@@ -32,7 +32,8 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures initialized;
   public void set_state(final double[] the_position,
                         final double the_orientation) {
-    super.set_dynamic_state(the_position, the_orientation, null, 0, 0, null);
+    super.set_dynamic_state(the_position, the_orientation, new double[]{0, 0},
+                            0, 0, new double[]{0, 0});
   }
 
   /* (non-Javadoc)
@@ -65,7 +66,6 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false
     return 0;
   }
 
