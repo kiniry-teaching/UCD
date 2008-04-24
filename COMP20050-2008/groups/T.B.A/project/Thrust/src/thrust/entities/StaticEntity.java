@@ -56,8 +56,6 @@ public abstract class StaticEntity extends DynamicEntity {
                        the_initial_shape_name, the_initial_shape,
                        the_initial_state,
                        new double[]{0, 0}, new double[]{0, 0}, 0, 0);
-    assert false; //@ assert false;
-    return null;
   }
 
   /* (non-Javadoc)

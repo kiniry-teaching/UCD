@@ -19,7 +19,7 @@ import thrust.animation.Animation;
 
 /**
  * An explosion.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Eoin Healy (eoin.healy@gmail.com)
  * @version 18 April 2008
  */
 public class Explosion extends StaticEntity

@@ -192,7 +192,7 @@ public class Factory extends StaticEntity
                           my_color, the_initial_shape_name,
                           the_initial_shape, the_inital_state);
 
-        }
+    }
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a

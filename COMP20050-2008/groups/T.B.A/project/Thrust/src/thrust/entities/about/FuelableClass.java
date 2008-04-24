@@ -14,14 +14,14 @@ package thrust.entities.about;
  * @author jdouglas (jd2088@gmail.com)
  * @version 7 April 2008
  */
-public class FuelableClass implements Fuelable {   
+public class FuelableClass implements Fuelable {
 /**
 * The amount of fuel that is contained.
 */
   private int my_fuel;
 /**
-* The mass of the fuel
-**/
+* The mass of the fuel.
+*/
   private int my_fuel_mass;
   /**
 * The change in the fuel content by a specific amount of units.
@@ -46,9 +46,8 @@ public class FuelableClass implements Fuelable {
    * @return What is the mass of your fuel?
    */
   //@ ensures \result == fuel() * 1;
-  /*@ pure @*/ 
-    public int my_fuel_mass() {
-    final int my_fuel_mass = fuel() * 1;
+  public /*@ pure @*/ int fuel_mass() {
+    my_fuel_mass = fuel() * 1;
     return my_fuel_mass;
   }
 /**
