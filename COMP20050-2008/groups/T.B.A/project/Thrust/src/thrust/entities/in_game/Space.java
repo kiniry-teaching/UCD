@@ -29,7 +29,7 @@ public class Space extends StaticEntity
                final double the_orientation, final Color the_color,
                final String the_initial_shape_name,
                final Shape the_initial_shape,
-               final byte the_inital_state) {
+               final byte the_initial_state) {
 
     super();
     super.set_state(the_position, the_orientation, the_color,
