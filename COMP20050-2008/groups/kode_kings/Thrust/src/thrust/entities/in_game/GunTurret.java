@@ -23,12 +23,16 @@ import thrust.entities.behaviors.AI;
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
 
+  /** The attack AI of a gun turret. */
+  private AI my_attack_ai;
+  /** The disturb AI of a gun turret. */
+  private AI my_disturb_ai;
+
   /**
    * @return The turret's attack AI must shoot a bullet toward the spaceship.
    */
   public AI attack() {
-    assert false; //@ assert false;
-    return null;
+    return my_attack_ai;
   }
 
   /**
@@ -36,7 +40,7 @@ public class GunTurret extends StaticEntity
    * the spaceship.
    */
   public void attack(final AI the_behavior) {
-    assert false; //@ assert false;
+    my_attack_ai = the_behavior;
   }
 
   /**
@@ -44,8 +48,7 @@ public class GunTurret extends StaticEntity
    * away from the terrain.
    */
   public AI disturb() {
-    assert false; //@ assert false;
-    return null;
+    return my_disturb_ai;
   }
 
   /**
@@ -53,7 +56,7 @@ public class GunTurret extends StaticEntity
    * in a random direction away from the terrain.
    */
   public void disturb(final AI the_behavior) {
-    assert false; //@ assert false;
+    my_disturb_ai = the_behavior;
   }
   /*@ public invariant (* A gun turret always resides on/adjacent to
     @                     the terrain. *);
