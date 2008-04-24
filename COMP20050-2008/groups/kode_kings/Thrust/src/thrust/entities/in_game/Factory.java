@@ -51,7 +51,7 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(byte the_damage) {
+  public void damage(final byte the_damage) {
     assert false; //@ assert false;
   }
 
@@ -95,7 +95,7 @@ public class Factory extends StaticEntity
      * is smoking or not.
      */
     //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(boolean the_smoking_state) {
+    public void smoking(final boolean the_smoking_state) {
       assert false; //@ assert false;
     }
 

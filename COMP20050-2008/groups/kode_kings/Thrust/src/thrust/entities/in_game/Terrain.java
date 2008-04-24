@@ -9,9 +9,6 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -22,16 +19,8 @@ import thrust.entities.StaticEntity;
  */
 public class Terrain extends StaticEntity
   implements NeutralEntity {
-
-  
-
-
-
- 
   /*@ public invariant (* Terrain and space are disjoint. *);
     @ public invariant (* The shape of the terrain is rendered as a
     @                     sequence of horizontal lines. *);
     @*/
-
- 
 }

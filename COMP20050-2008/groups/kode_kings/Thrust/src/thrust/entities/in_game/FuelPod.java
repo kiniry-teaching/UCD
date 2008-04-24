@@ -9,9 +9,6 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.about.Fuelable;
@@ -24,13 +21,6 @@ import thrust.entities.about.Fuelable;
  */
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
-
-  
-  public double orientation() {
-
-    return 0;
-  }
-
 
   /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);

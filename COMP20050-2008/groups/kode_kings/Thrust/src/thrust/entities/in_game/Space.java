@@ -9,12 +9,9 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
 import java.util.Collection;
 
 import thrust.animation.Animatable;
-import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -37,10 +34,9 @@ public class Space extends StaticEntity
    * Add this star to space.
    * @param the_star the star to add.
    */
-  public void add_star(Star the_star) {
+  public void add_star(final Star the_star) {
     assert false; //@ assert false;
   }
-
 
   //@ public invariant (* Terrain and space are disjoint. *);
 }

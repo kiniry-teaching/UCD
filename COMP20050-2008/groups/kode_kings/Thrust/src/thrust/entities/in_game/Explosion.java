@@ -9,28 +9,17 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.animation.Animatable;
-import thrust.animation.Animation;
 
 /**
  * An explosion.
+ * @author Colin Casey (colin.casey@org.com)
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @version 23 April 2008
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
-
-  public double[] acceleration() {
-
-
-    return null;
-  }
-
-
 
 }

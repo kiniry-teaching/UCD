@@ -9,11 +9,7 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.animation.Animatable;
-import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -25,12 +21,9 @@ import thrust.entities.StaticEntity;
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
 
-  
   /*@ public invariant (* A star's location is in space. *);
     @ public invariant (* A star interacts with no other entities. *);
     @ public invariant (* Each star blinks irregularly. *);
     @ public invariant (* A star's shape is always a small square. *);
     @*/
-
-
 }
