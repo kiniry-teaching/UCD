@@ -5,6 +5,7 @@ package thrust.physics;
  */
 /**
  * @author Tara Flood (Tara.Flood@ucdconnect.ie)
+ *         David Maguire(David.Maguire.2@ucdconnect.ie)
  * @version 8 April 2008
  */
 
@@ -31,13 +32,31 @@ public class Physicswhack implements PhysicsInterface {
    */
   double my_whackmass;
   /**
+   * double that holds momentum.
+   */
+  double my_whackmomentum;
+  /**
+   * array of doubles that represent the position.
+   */
+  double[] my_whackposition;
+  /**
+   * array of doubles representing the velocity.
+   */
+  double[] my_whackvelocity;
+  /**
+   * double that holds the time.
+   */
+  double my_whacktime;
+  //@ ensures \result.length == 2;
+  /**
+   * array of doubles that holds the speed and orientation.
+   */
+  double[] my_whackacceleration = {my_whackspeed, my_whackorientation};
+  /**
    * @return What is your acceleration in meters per second squared?
    */
+  public/*@ pure @*/ double[] acceleration() {
 
-  //@ ensures \result.length == 2;
-  double[] my_whackacceleration = {my_whackspeed, my_whackorientation};
-  /*@ pure @*/public double[] acceleration() {
-    //size and direction
     return my_whackacceleration;
   }
 
@@ -62,7 +81,8 @@ public class Physicswhack implements PhysicsInterface {
    * @return What is your momentum in kilograms*meters per second?
    */
   /*@ pure @*/public double momentum() {
-    return (mass() * my_whackspeed);
+    my_whackmomentum = mass() * (my_whackspeed * my_whackorientation);
+    return my_whackmomentum;
   }
 
   /**
@@ -80,8 +100,9 @@ public class Physicswhack implements PhysicsInterface {
 
   //@ ensures \result.length == 2;
   /*@ pure @*/public double[] position() {
-    final double[] position = {my_x, my_y};
-    return position;
+    my_whackposition[0] = my_x;
+    my_whackposition[1] = my_y;
+    return my_whackposition;
   }
 
   /**
@@ -91,13 +112,15 @@ public class Physicswhack implements PhysicsInterface {
 
   /*@ pure @*/public double[] velocity() {
     //speed and direction
-    final double[] my_whackvelocity = {my_whackspeed, my_whackorientation};
+    my_whackvelocity[0] = my_whackspeed;
+    my_whackvelocity[1] = my_whackorientation;
     return my_whackvelocity;
   }
   /**
    * @param a_time_interval the amount of time that has passed.
    */
   public void simulate(final double a_time_interval) {
+    my_whacktime = a_time_interval;
   }
   /**
    * @param the_acceleration This is your acceleration.
@@ -106,7 +129,13 @@ public class Physicswhack implements PhysicsInterface {
   //@ ensures acceleration()[0] == the_acceleration[0];
   //@ ensures acceleration()[1] == the_acceleration[1];
   public void acceleration(final double[] the_acceleration) {
-    // TODO Auto-generated method stub
+    final double two = 2;
+    if (the_acceleration.length != two) {
+      System.out.print("Array not equal to 2");
+    }
+
+    my_whackacceleration[0] = the_acceleration[0];
+    my_whackacceleration[1] = the_acceleration[1];
 
   }
 
@@ -116,7 +145,9 @@ public class Physicswhack implements PhysicsInterface {
   //@ requires 0 <= the_mass;
   //@ ensures mass() == the_mass;
   public void mass(final double the_mass) {
-    // TODO Auto-generated method stub
+    if (the_mass >= 0) {
+      my_whackmass = the_mass;
+    }
 
   }
 
@@ -125,8 +156,7 @@ public class Physicswhack implements PhysicsInterface {
    */
   //@ ensures orientation() == the_orientation;
   public void orientation(final double the_orientation) {
-    // TODO Auto-generated method stub
-
+    my_whackorientation = the_orientation;
   }
   /**
    * @param the_position This is your position.
@@ -135,6 +165,11 @@ public class Physicswhack implements PhysicsInterface {
   //@ ensures position()[0] == the_position[0];
   //@ ensures position()[1] == the_position[1];
   public void position(final double[] the_position) {
+    final double two = 2;
+    if (the_position.length == two) {
+      my_whackposition[0] = the_position[0];
+      my_whackposition[1] = the_position[1];
+    }
     // TODO Auto-generated method stub
 
   }
@@ -145,8 +180,14 @@ public class Physicswhack implements PhysicsInterface {
   //@ ensures velocity()[0] == the_velocity[0];
   //@ ensures velocity()[1] == the_velocity[1];
   public void velocity(final double[] the_velocity) {
-    // TODO Auto-generated method stub
+    final double two = 2;
+    if (the_velocity.length == two) {
+      my_whackvelocity[0] = the_velocity[0];
+      my_whackvelocity[1] = the_velocity[1];
+    }
+
 
   }
+
 
 }
