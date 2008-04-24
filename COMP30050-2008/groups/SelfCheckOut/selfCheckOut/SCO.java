@@ -14,7 +14,7 @@ public class SCO {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		sco = new SelfCheckOut();
+		sco = new SelfCheckOut(args[0]);
 		sco.start();
 	}
 

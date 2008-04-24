@@ -17,9 +17,9 @@ public class SelfCheckOut extends Thread {
 
 	private HWIconduit hwc = null;
 	
-	SelfCheckOut() {
+	SelfCheckOut(String AddressIP) {
 		System.out.println("This is the test for the SelfCheckout project");
-		hwc = new HWIconduit();
+		hwc = new HWIconduit(AddressIP, 3333);
 		hwc.start();
 		//Process();
 	}
