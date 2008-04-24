@@ -11,39 +11,45 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
 /**
  * A barrier and trigger to block the spaceship's way.
- * @author Ciaran Hale (ciaran.hale@ucdconnect.ie)
  * @author Colin Casey (colin.casey@org.com)
- * @version 23 April 2008
+ * @version 24 April 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+  /** Describes whether the barrier is open. */
+  private boolean my_open_indicator;
+  /** Describes whether the barrier is closed. */
+  private boolean my_closed_indicator;
+  /** Describes whether the barrier is moving. */
+  private boolean my_moving_indicator;
+  /** The frames in the barrier animation. */
+  private Animation my_animation;
+
   /**
    * @return Are you closed?
    */
   public /*@ pure @*/ boolean closed() {
-    assert false; //@ assert false;
-    return false;
+    return my_closed_indicator;
   }
 
   /**
    * @return Are you open?
    */
   public /*@ pure @*/ boolean opened() {
-    assert false; //@ assert false;
-    return false;
+    return my_open_indicator;
   }
 
   /**
    * @return Are you moving?
    */
   public /*@ pure @*/ boolean moving() {
-    assert false; //@ assert false;
-    return false;
+    return my_moving_indicator;
   }
 
   /**
@@ -51,7 +57,9 @@ public class Barrier extends StaticEntity
    */
   //@ requires opened();
   public void close() {
-    assert false; //@ assert false;
+    my_open_indicator = false;
+    my_closed_indicator = false;
+    my_moving_indicator = true;
   }
 
   /**
@@ -59,9 +67,22 @@ public class Barrier extends StaticEntity
    */
   //@ requires closed();
   public void open() {
-    assert false; //@ assert false;
+    my_open_indicator = false;
+    my_closed_indicator = false;
+    my_moving_indicator = true;
   }
 
+  public Animation animation() {
+    return my_animation;
+  }
+
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
+  }
+
+  public void animate() {
+    assert false;
+  }
 
   /*@ public invariant (* Barriers are always in one of the three states
     @                     of open, closed, or moving. *);
