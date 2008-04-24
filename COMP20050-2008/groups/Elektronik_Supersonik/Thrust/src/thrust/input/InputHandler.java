@@ -44,11 +44,9 @@ public class InputHandler {
    * @return What are the legal keyboard inputs?
    */
   public final /* @ pure @ */ char[] legal_inputs() {
-    final char[] legal =
-    {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
+    return new char[] {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
      STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
       USE_SHIELD};
-    return legal;
   }
 
   /*

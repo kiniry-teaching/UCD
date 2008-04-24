@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.EntityFuel;
@@ -20,8 +22,8 @@ import thrust.entities.behaviors.Tow;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public class Spaceship extends DynamicEntity
-  implements FriendEntity, Fuelable, Tow {
+public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
+    Tow {
   /*@ public invariant (* A spaceship's mass when empty of all fuel is
     @                     10000kg. *);
     @ public invariant EMPTY_MASS <= mass();
@@ -38,7 +40,18 @@ public class Spaceship extends DynamicEntity
    * The fuel of the Spaceship.
    */
   private EntityFuel my_fuel;
-  
+
+  public Spaceship(final double[] the_position, final double the_orientation,
+      final double[] the_acceleration, final double the_mass,
+      final double[] the_velocity, final String the_initial_shape_name,
+      final Shape the_initial_shape, final byte the_initial_state) {
+
+    super();
+    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
+                            the_mass, the_velocity, the_initial_shape_name,
+                            the_initial_shape, the_initial_state);
+  }
+
   public void change_fuel_content(final int the_fuel_change) {
     my_fuel.change_fuel_content(the_fuel_change);
   }
@@ -61,14 +74,14 @@ public class Spaceship extends DynamicEntity
 
   public void tow() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public boolean towed() {
     // TODO Auto-generated method stub
     return false;
   }
-  
+
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);

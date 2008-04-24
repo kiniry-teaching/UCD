@@ -1,10 +1,5 @@
 package thrust.entities.in_game;
 
-/**
- * @author Dominic Carr (dominiccarr@gmail.com).
- * @version 11 April 2008
- */
-
 public class GameState extends AbstractGameState {
   
   /**
@@ -27,9 +22,38 @@ public class GameState extends AbstractGameState {
    * An integer storing the score.
    */
   private int my_score;
-
+  /**
+   * The high scores.
+   */
+  private HighScore[] my_hiscores;
+  /**
+   * The maximum fuel a spaceship can have.
+   */
+  private static final int MAX_FUEL = 2000;
+  /**
+   * The number of high scores stored.
+   */
+  private static final int HIGH_SCORE_COUNT = 8;
+  public GameState(final int init_fuel, final byte initial_lives) {
+    super();
+    my_bonus = 0;
+    my_current_fuel = init_fuel;
+    my_lives = initial_lives;
+    my_max_fuel = MAX_FUEL;
+    my_score = 0;
+    my_hiscores = new HighScore[8];
+  }
+  
   public void add_high_score(final HighScoreInterface the_new_high_score) {
-    // TODO Auto-generated method stub
+    for(int i = 0; i >= HIGH_SCORE_COUNT; ++i) {
+      if(the_new_high_score.score() > my_hiscores[i].score()) {
+        for(int j = HIGH_SCORE_COUNT - 1; j >= i+1; --j) {
+          my_hiscores[j] = my_hiscores[j - 1]; 
+        }
+        my_hiscores[i] = (HighScore) the_new_high_score;
+      }
+      break;
+    }
   }
 
   public int bonus() {
@@ -49,13 +73,11 @@ public class GameState extends AbstractGameState {
   }
 
   public HighScoreInterface high_score(final int the_index) {
-    // TODO Auto-generated method stub
-    return null;
+    return new HighScore();
   }
 
   public HighScoreInterface[] high_scores() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_hiscores;
   }
 
   public byte lives() {
@@ -72,11 +94,51 @@ public class GameState extends AbstractGameState {
 
   public boolean new_high_score(
       final HighScoreInterface the_possible_new_high_score) {
-    // TODO Auto-generated method stub
-    return false;
+    boolean ret = false;
+    for(int i = 0; i < HIGH_SCORE_COUNT; ++i) {
+      if(my_hiscores[i].score() < the_possible_new_high_score.score()) {
+        ret = true;
+      }
+    }
+    return ret;
   }
 
   public int score() {
     return my_score;
+  }
+  
+  private class HighScore implements HighScoreInterface {
+    /**
+     * The initials of the high score holder.
+     */
+    private char[] my_initials;
+    /**
+     * The high score value.
+     */
+    private int my_hiscore;
+    
+    public HighScore() {
+      my_initials = new char[0];
+      my_hiscore = 0;
+    }
+    
+    public char[] initials() {
+      final char[] ret = new char[my_initials.length];
+      System.arraycopy(my_initials, 0, ret, 0, my_initials.length);
+      return ret;
+    }
+
+    public void new_initials(final char[] the_new_initials) {
+      my_initials = new char[the_new_initials.length];
+      System.arraycopy(the_new_initials, 0, my_initials, 0, the_new_initials.length);
+    }
+
+    public void new_score(final int the_new_score) {
+      my_hiscore = the_new_score;
+    }
+
+    public int score() {
+      return my_hiscore;
+    }
   }
 }
