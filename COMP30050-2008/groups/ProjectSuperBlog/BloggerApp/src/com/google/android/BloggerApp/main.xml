@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    
+            android:padding="10px"
+    
+   
+   
+   
+            <Button>
+            android:id="@+id/bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="Bold"
+            android:textStyle="bold"
+            
+  		 </Button>
+   
+           <Button>
+            android:id="@+id/italics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRight="@id/bold"
+            android:text="Italics"
+            android:textStyle="italic"
+           
+            
+   </Button>
+  
+            <Button>
+            android:id="@+id/colour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRight="@id/italics"
+            android:text="Colour"
+            
+   </Button>
+  
+           <Button>
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10px"
+            android:layout_toRight="@id/colour"
+            android:text="Size"
+            
+   </Button>
+              
+   
+    <TextView>
+            android:id="@+id/label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bold"
+            android:text="Title:"
+           
+            
+   </TextView>          
+
+    <EditText
+            android:id="@+id/entry"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label"
+            android:background="@android:drawable/editbox_background"
+          
+          
+
+            
+   </EditText>
+  
+     <TextView>
+            android:id="@+id/post"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/entry"
+            android:text="Post comment:"
+           
+            
+   </TextView>
+  
+    <EditText>
+            android:id="@+id/enter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post"
+            android:background="@android:drawable/editbox_background"
+          
+          
+
+
+   </EditText>
+  
+    <Button>
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_below="@id/enter"
+            android:text="Send"
+            >
+   </Button>
+  
+    <Button>
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10px"
+            android:layout_below="@id/enter"
+            android:layout_toRight="@id/ok"
+            android:text="Cancel"
+            
+   </Button>
+   
+
+</RelativeLayout>
