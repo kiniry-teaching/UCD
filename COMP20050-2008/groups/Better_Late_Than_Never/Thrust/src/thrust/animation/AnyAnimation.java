@@ -5,7 +5,7 @@ package thrust.animation;
  * @version 24 April 2008
  */
 public class AnyAnimation implements Animatable {
-/** Says missing a javadoc comment so here it is...*/
+/** The animation being used.*/
   static Animation my_animation;
 
   public void animate() { }
