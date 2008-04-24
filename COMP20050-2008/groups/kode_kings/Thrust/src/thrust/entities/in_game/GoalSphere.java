@@ -51,6 +51,12 @@ public class GoalSphere extends DynamicEntity
   /** Tow status of GoalSphere. */
   private boolean my_tow_indicator;
 
+  /** GoalSphere Constructor. */
+  public GoalSphere() {
+    color(java.awt.Color.GREEN);
+    //shape(circle);
+  }
+
   public boolean towed() {
     return my_tow_indicator;
   }

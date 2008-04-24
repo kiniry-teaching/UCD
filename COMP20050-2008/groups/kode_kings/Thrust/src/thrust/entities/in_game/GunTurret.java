@@ -23,10 +23,21 @@ import thrust.entities.behaviors.AI;
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
 
+  /*@ public invariant (* A gun turret always resides on/adjacent to
+  @                     the terrain. *);
+  @ public invariant (* A gun turret's color is always green. *);
+  @ public invariant color() == java.awt.Color.GREEN;
+  @*/
+
   /** The attack AI of a gun turret. */
   private AI my_attack_ai;
   /** The disturb AI of a gun turret. */
   private AI my_disturb_ai;
+
+  /** GunTurret Constructor. */
+  public GunTurret() {
+    color(java.awt.Color.GREEN);
+  }
 
   /**
    * @return The turret's attack AI must shoot a bullet toward the spaceship.
@@ -58,9 +69,4 @@ public class GunTurret extends StaticEntity
   public void disturb(final AI the_behavior) {
     my_disturb_ai = the_behavior;
   }
-  /*@ public invariant (* A gun turret always resides on/adjacent to
-    @                     the terrain. *);
-    @ public invariant (* A gun turret's color is always green. *);
-    @ public invariant color() == java.awt.Color.GREEN;
-    @*/
 }
