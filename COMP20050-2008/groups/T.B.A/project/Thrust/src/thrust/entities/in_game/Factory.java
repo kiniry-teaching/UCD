@@ -56,7 +56,6 @@ public class Factory extends StaticEntity
     super.set_state(the_position, the_orientation,
                     my_color, the_initial_shape_name,
                     the_initial_shape, the_inital_state);
-
   }
   /**
    * @return How much damage have you sustained?
@@ -173,9 +172,27 @@ public class Factory extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
-    public FactorySphere() {
+/**
+* The color of the sphere.
+*/
+    private Color my_color = Color.green;
+/**
+* @param double[] the_position
+* @param double the_orientation
+* @param String the_intial_shape_name
+* @param Shape the_intial_shape
+* @param byte the_intial_state
+*/
+    public FactorySphere(final double[] the_position,
+                       final double the_orientation,
+                       final String the_initial_shape_name,
+                       final Shape the_initial_shape,
+                       final byte the_inital_state) {
+      super.set_state(the_position, the_orientation,
+                          my_color, the_initial_shape_name,
+                          the_initial_shape, the_inital_state);
 
-    }
+        }
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a

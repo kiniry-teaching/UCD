@@ -54,7 +54,6 @@ public abstract class Entity implements GameColor {
     this.my_initial_shape = the_initial_shape;
     this.my_initial_state = the_initial_state;
     my_color = the_color;
-
   }
 
   /**
