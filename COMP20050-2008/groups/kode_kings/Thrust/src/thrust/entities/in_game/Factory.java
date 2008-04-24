@@ -17,7 +17,7 @@ import thrust.entities.StaticEntity;
 /**
  * An enemy factory.
  * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Joe Kiniry (kiniry@acm.org)s
  * @version 24 April 2008
  */
 public class Factory extends StaticEntity
@@ -65,10 +65,19 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
+<<<<<<< .mine
+  public void damage(byte the_damage){
+=======
   public void damage(byte the_damage) {
     my_damage_staus += the_damage;
   }
+>>>>>>> .r2051
 
+<<<<<<< .mine
+my_damage_staus += the_damage;
+  }
+=======
+>>>>>>> .r2051
 
   /*@ public invariant (* All factories have exactly one sphere and
     @                     one chimney. *);
