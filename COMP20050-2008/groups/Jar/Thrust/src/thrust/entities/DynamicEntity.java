@@ -79,7 +79,11 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
 
   public void simulate(final double some_seconds) {
     for (int i = 0; i < some_seconds; i++) {
-      System.out.println("Keith whores for food");
+      my_position[0] += my_velocity[0];
+      my_position[1] += my_velocity[1];
+      my_velocity[0] += my_acceleration[0];
+      my_velocity[1] += my_acceleration[1];
+      my_acceleration[1] += my_gravConstant;
     }
   }
 

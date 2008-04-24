@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
@@ -45,4 +47,21 @@ public class GoalSphere extends DynamicEntity
    * The mass of the goal sphere is 10,000kg.
    */
   public static final int MASS = 10000;
+
+  /** The towing state of the GoalSphere. */
+  private boolean my_tow_state = false;
+
+  /* (non-Javadoc)
+   * @see thrust.entities.behaviors.Tow#tow()
+   */
+  public void tow() {
+    my_tow_state = true;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.behaviors.Tow#towed()
+   */
+  public boolean towed() {
+    return my_tow_state;
+  }
 }

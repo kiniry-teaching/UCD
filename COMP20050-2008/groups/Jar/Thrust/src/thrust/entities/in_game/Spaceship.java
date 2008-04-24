@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -33,6 +35,65 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+
+  /** The mass of each unit of fuel. */
+  public static final double FUEL_MASS = .001;
+  
+  /** The fuel is initially set to the initial fuel value. */
+  private int my_fuel = INITIAL_FUEL;
+  /** The tow state of the SpaceShip. */
+  private boolean my_tow_state;
+  
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#change_fuel_content(int)
+   */
+  public void change_fuel_content(final int the_fuel_change) {
+    my_fuel += the_fuel_change;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#fuel_mass()
+   */
+  public int fuel_mass() {
+    return (int)(fuel() * FUEL_MASS);
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#fuel()
+   */
+  public int fuel() {
+    return my_fuel;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#maximum_fuel()
+   */
+  public int maximum_fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.about.Fuelable#set_fuel_content(int)
+   */
+  public void set_fuel_content(int the_fuel_content) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.behaviors.Tow#tow()
+   */
+  public void tow() {
+    my_tow_state = true;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.behaviors.Tow#towed()
+   */
+  public boolean towed() {
+    return my_tow_state;
+  }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
