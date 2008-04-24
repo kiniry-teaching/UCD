@@ -24,7 +24,6 @@ import thrust.entities.behaviors.Tow;
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
 
-
   /** A spaceship's mass when empty of all fuel is 10000kg. */
   public static final int EMPTY_MASS = 10000;
 
@@ -45,6 +44,10 @@ public class Spaceship extends DynamicEntity
    * The change in the fuel content by a specific amount of units.
    */
   private int my_fuel_content;
+  /**
+  * The mass of the fuel.
+  */
+  private int my_fuel_mass;
 
   public Spaceship(final double[] the_position,
                    final double the_orientation, final Color the_color,
@@ -88,8 +91,47 @@ public class Spaceship extends DynamicEntity
   public void set_fuel_content(final int the_fuel_content) {
     my_fuel = the_fuel_content;
 }
-
-  //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
+  /**
+   * @return What is the mass of your fuel?
+   */
+  //@ ensures \result == fuel() * 1;
+  public /*@ pure @*/ int fuel_mass() {
+    my_fuel_mass = fuel() * 1;
+    return my_fuel_mass;
+  }
+  /**
+   * @return the momentum of an object
+   */
+  public double momentum()
+  {
+    final int numberOfElements = 2;
+    double[] speed = new double[numberOfElements];
+    speed = velocity();
+    return mass() * speed[0];
+  }
+  /**
+   * @return the downward acceleration due to gravity.
+   */
+  public double gravitational_constant()
+  {
+    final double gravity = -9.81;
+    return gravity;
+  }
+   /**
+   * You are now towing or being towed.
+   */
+  //@ ensures towed();
+  public void tow(){
+    
+  }
+  /**
+   * @return Are you currently towing or being towed?
+   */
+  /*@ pure @*/ 
+  public boolean towed(){
+    return false;
+  }
+//@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
    * @ public invariant (* The spaceship is destroyed by a bullet. *);
     @ public invariant (* The spaceship is destroyed by the factory. *);
@@ -110,4 +152,4 @@ public class Spaceship extends DynamicEntity
     @ public invariant (* The spaceship's colour is always white. *);
     @ public invariant colour() == thrust.entities.properties.GameColor.WHITE;
     @*/
-}
+  }
