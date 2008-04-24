@@ -22,7 +22,7 @@ import java.io.FileReader;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 11 April 2008
  */
-public abstract class GameState extends AbstractGameState{
+public abstract class GameState extends AbstractGameState {
   /**
    * There are eight high scores.
    */
@@ -204,8 +204,8 @@ public abstract class GameState extends AbstractGameState{
 
   /**
    * @param the_new_high_score Insert this score into the high score table.
-   * @throws FileNotFoundException 
-   * @throws FileNotFoundException 
+   * @throws FileNotFoundException
+   * @throws FileNotFoundException
    */
   /*@ ensures new_high_score(the_new_high_score) ==>
     @         (\exists int i; 0 <= i & i < HIGH_SCORE_COUNT;
@@ -216,28 +216,27 @@ public abstract class GameState extends AbstractGameState{
   {
 
     try {
-      FileReader fis   = new FileReader("HighScore.txt");
-      BufferedReader input   = new BufferedReader(fis);
-      char[] storeInput = new char[49];
+      final FileReader fis   = new FileReader("HighScore.txt");
+      final BufferedReader input   = new BufferedReader(fis);
+      final char[] storeInput = new char[64];
       /*
        * stores initials and
        * scores as chars, then
        * converts them.
        */
 
-      while(input.readLine()!=null)
+      while (input.readLine() != null)
       {
-        String s = input.readLine();
-        for(int i =0;i<s.length();i++)
+        final String s = input.readLine();
+        for (int i = 0; i < s.length(); i++)
         {
           storeInput[i] = s.charAt(i);
         }
       }
+
+    } catch (IOException e) {
     }
- catch (IOException e) {
-}
- 
- 
+
 
 
     /**
