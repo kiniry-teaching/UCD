@@ -44,12 +44,12 @@ public abstract class DynamicEntity extends Entity
   /**
    * The acceleration of the entity.
    */
-  double[] the_acceleration;
+  double[] my_acceleration;
 
   /**
    * The x and y coordinates of the entity.
    */
-  double[] the_position;
+  double[] my_position;
 
   public void set_the_state(
           final Shape the_initial_shape,
@@ -63,61 +63,100 @@ public abstract class DynamicEntity extends Entity
           final double the_mass
   )
   {
-    super.set_state(the_initial_shape_name, the_initial_shape,the_initial_state, the_color);
+    super.set_state(the_initial_shape_name,
+                    the_initial_shape, the_initial_state, the_color);
     this.my_angleRadians = the_orientation;
     this.my_velocity = the_velocity;
-    this.the_position =  the_position;
-    this.the_acceleration = the_acceleration;
+    this.my_position =  the_position;
+    this.my_acceleration = the_acceleration;
     this.my_mass = the_mass;
   }
 
-
-
+  /**
+   * @return the_acceleration
+   * returns the current acceleration
+   */
   public double[] acceleration()
   {
-    return the_acceleration;
+    return my_acceleration;
   }
 
+  /**
+   * @return my_mass
+   * returns the mass of the current entity.
+   */
   public double mass()
   {
     return my_mass;
   }
 
+  /**
+   * @return my_angleRadians
+   * returns the current orientation.
+   */
   public double orientation()
   {
     return my_angleRadians;
   }
 
+  /**
+   * @return the_position
+   * returns the current x and y coordinates.
+   */
   public double[] position()
   {
-    return the_position;
+    return my_position;
   }
 
+  /**
+   * @return my_velocity
+   * returns the current velocity.
+   */
   public double[] velocity()
   {
     return my_velocity;
   }
 
+  /**
+   * @param the_orientation
+   * sets the orientation of the entity.
+   */
   public void orientation(final double the_orientation)
   {
     this.my_angleRadians = the_orientation;
   }
 
+  /**
+   * @param the_accelerationa
+   *  sets the acceleration of the entity.
+   */
   public void acceleration(final double[] the_accelerationa)
   {
-    this.the_acceleration = the_accelerationa;
+    this.my_acceleration = the_accelerationa;
   }
 
+  /**
+   * @param the_velocity
+   * sets the velocity of the entity.
+   */
   public void velocity(final double[] the_velocity)
   {
     this.my_velocity = the_velocity;
   }
 
+  /**
+   * @param the_positions
+   * sets the position of an entity.
+   */
   public void position(final double[] the_positions)
   {
-    this.the_position =  the_positions;
+    this.my_position =  the_positions;
   }
 
+  /**
+   * @param the_mass
+   * sets the mass of the entity.
+   */
   public void mass(final double the_mass)
   {
     this.my_mass = the_mass;
