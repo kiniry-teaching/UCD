@@ -78,13 +78,17 @@ public abstract /*@ pure @*/ class AbstractGameState {
     @          \result[i] >= \result[j]);
     @ ensures (* High scores are ordered from high to low. *);
     @*/
-  public abstract /*@ pure \nonnullelements @*/ HighScoreInterface[] high_scores();
+  public abstract
+    /*@ pure \nonnullelements @*/ HighScoreInterface[] high_scores();
 
-  public abstract /*@ pure non_null @*/ HighScoreInterface high_score(int the_index);
+  public abstract
+    /*@ pure non_null @*/ HighScoreInterface high_score(int the_index);
 
-  public abstract /*@ pure @*/ boolean new_high_score(/*@ non_null @*/ HighScoreInterface the_possible_new_high_score);
+  public abstract /*@ pure @*/ boolean new_high_score
+    (/*@ non_null @*/ HighScoreInterface the_possible_new_high_score);
 
-  public abstract void add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score);
+  public abstract void add_high_score
+    (/*@ non_null @*/ HighScoreInterface the_new_high_score);
 
   /**
    * A pair of a sequence of three initials and a score.
