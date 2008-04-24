@@ -79,6 +79,16 @@ public abstract class DynamicEntity extends Entity
   }
 
   /**
+   * @return the_gravitationalConstant
+   * returns the gravitational Constant.
+   */
+  public double gravitationalConstant()
+  {
+    final double the_gravitationalConstant = 9.81;
+    return the_gravitationalConstant;
+  }
+
+  /**
    * @return the_acceleration
    * returns the current acceleration
    */
