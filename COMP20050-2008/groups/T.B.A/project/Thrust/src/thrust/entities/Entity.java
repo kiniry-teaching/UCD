@@ -20,6 +20,21 @@ import java.awt.Color;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
+  
+
+  /** the_initial_shape_name.
+   * is the name of the initial shape
+   */
+  String my_initial_shape_name;
+  /** the_initial_shape.
+   * is the shape of the current entity
+   */
+  Shape my_initial_shape;
+/** the_initial_state.
+   * is the physical state the current entity
+   */
+  byte my_initial_state;
+
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.
@@ -30,6 +45,10 @@ public abstract class Entity implements GameColor {
                         Shape the_initial_shape,
                         byte the_initial_state) {
 
+    this.my_initial_shape_name = the_initial_shape_name;
+    this.my_initial_shape = the_initial_shape;
+    this.my_initial_state = the_initial_state;
+
     assert false; //@ assert false;
   }
 
@@ -37,16 +56,14 @@ public abstract class Entity implements GameColor {
    * @return What shape are you?
    */
   public /*@ pure @*/ String shape_name() {
-    assert false; //@ assert false;
-    return null;
+    return my_initial_shape_name;
   }
 
   /**
    * @return What shape are you?
    */
   public /*@ pure @*/ Shape shape() {
-    assert false; //@ assert false;
-    return null;
+    return my_initial_shape;
   }
 
   /**
@@ -54,7 +71,7 @@ public abstract class Entity implements GameColor {
    * @param the_shape the shape of this Entity.
    */
   public void shape(Shape the_shape) {
-    assert false; //@ assert false;
+    this.my_initial_shape = the_shape;
   }
 
   /**
@@ -63,8 +80,7 @@ public abstract class Entity implements GameColor {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    assert false; //@ assert false;
-    return 0;
+    return my_initial_state;
   }
 
   /**
@@ -74,7 +90,7 @@ public abstract class Entity implements GameColor {
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
   public void state(byte the_state) {
-    assert false; //@ assert false;
+    this.my_initial_state = the_state;
   }
 
   /**
