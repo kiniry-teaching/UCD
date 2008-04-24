@@ -16,7 +16,7 @@ import java.awt.Color;
 
 /**
  * Entities whose position or orientation change.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Maguire (David.Maguire@ucdconnect.ie)
  * @edited Tara Flood (Tara.Flood@ucdconnect.ie)
  * @version 21 April 2008
  */
