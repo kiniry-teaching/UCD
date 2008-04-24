@@ -37,20 +37,35 @@ public class GunTurret extends StaticEntity implements EnemyEntity {
                     the_initial_state);
 
   }
-  
+
+  /**
+   * @return The turret's attack AI must shoot a bullet toward the spaceship.
+   */
   public AI attack() {
     return my_ai.attack();
   }
 
-  public void attack(final AI the_behavior) {
+  /**
+   * @param the_behavior The turret's attack AI must shoot a bullet toward
+   * the spaceship.
+   */
+  public void attack(AI the_behavior) {
     my_ai.attack(the_behavior);
   }
 
+  /**
+   * @return The turret's disturb AI must shoot a bullet in a random direction
+   * away from the terrain.
+   */
   public AI disturb() {
     return my_ai.disturb();
   }
 
-  public void disturb(final AI the_behavior) {
+  /**
+   * @param the_behavior The turret's disturb AI must shoot a bullet
+   * in a random direction away from the terrain.
+   */
+  public void disturb(AI the_behavior) {
     my_ai.disturb(the_behavior);
   }
 
