@@ -30,6 +30,8 @@ public class Space extends StaticEntity
     return null;
   }
 
+
+
   /**
    * Add this star to space.
    * @param the_star the star to add.

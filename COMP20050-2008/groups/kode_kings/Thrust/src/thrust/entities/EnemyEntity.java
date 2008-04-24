@@ -1,3 +1,4 @@
+
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
@@ -17,26 +18,50 @@ import thrust.entities.behaviors.AI;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public interface EnemyEntity {
+public class EnemyEntity extends AI {
+
+    /**
+     * implements disturb.
+     */
+
+  private AI my_disturb_status();
+   /**
+    * implements attack.
+    */
+
+  private AI my_attack_status();
+
   /**
    * @return What is your attack behavior AI?
    */
-  /*@ pure @*/ AI attack();
+  public/*@ pure @*/ AI attack(); {
 
+    return my_attack_status;
+  }
   /**
    * @return What is your disturb behavior AI?
    */
-  /*@ pure @*/ AI disturb();
+  public/*@ pure @*/ AI disturb(); {
+
+    return my_disturb_status;
+  }
 
   /**
    * @param the_behavior This is your attack behavior.
    */
   //@ ensures attack() == the_behavior;
-  void attack(AI the_behavior);
+  public void attack(AI the_behavior); {
+
+   my_attack_status = the_behavior;
+  }
 
   /**
    * @param the_behavior This is your disturb behavior.
    */
   //@ ensures disturb() == the_behavior;
-  void disturb(AI the_behavior);
+public  void disturb(AI the_behavior); {
+
+my_disturb_status the_behavior;
+
+  }
 }
