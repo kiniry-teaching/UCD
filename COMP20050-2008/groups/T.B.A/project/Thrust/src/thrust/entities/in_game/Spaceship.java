@@ -57,13 +57,14 @@ public class Spaceship extends DynamicEntity
                    final double[] the_acceleration,
                    final double[] the_velocity,
                    final double the_mass,
-                   final double some_seconds) {
+                   final double some_seconds,
+                   final double the_momentum) {
 
     super();
     super.set_the_state(the_position, the_orientation, the_color,
                    the_initial_shape_name, the_initial_shape,
                    the_initial_state, the_acceleration, the_velocity,
-                   the_mass, some_seconds);
+                   the_mass, some_seconds, the_momentum);
   }
 
   /**
@@ -90,7 +91,7 @@ public class Spaceship extends DynamicEntity
    */
   public void set_fuel_content(final int the_fuel_content) {
     my_fuel = the_fuel_content;
-}
+  }
   /**
    * @return What is the mass of your fuel?
    */
@@ -121,14 +122,14 @@ public class Spaceship extends DynamicEntity
    * You are now towing or being towed.
    */
   //@ ensures towed();
-  public void tow(){
-    
+  public void tow()   {
+
   }
   /**
    * @return Are you currently towing or being towed?
    */
-  /*@ pure @*/ 
-  public boolean towed(){
+
+  public boolean towed() {
     return false;
   }
 //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
@@ -152,4 +153,4 @@ public class Spaceship extends DynamicEntity
     @ public invariant (* The spaceship's colour is always white. *);
     @ public invariant colour() == thrust.entities.properties.GameColor.WHITE;
     @*/
-  }
+}
