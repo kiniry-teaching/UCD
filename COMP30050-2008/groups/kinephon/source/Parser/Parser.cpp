@@ -95,11 +95,12 @@ int Parser::MSB_Extract(int first,int second)
 
 int Parser::Size_Extract()
 {
-	int total=0;
+	int bigendian=0,total=0;
 	for(int i=4;i<7;i++)
 	{
 		if(MSB_Size_Array[i]==1)
-			total+=(int)pow(2.0,i);
+			total+=(int)pow(2.0,bigendian);
+		bigendian++;
 	}
 	return total;	
 }
