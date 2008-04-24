@@ -9,9 +9,6 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
@@ -20,11 +17,11 @@ import thrust.entities.behaviors.Tow;
  * The goal sphere that the spaceship needs to tow into
  * space away from the terrain to escape.
  * @author Joe Kiniry (kiniry@acm.org)
+ * @author Colin Casey (colin.casey@org.com)
  * @version 18 April 2008
  */
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
-
 
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship
@@ -50,4 +47,14 @@ public class GoalSphere extends DynamicEntity
    * The mass of the goal sphere is 10,000kg.
    */
   public static final int MASS = 10000;
+  /** Tow status of GoalSphere. */
+  private boolean my_tow_indicator;
+
+  public boolean towed() {
+    return my_tow_indicator;
+  }
+
+  public void tow() {
+    my_tow_indicator = true;
+  }
 }
