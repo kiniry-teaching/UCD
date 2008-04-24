@@ -22,7 +22,7 @@ import javax.sound.sampled.LineUnavailableException;
 
 /**
  * Any sound made in response to a event.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Eoin Healy (eoin.healy@Gmail.com)
  * @version 2 April 2008
  */
 public class SoundEffect {

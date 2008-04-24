@@ -3,7 +3,6 @@ package thrust.entities;
 import java.awt.Color;
 import java.awt.Shape;
 
-import thrust.entities.Entity;
 import thrust.entities.properties.GameColor;
 
 /**

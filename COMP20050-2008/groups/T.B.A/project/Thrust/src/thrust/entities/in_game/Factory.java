@@ -9,6 +9,9 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.animation.Animatable;
 import thrust.entities.EnemyEntity;
 import thrust.entities.NeutralEntity;
@@ -34,7 +37,14 @@ public class Factory extends StaticEntity
  * The Chimney of the factory.
  */
   private FactoryChimney my_factory_chimney;
-  public Factory() {
+  public Factory(final double[] the_position,
+                 final double the_orientation, final Color the_color,
+                 final String the_initial_shape_name,
+                 final Shape the_initial_shape,
+                 final byte the_inital_state) {
+    super.set_state(the_position, the_orientation,
+                    the_color, the_initial_shape_name,
+                    the_initial_shape, the_inital_state);
 
   }
   /**
@@ -97,7 +107,7 @@ public class Factory extends StaticEntity
 /**
  *  Is the chimney smoking?
  */
-    public boolean my_smoking_state;
+    private boolean my_smoking_state;
 
     public FactoryChimney() {
 
