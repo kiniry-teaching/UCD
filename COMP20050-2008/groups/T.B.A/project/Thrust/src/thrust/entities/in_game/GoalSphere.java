@@ -31,13 +31,13 @@ public class GoalSphere extends DynamicEntity
                     final double[] the_acceleration,
                     final double[] the_velocity,
                     final double the_mass,
-                    final double some_seconds) {
+                    final double some_seconds, final double the_momentum) {
 
     super();
     super.set_the_state(the_position, the_orientation, the_color,
                     the_initial_shape_name, the_initial_shape,
                     the_initial_state, the_acceleration, the_velocity,
-                    the_mass, some_seconds);
+                    the_mass, some_seconds, the_momentum);
   }
 
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
