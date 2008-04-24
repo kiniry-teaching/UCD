@@ -27,8 +27,13 @@ public class Physicswhack implements PhysicsInterface {
    */
   double my_whackorientation;
   /**
+   * impementing mass.
+   */
+  double my_whackmass;
+  /**
    * @return What is your acceleration in meters per second squared?
    */
+
   //@ ensures \result.length == 2;
   double[] my_whackacceleration = {my_whackspeed, my_whackorientation};
   /*@ pure @*/public double[] acceleration() {
@@ -49,7 +54,6 @@ public class Physicswhack implements PhysicsInterface {
 
   //@ ensures 0 <= \result;
   /*@ pure @*/public double mass() {
-    final double my_whackmass = 50000;
     return my_whackmass;
   }
 
