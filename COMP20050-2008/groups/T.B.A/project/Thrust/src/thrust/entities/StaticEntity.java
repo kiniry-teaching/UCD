@@ -7,62 +7,58 @@
  * @last_updated_date "April 2008"
  * @keywords "C=64", "Thrust", "game"
  */
+package thrust.entities.in_game;
 
-package thrust.entities;
+import java.awt.Color;
+import java.awt.Shape;
+
+import thrust.entities.EnemyEntity;
+import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
- * Entities whose position or orientation do not change.
+ * An enemy gun turret that shoots bullets at the spaceship.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public abstract class StaticEntity extends DynamicEntity {
-/**
- * The Position
- */
-  private static double[] position = {0.0, 0.0};
+public class GunTurret extends StaticEntity
+  implements EnemyEntity {
+
   /**
-   * @return A new static entity with this position and orientation.
-   * @param the_position the immutable position.
-   * @param the_orientation the immutable orientation.
+   * @return The turret's attack AI must shoot a bullet toward the spaceship.
    */
-  //@ ensures position().equals(the_position);
-  //@ ensures orientation().equals(the_orientation);
-  public static StaticEntity make(final double[] the_position,
-                                  final double the_orientation) {
-    position = the_position;
+  public AI attack() {
     assert false; //@ assert false;
-    return null; 
+    return null;
   }
 
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#mass()
+  /**
+   * @param the_behavior The turret's attack AI must shoot a bullet toward
+   * the spaceship.
    */
-  //@ ensures \result == 0;
-  public abstract double mass();
+  public void attack(AI the_behavior) {
+    assert false; //@ assert false;
+  }
 
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#velocity()
+  /**
+   * @return The turret's disturb AI must shoot a bullet in a random direction
+   * away from the terrain.
    */
-  //@ ensures \result[0] == 0 & \result[1] == 0;
-  public abstract double[] velocity();
+  public AI disturb() {
+    assert false; //@ assert false;
+    return null;
+  }
 
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#acceleration()
+  /**
+   * @param the_behavior The turret's disturb AI must shoot a bullet
+   * in a random direction away from the terrain.
    */
-  //@ ensures \result[0] == 0 & \result[1] == 0;
-  public abstract double[] acceleration();
-
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#momentum()
-   */
-  //@ ensures \result == 0;
-  public abstract double momentum();
-
-  //@ public invariant (* All queries are constant. *);
-  //@ public constraint position() == \old(position());
-  //@ public constraint orientation() == \old(orientation());
-
-  /*@ public invariant (* Mass, velocity, acceleration, and momentum
-    @                     are all zero. *);
+  public void disturb(AI the_behavior) {
+    assert false; //@ assert false;
+  }
+  /*@ public invariant (* A gun turret always resides on/adjacent to
+    @                     the terrain. *);
+    @ public invariant (* A gun turret's color is always green. *);
+    @ public invariant color() == java.awt.Color.GREEN;
     @*/
 }
