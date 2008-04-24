@@ -37,13 +37,24 @@ public class Factory extends StaticEntity
  * The Chimney of the factory.
  */
   private FactoryChimney my_factory_chimney;
+/**
+ * The color of a factory.
+ */
+  private Color my_color = Color.yellow;
+  /**
+   * @param double[] the_position
+   * @param double the_orientation
+   * @param String the_intial_shape_name
+   * @param Shape the_intial_shape
+   * @param byte the_intial_state
+   */
   public Factory(final double[] the_position,
-                 final double the_orientation, final Color the_color,
+                 final double the_orientation,
                  final String the_initial_shape_name,
                  final Shape the_initial_shape,
                  final byte the_inital_state) {
     super.set_state(the_position, the_orientation,
-                    the_color, the_initial_shape_name,
+                    my_color, the_initial_shape_name,
                     the_initial_shape, the_inital_state);
 
   }
@@ -108,8 +119,25 @@ public class Factory extends StaticEntity
  *  Is the chimney smoking?
  */
     private boolean my_smoking_state;
-
-    public FactoryChimney() {
+/**
+* The color of a factory.
+*/
+    private Color my_color = Color.yellow;
+    /**
+     * @param double[] the_position
+     * @param double the_orientation
+     * @param String the_intial_shape_name
+     * @param Shape the_intial_shape
+     * @param byte the_intial_state
+     */
+    public FactoryChimney(final double[] the_position,
+                   final double the_orientation,
+                   final String the_initial_shape_name,
+                   final Shape the_initial_shape,
+                   final byte the_inital_state) {
+      super.set_state(the_position, the_orientation,
+                      my_color, the_initial_shape_name,
+                      the_initial_shape, the_inital_state);
 
     }
     /**
