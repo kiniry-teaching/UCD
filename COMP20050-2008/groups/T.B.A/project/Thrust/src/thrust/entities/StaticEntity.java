@@ -31,8 +31,6 @@ public abstract class StaticEntity extends DynamicEntity {
    * The angle of an object, in radians.
    */
   double my_angleRadians;
-  private static double[] position = {0.0, 0.0};
-
   //@ public model boolean initialised;
   //@ public initially initialised == false;
 
@@ -55,7 +53,7 @@ public abstract class StaticEntity extends DynamicEntity {
     super.set_the_state(the_position, the_orientation, the_color,
                        the_initial_shape_name, the_initial_shape,
                        the_initial_state,
-                       new double[]{0, 0}, new double[]{0, 0}, 0, 0);
+                       new double[]{0, 0}, new double[]{0, 0}, 0.0, 0.0, 0.0);
   }
 
   /* (non-Javadoc)
