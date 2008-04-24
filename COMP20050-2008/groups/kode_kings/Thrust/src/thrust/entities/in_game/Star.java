@@ -10,13 +10,15 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
 /**
  * A blinking star in space.
+ * @author Colin Casey (colin.casey@org.com)
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @version 23 April 2008
  */
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
@@ -26,4 +28,19 @@ public class Star extends StaticEntity
     @ public invariant (* Each star blinks irregularly. *);
     @ public invariant (* A star's shape is always a small square. *);
     @*/
+
+  /** The frames in the Star animation. */
+  private Animation my_animation;
+
+  public Animation animation() {
+    return my_animation;
+  }
+
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
+  }
+
+  public void animate() {
+    assert false;
+  }
 }

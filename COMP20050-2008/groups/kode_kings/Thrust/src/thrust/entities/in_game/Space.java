@@ -25,7 +25,7 @@ import thrust.entities.StaticEntity;
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
 
-  /** The frames in the Star animation. */
+  /** The frames in the Space animation. */
   private Animation my_animation;
 
   /**
