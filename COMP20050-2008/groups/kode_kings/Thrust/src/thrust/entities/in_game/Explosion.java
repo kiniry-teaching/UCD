@@ -12,6 +12,7 @@ package thrust.entities.in_game;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 
 /**
  * An explosion.
@@ -23,4 +24,18 @@ import thrust.animation.Animatable;
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
 
+  /** The frames in the Explosion animation. */
+  private Animation my_animation;
+
+  public Animation animation() {
+    return my_animation;
+  }
+
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
+  }
+
+  public void animate() {
+    assert false;
+  }
 }
