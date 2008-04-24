@@ -15,7 +15,7 @@ package thrust.entities;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public abstract class StaticEntity extends DynamicEntity {
+public class StaticEntity extends DynamicEntity {
   //@ public model boolean initialized;
   //@ public initially initialized == false;
 

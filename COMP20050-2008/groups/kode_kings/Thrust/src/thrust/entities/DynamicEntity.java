@@ -18,7 +18,7 @@ import thrust.physics.PhysicsInterface;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
-public abstract class DynamicEntity extends Entity
+public class DynamicEntity extends Entity
   implements PhysicsInterface {
 
   /**
@@ -61,7 +61,9 @@ public abstract class DynamicEntity extends Entity
   }
 
   public double[] acceleration() {
-    return my_acceleration;
+    final double[] temp = new double[my_acceleration.length];
+    System.arraycopy(my_acceleration, 0, temp, 0, my_acceleration.length);
+    return temp;
   }
 
   public double gravitational_constant() {
@@ -83,11 +85,15 @@ public abstract class DynamicEntity extends Entity
   }
 
   public double[] position() {
-    return my_position;
+    final double[] temp = new double[my_position.length];
+    System.arraycopy(my_position, 0, temp, 0, my_position.length);
+    return temp;
   }
 
   public double[] velocity() {
-    return my_velocity;
+    final double[] temp = new double[my_velocity.length];
+    System.arraycopy(my_velocity, 0, temp, 0, my_velocity.length);
+    return temp;
   }
 
   public void position(final double[] the_position) {
