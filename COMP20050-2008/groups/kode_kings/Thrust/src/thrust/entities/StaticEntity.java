@@ -32,7 +32,8 @@ public class StaticEntity extends DynamicEntity {
   //@ ensures initialized;
   public void set_state(final double[] the_position,
                         final double the_orientation) {
-    assert false; //@ assert false;
+    my_position = the_position;
+    my_orientation = the_orientation;
   }
 
   //@ public invariant (* All queries are constant. *);
