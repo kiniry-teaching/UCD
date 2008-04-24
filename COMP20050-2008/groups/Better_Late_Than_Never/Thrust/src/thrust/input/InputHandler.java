@@ -12,7 +12,8 @@ package thrust.input;
 
 /**
  * Processes and delegates each keyboard input received.
- * @author Stephen Murphy (StephenMurphy1@ucdconnect.ie)
+ * @author smurphy (StephenMurphy1@ucdconnect.ie)
+ * @revision 24 April 2008
  * @version 2 April 2008
  */
 public class InputHandler {
