@@ -83,11 +83,11 @@ public abstract class Entity implements GameColor {
   public void render() {
     assert false; //@ assert false;
   }
-  
+
   public Color color() {
-    
+
   }
-  public void color(final color the_color) {
-    
+  public void color(final Color the_color) {
+
   }
 }
