@@ -21,11 +21,10 @@ public class SoundEffect {
   /**
    * This is your sound effect.
    * @param the_sound_effect_file the sound effect to make.
-   * @return the new sound effect for the effect stored in 's'.
+   * @return the new sound effect for the effect stored in the provided file.
    */
-  public static /*@ pure @*/ SoundEffect make(File the_sound_effect_file) {
+  public /*@ pure @*/ SoundEffect(File the_sound_effect_file) {
     assert false; //@ assert false;
-    return null;
   }
 
   /**
