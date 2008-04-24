@@ -18,7 +18,7 @@ import thrust.entities.behaviors.AI;
 
 /**
  * An enemy gun turret that shoots bullets at the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author jdouglas (jd2088@gmail.com)
  * @version 18 April 2008
  */
 public class GunTurret extends StaticEntity
