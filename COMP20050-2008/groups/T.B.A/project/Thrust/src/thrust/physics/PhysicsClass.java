@@ -7,7 +7,7 @@ package thrust.physics;
  */
 public abstract class PhysicsClass implements PhysicsInterface {
 
-/**
+   /**
    * The angle of an object, in radians.
    */
   double my_angleRadians;
