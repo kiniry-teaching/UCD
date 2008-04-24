@@ -1,54 +1,53 @@
 package selfCheckOut.hardWareInterface;
-/**
- * This  class is used to communicate the Barcodes and weights
- *  to the main loop for the SelfChekcOut project.
- * <p>
- * 
- * @author Peter Gibney
- * @version 30th March 2008.
- */
 
-import selfCheckOut.SelfCheckOut;
-import selfCheckOut.Weight;
-import selfCheckOut.BarCode;
-import selfCheckOut.hardWareInterface.HardWareResult;
-import java.util.Random;
-import java.util.concurrent.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import selfCheckOut.hardWareInterface.HardWareResult;
+
+
 public class HWIconduit extends Thread {
-	
-	volatile boolean stopRequested = true;
-	volatile boolean isStopped = true;
-	volatile boolean gather = false;
-	
+
+	private volatile boolean stopRequested = true;
+	private volatile boolean isStopped = true;
 	private BlockingQueue<HardWareResult> queue =
 		new LinkedBlockingQueue<HardWareResult>();
-
-	
+	private final int usePort;
+	private final String AddressIP;
+	private volatile boolean gather = false;
 	// ------------------------------------------------------	
-	public HWIconduit() { 
-		super();
+	public HWIconduit(String AddressIP, int usePort) {
 		stopRequested = false;
+		isStopped = false;
+		this.AddressIP = AddressIP;
+		this.usePort = usePort;
 	}
-	// ------------------------------------------------------
-	public HardWareResult getHardWareResult() {
-		HardWareResult tempHWR = null;
-		//System.out.println("HWIconduit point 1");
-		try {
-			//System.out.println("HWIconduit point 2");
-			tempHWR = queue.poll(5L, TimeUnit.MILLISECONDS);
-			//System.out.println("HWIconduit point 3");
-		} catch (InterruptedException e) {
-			System.out.println("HWIconduit() exception = " + e.toString());
-			//e.printStackTrace();
+	// ------------------------------------------------------	
+	public void done() {
+		//stop sub threads
+		synchronized (this) {
+			stopRequested = true;
+		} //end sync
+		
+		while (!isStopped()) {
+			if (HWIconst.DE_BUG_THREAD_SHUT_DOWN) {
+				System.out.println("In: ScalesAndBarCode.done(), waiting:");
+			}
+			try {
+				Thread.sleep(55);
+			} catch (Exception ex) {
+				System.out.println("ScalesAndBarCode() exception = " + ex.toString());
+				ex.printStackTrace();
+			}
 		}
-		//System.out.println("HWIconduit point 4");
-		return tempHWR;
-	}
-	// ------------------------------------------------------
-	public synchronized void done() {
-		stopRequested = true;
 	}
 	// ------------------------------------------------------
 	private synchronized void setStopped() {
@@ -57,6 +56,20 @@ public class HWIconduit extends Thread {
 	// ------------------------------------------------------
 	public synchronized boolean isStopped() {
 		return isStopped;
+	}
+	// ------------------------------------------------------
+	public HardWareResult getHardWareResult() {
+		HardWareResult tempHWR = null;
+		//System.out.println("HWIconduit point 1");
+		if (!stopRequested() && !isStopped()){
+			try {
+				tempHWR = queue.poll(5L, TimeUnit.MILLISECONDS);
+			} catch (InterruptedException e) {
+				System.out.println("HWIconduit() exception = " + e.toString());
+				//e.printStackTrace();
+			}
+		}
+		return tempHWR;
 	}
 	// ------------------------------------------------------
 	private synchronized boolean stopRequested() {
@@ -71,64 +84,96 @@ public class HWIconduit extends Thread {
 		return this.gather;
 	}
 	// ------------------------------------------------------
-	private void wasteTime() {
-		long currTime = System.currentTimeMillis();
-		boolean waitForChange = true;
-		while (waitForChange) {
-			long newTime = System.currentTimeMillis();
-			waitForChange = (newTime == currTime);
-		}
-	}
-	// ------------------------------------------------------
-	
 	public void run() {
-		Random myRandom = new Random();
-		myRandom.nextInt(5000);
-		
-		int initWgt = myRandom.nextInt(5000) + 1000;
-		int w1 = initWgt;
-		int w2 = 0;
-		while (!stopRequested()) {
-			if (doGather()) {
-				int numBars = myRandom.nextInt(5) + 1;
-				int deltaWt = myRandom.nextInt(200) + 25;
-				if (w1 == 0) {
-					initWgt = myRandom.nextInt(5000) + 1000;
-					w1 = initWgt;
-					w2 = 0;
-					numBars = 0;
-				} else {
-					w1 = w1 - deltaWt;
-					w2 = w2 + deltaWt;
-					if (w1 <=0) {
-						w1 = 0;
-						w2 = initWgt;
-					}
-				}
-				Weight wgt1 = new Weight(w1);
-				BarCode[] barCodeList = new BarCode[numBars];
-				for (int i= 0; i < numBars; i++) {
-					wasteTime();
-					long barLong = 1000007000001l + 
-									(long)(myRandom.nextInt(80000000) +
-									(long)(myRandom.nextInt(80000000)));
-					String barStr = "" + barLong;
-					barCodeList[i] = new BarCode(barStr);
-				}
-				wasteTime();
-				Weight wgt2 = new Weight(w2);
-				HardWareResult hwr = new HardWareResult(barCodeList, wgt1, wgt2);
-				queue.add(hwr);
+		HardWareResult prevHWR = null;
+		Socket scalesSocket = null;
+		PrintWriter out = null;
+		BufferedReader in = null;
+		//String addressStr = "127.0.0.1";
+		String addressStr = AddressIP;
+		boolean connected = false; //
+
+		while (!connected && !stopRequested()) {
+			connected = true; //assume we will make a connection
+			try {
+			//192.168.13.1
+			//192.168.184.1
+			//137.43.177.213
+			scalesSocket = new Socket(addressStr, this.usePort);
+			} catch (UnknownHostException e) {
+				System.err.println("Don't know about host: " + addressStr);
+				connected = false;
+			} catch (IOException e) {
+				connected = false;
+				System.err.println("Couldn't get I/O for the connection to: " 
+						+ addressStr + ", stopReq = " + stopRequested());
+			}catch (Exception e) {
+				connected = false;
+				System.err.println("Exception :" +  e);
 			}
 			try {
-				sleep(1900);
-				//sleep((int)(Math.random() * 10000));
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				System.out.println("HWIconduit() exception = " + e.toString());
+				System.err.println("Exception ScalesClient..");
 				e.printStackTrace();
 			}
 		}
-		setStopped();//have stopped running
-	}
+		
+		Scanner lineScanner = null;
+		if (connected) {
+			try {
+				out = new PrintWriter(scalesSocket.getOutputStream(), true);
+				in = new BufferedReader(new InputStreamReader(scalesSocket.getInputStream()));
+			} catch (Exception e) {
+				System.out.print("Error:  " + e);// + i);
+			}
+			lineScanner = new Scanner(in);
+		}
+		
+		while (!stopRequested() && connected) {
+			if (lineScanner.hasNextLine()) {
+				String lineStr = lineScanner.nextLine();
+				Scanner inScan = new Scanner(lineStr);
+				HardWareResult hwr1 = HardWareResult.importHardWareResult(inScan);
+				if (hwr1 == null){
+					System.out.println("Server Error! : " + lineStr);
+				} else {
+					//System.out.println("Server: " + hwr1);//fromServer);
+					if (!hwr1.sameValues(prevHWR) && doGather()) {
+						queue.add(hwr1);
+						System.out.println("1.queue.size() = " + queue.size());
+						prevHWR = hwr1;
+					} else {
+						//System.out.print("*");
+					}
+				}
+			}
+			try {
+				sleep(50);
+			} catch (InterruptedException e) {
+				System.out.println("InterruptedException: ScalesClient()");
+				e.printStackTrace();
+			}
+		}
+		if (connected) {
+			try {
+				out.close();
+			} catch (Exception e) {
+				System.out.println("Error:  ScalesClient() out.close() " + e);// + i);
+			}
 
+			try {
+				in.close();
+			} catch (Exception e) {
+				System.out.println("Error:  ScalesClient() in.close() " + e);// + i);
+			}
+			
+			try {	
+				scalesSocket.close();
+			} catch (Exception e) {
+				System.out.println("Error:  ScalesClient() scalesSocket.close() " + e);// + i);
+			}
+		}
+		setStopped();
+	}
 }

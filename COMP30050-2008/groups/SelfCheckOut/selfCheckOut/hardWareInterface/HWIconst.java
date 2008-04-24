@@ -166,6 +166,11 @@ package selfCheckOut.hardWareInterface;
 	public static final boolean DE_BUG = false;
 	//-------------------------------------------------------------
 	/** 
+	 * This is whether we want debug output for filtering.
+	 */
+	public static final boolean DE_BUG_FILTERING = false;
+	//-------------------------------------------------------------
+	/** 
 	 * This is whether we want shut down debugging output, 
 	 * use this to see if there are any threads not shutting down.
 	 */
@@ -186,7 +191,10 @@ package selfCheckOut.hardWareInterface;
 	 * @see BarCodePanels
 	 */
 	public static final boolean SHOW_INTER_LEAVING = false;
+	//-------------------------------------------------------------
+	public static final String[] binaryType = 
+		{"RGB", "RG", "RB", "GB", "R", "G", "B", "ALL"}; 
 	
-
+	
 
 }//end class
