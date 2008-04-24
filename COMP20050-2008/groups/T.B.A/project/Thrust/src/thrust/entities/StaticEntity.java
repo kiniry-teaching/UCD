@@ -12,10 +12,20 @@ package thrust.entities;
 
 /**
  * Entities whose position and orientation do not change.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author jdouglas (kiniry@acm.org)
+ * @version 24 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
+  /**
+   * number used to initialise the
+   * velocity array and acceleration array.
+   */
+  final int my_numberTwo = 2;
+  /**
+   * The Position.
+   */
+  private static double[] position = {0.0, 0.0};
+
   //@ public model boolean initialized;
   //@ public initially initialized == false;
 
@@ -30,9 +40,11 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  public void set_state(double[] the_position,
-                        double the_orientation) {
+  public static StaticEntity set_state(final double[] the_position,
+                        final double the_orientation) {
+    position = the_position;
     assert false; //@ assert false;
+    return null;
   }
 
   /* (non-Javadoc)
@@ -40,7 +52,6 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double mass() {
-    assert false; //@ assert false;
     return 0;
   }
 
@@ -49,8 +60,10 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
+    final double[] my_velocity = new double[my_numberTwo];
+    my_velocity[0] = 0;
+    my_velocity[1] = 0;
+    return my_velocity;
   }
 
   /* (non-Javadoc)
@@ -58,8 +71,10 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
+    final double[] my_acceleration = new double[my_numberTwo];
+    my_acceleration[0] = 0;
+    my_acceleration[1] = 0;
+    return my_acceleration;
   }
 
   /* (non-Javadoc)
@@ -67,8 +82,8 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
-    return 0;
+    final double my_momentum = 0;
+    return my_momentum;
   }
 
   //@ public invariant (* All queries are constant. *);
