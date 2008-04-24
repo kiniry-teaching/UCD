@@ -37,6 +37,12 @@ public class GoalSphere extends DynamicEntity
     @                     as a sphere. *);
     @ public invariant (* The shape of the goal sphere is always a circle. *);
     @ public invariant (* The color of the goal sphere is always green. *);
-    @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+    @ public invariant color() == java.awt.Color.GREEN;
     @*/
+
+  //@ public invariant (* The mass of the goal sphere is 10,000kg. *);
+  /**
+   * The mass of the goal sphere is 10,000kg.
+   */
+  public static final int MASS = 10000;
 }

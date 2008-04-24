@@ -6,7 +6,7 @@ package thrust.physics;
  * @version 7 April 2008
  * edited 18 April 2008 by Roger Thomas & Kevin Lambe
  */
-public abstract class Motion implements Physics
+public abstract class Motion implements PhysicsInterface
 {
   //Creating all the double variables required
   /**
