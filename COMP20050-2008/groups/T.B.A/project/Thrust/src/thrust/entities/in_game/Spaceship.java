@@ -11,7 +11,6 @@ package thrust.entities.in_game;
 
 import java.awt.Color;
 import java.awt.Shape;
-
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -88,18 +87,15 @@ public class Spaceship extends DynamicEntity
    */
   public void set_fuel_content(final int the_fuel_content) {
     my_fuel = the_fuel_content;
-  }
-  
-  
+}
 
   //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
-
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
-    @ public invariant (* The spaceship is destroyed by a bullet. *);
+   * @ public invariant (* The spaceship is destroyed by a bullet. *);
     @ public invariant (* The spaceship is destroyed by the factory. *);
-    @ public invariant (* The spaceship is destroyed by the fuel pod. *);
+        @ public invariant (* The spaceship is destroyed by the fuel pod. *);
     @ public invariant (* If the spaceship is towing the goal sphere,
-    @                     and the spaceship is destroyed, the goal
+        @                     and the spaceship is destroyed, the goal
     @                     sphere is also destroyed. *);
     @ public invariant (* The spaceship is destroyed by the gun turret. *);
     @ public invariant (* The spaceship is not affected by space. *);
@@ -112,6 +108,6 @@ public class Spaceship extends DynamicEntity
     @                  (towed() ? GoalSphere.MASS : 0);
     @ public invariant (* The spaceship's shape is always that of a ship. *);
     @ public invariant (* The spaceship's colour is always white. *);
-    @ public invariant colour() == thrust.entities.properites.GameColor.WHITE;
+    @ public invariant colour() == thrust.entities.properties.GameColor.WHITE;
     @*/
 }
