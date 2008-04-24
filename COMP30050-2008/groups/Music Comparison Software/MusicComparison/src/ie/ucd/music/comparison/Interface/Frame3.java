@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import java.awt.Dimension;
 
-/**
+/*
  * <p>Title: </p>
  *
  * <p>Description: </p>
