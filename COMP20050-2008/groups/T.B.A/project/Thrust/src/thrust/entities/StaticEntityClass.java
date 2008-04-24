@@ -38,7 +38,7 @@ public abstract class StaticEntityClass extends StaticEntity {
                                   final double the_orientation) {
     position = the_position;
     assert false; //@ assert false;
-    return null; 
+    return null;
   }
 
   /* (non-Javadoc)
