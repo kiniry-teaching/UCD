@@ -1,7 +1,7 @@
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
- *
  * @author "Joe Kiniry (kiniry@acm.org)"
+ *
  * @module "COMP 20050, COMP 30050"
  * @creation_date "March 2007"
  * @last_updated_date "April 2008"
@@ -218,16 +218,26 @@ public abstract class GameState extends AbstractGameState{
     try {
       FileReader fis   = new FileReader("HighScore.txt");
       BufferedReader input   = new BufferedReader(fis);
+      char[] storeInput = new char[49];
+      /*
+       * stores initials and
+       * scores as chars, then
+       * converts them.
+       */
+
       while(input.readLine()!=null)
       {
+        String s = input.readLine();
+        for(int i =0;i<s.length();i++)
+        {
+          storeInput[i] = s.charAt(i);
+        }
       }
     }
-   catch (IOException e) {
-
-    System.out.println("File not found");
-    e.printStackTrace();
-
+ catch (IOException e) {
 }
+ 
+ 
 
 
     /**
