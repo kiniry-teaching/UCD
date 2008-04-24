@@ -25,63 +25,17 @@ import thrust.animation.Animation;
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
 
-  public Explosion() {
+  public Explosion(final double[] the_position,
+                   final double the_orientation,
+                   final String the_initial_shape_name,
+                   final Shape the_initial_shape,
+                   final byte the_inital_state) {
 
-  }
-
-  public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void render() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void shape(Shape the_shape) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void state(byte the_state) {
-    // TODO Auto-generated method stub
-    
   }
 
   public void animate() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Animation animation() {
@@ -91,37 +45,8 @@ public class Explosion extends StaticEntity
 
   public void animation(Animation the_animation) {
     // TODO Auto-generated method stub
-    
   }
 
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void simulate(double some_seconds) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public Color color() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void color(Color the_color) {
-    // TODO Auto-generated method stub
-    
-  }
 
 }
