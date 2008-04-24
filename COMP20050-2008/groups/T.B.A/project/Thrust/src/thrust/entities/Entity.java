@@ -25,31 +25,33 @@ public abstract class Entity implements GameColor {
   /** the_initial_shape_name.
    * is the name of the initial shape
    */
-  String my_initial_shape_name;
+  private String my_initial_shape_name;
   /** the_initial_shape.
    * is the shape of the current entity
    */
-  Shape my_initial_shape;
+  private Shape my_initial_shape;
 /** the_initial_state.
    * is the physical state the current entity
    */
-  byte my_initial_state;
-
+  private byte my_initial_state;
+/**
+ *  The color of the Entity.
+ */
+  private Color my_color;
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    */
-  public void set_state(String the_initial_shape_name,
-                        Shape the_initial_shape,
-                        byte the_initial_state) {
+  public void set_state(final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_initial_state) {
 
     this.my_initial_shape_name = the_initial_shape_name;
     this.my_initial_shape = the_initial_shape;
     this.my_initial_state = the_initial_state;
 
-    assert false; //@ assert false;
   }
 
   /**
@@ -70,7 +72,7 @@ public abstract class Entity implements GameColor {
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     this.my_initial_shape = the_shape;
   }
 
@@ -89,7 +91,7 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     this.my_initial_state = the_state;
   }
 
@@ -101,9 +103,9 @@ public abstract class Entity implements GameColor {
   }
 
   public Color color() {
-
+    return my_color;
   }
   public void color(final Color the_color) {
-
+    my_color = the_color;
   }
 }
