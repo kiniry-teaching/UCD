@@ -19,6 +19,13 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
+
+  /**the name of the shape of the entity.*/
+  private String my_shape_name;
+  /**the start shape.*/
+  private Shape my_initial_shape;
+  /**the start state.*/
+  private byte my_initial_state;
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.
@@ -26,33 +33,28 @@ public abstract class Entity implements GameColor {
    * @param the_initial_state the initial state.
    */
 
-  public static Entity make(final String the_initial_shape_name,
-                            final Shape the_initial_shape,
-                            final byte the_initial_state) {
-
-    return null;
-  }
   public void set_state(final String the_initial_shape_name,
-                        final Shape the_initial_shape,
+                       final Shape the_initial_shape,
                         final byte the_initial_state) {
+    my_shape_name = the_initial_shape_name;
+    my_initial_shape = the_initial_shape;
+    my_initial_state = the_initial_state;
 
-    assert false; //@ assert false;
+
   }
 
   /**
    * @return What shape are you?
    */
   public /*@ pure @*/ String shape_name() {
-    assert false; //@ assert false;
-    return null;
+    return my_shape_name;
   }
 
   /**
    * @return What shape are you?
    */
   public /*@ pure @*/ Shape shape() {
-    assert false; //@ assert false;
-    return null;
+    return my_initial_shape;
   }
 
   /**
@@ -61,7 +63,7 @@ public abstract class Entity implements GameColor {
    */
 
   public void shape(final Shape the_shape) {
-    assert false; //@ assert false;
+    my_initial_shape = the_shape;
   }
 
   /**
@@ -70,8 +72,7 @@ public abstract class Entity implements GameColor {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    assert false; //@ assert false;
-    return 0;
+    return my_initial_state;
   }
 
   /**
@@ -82,8 +83,9 @@ public abstract class Entity implements GameColor {
   //@ ensures state() == the_state;
 
   public void state(final byte the_state) {
-    assert false; //@ assert false;
+    my_initial_state = the_state;
   }
+
 
 
   /**
