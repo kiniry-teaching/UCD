@@ -10,18 +10,15 @@
 
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.animation.Animatable;
-import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
 /**
  * A barrier and trigger to block the spaceship's way.
  * @author Ciaran Hale (ciaran.hale@ucdconnect.ie)
- * @version 18 April 2008
+ * @author Colin Casey (colin.casey@org.com)
+ * @version 23 April 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {

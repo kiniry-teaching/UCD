@@ -9,30 +9,17 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
-import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
+ * @author Colin Casey (colin.casey@org.com)
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @version 23 April 2008
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntity {
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#mass()
-   */
-  //@ also ensures \result == 1;
-  public double mass() {
-    assert false; //@ assert false;
-    return 0;
-  }
-
- 
 
   /*@ public invariant (* Bullets are destroyed on contact with a
     @                     barrier, a factory, a fuel pod, the goal
