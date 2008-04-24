@@ -16,34 +16,47 @@ import thrust.entities.StaticEntity;
 
 /**
  * An enemy factory.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Eoin Healy (eoin.healy@gmail.com)
  * @version 18 April 2008
  */
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
+
+  /**
+   * How much damage has been taken?
+   */
+  private byte my_damage_taken;
+/**
+ * The sphere of the factory.
+ */
+  private FactorySphere my_factory_sphere;
+/**
+ * The Chimney of the factory.
+ */
+  private FactoryChimney my_factory_chimney;
+  public Factory() {
+
+  }
   /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-    assert false; //@ assert false;
-    return 0;
+    return my_damage_taken;
   }
 
   /**
    * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    assert false; //@ assert false;
-    return null;
+    return my_factory_chimney;
   }
 
   /**
    * @return What is your sphere?
    */
   public /*@ pure @*/ FactorySphere sphere() {
-    assert false; //@ assert false;
-    return null;
+    return my_factory_sphere;
   }
 
   /**
@@ -51,8 +64,8 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(byte the_damage) {
-    assert false; //@ assert false;
+  public void damage(final byte the_damage) {
+    my_damage_taken += the_damage;
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -76,17 +89,24 @@ public class Factory extends StaticEntity
 
   /**
    * A chimney of a factory.
-   * @author Joe Kiniry (kiniry@acm.org)
+   * @author Eoin Healy (eoin.healy@gmail.com)
    * @version 18 April 2008
    */
   public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
+/**
+ *  Is the chimney smoking?
+ */
+    public boolean my_smoking_state;
+
+    public FactoryChimney() {
+
+    }
     /**
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      assert false; //@ assert false;
-      return false;
+      return my_smoking_state;
     }
 
     /**
@@ -95,8 +115,8 @@ public class Factory extends StaticEntity
      * is smoking or not.
      */
     //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(boolean the_smoking_state) {
-      assert false; //@ assert false;
+    public void smoking(final boolean the_smoking_state) {
+      my_smoking_state = the_smoking_state;
     }
 
     /*@ public invariant (* A factories chimney is the same color as
@@ -110,11 +130,14 @@ public class Factory extends StaticEntity
 
   /**
    * A sphere of a factory.
-   * @author Joe Kiniry (kiniry@acm.org)
+   * @author Eoin Healy (eoin.healy@gmail.com)
    * @version 18 April 2008
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
+    public FactorySphere() {
+
+    }
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a

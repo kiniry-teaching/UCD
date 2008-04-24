@@ -13,6 +13,7 @@ import java.awt.Color;
 
 /**
  * Entities whose position and orientation do not change.
+
  * @author jdouglas (kiniry@acm.org)
  * @version 24 April 2008
  */
