@@ -9,9 +9,6 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-import java.awt.Shape;
-
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -20,7 +17,8 @@ import thrust.entities.behaviors.Tow;
 /**
  * The player's main vehicle.
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Colin Casey (colin.casey@org.com)
+ * @version 23 April 2008
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
@@ -37,13 +35,16 @@ public class Spaceship extends DynamicEntity
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
 
- 
+  /** Tow status of Spaceship. */
+  private boolean my_tow_indicator;
 
-  public void shape(Shape the_shape) {
-
-
+  public boolean towed() {
+    return my_tow_indicator;
   }
 
+  public void tow() {
+    my_tow_indicator = true;
+  }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
