@@ -163,7 +163,7 @@ public class Star extends StaticEntity
     /**
      *
      */
-    final Rectangle my_a = new Rectangle();
+    final Rectangle my_a = new Rectangle(10, 10);
 
     my_starshape = (Shape)my_a;
 
