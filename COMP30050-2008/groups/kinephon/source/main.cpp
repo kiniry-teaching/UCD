@@ -17,7 +17,9 @@
 #include "wiimote/WiimoteInterface.h"
 #include "Version_Interpreter/Movement.h"
 #include "Version_Interpreter/Interpreter.h"
+#include "Version_Interpreter/Melody.h"
 #include "type.h"
+#include <sys/time.h>
 
 using std::string;
 using std::cout;
@@ -35,7 +37,7 @@ Shapes *			g_Shapes		= 0;
 Parser *			g_Parser		= 0;
 WiimoteInterface *	g_Wiimote		= 0;
 Interpreter *		g_Interpreter	= 0;
-movement *			g_Movement		= 0;
+movement *			g_Movement		= 0;							
 
 ///////////////////////////////////////////////////////////////////////////////
 // prototype
@@ -47,9 +49,9 @@ movement *			g_Movement		= 0;
  * @returns true if OK to start kinephon or false to shutdown 
  */
 bool	initializeArgs
-		(	int &		argc,
-			char * *	argv
-		);
+(	int &		argc,
+		char * *	argv
+);
 /**
  * Start all subsystems
  * @returns true if OK to start kinephon or false to shutdown 
@@ -68,8 +70,8 @@ void	kinephon		(void);
  * Render the visualisations
  */
 void	glutOnTimer
-		(	int			timerId
-		);
+(	int			timerId
+);
 /**
  * Render the visualisations
  */
@@ -78,17 +80,17 @@ void	glutOnPaint		(void);
  * Respond to the keyboard
  */
 void	glutOnKeyDown
-		(	uchar		keyCode,
-			int			mouseX,
-			int			mousyY
-		);
+(	uchar		keyCode,
+		int			mouseX,
+		int			mousyY
+);
 /**
  * Respond to window resize
  */
 void	glutOnSize
-		(	int			width,
-			int			height
-		);
+(	int			width,
+		int			height
+);
 
 ///////////////////////////////////////////////////////////////////////////////
 // main
@@ -104,7 +106,7 @@ int main(int argc, char * * argv)
 {
 
 	if(initializeArgs(argc, argv) == true
-	&& initialize() == true)
+			&& initialize() == true)
 		glutMainLoop();
 	else
 		return 1;
@@ -118,30 +120,42 @@ int main(int argc, char * * argv)
 //
 void kinephon(void)
 {	uint			index;
-	ShapeMatches	shapeMatches(0.75f, 1);
+ShapeMatches	shapeMatches(0.75f, 1);
 
-	g_Wiimote->feedReport();
+g_Wiimote->feedReport();
 
-	Recording & recording = *g_Recorder->eject();
-	for(index = 0; index < recording.length(); index++)
-	{
+Recording & recording = *g_Recorder->eject();
+for(index = 0; index < recording.length(); index++)
+{
 
-		g_Shapes->compare(recording[index], &shapeMatches);
+	g_Shapes->compare(recording[index], &shapeMatches);
 
-		g_Interpreter->shapeMatching(&shapeMatches);
-		g_Movement->audioMovement(recording[index]);
+	g_Interpreter->shapeMatching(&shapeMatches);
+	g_Movement->audioMovement(recording[index]);
 
-		// Perform some cleanup, just force to 100 frames max for now
-		g_Recorder->erase
-		(	recording[index]->iid(),
+	// Perform some cleanup, just force to 100 frames max for now
+	g_Recorder->erase
+	(	recording[index]->iid(),
 			recording[index]->length() - 100
-		);
+	);
 
-	}
+}
 
-	g_Recorder->erase(&recording);
+g_Recorder->erase(&recording);
+
+timeval temp; 
+gettimeofday(&temp, NULL);
+
+//cout << "timer in main: difference " << (temp.tv_sec*1000+(temp.tv_usec /1000)) - (timer.tv_sec*1000+(timer.tv_usec /1000));
+
+if ((uint)(temp.tv_sec*1000+(temp.tv_usec /1000)) - (uint)(timer.tv_sec*1000+(timer.tv_usec /1000)) >= 200)
+{
+	//	cout<< "timer in main " << (temp.tv_sec*1000+(temp.tv_usec /1000))<<endl;
+	timer = temp;
 
 	g_Conductor->play();
+}
+
 
 }
 
@@ -150,45 +164,45 @@ void kinephon(void)
 //
 bool initializeArgs
 (	int &		argc,
-	char * *	argv
+		char * *	argv
 ){	int			index;
-	string		arg;
-	bool		startup	= true;
+string		arg;
+bool		startup	= true;
 
-	glutInit(&argc, argv);
+glutInit(&argc, argv);
 
-	for(index = 0; index < argc; index++)
-	{	arg.assign(argv[index]);
-		if(arg == "--config")
-			Config::displayConfig = true;
+for(index = 0; index < argc; index++)
+{	arg.assign(argv[index]);
+if(arg == "--config")
+	Config::displayConfig = true;
+else
+	if(arg == "--path")
+		if(index + 1 < argc)
+			Config::configPath = argv[index + 1];
 		else
-		if(arg == "--path")
-			if(index + 1 < argc)
-				Config::configPath = argv[index + 1];
-			else
-			{	Config::showUsage = true;
-				startup = false;
-			}
-		else
+		{	Config::showUsage = true;
+		startup = false;
+		}
+	else
 		if(arg == "--help")
 			Config::showUsage = true;
 
-	}
+}
 
-	if(startup == true)
-		if(Config::displayConfig == true)
-			startup = displayConfig();
+if(startup == true)
+	if(Config::displayConfig == true)
+		startup = displayConfig();
 
-	if(Config::showUsage == true)
-	{	cout << "Usage:" << endl;
-		cout << " kinephon [--config] [--path <filename>] [--help]" << endl;
-		cout << endl;
-		cout << " --config  Display the configuration dialog" << endl;
-		cout << " --path    Change path of configuration file" << endl;
-		cout << " --help    Show this message" << endl;
-	}
+if(Config::showUsage == true)
+{	cout << "Usage:" << endl;
+cout << " kinephon [--config] [--path <filename>] [--help]" << endl;
+cout << endl;
+cout << " --config  Display the configuration dialog" << endl;
+cout << " --path    Change path of configuration file" << endl;
+cout << " --help    Show this message" << endl;
+}
 
-	return startup;
+return startup;
 
 }
 
@@ -197,81 +211,101 @@ bool initializeArgs
 //
 bool initialize(void)
 {	int		retry	= 0;
-	bool	startup	= true;
+bool	startup	= true;
 
-	// Start sub systems in order of output -> input
-	g_Conductor = new Conductor();
-	if(g_Conductor->initialize
-	(	Config::recordMidi,
-		Config::midiPort
-	) == false)
+// Start sub systems in order of output -> input
+g_Conductor = new Conductor();
+if(g_Conductor->initialize
+		(	Config::recordMidi,
+				Config::midiPort
+		) == false)
+	startup = false;
+//cout << "conductor initialised" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
+
+if(startup != false)
+{	g_Interpreter = new Interpreter();
+g_Movement = new movement(g_Conductor);
+Melody::intialised();
+}
+//cout << "interpreter initialised" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
+
+if(startup != false)
+{
+
+	g_Recorder = new Recorder();
+	g_Shapes = ShapesLoader::loadShapes(Config::shapesPath.c_str());
+	if(g_Shapes == 0)
 		startup = false;
 
-	if(startup != false)
-	{	g_Interpreter = new Interpreter();
-		g_Movement = new movement(g_Conductor);
-	}
+}
+//cout << "recorder initialised" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
 
-	if(startup != false)
+if(startup != false)
+	g_Parser = new Parser(g_Recorder);
+//cout << "parser initialised" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
+
+if(startup != false)
+	//	system("ls");
+	//system("pwd");
+	g_Wiimote = new WiimoteInterface(g_Parser);
+
+//cout << "interface initialised" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
+if(startup != false)
+	for(retry = 0; retry < 4; retry++)
 	{
 
-		g_Recorder = new Recorder();
-		g_Shapes = ShapesLoader::loadShapes(Config::shapesPath.c_str());
-		if(g_Shapes == 0)
-			startup = false;
+		//			Config::wiimote = g_Wiimote->findWiimote();
+
+		if(Config::wiimote != WiimoteInterface::NOT_FOUND)
+			retry = 5;
 
 	}
 
-	if(startup != false)
-		g_Parser = new Parser(g_Recorder);
+if(retry == 4)
+	startup = false;
 
-	if(startup != false)
-		g_Wiimote = new WiimoteInterface(g_Parser);
+//cout << "wiimote search complete (init)" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
+if(startup != false)
+	g_Wiimote->connectTo(Config::wiimote);
 
-	if(startup != false)
-		for(retry = 0; retry < 4; retry++)
-		{
+cout << "connected to wiimote" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
+// Start glut
+if(startup != false)
+{
 
-			Config::wiimote = g_Wiimote->findWiimote();
+	// Set window properties
+	glutInitWindowSize(800, 600);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+	// Set callbacks
+	glutCreateWindow("kinephon");
+	glutDisplayFunc(glutOnPaint);
+	glutIdleFunc(glutOnPaint);
+	glutKeyboardFunc(glutOnKeyDown);
+	glutReshapeFunc(glutOnSize);
+	glutFullScreen();
+	// Set render properties
+	glDisable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT);
 
-			if(Config::wiimote != WiimoteInterface::NOT_FOUND)
-				retry = 5;
+}
 
-		}
+//cout << "glut started" << endl;
+//if (startup == false) {cout << "false" << endl;} else {cout << "continuing with startup" << endl;}
 
-	if(retry == 4)
-		startup = false;
+if(startup == false)
+{	ShapesLoader::unloadShapes(g_Shapes);
+delete g_Recorder;
+delete g_Conductor;
+}
 
-	if(startup != false)
-		g_Wiimote->connectTo(Config::wiimote);
-
-	// Start glut
-	if(startup != false)
-	{
-
-		// Set window properties
-		glutInitWindowSize(800, 600);
-		glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-		// Set callbacks
-		glutCreateWindow("Kinephon");
-		glutDisplayFunc(glutOnPaint);
-		glutIdleFunc(glutOnPaint);
-		glutKeyboardFunc(glutOnKeyDown);
-		glutReshapeFunc(glutOnSize);
-		glutFullScreen();
-		// Set render properties
-		glDisable(GL_DEPTH_TEST);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-	}
-
-	if(startup == false)
-	{	ShapesLoader::unloadShapes(g_Shapes);
-		delete g_Recorder;
-		delete g_Conductor;
-	}
-
-	return startup;
+return startup;
 
 }
 
@@ -280,8 +314,11 @@ bool initialize(void)
 //
 bool displayConfig(void)
 {
-	
+
+	// @todo - Display configuration dialog
+
 	return true;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -294,26 +331,26 @@ void glutOnPaint(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glBegin(GL_LINES);
-		for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = frame ->next())
-		{
-			glVertex2i(frame->y(), frame->y());
-			glVertex2i(frame->next()->x(), frame->next()->y());		
-		}
-	glEnd();
+	//	glBegin(GL_LINES);
+	//	for(Frame* frame = recording[index]->first(); frame != 0 && frame->next() != 0; frame = frame ->next())
+	//	{
+	//		glVertex2i(frame->y(), frame->y());
+	//		glVertex2i(frame->next()->x(), frame->next()->y());		
+	//	}
+	//	glEnd();
 
-    glutSwapBuffers();
+	glutSwapBuffers();
 
 }
 
 void glutOnKeyDown
 (	uchar	keyCode,
-	int,
-	int
+		int,
+		int
 ){
 
 	if(keyCode == 27
-	|| keyCode == 'q')
+			|| keyCode == 'q')
 		exit(0);
 
 }
@@ -323,7 +360,7 @@ void glutOnKeyDown
  */
 void glutOnSize
 (	int			width,
-	int			height
+		int			height
 ){
 
 	// Set display properties
