@@ -33,8 +33,8 @@ so that one can review and compare it later, maybe to the audio samples of other
 - pybluez
 - fluidsynth (you will require ALSA sound library for this, but this usually comes with a Linux distribution)
 
-2.) Open a Terminal and run the (...) script. Leave this window open, since it will run the software synthesizer which is needed
-	for the entire runtime of the application.
+2.) Open a Terminal and navigate to the release folder of the Kinephon project. Run the (...) script. Leave this window open, 
+	since it will run the software synthesizer which is needed for the entire runtime of the application.
 
 ##################################
 # TROUBLESHOOTING:
