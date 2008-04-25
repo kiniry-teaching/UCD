@@ -259,7 +259,7 @@ if(startup != false)
 	for(retry = 0; retry < 4; retry++)
 	{
 
-		//			Config::wiimote = g_Wiimote->findWiimote();
+			Config::wiimote = g_Wiimote->findWiimote();
 
 		if(Config::wiimote != WiimoteInterface::NOT_FOUND)
 			retry = 5;
