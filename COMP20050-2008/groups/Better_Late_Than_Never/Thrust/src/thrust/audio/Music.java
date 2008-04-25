@@ -22,13 +22,16 @@ import javax.sound.sampled.LineUnavailableException;
 /**
  * In-game music.
  * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @author Stephen Murphy (Stephen.Murphy.1@ucdconnect.ie)
  * @version 24 April 2008 */
+
 public class Music {
 
 /** Boolean for checking if music is playing. */
-  private transient boolean my_is_playing_boolean = false;
+  private transient boolean my_is_playing_boolean = true;
 /** Location of .wav file. */
-  private transient String my_music_location = "../../../media/Thrust_music.wav";
+  private transient String my_music_location =
+    "../../../media/Thrust_music.wav";
 /** Creates music_file File. */
   private transient File my_music_file;
   /** Ahem. */
@@ -40,20 +43,18 @@ public class Music {
 
   public Music() {
     my_music_file = new File(my_music_location);
-
     try {
       my_music_stream = AudioSystem.getAudioInputStream(my_music_file);
     } catch (UnsupportedAudioFileException e) {
       return;
-    } catch (IOException e) {
+    }      catch (IOException e)
+    {
       return;
+
     }
-
     my_music_format = my_music_stream.getFormat();
-
-    DataLine.Info info = new DataLine.Info(Clip.class, my_music_format);
-    try {
-      Clip my_music_clip = (Clip) AudioSystem.getLine(info);
+    final DataLine.Info info = new DataLine.Info(Clip.class, my_music_format);
+    try {      Clip my_music_clip = (Clip) AudioSystem.getLine(info);
     } catch (LineUnavailableException e) {
       return;
     }
