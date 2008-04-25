@@ -23,7 +23,7 @@ import javax.sound.sampled.LineUnavailableException;
  * In-game music.
  * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
  * @author Stephen Murphy (Stephen.Murphy.1@ucdconnect.ie)
- * @version 24 April 2008 */
+ * @version 25 April 2008 */
 
 public class Music {
 
@@ -43,18 +43,15 @@ public class Music {
 
   public Music() {
     my_music_file = new File(my_music_location);
-    try {
-      my_music_stream = AudioSystem.getAudioInputStream(my_music_file);
+    try { my_music_stream = AudioSystem.getAudioInputStream (my_music_file);
     } catch (UnsupportedAudioFileException e) {
       return;
-    }      catch (IOException e)
-    {
+    }      catch (IOException e)  {
       return;
-
     }
     my_music_format = my_music_stream.getFormat();
     final DataLine.Info info = new DataLine.Info(Clip.class, my_music_format);
-    try {      Clip my_music_clip = (Clip) AudioSystem.getLine(info);
+    try { Clip my_music_clip = (Clip)AudioSystem.getLine(info);
     } catch (LineUnavailableException e) {
       return;
     }
