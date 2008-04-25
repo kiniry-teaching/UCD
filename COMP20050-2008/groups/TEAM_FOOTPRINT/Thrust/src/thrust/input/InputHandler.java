@@ -9,10 +9,11 @@ Revised again on 8/4/08 with a little help from Fintan, still can't get rid of s
 told to use System.out.print, this pulled up more errors, told to ignore them
 */
 package thrust.input;
+import java.util.logging.Logger;
 /**
  *
- * @author Daire o Doherty 06535691
- * @version 03/04/08
+ * @author "Daire o Doherty 06535691 (daireod@gmail.com)"
+ * @version 03 April 2008
  *
  */
 public class InputHandler {
@@ -40,9 +41,9 @@ public class InputHandler {
    */
   public /*@ pure @*/ char[] legalInputs() {
      //@ assert false;
-    char[] legalInputs = {DISPLAY_SCORES, TOGGLE_MUSIC,
-                          START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
-                          TURN_RIGHT , USE_ENGINE, USE_SHIELD};
+    final char[] legalInputs = {DISPLAY_SCORES, TOGGLE_MUSIC,
+      START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
+                                TURN_RIGHT , USE_ENGINE, USE_SHIELD};
     return legalInputs;
   }
 
@@ -78,35 +79,38 @@ public class InputHandler {
    */
   //@ requires legal_input(k);
   public void process(final char the_input) {
+    final Logger my_log = Logger.getLogger("thrust.input.InputHandler");
      //@ assert false;
     if (legalInput(the_input)) {
       if (the_input == DISPLAY_SCORES) {
+        my_log.info("Display scores");
       //display high scores
       } else if (the_input == TOGGLE_MUSIC) {
+        my_log.info("TOGGLE MUSIC");
       //toggle music or sound effects
       } else if (the_input == START_GAME)  {
-        System.out.print("start the game");
+        my_log.info("Start game");
       //start the game
       } else if (the_input == STOP_GAME) {
+        my_log.info("Stop Game");
       //stop the game
-        System.out.print("stop the game");
       } else if (the_input == FIRE_GUN) {
+        my_log.info("Fire Gun");
       //Fire the gun
-        System.out.print("fire the gun");
       } else if (the_input == TURN_LEFT) {
       //turn ship left
-        System.out.println("turn the ship left");
+        my_log.info("Turn Left");
       } else if (the_input == TURN_RIGHT) {
+        my_log.info("Turn Right");
       //turn ship right
-        System.out.print("turn ship right");
       } else if (the_input == USE_ENGINE) {
-        System.out.print("use the engine");
+        my_log.info("Use engine");
       } else if (the_input == USE_SHIELD) {
       //use the shield
-        System.out.print("use the shield");
+        my_log.info("use shield");
       } else {
      //this is not a legal input
-        System.out.print("this is not a legal input");
+        my_log.info("This is not a legal input");
       }
     }
   }
