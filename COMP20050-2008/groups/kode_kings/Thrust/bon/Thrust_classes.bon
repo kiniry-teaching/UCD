@@ -219,9 +219,9 @@ class_chart COLOR
   command
     "This is your color."
   constraint
-    "There are exactly 12 different colors available.",
+    "There are exactly 13 different colors available.",
     "The legal colors are black, white, red, green, blue, cyan, \
-   \ magenta, dark gray, gray, light gray, orange, and pink."
+   \ magenta, dark gray, gray, light gray, orange, pink, and yellow."
 end
 
 class_chart SHAPE
