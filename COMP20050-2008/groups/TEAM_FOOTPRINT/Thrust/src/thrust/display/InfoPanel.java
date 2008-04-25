@@ -1,18 +1,22 @@
 package thrust.display;
+import java.util.logging.Logger;
 
 /**
- * Information about the game.
- *
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 11 April 2008
- * @revised by Daire O'Doherty 06535691 15/4/08
+ * @author Daire O'Doherty 06535691 (daireod@gmail.com)
+ * @version 18 April 2008
  */
 public class InfoPanel extends AbstractInfoPanel {
   /**
+   * logger for output.
+   */
+  private final Logger my_log = Logger.getLogger("thrust.input.InputHandler");
+  /**
    * @return Is the information panel currently displayed?
    */
+  private boolean my_is_displayed;
+
   public /*@ pure @*/ boolean displayed() {
-    return false;
+    return my_is_displayed;
   }
 
   /**
@@ -20,6 +24,10 @@ public class InfoPanel extends AbstractInfoPanel {
    */
   //@ ensures displayed();
   public void display() {
+    if (!displayed()) {
+      my_is_displayed = true;
+      my_log.info("Display");
+    }
   }
 
   /**
@@ -27,6 +35,10 @@ public class InfoPanel extends AbstractInfoPanel {
    */
   //@ ensures !displayed();
   public void hide() {
+    if (!displayed()) {
+      my_is_displayed = false;
+      my_log.info("Display");
+    }
   }
 
   /**
