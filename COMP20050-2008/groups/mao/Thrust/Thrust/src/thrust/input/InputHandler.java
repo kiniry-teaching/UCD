@@ -1,13 +1,3 @@
-/*
- * A re-implementation of the classic C=64 game 'Thrust'.
- *
- * @author "Joe Kiniry (kiniry@acm.org)"
- * @module "COMP 20050, COMP 30050"
- * @creation_date "March 2007"
- * @last_updated_date "April 2008"
- * @keywords "C=64", "Thrust", "game"
- */
-
 package thrust.input;
 
 /**
@@ -15,35 +5,87 @@ package thrust.input;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  */
-public class InputHandler {
-  /** An unknown character code. */
-  public static final char UNKNOWN_CHAR = '\0';
-  /** Fill in this comment. */
-  public static final char DISPLAY_HIGH_SCORES = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char START_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char STOP_GAME = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char FIRE_GUN = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_LEFT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char TURN_RIGHT = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_ENGINE = UNKNOWN_CHAR;
-  /** Fill in this comment. */
-  public static final char USE_SHIELD = UNKNOWN_CHAR;
+public class InputHandler 
+{
+    private static boolean gameRunning = false;
+
+    // Enumeration of in-game commands
+
+
+    public static void main(String[] args)
+    {
+    
+	for(commandChar i : commandChar.values())
+	    {
+		System.out.println(i.getAscii());
+	    }
+	System.out.println(gameRunning);
+	
+	
+    }
+
+    private enum validChar
+    {
+	DISPLAY_HIGH_SCORES(104, true),
+	TOGGLE_MUSIC_OR_EFFECTS(109, false),
+	START_GAME(32, true), 
+	STOP_GAME(27, true),
+	FIRE_GUN(13, false),
+	TURN_LEFT(97, false), 
+        TURN_RIGHT(115, false),
+	USE_ENGINE(15, false),
+	USE_SHIELD(32, false);
+
+	private final int myAscii;
+	private final char myChar;
+	private final boolean stateAccess;
+
+	private validChar(int i, boolean canChangeGameState)
+        {
+	myAscii = i;
+	myChar = (char)i;
+	stateAccess = canChangeGameState;
+        }
+
+	public int getAscii()
+	{
+        return myAscii;
+	}
+
+	public char getChar()
+	{
+        return myChar;
+	}
+	
+	public boolean getStateAccess()
+	{
+        return stateAccess;
+	}
+
+    }
+
+   
 
   /**
    * @return What are the legal keyboard inputs?
    */
-  public /*@ pure @*/ char[] legal_inputs() {
-    assert false; //@ assert false;
-    return null;
-  }
+    public /*@ pure @*/ char[] legal_inputs()
+    {
+       	int count = 0;
+       	char[] tempOne;
+       	for(validChar i : validChar.values())
+       	    {
+	       	count++;
+       	    }
+       	tempOne = new char[count];
+       	count = 0;
+       	for(validChar i : validChar.values())
+	    {
+		tempOne[count] = i.getChar();
+			count++;
+	    }
+       	return tempOne;   
+    }
 
   /**
    * @return Is this character a legal keyboard input?
@@ -59,17 +101,38 @@ public class InputHandler {
     @                      (the_character == USE_ENGINE) |
     @                      (the_character == USE_SHIELD);
     @*/
-  public /*@ pure @*/ boolean legal_input(char the_character) {
-    assert false; //@ assert false;
-    return false;
-  }
+    public /*@ pure @*/ boolean legal_input(char the_character)
+    {
+       	for(validChar i : validChar.values())
+	    {
+		if(i.getChar() == the_character)
+		    {
+			return true;
+		    }
+	    } 
+	return false;
+    }
 
   /**
    * Process this keyboard input character.
    * @param the_keyboard_input the input character to process.
    */
   //@ requires legal_input(the_keyboard_input);
-  public void process(char the_keyboard_input) {
-    assert false; //@ assert false;
-  }
+    public void process(char the_keyboard_input)
+    {
+	for(validChar i : validChar.values())
+	    {
+		if(i.getStateAccess() == true)
+		    {
+			if(gameRunning == true)
+			    {
+				gameRunning = false;
+			    }
+			else
+			    {
+				gameRunning = true;
+			    }
+		    }
+	    }
+    }
 }
