@@ -26,15 +26,42 @@ synths, or effects, thereby producing the movement's song. To enhance the use of
 so that one can review and compare it later, maybe to the audio samples of other users.
 
 ##################################
-# INSTALLATION:
+# RUN KINEPHON:
 ##################################
+(Note: This project has been compiled and run on Ubuntu 7.10.)
 1.) Make sure you have the following packages installed:
 - python, at least version 2.4
 - pybluez
 - fluidsynth (you will require ALSA sound library for this, but this usually comes with a Linux distribution)
 
-2.) Open a Terminal and navigate to the release folder of the Kinephon project. Run the (...) script. Leave this window open, 
+2.) Open a Terminal and navigate to the release folder of the Kinephon project. Run ./Kinephon_startup. Leave this window open, 
 	since it will run the software synthesizer which is needed for the entire runtime of the application.
+
+3.) >>>>>>>>>>>IMPORTANT!!!!!<<<<<<<<<<<<<<<<<
+	Before startup you need to press buttons 1 and 2 on your Wiimote and hold them during the entire startup. Otherwise the Wiimote cannot be found and the application
+	will not work.
+
+4.) In order to enable recording, you need to recompile the project.
+	For this change the Config::recordMidi in the Config.cpp file to true and recompile.
+	For compiling instructions, see below. 
+	
+##################################
+# COMPILING:
+##################################
+You will need to include the following settings for your g++ compiler:
+ -I/usr/include/python2.5 
+ -D__KP__ 
+ -D__LINUX_ALSASEQ__ 
+-lasound
+-lpthread
+-glut
+-GLU
+-GL
+-python2.5 (or your current version)
+
+In addition to this you will also need the following packages installed:
+-python-all-dev
+-libbluetooth-dev
 
 ##################################
 # TROUBLESHOOTING:
@@ -44,7 +71,12 @@ so that one can review and compare it later, maybe to the audio samples of other
 	alsamixer in a terminal window and adjust the settings accordingly.
 --> Check if your terminal window in which you ran the script is still open. If it is, check that fluidsynth is still working and does not give any other
 	error messages than something like 'lost events' (you can safely ignore those).
---> 
+
+* The application does not startup properly even after a couple of minutes.
+--> Make sure you are pressing the buttons 1 and 2 on your Wiimote. It is essential that you do this BEFORE and DURING the whole startup. 
+--> If the Wiimote has not been found for more than 4 times, it will not startup. You need to restart your system.
+--> If the application crashes and you see the error statements including python or connection it is likely that you have not been holding
+ 	the buttons on the Wiimote properly. 
 
 
 
