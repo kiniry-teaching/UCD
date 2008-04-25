@@ -12,7 +12,11 @@ public class InfoPanel  extends AbstractInfoPanel {
   /**
    * whether the info panel is displayed.
    */
-  boolean my_is_displayed;
+  private boolean my_is_displayed;
+  /**
+   * create a log of what to do.
+   */
+  private Logger my_log = Logger.getLogger("thrust.display.infoPanel");
   /**
    * @return Is the information panel currently displayed?
    */
@@ -23,16 +27,11 @@ public class InfoPanel  extends AbstractInfoPanel {
   //add some widget to the JFrame and set its isVisable to true, so in
   //the mean time we'll just log
   /**
-   * create a log of what to do.
-   */
-  Logger my_logger = Logger.getLogger("thrust.display.HighScoreDisplay");
-
-  /**
    * Display the information panel.
    */
   //@ ensures displayed();
   public void display() {
-    my_logger.info("Most likely we'll display them in a JText area etc");
+    my_log.info("Most likely we'll display them in a JText area etc");
   }
 
   /**
@@ -40,14 +39,14 @@ public class InfoPanel  extends AbstractInfoPanel {
    */
   //@ ensures !displayed();
   public void hide() {
-    my_logger.info("Probably set the isVisable property to false");
+    my_log.info("Probably set the isVisable property to false");
   }
 
   /**
    * Update the displayed information panel.
    */
   public void update() {
-    my_logger.info("do something!");
+    my_log.info("do something!");
   }
 
 
