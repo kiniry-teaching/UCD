@@ -28,7 +28,6 @@ public class InputHandler {
   public static final char USE_ENGINE = 16;
   /**Press [Space] to Use Shield.*/
   public static final char USE_SHIELD = ' ';
-
   /**
    * @return What are the legal keyboard inputs?
    */
