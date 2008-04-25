@@ -10,7 +10,7 @@ package thrust.physics;
 /**
  * @author Patrick Nevin (patrick.nevin@ucdconnect.ie)
  * @version 20 April 2008
- * @revised 25 April 2008
+ * @revised 25 April 2008 Patrick Nevin
  */
 public class  PhysicsClass implements PhysicsInterface {
 
