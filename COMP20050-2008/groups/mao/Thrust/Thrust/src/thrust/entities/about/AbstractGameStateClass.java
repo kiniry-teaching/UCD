@@ -1,6 +1,10 @@
 package thrust.entities.about;
 
-
+/**
+ * Stores current values of parameters of games's state.
+ * @author Magdalena Zieniewicz (mazienie@gmail.com)
+ * @version 24 April 2008
+ * */
 public class AbstractGameStateClass {
 
   /**
@@ -143,6 +147,17 @@ public class AbstractGameStateClass {
     @*/
   public  /*@ pure @*/
   boolean new_high_score(/*@ non_null @*/ HighScoreInterface the_high_score){
+    
+    int j;
+    for(j=0; j< HIGH_SCORE_COUNT; j++){ // find
+    
+      if(the_high_score.score() > my_HighScores[j].score())
+        return true;
+        
+      else if(the_high_score.score() == my_HighScores[j].score() && j != (HIGH_SCORE_COUNT - 1)){
+        return true;
+      }
+  }
     return false;
   }
 
@@ -153,15 +168,33 @@ public class AbstractGameStateClass {
     @         (\exists int i; 0 <= i & i < HIGH_SCORE_COUNT;
     @          high_score(i).equals(the_new_high_score));
     @*/
-  public void
-  add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score){
-    
-  }
   
-  public boolean score_search(int the_score){
-    return false;
-  }
+    public void add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score){
+  
 
+    int i;
+      for(i=0; 1< HIGH_SCORE_COUNT; i++) 
+      
+        if(the_new_high_score.score() > my_HighScores[i].score()){
+          
+          for(int k = i; k < HIGH_SCORE_COUNT-1; k++){
+            my_HighScores[k] = my_HighScores[k+1];
+          }
+          my_HighScores[i] = the_new_high_score;
+          }
+          
+        else if(the_new_high_score.score() == my_HighScores[i].score() && i != (HIGH_SCORE_COUNT - 1)){
+          
+          for(int k = i+ 1; k < HIGH_SCORE_COUNT-1; k++){
+            my_HighScores[k] = my_HighScores[k+1];
+          }
+      
+          my_HighScores[i+1] = the_new_high_score;
+  
+        }
+    }
+    
+    
   /**
    * A pair of a sequence of three initials and a score.
    *
@@ -201,11 +234,24 @@ public class AbstractGameStateClass {
     //@ invariant (* Initials are always three characters in length. *);
     //@ invariant initials().length == 3;
   }
+  
+  
+  /**
+   * An implemantation of the HighScoreInterface.
+   *
+   * @author Magdalena Zieniewicz (mazienie@gmail.com)
+   * @version 25 April 2008
+   */
 public class HighScoreClass implements HighScoreInterface{
     
     private char[] my_initials; 
     private  int my_score;
+
     
+    public HighScoreClass(){
+      my_score = 0;
+      my_initials = new char[3];
+    }
     
     /**
      * @return What is your score?
