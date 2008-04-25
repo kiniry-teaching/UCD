@@ -33,7 +33,7 @@ public class Factory extends StaticEntity
 
   /** This factories sphere. */
 
-  private FactorySphere my_sphere;
+  
 
   /**
    * @return How much damage have you sustained?
@@ -55,11 +55,7 @@ public class Factory extends StaticEntity
   /**
    * @return What is your sphere?
    */
-  public /*@ pure @*/ FactorySphere sphere() {
-
-    return my_sphere;
-  }
-
+ 
   /**
    * @param the_damage You have sustained this many units of damage.
    */
@@ -103,7 +99,7 @@ public class FactoryChimney extends StaticEntity
     */
 
 
-  private boolean my_smoking_boolean;
+  private boolean my_smoking_state;
    /**
     * @return Are you smoking?
     */
@@ -145,7 +141,14 @@ public class FactoryChimney extends StaticEntity
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
     
-	  
+    private FactorySphere my_sphere;
+    
+    public /*@ pure @*/ FactorySphere sphere() {
+
+      return my_sphere;
+    }
+
+    
 	  /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
