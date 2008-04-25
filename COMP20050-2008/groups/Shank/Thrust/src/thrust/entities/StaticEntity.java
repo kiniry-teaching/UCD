@@ -14,6 +14,7 @@ package thrust.entities;
  * Entities whose position and orientation do not change.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ * @edited Kevin Lambe (24th April 2008) 
  */
 public abstract class StaticEntity extends DynamicEntity {
   //@ public model boolean initialized;
