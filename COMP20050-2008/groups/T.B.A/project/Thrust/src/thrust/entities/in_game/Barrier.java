@@ -24,7 +24,7 @@ public class Barrier extends StaticEntity
   /**
    * Is the barrier closed?
    */
-  public boolean my_barrier_status = true;
+  private boolean my_barrier_status = true;
   /**
    * @return Are you closed?
    */
