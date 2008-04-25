@@ -13,7 +13,7 @@ public class Fueling implements Fuelable {
    * @return How much fuel do you contain?
    */
 
-  private int my_fuel;
+  private transient int my_fuel;
   /** integer myMaxi.*/
   private final int my_maxi = 100;
 
@@ -75,7 +75,8 @@ public class Fueling implements Fuelable {
  * @return What is the mass of your fuel?
  */
 //@ ensures \result == fuel * 1;
-  public /*@ pure @*/ int fuel_mass() {
+  public /*@ pure @*/ int fuel_mass() 
+  {
 
   }
 }
