@@ -4,7 +4,7 @@ package thrust.physics;
  * implementing the Physics interface.
  */
 /**
- * @author Tara Flood (Tara.Flood@ucdconnect.ie)
+ * @author Tara Flood (floodtara@hotmail.com)
  *         David Maguire(David.Maguire.2@ucdconnect.ie)
  * @version 8 April 2008
  */
