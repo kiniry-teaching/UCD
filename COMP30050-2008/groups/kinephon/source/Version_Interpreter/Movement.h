@@ -1,5 +1,6 @@
 #ifndef MOVEMENT_H_
 #define MOVEMENT_H_
+#include <sys/time.h>
 #include "../rai/Recorder/Track.h"
 #include "../audio/Conductor.h"
 #include "../audio/Channel.h"
@@ -20,6 +21,7 @@
 using namespace audio;
  using namespace interpreter;
  
+extern timeval timer; 
 class movement
 {
 public:
