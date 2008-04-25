@@ -206,5 +206,43 @@ function install($host, $username, $password, $dbname, $awskey, $isbndbkey, $add
 		mysql_close($con);
 		echo "<p>Installation Complete</p>";
 	}
+	
+	$os = $_SERVER['SERVER_SOFTWARE'];
+	
+	if (stristr($os, 'WIN')) { 
+		exec('start SCHTASKS /Create /SC weekly /D MON,TUE,WED,THU,FRI /TN CF /ST 03:00:00 /TR ' . $address . '/cron/cf.php');
+		exec('start SCHTASKS /Create /SC weekly /D MON,TUE,WED,THU,FRI /TN EmailAlerts /ST 03:00:00 /TR ' . $address . '/cron/email.php');
+	}
+	else { 
+	    $command = '0 3 * * * /usr/bin/php -f'  . $address . '/cron/cf.php'; 
+	    $cron_file = "cron/Feed_cron"; 
+	    
+	    // check for Feed_cron file. If it doesn't exist create it.
+	    // you must create the file from the browser to associate the proper group
+	    if (file_exists($cron_file)){  // if it exists, write new command
+	
+	        $open = fopen($cron_file, "w"); // This overwrites current line
+	        fwrite($open, $command); 
+	        fclose($open); 
+	
+	        // this will reinstate your Cron job
+	        exec("crontab " . $address . "/cron/Feed_cron");
+	    }
+	    else{  // if it Doesn't exist, Create it then write command
+	
+	        touch($cron_file); // create the file, Directory "cron" must be writeable
+	
+	        chmod($cron_file, 0777); // make new file writeable
+	
+	        $open = fopen($cron_file, "w"); 
+	        fwrite($open, $command); 
+	        fclose($open);
+	
+	        // start the cron job! 
+	        exec("crontab " . $address . "/cron/Feed_cron");
+	    }
+	    //TODO - Ryan - Add email alert as cron job
+	}
+
 }
 ?>

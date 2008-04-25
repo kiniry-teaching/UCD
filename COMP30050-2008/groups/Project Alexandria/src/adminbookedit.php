@@ -1,9 +1,17 @@
 <?php
+session_start();
+/*starts the session that will be used on all pages from login to logout*/
+?>
+
+<?php
 	include("include/header.php");
+?>
+<?php
+	include("include/userfunctions.php");
+	if(isAdmin($_SESSION['username'])){
 ?>
 <div id="adminbookedit">
 <?php
-//TODO - Thomas - isAdmin() needed here
 include("include/book_functions.php");
 include("include/adminbook_functions.php");
 $isbn = $_GET["isbn"];
@@ -35,6 +43,9 @@ if ($_POST["state"] == 1){ //If you're editing book data
 	</form>
 
 </div> <!--End of #adminbookedit-->
+<?php
+}
+?>
 <?php
 	include("include/footer.php");
 ?>

@@ -1,10 +1,17 @@
 <?php
+session_start();
+/*starts the session that will be used on all pages from login to logout*/
+?>
+
+<?php
 	include("include/header.php");
+?>
+<?php
+	include("include/userfunctions.php");
+	if(isAdmin($_SESSION['username'])){
 ?>
 <div id="adminbookadd">
 <?php
-
-//TODO - Thomas - isAdmin() needed here
 
 include("include/adminbook_functions.php");
 
@@ -48,6 +55,9 @@ else if($_POST["state"] == 2) //If you're adding book data
 		<div class="formbutton"><input type="hidden" name="state" value="2" /><input type="submit" value="Add" /></div>
 	</form>
 </div> <!--End of #adminbookadd-->
+<?php
+}
+?>
 <?php
 	include("include/footer.php");
 ?>

@@ -1,5 +1,14 @@
 <?php
+session_start();
+/*starts the session that will be used on all pages from login to logout*/
+?>
+
+<?php
 	include("include/header.php");
+?>
+<?php
+	include("include/userfunctions.php");
+	if(isAdmin($_SESSION['username'])){
 ?>
 <div id="adminbookmonitor">
 <?php include('include/adminbook_functions.php');?>
@@ -67,6 +76,9 @@ echo "</div>";
 ?>
 
 </div>
+<?php
+}
+?>
 <?php
 	include("include/footer.php");
 ?>
