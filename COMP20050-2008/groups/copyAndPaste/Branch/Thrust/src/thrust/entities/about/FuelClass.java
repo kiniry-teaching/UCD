@@ -52,4 +52,12 @@ public class FuelClass implements Fuelable {
   public void change_fuel_content(final int the_fuel_change) {
     this.my_fuel += the_fuel_change;
   }
+//@ public invariant (* One unit of fuel weights 1kg. *);
+  /**
+   * @return What is the mass of your fuel?
+   */
+  //@ ensures \result == fuel() * 1;
+  public /*@ pure @*/ int fuel_mass() {
+    return this.my_fuel * 1;
+  }
 }

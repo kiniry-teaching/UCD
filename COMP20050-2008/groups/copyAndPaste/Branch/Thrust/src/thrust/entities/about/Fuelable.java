@@ -45,4 +45,16 @@ public interface Fuelable {
     @           fuel() == \old(fuel() + the_fuel_change)));
     @*/
   void change_fuel_content(int the_fuel_change);
+
+
+  //@ public invariant (* Fuel content is always non-negative and finite. *);
+  //@ public invariant 0 <= fuel();
+
+  //@ public invariant (* One unit of fuel weights 1kg. *);
+  /**
+   * @return What is the mass of your fuel?
+   */
+  //@ ensures \result == fuel() * 1;
+  /*@ pure @*/ int fuel_mass();
+
 }
