@@ -66,12 +66,28 @@ public abstract class DynamicEntity extends Entity
     my_mass = the_mass;
     my_momentum = the_momentum;
   }
+
+  /**
+   * @param This is your position.
+   * */
+  public void position(final double[] the_position)
+  {
+    my_position = the_position;
+  }
   /**
    * @return What position do you have?
    * */
   public double[] position()
   {
     return my_position;
+  }
+
+  /**
+   * @param his is your orientation.
+   * */
+  public void orientation(final double the_orientation)
+  {
+    my_orientation = the_orientation;
   }
   /**
    * @return What orientation do you have?
@@ -80,10 +96,11 @@ public abstract class DynamicEntity extends Entity
   {
     return my_orientation;
   }
+
   /**
    * @return Set entity colour.
    * */
-  public void colour(final Color the_colour )
+  public void colour(final Color the_colour)
   {
     my_colour = the_colour;
   }
@@ -94,6 +111,7 @@ public abstract class DynamicEntity extends Entity
   {
     return my_colour;
   }
+
   /**
    * @return What initial_shape_name do you have?
    * */
@@ -115,12 +133,28 @@ public abstract class DynamicEntity extends Entity
   {
     return my_initial_state;
   }
+
+  /**
+   * @param This is your acceleration.
+   * */
+  public void acceleration(final double[] the_acceleration)
+  {
+    my_acceleration = the_acceleration;
+  }
   /**
    * @return What acceleration do you have?
    * */
   public double[] acceleration()
   {
     return my_acceleration;
+  }
+
+  /**
+   * @param  This is your velocity.
+   * */
+  public void velocity(final double[] the_velocity)
+  {
+    my_velocity = the_velocity;
   }
   /**
    * @return What velocity do you have?
@@ -129,6 +163,14 @@ public abstract class DynamicEntity extends Entity
   {
     return my_velocity;
   }
+
+  /**
+   * @param This is your mass.
+   * */
+  public void mass(final double the_mass)
+  {
+    my_mass =  the_mass;
+  }
   /**
    * @return What mass do you have?
    * */
@@ -136,6 +178,7 @@ public abstract class DynamicEntity extends Entity
   {
     return my_mass;
   }
+
   /**
    * @return What momentum do you have?
    * */
@@ -145,53 +188,10 @@ public abstract class DynamicEntity extends Entity
   }
 
   /**
-   * @return What shape name do you have?
-   * */
-  public String shape_name() {
-    assert false; //@ assert false;
-    return null;
-  }
-
-  /**
-   * @return What shape are you?
-   */
-  public Shape shape() {
-    assert false; //@ assert false;
-    return null;
-  }
-
-  /**
-   * This is your shape.
-   * @param the_shape the shape of this Entity.
-   */
-  public void shape(final Shape the_shape) {
-    assert false; //@ assert false;
-  }
-
-  /**
-   * @return What is your physical state?
-   * @note State is encoded by a non-negative number of "hit points".
-   */
-  //@ ensures 0 <= \result;
-  public byte state() {
-    assert false; //@ assert false;
-    return 0;
-  }
-
-  /**
-   * This is your physical state.
-   * @param the_state the state.
-   */
-  //@ requires 0 <= the_state;
-  //@ ensures state() == the_state;
-  public void state(final byte the_state) {
-    assert false; //@ assert false;
-  }
-
-  /**
-   * Render yourself.
-   */
-  public void render() {
-    assert false; //@ assert false;
+ * Simulate yourself for this many seconds.
+ * */
+  public void simulate(final int the_run_time)
+  {
+    //TODO simulation method.
   }
 }
