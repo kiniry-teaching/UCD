@@ -45,7 +45,7 @@ public abstract class GameState extends AbstractGameState {
       final FileReader fis   = new FileReader("HighScore.txt");
       final BufferedReader input   = new BufferedReader(fis);
       final char[] storeInput = new char[eight * eight];
-      final char[] intitills = new char[eight + eight];
+      final char[] intitills = new char[eight + eight + eight];
       final int[] scores = new int[eight];
 
       while (input.readLine() != null)
@@ -54,13 +54,15 @@ public abstract class GameState extends AbstractGameState {
         for (int i = 0; i < s.length(); i++)
         {
           storeInput[i] = s.charAt(i);
+          System.out.println(storeInput[i]);
         }
       }
       int current = 0;
-      for(int p = 0; p < eight + eight; p+=2)
+      for(int p = 0; p < eight + eight + eight; p+=3)
       {
         intitills[p] =  storeInput[p * eight];
-        intitills[p+1] =  intitills[(p * eight) + 1];
+        intitills[p+1] =  storeInput[(p * eight) + 1];
+        intitills[p+2] =  storeInput[(p * eight) + 2];
         my_highScore[current].new_initials(intitills);
         current ++;
       }
@@ -68,9 +70,8 @@ public abstract class GameState extends AbstractGameState {
 
       for (int j = 0; j < eight; j++)
       {
-        String temp = "" + storeInput[(j * eight)+3];
-        temp = temp + storeInput[(j * eight)+4];
-        temp = temp + storeInput[(j * eight) + 5];
+        String temp = "" + storeInput[(j * eight)+4];
+        temp = temp + storeInput[(j * eight)+5];
         temp = temp + storeInput[(j * eight) + 6];
         temp = temp + storeInput[(j * eight) + 7];
         my_highScore[j].new_score(Integer.parseInt(temp));
