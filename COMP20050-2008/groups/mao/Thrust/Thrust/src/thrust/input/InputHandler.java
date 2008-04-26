@@ -19,7 +19,7 @@ public class InputHandler
 	STOP_GAME(27, true),
 	FIRE_GUN(13, false),
 	TURN_LEFT(97, false), 
-        TURN_RIGHT(115, false),
+    TURN_RIGHT(115, false),
 	USE_ENGINE(15, false),
 	USE_SHIELD(32, false);
 
@@ -107,19 +107,22 @@ public class InputHandler
   //@ requires legal_input(the_keyboard_input);
     public void process(char the_keyboard_input)
     {
-	for(validChar i : validChar.values())
-	    {
-		if(i.getStateAccess() == true)
-		    {
-			if(gameRunning == true)
-			    {
-				gameRunning = false;
-			    }
-			else
-			    {
-				gameRunning = true;
-			    }
-		    }
-	    }
-    }
+		for(validChar i : validChar.values())
+		{
+			if(i.getChar == the_keyboard_input)
+			{
+				if(i.getStateAccess() == true)
+				{
+					if(gameRunning == true)
+					{
+					gameRunning = false;
+					}
+					else
+					{
+					gameRunning = true;
+					}
+				}
+			}
+		}
+	}
 }
