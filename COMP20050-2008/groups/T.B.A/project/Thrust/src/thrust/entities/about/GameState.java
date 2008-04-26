@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
@@ -219,6 +220,8 @@ public abstract class GameState extends AbstractGameState {
       final FileReader fis   = new FileReader("HighScore.txt");
       final BufferedReader input   = new BufferedReader(fis);
       final char[] storeInput = new char[64];
+      final String[] intitills = new String[8];
+      final int[] scores = new int[8];
       /*
        * stores initials and
        * scores as chars, then
@@ -232,6 +235,22 @@ public abstract class GameState extends AbstractGameState {
         {
           storeInput[i] = s.charAt(i);
         }
+      }
+
+      int currenti = 0;
+      for(int j = 0;j<64;j++)
+      {
+        if(j<2&&j>0||j<10&&j>8||j<18&&j>16||j<26&&j>24||j<34&&j>32||j<42&&j>40||j<50&&j>38||j<58&&j>58)
+        {
+          intitills[currenti] = storeInput[j].toString();
+          intitills[currenti] = storeInput[j+1];
+          currenti=+2;
+        }
+        else
+        {
+          scores[]
+        }
+
       }
 
     } catch (IOException e) {
