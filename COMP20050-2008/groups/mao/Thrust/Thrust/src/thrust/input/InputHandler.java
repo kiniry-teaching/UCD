@@ -9,20 +9,7 @@ public class InputHandler
 {
     private static boolean gameRunning = false;
 
-    // Enumeration of in-game commands
-
-
-    public static void main(String[] args)
-    {
-    
-	for(commandChar i : commandChar.values())
-	    {
-		System.out.println(i.getAscii());
-	    }
-	System.out.println(gameRunning);
-	
-	
-    }
+    // Enumeration of Valid commands
 
     private enum validChar
     {
