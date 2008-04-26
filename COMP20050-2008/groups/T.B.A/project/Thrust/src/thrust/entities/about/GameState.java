@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -24,6 +25,63 @@ import java.io.IOException;
  * @version 11 April 2008
  */
 public abstract class GameState extends AbstractGameState {
+
+  /**
+   * Stores the highScore in an array.
+   */
+  private HighScoreInterface[] my_highScore;
+  //@ ensures 0 <= some_highScore[];
+
+  /**
+   * Constructor to read in from a
+   * file to get the highscores and
+   * initials.
+   */
+
+  public GameState()
+  {
+  final int eight = 8;
+    try {
+      final FileReader fis   = new FileReader("HighScore.txt");
+      final BufferedReader input   = new BufferedReader(fis);
+      final char[] storeInput = new char[eight * eight];
+      final char[] intitills = new char[eight + eight];
+      final int[] scores = new int[eight];
+
+      while (input.readLine() != null)
+      {
+        final String s = input.readLine();
+        for (int i = 0; i < s.length(); i++)
+        {
+          storeInput[i] = s.charAt(i);
+        }
+      }
+      int current = 0;
+      for(int p = 0; p < eight + eight; p+=2)
+      {
+        intitills[p] =  storeInput[p * eight];
+        intitills[p+1] =  intitills[(p * eight) + 1];
+        my_highScore[current].new_initials(intitills);
+        current ++;
+      }
+
+
+      for (int j = 0; j < eight; j++)
+      {
+        String temp = "" + storeInput[(j * eight)+3];
+        temp = temp + storeInput[(j * eight)+4];
+        temp = temp + storeInput[(j * eight) + 5];
+        temp = temp + storeInput[(j * eight) + 6];
+        temp = temp + storeInput[(j * eight) + 7];
+        my_highScore[j].new_score(Integer.parseInt(temp));
+      }
+
+    } catch (IOException e) {
+      System.err.println("File not found: " + e.getMessage());
+    }
+
+  }
+
   /**
    * There are eight high scores.
    */
@@ -48,12 +106,6 @@ public abstract class GameState extends AbstractGameState {
    */
   private int my_score;
   //@ ensures 0 <= my_score;
-
-  /**
-   * Stores the highScore in an array.
-   */
-  private HighScoreInterface[] my_highScore;
-  //@ ensures 0 <= some_highScore[];
 
   /**
    * Stores the current number of lives.
@@ -215,70 +267,39 @@ public abstract class GameState extends AbstractGameState {
   public void
   add_high_score(/*@ non_null @*/ final HighScoreInterface the_new_high_score)
   {
-
+    final int eight = 8;
     try {
-      final FileReader fis   = new FileReader("HighScore.txt");
-      final BufferedReader input   = new BufferedReader(fis);
-      final char[] storeInput = new char[64];
-      final String[] intitills = new String[8];
-      final int[] scores = new int[8];
-      /*
-       * stores initials and
-       * scores as chars, then
-       * converts them.
-       */
 
-      while (input.readLine() != null)
+      int the_replaceThisHighScore = 0; //cannot be final
+      for (int x = 0; x < eight; x++)
       {
-        final String s = input.readLine();
-        for (int i = 0; i < s.length(); i++)
+        if (the_new_high_score.score() > my_highScore[x].score())
         {
-          storeInput[i] = s.charAt(i);
+          the_replaceThisHighScore = x;
         }
       }
+      final FileWriter fisWriter   = new FileWriter("HighScore.txt");
 
-      int currenti = 0;
-      for(int j = 0;j<64;j++)
+      for (int k = 0; k < eight; k++)
       {
-        if(j<2&&j>0||j<10&&j>8||j<18&&j>16||j<26&&j>24||j<34&&j>32||j<42&&j>40||j<50&&j>38||j<58&&j>58)
+        if (k == the_replaceThisHighScore)
         {
-          intitills[currenti] = storeInput[j].toString();
-          intitills[currenti] = storeInput[j+1];
-          currenti=+2;
+          final String temp = "" + the_new_high_score.initials()[0] +
+            the_new_high_score.initials()[1];
+          fisWriter.write(temp + " " + the_new_high_score.score());
         }
         else
         {
-          scores[]
+          fisWriter.write(my_highScore[k].initials().toString() + " " +
+                            my_highScore[k].score());
         }
-
       }
 
     } catch (IOException e) {
+      System.err.println("File not found: " + e.getMessage());
     }
 
 
-
-    /**
-     * the found variable is true if the value in
-     * score variable in the HighScoreInterface array
-     * is less than the current score.
-     */
-    boolean found = false;
-    if (new_high_score(the_new_high_score))
-    {
-      for (int j = 0; j < my_highScore.length; j++)
-      {
-        if (my_highScore[j].score() < the_new_high_score.score() && !found)
-        {
-          my_highScore[j] = the_new_high_score;
-          found = true;
-        }
-        if (found)
-        {
-          my_highScore[j - 1] = my_highScore[j];
-        }
-      }
-    }
   }
 
   /**
