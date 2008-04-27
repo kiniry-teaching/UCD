@@ -14,7 +14,7 @@ import thrust.entities.EnemyEntity;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Roger Thomas (Roger.thomas@ucdconnect.ie
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity
@@ -24,7 +24,6 @@ public class Bullet extends DynamicEntity
    */
   //@ also ensures \result == 1;
   public double mass() {
-    assert false; //@ assert false;
     return 0;
   }
 
