@@ -10,34 +10,20 @@
 
 package thrust.entities;
 
-import thrust.physics.PhysicsInterface;
+import thrust.physics.Physics;
+import java.awt.Color;
 
 /**
  * Entities whose position or orientation change.
  * @author Stephen Murphy (Stephen.Murphy.1@ucdconnect.ie)
  * @version 25 April 2008
  */
-public abstract class DynamicEntity extends Entity
-  implements PhysicsInterface {
+public class DynamicEntity extends Entity {
 
-  /** the_position the initial position. */
-  private double[] my_position;
-
-  /** the_orientation the initial orientation.*/
-  private double my_orientation;
-
-  /** the_acceleration the initial acceleration. */
-  private double my_acceleration;
-
-  /** the_grav_constant the initial gravitational constant. */
-  private double my_grav_constant;
-
-  /** the_mass the initial mass.*/
-  private double my_mass;
-
-  /** the_velocity the initial velocity. */
-  private double[] my_velocity;
-
+  /** Instance of Physics class implementing PhysicsInterface. */
+  private static Physics my_physics = new Physics();
+  /** Color.. */
+  private static Color my_color;
 
   /**
    * @return A new dynamic entity with the given physical state.
@@ -54,7 +40,21 @@ public abstract class DynamicEntity extends Entity
                                    final double the_grav_constant,
                                    final double the_mass,
                                    final double[] the_velocity) {
-    assert false; //@ assert false;
+    my_physics.position(the_position);
+    my_physics.orientation(the_orientation);
+    my_physics.acceleration(the_acceleration);
+    my_physics.gravitational_constant();
+    my_physics.mass(the_mass);
+    my_physics.velocity(the_velocity);
+
     return null;
+  }
+
+  public Color color() {
+    return my_color;
+  }
+
+  public void color(final Color the_color) {
+    my_color = the_color;
   }
 }

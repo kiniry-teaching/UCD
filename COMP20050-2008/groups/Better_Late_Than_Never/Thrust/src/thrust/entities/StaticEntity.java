@@ -16,6 +16,14 @@ package thrust.entities;
  * @version 18 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
+
+  /** Double array to hold position of StaticEntity. */
+  private static double[] my_position;
+  /** Double to hold orientation (radians) of StaticEntity. */
+  private static double my_orientation;
+  /** Int to hold array length value for my_position array. */
+  private static final int MY_ARRAYLENGTH = 2;
+
   /**
    * @return A new static entity with this position and orientation.
    * @param the_position the immutable position.
@@ -23,33 +31,43 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ ensures position().equals(the_position);
   //@ ensures orientation().equals(the_orientation);
-  public static StaticEntity make(double[] the_position,
-                                  double the_orientation) {
-    assert false; //@ assert false;
+  public static StaticEntity make(final double[] the_position,
+                                  final double the_orientation) {
+
+    my_position = new double[MY_ARRAYLENGTH];
+    my_position[0] = the_position[0];
+    my_position[1] = the_position[1];
+
+    my_orientation = the_orientation;
+
     return null;
   }
+/**
+
+  // Why are any of the following methods here? I thought this was
+  // StaticEntity..
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
-   */
+   *
   //@ ensures \result == 0;
   public abstract double mass();
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#velocity()
-   */
+   *
   //@ ensures \result[0] == 0 & \result[1] == 0;
   public abstract double[] velocity();
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#acceleration()
-   */
+   *
   //@ ensures \result[0] == 0 & \result[1] == 0;
   public abstract double[] acceleration();
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#momentum()
-   */
+   *
   //@ ensures \result == 0;
   public abstract double momentum();
 
