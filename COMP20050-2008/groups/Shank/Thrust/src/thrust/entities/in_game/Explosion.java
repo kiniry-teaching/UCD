@@ -9,16 +9,51 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 
 /**
  * An explosion.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Kevin Lambe (kevlambe@gmail.com)
+ * @version 27 April 2008
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
+  /**
+   * The frames in the explosion animation.
+   */
+  private Animation my_animation;
+  /**
+   * The color of the explosion.
+   */
+  private Color my_color;
+
+  public void animation(final Animation the_animation)
+  {
+    my_animation = the_animation;
+  }
+  public Animation animation()
+  {
+    return my_animation;
+  }
+  public void animate()
+  {
+
+  }
+  public void color(final Color the_color) {
+  }
+  public Color color() {
+    return my_color;
+  }
+  public void simulate(final double the_amount) {
+  }
+  public double gravitational_constant() {
+    final double d = 9.81;
+    return d;
+  }
 
 }
