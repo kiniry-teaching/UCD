@@ -19,30 +19,34 @@ import thrust.entities.StaticEntity;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
+//Implemented by roger fri-Apr 25
+
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  private boolean my_isopen;
+  private boolean my_ismoving;
+
   /**
    * @return Are you closed?
    */
+
   public /*@ pure @*/ boolean closed() {
-    assert false; //@ assert false;
-    return false;
+    return !my_isopen;
   }
 
   /**
    * @return Are you open?
    */
   public /*@ pure @*/ boolean opened() {
-    assert false; //@ assert false;
-    return false;
+    return my_isopen;
   }
 
   /**
    * @return Are you moving?
    */
   public /*@ pure @*/ boolean moving() {
-    assert false; //@ assert false;
-    return false;
+    return my_ismoving;
   }
 
   /**
@@ -50,7 +54,8 @@ public class Barrier extends StaticEntity
    */
   //@ requires opened();
   public void close() {
-    assert false; //@ assert false;
+    my_ismoving = true;
+    my_isopen = false;
   }
 
   /**
@@ -58,7 +63,8 @@ public class Barrier extends StaticEntity
    */
   //@ requires closed();
   public void open() {
-    assert false; //@ assert false;
+    my_ismoving = true;
+    my_isopen = true;
   }
 
   /*@ public invariant (* Barriers are always in one of the three states
