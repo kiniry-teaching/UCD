@@ -18,7 +18,7 @@ import thrust.entities.StaticEntity;
 /**
  * A barrier and trigger to block the spaceship's way.
  * @author Colin Casey (colin.casey@org.com)
- * @version 24 April 2008
+ * @version 27 April 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
@@ -31,13 +31,15 @@ public class Barrier extends StaticEntity
 //@ public invariant moving() ==> !closed() & !opened();
 
   /** Describes whether the barrier is open. */
-  private boolean my_open_indicator;
+  private boolean my_open_indicator = true;
   /** Describes whether the barrier is closed. */
   private boolean my_closed_indicator;
   /** Describes whether the barrier is moving. */
   private boolean my_moving_indicator;
   /** The frames in the barrier animation. */
   private Animation my_animation;
+  /** Animation frame counter. */
+  private int my_animation_counter;
 
   /** Barrier Constructor. */
   public Barrier() {
@@ -94,6 +96,20 @@ public class Barrier extends StaticEntity
   }
 
   public void animate() {
-    assert false;
+    my_animation_counter++;
+    /* When animate is called a frame of animation is played
+     * If that is half way through the animation the barrier is closed
+     * If it is complete then the barrier is open again
+     */
+    if (my_animation_counter % 20 == 0) {
+      my_open_indicator = true;
+      my_closed_indicator = false;
+      my_moving_indicator = false;
+      my_animation_counter = 0;
+    } else if (my_animation_counter % 10 == 0) {
+      my_open_indicator = false;
+      my_closed_indicator = true;
+      my_moving_indicator = false;
+    }
   }
 }
