@@ -22,7 +22,7 @@ public class HighScore implements HighScoreInterface {
    * @see thrust.entities.about.AbstractGameState.HighScoreInterface#initials()
    */
   public char[] initials() {
-    return my_initials;
+    return (char[])my_initials.clone();
   }
 
   /*
@@ -30,7 +30,7 @@ public class HighScore implements HighScoreInterface {
    *      new_initials(char[])
    */
   public void new_initials(final char[] the_new_initials) {
-    my_initials = the_new_initials;
+    my_initials = (char[])the_new_initials.clone();
   }
 
   /*

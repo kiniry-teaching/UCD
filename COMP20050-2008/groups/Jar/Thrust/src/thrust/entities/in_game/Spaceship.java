@@ -9,8 +9,6 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color;
-
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -76,7 +74,7 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#set_fuel_content(int)
    */
-  public void set_fuel_content(int the_fuel_content) {
+  public void set_fuel_content(final int the_fuel_content) {
     // TODO Auto-generated method stub
 
   }
