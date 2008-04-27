@@ -21,28 +21,30 @@ import thrust.entities.StaticEntity;
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+  /** The open state of the door. */
+  private boolean my_openState;
+  /** The closed state of the door. */
+  private boolean my_closeState;
+
   /**
    * @return Are you closed?
    */
   public /*@ pure @*/ boolean closed() {
-    assert false; //@ assert false;
-    return false;
+    return my_closeState;
   }
 
   /**
    * @return Are you open?
    */
   public /*@ pure @*/ boolean opened() {
-    assert false; //@ assert false;
-    return false;
+    return my_openState;
   }
 
   /**
    * @return Are you moving?
    */
   public /*@ pure @*/ boolean moving() {
-    assert false; //@ assert false;
-    return false;
+    return (!opened() && !closed());
   }
 
   /**
@@ -50,7 +52,9 @@ public class Barrier extends StaticEntity
    */
   //@ requires opened();
   public void close() {
-    assert false; //@ assert false;
+    if (opened()) {
+      my_openState = false;
+    }
   }
 
   /**
@@ -58,7 +62,9 @@ public class Barrier extends StaticEntity
    */
   //@ requires closed();
   public void open() {
-    assert false; //@ assert false;
+    if (closed()) {
+      my_closeState = false;
+    }
   }
 
   /*@ public invariant (* Barriers are always in one of the three states
