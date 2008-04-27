@@ -47,10 +47,13 @@ implements FriendEntity, Fuelable, Tow {
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
    */
   public void change_fuel_content(final int the_fuel_change) {
-    boolean balls = 
-      (fuel() + the_fuel_change < 0) ? (fuel() == 0) : ((maximum_fuel() < (fuel() + the_fuel_change)) ?
-                                                                                                       (my_fuel = maximum_fuel()) :
-                                                                                                         my_fuel = my_fuel + the_fuel_change));
+    if (my_fuel + the_fuel_change < 0) {
+      my_fuel = 0;
+    } else if (maximum_fuel() < (my_fuel + the_fuel_change)) {
+      my_fuel = maximum_fuel();
+    } else {
+      my_fuel += the_fuel_change;
+    }
   }
 
   /* (non-Javadoc)
