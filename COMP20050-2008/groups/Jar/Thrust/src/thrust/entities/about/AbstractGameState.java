@@ -33,7 +33,7 @@ public abstract class AbstractGameState {
   public abstract /*@ pure @*/ int bonus();
 
   /**
-   * @param the_new_value This is your new value.
+\   * @param the_new_value This is your new value.
    */
   //@ requires 0 <= the_new_value;
   //@ ensures bonus() == the_new_value;

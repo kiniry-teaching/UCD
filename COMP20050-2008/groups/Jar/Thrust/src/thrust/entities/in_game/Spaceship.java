@@ -38,12 +38,12 @@ public class Spaceship extends DynamicEntity
 
   /** The mass of each unit of fuel. */
   public static final double FUEL_MASS = .001;
-  
+
   /** The fuel is initially set to the initial fuel value. */
   private int my_fuel = INITIAL_FUEL;
   /** The tow state of the SpaceShip. */
   private boolean my_tow_state;
-  
+
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
    */
@@ -78,7 +78,7 @@ public class Spaceship extends DynamicEntity
    */
   public void set_fuel_content(int the_fuel_content) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /* (non-Javadoc)
@@ -88,11 +88,19 @@ public class Spaceship extends DynamicEntity
     my_tow_state = true;
   }
 
+  public double mass() {
+    return super.mass() + fuel_mass() + (towed() ? GoalSphere.MASS : 0);
+  }
+
   /* (non-Javadoc)
    * @see thrust.entities.behaviors.Tow#towed()
    */
   public boolean towed() {
     return my_tow_state;
+  }
+
+  public Color color() {
+    return java.awt.Color.WHITE;
   }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;

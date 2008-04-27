@@ -35,7 +35,7 @@ public class HighScore implements HighScoreInterface {
 
   /*
    * @see thrust.entities.about.AbstractGameState.HighScoreInterface#
-   *       new_score(int)
+   * new_score(int)
    */
   public void new_score(final int the_new_score) {
     my_high_score = the_new_score;
