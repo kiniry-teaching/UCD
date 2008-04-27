@@ -9,17 +9,88 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.about.Fuelable;
 
 /**
  * A fuel pod from which the spaceship can obtain fuel.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Kevin Lambe (kevlambe@gmail.com)
+ * @version 25 April 2008
  */
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
+  /**
+   * The mass of the fuelpod.
+   */
+  private Fuelable my_mass;
+  /**
+   * Color of the fuel pod.
+   */
+  private Color my_color;
+
+  /**
+   * int representing fuel content.
+   */
+  private int my_fuel_content;
+  /**
+   * the current fuel level.
+   */
+  private Fuelable my_fuel;
+  /**
+   * the maximum fuel level.
+   */
+  private int my_maximum_fuel;
+
+  public Fuelable mass(final Fuelable the_mass)
+  {
+    my_mass = the_mass;
+    return my_mass;
+  }
+
+  public int fuel_mass()
+  {
+    return my_fuel_content;
+  }
+
+  public void color(final Color the_color) {
+    my_color = the_color;
+  }
+  public Color color() {
+    return my_color;
+  }
+
+  public double gravitational_constant() {
+    final double d = 9.81;
+    return d;
+  }
+
+
+  public void change_fuel_content(final int the_fuel_change)
+  {
+    my_fuel_content = my_fuel_content - the_fuel_change;
+  }
+
+  public void set_fuel_content(final int the_fuel_content)
+  {
+    my_fuel_content = the_fuel_content;
+  }
+
+  public Fuelable fuel(final Fuelable the_fuel)
+  {
+    my_fuel = the_fuel;
+    return my_fuel;
+  }
+  public int fuel() {
+    return my_fuel_content;
+  }
+  public int maximum_fuel() {
+    return my_maximum_fuel;
+  }
+  public void simulate(final double the_amount) {
+  }
   /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);
     @ public invariant (* The fuel pod is not affected by the spaceship. *);

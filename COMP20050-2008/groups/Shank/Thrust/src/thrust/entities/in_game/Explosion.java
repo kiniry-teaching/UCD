@@ -45,6 +45,7 @@ public class Explosion extends StaticEntity
 
   }
   public void color(final Color the_color) {
+    my_color = the_color;
   }
   public Color color() {
     return my_color;
