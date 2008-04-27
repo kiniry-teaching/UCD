@@ -59,9 +59,45 @@ public interface PhysicsInterface {
   /*@ pure @*/ double[] velocity();
 
   /**
+   * @param the_position This is your position.
+   */
+  //@ requires the_position.length == 2;
+  //@ ensures position()[0] == the_position[0];
+  //@ ensures position()[1] == the_position[1];
+  void position(double[] the_position);
+
+  /**
+   * @param the_orientation This is your orientation.
+   */
+  //@ ensures orientation() == the_orientation;
+  void orientation(double the_orientation);
+
+  /**
+   * @param the_mass This is your mass.
+   */
+  //@ requires 0 <= the_mass;
+  //@ ensures mass() == the_mass;
+  void mass(double the_mass);
+
+  /**
+   * @param the_velocity This is your velocity.
+   */
+  //@ requires the_velocity.length == 2;
+  //@ ensures velocity()[0] == the_velocity[0];
+  //@ ensures velocity()[1] == the_velocity[1];
+  void velocity(double[] the_velocity);
+
+  /**
+   * @param the_acceleration This is your acceleration.
+   */
+  //@ requires the_acceleration.length == 2;
+  //@ ensures acceleration()[0] == the_acceleration[0];
+  //@ ensures acceleration()[1] == the_acceleration[1];
+  void acceleration(double[] the_acceleration);
+
+  /**
    * Simulate yourself for this many seconds.
    * @param some_seconds the number of seconds to simulate.
    */
   void simulate(double some_seconds);
-
 }
