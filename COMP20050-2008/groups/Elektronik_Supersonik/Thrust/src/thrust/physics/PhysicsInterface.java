@@ -11,7 +11,7 @@
 package thrust.physics;
 
 /**
- * Computing the behavior of entities according to physical
+ * Computing the behaviour of entities according to physical
  * simulation in two dimensions.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
@@ -32,13 +32,13 @@ public interface PhysicsInterface {
   /*@ pure @*/ double gravitational_constant();
 
   /**
-   * @return What is your mass in kilograms?
+   * @return What is your mass in kilogrammes?
    */
   //@ ensures 0 <= \result;
   /*@ pure @*/ double mass();
 
   /**
-   * @return What is your momentum in kilograms*meters per second?
+   * @return What is your momentum in kilogrammes*meters per second?
    */
   /*@ pure @*/ double momentum();
 

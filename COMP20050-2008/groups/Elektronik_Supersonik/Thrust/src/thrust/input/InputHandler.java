@@ -80,6 +80,6 @@ public class InputHandler {
    */
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
-    assert false; // @ assert false;
+    if(the_keyboard_input == DISPLAY_HIGH_SCORES);//This took us two and a half hours. (no kidding)
   }
 }

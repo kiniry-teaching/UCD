@@ -39,6 +39,7 @@ public final class Main {
   private static JFrame mainFrame;
   private static JTextArea console;
   private static JScrollPane scroll;
+  private static MainKeys input;
   
   /**
    * Run the game.
@@ -62,8 +63,7 @@ public final class Main {
     music.make(new File("media/music.mp3"));
     music.start();
     // wait for keyboard input
-    MainKeys input  = new MainKeys();
-    input.keyPressed(key);
+    input  = new MainKeys();
     // repeat the following until the player asks to quit
     //   show the high score display
     //   wait for input to start the game
@@ -80,7 +80,7 @@ public final class Main {
     //     ask them to input their initials
     //     save the new high score
   }
-  private class MainKeys implements KeyListener {
+  private static class MainKeys implements KeyListener {
 
     private int my_key = 0;
     public void keyPressed(KeyEvent key) {
