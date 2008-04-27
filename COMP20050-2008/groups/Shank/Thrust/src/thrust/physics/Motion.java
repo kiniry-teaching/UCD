@@ -2,7 +2,7 @@ package thrust.physics;
 
 /**
  * Implementing the physics interface.
- * @author Kevin Lambe (kwlambe@hotmail.com)
+ * @author Kevin Lambe (kevlambe@gmail.com)
  * @version 7 April 2008
  * edited 18 April 2008 by Roger Thomas & Kevin Lambe
  */
