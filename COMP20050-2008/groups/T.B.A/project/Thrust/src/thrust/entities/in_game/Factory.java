@@ -142,14 +142,16 @@ public class Factory extends StaticEntity
 * The color of a factory.
 */
     private Color my_color = Color.yellow;
-/**
- * Animation variable.
- */
-    private Animation my_animation;
+
 /**
  * The steps in the animation,text based.
  */
     private final Object[] my_animation_steps = {"|", " "};
+
+/**
+ * Animation variable.
+ */
+    private Animation my_animation = (Animation) my_animation_steps[my_step];
     /**
      * @param double[] the_position
      * @param double the_orientation
