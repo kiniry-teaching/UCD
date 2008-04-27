@@ -9,14 +9,16 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
 import thrust.entities.behaviors.AI;
-import thrust.entities.properties.GameColor;
+
 
 /**
  * A bullet shot from the spaceship or a gun turret.
- * @author Roger Thomas (Roger.thomas@ucdconnect.ie
+ * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity
@@ -36,18 +38,39 @@ public class Bullet extends DynamicEntity
   /**
    * The color of the bullet.
    */
-  private GameColor my_color;
-
-  public void attack(final AI the_bullet_behaviour) {
-    my_attackAI = the_bullet_behaviour;
+  private Color my_color;
+  public void attack(final AI the_behaviour) {
+    my_attackAI = the_behaviour;
   }
-  public void disturb(final AI the_bullet_behaviour) {
-    my_disturbAI = the_bullet_behaviour;
+  public void disturb(final AI the_behaviour) {
+    my_disturbAI = the_behaviour;
+  }
+  public AI attack() {
+    return my_attackAI;
+  }
+  public AI disturb() {
+    return my_disturbAI;
   }
   public double mass() {
     return 0;
   }
-
+  public void color(final Color the_color) {
+  }
+  public Color color() {
+    return my_color;
+  }
+  public void simulate(final double the_amount) {
+  }
+  public double gravitational_constant() {
+    final double d = 9.81;
+    return d;
+  }
+ /* public void color(final Color the_color) {
+    my_color = the_color;
+  }
+  public GameColor. color() {
+    return my_color.color();
+  }*/
   /*@ public invariant (* Bullets are destroyed on contact with a
     @                     barrier, a factory, a fuel pod, the goal
     @                     sphere, a gun turret, the spaceship, or the
