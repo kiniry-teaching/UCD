@@ -58,20 +58,20 @@ public abstract class GameState extends AbstractGameState {
         }
       }
       int current = 0;
-      for(int p = 0; p < eight + eight + eight; p+=3)
+      for (int p = 0; p < eight + eight + eight; p += 3)
       {
         intitills[p] =  storeInput[p * eight];
-        intitills[p+1] =  storeInput[(p * eight) + 1];
-        intitills[p+2] =  storeInput[(p * eight) + 2];
+        intitills[p + 1] =  storeInput[(p * eight) + 1];
+        intitills[p + 2] =  storeInput[(p * eight) + 2];
         my_highScore[current].new_initials(intitills);
-        current ++;
+        current++;
       }
 
 
       for (int j = 0; j < eight; j++)
       {
-        String temp = "" + storeInput[(j * eight)+4];
-        temp = temp + storeInput[(j * eight)+5];
+        String temp = "" + storeInput[(j * eight) + 4];
+        temp = temp + storeInput[(j * eight) + 5];
         temp = temp + storeInput[(j * eight) + 6];
         temp = temp + storeInput[(j * eight) + 7];
         my_highScore[j].new_score(Integer.parseInt(temp));

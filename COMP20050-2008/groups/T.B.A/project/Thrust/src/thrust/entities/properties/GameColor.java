@@ -20,9 +20,7 @@ import java.awt.Color;
 public interface GameColor {
   //@ public model Color _the_color;
 
-  /**
-   * @return What color are you?
-   */
+  /** @return What color are you? */
   //@ ensures \result == _the_color;
   /*@ pure @*/ Color color();
 
@@ -33,12 +31,13 @@ public interface GameColor {
   //@ ensures color() == the_color;
   void color(Color the_color);
 
-  //@ public invariant (* There are exactly 12 different colors available. *);
+  //@ public invariant (* There are exactly 13 different colors available. *);
   /*@ public invariant _the_color == Color.BLACK | _the_color == Color.WHITE |
     @                  _the_color == Color.RED | _the_color == Color.GREEN |
     @                  _the_color == Color.BLUE | _the_color == Color.CYAN |
     @                  _the_color == Color.MAGENTA | _the_color == Color.DARK_GRAY |
     @                  _the_color == Color.GRAY | _the_color == Color.LIGHT_GRAY |
-    @                  _the_color == Color.ORANGE | _the_color == Color.PINK;
+    @                  _the_color == Color.ORANGE | _the_color == Color.PINK |
+    @                  _the_color == Color.YELLOW;
     @*/
 }

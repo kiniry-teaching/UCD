@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Shape;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.EnemyEntity;
 import thrust.entities.EnemyAI;
 import thrust.entities.NeutralEntity;
@@ -47,6 +48,19 @@ public class Factory extends StaticEntity
  * The AI.
  */
   private EnemyAI my_enemy_ai;
+/**
+ * Animation variable.
+ */
+  private Animation my_animation;
+/**
+ * The steps in the animation,text based.
+ */
+  private final Object[] my_animation_steps = {"F"};
+
+/**
+ * Current animation step.
+ */
+  private int my_step;
   /**
    * @param double[] the_position
    * @param double the_orientation
@@ -128,6 +142,14 @@ public class Factory extends StaticEntity
 * The color of a factory.
 */
     private Color my_color = Color.yellow;
+/**
+ * Animation variable.
+ */
+    private Animation my_animation;
+/**
+ * The steps in the animation,text based.
+ */
+    private final Object[] my_animation_steps = {"|", " "};
     /**
      * @param double[] the_position
      * @param double the_orientation
@@ -172,6 +194,21 @@ public class Factory extends StaticEntity
     }
     public void disturb(final AI the_behavior) {
       my_enemy_ai.disturb(the_behavior);
+    }
+    public void animate() {
+      if (my_step == my_animation_steps.length - 1) {
+        my_step = 0;
+      } else
+        my_step++;
+      animation((Animation) my_animation_steps[my_step]);
+
+    }
+    public Animation animation() {
+      return my_animation;
+    }
+    public void animation(final Animation the_animation) {
+      my_animation = the_animation;
+
     }
 
     /*@ public invariant (* A factories chimney is the same color as
@@ -229,5 +266,14 @@ public class Factory extends StaticEntity
   }
   public void disturb(final AI the_behavior) {
     my_enemy_ai.disturb(the_behavior);
+  }
+  public void animate() {
+    // Dunno if this needs anything ATM.
+  }
+  public Animation animation() {
+    return my_animation;
+  }
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
   }
 }
