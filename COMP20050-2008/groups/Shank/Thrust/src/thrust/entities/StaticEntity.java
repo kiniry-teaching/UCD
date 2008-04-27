@@ -9,12 +9,14 @@
  */
 
 package thrust.entities;
-// hello testh
+
+import java.awt.Color;
+import java.awt.Shape;
+
 /**
  * Entities whose position and orientation do not change.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
- * @edited Kevin Lambe (24th April 2008) 
+ * @author Roger Thomas (roger.thomas@ucdconnect.ie)
+ * @version 25 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
   //@ public model boolean initialized;
@@ -31,9 +33,38 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
+  /*
+   *                                    final double the_orientation,
+                                        final Color the_colour,
+                                        final String the_initial_shape_name,
+                                        final Shape the_initial_shape,
+                                        final byte the_initial_state,
+                                        final double[] the_acceleration,
+                                        final double[] the_velocity,
+                                        final double the_mass,
+                                        final double the_momentum
+   */
   public void set_state(final double[] the_position,
-                        final double the_orientation) {
-    assert false; //@ assert false;
+                        final double the_orientation,
+                        final Color the_colour,
+                        final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_initial_state,
+                        final double[] the_acceleration,
+                        final double[] the_velocity,
+                        final double the_mass,
+                        final double the_momentum) {
+    super.set_State(the_position,
+                    the_orientation,
+                    the_colour,
+                    the_initial_shape_name,
+                    the_initial_shape,
+                    the_initial_state,
+                    the_acceleration,
+                    the_velocity,
+                    the_mass,
+                    the_momentum);
+    
   }
 
   /* (non-Javadoc)
@@ -41,8 +72,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    return 0.0;
   }
 
   /* (non-Javadoc)
@@ -50,8 +80,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
+    return new double[] {0, 0};
   }
 
   /* (non-Javadoc)
@@ -59,8 +88,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
+    return new double[] {0, 0};
   }
 
   /* (non-Javadoc)
@@ -68,8 +96,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
-    return 0;
+    return 0.0;
   }
 
   //@ public invariant (* All queries are constant. *);
