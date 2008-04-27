@@ -18,7 +18,7 @@ import thrust.physics.PhysicsInterface;
 /**
  * Entities whose position or orientation change.
  * @author Ben Fitzgerald  (ben.fitz@hotmail.com)
- * @version 24 04 2008
+ * @version 24 April 2008
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
