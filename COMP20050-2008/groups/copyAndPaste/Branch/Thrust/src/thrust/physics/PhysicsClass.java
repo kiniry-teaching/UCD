@@ -40,8 +40,8 @@ public class  PhysicsClass implements PhysicsInterface {
    * @param x initial location of this entity
    * @param y location of this entity
    */
-  public PhysicsClass(final double a_mass) {
-    this.my_mass = a_mass;
+  public PhysicsClass() {
+
   }
   /**
    * @return What is your acceleration in meters per second squared?
@@ -140,6 +140,12 @@ public class  PhysicsClass implements PhysicsInterface {
    * @param some_seconds the number of seconds to simulate.
    */
   public void simulate(final double some_seconds) {
-    this.my_simulation = some_seconds;
+    for (int i = 0; i <= some_seconds; i++) {
+      this.my_position[0] += this.my_velocity[0];
+      this.my_position[1] += this.my_velocity[1];
+      this.my_velocity[0] += this.my_acceleration[0];
+      this.my_velocity[1] += this.my_acceleration[1];
+      this.my_acceleration[1] += PhysicsClass.GRAVITATIONAL_CONSTANT;
+    }
   }
 }
