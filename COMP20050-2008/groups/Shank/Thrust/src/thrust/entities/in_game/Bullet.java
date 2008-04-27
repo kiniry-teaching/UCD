@@ -11,6 +11,8 @@ package thrust.entities.in_game;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
+import thrust.entities.behaviors.AI;
+import thrust.entities.properties.GameColor;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -23,6 +25,25 @@ public class Bullet extends DynamicEntity
    * @see thrust.physics.PhysicsInterface#mass()
    */
   //@ also ensures \result == 1;
+  /**
+   * The AI of an attacking bullet.
+   */
+  private AI my_attackAI;
+  /**
+   * The ai of a disturbing bullet.
+   */
+  private AI my_disturbAI;
+  /**
+   * The color of the bullet.
+   */
+  private GameColor my_color;
+
+  public void attack(final AI the_bullet_behaviour) {
+    my_attackAI = the_bullet_behaviour;
+  }
+  public void disturb(final AI the_bullet_behaviour) {
+    my_disturbAI = the_bullet_behaviour;
+  }
   public double mass() {
     return 0;
   }
