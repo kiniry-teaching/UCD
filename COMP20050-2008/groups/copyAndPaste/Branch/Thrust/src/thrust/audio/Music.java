@@ -13,7 +13,7 @@ import javax.sound.sampled.DataLine;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  * @revised 25/04/08 Ciaran Flynn: 06516564 (wrote the code)
- * @revised 28/04/08 Patrick Nevin (just fixed few style errors and added comments)
+ * @revised 28/04/08 P Nevin (just fixed few style errors and added comments)
 */
 public class Music {
   /**
