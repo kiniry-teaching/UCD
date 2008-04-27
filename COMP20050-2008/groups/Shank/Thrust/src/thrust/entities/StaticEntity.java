@@ -9,7 +9,7 @@
  */
 
 package thrust.entities;
-
+// hello testh
 /**
  * Entities whose position and orientation do not change.
  * @author Joe Kiniry (kiniry@acm.org)
