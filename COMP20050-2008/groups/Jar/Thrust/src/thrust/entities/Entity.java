@@ -11,6 +11,8 @@
 package thrust.entities;
 
 import thrust.entities.properties.GameColor;
+
+import java.awt.Color;
 import java.awt.Shape;
 
 /**
@@ -26,6 +28,8 @@ public abstract class Entity implements GameColor {
   private Shape my_shape;
   /** The state of the entity. */
   private byte my_state;
+  /** The color of the entity. */
+  private Color my_color;
 
   /**
    * Set the initial shape name, shape, and state of this entity.
@@ -88,5 +92,19 @@ public abstract class Entity implements GameColor {
    */
   public void render() {
     assert false; //@ assert false;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.properties.GameColor#color()
+   */
+  public Color color() {
+    return my_color;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.properties.GameColor#color(java.awt.Color)
+   */
+  public void color(final Color the_color) {
+    my_color = the_color;
   }
 }
