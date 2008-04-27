@@ -10,6 +10,8 @@
 
 package thrust.entities.in_game;
 
+import java.util.logging.Logger;
+
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
@@ -30,6 +32,9 @@ public class Barrier extends StaticEntity
 //@ public invariant opened() ==> !closed() & !moving();
 //@ public invariant moving() ==> !closed() & !opened();
 
+  /** Logger for animation. */
+  private static final Logger THE_LOGGER =
+    Logger.getLogger(Explosion.class.getName());
   /** Describes whether the barrier is open. */
   private boolean my_open_indicator = true;
   /** Describes whether the barrier is closed. */
@@ -101,6 +106,8 @@ public class Barrier extends StaticEntity
      * If that is half way through the animation the barrier is closed
      * If it is complete then the barrier is open again
      */
+    THE_LOGGER.fine("Animation step " +
+                    my_animation_counter + " has been rendered.");
     if (my_animation_counter % 20 == 0) {
       my_open_indicator = true;
       my_closed_indicator = false;

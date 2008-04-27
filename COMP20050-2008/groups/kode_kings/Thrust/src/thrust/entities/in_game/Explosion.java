@@ -9,6 +9,7 @@
  */
 package thrust.entities.in_game;
 
+import java.util.logging.Logger;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.animation.Animatable;
@@ -24,8 +25,13 @@ import thrust.animation.Animation;
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
 
+  /** Logger for animation. */
+  private static final Logger THE_LOGGER =
+    Logger.getLogger(Explosion.class.getName());
   /** The frames in the Explosion animation. */
   private Animation my_animation;
+  /** Animation frame counter. */
+  private int my_animation_counter;
 
   /** Explosion Constructor. */
   public Explosion() {
@@ -41,6 +47,11 @@ public class Explosion extends StaticEntity
   }
 
   public void animate() {
-    assert false;
+    my_animation_counter++;
+    THE_LOGGER.fine("Animation step " +
+                     my_animation_counter + " has been rendered.");
+    if (my_animation_counter % 10 == 0) {
+      my_animation_counter = 0;
+    }
   }
 }
