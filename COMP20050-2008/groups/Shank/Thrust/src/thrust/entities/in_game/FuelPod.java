@@ -36,11 +36,7 @@ public class FuelPod extends StaticEntity
    */
   private int my_fuel_content;
   /**
-   * the current fuel level.
-   */
-  private Fuelable my_fuel;
-  /**
-   * the maximum fuel level.
+   * the maximum fuel content.
    */
   private int my_maximum_fuel;
 
@@ -76,12 +72,6 @@ public class FuelPod extends StaticEntity
   public void set_fuel_content(final int the_fuel_content)
   {
     my_fuel_content = the_fuel_content;
-  }
-
-  public Fuelable fuel(final Fuelable the_fuel)
-  {
-    my_fuel = the_fuel;
-    return my_fuel;
   }
   public int fuel() {
     return my_fuel_content;
