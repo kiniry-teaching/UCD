@@ -18,41 +18,61 @@ import java.awt.Shape;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
+
 public abstract class Entity implements GameColor {
+
+ /** Name of current shape. */
+  private static String my_current_shape_name;
+ /** Type of current shape. */
+  private static Shape my_current_shape;
+ /** Current state of Entity. */
+  private static byte my_current_state;
+
   /**
    * @param the_initial_shape_name the initial shape name.
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
-   * @return A new entity with this initial shape name, shape, and state.
    */
-  public static Entity make(String the_initial_shape_name,
-                            Shape the_initial_shape,
-                            byte the_initial_state) {
-    assert false; //@ assert false;
+  public static Entity make(final String the_initial_shape_name,
+                            final Shape the_initial_shape,
+                            final byte the_initial_state) {
+
+    my_current_shape_name = the_initial_shape_name;
+    my_current_shape = the_initial_shape;
+    my_current_state = the_initial_state;
+
   }
 
   /**
    * @return What shape are you?
    */
-  public abstract /*@ pure @*/ String shape_name();
+  public /*@ pure @*/ String shape_name() {
+    return my_current_shape_name;
+  }
 
   /**
    * @return What shape are you?
    */
-  public abstract /*@ pure @*/ Shape shape();
+  public /*@ pure @*/ Shape shape() {
+    return my_current_shape;
+  }
 
   /**
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public abstract void shape(Shape the_shape);
+  public void shape(final Shape the_shape) {
+    my_current_shape = the_shape;
+  }
 
   /**
    * @return What is your physical state?
    * @note State is encoded by a non-negative number of "hit points".
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ byte state();
+  public /*@ pure @*/ byte state() {
+    return my_current_state;
+  }
 
   /**
    * This is your physical state.
@@ -60,7 +80,9 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
-  public abstract void state(byte the_state);
+  public void state(final byte the_state) {
+    my_current_state = the_state;
+  }
 
   /**
    * Render yourself.
