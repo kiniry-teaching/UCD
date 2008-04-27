@@ -234,7 +234,6 @@ public class Factory extends StaticEntity
       @                     chimney. *);
       @*/
   }
-
   /**
    * A sphere of a factory.
    * @author Joe Kiniry (kiniry@acm.org)
