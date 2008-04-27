@@ -1,4 +1,4 @@
-<<<<<<< .working
+
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
@@ -74,4 +74,3 @@ public class Bullet extends DynamicEntity
     @*/
   //@ public invariant (* Bullets have a mass of 1 kg. *);
 }
->>>>>>> .merge-right.r1941
