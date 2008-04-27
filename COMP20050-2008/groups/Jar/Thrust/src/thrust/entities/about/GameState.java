@@ -15,8 +15,6 @@ public class GameState extends AbstractGameState {
   private static int my_bonus;
   /** The amount of lives the player has. */
   private static byte my_lives;
-  /** The amount of fuel the ship has. */
-  private static int my_fuel;
   /** The high scores of the game. */
   private static HighScoreInterface[] my_high_scores =
     new HighScore[HIGH_SCORE_COUNT];
@@ -90,14 +88,6 @@ public class GameState extends AbstractGameState {
   public byte lives() {
 
     return my_lives;
-  }
-
-  /*
-   * @see thrust.entities.about.AbstractGameState#maximum_fuel()
-   */
-  public int maximum_fuel() {
-
-    return my_fuel;
   }
 
   /*
