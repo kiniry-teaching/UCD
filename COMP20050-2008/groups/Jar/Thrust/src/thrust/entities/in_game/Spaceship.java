@@ -21,7 +21,7 @@ import thrust.entities.behaviors.Tow;
  * @version 18 April 2008
  */
 public class Spaceship extends DynamicEntity
-  implements FriendEntity, Fuelable, Tow {
+implements FriendEntity, Fuelable, Tow {
   /*@ public invariant (* A spaceship's mass when empty of all fuel is
     @                     10000kg. *);
     @ public invariant EMPTY_MASS <= mass();
@@ -36,7 +36,7 @@ public class Spaceship extends DynamicEntity
   public static final int INITIAL_FUEL = 1000;
 
   /** The mass of each unit of fuel. */
-  public static final double FUEL_MASS = .001;
+  public static final double FUEL_MASS = 1;
 
   /** The fuel is initially set to the initial fuel value. */
   private int my_fuel = INITIAL_FUEL;
@@ -47,7 +47,10 @@ public class Spaceship extends DynamicEntity
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
    */
   public void change_fuel_content(final int the_fuel_change) {
-    my_fuel += the_fuel_change;
+    boolean balls = 
+      (fuel() + the_fuel_change < 0) ? (fuel() == 0) : ((maximum_fuel() < (fuel() + the_fuel_change)) ?
+                                                                                                       (my_fuel = maximum_fuel()) :
+                                                                                                         my_fuel = my_fuel + the_fuel_change));
   }
 
   /* (non-Javadoc)
@@ -76,8 +79,7 @@ public class Spaceship extends DynamicEntity
    * @see thrust.entities.about.Fuelable#set_fuel_content(int)
    */
   public void set_fuel_content(final int the_fuel_content) {
-    // TODO Auto-generated method stub
-
+    my_fuel = the_fuel_content;
   }
 
   /* (non-Javadoc)
