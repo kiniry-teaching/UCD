@@ -29,6 +29,30 @@ public class Explosion extends StaticEntity
  */
   private Color my_color = Color.ORANGE;
 
+ /**
+  *  The animation steps.
+  */
+  private final Object[] my_animation_steps =
+  {".", "*", "@", "#", "@", "*", "."};
+
+/**
+ * Current animation step.
+ */
+  private int my_step;
+
+/**
+ * The animation.
+ */
+  private Animation my_animation = (Animation) my_animation_steps[my_step];
+/**
+ * Constructor for creating an explosion.
+ * @param the_position
+ * @param the_orientation
+ * @param the_initial_shape_name
+ * @param the_initial_shape
+ * @param the_inital_state
+ */
+
   public Explosion(final double[] the_position,
                    final double the_orientation,
                    final String the_initial_shape_name,
@@ -40,6 +64,20 @@ public class Explosion extends StaticEntity
                     the_initial_shape, the_inital_state);
   }
 
+  public void animate() {
+    if (my_step == my_animation_steps.length - 1) {
+      my_step = 0;
+    } else
+      my_step++;
+    animation((Animation) my_animation_steps[my_step]);
 
+  }
+  public Animation animation() {
+    return my_animation;
+  }
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
+
+  }
 
 }
