@@ -16,6 +16,7 @@ import java.awt.Color;
  * A color.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ * test
  */
 public interface GameColor {
   //@ public model Color _the_color;
