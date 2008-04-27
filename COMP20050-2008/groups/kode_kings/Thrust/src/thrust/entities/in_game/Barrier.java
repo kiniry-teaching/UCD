@@ -101,14 +101,14 @@ public class Barrier extends StaticEntity
   }
 
   public void animate() {
-    my_animation_counter++;
     /* When animate is called a frame of animation is played
      * If that is half way through the animation the barrier is closed
      * If it is complete then the barrier is open again
      */
-    THE_LOGGER.fine("Animation step " +
+    my_animation_counter++;
+    THE_LOGGER.fine("Barrier animation step " +
                     my_animation_counter + " has been rendered.");
-    if (my_animation_counter % 20 == 0) {
+    if (my_animation_counter % (10 * 2) == 0) {
       my_open_indicator = true;
       my_closed_indicator = false;
       my_moving_indicator = false;

@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.util.logging.Logger;
+
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
@@ -29,8 +31,13 @@ public class Star extends StaticEntity
     @ public invariant (* A star's shape is always a small square. *);
     @*/
 
+  /** Logger for animation. */
+  private static final Logger THE_LOGGER =
+    Logger.getLogger(Explosion.class.getName());
   /** The frames in the Star animation. */
   private Animation my_animation;
+  /** Animation frame counter. */
+  private int my_animation_counter;
 
   /** Star Constructor. */
   public Star() {
@@ -46,6 +53,14 @@ public class Star extends StaticEntity
   }
 
   public void animate() {
-    assert false;
+    /* When animate is called a frame of animation is played
+     * Resets after star animation completes
+     */
+    my_animation_counter++;
+    THE_LOGGER.fine("Star animation step " +
+                     my_animation_counter + " has been rendered.");
+    if (my_animation_counter % 10 == 0) {
+      my_animation_counter = 0;
+    }
   }
 }

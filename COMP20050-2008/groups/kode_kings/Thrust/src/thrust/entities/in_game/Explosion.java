@@ -47,8 +47,11 @@ public class Explosion extends StaticEntity
   }
 
   public void animate() {
+    /* When animate is called a frame of animation is played
+     * Resets after explosion completes
+     */
     my_animation_counter++;
-    THE_LOGGER.fine("Animation step " +
+    THE_LOGGER.fine("Explosion animation step " +
                      my_animation_counter + " has been rendered.");
     if (my_animation_counter % 10 == 0) {
       my_animation_counter = 0;

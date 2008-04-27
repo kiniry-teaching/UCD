@@ -10,6 +10,7 @@
 package thrust.entities.in_game;
 
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
@@ -27,8 +28,13 @@ public class Space extends StaticEntity
 
   //@ public invariant (* Terrain and space are disjoint. *);
 
+  /** Logger for animation. */
+  private static final Logger THE_LOGGER =
+    Logger.getLogger(Explosion.class.getName());
   /** The frames in the Space animation. */
   private Animation my_animation;
+  /** Animation frame counter. */
+  private int my_animation_counter;
 
   /** Space Constructor. */
   public Space() {
@@ -60,6 +66,14 @@ public class Space extends StaticEntity
   }
 
   public void animate() {
-    assert false;
+    /* When animate is called a frame of animation is played
+     * Resets after space animation completes
+     */
+    my_animation_counter++;
+    THE_LOGGER.fine("Space animation step " +
+                     my_animation_counter + " has been rendered.");
+    if (my_animation_counter % 10 == 0) {
+      my_animation_counter = 0;
+    }
   }
 }
