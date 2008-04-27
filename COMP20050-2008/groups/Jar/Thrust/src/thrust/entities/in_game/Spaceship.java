@@ -9,6 +9,7 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
