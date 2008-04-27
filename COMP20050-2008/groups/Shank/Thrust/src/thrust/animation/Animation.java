@@ -14,7 +14,16 @@ package thrust.animation;
  * The frames in an animation.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ * @version 27 April 2008
  */
-public interface Animation {
 
+public interface Animation {
+  /**
+   * Starts the animation.
+   */
+  void start();
+  /**
+   * Stops the animation.
+   */
+  void stop();
 }
