@@ -8,9 +8,6 @@
  * @keywords "C=64", "Thrust", "game"
  */
 package thrust.entities.in_game;
-
-import java.awt.Color;
-
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
