@@ -1,14 +1,22 @@
-package ui;
+//package selfCheckOut.userInterface;
+//package ui;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+//import selfCheckOut.SelfCheckOut;
+//import selfCheckOut.ItemRec;
+
+/**
+ * @author Grainne Mulligan
+ * */
+
 
 public class Interface extends JFrame implements ActionListener
 {
 	static final long serialVersionUID=0;
 	public int customerNr; //number customer enters
 	public String customerNrString;
-	public String customerName;
+	public String customerName = "Frank";
 	public String itemName; //item name to be displayed 
 	public double itemPrice; //item price to be displayed
 	public String itemAllergies;
@@ -20,6 +28,8 @@ public class Interface extends JFrame implements ActionListener
 	public boolean fraudDetection; //true if fraud detected, false if no fraud detected. 
 	public boolean isStarted=false;
 	public boolean isFinished=false;
+	
+	private SelfCheckOut theCaller = null;
 	
 	//Item currentItem;
 	//Customer currentCustomer;
@@ -48,7 +58,7 @@ public class Interface extends JFrame implements ActionListener
 	
 	JLabel amountTenderedLabel = new JLabel("<html> Enter your amount tendered here: <br><br></html>");
 	JButton startShoppingButton = new JButton("START Shopping");
-	JButton scanItemButton = new JButton("SCAN item");
+	//JButton scanItemButton = new JButton("SCAN item");
 	JButton finishAndPayButton = new JButton("Finish and Pay");
 	JLabel subTotalLabel = new JLabel();
 	JLabel yourShopping = new JLabel("Your Shopping");
@@ -77,6 +87,21 @@ public class Interface extends JFrame implements ActionListener
 	JCheckBox item;//for displaying reminders
 	public String[] remindersList;
 	public String[] updatedRemindersList;
+	
+	JCheckBox bananas = new JCheckBox("Bananas");
+    JCheckBox milk = new JCheckBox("Milk");
+    JCheckBox bread = new JCheckBox("Bread");
+    JCheckBox beans = new JCheckBox("Beans");
+
+
+	
+	
+	public Interface(SelfCheckOut theCaller) {
+		
+		 this.theCaller = theCaller;
+		
+		
+	}
 	
     //welcome and customer number
     public JPanel getTitlePanel()
@@ -147,6 +172,15 @@ public class Interface extends JFrame implements ActionListener
     	remindersSection.setVisible(false);
     	
     	remindersPanel.add(updateRemindersText);
+    	
+    	remindersPanel.add(bananas);
+        bananas.setVisible(false);
+        remindersPanel.add(beans);
+        beans.setVisible(false);
+        remindersPanel.add(milk);
+        milk.setVisible(false);
+        remindersPanel.add(bread);
+        bread.setVisible(false);
     	remindersPanel.add(updateRemindersButton);
     	
     	updateRemindersText.setVisible(false);
@@ -245,14 +279,14 @@ public class Interface extends JFrame implements ActionListener
     	buttonsPanel = new JPanel();
     	buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
     	buttonsPanel.add(Box.createRigidArea(new Dimension(10, 50)));
-    	
+    	/**
     	buttonsPanel.add(scanItemButton);
     	scanItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
     	//scanItemButton.setAlignmentY(Component.CENTER_ALIGNMENT);
     	buttonsPanel.add(Box.createRigidArea(new Dimension(10, 50)));
     	scanItemButton.addActionListener(this);
-    	scanItemButton.setVisible(false);
-    	
+    	c.setVisible(false);
+    	*/
     	finishAndPayButton.setAlignmentX(Component.CENTER_ALIGNMENT);
     	//inishAndPayButton.setAlignmentY(Component.CENTER_ALIGNMENT);
     	buttonsPanel.add(Box.createRigidArea(new Dimension(10, 50)));
@@ -272,12 +306,10 @@ public class Interface extends JFrame implements ActionListener
     
     public void actionPerformed(ActionEvent e)
     {   
-    	if (e.getSource() == scanItemButton)
-    		scanItem();
+    	if (e.getSource() == startShoppingButton)
+    		startShopping();
         else if (e.getSource() == finishAndPayButton)
         	finishAndPay();
-        else if (e.getSource() == startShoppingButton)
-        	startShopping();
         else if (e.getSource()== finalPayButton)
         	finalScreen();
         else if (e.getSource()== updateRemindersButton)   	
@@ -289,11 +321,12 @@ public class Interface extends JFrame implements ActionListener
     	remindersThanks.setVisible(true);
     	return updatedRemindersList;
     }
-    
+
     public void startShopping()
     {
     	isStarted=true;
     
+    	this.theCaller.startShopping() ;
     	
     	//in title panel...
     	welcomeMessage.setVisible(true);
@@ -312,9 +345,14 @@ public class Interface extends JFrame implements ActionListener
 			
     	}*/
     	
+    	beans.setVisible(true);
+        bananas.setVisible(true);
+        milk.setVisible(true);
+        bread.setVisible(true);
+    	
     	//in buttons panel
     	startShoppingButton.setVisible(false);
-    	scanItemButton.setVisible(true);
+    	//scanItemButton.setVisible(true);
     	finishAndPayButton.setVisible(true);
     	
     	//in transactions panel
@@ -333,29 +371,24 @@ public class Interface extends JFrame implements ActionListener
     
     public void test2(String s)
     {
-    	transactionDetails.repaint();
-    	transactionDetails.append(s +"\t\n");
-    	transactionDetails.updateUI();
+        //transactionDetails.repaint();
+        //transactionDetails.append(s +"\t\n");
+        //transactionDetails.updateUI();
 
-    	transactionPanel.repaint();
+        //transactionPanel.repaint();
     }
     
+    //poo
     
-    public void scanItem()
-    {	
-    	//itemName = currentItem.name();
-    	//itemPrice = currentItem.price();
-    	//itemAllergies = currentItem.allergy();
-    	
-    	
-    	
-    	
-    	transactionDetails.append(itemName +"\t");
-    	transactionDetails.append("€"+ itemPrice +"\t");
-    	transactionDetails.append(itemAllergies +"\n");
-    	//subTotal = getCurrentTotal();
-    	
-    	 
+    
+    public void displayItems(ItemQuery currentItem) {
+        itemName = currentItem.name;
+        itemPrice = currentItem.price;
+        itemAllergies = currentItem.allergy;
+        transactionDetails.append(itemName +"\t");
+        transactionDetails.append("â‚¬"+ itemPrice +"\t");
+        transactionDetails.append(itemAllergies +"\n");
+        transactionDetails.updateUI();
     }
     
     public void finishAndPay()
@@ -366,13 +399,14 @@ public class Interface extends JFrame implements ActionListener
     	transactionInfo.setVisible(false);
     	transactionDetails.setVisible(false);
     	subTotalLabel.setVisible(false);
-    	scanItemButton.setVisible(false);
+    	//scanItemButton.setVisible(false);
     	finishAndPayButton.setVisible(false);
     	
     	totalAmountInfo.setVisible(true);
     	amountTenderedLabel.setVisible(true);
     	enterAmountTendered.setVisible(true);
     	finalPayButton.setVisible(true);
+    	this.theCaller.stopShopping() ;
     } 
     
     public void finalScreen()
@@ -388,6 +422,11 @@ public class Interface extends JFrame implements ActionListener
     	updateRemindersText.setVisible(false);
     	updateRemindersButton.setVisible(false);
     	remindersThanks.setVisible(false);
+    	
+    	beans.setVisible(false);
+        bananas.setVisible(false);
+        milk.setVisible(false);
+        bread.setVisible(false);
     	
     	thanksText.setVisible(true);
     	changeText.setVisible(true);
