@@ -26,6 +26,18 @@ public abstract class StaticEntity extends DynamicEntity {
    * static acceleration.
    */
   private double[] my_acc = {0, 0};
+  //@ public model boolean initialised;
+  //@ public initially initialised == false;
+  /**
+   * flag to indicate if instance of object is initialised.
+   */
+  private boolean my_initialized; //no need to assign, false by default
+  /**
+   * @return whether instances of this object are initialised.
+   */
+  public boolean is_initialized() {
+    return this.my_initialized;
+  }
 
   /**
    * Set the position and orientation of this entity.  You may only
@@ -40,6 +52,7 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures initialized;
   public void set_state(final double[] the_pos, final double the_ori) {
     super.set_state(the_pos, the_ori);
+    my_initialized = true;
   }
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
