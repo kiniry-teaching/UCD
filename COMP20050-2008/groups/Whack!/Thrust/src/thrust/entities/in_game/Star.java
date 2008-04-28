@@ -12,9 +12,13 @@ package thrust.entities.in_game;
 import java.awt.Color;
 import java.awt.Shape;
 import thrust.animation.Animatable;
+import thrust.animation.AnimatableWhack;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -25,15 +29,11 @@ import thrust.entities.StaticEntity;
 public class Star extends StaticEntity
     implements NeutralEntity, Animatable {
   /**
-   *
-   * @author Allison Fallon(allison.fallon@ucdconnect.ie)
-   *@version 23 April 2008
-   */
-  Color my_starcolor;
-  /**
-   *
-   */
-  Shape my_starshape;
+  *
+  * @author Allison Fallon(allison.fallon@ucdconnect.ie)
+  *@version 23 April 2008
+  */
+  AnimatableWhack my_animation;
   /**
    *
    */
@@ -46,6 +46,21 @@ public class Star extends StaticEntity
    *
    */
   final double my_mass;
+  /**
+   *
+   */
+  final byte my_state;
+  /**
+   *
+   */
+  Color my_starcolor;
+  /**
+   *
+   */
+  Shape my_starshape;
+  /**
+   *
+   */
 
   public double[] acceleration() {
 
@@ -86,9 +101,19 @@ public class Star extends StaticEntity
     return my_vel;
 
   }
+  /**
+   *
+   */
+  class Listener implements ActionListener {
+    public void actionPerformed(final ActionEvent the_event) {
+      my_starcolor.equals(Color.LIGHT_GRAY);
+    }
+  }
 
   public void render() {
-
+    final Listener my_listener = new Listener();
+    final Timer my_timer = new Timer(500, my_listener);
+    my_timer.start();
 
   }
   /**
@@ -180,38 +205,39 @@ public class Star extends StaticEntity
 
   public byte state() {
 
-    return 0;
+    return my_state;
   }
 
-  public void state(final byte the_state) {
+  public void set_state(final byte the_state) {
 
 
   }
 
   public void animate() {
-
+    my_animation.animate();
 
   }
 
   public Animation animation() {
 
-    return null;
+    return my_animation.animation();
   }
 
   public void animation(final Animation the_animation) {
-
+    my_animation.animation(the_animation);
 
   }
   public Color color() {
 
     my_starcolor.equals(Color.DARK_GRAY);
-    my_starcolor.equals(Color.LIGHT_GRAY);
+
 
     return my_starcolor;
 
   }
 
   public void color(final Color the_color) {
+
 
     my_starcolor = the_color;
 
