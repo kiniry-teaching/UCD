@@ -39,7 +39,7 @@ public class SoundEffect {
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in the provided file.
    */
-  public SoundEffect()throws IOException , UnsupportedAudioFileException ,
+  public SoundEffect(File my_soundFile)throws IOException , UnsupportedAudioFileException ,
   LineUnavailableException
 
   {

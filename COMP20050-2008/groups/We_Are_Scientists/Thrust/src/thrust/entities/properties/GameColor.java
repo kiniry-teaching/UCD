@@ -29,8 +29,10 @@ public interface GameColor {
    * @the_color the new color.
    */
   //@ ensures color() == the_color;
-  void color(Color the_color);
-
+  void color(Color the_color)
+  {
+the_color == Color.BLACK;
+  }
   //@ public invariant (* There are exactly 13 different colors available. *);
   /*@ public invariant _the_color == Color.BLACK | _the_color == Color.WHITE |
     @                  _the_color == Color.RED | _the_color == Color.GREEN |
