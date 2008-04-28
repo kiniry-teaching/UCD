@@ -19,6 +19,7 @@ import thrust.entities.StaticEntity;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import thrust.physics.Physicswhack;
 
 
 /**
@@ -29,10 +30,10 @@ import java.awt.event.ActionListener;
 public class Star extends StaticEntity
     implements NeutralEntity, Animatable {
   /**
-  *
-  * @author Allison Fallon(allison.fallon@ucdconnect.ie)
-  *@version 23 April 2008
-  */
+   *
+   * @author Allison Fallon(allison.fallon@ucdconnect.ie)
+   *@version 23 April 2008
+   */
   AnimatableWhack my_animation;
   /**
    *
@@ -41,11 +42,11 @@ public class Star extends StaticEntity
   /**
    *
    */
-  final double my_anglerad;
+  double my_anglerad;
   /**
    *
    */
-  final double my_mass;
+  double my_mass;
   /**
    *
    */
@@ -61,6 +62,23 @@ public class Star extends StaticEntity
   /**
    *
    */
+  final double[] my_position;
+  /**
+   *
+   */
+  final double my_orientation;
+  /**
+   *
+   */
+  final double[] my_acceleration;
+  /**
+   *
+   */
+  final double[] my_velocity;
+  /**
+   *
+   */
+  String my_shapename;
 
   public double[] acceleration() {
 
@@ -76,7 +94,7 @@ public class Star extends StaticEntity
   public double momentum() {
 
     final int my_elements = 2;
-    final double[] my_s = new double[my_elements];
+    double[] my_s = new double[my_elements];
     my_s = velocity();
 
     return mass() * my_s[0];
@@ -143,11 +161,11 @@ public class Star extends StaticEntity
     /**
      * width of rectangle.
      */
-    final int my_width = 0;
+    int my_width = 1;
     /**
      * height of rectangle.
      */
-    final int my_height = 0;
+    int my_height = 1;
     /**
      *
      */
@@ -208,7 +226,23 @@ public class Star extends StaticEntity
     return my_state;
   }
 
-  public void set_state(final byte the_state) {
+  public void set_state(final double[] the_position,
+                        final double the_orientation,
+                        final double[] the_acceleration,
+                        final double the_mass,
+                        final double[] the_velocity,
+                        final String the_shapename,
+                        final Shape the_shape,
+                        final byte the_state) {
+
+    super.set_Dynstate(the_position,
+                       the_orientation,
+                       the_acceleration,
+                       the_mass,
+                       the_velocity,
+                       the_shapename,
+                       the_shape,
+                       the_state);
 
 
   }
