@@ -57,7 +57,7 @@ public class SoundEffect {
    */
   //@ ensures is_playing;
   public void start() {
-    my_sound_clip.start;
+    my_sound_clip.start();
 
 
   }
