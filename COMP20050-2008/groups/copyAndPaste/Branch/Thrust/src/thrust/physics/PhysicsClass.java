@@ -47,6 +47,7 @@ public class  PhysicsClass implements PhysicsInterface {
   //@ ensures \result.length == 2;
   /*@ pure @*/
   public double[] acceleration() {
+    assert this.my_acceleration.length == ARRAYSIZE : "ERROR: size not 2";
     return this.my_acceleration;
   }
   /**
@@ -78,6 +79,7 @@ public class  PhysicsClass implements PhysicsInterface {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ double mass() {
+    assert this.my_mass >= 0 : "ERROR: Mass must be non-negative";
     return this.my_mass;
   }
   /**
@@ -104,6 +106,7 @@ public class  PhysicsClass implements PhysicsInterface {
    */
   //@ ensures \result.length == 2;
   public /*@ pure @*/ double[] position() {
+    assert this.my_position.length == ARRAYSIZE : "ERROR: size not 2";
     return this.my_position;
   }
   /**
