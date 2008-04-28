@@ -1,10 +1,13 @@
 package thrust.entities.about;
+
 /** Extends GameState, calls HighScore class.
  * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
  * @version 27 April 2008
  */
 public class GameState extends AbstractGameState {
 
+  /** Instance of HighScore class implementing HighScoreInterface. */
+  private static HighScore my_highscore;
   /** Int holding maximum amount of fuel allowed. */
   private static final int MAX_FUEL = 100000;
   /** HighScore class to keep track of score. */
@@ -39,34 +42,25 @@ public class GameState extends AbstractGameState {
     my_lives += some_new_lives;
   }
 
-/**
+/** Following methods implement HighScore instance. */
 
-  public HighScoreInterface high_score(int the_index) {
-    // TODO Auto-generated method stub
-    return null;
+  public int high_score(final int the_index) {
+    return my_highscore.high_score(the_index);
   }
 
-  public HighScoreInterface[] high_scores() {
-    // TODO Auto-generated method stub
-    return null;
+  public int[] high_scores() {
+    return my_highscore.high_scores();
   }
 
-
-
-
-  public void add_high_score(final HighScoreInterface the_new_high_score) {
-    // TODO Auto-generated method stub
-
+  public void add_high_score(final int the_new_high_score) {
+    my_highscore.add_high_score(the_new_high_score);
   }
 
-  public boolean new_high_score(HighScoreInterface the_high_score) {
-    // TODO Auto-generated method stub
-    return false;
+  public boolean new_high_score(final int the_high_score) {
+    return my_highscore.new_high_score(the_high_score);
   }
 
   public int score() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_highscore.score();
   }
-*/
 }
