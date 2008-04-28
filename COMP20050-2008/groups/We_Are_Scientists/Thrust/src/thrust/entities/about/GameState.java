@@ -17,7 +17,17 @@ package thrust.entities.about;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 11 April 2008
  */
-public class GameState {
+public class GameState extends FuelAble{
+  public GameState(float initialFuel) {
+    super(initialFuel);
+    // TODO Auto-generated constructor stub
+  }
+
+  static int bonus;
+  static int lives;
+  boolean death;
+  int score;
+  
   /**
    * There are eight high scores.
    */
@@ -32,7 +42,8 @@ public class GameState {
    */
   //@ ensures 0 <= \result;
   public static /*@ pure @*/ int bonus() {
-    return 0;
+    bonus++;
+    return bonus;
   }
 
   /**
@@ -42,7 +53,13 @@ public class GameState {
   //@ ensures bonus() == the_new_value;
   public void new_bonus(int the_new_value) {
     the_new_value =0;
-    bonus() = the_new_value;
+    bonus= the_new_value;
+    
+    if(bonus<0)
+     bonus= 0;
+    //should really be bonus = bonus^2-bonus^2; which gives 0
+    else
+    {bonus= bonus*1;}
   }
 
   //@ invariant (* Bonus values are always non-negative. *);
@@ -56,8 +73,8 @@ public class GameState {
    * a convenience method.
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ int current_fuel() {
-    return 0;
+  public /*@ pure @*/ float current_fuel() {
+    return Fuel;
   }
 
   /**
@@ -65,8 +82,9 @@ public class GameState {
    * @idea The maximum fuel of the spaceship.
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ int maximum_fuel() {
-    return 9999;
+  public /*@ pure @*/ float maximum_fuel() {
+    //return Float.POSITIVE_INFINITY;
+    return maximum_fuel();
   }
 
   /**
@@ -75,9 +93,12 @@ public class GameState {
   //@ ensures 0 <= \result;
   public /*@ pure @*/ int score() {
     int my_score =0;
+    if(my_score<0)
+      my_score=0;
     return my_score;
+   
   }
-
+ 
   //@ invariant (* Score is always non-negative and finite. *);
   //@ invariant 0 <= score();
 
@@ -87,6 +108,8 @@ public class GameState {
    */
   //@ ensures score() == \old(score() + some_new_points);
   public void change_score(int some_new_points) {
+    score = score()+some_new_points;
+   
     
   }
 
@@ -95,9 +118,11 @@ public class GameState {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte lives() {
-    return 0;
+    lives =4;
+    return (byte) lives;
   }
-
+  
+  
   //@ invariant (* Number of lives is always non-negative and finite. *);
   //@ invariant 0 <= lives();
 
@@ -106,6 +131,11 @@ public class GameState {
    */
   //@ ensures lives() == \old(lives() + some_new_lives);
   public /*@ pure @*/ void change_lives(byte some_new_lives) {
+    some_new_lives =1;
+    if(!death)
+    (lives) = lives+some_new_lives;
+    else
+      (lives)= lives - some_new_lives;
   }
 
   /**
@@ -114,6 +144,7 @@ public class GameState {
   //@ ensures \result.length == HIGH_SCORE_COUNT;
   //@ ensures \nonnullelements(\result);
   public /*@ pure @*/ HighScoreInterface[] high_scores() {
+    //high_scores =HIGH_SCORE_COUNT;
     return null;
   }
 
@@ -132,8 +163,16 @@ public class GameState {
    */
   //@ requires 0 <= the_index & the_index < HIGH_SCORE_COUNT;
   //@ ensures \result.equals(high_scores()[the_index]);
-  public /*@ pure non_null @*/
-  HighScoreInterface high_score(int the_index) {
+  public /*@ pure non_null @*/HighScoreInterface high_score(int the_index) {
+    int j;
+    for(j=0;j < HIGH_SCORE_COUNT;j++)
+    {}
+    for(int i=0; i>=0&&i<j; i++)
+    { 
+      //WTF WARHFHGHGGH
+      high_scores()[i].score() >= high_scores()[j].score());}
+    
+
     return null;
   }
 
@@ -159,6 +198,8 @@ public class GameState {
     @*/
   public void
   add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score) {
+    for(int i=0;i>=0&&i<HIGH_SCORE_COUNT;i++)
+    {high_score(i).equals(the_new_high_score);}
   }
 
   /**
