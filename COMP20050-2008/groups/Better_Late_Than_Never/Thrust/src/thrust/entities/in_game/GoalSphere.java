@@ -21,6 +21,25 @@ import thrust.entities.behaviors.Tow;
  */
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
+
+  /** Boolean holding whether GoalSphere is being towed or not. */
+  private boolean my_towed_state;
+
+  /**
+   * @return Are you currently towing or being towed?
+   */
+  public /*@ pure @*/ boolean towed() {
+    return my_towed_state;
+  }
+
+  /**
+   * You are now towing or being towed.
+   */
+  //@ ensures towed();
+  public void tow() {
+    my_towed_state = true;
+  }
+
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship
     @                     is destroyed. *);
