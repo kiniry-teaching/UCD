@@ -34,7 +34,7 @@ public class Barrier extends StaticEntity
 
   /** Logger for animation. */
   private static final Logger THE_LOGGER =
-    Logger.getLogger(Explosion.class.getName());
+    Logger.getLogger(Barrier.class.getName());
   /** Describes whether the barrier is open. */
   private transient boolean my_open_indicator = true;
   /** Describes whether the barrier is closed. */

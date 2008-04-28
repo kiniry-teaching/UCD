@@ -33,7 +33,7 @@ public class Star extends StaticEntity
 
   /** Logger for animation. */
   private static final Logger THE_LOGGER =
-    Logger.getLogger(Explosion.class.getName());
+    Logger.getLogger(Star.class.getName());
   /** The frames in the Star animation. */
   private transient Animation my_animation;
   /** Animation frame counter. */

@@ -136,7 +136,7 @@ public class Factory extends StaticEntity
     private transient AI my_disturb_ai;
     /** Logger for animation. */
     private final Logger my_logger =
-      Logger.getLogger(Explosion.class.getName());
+      Logger.getLogger(FactoryChimney.class.getName());
     /** The frames in the Star animation. */
     private transient Animation my_animation;
     /** Animation frame counter. */
