@@ -39,7 +39,7 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
 
-  public void set_state(final double[] the_position,
+  public void set_Staticstate(final double[] the_position,
                         final double the_orientation,
                         final double[] the_acceleration,
                         final double the_mass,
