@@ -18,7 +18,7 @@ public class GameState extends AbstractGameState {
   /**
    * the max fuel.
    */
-  private final int my_max_fuel;
+  private int my_max_fuel;
   /**
    * the current score.
    */
@@ -39,10 +39,7 @@ public class GameState extends AbstractGameState {
    * @param score
    * @param lives
    */
-  public GameState(final int a_fuel, final int a_max_fuel, final byte a_lives) {
-    this.my_fuel = a_fuel;
-    this.my_max_fuel = a_max_fuel;
-    this.my_lives = a_lives;
+  public GameState() {
     this.my_high_scores = new HighScoreClass[HIGH_SCORE_COUNT];
   }
   /**

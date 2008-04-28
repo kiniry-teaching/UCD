@@ -1,5 +1,8 @@
 package thrust.input;
 import java.util.logging.Logger;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -8,7 +11,7 @@ import java.util.logging.Logger;
  *                   Robert Plunkett: 06038883
  * @revised 20/04/08 Patrick Nevin
 */
-public class InputHandler {
+public class InputHandler extends KeyAdapter {
 
   /** Press h to Display High Score.*/
   public static final char DISPLAY_HIGH_SCORES = 'h';
@@ -28,6 +31,24 @@ public class InputHandler {
   public static final char USE_ENGINE = 16;
   /**Press [Space] to Use Shield.*/
   public static final char USE_SHIELD = ' ';
+  /**
+   * flag to determine when to stop/start game.
+   * setter and getter below.
+   */
+  private boolean my_game_on;
+
+  /**
+   * get value of stop_game.
+   */
+  public boolean get_game_on() {
+    return this.my_game_on;
+  }
+  /**
+   * set whether the game is on or off.
+   */
+  public void set_game_on(final boolean a_value) {
+    this.my_game_on = a_value;
+  }
   /**
    * @return What are the legal keyboard inputs?
    */
@@ -62,6 +83,7 @@ public class InputHandler {
         return true;
       }
     }
+    assert false : "ERROR: should never get here";
     return false;
   }
 
@@ -72,16 +94,6 @@ public class InputHandler {
   //@ requires legal_input(the_keyboard_input);
   public void process(final char the_keyboard_input) {
 
-    /**
-     *Is the game on or off, might have to move this
-     *condition somewhere else later,
-     */
-    boolean game_on = false;
-
-    /**
-     * Haven't yet decided how to deal with the key board input,
-     * so lets log for the time being!
-     */
     final Logger my_logger = Logger.getLogger("thrust.input.InputHandler");
     switch (the_keyboard_input) {
       case DISPLAY_HIGH_SCORES:
@@ -91,7 +103,7 @@ public class InputHandler {
         my_logger.info("New Command to deal with: TOGGLE_MUSIC_OR_EFFECTS");
         break;
       case STOP_GAME:
-        game_on = false;
+        this.set_game_on(false);
         my_logger.info("New Command to deal with: STOP_GAME");
         break;
       case FIRE_GUN:
@@ -110,12 +122,12 @@ public class InputHandler {
     }
     //char [space] is overloaded and has two associated behaviours
     //if the game is not on, start the game when [space] pressed
-    if (the_keyboard_input == ' '/**START_GAME*/ && !game_on) {
+    if (the_keyboard_input == ' ' &&  !this.get_game_on()) {
       my_logger.info("New Command to deal with: START_GAME");
-      game_on = true;
-    } //what's the story with this curly... seems alrite...
-    //otherwise if the game is not on use shield when [space] pressed
-    else if (the_keyboard_input == ' '/**USE_SHIELD*/ && game_on) {
+      this.set_game_on(true);
+    }
+    //otherwise if the game is not on, use shield when [space] pressed
+    else if (the_keyboard_input == ' ' && this.get_game_on()) {
       my_logger.info("New Command to deal with: USE_SHIELD ");
     }
   }

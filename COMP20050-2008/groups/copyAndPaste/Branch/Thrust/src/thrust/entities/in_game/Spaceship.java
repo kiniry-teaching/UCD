@@ -1,4 +1,3 @@
-<<<<<<< .working
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
@@ -118,4 +117,4 @@ public class Spaceship extends DynamicEntity
     @ public invariant color() == java.awt.Color.WHITE;
     @*/
 }
->>>>>>> .merge-right.r1941
+
