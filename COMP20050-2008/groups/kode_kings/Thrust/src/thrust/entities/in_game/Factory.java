@@ -54,7 +54,7 @@ public class Factory extends StaticEntity
 
   /** Factory Constructor. */
   public Factory() {
-
+    color(java.awt.Color.GREEN);
   }
 
   /**
@@ -83,9 +83,14 @@ public class Factory extends StaticEntity
    * @param the_damage_staus You have taken this many units of damage.
    */
   //@ requires 0 <= the_damage;
-  //@ ensures damage() == \old(damage() - the_damage);
+  //@ ensures damage() == \old(damage() + the_damage);
   public void damage(final byte the_damage) {
-    my_damage_status -= the_damage;
+    my_damage_status += the_damage;
+    if (my_damage_status <= 10) {
+      my_chimney.smoking(true);
+    } else {
+      my_chimney.smoking(false);
+    }
   }
 
   public AI attack() {
@@ -113,7 +118,10 @@ public class Factory extends StaticEntity
   }
 
   public void animate() {
-    my_chimney.animate();
+    //Only smoke if damage is less than or equal to 10
+    if (damage() <= 10) {
+      my_chimney.animate();
+    }
   }
 
   /**
@@ -134,7 +142,7 @@ public class Factory extends StaticEntity
     @*/
 
     /** Whether the FactoryChimney is smoking or not. */
-    private boolean my_smoking_state;
+    private boolean my_smoking_state = true;
     /** The attack AI of a Factory. */
     private transient AI my_attack_ai;
     /** The disturb AI of a Factory. */
@@ -149,7 +157,7 @@ public class Factory extends StaticEntity
 
     /** FactoryChimney Constructor. */
     public FactoryChimney() {
-
+      color(java.awt.Color.GREEN);
     }
 
     /**
@@ -222,7 +230,7 @@ public class Factory extends StaticEntity
 
     /** FactorySphere Constructor. */
     public FactorySphere() {
-
+      color(java.awt.Color.GREEN);
     }
   }
 }
