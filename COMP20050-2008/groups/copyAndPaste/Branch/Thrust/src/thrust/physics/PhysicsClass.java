@@ -30,8 +30,6 @@ public class  PhysicsClass implements PhysicsInterface {
   private double my_mass;
   /**the angle of the direction of an entity giving in rad's.*/
   private double my_orientation;
-    /**the speed of an entity in m/s.*/
-  private double my_speed;
   /**
    * Create an instance of Physics an set the following attributes.
    * @param mass, set the Entities mass
@@ -86,7 +84,15 @@ public class  PhysicsClass implements PhysicsInterface {
    * @return What is your momentum in kg's*meters per second?
    */
   public /*@ pure @*/ double momentum() {
-    return (this.my_speed * this.my_mass);
+    //don't know if this is right as i don't know d def of
+    //momentum
+
+    //get the velocity in the x direction
+    final double my_xMove = this.my_velocity[0];
+    //get the velocity in the y direction
+    final double my_yMove = this.my_velocity[1];
+    //multiply these and divide them by 2, the times mass
+    return (((my_xMove * my_yMove) / ARRAYSIZE) * this.my_mass);
   }
   /**
    * @return What is your orientation in rad's?
