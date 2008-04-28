@@ -11,9 +11,7 @@ package thrust.entities.in_game;
 
 import java.awt.Color;
 import java.awt.Shape;
-import java.awt.geom.Rectangle2D;
 
-import thrust.physics.*;
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
@@ -25,18 +23,49 @@ import thrust.entities.StaticEntity;
  * @version 18 April 2008
  */
 public class Barrier extends StaticEntity
-  implements NeutralEntity, Animatable, Shape, Physics {
+  implements NeutralEntity, Animatable {
 
   /**holds whether barrier is open or not.*/
   private boolean my_opened;
   /** holds whether barrier is closed or not.*/
   private boolean my_closed;
+  /**holds the position.*/
+  private double[] my_position;
+  /**holds the orientation.*/
+  private double my_orientation;
+  /**holds the acceleration.*/
+  private double[] my_acceleration;
+  /**holds the mass.*/
+  private double my_mass;
+  /**holds the velocity.*/
+  private double[] my_velocity;
+  /**the name of the shape.*/
+  private String my_shapename;
   /** the  shape of the barrier.*/
   private Shape my_shape;
   /** the state of the barrier.*/
   private byte my_state;
   /**the color of the barrier.*/
   private Color my_color;
+  /**the entity.*/
+  private StaticEntity my_entity;
+  /**the animation.*/
+  private Animation my_animation;
+
+  public Barrier(final double[] the_position,
+                 final double the_orientation,
+                 final double[] the_acceleration,
+                 final double the_mass,
+                 final double[] the_velocity,
+                 final String the_shapename,
+                 final Shape the_shape,
+                 final byte the_state) {
+    super();
+    super.set_Staticstate(the_position, the_orientation,
+                            the_acceleration, the_mass,
+                            the_velocity, the_shapename,
+                            the_shape, the_state);
+  }
 
 
   /**
@@ -108,26 +137,32 @@ public class Barrier extends StaticEntity
 
   public double[] acceleration() {
 
-    return acceleration();
+    return my_entity.acceleration();
   }
 
-  public double barrierMass() {
+  public void acceleration(final double[] the_acceleration) {
+    my_entity.acceleration(the_acceleration);
+  }
 
-    final double barrierMass = 70000;
-    return barrierMass;
+  public double mass() {
+    return my_mass;
+
+  }
+
+  public void mass(final double the_mass) {
+    my_entity.mass(the_mass);
   }
 
   public double momentum() {
-    final double speed = 10;
-    return barrierMass() * speed;
+    return my_entity.momentum();
   }
 
   public double[] velocity() {
-    final double [] acceleration = acceleration();
-    final double speed = acceleration[0];
-    final double orientation = acceleration[1];
-    final double[] velocity = {speed, orientation};
-    return velocity;
+    return my_entity.velocity();
+  }
+
+  public void velocity(final double[] the_velocity) {
+    my_entity.velocity(the_velocity);
   }
 
   public void render() {
@@ -143,17 +178,12 @@ public class Barrier extends StaticEntity
   }
 
   public void shape(final Shape the_shape) {
-    final int my_d = 10;
-    final int my_a = 20;
-    final int my_t = 10;
-    final int my_s = 20;
-    my_shape = new Rectangle2D.Float(my_d, my_a, my_t, my_s);
+    my_shape = the_shape;
 
   }
 
   public String shape_name() {
-    final String name = "Rectangle";
-    return name;
+    return my_shapename;
   }
 
   public byte state() {
@@ -180,28 +210,32 @@ public class Barrier extends StaticEntity
   }
 
   public Animation animation() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_animation;
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
+    my_animation = the_animation;
 
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_entity.gravitational_constant();
   }
 
   public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_orientation;
+  }
+
+  public void orientation(final double the_orientation) {
+    my_entity.orientation(the_orientation);
   }
 
   public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_position;
+  }
+
+  public void position(final double[] the_position) {
+    my_entity.position(the_position);
   }
 
   public void simulate(final double a_time_interval) {
@@ -210,7 +244,6 @@ public class Barrier extends StaticEntity
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
     return my_color;
   }
 
