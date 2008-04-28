@@ -61,7 +61,7 @@ public final class Main {
     thrust_frame.setSize(WIDTH, HEIGHT);
     intro_screen = new JTextArea();
     intro_screen.setFont(FONT);
-    intro_screen.setText("Welcome to Thrust");
+    intro_screen.setText("Thrust");
     intro_screen.setEditable(false);
     thrust_frame.getContentPane().add(intro_screen, BorderLayout.CENTER);
     thrust_frame.setVisible(true);
