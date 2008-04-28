@@ -9,9 +9,11 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
 import java.util.Collection;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -36,6 +38,37 @@ public class Space extends StaticEntity
    */
   public void add_star(final Star the_star) {
     assert false; //@ assert false;
+  }
+
+  public void animate() {
+    // TODO Auto-generated method stub
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(final Animation the_animation) {
+    // TODO Auto-generated method stub
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void simulate(final double some_seconds) {
+    // TODO Auto-generated method stub
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

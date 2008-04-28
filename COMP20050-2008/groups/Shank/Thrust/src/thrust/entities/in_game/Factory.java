@@ -45,7 +45,7 @@ public class Factory extends StaticEntity
    */
   private AI my_attackAI;
   /**
-   * The ai of a disturbing factory.
+   * The AI of a disturbing factory.
    */
   private AI my_disturbAI;
   public /*@ pure @*/ byte damage() {
@@ -61,7 +61,8 @@ public class Factory extends StaticEntity
   /**
    * @return What is your sphere?
    */
-  public /*@ pure @*/ FactorySphere sphere() {
+  public /*@ pure @*/ FactorySphere sphere()
+  {
     return null;
   }
   /**
@@ -176,7 +177,7 @@ public class Factory extends StaticEntity
       }
     }
     /**
-     * @return null
+     * @return attack behaviour.
      * Factory has no AI
      */
     public void attack(final AI the_behaviour) {

@@ -9,7 +9,10 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -20,6 +23,37 @@ import thrust.entities.StaticEntity;
  */
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  public void animate() {
+    // TODO Auto-generated method stub
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(final Animation the_animation) {
+    // TODO Auto-generated method stub
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void simulate(final double some_seconds) {
+    // TODO Auto-generated method stub
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
+  }
   /*@ public invariant (* A star's location is in space. *);
     @ public invariant (* A star interacts with no other entities. *);
     @ public invariant (* Each star blinks irregularly. *);

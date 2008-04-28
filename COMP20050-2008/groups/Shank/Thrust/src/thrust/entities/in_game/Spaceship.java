@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -33,6 +35,56 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+
+  public void change_fuel_content(final int the_fuel_change) {
+    // TODO Auto-generated method stub
+  }
+
+  public int fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int fuel_mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int maximum_fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void set_fuel_content(final int the_fuel_content) {
+    // TODO Auto-generated method stub
+  }
+
+  public void tow() {
+    // TODO Auto-generated method stub
+  }
+
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void simulate(final double some_seconds) {
+    // TODO Auto-generated method stub
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
+  }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 

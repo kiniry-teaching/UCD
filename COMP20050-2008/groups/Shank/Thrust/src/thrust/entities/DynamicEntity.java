@@ -49,11 +49,7 @@ public abstract class DynamicEntity extends Entity
                                         final Color the_colour,
                                         final String the_initial_shape_name,
                                         final Shape the_initial_shape,
-                                        final byte the_initial_state,
-                                        final double[] the_acceleration,
-                                        final double[] the_velocity,
-                                        final double the_mass,
-                                        final double the_momentum
+                                        final byte the_initial_state
   )
   {
     super.set_state(the_initial_shape_name, the_initial_shape,
@@ -61,10 +57,6 @@ public abstract class DynamicEntity extends Entity
     my_position = the_position;
     my_orientation = the_orientation;
     my_colour = the_colour;
-    my_acceleration = the_acceleration;
-    my_velocity = the_velocity;
-    my_mass = the_mass;
-    my_momentum = the_momentum;
   }
 
   /**

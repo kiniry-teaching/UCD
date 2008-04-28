@@ -9,8 +9,11 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.entities.EnemyEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy gun turret that shoots bullets at the spaceship.
@@ -19,6 +22,42 @@ import thrust.entities.StaticEntity;
  */
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
+
+  public AI attack() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void attack(final AI the_behavior) {
+    // TODO Auto-generated method stub
+  }
+
+  public AI disturb() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void disturb(final AI the_behavior) {
+    // TODO Auto-generated method stub
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void simulate(final double some_seconds) {
+    // TODO Auto-generated method stub
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
+  }
   /*@ public invariant (* A gun turret always resides on/adjacent to
     @                     the terrain. *);
     @ public invariant (* A gun turret's color is always green. *);

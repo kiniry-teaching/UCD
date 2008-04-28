@@ -10,7 +10,10 @@
 
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -23,8 +26,9 @@ import thrust.entities.StaticEntity;
 
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
-
+  /**Put java doc here.*/
   private boolean my_isopen;
+  /**Put java doc here.*/
   private boolean my_ismoving;
 
   /**
@@ -65,6 +69,37 @@ public class Barrier extends StaticEntity
   public void open() {
     my_ismoving = true;
     my_isopen = true;
+  }
+
+  public void animate() {
+    // TODO Auto-generated method stub
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(final Animation the_animation) {
+    // TODO Auto-generated method stub
+  }
+
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void simulate(final double some_seconds) {
+    // TODO Auto-generated method stub
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
   }
 
   /*@ public invariant (* Barriers are always in one of the three states

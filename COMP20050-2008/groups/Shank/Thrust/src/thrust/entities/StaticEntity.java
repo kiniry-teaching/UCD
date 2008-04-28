@@ -49,22 +49,13 @@ public abstract class StaticEntity extends DynamicEntity {
                         final Color the_colour,
                         final String the_initial_shape_name,
                         final Shape the_initial_shape,
-                        final byte the_initial_state,
-                        final double[] the_acceleration,
-                        final double[] the_velocity,
-                        final double the_mass,
-                        final double the_momentum) {
-    super.set_State(the_position,
-                    the_orientation,
-                    the_colour,
-                    the_initial_shape_name,
-                    the_initial_shape,
-                    the_initial_state,
-                    the_acceleration,
-                    the_velocity,
-                    the_mass,
-                    the_momentum);
-    
+                        final byte the_initial_state
+  )
+  {
+    super.set_State(the_position, the_orientation,
+                    the_colour, the_initial_shape_name,
+                    the_initial_shape, the_initial_state);
+
   }
 
   /* (non-Javadoc)
@@ -79,7 +70,8 @@ public abstract class StaticEntity extends DynamicEntity {
    * @see thrust.physics.PhysicsInterface#velocity()
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
-  public double[] velocity() {
+  public double[] velocity()
+  {
     return new double[] {0, 0};
   }
 
@@ -87,7 +79,8 @@ public abstract class StaticEntity extends DynamicEntity {
    * @see thrust.physics.PhysicsInterface#acceleration()
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
-  public double[] acceleration() {
+  public double[] acceleration()
+  {
     return new double[] {0, 0};
   }
 
@@ -95,7 +88,8 @@ public abstract class StaticEntity extends DynamicEntity {
    * @see thrust.physics.PhysicsInterface#momentum()
    */
   //@ also ensures \result == 0;
-  public double momentum() {
+  public double momentum()
+  {
     return 0.0;
   }
 
