@@ -52,6 +52,11 @@ public class Factory extends StaticEntity
   /** This factories sphere. */
   private transient FactorySphere my_sphere;
 
+  /** Factory Constructor. */
+  public Factory() {
+
+  }
+
   /**
    * @return How much damage have you sustained?
    */
@@ -142,6 +147,11 @@ public class Factory extends StaticEntity
     /** Animation frame counter. */
     private transient int my_animation_counter;
 
+    /** FactoryChimney Constructor. */
+    public FactoryChimney() {
+
+    }
+
     /**
      * @return Are you smoking?
      */
@@ -199,7 +209,8 @@ public class Factory extends StaticEntity
   /**
    * A sphere of a factory.
    * @author Ciaran Hale (ciaran.hale@ucdconnect.ie)
-   * @version 18 April 2008
+   * @author Colin Casey (colin.casey@org.com)
+   * @version 28 April 2008
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
@@ -208,5 +219,10 @@ public class Factory extends StaticEntity
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
+
+    /** FactorySphere Constructor. */
+    public FactorySphere() {
+
+    }
   }
 }
