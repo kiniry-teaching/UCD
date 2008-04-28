@@ -160,13 +160,13 @@ public class Factory extends StaticEntity
     @*/
 
     /** Whether the FactoryChimney is smoking or not. */
-    private boolean my_smoking_state = true;
+    private transient boolean my_smoking_state = true;
     /** The attack AI of a Factory. */
     private transient AI my_attack_ai;
     /** The disturb AI of a Factory. */
     private transient AI my_disturb_ai;
     /** Logger for animation. */
-    private final Logger my_logger =
+    private final transient Logger my_logger =
       Logger.getLogger(FactoryChimney.class.getName());
     /** The frames in the Star animation. */
     private transient Animation my_animation;
