@@ -8,14 +8,16 @@
  * @keywords "C=64", "Thrust", "game"
  */
 package thrust;
-import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import thrust.audio.Music;
 import thrust.input.InputHandler;
+import thrust.entities.about.GameState;
 /**
  * Simulating all of the entities in the game to realize the game.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -50,31 +52,57 @@ public final class Main {
       my_log.log(Level.SEVERE, "Uncaught exception", u);
     }
     // display the title screen
-
+    //record the time the game has exsisted for in millisecs.
+    long start_time, stop_time, time_gone;
     // wait for keyboard input
     //grab the user input
     final Scanner user_input = new Scanner(System.in);
-    //assign input to a char
-    final char ch = user_input.next().charAt(0);
-    //create new instance of InputHandler to deal with input
-    final InputHandler key_handler = new InputHandler();
-    //now process the keyboard input
-    key_handler.process(ch);
+    //cast the input to a char
+    char ch = user_input.next().charAt(0);
+    //create a new instance of InputHandler
+    InputHandler key_handler;
+    //create a new instance of GameState
+    final GameState the_game = new GameState();
+    //start recording time
+    start_time = -System.currentTimeMillis();
+    while (ch != InputHandler.STOP_GAME) {
+      //keep getting the users input
+      ch = user_input.next().charAt(0);
+      //create new instance of InputHandler to deal with input
+      key_handler = new InputHandler();
+      //now process the keyboard input
+      key_handler.process(ch);
 
-    // repeat the following until the player asks to quit
-    //   show the high score display
-    //   wait for input to start the game
-    //   create game map and initialize location of all entities
-    //   repeat the following until the player is out of lives or asks to quit:
+      // repeat the following until the player asks to quit
+      while (key_handler.get_game_on()) {
+      //   show the high score display
+      //   wait for input to start the game
+      //   create game map and initialize location of all entities
+      //repeat the following until the player is out of lives or asks to quit:
+        while (the_game.lives() > 0) {
+
+          stop_time = System.currentTimeMillis();
+          time_gone = start_time + stop_time;
     //      record the current time T
     //      perform a step in the simulation
     //      render all entities
     //      process the next keyboard input
     //      record the current time T'
+          /**
+           * thought you said not to use threads??
+           */
+          try {
+            Thread.sleep(1000 / 30);
+          } catch (InterruptedException ie) {
+            my_log.log(Level.SEVERE, "Uncaught exception", ie);
+          }
     //      wait for (1/30th of a second - (T-T'))
     //   remove the game interface
     //   if the player has a new high score
     //     ask them to input their initials
     //     save the new high score
-  }
-}
+        } //end while
+      } //end second while
+    } //end outer while
+  } //end main()
+} // end class
