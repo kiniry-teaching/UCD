@@ -1,18 +1,6 @@
-/*
- * A re-implementation of the classic C=64 game 'Thrust'.
- * @author "Joe Kiniry (kiniry@acm.org)"
- *
- * @module "COMP 20050, COMP 30050"
- * @creation_date "March 2007"
- * @last_updated_date "April 2008"
- * @keywords "C=64", "Thrust", "game"
- */
-
 package thrust.entities.about;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -54,7 +42,6 @@ public abstract class GameState extends AbstractGameState {
         for (int i = 0; i < s.length(); i++)
         {
           storeInput[i] = s.charAt(i);
-          System.out.println(storeInput[i]);
         }
       }
       int current = 0;
@@ -303,10 +290,4 @@ public abstract class GameState extends AbstractGameState {
 
   }
 
-  /**
-   * A pair of a sequence of three initials and a score.
-   *
-   * @author Joe Kiniry (kiniry@acm.org)
-   * @version 11 April 2008
-   */
 }
