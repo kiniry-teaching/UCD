@@ -21,6 +21,7 @@ import thrust.entities.StaticEntity;
  * The vacuum in which entities exist.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ * Edited by Ben Fitzgerald 28/04/2008
  */
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
@@ -41,34 +42,34 @@ public class Space extends StaticEntity
   }
 
   public void animate() {
-    // TODO Auto-generated method stub
+    // TODO animate method stub
   }
 
   public Animation animation() {
-    // TODO Auto-generated method stub
+    // TODO animation getter method stub
     return null;
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
+    // TODO animation setter method stub
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
+    // TODO gravitational_constant getter method stub
     return 0;
   }
 
   public void simulate(final double some_seconds) {
-    // TODO Auto-generated method stub
+    // TODO simulate method stub
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
+    // TODO color getter method stub
     return null;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    // TODO color setter  method stub
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

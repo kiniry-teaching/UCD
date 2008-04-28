@@ -1,10 +1,13 @@
 package thrust.input;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  * Edited by Ben Fitzgerald on 07/04/2008
+ * Edited by Ben Fitzgerald 28/04/2008
  * Doing the input handlers char values and process method
  */
 public class InputHandler {
@@ -77,28 +80,40 @@ public class InputHandler {
   //@ requires legal_input(the_keyboard_input);
   public void process(final char the_keyboard_input)
   {
+    final Logger my_inputLog = Logger.getLogger("thrust.input.InputLog");
+
     switch(the_keyboard_input)
     {
-      // Change use logging
-      // starts Displays high score method called.
-      case DISPLAY_HIGH_SCORES: // ("starts Displays high score method");
-     // Toggles the music or effects on or off method called.
-      case TOGGLE_MUSIC_OR_EFFECTS: //("Toggles the music or effects ");
-     // Starts the game method called.
-      case START_GAME: //  ("Starts the game");
+        // Change use logging
+        // starts Displays high score method called.
+      case DISPLAY_HIGH_SCORES:
+        my_inputLog.log(Level.ALL , "starts Displays high score method");
+        // Toggles the music or effects on or off method called.
+      case TOGGLE_MUSIC_OR_EFFECTS:
+        my_inputLog.log(Level.ALL , "Toggles the music or effects ");
+        // Starts the game method called.
+      case START_GAME:
+        my_inputLog.log(Level.ALL , "Starts the game");
      // Stops the game method called.
-      case STOP_GAME: //  ("Stops the game");
+      case STOP_GAME:
+        my_inputLog.log(Level.ALL , "Stops the game");
      // fire ships's gun method called.
-      case FIRE_GUN: //  ("fire ships's gun");
+      case FIRE_GUN:
+        my_inputLog.log(Level.ALL , "fire ships's gun");
      // Rotate ship left method called.
-      case TURN_LEFT: //  ("Rotate ship left");
+      case TURN_LEFT:
+        my_inputLog.log(Level.ALL , "Rotate ship left");
         // Rotate ship right method called.
-      case TURN_RIGHT: //  ("Rotate ship right");
+      case TURN_RIGHT:
+        my_inputLog.log(Level.ALL , "Rotate ship right");
         // Use ship's engine method called.
-      case USE_ENGINE: //  ("Use ship's engine");
+      case USE_ENGINE:
+        my_inputLog.log(Level.ALL , "Use ship's engine");
      // Use ships shield method called.
-      case USE_SHIELD: //  ("Use ships shield");
-      default: // ("illegal input");// Unknown char
+      case USE_SHIELD:
+        my_inputLog.log(Level.ALL , "Use ships shield");
+      default:
+        my_inputLog.log(Level.ALL , "illegal input"); // Unknown char
     }
   }
 }

@@ -19,6 +19,7 @@ import thrust.physics.PhysicsInterface;
  * Entities whose position or orientation change.
  * @author Ben Fitzgerald  (ben.fitz@hotmail.com)
  * @version 24 April 2008
+ *  Edited by Ben Fitzgerald 28/04/2008
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
@@ -180,8 +181,9 @@ public abstract class DynamicEntity extends Entity
   }
 
   /**
- * Simulate yourself for this many seconds.
- * */
+   * Simulate yourself for this many seconds.
+   * @param Simulate yourself for this many seconds.
+   * */
   public void simulate(final int the_run_time)
   {
     //TODO simulation method.

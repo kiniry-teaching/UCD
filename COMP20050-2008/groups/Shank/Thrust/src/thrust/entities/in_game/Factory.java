@@ -23,6 +23,7 @@ import thrust.entities.behaviors.AI;
  * @author Joe Kiniry (kiniry@acm.org)
  * Edited by Roger Thomas.
  * @version 28 April 2008
+ *  Edited by Ben Fitzgerald 28/04/2008
  */
 
 public class Factory extends StaticEntity

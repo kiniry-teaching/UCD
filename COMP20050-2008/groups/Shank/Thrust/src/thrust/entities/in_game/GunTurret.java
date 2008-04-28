@@ -19,44 +19,45 @@ import thrust.entities.behaviors.AI;
  * An enemy gun turret that shoots bullets at the spaceship.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ *  Edited by Ben Fitzgerald 28/04/2008
  */
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
 
   public AI attack() {
-    // TODO Auto-generated method stub
+    // TODO attack getter method stub
     return null;
   }
 
   public void attack(final AI the_behavior) {
-    // TODO Auto-generated method stub
+    // TODO attack getter method stub
   }
 
   public AI disturb() {
-    // TODO Auto-generated method stub
+    // TODO disturb getter method stub
     return null;
   }
 
   public void disturb(final AI the_behavior) {
-    // TODO Auto-generated method stub
+    // TODO disturb setter method stub
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
+    // TODO gravitational_constant getter method stub
     return 0;
   }
 
   public void simulate(final double some_seconds) {
-    // TODO Auto-generated method stub
+    // TODO simulate method stub
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
+    // TODO color getter method stub
     return null;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    // TODO color setter  method stub
   }
   /*@ public invariant (* A gun turret always resides on/adjacent to
     @                     the terrain. *);

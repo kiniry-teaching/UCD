@@ -18,26 +18,27 @@ import thrust.entities.StaticEntity;
  * The planet on which some entities rest.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ * Edited by Ben Fitzgerald 28/04/2008
  */
 public class Terrain extends StaticEntity
   implements NeutralEntity {
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
+    // TODO gravitational_constant getter method stub
     return 0;
   }
 
   public void simulate(final double some_seconds) {
-    // TODO Auto-generated method stub
+    // TODO simulate method stub
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
+    // TODO color getter method stub
     return null;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    // TODO color setter method stub
   }
   /*@ public invariant (* Terrain and space are disjoint. *);
     @ public invariant (* The shape of the terrain is rendered as a

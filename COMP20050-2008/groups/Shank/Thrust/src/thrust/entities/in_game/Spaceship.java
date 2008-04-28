@@ -20,6 +20,7 @@ import thrust.entities.behaviors.Tow;
  * The player's main vehicle.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ *  Edited by Ben Fitzgerald 28/04/2008
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
@@ -37,53 +38,53 @@ public class Spaceship extends DynamicEntity
   public static final int INITIAL_FUEL = 1000;
 
   public void change_fuel_content(final int the_fuel_change) {
-    // TODO Auto-generated method stub
+    // TODO change_fuel_content setter method stub
   }
 
   public int fuel() {
-    // TODO Auto-generated method stub
+    // TODO fuel getter method stub
     return 0;
   }
 
   public int fuel_mass() {
-    // TODO Auto-generated method stub
+    // TODO fuel_mass getter method stub
     return 0;
   }
 
   public int maximum_fuel() {
-    // TODO Auto-generated method stub
+    // TODO maximum_fuel getter method stub
     return 0;
   }
 
   public void set_fuel_content(final int the_fuel_content) {
-    // TODO Auto-generated method stub
+    // TODO set_fuel_content setter method stub
   }
 
   public void tow() {
-    // TODO Auto-generated method stub
+    // TODO tow method stub
   }
 
   public boolean towed() {
-    // TODO Auto-generated method stub
+    // TODO  towed gettermethod stub
     return false;
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
+    // TODO gravitational_constant method stub
     return 0;
   }
 
   public void simulate(final double some_seconds) {
-    // TODO Auto-generated method stub
+    // TODO simulate method stub
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
+    // TODO color getter method stub
     return null;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    // TODO color setter method stub
   }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
