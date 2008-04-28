@@ -30,6 +30,10 @@ public abstract class Entity implements GameColor {
                         final Shape the_initial_shape,
                         final byte the_initial_state) {
 
+    final Entity ent = null;
+    ent.shape(the_initial_shape);
+    ent.state(the_initial_state);
+
     assert false; //@ assert false;
   }
 
@@ -37,8 +41,8 @@ public abstract class Entity implements GameColor {
    * @return What shape are you?
    */
   public /*@ pure @*/ String shape_name() {
-    assert false; //@ assert false;
-    return null;
+
+    return this.shape().toString();
   }
 
   /**
