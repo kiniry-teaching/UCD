@@ -1,44 +1,35 @@
 package thrust.entities;
-
-import thrust.entities.behaviors.AI;
-
-/**
- * An entity that is a threat to the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
- */
-public class EnemyEntityIO implements EnemyEntity {
+   
+   import thrust.entities.behaviors.AI;
+   
+   public class EnemyEntityIO implements EnemyEntity{
+     /**
+      * The bullet's/turret's disturb behavior.
+      */
+    private AI my_disturb;
+    /**
+     * The bullet's/turret's attack behavior.
+     */
+    private AI my_attack;
+    
+    public boolean Attack() {
+      return true;
+     
+    }
   
-  private AI my_Disturb;
+    public AI attack() {
+      return my_attack;
+    }
   
+    public void attack(AI behavior) {
+      my_attack = behavior;
+    }
+ 
+    public AI disturb() {
+      return my_disturb;
+    }
   
-  
-  private AI my_attack;
-      public void EnemyAI() {
-       
-      }
-  /**
-   * @return What is your attack behavior AI?
-   */
-  public/*@ pure @*/ AI attack()
-  {return attack;}
-
-  /**
-   * @return What is your disturb behavior AI?
-   */
-  public/*@ pure @*/ AI disturb()
-  {return AI;}
-
-  /**
-   * @param the_behavior This is your attack behavior.
-   */
-  //@ ensures attack() == the_behavior;
-  public void attack(AI the_behavior)
-  {}
-
-  /**
-   * @param the_behavior This is your disturb behavior.
-   */
-  //@ ensures disturb() == the_behavior;
-  void disturb(AI the_behavior);
-}
+    public void disturb(AI behavior) {
+      my_disturb = behavior;
+    }
+  }
