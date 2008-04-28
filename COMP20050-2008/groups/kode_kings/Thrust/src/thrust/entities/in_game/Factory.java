@@ -48,13 +48,31 @@ public class Factory extends StaticEntity
   /** Amount of damage taken by factory. */
   private transient byte my_damage_status;
   /** This factories chimney. */
-  private transient FactoryChimney my_chimney;
+  private final transient FactoryChimney my_chimney;
   /** This factories sphere. */
-  private transient FactorySphere my_sphere;
+  private final transient FactorySphere my_sphere;
 
   /** Factory Constructor. */
   public Factory() {
     color(java.awt.Color.GREEN);
+    my_chimney = new FactoryChimney();
+    my_sphere = new FactorySphere();
+  }
+
+  /**
+   * set_state method that overrides StaticEntity set_state so that
+   * it calls set_state for the factory's chimney and sphere.
+   */
+  public void set_state(final double[] the_position,
+                        final double the_orientation) {
+    position(the_position);
+    orientation(the_orientation);
+    mass(0);
+    final double[] temp = {0, 0};
+    velocity(temp);
+    acceleration(temp);
+    my_chimney.set_state(the_position, the_orientation);
+    my_sphere.set_state(the_position, the_orientation);
   }
 
   /**
