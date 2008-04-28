@@ -14,6 +14,7 @@ package thrust.entities;
  * Entities whose position and orientation do not change.
  * @author Joe Kiniry (kiniry@acm.org)
  * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie)
+ * @author Colin Casey (colin.casey@org.com)
  * @version 28 April 2008
  */
 public class StaticEntity extends DynamicEntity {
@@ -30,15 +31,11 @@ public class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  /** The position of this entity. */
-  private double[] my_position;
-  /** The orientation of this entity. */
-  private double my_orientation;
-  
+
   public void set_state(final double[] the_position,
                         final double the_orientation) {
-    my_position = the_position;
-    my_orientation = the_orientation;
+    position(the_position);
+    orientation(the_orientation);
   }
 
   //@ public invariant (* All queries are constant. *);
