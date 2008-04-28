@@ -81,7 +81,7 @@ public class Factory extends StaticEntity
 
   /**
    * A chimney of a factory.
-   * @author Joe Kiniry (kiniry@acm.org)
+   * @author Ciaran Hale (ciaran.hale@ucdconnect.ie)
    * @version 18 April 2008
    */
   public class FactoryChimney extends StaticEntity
@@ -117,7 +117,7 @@ public class Factory extends StaticEntity
 
   /**
    * A sphere of a factory.
-   * @author Joe Kiniry (kiniry@acm.org)
+   * @author Ciaran Hale (ciaran.hale@ucdconnect.ie)
    * @version 18 April 2008
    */
   public class FactorySphere extends StaticEntity
