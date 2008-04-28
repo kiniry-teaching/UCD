@@ -18,16 +18,17 @@ import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @version 27 April 2008
  */
+//@ Still have to implement AI class correctly. <--------
 public class Factory extends StaticEntity
   implements EnemyEntity { // Removed implements Animatable => FactorySmoke
 
+  /** Byte holding starting hit points of Factory. */
+  private static final byte my_starting_hp = 20;
   /** Byte holding current hit points of Factory. */
   private static byte my_hp;
-  /** Byte holding starting hit points of Factory. */
-  private static byte my_starting_hp;
   /** Instance of FactoryChimney class associated with this Factory. */
   private FactoryChimney my_factorychimney;
   /** Instance of FactorySphere class associated with this Factory. */
