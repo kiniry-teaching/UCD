@@ -10,6 +10,7 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -20,6 +21,32 @@ import thrust.entities.StaticEntity;
  */
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  /** Animation holding animation steps for Star class. */
+  private Animation my_animation;
+
+  /**
+   * @return What is your animation?
+   */
+  public /*@ pure @*/ Animation animation() {
+    return my_animation;
+  }
+
+  /**
+   * @param the_animation This is your animation.
+   */
+  //@ ensures animation() == the_animation;
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
+  }
+
+  /**
+   * Take a next animation step.
+   */
+  public void animate() {
+    my_animation.animate(); // Animatable.animate() method UNFINISHED
+  }
+  
   /*@ public invariant (* A star's location is in space. *);
     @ public invariant (* A star interacts with no other entities. *);
     @ public invariant (* Each star blinks irregularly. *);
