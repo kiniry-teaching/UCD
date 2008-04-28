@@ -16,8 +16,8 @@ package thrust.animation;
  * @version 18 April 2008
  */
 public class AnimatableClass {
-  /**An instance of the Animation class.
-   * 
+  /**
+   * An instance of the Animation class.
    */
   private Animation my_animation = new AnimationClass();
   /**
@@ -31,7 +31,7 @@ public class AnimatableClass {
    * @param the_animation This is your animation.
    */
   //@ ensures animation() == the_animation;
-  public void animation(Animation the_animation) {
+  public void animation(final Animation the_animation) {
     this.my_animation = the_animation;
   }
 
@@ -39,6 +39,6 @@ public class AnimatableClass {
    * Take a next animation step.
    */
   public void animate() {
-    //do something probably with an insance g of Graphics
+    //do something probably with an instance g of Graphics
   }
 }
