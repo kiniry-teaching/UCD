@@ -11,6 +11,7 @@ package thrust.entities.in_game;
 import java.awt.Color;
 import java.awt.Shape;
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -21,10 +22,19 @@ import thrust.entities.StaticEntity;
  */
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
-/**.
-   * This is for the animation of a star
+
+  /**
+   * The animations of the star.
    */
-  private Animatable my_animation;
+  private final Object[] my_animation_steps = {".", "*"};
+  /**
+   * The current step.
+   */
+  private int my_step;
+  /**
+   * The current animation.
+   */
+  private Animation my_animation = (Animation) my_animation_steps[my_step];
 
   public Star(final double[] the_position,
             final double the_orientation, final Color the_color,
@@ -39,14 +49,21 @@ public class Star extends StaticEntity
                   the_initial_state);
 
   }
+  public void animate() {
+    if (my_step == my_animation_steps.length - 1) {
+      my_step = 0;
+    } else
+      my_step++;
+    animation((Animation) my_animation_steps[my_step]);
 
-  /*public void animate() {
-    my_animation.animate();
+  }
+  public Animation animation() {
+    return my_animation;
+  }
+  public void animation(final Animation the_animation) {
+    my_animation = the_animation;
   }
 
-  public Animation animation() {
-    return my_animation.animation();
-  }*/
 
   /*@ public invariant (* A star's location is in space. *);
     @ public invariant (* A star interacts with no other entities. *);

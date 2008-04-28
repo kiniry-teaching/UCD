@@ -77,7 +77,6 @@ public class Explosion extends StaticEntity
   }
   public void animation(final Animation the_animation) {
     my_animation = the_animation;
-
   }
 
 }

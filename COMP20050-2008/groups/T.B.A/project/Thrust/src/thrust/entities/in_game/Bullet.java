@@ -40,7 +40,6 @@ public class Bullet extends DynamicEntity
                 final byte the_initial_state,
                 final double[] the_acceleration,
                 final double[] the_velocity,
-                final double the_mass,
                 final double some_seconds,
                 final double the_momentum
   )
@@ -53,7 +52,7 @@ public class Bullet extends DynamicEntity
                         the_initial_state,
                         the_acceleration,
                         the_velocity,
-                        the_mass,
+                        mass(),
                         some_seconds,
                         the_momentum);
 

@@ -10,12 +10,39 @@
 
 package thrust;
 
+import thrust.audio.Music;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import java.awt.BorderLayout;
+
 /**
  * Simulating all of the entities in the game to realize the game.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
 public final class Main {
+  /**
+   * The window for Thrust.
+   */
+  private static JFrame thrust_frame;
+  /**
+   * Window height.
+   */
+  private static final int HEIGHT = 400;
+  /**
+   * Window width.
+   */
+  private static final int WIDTH = 600;
+  /**
+   * The introduction to thrust.
+   */
+  private static JTextArea intro_screen;
+  /**
+   * The Font.
+   */
+  private final static Font FONT = new Font("Serif", Font.BOLD, 40);
+
   /**
    * This class cannot be constructed.
    */
@@ -29,8 +56,18 @@ public final class Main {
    */
   public static void main(final String[] the_args) {
     assert false; //@ assert false;
+    thrust_frame = new JFrame("Thrust");
+    thrust_frame.getContentPane().setLayout(new BorderLayout());
+    thrust_frame.setSize(WIDTH, HEIGHT);
+    intro_screen = new JTextArea();
+    intro_screen.setFont(FONT);
+    intro_screen.setText("Welcome to Thrust");
+    intro_screen.setEditable(false);
+    thrust_frame.getContentPane().add(intro_screen, BorderLayout.CENTER);
+    thrust_frame.setVisible(true);
     // display the title screen
-    // play title music
+    final Music music_effect = new Music();
+    //music_effect.start();
     // wait for keyboard input
     // repeat the following until the player asks to quit
     //   show the high score display

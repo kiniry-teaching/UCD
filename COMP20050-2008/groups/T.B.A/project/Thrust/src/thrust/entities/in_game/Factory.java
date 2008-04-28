@@ -43,7 +43,7 @@ public class Factory extends StaticEntity
 /**
  * The color of a factory.
  */
-  private Color my_color = Color.yellow;
+  private Color my_color = Color.YELLOW;
 /**
  * The AI.
  */
@@ -141,7 +141,7 @@ public class Factory extends StaticEntity
 /**
 * The color of a factory.
 */
-    private Color my_color = Color.yellow;
+    private Color my_color = Color.YELLOW;
 
 /**
  * The steps in the animation,text based.
@@ -203,7 +203,6 @@ public class Factory extends StaticEntity
       } else
         my_step++;
       animation((Animation) my_animation_steps[my_step]);
-
     }
     public Animation animation() {
       return my_animation;

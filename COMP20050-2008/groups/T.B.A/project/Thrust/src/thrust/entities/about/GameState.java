@@ -70,8 +70,8 @@ public abstract class GameState extends AbstractGameState {
 
       for (int j = 0; j < eight; j++)
       {
-        String temp = "" + storeInput[(j * eight) + 4];
-        temp = temp + storeInput[(j * eight) + 5];
+        String temp = "" + storeInput[(j * eight)+ 4];
+        temp = temp + storeInput[(j * eight)+5];
         temp = temp + storeInput[(j * eight) + 6];
         temp = temp + storeInput[(j * eight) + 7];
         my_highScore[j].new_score(Integer.parseInt(temp));
