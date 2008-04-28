@@ -10,9 +10,11 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.EnemyEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
@@ -20,30 +22,39 @@ import thrust.entities.StaticEntity;
  * @version 18 April 2008
  */
 public class Factory extends StaticEntity
-  implements EnemyEntity, Animatable {
+  implements EnemyEntity { // Removed implements Animatable => FactorySmoke
+
+  /** Byte holding current hit points of Factory. */
+  private static byte my_hp;
+  /** Byte holding starting hit points of Factory. */
+  private static byte my_starting_hp;
+  /** Instance of FactoryChimney class associated with this Factory. */
+  private FactoryChimney my_factorychimney;
+  /** Instance of FactorySphere class associated with this Factory. */
+  private FactorySphere my_factorysphere;
+  /** Instance of AI class implemented in EnemyEntity. */
+  private AI my_ai;
+
   /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-    assert false; //@ assert false;
-    return 0;
+    return (byte) (my_starting_hp - my_hp);
   }
 
   /**
    * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    assert false; //@ assert false;
-    return null;
+    return my_factorychimney;
   }
 
   /**
    * @return What is your sphere?
    */
   public /*@ pure @*/ FactorySphere sphere() {
-    assert false; //@ assert false;
-    return null;
+    return my_factorysphere;
   }
 
   /**
@@ -51,8 +62,8 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(byte the_damage) {
-    assert false; //@ assert false;
+  public void damage(final byte the_damage) {
+    my_hp -= the_damage; // my_hp = my_hp - the_damage
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -73,6 +84,35 @@ public class Factory extends StaticEntity
 
   //@ public invariant (* See constraint on color in FactoryChimney. *);
   //@ public invariant color() == chimney().color();
+  /**
+   * @return What is your attack behavior AI?
+   */
+  public /*@ pure @*/ AI attack() {
+    return my_ai.attack();
+  }
+
+  /**
+   * @return What is your disturb behavior AI?
+   */
+  public /*@ pure @*/ AI disturb() {
+    return my_ai.disturb();
+  }
+
+  /**
+   * @param the_behavior This is your attack behavior.
+   */
+  //@ ensures attack() == the_behavior;
+  public void attack(final AI the_behavior) {
+    my_ai.attack(the_behaviour);
+  }
+
+  /**
+   * @param the_behavior This is your disturb behavior.
+   */
+  //@ ensures disturb() == the_behavior;
+  public void disturb(final AI the_behavior) {
+    my_ai.disturb(the_behaviour)
+  }
 
   /**
    * A chimney of a factory.
@@ -81,22 +121,37 @@ public class Factory extends StaticEntity
    */
   public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
+
+    /** Boolean holding whether Chimney is smoking. */
+    private boolean my_smoking_state;
+    /** Animation holding animations for FactoryChimney class. */
+    private Animation my_animation;
+    /** AI holding behaviour for FactoryChimney class. */
+    private AI my_ai;
+
     /**
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      assert false; //@ assert false;
-      return false;
+      return my_smoking_state;
     }
 
-    /**
-     * Your smoking state is dictated by this flag.
-     * @param the_smoking_state A flag indicating whether the chimney
-     * is smoking or not.
-     */
-    //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(boolean the_smoking_state) {
-      assert false; //@ assert false;
+    /** The animation methods. */
+    
+    public /*@ pure @*/ Animation animation() {
+      return my_animation;
+    }
+
+    public void smoking(final boolean the_smoking_state) {
+      my_smoking_state = the_smoking_state;
+    }
+
+    public void animation(final Animation the_animation) {
+      my_animation = the_animation;
+    }
+
+    public void animate() {
+      my_animation.animate(); // AnyAnimation.animate() UNFINISHED
     }
 
     /*@ public invariant (* A factories chimney is the same color as
@@ -106,6 +161,26 @@ public class Factory extends StaticEntity
       @ public invariant (* The spaceship is destroyed by a factory's
       @                     chimney. *);
       @*/
+
+    /** The AI methods. */
+
+    public /*@ pure @*/ AI attack() {
+      return my_ai.attack();
+    }
+
+    public /*@ pure @*/ AI disturb() {
+      return my_ai.disturb();
+    }
+
+    //@ ensures attack() == the_behavior;
+    public void attack(final AI the_behavior) {
+      my_ai.attack(the_behaviour);
+    }
+
+    //@ ensures disturb() == the_behavior;
+    public void disturb(final AI the_behavior) {
+      my_ai.disturb(the_behaviour);
+    }
   }
 
   /**
