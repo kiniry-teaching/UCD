@@ -23,7 +23,7 @@ public class myTestMain {
 		//Various Test Code Placed Here
 		
 		
-		BarCode myBarcode = new BarCode(5000347071843l);
+		BarCode myBarcode = new BarCode(3057640136993l);
 		//1. Creates a Query For a Product and prints out returned data
 		ItemQuery myItem = new ItemQuery(myBarcode);
 //		System.out.println("Product Barcode is: " +myItem.barcode.toString());
