@@ -33,7 +33,7 @@ public class GoalSphere extends DynamicEntity
     @ public invariant (* The goal sphere is not affected by space. *);
     @ public invariant (* The goal sphere is not affected by stars. *);
     @ public invariant (* The goal sphere is destroyed by the terrain. *);
-    @ public invariant (* When rendered on the terrain, the goal sphere
+    @ public invariant (* When rend ered on the terrain, the goal sphere
     @                     sits on a pedestal. *);
     @ public invariant (* When being towed, the goal sphere is rendered
     @                     as a sphere. *);
@@ -58,17 +58,23 @@ public class GoalSphere extends DynamicEntity
   public void tow() {
     my_tow = true;
   }
+  /**
+   * @return*/
   public boolean towed() {
     return my_tow;
   }
+  /**@return*/
   public void color(final Color the_color) {
     my_color = the_color;
   }
+  /**@return*/
   public Color color() {
     return my_color;
   }
+  /**@return*/
   public void simulate(final double the_amount) {
   }
+  /**@return*/
   public double gravitational_constant() {
     final double d = 9.81;
     return d;
