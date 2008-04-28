@@ -89,6 +89,142 @@ public class Spaceship extends DynamicEntity
     }
   }
 
+  /* (non-Javadoc)
+   * @see thrust.entities.behaviors.Tow#tow()
+   */
+  public void tow() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.behaviors.Tow#towed()
+   */
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.properties.GameColor#color()
+   */
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.properties.GameColor#color(java.awt.Color)
+   */
+  public void color(Color the_color) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#acceleration()
+   */
+  public double[] acceleration() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#acceleration(double[])
+   */
+  public void acceleration(double[] the_acceleration) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#gravitational_constant()
+   */
+  public double gravitational_constant() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#mass()
+   */
+  public double mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#mass(double)
+   */
+  public void mass(double the_mass) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#momentum()
+   */
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#orientation()
+   */
+  public double orientation() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#orientation(double)
+   */
+  public void orientation(double the_orientation) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#position()
+   */
+  public double[] position() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#position(double[])
+   */
+  public void position(double[] the_position) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#simulate(double)
+   */
+  public void simulate(double some_seconds) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#velocity()
+   */
+  public double[] velocity() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#velocity(double[])
+   */
+  public void velocity(double[] the_velocity) {
+    // TODO Auto-generated method stub
+    
+  }
+
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
     @ public invariant (* The spaceship is destroyed by a bullet. *);
     @ public invariant (* The spaceship is destroyed by the factory. *);

@@ -53,7 +53,7 @@ public abstract class Entity implements GameColor {
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     assert false; //@ assert false;
   }
 
@@ -73,7 +73,7 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     assert false; //@ assert false;
   }
 
