@@ -66,7 +66,7 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#fuel()
    */
-  public int fuel() {
+  public float fuel() {
     my_fuel = maximum_fuel();
     return my_fuel;
   }
@@ -74,8 +74,8 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#maximum_fuel()
    */
-  public int maximum_fuel() {
-    final int maximum_fuel = 9999;
+  public float maximum_fuel() {
+    final float maximum_fuel = Float.POSITIVE_INFINITY;
     return maximum_fuel;
   }
 
@@ -221,6 +221,16 @@ public class Spaceship extends DynamicEntity
    * @see thrust.physics.PhysicsInterface#velocity(double[])
    */
   public void velocity(double[] the_velocity) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void change_fuel_content(float the_fuel_change) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void set_fuel_content(float the_fuel_content) {
     // TODO Auto-generated method stub
     
   }

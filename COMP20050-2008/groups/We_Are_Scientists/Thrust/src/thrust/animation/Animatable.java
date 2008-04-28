@@ -12,7 +12,7 @@ package thrust.animation;
 
 /**
  * An entity that moves or changes independent of the player via an animation.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author simon markey (kiniry@acm.org)
  * @version 18 April 2008
  */
 public interface Animatable {

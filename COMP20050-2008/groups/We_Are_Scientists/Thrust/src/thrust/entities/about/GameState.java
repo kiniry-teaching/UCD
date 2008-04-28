@@ -14,7 +14,7 @@ package thrust.entities.about;
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
  *
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author simo markey (kiniry@acm.org)
  * @version 11 April 2008
  */
 public class GameState extends FuelAble{

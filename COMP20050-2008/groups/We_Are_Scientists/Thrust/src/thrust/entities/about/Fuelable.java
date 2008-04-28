@@ -11,7 +11,7 @@
 package thrust.entities.about;
 
 /**
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author simon markey (kiniry@acm.org)
  * @version 11 April 2008
  */
 

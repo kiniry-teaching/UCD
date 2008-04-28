@@ -1,7 +1,7 @@
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
- * @author "Joe Kiniry (kiniry@acm.org)"
+ * @author "simon markey (kiniry@acm.org)"
  * @module "COMP 20050, COMP 30050"
  * @creation_date "March 2007"
  * @last_updated_date "April 2008"
@@ -14,14 +14,21 @@ import java.util.Collection;
 import thrust.animation.Animatable;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
-
+import java.awt.Color;
+import java.awt.Shape;
+import thrust.animation.Animation_class;
+import thrust.animation.Animation;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  * The vacuum in which entities exist.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
 public class Space extends StaticEntity
-  implements NeutralEntity, Animatable {
+  implements NeutralEntity
+  {
   /**
    * @return What are your stars?"
    */
@@ -35,7 +42,9 @@ public class Space extends StaticEntity
    * @param the_star the star to add.
    */
   public void add_star(Star the_star) {
-    assert false; //@ assert false;
+  //  assert false; //@ assert false;
+    
+    Star add_star = the_star;
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

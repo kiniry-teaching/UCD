@@ -16,16 +16,27 @@ import thrust.entities.StaticEntity;
 
 /**
  * An enemy factory.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author simon markey 
  * @version 18 April 2008
  */
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
+  
+  int damage=100;
+  int upDateDamage=-20;
+  public boolean shot=false;
+  
   /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
+    
+    while(damage>0)
+    {
+      if(shot)
+    damage=damage+upDateDamage;
+    }
     assert false; //@ assert false;
     return 0;
   }
@@ -34,7 +45,13 @@ public class Factory extends StaticEntity
    * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    assert false; //@ assert false;
+    //chimney animation???
+    while(damage>50)
+    {
+    animate();
+    }
+   // assert false; //@ assert false;
+    //return null;
     return null;
   }
 
@@ -42,6 +59,8 @@ public class Factory extends StaticEntity
    * @return What is your sphere?
    */
   public /*@ pure @*/ FactorySphere sphere() {
+    
+    //implement shape and size and location etc AGAIN eughgh
     assert false; //@ assert false;
     return null;
   }
@@ -52,6 +71,8 @@ public class Factory extends StaticEntity
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
   public void damage(byte the_damage) {
+    
+    
     assert false; //@ assert false;
   }
 
@@ -85,8 +106,12 @@ public class Factory extends StaticEntity
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      assert false; //@ assert false;
-      return false;
+      if(smoking())
+        return true;
+      else
+        return false;
+     // assert false; //@ assert false;
+     // return false;
     }
 
     /**
