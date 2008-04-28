@@ -36,6 +36,10 @@ public class StaticEntity extends DynamicEntity {
                         final double the_orientation) {
     position(the_position);
     orientation(the_orientation);
+    mass(0);
+    final double[] temp = {0, 0};
+    velocity(temp);
+    acceleration(temp);
   }
 
   //@ public invariant (* All queries are constant. *);
