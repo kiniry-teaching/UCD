@@ -51,6 +51,7 @@ public class GameState extends AbstractGameState {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ int bonus() {
+    assert this.my_bonus >= 0 : "ERROR: bonus less than zero";
     return this.my_bonus;
   }
   /**
@@ -59,6 +60,7 @@ public class GameState extends AbstractGameState {
   //@ requires 0 <= the_new_value;
   //@ ensures bonus() == the_new_value;
   public void new_bonus(final int the_new_value) {
+    assert this.my_bonus == the_new_value : "ERROR:";
     this.my_bonus = the_new_value;
   }
   /**
@@ -66,6 +68,7 @@ public class GameState extends AbstractGameState {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ int current_fuel() {
+    assert this.my_fuel >= 0 : "ERROR: Fuel non-negative";
     return this.my_fuel;
   }
 
@@ -74,6 +77,7 @@ public class GameState extends AbstractGameState {
    */
   //@ ensures 0 <= \result;
   public  /*@ pure @*/ int maximum_fuel() {
+    assert this.my_max_fuel >= 0 : "ERROR: Max Fuel non-negative";
     return this.my_max_fuel;
   }
 
@@ -82,6 +86,7 @@ public class GameState extends AbstractGameState {
    */
   //@ ensures 0 <= \result;
   public  /*@ pure @*/ int score() {
+    assert this.my_current_score >= 0 : "ERROR: Score non-negative";
     return this.my_current_score;
   }
 
@@ -99,6 +104,7 @@ public class GameState extends AbstractGameState {
    */
   //@ ensures 0 <= \result;
   public  /*@ pure @*/ byte lives() {
+    assert this.my_lives >= 0 : "ERROR: lives non-negative";
     return this.my_lives;
   }
 
@@ -117,24 +123,45 @@ public class GameState extends AbstractGameState {
    * @return What are the current high scores?
    */
   //@ ensures \result.length == HIGH_SCORE_COUNT;
-  /*@ ensures (\for  all int i, int j; 0 <= i & i < j & j < HIGH_SCORE_COUNT &
-    @          \result[i] >= \result[j]);
-    @ ensures (* High scores are ordered from high to low. *);
-    @*/
+  //@ ensures \nonnullelements(\result);
   public  /*@ pure \non null elements @*/ HighScoreInterface[] high_scores() {
+    assert this.my_high_scores.length == HIGH_SCORE_COUNT : "ERROR:";
+
+    for (int i = 0; i <= HIGH_SCORE_COUNT; i++) {
+         assert this.my_high_scores[i] != null : "Error: Only non-nulls";
+    }
     return this.my_high_scores;
   }
 
+  /**
+   * @param the_index the index to lookup.
+   * @return What is the high score at this index?
+   */
+  //@ requires 0 <= the_index & the_index < HIGH_SCORE_COUNT;
+  //@ ensures \result.equals(high_scores()[the_index]);
   public HighScoreInterface high_score(final int the_index) {
     return this.my_high_scores[the_index];
   }
-
+  /**
+  *
+  * @param the_high_score the potential high score to check.
+  * @return Is this score a new high score?
+  */
+ /*@ ensures \result <==> high_scores()[0].score() >= the_high_score.score() &
+   @                      the_high_score.score() >= high_scores()[HIGH_SCORE_COUNT-1].score();
+   @*/
   public boolean new_high_score(final HighScoreInterface the_pos_new_high) {
     return (this.my_high_scores[0].my_score == the_pos_new_high.score());
   }
-
+  /**
+   * @param the_new_high_score Insert this score into the high score table.
+   */
+  /*@ ensures new_high_score(the_new_high_score) ==>
+    @         (\exists int i; 0 <= i & i < HIGH_SCORE_COUNT;
+    @          high_score(i).equals(the_new_high_score));
+    @*/
   public  void add_high_score(final HighScoreInterface the_new_high_score) {
-    for (int i = 0; i < HIGH_SCORE_COUNT; i++) {
+    for (int i = 0; i < HIGH_SCORE_COUNT - 1; i++) {
       if (this.my_high_scores[i].my_score <= the_new_high_score.score()) {
         this.my_high_scores[i] = (HighScoreClass)the_new_high_score;
       }
@@ -160,6 +187,7 @@ public class GameState extends AbstractGameState {
      */
     //@ ensures 0 <= \result;
     public /*@ pure @*/ int score() {
+      assert this.my_score >= 0 : "Score must be >= zero";
       return this.my_score;
     }
 
@@ -168,6 +196,7 @@ public class GameState extends AbstractGameState {
      */
     //@ ensures \results.length == 3;
     public /*@ pure \non-null-elements @*/ char[] initials() {
+      assert this.my_initialsArray.length == MY_SIZE : "Array not length 3";
       return this.my_initialsArray;
     }
 

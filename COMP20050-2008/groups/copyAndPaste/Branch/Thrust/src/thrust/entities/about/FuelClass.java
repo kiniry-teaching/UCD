@@ -23,6 +23,7 @@ public class FuelClass implements Fuelable {
   //@ ensures 0 <= \result;
   //@ ensures \result <= maximum_fuel();
   public /*@ pure @*/ int fuel() {
+    assert this.my_fuel <= this.my_maxFuel : "ERROR: Fuel exceeds Max Fuel!";
     return this.my_fuel;
   }
   /**
@@ -30,6 +31,7 @@ public class FuelClass implements Fuelable {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ int maximum_fuel() {
+    assert this.my_maxFuel >= 0 : "ERROR: MAX FUEL must exceed zero";
     return this.my_maxFuel;
   }
   /**
@@ -50,6 +52,10 @@ public class FuelClass implements Fuelable {
     @           fuel() == \old(fuel() + the_fuel_change)));
     @*/
   public void change_fuel_content(final int the_fuel_change) {
+   /** assert (this.my_fuel + the_fuel_change < 0) ? (this.my_fuel = 0) :
+      (this.my_maxFuel < (this.my_fuel + the_fuel_change)) ?
+          (this.my_fuel = this.my_maxFuel) :
+       (this.my_fuel = (this.my_fuel + the_fuel_change)); **/
     this.my_fuel += the_fuel_change;
   }
 //@ public invariant (* One unit of fuel weights 1kg. *);
@@ -58,6 +64,7 @@ public class FuelClass implements Fuelable {
    */
   //@ ensures \result == fuel() * 1;
   public /*@ pure @*/ int fuel_mass() {
+    assert this.my_fuel == this.my_fuel * 1 : "ERROR: weight not in kg's";
     return this.my_fuel * 1;
   }
 }
