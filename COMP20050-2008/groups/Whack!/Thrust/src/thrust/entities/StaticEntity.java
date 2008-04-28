@@ -11,6 +11,7 @@
 package thrust.entities;
 import java.awt.Shape;
 
+
 /**
  * Entities whose position and orientation do not change.
  * @author David Maguire (David.Maguire.2@ucdconnect.ie)
