@@ -30,9 +30,9 @@ public class GunTurret extends StaticEntity
   @*/
 
   /** The attack AI of a gun turret. */
-  private AI my_attack_ai;
+  private transient AI my_attack_ai;
   /** The disturb AI of a gun turret. */
-  private AI my_disturb_ai;
+  private transient AI my_disturb_ai;
 
   /** GunTurret Constructor. */
   public GunTurret() {

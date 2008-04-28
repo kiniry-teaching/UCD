@@ -100,7 +100,7 @@ public class GameState extends AbstractGameState {
   public class HighScore implements HighScoreInterface {
 
     /** The initials of the player. */
-    private char[] my_initials;
+    private transient char[] my_initials;
 
     public int score() {
       return my_score;

@@ -32,9 +32,9 @@ public class Space extends StaticEntity
   private static final Logger THE_LOGGER =
     Logger.getLogger(Explosion.class.getName());
   /** The frames in the Space animation. */
-  private Animation my_animation;
+  private transient Animation my_animation;
   /** Animation frame counter. */
-  private int my_animation_counter;
+  private transient int my_animation_counter;
 
   /** Space Constructor. */
   public Space() {

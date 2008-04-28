@@ -37,9 +37,9 @@ public class Spaceship extends DynamicEntity
   /** The maximum amount of fuel that can be contained. */
   private static final int MAX_FUEL = 10000;
   /** The amount of fuel that is contained. */
-  private static int my_fuel;
+  private transient int my_fuel;
   /** Tow status of Spaceship. */
-  private boolean my_tow_indicator;
+  private transient boolean my_tow_indicator;
 
   /** Spaceship Constructor. */
   public Spaceship() {

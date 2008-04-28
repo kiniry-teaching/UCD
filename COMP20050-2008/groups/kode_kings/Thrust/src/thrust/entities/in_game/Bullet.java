@@ -31,9 +31,9 @@ public class Bullet extends DynamicEntity
   //@ public invariant (* Bullets have a mass of 1 kg. *);
 
   /** The attack AI of a bullet. */
-  private AI my_attack_ai;
+  private transient AI my_attack_ai;
   /** The disturb AI of a bullet. */
-  private AI my_disturb_ai;
+  private transient AI my_disturb_ai;
 
   /** Bullet Constructor. */
   public Bullet() {

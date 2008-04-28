@@ -49,7 +49,7 @@ public class GoalSphere extends DynamicEntity
    */
   public static final int MASS = 10000;
   /** Tow status of GoalSphere. */
-  private boolean my_tow_indicator;
+  private transient boolean my_tow_indicator;
 
   /** GoalSphere Constructor. */
   public GoalSphere() {
