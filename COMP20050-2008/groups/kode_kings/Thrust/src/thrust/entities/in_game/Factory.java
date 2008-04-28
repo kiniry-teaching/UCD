@@ -16,56 +16,49 @@ import thrust.entities.StaticEntity;
 
 /**
  * An enemy factory.
- * @author Ciaran Hale (Ciaran.hale@ucdconnect.ie)
- * @author Joe Kiniry (kiniry@acm.org)s
- * @version 24 April 2008
+ * @author Joe Kiniry (kiniry@acm.org)
+ * @version 18 April 2008
  */
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
-
- /** Amount of damage inflicted upon the factory. */
-
-  private byte my_damage_staus;
-
+  /** Amount of damage taken by factory. */
+  private byte my_damage_status;
   /** This factories chimney. */
-
-  private FactoryChimney my_factory_chimney;
-
+  private FactoryChimney my_chimney;
   /** This factories sphere. */
-
-  
+  private FactorySphere my_sphere;
 
   /**
    * @return How much damage have you sustained?
    */
-
+  //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-
     return my_damage_status;
   }
 
   /**
-   * return your chimney.
+   * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-
-    return my_factory_chimney;
+    return my_chimney;
   }
 
   /**
    * @return What is your sphere?
    */
- 
+  public /*@ pure @*/ FactorySphere sphere() {
+    return my_sphere;
+  }
+
+
   /**
-   * @param the_damage You have sustained this many units of damage.
+   * @param the_damage_staus You have taken this many units of damage.
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-
-  public void damage(byte the_damage) {
-    my_damage_staus += the_damage;
+  public void damage(final byte the_damage) {
+    my_damage_status += the_damage;
   }
-
 
   /*@ public invariant (* All factories have exactly one sphere and
     @                     one chimney. *);
@@ -91,38 +84,27 @@ public class Factory extends StaticEntity
    * @author Joe Kiniry (kiniry@acm.org)
    * @version 18 April 2008
    */
-public class FactoryChimney extends StaticEntity
+  public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
 
-   /**
-    *  Whats my smoking status?.
-    */
+    /** . */
+    private boolean my_smoking_state;
+    /**
+     * @return Are you smoking?
+     */
+    public /*@ pure @*/ boolean smoking() {
+      return my_smoking_state;
+    }
 
-
-  private boolean my_smoking_state;
-   /**
-    * @return Are you smoking?
-    */
-  public /*@ pure @*/ boolean smoking() {
-
-    return my_smoking_state;
-  }
-
-
-   /**
-    * Your smoking state is dictated by this flag.
-    * @param the_smoking_state A flag indicating whether the chimney
-    * is smoking or not.
-    */
-     //@ ensures smoking() <==> the_smoking_state;
-
-  public void smoking(final the_smoking_state) {
-
-	  my_smoking_state = the_smoking_state;
-  }
-
-    
-    
+    /**
+     * Your smoking state is dictated by this flag.
+     * @param the_smoking_state A flag indicating whether the chimney
+     * is smoking or not.
+     */
+    //@ ensures smoking() <==> the_smoking_state;
+    public void smoking(final boolean the_smoking_state) {
+      my_smoking_state = the_smoking_state;
+    }
 
     /*@ public invariant (* A factories chimney is the same color as
       @                     its factory. *);
@@ -131,7 +113,7 @@ public class FactoryChimney extends StaticEntity
       @ public invariant (* The spaceship is destroyed by a factory's
       @                     chimney. *);
       @*/
-  
+  }
 
   /**
    * A sphere of a factory.
@@ -140,19 +122,10 @@ public class FactoryChimney extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
-    
-    private FactorySphere my_sphere;
-    
-    public /*@ pure @*/ FactorySphere sphere() {
-
-      return my_sphere;
-    }
-
-    
-	  /*@ public invariant (* A factory sphere's color is always green. *);
+    /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
   }
-
+}
