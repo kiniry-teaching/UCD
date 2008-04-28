@@ -32,7 +32,6 @@ public class  PhysicsClass implements PhysicsInterface {
   private double my_orientation;
     /**the speed of an entity in m/s.*/
   private double my_speed;
-  
   /**
    * Create an instance of Physics an set the following attributes.
    * @param mass, set the Entities mass
