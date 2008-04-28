@@ -10,8 +10,6 @@
 
 package thrust.entities;
 
-import thrust.physics.PhysicsClass;
-
 /**
  * Entities whose position and orientation do not change.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -20,16 +18,6 @@ import thrust.physics.PhysicsClass;
  * @version 27 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
-//@ public model boolean initialized;
-  //@ public initially initialized == false;
-  /**
-   * flag to indicate if instance of object is initialized.
-   */
-  private boolean my_initialized; //no need to assign, false by default
-  /**
-   * create an instance of physics.
-   */
-  private PhysicsClass my_physics = new PhysicsClass();
   /**
    * static velocity.
    */
@@ -38,12 +26,7 @@ public abstract class StaticEntity extends DynamicEntity {
    * static acceleration.
    */
   private double[] my_acc = {0, 0};
-  /**
-   * @return whether instances of this object are initialized
-   */
-  public boolean is_initialized() {
-    return this.my_initialized;
-  }
+
   /**
    * Set the position and orientation of this entity.  You may only
    * call this method once ever per StaticEntity object.
@@ -56,9 +39,7 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
   public void set_state(final double[] the_pos, final double the_ori) {
-    my_physics.position(the_pos);
-    my_physics.orientation(the_ori);
-    my_initialized = true;
+    super.set_state(the_pos, the_ori);
   }
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
