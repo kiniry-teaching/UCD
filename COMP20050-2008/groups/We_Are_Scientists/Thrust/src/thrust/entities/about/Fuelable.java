@@ -28,19 +28,18 @@ public interface Fuelable {
   /**
    * @return your fuel
    */
-  int fuel();
+  float fuel();
 
   /**
    * @return How much fuel can you contain?
    */
-  //@ ensures 0 <= \result;
-  /*@ pure @*/ int maximum_fuel();
+  float maximum_fuel();
   /**
    * @param the_fuel_content This many units is your fuel content.
    */
   //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
   //@ ensures fuel() == the_fuel_content;
-  void set_fuel_content(int the_fuel_content);
+  void set_fuel_content(float the_fuel_content);
 
   /**
    * @param the_fuel_change Change your fuel content by this many units.
@@ -51,7 +50,7 @@ public interface Fuelable {
     @             (fuel() == maximum_fuel()) :
     @           fuel() == \old(fuel() + the_fuel_change)));
     @*/
-  void change_fuel_content(int the_fuel_change);
+  void change_fuel_content(float the_fuel_change);
 
   //@ invariant (* Fuel content is always non-negative and finite. *);
   //@ invariant 0 <= fuel();
@@ -59,6 +58,5 @@ public interface Fuelable {
   /**
    * @return What is the mass of your fuel?
    */
-  //@ ensures \result == fuel() * 1;
-  /*@ pure @*/ int fuel_mass();
+  fuel fuel_mass();
 }
