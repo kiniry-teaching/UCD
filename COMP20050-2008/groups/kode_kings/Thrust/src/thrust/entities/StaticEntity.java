@@ -13,12 +13,12 @@ package thrust.entities;
 /**
  * Entities whose position and orientation do not change.
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie)
+ * @version 28 April 2008
  */
 public class StaticEntity extends DynamicEntity {
   //@ public model boolean initialized;
   //@ public initially initialized == false;
-
   /**
    * Set the position and orientation of this entity.  You may only
    * call this method once ever per StaticEntity object.
@@ -30,6 +30,11 @@ public class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
+  /** The position of this entity. */
+  private double[] my_position;
+  /** The orientation of this entity. */
+  private double my_orientation;
+  
   public void set_state(final double[] the_position,
                         final double the_orientation) {
     my_position = the_position;
