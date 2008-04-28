@@ -23,7 +23,7 @@ public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
 
   /** Boolean holding whether GoalSphere is being towed or not. */
-  private boolean my_towed_state;
+  private static boolean my_towed_state;
 
   /**
    * @return Are you currently towing or being towed?
