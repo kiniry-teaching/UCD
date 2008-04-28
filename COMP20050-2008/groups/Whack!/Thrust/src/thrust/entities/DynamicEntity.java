@@ -56,11 +56,41 @@ public abstract class DynamicEntity extends Entity
                                    final Shape the_shape,
                                    final byte the_state) {
     my_orientation = the_orientation;
-    my_acceleration = the_acceleration;
+    my_acceleration[0] = the_acceleration[0];
+    my_acceleration[1] = the_acceleration[1];
     my_mass = the_mass;
-    my_velocity = the_velocity;
+    my_velocity[0] = the_velocity[0];
+    my_velocity[1] = the_velocity[1];
     super.set_state(the_shapename, the_shape, the_state);
 
+  }
+
+  public double[] position() {
+    return my_position;
+  }
+
+  public double orientation() {
+    return my_orientation;
+  }
+
+  public double[] acceleration() {
+    return my_acceleration;
+  }
+
+  public double mass() {
+    return my_mass;
+  }
+
+  public double[] velocity() {
+    return my_velocity;
+  }
+
+  public Color my_Color() {
+    return my_color;
+  }
+
+  public void my_Color(final Color the_color) {
+    my_color = the_color;
   }
 
 }
