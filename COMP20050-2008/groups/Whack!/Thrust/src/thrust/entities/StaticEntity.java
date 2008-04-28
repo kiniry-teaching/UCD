@@ -41,23 +41,25 @@ public abstract class StaticEntity extends DynamicEntity {
 
   public void set_state(final double[] the_position,
                         final double the_orientation,
+                        final double[] the_acceleration,
+                        final double the_mass,
+                        final double[] the_velocity,
                         final String the_shapename,
                         final Shape the_shape,
                         final byte the_state) {
 
-    super.set_state(the_shapename, the_shape, the_state);
-    my_orientation = the_orientation;
-    my_position[0] = the_position[0];
-    my_position[1] = the_position[1];
-
+    super.set_Dynstate(the_position, the_orientation,
+                       the_acceleration, the_mass,
+                       the_velocity, the_shapename,
+                       the_shape, the_state);
   }
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
   //@ also ensures \result == 0;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    final double mass = 0;
+    return mass;
   }
 
   /* (non-Javadoc)
@@ -65,8 +67,8 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
+    final double [] velocity = new double[]{0, 0};
+    return velocity;
   }
 
   /* (non-Javadoc)
@@ -74,8 +76,8 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
+    final double [] acceleration = new double[]{0, 0};
+    return acceleration;
   }
 
   /* (non-Javadoc)
@@ -83,8 +85,8 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
-    return 0;
+    final double momentum = 0;
+    return momentum;
   }
 
   //@ public invariant (* All queries are constant. *);
