@@ -24,7 +24,7 @@ import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Maguire (David.Maguire.2@ucdconnect.ie)
  * @version 18 April 2008
  */
 public class Factory extends StaticEntity
