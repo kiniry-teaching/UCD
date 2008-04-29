@@ -26,50 +26,6 @@ public abstract class GameState extends AbstractGameState {
    * initials.
    */
 
-  public GameState()
-  {
-  final int eight = 8;
-    try {
-      final FileReader fis   = new FileReader("HighScore.txt");
-      final BufferedReader input   = new BufferedReader(fis);
-      final char[] storeInput = new char[eight * eight];
-      final char[] intitills = new char[eight + eight + eight];
-      final int[] scores = new int[eight];
-
-      while (input.readLine() != null)
-      {
-        final String s = input.readLine();
-        for (int i = 0; i < s.length(); i++)
-        {
-          storeInput[i] = s.charAt(i);
-        }
-      }
-      int current = 0;
-      for (int p = 0; p < eight + eight + eight; p += 3)
-      {
-        intitills[p] =  storeInput[p * eight];
-        intitills[p + 1] =  storeInput[(p * eight) + 1];
-        intitills[p + 2] =  storeInput[(p * eight) + 2];
-        my_highScore[current].new_initials(intitills);
-        current++;
-      }
-
-
-      for (int j = 0; j < eight; j++)
-      {
-        String temp = "" + storeInput[(j * eight)+ 4];
-        temp = temp + storeInput[(j * eight)+5];
-        temp = temp + storeInput[(j * eight) + 6];
-        temp = temp + storeInput[(j * eight) + 7];
-        my_highScore[j].new_score(Integer.parseInt(temp));
-      }
-
-    } catch (IOException e) {
-      System.err.println("File not found: " + e.getMessage());
-    }
-
-  }
-
   /**
    * There are eight high scores.
    */
@@ -105,6 +61,51 @@ public abstract class GameState extends AbstractGameState {
    * @return What is the current bonus?
    * @bon BONUS What is your value?
    */
+
+  public GameState()
+  {
+    final int eight = 8;
+    try {
+      final FileReader fis   = new FileReader("HighScore.txt");
+      final BufferedReader input   = new BufferedReader(fis);
+      final char[] storeInput = new char[eight * eight];
+      final char[] intitills = new char[eight + eight + eight];
+      final int[] scores = new int[eight];
+
+      while (input.readLine() != null)
+      {
+        final String s = input.readLine();
+        for (int i = 0; i < s.length(); i++)
+        {
+          storeInput[i] = s.charAt(i);
+        }
+      }
+      int current = 0;
+      for (int p = 0; p < eight + eight + eight; p += 3)
+      {
+        intitills[p] =  storeInput[p * eight];
+        intitills[p + 1] =  storeInput[(p * eight) + 1];
+        intitills[p + 2] =  storeInput[(p * eight) + 2];
+        my_highScore[current].new_initials(intitills);
+        current++;
+      }
+
+
+      for (int j = 0; j < eight; j++)
+      {
+        String temp = "" + storeInput[(j * eight) + 4];
+        temp = temp + storeInput[(j * eight) + 5];
+        temp = temp + storeInput[(j * eight) + 6];
+        temp = temp + storeInput[(j * eight) + 7];
+        my_highScore[j].new_score(Integer.parseInt(temp));
+      }
+
+    } catch (IOException e) {
+      System.err.println("File not found: " + e.getMessage());
+    }
+
+  }
+
 
   public /*@ pure @*/ int bonus()
   {
@@ -275,8 +276,7 @@ public abstract class GameState extends AbstractGameState {
           final String temp = "" + the_new_high_score.initials()[0] +
             the_new_high_score.initials()[1];
           fisWriter.write(temp + " " + the_new_high_score.score());
-        }
-        else
+        } else
         {
           fisWriter.write(my_highScore[k].initials().toString() + " " +
                             my_highScore[k].score());

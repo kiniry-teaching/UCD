@@ -67,7 +67,7 @@ public final class Main {
     thrust_frame.setVisible(true);
     // display the title screen
     final Music music_effect = new Music();
-    //music_effect.start();
+    music_effect.start();
     // wait for keyboard input
     // repeat the following until the player asks to quit
     //   show the high score display

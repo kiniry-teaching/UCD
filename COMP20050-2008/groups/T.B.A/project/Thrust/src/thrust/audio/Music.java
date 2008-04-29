@@ -37,7 +37,7 @@ public class Music {
    */
   public void openMusic() {
     final File music_file =
-      new File("../../../media/thrustmusic.wav");
+      new File("../../../media/file.wav");
 
     AudioInputStream my_audio_stream = null;
     try {
