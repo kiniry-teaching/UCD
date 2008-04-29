@@ -9,6 +9,9 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.EnemyEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.behaviors.AI;
@@ -20,22 +23,122 @@ import thrust.entities.behaviors.AI;
  */
 public class GunTurret extends StaticEntity
   implements EnemyEntity {
+  /**
+   * @author allison fallon(allison.fallon@ucdconnect.ie)
+   */
+  /**
+   * Colour of GunTurret.
+   */
+  Color my_colour;
+
+  public double[] acceleration() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  public void acceleration(final double[] the_acceleration) {
+
+  }
+  public void simulate(final double a_time_interval) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public double mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+  public void mass(final double the_mass) {
+
+  }
+
+  public double momentum() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public double[] velocity() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  public void velocity(final double[] the_velocity) {
+
+  }
+  public double gravitational_constant() {
+    return 0;
+  }
+  public double[] position() {
+    return null;
+  }
+
+  public void position(final double[] the_position) {
+
+  }
+  public void orientation(final double the_orientation) {
+
+
+
+  }
+  public double orientation() {
+
+    return 0;
+
+  }
+
+
+  public void render() {
+    // TODO Auto-generated method stub
+
+  }
+
+  public Shape shape() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void shape(final Shape the_shape) {
+    // TODO Auto-generated method stub
+  }
+
+  public String shape_name() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public byte state() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void state(final byte the_state) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public AI attack() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void attack(final AI the_behavior) {
+    // TODO Auto-generated method stub
+
+  }
+
+
+  public Color color() {
+    my_colour.equals(Color.GREEN);
+    return my_colour;
+  }
+
+  public void color(final Color the_color) {
+    my_colour = the_color;
+
+  }
 
   /**
    * @return The turret's attack AI must shoot a bullet toward the spaceship.
    */
-  public AI attack() {
-    assert false; //@ assert false;
-    return null;
-  }
 
-  /**
-   * @param the_behavior The turret's attack AI must shoot a bullet toward
-   * the spaceship.
-   */
-  public void attack(AI the_behavior) {
-    assert false; //@ assert false;
-  }
 
   /**
    * @return The turret's disturb AI must shoot a bullet in a random direction
@@ -50,7 +153,7 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's disturb AI must shoot a bullet
    * in a random direction away from the terrain.
    */
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     assert false; //@ assert false;
   }
 
