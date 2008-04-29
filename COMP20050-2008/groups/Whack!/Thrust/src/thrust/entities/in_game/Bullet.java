@@ -1,5 +1,4 @@
-<<<<<<< .working
-<<<<<<< .working
+
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
@@ -14,8 +13,10 @@ package thrust.entities.in_game;
 import java.awt.Color;
 import java.awt.Shape;
 
+//import thrust.animation.Animation;
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
+import thrust.entities.StaticEntity;
 import thrust.entities.behaviors.AI;
 
 /**
@@ -24,14 +25,58 @@ import thrust.entities.behaviors.AI;
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity
-  implements EnemyEntity {
+    implements EnemyEntity {
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
+  /**holds the position.*/
+  private double[] my_position;
+  /**holds the orientation.*/
+  private double my_orientation;
+  /**holds the acceleration.*/
+  private double[] my_acceleration;
+  /**holds the mass.*/
+  private double my_mass;
+  /**holds the velocity.*/
+  private double[] my_velocity;
+  /**the name of the shape.*/
+  private String my_shapename;
+  /** the  shape of the bullet.*/
+  private Shape my_shape;
+  /** the state of the bullet.*/
+  private byte my_state;
+  /**the colour of the bullet.*/
+  private Color my_color;
+  /**the entity.*/
+  private StaticEntity my_entity;
+  /**the time.*/
+  private double my_time;
+  /**the behaviour of the bullet.*/
+  private AI my_behavior;
+
+  public Bullet(final double[] the_position,
+                final double the_orientation,
+                final double[] the_acceleration,
+                final double the_mass,
+                final double[] the_velocity,
+                final String the_shapename,
+                final Shape the_shape,
+                final byte the_state) {
+    super();
+    super.set_Dynstate(the_position, the_orientation,
+                       the_acceleration, the_mass,
+                       the_velocity, the_shapename,
+                       the_shape, the_state);
+
+  }
   //@ also ensures \result == 1;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    my_mass = 1;
+    return my_mass;
+  }
+
+  public void mass(final double the_mass) {
+    my_entity.mass(the_mass);
   }
 
   public void render() {
@@ -39,37 +84,40 @@ public class Bullet extends DynamicEntity
 
   }
 
+  public String shapename() {
+
+    return my_shapename;
+  }
+
   public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
+
+    return my_shape;
   }
 
   public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
+    my_shape = the_shape;
   }
 
   public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
+    final String shape = "Square";
+    return shape;
   }
 
   public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_state;
   }
 
   public void state(final byte the_state) {
-    // TODO Auto-generated method stub
+    my_state = the_state;
 
   }
 
   public AI attack() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_behavior;
   }
 
   public void attack(final AI the_behavior) {
-    // TODO Auto-generated method stub
+    my_behavior = the_behavior;
 
   }
 
@@ -84,47 +132,56 @@ public class Bullet extends DynamicEntity
   }
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_acceleration;
+  }
+
+  public void acceleration(final double[] the_acceleration) {
+    my_entity.acceleration();
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_entity.gravitational_constant();
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_entity.momentum();
   }
 
   public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_orientation;
+  }
+
+  public void orientation(final double the_orientation) {
+    my_entity.orientation(the_orientation);
   }
 
   public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_position;
+  }
+
+  public void position(final double[] the_position) {
+    my_entity.position(the_position);
   }
 
   public void simulate(final double a_time_interval) {
-    // TODO Auto-generated method stub
+    my_time = a_time_interval;
 
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_velocity;
+  }
+
+  public void velocity(final double[] the_velocity) {
+    my_entity.velocity(the_velocity);
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_color;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    my_color = the_color;
 
   }
 
@@ -135,81 +192,4 @@ public class Bullet extends DynamicEntity
     @*/
   //@ public invariant (* Bullets have a mass of 1 kg. *);
 }
-=======
-/*
- * A re-implementation of the classic C=64 game 'Thrust'.
- *
- * @author "Joe Kiniry (kiniry@acm.org)"
- * @module "COMP 20050, COMP 30050"
- * @creation_date "March 2007"
- * @last_updated_date "April 2008"
- * @keywords "C=64", "Thrust", "game"
- */
-package thrust.entities.in_game;
 
-import thrust.entities.DynamicEntity;
-import thrust.entities.EnemyEntity;
-
-/**
- * A bullet shot from the spaceship or a gun turret.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
- */
-public class Bullet extends DynamicEntity
-  implements EnemyEntity {
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#mass()
-   */
-  //@ also ensures \result == 1;
-  public double mass() {
-    assert false; //@ assert false;
-    return 0;
-  }
-
-  /*@ public invariant (* Bullets are destroyed on contact with a
-    @                     barrier, a factory, a fuel pod, the goal
-    @                     sphere, a gun turret, the spaceship, or the
-    @                     terrain. *);
-    @*/
-  //@ public invariant (* Bullets have a mass of 1 kg. *);
-}
->>>>>>> .merge-right.r1590
-=======
-/*
- * A re-implementation of the classic C=64 game 'Thrust'.
- *
- * @author "Joe Kiniry (kiniry@acm.org)"
- * @module "COMP 20050, COMP 30050"
- * @creation_date "March 2007"
- * @last_updated_date "April 2008"
- * @keywords "C=64", "Thrust", "game"
- */
-package thrust.entities.in_game;
-
-import thrust.entities.DynamicEntity;
-import thrust.entities.EnemyEntity;
-
-/**
- * A bullet shot from the spaceship or a gun turret.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
- */
-public class Bullet extends DynamicEntity
-  implements EnemyEntity {
-  /* (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#mass()
-   */
-  //@ ensures \result == 1;
-  public double mass() {
-    assert false; //@ assert false;
-    return 0;
-  }
-
-  /*@ public invariant (* Bullets are destroyed on contact with a
-    @                     barrier, a factory, a fuel pod, the goal
-    @                     sphere, a gun turret, the spaceship, or the
-    @                     terrain. *);
-    @*/
-  //@ public invariant (* Bullets have a mass of 1 kg. *);
-}
->>>>>>> .merge-right.r1590
