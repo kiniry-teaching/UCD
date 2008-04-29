@@ -27,7 +27,7 @@ public class GoalSphere extends DynamicEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Shape shape() {
@@ -35,9 +35,9 @@ public class GoalSphere extends DynamicEntity
     return null;
   }
 
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -50,14 +50,14 @@ public class GoalSphere extends DynamicEntity
     return 0;
   }
 
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public void tow() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public boolean towed() {
@@ -105,9 +105,9 @@ public class GoalSphere extends DynamicEntity
     return null;
   }
 
-  public void color(Color the_color) {
+  public void color(final Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship

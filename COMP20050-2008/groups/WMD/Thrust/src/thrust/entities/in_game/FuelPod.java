@@ -19,9 +19,10 @@ import thrust.entities.about.Fuelable;
 /**
  * A fuel pod from which the spaceship can obtain fuel.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
+ * @version 24 April 2008
  */
 public class FuelPod extends StaticEntity
-  implements NeutralEntity, Fuelable {
+  implements NeutralEntity { //, Fuelable {
 
   public double[] acceleration() {
     // TODO Auto-generated method stub
@@ -45,7 +46,7 @@ public class FuelPod extends StaticEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Shape shape() {
@@ -53,9 +54,9 @@ public class FuelPod extends StaticEntity
     return null;
   }
 
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -68,9 +69,9 @@ public class FuelPod extends StaticEntity
     return 0;
   }
 
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public double gravitational_constant() {
@@ -93,9 +94,9 @@ public class FuelPod extends StaticEntity
     return null;
   }
 
-  public void color(Color the_color) {
+  public void color(final Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
   /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);
