@@ -88,6 +88,7 @@ public class Star extends StaticEntity
 
   public void simulate(final double a_time_interval) {
 
+    my_ent.simulate(a_time_interval);
 
   }
 
