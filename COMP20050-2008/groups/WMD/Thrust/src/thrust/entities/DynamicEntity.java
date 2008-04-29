@@ -41,19 +41,19 @@ public abstract class DynamicEntity extends Entity
   /**array of doubles holding the entity's velocity.*/
   static double[] my_velocity;
   /**Color storing the color of the entity.*/
-  Color my_color;
+  static Color my_Color;
 
   public DynamicEntity() {
     super();
   }
-  public DynamicEntity make(final double[] the_position,
-                                   final double the_orientation,
-                                   final double[] the_acceleration,
-                                   final double the_mass,
-                                   final double[] the_velocity,
-                                   final String the_initial_shape_name,
-                                   final Shape the_initial_shape,
-                                   final byte the_initial_state) {
+  public void set_DynamicEntity (final double[] the_position,
+                                 final double the_orientation,
+                                 final double[] the_acceleration,
+                                 final double the_mass,
+                                 final double[] the_velocity,
+                                 final String the_initial_shape_name,
+                                 final Shape the_initial_shape,
+                                 final byte the_initial_state) {
 
     my_position = the_position;
     my_orientation = the_orientation;
@@ -61,6 +61,28 @@ public abstract class DynamicEntity extends Entity
     my_mass = the_mass;
     my_velocity = the_velocity;
     super.make(the_initial_shape_name, the_initial_shape, the_initial_state);
-    return null;
+
   }
+  public double[] position() {
+    return my_position;
+  }
+  public double orientation() {
+    return my_orientation;
+  }
+  public double[] acceleration() {
+    return my_acceleration;
+  }
+  public double mass() {
+    return my_mass;
+  }
+  public double[] velocity() {
+    return my_velocity;
+  }
+  public void my_Color(final Color the_color) {
+    my_Color = the_color;
+  }
+  public Color my_Color() {
+    return my_Color;
+  }
+
 }
