@@ -1,7 +1,7 @@
 
 package com.google.anrdoid.bloggerApp;
 
-
+//author: Peter Morgan
 
 public class ParsedText {
      private String extractedString = null;

@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+//author: Peter Morgan
+
 public class SinglePost extends Activity {
 
 	private TextView mTitleText;

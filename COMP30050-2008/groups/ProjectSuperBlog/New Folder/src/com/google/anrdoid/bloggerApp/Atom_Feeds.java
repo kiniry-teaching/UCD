@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+//author: Peter Morgan
+
 public class Atom_Feeds extends ListActivity {
 
     private BlogsDbAdapter mDbHelper;

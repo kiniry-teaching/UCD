@@ -1,5 +1,7 @@
 package com.google.anrdoid.bloggerApp;
 
+//author: Peter Morgan
+
 public class BlogEntry extends Object {
     public String title;
     public long id;

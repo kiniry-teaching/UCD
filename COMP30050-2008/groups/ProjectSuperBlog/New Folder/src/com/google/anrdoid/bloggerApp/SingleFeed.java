@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+//author: Peter Morgan
 
 public class SingleFeed extends ListActivity {
 

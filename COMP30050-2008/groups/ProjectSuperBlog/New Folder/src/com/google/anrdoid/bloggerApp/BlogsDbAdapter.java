@@ -34,6 +34,9 @@ import android.database.sqlite.SQLiteDatabase;
  * of better error handling and also using returning a Cursor instead of using
  * a collection of inner classes (which is less scalable and not recommended).
  */
+
+//author: Peter Morgan
+
 public class BlogsDbAdapter {
 
     public static final String TITLE="title";

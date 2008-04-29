@@ -4,6 +4,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+//author: Peter Morgan
 
 public class xmlParser extends DefaultHandler{
 
