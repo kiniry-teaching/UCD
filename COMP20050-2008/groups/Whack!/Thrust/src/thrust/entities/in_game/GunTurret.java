@@ -27,11 +27,11 @@ public class GunTurret extends StaticEntity
   /**
    * @author allison fallon(allison.fallon@ucdconnect.ie)
    */
-  int my_health = 10;
+  int my_health = 1;
   /**
    *
    */
-  Bullet my_bullet;
+  EnemyEntity my_enemy;
   /**
    * Colour of GunTurret.
    */
@@ -89,13 +89,15 @@ public class GunTurret extends StaticEntity
    */
   public double[] acceleration() {
 
-    return null;
+    return my_entity.acceleration();
   }
-  public void acceleration(final double[] the_acceleration) {
 
+  public void acceleration(final double[] the_acceleration) {
+    my_entity.acceleration(the_acceleration);
   }
   public void simulate(final double a_time_interval) {
 
+    my_entity.simulate(a_time_interval);
 
   }
 
