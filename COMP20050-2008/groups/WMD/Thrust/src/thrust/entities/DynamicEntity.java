@@ -43,7 +43,7 @@ public abstract class DynamicEntity extends Entity
   /**Color storing the color of the entity.*/
   static Color my_Color;
 
-  private static final double GRAV_CONST = 0.0000000000667300;
+  public static final double GRAV_CONST = 0.0000000000667300;
 
   public DynamicEntity() {
     super();
