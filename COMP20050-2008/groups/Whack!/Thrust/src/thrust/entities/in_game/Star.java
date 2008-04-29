@@ -94,7 +94,7 @@ public class Star extends StaticEntity
   }
 
   public void simulate(final double a_time_interval) {
-    // TODO Auto-generated method stub
+
 
   }
 
@@ -232,7 +232,7 @@ public class Star extends StaticEntity
     /**
      *
      */
-    final Rectangle my_a = new Rectangle(10, 10);
+    final Rectangle my_a = new Rectangle(2, 2);
 
     my_starshape = (Shape)my_a;
 
@@ -247,7 +247,7 @@ public class Star extends StaticEntity
   }
 
   public String shape_name() {
-    final String my_name = "Square";
+    final String my_name = "Star";
     return my_name;
   }
   public byte state() {
