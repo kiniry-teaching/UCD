@@ -9,18 +9,21 @@ package thrust.display;
 
 public class InfoPanel extends AbstractInfoPanel {
 
-  public void display() {
-    // TODO Auto-generated method stub
+  /** Boolean holding current displayed state of InfoPanel. */
+  private static boolean my_display_state;
 
-  }
 
   public boolean displayed() {
-    // TODO Auto-generated method stub
-    return false;
+    return my_display_state;
+  }
+
+  public void display() {
+    my_display_state = true;
+
   }
 
   public void hide() {
-    // TODO Auto-generated method stub
+    my_display_state = false;
 
   }
 
