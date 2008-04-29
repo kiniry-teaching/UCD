@@ -1,4 +1,7 @@
 package thrust.entities.in_game;
+
+import thrust.entities.in_game.AbstractGameState.HighScoreInterface;
+
 /**
  * @author Tara Flood (0361188@ucdconnect.ie)
  * @version 14 April 2008
@@ -143,5 +146,19 @@ public class GameStateWhack extends AbstractGameState {
     void new_initials(/*@ non_null @*/ final char[] the_new_initials) {
 
     }
+  }
+
+  public void add_high_score(
+                             thrust.entities.in_game.AbstractGameState.HighScoreInterface 
+                             the_new_high_score) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public boolean new_high_score(
+                                final thrust.entities.in_game.AbstractGameState.HighScoreInterface
+                                the_possible_new_high_score) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }
