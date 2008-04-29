@@ -12,9 +12,11 @@ package thrust.entities.in_game;
 import java.awt.Color;
 import java.awt.Shape;
 
+import thrust.animation.AnimatableWhack;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.about.Fuelable;
+import thrust.entities.about.FuelableWhack;
 
 
 /**
@@ -28,6 +30,10 @@ public class FuelPod extends StaticEntity
   /**
    * @author allison fallon(allison.fallon@ucdconnect.ie)
    */
+  FuelableWhack my_fuel;
+  /**
+   *
+   */
   Color my_fuelpodcolor;
   /**
    *
@@ -36,19 +42,55 @@ public class FuelPod extends StaticEntity
   /**
    *
    */
-  final double my_speed;
+  AnimatableWhack my_animation;
   /**
    *
    */
-  final double my_anglerad;
+  double my_speed;
   /**
    *
    */
-  final double my_mass;
+  double my_anglerad;
+  /**
+   *
+   */
+  double my_mass;
+  /**
+   *
+   */
+  double[] my_position;
+  /**
+   *
+   */
+  double my_orientation;
+  /**
+   *
+   */
+  double[] my_acceleration;
+  /**
+   *
+   */
+  double[] my_velocity;
+  /**
+   *
+   */
+  String my_shapename;
+  /**
+   *
+   */
+  StaticEntity my_ent;
 
   public double[] acceleration() {
 
-    return null;
+    return my_ent.acceleration();
+  }
+
+  public void acceleration(final double[] the_acceleration) {
+    my_ent.acceleration(the_acceleration);
+  }
+  public void simulate(final double a_time_interval) {
+    // TODO Auto-generated method stub
+
   }
 
   public double mass() {
@@ -56,24 +98,28 @@ public class FuelPod extends StaticEntity
     return my_mass;
 
   }
+  public void mass(final double the_mass) {
+    my_ent.mass(the_mass);
+  }
+
 
   public double momentum() {
 
     final int my_elements = 2;
-    final double[] my_s = new double[my_elements];
+    double[] my_s = new double[my_elements];
     my_s = velocity();
 
     return mass() * my_s[0];
 
   }
-  public void orientation(final double the_angle) {
+  public void orientation(final double the_orientation) {
 
-    my_anglerad = the_angle;
+    my_ent.orientation(the_orientation);
 
   }
   public double orientation() {
 
-    return my_anglerad;
+    return my_orientation;
 
   }
   public double[] velocity() {
@@ -84,6 +130,19 @@ public class FuelPod extends StaticEntity
     my_vel[1] = orientation();
     return my_vel;
 
+  }
+  public void velocity(final double[] the_velocity) {
+    my_ent.velocity(the_velocity);
+  }
+  public double gravitational_constant() {
+    return my_ent.gravitational_constant();
+  }
+  public double[] position() {
+    return my_position;
+  }
+
+  public void position(final double[] the_position) {
+    my_ent.position(the_position);
   }
   public void render() {
 
@@ -118,11 +177,11 @@ public class FuelPod extends StaticEntity
     /**
      * width of rectangle.
      */
-    final int my_width = 0;
+    int my_width = 1;
     /**
      * height of rectangle.
      */
-    final int my_height = 0;
+    int my_height = 1;
     /**
      *
      */
@@ -177,7 +236,8 @@ public class FuelPod extends StaticEntity
 
   public String shape_name() {
 
-    return null;
+    final String my_name = "Fuel Box";
+    return my_name;
 
   }
 
@@ -193,30 +253,30 @@ public class FuelPod extends StaticEntity
   }
 
   public void change_fuel_content(final int the_fuel_change) {
-
+    my_fuel.change_fuel_content(the_fuel_change);
 
   }
 
   public int fuel() {
 
-    return 0;
+    return my_fuel.fuel();
 
   }
 
   public int fuel_mass() {
 
-    return 0;
+    return my_fuel.fuel_mass();
 
   }
 
   public int maximum_fuel() {
 
-    return 0;
+    return my_fuel.fuel();
 
   }
 
   public void set_fuel_content(final int the_fuel_content) {
-
+    my_fuel.set_fuel_content(the_fuel_content);
 
   }
 
