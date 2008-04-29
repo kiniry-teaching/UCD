@@ -29,49 +29,61 @@ public abstract class Entity implements GameColor {
   /** Shape to store shape.*/
   private Shape my_shape;
   /** byte to store the state.*/
-  private byte the_state;
+  private byte my_state;
 
   public void set_State(final String the_initial_shape_name,
                         final Shape the_initial_shape,
                         final byte the_initial_state) {
     my_shape_name = the_initial_shape_name;
     my_shape = the_initial_shape;
-    the_state = the_initial_state;
+    my_state = the_initial_state;
   }
 
   /**
    * @return What shape are you?
    */
-  public abstract /*@ pure @*/ String shape_name();
+  public /*@ pure @*/ String shape_name() {
+    return my_shape_name;
+  }
 
   /**
    * @return What shape are you?
    */
-  public abstract /*@ pure @*/ Shape shape();
+  public /*@ pure @*/ Shape shape() {
+    return my_shape;
+  }
 
   /**
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public abstract void shape(Shape the_shape);
+  public void shape(final Shape the_shape) {
+    my_shape = the_shape;
+  }
 
   /**
    * @return What is your physical state?
    * @note State is encoded by a non-negative number of "hit points".
    */
   //@ ensures 0 <= \result;
-  public abstract /*@ pure @*/ byte state();
+  public /*@ pure @*/ byte state() {
+    return my_state;
+  }
 
   /**
    * This is your physical state.
-   * @param the_state the state.
+   * @param my_state the state.
    */
-  //@ requires 0 <= the_state;
+  //@ requires 0 <= my_state;
   //@ ensures state() == the_state;
-  public abstract void state(byte the_state);
+  public void state(final byte a_state) {
+    my_state = a_state;
+  }
 
   /**
    * Render yourself.
    */
-  public abstract void render();
+  public void render() {
+    assert false;
+  }
 }
