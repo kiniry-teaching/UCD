@@ -120,7 +120,6 @@ public class FuelPod extends StaticEntity
   public double orientation() {
 
     return my_orientation;
-
   }
   public double[] velocity() {
 

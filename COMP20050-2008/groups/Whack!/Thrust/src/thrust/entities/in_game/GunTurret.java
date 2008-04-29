@@ -183,7 +183,6 @@ public class GunTurret extends StaticEntity
     }
   }
   /**
-   *
    * @author allison
    *
    */
