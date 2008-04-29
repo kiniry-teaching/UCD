@@ -71,12 +71,8 @@ public class GoalSphere extends DynamicEntity
   public Color color() {
     return my_color;
   }
-  /**@return*/
+  /**
+   * @param*/
   public void simulate(final double the_amount) {
-  }
-  /**@return*/
-  public double gravitational_constant() {
-    final double d = 9.81;
-    return d;
   }
 }

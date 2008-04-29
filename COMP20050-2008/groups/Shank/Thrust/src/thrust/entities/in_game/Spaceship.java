@@ -69,11 +69,6 @@ public class Spaceship extends DynamicEntity
     return false;
   }
 
-  public double gravitational_constant() {
-    // TODO gravitational_constant method stub
-    return 0;
-  }
-
   public void simulate(final double some_seconds) {
     // TODO simulate method stub
   }

@@ -58,12 +58,6 @@ public class FuelPod extends StaticEntity
     return my_color;
   }
 
-  public double gravitational_constant() {
-    final double d = 9.81;
-    return d;
-  }
-
-
   public void change_fuel_content(final int the_fuel_change)
   {
     my_fuel_content = my_fuel_content - the_fuel_change;

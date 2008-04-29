@@ -43,7 +43,8 @@ public abstract class DynamicEntity extends Entity
   private double my_mass;
 /**The entities momentum.*/
   private double my_momentum;
-
+  /**Sets the gravitational constant.*/
+  private final double my_gravitationalConstant = 9.81;
 /**Set the initial.*/
   public void set_State(final double[] the_position,
                                         final double the_orientation,
@@ -60,6 +61,13 @@ public abstract class DynamicEntity extends Entity
     my_colour = the_colour;
   }
 
+  /**
+   * @return my_gravitationalConstant
+   */
+  public double gravitational_constant()
+  {
+    return my_gravitationalConstant;
+  }
   /**
    * @param This is your position.
    * */

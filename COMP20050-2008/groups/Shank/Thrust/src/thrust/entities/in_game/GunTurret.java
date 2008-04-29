@@ -42,11 +42,6 @@ public class GunTurret extends StaticEntity
     // TODO disturb setter method stub
   }
 
-  public double gravitational_constant() {
-    // TODO gravitational_constant getter method stub
-    return 0;
-  }
-
   public void simulate(final double some_seconds) {
     // TODO simulate method stub
   }

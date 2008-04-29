@@ -61,10 +61,6 @@ public class Bullet extends DynamicEntity
   }
   public void simulate(final double the_amount) {
   }
-  public double gravitational_constant() {
-    final double d = 9.81;
-    return d;
-  }
  /* public void color(final Color the_color) {
     my_color = the_color;
   }

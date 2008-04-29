@@ -85,11 +85,6 @@ public class Barrier extends StaticEntity
     // TODO animation(final Animation the_animation)  method stub
   }
 
-  public double gravitational_constant() {
-    // TODO gravitational_constant method stub
-    return 0;
-  }
-
   public void simulate(final double some_seconds) {
     // TODO simulate method stub
   }

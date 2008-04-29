@@ -38,11 +38,6 @@ public class Star extends StaticEntity
     // TODO animation setter method stub
   }
 
-  public double gravitational_constant() {
-    // TODO gravitational_constant setter method stub
-    return 0;
-  }
-
   public void simulate(final double some_seconds) {
     // TODO simulate method stub
   }

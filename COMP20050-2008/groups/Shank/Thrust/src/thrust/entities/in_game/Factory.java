@@ -17,6 +17,7 @@ import thrust.entities.EnemyEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.behaviors.AI;
+import thrust.entities.Enemy;
 
 /**
  * An enemy factory.
@@ -41,14 +42,13 @@ public class Factory extends StaticEntity
    * The color of the Factory.
    */
   private Color my_color;
-  /**
-   * The AI of an attacking factory.
-   */
-  private AI my_attackAI;
-  /**
-   * The AI of a disturbing factory.
-   */
-  private AI my_disturbAI;
+  /**The Factory Chimney.*/
+  private FactoryChimney my_factory_Chimney;
+  /**The Factory Sphere.*/
+  private FactorySphere my_factory_Sphere;
+  /** The EnemyAI .*/
+  private Enemy my_enemyAI;
+
   public /*@ pure @*/ byte damage() {
     return my_damage;
   }
@@ -56,7 +56,7 @@ public class Factory extends StaticEntity
    * @return What is your chimney?
    */
   public /*@ pure @*/ FactoryChimney chimney() {
-    return null;
+    return my_factory_Chimney;
   }
 
   /**
@@ -64,31 +64,7 @@ public class Factory extends StaticEntity
    */
   public /*@ pure @*/ FactorySphere sphere()
   {
-    return null;
-  }
-  /**
-   * @return null
-   * Factory has no AI
-   */
-  public void attack(final AI the_behaviour) {
-    my_attackAI = the_behaviour;
-  }
- /**
-  * @return null
-  * Factory has no AI
-  */
-  public void disturb(final AI the_behaviour) {
-    my_disturbAI = the_behaviour;
-  }
-  public AI attack() {
-    return my_attackAI;
-  }
-  public AI disturb() {
-    return my_disturbAI;
-  }
-  public double gravitational_constant() {
-    final double d = 9.81;
-    return d;
+    return my_factory_Sphere;
   }
   public void animation(final Animation the_animation)
   {
@@ -99,6 +75,20 @@ public class Factory extends StaticEntity
     return my_animation;
   }
   public void animate() {
+  }
+  public AI attack() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  public void attack(final AI the_behavior) {
+    // TODO Auto-generated method stub
+  }
+  public AI disturb() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  public void disturb(final AI the_behavior) {
+    // TODO Auto-generated method stub
   }
 
   /**
@@ -135,6 +125,9 @@ public class Factory extends StaticEntity
 
   public void simulate(final double the_amount) {
   }
+  //============================================//
+  //                                  Factory Chimney Class.
+  //============================================//
   /**
    * A chimney of a factory.
    * @author Joe Kiniry (kiniry@acm.org)
@@ -177,25 +170,25 @@ public class Factory extends StaticEntity
         my_smoking_animation.stop();
       }
     }
+    public AI attack() {
+      return  my_enemyAI.attack();
+    }
     /**
      * @return attack behaviour.
      * Factory has no AI
      */
     public void attack(final AI the_behaviour) {
-      my_attackAI = the_behaviour;
+      my_enemyAI.attack(the_behaviour);
     }
    /**
     * @return null
     * Factory has no AI
     */
     public void disturb(final AI the_behaviour) {
-      my_disturbAI = the_behaviour;
-    }
-    public AI attack() {
-      return my_attackAI;
+      my_enemyAI.disturb(the_behaviour);
     }
     public AI disturb() {
-      return my_disturbAI;
+      return  my_enemyAI.disturb();
     }
     public void animation(final Animation the_animation)
     {
@@ -208,10 +201,6 @@ public class Factory extends StaticEntity
     public void animate() {
     }
     public void simulate(final double the_amount) {
-    }
-    public double gravitational_constant() {
-      final double d = 9.81;
-      return d;
     }
     public void color(final Color the_color) {
     }
@@ -236,6 +225,10 @@ public class Factory extends StaticEntity
       @                     chimney. *);
       @*/
   }
+
+  //============================================//
+  //                                  Factory Sphere Class.
+  //============================================//
   /**
    * A sphere of a factory.
    * @author Joe Kiniry (kiniry@acm.org)
@@ -254,14 +247,13 @@ public class Factory extends StaticEntity
     }
     public void simulate(final double the_amount) {
     }
-    public double gravitational_constant() {
-      final double d = 9.81;
-      return d;
-    }
+
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
   }
+
+
 }

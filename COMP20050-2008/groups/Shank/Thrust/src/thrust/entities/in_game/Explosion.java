@@ -52,9 +52,4 @@ public class Explosion extends StaticEntity
   }
   public void simulate(final double the_amount) {
   }
-  public double gravitational_constant() {
-    final double d = 9.81;
-    return d;
-  }
-
 }

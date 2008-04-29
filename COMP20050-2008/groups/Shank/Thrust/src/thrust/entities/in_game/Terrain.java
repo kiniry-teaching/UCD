@@ -23,11 +23,6 @@ import thrust.entities.StaticEntity;
 public class Terrain extends StaticEntity
   implements NeutralEntity {
 
-  public double gravitational_constant() {
-    // TODO gravitational_constant getter method stub
-    return 0;
-  }
-
   public void simulate(final double some_seconds) {
     // TODO simulate method stub
   }
