@@ -15,7 +15,7 @@ import java.awt.Shape;
 
 /**
  * Any entity in the game that is drawn in space or on the terrain.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Maguire (David.Maguire.2@ucdconnect.ie))
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
