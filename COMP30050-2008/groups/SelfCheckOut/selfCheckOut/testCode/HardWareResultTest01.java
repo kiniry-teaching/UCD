@@ -1,16 +1,20 @@
-package selfCheckOut.hardWareInterface;
+package selfCheckOut.testCode;
 
 import java.util.Scanner;
 import selfCheckOut.BarCode;
 import selfCheckOut.Weight;
+import selfCheckOut.hardWareInterface.HardWareResult;
 
+/**
+ * This  class is used to test some of the members of the class HardWareResult 
+ * for the Hardware interface components of the SelfChekcOut project.
+ * <p>
+ * @author Peter Gibney
+ * @version 2nd April 2008.
+ */
 
 
 public class HardWareResultTest01 {
-
-	/**
-	 * @param args
-	 */
 
 	
 	
@@ -60,22 +64,20 @@ public class HardWareResultTest01 {
 		HardWareResult hwr2 = HardWareResult.importHardWareResult(inScan);
 		if (hwr2 == null) {
 			System.out.println("(hwr2 == null)");
+		} else {
+			System.out.println(" ");
+			System.out.println(" -------------------------------- ");
+			System.out.println(" ");
+			
+			repStr = hwr2.exportHardWareResult();
+			System.out.println(repStr);
+			
+			System.out.println(" ");
+			
+			System.out.println("hwr1.equals(hwr2) " + hwr1.equals(hwr2));
+			System.out.println(" ");
+			
+			System.out.println(hwr2.toString());
 		}
-	
-		System.out.println(" ");
-		System.out.println(" -------------------------------- ");
-		System.out.println(" ");
-		
-		repStr = hwr2.exportHardWareResult();
-		System.out.println(repStr);
-		
-		System.out.println(" ");
-		
-		System.out.println("hwr1.equals(hwr2) " + hwr1.equals(hwr2));
-		System.out.println(" ");
-		
-		System.out.println(hwr2.toString());
-		
-		
 	}
 }

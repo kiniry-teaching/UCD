@@ -350,6 +350,13 @@ public class HardWareResult {
 		return resStr;
 	}
 	// ---------------------------------------------
+	/**
+	 * Imports a formatted string so that it can be
+	 * reconstructed as an object of this class following the use of 
+	 * the corresponding exportHardWareResult(),
+	 * These are intended to permit the persistance & transmission as strings.
+	 * @return formatted string representing the object.
+	 */
 	public static HardWareResult importHardWareResult(Scanner inScan) {
 		BarCode[] barCodes = null;//array of barcodes
 		Weight weightPre = null;

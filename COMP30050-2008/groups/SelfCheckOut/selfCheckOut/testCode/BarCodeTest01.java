@@ -1,4 +1,4 @@
-package selfCheckOut.hardWareInterface;
+package selfCheckOut.testCode;
 /**
 	 * This  class is used to test some of the members of the class BarCode 
 	 * for the Hardware interface components of the SelfChekcOut project.

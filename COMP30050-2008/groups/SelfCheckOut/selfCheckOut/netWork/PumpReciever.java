@@ -1,3 +1,4 @@
+package selfCheckOut.netWork;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,23 +9,37 @@ import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import selfCheckOut.hardWareInterface.HardWareResult;
+import selfCheckOut.hardWareInterface.HWIconst;
+//import selfCheckOut.Weight;
 
-//import selfCheckOut.hardWareInterface.HardWareResult;
+/**
+ * This thread class is used to recieve HardWareResult objects that
+ * have been sent across the network for the SelfChekcOut project.
+ * <p>
+ * 
+ * @author Peter Gibney
+ */
 
 
-public class HWIconduit extends Thread {
+
+public class PumpReciever extends Thread {
 
 	private volatile boolean stopRequested = true;
 	private volatile boolean isStopped = true;
+	//private volatile boolean outPutAvail = false;
+	//private volatile Weight[] outPutWeights = null;
 	private BlockingQueue<HardWareResult> queue =
 		new LinkedBlockingQueue<HardWareResult>();
 	private final int usePort;
 	private final String AddressIP;
 	private volatile boolean gather = false;
 	// ------------------------------------------------------	
-	public HWIconduit(String AddressIP, int usePort) {
+	public PumpReciever(String AddressIP, int usePort) {
 		stopRequested = false;
 		isStopped = false;
+		//outPutAvail = false;
+		//outPutWeights = new Weight[2];
 		this.AddressIP = AddressIP;
 		this.usePort = usePort;
 	}
@@ -139,7 +154,7 @@ public class HWIconduit extends Thread {
 					//System.out.println("Server: " + hwr1);//fromServer);
 					if (!hwr1.sameValues(prevHWR) && doGather()) {
 						queue.add(hwr1);
-						System.out.println("1.queue.size() = " + queue.size());
+						System.out.println("queue.size() = " + queue.size());
 						prevHWR = hwr1;
 					} else {
 						//System.out.print("*");
@@ -175,3 +190,4 @@ public class HWIconduit extends Thread {
 		setStopped();
 	}
 }
+

@@ -13,18 +13,25 @@ import java.util.concurrent.TimeUnit;
 
 import selfCheckOut.hardWareInterface.HardWareResult;
 
-
+/**
+ * This  class is used to recieve the transmission of the HardWareResult
+ * objects across an IP network, for the Hardware interface components 
+ * of the SelfChekcOut project.
+ * <p>
+ * @author Peter Gibney
+ * @version 10th April 2008.
+ */
 public class HWIconduit extends Thread {
 
 	private volatile boolean stopRequested = true;
 	private volatile boolean isStopped = true;
-	private BlockingQueue<HardWareResult> queue =
-		new LinkedBlockingQueue<HardWareResult>();
+	private BlockingQueue<HardWareResult> queue = null;
 	private final int usePort;
 	private final String AddressIP;
 	private volatile boolean gather = false;
 	// ------------------------------------------------------	
 	public HWIconduit(String AddressIP, int usePort) {
+		queue = new LinkedBlockingQueue<HardWareResult>();
 		stopRequested = false;
 		isStopped = false;
 		this.AddressIP = AddressIP;
@@ -36,7 +43,6 @@ public class HWIconduit extends Thread {
 		synchronized (this) {
 			stopRequested = true;
 		} //end sync
-		
 		while (!isStopped()) {
 			if (HWIconst.DE_BUG_THREAD_SHUT_DOWN) {
 				System.out.println("In: ScalesAndBarCode.done(), waiting:");

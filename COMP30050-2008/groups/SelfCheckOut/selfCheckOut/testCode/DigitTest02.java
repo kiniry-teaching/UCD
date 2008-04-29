@@ -1,4 +1,7 @@
-package selfCheckOut.hardWareInterface;
+package selfCheckOut.testCode;
+
+import selfCheckOut.hardWareInterface.Digit;
+
 /**
 	 * This  class is used to test the class Digit for the Hardware interface 
 	 * components of the SelfChekcOut project.

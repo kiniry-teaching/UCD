@@ -1,5 +1,12 @@
-package selfCheckOut.hardWareInterface;
+package selfCheckOut.testCode;
 
+
+/**
+ * This  class is used to test objects of class Weight
+ * for the Hardware interface components of the SelfChekcOut project.
+ * <p>
+ * @author Peter Gibney
+ */
 
 //to run:
 
