@@ -27,31 +27,33 @@ import javax.sound.sampled.LineUnavailableException;
 
 public class Music {
 
-/** Boolean for checking if music is playing. */
-  private transient boolean my_is_playing_boolean = true;
-/** Location of .wav file. */
-  private transient String my_music_location =
+  /** Location of .wav file. */
+  private static final String MUSIC_LOCATION =
     "../../../media/Thrust_music.wav";
+/** Boolean for checking if music is playing. */
+  private transient boolean my_music_boolean = true;
 /** Creates music_file File. */
   private transient File my_music_file;
-  /** Ahem. */
+  /** AudioInputStream to take my_music_file. */
   private transient AudioInputStream my_music_stream;
-  /** Ahem. */
+  /** Takes the audio format of the AudioInputStream. */
   private transient AudioFormat my_music_format;
-  /** Ahem. */
+  /** The clip that gets played. */
   private transient Clip my_music_clip;
 
-  public Music() {
-    my_music_file = new File(my_music_location);
-    try { my_music_stream = AudioSystem.getAudioInputStream (my_music_file);
+  public Music() { // Fixed try indentation but now method is >15 lines..
+    my_music_file = new File(MUSIC_LOCATION);
+    try {
+      my_music_stream = AudioSystem.getAudioInputStream (my_music_file);
     } catch (UnsupportedAudioFileException e) {
       return;
-    }      catch (IOException e)  {
+    } catch (IOException e)  {
       return;
     }
     my_music_format = my_music_stream.getFormat();
     final DataLine.Info info = new DataLine.Info(Clip.class, my_music_format);
-    try { Clip my_music_clip = (Clip)AudioSystem.getLine(info);
+    try {
+      my_music_clip = (Clip)AudioSystem.getLine(info);
     } catch (LineUnavailableException e) {
       return;
     }
@@ -63,7 +65,7 @@ public class Music {
   //@ ensures \result == is_playing;
   public boolean playing() {
 
-    return my_is_playing_boolean;
+    return my_music_boolean;
 
   }
 
@@ -72,9 +74,10 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
-
-    my_music_clip.start();
-    my_is_playing_boolean = true;
+    // replaced my_music.start(); with .loop.
+    // Clip.LOOP_CONTINUOUSLY defined in Clip class.
+    my_music_clip.loop(Clip.LOOP_CONTINUOUSLY);
+    my_music_boolean = true;
 
   }
 
@@ -86,7 +89,7 @@ public class Music {
 
     my_music_clip.stop();
     my_music_clip.flush();
-    my_is_playing_boolean = false;
+    my_music_boolean = false;
 
   }
 }
