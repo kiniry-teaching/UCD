@@ -44,29 +44,26 @@ public class Bullet extends DynamicEntity
    * The bullet's attack.
    */
   AI my_attack;
-  /**
-   * The bullet's acceleration.
-   */
-  final double[] my_acceleration;
-  /**
-   * The bullet's momentum.
-   */
-  final double my_momentum;
 
   /**
    * Make a bullet.
    */
-  public Bullet(final double[] a_acceleration,
-                final double a_momentum) {
-
+  public Bullet(final double[] a_position,
+                final double an_orientation,
+                final double[] an_acceleration,
+                final double[] a_velocity,
+                final String an_initial_shape_name,
+                final Shape an_initial_shape,
+                final byte an_initial_state) {
+    super();
     /**
      * The mass of a bullet is 1kg.
      */
     my_bullet_mass = 1;
-
-    my_acceleration = a_acceleration;
-    my_momentum = a_momentum;
-
+    super.set_Dynamic_State(a_position, an_orientation,
+                            an_acceleration, my_bullet_mass, a_velocity,
+                            an_initial_shape_name, an_initial_shape,
+                            an_initial_state);
   }
 
 
