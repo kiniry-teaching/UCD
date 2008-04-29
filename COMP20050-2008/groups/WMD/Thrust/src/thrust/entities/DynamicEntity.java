@@ -44,7 +44,7 @@ public abstract class DynamicEntity extends Entity
   static Color my_Color;
 
   private static final double GRAV_CONST = 0.0000000000667300;
-  
+
   public DynamicEntity() {
     super();
   }
@@ -62,7 +62,8 @@ public abstract class DynamicEntity extends Entity
     my_acceleration = the_acceleration;
     my_mass = the_mass;
     my_velocity = the_velocity;
-    super.make(the_initial_shape_name, the_initial_shape, the_initial_state);
+    super.set_State(the_initial_shape_name, the_initial_shape,
+                    the_initial_state);
 
   }
   public double[] position() {
