@@ -19,8 +19,10 @@ public class Atom_Feeds extends ListActivity {
 	private EditText add;
 	private String url;
 	public static String test;
-	String http;
-	String end;
+	
+	String http = "http://";
+	String userIP = "192.168.1.106/";
+	String end = ".xml";
 	
     /** Called when the activity is first created. */
     @Override
@@ -30,6 +32,7 @@ public class Atom_Feeds extends ListActivity {
         mDbHelper = new BlogsDbAdapter(this);
         fillData();
         
+
         Button back = (Button) findViewById(R.id.s2_back);
         back.setOnClickListener(new View.OnClickListener() {
            public void onClick(View arg0) {
@@ -42,9 +45,8 @@ public class Atom_Feeds extends ListActivity {
         uri.setOnClickListener(new View.OnClickListener() {
            public void onClick(View arg0) {
         	   add = (EditText) findViewById(R.id.feed_uri);
-        	   http = "http://192.168.1.106/";
-        	   end = ".xml";
-        	   test = http + add.getText().toString() + end;
+
+        	   test = http + userIP + add.getText().toString() + end;
         	   
            Intent i = new Intent(Atom_Feeds.this, SingleFeed.class);
            i.putExtra(url, true);
@@ -70,8 +72,10 @@ public class Atom_Feeds extends ListActivity {
      		
     		setListAdapter(entries);
 */
+        	
+       //default Feed
      		List<String> items = new ArrayList<String>();
-     		test = "http://192.168.1.106/superblog1.xml";
+     		test = http + userIP + "superblog1.xml";
      		items.add(test);
      		ArrayAdapter<String> entries = 
     		    new ArrayAdapter<String>(this, R.layout.blogs_row, items);

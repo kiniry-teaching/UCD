@@ -87,6 +87,7 @@ public class SingleFeed extends ListActivity {
               parsedTest.popTable(mDbHelper);
               title = parsedTest.getTitle();
               mTitleText.setText(title);
+              
               // populate list
               fillData();
               
@@ -134,9 +135,6 @@ public class SingleFeed extends ListActivity {
         i.putExtra(BlogsDbAdapter.ROWID, id);
         startActivity(i);
     }
-    
-    
-    
     
     /*
     @Override

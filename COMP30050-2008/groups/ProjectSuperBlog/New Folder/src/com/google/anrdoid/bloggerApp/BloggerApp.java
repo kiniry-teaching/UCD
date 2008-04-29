@@ -20,13 +20,13 @@ public class BloggerApp extends Activity
          }
       });
      
-     /* Button b = (Button) findViewById(R.id.s1_blogger_button);
+      Button b = (Button) findViewById(R.id.s1_blogger_button);
       b.setOnClickListener(new View.OnClickListener() {
          public void onClick(View arg0) {
          //Intent i = new Intent(BloggerApp.this, Atom_Feeds.class);
          //startActivity(i);
-        	 setContentView(R.layout.screen_3_single_feed);
+        	 setContentView(R.layout.screen_5_access_blogger);
          }
-      });*/
+      });
    }
 }
