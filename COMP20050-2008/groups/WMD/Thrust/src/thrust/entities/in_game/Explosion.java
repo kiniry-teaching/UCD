@@ -14,7 +14,7 @@ import java.awt.Shape;
 
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
-import thrust.entities.behaviors.AI;
+//import thrust.entities.behaviors.AI;
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 
@@ -25,6 +25,28 @@ import thrust.animation.Animation;
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  /**
+   * The shape of an explosion.
+   */
+  Shape my_explosion_shape;
+
+  /**
+   * The state of the explosion.
+   */
+  byte my_state;
+
+  /**
+   * The explosion's animation.
+   */
+  Animation my_animation;
+
+  /**
+   * The explosion's color.
+   */
+  Color my_color;
+
+
 
   public double[] acceleration() {
     // TODO Auto-generated method stub
@@ -48,7 +70,7 @@ public class Explosion extends StaticEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Shape shape() {
@@ -56,9 +78,9 @@ public class Explosion extends StaticEntity
     return null;
   }
 
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -71,14 +93,14 @@ public class Explosion extends StaticEntity
     return 0;
   }
 
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public void animate() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Animation animation() {
@@ -86,9 +108,9 @@ public class Explosion extends StaticEntity
     return null;
   }
 
-  public void animation(Animation the_animation) {
+  public void animation(final Animation the_animation) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public double gravitational_constant() {
@@ -111,9 +133,9 @@ public class Explosion extends StaticEntity
     return null;
   }
 
-  public void color(Color the_color) {
+  public void color(final Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
 
 }
