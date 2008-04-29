@@ -28,22 +28,44 @@ public class Bullet extends DynamicEntity
    * The mass of a bullet is 1kg.
    */
   final double my_bullet_mass;
-  
+  /**
+   * The shape of a bullet.
+   */
+  Shape my_bullet_shape;
+  /**
+   * The bullet's colour.
+   */
+  Color my_bullet_color;
+  /**
+   * The bullet's disturb.
+   */
+  AI my_disturb;
+  /**
+   * The bullet's attack.
+   */
+  AI my_attack;
+  /**
+   * The bullet's acceleration.
+   */
+  final double[] my_acceleration;
+  /**
+   * The bullet's momentum.
+   */
+  final double my_momentum;
+
   /**
    * Make a bullet.
    */
-  public Bullet(final Shape a_bullet,
-                final Color a_bullet_color,
-                //final double my_bullet_mass = 1,
-                final AI a_disturb,
-                final AI a_attack,
-                final double[] a_acceleration,
+  public Bullet(final double[] a_acceleration,
                 final double a_momentum) {
 
     /**
      * The mass of a bullet is 1kg.
      */
     my_bullet_mass = 1;
+
+    my_acceleration = a_acceleration;
+    my_momentum = a_momentum;
 
   }
 
@@ -70,7 +92,7 @@ public class Bullet extends DynamicEntity
    * @return What shape are you?
    */
   public Shape shape() {
-    return a_bullet;
+    return my_bullet_shape;
   }
 
   /**
@@ -78,7 +100,7 @@ public class Bullet extends DynamicEntity
    * @param the_shape the shape of this Entity.
    */
   public void shape(final Shape the_shape) {
-    my_bullet = the_shape;
+    my_bullet_shape = the_shape;
   }
 
   /**
