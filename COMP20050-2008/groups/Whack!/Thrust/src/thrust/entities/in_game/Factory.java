@@ -54,7 +54,7 @@ public class Factory extends StaticEntity
                  final String the_shapename,
                  final Shape the_shape,
                  final byte the_state) {
-    
+
     super();
     super.set_Staticstate(the_position, the_orientation,
                           the_acceleration, the_mass,
