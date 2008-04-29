@@ -15,7 +15,8 @@ import java.awt.Shape;
 
 /**
  * Any entity in the game that is drawn in space or on the terrain.
- * @author David Maguire (David.Maguire.2@ucdconnect.ie))
+ * @author David Maguire (David.Maguire.2@ucdconnect.ie)
+ *          Tara Flood (Tara.Flood@ucdconnect.ie)
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
@@ -42,7 +43,6 @@ public abstract class Entity implements GameColor {
 
 
   }
-
   /**
    * @return What shape are you?
    */
@@ -62,10 +62,10 @@ public abstract class Entity implements GameColor {
    * @param the_shape the shape of this Entity.
    */
 
+
   public void shape(final Shape the_shape) {
     my_initial_shape = the_shape;
   }
-
   /**
    * @return What is your physical state?
    * @note State is encoded by a non-negative number of "hit points".
@@ -85,7 +85,6 @@ public abstract class Entity implements GameColor {
   public void state(final byte the_state) {
     my_initial_state = the_state;
   }
-
 
 
   /**

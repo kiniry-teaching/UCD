@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * A color.
  * @author Tara Flood (Tara.Flood@ucdconnect.ie),
- * @        Allison Fallon(allison.fallon@ucdconnect.ie).
+ * @       Allison Fallon(allison.fallon@ucdconnect.ie).
  * @version 21 April 2008
  */
 public class GameColorWhack implements GameColor {
@@ -32,7 +32,7 @@ public class GameColorWhack implements GameColor {
    */
   //@ ensures color() == the_color;
   public void color(final Color the_color) {
-      my_color = the_color;
+    my_color = the_color;
 
   }
 
