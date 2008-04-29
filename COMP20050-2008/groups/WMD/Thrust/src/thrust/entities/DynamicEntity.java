@@ -43,7 +43,8 @@ public abstract class DynamicEntity extends Entity
   /**Color storing the color of the entity.*/
   static Color my_Color;
 
-  public static final double GRAV_CONST = 0.0000000000667300;
+  /** double to hold the constant gravity.*/
+  static final double GRAV_CONST = 0.0000000000667300;
 
   public DynamicEntity() {
     super();
@@ -57,14 +58,18 @@ public abstract class DynamicEntity extends Entity
                                  final Shape the_initial_shape,
                                  final byte the_initial_state) {
 
-    my_position = the_position;
+    my_position = new double[] {the_position[0], the_position[1] };
     my_orientation = the_orientation;
-    my_acceleration = the_acceleration;
+    my_acceleration = new double[] {the_acceleration[0], the_acceleration[1] };
     my_mass = the_mass;
-    my_velocity = the_velocity;
+    my_velocity = new double[] {the_velocity[0], the_velocity[1]};
+
     super.set_State(the_initial_shape_name, the_initial_shape,
                     the_initial_state);
 
+  }
+  public double gravitational_constant() {
+    return GRAV_CONST;
   }
   public double[] position() {
     return my_position;
