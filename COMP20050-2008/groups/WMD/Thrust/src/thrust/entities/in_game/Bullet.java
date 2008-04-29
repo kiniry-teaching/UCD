@@ -73,40 +73,6 @@ public class Bullet extends DynamicEntity
    */
   //@ ensures \result == 1;
 
-  public double mass() {
-    assert false; //@ assert false;
-    return my_bullet_mass;
-  }
-
-  /**
-   * Render yourself.
-   */
-  public void render() {
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * @return What shape are you?
-   */
-  public Shape shape() {
-    return my_bullet_shape;
-  }
-
-  /**
-   * This is your shape.
-   * @param the_shape the shape of this Entity.
-   */
-  public void shape(final Shape the_shape) {
-    my_bullet_shape = the_shape;
-  }
-
-  /**
-   * @return What shape are you?
-   */
-  public String shape_name() {
-    return "Rectangle";
-  }
 
   /**
    * @return What is your attack behavior AI?
