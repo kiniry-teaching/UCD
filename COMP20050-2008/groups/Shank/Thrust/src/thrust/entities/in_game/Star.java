@@ -25,29 +25,35 @@ import thrust.entities.StaticEntity;
 public class Star extends StaticEntity
   implements NeutralEntity, Animatable {
 
-  public void animate() {
+  public void animate()
+  {
     // TODO animate method stub
   }
 
-  public Animation animation() {
+  public Animation animation()
+  {
     // TODO animation getter method stub
     return null;
   }
 
-  public void animation(final Animation the_animation) {
+  public void animation(final Animation the_animation)
+  {
     // TODO animation setter method stub
   }
 
-  public void simulate(final double some_seconds) {
+  public void simulate(final double some_seconds)
+  {
     // TODO simulate method stub
   }
 
-  public Color color() {
+  public Color color()
+  {
     // TODO color getter method stub
     return null;
   }
 
-  public void color(final Color the_color) {
+  public void color(final Color the_color)
+  {
     // TODO color setter method stub
   }
   /*@ public invariant (* A star's location is in space. *);
