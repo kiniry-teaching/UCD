@@ -16,8 +16,8 @@ import java.awt.Shape;
 
 /**
  * Entities whose position or orientation change.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Stephen Walker (stephen.walker@ucdconnect.ie)
+ * @version 29 April 2008
  */
 public abstract class DynamicEntity extends Entity
   implements PhysicsInterface {
@@ -43,10 +43,12 @@ public abstract class DynamicEntity extends Entity
   /**Color storing the color of the entity.*/
   static Color my_Color;
 
+  private static final double GRAV_CONST = 0.0000000000667300;
+  
   public DynamicEntity() {
     super();
   }
-  public void set_DynamicEntity (final double[] the_position,
+  public void set_Dynamic_State (final double[] the_position,
                                  final double the_orientation,
                                  final double[] the_acceleration,
                                  final double the_mass,
