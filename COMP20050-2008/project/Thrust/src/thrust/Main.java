@@ -16,9 +16,7 @@ package thrust;
  * @version 23 April 2008
  */
 public final class Main {
-  /**
-   * This class cannot be constructed.
-   */
+  /** This class cannot be constructed. */
   private Main() {
     assert false; //@ assert false;
   }
