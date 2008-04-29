@@ -7,9 +7,9 @@ package thrust.physics;
 public class Physics implements PhysicsInterface {
 
   /** Double holding the gravitational constant value. */
-  private static final double GRAVITATIONAL_CONSTANT = 0;
+  private static final double GRAV_CONSTANT = 0;
   /** String to clean up assertion error messages. */
-  private  static final String ASSERTIONERROR =
+  private static final String ASSERTIONERROR =
     "The parameter array length != 2";
   /** Int for use in my_acceleration, my_position and my_velocity arrays. */
   private static final int ARRAYLENGTH = 2;
@@ -36,7 +36,7 @@ public class Physics implements PhysicsInterface {
 
 /** Returns the gravitational constant in use. */
   public double gravitational_constant() {
-    return GRAVITATIONAL_CONSTANT;
+    return GRAV_CONSTANT;
   }
 
   /** Returns current mass of the Entity in kilograms. */
@@ -104,7 +104,7 @@ public class Physics implements PhysicsInterface {
   }
 
   public void simulate(final double some_seconds) {
-    my_seconds = ARRAYLENGTH; // Ehh
+
     my_seconds = some_seconds;
   }
 
