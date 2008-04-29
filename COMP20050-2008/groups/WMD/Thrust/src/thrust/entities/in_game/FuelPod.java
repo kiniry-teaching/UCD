@@ -10,11 +10,10 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
 
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
-import thrust.entities.about.Fuelable;
+import thrust.entities.about.FuelableInterface;
 
 /**
  * A fuel pod from which the spaceship can obtain fuel.
@@ -22,72 +21,8 @@ import thrust.entities.about.Fuelable;
  * @version 24 April 2008
  */
 public class FuelPod extends StaticEntity
-  implements NeutralEntity { //, Fuelable {
+  implements  FuelableInterface, NeutralEntity {
 
-  public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void render() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void state(final byte the_state) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   public Color color() {
     // TODO Auto-generated method stub
@@ -106,4 +41,27 @@ public class FuelPod extends StaticEntity
     @ public invariant (* A fuel pod's 'fuel' lettering color is
     @                     dictated by the amount of fuel it contains. *);
     @*/
+
+  public void change_fuel_content(final int the_fuel_change) {
+    // TODO Auto-generated method stub
+  }
+
+  public int fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int fuel_mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int maximum_fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void set_fuel_content(final int the_fuel_content) {
+    // TODO Auto-generated method stub
+  }
 }
