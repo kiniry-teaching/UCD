@@ -12,6 +12,7 @@ package thrust.entities;
 
 import thrust.physics.PhysicsInterface;
 import java.awt.Color;
+import java.awt.Shape;
 
 /**
  * Entities whose position or orientation change.
@@ -45,19 +46,21 @@ public abstract class DynamicEntity extends Entity
   public DynamicEntity() {
     super();
   }
-  public static DynamicEntity make(final double[] the_position,
+  public DynamicEntity make(final double[] the_position,
                                    final double the_orientation,
                                    final double[] the_acceleration,
                                    final double the_mass,
                                    final double[] the_velocity,
-                                   final String the_shape_name) {
+                                   final String the_initial_shape_name,
+                                   final Shape the_initial_shape,
+                                   final byte the_initial_state) {
 
     my_position = the_position;
     my_orientation = the_orientation;
     my_acceleration = the_acceleration;
     my_mass = the_mass;
     my_velocity = the_velocity;
-
+    super.make(the_initial_shape_name, the_initial_shape, the_initial_state);
     return null;
   }
 }
