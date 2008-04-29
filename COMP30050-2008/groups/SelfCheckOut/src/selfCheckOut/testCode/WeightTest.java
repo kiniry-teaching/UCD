@@ -11,7 +11,7 @@ package selfCheckOut.testCode;
 //to run:
 
 //C:\DN008\3rdYear\Sem.2\COMP30050\WS\SelfCheckOut\bin>java -ea 
-// selfCheckOut.hardWareInterface.WeightTest
+//  selfCheckOut.hardWareInterface.WeightTest
 
 
 import selfCheckOut.Weight;
