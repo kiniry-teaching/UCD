@@ -138,7 +138,7 @@ public void run() {
 					out = new 
 						PrintWriter(clientSocket.getOutputStream(), true);
 		        } catch (Exception e) {
-		        	System.out.print("Error:  " + e);// + i);
+		        	System.out.print("ResultPumper(A):Error:  " + e);// + i);
 		        }
 			}
 		} else {
@@ -158,11 +158,14 @@ public void run() {
 		}
 	}
 	try {
-		out.close();
-		clientSocket.close();
-		serverSocket.close();
+		if (out != null) 
+			out.close();
+		if (clientSocket != null) 
+			clientSocket.close();
+		if (serverSocket != null)
+			serverSocket.close();
 	} catch (Exception e) {
-		System.out.print("Error:  " + e);// + i);
+		System.out.print("ResultPumper(B:)Error:  " + e);// + i);
 	}
 	setStopped();//have stopped running
 } //end run()

@@ -138,7 +138,7 @@ public class PumpReciever extends Thread {
 				out = new PrintWriter(scalesSocket.getOutputStream(), true);
 				in = new BufferedReader(new InputStreamReader(scalesSocket.getInputStream()));
 			} catch (Exception e) {
-				System.out.print("Error:  " + e);// + i);
+				System.out.print("PumpReciever(A):Error:  " + e);// + i);
 			}
 			lineScanner = new Scanner(in);
 		}
