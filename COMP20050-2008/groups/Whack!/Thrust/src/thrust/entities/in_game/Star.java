@@ -19,7 +19,7 @@ import thrust.entities.StaticEntity;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import thrust.physics.Physicswhack;
+import thrust.physics.PhysicsInterface;
 
 
 /**
@@ -28,17 +28,17 @@ import thrust.physics.Physicswhack;
  * @version 18 April 2008
  */
 public class Star extends StaticEntity
-    implements NeutralEntity, Animatable {
+    implements NeutralEntity, Animatable, PhysicsInterface {
   /**
    *
-   * @author Allison Fallon(allison.fallon@ucdconnect.ie)
+   *@author Allison Fallon(allison.fallon@ucdconnect.ie)
    *@version 23 April 2008
    */
   AnimatableWhack my_animation;
   /**
    *
    */
-  final double my_speed;
+  double my_speed;
   /**
    *
    */
@@ -50,7 +50,7 @@ public class Star extends StaticEntity
   /**
    *
    */
-  final byte my_state;
+  byte my_state;
   /**
    *
    */
@@ -62,33 +62,49 @@ public class Star extends StaticEntity
   /**
    *
    */
-  final double[] my_position;
+  double[] my_position;
   /**
    *
    */
-  final double my_orientation;
+  double my_orientation;
   /**
    *
    */
-  final double[] my_acceleration;
+  double[] my_acceleration;
   /**
    *
    */
-  final double[] my_velocity;
+  double[] my_velocity;
   /**
    *
    */
   String my_shapename;
+  /**
+   *
+   */
+  StaticEntity my_ent;
 
   public double[] acceleration() {
 
-    return null;
+    return my_ent.acceleration();
+  }
+
+  public void acceleration(final double[] the_acceleration) {
+    my_ent.acceleration(the_acceleration);
+  }
+
+  public void simulate(final double a_time_interval) {
+    // TODO Auto-generated method stub
+
   }
 
   public double mass() {
 
     return my_mass;
 
+  }
+  public void mass(final double the_mass) {
+    my_ent.mass(the_mass);
   }
 
   public double momentum() {
@@ -100,14 +116,15 @@ public class Star extends StaticEntity
     return mass() * my_s[0];
 
   }
-  public void orientation(final double the_angle) {
-
-    my_anglerad = the_angle;
-
-  }
   public double orientation() {
 
-    return my_anglerad;
+    return my_orientation;
+
+  }
+
+  public void orientation(final double the_orientation) {
+
+    my_ent.orientation(the_orientation);
 
   }
   public double[] velocity() {
@@ -118,6 +135,19 @@ public class Star extends StaticEntity
     my_vel[1] = orientation();
     return my_vel;
 
+  }
+  public void velocity(final double[] the_velocity) {
+    my_ent.velocity(the_velocity);
+  }
+  public double gravitational_constant() {
+    return my_ent.gravitational_constant();
+  }
+  public double[] position() {
+    return my_position;
+  }
+
+  public void position(final double[] the_position) {
+    my_ent.position(the_position);
   }
   /**
    *
@@ -220,29 +250,22 @@ public class Star extends StaticEntity
     final String my_name = "Square";
     return my_name;
   }
-
   public byte state() {
 
     return my_state;
   }
-
-  public void set_state(final double[] the_position,
-                        final double the_orientation,
-                        final double[] the_acceleration,
-                        final double the_mass,
-                        final double[] the_velocity,
-                        final String the_shapename,
-                        final Shape the_shape,
-                        final byte the_state) {
-
-    super.set_Dynstate(the_position,
-                       the_orientation,
-                       the_acceleration,
-                       the_mass,
-                       the_velocity,
-                       the_shapename,
-                       the_shape,
-                       the_state);
+  /**
+   *
+   * @param the_position
+   * @param the_orientation
+   * @param the_acceleration
+   * @param the_mass
+   * @param the_velocity
+   * @param the_shapename
+   * @param the_shape
+   * @param the_state
+   */
+  public void set_state(final byte the_state) {
 
 
   }
