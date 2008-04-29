@@ -17,20 +17,21 @@ import thrust.entities.StaticEntity;
 
 /**
  * A barrier and trigger to block the spaceship's way.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @version 27 April 2008
  */
+  // DOES THIS INCLUDE THE TRIGGER OR IS THAT ANOTHER CLASS?
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
 
+  /** Animation holding the animations for Barrier class. */
+  private transient Animation my_animation;
   /** Boolean holding whether Barrier is open. */
-  private boolean my_open_state;
+  private transient boolean my_open_state;
   /** Boolean holding whether Barrier is closed. */
-  private boolean my_closed_state;
+  private transient boolean my_closed_state;
   /** Boolean holding whether Barrier is moving or still. */
-  private boolean my_movement;
-  /** AnyAnimation holding the animations for Barrier class. */
-  private Animation my_animation;
+  private transient boolean my_movement;
 
   /**
    * @return Are you closed?
@@ -51,13 +52,6 @@ public class Barrier extends StaticEntity
    */
   public /*@ pure @*/ boolean moving() {
     return my_movement;
-  }
-
-  /**
-   * @return What is your animation?
-   */
-  public /*@ pure @*/ Animation animation() {
-    return my_animation;
   }
 
   /**
@@ -98,7 +92,13 @@ public class Barrier extends StaticEntity
   //@ public invariant opened() ==> !closed() & !moving();
   //@ public invariant moving() ==> !closed() & !opened();
 
-
+  // The animation methods.
+  /**
+   * @return What is your animation?
+   */
+  public /*@ pure @*/ Animation animation() {
+    return my_animation;
+  }
   /**
    * @param the_animation This is your animation.
    */

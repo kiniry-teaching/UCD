@@ -16,14 +16,14 @@ import thrust.animation.Animation;
 
 /**
  * An explosion.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @version 27 April 2008
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
-  
+
   /** Animation holding animation steps for Explosion class. */
-  private Animation my_animation;
+  private transient Animation my_animation;
 
   /**
    * @return What is your animation?
@@ -44,7 +44,7 @@ public class Explosion extends StaticEntity
    * Take a next animation step.
    */
   public void animate() {
-    my_animation.animate(); // Animatable.animate() method UNFINISHED
+    // my_animation.animate(); // Animatable.animate() method UNFINISHED
   }
 
 

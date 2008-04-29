@@ -16,8 +16,8 @@ import thrust.entities.behaviors.Tow;
 /**
  * The goal sphere that the spaceship needs to tow into
  * space away from the terrain to escape.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @version 27 April 2008
  */
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
