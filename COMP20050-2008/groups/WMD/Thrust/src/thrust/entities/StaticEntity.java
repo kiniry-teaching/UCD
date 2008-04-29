@@ -1,19 +1,13 @@
-/*
- * A re-implementation of the classic C=64 game 'Thrust'.
- *
- * @author "Joe Kiniry (kiniry@acm.org)"
- * @module "COMP 20050, COMP 30050"
- * @creation_date "March 2007"
- * @last_updated_date "April 2008"
- * @keywords "C=64", "Thrust", "game"
- */
+
 
 package thrust.entities;
 
+import java.awt.Shape;
+
 /**
  * Entities whose position or orientation do not change.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Stephen Walker (stephen.walker@ucdconnect.ie)
+ * @version 29 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
   /**
@@ -23,10 +17,18 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ ensures position().equals(the_position);
   //@ ensures orientation().equals(the_orientation);
-  public static StaticEntity make(double[] the_position,
-                                  double the_orientation) {
-    assert false; //@ assert false;
-    return null;
+  public void set_Staticstate (final double[] the_position,
+                              final double the_orientation,
+                              final double[] the_acceleration,
+                              final double the_mass,
+                              final double[] the_velocity,
+                              final String the_initial_shape_name,
+                              final Shape the_initial_shape,
+                              final byte the_initial_state) {
+
+    super.set_State(the_initial_shape_name,
+                    the_initial_shape, the_initial_state);
+
   }
 
   /* (non-Javadoc)
