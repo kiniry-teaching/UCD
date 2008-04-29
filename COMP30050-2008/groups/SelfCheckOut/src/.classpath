@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/DN008/3rdYear/Sem.2/COMP30050/WS/SelfCheckOut/src/selfCheckOut/hardWareInterface/Phidget21.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
