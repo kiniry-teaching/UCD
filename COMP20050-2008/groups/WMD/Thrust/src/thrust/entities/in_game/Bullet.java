@@ -19,7 +19,7 @@ import thrust.entities.behaviors.AI;
 /**
  * A bullet shot from the spaceship or a gun turret.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
- * @version 24 April 2008
+ * @version 29 April 2008
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntity {
@@ -60,6 +60,7 @@ public class Bullet extends DynamicEntity
      * The mass of a bullet is 1kg.
      */
     my_bullet_mass = 1;
+
     super.set_Dynamic_State(a_position, an_orientation,
                             an_acceleration, my_bullet_mass, a_velocity,
                             an_initial_shape_name, an_initial_shape,
@@ -108,24 +109,6 @@ public class Bullet extends DynamicEntity
   }
 
   /**
-   * @return What is your physical state?
-   * @note State is encoded by a non-negative number of "hit points".
-   */
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  /**
-   * This is your physical state.
-   * @param the_state the state.
-   */
-  public void state(final byte the_state) {
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
    * @return What is your attack behavior AI?
    */
   public AI attack() {
@@ -171,28 +154,17 @@ public class Bullet extends DynamicEntity
 
   }
 
-  public double[] acceleration() {
-
-    return my_acceleration;
-  }
-
+  /**
+   * @return What is the gravitational constant?
+   */
   public double gravitational_constant() {
-    return null;
+    return super.GRAV_CONST;
   }
 
+  /**
+   * @return What is your momentum?
+   */
   public double momentum() {
-    return null;
-  }
-
-  public double orientation() {
-    return null;
-  }
-
-  public double[] position() {
-    return null;
-  }
-
-  public double[] velocity() {
     return null;
   }
 
