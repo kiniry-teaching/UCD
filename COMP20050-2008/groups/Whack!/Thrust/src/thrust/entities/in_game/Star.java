@@ -32,6 +32,7 @@ public class Star extends StaticEntity
   /**
    *
    *@author Allison Fallon(allison.fallon@ucdconnect.ie)
+   *@edited Tara Flood (Tara.Flood@ucdconnet.ie)
    *@version 23 April 2008
    */
   AnimatableWhack my_animation;
@@ -67,14 +68,6 @@ public class Star extends StaticEntity
    *
    */
   double my_orientation;
-  /**
-   *
-   */
-  double[] my_acceleration;
-  /**
-   *
-   */
-  double[] my_velocity;
   /**
    *
    */
@@ -143,7 +136,7 @@ public class Star extends StaticEntity
     return my_ent.gravitational_constant();
   }
   public double[] position() {
-    return my_position;
+    return  my_position;
   }
 
   public void position(final double[] the_position) {

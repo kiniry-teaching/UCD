@@ -1,6 +1,8 @@
 
 package thrust.entities.in_game;
 
+import thrust.entities.in_game.GameStateWhack.HighScoreInterface;
+
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
