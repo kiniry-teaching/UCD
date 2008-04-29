@@ -6,24 +6,28 @@ package thrust.physics;
  */
 public class Physics implements PhysicsInterface {
 
-  /** Array holding acceleration and orientation of Entity. */
-  private double[] my_acceleration;
   /** Double holding the gravitational constant value. */
-  private final double my_gravitational_constant = 0;
-  /** Double holding current mass of the ship. */
-  private double my_mass;
-  /** Double holding current momentum of the Entity. */
-  private double my_momentum;
-  /** Double holding orientation of ship in radians. */
-  private double my_orientation;
-  /** Array of doubles holding X and Y coordinates of Entity. */
-  private double[] my_position;
-  /** Array of doubles holding velocity and orientation of Entity. */
-  private double[] my_velocity;
+  private static final double GRAVITATIONAL_CONSTANT = 0;
+  /** String to clean up assertion error messages. */
+  private  static final String ASSERTIONERROR =
+    "The parameter array length != 2";
   /** Int for use in my_acceleration, my_position and my_velocity arrays. */
-  private final int my_arraylength = 2;
+  private static final int ARRAYLENGTH = 2;
+  /** Array holding acceleration and orientation of Entity. */
+  private transient double[] my_acceleration;
+  /** Double holding current mass of the ship. */
+  private transient double my_mass;
+  /** Double holding current momentum of the Entity. */
+  private transient double my_momentum;
+  /** Double holding orientation of ship in radians. */
+  private transient double my_orientation;
+  /** Array of doubles holding X and Y coordinates of Entity. */
+  private transient double[] my_position;
+  /** Array of doubles holding velocity and orientation of Entity. */
+  private transient double[] my_velocity;
   /** Double holding amount of seconds to simulate for. */
-  private double my_seconds;
+  private transient double my_seconds;
+
 
   /** Returns current acceleration of the Entity. */
   public double[] acceleration() {
@@ -32,7 +36,7 @@ public class Physics implements PhysicsInterface {
 
 /** Returns the gravitational constant in use. */
   public double gravitational_constant() {
-    return my_gravitational_constant;
+    return GRAVITATIONAL_CONSTANT;
   }
 
   /** Returns current mass of the Entity in kilograms. */
@@ -66,26 +70,16 @@ public class Physics implements PhysicsInterface {
 
   /** Calculates new acceleration of Entity. */
   public void acceleration(final double[] the_acceleration) {
-
-    // If statement using my_arraylength because it equals 2
-    // and 2 is a magic number.
-    if (the_acceleration.length == my_arraylength) {
-      my_acceleration = new double[my_arraylength];
-      my_acceleration[0] = the_acceleration[0];
-      my_acceleration[1] = the_acceleration[1];
-    } else {
-      System.out.print("the_acceleration.length must equal 2");
-    }
+    assert the_acceleration.length == ARRAYLENGTH : ASSERTIONERROR;
+    System.arraycopy(the_acceleration, 0, my_acceleration, 0,
+                     the_acceleration.length);
   }
 
   /** Ensures mass is positive, equal to the_mass. */
   public void mass(final double the_mass) {
 
-    if (the_mass < 0) {
-      System.out.print("Mass cannot be negative.");
-    } else {
-      my_mass = the_mass;
-    }
+    assert the_mass >= 0;
+    my_mass = the_mass;
   }
 
 /** Ensures orientatian is equal to the_orientation. */
@@ -96,32 +90,21 @@ public class Physics implements PhysicsInterface {
 
 /** Ensures positions match up, the_position.length must equal 2. */
   public void position(final double[] the_position) {
+    assert the_position.length == ARRAYLENGTH : ASSERTIONERROR;
+    System.arraycopy(the_position, 0, my_position, 0, the_position.length);
 
-    if (the_position.length == my_arraylength) {
-      my_position = new double[my_arraylength];
-      my_position[0] = the_position[0];
-      my_position[1] = the_position[1];
-    } else {
-      System.out.print("the_position.length must equal 2");
-    }
   }
 
   // Assuming the_velocity[0] == current speed
   // and the_velocity[1] == current orientation
 /** Ensures velocities match up, the_velocity.length must equal 2. */
   public void velocity(final double[] the_velocity) {
-
-    if (the_velocity.length == my_arraylength) {
-      my_velocity = new double[my_arraylength];
-      my_velocity[0] = the_velocity[0];
-      my_velocity[1] = the_velocity[1];
-    } else {
-      System.out.print("the_velocity.length must equal 2");
-    }
+    assert the_velocity.length == ARRAYLENGTH : ASSERTIONERROR;
+    System.arraycopy(the_velocity, 0, my_velocity, 0, the_velocity.length);
   }
 
   public void simulate(final double some_seconds) {
-
+    my_seconds = ARRAYLENGTH; // Ehh
     my_seconds = some_seconds;
   }
 
