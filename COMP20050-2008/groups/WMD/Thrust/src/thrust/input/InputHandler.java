@@ -1,12 +1,23 @@
+/*
+ * A re-implementation of the classic C=64 game 'Thrust'.
+ *
+ * @author "Joe Kiniry (kiniry@acm.org)"
+ * @module "COMP 20050, COMP 30050"
+ * @creation_date "March 2007"
+ * @last_updated_date "April 2008"
+ * @keywords "C=64", "Thrust", "game"
+ */
+
 package thrust.input;
 import java.awt.event.KeyEvent;
 
 /**
  * Processes and delegates each keyboard input received.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
+ * @author Siobhán Dunne (siobhan.dunne@ucdconnect.ie)
+ * @version 29 April 2008
  */
 public class InputHandler {
+
 
   /** Display the high scores.*/
   public static final char DISPLAY_HIGH_SCORES = KeyEvent.VK_H;
@@ -26,6 +37,7 @@ public class InputHandler {
   public static final char USE_ENGINE = KeyEvent.VK_SHIFT;
   /** Use shield. */
   public static final char USE_SHIELD = KeyEvent.VK_SPACE;
+
 
   /**
    * @return What are the legal keyboard inputs?
