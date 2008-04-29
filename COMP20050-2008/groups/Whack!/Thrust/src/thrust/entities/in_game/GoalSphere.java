@@ -10,10 +10,13 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
+import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
+import com.sun.j3d.utils.geometry.Sphere;
+
 
 /**
  * The goal sphere that the spaceship needs to tow into
@@ -21,8 +24,7 @@ import thrust.entities.behaviors.Tow;
  * @author Tara Flood (Tara.Flood@ucdconnect.ie)
  * @version 29 April 2008
  */
-public class GoalSphere extends DynamicEntity
-implements NeutralEntity, Tow {
+public class GoalSphere extends DynamicEntity implements NeutralEntity, Tow {
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship
     @                     is destroyed. *);
@@ -56,6 +58,10 @@ implements NeutralEntity, Tow {
    */
   double[] my_velocity;
   /**
+   * acceleration.
+   */
+  double[] my_acceleration;
+  /**
    * sphere color.
    */
   Color my_spherecolor;
@@ -75,6 +81,18 @@ implements NeutralEntity, Tow {
    * mass.
    */
   double my_mass;
+  /**
+   * sphere.
+   */
+  Shape my_sphereshape;
+  /**
+   * radius.
+   */
+  float my_radius;
+  /**
+   * sphere.
+   */
+  Sphere my_sshape;
   public void tow() {
     // TODO Auto-generated method stub
   }
@@ -85,18 +103,15 @@ implements NeutralEntity, Tow {
   }
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_acceleration;
   }
 
   public void acceleration(final double[] the_acceleration) {
-    // TODO Auto-generated method stub
-
+    my_dynamicentity.acceleration();
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_dynamicentity.gravitational_constant();
   }
 
   public double mass() {
@@ -147,5 +162,21 @@ implements NeutralEntity, Tow {
 
   public void color(final Color the_color) {
     my_spherecolor = the_color;
+  }
+  public void sphere(final float the_radius) {
+    my_sshape.sphere(the_radius);
+  }
+
+  public Shape shape() {
+    final sphere my_sphere = new sphere(1);
+
+    my_sphereshape = (Shape)my_sphere;
+    return my_sphereshape;
+
+  }
+
+  public void shape(final Shape the_shape) {
+    my_sphereshape = the_shape;
+
   }
 }
