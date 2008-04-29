@@ -180,23 +180,23 @@ public class Bullet extends DynamicEntity
   }
 
   public double gravitational_constant() {
-    return gravitational_constant();
+    return null;
   }
 
   public double momentum() {
-    return momentum();
+    return null;
   }
 
   public double orientation() {
-    return orientation();
+    return null;
   }
 
   public double[] position() {
-    return position();
+    return null;
   }
 
   public double[] velocity() {
-    return velocity();
+    return null;
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a

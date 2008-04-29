@@ -21,7 +21,7 @@ import thrust.entities.StaticEntity;
 /**
  * A barrier and trigger to block the spaceship's way.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
- * @version 24 April 2008
+ * @version 29 April 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
@@ -38,6 +38,22 @@ public class Barrier extends StaticEntity
    * Is the barrier closed.
    */
   private boolean my_closed;
+
+  /**
+   * The mass of a barrier.
+   */
+  private double my_barrier_mass;
+
+  /**
+   * Constructor.
+   * @param a_mass
+   */
+
+  public Barrier(final double a_mass) {
+
+    my_barrier_mass = a_mass;
+
+  }
 
   /**
    * @return Are you closed?
@@ -101,13 +117,11 @@ public class Barrier extends StaticEntity
   }
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
     return null;
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_barrier_mass;
   }
 
   public double momentum() {

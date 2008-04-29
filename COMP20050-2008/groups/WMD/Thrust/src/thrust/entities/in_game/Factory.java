@@ -55,7 +55,7 @@ public class Factory extends StaticEntity
    * @param the_damage You have sustained this many units of damage.
    */
   //@ requires 0 <= the_damage;
-  //@ ensures damage() == \old(damage() - the_damage);
+  //@ ensures damage() == \old(damage() + the_damage);
   public void damage(final byte the_damage) {
     assert false; //@ assert false;
   }
