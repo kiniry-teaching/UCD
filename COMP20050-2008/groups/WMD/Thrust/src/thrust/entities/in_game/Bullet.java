@@ -16,8 +16,6 @@ import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
 import thrust.entities.behaviors.AI;
 
-
-
 /**
  * A bullet shot from the spaceship or a gun turret.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
@@ -25,20 +23,30 @@ import thrust.entities.behaviors.AI;
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntity {
-  /**
-   * The shape of a bullet.
-   */
-  private Shape my_bullet;
-
-  /**
-   * The colour of a bullet.
-   */
-  private Color my_bullet_color;
 
   /**
    * The mass of a bullet is 1kg.
    */
-  private double my_bullet_mass = 1;
+  final double my_bullet_mass;
+  
+  /**
+   * Make a bullet.
+   */
+  public Bullet(final Shape a_bullet,
+                final Color a_bullet_color,
+                //final double my_bullet_mass = 1,
+                final AI a_disturb,
+                final AI a_attack,
+                final double[] a_acceleration,
+                final double a_momentum) {
+
+    /**
+     * The mass of a bullet is 1kg.
+     */
+    my_bullet_mass = 1;
+
+  }
+
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
@@ -62,7 +70,7 @@ public class Bullet extends DynamicEntity
    * @return What shape are you?
    */
   public Shape shape() {
-    return my_bullet;
+    return a_bullet;
   }
 
   /**
@@ -98,24 +106,33 @@ public class Bullet extends DynamicEntity
 
   }
 
+  /**
+   * @return What is your attack behavior AI?
+   */
   public AI attack() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_attack;
   }
 
+  /**
+   * @param the_behavior This is your attack behavior.
+   */
   public void attack(final AI the_behavior) {
-    // TODO Auto-generated method stub
+    my_attack = the_behavior;
 
   }
 
+  /**
+   * @return What is your disturb behavior AI?
+   */
   public AI disturb() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_disturb;
   }
 
+  /**
+   * @param the_behavior This is your disturb behavior.
+   */
   public void disturb(final AI the_behavior) {
-    // TODO Auto-generated method stub
-
+    my_disturb = the_behavior;
   }
 
 
@@ -136,33 +153,28 @@ public class Bullet extends DynamicEntity
   }
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
+
+    return my_acceleration;
   }
 
   public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
+    return gravitational_constant();
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
+    return momentum();
   }
 
   public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
+    return orientation();
   }
 
   public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
+    return position();
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
+    return velocity();
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a
