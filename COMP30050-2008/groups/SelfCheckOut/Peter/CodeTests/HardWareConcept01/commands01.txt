@@ -1,0 +1,14 @@
+
+
+java -ea selfChrckOut.hardWareInterface.BarCodeTest01
+java -ea .selfChrckOut.hardWareInterface.BarCodeTest01
+java -ea .selfCheckOut.hardWareInterface.BarCodeTest01
+java -ea selfCheckOut.hardWareInterface.WeightTest
+java -ea selfCheckOut.hardWareInterface.HardWareResultTest01
+java -ea selfCheckOut.hardWareInterface.BarCodeTest01
+
+C:\DN008\3rdYear\Sem.2\COMP30050\WS\ConceptTest\bin>java -classpath .;Phidget21.
+jar -ea ScalesServer5
+
+C:\DN008\3rdYear\Sem.2\COMP30050\WS\ConceptTest\bin>java SCO 127.0.0.1
+
