@@ -181,9 +181,10 @@ public class CameraCapture implements ControllerListener {
 			if (devices.size() == 0) {
 				System.out.println("No devices found.....");
 				//System.exit(0);
-			}
+			} else 
+				System.out.println(devices.size() + " devices found");
 		}
-		System.out.println(devices.size() + " devices found");
+		
 
 		// VideoFormat format = new VideoFormat("RGB", new Dimension(176, 144), 76230, byte[].class, 15.0f);
 		// DataSource ds;

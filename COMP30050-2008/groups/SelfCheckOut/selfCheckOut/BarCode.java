@@ -10,7 +10,7 @@ import java.util.Scanner;
 	 * @version 15th April 2008.
 	 */
 public class BarCode {
-	//
+
 	private static final int BAR_CODE_LEN = 13;
 	private final int[] barNums = new int[BAR_CODE_LEN];
 	private final long timeStamp;
