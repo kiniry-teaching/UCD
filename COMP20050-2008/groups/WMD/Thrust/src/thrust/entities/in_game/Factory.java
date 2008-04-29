@@ -56,7 +56,7 @@ public class Factory extends StaticEntity
    */
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(byte the_damage) {
+  public void damage(final byte the_damage) {
     assert false; //@ assert false;
   }
 
@@ -100,8 +100,118 @@ public class Factory extends StaticEntity
      * is smoking or not.
      */
     //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(boolean the_smoking_state) {
+    public void smoking(final boolean the_smoking_state) {
       assert false; //@ assert false;
+    }
+
+    public double[] acceleration() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public double mass() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double momentum() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double[] velocity() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void render() {
+      // TODO Auto-generated method stub
+
+    }
+
+    public Shape shape() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void shape(final Shape the_shape) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public String shape_name() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public byte state() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public void state(final byte the_state) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public AI attack() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void attack(final AI the_behavior) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public AI disturb() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void disturb(final AI the_behavior) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void animate() {
+      // TODO Auto-generated method stub
+
+    }
+
+    public Animation animation() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void animation(final Animation the_animation) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public double gravitational_constant() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double orientation() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double[] position() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public Color color() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void color(final Color the_color) {
+      // TODO Auto-generated method stub
+
     }
 
     /*@ public invariant (* A factories chimney is the same color as
@@ -120,6 +230,81 @@ public class Factory extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
+
+    public double[] acceleration() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public double mass() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double momentum() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double[] velocity() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void render() {
+      // TODO Auto-generated method stub
+
+    }
+
+    public Shape shape() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void shape(final Shape the_shape) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public String shape_name() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public byte state() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public void state(final byte the_state) {
+      // TODO Auto-generated method stub
+
+    }
+
+    public double gravitational_constant() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double orientation() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    public double[] position() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public Color color() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void color(final Color the_color) {
+      // TODO Auto-generated method stub
+
+    }
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
@@ -149,7 +334,7 @@ public class Factory extends StaticEntity
 
   public void render() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Shape shape() {
@@ -157,9 +342,9 @@ public class Factory extends StaticEntity
     return null;
   }
 
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public String shape_name() {
@@ -172,9 +357,9 @@ public class Factory extends StaticEntity
     return 0;
   }
 
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public AI attack() {
@@ -182,9 +367,9 @@ public class Factory extends StaticEntity
     return null;
   }
 
-  public void attack(AI the_behavior) {
+  public void attack(final AI the_behavior) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public AI disturb() {
@@ -192,14 +377,14 @@ public class Factory extends StaticEntity
     return null;
   }
 
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public void animate() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Animation animation() {
@@ -207,9 +392,9 @@ public class Factory extends StaticEntity
     return null;
   }
 
-  public void animation(Animation the_animation) {
+  public void animation(final Animation the_animation) {
     // TODO Auto-generated method stub
-    
+
   }
 
   public double gravitational_constant() {
@@ -232,8 +417,8 @@ public class Factory extends StaticEntity
     return null;
   }
 
-  public void color(Color the_color) {
+  public void color(final Color the_color) {
     // TODO Auto-generated method stub
-    
+
   }
 }
