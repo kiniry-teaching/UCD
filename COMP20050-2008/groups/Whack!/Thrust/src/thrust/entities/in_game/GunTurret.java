@@ -32,19 +32,19 @@ public class GunTurret extends StaticEntity
   Color my_colour;
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
+
     return null;
   }
   public void acceleration(final double[] the_acceleration) {
 
   }
   public void simulate(final double a_time_interval) {
-    // TODO Auto-generated method stub
+
 
   }
 
   public double mass() {
-    // TODO Auto-generated method stub
+
     return 0;
   }
   public void mass(final double the_mass) {
@@ -52,12 +52,12 @@ public class GunTurret extends StaticEntity
   }
 
   public double momentum() {
-    // TODO Auto-generated method stub
+
     return 0;
   }
 
   public double[] velocity() {
-    // TODO Auto-generated method stub
+
     return null;
   }
   public void velocity(final double[] the_velocity) {
@@ -86,41 +86,40 @@ public class GunTurret extends StaticEntity
 
 
   public void render() {
-    // TODO Auto-generated method stub
+
 
   }
 
   public Shape shape() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
   }
 
   public String shape_name() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public byte state() {
-    // TODO Auto-generated method stub
+
     return 0;
   }
 
   public void state(final byte the_state) {
-    // TODO Auto-generated method stub
+
 
   }
 
   public AI attack() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public void attack(final AI the_behavior) {
-    // TODO Auto-generated method stub
+
 
   }
 
