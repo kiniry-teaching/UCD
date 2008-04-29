@@ -121,13 +121,6 @@ public class Bullet extends DynamicEntity
   }
 
   /**
-   * @return What is the gravitational constant?
-   */
-  public double gravitational_constant() {
-    return super.GRAV_CONST;
-  }
-
-  /**
    * @return What is your momentum?
    */
   public double momentum() {

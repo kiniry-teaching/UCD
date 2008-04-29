@@ -1,3 +1,4 @@
+
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
@@ -46,10 +47,31 @@ public class Explosion extends StaticEntity
    */
   Color my_color;
 
+  /**
+   * @param acceleration
+   * @param mass
+   * @param momentum
+   * @param velocity
+   */
+  public Explosion(final double[] an_acceleration,
+                   final double[] a_position,
+                   final double an_orientation,
+                   final double a_mass,
+                   final double[] a_velocity,
+                   final String an_initial_shape_name,
+                   final Shape an_initial_shape,
+                   final byte an_initial_state) {
+    super();
+    super.set_Staticstate(a_position, an_orientation,
+                          an_acceleration, a_mass, a_velocity,
+                          an_initial_shape_name, an_initial_shape,
+                          an_initial_state);
 
+
+  }
 
   public double[] acceleration() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
@@ -68,35 +90,6 @@ public class Explosion extends StaticEntity
     return null;
   }
 
-  public void render() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void state(final byte the_state) {
-    // TODO Auto-generated method stub
-
-  }
 
   public void animate() {
     // TODO Auto-generated method stub
@@ -113,21 +106,6 @@ public class Explosion extends StaticEntity
 
   }
 
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
   public Color color() {
     // TODO Auto-generated method stub
     return null;
@@ -139,3 +117,5 @@ public class Explosion extends StaticEntity
   }
 
 }
+
+
