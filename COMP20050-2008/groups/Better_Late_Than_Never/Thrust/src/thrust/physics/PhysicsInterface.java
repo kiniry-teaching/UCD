@@ -56,7 +56,7 @@ public interface PhysicsInterface {
   /**
    * @return What is your velocity in meters per second?
    */
-  /*@ pure @*/ double velocity();
+  /*@ pure @*/ double[] velocity();
 
   /**
    * @param the_position This is your position.

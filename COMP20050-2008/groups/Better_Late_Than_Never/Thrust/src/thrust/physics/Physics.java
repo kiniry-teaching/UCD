@@ -64,8 +64,8 @@ public class Physics implements PhysicsInterface {
   // See: void velocity(the_velocity) method.
   // Changed from double[] to double here and in PhysicsInterface.
 /** Returns current velocity of the Entity in metres per second. */
-  public double velocity() {
-    return my_velocity[0];
+  public double[] velocity() {
+    return my_velocity;
   }
 
   /** Calculates new acceleration of Entity. */
