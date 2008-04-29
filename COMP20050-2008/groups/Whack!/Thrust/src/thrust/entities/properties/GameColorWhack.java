@@ -23,6 +23,18 @@ public class GameColorWhack implements GameColor {
 
     my_color.equals(Color.BLUE);
     my_color.equals(Color.BLACK);
+    my_color.equals(Color.RED);
+    my_color.equals(Color.GRAY);
+    my_color.equals(Color.ORANGE);
+    my_color.equals(Color.MAGENTA);
+    my_color.equals(Color.WHITE);
+    my_color.equals(Color.GREEN);
+    my_color.equals(Color.PINK);
+    my_color.equals(Color.CYAN);
+    my_color.equals(Color.DARK_GRAY);
+    my_color.equals(Color.LIGHT_GRAY);
+
+
     return my_color;
   }
 
@@ -32,7 +44,9 @@ public class GameColorWhack implements GameColor {
    */
   //@ ensures color() == the_color;
   public void color(final Color the_color) {
+
     my_color = the_color;
+
 
   }
 
