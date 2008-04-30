@@ -8,7 +8,7 @@ import thrust.entities.in_game.GameStateWhack.HighScoreInterface;
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
  *
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author David Maguire (David.Maguire.2@ucdconnect.ie)
  * @version 11 April 2008
  */
 
