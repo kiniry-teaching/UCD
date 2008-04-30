@@ -33,7 +33,7 @@ public class Factory extends StaticEntity
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
     assert false; //@ assert false;
-    
+
     return 0;
   }
 
@@ -83,8 +83,8 @@ public class Factory extends StaticEntity
 
   /**
    * A chimney of a factory.
-   * @author Joe Kiniry (kiniry@acm.org)
-   * @version 18 April 2008
+   * @author Siobhan Dunne (Siobhan.Dunne@ucdconnect.ie)
+   * @version 30 April 2008
    */
   public class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
@@ -104,6 +104,7 @@ public class Factory extends StaticEntity
     //@ ensures smoking() <==> the_smoking_state;
     public void smoking(final boolean the_smoking_state) {
       assert false; //@ assert false;
+
     }
 
     public void attack(final AI the_behavior) {
@@ -162,8 +163,8 @@ public class Factory extends StaticEntity
 
   /**
    * A sphere of a factory.
-   * @author Joe Kiniry (kiniry@acm.org)
-   * @version 18 April 2008
+   * @author Siobhan Dunne (Siobhan.Dunne@ucdconnect.ie)
+   * @version 30 April 2008
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {

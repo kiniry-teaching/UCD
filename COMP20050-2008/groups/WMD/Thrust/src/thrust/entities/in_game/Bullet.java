@@ -13,8 +13,9 @@ import java.awt.Color;
 import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
-import thrust.entities.EnemyEntity;
+import thrust.entities.EnemyEntityInterface;
 import thrust.entities.behaviors.AI;
+import thrust.physics.Physic;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -22,7 +23,16 @@ import thrust.entities.behaviors.AI;
  * @version 29 April 2008
  */
 public class Bullet extends DynamicEntity
-  implements EnemyEntity {
+  implements EnemyEntityInterface {
+
+  /**
+   * AI import.
+   */
+  AI my_ai = new AI();
+/**
+ * Physcs Import.
+ */
+  Physic my_physics = new Physic();
 
   /**
    * The mass of a bullet is 1kg.
@@ -36,14 +46,6 @@ public class Bullet extends DynamicEntity
    * The bullet's colour.
    */
   Color my_bullet_color;
-  /**
-   * The bullet's disturb.
-   */
-  AI my_disturb;
-  /**
-   * The bullet's attack.
-   */
-  AI my_attack;
 
   /**
    * Make a bullet.
@@ -78,29 +80,28 @@ public class Bullet extends DynamicEntity
    * @return What is your attack behavior AI?
    */
   public AI attack() {
-    return my_attack;
+    return my_ai.attack(my_ai);
   }
 
   /**
    * @param the_behavior This is your attack behavior.
    */
   public void attack(final AI the_behavior) {
-    my_attack = the_behavior;
-
+    my_ai.attack(the_behavior);
   }
 
   /**
    * @return What is your disturb behavior AI?
    */
   public AI disturb() {
-    return my_disturb;
+    return my_ai.disturb(my_ai);
   }
 
   /**
    * @param the_behavior This is your disturb behavior.
    */
   public void disturb(final AI the_behavior) {
-    my_disturb = the_behavior;
+    my_ai.disturb(the_behavior);
   }
 
 
@@ -124,7 +125,7 @@ public class Bullet extends DynamicEntity
    * @return What is your momentum?
    */
   public double momentum() {
-    return null;
+    return my_physics.momentum();
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a
