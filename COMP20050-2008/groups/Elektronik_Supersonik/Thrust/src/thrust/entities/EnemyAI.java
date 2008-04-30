@@ -6,11 +6,11 @@ public class EnemyAI implements EnemyEntity{
   /**
    * The bullet's disturb behavior.
    */
-  private AI my_disturb;
+  private transient AI my_disturb;
   /**
    * The bullet's attack behavior.
    */
-  private AI my_attack;
+  private transient AI my_attack;
   public EnemyAI() {
     
   }
@@ -19,7 +19,7 @@ public class EnemyAI implements EnemyEntity{
     return my_attack;
   }
 
-  public void attack(AI the_behavior) {
+  public void attack(final AI the_behavior) {
     my_attack = the_behavior;
   }
 
@@ -27,7 +27,7 @@ public class EnemyAI implements EnemyEntity{
     return my_disturb;
   }
 
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     my_disturb = the_behavior;
   }
 }

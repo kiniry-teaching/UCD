@@ -4,7 +4,7 @@ public class EntityAnimation implements Animatable{
   /**
    * The entity's animation.
    */
-  private Animation my_animation;
+  private transient Animation my_animation;
   public EntityAnimation() {
     
   }
@@ -18,7 +18,7 @@ public class EntityAnimation implements Animatable{
     return my_animation;
   }
 
-  public void animation(Animation the_animation) {
+  public void animation(final Animation the_animation) {
     my_animation = the_animation;
   }
 

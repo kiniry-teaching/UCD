@@ -22,15 +22,15 @@ public abstract class Entity implements GameColor {
   /**
    * A shape which stores the shape of the entity
    */
-  private Shape my_shape;
+  private transient Shape my_shape;
   /**
    * A string to store the name of the shape.
    */
-  private String my_shape_name;
+  private transient String my_shape_name;
   /** 
    * A byte which stores the state.
    */
-  private byte my_state;
+  private transient byte my_state;
 
   /**
    * Set the initial shape name, shape, and state of this entity.
@@ -38,9 +38,9 @@ public abstract class Entity implements GameColor {
    * @param the_initial_shape the initial shape.
    * @param the_initial_state the initial state.
    */
-  public void set_state(String the_initial_shape_name,
-                        Shape the_initial_shape,
-                        byte the_initial_state) {
+  public void set_state(final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_initial_state) {
     my_shape_name = the_initial_shape_name;
     my_shape = the_initial_shape;
     my_state = the_initial_state;
@@ -64,7 +64,7 @@ public abstract class Entity implements GameColor {
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public void shape(Shape the_shape) {
+  public void shape(final Shape the_shape) {
     my_shape = the_shape;
   }
 
@@ -83,7 +83,7 @@ public abstract class Entity implements GameColor {
    */
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
-  public void state(byte the_state) {
+  public void state(final byte the_state) {
     my_state = the_state;
   }
 

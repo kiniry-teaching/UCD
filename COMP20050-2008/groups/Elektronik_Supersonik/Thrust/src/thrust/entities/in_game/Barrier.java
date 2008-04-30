@@ -10,7 +10,6 @@
 
 package thrust.entities.in_game;
 
-import java.awt.Color;
 import java.awt.Shape;
 
 import thrust.animation.Animatable;
@@ -40,15 +39,15 @@ public class Barrier extends StaticEntity implements NeutralEntity, Animatable {
   /**
    * The animation of the barrier.
    */
-  private EntityAnimation my_animation;
+  private transient EntityAnimation my_animation;
   /**
    * Indicates whether the barrier is open.
    */
-  private boolean my_open;
+  private transient boolean my_open;
   /**
    * Indicates whether the barrier is moving.
    */
-  private boolean my_moving;
+  private transient boolean my_moving;
 
   /**
    * @return Are you closed?

@@ -25,7 +25,7 @@ public class FuelPod extends StaticEntity implements NeutralEntity, Fuelable {
   /**
    * The fuel of the Pod.
    */
-  private EntityFuel my_fuel;
+  private transient EntityFuel my_fuel;
 
   public FuelPod(final double[] the_position, final double the_orientation,
                  final double[] the_acceleration, final double the_mass,

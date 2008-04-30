@@ -25,7 +25,7 @@ public class GunTurret extends StaticEntity implements EnemyEntity {
   /**
    * The AI of the gun turret.
    */
-  private EnemyAI my_ai;
+  private transient EnemyAI my_ai;
   public GunTurret(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
       final double[] the_velocity, final String the_initial_shape_name,
@@ -49,7 +49,7 @@ public class GunTurret extends StaticEntity implements EnemyEntity {
    * @param the_behavior The turret's attack AI must shoot a bullet toward
    * the spaceship.
    */
-  public void attack(AI the_behavior) {
+  public void attack(final AI the_behavior) {
     my_ai.attack(the_behavior);
   }
 
@@ -65,7 +65,7 @@ public class GunTurret extends StaticEntity implements EnemyEntity {
    * @param the_behavior The turret's disturb AI must shoot a bullet
    * in a random direction away from the terrain.
    */
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     my_ai.disturb(the_behavior);
   }
 

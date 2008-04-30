@@ -39,7 +39,7 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
   /**
    * The fuel of the Spaceship.
    */
-  private EntityFuel my_fuel;
+  private transient EntityFuel my_fuel;
 
   public Spaceship(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,

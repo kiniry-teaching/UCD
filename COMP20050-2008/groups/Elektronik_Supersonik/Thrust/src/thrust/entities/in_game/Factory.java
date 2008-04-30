@@ -30,23 +30,23 @@ public class Factory extends StaticEntity
   /**
    * Stores the health(hit-points) of the factory.
    */
-  private byte my_health;
+  private transient byte my_health;
   /**
    * The factory's chimney.
    */
-  private FactoryChimney my_chimney;
+  private transient FactoryChimney my_chimney;
   /**
    * The factory's sphere.
    */
-  private FactorySphere my_sphere;
+  private transient FactorySphere my_sphere;
   /**
    * The AI of the factory.
    */
-  private EnemyAI my_ai;
+  private transient EnemyAI my_ai;
   /**
    * The animation of the factory.
    */
-  private EntityAnimation my_animation;
+  private transient EntityAnimation my_animation;
 
   public Factory(final double[] the_position, final double the_orientation,
                  final double[] the_acceleration, final double the_mass,
@@ -149,15 +149,15 @@ public class Factory extends StaticEntity
     /**
      * Indicates whether the chimney is smoking.
      */
-    private boolean my_smoking;
+    private transient boolean my_smoking;
     /**
      * The AI of the chimney.
      */
-    private EnemyAI my_ai;
+    private transient EnemyAI my_ai;
     /**
      * The animation of the chimney.
      */
-    private EntityAnimation my_animation;
+    private transient EntityAnimation my_animation;
     public AI attack() {
       return my_ai.attack();
     }
@@ -223,5 +223,9 @@ public class Factory extends StaticEntity
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
+    public FactorySphere() {
+      super();
+      
+    }
   }
 }

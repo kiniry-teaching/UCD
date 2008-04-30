@@ -22,7 +22,7 @@ public class Star extends StaticEntity implements NeutralEntity, Animatable {
   /**
    * The animation of the Star.
    */
-  private EntityAnimation my_animation;
+  private transient EntityAnimation my_animation;
 
   /**
    * @param the_position

@@ -5,27 +5,27 @@ public class GameState extends AbstractGameState {
   /**
    * An integer to store the bonus.
    */
-  private int my_bonus;
+  private transient int my_bonus;
   /**
    * An integer storing the current fuel.
    */
-  private int my_current_fuel;
+  private transient int my_current_fuel;
   /**
    * An byte storing lives.
    */
-  private byte my_lives; 
+  private transient byte my_lives; 
   /**
    * An integer storing the maximum fuel.
    */
-  private int my_max_fuel;
+  private transient int my_max_fuel;
   /**
    * An integer storing the score.
    */
-  private int my_score;
+  private transient int my_score;
   /**
    * The high scores.
    */
-  private HighScore[] my_hiscores;
+  private transient HighScore[] my_hiscores;
   /**
    * The maximum fuel a spaceship can have.
    */
@@ -124,11 +124,11 @@ public class GameState extends AbstractGameState {
     /**
      * The initials of the high score holder.
      */
-    private char[] my_initials;
+    private transient char[] my_initials;
     /**
      * The high score value.
      */
-    private int my_hiscore;
+    private transient int my_hiscore;
     
     public HighScore() {
       my_initials = new char[0];

@@ -24,31 +24,31 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   /**
    * An array of doubles to store acceleration.
    */
-  private double[] my_acceleration;
+  transient private double[] my_acceleration;
   /**
    *  A double to store mass.
    */
-  private double my_mass;
+  transient private double my_mass;
   /**
    * A double which stores momentum
    */
-  private double my_momentum;
+  transient private double my_momentum;
   /**
    * A double which stores the orientation
    */
-  private double my_orientation;
+  transient private double my_orientation;
   /**
    * An array of doubles storing position
    */
-  private double[] my_position;
+  transient private double[] my_position;
   /**
    * An array of doubles storing velocity
    */
-  private double[] my_velocity;
+  transient private double[] my_velocity;
   /**
-   * A color which stores the colour of the entity
+   * A colour which stores the colour of the entity
    */
-  private Color my_color;
+  transient private Color my_color;
   /**
    * A double storing our gravitational constant
    */
@@ -109,7 +109,33 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
     my_position[1] += my_velocity[1] * some_seconds;
     my_velocity[0] += my_acceleration[0] * some_seconds;
     my_velocity[1] += my_acceleration[1] * some_seconds;
-    my_acceleration[1] -= 0.001 * some_seconds;
+    if(my_mass != 0) {
+      if(my_velocity[0] > 8) {
+        my_velocity[0] = 8;
+      }
+      if(my_velocity[0] < -8) {
+        my_velocity[0] = -8;
+      }
+      if(my_velocity[1] > 8) {
+        my_velocity[1] = 8;
+      }
+      if(my_velocity[1] < -8) {
+        my_velocity[1] = -8;
+      }
+      my_acceleration[1] += 0.5 * some_seconds;
+      if(my_acceleration[0] > 8) {
+        my_acceleration[0] = 8;
+      }
+      if(my_acceleration[1] > 8) {
+        my_acceleration[1] = 8;
+      }
+      if(my_acceleration[1] < -8) {
+        my_acceleration[1] = -8;
+      }
+      if(my_acceleration[0] < -8) {
+        my_acceleration[0] = -8;
+      }
+    }
   }
 
   public double[] velocity() {

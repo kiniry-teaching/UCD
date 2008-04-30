@@ -33,7 +33,7 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
                             the_initial_shape, the_initial_state);
   }
 
-  private EnemyAI my_ai = new EnemyAI();
+  private transient EnemyAI my_ai = new EnemyAI();
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()

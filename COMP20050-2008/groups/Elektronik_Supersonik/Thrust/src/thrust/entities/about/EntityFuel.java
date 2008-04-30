@@ -4,7 +4,7 @@ public class EntityFuel implements Fuelable {
   /**
    * The fuel an entity has.
    */
-  private int my_fuel;
+  private transient int my_fuel;
   /**
    * The maximum amount of fuel the entity can have.
    */
@@ -18,7 +18,7 @@ public class EntityFuel implements Fuelable {
      my_fuel = the_initial_fuel;
   }
 
-  public void change_fuel_content(int the_fuel_change) {
+  public void change_fuel_content(final int the_fuel_change) {
     my_fuel += the_fuel_change;
   }
 
@@ -34,7 +34,7 @@ public class EntityFuel implements Fuelable {
     return MAX_FUEL;
   }
 
-  public void set_fuel_content(int the_fuel_content) {
+  public void set_fuel_content(final int the_fuel_content) {
     my_fuel = the_fuel_content;
   }
   

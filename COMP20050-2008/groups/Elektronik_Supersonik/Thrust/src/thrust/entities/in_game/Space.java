@@ -24,7 +24,7 @@ public class Space extends StaticEntity implements NeutralEntity, Animatable {
   /**
    * The animation of space.
    */
-  private EntityAnimation my_animation;
+  private transient EntityAnimation my_animation;
   
   /**
    * @param the_position
@@ -63,7 +63,7 @@ public class Space extends StaticEntity implements NeutralEntity, Animatable {
    * @param the_star
    *          the star to add.
    */
-  public void add_star(Star the_star) {
+  public void add_star(final Star the_star) {
     assert false; // @ assert false;
   }
   

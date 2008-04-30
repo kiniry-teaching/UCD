@@ -85,7 +85,6 @@ public class InputHandler {
    */
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
-    if(the_keyboard_input == DISPLAY_HIGH_SCORES);
     if(the_keyboard_input == START_GAME) {
       Main.start();
     }
@@ -100,6 +99,9 @@ public class InputHandler {
     }
     if(the_keyboard_input == TURN_RIGHT) {
       Main.turnRight();
+    }
+    if(the_keyboard_input == FIRE_GUN) {
+      Main.fire();
     }
   }
 }
