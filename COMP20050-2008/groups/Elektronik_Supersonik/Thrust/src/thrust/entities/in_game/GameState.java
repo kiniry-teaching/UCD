@@ -34,14 +34,27 @@ public class GameState extends AbstractGameState {
    * The number of high scores stored.
    */
   private static final int HIGH_SCORE_COUNT = 8;
-  public GameState(final int init_fuel, final byte initial_lives) {
+  /**
+   * The number of lives you get initially.
+   */
+  private static final int INIT_LIVES = 3;
+  /**
+   * The number of fuel you get initially.
+   */
+  private static final int INIT_FUEL = 2000;
+  public GameState() {
     super();
     my_bonus = 0;
-    my_current_fuel = init_fuel;
-    my_lives = initial_lives;
+    my_current_fuel = INIT_FUEL;
+    my_lives = INIT_LIVES;
     my_max_fuel = MAX_FUEL;
     my_score = 0;
     my_hiscores = new HighScore[8];
+    for(int i = 0; i < HIGH_SCORE_COUNT; ++i) {
+      my_hiscores[i] = new HighScore();
+      my_hiscores[i].new_score(0);
+      my_hiscores[i].new_initials(new char[] {'A', 'A', 'A'});
+    }
   }
   
   public void add_high_score(final HighScoreInterface the_new_high_score) {
@@ -73,7 +86,7 @@ public class GameState extends AbstractGameState {
   }
 
   public HighScoreInterface high_score(final int the_index) {
-    return new HighScore();
+    return my_hiscores[the_index];
   }
 
   public HighScoreInterface[] high_scores() {

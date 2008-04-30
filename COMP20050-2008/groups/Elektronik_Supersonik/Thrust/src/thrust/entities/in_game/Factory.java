@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Shape;
+
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.animation.EntityAnimation;
@@ -46,6 +48,16 @@ public class Factory extends StaticEntity
    */
   private EntityAnimation my_animation;
 
+  public Factory(final double[] the_position, final double the_orientation,
+                 final double[] the_acceleration, final double the_mass,
+                 final double[] the_velocity, final String the_initial_shape_name,
+                 final Shape the_initial_shape, final byte the_initial_state) {
+    super();
+    super.set_state(the_position, the_orientation, the_acceleration, the_mass,
+                    the_velocity, the_initial_shape_name, the_initial_shape,
+                    the_initial_state);   
+  }
+  
   public AI attack() {
     return my_ai.attack();
   }

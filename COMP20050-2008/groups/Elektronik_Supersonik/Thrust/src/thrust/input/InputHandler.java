@@ -12,6 +12,8 @@ package thrust.input;
 
 import java.awt.event.KeyEvent;
 
+import thrust.Main;
+
 /**
  * Processes and delegates each keyboard input received.
  *
@@ -39,7 +41,10 @@ public class InputHandler {
   public static final char USE_ENGINE = KeyEvent.VK_UP;
   /** Character code to enable shield (Shift). */
   public static final char USE_SHIELD = KeyEvent.VK_SHIFT;
-
+  /**
+   * Quit game.
+   */
+  public static final char QUIT_GAME = KeyEvent.VK_X;
   /**
    * @return What are the legal keyboard inputs?
    */
@@ -80,6 +85,21 @@ public class InputHandler {
    */
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
-    if(the_keyboard_input == DISPLAY_HIGH_SCORES);//This took us two and a half hours. (no kidding)
+    if(the_keyboard_input == DISPLAY_HIGH_SCORES);
+    if(the_keyboard_input == START_GAME) {
+      Main.start();
+    }
+    if(the_keyboard_input == QUIT_GAME) {
+      Main.quit();
+    }
+    if(the_keyboard_input == USE_ENGINE) {
+      Main.thrust();
+    }
+    if(the_keyboard_input == TURN_LEFT) {
+      Main.turnLeft();
+    }
+    if(the_keyboard_input == TURN_RIGHT) {
+      Main.turnRight();
+    }
   }
 }

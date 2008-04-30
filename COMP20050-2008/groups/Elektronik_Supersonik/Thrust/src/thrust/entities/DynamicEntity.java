@@ -105,7 +105,11 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   }
 
   public void simulate(final double some_seconds) {
-    assert false;
+    my_position[0] += my_velocity[0] * some_seconds;
+    my_position[1] += my_velocity[1] * some_seconds;
+    my_velocity[0] += my_acceleration[0] * some_seconds;
+    my_velocity[1] += my_acceleration[1] * some_seconds;
+    my_acceleration[1] -= 0.001 * some_seconds;
   }
 
   public double[] velocity() {
