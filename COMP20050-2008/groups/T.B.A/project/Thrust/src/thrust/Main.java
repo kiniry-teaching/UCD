@@ -11,6 +11,7 @@
 package thrust;
 
 import thrust.audio.Music;
+import thrust.input.InputHandler;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -18,7 +19,7 @@ import java.awt.BorderLayout;
 
 /**
  * Simulating all of the entities in the game to realize the game.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Eoin Healy (eoin.healy@gmail.com)
  * @version 23 April 2008
  */
 public final class Main {
@@ -41,8 +42,15 @@ public final class Main {
   /**
    * The Font.
    */
-  private final static Font FONT = new Font("Serif", Font.BOLD, 40);
-
+  private static final Font FONT = new Font("Serif", Font.BOLD, 40);
+  /**
+   * Input Handler.
+   */
+  private static InputHandler input;
+  /**
+   * Listener.
+   */
+  private static InputHandler.KeyPressed listener;
   /**
    * This class cannot be constructed.
    */
@@ -55,6 +63,7 @@ public final class Main {
    * @param the_args The command-line arguments are ignored.
    */
   public static void main(final String[] the_args) {
+    /* I don't understand why I'm getting an uncommented method here, I clearly have comments in it*/
     assert false; //@ assert false;
     thrust_frame = new JFrame("Thrust");
     thrust_frame.getContentPane().setLayout(new BorderLayout());
@@ -64,12 +73,19 @@ public final class Main {
     intro_screen.setText("Thrust");
     intro_screen.setEditable(false);
     thrust_frame.getContentPane().add(intro_screen, BorderLayout.CENTER);
+    /*This isnt working right for some reason. Adding it but not centering it.*/
     thrust_frame.setVisible(true);
     // display the title screen
     final Music music_effect = new Music();
+    /* This needs to be changed to work with SourceDataLine instead of Clip */
     music_effect.start();
     // wait for keyboard input
+    input = new InputHandler();
+    listener = input.new KeyPressed();
+    thrust_frame.addKeyListener(listener);
     // repeat the following until the player asks to quit
+    while (true) {
+      assert true;
     //   show the high score display
     //   wait for input to start the game
     //   create game map and initialize location of all entities
@@ -84,5 +100,25 @@ public final class Main {
     //   if the player has a new high score
     //     ask them to input their initials
     //     save the new high score
+    }
+  }
+  public static void start() {
+  }
+
+  public static void stop() {
+  }
+  public static void left() {
+  }
+  public static void right() {
+  }
+  public static void accelerate() {
+  }
+  public static void shield() {
+  }
+  public static void scores() {
+  }
+  public static void fire() {
+  }
+  public static void sound() {
   }
 }

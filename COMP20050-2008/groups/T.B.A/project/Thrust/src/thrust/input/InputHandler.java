@@ -10,6 +10,10 @@
 
 package thrust.input;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import thrust.Main;
 /**
  * Processes and delegates each keyboard input received.
  * @author Eoin Healy (eoin.healy@Gmail.com)
@@ -36,19 +40,21 @@ public class InputHandler {
   private static final char USE_ENGINE = (char) 14;
   /** Press [space] to use shield and/or pick up object. */
   private static final char USE_SHIELD = ' ';
-
+/**
+ * p
+ */
   /**
    * @return What are the legal keyboard inputs?
    */
   public /*@ pure @*/ char[] legal_inputs() {
     /* Array of the legal inputs */
-    final char[] legal_inputs_array = {DISPLAY_HIGH_SCORES,
-                                       TOGGLE_MUSIC_OR_EFFECTS,
-                                       START_GAME, STOP_GAME, FIRE_GUN,
-                                       TURN_LEFT, TURN_RIGHT, USE_ENGINE,
-                                       USE_SHIELD};
-    //@ assert legal_inputs_array != null;
-    return legal_inputs_array;
+    final char[] inputs_array = {DISPLAY_HIGH_SCORES,
+                                 TOGGLE_MUSIC_OR_EFFECTS,
+                                 START_GAME, STOP_GAME, FIRE_GUN,
+                                 TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+                                 USE_SHIELD};
+    //@ assert inputs_array != null;
+    return inputs_array;
   }
 
   /**
@@ -86,17 +92,56 @@ public class InputHandler {
     //@assert legal_input(the_keyboard_input);
 
     switch(the_keyboard_input) {
-      case START_GAME: /* start game */
-      case DISPLAY_HIGH_SCORES: /* start game */
-      case TOGGLE_MUSIC_OR_EFFECTS: /* Toggle Music/Effects */
-      case STOP_GAME: /* stop game */
-      case FIRE_GUN: /* Fire a bullet*/
-      case TURN_LEFT: /*Rotate ship left*/
-      case TURN_RIGHT: /* Rotate ship right*/
-      case USE_ENGINE: /*Accelerate ship */
-      case USE_SHIELD: /*Use shield/pick up */
+      case START_GAME:
+        Main.start();
+      case DISPLAY_HIGH_SCORES:
+        Main.scores();
+      case TOGGLE_MUSIC_OR_EFFECTS:
+        Main.sound(); /* Toggle Music/Effects */
+      case STOP_GAME:
+        Main.stop(); /* stop game */
+      case FIRE_GUN:
+        Main.fire(); /* Fire a bullet*/
+      case TURN_LEFT:
+        Main.left(); /*Rotate ship left*/
+      case TURN_RIGHT:
+        Main.right(); /* Rotate ship right*/
+      case USE_ENGINE:
+        Main.accelerate(); /*Accelerate ship */
+      case USE_SHIELD:
+        Main.shield(); /*Use shield/pick up */
       default:
         break;
     }
+  }
+/**
+ * Key Listener Class.
+ * @author Eoin Healy(eoin.healy@gmail.com)
+ * @version 30 April 2008
+ */
+  public class KeyPressed implements KeyListener {
+    /**
+     * The key pressed.
+     */
+    private int my_keypressed;
+
+    public KeyPressed() {
+    }
+
+    public void keyPressed(final KeyEvent the_key) {
+      my_keypressed = the_key.getKeyCode();
+      if (legal_input((char) my_keypressed))
+        process((char) my_keypressed);
+
+    }
+
+    public void keyReleased(final KeyEvent the_key) {
+      // TODO Auto-generated method stub
+    }
+
+    public void keyTyped(final KeyEvent the_key) {
+      // TODO Auto-generated method stub
+    }
+
   }
 }
