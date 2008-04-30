@@ -2,8 +2,6 @@ package thrust.audio;
 
 import java.io.File;
 import java.io.IOException;
-
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -21,20 +19,26 @@ public class Music {
 
   /** File for music. */
   private final transient File my_clipFile =
-          new File("/home/keith/work/Jar/Thrust/media/Thrust_music.wav");
+    new File("F:\\Jar\\Thrust\\media\\Thrust_music1.wav");
   /** Clip to be played. */
   // @ assert my_clipFile != null;
-  private final transient Clip my_clip;
+  private transient Clip my_clip;
 
   /** Constructor, sets up audio stream. */
-  public Music() throws LineUnavailableException, IOException,
-      UnsupportedAudioFileException {
-    final AudioInputStream my_audiois =
-      AudioSystem.getAudioInputStream(my_clipFile);
-    final AudioFormat format = my_audiois.getFormat();
-    final DataLine.Info info = new DataLine.Info(Clip.class, format);
-    my_clip = (Clip) AudioSystem.getLine(info);
-    my_clip.open(my_audiois);
+  public Music() {
+    AudioInputStream my_audiois = null;
+    try {
+      my_audiois = AudioSystem.getAudioInputStream(my_clipFile);
+      my_clip = (Clip) AudioSystem.getLine(new DataLine.Info(
+                              Clip.class, my_audiois.getFormat()));
+      my_clip.open(my_audiois);
+    } catch (UnsupportedAudioFileException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (LineUnavailableException e) {
+      e.printStackTrace();
+    }
   }
 
   /**

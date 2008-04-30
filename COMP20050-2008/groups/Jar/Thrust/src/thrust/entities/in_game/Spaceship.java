@@ -21,7 +21,7 @@ import thrust.entities.behaviors.Tow;
  * @version 18 April 2008
  */
 public class Spaceship extends DynamicEntity
-implements FriendEntity, Fuelable, Tow {
+  implements FriendEntity, Fuelable, Tow {
   /*@ public invariant (* A spaceship's mass when empty of all fuel is
     @                     10000kg. *);
     @ public invariant EMPTY_MASS <= mass();

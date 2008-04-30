@@ -46,7 +46,7 @@ public class GoalSphere extends DynamicEntity
   public static final int MASS = 10000;
 
   /** The towing state of the GoalSphere. */
-  private boolean my_tow_state = false;
+  private boolean my_tow_state;
 
   /* (non-Javadoc)
    * @see thrust.entities.behaviors.Tow#tow()

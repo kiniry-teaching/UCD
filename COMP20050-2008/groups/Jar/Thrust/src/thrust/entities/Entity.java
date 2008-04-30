@@ -73,7 +73,7 @@ public abstract class Entity implements GameColor {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    assert my_state != 0; //@ assert my_state != 0;
+    assert my_state != 0; //@ assert my_state <= 0;
     return my_state;
   }
 

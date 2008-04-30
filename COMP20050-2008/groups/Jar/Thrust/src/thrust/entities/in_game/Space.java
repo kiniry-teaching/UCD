@@ -26,7 +26,7 @@ public class Space extends StaticEntity
    * @return What are your stars?"
    */
   public /*@ pure @*/ Collection stars() {
-    assert false; //@ assert false;
+    assert false; //@ assert true;
     return null;
   }
 

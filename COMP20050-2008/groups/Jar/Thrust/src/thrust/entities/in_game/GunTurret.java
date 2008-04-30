@@ -25,7 +25,7 @@ public class GunTurret extends StaticEntity
    * @return The turret's attack AI must shoot a bullet toward the spaceship.
    */
   public AI attack() {
-    assert false; //@ assert false;
+    assert false; //@ assert true;
     return null;
   }
 
