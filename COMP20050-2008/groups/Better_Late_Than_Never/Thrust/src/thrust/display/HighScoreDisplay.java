@@ -7,6 +7,7 @@ package thrust.display;
  *
  * @author Joe Kiniry (kiniry@acm.org) <- essentially
  * @version 11 April 2008
+ * @ Nick..Steve
  */
 
 public class HighScoreDisplay extends AbstractHighScoreDisplay {
@@ -20,11 +21,6 @@ public class HighScoreDisplay extends AbstractHighScoreDisplay {
     return my_display_state;
   }
 
-  public void add_new_high_score() {
-    //my_highscore.add_high_score(the_new_high_score)
-
-  }
-
   public void display() {
     my_display_state = true;
 
@@ -35,4 +31,8 @@ public class HighScoreDisplay extends AbstractHighScoreDisplay {
 
   }
 
+  public void add_new_high_score() {
+    my_high_scores.add_new_high_score(new_high_score);
+
+  }
 }

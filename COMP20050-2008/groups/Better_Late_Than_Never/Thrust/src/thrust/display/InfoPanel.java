@@ -28,8 +28,7 @@ public class InfoPanel extends AbstractInfoPanel {
   }
 
   public void update() {
-    // TODO Auto-generated method stub
-
+    my_display_state.add_new_high_score(new_high_score);
   }
 
 }

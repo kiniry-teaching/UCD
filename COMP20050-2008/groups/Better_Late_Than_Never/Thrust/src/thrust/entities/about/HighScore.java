@@ -1,8 +1,9 @@
 package thrust.entities.about;
 
 /** HighScore class implementing HighScoreInterface.
- * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @author Nicholas McCarthy (nicholau.mccarthy@gmail.com)
  * @version 27 April 2008
+ * @ author smurphy
  */
 public class HighScore implements HighScoreInterface {
 

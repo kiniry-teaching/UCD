@@ -89,7 +89,8 @@ public abstract class Entity implements GameColor {
     return my_color;
   }
 
-  public void Color(final Color the_color) {
+  public void Color (final Color the_color)
+  {
     my_color = the_color;
   }
 

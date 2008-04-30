@@ -4,16 +4,17 @@ package thrust.entities.about;
  * A pair of a sequence of three initials and a score.
  *
  * @author Joe Kiniry (kiniry@acm.org)
+ * @ author Nick and Steve
  * @version 11 April 2008
  */
 public interface HighScoreInterface {
   /**
    * There are eight high scores.
    */
-  int HIGH_SCORE_COUNT;
+  int HIGH_SCORE_COUNT = 8;
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
-
+  // put 8 here, HIGH_SCORE_COUNT wasn't being read-Steve
   /**
    * @return What is the current score?
    */
