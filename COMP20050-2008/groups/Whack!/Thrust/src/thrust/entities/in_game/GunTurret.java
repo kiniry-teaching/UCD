@@ -182,10 +182,7 @@ public class GunTurret extends StaticEntity
 
     }
   }
-  /**
-   * @author allison
-   *
-   */
+/**a rectangle.*/
   public class Rectangle {
     /**
      * width of rectangle.
