@@ -36,45 +36,25 @@ public class Star extends StaticEntity
    *@version 23 April 2008
    */
   AnimatableWhack my_animation;
-  /**
-   *
-   */
+  /**the speed.*/
   double my_speed;
-  /**
-   *
-   */
+  /**the angle.*/
   double my_anglerad;
-  /**
-   *
-   */
+  /**the mass.*/
   double my_mass;
-  /**
-   *
-   */
+  /**the state.*/
   byte my_state;
-  /**
-   *
-   */
+  /**the colour.*/
   Color my_starcolor;
-  /**
-   *
-   */
+  /**the shape.*/
   Shape my_starshape;
-  /**
-   *
-   */
+  /**the position.*/
   double[] my_position;
-  /**
-   *
-   */
+  /**the orientation.*/
   double my_orientation;
-  /**
-   *
-   */
+  /**the shape's name.*/
   String my_shapename;
-  /**
-   *
-   */
+  /**a static entity.*/
   StaticEntity my_ent;
 
   public double[] acceleration() {
