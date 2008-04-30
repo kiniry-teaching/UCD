@@ -1,3 +1,4 @@
+
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
@@ -27,8 +28,7 @@ import thrust.entities.behaviors.AI;
  * @author David Maguire (David.Maguire.2@ucdconnect.ie)
  * @version 18 April 2008
  */
-public class Factory extends StaticEntity
-  implements EnemyEntity, Animatable {
+public class Factory extends StaticEntity implements EnemyEntity, Animatable {
   /**the amount of damage sustain by the factory.*/
   private byte my_damage;
   /**how often the timer will go off.*/
@@ -132,20 +132,20 @@ public class Factory extends StaticEntity
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
-    @                     one chimney. *);
-    @ public invariant (* A bullet causes 1 unit of damage. *);
-    @ public invariant (* Each second 1 unit of damage is eliminated. *);
-    @ public initially (* A factory initially has zero units of damage. *);
-    @ public initially damage() == 0;
-    @ public invariant (* A factory can sustain 20 units of damage before
-    @                     it is destroyed. *);
-    @ public invariant (* A factory with more than 10 units of damage
-    @                     has a chimney that does not smoke. *);
-    @ public invariant 10 < damage() ==> !chimney().smoking();
-    @ public invariant (* A factory with at most 10 units of damage has
-    @                     a smoking chimney. *);
-    @ public invariant damage() <= 10 ==> chimney().smoking();
-    @*/
+       @                     one chimney. *);
+       @ public invariant (* A bullet causes 1 unit of damage. *);
+       @ public invariant (* Each second 1 unit of damage is eliminated. *);
+       @ public initially (* A factory initially has zero units of damage. *);
+       @ public initially damage() == 0;
+       @ public invariant (* A factory can sustain 20 units of damage before
+       @                     it is destroyed. *);
+       @ public invariant (* A factory with more than 10 units of damage
+       @                     has a chimney that does not smoke. *);
+       @ public invariant 10 < damage() ==> !chimney().smoking();
+       @ public invariant (* A factory with at most 10 units of damage has
+       @                     a smoking chimney. *);
+       @ public invariant damage() <= 10 ==> chimney().smoking();
+       @*/
 
   //@ public invariant (* See constraint on color in FactoryChimney. *);
   //@ public invariant color() == chimney().color();
@@ -156,7 +156,7 @@ public class Factory extends StaticEntity
    * @version 18 April 2008
    */
   public class FactoryChimney extends StaticEntity
-    implements EnemyEntity, Animatable {
+  implements EnemyEntity, Animatable {
     /**holds whether or not the chimney is smoking.*/
     private boolean my_smoking;
     /**chimney's colour.*/
@@ -190,12 +190,10 @@ public class Factory extends StaticEntity
     public void smoking(final boolean the_smoking_state) {
       my_smoking = the_smoking_state;
     }
-
     public Color color() {
       return my_color;
     }
     public AI attack() {
-      // TODO Auto-generated method stub
       return null;
     }
     public void attack(final AI the_behavior) {
@@ -226,7 +224,7 @@ public class Factory extends StaticEntity
       my_entity.acceleration(the_acceleration);
     }
     public double gravitational_constant() {
-      return my_entity.gravitational_constant();
+      return  my_entity.gravitational_constant();
     }
     public void mass(final double the_mass) {
       my_mass = the_mass;
@@ -254,12 +252,12 @@ public class Factory extends StaticEntity
     }
 
     /*@ public invariant (* A factories chimney is the same color as
-      @                     its factory. *);
-      @ public invariant (* The goal sphere is destroyed by a
-      @                     factory's chimney. *);
-      @ public invariant (* The spaceship is destroyed by a factory's
-      @                     chimney. *);
-      @*/
+         @                     its factory. *);
+         @ public invariant (* The goal sphere is destroyed by a
+         @                     factory's chimney. *);
+         @ public invariant (* The spaceship is destroyed by a factory's
+         @                     chimney. *);
+         @*/
   }
 
   /**
@@ -268,7 +266,7 @@ public class Factory extends StaticEntity
    * @version 18 April 2008
    */
   public class FactorySphere extends StaticEntity
-    implements NeutralEntity {
+  implements NeutralEntity {
     /**the mass of the sphere.*/
     private double my_mass;
     /**the factory that the sphere is attached to.*/
@@ -277,7 +275,6 @@ public class Factory extends StaticEntity
     private final Color my_color = java.awt.Color.GREEN;
     /**a static entity.*/
     private StaticEntity my_entity;
-
     public FactorySphere(final Factory the_factory, final double the_mass) {
       my_factory = the_factory;
       my_mass = the_mass;
@@ -291,7 +288,6 @@ public class Factory extends StaticEntity
       my_entity.acceleration(the_acceleration);
 
     }
-
     public double gravitational_constant() {
       return my_entity.gravitational_constant();
     }
@@ -310,7 +306,6 @@ public class Factory extends StaticEntity
       my_entity.position(the_position);
 
     }
-
     public void simulate(final double some_seconds) {
       my_entity.simulate(some_seconds);
 
@@ -322,15 +317,12 @@ public class Factory extends StaticEntity
     }
 
     public void color(final Color the_color) {
-
-
     }
-
     /*@ public invariant (* A factory sphere's color is always green. *);
-      @ public invariant color() == java.awt.Color.GREEN;
-      @ public invariant (* The goal sphere is not destroyed by a
-      @                     factory's sphere. *);
-      @*/
+         @ public invariant color() == java.awt.Color.GREEN;
+         @ public invariant (* The goal sphere is not destroyed by a
+         @                     factory's sphere. *);
+         @*/
   }
 
   public AI attack() {

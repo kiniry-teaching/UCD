@@ -23,7 +23,7 @@ import thrust.animation.Animation;
  */
 
 public class Explosion extends StaticEntity
-implements NeutralEntity, Animatable {
+  implements NeutralEntity, Animatable {
   /**
    * Static Entity.
    */
@@ -53,6 +53,10 @@ implements NeutralEntity, Animatable {
    */
   double my_mass;
   /**
+   * my_animation.
+   */
+  Animation my_animation;
+  /**
    * Color.
    */
   Color my_explosioncolor;
@@ -62,12 +66,11 @@ implements NeutralEntity, Animatable {
   }
 
   public Animation animation() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_animation;
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
+    my_animation = the_animation;
 
   }
   public double[] acceleration() {
