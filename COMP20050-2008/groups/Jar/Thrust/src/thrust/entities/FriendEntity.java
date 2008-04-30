@@ -12,7 +12,7 @@ package thrust.entities;
 
 /**
  * An entity that is helpful to the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 18 April 2008
  */
 public interface FriendEntity {

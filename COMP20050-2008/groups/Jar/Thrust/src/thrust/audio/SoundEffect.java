@@ -12,7 +12,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Any sound made in response to a event.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 2 April 2008
  */
 public class SoundEffect {

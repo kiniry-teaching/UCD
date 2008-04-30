@@ -11,8 +11,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * In-game music.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
+ * @author Sean Russell, Keith Byrne, Eoghan O'Donovan (Jar@timbyr.com).
+ * @version 30 April 2008
  */
 public class Music {
   // @ public model boolean is_playing;

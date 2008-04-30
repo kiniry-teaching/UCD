@@ -4,7 +4,7 @@
 package thrust.display;
 
 /**
- * @author Jar (timbyr@gmail.com)
+ * @author Keith Byrne, Sean Russell, Eoghan O'Donovan (Jar@gmail.com)
  * @version 15 April 2008
  */
 public class InfoPanel extends AbstractInfoPanel {

@@ -14,7 +14,7 @@ import java.awt.Color;
 
 /**
  * A color.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 18 April 2008
  */
 public interface GameColor {

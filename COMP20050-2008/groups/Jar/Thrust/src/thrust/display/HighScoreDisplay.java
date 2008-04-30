@@ -4,7 +4,7 @@
 package thrust.display;
 
 /**
- * @author Jar (timbyr@gmail.com)
+ * @author Eoghan O'Donovan, Keith Byrne, Sean Russell (Jar@timbyr.com).
  * @version 15 April 2008
  */
 public class HighScoreDisplay extends AbstractHighScoreDisplay {

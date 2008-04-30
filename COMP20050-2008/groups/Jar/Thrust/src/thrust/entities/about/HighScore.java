@@ -6,7 +6,7 @@ package thrust.entities.about;
 import thrust.entities.about.AbstractGameState.HighScoreInterface;
 
 /**
- * @author keith (timbyr@gmail.com)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 21 April 2008
  */
 public class HighScore implements HighScoreInterface {

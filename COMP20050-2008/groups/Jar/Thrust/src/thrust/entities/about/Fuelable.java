@@ -11,7 +11,7 @@
 package thrust.entities.about;
 
 /**
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 11 April 2008
  */
 public interface Fuelable {

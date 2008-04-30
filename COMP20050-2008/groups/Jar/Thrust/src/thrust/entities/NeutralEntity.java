@@ -12,7 +12,7 @@ package thrust.entities;
 
 /**
  * An entity that is not a threat and is not helpful to the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 18 April 2008
  */
 public interface NeutralEntity {

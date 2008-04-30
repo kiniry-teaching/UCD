@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 /**
  * Processes and delegates each keyboard input received.
  *
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 2 April 2008
  */
 public class InputHandler {

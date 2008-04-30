@@ -13,7 +13,7 @@ package thrust.physics;
 /**
  * Computing the behavior of entities according to physical
  * simulation in two dimensions.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 2 April 2008
  */
 public interface PhysicsInterface {
