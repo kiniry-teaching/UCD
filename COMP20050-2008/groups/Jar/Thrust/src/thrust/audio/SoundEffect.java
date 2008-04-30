@@ -3,7 +3,6 @@ package thrust.audio;
 import java.io.File;
 import java.io.IOException;
 
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -25,36 +24,23 @@ public class SoundEffect {
    *
    * @param filename
    *          the sound effect to make.
-   * @return the new sound effect for the effect stored in 's'.
+   * @return the new sound effect for the effect stored in the provided file.
    */
-  public static/* @ pure @ */SoundEffect make(final File the_filename) {
-
-    AudioInputStream audiois = null;
-    // @ assert the_filename != null;
+  public /* @ pure @ */SoundEffect(final File the_filename) {
+    AudioInputStream audiois = null; // @ assert the_filename != null;
     try {
       audiois = AudioSystem.getAudioInputStream(the_filename);
-    } catch (UnsupportedAudioFileException e) {
-      e.printStackTrace(System.err);
-    } catch (IOException e) {
-      e.printStackTrace(System.err);
-    }
-
-    final AudioFormat format = audiois.getFormat();
-    final DataLine.Info info = new DataLine.Info(Clip.class, format);
-
-    try {
-      my_clip = (Clip) AudioSystem.getLine(info);
-      // @ assert my_clip !=null;
-      my_clip.open(audiois);
+      my_clip = (Clip) AudioSystem.getLine(new DataLine.Info(
+                                       Clip.class, audiois.getFormat()));
+      // @ assert my_clip !=null; my_clip.open(audiois);
     } catch (LineUnavailableException e) {
       e.printStackTrace(System.err);
     } catch (IOException e) {
       e.printStackTrace(System.err);
+    } catch (UnsupportedAudioFileException e) {
+      e.printStackTrace(System.err);
     }
-
-    return null;
   }
-
   /**
    * Start playing your effect.
    */
