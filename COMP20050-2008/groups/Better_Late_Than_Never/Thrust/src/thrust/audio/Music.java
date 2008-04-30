@@ -41,6 +41,7 @@ public class Music {
   /** The clip that gets played. */
   private transient Clip my_music_clip;
 
+
   public Music() { // Fixed try indentation but now method is >15 lines..
     my_music_file = new File(MUSIC_LOCATION);
     try {

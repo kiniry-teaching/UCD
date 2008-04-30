@@ -15,14 +15,12 @@ package thrust.entities;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public abstract class StaticEntity extends DynamicEntity {
+public class StaticEntity extends DynamicEntity {
 
   /** Double array to hold position of StaticEntity. */
   private static double[] my_position;
-  /** Double to hold orientation (radians) of StaticEntity. */
+  /** Double to hold orientation (radians) of Static Entity. */
   private static double my_orientation;
-  /** Int to hold array length value for my_position array. */
-  private static final int MY_ARRAYLENGTH = 2;
 
   /**
    * @return A new static entity with this position and orientation.
@@ -33,13 +31,8 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures orientation().equals(the_orientation);
   public static StaticEntity make(final double[] the_position,
                                   final double the_orientation) {
-
-    my_position = new double[MY_ARRAYLENGTH];
-    my_position[0] = the_position[0];
-    my_position[1] = the_position[1];
-
     my_orientation = the_orientation;
-
+    System.arraycopy(the_position, 0, my_position, 0, the_position.length);
     return null;
   }
 /**

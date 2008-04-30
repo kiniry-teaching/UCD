@@ -1,9 +1,9 @@
 package thrust.entities.about;
 
 /** HighScore class implementing HighScoreInterface.
- * @author Nicholas McCarthy (nicholau.mccarthy@gmail.com)
+ * @author Nicholas McCarthy (nicholas.mccarthy@gmail.com)
+ * @author Stephen Murphy (stephen.murphy.1@ucdconnect.ie)
  * @version 27 April 2008
- * @ author smurphy
  */
 public class HighScore implements HighScoreInterface {
 
@@ -12,9 +12,9 @@ public class HighScore implements HighScoreInterface {
   /** Int to hold high score. */
   private static int my_score;
   /** Char array to hold initials. */
-  private char[] my_initials;
+  private static char[] my_initials;
   /** Int array to hold high score values. */
-  private int[] my_high_scores = new int[HIGH_SCORE_COUNT];
+  private static int[] my_high_scores = new int[HIGH_SCORE_COUNT];
 
 
   public char[] initials() {
@@ -34,8 +34,8 @@ public class HighScore implements HighScoreInterface {
   }
 
   public boolean new_high_score(final int the_high_score) {
-
-    return false; // FLAGGED TO COMPLETE.
+    // this assumes my_high_scores[7] is the lowest high score
+    return (the_high_score > high_score(HIGH_SCORE_COUNT - 1));
   }
 
 
@@ -56,13 +56,15 @@ public class HighScore implements HighScoreInterface {
  */
   public void add_high_score(final int the_new_high_score) {
 
-    for (int i = 0; i < my_high_scores.length; i++) {
+    if (new_high_score(my_score)) {
+      for (int i = 0; i < my_high_scores.length; i++) {
 
-      if (the_new_high_score > high_score(i)) {
+        if (the_new_high_score > high_score(i)) {
 
-        for (int j = i; j < my_high_scores.length; j++) {
-          my_high_scores[i + 1] = my_high_scores[i];
-          my_high_scores[i] = the_new_high_score;
+          for (int j = i; j < my_high_scores.length; j++) {
+            my_high_scores[i + 1] = my_high_scores[i];
+            my_high_scores[i] = the_new_high_score;
+          }
         }
       }
     }

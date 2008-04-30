@@ -6,11 +6,13 @@ package thrust.animation;
  */
 public class AnyAnimation implements Animatable {
 /** The animation being used.*/
-  static Animation my_animation;
+  static AnyAnimation my_animation;
 
-  public void animate() { }
+  public void animate() {
+    // MUST FINISH THIS METHOD.
+  }
 
-  public Animation animation() {
+  public AnyAnimation animation() {
     return my_animation;
   }
 
