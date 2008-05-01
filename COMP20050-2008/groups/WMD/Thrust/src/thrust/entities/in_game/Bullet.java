@@ -38,10 +38,7 @@ public class Bullet extends DynamicEntity
    * The mass of a bullet is 1kg.
    */
   final double my_bullet_mass;
-  /**
-   * The shape of a bullet.
-   */
-  Shape my_bullet_shape;
+
   /**
    * The bullet's colour.
    */
@@ -56,12 +53,14 @@ public class Bullet extends DynamicEntity
                 final double[] a_velocity,
                 final String an_initial_shape_name,
                 final Shape an_initial_shape,
-                final byte an_initial_state) {
+                final byte an_initial_state,
+                final Color a_color) {
     super();
     /**
      * The mass of a bullet is 1kg.
      */
     my_bullet_mass = 1;
+    my_bullet_color = a_color;
 
     super.set_Dynamic_State(a_position, an_orientation,
                             an_acceleration, my_bullet_mass, a_velocity,

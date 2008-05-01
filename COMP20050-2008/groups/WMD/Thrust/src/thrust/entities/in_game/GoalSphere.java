@@ -25,33 +25,34 @@ import thrust.entities.behaviors.Tow;
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
 
-  public void render() {
-    // TODO Auto-generated method stub
+  /**
+   * The color of a goal sphere.
+   */
+  Color my_color;
 
-  }
+  /**
+   * The shape of a goal sphere.
+   */
+  Shape my_shape;
 
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  /**
+   * Make a goal sphere.
+   */
+  public GoalSphere(final double[] a_position,
+                    final double an_orientation,
+                    final double[] an_acceleration,
+                    final double a_mass,
+                    final double[] a_velocity,
+                    //final String an_initial_shape_name,
+                    //final Shape an_initial_shape,
+                    final byte an_initial_state) {
 
-  public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void state(final byte the_state) {
-    // TODO Auto-generated method stub
+    super();
+    color(Color.GREEN);
+    //my_shape = circle;
+    super.set_Dynamic_State(a_position, an_orientation, an_acceleration,
+                            a_mass, a_velocity, "Circle",
+                            my_shape, an_initial_state);
 
   }
 
@@ -65,49 +66,18 @@ public class GoalSphere extends DynamicEntity
     return false;
   }
 
-  public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
   public double momentum() {
     // TODO Auto-generated method stub
     return 0;
   }
 
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
   public Color color() {
-    // TODO Auto-generated method stub
-    return null;
+    return my_color;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
-
+    my_color = the_color;
   }
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship

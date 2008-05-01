@@ -40,18 +40,24 @@ public class Barrier extends StaticEntity
   private boolean my_closed;
 
   /**
-   * The mass of a barrier.
-   */
-  private double my_barrier_mass;
-
-  /**
-   * Constructor.
+   * Make a barrier.
    * @param a_mass
    */
 
-  public Barrier(final double a_mass) {
+  public Barrier(final double[] a_position,
+                 final double an_orientation,
+                 final double[] an_acceleration,
+                 final double a_mass,
+                 final double[] a_velocity,
+                 final String an_initial_shape_name,
+                 final Shape an_initial_shape,
+                 final byte an_initial_state) {
 
-    my_barrier_mass = a_mass;
+    super();
+    super.set_Staticstate(a_position, an_orientation, an_acceleration,
+                          a_mass, a_velocity, an_initial_shape_name,
+                          an_initial_shape, an_initial_state);
+
 
   }
 
@@ -116,73 +122,6 @@ public class Barrier extends StaticEntity
     }
   }
 
-  public double[] acceleration() {
-    return null;
-  }
-
-  public double mass() {
-    return my_barrier_mass;
-  }
-
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * Render yourself.
-   */
-  public void render() {
-    // TODO Auto-generated method stub
-  }
-
-  /**
-   * @return What shape are you?
-   */
-  public Shape shape() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * This is your shape.
-   * @param the_shape the shape of this Entity.
-   */
-  public void shape(final Shape the_shape) {
-    // TODO Auto-generated method stub
-  }
-
-  /**
-   * @return What shape are you?
-   */
-  public String shape_name() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * @return What is your physical state?
-   * @note State is encoded by a non-negative number of "hit points".
-   */
-  public byte state() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  /**
-   * This is your physical state.
-   * @param the_state the state.
-   */
-  public void state(final byte the_state) {
-    // TODO Auto-generated method stub
-
-  }
-
   /**
    * Take a next animation step.
    */
@@ -222,20 +161,6 @@ public class Barrier extends StaticEntity
     my_color = the_color;
   }
 
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   /*@ public invariant (* Barriers are always in one of the three states
     @                     of open, closed, or moving. *);
