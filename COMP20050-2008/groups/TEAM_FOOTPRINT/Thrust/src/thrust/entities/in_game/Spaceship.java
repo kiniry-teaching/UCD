@@ -8,6 +8,7 @@
  * @keywords "C=64", "Thrust", "game"
  */
 package thrust.entities.in_game;
+import java.awt.Color;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
@@ -33,6 +34,70 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+  /**integer to set the fuel of the ship.*/
+  private int my_fuel = INITIAL_FUEL;
+  /**boolean to check tow state of ship.*/
+  private boolean my_towness;
+  /** integer myMaxi.*/
+  private final int my_maxi = 100;
+  /** integer for mass of fuel.*/
+  private final int my_fuel_mass = 1;
+
+  public final void changeFuelContent(final int the_fuel_change) {
+    if (fuel() + the_fuel_change < 0) {
+      my_fuel = 0;
+    } else if (maxiumumFuel() < (fuel() + the_fuel_change)) {
+      my_fuel = maxiumumFuel();
+    } else {
+      my_fuel = fuel() + the_fuel_change;
+    }
+  }
+
+  //@ ensures \result == fuel * 1;
+  public /*@ pure @*/ int fuel_mass()
+  {
+    return my_fuel * my_fuel_mass;
+  }
+
+
+  //@ ensures 0 <= \result;
+  //@ ensures \result <= maximum_fuel();
+  /*@ pure @*/
+  public int fuel() {
+    return my_fuel;
+  }
+  //@ ensures 0 <= \result;
+  /*@ pure @*/
+  public final int maxiumumFuel() {
+    if (my_maxi >= 0) {
+      return my_maxi;
+    }
+    return 0;
+  }
+
+//@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
+  //@ ensures fuel() == the_fuel_content;
+  public final void setFuelContent(final int the_fuel_content) {
+    if (the_fuel_content >= 0 && the_fuel_content <= my_maxi) {
+      my_fuel = the_fuel_content;
+    }
+  }
+
+  public double mass() {
+    return (EMPTY_MASS + my_fuel);
+  }
+
+  public void tow() {
+    my_towness = true;
+  }
+
+  public boolean towed() {
+    return my_towness;
+  }
+
+  public Color color() {
+    return java.awt.Color.WHITE;
+  }
 
   //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
 
