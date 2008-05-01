@@ -1,21 +1,23 @@
 package GUI;
 
 /**
- * @author Lister
- *
+ * @author Alex Rankin
+ * 
  */
 public class Beverage {
-	int price;
-	boolean alcoholic;
+	private int price;
+	private boolean alcoholic;
 	private boolean available;
-	String name;
-	int id;
+	private String name;
+	private int id;
 
 	/**
-	 * @param n
-	 * @param p
-	 * @param a
-	 * @param i
+	 * Constructs a new beverage object, and initialises required variables.
+	 * 
+	 * @param n The name of the beverage
+	 * @param p The price of the beverage
+	 * @param a Whether the beverage is alcoholic
+	 * @param i The ID (position) of the beverage
 	 */
 	public Beverage(String n, int p, boolean a, int i) {
 		name = n;
@@ -26,56 +28,72 @@ public class Beverage {
 	}
 
 	/**
-	 * @return
+	 * Gets the price of the beverage
+	 * 
+	 * @return The price of the beverage
 	 */
 	public int getPrice() {
 		return price;
 	}
 
 	/**
+	 * Sets whether the beverage is available
 	 * 
+	 * @param b Boolean telling us if the beverage is available
 	 */
 	public void setAvailable(boolean b) {
 		available = b;
 	}
 
 	/**
-	 * @return
+	 * Checks whether the beverage is available
+	 * 
+	 * @return Boolean stating whether the beverage is available
 	 */
 	public boolean getAvailable() {
 		return available;
 	}
 
 	/**
-	 * @return
+	 * Checks whether the beverage is alcoholic
+	 * 
+	 * @return Boolean stating whether the beverage is alcoholic
 	 */
 	public boolean getAlcoholic() {
 		return alcoholic;
 	}
 
 	/**
-	 * @return
+	 * Get the name of the beverage
+	 * 
+	 * @return String containing the name of the beverage
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @return
+	 * Get the ID (position) of the beverage
+	 * 
+	 * @return Integer containing the ID of the beverage
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * @param in
+	 * Set the price of the beverage
+	 * 
+	 * @param in Integer representation of the price of this beverage
 	 */
 	public void setPrice(int in) {
 		price = in;
 	}
 
 	/**
-	 * @param in
+	 * Set whether the beverage is alcoholic
+	 * 
+	 * @param in Integer representing true if 1
 	 */
 	public void setAlcoholic(int in) {
 		if (in == 1)
@@ -85,14 +103,18 @@ public class Beverage {
 	}
 
 	/**
-	 * @param in
+	 * Sets the name of the beverage
+	 * 
+	 * @param in The new name of this beverage
 	 */
 	public void setName(String in) {
 		name = in;
 	}
 
 	/**
-	 * @param in
+	 * Sets the ID of the beverage
+	 * 
+	 * @param in New ID of the beverage
 	 */
 	public void setId(int in) {
 		id = in;

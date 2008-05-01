@@ -1,7 +1,7 @@
 package GUI;
 
 /**
- * @author Lister
+ * @author Alex Rankin
  *
  */
 public class Main {
@@ -9,7 +9,6 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		AutoCock myCock = new AutoCock();
 		myCock.makeGUI();
 	}
