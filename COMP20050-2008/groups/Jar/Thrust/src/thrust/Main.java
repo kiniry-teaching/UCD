@@ -10,8 +10,10 @@
 
 package thrust;
 
+import java.util.LinkedList;
 import java.util.logging.Logger;
-
+import thrust.audio.Music;
+import thrust.input.KeyBoardInput;
 
 /**
  * Simulating all of the entities in the game to realize the game.
@@ -19,11 +21,21 @@ import java.util.logging.Logger;
  * @version 23 April 2008
  */
 public final class Main {
+  /** Game state. */
+  public static final thrust.entities.about.GameState GAMESTATE =
+    new thrust.entities.about.GameState();
+  /** The music player. */
+  public static final Music MUSIC = new Music();
+  /** The input handler. */
+  public static final KeyBoardInput INPUT = new KeyBoardInput();
+  /** */
+  private static LinkedList < thrust.entities.Entity > my_dynamics =
+    new LinkedList < thrust.entities.Entity > ();
+  public static boolean my_check = true;
   /** This class cannot be constructed. */
   private Main() {
     //@ assert true;
   }
-
   /**
    * Run the game.
    * @param the_args The command-line arguments are ignored.
@@ -32,20 +44,22 @@ public final class Main {
     final Logger the_log = Logger.getLogger("Main");
     the_log.info("Title Screen");
     // display the title screen
-    final thrust.audio.Music music = new thrust.audio.Music();
-    music.start();
-    final thrust.input.KeyBoardInput the_keyIn =
-      new thrust.input.KeyBoardInput();
+    MUSIC.start();
 
-    while (true) assert true;
     // wait for keyboard input
     // repeat the following until the player asks to quit
     //   show the high score display
     //   wait for input to start the game
     //   create game map and initialize location of all entities
     //   repeat the following until the player is out of lives or asks to quit:
+    do{
+      if(GAMESTATE.get_state() == GAMESTATE.PLAY)
+        while(GAMESTATE.lives() > 0 &&
+            GAMESTATE.get_state() == GAMESTATE.PLAY){
+          my_check = true;
+        }
+    } while(GAMESTATE.get_state() != GAMESTATE.PLAY);       
     //      record the current time T
-   // System.currentTimeMillis();
     //      perform a step in the simulation
     //      render all entities
     //      process the next keyboard input
