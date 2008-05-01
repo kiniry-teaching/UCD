@@ -20,18 +20,29 @@ package thrust.entities.about;
 public class GameState extends FuelAble{
   public GameState(float initialFuel) {
     super(initialFuel);
+    
+    int my_bonus;
+    byte my_lives;
+    int my_fuel;
+    int maximum_fuel;
+    boolean death=false;
+    
+    int HighScoreInterface[] my_highScores;
+    
+    int my_HIGH_SCORE_COUNT= 8;
     // TODO Auto-generated constructor stub
   }
 
-  static int bonus;
-  static int lives;
-  boolean death;
-  int score;
+  //static int bonus=0;
+  //static int lives=4;
+  
+  //int score=0;
+  //static int my_bonus=0;
   
   /**
    * There are eight high scores.
    */
-  public static final int HIGH_SCORE_COUNT=8;
+  
  // HIGH_SCORE_COUNT =8;
   //@ invariant HIGH_SCORE_COUNT ==8;
   //@ invariant (* There are eight high scores. *);
@@ -42,8 +53,8 @@ public class GameState extends FuelAble{
    */
   //@ ensures 0 <= \result;
   public static /*@ pure @*/ int bonus() {
-    bonus++;
-    return bonus;
+    
+    return my_bonus;
   }
 
   /**
@@ -55,11 +66,11 @@ public class GameState extends FuelAble{
     the_new_value =0;
     bonus= the_new_value;
     
-    if(bonus<0)
-     bonus= 0;
+    if(my_bonus<0)
+     my_bonus= 0;
     //should really be bonus = bonus^2-bonus^2; which gives 0
     else
-    {bonus= bonus*1;}
+    {my_bonus= my_bonus*1;}
   }
 
   //@ invariant (* Bonus values are always non-negative. *);
@@ -163,14 +174,21 @@ public class GameState extends FuelAble{
    */
   //@ requires 0 <= the_index & the_index < HIGH_SCORE_COUNT;
   //@ ensures \result.equals(high_scores()[the_index]);
-  public /*@ pure non_null @*/HighScoreInterface high_score(int the_index) {
+  public /*@ pure non_null @*/HighScoreInterface high_score() {
     int j;
     for(j=0;j < HIGH_SCORE_COUNT;j++)
     {}
-    for(int i=0; i>=0&&i<j; i++)
+    for(int i=HIGH_SCORE_COUNT;i>j; i--)
     { 
       //WTF WARHFHGHGGH
-      high_scores()[i].score() >= high_scores()[j].score());}
+     if (high_scores()[i].score() >= high_scores()[j].score())
+     {
+       int tempScore = high_scores()[i].score();
+       high_scores()[i].new_score(high_scores()[j].score());
+       high_scores()[j].new_score(tempScore);
+       
+     }
+    }
     
 
     return null;

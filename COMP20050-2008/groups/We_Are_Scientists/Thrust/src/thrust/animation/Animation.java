@@ -17,4 +17,8 @@ package thrust.animation;
  */
 public interface Animation {
 
+  
+  
+  
+  
 }

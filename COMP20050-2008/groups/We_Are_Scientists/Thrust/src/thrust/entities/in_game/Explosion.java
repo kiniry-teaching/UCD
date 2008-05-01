@@ -20,5 +20,10 @@ import thrust.animation.Animatable;
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
+  
+  public void Explosion()
+  {
+    animate();
+  }
 
 }

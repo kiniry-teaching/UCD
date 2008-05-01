@@ -16,5 +16,8 @@ package thrust.entities;
  * @version 18 April 2008
  */
 public interface NeutralEntity {
+ //stars
+  //space
+  //that is all
 
 }

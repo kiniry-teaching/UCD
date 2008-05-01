@@ -27,6 +27,10 @@ public class Barrier extends StaticEntity
    */
   public /*@ pure @*/ boolean closed() {
     assert false; //@ assert false;
+    if(!opened())
+    {
+      return true;
+    }
     return false;
   }
 
@@ -34,14 +38,18 @@ public class Barrier extends StaticEntity
    * @return Are you open?
    */
   public /*@ pure @*/ boolean opened() {
+    if(!closed())
+      return true;
     assert false; //@ assert false;
-    return false;
+    return true;
   }
 
   /**
    * @return Are you moving?
    */
   public /*@ pure @*/ boolean moving() {
+    if(!closed()&&!opened())
+      return true;
     assert false; //@ assert false;
     return false;
   }
@@ -51,6 +59,8 @@ public class Barrier extends StaticEntity
    */
   //@ requires opened();
   public void close() {
+    if(opened())
+      
     assert false; //@ assert false;
   }
 
@@ -59,6 +69,7 @@ public class Barrier extends StaticEntity
    */
   //@ requires closed();
   public void open() {
+    if(closed())
     assert false; //@ assert false;
   }
 
@@ -68,6 +79,7 @@ public class Barrier extends StaticEntity
   }
 
   public Animation animation() {
+    animate();
     // TODO Auto-generated method stub
     return null;
   }

@@ -20,25 +20,36 @@ import thrust.entities.StaticEntity;
  * @version 18 April 2008
  */
 public class Factory extends StaticEntity
-  implements EnemyEntity, Animatable {
+  implements EnemyEntity, Animatable{
   
-  int damage=100;
+  byte damage=0;
   int upDateDamage=-20;
+  private StaticEntity my_entity;
   public boolean shot=false;
-  
+  int hp = my_entity.state();
+  hp=100;
   /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-    
-    while(damage>0)
+    if(shot()==true)
     {
-      if(shot)
-    damage=damage+upDateDamage;
-    }
-    assert false; //@ assert false;
-    return 0;
+      damage++;
+      return damage;
+    } 
+    
+    
+    
+  
+    //assert false; //@ assert false;
+    
+  }
+
+  private boolean shot() {
+    return true;
+    // TODO Auto-generated method stub
+    return false;
   }
 
   /**
@@ -46,7 +57,7 @@ public class Factory extends StaticEntity
    */
   public /*@ pure @*/ FactoryChimney chimney() {
     //chimney animation???
-    while(damage>50)
+    while(hp>50)
     {
     animate();
     }
@@ -71,9 +82,15 @@ public class Factory extends StaticEntity
   //@ requires 0 <= the_damage;
   //@ ensures damage() == \old(damage() - the_damage);
   public void damage(byte the_damage) {
+    the_damage=(byte) (damage()+the_damage);
+    
+    if(the_damage>=20)
+    {
+      Explosion();
+    }
     
     
-    assert false; //@ assert false;
+    //assert false; //@ assert false;
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -95,6 +112,7 @@ public class Factory extends StaticEntity
   //@ public invariant (* See constraint on color in FactoryChimney. *);
   //@ public invariant color() == chimney().color();
 
+  
   /**
    * A chimney of a factory.
    * @author Joe Kiniry (kiniry@acm.org)
@@ -106,7 +124,7 @@ public class Factory extends StaticEntity
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      if(smoking())
+      if(damage()<10)
         return true;
       else
         return false;
@@ -121,7 +139,11 @@ public class Factory extends StaticEntity
      */
     //@ ensures smoking() <==> the_smoking_state;
     public void smoking(boolean the_smoking_state) {
-      assert false; //@ assert false;
+      while(damage()<10)
+      {
+      the_smoking_state = true;
+      }
+      
     }
 
     /*@ public invariant (* A factories chimney is the same color as

@@ -49,7 +49,7 @@ public class Spaceship extends DynamicEntity
 
     if (my_fuel + the_fuel_change > maximum_fuel())
     {
-      my_fuel = maximum_fuel();
+      my_fuel = (int) maximum_fuel();
     }
     my_fuel = my_fuel + the_fuel_change;
 
@@ -67,7 +67,7 @@ public class Spaceship extends DynamicEntity
    * @see thrust.entities.about.Fuelable#fuel()
    */
   public float fuel() {
-    my_fuel = maximum_fuel();
+    my_fuel = (int) maximum_fuel();
     return my_fuel;
   }
 
