@@ -1,11 +1,12 @@
-import java.util.Scanner;
- import java.io.InputStreamReader;
-
+import java.awt.event.KeyListener;
+import java.awt.event.ActionListener;
+java.awt.event.KeyEvent;
 // thrust game thread
 
-class thrust_game implements Runnable
+class thrust_game implements Runnable, KeyListener, ActionListener
 {
 	private int framesPerSecond;
+	private int currentChar;
 	
 	public thrust_game(int fps)
 	{
@@ -14,17 +15,13 @@ class thrust_game implements Runnable
 
 	public void run()
 	{
-	InputStreamReader tempOne = new InputStreamReader(System.in);
-	char tempTwo;
 		while(true)
 		{
-		// Frame calculation and interrupt
+		// Frame calculation and interrupt		
 			try
 			{
 			Thread.sleep(1000/framesPerSecond);
-			tempTwo = (char)tempOne.read();
-			System.out.print(tempTwo);
-			tempTwo = 0;	
+			System.out.print(currentChar);
 			}
 			catch(Exception e)
 			{
@@ -32,4 +29,19 @@ class thrust_game implements Runnable
 			}
 		}
 	}
+	
+	
+	public void keyTyped(KeyEvent e) 
+	{
+    }
+    
+	public void keyPressed(KeyEvent e) 
+	{
+	currentChar = (int)e.getKeyChar();
+	}
+	
+    
+    public void keyReleased(KeyEvent e)
+	{
+    }
 }
