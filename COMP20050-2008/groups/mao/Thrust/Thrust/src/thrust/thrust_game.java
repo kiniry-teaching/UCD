@@ -1,9 +1,8 @@
 import java.awt.event.KeyListener;
-import java.awt.event.ActionListener;
-java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
 // thrust game thread
 
-class thrust_game implements Runnable, KeyListener, ActionListener
+class thrust_game implements Runnable, KeyListener
 {
 	private int framesPerSecond;
 	private int currentChar;
@@ -21,7 +20,6 @@ class thrust_game implements Runnable, KeyListener, ActionListener
 			try
 			{
 			Thread.sleep(1000/framesPerSecond);
-			System.out.print(currentChar);
 			}
 			catch(Exception e)
 			{
@@ -30,7 +28,7 @@ class thrust_game implements Runnable, KeyListener, ActionListener
 		}
 	}
 	
-	
+	// <Overwrite methods>
 	public void keyTyped(KeyEvent e) 
 	{
     }
@@ -38,10 +36,12 @@ class thrust_game implements Runnable, KeyListener, ActionListener
 	public void keyPressed(KeyEvent e) 
 	{
 	currentChar = (int)e.getKeyChar();
+	System.out.println(currentChar);
 	}
-	
-    
+	 
     public void keyReleased(KeyEvent e)
 	{
     }
+	
+	// </Overwrite methods>
 }
