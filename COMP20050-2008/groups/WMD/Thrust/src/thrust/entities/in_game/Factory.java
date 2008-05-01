@@ -126,12 +126,22 @@ public class Factory extends StaticEntity
    * @version 30 April 2008
    */
   public class FactoryChimney extends StaticEntity
-  implements EnemyEntityInterface, Animatable {
+    implements EnemyEntityInterface, Animatable {
 
     /**
      * The factory that this chimney belongs to.
      */
     Factory my_factory;
+
+    /**
+     * The AI of a factory chimney.
+     */
+    AI my_ai = new AI();
+
+    /**
+     * The disturb of a factory chimney.
+     */
+    AI my_disturb;
 
     /**
      * @return Are you smoking?
@@ -156,18 +166,16 @@ public class Factory extends StaticEntity
     }
 
     public void attack(final AI the_behavior) {
-      // TODO Auto-generated method stub
 
     }
 
     public AI disturb() {
-      // TODO Auto-generated method stub
-      return null;
+      return my_disturb;
     }
 
     public void disturb(final AI the_behavior) {
-      // TODO Auto-generated method stub
-
+      my_disturb = the_behavior;
+      my_ai.attack(the_behavior);
     }
 
     public void animate() {
