@@ -17,8 +17,8 @@ import thrust.entities.behaviors.Tow;
 
 /**
  * The player's main vehicle.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author "Daire O'Doherty (daireod@gmail.com)"
+ * @version 30 April 2008
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {

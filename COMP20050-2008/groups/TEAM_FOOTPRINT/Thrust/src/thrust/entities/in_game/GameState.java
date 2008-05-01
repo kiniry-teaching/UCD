@@ -23,7 +23,7 @@ public  /*@ pure @*/ class GameState extends AbstractGameState {
   /** number of highscores.*/
   private final int my_high_score_count = 8;
  /**all of the highscores within the game.*/
-  private HighScoreInterface[] my_high_scores = new HighScore[my_high_score_count];
+  private HighScoreInterface[]my_high_scores = new HighScore[my_high_score_count];
 
 
   /**
@@ -54,7 +54,7 @@ public  /*@ pure @*/ class GameState extends AbstractGameState {
     return my_maxi;
   }
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ int score(){
+  public /*@ pure @*/ int score() {
     return my_score;
   }
 
