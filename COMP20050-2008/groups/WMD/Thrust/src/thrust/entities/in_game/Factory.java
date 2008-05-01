@@ -10,11 +10,10 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
 
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
-import thrust.entities.EnemyEntity;
+import thrust.entities.EnemyEntityInterface;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.behaviors.AI;
@@ -25,7 +24,38 @@ import thrust.entities.behaviors.AI;
  * @version 24 April 2008
  */
 public class Factory extends StaticEntity
-  implements EnemyEntity, Animatable {
+  implements EnemyEntityInterface, Animatable {
+
+  /**
+   * The factory's damage.
+   */
+  private byte my_damage;
+
+  /**
+   * The factory's chimney.
+   */
+  private FactoryChimney my_chimney;
+
+  /**
+   * The factory's sphere.
+   */
+  private FactorySphere my_sphere;
+
+  /**
+   * The max damage a factory can have is 20.
+   */
+  private final byte my_max_damage = 20;
+
+  /**
+   * Make a factory.
+   */
+  public Factory() {
+
+    my_damage = 0;
+    my_chimney = new FactoryChimney();
+    my_sphere = new FactorySphere();
+
+  }
 
   /**
    * @return How much damage have you sustained?
@@ -34,7 +64,12 @@ public class Factory extends StaticEntity
   public /*@ pure @*/ byte damage() {
     assert false; //@ assert false;
 
-    return 0;
+    if (my_damage < 0)
+      my_damage = 0;
+    if (my_damage > my_max_damage)
+      my_damage = my_max_damage;
+
+    return my_damage;
   }
 
   /**
@@ -42,7 +77,7 @@ public class Factory extends StaticEntity
    */
   public /*@ pure @*/ FactoryChimney chimney() {
     assert false; //@ assert false;
-    return null;
+    return  my_chimney;
   }
 
   /**
@@ -50,7 +85,7 @@ public class Factory extends StaticEntity
    */
   public /*@ pure @*/ FactorySphere sphere() {
     assert false; //@ assert false;
-    return null;
+    return my_sphere;
   }
 
   /**
@@ -60,6 +95,10 @@ public class Factory extends StaticEntity
   //@ ensures damage() == \old(damage() + the_damage);
   public void damage(final byte the_damage) {
     assert false; //@ assert false;
+    my_damage = damage();
+    int total_damage = my_damage;
+    final int new_damage = the_damage;
+    total_damage = total_damage + new_damage;
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -87,13 +126,22 @@ public class Factory extends StaticEntity
    * @version 30 April 2008
    */
   public class FactoryChimney extends StaticEntity
-    implements EnemyEntity, Animatable {
+  implements EnemyEntityInterface, Animatable {
+
+    /**
+     * The factory that this chimney belongs to.
+     */
+    Factory my_factory;
+
     /**
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
       assert false; //@ assert false;
-      return false;
+      if (my_factory.damage() > 10) {
+        return false;
+      }
+      return true;
     }
 
     /**
@@ -170,58 +218,49 @@ public class Factory extends StaticEntity
     implements NeutralEntity {
 
     public Color color() {
-      // TODO Auto-generated method stub
       return null;
     }
 
     public void color(final Color the_color) {
-      // TODO Auto-generated method stub
 
     }
   }
 
   public AI attack() {
-    // TODO Auto-generated method stub
     return null;
   }
 
   public void attack(final AI the_behavior) {
-    // TODO Auto-generated method stub
 
   }
 
   public AI disturb() {
-    // TODO Auto-generated method stub
     return null;
   }
 
   public void disturb(final AI the_behavior) {
-    // TODO Auto-generated method stub
 
   }
 
   public void animate() {
-    // TODO Auto-generated method stub
 
   }
 
   public Animation animation() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
 
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
 
   }
 }
