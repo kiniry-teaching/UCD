@@ -70,52 +70,25 @@ public class Explosion extends StaticEntity
 
   }
 
-  public double[] acceleration() {
-
-    return null;
-  }
-
-  public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
   public void animate() {
-    // TODO Auto-generated method stub
 
   }
 
   public Animation animation() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
 
   }
 
   public Color color() {
-    // TODO Auto-generated method stub
     return null;
   }
 
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
 
   }
 
 }
-
-
