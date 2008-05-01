@@ -32,13 +32,13 @@ public class KeyBoardInput implements KeyListener {
   }
 
   public void keyPressed(final KeyEvent the_arg0) {
-      if (the_arg0.getKeyCode() == KeyEvent.VK_SHIFT) {
-        my_input.process((char)KeyEvent.VK_SHIFT);
-      }
-      if (my_input.legalInput(the_arg0.getKeyChar())) {
-        my_input.process(the_arg0.getKeyChar());
-      }
-      my_keyStates[the_arg0.getKeyCode()] = true;
+    if (the_arg0.getKeyCode() == KeyEvent.VK_SHIFT) {
+      my_input.process((char)KeyEvent.VK_SHIFT);
+    }
+    if (my_input.legalInput(the_arg0.getKeyChar())) {
+      my_input.process(the_arg0.getKeyChar());
+    }
+    my_keyStates[the_arg0.getKeyCode()] = true;
   }
 
   /* (non-Javadoc)
@@ -46,14 +46,14 @@ public class KeyBoardInput implements KeyListener {
    */
 
   public void keyReleased(final KeyEvent the_arg0) {
-      my_keyStates[the_arg0.getKeyCode()] = false;
+    my_keyStates[the_arg0.getKeyCode()] = false;
   }
 
   /*
    *
    */
   public boolean keyDown(final int the_key_num) {
-      return my_keyStates[the_key_num];
+    return my_keyStates[the_key_num];
   }
 
   /* (non-Javadoc)
