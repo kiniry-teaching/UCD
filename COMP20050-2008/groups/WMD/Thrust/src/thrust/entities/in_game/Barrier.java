@@ -21,7 +21,7 @@ import thrust.entities.StaticEntity;
 /**
  * A barrier and trigger to block the spaceship's way.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
- * @version 29 April 2008
+ * @version 1 May 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {

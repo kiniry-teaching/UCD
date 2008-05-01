@@ -22,7 +22,7 @@ import thrust.animation.Animation;
 /**
  * An explosion.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
- * @version 24 April 2008
+ * @version 1 May 2008
  */
 public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {

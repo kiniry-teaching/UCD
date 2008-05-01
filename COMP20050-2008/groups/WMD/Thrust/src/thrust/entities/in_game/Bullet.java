@@ -20,7 +20,7 @@ import thrust.physics.Physic;
 /**
  * A bullet shot from the spaceship or a gun turret.
  * @author Siobhan Dunne (Siobhan.Dunne@ucd.ie)
- * @version 29 April 2008
+ * @version 1 May 2008
  */
 public class Bullet extends DynamicEntity
   implements EnemyEntityInterface {
