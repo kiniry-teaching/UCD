@@ -12,27 +12,20 @@ import java.io.IOException;
  * @author David Haughton (dave.haughton1@gmail.com)
  * @version 11 April 2008
  */
-public abstract class GameState extends AbstractGameState {
+public class GameState extends AbstractGameState {
 
   /**
    * Stores the highScore in an array.
    */
   private HighScoreInterface[] my_highScore;
   //@ ensures 0 <= some_highScore[];
-
-  /**
-   * Constructor to read in from a
-   * file to get the highscores and
-   * initials.
-   */
-
   /**
    * There are eight high scores.
    */
-  public static final int HIGH_SCORE_COUNT = 8;
+  private final int HIGH_SCORE_COUNT = 8;
+
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
-
   /**
    * Stores a bonus value.
    */
@@ -58,10 +51,10 @@ public abstract class GameState extends AbstractGameState {
   //@ ensures 0 <= lives;
 
   /**
-   * @return What is the current bonus?
-   * @bon BONUS What is your value?
+   * Constructor to read in from a
+   * file to get the highscores and
+   * initials.
    */
-
   public GameState()
   {
     final int eight = 8;
@@ -106,6 +99,10 @@ public abstract class GameState extends AbstractGameState {
 
   }
 
+  /**
+   * @return What is the current bonus?
+   * @bon BONUS What is your value?
+   */
 
   public /*@ pure @*/ int bonus()
   {

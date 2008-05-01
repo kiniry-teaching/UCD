@@ -63,7 +63,10 @@ public class Explosion extends StaticEntity
                     my_color, the_initial_shape_name,
                     the_initial_shape, the_inital_state);
   }
-
+/* Although there is duplicate lines in here and explosion, I don't think its,
+ * a problem since their animation steps are similar(non-Javadoc)
+ * @see thrust.animation.Animatable#animate()
+ */
   public void animate() {
     if (my_step == my_animation_steps.length - 1) {
       my_step = 0;

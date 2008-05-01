@@ -136,11 +136,11 @@ public class InputHandler {
     }
 
     public void keyReleased(final KeyEvent the_key) {
-      // TODO Auto-generated method stub
+      /* Don't need this. */
     }
 
     public void keyTyped(final KeyEvent the_key) {
-      // TODO Auto-generated method stub
+      /* Don't need this. */
     }
 
   }

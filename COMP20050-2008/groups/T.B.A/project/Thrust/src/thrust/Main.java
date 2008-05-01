@@ -11,6 +11,7 @@
 package thrust;
 
 import thrust.audio.Music;
+import thrust.entities.about.GameState;
 import thrust.input.InputHandler;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -31,26 +32,20 @@ public final class Main {
    * Window height.
    */
   private static final int HEIGHT = 400;
-  /**
-   * Window width.
-   */
+  /** Window width.*/
   private static final int WIDTH = 600;
-  /**
-   * The introduction to thrust.
-   */
+  /**The introduction to thrust.*/
   private static JTextArea intro_screen;
-  /**
-   * The Font.
-   */
+  /*** The Font.*/
   private static final Font FONT = new Font("Serif", Font.BOLD, 40);
-  /**
-   * Input Handler.
-   */
+  /** * Input Handler.*/
   private static InputHandler input;
-  /**
-   * Listener.
-   */
+  /** Listener. */
   private static InputHandler.KeyPressed listener;
+  /** Gamestate. */
+  private static GameState gamestate;
+  /** Has the game started? */
+  private static boolean started;
   /**
    * This class cannot be constructed.
    */
@@ -63,8 +58,8 @@ public final class Main {
    * @param the_args The command-line arguments are ignored.
    */
   public static void main(final String[] the_args) {
-    /* I don't understand why I'm getting an uncommented method here, I clearly have comments in it*/
-    assert false; //@ assert false;
+    /* I don't understand why I'm getting an uncommented method here,
+     * Method length is breaking a few checkstyle rules.*/
     thrust_frame = new JFrame("Thrust");
     thrust_frame.getContentPane().setLayout(new BorderLayout());
     thrust_frame.setSize(WIDTH, HEIGHT);
@@ -73,7 +68,7 @@ public final class Main {
     intro_screen.setText("Thrust");
     intro_screen.setEditable(false);
     thrust_frame.getContentPane().add(intro_screen, BorderLayout.CENTER);
-    /*This isnt working right for some reason. Adding it but not centering it.*/
+    /*This isnt working right for some reason. Adding it but not centring it.*/
     thrust_frame.setVisible(true);
     // display the title screen
     final Music music_effect = new Music();
@@ -83,27 +78,37 @@ public final class Main {
     input = new InputHandler();
     listener = input.new KeyPressed();
     thrust_frame.addKeyListener(listener);
+    gamestate = new GameState();
     // repeat the following until the player asks to quit
     while (true) {
       assert true;
     //   show the high score display
-    //   wait for input to start the game
-    //   create game map and initialize location of all entities
+      if (started) {
+    //   create game map and initialize location of all entities.
+        while (started) {
     //   repeat the following until the player is out of lives or asks to quit:
-    //      record the current time T
+          final long first_time = System.currentTimeMillis();
     //      perform a step in the simulation
     //      render all entities
     //      process the next keyboard input
-    //      record the current time T'
-    //      wait for (1/30th of a second - (T-T'))
+          final long second_time = System.currentTimeMillis();
+          try {
+            Thread.sleep(10 - (first_time - second_time));
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
     //   remove the game interface
     //   if the player has a new high score
     //     ask them to input their initials
     //     save the new high score
+        }
+      }
     }
   }
   public static void start() {
+    started = true;
   }
+
 
   public static void stop() {
   }
