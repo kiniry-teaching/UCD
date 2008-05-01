@@ -15,8 +15,12 @@ import javax.swing.*;
  *
  */
 public class KeyBoardInput implements KeyListener {
+  /** The number of keys that can be pressed */
+  private static final int NO_KEYS = 256;
   /** Keyboard input logger. */
   Logger my_input_log = Logger.getLogger("Keyboard logger");
+  /** Holds a boolean value which determines weather a key is down or not. */
+  boolean[] keyStates = new boolean[NO_KEYS];
   /* (non-Javadoc)
    * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
    */
@@ -34,14 +38,20 @@ public class KeyBoardInput implements KeyListener {
     final char b = the_arg0.getKeyChar();
     final String c = a + " " + b;
     my_input_log.info(c);
+    keyStates[a] = true;
   }
 
   /* (non-Javadoc)
    * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
    */
   public void keyReleased(KeyEvent arg0) {
-    // TODO Auto-generated method stub
-    
+    keyStates[arg0.getKeyCode()] = false;
+  }
+  /*
+   * 
+   */
+  public boolean keyDown(int keyNum){
+    return keyStates[keyNum];
   }
 
   /* (non-Javadoc)
