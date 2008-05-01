@@ -30,7 +30,9 @@ class thrust_game extends InputHandler implements Runnable
 			try
 			{
 			// Frame calculation and interrupt		
-			Thread.sleep(1000/myFramesPerSecond);drawFrame();
+			Thread.sleep(1000/myFramesPerSecond);
+			//draw frame
+			drawFrame();
 			
 			}
 			catch(Exception e)
