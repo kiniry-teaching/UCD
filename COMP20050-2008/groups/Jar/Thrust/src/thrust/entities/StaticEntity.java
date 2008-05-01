@@ -30,7 +30,7 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
-  public void set_state(final double[] the_position,
+  public void set_static_state(final double[] the_position,
                         final double the_orientation) {
     super.set_dynamic_state(the_position, the_orientation, new double[]{0, 0},
                             0, 0, new double[]{0, 0});
