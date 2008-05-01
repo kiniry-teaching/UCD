@@ -6,10 +6,10 @@ import java.awt.event.KeyListener;
 
 /**sfsa
  * Processes and delegates each keyboard input received.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
+ * @author stephen
+ * @version 30 April 2008
  */
-public class InputHandler {
+public class InputHandler implements KeyListener {
   /** An unknown character code. */
   //private static final char UNKNOWN_CHAR = '\0';
   /** Fill in this comment. */
@@ -88,10 +88,11 @@ public class InputHandler {
       }
     return false;
   } 
+  addKeyListener(new KeyListener)
   
-  public char keyPressed(KeyEvent e){
-    char keyCode = (char) e.getKeyCode();
-    return keyCode;
+  public void keyPressed(KeyEvent e){
+    final char keyCode = (char) e.getKeyCode();
+    
  }
 
   /**
@@ -142,5 +143,27 @@ public class InputHandler {
     assert false;
   }
   }
+  
+  public void keyReleased(KeyEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void keyTyped(KeyEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+  /*public static void main(String[] args){
+    typingArea = new JTextField(20);
+    typingArea.addKeyListener(this);
+    while (h.keyPressed(e) != STOP_GAME){
+      System.out.println((char) e.getKeyCode());
+      //return null;
+    }*/
+    
+    
+  }
+
+  
 }
 
