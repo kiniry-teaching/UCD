@@ -10,6 +10,7 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
+import java.awt.Shape;
 
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
@@ -52,8 +53,8 @@ public class Factory extends StaticEntity
   public Factory() {
 
     my_damage = 0;
-    my_chimney = new FactoryChimney();
-    my_sphere = new FactorySphere();
+    //my_chimney = new FactoryChimney();
+    //my_sphere = new FactorySphere();
 
   }
 
@@ -101,6 +102,36 @@ public class Factory extends StaticEntity
     total_damage = total_damage + new_damage;
   }
 
+  public void attack() {
+    // TODO Auto-generated method stub
+
+  }
+
+  public void animate() {
+    // TODO Auto-generated method stub
+
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(final Animation the_animation) {
+    // TODO Auto-generated method stub
+
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(final Color the_color) {
+    // TODO Auto-generated method stub
+
+  }
+
   /*@ public invariant (* All factories have exactly one sphere and
     @                     one chimney. *);
     @ public invariant (* A bullet causes 1 unit of damage. *);
@@ -142,6 +173,31 @@ public class Factory extends StaticEntity
      * The disturb of a factory chimney.
      */
     AI my_disturb;
+
+    /**
+     * Make a Factory chimney.
+     * @param a_position
+     * @param an_orientation
+     * @param a_mass
+     * @param a_velocity
+     * @param an_initial_shape_name
+     * @param an_initial_shape
+     * @param an_initial_state
+     */
+    public FactoryChimney(final double[] a_position,
+                          final double an_orientation,
+                          final double[] an_acceleration,
+                          final double a_mass,
+                          final double[] a_velocity,
+                          final String an_initial_shape_name,
+                          final Shape an_initial_shape,
+                          final byte an_initial_state) {
+
+      super();
+      super.set_Staticstate(a_position, an_orientation, an_acceleration,
+                            a_mass, a_velocity, an_initial_shape_name,
+                            an_initial_shape, an_initial_state);
+    }
 
     /**
      * @return Are you smoking?
@@ -224,52 +280,76 @@ public class Factory extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
+    /**
+     * The factory for the sphere.
+     */
+    Factory my_factory;
+
+    /**
+     * The factory sphere's AI.
+     */
+    AI my_ai = new AI();
+    /**
+     * The factory sphere disturb.
+     */
+    AI my_disturb;
+
+    /**
+     * Make a factory sphere.
+     */
+    public FactorySphere(final double[] a_position,
+                         final double an_orientation,
+                         final double[] an_acceleration,
+                         final double a_mass,
+                         final double[] a_velocity,
+                         final String an_initial_shape_name,
+                         final Shape an_initial_shape,
+                         final byte an_initial_state) {
+      super();
+      super.set_Staticstate(a_position, an_orientation, an_acceleration,
+                            a_mass, a_velocity, an_initial_shape_name,
+                            an_initial_shape, an_initial_state);
+
+    }
+
+    public AI attack() {
+      return my_disturb;
+    }
+
+    public void attack(final AI the_behavior) {
+      my_disturb = the_behavior;
+
+    }
+
+    public AI disturb() {
+      return null;
+    }
+
+    public void disturb(final AI the_behavior) {
+
+    }
+
+    public void animate() {
+
+    }
+
+    public Animation animation() {
+
+      return null;
+    }
+
+    public void animation(final Animation the_animation) {
+
+    }
 
     public Color color() {
+
       return null;
     }
 
     public void color(final Color the_color) {
 
     }
-  }
-
-  public AI attack() {
-    return null;
-  }
-
-  public void attack(final AI the_behavior) {
-
-  }
-
-  public AI disturb() {
-    return null;
-  }
-
-  public void disturb(final AI the_behavior) {
-
-  }
-
-  public void animate() {
-
-  }
-
-  public Animation animation() {
-
-    return null;
-  }
-
-  public void animation(final Animation the_animation) {
-
-  }
-
-  public Color color() {
-
-    return null;
-  }
-
-  public void color(final Color the_color) {
-
   }
 }
 
