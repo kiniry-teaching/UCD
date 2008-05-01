@@ -9,6 +9,7 @@ import java.awt.Shape;
  * Any entity in the game that is drawn in space or on the terrain.
  * @author Stephen Walker (stephen.walker@ucdconnect.ie)
  * @version 29 April 2008
+ * EDIT: Keith Madden (keith.madden@ucdconnect.ie)
  */
 public abstract class Entity implements GameColor {
   /**
@@ -17,11 +18,11 @@ public abstract class Entity implements GameColor {
    * @param the_initial_state the initial state.
    * @return A new entity with this initial shape name, shape, and state.
    */
-  private String my_shape_name;
+  private static String my_shape_name;
   /** Shape to store shape.*/
-  private Shape my_shape;
+  private static Shape my_shape;
   /** byte to store the state.*/
-  private byte my_state;
+  private static byte my_state;
 
   public void set_State(final String the_initial_shape_name,
                         final Shape the_initial_shape,
@@ -34,14 +35,14 @@ public abstract class Entity implements GameColor {
   /**
    * @return What shape are you?
    */
-  public /*@ pure @*/ String shape_name() {
+  public static /*@ pure @*/ String shape_name() {
     return my_shape_name;
   }
 
   /**
    * @return What shape are you?
    */
-  public /*@ pure @*/ Shape shape() {
+  public static /*@ pure @*/ Shape shape() {
     return my_shape;
   }
 
@@ -49,7 +50,7 @@ public abstract class Entity implements GameColor {
    * This is your shape.
    * @param the_shape the shape of this Entity.
    */
-  public void shape(final Shape the_shape) {
+  public static void shape(final Shape the_shape) {
     my_shape = the_shape;
   }
 

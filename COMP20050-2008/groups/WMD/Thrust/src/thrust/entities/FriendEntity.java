@@ -12,9 +12,22 @@ package thrust.entities;
 
 /**
  * An entity that is helpful to the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author Keith Madden (keith.madden@ucdconnect.ie)
+ * @version 30 April 2008
  */
-public interface FriendEntity {
+public class FriendEntity {
+  /**GoalSphere. */
+  static Entity my_goalSphere;
+  /**FuelPod. */
+  static Entity my_fuelPod;
 
+  /**GoalSphere Method. */
+  static /* pure */ Entity goalSphere() {
+    return my_goalSphere;
+  }
+
+  /**FuelPod Method. */
+  static /* pure */ Entity fuelPod() {
+    return my_fuelPod;
+  }
 }

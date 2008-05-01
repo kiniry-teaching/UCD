@@ -14,6 +14,11 @@ public abstract class StaticEntity extends DynamicEntity {
    * @param the_position the immutable position.
    * @param the_orientation the immutable orientation.
    */
+
+  /**
+   * Physics.
+   */
+  thrust.physics.Physic my_physics = new thrust.physics.Physic();
   //@ ensures position().equals(the_position);
   //@ ensures orientation().equals(the_orientation);
   public void set_Staticstate (final double[] the_position,
