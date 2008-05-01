@@ -9,14 +9,24 @@ package thrust.entities.about;
  */
 public class GameState extends AbstractGameState {
 
+  /** The main menu state. */
+  public static final byte MAINMENU = 0;
+  /** The high score menu state. */
+  public static final byte HIGHSCOREMENU = 1;
+  /** The play state. */
+  public static final byte PLAY = 2;
+  /** The gameover state. */
+  public static final byte GAMEOVER = 3;
+  /** The game state. */
+  private static byte my_state;
   /** The current score. */
   private static int my_score;
   /** The end of level bonus if any. */
   private static int my_bonus;
   /** The amount of lives the player has. */
-  private static byte my_lives;
+  private static byte my_lives = 3;
   /** The current fuel of the spaceship. */
-  private static int my_fuel;
+  private static int my_fuel = 834;
   /** The high scores of the game. */
   private static HighScoreInterface[] my_high_scores =
     new HighScore[HIGH_SCORE_COUNT];
@@ -128,4 +138,11 @@ public class GameState extends AbstractGameState {
     return 0;
   }
 
+  public void set_state(final byte the_new_state) {
+    my_state = the_new_state;
+  }
+
+  public byte get_state() {
+    return my_state;
+  }
 }

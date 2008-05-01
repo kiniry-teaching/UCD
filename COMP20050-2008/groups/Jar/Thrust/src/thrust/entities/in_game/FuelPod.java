@@ -21,9 +21,9 @@ import thrust.entities.about.Fuelable;
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
   /** The amount of fuel currently in the FuelPod. */
-  private int my_fuel;
+  private transient int my_fuel;
   /** The maximum amount of fuel that a FuelPod can hold. */
-  private int my_max_fuel;
+  private transient int my_max_fuel;
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
    */

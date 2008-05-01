@@ -20,6 +20,6 @@ public class AI {
    * Perform your behavior.
    */
   public void act() {
-    assert false; //@ assert true;
+    //@ assert true;
   }
 }

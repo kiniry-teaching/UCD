@@ -22,9 +22,9 @@ import thrust.entities.StaticEntity;
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
   /** The open state of the door. */
-  private boolean my_openState;
+  private transient boolean my_openState;
   /** The closed state of the door. */
-  private boolean my_closeState;
+  private transient boolean my_closeState;
 
   /**
    * @return Are you closed?

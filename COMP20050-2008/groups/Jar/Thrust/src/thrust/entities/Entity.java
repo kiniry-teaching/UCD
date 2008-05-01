@@ -23,13 +23,13 @@ import java.awt.Shape;
 public abstract class Entity implements GameColor {
 
   /** The name of the shape. */
-  private String my_shape_name;
+  private transient String my_shape_name;
   /** The shape object. */
-  private Shape my_shape;
+  private transient Shape my_shape;
   /** The state of the entity. */
-  private byte my_state;
+  private transient byte my_state;
   /** The color of the entity. */
-  private Color my_color;
+  private transient Color my_color;
 
   /**
    * Set the initial shape name, shape, and state of this entity.
@@ -73,7 +73,7 @@ public abstract class Entity implements GameColor {
    */
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    assert my_state != 0; //@ assert my_state <= 0;
+    //@ assert my_state <= 0;
     return my_state;
   }
 
@@ -91,7 +91,7 @@ public abstract class Entity implements GameColor {
    * Render yourself.
    */
   public void render() {
-    assert false; //@ assert false;
+    //@ assert false;
   }
 
   /* (non-Javadoc)

@@ -2,7 +2,7 @@ package thrust.audio;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -16,6 +16,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @version 2 April 2008
  */
 public class SoundEffect {
+  /** Error log for Music class. */
+  private static final Logger SOUNDLOG = Logger.getLogger("Error Log");
   /** Clip to be played. */
   private static Clip my_clip;
 
@@ -34,11 +36,11 @@ public class SoundEffect {
                                        Clip.class, audiois.getFormat()));
       // @ assert my_clip !=null; my_clip.open(audiois);
     } catch (LineUnavailableException e) {
-      e.printStackTrace(System.err);
+      SOUNDLOG.warning(e.getMessage());
     } catch (IOException e) {
-      e.printStackTrace(System.err);
+      SOUNDLOG.warning(e.getMessage());
     } catch (UnsupportedAudioFileException e) {
-      e.printStackTrace(System.err);
+      SOUNDLOG.warning(e.getMessage());
     }
   }
   /**

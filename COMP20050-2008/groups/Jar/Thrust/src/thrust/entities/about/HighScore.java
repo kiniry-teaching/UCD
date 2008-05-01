@@ -14,9 +14,9 @@ public class HighScore implements HighScoreInterface {
   /** Maximum number of initials that can be saved. */
   private static final int INITIAL_NUMBER = 3;
   /**The initials that have been saved. */
-  private char[] my_initials = new char[INITIAL_NUMBER];
+  private transient char[] my_initials = new char[INITIAL_NUMBER];
   /** The high score. */
-  private int my_high_score;
+  private transient int my_high_score;
 
   /*
    * @see thrust.entities.about.AbstractGameState.HighScoreInterface#initials()

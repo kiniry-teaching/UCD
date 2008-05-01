@@ -26,7 +26,7 @@ public class Space extends StaticEntity
    * @return What are your stars?"
    */
   public /*@ pure @*/ Collection stars() {
-    assert false; //@ assert true;
+    //@ assert true;
     return null;
   }
 
@@ -35,7 +35,7 @@ public class Space extends StaticEntity
    * @param the_star the star to add.
    */
   public void add_star(final Star the_star) {
-    assert false; //@ assert false;
+    //@ assert false;
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

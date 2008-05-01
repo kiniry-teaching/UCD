@@ -19,17 +19,17 @@ import thrust.physics.PhysicsInterface;
  */
 public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   /** Acceleration of the entity. */
-  private double[] my_acceleration;
+  private transient double[] my_acceleration;
   /** Gravitational constant. */
-  private double my_gravConstant;
+  private transient double my_gravConstant;
   /** The mass of the entity. */
-  private double my_mass;
+  private transient double my_mass;
   /** The velocity of the entity. */
-  private double[] my_velocity;
+  private transient double[] my_velocity;
   /** The position of the entity. */
-  private double[] my_position;
+  private transient double[] my_position;
   /** The orientation of the entity in radians. */
-  private double my_orientation;
+  private transient double my_orientation;
 
   /**
    * @param the_position the initial position.

@@ -25,7 +25,7 @@ public class GunTurret extends StaticEntity
    * @return The turret's attack AI must shoot a bullet toward the spaceship.
    */
   public AI attack() {
-    assert false; //@ assert true;
+    //@ assert true;
     return null;
   }
 
@@ -34,7 +34,7 @@ public class GunTurret extends StaticEntity
    * the spaceship.
    */
   public void attack(final AI the_behavior) {
-    assert false; //@ assert false;
+    //@ assert false;
   }
 
   /**
@@ -42,7 +42,7 @@ public class GunTurret extends StaticEntity
    * away from the terrain.
    */
   public AI disturb() {
-    assert false; //@ assert false;
+    //@ assert false;
     return null;
   }
 
@@ -51,7 +51,7 @@ public class GunTurret extends StaticEntity
    * in a random direction away from the terrain.
    */
   public void disturb(final AI the_behavior) {
-    assert false; //@ assert false;
+    //@ assert false;
   }
 
   /*@ public invariant (* A gun turret always resides on/adjacent to

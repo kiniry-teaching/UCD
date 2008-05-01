@@ -39,9 +39,9 @@ public class Spaceship extends DynamicEntity
   public static final double FUEL_MASS = 1;
 
   /** The fuel is initially set to the initial fuel value. */
-  private int my_fuel = INITIAL_FUEL;
+  private transient int my_fuel = INITIAL_FUEL;
   /** The tow state of the SpaceShip. */
-  private boolean my_tow_state;
+  private transient boolean my_tow_state;
 
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)

@@ -22,11 +22,11 @@ import thrust.entities.StaticEntity;
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
   /** Amount of damage taken by factory. */
-  private byte my_damage;
+  private transient byte my_damage;
   /** This factories chimney. */
-  private FactoryChimney my_chimney;
+  private transient FactoryChimney my_chimney;
   /** This factories sphere. */
-  private FactorySphere my_sphere;
+  private transient FactorySphere my_sphere;
 
   /**
    * @return How much damage have you sustained?
@@ -87,7 +87,7 @@ public class Factory extends StaticEntity
     implements EnemyEntity, Animatable {
 
     /** . */
-    private boolean my_smoking_state;
+    private transient boolean my_smoking_state;
     /**
      * @return Are you smoking?
      */
