@@ -1,0 +1,4 @@
+public PlanetExplodingAnimation implements Animation
+{
+
+}

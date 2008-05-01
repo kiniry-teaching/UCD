@@ -1,0 +1,4 @@
+public StarAnimation implements Animation
+{
+
+}

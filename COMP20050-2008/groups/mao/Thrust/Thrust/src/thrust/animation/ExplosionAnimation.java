@@ -1,0 +1,4 @@
+public ExplosionAnimation implements Animation
+{
+
+}

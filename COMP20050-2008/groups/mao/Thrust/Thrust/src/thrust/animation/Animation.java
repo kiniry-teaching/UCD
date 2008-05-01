@@ -15,6 +15,7 @@ package thrust.animation;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public interface Animation {
-
+public interface Animation 
+{
+	private frame[] myFrames;
 }

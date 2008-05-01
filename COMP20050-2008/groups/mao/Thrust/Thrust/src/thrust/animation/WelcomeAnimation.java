@@ -1,0 +1,4 @@
+public WelcomeAnimation implements Animation
+{
+
+}
