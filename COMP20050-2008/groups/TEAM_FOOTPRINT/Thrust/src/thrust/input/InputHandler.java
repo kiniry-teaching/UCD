@@ -1,15 +1,18 @@
 
 /**class written by Daire O'Doherty 06535691 3/4/08
 
-Just trying to set up what the legal inputs for the game are, and how the computer checks if what is pressed is legal
+Just trying to set up what the legal inputs for
+the game are, and how the computer checks if what is pressed is legal
 
-Daire O'Doherty 06535691 reworked on it 5/4/08, havn't been able to get in touch with one of my team members in a few weeks, other member Sinead morley
-said that she would implement the audio, I have started a bit of the Physics myself, as i don't know if Lane is going to do it
-Revised again on 8/4/08 with a little help from Fintan, still can't get rid of some of the errors, told to ignore them,
-told to use System.out.print, this pulled up more errors, told to ignore them
+Daire O'Doherty 06535691 reworked on it 5/4/08,
+Revised again on 8/4/08 with a little help from Fintan,
+still can't get rid of some of the errors, told to ignore them,
+told to use System.out.print, this pulled up more errors, told to ignore them.
+Added a logger instead of System.out.print.i need to study for my exams though!
 */
 package thrust.input;
 import java.util.logging.Logger;
+
 /**
  *
  * @author "Daire o Doherty 06535691 (daireod@gmail.com)"
