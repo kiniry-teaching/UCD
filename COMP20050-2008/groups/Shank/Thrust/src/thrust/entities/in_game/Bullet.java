@@ -52,7 +52,7 @@ public class Bullet extends DynamicEntity
     return my_disturbAI;
   }
   public double mass() {
-    return 0;
+    return 1;
   }
   public void color(final Color the_color) {
   }

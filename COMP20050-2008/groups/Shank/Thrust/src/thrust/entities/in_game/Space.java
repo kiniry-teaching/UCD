@@ -20,11 +20,44 @@ import thrust.entities.StaticEntity;
 /**
  * The vacuum in which entities exist.
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
- * Edited by Ben Fitzgerald 28/04/2008
+ * @version 01 May 2008
+ * Edited by Roger Thomas 01/05/2008
  */
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
+  /*
+   * @ public invariant (* Space color is always black. *);
+   * @ public invariant color() == java.awt.Color.Black;
+   */
+  /**
+   * The frames in the space animation.
+   */
+  private Animation my_animation;
+  /**
+   * The color of Space.
+   */
+  private Color my_color;
+  /**
+   * Sets the color of Space.
+   * @param the_color must be black
+   */
+  public void color(final Color the_color) {
+    my_color = the_color;
+  }
+  public Color color() {
+    return my_color;
+  }
+  public void animation(final Animation the_animation)
+  {
+    my_animation = the_animation;
+  }
+  public Animation animation()
+  {
+    return my_animation;
+  }
+  public void animate() {
+    my_animation.start();
+  }
   /**
    * @return What are your stars?"
    */
@@ -40,31 +73,11 @@ public class Space extends StaticEntity
   public void add_star(final Star the_star) {
     assert false; //@ assert false;
   }
-
-  public void animate() {
-    // TODO animate method stub
+  public void simulate(final double the_amount) {
   }
-
-  public Animation animation() {
-    // TODO animation getter method stub
-    return null;
-  }
-
-  public void animation(final Animation the_animation) {
-    // TODO animation setter method stub
-  }
-
-  public void simulate(final double some_seconds) {
-    // TODO simulate method stub
-  }
-
-  public Color color() {
-    // TODO color getter method stub
-    return null;
-  }
-
-  public void color(final Color the_color) {
-    // TODO color setter  method stub
+  public double gravitational_constant() {
+    final double d = 9.81;
+    return d;
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

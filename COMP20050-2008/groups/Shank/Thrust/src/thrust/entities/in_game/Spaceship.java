@@ -19,8 +19,8 @@ import thrust.entities.behaviors.Tow;
 /**
  * The player's main vehicle.
  * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
- *  Edited by Ben Fitzgerald 28/04/2008
+ * @version 01 May 2008
+ *  Edited by Roger Thomas 01/05/2008
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
@@ -36,50 +36,77 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
-
+  /**
+   * The maximum fuel content of the Spaceship.
+   */
+  public static final int MAX_FUEL = 10000;
+  /**
+   * The current fuel content of the Spaceship.
+   */
+  private int my_current_fuel;
+  /**
+   * The color of the spaceship.
+   */
+  private Color my_color;
+  /**
+   * Boolean which indicates if the spaceship is towing something or not.
+   */
+  private boolean my_isTowed;
+  /**
+   * Change the fuel content of the spaceship.
+   * As a convention if the spaceship picks up fuel
+   * the_fuel_change >= 0
+   * If the spaceship is loosing fuel by burning it off
+   * the_fuel_change <= 0
+   */
   public void change_fuel_content(final int the_fuel_change) {
     // TODO change_fuel_content setter method stub
+    my_current_fuel = my_current_fuel + the_fuel_change;
   }
 
   public int fuel() {
     // TODO fuel getter method stub
-    return 0;
+    return my_current_fuel;
   }
 
   public int fuel_mass() {
     // TODO fuel_mass getter method stub
-    return 0;
+    return my_current_fuel * 1;
   }
 
   public int maximum_fuel() {
     // TODO maximum_fuel getter method stub
-    return 0;
+    return MAX_FUEL;
   }
 
   public void set_fuel_content(final int the_fuel_content) {
     // TODO set_fuel_content setter method stub
+    my_current_fuel = the_fuel_content;
   }
 
   public void tow() {
     // TODO tow method stub
+    my_isTowed = true;
   }
 
   public boolean towed() {
     // TODO  towed gettermethod stub
-    return false;
+    return my_isTowed;
   }
-
   public void simulate(final double some_seconds) {
     // TODO simulate method stub
   }
-
+  public double mass() {
+    return (EMPTY_MASS + my_current_fuel);
+  }
   public Color color() {
     // TODO color getter method stub
-    return null;
+    return my_color;
   }
 
   public void color(final Color the_color) {
     // TODO color setter method stub
+    my_color = java.awt.Color.white;
   }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
