@@ -1,10 +1,18 @@
-import thrust.input.*;
+import java.awt.DisplayMode;
+import java.awt.Frame;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+
+import thrust.input.InputHandler;
 // thrust game thread
 
 class thrust_game extends InputHandler implements Runnable 
 {
 	private int myFramesPerSecond;
 	private int myCurrentChar;
+	private Frame myFrame;
 	//private InputHandler myInputHandler;
 	
 	public thrust_game(int fps)
@@ -14,11 +22,7 @@ class thrust_game extends InputHandler implements Runnable
 
 	public void run()
 	{
-	// test code
-	
-	int frame = 0;
-	// end test code
-	
+	initFrame();
 		while(true)
 		{
 		
@@ -26,7 +30,7 @@ class thrust_game extends InputHandler implements Runnable
 			{
 			// Frame calculation and interrupt		
 			Thread.sleep(1000/myFramesPerSecond);
-			System.out.println(frame++);
+			drawFrame();
 			}
 			catch(Exception e)
 			{
@@ -34,4 +38,27 @@ class thrust_game extends InputHandler implements Runnable
 			}
 		}
 	}
+	
+	
+	private void initFrame()
+	{
+	
+	
+
+	GraphicsEnvironment tempOne = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsDevice[] tempTwo = tempOne.getScreenDevices();
+	int tempThree = tempTwo[0].getDisplayMode().getWidth(); // Current screen width
+	int tempFour = tempTwo[0].getDisplayMode().getHeight(); // Current screen height
+	
+	//myFrame = new Frame(
+	
+	}
+	
+	private void drawFrame()
+	{
+	
+	
+	}
+	
+	
 }
