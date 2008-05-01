@@ -11,7 +11,7 @@ import java.io.*;
 public class BTReceive {
 
 	public BTReceive(){
-		
+
 	}
 	public static void main(String [] args)  throws Exception 
 	{
@@ -19,16 +19,16 @@ public class BTReceive {
 		final String mouth1 = "..Mouth Watering";
 		final String mouth2 = "cumming soon" ;
 		final String order = "Receiving order";
-        final String closing = "Closing...";
-        
+		final String closing = "Closing...";
+
 		while (true)
 		{
 			LCD.drawString(autocock,0,0);
 			LCD.drawString(mouth1,0,5);
 			LCD.refresh();
 
-	        BTConnection btc = Bluetooth.waitForConnection();
-	        
+			BTConnection btc = Bluetooth.waitForConnection();
+
 			LCD.clear();
 			LCD.drawString(order,0,0);
 			LCD.drawString(mouth2,0,5);
@@ -36,7 +36,7 @@ public class BTReceive {
 
 			DataInputStream dis = btc.openDataInputStream();
 			DataOutputStream dos = btc.openDataOutputStream();
-			
+
 			for(int i=0;i<100;i++) {
 				int n = dis.readInt();
 				LCD.drawInt(n,7,0,1);
@@ -44,7 +44,7 @@ public class BTReceive {
 				dos.writeInt(-n);
 				dos.flush();
 			}
-			
+
 			dis.close();
 			dos.close();
 			Thread.sleep(100); // wait for data to drain
