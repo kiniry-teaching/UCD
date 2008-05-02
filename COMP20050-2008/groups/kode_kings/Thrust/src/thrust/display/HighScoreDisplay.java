@@ -12,24 +12,27 @@ package thrust.display;
 
 /**
  * @author Colin Casey (colin.casey@org.com)
+ * @author Neil McCarthy (neil.mccarthy@ucdconnect.ie)
  * @version 15 April 2008
  */
 public class HighScoreDisplay extends AbstractHighScoreDisplay {
-
+  
+  int[] high_scores;
+  
   public boolean displayed() {
     return true;
   }
 
   public void display() {
-
+      System.out.print(high_scores);
   }
 
   public void hide() {
-
+    
   }
 
   public void add_new_high_score() {
-
+    
   }
 
 }
