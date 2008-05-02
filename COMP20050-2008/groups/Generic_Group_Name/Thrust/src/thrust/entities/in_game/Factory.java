@@ -1,4 +1,3 @@
-
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *

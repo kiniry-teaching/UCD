@@ -8,13 +8,15 @@
  * @keywords "C=64", "Thrust", "game"
  */
 
-package thrust.animation;
+package thrust.entities;
+
+import thrust.physics.PhysicsInterface;
 
 /**
- * The frames in an animation.
+ * Entities whose position or orientation change.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public interface Animation {
-
+public abstract class DynamicEntity extends Entity
+  implements PhysicsInterface {
 }

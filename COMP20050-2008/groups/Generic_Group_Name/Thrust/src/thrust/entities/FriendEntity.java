@@ -8,13 +8,13 @@
  * @keywords "C=64", "Thrust", "game"
  */
 
-package thrust.animation;
+package thrust.entities;
 
 /**
- * The frames in an animation.
+ * An entity that is helpful to the spaceship.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public interface Animation {
+public interface FriendEntity {
 
 }
