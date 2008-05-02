@@ -25,6 +25,13 @@ public class Explosion extends StaticEntity
   /** Animation holding animation steps for Explosion class. */
   private transient Animation my_animation;
 
+  /** Constructor. */
+  public Explosion(final double[] the_position,
+                   final double the_orientation) {
+    super();
+    super.make(the_position, the_orientation);
+  }
+
   /**
    * @return What is your animation?
    */

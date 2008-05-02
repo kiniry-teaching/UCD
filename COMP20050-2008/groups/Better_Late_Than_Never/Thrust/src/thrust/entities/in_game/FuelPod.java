@@ -28,6 +28,13 @@ public class FuelPod extends StaticEntity
   /** Int holding mass of fuel. */
   private static int my_fuel_mass = my_fuel;
 
+  /** Constructor. */
+  public FuelPod(final double[] the_position,
+                 final double the_orientation) {
+    super();
+    super.make(the_position, the_orientation);
+  }
+
   /**
    * @return How much fuel do you contain?
    */

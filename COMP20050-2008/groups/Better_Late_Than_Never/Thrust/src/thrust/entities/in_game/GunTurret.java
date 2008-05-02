@@ -31,6 +31,12 @@ public class GunTurret extends StaticEntity
   /** AI holding Bullet's disturb AI. */
   private transient AI my_disturb;
 
+  public GunTurret(final double[] the_position,
+                   final double the_orientation) {
+    super();
+    super.make(the_position, the_orientation);
+  }
+
   /**
    * @return What is your attack behavior AI?
    */

@@ -10,6 +10,12 @@
 
 package thrust;
 
+import thrust.audio.*;
+import thrust.display.*;
+import thrust.entities.about.*;
+import thrust.input.*;
+
+
 /**
  * Simulating all of the entities in the game to realize the game.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -22,7 +28,15 @@ public final class Main {
   private Main() {
     assert false; //@ assert false;
   }
-}
+
+  HighScore my_highscore;
+  InfoPanel my_infopanel;
+
+  public static void main(final String[] the_args) {
+
+
+
+  }
 
   /**
    * Run the game.

@@ -35,6 +35,14 @@ public class StaticEntity extends DynamicEntity {
     System.arraycopy(the_position, 0, my_position, 0, the_position.length);
     return null;
   }
+
+  public double[] position() {
+    return my_position;
+  }
+
+  public double orientation() {
+    return my_orientation;
+  }
 /**
 
   // Why are any of the following methods here? I thought this was

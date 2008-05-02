@@ -36,6 +36,17 @@ public class Factory extends StaticEntity
   /** Instance of AI class implemented in EnemyEntity. */
   private AI my_ai;
 
+  public Factory(final double[] the_position,
+                 final double the_orientation) {
+
+    super.make(the_position, the_orientation);
+    // Creating instance of Factory creates FactorySphere and
+    // FactoryChimney in same location.
+    FactoryChimney(the_position, the_orientation);
+    FactorySphere(the_position, the_orientation);
+  }
+  
+  
   /**
    * @return How much damage have you sustained?
    */
@@ -130,6 +141,13 @@ public class Factory extends StaticEntity
     /** AI holding behaviour for FactoryChimney class. */
     private AI my_ai;
 
+    
+    public FactoryChimney(final double[] the_position,
+                          final double the_orientation) {
+      
+      super.make(the_position, the_orientation);
+    }
+    
     /**
      * @return Are you smoking?
      */
@@ -191,6 +209,13 @@ public class Factory extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
+    
+    public FactorySphere(final double[] the_position,
+                          final double the_orientation) {
+      
+      super.make(the_position, the_orientation);
+    }
+    
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a

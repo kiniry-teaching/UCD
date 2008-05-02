@@ -25,6 +25,13 @@ public class Star extends StaticEntity
   /** Animation holding animation steps for Star class. */
   private Animation my_animation;
 
+  public Star(final double[] the_position,
+              final double the_orientation) {
+
+    super();
+    super.make(the_position, the_orientation);
+  }
+
   /**
    * @return What is your animation?
    */

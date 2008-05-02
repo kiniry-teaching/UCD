@@ -19,16 +19,16 @@ import java.awt.Color;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public abstract class Entity implements GameColor {
+public class Entity implements GameColor {
 
-  /** String to hold this Shape's name. */
-  private String my_shape_name;
-  /** Shape to hold this Shape's shape. */
-  private Shape my_shape;
-  /** Byte to hold this Shape's initial state. */
-  private byte my_state;
   /** Color to hold this Shape's colour. */
-  private Color my_color;
+  private static Color my_color;
+  /** String to hold this Shape's name. */
+  private transient String my_shape_name;
+  /** Shape to hold this Shape's shape. */
+  private transient Shape my_shape;
+  /** Byte to hold this Shape's initial state. */
+  private transient byte my_state;
 
   /**
    * Set the initial shape name, shape, and state of this entity.
@@ -89,8 +89,7 @@ public abstract class Entity implements GameColor {
     return my_color;
   }
 
-  public void Color (final Color the_color)
-  {
+  public void color(final Color the_color) {
     my_color = the_color;
   }
 

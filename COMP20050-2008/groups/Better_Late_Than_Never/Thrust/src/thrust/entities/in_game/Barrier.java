@@ -33,6 +33,14 @@ public class Barrier extends StaticEntity
   /** Boolean holding whether Barrier is moving or still. */
   private transient boolean my_movement;
 
+
+  public Barrier(final double[] the_position,
+                 final double the_orientation) {
+
+    super();
+    super.make(the_position, the_orientation);
+  }
+
   /**
    * @return Are you closed?
    */

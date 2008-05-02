@@ -16,6 +16,7 @@ import thrust.entities.StaticEntity;
  * The planet on which some entities rest.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
+ * @revised 2 May 2008 by Nicholas McCarthy
  */
 public class Terrain extends StaticEntity
   implements NeutralEntity {
@@ -23,4 +24,10 @@ public class Terrain extends StaticEntity
     @ public invariant (* The shape of the terrain is rendered as a
     @                     sequence of horizontal lines. *);
     @*/
+
+  public Terrain(final double[] the_position,
+                 final double the_orientation) {
+    super();
+    super.make(the_position, the_orientation);
+  }
 }

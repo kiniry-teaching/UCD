@@ -12,6 +12,7 @@ package thrust.entities.in_game;
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
 import thrust.entities.behaviors.AI;
+import java.awt.Shape;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -34,6 +35,25 @@ public class Bullet extends DynamicEntity
   private transient AI my_attack;
   /** AI holding Bullet's disturb AI. */
   private transient AI my_disturb;
+
+  /** Constructor. */
+
+  public Bullet(final double[] the_position, final double the_orientation,
+                final double[] the_acceleration,
+                final double the_grav_constant, final double the_mass,
+                final double[] the_velocity,
+                final String the_initial_shape_name,
+                final Shape the_initial_shape,
+                final byte the_initial_state) {
+
+    super();
+    super.make(the_position, the_orientation, the_acceleration,
+               the_grav_constant, the_mass, the_velocity);
+
+    super.set_entity_state(the_initial_shape_name, the_initial_shape,
+                           the_initial_state);
+
+  }
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()

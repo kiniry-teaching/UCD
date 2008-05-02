@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -39,6 +41,24 @@ public class Spaceship extends DynamicEntity
   private static boolean my_towed_state;
   /** The spaceship's current fuel. */
   private transient int my_fuel;
+
+  /** Constructor. */
+  public Spaceship(final double[] the_position, final double the_orientation,
+                   final double[] the_acceleration,
+                   final double the_grav_constant, final double the_mass,
+                   final double[] the_velocity,
+                   final String the_initial_shape_name,
+                   final Shape the_initial_shape,
+                   final byte the_initial_state) {
+
+    super();
+    super.make(the_position, the_orientation, the_acceleration,
+               the_grav_constant, the_mass, the_velocity);
+
+    super.set_entity_state(the_initial_shape_name, the_initial_shape,
+                           the_initial_state);
+
+  }
 
   /**
    * @return How much fuel do you contain?

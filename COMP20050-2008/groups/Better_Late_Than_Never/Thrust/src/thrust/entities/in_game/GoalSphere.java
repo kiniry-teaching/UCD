@@ -24,7 +24,10 @@ public class GoalSphere extends DynamicEntity
 
   /** Boolean holding whether GoalSphere is being towed or not. */
   private static boolean my_towed_state;
-
+  
+  
+  
+  
   /**
    * @return Are you currently towing or being towed?
    */
