@@ -12,7 +12,7 @@ package thrust.entities;
 
 /**
  * Entities whose position and orientation do not change.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Simon markey,ursula redmond holly baker (kiniry@acm.org)
  * @version 18 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
@@ -31,9 +31,17 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
+  public boolean initialized=false;
+  
   public void set_state(final double[] the_position,
                         final double the_orientation) {
-    assert false; //@ assert false;
+    if(!initialized)
+    {
+      my_position[0] = the_position[0];
+      my_position[1] = the_position[1];
+      my_orientation = the_orientation;
+    }
+   
   }
 
   /* (non-Javadoc)
@@ -68,7 +76,13 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
+   
+    
+    if(initialized)
+    {
+      position[0]  == position[0];
+      
+    }
     return 0;
   }
 

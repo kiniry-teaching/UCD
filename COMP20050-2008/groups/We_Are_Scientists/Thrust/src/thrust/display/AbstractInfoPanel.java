@@ -13,7 +13,7 @@ package thrust.display;
 /**
  * Information about the game.
  *
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Simon markey,ursula redmond holly baker (kiniry@acm.org)
  * @version 11 April 2008
  */
 public abstract class AbstractInfoPanel {

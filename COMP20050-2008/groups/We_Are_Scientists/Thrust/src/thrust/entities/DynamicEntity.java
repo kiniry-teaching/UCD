@@ -6,7 +6,7 @@
   
   /**
    * Entities whose position or orientation change.
-   * @author simon markey
+   * @author Simon markey,ursula redmond holly baker
    * @version 21 April 2008
    */
   public abstract class DynamicEntity extends Entity

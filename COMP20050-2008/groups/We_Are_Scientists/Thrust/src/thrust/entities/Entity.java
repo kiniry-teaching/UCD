@@ -1,7 +1,7 @@
 /*
  * A re-implementation of the classic C=64 game 'Thrust'.
  *
- * @author "Joe Kiniry (kiniry@acm.org)"
+ * @author "Simon markey,ursula redmond holly baker (kiniry@acm.org)"
  * @module "COMP 20050, COMP 30050"
  * @creation_date "March 2007"
  * @last_updated_date "April 2008"
@@ -15,7 +15,7 @@ import java.awt.Shape;
 
 /**
  * Any entity in the game that is drawn in space or on the terrain.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Simon markey,ursula redmond holly baker
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {

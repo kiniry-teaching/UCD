@@ -3,7 +3,7 @@ import thrust.entities.behaviors.AI;
 
 /**
  * An entity that is a threat to the spaceship.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Simon markey,ursula redmond holly baker
  * @version 18 April 2008
  */
 public class EnemyEntityImp implements EnemyEntity {
