@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>thrust</name>
+	<name>TheThrust</name>
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -60,23 +55,10 @@
 				</dictionary>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>edu.umd.cs.findbugs.plugin.eclipse.findbugsBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>net.sourceforge.pmd.runtime.pmdBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>mobius.escjava2.plugin.autocheckEscjavaNature</nature>
-		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
 		<nature>net.sourceforge.metrics.nature</nature>
-		<nature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</nature>
-		<nature>net.sourceforge.pmd.runtime.pmdNature</nature>
 	</natures>
 </projectDescription>

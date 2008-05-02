@@ -10,6 +10,7 @@
 
 package thrust.display;
 package thrust.entities.about;
+import thrust.entities.about.*;
 
 /**
  * Information about the game.
