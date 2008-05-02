@@ -10,6 +10,9 @@
 
 package thrust;
 
+import thrust.entities.about.GameState;
+import thrust.display.InfoPanel;
+
 /**
  * Simulating all of the entities in the game to realize the game.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -26,6 +29,10 @@ public final class Main {
    * @param the_args The command-line arguments are ignored.
    */
   public static void main(final String[] the_args) {
+    
+    GameState game = new GameState();
+    InfoPanel info = new InfoPanel();
+
     assert false; //@ assert false;
     // display the title screen
     // play title music

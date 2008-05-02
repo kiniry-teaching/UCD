@@ -9,12 +9,16 @@
  */
 
 package thrust.display;
+import java.util.Scanner;
+import java.io.*;
 
 /**
  * Top scores of past players.
  *
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 11 April 2008
+ * @author David McGinn
+ * @author Cillian O'Neill
+ * @author Michael Fahey
+ * @version 2 May 2008
  */
 public class HighScoreDisplay {
   
@@ -48,7 +52,8 @@ public class HighScoreDisplay {
    * Let the player to add a new name for this high score.
    */
   public void add_new_high_score() {
-    //input a name by some method or other... for testing purposes, using:
+//    Scanner in = new Scanner(System.in);
+//    String n = in.nextLine();
     char n = 'DMG';
     name = n;
   }

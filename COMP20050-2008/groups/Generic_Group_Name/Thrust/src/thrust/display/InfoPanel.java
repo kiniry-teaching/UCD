@@ -9,20 +9,21 @@
  */
 
 package thrust.display;
-package thrust.entities.about;
-import thrust.entities.about.*;
 
 /**
  * Information about the game.
  *
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 11 April 2008
+ * @author David McGinn
+ * @author Michael Fahey
+ * @author Cillian O'Neill
+ * @version 2 May 2008
  */
 public class InfoPanel {
   int cur_score;
   byte cur_lives;
   int cur_fuel;
   boolean displayed = false;
+
   /**
    * @return Is the information panel currently displayed?
    */
@@ -36,6 +37,7 @@ public class InfoPanel {
   //@ ensures displayed();
   public void display() {
      displayed = true;
+     System.out.println("High score is displayed");
   }
 
   /**
@@ -50,8 +52,10 @@ public class InfoPanel {
    * Update the displayed information panel.
    */
   public void update() {
-    cur_score = GameState.score();
-    cur_lives = GameState.lives();
-    cur_fuel = GameState.current_fuel();
+   /**     NOT FINISHED
+    *   cur_score = score();
+    *   cur_lives = lives();
+    *   cur_fuel = current_fuel();
+    */
   }
 }

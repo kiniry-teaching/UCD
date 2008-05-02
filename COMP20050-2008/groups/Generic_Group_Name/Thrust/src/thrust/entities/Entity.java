@@ -19,6 +19,11 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
+  
+  String my_shape_name;
+  Shape my_shape;
+  byte my_state;
+  
   /**
    * Set the initial shape name, shape, and state of this entity.
    * @param the_initial_shape_name the initial shape name.
@@ -28,23 +33,23 @@ public abstract class Entity implements GameColor {
   public void set_state(String the_initial_shape_name,
                         Shape the_initial_shape,
                         byte the_initial_state) {
-    assert false; //@ assert false;
+    my_shape_name = the_initial_shape_name;
+    my_shape = the_initial_shape;
+    my_state = the_initial_state;    
   }
 
   /**
    * @return What shape are you?
    */
-  public /*@ pure @*/ String shape_name() {
-    assert false; //@ assert false;
-    return null;
+  public String shape_name() {
+    return my_shape_name;
   }
 
   /**
    * @return What shape are you?
    */
-  public /*@ pure @*/ Shape shape() {
-    assert false; //@ assert false;
-    return null;
+  public Shape shape() {
+    return my_shape;
   }
 
   /**
@@ -52,7 +57,7 @@ public abstract class Entity implements GameColor {
    * @param the_shape the shape of this Entity.
    */
   public void shape(Shape the_shape) {
-    assert false; //@ assert false;
+    my_shape = the_shape;
   }
 
   /**
@@ -60,9 +65,8 @@ public abstract class Entity implements GameColor {
    * @note State is encoded by a non-negative number of "hit points".
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ byte state() {
-    assert false; //@ assert false;
-    return 0;
+  public byte state() {
+    return my_state;
   }
 
   /**
@@ -72,13 +76,13 @@ public abstract class Entity implements GameColor {
   //@ requires 0 <= the_state;
   //@ ensures state() == the_state;
   public void state(byte the_state) {
-    assert false; //@ assert false;
+    my_state = the_state;
   }
 
   /**
    * Render yourself.
    */
   public void render() {
-    assert false; //@ assert false;
+    //render!
   }
 }

@@ -14,19 +14,19 @@ import java.io.*;
 
 public class Music {
   //@ public model boolean is_playing;
-
-  InputStream in = new FileInputStream(Thrust_music.mp3);
-  AudioStream as = new AudioStream(in); 
-  AudioData data = as.getData();
-  ContinuousAudioDataStream cas = new ContinuousAudioDataStream(data);
-
+  
+  boolean playing;
+try {
+  public InputStream in = new FileInputStream("Thrust_music.mp3");
+  public AudioStream as = new AudioStream(in); 
+  public AudioData data = as.getData();
+  public ContinuousAudioDataStream cas = new ContinuousAudioDataStream(data);
   /**
    * @return Is music playing?
    */
   //@ ensures \result == is_playing;
-  public /*@ pure @*/ boolean playing() {
-    assert false; //@ assert false;
-    return false;
+  public boolean playing() {
+    return playing;
   }
 
   /**
@@ -35,7 +35,7 @@ public class Music {
   //@ ensures is_playing;
   public void start() {
     AudioPlayer.player.start(cas);
-//    assert false; //@ assert false;
+    playing = true;
   }
 
   /**
@@ -44,6 +44,8 @@ public class Music {
   //@ ensures !is_playing;
   public void stop() {
     AudioPlayer.player.stop(cas);
-//    assert false; //@ assert false;
+    playing = false;
   }
+} catch (Exception e) {}
+
 }

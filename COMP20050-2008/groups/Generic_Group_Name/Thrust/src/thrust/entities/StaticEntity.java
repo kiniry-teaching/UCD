@@ -16,6 +16,14 @@ package thrust.entities;
  * @version 18 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
+  
+  double[] my_position;
+  double[] my_velocity;
+  double[] my_acceleration;
+  double my_orientation;
+  double my_momentum = 0;
+  double m = 0;
+  
   //@ public model boolean initialized;
   //@ public initially initialized == false;
 
@@ -32,7 +40,8 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures initialized;
   public void set_state(double[] the_position,
                         double the_orientation) {
-    assert false; //@ assert false;
+     my_position = the_position;
+     my_orientation = the_orientation;
   }
 
   /* (non-Javadoc)
@@ -40,8 +49,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    return m;
   }
 
   /* (non-Javadoc)
@@ -49,8 +57,9 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
+    my_velocity[0] = 0;
+    my_velocity[1] = 0;
+    return my_velocity;
   }
 
   /* (non-Javadoc)
@@ -58,8 +67,9 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
+    my_acceleration[0] = 0;
+    my_acceleration[1] = 0;
+    return my_acceleration;
   }
 
   /* (non-Javadoc)
@@ -67,8 +77,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
-    return 0;
+    return my_momentum;
   }
 
   //@ public invariant (* All queries are constant. *);
