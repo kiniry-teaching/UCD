@@ -52,7 +52,7 @@ public class Spaceship extends DynamicEntity
     } else if (maximum_fuel() < (my_fuel + the_fuel_change)) {
       my_fuel = maximum_fuel();
     } else {
-      my_fuel += the_fuel_change;
+      my_fuel = my_fuel + the_fuel_change;
     }
   }
 

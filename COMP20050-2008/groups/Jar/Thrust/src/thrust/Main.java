@@ -10,9 +10,11 @@
 
 package thrust;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 import thrust.audio.Music;
+import thrust.entities.about.GameState;
 import thrust.input.KeyBoardInput;
 
 /**
@@ -20,7 +22,7 @@ import thrust.input.KeyBoardInput;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
-public final class Main{
+public final class Main {
   /** Game state. */
   public static final thrust.entities.about.GameState GAMESTATE =
     new thrust.entities.about.GameState();
@@ -31,7 +33,7 @@ public final class Main{
   /** */
   public static boolean my_check = true;
   /** */
-  private static LinkedList my_dynamics = new LinkedList();
+  private static Collection my_dynamics = new LinkedList();
   /** This class cannot be constructed. */
   private Main() {
     //@ assert true;
@@ -45,7 +47,6 @@ public final class Main{
     the_log.info("Title Screen");
     // display the title screen
     MUSIC.start();
-
     // wait for keyboard input
     // repeat the following until the player asks to quit
     //   show the high score display
@@ -53,12 +54,13 @@ public final class Main{
     //   create game map and initialize location of all entities
     //   repeat the following until the player is out of lives or asks to quit:
     do {
-      if (GAMESTATE.get_state() == GAMESTATE.PLAY)
+      if (GAMESTATE.get_state() == GameState.PLAY) {
         while (GAMESTATE.lives() > 0 &&
-            GAMESTATE.get_state() == GAMESTATE.PLAY) {
+            GAMESTATE.get_state() == GameState.PLAY) {
           my_check = true;
         }
-    } while(GAMESTATE.get_state() != GAMESTATE.PLAY);
+      }
+    } while(GAMESTATE.get_state() != GameState.PLAY);
     //      record the current time T
     //      perform a step in the simulation
     //      render all entities
