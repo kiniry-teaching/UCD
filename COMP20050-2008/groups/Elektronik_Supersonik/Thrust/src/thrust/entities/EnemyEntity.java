@@ -21,22 +21,22 @@ public interface EnemyEntity {
   /**
    * @return What is your attack behavior AI?
    */
-  /*@ pure @*/ AI attack();
+  /* @ pure @ */AI attack();
 
   /**
    * @return What is your disturb behavior AI?
    */
-  /*@ pure @*/ AI disturb();
+  /* @ pure @ */AI disturb();
 
   /**
    * @param the_behavior This is your attack behavior.
    */
-  //@ ensures attack() == the_behavior;
+  // @ ensures attack() == the_behavior;
   void attack(AI the_behavior);
 
   /**
    * @param the_behavior This is your disturb behavior.
    */
-  //@ ensures disturb() == the_behavior;
+  // @ ensures disturb() == the_behavior;
   void disturb(AI the_behavior);
 }

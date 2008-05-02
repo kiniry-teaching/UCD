@@ -15,16 +15,16 @@ package thrust.entities.behaviors;
  * @version 18 April 2008
  */
 public interface Tow {
-  //@ initially !towed();
+  // @ initially !towed();
 
   /**
    * @return Are you currently towing or being towed?
    */
-  /*@ pure @*/ boolean towed();
+  /* @ pure @ */boolean towed();
 
   /**
    * You are now towing or being towed.
    */
-  //@ ensures towed();
+  // @ ensures towed();
   void tow();
 }

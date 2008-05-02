@@ -31,12 +31,13 @@ public class SoundEffect {
    * The sound effect clip.
    */
   private transient Clip my_clip;
+
   /**
    * This is your sound effect.
    * @param the_sound_effect_file the sound effect to make.
    * @return the new sound effect for the effect stored in 's'.
    */
-  public final /*@ pure @*/ SoundEffect make(final File the_sound_effect_file) {
+  public final/* @ pure @ */SoundEffect make(final File the_sound_effect_file) {
     AudioInputStream input_stream;
     DataLine.Info data_line_info;
     input_stream = null;

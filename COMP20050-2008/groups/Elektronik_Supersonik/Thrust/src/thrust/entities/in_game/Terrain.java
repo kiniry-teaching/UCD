@@ -17,10 +17,10 @@ import thrust.entities.StaticEntity;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
-public class Terrain extends StaticEntity
-  implements NeutralEntity {
-  /*@ public invariant (* Terrain and space are disjoint. *);
-    @ public invariant (* The shape of the terrain is rendered as a
-    @                     sequence of horizontal lines. *);
-    @*/
+public class Terrain extends StaticEntity implements NeutralEntity {
+  /*
+   * @ public invariant (* Terrain and space are disjoint. *); @ public
+   * invariant (* The shape of the terrain is rendered as a @ sequence of
+   * horizontal lines. *); @
+   */
 }

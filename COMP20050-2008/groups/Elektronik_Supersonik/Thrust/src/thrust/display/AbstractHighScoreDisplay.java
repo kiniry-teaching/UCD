@@ -12,7 +12,6 @@ package thrust.display;
 
 /**
  * Top scores of past players.
- *
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 11 April 2008
  */
@@ -20,18 +19,18 @@ public abstract class AbstractHighScoreDisplay {
   /**
    * @return Are the high scores currently displayed?"
    */
-  public abstract /*@ pure @*/ boolean displayed();
+  public abstract/* @ pure @ */boolean displayed();
 
   /**
    * Display the high scores.
    */
-  //@ ensures displayed();
+  // @ ensures displayed();
   public abstract void display();
 
   /**
    * Hide the high scores.
    */
-  //@ ensures !displayed();
+  // @ ensures !displayed();
   public abstract void hide();
 
   /**

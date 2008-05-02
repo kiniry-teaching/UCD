@@ -12,7 +12,6 @@ package thrust.display;
 
 /**
  * Information about the game.
- *
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 11 April 2008
  */
@@ -20,18 +19,18 @@ public abstract class AbstractInfoPanel {
   /**
    * @return Is the information panel currently displayed?
    */
-  public abstract /*@ pure @*/ boolean displayed();
+  public abstract/* @ pure @ */boolean displayed();
 
   /**
    * Display the information panel.
    */
-  //@ ensures displayed();
+  // @ ensures displayed();
   public abstract void display();
 
   /**
    * Hide the information panel.
    */
-  //@ ensures !displayed();
+  // @ ensures !displayed();
   public abstract void hide();
 
   /**

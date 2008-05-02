@@ -19,12 +19,12 @@ public interface Animatable {
   /**
    * @return What is your animation?
    */
-  /*@ pure @*/ Animation animation();
+  /* @ pure @ */Animation animation();
 
   /**
    * @param the_animation This is your animation.
    */
-  //@ ensures animation() == the_animation;
+  // @ ensures animation() == the_animation;
   void animation(Animation the_animation);
 
   /**
