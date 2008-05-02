@@ -13,10 +13,10 @@ import javax.swing.JFrame;
  *
  */
 public class KeyBoardInput implements KeyListener {
+  /** The input handler. */
+  public static final InputHandler INPUT = new InputHandler();
   /** The number of keys that can be pressed. */
   private static final int NO_KEYS = 256;
-  /** The input handler. */
-  private final transient InputHandler my_input = new InputHandler();
   /** Target for input. */
   private final transient JFrame my_frame = new JFrame();
   /** Holds a boolean value which determines weather a key is down or not. */
@@ -33,10 +33,10 @@ public class KeyBoardInput implements KeyListener {
 
   public void keyPressed(final KeyEvent the_arg0) {
     if (the_arg0.getKeyCode() == KeyEvent.VK_SHIFT) {
-      my_input.process((char)KeyEvent.VK_SHIFT);
+      INPUT.process((char)KeyEvent.VK_SHIFT);
     }
-    if (my_input.legalInput(the_arg0.getKeyChar())) {
-      my_input.process(the_arg0.getKeyChar());
+    if (INPUT.legalInput(the_arg0.getKeyChar())) {
+      INPUT.process(the_arg0.getKeyChar());
     }
     my_keyStates[the_arg0.getKeyCode()] = true;
   }

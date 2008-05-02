@@ -86,11 +86,7 @@ public class GameState extends AbstractGameState {
    * @see thrust.entities.about.AbstractGameState#high_scores()
    */
   public HighScoreInterface[] high_scores() {
-    final HighScoreInterface[] temp = new HighScoreInterface[HIGH_SCORE_COUNT];
-    for (int i = 0; i < HIGH_SCORE_COUNT; i++) {
-      temp[i] = my_high_scores[0];
-    }
-    return temp;
+    return (HighScoreInterface[])my_high_scores.clone();
   }
 
   /*

@@ -10,6 +10,8 @@
 
 package thrust.entities;
 
+import java.awt.Shape;
+
 import thrust.physics.PhysicsInterface;
 
 /**
@@ -44,7 +46,11 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
                                 final double[] the_acceleration,
                                 final double the_grav_constant,
                                 final double the_mass,
-                                final double[] the_velocity) {
+                                final double[] the_velocity,
+                                final String the_shape_name,
+                                final Shape the_shape,
+                                final byte the_state) {
+    super.set_state(the_shape_name, the_shape, the_state);
     my_position = new double[]{the_position[0], the_position[1]};
     my_orientation = the_orientation;
     my_acceleration = new double[]{the_acceleration[0], the_acceleration[1]};

@@ -37,6 +37,27 @@ public class InputHandler {
   public static final char USE_SHIELD = ' ';
   /** Logger for input package. */
   protected static final Logger LOG = Logger.getLogger("Input");
+  /** Legal inputs. */
+  private static final char[] INPUTS =
+  {HIGH_SCORES, TOGGLE_SOUND, START_GAME, STOP_GAME,
+   FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+   USE_SHIELD };
+  /** */
+  private static boolean checkbool = true;
+
+  /**
+   *
+   */
+  public final boolean check() {
+    return checkbool;
+  }
+
+  /**
+   *
+   */
+  public void check(final boolean the_check) {
+    checkbool = the_check;
+  }
 
   /*
    * @ ensures \result !=null;
@@ -45,12 +66,8 @@ public class InputHandler {
    * @return What are the legal keyboard inputs?
    */
   public final/* @ pure @ */char[] legalInputs() {
-    final char[] inputs =
-    {HIGH_SCORES, TOGGLE_SOUND, START_GAME, STOP_GAME,
-     FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
-     USE_SHIELD };
-    // @ assert inputs != null;
-    return inputs;
+    // @ assert INPUTS != null;
+    return (char[])INPUTS.clone();
   }
 
   /*
@@ -181,7 +198,7 @@ public class InputHandler {
       default:
         break;
     }
-    thrust.Main.my_check = false;
+    checkbool = false;
   }
 
   /**
@@ -192,12 +209,8 @@ public class InputHandler {
    */
   // @ requires legalInput(the_key_input);
   public void processHigh(final char the_key_input) {
-    switch (the_key_input) {
-      case STOP_GAME:
-        thrust.Main.GAMESTATE.set_state(MAINMENU);
-        break;
-      default:
-        break;
+    if (the_key_input == STOP_GAME) {
+      thrust.Main.GAMESTATE.set_state(MAINMENU);
     }
   }
   /**
