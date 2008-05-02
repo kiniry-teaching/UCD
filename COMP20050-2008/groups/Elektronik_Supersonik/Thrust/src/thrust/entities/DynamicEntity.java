@@ -113,27 +113,35 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
       if(my_velocity[0] > 8) {
         my_velocity[0] = 8;
       }
-      if(my_velocity[0] < -8) {
-        my_velocity[0] = -8;
+      else {
+        if(my_velocity[0] < -8) {
+          my_velocity[0] = -8;
+        }
       }
       if(my_velocity[1] > 8) {
         my_velocity[1] = 8;
       }
-      if(my_velocity[1] < -8) {
-        my_velocity[1] = -8;
+      else {
+        if(my_velocity[1] < -8) {
+          my_velocity[1] = -8;
+        }
       }
       my_acceleration[1] += 0.5 * some_seconds;
       if(my_acceleration[0] > 8) {
         my_acceleration[0] = 8;
       }
+      else {
+        if(my_acceleration[0] < -8) {
+          my_acceleration[0] = -8;
+        }
+      }
       if(my_acceleration[1] > 8) {
         my_acceleration[1] = 8;
       }
-      if(my_acceleration[1] < -8) {
-        my_acceleration[1] = -8;
-      }
-      if(my_acceleration[0] < -8) {
-        my_acceleration[0] = -8;
+      else {
+        if(my_acceleration[1] < -8) {
+          my_acceleration[1] = -8;
+        }
       }
     }
   }
