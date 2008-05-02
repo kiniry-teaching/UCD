@@ -20,7 +20,7 @@ import thrust.input.KeyBoardInput;
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
-public final class Main {
+public final class Main{
   /** Game state. */
   public static final thrust.entities.about.GameState GAMESTATE =
     new thrust.entities.about.GameState();
@@ -29,9 +29,9 @@ public final class Main {
   /** The input handler. */
   public static final KeyBoardInput INPUT = new KeyBoardInput();
   /** */
-  private static LinkedList < thrust.entities.Entity > my_dynamics =
-    new LinkedList < thrust.entities.Entity > ();
   public static boolean my_check = true;
+  /** */
+  private static LinkedList my_dynamics = new LinkedList();
   /** This class cannot be constructed. */
   private Main() {
     //@ assert true;
@@ -52,13 +52,13 @@ public final class Main {
     //   wait for input to start the game
     //   create game map and initialize location of all entities
     //   repeat the following until the player is out of lives or asks to quit:
-    do{
-      if(GAMESTATE.get_state() == GAMESTATE.PLAY)
-        while(GAMESTATE.lives() > 0 &&
-            GAMESTATE.get_state() == GAMESTATE.PLAY){
+    do {
+      if (GAMESTATE.get_state() == GAMESTATE.PLAY)
+        while (GAMESTATE.lives() > 0 &&
+            GAMESTATE.get_state() == GAMESTATE.PLAY) {
           my_check = true;
         }
-    } while(GAMESTATE.get_state() != GAMESTATE.PLAY);       
+    } while(GAMESTATE.get_state() != GAMESTATE.PLAY);
     //      record the current time T
     //      perform a step in the simulation
     //      render all entities

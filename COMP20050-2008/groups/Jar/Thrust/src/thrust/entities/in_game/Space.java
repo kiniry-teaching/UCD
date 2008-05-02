@@ -10,6 +10,7 @@
 package thrust.entities.in_game;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import thrust.animation.Animatable;
 import thrust.entities.NeutralEntity;
@@ -22,12 +23,14 @@ import thrust.entities.StaticEntity;
  */
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
+  /** Collection of stars objects. */
+  private static final LinkedList STARS = new LinkedList();
   /**
    * @return What are your stars?"
    */
   public /*@ pure @*/ Collection stars() {
     //@ assert true;
-    return null;
+    return STARS;
   }
 
   /**
