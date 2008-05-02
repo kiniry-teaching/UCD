@@ -58,5 +58,5 @@ public interface Fuelable {
   /**
    * @return What is the mass of your fuel?
    */
-  fuel fuel_mass();
+
 }

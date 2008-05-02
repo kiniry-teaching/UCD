@@ -12,7 +12,7 @@ package thrust;
 
 /**
  * Simulating all of the entities in the game to realize the game.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author simon markey,holly baker,ursula redmond ()
  * @version 23 April 2008
  */
 public final class Main {

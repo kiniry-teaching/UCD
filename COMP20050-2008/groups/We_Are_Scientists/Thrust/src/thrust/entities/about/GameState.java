@@ -14,46 +14,55 @@ package thrust.entities.about;
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
  *
- * @author simo markey (kiniry@acm.org)
+ * @author simon markey,holly baker,ursula redmond (simon.markey@ucdconnect.ie)
  * @version 11 April 2008
  */
-public class GameState extends FuelAble{
-  public GameState(float initialFuel) {
-    super(initialFuel);
-    
-    int my_bonus;
-    byte my_lives;
-    int my_fuel;
-    int maximum_fuel;
-    boolean death=false;
-    
-    int HighScoreInterface[] my_highScores;
-    
-    int my_HIGH_SCORE_COUNT= 8;
-    // TODO Auto-generated constructor stub
-  }
+public class GameState {
 
-  //static int bonus=0;
-  //static int lives=4;
-  
-  //int score=0;
-  //static int my_bonus=0;
-  
+  /** bonus.*/
+  private int my_bonus;
+
+  /**the current lives.*/
+  private byte my_lives = 4;
+
+  /**the initial fuel.*/
+  private int my_fuel;
+
+  /**the maximum fuel.*/
+  private float my_maximum_fuel = Float.POSITIVE_INFINITY;
+  /**the maximum fuel there can be.*/
+
+  /**the initial score.*/
+  private int my_score;
+
+  /**an array containing the highscores.*/
+  private HighScoreInterface[] my_highScores;
+
+  /**the amount of highscores there can be.*/
+
   /**
    * There are eight high scores.
    */
-  
- // HIGH_SCORE_COUNT =8;
-  //@ invariant HIGH_SCORE_COUNT ==8;
+  public static final int my_HIGH_SCORE_COUNT = 8;
+
+  //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
+
+  public GameState(final int the_initial_fuel, final byte the_initial_lives) {
+    my_bonus = 0;
+    my_lives = the_initial_lives;
+    my_fuel = the_initial_fuel;
+    my_maximum_fuel = my_maximum_fuel;
+    my_score = 0;
+    my_highScores = new HighScoreInterface[my_HIGH_SCORE_COUNT];
+  }
 
   /**
    * @return What is the current bonus?
    * @bon BONUS What is your value?
    */
   //@ ensures 0 <= \result;
-  public static /*@ pure @*/ int bonus() {
-    
+  public/*@ pure @*/int bonus() {
     return my_bonus;
   }
 
@@ -63,14 +72,12 @@ public class GameState extends FuelAble{
   //@ requires 0 <= the_new_value;
   //@ ensures bonus() == the_new_value;
   public void new_bonus(int the_new_value) {
-    the_new_value =0;
-    bonus= the_new_value;
-    
-    if(my_bonus<0)
-     my_bonus= 0;
-    //should really be bonus = bonus^2-bonus^2; which gives 0
-    else
-    {my_bonus= my_bonus*1;}
+    if (the_new_value >= 0) {
+
+      my_bonus = the_new_value;
+
+    }
+
   }
 
   //@ invariant (* Bonus values are always non-negative. *);
@@ -84,8 +91,9 @@ public class GameState extends FuelAble{
    * a convenience method.
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ float current_fuel() {
-    return Fuel;
+  public/*@ pure @*/int current_fuel() {
+    return my_fuel;
+
   }
 
   /**
@@ -93,23 +101,19 @@ public class GameState extends FuelAble{
    * @idea The maximum fuel of the spaceship.
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ float maximum_fuel() {
-    //return Float.POSITIVE_INFINITY;
-    return maximum_fuel();
+  public/*@ pure @*/float maximum_fuel() {
+    return my_maximum_fuel;
   }
 
   /**
    * @return What is the current score?
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ int score() {
-    int my_score =0;
-    if(my_score<0)
-      my_score=0;
+  public/*@ pure @*/int score() {
     return my_score;
-   
+
   }
- 
+
   //@ invariant (* Score is always non-negative and finite. *);
   //@ invariant 0 <= score();
 
@@ -119,21 +123,18 @@ public class GameState extends FuelAble{
    */
   //@ ensures score() == \old(score() + some_new_points);
   public void change_score(int some_new_points) {
-    score = score()+some_new_points;
-   
-    
+    my_score = my_score + some_new_points;
   }
 
   /**
    * @return How many lives do you have?
    */
   //@ ensures 0 <= \result;
-  public /*@ pure @*/ byte lives() {
-    lives =4;
-    return (byte) lives;
+  public/*@ pure @*/byte lives() {
+    return my_lives;
+
   }
-  
-  
+
   //@ invariant (* Number of lives is always non-negative and finite. *);
   //@ invariant 0 <= lives();
 
@@ -141,12 +142,8 @@ public class GameState extends FuelAble{
    * @param some_new_lives Change the current lives by this many lives.
    */
   //@ ensures lives() == \old(lives() + some_new_lives);
-  public /*@ pure @*/ void change_lives(byte some_new_lives) {
-    some_new_lives =1;
-    if(!death)
-    (lives) = lives+some_new_lives;
-    else
-      (lives)= lives - some_new_lives;
+  public/*@ pure @*/void change_lives(byte some_new_lives) {
+    my_lives += some_new_lives;
   }
 
   /**
@@ -154,9 +151,20 @@ public class GameState extends FuelAble{
    */
   //@ ensures \result.length == HIGH_SCORE_COUNT;
   //@ ensures \nonnullelements(\result);
-  public /*@ pure @*/ HighScoreInterface[] high_scores() {
-    //high_scores =HIGH_SCORE_COUNT;
-    return null;
+  public/*@ pure @*/HighScoreInterface[] high_scores() {
+    for (int i = 0; i < my_highScores.length; i++) {
+
+      for (int j = my_highScores.length; j > i; j--) {
+        if (my_highScores[i].score() > my_highScores[j].score()) {
+          int temp = my_highScores[i].score();
+          my_highScores[i].new_score(my_highScores[j].score());
+          my_highScores[j].new_score(temp);
+
+        }
+
+      }
+    }
+    return my_highScores;
   }
 
   /*@ invariant (\forall int i, j; 0 <= i & i < j & j < HIGH_SCORE_COUNT &
@@ -174,24 +182,8 @@ public class GameState extends FuelAble{
    */
   //@ requires 0 <= the_index & the_index < HIGH_SCORE_COUNT;
   //@ ensures \result.equals(high_scores()[the_index]);
-  public /*@ pure non_null @*/HighScoreInterface high_score() {
-    int j;
-    for(j=0;j < HIGH_SCORE_COUNT;j++)
-    {}
-    for(int i=HIGH_SCORE_COUNT;i>j; i--)
-    { 
-      //WTF WARHFHGHGGH
-     if (high_scores()[i].score() >= high_scores()[j].score())
-     {
-       int tempScore = high_scores()[i].score();
-       high_scores()[i].new_score(high_scores()[j].score());
-       high_scores()[j].new_score(tempScore);
-       
-     }
-    }
-    
-
-    return null;
+  public/*@ pure non_null @*/HighScoreInterface high_score(int the_index) {
+    return my_highScores[the_index];
   }
 
   /**
@@ -202,9 +194,22 @@ public class GameState extends FuelAble{
   /*@ ensures \result <==> high_scores()[0].score() >= the_high_score.score() &
     @                      the_high_score.score() >= high_scores()[HIGH_SCORE_COUNT-1].score();
     @*/
-  public /*@ pure @*/
-  boolean new_high_score(/*@ non_null @*/ HighScoreInterface the_high_score) {
-    return false;
+  public/*@ pure @*/boolean new_high_score(
+                                            /*@ non_null @*/HighScoreInterface the_possible_new_high_score) {
+    int lowest = my_highScores[0].my_score;
+
+    for (int i = 0; i < my_highScores.length; i++) {
+      if (lowest > my_highScores[i].my_score) {
+        lowest = my_highScores[i].my_score;
+
+      }
+    }
+if(the_possible_new_high_score.my_score>lowest)
+  {
+  return true;
+  }
+else
+  return false;
   }
 
   /**
@@ -214,10 +219,10 @@ public class GameState extends FuelAble{
     @         (\exists int i; 0 <= i & i < HIGH_SCORE_COUNT;
     @          high_score(i).equals(the_new_high_score));
     @*/
-  public void
-  add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score) {
-    for(int i=0;i>=0&&i<HIGH_SCORE_COUNT;i++)
-    {high_score(i).equals(the_new_high_score);}
+  public void add_high_score(
+                             /*@ non_null @*/HighScoreInterface the_new_high_score) {
+    
+    
   }
 
   /**
@@ -226,32 +231,53 @@ public class GameState extends FuelAble{
    * @author Joe Kiniry (kiniry@acm.org)
    * @version 11 April 2008
    */
-  public interface HighScoreInterface {
+  public class HighScoreInterface {
+    int my_score = 0;
+     public char[] my_name;
     /**
      * @return What is your score?
      */
     //@ ensures 0 <= \result;
-    /*@ pure @*/ int score();
+    public/*@ pure @*/int score(){
+      
+      return my_score;
+    }
+    
 
     /**
      * @return What are your initials?
      */
     //@ ensures \result.length == 3;
-    /*@ pure @*/ char[] initials();
+    public/*@ pure @*/char[] initials()
+    {return my_name;}
 
     /**
      * @param the_new_score This is your score.
      */
     //@ requires 0 <= the_new_score;
     //@ ensures score() == the_new_score;
-    void new_score(int the_new_score);
+    public void new_score(int the_new_score)
+    {if(the_new_score>=0)
+      my_score = the_new_score;
+    }
 
     /**
      * @param the_new_initials These are your initials.
      */
     //@ requires the_new_initials.length == 3;
     //@ ensures initials().equals(\old(the_new_initials));
-    void new_initials(/*@ non_null @*/ char[] the_new_initials);
+    public void new_initials(/*@ non_null @*/char[] the_new_initials)
+    { final int IN3=3;
+    final int IN2 =2;
+      if(the_new_initials.length ==IN3)
+      {my_name[0]=the_new_initials[0];
+      my_name[1]=the_new_initials[1];
+      my_name[IN2]=the_new_initials[IN2];
+      }
+      
+        
+      
+    }
 
     //@ invariant (* High scores are always non-negative and finite. *);
     //@ invariant 0 <= score();
@@ -259,4 +285,6 @@ public class GameState extends FuelAble{
     //@ invariant (* Initials are always three characters in length. *);
     //@ invariant initials().length == 3;
   }
+  
+  
 }
