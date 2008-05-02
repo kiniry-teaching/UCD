@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
@@ -24,10 +26,24 @@ public class GoalSphere extends DynamicEntity
 
   /** Boolean holding whether GoalSphere is being towed or not. */
   private static boolean my_towed_state;
-  
-  
-  
-  
+
+  public GoalSphere(final double[] the_position, final double the_orientation,
+                   final double[] the_acceleration,
+                   final double the_grav_constant, final double the_mass,
+                   final double[] the_velocity,
+                   final String the_initial_shape_name,
+                   final Shape the_initial_shape,
+                   final byte the_initial_state) {
+
+    super();
+    super.make(the_position, the_orientation, the_acceleration,
+               the_grav_constant, the_mass, the_velocity);
+
+    super.set_entity_state(the_initial_shape_name, the_initial_shape,
+                           the_initial_state);
+
+  }
+
   /**
    * @return Are you currently towing or being towed?
    */
