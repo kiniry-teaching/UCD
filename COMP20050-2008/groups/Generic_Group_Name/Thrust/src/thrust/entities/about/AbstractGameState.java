@@ -1,7 +1,7 @@
 /**
  * 
  */
-package thrust.entities.in_game;
+package thrust.entities.about;
 
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
@@ -78,7 +78,7 @@ public abstract /*@ pure @*/ class AbstractGameState {
     @          \result[i] >= \result[j]);
     @ ensures (* High scores are ordered from high to low. *);
     @*/
-  public abstract /*@ pure \nonnullelements @*/ HighScoreInterface[] high_scores();
+  public abstract /*@ pure \non_nullelements @*/ HighScoreInterface[] high_scores();
 
   public abstract /*@ pure non_null @*/ HighScoreInterface high_score(int the_index);
 

@@ -1,12 +1,14 @@
 package thrust.audio;
+import sun.audio.*;    //import the sun.audio package
+import java.io.*;
 
-/**
- * In-game music.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
- */
 public class Music {
   //@ public model boolean is_playing;
+
+  InputStream in = new FileInputStream(Thrust_music.mp3);
+  AudioStream as = new AudioStream(in); 
+  AudioData data = as.getData();
+  ContinuousAudioDataStream cas = new ContinuousAudioDataStream(data);
 
   /**
    * @return Is music playing?
@@ -22,7 +24,8 @@ public class Music {
    */
   //@ ensures is_playing;
   public void start() {
-    assert false; //@ assert false;
+    AudioPlayer.player.start(cas);
+//    assert false; //@ assert false;
   }
 
   /**
@@ -30,6 +33,7 @@ public class Music {
    */
   //@ ensures !is_playing;
   public void stop() {
-    assert false; //@ assert false;
+    AudioPlayer.player.stop(cas);
+//    assert false; //@ assert false;
   }
 }
