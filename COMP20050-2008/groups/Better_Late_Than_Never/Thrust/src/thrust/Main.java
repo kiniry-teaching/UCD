@@ -10,10 +10,10 @@
 
 package thrust;
 
-import thrust.audio.*;
+import thrust.audio.Music;
 import thrust.display.*;
 import thrust.entities.about.*;
-import thrust.input.*;
+import thrust.input.InputHandler;
 
 
 /**
@@ -29,8 +29,10 @@ public final class Main {
     assert false; //@ assert false;
   }
 
-  HighScore my_highscore;
-  InfoPanel my_infopanel;
+  GameState the_game = new GameState();
+  InputHandler the_inputhandler = new InputHandler();
+  HighScore my_highscore = new HighScore();
+  //InfoPanel my_infopanel = new InfoPanel(int, int, int);
 
   public static void main(final String[] the_args) {
 
