@@ -1,6 +1,10 @@
 package thrust.audio;
-import java.io.*;
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import java.io.File;
 
 
 /**
@@ -40,11 +44,7 @@ public class Music {
         ex.printStackTrace();
       }
   }
-  public void prepare audio
-      public void stop(){ 
-        clip.stop();
-      }
-      public static void main(String[] args){
-        while(true);
-      }
+  public void stop(){ 
+      clip.stop();
+  }
 }
