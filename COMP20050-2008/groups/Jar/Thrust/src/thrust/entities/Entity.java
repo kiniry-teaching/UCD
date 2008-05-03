@@ -73,9 +73,10 @@ public abstract class Entity implements GameColor {
    * @return What is your physical state?
    * @note State is encoded by a non-negative number of "hit points".
    */
+  //@ requires 0 <= my_state;
   //@ ensures 0 <= \result;
   public /*@ pure @*/ byte state() {
-    //@ assert my_state <= 0;
+    //@ assert my_state >= 0;
     return my_state;
   }
 
