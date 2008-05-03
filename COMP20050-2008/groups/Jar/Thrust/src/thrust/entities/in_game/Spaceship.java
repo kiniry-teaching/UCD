@@ -42,6 +42,8 @@ public class Spaceship extends DynamicEntity
   private transient int my_fuel = INITIAL_FUEL;
   /** The tow state of the SpaceShip. */
   private transient boolean my_tow_state;
+  /** The shield state of the SpaceShip. */
+  private transient boolean my_shield_state;
 
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
@@ -101,6 +103,14 @@ public class Spaceship extends DynamicEntity
    */
   public boolean towed() {
     return my_tow_state;
+  }
+
+  public boolean shielded() {
+    return my_shield_state;
+  }
+
+  public void set_shield(final boolean the_state) {
+    my_shield_state = the_state;
   }
 
   public Color color() {

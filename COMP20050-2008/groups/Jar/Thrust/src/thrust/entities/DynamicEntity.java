@@ -18,6 +18,16 @@ import thrust.physics.PhysicsInterface;
  * @version 18 April 2008
  */
 public abstract class DynamicEntity extends Entity implements PhysicsInterface {
+  /** Is the entity turning left? */
+  private static boolean turnleft;
+  /** IS the entity turning right? */
+  private static boolean turnright;
+  /** Is the entity thrusting? */
+  private static boolean thrusting;
+  /** Turn step. */
+  private static final double TURN = Math.PI / 10;
+  /** Thrust. */
+  private static final double THRUST = 10;
   /** Acceleration of the entity. */
   private transient double[] my_acceleration;
   /** Gravitational constant. */
@@ -30,6 +40,7 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   private transient double[] my_position;
   /** The orientation of the entity in radians. */
   private transient double my_orientation;
+
 
   /**
    * @param the_position the initial position.
@@ -47,10 +58,10 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
                                 final double[] the_velocity) {
     my_position = new double[]{the_position[0], the_position[1]};
     my_orientation = the_orientation;
-    my_acceleration = new double[]{the_acceleration[0], the_acceleration[1]};
+    my_acceleration = (double[])the_acceleration.clone();
     my_gravConstant = the_grav_constant;
     my_mass = the_mass;
-    my_velocity = new double[]{the_velocity[0], the_acceleration[1]};
+    my_velocity = (double[])the_velocity.clone();
   }
 
   /* (non-Javadoc)
@@ -128,6 +139,16 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
    */
   public void simulate(final double some_seconds) {
     for (int i = 0; i < some_seconds; i++) {
+      if (thrusting) {
+        my_acceleration[0] += THRUST * Math.cos(orientation());
+        my_acceleration[1] += THRUST * Math.sin(orientation());
+      }
+      if (turnleft) {
+        my_orientation += TURN;
+      }
+      if (turnright) {
+        my_orientation -= TURN;
+      }
       my_position[0] += my_velocity[0];
       my_position[1] += my_velocity[1];
       my_velocity[0] += my_acceleration[0];
@@ -148,6 +169,30 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
    */
   public void velocity(final double[] the_velocity) {
     my_velocity = (double[])the_velocity.clone();
+  }
+
+  /**
+   *
+   * @param the_state
+   */
+  public void set_turnleft(final boolean the_state) {
+    turnleft = the_state;
+  }
+
+   /**
+    *
+    * @param the_state
+    */
+  public void set_turnright(final boolean the_state) {
+    turnright = the_state;
+  }
+
+  /**
+   *
+   * @param the_state
+   */
+  public void set_thrust(final boolean the_state) {
+    thrusting = the_state;
   }
 
 }

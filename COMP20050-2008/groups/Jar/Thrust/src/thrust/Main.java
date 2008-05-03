@@ -11,6 +11,7 @@
 package thrust;
 
 import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ import thrust.entities.Entity;
 import thrust.entities.about.GameState;
 import thrust.entities.in_game.Bullet;
 import thrust.entities.in_game.Explosion;
+import thrust.entities.in_game.Spaceship;
 import thrust.input.KeyBoardInput;
 
 /**
@@ -29,9 +31,11 @@ import thrust.input.KeyBoardInput;
  * @version 23 April 2008
  */
 public final class Main {
+  /** The spaceship entity. */
+  public static final Spaceship SPACESHIP = new Spaceship();
   /** Game state. */
-  public static final thrust.entities.about.GameState GAMESTATE =
-    new thrust.entities.about.GameState();
+  public static final GameState GAMESTATE =
+    new GameState();
   /** The music player. */
   public static final Music MUSIC = new Music();
   /** The input handler. */
@@ -46,6 +50,8 @@ public final class Main {
   private static transient Iterator my_iterator;
   /** */
   private static long time;
+  /** */
+  private static boolean quit;
 
   /** This class cannot be constructed. */
   private Main() {
@@ -59,11 +65,22 @@ public final class Main {
     LOG.info("Title Screen");
     // display the title screen
     MUSIC.start();
+    final Bullet bull = new Bullet();
+    bull.set_dynamic_state(new double[]{0, 0} , 0,
+                                new double[]{0, 0}, 0, 0, new double[]{0, 0});
+    bull.set_state("Triangle?",
+                        new Rectangle2D.Double(0, 1, 2, 3), (byte)0);
+    my_entities.add(bull);
     // wait for keyboard input
     // repeat the following until the player asks to quit
     //   show the high score display
     //   wait for input to start the game
     //   create game map and initialize location of all entities
+    SPACESHIP.set_dynamic_state(new double[]{0, 0} , 0,
+                                new double[]{0, 0}, 0, 0, new double[]{0, 0});
+    SPACESHIP.set_state("Triangle?",
+                        new Rectangle2D.Double(0, 1, 2, 3), (byte)0);
+    my_entities.add(SPACESHIP);
     //   repeat the following until the player is out of lives or asks to quit:
     do {
       if (GAMESTATE.get_state() == GameState.PLAY) {
@@ -72,6 +89,7 @@ public final class Main {
           //      record the current time T
           time = System.currentTimeMillis();
           //      perform a step in the simulation
+          simulateShip();
           simulate();
           //      render all entities
           render();
@@ -83,14 +101,14 @@ public final class Main {
             LOG.severe(e.getMessage());
           }
           //      wait for (1/30th of a second - (T-T'))
-          INPUT.INPUT.check(true);
         }
       }
-    } while(GAMESTATE.get_state() != GameState.PLAY);
+    } while(GAMESTATE.get_state() != GameState.QUIT);
     //   remove the game interface
     //   if the player has a new high score
     //     ask them to input their initials
     //     save the new high score
+    System.exit(0);
   }
 
   private static void simulate() {
@@ -104,7 +122,7 @@ public final class Main {
           final DynamicEntity the_enemy = ((DynamicEntity)enemy.next());
           final Area area = new Area(the_entity.shape());
           area.intersect(new Area(the_enemy.shape()));
-          if (!area.isEmpty()) {
+          if (!area.isEmpty() && !the_enemy.equals(the_entity)) {
             final Explosion explose = new Explosion();
             explose.set_static_state(the_enemy.position(),
                                      the_enemy.orientation(),
@@ -124,10 +142,38 @@ public final class Main {
     }
   }
 
+  private static void simulateShip() {
+    my_iterator = my_entities.iterator();
+    while (my_iterator.hasNext()) {
+      final Entity the_entity = ((Entity)my_iterator.next());
+      final Area area = new Area(SPACESHIP.shape());
+      if (the_entity.shape() == null) {
+        System.err.println("null");
+      }
+      area.intersect(new Area(the_entity.shape()));
+      if (!area.isEmpty() && !SPACESHIP.equals(the_entity)) {
+        final Explosion explose = new Explosion();
+        explose.set_static_state(SPACESHIP.position(),
+                                 SPACESHIP.orientation(),
+                                 "Explosion",
+                                 SPACESHIP.shape().getBounds2D(),
+                                 (byte)0);
+        System.out.println(explose.shape().getClass().getName());
+        my_entities.add(explose);
+        my_entities.remove(SPACESHIP);
+        GAMESTATE.change_lives((byte)-1);
+        if (the_entity instanceof Bullet) {
+          my_entities.remove(the_entity);
+        }
+        break;
+      }
+    }
+  }
+
   private static void render() {
     my_iterator = my_entities.iterator();
     while (my_iterator.hasNext()) {
-      ((Entity) my_iterator.next()).render();
+      ((Entity)my_iterator.next()).render();
     }
   }
 }

@@ -18,6 +18,16 @@ package thrust.entities.about;
  * @version 11 April 2008
  */
 public abstract class AbstractGameState {
+  /** The main menu state. */
+  public static final byte MAINMENU = 0;
+  /** The high score menu state. */
+  public static final byte HIGHSCOREMENU = 1;
+  /** The play state. */
+  public static final byte PLAY = 2;
+  /** The game over state. */
+  public static final byte GAMEOVER = 3;
+  /** The quit state. */
+  public static final byte QUIT = 4;
   /**
    * There are eight high scores.
    */

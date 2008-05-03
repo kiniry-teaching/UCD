@@ -157,7 +157,30 @@ public class InputHandler {
         thrust.Main.GAMESTATE.set_state(GameState.PLAY);
         break;
       case STOP_GAME:
-        System.exit(0);
+        thrust.Main.GAMESTATE.set_state(GameState.QUIT);
+      default:
+        break;
+    }
+  }
+
+  /**
+   *
+   */
+  // @ requires legalInput(the_key_input);
+  public void processReleased(final char the_key_input) {
+    switch (the_key_input) {
+      case TURN_LEFT:
+        thrust.Main.SPACESHIP.set_turnleft(false);
+        break;
+      case TURN_RIGHT:
+        thrust.Main.SPACESHIP.set_turnright(false);
+        break;
+      case USE_ENGINE:
+        thrust.Main.SPACESHIP.set_thrust(false);
+        break;
+      case USE_SHIELD:
+        thrust.Main.SPACESHIP.set_shield(false);
+        break;
       default:
         break;
     }
@@ -179,16 +202,17 @@ public class InputHandler {
         LOG.info("Fire the Gun");
         break;
       case TURN_LEFT:
-        LOG.info("Turn left");
+        thrust.Main.SPACESHIP.set_turnleft(true);
         break;
       case TURN_RIGHT:
-        LOG.info("Turn right");
+        thrust.Main.SPACESHIP.set_turnright(true);
         break;
       case USE_ENGINE:
-        LOG.info("Engage thrust");
+        thrust.Main.SPACESHIP.set_thrust(true);
         break;
       case USE_SHIELD:
-        LOG.info("Engage shield/pickup");
+        thrust.Main.SPACESHIP.set_shield(true);
+        break;
       default:
         break;
     }

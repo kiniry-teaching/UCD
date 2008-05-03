@@ -93,7 +93,7 @@ public abstract class Entity implements GameColor {
    * Render yourself.
    */
   public void render() {
-    LOG.info("Render" + this.getClass().getName());
+    LOG.info("Render " + this.getClass().getName());
   }
 
   /* (non-Javadoc)

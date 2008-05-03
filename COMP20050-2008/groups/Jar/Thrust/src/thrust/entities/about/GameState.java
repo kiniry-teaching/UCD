@@ -10,14 +10,6 @@ import thrust.entities.in_game.Spaceship;
  * @version 15 April 2008
  */
 public class GameState extends AbstractGameState {
-  /** The main menu state. */
-  public static final byte MAINMENU = 0;
-  /** The high score menu state. */
-  public static final byte HIGHSCOREMENU = 1;
-  /** The play state. */
-  public static final byte PLAY = 2;
-  /** The game over state. */
-  public static final byte GAMEOVER = 3;
   /** Initial lives that the player has. */
   private static final byte INITLIVE = 3;
   /** The amount of points required to gain a life. */

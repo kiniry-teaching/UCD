@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
+import thrust.entities.about.GameState;
+
 /**
  * @author Jar (jar@timbyr.com)
  * @version 30 April 2008
@@ -15,20 +17,17 @@ import javax.swing.JFrame;
 public class KeyBoardInput implements KeyListener {
   /** The input handler. */
   public static final InputHandler INPUT = new InputHandler();
-  /** The number of keys that can be pressed. */
-  private static final int NO_KEYS = 256;
   /** Target for input. */
-  private final transient JFrame my_frame = new JFrame();
-  /** Holds a boolean value which determines weather a key is down or not. */
-  private transient boolean[] my_keyStates = new boolean[NO_KEYS];
+  private static final JFrame FRAME = new JFrame();
+
   /* (non-Javadoc)
    * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
    */
   public KeyBoardInput() {
-    my_frame.setSize(0, 0);
-    my_frame.setVisible(true);
-    my_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    my_frame.addKeyListener(this);
+    FRAME.setSize(0, 0);
+    FRAME.setVisible(true);
+    FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    FRAME.addKeyListener(this);
   }
 
   public void keyPressed(final KeyEvent the_arg0) {
@@ -38,7 +37,6 @@ public class KeyBoardInput implements KeyListener {
     if (INPUT.legalInput(the_arg0.getKeyChar())) {
       INPUT.process(the_arg0.getKeyChar());
     }
-    my_keyStates[the_arg0.getKeyCode()] = true;
   }
 
   /* (non-Javadoc)
@@ -46,14 +44,14 @@ public class KeyBoardInput implements KeyListener {
    */
 
   public void keyReleased(final KeyEvent the_arg0) {
-    my_keyStates[the_arg0.getKeyCode()] = false;
-  }
-
-  /*
-   *
-   */
-  public boolean keyDown(final int the_key_num) {
-    return my_keyStates[the_key_num];
+    if (thrust.Main.GAMESTATE.get_state() == GameState.PLAY) {
+      if (the_arg0.getKeyCode() == KeyEvent.VK_SHIFT) {
+        INPUT.processReleased((char)KeyEvent.VK_SHIFT);
+      }
+      if (INPUT.legalInput(the_arg0.getKeyChar())) {
+        INPUT.processReleased(the_arg0.getKeyChar());
+      }
+    }
   }
 
   /* (non-Javadoc)

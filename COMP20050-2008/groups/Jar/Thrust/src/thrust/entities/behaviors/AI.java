@@ -15,11 +15,7 @@ package thrust.entities.behaviors;
  * @author Keith Byrne, Eoghan O'Donovan, Sean Russell (Jar@timbyr.com).
  * @version 18 April 2008
  */
-public class AI {
-  /**
-   * Perform your behavior.
-   */
-  public void act() {
-    //@ assert true;
-  }
+public interface AI {
+  /** Perform your behavior. */
+  void act();
 }
