@@ -2,6 +2,8 @@ package thrust.input;
 import java.util.logging.Logger;
 import java.awt.event.KeyEvent;
 
+import thrust.entities.about.GameState;
+
 /**
  * Processes and delegates each keyboard input received.
  *
@@ -9,14 +11,6 @@ import java.awt.event.KeyEvent;
  * @version 2 April 2008
  */
 public class InputHandler {
-  /** The main menu state. */
-  public static final byte MAINMENU = 0;
-  /** The high score menu state. */
-  public static final byte HIGHSCOREMENU = 1;
-  /** The play state. */
-  public static final byte PLAY = 2;
-  /** The gameover state. */
-  public static final byte GAMEOVER = 3;
   /** Character h to display high scores. */
   public static final char HIGH_SCORES = 'h';
   /** Character m switch between music and SFX. */
@@ -106,32 +100,32 @@ public class InputHandler {
   public void process(final char the_key_input) {
     // @ assert true;
     switch (thrust.Main.GAMESTATE.get_state()) {
-      case MAINMENU:
+      case GameState.MAINMENU:
         processMenu(the_key_input);
         break;
-      case PLAY:
+      case GameState.PLAY:
         processPlay(the_key_input);
         break;
-      case HIGHSCOREMENU:
+      case GameState.HIGHSCOREMENU:
         processHigh(the_key_input);
         break;
-      case GAMEOVER:
+      case GameState.GAMEOVER:
         processOver(the_key_input);
         break;
       default:
         break;
     }
     switch (thrust.Main.GAMESTATE.get_state()) {
-      case MAINMENU:
+      case GameState.MAINMENU:
         LOG.info("Main menu");
         break;
-      case PLAY:
+      case GameState.PLAY:
         LOG.info("Play");
         break;
-      case HIGHSCOREMENU:
+      case GameState.HIGHSCOREMENU:
         LOG.info("High scores");
         break;
-      case GAMEOVER:
+      case GameState.GAMEOVER:
         LOG.info("Game over");
         break;
       default:
@@ -149,7 +143,7 @@ public class InputHandler {
   public void processMenu(final char the_key_input) {
     switch (the_key_input) {
       case HIGH_SCORES:
-        thrust.Main.GAMESTATE.set_state(HIGHSCOREMENU);
+        thrust.Main.GAMESTATE.set_state(GameState.HIGHSCOREMENU);
         break;
       case TOGGLE_SOUND:
         LOG.info("Toggle Sound");
@@ -160,7 +154,7 @@ public class InputHandler {
         }
         break;
       case START_GAME:
-        thrust.Main.GAMESTATE.set_state(PLAY);
+        thrust.Main.GAMESTATE.set_state(GameState.PLAY);
         break;
       case STOP_GAME:
         System.exit(0);
@@ -179,7 +173,7 @@ public class InputHandler {
   public void processPlay(final char the_key_input) {
     switch (the_key_input) {
       case STOP_GAME:
-        thrust.Main.GAMESTATE.set_state(MAINMENU);
+        thrust.Main.GAMESTATE.set_state(GameState.MAINMENU);
         break;
       case FIRE_GUN:
         LOG.info("Fire the Gun");
@@ -210,7 +204,7 @@ public class InputHandler {
   // @ requires legalInput(the_key_input);
   public void processHigh(final char the_key_input) {
     if (the_key_input == STOP_GAME) {
-      thrust.Main.GAMESTATE.set_state(MAINMENU);
+      thrust.Main.GAMESTATE.set_state(GameState.MAINMENU);
     }
   }
   /**
@@ -223,10 +217,10 @@ public class InputHandler {
   public void processOver(final char the_key_input) {
     switch (the_key_input) {
       case STOP_GAME:
-        thrust.Main.GAMESTATE.set_state(MAINMENU);
+        thrust.Main.GAMESTATE.set_state(GameState.MAINMENU);
         break;
       case START_GAME:
-        thrust.Main.GAMESTATE.set_state(MAINMENU);
+        thrust.Main.GAMESTATE.set_state(GameState.MAINMENU);
         break;
       default:
         break;

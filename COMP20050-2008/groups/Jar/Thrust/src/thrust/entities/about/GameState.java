@@ -3,12 +3,13 @@
  */
 package thrust.entities.about;
 
+import thrust.entities.in_game.Spaceship;
+
 /**
  * @author Jar (timbyr@gmail.com)
  * @version 15 April 2008
  */
 public class GameState extends AbstractGameState {
-
   /** The main menu state. */
   public static final byte MAINMENU = 0;
   /** The high score menu state. */
@@ -17,6 +18,8 @@ public class GameState extends AbstractGameState {
   public static final byte PLAY = 2;
   /** The gameover state. */
   public static final byte GAMEOVER = 3;
+  /** Initial lives that the player has. */
+  private static final byte INITLIVE = 3;
   /** The game state. */
   private static byte my_state;
   /** The current score. */
@@ -24,9 +27,9 @@ public class GameState extends AbstractGameState {
   /** The end of level bonus if any. */
   private static int my_bonus;
   /** The amount of lives the player has. */
-  private static byte my_lives = 3;
+  private static byte my_lives = INITLIVE;
   /** The current fuel of the spaceship. */
-  private static int my_fuel = 834;
+  private static int my_fuel = Spaceship.INITIAL_FUEL;
   /** The high scores of the game. */
   private static HighScoreInterface[] my_high_scores =
     new HighScore[HIGH_SCORE_COUNT];

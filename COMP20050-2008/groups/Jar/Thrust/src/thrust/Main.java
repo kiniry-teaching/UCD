@@ -113,6 +113,8 @@ public final class Main {
                                      (byte)0);
             my_entities.add(explose);
             my_entities.remove(the_enemy);
+            my_entities.remove(enemy);
+            break;
           }
         }
       }

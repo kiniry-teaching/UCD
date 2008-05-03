@@ -36,7 +36,7 @@ public class Spaceship extends DynamicEntity
   public static final int INITIAL_FUEL = 1000;
 
   /** The mass of each unit of fuel. */
-  public static final double FUEL_MASS = 1;
+  public static final double FUELMASS = 1;
 
   /** The fuel is initially set to the initial fuel value. */
   private transient int my_fuel = INITIAL_FUEL;
@@ -60,7 +60,7 @@ public class Spaceship extends DynamicEntity
    * @see thrust.entities.about.Fuelable#fuel_mass()
    */
   public int fuel_mass() {
-    return (int)(fuel() * FUEL_MASS);
+    return (int)(fuel() * FUELMASS);
   }
 
   /* (non-Javadoc)

@@ -14,6 +14,7 @@ import thrust.entities.properties.GameColor;
 
 import java.awt.Color;
 import java.awt.Shape;
+import java.util.logging.Logger;
 
 /**
  * Any entity in the game that is drawn in space or on the terrain.
@@ -21,7 +22,8 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class Entity implements GameColor {
-
+  /** Logger. */
+  private static final Logger LOG = Logger.getLogger("Entity Logger");
   /** The name of the shape. */
   private transient String my_shape_name;
   /** The shape object. */
@@ -91,7 +93,7 @@ public abstract class Entity implements GameColor {
    * Render yourself.
    */
   public void render() {
-    //@ assert false;
+    LOG.info("Render"+this.getClass().getName());
   }
 
   /* (non-Javadoc)
