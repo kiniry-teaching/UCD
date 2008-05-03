@@ -21,6 +21,9 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ public model boolean initialized;
   //@ public initially initialized == false;
 
+  /** No mass variable. */
+  private static final int NOMASS = 0;
+
   /**
    * Set the position and orientation of this entity.  You may only
    * call this method once ever per StaticEntity object.
@@ -48,7 +51,7 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ also ensures \result == 0;
   public double mass() {
     //@ assert super.mass() == 0;
-    return super.mass();
+    return NOMASS;
   }
 
   /* (non-Javadoc)
@@ -72,7 +75,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    return super.momentum();
+    return NOMASS;
   }
 
   //@ public invariant (* All queries are constant. *);
