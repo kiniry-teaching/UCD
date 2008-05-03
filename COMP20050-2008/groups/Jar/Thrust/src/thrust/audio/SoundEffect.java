@@ -20,6 +20,8 @@ public class SoundEffect {
   private static final Logger SOUNDLOG = Logger.getLogger("Error Log");
   /** Clip to be played. */
   private static Clip my_clip;
+  /** Audio stream. */
+  private static AudioInputStream audiois;
 
   /**
    * This is your sound effect.
@@ -29,7 +31,11 @@ public class SoundEffect {
    * @return the new sound effect for the effect stored in the provided file.
    */
   public /* @ pure @ */SoundEffect(final File the_filename) {
-    AudioInputStream audiois = null; // @ assert the_filename != null;
+    setup(the_filename);
+  }
+
+  private void setup(final File the_filename) {
+    // @ assert the_filename != null;
     try {
       audiois = AudioSystem.getAudioInputStream(the_filename);
       my_clip = (Clip) AudioSystem.getLine(new DataLine.Info(
