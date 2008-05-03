@@ -24,13 +24,13 @@ import thrust.entities.StaticEntity;
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
   /** Collection of stars objects. */
-  private static final Collection STARS = new LinkedList();
+  private static final Collection STARSLIST = new LinkedList();
   /**
    * @return What are your stars?"
    */
   public /*@ pure @*/ Collection stars() {
     //@ assert true;
-    return STARS;
+    return STARSLIST;
   }
 
   /**
@@ -38,7 +38,7 @@ public class Space extends StaticEntity
    * @param the_star the star to add.
    */
   public void add_star(final Star the_star) {
-    STARS.add(the_star);
+    STARSLIST.add(the_star);
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);
