@@ -10,8 +10,6 @@
 
 package thrust.entities;
 
-import java.awt.Shape;
-
 import thrust.physics.PhysicsInterface;
 
 /**
@@ -46,11 +44,7 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
                                 final double[] the_acceleration,
                                 final double the_grav_constant,
                                 final double the_mass,
-                                final double[] the_velocity,
-                                final String the_shape_name,
-                                final Shape the_shape,
-                                final byte the_state) {
-    super.set_state(the_shape_name, the_shape, the_state);
+                                final double[] the_velocity) {
     my_position = new double[]{the_position[0], the_position[1]};
     my_orientation = the_orientation;
     my_acceleration = new double[]{the_acceleration[0], the_acceleration[1]};
@@ -59,30 +53,79 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
     my_velocity = new double[]{the_velocity[0], the_acceleration[1]};
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#acceleration()
+   */
   public double[] acceleration() {
-    return new double[] {my_acceleration[0], my_acceleration[1] };
+    return (double[])my_acceleration.clone();
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#acceleration(double[])
+   */
+  public void acceleration(final double[] the_acceleration) {
+    my_acceleration = (double[])the_acceleration.clone();
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#gravitational_constant()
+   */
   public double gravitational_constant() {
     return my_gravConstant;
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#mass()
+   */
   public double mass() {
     return my_mass;
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#mass(double)
+   */
+  public void mass(final double the_mass) {
+    my_mass = the_mass;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#momentum()
+   */
   public double momentum() {
     return (my_mass * Math.hypot(my_velocity[0], my_velocity[1]));
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#orientation()
+   */
   public double orientation() {
     return my_orientation;
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#orientation(double)
+   */
+  public void orientation(final double the_orientation) {
+    my_orientation = the_orientation;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#position()
+   */
   public double[] position() {
     return new double[] {my_position[0], my_position[1] };
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#position(double[])
+   */
+  public void position(final double[] the_position) {
+    my_position = (double[])the_position.clone();
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#simulate(double)
+   */
   public void simulate(final double some_seconds) {
     for (int i = 0; i < some_seconds; i++) {
       my_position[0] += my_velocity[0];
@@ -93,7 +136,18 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
     }
   }
 
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#velocity()
+   */
   public double[] velocity() {
-    return new double[] {my_velocity[0], my_velocity[1] };
+    return (double[])my_velocity.clone();
   }
+
+  /* (non-Javadoc)
+   * @see thrust.physics.PhysicsInterface#velocity(double[])
+   */
+  public void velocity(final double[] the_velocity) {
+    my_velocity = (double[])the_velocity.clone();
+  }
+
 }

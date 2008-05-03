@@ -38,8 +38,7 @@ public abstract class StaticEntity extends DynamicEntity {
                                final Shape the_shape,
                                final byte the_state) {
     super.set_dynamic_state(the_position, the_orientation, new double[]{0, 0},
-                            0, 0, new double[]{0, 0},
-                            the_shape_name, the_shape, the_state);
+                            0, 0, new double[]{0, 0});
   //@ initialized = true;
   }
 
