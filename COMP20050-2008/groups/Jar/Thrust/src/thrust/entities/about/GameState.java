@@ -6,7 +6,7 @@ package thrust.entities.about;
 import thrust.entities.in_game.Spaceship;
 
 /**
- * @author Jar (timbyr@gmail.com)
+ * @author Sean Russell, Eoghan O'Donovan, Keith Byrne (jar@timbyr.com)
  * @version 15 April 2008
  */
 public class GameState extends AbstractGameState {
@@ -16,10 +16,12 @@ public class GameState extends AbstractGameState {
   public static final byte HIGHSCOREMENU = 1;
   /** The play state. */
   public static final byte PLAY = 2;
-  /** The gameover state. */
+  /** The game over state. */
   public static final byte GAMEOVER = 3;
   /** Initial lives that the player has. */
   private static final byte INITLIVE = 3;
+  /** The amount of points required to gain a life. */
+  private static final int NEWLIVES = 10000;
   /** The game state. */
   private static byte my_state;
   /** The current score. */
@@ -69,6 +71,9 @@ public class GameState extends AbstractGameState {
    */
   public void change_score(final int some_new_points) {
     my_score += some_new_points;
+    if (((my_score - some_new_points) % NEWLIVES) > (my_score % NEWLIVES)) {
+      change_lives((byte)1);
+    }
   }
 
   /*
@@ -126,7 +131,6 @@ public class GameState extends AbstractGameState {
    * @see thrust.entities.about.AbstractGameState#score()
    */
   public int score() {
-
     return my_score;
   }
 

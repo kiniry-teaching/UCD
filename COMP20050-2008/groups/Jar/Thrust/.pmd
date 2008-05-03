@@ -836,10 +836,6 @@
             <ruleset>Strict Exception Rules</ruleset>
         </rule>
         <rule>
-            <name>SignatureDeclareThrowsException</name>
-            <ruleset>Strict Exception Rules</ruleset>
-        </rule>
-        <rule>
             <name>AppendCharacterWithChar</name>
             <ruleset>String and StringBuffer Rules</ruleset>
         </rule>

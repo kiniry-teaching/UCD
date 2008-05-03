@@ -8,7 +8,6 @@ package thrust.display;
  * @version 15 April 2008
  */
 public class HighScoreDisplay extends AbstractHighScoreDisplay {
-
   /*
    * @see thrust.display.AbstractHighScoreDisplay#add_new_high_score()
    */
