@@ -65,12 +65,6 @@ public final class Main {
     LOG.info("Title Screen");
     // display the title screen
     MUSIC.start();
-    final Bullet bull = new Bullet();
-    bull.set_dynamic_state(new double[]{0, 0} , 0,
-                                new double[]{0, 0}, 0, 0, new double[]{0, 0});
-    bull.set_state("Triangle?",
-                        new Rectangle2D.Double(0, 1, 2, 3), (byte)0);
-    my_entities.add(bull);
     // wait for keyboard input
     // repeat the following until the player asks to quit
     //   show the high score display
@@ -147,9 +141,6 @@ public final class Main {
     while (my_iterator.hasNext()) {
       final Entity the_entity = ((Entity)my_iterator.next());
       final Area area = new Area(SPACESHIP.shape());
-      if (the_entity.shape() == null) {
-        System.err.println("null");
-      }
       area.intersect(new Area(the_entity.shape()));
       if (!area.isEmpty() && !SPACESHIP.equals(the_entity)) {
         final Explosion explose = new Explosion();
@@ -158,7 +149,6 @@ public final class Main {
                                  "Explosion",
                                  SPACESHIP.shape().getBounds2D(),
                                  (byte)0);
-        System.out.println(explose.shape().getClass().getName());
         my_entities.add(explose);
         my_entities.remove(SPACESHIP);
         GAMESTATE.change_lives((byte)-1);
@@ -175,5 +165,14 @@ public final class Main {
     while (my_iterator.hasNext()) {
       ((Entity)my_iterator.next()).render();
     }
+  }
+
+  private static void fire() {
+    final Bullet bull = new Bullet();
+    bull.set_dynamic_state(new double[]{0, 0} , 0,
+                                new double[]{0, 0}, 0, 0, new double[]{0, 0});
+    bull.set_state("Bullet",
+                        new Rectangle2D.Double(1, 1, 1, 1), (byte)0);
+    my_entities.add(bull);
   }
 }
