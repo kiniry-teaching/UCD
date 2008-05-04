@@ -23,7 +23,7 @@ public class gameFrame extends Frame
 		this.setTitle("Thrust Game");
 		this.setSize(400,400);
 		this.setResizable(false);
-		//this.addKeyListener(new InputHandler);
+
 		
 		// Create text area for drawing
 		myMapArea = new TextArea("", 0, 0, 3);
@@ -39,19 +39,14 @@ public class gameFrame extends Frame
 		
 		// Create high score area
 		myHighScoreFrame = new Frame("High Score");
-		myHighScoreFrame.setBounds(180, 200, 200, 200);
+		myHighScoreFrame.setBounds(100, 100, 200, 200);
 		myHighScoreFrame.setResizable(false);
+		myHighScoreFrame.add(myHighScoreArea);
 		
+		this.setVisible(true);
+		myHighScoreFrame.setVisible(true);
 	
-		
-	
-		
-	
-		
-		
-		
-		
-		
+
 		}
 		catch(Exception e)
 		{
