@@ -16,6 +16,7 @@ package thrust.input;
  * @revision 24 April 2008
  * @version 2 April 2008
  */
+
 public class InputHandler {
 
   /** Press "h" to display high scores. */
@@ -72,13 +73,13 @@ public class InputHandler {
     @*/
   public final /*@ pure @*/ boolean legal_input(final char the_character) {
 
-    boolean return_boolean = false;
+    boolean legal_input_boolean = false;
     for (int i = 0; i < legal_inputs().length; ++i) {
       if (legal_inputs()[i] == the_character) {
-        return_boolean = true;
+        legal_input_boolean = true;
       }
     }
-    return return_boolean;
+    return legal_input_boolean;
   }
 
   /**
@@ -87,17 +88,38 @@ public class InputHandler {
    */
   //@ requires legal_input(the_keyboard_input);
   public void process(final char the_keyboard_input) {
-    assert false; //@ assert false;
+    assert legal_input(the_keyboard_input);
     switch(the_keyboard_input) {
       case START_GAME: /* Starts the game */
+        // set ingame boolean to true
+        // display ingame screen
+        // allow ingame keyboard_input
+        break;
       case DISPLAY_HIGH_SCORES: /* Displays The High Scores */
+        // Pause game (?)
+        // Display HighScore class
+        // toggle or only show on press?
+        break;
       case TOGGLE_MUSIC_OR_EFFECTS: /* Toggles Music/Effects */
+        // CAN'T FIND METHOD FOR SETTING VOLUME LEVEL IN CLIP OR
+        // DATALINE IN API SO JUST SETTING IT TO stop().
+        // not correct but somewhat in the region vvvvv
+        // if (thrust.Main.initGame().my_music.playing()    == true)
+        //    set Thrust.audio.Music.stop();
+        break;
       case STOP_GAME: /* Stops the game */
+        // Pause game or something.
+        break;
       case FIRE_GUN: /* Fires ships weapon/ fires a bullet*/
+        break;
       case TURN_LEFT: /* Turns ship left*/
+        break;
       case TURN_RIGHT: /* Turns ship right*/
+        break;
       case USE_ENGINE: /* Propell's the ship */
+        break;
       case USE_SHIELD: /*Use shield/picks up pod(objective) */
+        break;
       default:
         break;
     }

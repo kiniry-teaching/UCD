@@ -30,9 +30,9 @@ public class Music {
   /** Location of .wav file. */
   private static final String MUSIC_LOCATION =
     "../../../media/Thrust_music.wav";
-/** Boolean for checking if music is playing. */
-  private transient boolean my_music_boolean = true;
-/** Creates music_file File. */
+  /** Boolean for checking if music is playing. Default off*/
+  private transient boolean my_music_boolean = false;
+  /** Creates music_file File. */
   private transient File my_music_file;
   /** AudioInputStream to take my_music_file. */
   private transient AudioInputStream my_music_stream;
@@ -65,7 +65,7 @@ public class Music {
    */
   //@ ensures \result == is_playing;
   public boolean playing() {
-
+    
     return my_music_boolean;
 
   }

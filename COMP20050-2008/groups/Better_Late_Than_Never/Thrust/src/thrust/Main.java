@@ -29,10 +29,14 @@ public final class Main {
     assert false; //@ assert false;
   }
 
-  GameState the_game = new GameState();
-  InputHandler the_inputhandler = new InputHandler();
-  HighScore my_highscore = new HighScore();
-  //InfoPanel my_infopanel = new InfoPanel(int, int, int);
+  public void initGame() {
+    GameState the_game = new GameState();
+    InputHandler the_inputhandler = new InputHandler();
+    HighScore my_highscore = new HighScore();
+    Music my_music = new Music();
+    //InfoPanel my_infopanel = new InfoPanel(int, int, int);
+  }
+  
 
   public static void main(final String[] the_args) {
 

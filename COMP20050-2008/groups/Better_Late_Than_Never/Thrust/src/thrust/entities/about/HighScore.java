@@ -15,7 +15,11 @@ public class HighScore implements HighScoreInterface {
   private static char[] my_initials;
   /** Int array to hold high score values. */
   private static int[] my_high_scores = new int[HIGH_SCORE_COUNT];
+  /** Starting high score values for that authentic arcade feel.. */
 
+  public HighScore() {
+    default_highscores();
+  }
 
   public char[] initials() {
     return my_initials;
@@ -72,6 +76,23 @@ public class HighScore implements HighScoreInterface {
 
   public void change_score(final int some_new_points) {
     my_score += some_new_points;
+  }
+
+  public void default_highscores() {
+    final char[] default_initials = new char[] {'l', 'o', 'l'};
+
+    new_initials(default_initials);
+    add_high_score(500);
+    add_high_score(561);
+    add_high_score(709);
+    add_high_score(909);
+    add_high_score(1007); // Ignoring magic number errors..
+    add_high_score(1451);
+    add_high_score(1988);
+    add_high_score(2008);
+    add_high_score(2025);
+    add_high_score(9567);
+
   }
 
 }
