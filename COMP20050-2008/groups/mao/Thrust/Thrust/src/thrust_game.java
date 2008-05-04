@@ -1,7 +1,8 @@
 
 
-import thrust.input.InputHandler;
-import thrust.display.gameFrame;
+import thrust.input.*;
+import thrust.display.*;
+import thrust.maps.*;
 // thrust game thread
 
 class thrust_game extends InputHandler implements Runnable 
@@ -9,17 +10,20 @@ class thrust_game extends InputHandler implements Runnable
 	private int myFramesPerSecond;
 	private int myCurrentChar;
 	private InputHandler myInputHandler;
+	private thrustMap myMap;
 
 	
 	//private InputHandler myInputHandler;
 	
-	public thrust_game(int fps)
+	public thrust_game(int fps, String map)
 	{
 	myFramesPerSecond = fps;
+	myMap = new thrustMap(map);
 	}
 
 	public void run()
 	{
+	
 	initFrame();
 	
 	// Initialise the fist screen the user sees
@@ -28,7 +32,6 @@ class thrust_game extends InputHandler implements Runnable
 	
 			// Press any button to start
 		
-	
 	
 	
 		while(myInputHandler.gameRunning == true)
@@ -52,7 +55,7 @@ class thrust_game extends InputHandler implements Runnable
 	
 	private void initFrame()
 	{
-	gameFrame tempOne = new gameFrame();
+	gameFrame tempOne = new gameFrame(myMap);
 	}
 
 	
