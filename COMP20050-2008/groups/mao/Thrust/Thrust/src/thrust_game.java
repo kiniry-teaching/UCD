@@ -1,19 +1,16 @@
-import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsConfiguration;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Rectangle;
+
 
 import thrust.input.InputHandler;
+import thrust.display.gameFrame;
 // thrust game thread
 
 class thrust_game extends InputHandler implements Runnable 
 {
 	private int myFramesPerSecond;
 	private int myCurrentChar;
-	private Frame myFrame;
+	private InputHandler myInputHandler;
+
+	
 	//private InputHandler myInputHandler;
 	
 	public thrust_game(int fps)
@@ -24,7 +21,17 @@ class thrust_game extends InputHandler implements Runnable
 	public void run()
 	{
 	initFrame();
-		while(true)
+	
+	// Initialise the fist screen the user sees
+	
+		// Load the high score into frame
+	
+			// Press any button to start
+		
+	
+	
+	
+		while(myInputHandler.gameRunning == true)
 		{
 		
 			try
@@ -45,15 +52,7 @@ class thrust_game extends InputHandler implements Runnable
 	
 	private void initFrame()
 	{
-	
-	GraphicsEnvironment tempOne = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	GraphicsDevice[] tempTwo = tempOne.getScreenDevices();
-	GraphicsDevice tempThree = tempTwo[0];
-	GraphicsConfiguration[] tempFour = tempThree.getConfigurations();
-	
-	myFrame = new Frame("Thrust game", tempFour[0]);
-	myFrame.setVisible(true);
-	myFrame.setSize(400,400);
+	gameFrame tempOne = new gameFrame();
 	}
 
 	
