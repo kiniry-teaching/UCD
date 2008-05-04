@@ -12,8 +12,8 @@ package thrust.entities;
 
 /**
  * Entities whose position and orientation do not change.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author David Murphy(05590701)
+ * @version 4 May 2008.
  */
 public abstract class StaticEntity extends DynamicEntity {
   //@ public model boolean initialized;
@@ -30,9 +30,17 @@ public abstract class StaticEntity extends DynamicEntity {
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
   //@ ensures initialized;
+  private static double[] my_velocity;
+  private static double[] my_position;
+  private static double[] my_acceleration;
+  private static double my_momentum;
+  private static double my_orientation;
+  private static double my_mass;
+  
   public void set_state(double[] the_position,
                         double the_orientation) {
-    assert false; //@ assert false;
+    my_position = new double[]{the_position[0] , the_position[1]};
+    my_orientation = the_orientation;
   }
 
   /* (non-Javadoc)
@@ -40,8 +48,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double mass() {
-    assert false; //@ assert false;
-    return 0;
+    return my_mass;
   }
 
   /* (non-Javadoc)
@@ -49,8 +56,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    assert false; //@ assert false;
-    return null;
+    return new double[] {my_velocity[0] = 0 , my_velocity[1] = 0};
   }
 
   /* (non-Javadoc)
@@ -58,8 +64,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    assert false; //@ assert false;
-    return null;
+    return new double[] {my_acceleration[0] = 0 , my_acceleration[1] = 0};
   }
 
   /* (non-Javadoc)
@@ -67,8 +72,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result == 0;
   public double momentum() {
-    assert false; //@ assert false;
-    return 0;
+    return my_momentum = 0;
   }
 
   //@ public invariant (* All queries are constant. *);
