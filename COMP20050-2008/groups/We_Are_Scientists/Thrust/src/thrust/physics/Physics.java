@@ -7,6 +7,17 @@ package thrust.physics;
  * @version 8 April 2008
  */
 public class Physics {
+  /**
+   * The gravitational constant.
+   */
+  private static final double GRAV_CONST = 0.0000000000667300;
+  
+  /**
+   * The spaceship's mass.
+   */
+  private static final double SPACESHIP_MASS = 50000;
+  
+  
 //@ constraint (* The gravitational constant never changes. *);
   //@ constraint gravitational_constant() == \old(gravitational_constant());
 
@@ -14,7 +25,7 @@ public class Physics {
    * @return What is your acceleration in meters per second squared?
    */
   //@ ensures \result.length == 2;
-  /*@ pure @*/ double[] acceleration()
+  public /*@ pure @*/ double[] acceleration()
   {
     return null;
   }
@@ -22,26 +33,24 @@ public class Physics {
   /**
    * @return What is the gravitational constant?
    */
-  /*@ pure @*/ double gravitational_constant()
+  public /*@ pure @*/ double gravitational_constant()
   {
-    final double gravity = 9.8;
-    return gravity;
+    return GRAV_CONST;
   }
 
   /**
    * @return What is your mass in kilograms?
    */
   //@ ensures 0 <= \result;
-  /*@ pure @*/ double mass()
+  public /*@ pure @*/ double mass()
   {
-    final double mass = 50000;
-    return mass;
+    return SPACESHIP_MASS;
   }
 
   /**
    * @return What is your momentum in kilograms*meters per second?
    */
-  /*@ pure @*/ double momentum()
+  public /*@ pure @*/ double momentum()
   {
     return 0;
   }
@@ -49,7 +58,7 @@ public class Physics {
   /**
    * @return What is your orientation in radians?
    */
-  /*@ pure @*/ double orientation()
+  public /*@ pure @*/ double orientation()
   {
     return 0;
   }
@@ -58,7 +67,7 @@ public class Physics {
    * @return What is your position in meters from the origin?
    */
   //@ ensures \result.length == 2;
-  /*@ pure @*/ double[] position()
+  public /*@ pure @*/ double[] position()
   {
     return null;
   }
@@ -66,7 +75,7 @@ public class Physics {
   /**
    * @return What is your velocity in meters per second?
    */
-  /*@ pure @*/ double[] velocity()
+  public /*@ pure @*/ double[] velocity()
   {
     return null;
   }

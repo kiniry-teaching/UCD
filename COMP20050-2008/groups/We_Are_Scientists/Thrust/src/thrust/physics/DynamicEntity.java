@@ -11,12 +11,12 @@ public class DynamicEntity {
   /**
    * mass of spaceship.
    */
-  private double my_mass;
+  private transient double my_mass;
 
   /**
    * gravitational constant.
    */
-  private double my_gravity;
+  private transient double my_gravity;
 
 //@ constraint (* The gravitational constant never changes. *);
   //@ constraint gravitational_constant() == \old(gravitational_constant());
@@ -25,7 +25,7 @@ public class DynamicEntity {
    * @return What is your acceleration in meters per second squared?
    */
   //@ ensures \result.length == 2;
-  /*@ pure @*/ double[] acceleration()
+  public /*@ pure @*/ double[] acceleration()
   {
     return null;
   }
@@ -43,7 +43,7 @@ public class DynamicEntity {
   /**
    * @return What is the gravitational constant?
    */
-  /*@ pure @*/ double gravitational_constant()
+  public /*@ pure @*/ double gravitational_constant()
   {
     return my_gravity;
   }
@@ -52,7 +52,7 @@ public class DynamicEntity {
    * @return What is your mass in kilograms?
    */
   //@ ensures 0 <= \result;
-  /*@ pure @*/ double mass()
+  public /*@ pure @*/ double mass()
   {
     return my_mass;
   }
@@ -60,35 +60,33 @@ public class DynamicEntity {
   /**
    * @return What is your momentum in kilograms*meters per second?
    */
-  /*@ pure @*/ double momentum()
+  public /*@ pure @*/ double momentum()
   {
     final double m = mass();
     final double[] v = velocity();
     final double x = v[0] * m;
     final double y = v[1] * m;
-    final double answer = Math.sqrt((x * x) + (y * y));
-    return answer;
+    return Math.sqrt((x * x) + (y * y));
   }
 
   /**
    * @return What is your orientation in radians?
    */
-  /*@ pure @*/ double orientation()
+  public /*@ pure @*/ double orientation()
   {
     final double mone = 0;
     final double[] a = position();
     final double half = 2;
     final double mtwo = (a[1] - a[0]) / (a[1] / half - a[0] / half);
     final double tantheta = Math.abs((mone - mtwo) / (1 + (mone * mtwo)));
-    final double theta = Math.atan(tantheta);
-    return theta;
+    return Math.atan(tantheta);
   }
 
   /**
    * @return What is your position in meters from the origin?
    */
   //@ ensures \result.length == 2;
-  /*@ pure @*/ double[] position()
+  public /*@ pure @*/ double[] position()
   {
     return null;
   }
@@ -96,7 +94,7 @@ public class DynamicEntity {
   /**
    * @return What is your velocity in meters per second?
    */
-  /*@ pure @*/ double[] velocity()
+  public /*@ pure @*/ double[] velocity()
   {
     return null;
   }
