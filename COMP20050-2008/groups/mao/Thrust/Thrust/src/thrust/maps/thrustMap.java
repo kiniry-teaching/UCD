@@ -129,7 +129,7 @@ public class thrustMap
 	private String getStringFromLines(String[] s, int start, int end)
 	{
 	String tempOne = "";
-		for(int i=start;i<=end;i++)
+		for(int i=start+1;i<end;i++)
 		{
 		tempOne = tempOne + s[i] + "\n";
 		}
