@@ -8,9 +8,9 @@ public class mapSection
 	
 	public mapSection(String head, String details)
 	{
+	// Store details of map section from map file
 	mySectionHeader = head.trim();
 	mySectionDetails = details.trim();;
 	mySectionLines = mySectionDetails.trim().split("\n");
-
 	}
 }
