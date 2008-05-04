@@ -1,34 +1,34 @@
 package thrust.input;
 
 
-//import java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
- * holly ursula simon - worked on input physics and audio equally
+ *
  */
 public class InputHandler {
   /** An unknown character code. */
  // private static final char UNKNOWN_CHAR = '\0';
-  /** this is the command to display the high scores. */
-  public static final char DISPLAY_HIGH_SCORES = 'h';
-  /** command to turn the music effects on or off.*/
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
-  /** begins the game on level one. */
-  public static final char START_GAME = '\u00A0';
-  /** quits the game. */
-  public static final char STOP_GAME = '\u001B';
-  /** fires the ships gun 4 bullets. */
-  public static final char FIRE_GUN = '\n';
-  /** the key a turns the ship anti anti_clockwise. */
-  public static final char TURN_LEFT = 'a';
-  /** turns the ship clockwise. */
-  public static final char TURN_RIGHT = 's';
-  /** thrust uses fuel.*/
-  public static final char USE_ENGINE = '\u000F';
-  /** use the shield and tractor beam. Uses fuel.*/
-  public static final char USE_SHIELD = '\u00A1';
+  /**  command to display the high scores: h. */
+  public static final char DISPLAY_HIGH_SCORES = KeyEvent.VK_H;
+  /** command to toggle the music or effects: m. */
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_M;
+  /** begins the game on level one: enter. */
+  public static final char START_GAME = KeyEvent.VK_ENTER;
+  /** quits the game: escape. */
+  public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
+  /** fires the ships gun 4 bullets: space. */
+  public static final char FIRE_GUN = KeyEvent.VK_SPACE;;
+  /** turns the ship anti_clockwise: left arrow. */
+  public static final char TURN_LEFT = KeyEvent.VK_LEFT;
+  /** turns the ship clockwise: right arrow. */
+  public static final char TURN_RIGHT = KeyEvent.VK_RIGHT;
+  /** thrust uses fuel: up arrow.*/
+  public static final char USE_ENGINE = KeyEvent.VK_UP;
+  /** use the shield and tractor beam, uses fuel: s.*/
+  public static final char USE_SHIELD = KeyEvent.VK_S;
 
   /**
    * @return What are the legal keyboard inputs?
@@ -38,7 +38,6 @@ public class InputHandler {
       TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
       STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
       USE_SHIELD };
-    //assert false; //@ assert false;
     return legal_inputs;
   }
 
@@ -61,8 +60,16 @@ public class InputHandler {
    * @stuff
    */
   public final /*@ pure @*/ boolean legalInput(final char the_character) {
+    boolean legal = false;
+    for (int i = 0; i < legal_inputs().length; i++)
+    {
+      if (legal_inputs()[i] == the_character)
+        legal = true;
+    }
+    return legal;
+  }
 
-    switch (the_character)
+    /**switch (the_character)
     {
       case DISPLAY_HIGH_SCORES:
         System.out.print("display the scores");
@@ -94,20 +101,8 @@ public class InputHandler {
       default:
         break;
     }
-    return true;
-   /* if ((the_character == 'h') ||
-        (the_character == 'm')  ||
-        (the_character == '\u00A0') ||
-        (the_character == '\u001B') || (the_character == '\n') ||
-        (the_character == 'a') ||
-        (the_character == 's') || (the_character == '\u000F')) {
+    return true;*/
 
-      return true;
-    }
-    //assert false; //@ assert false;
-    return false;
-    */
-  }
 
   /**
    * Process this keyboard input character.
