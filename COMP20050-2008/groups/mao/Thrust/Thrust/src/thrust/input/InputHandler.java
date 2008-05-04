@@ -1,14 +1,14 @@
 package thrust.input;
 
 
-//import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 /**
  * Processes and delegates each keyboard input received.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 2 April 2008
  */
-public class InputHandler 
+public class InputHandler implements KeyListener
 {
     public static boolean gameRunning = false;
 
@@ -31,11 +31,11 @@ public class InputHandler
 	private final boolean stateAccess;
 
 	private validChar(int i, boolean canChangeGameState)
-        {
+    {
 	myAscii = i;
 	myChar = (char)i;
 	stateAccess = canChangeGameState;
-        }
+	}
 
 	public int getAscii()
 	{
@@ -125,12 +125,13 @@ public class InputHandler
 					gameRunning = true;
 					}
 				}
+				
 			}
 		}
 	}
 	
 		// <Override methods>
-	/*public void keyTyped(KeyEvent e) 
+	public void keyTyped(KeyEvent e) 
 	{
     }
     
@@ -142,6 +143,6 @@ public class InputHandler
 	 
     public void keyReleased(KeyEvent e)
 	{
-    }*/
+    }
 		// </Override methods>
 }
