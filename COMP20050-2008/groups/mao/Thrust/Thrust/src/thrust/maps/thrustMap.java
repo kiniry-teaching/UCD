@@ -12,7 +12,7 @@ public class thrustMap
 	private String myDetails;
 	
 	public mapSection myHighScore;
-	public mapSection myMap;
+	public mapSection myMapSection;
 	
 
 	public thrustMap(String fileName)
@@ -74,14 +74,13 @@ public class thrustMap
 						{
 							switch(a)
 							{
-							case: HIGH_SCORE;
+							case HIGH_SCORE:
 								myHighScore = tempThree;
 									break;
-							case: MAP;
-								myMap = tempThree;
+							case MAP:
+								myMapSection = tempThree;
 									break;		
 							}
-						System.out.println(a);
 						}
 					}
 				//Reset locks and positions
