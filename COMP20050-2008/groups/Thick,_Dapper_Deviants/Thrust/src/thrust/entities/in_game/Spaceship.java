@@ -9,6 +9,10 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
@@ -16,8 +20,8 @@ import thrust.entities.behaviors.Tow;
 
 /**
  * The player's main vehicle.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author David Murphy(05590701)
+ * @version 4 May 2008.
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
@@ -27,13 +31,61 @@ public class Spaceship extends DynamicEntity
     @*/
   /** A spaceship's mass when empty of all fuel is 10000kg. */
   public static final int EMPTY_MASS = 10000;
+  public static final int INITIAL_FUEL_MASS = 11000;
+  public static int CURRENT_MASS;
 
   /*@ public initially (* The spaceship's initial fuel is 1000 units. *);
     @ public initially fuel() == INITIAL_FUEL;
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
+  public static final int MAX_FUEL = 10000;
+  public static int CURRENT_FUEL;
+  
+  public Spaceship(final double[] position , final double orientation,
+                           final double[] acceleration ,
+                           final double mass , final double[] velocity ,
+                           final String ship_name , final Shape ship_shape , 
+                           final byte ship_state) {
+    super.set_state(position, orientation, acceleration, mass, velocity ,
+                       ship_name , ship_shape , ship_state);
+  }
+  
+  public void change_fuel_content(int the_fuel_change) {}
 
+  public int fuel() {
+    return CURRENT_FUEL;
+  }
+
+  public int fuel_mass() {
+    return INITIAL_FUEL_MASS;
+  }
+
+  public int maximum_fuel() {
+    return MAX_FUEL;
+  }
+
+  public void set_fuel_content(int the_fuel_content) {}
+
+  public void tow() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public Color color() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void color(Color the_color) {
+    // TODO Auto-generated method stub
+    
+  }
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);
