@@ -27,7 +27,7 @@ public class AbstractGameStateImp extends AbstractGameState {
   //@ requires 0 <= the_new_value;
   //@ ensures bonus() == the_new_value;
   public void new_bonus(final int the_new_value) {
-
+//new bonus
   }
 
   /**
@@ -64,7 +64,7 @@ public class AbstractGameStateImp extends AbstractGameState {
    */
   //@ ensures score() = \old(score() + some_new_points);
   public void change_score(final int some_new_points) {
-
+//changes the score
   }
 
   /**
@@ -80,7 +80,7 @@ public class AbstractGameStateImp extends AbstractGameState {
    */
   //@ ensures lives() == \old(lives() + some_new_lives);
   public /*@ pure @*/ void change_lives(final byte some_new_lives) {
-
+//changes lives
   }
 
   //@ public invariant HIGH_SCORE_COUNT == 8;
@@ -96,12 +96,12 @@ public class AbstractGameStateImp extends AbstractGameState {
     @*/
   public /*@ pure \nonnullelements @*/
   HighScoreInterface[] high_scores() {
-
+//high scores
   }
 
   public /*@ pure non_null @*/
-  HighScoreInterface high_score(int the_index) {
-
+  HighScoreInterface high_score(final int the_index) {
+//high score
   }
 
   public /*@ pure @*/
@@ -111,8 +111,8 @@ public class AbstractGameStateImp extends AbstractGameState {
   }
 
   public void add_high_score(/*@ non_null @*/
-                                      final HighScoreInterface the_new_high_score) {
-
+                             final HighScoreInterface the_new_high_score) {
+//adds a high score
   }
 
   /**

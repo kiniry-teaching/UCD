@@ -11,16 +11,15 @@ package thrust.entities.in_game;
 
 import java.util.Collection;
 
-import thrust.animation.Animatable;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
-import java.awt.Color;
-import java.awt.Shape;
-import thrust.animation.Animation_class;
-import thrust.animation.Animation;
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.Color;
+//import java.awt.Shape;
+//import thrust.animation.Animatable_class;
+//import thrust.animation.Animation;
+//import javax.swing.Timer;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 /**
  * The vacuum in which entities exist.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -41,10 +40,10 @@ public class Space extends StaticEntity
    * Add this star to space.
    * @param the_star the star to add.
    */
-  public void add_star(Star the_star) {
+  public void add_star(final Star the_star) {
   //  assert false; //@ assert false;
-    
-    Star add_star = the_star;
+
+    //final Star add_star = the_star;
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

@@ -63,8 +63,9 @@ public class InputHandler {
     boolean legal = false;
     for (int i = 0; i < legal_inputs().length; i++)
     {
-      if (legal_inputs()[i] == the_character)
+      if (legal_inputs()[i] == the_character) {
         legal = true;
+      }
     }
     return legal;
   }

@@ -28,4 +28,5 @@ public class FuelPod extends StaticEntity
     @ public invariant (* A fuel pod's 'fuel' lettering color is
     @                     dictated by the amount of fuel it contains. *);
     @*/
+  
 }

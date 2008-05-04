@@ -10,7 +10,7 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
+//import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
@@ -36,7 +36,10 @@ public class Spaceship extends DynamicEntity
     @*/
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
-  private int my_fuel;
+  /**
+   * The fuel.
+   */
+  private transient int my_fuel;
 
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
@@ -75,14 +78,13 @@ public class Spaceship extends DynamicEntity
    * @see thrust.entities.about.Fuelable#maximum_fuel()
    */
   public float maximum_fuel() {
-    final float maximum_fuel = Float.POSITIVE_INFINITY;
-    return maximum_fuel;
+    return Float.POSITIVE_INFINITY;
   }
 
   /* (non-Javadoc)
    * @see thrust.entities.about.Fuelable#set_fuel_content(int)
    */
-  public void set_fuel_content(int the_fuel_content) {
+  public void set_fuel_content(final int the_fuel_content) {
     if (the_fuel_content >= 0 && the_fuel_content <= maximum_fuel())
     {
       my_fuel = the_fuel_content;
@@ -94,7 +96,7 @@ public class Spaceship extends DynamicEntity
    */
   public void tow() {
     // TODO Auto-generated method stub
-    
+
   }
 
   /* (non-Javadoc)
@@ -116,9 +118,8 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.entities.properties.GameColor#color(java.awt.Color)
    */
-  public void color(Color the_color) {
+  public void color(final Color the_color) {
     // TODO Auto-generated method stub
-    
   }
 
   /* (non-Javadoc)
@@ -132,9 +133,9 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#acceleration(double[])
    */
-  public void acceleration(double[] the_acceleration) {
+  public void acceleration(final double[] the_acceleration) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /* (non-Javadoc)
@@ -156,9 +157,8 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass(double)
    */
-  public void mass(double the_mass) {
+  public void mass(final double the_mass) {
     // TODO Auto-generated method stub
-    
   }
 
   /* (non-Javadoc)
@@ -180,9 +180,9 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#orientation(double)
    */
-  public void orientation(double the_orientation) {
+  public void orientation(final double the_orientation) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /* (non-Javadoc)
@@ -196,17 +196,17 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#position(double[])
    */
-  public void position(double[] the_position) {
+  public void position(final double[] the_position) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#simulate(double)
    */
-  public void simulate(double some_seconds) {
+  public void simulate(final double some_seconds) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /* (non-Javadoc)
@@ -220,19 +220,19 @@ public class Spaceship extends DynamicEntity
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#velocity(double[])
    */
-  public void velocity(double[] the_velocity) {
+  public void velocity(final double[] the_velocity) {
     // TODO Auto-generated method stub
-    
+
   }
 
-  public void change_fuel_content(float the_fuel_change) {
+  public void change_fuel_content(final float the_fuel_change) {
     // TODO Auto-generated method stub
-    
+
   }
 
-  public void set_fuel_content(float the_fuel_content) {
+  public void set_fuel_content(final float the_fuel_content) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);

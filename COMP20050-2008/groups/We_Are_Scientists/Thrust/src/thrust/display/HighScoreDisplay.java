@@ -13,14 +13,14 @@ package thrust.display;
 /**
  * Top scores of past players.
  *
- * @author Simon markey,ursula redmond holly baker (kiniry@acm.org)
+ * @author Simon markey (simon.markey@ucdconnect.ie)
  * @version 11 April 2008
  */
 public class HighScoreDisplay extends AbstractHighScoreDisplay {
   /**
    * @ booleans"
    */
-  private boolean my_display;
+  private transient boolean my_display;
 
 
 
@@ -41,7 +41,7 @@ public class HighScoreDisplay extends AbstractHighScoreDisplay {
     if (!my_display)
     {
       my_display = true;
-      System.out.print("on screen");
+      //System.out.print("on screen");
 
     }
   }
@@ -55,7 +55,7 @@ public class HighScoreDisplay extends AbstractHighScoreDisplay {
     if (my_display)
     {
       my_display = false;
-      System.out.print("offscreen");
+      //System.out.print("offscreen");
     }
 
   }
@@ -65,7 +65,7 @@ public class HighScoreDisplay extends AbstractHighScoreDisplay {
    */
   public void add_new_high_score()
   {
-    final int[] score = new int[10];
+    //final int[] score = new int[10];
 
 
   }

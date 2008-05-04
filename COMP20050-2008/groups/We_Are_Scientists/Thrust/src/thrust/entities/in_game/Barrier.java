@@ -26,32 +26,42 @@ public class Barrier extends StaticEntity
    * @return Are you closed?
    */
   public /*@ pure @*/ boolean closed() {
-    assert false; //@ assert false;
-    if(!opened())
+    boolean answer;
+    if (opened())
     {
-      return true;
+      answer = false;
+    } else {
+      answer = true;
     }
-    return false;
+    return answer;
   }
 
   /**
    * @return Are you open?
    */
   public /*@ pure @*/ boolean opened() {
-    if(!closed())
-      return true;
-    assert false; //@ assert false;
-    return true;
+    //can't define this in terms of something that's defined by this!!
+    boolean answer;
+    if (closed())
+    {
+      answer = false;
+    } else {
+      answer = true;
+    }
+    return answer;
   }
 
   /**
    * @return Are you moving?
    */
   public /*@ pure @*/ boolean moving() {
-    if(!closed()&&!opened())
-      return true;
-    assert false; //@ assert false;
-    return false;
+    boolean answer;
+    if (!closed() && !opened()) {
+      answer = true;
+    } else {
+      answer = false;
+    }
+    return answer;
   }
 
   /**
@@ -59,8 +69,6 @@ public class Barrier extends StaticEntity
    */
   //@ requires opened();
   public void close() {
-    if(opened())
-      
     assert false; //@ assert false;
   }
 
@@ -69,13 +77,12 @@ public class Barrier extends StaticEntity
    */
   //@ requires closed();
   public void open() {
-    if(closed())
     assert false; //@ assert false;
   }
 
   public void animate() {
     // TODO Auto-generated method stub
-    
+
   }
 
   public Animation animation() {
@@ -84,9 +91,9 @@ public class Barrier extends StaticEntity
     return null;
   }
 
-  public void animation(Animation the_animation) {
+  public void animation(final Animation the_animation) {
     // TODO Auto-generated method stub
-    
+
   }
 
   /*@ public invariant (* Barriers are always in one of the three states
