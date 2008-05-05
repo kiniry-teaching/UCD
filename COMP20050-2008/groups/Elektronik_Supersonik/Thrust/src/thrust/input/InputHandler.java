@@ -50,7 +50,7 @@ public class InputHandler {
    */
   public final /* @ pure @ */ char[] legal_inputs() {
     return new char[] {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, START_GAME,
-     STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
+      STOP_GAME, FIRE_GUN, TURN_LEFT, TURN_RIGHT, USE_ENGINE,
       USE_SHIELD};
   }
 
@@ -85,26 +85,30 @@ public class InputHandler {
    */
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
-    if(the_keyboard_input == START_GAME) {
-      Main.createGameScreen();
-    }
-    if(the_keyboard_input == QUIT_GAME) {
-      Main.quit();
-    }
-    if(the_keyboard_input == USE_ENGINE) {
-      Main.thrust();
-    }
-    if(the_keyboard_input == TURN_LEFT) {
-      Main.turnLeft();
-    }
-    if(the_keyboard_input == TURN_RIGHT) {
-      Main.turnRight();
-    }
-    if(the_keyboard_input == FIRE_GUN) {
-      Main.fire();
-    }
-    if(the_keyboard_input == STOP_GAME) {
-      Main.createWelcomeScreen();
+    switch(the_keyboard_input) {
+      case START_GAME:
+        Main.createGameScreen();
+        break;
+      case QUIT_GAME:
+        Main.quit();
+        break;
+      case USE_ENGINE:
+        Main.thrust();
+        break;
+      case TURN_LEFT:
+        Main.turnLeft();
+        break;
+      case TURN_RIGHT:
+        Main.turnRight();
+        break;
+      case FIRE_GUN:
+        Main.fire();
+        break;
+      case STOP_GAME:
+        Main.createWelcomeScreen();
+        break;
+      default:
+        break;
     }
   }
 }

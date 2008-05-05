@@ -96,7 +96,7 @@ public final class Main {
   /**
    * The component responsible for drawing the the entities.
    */
-  private static GameDraw dr;
+  private static GameDraw drawComponent;
   /**
    * The maximum number of player-launched bullets that can be on screen
    * at one given time.
@@ -137,9 +137,9 @@ public final class Main {
     initializeEntities();
     while (true) {
       input.process((char) inputListener.lastKeyPressed());
-      if(started) {
+      if (started) {
         cycleEntities();
-        dr.updateShapes(renderable);
+        drawComponent.updateShapes(renderable);
       }
       mainFrame.update(mainFrame.getGraphics());
       sleep();
@@ -160,7 +160,7 @@ public final class Main {
     final int my_height = 600;
     final int my_width = 800;
     started = false;
-    if(mainFrame != null) {
+    if (mainFrame != null) {
       mainFrame.dispose();
     }
     mainFrame = new JFrame("Thrust");
@@ -214,17 +214,17 @@ public final class Main {
     final int my_width = 800;
     final int my_height = 600;
     started = true;
-    if(mainFrame != null) {
+    if (mainFrame != null) {
       mainFrame.dispose();
     }
     mapBounds = new Rectangle2D.Double(0, 0, my_width, my_height);
-    dr = new GameDraw(renderable);
+    drawComponent = new GameDraw(renderable);
     bulletCount = 0;
     mainFrame = new JFrame("Thrust");
     mainFrame.setVisible(true);
     mainFrame.setSize(my_width, my_height);
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mainFrame.add(dr);
+    mainFrame.add(drawComponent);
     mainFrame.update(mainFrame.getGraphics());
     mainFrame.addKeyListener(inputListener);
   }

@@ -35,10 +35,10 @@ public interface GameColor {
 
   // @ public invariant (* There are exactly 12 different colors available. *);
   /*
-   * @ public invariant _the_color == Color.BLACK | _the_color == Color.WHITE | @
-   * _the_color == Color.RED | _the_color == Color.GREEN | @ _the_color ==
+   * @ public invariant _the_color == Color.BLACK | _the_color == Color.WHITE |
+   * @ _the_color == Color.RED | _the_color == Color.GREEN | @ _the_color ==
    * Color.BLUE | _the_color == Color.CYAN | @ _the_color == Color.MAGENTA |
    * _the_color == Color.DARK_GRAY | @ _the_color == Color.GRAY | _the_color ==
-   * Color.LIGHT_GRAY | @ _the_color == Color.ORANGE | _the_color == Color.PINK; @
+   * Color.LIGHT_GRAY | @ _the_color == Color.ORANGE | _the_color == Color.PINK;
    */
 }
