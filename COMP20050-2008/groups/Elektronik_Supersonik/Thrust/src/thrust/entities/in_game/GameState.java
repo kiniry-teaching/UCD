@@ -42,6 +42,14 @@ public class GameState extends AbstractGameState {
    * The number of fuel you get initially.
    */
   private static final int INIT_FUEL = 2000;
+  /**
+   * The MENU game state.
+   */
+  public static final byte MENU_STATE = 0;
+  /**
+   * The GAMEPLAY game state.
+   */
+  public static final byte GAMEPLAY_STATE = 1;
   public GameState() {
     super();
     my_bonus = 0;

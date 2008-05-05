@@ -30,7 +30,7 @@ public class InputHandler {
   /** Character code to start the game (Enter). */
   public static final char START_GAME = KeyEvent.VK_ENTER;
   /** Character code to stop (pause) the game (Pause). */
-  public static final char STOP_GAME = KeyEvent.VK_PAUSE;
+  public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
   /** Character code to fire the gun (Space). */
   public static final char FIRE_GUN = KeyEvent.VK_SPACE;
   /** Character code to turn left (Left arrow). */
@@ -86,7 +86,7 @@ public class InputHandler {
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
     if(the_keyboard_input == START_GAME) {
-      Main.start();
+      Main.createGameScreen();
     }
     if(the_keyboard_input == QUIT_GAME) {
       Main.quit();
@@ -102,6 +102,9 @@ public class InputHandler {
     }
     if(the_keyboard_input == FIRE_GUN) {
       Main.fire();
+    }
+    if(the_keyboard_input == STOP_GAME) {
+      Main.createWelcomeScreen();
     }
   }
 }

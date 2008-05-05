@@ -45,24 +45,78 @@ import thrust.input.InputHandler;
  */
 public final class Main {
 
+  /**
+   * The main frame for the game screen.
+   */
   private static JFrame mainFrame;
+  /**
+   * The text-display field in the main frame.
+   */
   private static JTextArea console;
+  /**
+   * The scroll bar for the text area.
+   */
   private static JScrollPane scroll;
+  /**
+   * The key listener for the game.
+   */
   private static MainKeys inputListener;
+  /**
+   * The game state.
+   */
   private static GameState game;
+  /**
+   * The input handler for the game.
+   */
   private static InputHandler input;
+  /**
+   * The rectangle that describes valid movement(map bounds).
+   */
   private static Rectangle2D.Double mapBounds;
+  /**
+   * The spaceship entity.
+   */
   private static Spaceship playerShip;
+  /**
+   * The factory entity.
+   */
   private static Factory theFactory;
+  /**
+   * The turret entity.
+   */
   private static GunTurret theTurret;
+  /**
+   * The goal sphere entity.
+   */
   private static GoalSphere theSphere;
+  /**
+   * The fuel pod entity.
+   */
   private static FuelPod theFuelPod;
-  private static gameDraw dr;
-  private static JFrame newFr;
+  /**
+   * The component responsible for drawing the the entities.
+   */
+  private static GameDraw dr;
+  /**
+   * The maximum number of player-launched bullets that can be on screen
+   * at one given time.
+   */
   private static final int NUM_BULLETS = 4;
+  /**
+   * The number of bullets currently on screen.
+   */
   private static int bulletCount;
+  /**
+   * The list of renderable entity shapes.
+   */
   private static List renderable;
+  /**
+   * Started boolean.
+   */
   private static boolean started;
+  /**
+   * The list of entities involved in the game.
+   */
   private static List entities;
 
   /**
@@ -77,10 +131,40 @@ public final class Main {
    * @param the_args The command-line arguments are ignored.
    */
   public static void main(final String[] the_args) {
-    // display the title screen
     started = false;
+    createWelcomeScreen();
+    displayHighScores();
+    initializeEntities();
+    while (true) {
+      input.process((char) inputListener.lastKeyPressed());
+      if(started) {
+        cycleEntities();
+        dr.updateShapes(renderable);
+      }
+      mainFrame.update(mainFrame.getGraphics());
+      sleep();
+    }
+  }
+
+  private static void displayHighScores() {
+    for (int i = 0; i < game.high_scores().length; ++i) {
+      console.setText(" " + game.high_score(i).score() + "\n" +
+          console.getText());
+      for (int j = 0; j < game.high_score(i).initials().length; ++j) {
+        console.setText(game.high_score(i).initials()[j] + console.getText());
+      }
+    }
+  }
+
+  public static void createWelcomeScreen() {
+    final int my_height = 600;
+    final int my_width = 800;
+    started = false;
+    if(mainFrame != null) {
+      mainFrame.dispose();
+    }
     mainFrame = new JFrame("Thrust");
-    mainFrame.setSize(500, 500);
+    mainFrame.setSize(my_width, my_height);
     console = new JTextArea();
     scroll = new JScrollPane(console);
     mainFrame.add(scroll);
@@ -91,88 +175,63 @@ public final class Main {
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     inputListener = new MainKeys();
     mainFrame.addKeyListener(inputListener);
-    input = new InputHandler();
-    // play title music
-    // Music music = new Music();
     game = new GameState();
-    // music.start();
-    // wait for keyboard input
-    // repeat the following until the player asks to quit
-    for (int i = 0; i < game.high_scores().length; ++i) {
-      console.setText(" " + game.high_score(i).score() + "\n" +
-          console.getText());
-      for (int j = 0; j < game.high_score(i).initials().length; ++j) {
-        console.setText(game.high_score(i).initials()[j] + console.getText());
-      }
-    }
-    while (!started) {
-      input.process((char) inputListener.lastKeyPressed());
-      sleep(100);
-    }
-    init();
-    // show the high score display
-    while (true) {
-      input.process((char) inputListener.lastKeyPressed());
-      for (int i = 0; i < entities.size(); ++i) {
-        if (!(entities.get(i) instanceof StaticEntity)) {
-          ((DynamicEntity) entities.get(i)).simulate(0.1);
-          updateShape((DynamicEntity) entities.get(i));
-        }
-        if (entities.get(i) instanceof Bullet) {
-          final Bullet bull = (Bullet) entities.get(i);
-          if (!mapBounds.contains(new Point2D.Double(bull.position()[0], bull
-              .position()[1]))) {
-            entities.remove(i);
-            bulletCount--;
-          }
-        }
-      }
-      renderable = new ArrayList();
-      final Ellipse2D.Double plShape = (Ellipse2D.Double) playerShip.shape();
-      final Point2D.Double origin =
-          new Point2D.Double(plShape.getCenterX(), plShape.getCenterY());
-      final Point2D.Double destination =
-          new Point2D.Double((plShape.getCenterX() + 25 * Math.sin(Math
-              .toRadians(playerShip.orientation()))),
-              (plShape.getCenterY() + 25 * Math.cos(Math.toRadians(playerShip
-                  .orientation()))));
-      final Line2D.Double orientLine = new Line2D.Double(origin, destination);
-      renderable.add(orientLine);
-      for (int i = 0; i < entities.size(); ++i) {
-        if (entities.get(i) != null) {
-          renderable.add(((Entity) entities.get(i)).shape());
-        }
-      }
+    input = new InputHandler();
+  }
 
-      if (!mapBounds.contains(new Point2D.Double(plShape.getCenterX(), plShape
-          .getCenterY()))) {
-        console.setText("outtabounds");
-        newFr.dispose();
+  private static void cycleEntities() {
+    final int my_dirlen = 25;
+    final double my_simulatetime = 0.1;
+    renderable = new ArrayList();
+    final Ellipse2D.Double plShape = (Ellipse2D.Double) playerShip.shape();
+    final Point2D.Double origin =
+        new Point2D.Double(plShape.getCenterX(), plShape.getCenterY());
+    final Point2D.Double destination =
+        new Point2D.Double((plShape.getCenterX() + my_dirlen *
+            Math.sin(Math.toRadians(playerShip.orientation()))),
+            (plShape.getCenterY() + my_dirlen * Math.cos(Math
+              .toRadians(playerShip.orientation()))));
+    final Line2D.Double orientLine = new Line2D.Double(origin, destination);
+    renderable.add(orientLine);
+    for (int i = 0; i < entities.size(); ++i) {
+      if (!(entities.get(i) instanceof StaticEntity)) {
+        ((DynamicEntity) entities.get(i)).simulate(my_simulatetime);
+        updateShape((DynamicEntity) entities.get(i));
       }
-      dr.updateShapes(renderable);
-      newFr.update(newFr.getGraphics());
-      mainFrame.update(mainFrame.getGraphics());
-      sleep(30);
-      // wait for input to start the game
-      // repeat the following until the player is out of lives or asks to
-      // quit:
-      // record the current time T
-      // perform a step in the simulation
-      // render all entities
-      // process the next keyboard input
-      // record the current time T'
-      // wait for (1/30th of a second - (T-T'))
-      // remove the game interface
-      // if the player has a new high score
-      // ask them to input their initials
-      // save the new high score
+      renderable.add(((Entity) entities.get(i)).shape());
+      if (entities.get(i) instanceof Bullet) {
+        final Bullet bull = (Bullet) entities.get(i);
+        if (!mapBounds.contains(bull.position()[0], bull
+            .position()[1])) {
+          entities.remove(i);
+          bulletCount--;
+        }
+      }
     }
   }
 
-  private static void init() {
+  public static void createGameScreen() {
+    final int my_width = 800;
+    final int my_height = 600;
+    started = true;
+    if(mainFrame != null) {
+      mainFrame.dispose();
+    }
+    mapBounds = new Rectangle2D.Double(0, 0, my_width, my_height);
+    dr = new GameDraw(renderable);
+    bulletCount = 0;
+    mainFrame = new JFrame("Thrust");
+    mainFrame.setVisible(true);
+    mainFrame.setSize(my_width, my_height);
+    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mainFrame.add(dr);
+    mainFrame.update(mainFrame.getGraphics());
+    mainFrame.addKeyListener(inputListener);
+  }
+
+  private static void initializeEntities() {
     renderable = new ArrayList();
     entities = new ArrayList();
-    mapBounds = new Rectangle2D.Double(0, 0, 800, 600);
     renderable.add(mapBounds);
     playerShip =
         new Spaceship(new double[] {450, 500}, 0, new double[] {0, 0},
@@ -204,21 +263,13 @@ public final class Main {
                 20), (byte) 0);
     entities.add(theFuelPod);
     renderable.add(theFuelPod.shape());
-    dr = new gameDraw(renderable);
-    bulletCount = 0;
-    newFr = new JFrame();
-    newFr.setVisible(true);
-    newFr.setSize(800, 600);
-    newFr.add(dr);
-    newFr.update(newFr.getGraphics());
-    newFr.addKeyListener(inputListener);
   }
 
-  private static void updateShape(final DynamicEntity e) {
-    final RectangularShape sh = (RectangularShape) e.shape();
-    sh
-        .setFrame(e.position()[0], e.position()[1], sh.getWidth(), sh
-            .getHeight());
+  private static void updateShape(final DynamicEntity the_entity) {
+    final RectangularShape shape = (RectangularShape) the_entity.shape();
+    shape
+        .setFrame(the_entity.position()[0], the_entity.position()[1],
+          shape.getWidth(), shape.getHeight());
   }
 
   public static void thrust() {
@@ -235,16 +286,20 @@ public final class Main {
   }
 
   public static void turnLeft() {
-    playerShip.orientation(playerShip.orientation() - 25);
+    final int my_turnamount = 25;
+    final int my_fullcircle = 360;
+    playerShip.orientation(playerShip.orientation() - my_turnamount);
     if (playerShip.orientation() < 0) {
-      playerShip.orientation(360 + playerShip.orientation());
+      playerShip.orientation(my_fullcircle + playerShip.orientation());
     }
   }
 
   public static void turnRight() {
-    playerShip.orientation(playerShip.orientation() + 25);
-    if (playerShip.orientation() > 360) {
-      playerShip.orientation(360 - playerShip.orientation());
+    final int my_turnamount = 25;
+    final int my_fullcircle = 360;
+    playerShip.orientation(playerShip.orientation() + my_turnamount);
+    if (playerShip.orientation() > my_fullcircle) {
+      playerShip.orientation(my_fullcircle - playerShip.orientation());
     }
   }
 
@@ -262,38 +317,45 @@ public final class Main {
     }
   }
 
-  public static void start() {
-    started = true;
-  }
-
-  private static void sleep(final int amnt) {
+  private static void sleep() {
+    final int my_sleeptime = 30;
     try {
-      Thread.sleep(amnt);
+      Thread.sleep(my_sleeptime);
     } catch (InterruptedException e) {
       e.printStackTrace(System.err);
     }
   }
 
-  private static class gameDraw extends JComponent {
+  /**
+   * The graphics component of the game.
+   * Responsible for rendering all the shapes of the entities.
+   */
+  private static class GameDraw extends JComponent {
+    /**
+     * Standard serial version UID.
+     */
     private static final long serialVersionUID = 1L;
-    private transient List shapes;
+    /**
+     * The shapes that the component is to render.
+     */
+    private transient List my_shapes;
 
-    public gameDraw(final List arr) {
+    public GameDraw(final List the_list) {
       super();
-      shapes = arr;
+      my_shapes = the_list;
     }
 
-    protected void paintComponent(final Graphics graphics) {
-      final Graphics2D graph2 = (Graphics2D) graphics;
+    protected void paintComponent(final Graphics the_graphics) {
+      final Graphics2D graph2 = (Graphics2D) the_graphics;
       graph2.setColor(Color.BLACK);
-      final int size = shapes.size();
+      final int size = my_shapes.size();
       for (int i = 0; i < size; ++i) {
-        graph2.draw((Shape) shapes.get(i));
+        graph2.draw((Shape) my_shapes.get(i));
       }
     }
 
-    public void updateShapes(final List array) {
-      shapes = array;
+    public void updateShapes(final List the_array) {
+      my_shapes = the_array;
     }
   }
 
@@ -301,29 +363,31 @@ public final class Main {
    * The key listener.
    */
   private static class MainKeys implements KeyListener {
+  /**
+   * The last key pressed.
+   */
+    private transient int my_key;
 
-    private transient int myKey;
-
-    public void keyPressed(final KeyEvent key) {
-      myKey = key.getKeyCode();
+    public MainKeys() {
+      my_key = 0;
     }
 
-    public void keyReleased(final KeyEvent arg0) {
+    public void keyPressed(final KeyEvent the_key) {
+      my_key = the_key.getKeyCode();
+    }
+
+    public void keyReleased(final KeyEvent the_key) {
 
     }
 
-    public void keyTyped(final KeyEvent arg0) {
+    public void keyTyped(final KeyEvent the_key) {
 
     }
 
     public int lastKeyPressed() {
-      final int temp = myKey;
-      myKey = -1;
+      final int temp = my_key;
+      my_key = -1;
       return temp;
-    }
-
-    public MainKeys() {
-      myKey = 0;
     }
   }
 }
