@@ -5,11 +5,11 @@ import thrust.display.*;
 import thrust.maps.*;
 // thrust game thread
 
-class thrust_game extends InputHandler implements Runnable 
+class thrust_game implements Runnable 
 {
 	private int myFramesPerSecond;
 	private int myCurrentChar;
-	private InputHandler myInputHandler;
+	private static InputHandler myInputHandler;
 	private thrustMap myMap;
 
 	
@@ -21,6 +21,10 @@ class thrust_game extends InputHandler implements Runnable
 	myMap = new thrustMap(map);
 	}
 
+	
+	
+	
+	// Main game loop
 	public void run()
 	{
 	
@@ -33,21 +37,24 @@ class thrust_game extends InputHandler implements Runnable
 			// Press any button to start
 		
 	
-	
-		while(myInputHandler.gameRunning == true)
+		int count = 0;
+		while(true)
 		{
-		
-			try
+			while(myInputHandler.gameRunning == true)
 			{
-			// Frame calculation and interrupt		
-			Thread.sleep(1000/myFramesPerSecond);
-			//draw frame
-			drawFrame();
-			
-			}
-			catch(Exception e)
-			{
-			System.out.println(e);
+				try
+				{
+				// Frame calculation and interrupt		
+				Thread.sleep(1000/myFramesPerSecond);
+				//draw frame
+				drawFrame();
+				count++;
+				System.out.println(count);
+				}
+				catch(Exception e)
+				{
+				System.out.println(e);
+				}
 			}
 		}
 	}
@@ -56,11 +63,13 @@ class thrust_game extends InputHandler implements Runnable
 	private void initFrame()
 	{
 	gameFrame tempOne = new gameFrame(myMap);
+	myInputHandler = tempOne.myInputHandler;
 	}
 
 	
 	private void drawFrame()
 	{
+	
 	
 	
 	}
