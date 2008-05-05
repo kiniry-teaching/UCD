@@ -6,13 +6,13 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import thrust.maps.thrustMap;
+import thrust.input.InputHandler;
 
 public class gameFrame extends Frame
 {
 
 	private TextArea myMapArea;
-	private Frame myHighScoreFrame;
-	private TextArea myHighScoreArea;
+	public InputHandler myInputHandler;
 
 	public gameFrame(thrustMap map)
 	{	
@@ -27,32 +27,26 @@ public class gameFrame extends Frame
 		
 		// Create text area for drawing
 		myMapArea = new TextArea("", 0, 0, 3);
-		myMapArea.insert(map.myMapSection.mySectionDetails, 0);
+		myMapArea.insert(map.getTransposeHighScore(), 0);
 		myMapArea.setEditable(false);
+		
+		myInputHandler = new InputHandler();
+		myMapArea.addKeyListener(myInputHandler);
 		// add map text area to frame
-		this.add(myMapArea);
-	
-		// Create high score text area
-		myHighScoreArea = new TextArea("",0,0,3);
-		myHighScoreArea.insert(map.myHighScore.mySectionDetails, 0);
-		myHighScoreArea.setEditable(false);
+		this.add(myMapArea);	
+		this.setVisible(true);	
 		
-		// Create high score area
-		myHighScoreFrame = new Frame("High Score");
-		myHighScoreFrame.setBounds(100, 100, 200, 200);
-		myHighScoreFrame.setResizable(false);
-		myHighScoreFrame.add(myHighScoreArea);
 		
-		this.setVisible(true);
-		myHighScoreFrame.setVisible(true);
-	
-
+		
+		
+		
 		}
 		catch(Exception e)
 		{
 		System.out.println(e);
 		}
 	}
+
 	
 	
 		
