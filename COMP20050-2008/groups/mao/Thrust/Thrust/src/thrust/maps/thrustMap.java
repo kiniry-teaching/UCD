@@ -136,6 +136,45 @@ public class thrustMap
 	return tempOne;
 	}
 	
+		
+	public String getTransposeHighScore()
+	{
+	String[] tempOne = myHighScore.mySectionLines;
+	String[] tempTwo = myMapSection.mySectionLines;
+	String[] tempThree = new String[tempTwo.length];
+	int offset = 50;
+	String tempFour = "";
+		for(int i=0;i<offset;i++)
+		{
+		tempFour = tempFour + " ";
+		}
+		// Make sure the high score can fit in the map
+		if(tempOne.length < tempTwo.length)
+		{
+			for(int i=0;i<tempTwo.length;i++)
+			{
+				if(i < tempOne.length)
+				{
+				tempThree[i] = tempFour + tempOne[i];
+				}
+				else
+				{
+				tempThree[i] = tempTwo[i];
+				}
+			}
+		}
+		else
+		{
+		return "High score list has too many entries";
+		}
+	String tempFive = "";
+		for(String a : tempThree)
+		{
+		tempFive = tempFive + a + "\n";
+		}
+	return tempFive;
+	}
+	
 
 	enum sectionHeaders
 	{
