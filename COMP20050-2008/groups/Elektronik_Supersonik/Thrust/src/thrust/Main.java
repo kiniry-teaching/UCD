@@ -119,6 +119,10 @@ public final class Main {
    */
   private static List entities;
   /**
+   * The list of player-launched bullets in the game.
+   */
+  private static List playerBullets;
+  /**
    * The state the game is in (menu, gameplay, etc.)
    */
   public static byte state;
@@ -209,19 +213,31 @@ public final class Main {
     renderable.add(orientLine);
     renderable.add(mapBounds);
     for (int i = 0; i < entities.size(); ++i) {
-      if (!(entities.get(i) instanceof StaticEntity)) {
-        if (((DynamicEntity)entities.get(i)).state() != 1) {
-          ((DynamicEntity) entities.get(i)).simulate(my_simulatetime);
-          updateShape((DynamicEntity) entities.get(i));
+      Entity curEnt = (Entity) entities.get(i);
+      if (!(curEnt instanceof StaticEntity)) {
+        if (((DynamicEntity)curEnt).state() != 1) {
+          ((DynamicEntity) curEnt).simulate(my_simulatetime);
+          updateShape((DynamicEntity) curEnt);
         }
       }
-      renderable.add(((Entity) entities.get(i)).shape());
-      if (entities.get(i) instanceof Bullet) {
-        final Bullet bull = (Bullet) entities.get(i);
+      renderable.add(((Entity) curEnt).shape());
+      if (curEnt instanceof Bullet) {
+        final Bullet bull = (Bullet) curEnt;
         if (!mapBounds.contains(bull.position()[0], bull
             .position()[1])) {
           entities.remove(i);
+          playerBullets.remove(bull);
           bulletCount--;
+        }
+      }
+      if (curEnt instanceof GunTurret) {
+        for(int j = 0; j < playerBullets.size(); ++j) {
+          if(((Rectangle2D.Double)curEnt.shape())
+              .contains((Rectangle2D.Double)((Entity)playerBullets.get(j)).shape())) {
+            entities.remove(curEnt);
+            playerBullets.remove(j);
+            entities.remove(playerBullets.get(j));
+          }
         }
       }
     }
@@ -249,6 +265,7 @@ public final class Main {
   private static void initializeEntities() {
     renderable = new ArrayList();
     entities = new ArrayList();
+    playerBullets = new ArrayList();
     renderable.add(mapBounds);
     playerShip =
         new Spaceship(new double[] {450, 50}, 0, new double[] {0, 0},
@@ -329,6 +346,7 @@ public final class Main {
               "Rectangle", new Rectangle2D.Double(playerShip.position()[0],
                   playerShip.position()[1], 2, 2), (byte) 0);
       entities.add(bull);
+      playerBullets.add(bull);
       bulletCount++;
     }
   }
