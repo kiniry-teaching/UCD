@@ -16,14 +16,14 @@ import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
- * 
+ *
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity implements EnemyEntity {
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see thrust.physics.PhysicsInterface#mass()
    */
   /** holds the position. */
@@ -34,6 +34,8 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
   private transient double[] my_acceleration;
   /** holds the mass. */
   private transient double my_mass;
+  /** holds the time. */
+  private transient double my_time;
   /** holds the velocity. */
   private transient double[] my_velocity;
   /** the name of the shape. */
@@ -124,7 +126,7 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
   }
 
   public double[] acceleration() {
-    return my_acceleration;
+    return new double[] {my_acceleration[0], my_acceleration[1] };
   }
 
   public void acceleration(final double[] the_acceleration) {
@@ -148,7 +150,7 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
   }
 
   public double[] position() {
-    return my_position;
+    return new double[] {my_position[0], my_position[1] };
   }
 
   public void position(final double[] the_position) {
@@ -161,7 +163,7 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
   }
 
   public double[] velocity() {
-    return my_velocity;
+    return new double[] {my_velocity[0], my_velocity[1] };
   }
 
   public void velocity(final double[] the_velocity) {

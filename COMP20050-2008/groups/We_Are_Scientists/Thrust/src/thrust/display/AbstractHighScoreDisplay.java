@@ -13,7 +13,7 @@ package thrust.display;
 /**
  * Top scores of past players.
  *
- * @author Simon markey,ursula redmond holly baker (kiniry@acm.org)
+ * @author joe kiniry (kiniry@acm.org)
  * @version 11 April 2008
  */
 public abstract class AbstractHighScoreDisplay {

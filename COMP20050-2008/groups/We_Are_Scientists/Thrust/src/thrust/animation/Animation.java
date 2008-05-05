@@ -12,13 +12,10 @@ package thrust.animation;
 
 /**
  * The frames in an animation.
- * @author Simon markey ()
+ * @author joe kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
 public interface Animation {
 
-  
-  
-  
-  
+
 }

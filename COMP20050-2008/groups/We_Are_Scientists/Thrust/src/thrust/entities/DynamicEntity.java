@@ -41,7 +41,7 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
    * @param the_velocity
    *          the initial velocity.
    */
-  public void the_Dynamic_State(final double[] the_position,
+  public void set_dynamic_state(final double[] the_position,
                             final double the_orientation,
                             final double[] the_acceleration,
                             final double the_mass, final double[] the_velocity,
@@ -58,7 +58,7 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   }
 
   public double[] position() {
-    return my_position;
+    return new double[] {my_position[0], my_position[1] };
   }
 
   public double orientation() {
@@ -66,7 +66,7 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   }
 
   public double[] acceleration() {
-    return my_acceleration;
+    return new double[] {my_acceleration[0], my_acceleration[1] };
   }
 
   public double mass() {
@@ -74,7 +74,7 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   }
 
   public double[] velocity() {
-    return my_velocity;
+    return new double[] {my_velocity[0], my_velocity[1] };
   }
 
   public Color my_Color() {

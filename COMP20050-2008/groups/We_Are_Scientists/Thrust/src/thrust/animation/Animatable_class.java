@@ -12,34 +12,35 @@ package thrust.animation;
 
 /**
  * An entity that moves or changes independent of the player via an animation.
- * @author simon markey (kiniry@acm.org)
+ * @author simon markey (simark@ericom.net)
+ * With input from Ursula.
  * @version 18 April 2008
  */
 public class Animatable_class {
-  
-  Animation my_animation;
+  /**
+   * The animation.
+   */
+  private transient Animation my_animation;
   /**
    * @return What is your animation?
    */
-  /*@ pure @*/ Animation animation()
-  {return my_animation;}
+  public /*@ pure @*/ Animation animation()
+  { return my_animation; }
 
   /**
    * @param the_animation This is your animation.
    */
   //@ ensures animation() == the_animation;
-  void animation(Animation the_animation)
+  public void animation(final Animation the_animation)
   {
-    
-    if(my_animation.equals(the_animation))
-      {animate();}
+    if (my_animation.equals(the_animation))
+    { animate(); }
   }
 
   /**
    * Take a next animation step.
    */
-  void animate()
-  {//do stuff
-   }
+  public void animate()
+  { //do stuff
   }
 }

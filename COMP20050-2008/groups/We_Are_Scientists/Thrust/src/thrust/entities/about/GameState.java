@@ -43,7 +43,7 @@ public class GameState {
   /**
    * There are eight high scores.
    */
-  public static final int my_HIGH_SCORE_COUNT = 8;
+  public final static int MY_HIGH_SCORE_COUNT = 8;
 
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);

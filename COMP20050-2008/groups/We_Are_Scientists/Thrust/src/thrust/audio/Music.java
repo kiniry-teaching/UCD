@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * In-game music.
- * @author Simon markey ursula redmond holly baker ()
+ * @author Simon markey (simark@eircom.net)
  * @version 2 April 2008
  */
 public class Music {
