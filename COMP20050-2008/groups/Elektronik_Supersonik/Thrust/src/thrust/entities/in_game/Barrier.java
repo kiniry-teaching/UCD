@@ -24,11 +24,23 @@ import thrust.entities.StaticEntity;
  * @version 18 April 2008
  */
 public class Barrier extends StaticEntity implements NeutralEntity, Animatable {
+  /**
+  * The animation of the barrier.
+  */
+  private transient EntityAnimation my_animation;
+  /**
+  * Indicates whether the barrier is open.
+  */
+  private transient boolean my_open;
+  /**
+  * Indicates whether the barrier is moving.
+  */
+  private transient boolean my_moving;
   public Barrier(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
       final double[] the_velocity, final String the_initial_shape_name,
       final Shape the_initial_shape, final byte the_initial_state) {
-    
+
     super();
     super.set_state(the_position, the_orientation, the_acceleration, the_mass,
                     the_velocity, the_initial_shape_name, the_initial_shape,
@@ -36,18 +48,6 @@ public class Barrier extends StaticEntity implements NeutralEntity, Animatable {
 
   }
 
-  /**
-   * The animation of the barrier.
-   */
-  private transient EntityAnimation my_animation;
-  /**
-   * Indicates whether the barrier is open.
-   */
-  private transient boolean my_open;
-  /**
-   * Indicates whether the barrier is moving.
-   */
-  private transient boolean my_moving;
 
   /**
    * @return Are you closed?

@@ -75,7 +75,7 @@ public class Music {
   private void prepareMusicFile() {
     AudioInputStream input_stream;
     DataLine.Info data_line_info;
-    final File music = new File("D:/Mokslai/workspace-soft/Thrust/media/music.mp3");
+    final File music = new File("../media/music.mp3");
     input_stream = null;
 
     try {

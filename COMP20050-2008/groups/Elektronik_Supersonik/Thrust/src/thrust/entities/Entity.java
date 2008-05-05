@@ -20,14 +20,14 @@ import java.awt.Shape;
  */
 public abstract class Entity implements GameColor {
   /**
-   * A shape which stores the shape of the entity
+   * A shape which stores the shape of the entity.
    */
   private transient Shape my_shape;
   /**
    * A string to store the name of the shape.
    */
   private transient String my_shape_name;
-  /** 
+  /**
    * A byte which stores the state.
    */
   private transient byte my_state;

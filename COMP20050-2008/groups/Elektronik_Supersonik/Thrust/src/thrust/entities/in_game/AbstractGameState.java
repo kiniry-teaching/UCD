@@ -29,7 +29,7 @@ public abstract /*@ pure @*/ class AbstractGameState {
   /**
    * @return How much fuel do you contain?
    * @design The current fuel of the spaceship.
-   * @note Note that the {@link Spaceship} class should be the 
+   * @note Note that the {@link Spaceship} class should be the
    * actual owner of this data; this is just a convenience method.
    */
   //@ ensures 0 <= \result;
@@ -78,13 +78,18 @@ public abstract /*@ pure @*/ class AbstractGameState {
     @          \result[i] >= \result[j]);
     @ ensures (* High scores are ordered from high to low. *);
     @*/
-  public abstract /*@ pure \nonnullelements @*/ HighScoreInterface[] high_scores();
+  public abstract /*@ pure \nonnullelements @*/
+  HighScoreInterface[] high_scores();
 
-  public abstract /*@ pure non_null @*/ HighScoreInterface high_score(int the_index);
+  public abstract /*@ pure non_null @*/
+  HighScoreInterface high_score(int the_index);
 
-  public abstract /*@ pure @*/ boolean new_high_score(/*@ non_null @*/ HighScoreInterface the_possible_new_high_score);
+  public abstract /*@ pure @*/
+  boolean new_high_score(
+  /*@ non_null @*/ HighScoreInterface the_possible_new_high_score);
 
-  public abstract void add_high_score(/*@ non_null @*/ HighScoreInterface the_new_high_score);
+  public abstract void add_high_score(
+  /*@ non_null @*/ HighScoreInterface the_new_high_score);
 
   /**
    * A pair of a sequence of three initials and a score.

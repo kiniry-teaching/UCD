@@ -1,6 +1,11 @@
 package thrust.display;
 
-public class InfoPanel extends AbstractInfoPanel{
+/**
+ * The Information Panel.
+ * @author Elektronik Supersonik (.@.)
+ * @version 05 May 2008
+ */
+public class InfoPanel extends AbstractInfoPanel {
 
   public void display() {
     // TODO Auto-generated method stub

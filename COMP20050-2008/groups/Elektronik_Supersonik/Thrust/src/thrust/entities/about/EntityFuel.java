@@ -1,10 +1,11 @@
 package thrust.entities.about;
 
+/**
+ * Enemy's AI.
+ * @author Elektronik Supersonik (.@.)
+ * @version 05 May 2008
+ */
 public class EntityFuel implements Fuelable {
-  /**
-   * The fuel an entity has.
-   */
-  private transient int my_fuel;
   /**
    * The maximum amount of fuel the entity can have.
    */
@@ -13,9 +14,13 @@ public class EntityFuel implements Fuelable {
    * The mass of a unit of fuel.
    */
   private static final int FUEL_UNIT_MASS = 1;
-  
+  /**
+   * The fuel an entity has.
+   */
+  private transient int my_fuel;
+
   public EntityFuel(final int the_initial_fuel) {
-     my_fuel = the_initial_fuel;
+    my_fuel = the_initial_fuel;
   }
 
   public void change_fuel_content(final int the_fuel_change) {
@@ -37,6 +42,4 @@ public class EntityFuel implements Fuelable {
   public void set_fuel_content(final int the_fuel_content) {
     my_fuel = the_fuel_content;
   }
-  
-  
 }

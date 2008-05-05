@@ -18,8 +18,8 @@ import java.awt.Shape;
  * @version 18 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {
-  //@ public model boolean initialized;
-  //@ public initially initialized == false;
+  //@ public model boolean initialised;
+  //@ public initially initialised == false;
 
   /**
    * Set the position and orientation of this entity.  You may only
@@ -27,16 +27,19 @@ public abstract class StaticEntity extends DynamicEntity {
    * @param the_position the immutable position.
    * @param the_orientation the immutable orientation.
    */
-  //@ requires !initialized;
+  //@ requires !initialised;
   //@ ensures position()[0] == the_position[0];
   //@ ensures position()[1] == the_position[1];
   //@ ensures orientation() == the_orientation;
-  //@ ensures initialized;
-  public void set_state(final double[] the_position, final double the_orientation,
-                        final double[] the_acceleration, final double the_mass,
-                        final double[] the_velocity, final String the_initial_shape_name,
-                        final Shape the_initial_shape, final byte the_initial_state) {
-    
+  //@ ensures initialised;
+  public void set_state(final double[] the_position,
+                        final double the_orientation,
+                        final double[] the_acceleration,
+                        final double the_mass,
+                        final double[] the_velocity,
+                        final String the_initial_shape_name,
+                        final Shape the_initial_shape,
+                        final byte the_initial_state) {
     super.set_dynamic_state(the_position, the_orientation, the_acceleration,
                             the_mass, the_velocity, the_initial_shape_name,
                             the_initial_shape, the_initial_state);
@@ -56,7 +59,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] velocity() {
-    return new double[] { 0, 0 };
+    return new double[] {0, 0};
   }
 
   /* (non-Javadoc)
@@ -64,7 +67,7 @@ public abstract class StaticEntity extends DynamicEntity {
    */
   //@ also ensures \result[0] == 0 & \result[1] == 0;
   public double[] acceleration() {
-    return new double[] { 0, 0 };
+    return new double[] {0, 0};
   }
 
   /* (non-Javadoc)
@@ -77,8 +80,8 @@ public abstract class StaticEntity extends DynamicEntity {
   }
 
   //@ public invariant (* All queries are constant. *);
-  //@ public constraint initialized ==> (position() == \old(position()));
-  //@ public constraint initialized ==> (orientation() == \old(orientation()));
+  //@ public constraint initialised ==> (position() == \old(position()));
+  //@ public constraint initialised ==> (orientation() == \old(orientation()));
 
   /*@ public invariant (* Mass, velocity, acceleration, and momentum
     @                     are all zero. *);

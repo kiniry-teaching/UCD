@@ -28,6 +28,10 @@ import thrust.entities.behaviors.AI;
 public class Factory extends StaticEntity
   implements EnemyEntity, Animatable {
   /**
+  * An Integer storing our maximum velocity and acceleration.
+  */
+  private static final int HEALTH_LIMIT = 20;
+  /**
    * Stores the health(hit-points) of the factory.
    */
   private transient byte my_health;
@@ -50,14 +54,15 @@ public class Factory extends StaticEntity
 
   public Factory(final double[] the_position, final double the_orientation,
                  final double[] the_acceleration, final double the_mass,
-                 final double[] the_velocity, final String the_initial_shape_name,
+                 final double[] the_velocity,
+                 final String the_initial_shape_name,
                  final Shape the_initial_shape, final byte the_initial_state) {
     super();
     super.set_state(the_position, the_orientation, the_acceleration, the_mass,
                     the_velocity, the_initial_shape_name, the_initial_shape,
-                    the_initial_state);   
+                    the_initial_state);
   }
-  
+
   public AI attack() {
     return my_ai.attack();
   }
@@ -90,8 +95,8 @@ public class Factory extends StaticEntity
    */
   //@ ensures 0 <= \result & \result <= 20;
   public /*@ pure @*/ byte damage() {
-    byte ret = (byte) (20 - my_health);
-    if(ret < 0) {
+    byte ret = (byte) (HEALTH_LIMIT - my_health);
+    if (ret < 0) {
       ret = 0;
     }
     return ret;
@@ -136,8 +141,8 @@ public class Factory extends StaticEntity
     @ public invariant damage() <= 10 ==> chimney().smoking();
     @*/
 
-  //@ public invariant (* See constraint on color in FactoryChimney. *);
-  //@ public invariant color() == chimney().color();
+  //@ public invariant (* See constraint on colour in FactoryChimney. *);
+  //@ public invariant colour() == chimney().colour();
 
   /**
    * A chimney of a factory.
@@ -218,14 +223,13 @@ public class Factory extends StaticEntity
    */
   public class FactorySphere extends StaticEntity
     implements NeutralEntity {
-    /*@ public invariant (* A factory sphere's color is always green. *);
-      @ public invariant color() == java.awt.Color.GREEN;
+    /*@ public invariant (* A factory sphere's colour is always green. *);
+      @ public invariant colour() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
     public FactorySphere() {
       super();
-      
     }
   }
 }

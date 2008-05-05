@@ -121,8 +121,8 @@ public abstract class AbstractGameState {
    * @return Is this score a new high score?
    */
   /*
-   * @ ensures \result <==> high_scores()[0].score() >= the_high_score.score() & @
-   * the_high_score.score() >= high_scores()[HIGH_SCORE_COUNT-1].score(); @
+   * @ ensures \result <==> high_scores()[0].score() >= the_high_score.score() &
+   * @ the_high_score.score() >= high_scores()[HIGH_SCORE_COUNT-1].score(); @
    */
   public abstract/* @ pure @ */
   boolean new_high_score(/* @ non_null @ */HighScoreInterface the_high_score);

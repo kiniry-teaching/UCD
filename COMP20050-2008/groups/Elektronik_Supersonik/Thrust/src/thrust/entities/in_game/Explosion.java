@@ -29,7 +29,7 @@ public class Explosion extends StaticEntity implements NeutralEntity,
    */
   private transient EntityAnimation my_animation;
   /**
-   * 
+   *
    * @param the_position
    * @param the_orientation
    * @param the_acceleration

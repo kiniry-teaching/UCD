@@ -22,6 +22,10 @@ import thrust.entities.behaviors.AI;
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity implements EnemyEntity {
+  /**
+  * The enemy's AI.
+  */
+  private transient EnemyAI my_ai = new EnemyAI();
 
   public Bullet(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
@@ -33,7 +37,6 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
                             the_initial_shape, the_initial_state);
   }
 
-  private transient EnemyAI my_ai = new EnemyAI();
 
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()

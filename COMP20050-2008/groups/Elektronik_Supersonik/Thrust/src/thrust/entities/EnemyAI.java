@@ -2,17 +2,21 @@ package thrust.entities;
 
 import thrust.entities.behaviors.AI;
 
-public class EnemyAI implements EnemyEntity{
+/**
+ * Enemy's AI.
+ * @author Elektronik Supersonik (.@.)
+ * @version 05 May 2008
+ */
+public class EnemyAI implements EnemyEntity {
   /**
-   * The bullet's disturb behavior.
+   * The bullet's disturb behaviour.
    */
   private transient AI my_disturb;
   /**
-   * The bullet's attack behavior.
+   * The bullet's attack behaviour.
    */
   private transient AI my_attack;
   public EnemyAI() {
-    
   }
 
   public AI attack() {
