@@ -16,7 +16,6 @@ import thrust.entities.StaticEntity;
 
 /**
  * The vacuum in which entities exist.
- * 
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 18 April 2008
  */
@@ -25,7 +24,7 @@ public class Space extends StaticEntity implements NeutralEntity, Animatable {
    * The animation of space.
    */
   private transient EntityAnimation my_animation;
-  
+
   /**
    * @param the_position
    * @param the_orientation
@@ -36,7 +35,7 @@ public class Space extends StaticEntity implements NeutralEntity, Animatable {
    * @param the_initial_shape
    * @param the_initial_state
    */
-  
+
   public Space(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
       final double[] the_velocity, final String the_initial_shape_name,
@@ -59,14 +58,14 @@ public class Space extends StaticEntity implements NeutralEntity, Animatable {
 
   /**
    * Add this star to space.
-   * 
+   *
    * @param the_star
    *          the star to add.
    */
   public void add_star(final Star the_star) {
     assert false; // @ assert false;
   }
-  
+
   public void animate() {
     my_animation.animate();
   }

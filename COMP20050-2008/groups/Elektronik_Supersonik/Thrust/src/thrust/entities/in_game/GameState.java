@@ -1,31 +1,24 @@
 package thrust.entities.in_game;
 
+/**
+ * Game's State.
+ * @author Elektronik Supersonik (.@.)
+ * @version 05 May 2008
+ */
 public class GameState extends AbstractGameState {
-  
+
   /**
-   * An integer to store the bonus.
+   * The MENU game state.
    */
-  private transient int my_bonus;
+  public static final byte MENU_STATE = 0;
   /**
-   * An integer storing the current fuel.
+   * The GAMEPLAY game state.
    */
-  private transient int my_current_fuel;
+  public static final byte GAMEPLAY_STATE = 1;
   /**
-   * An byte storing lives.
+   * The maximum fuel a spaceship can have.
    */
-  private transient byte my_lives; 
-  /**
-   * An integer storing the maximum fuel.
-   */
-  private transient int my_max_fuel;
-  /**
-   * An integer storing the score.
-   */
-  private transient int my_score;
-  /**
-   * The high scores.
-   */
-  private transient HighScore[] my_hiscores;
+  private static final int MAX_SCORES = 8;
   /**
    * The maximum fuel a spaceship can have.
    */
@@ -43,13 +36,29 @@ public class GameState extends AbstractGameState {
    */
   private static final int INIT_FUEL = 2000;
   /**
-   * The MENU game state.
+   * An integer to store the bonus.
    */
-  public static final byte MENU_STATE = 0;
+  private transient int my_bonus;
   /**
-   * The GAMEPLAY game state.
+   * An integer storing the current fuel.
    */
-  public static final byte GAMEPLAY_STATE = 1;
+  private transient int my_current_fuel;
+  /**
+   * An byte storing lives.
+   */
+  private transient byte my_lives;
+  /**
+   * An integer storing the maximum fuel.
+   */
+  private transient int my_max_fuel;
+  /**
+   * An integer storing the score.
+   */
+  private transient int my_score;
+  /**
+   * The high scores.
+   */
+  private transient HighScore[] my_hiscores;
   public GameState() {
     super();
     my_bonus = 0;
@@ -57,19 +66,19 @@ public class GameState extends AbstractGameState {
     my_lives = INIT_LIVES;
     my_max_fuel = MAX_FUEL;
     my_score = 0;
-    my_hiscores = new HighScore[8];
-    for(int i = 0; i < HIGH_SCORE_COUNT; ++i) {
+    my_hiscores = new HighScore[MAX_SCORES];
+    for (int i = 0; i < HIGH_SCORE_COUNT; ++i) {
       my_hiscores[i] = new HighScore();
       my_hiscores[i].new_score(0);
       my_hiscores[i].new_initials(new char[] {'A', 'A', 'A'});
     }
   }
-  
+
   public void add_high_score(final HighScoreInterface the_new_high_score) {
-    for(int i = 0; i >= HIGH_SCORE_COUNT; ++i) {
-      if(the_new_high_score.score() > my_hiscores[i].score()) {
-        for(int j = HIGH_SCORE_COUNT - 1; j >= i+1; --j) {
-          my_hiscores[j] = my_hiscores[j - 1]; 
+    for (int i = 0; i >= HIGH_SCORE_COUNT; ++i) {
+      if (the_new_high_score.score() > my_hiscores[i].score()) {
+        for (int j = HIGH_SCORE_COUNT - 1; j >= i + 1; --j) {
+          my_hiscores[j] = my_hiscores[j - 1];
         }
         my_hiscores[i] = (HighScore) the_new_high_score;
       }
@@ -116,8 +125,8 @@ public class GameState extends AbstractGameState {
   public boolean new_high_score(
       final HighScoreInterface the_possible_new_high_score) {
     boolean ret = false;
-    for(int i = 0; i < HIGH_SCORE_COUNT; ++i) {
-      if(my_hiscores[i].score() < the_possible_new_high_score.score()) {
+    for (int i = 0; i < HIGH_SCORE_COUNT; ++i) {
+      if (my_hiscores[i].score() < the_possible_new_high_score.score()) {
         ret = true;
       }
     }
@@ -127,7 +136,12 @@ public class GameState extends AbstractGameState {
   public int score() {
     return my_score;
   }
-  
+
+  /**
+   * High Scores.
+   * @author Elektronik Supersonik (.@.)
+   * @version 05 May 2008
+   */
   private class HighScore implements HighScoreInterface {
     /**
      * The initials of the high score holder.
@@ -137,12 +151,12 @@ public class GameState extends AbstractGameState {
      * The high score value.
      */
     private transient int my_hiscore;
-    
+
     public HighScore() {
       my_initials = new char[0];
       my_hiscore = 0;
     }
-    
+
     public char[] initials() {
       final char[] ret = new char[my_initials.length];
       System.arraycopy(my_initials, 0, ret, 0, my_initials.length);
@@ -151,7 +165,8 @@ public class GameState extends AbstractGameState {
 
     public void new_initials(final char[] the_new_initials) {
       my_initials = new char[the_new_initials.length];
-      System.arraycopy(the_new_initials, 0, my_initials, 0, the_new_initials.length);
+      System.arraycopy(the_new_initials, 0,
+                       my_initials, 0, the_new_initials.length);
     }
 
     public void new_score(final int the_new_score) {
