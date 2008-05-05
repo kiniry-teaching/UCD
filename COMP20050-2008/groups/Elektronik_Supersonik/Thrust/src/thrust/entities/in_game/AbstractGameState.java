@@ -1,6 +1,3 @@
-/**
- * 
- */
 package thrust.entities.in_game;
 
 /**

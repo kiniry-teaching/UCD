@@ -118,7 +118,10 @@ public final class Main {
    * The list of entities involved in the game.
    */
   private static List entities;
-
+  /**
+   * The state the game is in (menu, gameplay, etc.)
+   */
+  public static byte state;
   /**
    * This class cannot be constructed.
    */
@@ -132,6 +135,8 @@ public final class Main {
    */
   public static void main(final String[] the_args) {
     started = false;
+    game = new GameState();
+    state = GameState.MENU_STATE;
     createWelcomeScreen();
     displayHighScores();
     initializeEntities();
@@ -140,6 +145,15 @@ public final class Main {
       if (started) {
         cycleEntities();
         drawComponent.updateShapes(renderable);
+        if (!mapBounds.contains(playerShip.position()[0],
+          playerShip.position()[1])) {
+          playerShip.position(new double[] {450, 50});
+          game.change_lives((byte)-1);
+        }
+        if (game.lives() < 0) {
+          createWelcomeScreen();
+          started = false;
+        }
       }
       mainFrame.update(mainFrame.getGraphics());
       sleep();
@@ -159,12 +173,13 @@ public final class Main {
   public static void createWelcomeScreen() {
     final int my_height = 600;
     final int my_width = 800;
+    state = GameState.MENU_STATE;
     started = false;
     if (mainFrame != null) {
       mainFrame.dispose();
     }
     mainFrame = new JFrame("Thrust");
-    mainFrame.setSize(my_width, my_height);
+    mainFrame.setSize(my_width + 60, my_height + 60);
     console = new JTextArea();
     scroll = new JScrollPane(console);
     mainFrame.add(scroll);
@@ -175,7 +190,6 @@ public final class Main {
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     inputListener = new MainKeys();
     mainFrame.addKeyListener(inputListener);
-    game = new GameState();
     input = new InputHandler();
   }
 
@@ -193,10 +207,13 @@ public final class Main {
               .toRadians(playerShip.orientation()))));
     final Line2D.Double orientLine = new Line2D.Double(origin, destination);
     renderable.add(orientLine);
+    renderable.add(mapBounds);
     for (int i = 0; i < entities.size(); ++i) {
       if (!(entities.get(i) instanceof StaticEntity)) {
-        ((DynamicEntity) entities.get(i)).simulate(my_simulatetime);
-        updateShape((DynamicEntity) entities.get(i));
+        if (((DynamicEntity)entities.get(i)).state() != 1) {
+          ((DynamicEntity) entities.get(i)).simulate(my_simulatetime);
+          updateShape((DynamicEntity) entities.get(i));
+        }
       }
       renderable.add(((Entity) entities.get(i)).shape());
       if (entities.get(i) instanceof Bullet) {
@@ -213,16 +230,16 @@ public final class Main {
   public static void createGameScreen() {
     final int my_width = 800;
     final int my_height = 600;
+    state = GameState.GAMEPLAY_STATE;
     started = true;
     if (mainFrame != null) {
       mainFrame.dispose();
     }
     mapBounds = new Rectangle2D.Double(0, 0, my_width, my_height);
     drawComponent = new GameDraw(renderable);
-    bulletCount = 0;
     mainFrame = new JFrame("Thrust");
     mainFrame.setVisible(true);
-    mainFrame.setSize(my_width, my_height);
+    mainFrame.setSize(my_width + 60, my_height + 60);
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.add(drawComponent);
     mainFrame.update(mainFrame.getGraphics());
@@ -234,32 +251,32 @@ public final class Main {
     entities = new ArrayList();
     renderable.add(mapBounds);
     playerShip =
-        new Spaceship(new double[] {450, 500}, 0, new double[] {0, 0},
+        new Spaceship(new double[] {450, 50}, 0, new double[] {0, 0},
             Spaceship.EMPTY_MASS + Spaceship.INITIAL_FUEL, new double[] {0, 0},
             "Triangle", new Ellipse2D.Double(450, 500, 20, 20), (byte) 0);
     entities.add(playerShip);
     renderable.add(playerShip.shape());
     theFactory =
-        new Factory(new double[] {450, 60}, 0.0, new double[] {0, 0}, 0.0,
-            new double[] {0, 0}, "Rectangle", new Rectangle2D.Double(450, 60,
+        new Factory(new double[] {450, 540}, 0.0, new double[] {0, 0}, 0.0,
+            new double[] {0, 0}, "Rectangle", new Rectangle2D.Double(450, 540,
                 60, 60), (byte) 0);
     entities.add(theFactory);
     renderable.add(theFactory.shape());
     theTurret =
-        new GunTurret(new double[] {280, 20}, 0.0, new double[] {0, 0}, 0.0,
-            new double[] {0, 0}, "Rectangle", new Rectangle2D.Double(280, 20,
+        new GunTurret(new double[] {280, 580}, 0.0, new double[] {0, 0}, 0.0,
+            new double[] {0, 0}, "Rectangle", new Rectangle2D.Double(280, 580,
                 60, 20), (byte) 0);
     entities.add(theTurret);
     renderable.add(theTurret.shape());
     theSphere =
-        new GoalSphere(new double[] {400, 40}, 0.0, new double[] {0, 0},
+        new GoalSphere(new double[] {400, 580}, 0.0, new double[] {0, 0},
             10000.0, new double[] {0, 0}, "Ellipse", new Ellipse2D.Double(400,
-                40, 20, 20), (byte) 0);
+                580, 20, 20), (byte) 1);
     entities.add(theSphere);
     renderable.add(theSphere.shape());
     theFuelPod =
-        new FuelPod(new double[] {720, 20}, 0.0, new double[] {0, 0}, 0.0,
-            new double[] {0, 0}, "Ellipse", new Ellipse2D.Double(720, 20, 20,
+        new FuelPod(new double[] {720, 580}, 0.0, new double[] {0, 0}, 0.0,
+            new double[] {0, 0}, "Ellipse", new Ellipse2D.Double(720, 580, 20,
                 20), (byte) 0);
     entities.add(theFuelPod);
     renderable.add(theFuelPod.shape());
@@ -267,8 +284,7 @@ public final class Main {
 
   private static void updateShape(final DynamicEntity the_entity) {
     final RectangularShape shape = (RectangularShape) the_entity.shape();
-    shape
-        .setFrame(the_entity.position()[0], the_entity.position()[1],
+    shape.setFrame(the_entity.position()[0], the_entity.position()[1],
           shape.getWidth(), shape.getHeight());
   }
 
@@ -285,7 +301,7 @@ public final class Main {
     System.exit(1);
   }
 
-  public static void turnLeft() {
+  public static void turnRight() {
     final int my_turnamount = 25;
     final int my_fullcircle = 360;
     playerShip.orientation(playerShip.orientation() - my_turnamount);
@@ -294,7 +310,7 @@ public final class Main {
     }
   }
 
-  public static void turnRight() {
+  public static void turnLeft() {
     final int my_turnamount = 25;
     final int my_fullcircle = 360;
     playerShip.orientation(playerShip.orientation() + my_turnamount);
@@ -377,7 +393,7 @@ public final class Main {
     }
 
     public void keyReleased(final KeyEvent the_key) {
-
+      my_key = -1;
     }
 
     public void keyTyped(final KeyEvent the_key) {
@@ -386,7 +402,7 @@ public final class Main {
 
     public int lastKeyPressed() {
       final int temp = my_key;
-      my_key = -1;
+      //my_key = -1;
       return temp;
     }
   }

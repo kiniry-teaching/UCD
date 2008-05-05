@@ -13,6 +13,7 @@ package thrust.input;
 import java.awt.event.KeyEvent;
 
 import thrust.Main;
+import thrust.entities.in_game.GameState;
 
 /**
  * Processes and delegates each keyboard input received.
@@ -55,12 +56,15 @@ public class InputHandler {
   }
 
   /*
-   * @ ensures \result <==> (the_character == DISPLAY_HIGH_SCORES) | @
-   * (the_character == TOGGLE_MUSIC_OR_EFFECTS) | @ (the_character ==
-   * START_GAME) | @ (the_character == STOP_GAME) | @ (the_character ==
-   * FIRE_GUN) | @ (the_character == TURN_LEFT) | @ (the_character ==
-   * TURN_RIGHT) | @ (the_character == USE_ENGINE) | @ (the_character ==
-   * USE_SHIELD); @
+   * @ ensures \result <==> (the_character == DISPLAY_HIGH_SCORES) |
+   * @ (the_character == TOGGLE_MUSIC_OR_EFFECTS) |
+   * @ (the_character == START_GAME) |
+   * @ (the_character == STOP_GAME) |
+   * @ (the_character == FIRE_GUN) |
+   * @ (the_character == TURN_LEFT) |
+   * @ (the_character == TURN_RIGHT) |
+   * @ (the_character == USE_ENGINE) |
+   * @ (the_character ==USE_SHIELD);
    */
   /**
    * @return Is this character a legal keyboard input?
@@ -85,30 +89,41 @@ public class InputHandler {
    */
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
-    switch(the_keyboard_input) {
-      case START_GAME:
-        Main.createGameScreen();
-        break;
-      case QUIT_GAME:
-        Main.quit();
-        break;
-      case USE_ENGINE:
-        Main.thrust();
-        break;
-      case TURN_LEFT:
-        Main.turnLeft();
-        break;
-      case TURN_RIGHT:
-        Main.turnRight();
-        break;
-      case FIRE_GUN:
-        Main.fire();
-        break;
-      case STOP_GAME:
-        Main.createWelcomeScreen();
-        break;
-      default:
-        break;
+    if(Main.state == GameState.MENU_STATE) {
+      switch(the_keyboard_input) {
+        case START_GAME:
+          Main.createGameScreen();
+          break;
+        case QUIT_GAME:
+          Main.quit();
+          break;
+        default:
+          break;
+      }
+    }
+    else {
+      switch(the_keyboard_input) {
+        case QUIT_GAME:
+          Main.quit();
+          break;
+        case USE_ENGINE:
+          Main.thrust();
+          break;
+        case TURN_LEFT:
+          Main.turnLeft();
+          break;
+        case TURN_RIGHT:
+          Main.turnRight();
+          break;
+        case FIRE_GUN:
+          Main.fire();
+          break;
+        case STOP_GAME:
+          Main.createWelcomeScreen();
+          break;
+        default:
+          break;
+      }
     }
   }
 }
