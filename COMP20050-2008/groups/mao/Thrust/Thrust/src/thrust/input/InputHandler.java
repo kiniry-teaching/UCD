@@ -54,8 +54,6 @@ public class InputHandler implements KeyListener
 
     }
 
-   
-
   /**
    * @return What are the legal keyboard inputs?
    */
@@ -124,8 +122,7 @@ public class InputHandler implements KeyListener
 					{
 					gameRunning = true;
 					}
-				}
-				
+				}	
 			}
 		}
 	}
@@ -133,6 +130,8 @@ public class InputHandler implements KeyListener
 		// <Override methods>
 	public void keyTyped(KeyEvent e) 
 	{
+	//System.out.println(e.getKeyChar());
+	//process(e.getKeyChar());
     }
     
 	public void keyPressed(KeyEvent e) 
@@ -143,6 +142,8 @@ public class InputHandler implements KeyListener
 	 
     public void keyReleased(KeyEvent e)
 	{
+	//System.out.println(e.getKeyChar());
+	//process(e.getKeyChar());
     }
 		// </Override methods>
 }
