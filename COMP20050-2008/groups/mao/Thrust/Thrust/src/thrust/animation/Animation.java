@@ -10,6 +10,8 @@
 
 package thrust.animation;
 
+import thrust.display.*;
+
 /**
  * The frames in an animation.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -17,5 +19,5 @@ package thrust.animation;
  */
 public interface Animation 
 {
-	private frame[] myFrames;
+	 gameFrame[] myFrames();
 }
