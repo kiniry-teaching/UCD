@@ -50,8 +50,6 @@ public final class Main {
   private static transient Iterator my_iterator;
   /** */
   private static long time;
-  /** */
-  private static boolean quit;
 
   /** This class cannot be constructed. */
   private Main() {
