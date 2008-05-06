@@ -137,7 +137,7 @@ public class Spaceship extends DynamicEntity
     */
    //@ ensures 0 <= \result;
   public /*@ pure @*/ double mass(){
-     my_physics.mass(EMPTY_MASS + INITIAL_FUEL);
+     my_physics.mass(EMPTY_MASS + my_fuel);
      return my_physics.mass();
    }
 
@@ -175,7 +175,7 @@ public class Spaceship extends DynamicEntity
     * @param some_seconds the number of seconds to simulate.
     */
    public void simulate(double some_seconds){
-     my_physics.simulate();
+     my_physics.simulate(some_seconds);
  }
 
 }
