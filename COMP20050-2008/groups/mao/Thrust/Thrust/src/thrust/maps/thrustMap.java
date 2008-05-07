@@ -34,6 +34,10 @@ public class thrustMap
 		// Split raw map details into lines
 		myMapLines = myDetails.split("\n");
 		
+		
+		
+		// 
+		
 			// Filter Map into sections
 			
 				// locks and positions for sections/headers
