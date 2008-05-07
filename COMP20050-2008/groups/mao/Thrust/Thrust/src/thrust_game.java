@@ -1,8 +1,12 @@
 
+import java.util.Vector;
 
 import thrust.input.*;
 import thrust.display.*;
 import thrust.maps.*;
+
+
+
 // thrust game thread
 
 class thrust_game implements Runnable 
@@ -11,6 +15,7 @@ class thrust_game implements Runnable
 	private int myCurrentChar;
 	private static InputHandler myInputHandler;
 	private thrustMap myMap;
+	private Vector myEntities;
 
 	
 	//private InputHandler myInputHandler;
