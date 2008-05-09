@@ -12,6 +12,8 @@ package thrust.entities.in_game;
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
+import thrust.physics.PhysicsClass;
+import thrust.physics.PhysicsInterface;
 
 /**
  * The goal sphere that the spaceship needs to tow into
@@ -39,4 +41,80 @@ public class GoalSphere extends DynamicEntity
     @ public invariant (* The color of the goal sphere is always green. *);
     @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
     @*/
+  
+  private PhysicsInterface my_physics = new PhysicsClass();
+  
+  /**
+   * @return What is your acceleration in meters per second squared?
+   */
+  //@ ensures \result.length == 2;
+  public /*@ pure @*/ double[] acceleration(){
+   return my_physics.acceleration();
+  }
+
+  /**
+   * @return What is the gravitational constant?
+   */
+  public /*@ pure @*/ double gravitational_constant(){
+    return my_physics.gravitational_constant();
+  }
+
+  /**
+   * @return What is your mass in kilograms?
+   */
+  //@ ensures 0 <= \result;
+ public /*@ pure @*/ double mass(){
+
+    return my_physics.mass();
+  }
+
+  /**
+   * @return What is your momentum in kilograms*meters per second?
+   */
+  public /*@ pure @*/ double momentum(){
+    return my_physics.momentum();
+  }
+
+  /**
+   * @return What is your orientation in radians?
+   */
+  public /*@ pure @*/ double orientation(){
+    return my_physics.orientation();
+  }
+
+  /**
+   * @return What is your position in meters from the origin?
+   */
+  //@ ensures \result.length == 2;
+ public  /*@ pure @*/ double[] position(){
+   return my_physics.position();
+  }
+ 
+ public void simulate(double time){
+   my_physics.simulate(time);
+ }
+
+  /**
+   * @return What is your velocity in meters per second?
+   */
+ public  /*@ pure @*/ double[] velocity(){
+   return my_physics.velocity();
+  }
+ 
+ /**
+  * @return Are you currently towing or being towed?
+  */
+ public /*@ pure @*/ boolean towed(){
+   //...
+   return false;
+ }
+
+ /**
+  * You are now towing or being towed.
+  */
+ //@ ensures towed();
+ public void tow(){
+   
+ }
+  
 }
