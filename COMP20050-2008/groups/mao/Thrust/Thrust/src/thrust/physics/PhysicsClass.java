@@ -34,13 +34,23 @@ public class PhysicsClass implements PhysicsInterface {
     my_speed = (phi.velocity())[0];
     my_acceleration = (phi.acceleration())[0];
     my_orientation = phi.orientation();
-    my_position_x = (phi.position())[0];;
-    my_position_y = (phi.position())[1];;
+    my_position_x = (phi.position())[0];
+    my_position_y = (phi.position())[1];
 
   }
   
   public PhysicsClass(){
     
+  }
+  
+  /**
+  * PhysicsClass constructor for static entities.
+  * */
+  public PhysicsClass(double the_pos_x, double the_pos_y, double the_mass){
+    my_speed = 0;
+    my_acceleration = 0;
+    my_position_x = the_pos_x;
+    my_position_y = the_pos_y;
   }
 
   public int getArrayLength() {
@@ -54,6 +64,11 @@ public class PhysicsClass implements PhysicsInterface {
     acceleration[1] = my_orientation;
     return acceleration;
   }
+  
+  public void acceleration(double the_acceleration){
+    my_acceleration = the_acceleration;
+  }
+
 
   public double gravitational_constant() {
     return THE_GRAV_CONST;
@@ -61,6 +76,10 @@ public class PhysicsClass implements PhysicsInterface {
 
   public double mass() {
     return my_mass;
+  }
+  
+  public void mass(double the_mass){
+    my_mass = the_mass;
   }
 
   public double momentum() {
@@ -70,6 +89,10 @@ public class PhysicsClass implements PhysicsInterface {
   public double orientation() {
     return my_orientation;
   }
+  
+  public void orientation(double the_orientation){
+    my_orientation = the_orientation;
+  }
 
   public double[] position() {
     final double[] position = new double[getArrayLength()];
@@ -78,15 +101,28 @@ public class PhysicsClass implements PhysicsInterface {
     return position;
   }
 
+  public void position_x(double the_position_x){
+    my_position_x = the_position_x;
+  }
+  public void position_y(double the_position_y){
+    my_position_y = the_position_y;
+  }
   public double[] velocity() {
     final double [] velocity = new double[getArrayLength()];
     velocity[0] = my_speed;
     velocity[1] = my_orientation;
     return velocity;
   }
+  public void speed(double the_speed){
+    my_speed = the_speed;
+  }
   
   public void simulate(double time){
     time = my_time;
+  }
+  
+  public void simulationTime(double the_time){
+    my_time = the_time;
   }
 
 }
