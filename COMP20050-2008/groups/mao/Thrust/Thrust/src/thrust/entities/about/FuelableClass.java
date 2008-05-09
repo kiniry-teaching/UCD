@@ -22,9 +22,11 @@ public class FuelableClass implements Fuelable {
   /** Capacity of fuel tank. */
   private int my_max_fuel;
   
- 
-  
-  
+  public FuelableClass(int the_initial_fuel, int the_max_fuel){
+    my_fuel = the_initial_fuel;
+    my_max_fuel = the_max_fuel;
+    
+  }
   
   /**
    * @param the_fuel_change Change your fuel content by this many units.
