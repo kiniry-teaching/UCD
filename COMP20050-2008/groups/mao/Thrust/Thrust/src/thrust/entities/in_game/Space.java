@@ -10,13 +10,12 @@
 package thrust.entities.in_game;
 
 import java.util.Collection;
-
+import java.util.Vector;
 import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.physics.PhysicsClass;
-import thrust.physics.PhysicsInterface;
 
 /**
  * The vacuum in which entities exist.
@@ -28,14 +27,28 @@ import thrust.physics.PhysicsInterface;
 public class Space extends StaticEntity
   implements NeutralEntity, Animatable {
   
-  private PhysicsInterface my_physics = new PhysicsClass();
+  private PhysicsClass my_physics;
   private Animation my_animation;
+  private final static double SPACE_MASS = 0;
+  private final static double SPACE_POS_X = 0;
+  private final static double SPACE_POS_Y = 0;
+  private Collection my_stars;
+  /**
+   * Space constructor.
+   */
+  public Space(){
+      my_physics = new PhysicsClass(SPACE_POS_X, SPACE_POS_Y, SPACE_MASS);
+      //my_animation = new Animation();
+      my_stars = new Vector();
+  }
+  
+  
   /**
    * @return What are your stars?"
    */
   public /*@ pure @*/ Collection stars() {
     assert false; //@ assert false;
-    return null;
+    return my_stars;
   }
 
   /**
@@ -44,6 +57,7 @@ public class Space extends StaticEntity
    */
   public void add_star(Star the_star) {
     assert false; //@ assert false;
+    my_stars.add(the_star);
   }
 
   

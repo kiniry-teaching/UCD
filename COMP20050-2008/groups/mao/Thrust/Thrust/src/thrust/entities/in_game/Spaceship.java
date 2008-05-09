@@ -12,6 +12,7 @@ package thrust.entities.in_game;
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
 import thrust.entities.about.Fuelable;
+import thrust.entities.about.FuelableClass;
 import thrust.entities.behaviors.Tow;
 import thrust.physics.*;
 
@@ -22,6 +23,7 @@ import thrust.physics.*;
  */
 public class Spaceship extends DynamicEntity
   implements FriendEntity, Fuelable, Tow {
+  
   /*@ public invariant (* A spaceship's mass when empty of all fuel is
     @                     10000kg. *);
     @ public invariant EMPTY_MASS <= mass();
@@ -35,11 +37,17 @@ public class Spaceship extends DynamicEntity
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
   
-  public int my_fuel;
-  public PhysicsClass my_physics = new PhysicsClass();
+  public PhysicsClass my_physics;
+  public Fuelable my_fuelable;
   
-  
-  
+  /**
+   * Spaceship constructor.
+   */
+  public Spaceship(){
+      my_physics = new PhysicsClass();
+      //my_animation = new Animation();
+      my_fuelable = new FuelableClass(INITIAL_FUEL, INITIAL_FUEL);
+  }
   
   //@ public initially_redundantly mass() == EMPTY_MASS + INITIAL_FUEL;
 
@@ -82,22 +90,21 @@ public class Spaceship extends DynamicEntity
   
   
   public void change_fuel_content(int the_fuel_change) {
-    int fuel = fuel() + the_fuel_change;
-    my_fuel = fuel;
+    my_fuelable.change_fuel_content(the_fuel_change);
    }
 
    /**
     * @return How much fuel do you contain?
     */
    public int fuel() {
-     return my_fuel;
+     return my_fuelable.fuel();
    }
 
    /**
     * @return What is the mass of your fuel?
     */
    public int fuel_mass() {
-     return fuel() * 1;
+     return my_fuelable.fuel_mass();
    }
 
    /**
@@ -114,7 +121,7 @@ public class Spaceship extends DynamicEntity
    //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
    //@ ensures fuel() == the_fuel_content;
    public void set_fuel_content(int the_fuel_content) {
-    my_fuel = the_fuel_content;
+    my_fuelable.set_fuel_content(the_fuel_content);
    }
 
    /**
@@ -137,7 +144,7 @@ public class Spaceship extends DynamicEntity
     */
    //@ ensures 0 <= \result;
   public /*@ pure @*/ double mass(){
-     my_physics.mass(EMPTY_MASS + my_fuel);
+     my_physics.mass(EMPTY_MASS + my_fuelable.fuel_mass());
      return my_physics.mass();
    }
 

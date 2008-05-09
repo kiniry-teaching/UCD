@@ -9,12 +9,9 @@
  */
 package thrust.entities.in_game;
 
-import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.physics.PhysicsClass;
-import thrust.physics.PhysicsInterface;
-
 /**
  * The planet on which some entities rest.
  * @author Joe Kiniry (kiniry@acm.org)
@@ -26,8 +23,20 @@ public class Terrain extends StaticEntity
     @ public invariant (* The shape of the terrain is rendered as a
     @                     sequence of horizontal lines. *);
     @*/
+  private PhysicsClass my_physics;
+  private final static double TERRAIN_POS_X = 600;
+  private final static double TERRAIN_POS_Y = 400;
   
-  private PhysicsInterface my_physics = new PhysicsClass();
+  /**
+   * Terrain constructor.
+   */
+  public Terrain(){
+      my_physics = new PhysicsClass();
+      //my_animation = new Animation();
+      my_physics.position_x(TERRAIN_POS_X);
+      my_physics.position_y(TERRAIN_POS_Y);
+  }
+  
  
   /**
    * @return What is your acceleration in meters per second squared?

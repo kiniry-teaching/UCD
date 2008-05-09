@@ -14,7 +14,6 @@ import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.physics.PhysicsClass;
-import thrust.physics.PhysicsInterface;
 
 /**
  * A blinking star in space.
@@ -29,8 +28,20 @@ public class Star extends StaticEntity
     @ public invariant (* A star's shape is always a small square. *);
     @*/
   
-  private PhysicsInterface my_physics = new PhysicsClass();
+  private PhysicsClass my_physics;
   private Animation my_animation;
+  private final static double STAR_MASS = 0;
+  
+  /**
+   * Star constructor.
+   */
+  public Star(double star_pos_x, double star_pos_y){
+      my_physics = new PhysicsClass();
+      //my_animation = new Animation();
+      my_physics.mass(STAR_MASS);
+      my_physics.position_x(star_pos_x);
+      my_physics.position_y(star_pos_y);
+  }
   
   /**
    * @return What is your animation?

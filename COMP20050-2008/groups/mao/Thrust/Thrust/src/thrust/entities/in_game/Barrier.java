@@ -14,6 +14,7 @@ import thrust.animation.Animatable;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 import thrust.physics.*;
 
 /**
@@ -25,8 +26,21 @@ public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
   
   private Animation my_animation;
-  private PhysicsInterface my_physics = new PhysicsClass();
+  private PhysicsClass my_physics; 
   private int my_step_count;
+  private final static double BARRIER_MASS = 100;
+  
+  /**
+   * Barrier constructor.
+   */
+  public Barrier(double the_position_x, double the_position_y){
+    
+        my_physics = new PhysicsClass();
+        //my_animation = new Animation();
+          my_physics.mass(BARRIER_MASS);
+          my_physics.position_x(the_position_x);
+          my_physics.position_y(the_position_y);
+  }
   
   /**
    * @return Are you closed?

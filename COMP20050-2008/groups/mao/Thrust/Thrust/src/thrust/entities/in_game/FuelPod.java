@@ -13,7 +13,7 @@ import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.about.*;
 import thrust.physics.PhysicsClass;
-import thrust.physics.PhysicsInterface;
+
 
 /**
  * A fuel pod from which the spaceship can obtain fuel.
@@ -30,10 +30,23 @@ public class FuelPod extends StaticEntity
     @ public invariant (* A fuel pod's 'fuel' lettering color is
     @                     dictated by the amount of fuel it contains. *);
     @*/
-  public static final int INITIAL_FUEL = 1000;
+  public static final int INITIAL_FUEL = 10000;
   
-  private PhysicsInterface my_physics = new PhysicsClass();
-  private Fuelable my_fuelable = new FuelableClass(INITIAL_FUEL, INITIAL_FUEL);
+  private PhysicsClass my_physics;
+  private Fuelable my_fuelable; 
+  private final static double FUELPOD_POS_X = 222;
+  private final static double FUELPOD_POS_Y = 111;
+  private final static double FUELPOD_MASS = 100;
+  
+  /**
+   * FuelPod constructor.
+   */
+  public FuelPod(){
+      my_physics = new PhysicsClass(FUELPOD_POS_X, FUELPOD_POS_Y, FUELPOD_MASS);
+      //my_animation = new Animation();
+      my_fuelable = new FuelableClass(INITIAL_FUEL, INITIAL_FUEL);
+  }
+  
   
   public void simulate(double time){
     my_physics.simulate(time);
@@ -59,7 +72,7 @@ public class FuelPod extends StaticEntity
   //@ ensures 0 <= \result;
  public /*@ pure @*/ double mass(){
 
-    return my_physics.mass();
+    return my_physics.mass() + my_fuelable.fuel_mass();
   }
 
   /**

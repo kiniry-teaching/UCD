@@ -24,8 +24,20 @@ public class Explosion extends StaticEntity
   implements NeutralEntity, Animatable {
 
   private Animation my_animation;
-  private PhysicsInterface my_physics = new PhysicsClass();
+  private PhysicsClass my_physics;
+  private final static double EXPLOSION_MASS = 0;
   
+  /**
+   * Explosion constructor.
+   */
+  public Explosion(double the_position_x, double the_position_y){
+      my_physics = new PhysicsClass();
+      my_physics.mass(EXPLOSION_MASS);
+      my_physics.position_x(the_position_x);
+      my_physics.position_y(the_position_y);
+      //my_animation = new Animation();
+      
+  }
   /**
    * @return What is your animation?
    */

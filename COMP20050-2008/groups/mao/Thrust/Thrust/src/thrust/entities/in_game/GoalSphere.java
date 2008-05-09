@@ -13,7 +13,6 @@ import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
 import thrust.physics.PhysicsClass;
-import thrust.physics.PhysicsInterface;
 
 /**
  * The goal sphere that the spaceship needs to tow into
@@ -23,26 +22,18 @@ import thrust.physics.PhysicsInterface;
  */
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
-  /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
-    @ public invariant (* If the fuel pod is destroyed, the spaceship
-    @                     is destroyed. *);
-    @ public invariant (* The goal sphere is destroyed by the factory's
-    @                     chimney, but not its sphere. *);
-    @ public invariant (* The goal sphere is not affected by the gun turret. *);
-    @ public invariant (* The goal sphere is not affected by the fuel pod. *);
-    @ public invariant (* The goal sphere is not affected by space. *);
-    @ public invariant (* The goal sphere is not affected by stars. *);
-    @ public invariant (* The goal sphere is destroyed by the terrain. *);
-    @ public invariant (* When rendered on the terrain, the goal sphere
-    @                     sits on a pedestal. *);
-    @ public invariant (* When being towed, the goal sphere is rendered
-    @                     as a sphere. *);
-    @ public invariant (* The shape of the goal sphere is always a circle. *);
-    @ public invariant (* The color of the goal sphere is always green. *);
-    @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
-    @*/
   
-  private PhysicsInterface my_physics = new PhysicsClass();
+  private PhysicsClass my_physics;
+  private final static double GOALSPHERE_MASS = 500;
+  
+  /**
+   * GoalSphere constructor.
+   */
+  public GoalSphere(){
+      my_physics = new PhysicsClass();
+      my_physics.mass(GOALSPHERE_MASS);
+  }
+  
   
   /**
    * @return What is your acceleration in meters per second squared?
@@ -116,5 +107,22 @@ public class GoalSphere extends DynamicEntity
  public void tow(){
    
  }
-  
+ /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
+ @ public invariant (* If the fuel pod is destroyed, the spaceship
+ @                     is destroyed. *);
+ @ public invariant (* The goal sphere is destroyed by the factory's
+ @                     chimney, but not its sphere. *);
+ @ public invariant (* The goal sphere is not affected by the gun turret. *);
+ @ public invariant (* The goal sphere is not affected by the fuel pod. *);
+ @ public invariant (* The goal sphere is not affected by space. *);
+ @ public invariant (* The goal sphere is not affected by stars. *);
+ @ public invariant (* The goal sphere is destroyed by the terrain. *);
+ @ public invariant (* When rendered on the terrain, the goal sphere
+ @                     sits on a pedestal. *);
+ @ public invariant (* When being towed, the goal sphere is rendered
+ @                     as a sphere. *);
+ @ public invariant (* The shape of the goal sphere is always a circle. *);
+ @ public invariant (* The color of the goal sphere is always green. *);
+ @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
+ @*/
 }

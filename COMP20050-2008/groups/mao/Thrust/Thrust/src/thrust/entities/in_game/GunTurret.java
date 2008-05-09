@@ -28,7 +28,24 @@ public class GunTurret extends StaticEntity
     @ public invariant color() == thrust.entities.properties.GameColor.GREEN;
     @*/
   
-  private PhysicsInterface my_physics = new PhysicsClass();
+  private PhysicsClass my_physics; 
+  private AI my_attack;
+  private AI my_disturb;
+  private final static double GUNTUR_MASS = 500;
+  
+  /**
+   * GunTurret constructor.
+   */
+  public GunTurret(double the_position_x, double the_position_y){
+    my_physics = new PhysicsClass();
+    my_physics.mass(GUNTUR_MASS);
+    my_physics.position_x(the_position_x);
+    my_physics.position_y(the_position_y);
+    //my_animation = new Animation();
+      my_attack = new AI();
+      my_disturb = new AI();
+  }
+  
   /**
    * @return What is your acceleration in meters per second squared?
    */
@@ -89,14 +106,14 @@ public class GunTurret extends StaticEntity
   * @return What is your attack behavior AI?
   */
  public /*@ pure @*/ AI attack(){
-   
+   return my_attack;
  }
 
  /**
   * @return What is your disturb behavior AI?
   */
  public /*@ pure @*/ AI disturb(){
-   
+   return my_disturb;
  }
  /**
   * @param the_behavior This is your attack behavior.
