@@ -64,8 +64,7 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.entities.about.Fuelable#fuel_mass()
    */
   public int fuel_mass() {
-    // TODO Auto-generated method stub
-    return 0;
+    return my_fuel;
   }
 
   /*
@@ -73,7 +72,11 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.entities.about.Fuelable#fuel()
    */
   public float fuel() {
-    return (int) maximum_fuel();
+    float answer = 0;
+    if (0 <= my_fuel && my_fuel <= maximum_fuel()) {
+      answer = my_fuel;
+    }
+    return answer;
   }
 
   /*
@@ -99,8 +102,7 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.entities.behaviors.Tow#tow()
    */
   public void tow() {
-    // TODO Auto-generated method stub
-
+    my_tow_state = true;
   }
 
   /*
@@ -108,17 +110,16 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.entities.behaviors.Tow#towed()
    */
   public boolean towed() {
-    // TODO Auto-generated method stub
-    return false;
+    return my_tow_state;
   }
 
   /*
+   * A spaceship is always white.
    * (non-Javadoc)
    * @see thrust.entities.properties.GameColor#color()
    */
   public Color color() {
-    // TODO Auto-generated method stub
-    return null;
+    return java.awt.Color.WHITE;
   }
 
   /*
@@ -126,7 +127,9 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.entities.properties.GameColor#color(java.awt.Color)
    */
   public void color(final Color the_color) {
-    // TODO Auto-generated method stub
+    if (the_color == java.awt.Color.WHITE) {
+      my_Color(java.awt.Color.WHITE);
+    }
   }
 
   /*
@@ -152,8 +155,7 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.physics.PhysicsInterface#mass()
    */
   public double mass() {
-    // TODO Auto-generated method stub
-    return 0;
+    return super.mass() + fuel_mass() + (towed() ? GoalSphere.MASS : 0);
   }
 
   /*
@@ -161,7 +163,7 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.physics.PhysicsInterface#mass(double)
    */
   public void mass(final double the_mass) {
-    // TODO Auto-generated method stub
+    //But the spaceship's mass is private...
   }
 
   /*

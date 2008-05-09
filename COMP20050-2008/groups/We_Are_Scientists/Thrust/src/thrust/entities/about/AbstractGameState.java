@@ -10,8 +10,6 @@
 
 package thrust.entities.about;
 
-import thrust.entities.about.GameState.HighScoreInterface;
-
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.

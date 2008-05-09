@@ -11,13 +11,12 @@ public class Physics {
    * The gravitational constant.
    */
   private static final double GRAV_CONST = 0.0000000000667300;
-  
+
   /**
    * The spaceship's mass.
    */
   private static final double SPACESHIP_MASS = 50000;
-  
-  
+
 //@ constraint (* The gravitational constant never changes. *);
   //@ constraint gravitational_constant() == \old(gravitational_constant());
 
