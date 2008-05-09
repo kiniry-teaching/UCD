@@ -24,6 +24,8 @@ public class Bullet extends DynamicEntity
   implements EnemyEntity {
   
   private PhysicsInterface my_physics = new PhysicsClass();
+  private AI my_attack;
+  private AI my_disturb;
   
   /* (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
@@ -97,14 +99,14 @@ public class Bullet extends DynamicEntity
    * @return What is your attack behavior AI?
    */
   public /*@ pure @*/ AI attack(){
-    
+    return my_attack;
   }
 
   /**
    * @return What is your disturb behavior AI?
    */
   public /*@ pure @*/ AI disturb(){
-    
+    return my_disturb;
   }
   /**
    * @param the_behavior This is your attack behavior.
