@@ -40,7 +40,7 @@ import thrust.input.InputHandler;
 
 /**
  * Simulating all of the entities in the game to realize the game.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 23 April 2008
  */
 public final class Main {
@@ -123,7 +123,7 @@ public final class Main {
    */
   private static List playerBullets;
   /**
-   * The state the game is in (menu, gameplay, etc.)
+   * The state the game is in (menu, gameplay, etc.).
    */
   public static byte state;
   /**
@@ -213,16 +213,16 @@ public final class Main {
     renderable.add(orientLine);
     renderable.add(mapBounds);
     for (int i = 0; i < entities.size(); ++i) {
-      Entity curEnt = (Entity) entities.get(i);
-      if (!(curEnt instanceof StaticEntity)) {
-        if (((DynamicEntity)curEnt).state() != 1) {
-          ((DynamicEntity) curEnt).simulate(my_simulatetime);
-          updateShape((DynamicEntity) curEnt);
+      Entity cur_ent = (Entity) entities.get(i);
+      if (!(cur_ent instanceof StaticEntity)) {
+        if (((DynamicEntity)cur_ent).state() != 1) {
+          ((DynamicEntity) cur_ent).simulate(my_simulatetime);
+          updateShape((DynamicEntity) cur_ent);
         }
       }
-      renderable.add(((Entity) curEnt).shape());
-      if (curEnt instanceof Bullet) {
-        final Bullet bull = (Bullet) curEnt;
+      renderable.add(((Entity) cur_ent).shape());
+      if (cur_ent instanceof Bullet) {
+        final Bullet bull = (Bullet) cur_ent;
         if (!mapBounds.contains(bull.position()[0], bull
             .position()[1])) {
           entities.remove(i);
@@ -230,11 +230,11 @@ public final class Main {
           bulletCount--;
         }
       }
-      if (curEnt instanceof GunTurret) {
-        for(int j = 0; j < playerBullets.size(); ++j) {
-          if(((Rectangle2D.Double)curEnt.shape())
+      if (cur_ent instanceof GunTurret) {
+        for (int j = 0; j < playerBullets.size(); ++j) {
+          if (((Rectangle2D.Double)cur_ent.shape())
               .contains((Rectangle2D.Double)((Entity)playerBullets.get(j)).shape())) {
-            entities.remove(curEnt);
+            entities.remove(cur_ent);
             playerBullets.remove(j);
             entities.remove(playerBullets.get(j));
           }

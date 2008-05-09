@@ -18,7 +18,7 @@ import thrust.entities.in_game.GameState;
 /**
  * Processes and delegates each keyboard input received.
  *
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 2 April 2008
  */
 public class InputHandler {

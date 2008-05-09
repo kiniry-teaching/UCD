@@ -16,7 +16,7 @@ import thrust.entities.StaticEntity;
 
 /**
  * The vacuum in which entities exist.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public class Space extends StaticEntity implements NeutralEntity, Animatable {

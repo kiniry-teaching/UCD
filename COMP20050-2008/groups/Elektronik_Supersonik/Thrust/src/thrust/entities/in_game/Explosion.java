@@ -19,7 +19,7 @@ import thrust.animation.EntityAnimation;
 
 /**
  * An explosion.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public class Explosion extends StaticEntity implements NeutralEntity,

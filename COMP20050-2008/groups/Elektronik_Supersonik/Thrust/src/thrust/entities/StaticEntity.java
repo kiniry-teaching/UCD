@@ -14,7 +14,7 @@ import java.awt.Shape;
 
 /**
  * Entities whose position and orientation do not change.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public abstract class StaticEntity extends DynamicEntity {

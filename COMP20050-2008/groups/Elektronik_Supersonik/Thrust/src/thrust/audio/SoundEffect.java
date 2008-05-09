@@ -22,7 +22,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Any sound made in response to a event.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 2 April 2008
  */
 public class SoundEffect {

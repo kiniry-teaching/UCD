@@ -18,7 +18,7 @@ import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public class Bullet extends DynamicEntity implements EnemyEntity {

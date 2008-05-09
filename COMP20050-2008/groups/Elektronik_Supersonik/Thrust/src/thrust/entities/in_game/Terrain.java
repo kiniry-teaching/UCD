@@ -14,7 +14,7 @@ import thrust.entities.StaticEntity;
 
 /**
  * The planet on which some entities rest.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public class Terrain extends StaticEntity implements NeutralEntity {

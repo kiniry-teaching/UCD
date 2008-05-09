@@ -14,7 +14,7 @@ import thrust.entities.StaticEntity;
 
 /**
  * A blinking star in space.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public class Star extends StaticEntity implements NeutralEntity, Animatable {

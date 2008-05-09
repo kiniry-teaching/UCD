@@ -18,7 +18,7 @@ import thrust.entities.about.Fuelable;
 
 /**
  * A fuel pod from which the spaceship can obtain fuel.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 18 April 2008
  */
 public class FuelPod extends StaticEntity implements NeutralEntity, Fuelable {

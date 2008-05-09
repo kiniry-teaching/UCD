@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * In-game music.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 2 April 2008
  */
 public class Music {
