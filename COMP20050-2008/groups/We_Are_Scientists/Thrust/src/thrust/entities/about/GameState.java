@@ -10,6 +10,9 @@
 
 package thrust.entities.about;
 
+//import thrust.entities.about.AbstractGameState.HighScoreInterface;
+import thrust.entities.in_game.Spaceship;
+
 /**
  * The state of the Thrust game, including current score, bonus, fuel, lives,
  * and high scores.
@@ -17,43 +20,46 @@ package thrust.entities.about;
  * @author simon markey,holly baker,ursula redmond (simon.markey@ucdconnect.ie)
  * @version 11 April 2008
  */
-public class GameState {
+public class GameState extends AbstractGameState {
 
-  /** bonus.*/
+  /** The game state. */
+  private static byte my_state;
+
+  /** Initial lives the player has. */
+  private static final byte INIT_LIVES = 4;
+
+  /** The number of points required to gain a life. */
+  //private static final int NEW_LIFE_POINTS = 10000;
+
+  /** Bonus at end of level.*/
   private transient int my_bonus;
 
-  /**the current lives, initially 4.*/
-  private transient byte my_lives;
+  /** The current lives the player has. */
+  private transient byte my_lives = INIT_LIVES;
 
-  /**the initial fuel.*/
-  private final transient int my_fuel;
+  /** The current fuel of the spaceship. */
+  private final transient int my_fuel = Spaceship.INITIAL_FUEL;
 
-  /**the maximum fuel.*/
+  /** The maximum fuel.*/
   private final transient float my_maximum_fuel = Float.POSITIVE_INFINITY;
-  /**the maximum fuel there can be.*/
 
-  /**the initial score.*/
+  /** The initial score.*/
   private transient int my_score;
 
-  /**an array containing the highscores.*/
+  /** An array containing the high scores.*/
   private final transient HighScoreInterface[] my_highScores;
 
-  /**the amount of highscores there can be.*/
-
-  /**
-   * There are eight high scores.
-   */
-  public final static int MY_HIGH_SCORE_COUNT = 8;
+  /** There are eight high scores. */
+  //private static final int MY_HIGH_SCORE_COUNT = 8;
 
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
 
-  public GameState(final int the_initial_fuel, final byte the_initial_lives) {
+  public GameState() {
+    super();
     my_bonus = 0;
-    my_lives = the_initial_lives;
-    my_fuel = the_initial_fuel;
     my_score = 0;
-    my_highScores = new HighScoreInterface[my_HIGH_SCORE_COUNT];
+    my_highScores = new HighScoreInterface[AbstractGameState.HIGH_SCORE_COUNT];
   }
 
   /**
@@ -61,7 +67,7 @@ public class GameState {
    * @bon BONUS What is your value?
    */
   //@ ensures 0 <= \result;
-  public/*@ pure @*/int bonus() {
+  public int bonus() {
     return my_bonus;
   }
 
@@ -72,11 +78,8 @@ public class GameState {
   //@ ensures bonus() == the_new_value;
   public void new_bonus(final int the_new_value) {
     if (the_new_value >= 0) {
-
       my_bonus = the_new_value;
-
     }
-
   }
 
   //@ invariant (* Bonus values are always non-negative. *);
@@ -90,9 +93,8 @@ public class GameState {
    * a convenience method.
    */
   //@ ensures 0 <= \result;
-  public/*@ pure @*/int current_fuel() {
+  public int current_fuel() {
     return my_fuel;
-
   }
 
   /**
@@ -100,17 +102,16 @@ public class GameState {
    * @idea The maximum fuel of the spaceship.
    */
   //@ ensures 0 <= \result;
-  public/*@ pure @*/float maximum_fuel() {
-    return my_maximum_fuel;
+  public int maximum_fuel() {
+    return (int) my_maximum_fuel;
   }
 
   /**
    * @return What is the current score?
    */
   //@ ensures 0 <= \result;
-  public/*@ pure @*/int score() {
+  public int score() {
     return my_score;
-
   }
 
   //@ invariant (* Score is always non-negative and finite. *);
@@ -129,9 +130,8 @@ public class GameState {
    * @return How many lives do you have?
    */
   //@ ensures 0 <= \result;
-  public/*@ pure @*/byte lives() {
+  public byte lives() {
     return my_lives;
-
   }
 
   //@ invariant (* Number of lives is always non-negative and finite. *);
@@ -141,8 +141,8 @@ public class GameState {
    * @param some_new_lives Change the current lives by this many lives.
    */
   //@ ensures lives() == \old(lives() + some_new_lives);
-  public/*@ pure @*/void change_lives(final byte some_new_lives) {
-    my_lives += some_new_lives;
+  public void change_lives(final byte some_new_lives) {
+    my_lives = (byte) (my_lives + some_new_lives);
   }
 
   /**
@@ -150,20 +150,8 @@ public class GameState {
    */
   //@ ensures \result.length == HIGH_SCORE_COUNT;
   //@ ensures \nonnullelements(\result);
-  public/*@ pure @*/HighScoreInterface[] high_scores() {
-    for (int i = 0; i < my_highScores.length; i++) {
-
-      for (int j = my_highScores.length; j > i; j--) {
-        if (my_highScores[i].score() > my_highScores[j].score()) {
-          final int temp = my_highScores[i].score();
-          my_highScores[i].new_score(my_highScores[j].score());
-          my_highScores[j].new_score(temp);
-
-        }
-
-      }
-    }
-    return my_highScores;
+  public HighScoreInterface[] high_scores() {
+    return (HighScoreInterface[])my_highScores.clone();
   }
 
   /*@ invariant (\forall int i, j; 0 <= i & i < j & j < HIGH_SCORE_COUNT &
@@ -181,7 +169,7 @@ public class GameState {
    */
   //@ requires 0 <= the_index & the_index < HIGH_SCORE_COUNT;
   //@ ensures \result.equals(high_scores()[the_index]);
-  public/*@ pure non_null @*/HighScoreInterface high_score(final int the_index) {
+  public HighScoreInterface high_score(final int the_index) {
     return my_highScores[the_index];
   }
 
@@ -193,18 +181,19 @@ public class GameState {
   /*@ ensures \result <==> high_scores()[0].score() >= the_high_score.score() &
     @                      the_high_score.score() >= high_scores()[HIGH_SCORE_COUNT-1].score();
     @*/
-  public/*@ pure @*/boolean new_high_score(
+  public boolean new_high_score(
             final HighScoreInterface the_possible_new_high_score) {
-    int lowest = my_highScores[0].my_score;
 
-    for (int i = 0; i < my_highScores.length; i++) {
-      if (lowest > my_highScores[i].my_score) {
-        lowest = my_highScores[i].my_score;
+    int lowest = my_highScores[0].score();
 
+    for (int i = 0; i < HIGH_SCORE_COUNT - 1; i++) {
+      if (my_highScores[i] != null && lowest > my_highScores[i].score()) {
+        lowest = my_highScores[i].score();
       }
     }
+
     boolean answer;
-    if (the_possible_new_high_score.my_score > lowest) {
+    if (the_possible_new_high_score.score() > lowest) {
       answer = true;
     } else {
       answer = false;
@@ -222,70 +211,29 @@ public class GameState {
     @*/
   public void add_high_score(
             final /*@ non_null @*/HighScoreInterface the_new_high_score) {
-//This adds a high score to the table.
+    for (int i = 0; i < HIGH_SCORE_COUNT - 1; i++) {
+      if (my_highScores[i] != null && my_score > my_highScores[i].score() &&
+          i > 0) {
+        my_highScores[i - 1] = my_highScores[i];
+      } else {
+        my_highScores[i] = the_new_high_score;
+      }
+    }
   }
 
   /**
-   * A pair of a sequence of three initials and a score.
-   *
-   * @author Joe Kiniry (kiniry@acm.org)
-   * @version 11 April 2008
+   * Sets the state.
+   * @param the_new_state The new state
    */
-  public class HighScoreInterface {
-    /**
-     * Stores the score.
-     */
-    private transient int my_score;
-    /**
-     * Stores the name.
-     */
-    private transient char[] my_name;
-    /**
-     * @return What is your score?
-     */
-    //@ ensures 0 <= \result;
-    public/*@ pure @*/int score() {
-      return my_score;
-    }
+  public void set_state(final byte the_new_state) {
+    my_state = the_new_state;
+  }
 
-    /**
-     * @return What are your initials?
-     */
-    //@ ensures \result.length == 3;
-    public/*@ pure @*/char[] initials() {
-      return my_name;
-    }
-
-    /**
-     * @param the_new_score This is your score.
-     */
-    //@ requires 0 <= the_new_score;
-    //@ ensures score() == the_new_score;
-    public void new_score(final int the_new_score) {
-      if (the_new_score >= 0) {
-        my_score = the_new_score;
-      }
-    }
-
-    /**
-     * @param the_new_initials These are your initials.
-     */
-    //@ requires the_new_initials.length == 3;
-    //@ ensures initials().equals(\old(the_new_initials));
-    public void new_initials(final /*@ non_null @*/char[] the_new_initials) {
-      final int an_IN3 = 3;
-      final int second = 2;
-      if (the_new_initials.length == an_IN3) {
-        my_name[0] = the_new_initials[0];
-        my_name[1] = the_new_initials[1];
-        my_name[second] = the_new_initials[second];
-      }
-    }
-
-    //@ invariant (* High scores are always non-negative and finite. *);
-    //@ invariant 0 <= score();
-
-    //@ invariant (* Initials are always three characters in length. *);
-    //@ invariant initials().length == 3;
+  /**
+   * Returns the state.
+   * @return The state
+   */
+  public byte get_state() {
+    return my_state;
   }
 }
