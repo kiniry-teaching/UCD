@@ -9,88 +9,106 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.animation.Animatable;
+import thrust.animation.AnimatableImp;
+import thrust.animation.Animation;
 import thrust.entities.EnemyEntity;
+import thrust.entities.EnemyEntityImp;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
- * @author simon markey 
- * @version 18 April 2008
+ * @author ursula redmond (ursula.redmond@ucdconnect.ie)
+ * Original by Simon.
+ * @version 10 May 2008
  */
 public class Factory extends StaticEntity
-  implements EnemyEntity, Animatable{
-  
-  byte damage=0;
-  int upDateDamage=-20;
-  private StaticEntity my_entity;
-  public boolean shot=false;
-  int hp = my_entity.state();
-  hp=100;
+  implements EnemyEntity, Animatable {
+
+  /** Amount factory damage, initially zero. */
+  private transient byte my_damage;
+  /** Factory's chimney. */
+  private static transient FactoryChimney my_chimney;
+  /** Factory's sphere. */
+  private transient FactorySphere my_sphere;
+  /** Factory's AI. */
+  private transient EnemyEntityImp my_ai;
+  /** Factory's animation. */
+  private transient AnimatableImp my_animation;
+
+  public AI attack() {
+    return my_ai.attack();
+  }
+
+  public void attack(final AI the_behavior) {
+    my_ai.attack(the_behavior);
+  }
+
+  public AI disturb() {
+    return my_ai.disturb();
+  }
+
+  public void disturb(final AI the_behavior) {
+    my_ai.disturb(the_behavior);
+  }
+
+  public void animate() {
+    my_animation.animate();
+  }
+
+  public Animation animation() {
+    return my_animation.animation();
+  }
+
+  public void animation(final Animation the_animation) {
+    my_animation.animation(the_animation);
+  }
+
+  public Color color() {
+    return chimney().color();
+  }
+
+  public void color(final Color the_color) {
+    if (the_color == chimney().color()) {
+      my_Color(chimney().color());
+    }
+  }
+
   /**
    * @return How much damage have you sustained?
    */
   //@ ensures 0 <= \result & \result <= 20;
-  public /*@ pure @*/ byte damage() {
-    if(shot()==true)
-    {
-      damage++;
-      return damage;
-    } 
-    
-    
-    
-  
-    //assert false; //@ assert false;
-    
-  }
-
-  private boolean shot() {
-    return true;
-    // TODO Auto-generated method stub
-    return false;
+  public byte damage() {
+    return my_damage;
   }
 
   /**
    * @return What is your chimney?
    */
-  public /*@ pure @*/ FactoryChimney chimney() {
-    //chimney animation???
-    while(hp>50)
-    {
-    animate();
-    }
-   // assert false; //@ assert false;
-    //return null;
-    return null;
+  public static FactoryChimney chimney() {
+    return my_chimney;
   }
 
   /**
    * @return What is your sphere?
    */
-  public /*@ pure @*/ FactorySphere sphere() {
-    
-    //implement shape and size and location etc AGAIN eughgh
-    assert false; //@ assert false;
-    return null;
+  public FactorySphere sphere() {
+    return my_sphere;
   }
 
   /**
    * @param the_damage You have sustained this many units of damage.
    */
   //@ requires 0 <= the_damage;
-  //@ ensures damage() == \old(damage() - the_damage);
-  public void damage(byte the_damage) {
-    the_damage=(byte) (damage()+the_damage);
-    
-    if(the_damage>=20)
-    {
-      Explosion();
+  //@ ensures damage() == \old(damage() + the_damage);
+  public void damage(final byte the_damage) {
+    if (the_damage >= 0) {
+      my_damage = (byte) (my_damage + the_damage);
     }
-    
-    
-    //assert false; //@ assert false;
   }
 
   /*@ public invariant (* All factories have exactly one sphere and
@@ -112,24 +130,32 @@ public class Factory extends StaticEntity
   //@ public invariant (* See constraint on color in FactoryChimney. *);
   //@ public invariant color() == chimney().color();
 
-  
   /**
    * A chimney of a factory.
    * @author Joe Kiniry (kiniry@acm.org)
    * @version 18 April 2008
    */
-  public class FactoryChimney extends StaticEntity
+  public abstract static class FactoryChimney extends StaticEntity
     implements EnemyEntity, Animatable {
+
+    /** Factory's smoking state. */
+    private transient boolean my_smoking_state;
+
+    public Color color() {
+      return chimney().color();
+    }
+
+    public void color(final Color the_color) {
+      if (the_color == chimney().color()) {
+        my_Color(chimney().color());
+      }
+    }
+
     /**
      * @return Are you smoking?
      */
     public /*@ pure @*/ boolean smoking() {
-      if(damage()<10)
-        return true;
-      else
-        return false;
-     // assert false; //@ assert false;
-     // return false;
+      return my_smoking_state;
     }
 
     /**
@@ -138,12 +164,8 @@ public class Factory extends StaticEntity
      * is smoking or not.
      */
     //@ ensures smoking() <==> the_smoking_state;
-    public void smoking(boolean the_smoking_state) {
-      while(damage()<10)
-      {
-      the_smoking_state = true;
-      }
-      
+    public void smoking(final boolean the_smoking_state) {
+      my_smoking_state = the_smoking_state;
     }
 
     /*@ public invariant (* A factories chimney is the same color as
@@ -160,12 +182,23 @@ public class Factory extends StaticEntity
    * @author Joe Kiniry (kiniry@acm.org)
    * @version 18 April 2008
    */
-  public class FactorySphere extends StaticEntity
+  public static class FactorySphere extends StaticEntity
     implements NeutralEntity {
     /*@ public invariant (* A factory sphere's color is always green. *);
       @ public invariant color() == java.awt.Color.GREEN;
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
+
+
+    public Color color() {
+      return java.awt.Color.GREEN;
+    }
+
+    public void color(final Color the_color) {
+      if (the_color == java.awt.Color.GREEN) {
+        my_Color(java.awt.Color.GREEN);
+      }
+    }
   }
 }

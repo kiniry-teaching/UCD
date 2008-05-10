@@ -4,21 +4,28 @@ import thrust.entities.behaviors.AI;
 /**
  * An entity that is a threat to the spaceship.
  * @author ursula redmond (ursula.redmond@ucdconnect.ie)
- * @version 18 April 2008
+ * @version 10 May 2008
  */
 public class EnemyEntityImp implements EnemyEntity {
+
+  /** The disturb behaviour. */
+  private transient AI my_disturb;
+
+  /** The attack behaviour. */
+  private transient AI my_attack;
+
   /**
    * @return What is your attack behavior AI?
    */
-  public /*@ pure @*/ AI attack() {
-    return null;
+  public AI attack() {
+    return my_attack;
   }
 
   /**
    * @return What is your disturb behavior AI?
    */
-  public /*@ pure @*/ AI disturb() {
-    return null;
+  public AI disturb() {
+    return my_disturb;
   }
 
   /**
@@ -26,7 +33,7 @@ public class EnemyEntityImp implements EnemyEntity {
    */
   //@ ensures attack() == the_behavior;
   public void attack(final AI the_behavior) {
-//how the enemy attacks.
+    my_attack = the_behavior;
   }
 
   /**
@@ -34,6 +41,6 @@ public class EnemyEntityImp implements EnemyEntity {
    */
   //@ ensures disturb() == the_behavior;
   public void disturb(final AI the_behavior) {
-//how a disturbance happens.
+    my_disturb = the_behavior;
   }
 }

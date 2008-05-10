@@ -8,7 +8,8 @@
  */
 package thrust.entities.in_game;
 
-import java.awt.Color; // import java.awt.Shape;
+import java.awt.Color;
+import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
@@ -17,8 +18,8 @@ import thrust.entities.behaviors.Tow;
 
 /**
  * The player's main vehicle.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author ursula redmond (ursula.redmond@ucdconnect.ie)
+ * @version 10 May 2008
  */
 public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
     Tow {
@@ -44,6 +45,28 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
 
   /** The shield state of the SpaceShip. */
   private transient boolean my_shield_state;
+
+  /**
+   *
+   * @param the_position
+   * @param the_orientation
+   * @param the_acceleration
+   * @param the_mass
+   * @param the_velocity
+   * @param the_initial_shape_name
+   * @param the_initial_shape
+   * @param the_initial_state
+   */
+  public Spaceship(final double[] the_position, final double the_orientation,
+        final double[] the_acceleration, final double the_mass,
+        final double[] the_velocity, final String the_initial_shape_name,
+        final Shape the_initial_shape, final byte the_initial_state) {
+
+    super();
+    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
+          the_mass, the_velocity, the_initial_shape_name,
+          the_initial_shape, the_initial_state);
+  }
 
   /*
    * (non-Javadoc)
@@ -72,9 +95,11 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * @see thrust.entities.about.Fuelable#fuel()
    */
   public float fuel() {
-    float answer = 0;
+    float answer;
     if (0 <= my_fuel && my_fuel <= maximum_fuel()) {
       answer = my_fuel;
+    } else {
+      answer = 0;
     }
     return answer;
   }
@@ -113,6 +138,22 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
     return my_tow_state;
   }
 
+  /**
+   * Returns true if the shield is up.
+   * @return return true if spaceship is shielded
+   */
+  public boolean shielded() {
+    return my_shield_state;
+  }
+
+  /**
+   * Sets the shield state.
+   * @param the_state state of shield
+   */
+  public void set_shield(final boolean the_state) {
+    my_shield_state = the_state;
+  }
+
   /*
    * A spaceship is always white.
    * (non-Javadoc)
@@ -134,123 +175,10 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
 
   /*
    * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#acceleration()
-   */
-  public double[] acceleration() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#acceleration(double[])
-   */
-  public void acceleration(final double[] the_acceleration) {
-    // TODO Auto-generated method stub
-
-  }
-
-  /*
-   * (non-Javadoc)
    * @see thrust.physics.PhysicsInterface#mass()
    */
   public double mass() {
     return super.mass() + fuel_mass() + (towed() ? GoalSphere.MASS : 0);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#mass(double)
-   */
-  public void mass(final double the_mass) {
-    //But the spaceship's mass is private...
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#momentum()
-   */
-  public double momentum() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#orientation()
-   */
-  public double orientation() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#orientation(double)
-   */
-  public void orientation(final double the_orientation) {
-    // TODO Auto-generated method stub
-
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#position()
-   */
-  public double[] position() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#position(double[])
-   */
-  public void position(final double[] the_position) {
-    // TODO Auto-generated method stub
-
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#simulate(double)
-   */
-  public void simulate(final double some_seconds) {
-    // TODO Auto-generated method stub
-
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#velocity()
-   */
-  public double[] velocity() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see thrust.physics.PhysicsInterface#velocity(double[])
-   */
-  public void velocity(final double[] the_velocity) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public void change_fuel_content(final float the_fuel_change) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public void set_fuel_content(final float the_fuel_content) {
-    // TODO Auto-generated method stub
-
-  }
-
-  public double gravitational_constant() {
-    // TODO Auto-generated method stub
-    return 0;
   }
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);

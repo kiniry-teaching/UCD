@@ -22,33 +22,24 @@ import thrust.entities.StaticEntity;
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
+
+  /** The door when open. */
+  private transient boolean my_openDoor;
+  /** The door when closed. */
+  private transient boolean my_closedDoor;
+
   /**
    * @return Are you closed?
    */
   public /*@ pure @*/ boolean closed() {
-    boolean answer;
-    if (opened())
-    {
-      answer = false;
-    } else {
-      answer = true;
-    }
-    return answer;
+    return my_closedDoor;
   }
 
   /**
    * @return Are you open?
    */
   public /*@ pure @*/ boolean opened() {
-    //can't define this in terms of something that's defined by this!!
-    boolean answer;
-    if (closed())
-    {
-      answer = false;
-    } else {
-      answer = true;
-    }
-    return answer;
+    return my_openDoor;
   }
 
   /**
@@ -56,10 +47,10 @@ public class Barrier extends StaticEntity
    */
   public /*@ pure @*/ boolean moving() {
     boolean answer;
-    if (!closed() && !opened()) {
-      answer = true;
-    } else {
+    if (closed() || opened()) {
       answer = false;
+    } else {
+      answer = true;
     }
     return answer;
   }
@@ -69,7 +60,9 @@ public class Barrier extends StaticEntity
    */
   //@ requires opened();
   public void close() {
-    assert false; //@ assert false;
+    if (opened()) {
+      my_openDoor = false;
+    }
   }
 
   /**
@@ -77,7 +70,9 @@ public class Barrier extends StaticEntity
    */
   //@ requires closed();
   public void open() {
-    assert false; //@ assert false;
+    if (closed()) {
+      my_closedDoor = false;
+    }
   }
 
   public void animate() {
