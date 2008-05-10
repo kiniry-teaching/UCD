@@ -26,9 +26,13 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   */
   private static final double GRAV_CONST = 0.0000000000667300;
   /**
-   * An Integer storing our maximum velocity and acceleration.
+   * Velocity cap.
    */
-  private static final int MAX_POWER = 8;
+  private static final int MAX_VEL = 30;
+  /**
+   * Acceleration cap.
+   */
+  private static final int MAX_ACC = 12;
   /**
    * An Double storing gravity's pull.
    */
@@ -128,35 +132,35 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
   }
 
   private void fixVelocity() {
-    if (my_velocity[0] > MAX_POWER) {
-      my_velocity[0] = MAX_POWER;
+    if (my_velocity[0] > MAX_VEL) {
+      my_velocity[0] = MAX_VEL;
     } else {
-      if (my_velocity[0] < -MAX_POWER) {
-        my_velocity[0] = -MAX_POWER;
+      if (my_velocity[0] < -MAX_VEL) {
+        my_velocity[0] = -MAX_VEL;
       }
     }
-    if (my_velocity[1] > MAX_POWER) {
-      my_velocity[1] = MAX_POWER;
+    if (my_velocity[1] > MAX_VEL) {
+      my_velocity[1] = MAX_VEL;
     } else {
-      if (my_velocity[1] < -MAX_POWER) {
-        my_velocity[1] = -MAX_POWER;
+      if (my_velocity[1] < -MAX_VEL) {
+        my_velocity[1] = -MAX_VEL;
       }
     }
   }
 
   private void fixAcceleration() {
-    if (my_acceleration[0] > MAX_POWER) {
-      my_acceleration[0] = MAX_POWER;
+    if (my_acceleration[0] > MAX_ACC) {
+      my_acceleration[0] = MAX_ACC;
     } else {
-      if (my_acceleration[0] < -MAX_POWER) {
-        my_acceleration[0] = -MAX_POWER;
+      if (my_acceleration[0] < -MAX_ACC) {
+        my_acceleration[0] = -MAX_ACC;
       }
     }
-    if (my_acceleration[1] > MAX_POWER) {
-      my_acceleration[1] = MAX_POWER;
+    if (my_acceleration[1] > MAX_ACC) {
+      my_acceleration[1] = MAX_ACC;
     } else {
-      if (my_acceleration[1] < -MAX_POWER) {
-        my_acceleration[1] = -MAX_POWER;
+      if (my_acceleration[1] < -MAX_ACC) {
+        my_acceleration[1] = -MAX_ACC;
       }
     }
   }

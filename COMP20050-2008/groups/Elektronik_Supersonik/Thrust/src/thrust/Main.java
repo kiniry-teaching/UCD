@@ -7,6 +7,7 @@
 package thrust;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -44,7 +45,7 @@ import thrust.input.InputHandler;
 
 /**
  * Simulating all of the entities in the game to realize the game.
- * @author Joe Kiniry (kiniry@acm.org)
+ * @author Elektronik Supersonik (.@.)
  * @version 23 April 2008
  */
 public final class Main {
@@ -151,6 +152,10 @@ public final class Main {
    */
   private static List turBullets;
   /**
+   * The deadline for escaping the planet after the factory destruction.
+   */
+  private static long deadline = -1;
+  /**
    * This class cannot be constructed.
    */
   private Main() {
@@ -175,15 +180,20 @@ public final class Main {
         drawComponent.updateShapes(renderable);
         checkStatus();
         if (game.lives() < 0) {
-          over = true;
-          createWelcomeScreen();
-          started = false;
+          lose();
         }
         displayInfo();
       }
       mainFrame.update(mainFrame.getGraphics());
       sleep();
     }
+  }
+
+  private static void lose() {
+    over = true;
+    createWelcomeScreen();
+    console.setText("You lost! Your final score is:" + game.score());
+    started = false;
   }
 
   private static void checkStatus() {
@@ -193,6 +203,9 @@ public final class Main {
     }
     if (playerShip.fuel() <= 0) {
       killShip();
+    }
+    if(deadline != -1 && System.currentTimeMillis() >= deadline) {
+      lose();
     }
     if (playerShip.towed() && playerShip.position()[1] <= GConst.SHIP_D) {
       createWelcomeScreen();
@@ -206,6 +219,9 @@ public final class Main {
     playerShip.position(new double[] {GConst.SHP_STRTX, GConst.SHP_STRTY});
     game.change_lives((byte)-1);
     playerShip.set_fuel_content(Spaceship.INITIAL_FUEL);
+    playerShip.acceleration(new double[] {0, 0});
+    playerShip.velocity(new double[] {0, 0});
+    playerShip.orientation(0);
   }
 
   private static void displayHighScores() {
@@ -242,6 +258,10 @@ public final class Main {
   private static void cycleEntities() {
     final int my_dirlen = 25;
     renderable = new ArrayList();
+    renderable.add(mapBounds);
+    for (int i = 0; i < entities.size(); ++i) {
+      processEntity((Entity) entities.get(i), i);
+    }
     final Ellipse2D.Double plShape = (Ellipse2D.Double) playerShip.shape();
     final Point2D.Double origin =
         new Point2D.Double(plShape.getCenterX(), plShape.getCenterY());
@@ -251,11 +271,7 @@ public final class Main {
             (plShape.getCenterY() + my_dirlen * Math.cos(Math
               .toRadians(playerShip.orientation()))));
     final Line2D.Double orientLine = new Line2D.Double(origin, destination);
-    renderable.add(mapBounds);
     renderable.add(orientLine);
-    for (int i = 0; i < entities.size(); ++i) {
-      processEntity((Entity) entities.get(i), i);
-    }
     cycleBullets();
     cycleEnemyBullets();
   }
@@ -332,8 +348,7 @@ public final class Main {
     }
     if (theSphere.towed() && the_ent.shape().intersects(theSphere.shape()
       .getBounds())) {
-      over = true;
-      createWelcomeScreen();
+      lose();
     }
   }
 
@@ -354,6 +369,7 @@ public final class Main {
     }
     if (entf.damage() >= Factory.HEALTH_LIMIT) {
       entities.remove(the_index);
+      deadline = System.currentTimeMillis() + GConst.ESC_TIME;
     }
     game.change_score(hitScore);
   }
@@ -433,6 +449,8 @@ public final class Main {
       if (mainFrame != null) {
         mainFrame.dispose();
       }
+      infoScreen.setFont(new Font("Courier", 0, 14));
+      infoPanel.setSize(80, GConst.FRM_H);
       infoPanel.add(infoScreen);
       mapBounds = new Rectangle2D.Double(0, 0, GConst.SCR_W, GConst.SCR_H);
       drawComponent = new GameDraw(renderable);
@@ -448,9 +466,14 @@ public final class Main {
   }
 
   private static void displayInfo() {
-    final String infoString;
+    String infoString;
     infoString = "Lives: " + game.lives() + "\nFuel: " + playerShip.fuel() +
       "\nScore: " + game.score();
+    if(deadline != -1) {
+      infoString = infoString + "\nExplosion in: " +
+      ((deadline - System.currentTimeMillis()) / 1000) + "s";
+    }
+    infoString = "                  \n" + infoString;
     infoScreen.setText(infoString);
   }
 
@@ -506,9 +529,9 @@ public final class Main {
 
   public static void thrust() {
     playerShip.acceleration(new double[] {
-      playerShip.acceleration()[0] + 1 *
+      playerShip.acceleration()[0] + GConst.ACC_GAIN *
           Math.sin(Math.toRadians(playerShip.orientation())),
-      playerShip.acceleration()[1] + 1 *
+      playerShip.acceleration()[1] + GConst.ACC_GAIN *
           Math.cos(Math.toRadians(playerShip.orientation()))});
     playerShip.set_fuel_content(playerShip.fuel() - 1);
     if (playerShip.towed()) {

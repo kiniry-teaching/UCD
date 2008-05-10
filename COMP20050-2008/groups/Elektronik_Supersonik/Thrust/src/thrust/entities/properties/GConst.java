@@ -17,7 +17,7 @@ public class GConst {
   /**
    * Frame width.
    */
-  public static final int FRM_W = 900;
+  public static final int FRM_W = 1000;
   /**
    * Frame height.
    */
@@ -109,11 +109,19 @@ public class GConst {
   /**
    * The bullet velocity.
    */
-  public static final int BUL_VEL = 50;
+  public static final int BUL_VEL = 100;
   /**
    * Bullet dimension.
    */
   public static final int BUL_D = 2;
+  /**
+   * The number of milliseconds you have to escape after factory explosion.
+   */
+  public static final int ESC_TIME = 20000;
+  /**
+   * The acceleration gained from thrusting.
+   */
+  public static final double ACC_GAIN = 5;
   public GConst() {
     assert false;
   }
