@@ -45,7 +45,7 @@ public class Space extends StaticEntity implements NeutralEntity, Animatable {
     super.set_state(the_position, the_orientation, the_acceleration, the_mass,
                     the_velocity, the_initial_shape_name, the_initial_shape,
                     the_initial_state);
-
+    my_animation = new EntityAnimation();
   }
 
   /**

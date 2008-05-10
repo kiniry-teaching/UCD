@@ -121,34 +121,42 @@ public abstract class DynamicEntity extends Entity implements PhysicsInterface {
     my_velocity[0] += my_acceleration[0] * some_seconds;
     my_velocity[1] += my_acceleration[1] * some_seconds;
     if (my_mass != 0) {
-      if (my_velocity[0] > MAX_POWER) {
-        my_velocity[0] = MAX_POWER;
-      } else {
-        if (my_velocity[0] < -MAX_POWER) {
-          my_velocity[0] = -MAX_POWER;
-        }
-      }
-      if (my_velocity[1] > MAX_POWER) {
-        my_velocity[1] = MAX_POWER;
-      } else {
-        if (my_velocity[1] < -MAX_POWER) {
-          my_velocity[1] = -MAX_POWER;
-        }
-      }
+      fixVelocity();
       my_acceleration[1] += some_seconds * GRAV_ACCEL;
-      if (my_acceleration[0] > MAX_POWER) {
-        my_acceleration[0] = MAX_POWER;
-      } else {
-        if (my_acceleration[0] < -MAX_POWER) {
-          my_acceleration[0] = -MAX_POWER;
-        }
+      fixAcceleration();
+    }
+  }
+
+  private void fixVelocity() {
+    if (my_velocity[0] > MAX_POWER) {
+      my_velocity[0] = MAX_POWER;
+    } else {
+      if (my_velocity[0] < -MAX_POWER) {
+        my_velocity[0] = -MAX_POWER;
       }
-      if (my_acceleration[1] > MAX_POWER) {
-        my_acceleration[1] = MAX_POWER;
-      } else {
-        if (my_acceleration[1] < -MAX_POWER) {
-          my_acceleration[1] = -MAX_POWER;
-        }
+    }
+    if (my_velocity[1] > MAX_POWER) {
+      my_velocity[1] = MAX_POWER;
+    } else {
+      if (my_velocity[1] < -MAX_POWER) {
+        my_velocity[1] = -MAX_POWER;
+      }
+    }
+  }
+
+  private void fixAcceleration() {
+    if (my_acceleration[0] > MAX_POWER) {
+      my_acceleration[0] = MAX_POWER;
+    } else {
+      if (my_acceleration[0] < -MAX_POWER) {
+        my_acceleration[0] = -MAX_POWER;
+      }
+    }
+    if (my_acceleration[1] > MAX_POWER) {
+      my_acceleration[1] = MAX_POWER;
+    } else {
+      if (my_acceleration[1] < -MAX_POWER) {
+        my_acceleration[1] = -MAX_POWER;
       }
     }
   }

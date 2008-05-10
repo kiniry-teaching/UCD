@@ -89,41 +89,50 @@ public class InputHandler {
    */
   // @ requires legal_input(the_keyboard_input);
   public final void process(final char the_keyboard_input) {
-    if(Main.state == GameState.MENU_STATE) {
-      switch(the_keyboard_input) {
-        case START_GAME:
-          Main.createGameScreen();
-          break;
-        case QUIT_GAME:
-          Main.quit();
-          break;
-        default:
-          break;
-      }
+    if (Main.state() == GameState.MENU_STATE) {
+      processMenu(the_keyboard_input);
+    } else {
+      processInGame(the_keyboard_input);
     }
-    else {
-      switch(the_keyboard_input) {
-        case QUIT_GAME:
-          Main.quit();
-          break;
-        case USE_ENGINE:
-          Main.thrust();
-          break;
-        case TURN_LEFT:
-          Main.turnLeft();
-          break;
-        case TURN_RIGHT:
-          Main.turnRight();
-          break;
-        case FIRE_GUN:
-          Main.fire();
-          break;
-        case STOP_GAME:
-          Main.createWelcomeScreen();
-          break;
-        default:
-          break;
-      }
+  }
+
+  private void processMenu(final int the_keyboard_input) {
+    switch(the_keyboard_input) {
+      case START_GAME:
+        Main.createGameScreen();
+        break;
+      case QUIT_GAME:
+        Main.quit();
+        break;
+      default:
+        break;
+    }
+  }
+
+  private void processInGame(final int the_keyboard_input) {
+    switch(the_keyboard_input) {
+      case QUIT_GAME:
+        Main.quit();
+        break;
+      case USE_ENGINE:
+        Main.thrust();
+        break;
+      case TURN_LEFT:
+        Main.turnLeft();
+        break;
+      case TURN_RIGHT:
+        Main.turnRight();
+        break;
+      case FIRE_GUN:
+        Main.fire();
+        break;
+      case STOP_GAME:
+        Main.createWelcomeScreen();
+        break;
+      case USE_SHIELD:
+        Main.activateShield();
+      default:
+        break;
     }
   }
 }

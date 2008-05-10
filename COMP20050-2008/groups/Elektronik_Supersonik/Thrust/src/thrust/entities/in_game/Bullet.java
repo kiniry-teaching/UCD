@@ -25,7 +25,7 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
   /**
   * The enemy's AI.
   */
-  private transient EnemyAI my_ai = new EnemyAI();
+  private transient EnemyAI my_ai;
 
   public Bullet(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
@@ -35,6 +35,7 @@ public class Bullet extends DynamicEntity implements EnemyEntity {
     super.set_dynamic_state(the_position, the_orientation, the_acceleration,
                             the_mass, the_velocity, the_initial_shape_name,
                             the_initial_shape, the_initial_state);
+    my_ai = new EnemyAI();
   }
 
 

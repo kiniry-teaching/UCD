@@ -6,6 +6,7 @@
 
 package thrust;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -19,9 +20,11 @@ import java.awt.geom.RectangularShape;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -36,15 +39,20 @@ import thrust.entities.in_game.GameState;
 import thrust.entities.in_game.GoalSphere;
 import thrust.entities.in_game.GunTurret;
 import thrust.entities.in_game.Spaceship;
+import thrust.entities.properties.GConst;
 import thrust.input.InputHandler;
 
 /**
  * Simulating all of the entities in the game to realize the game.
- * @author Elektronik Supersonik (.@.)
+ * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
 public final class Main {
 
+  /**
+   * The information screen.
+   */
+  private static JTextArea infoScreen;
   /**
    * The main frame for the game screen.
    */
@@ -125,7 +133,23 @@ public final class Main {
   /**
    * The state the game is in (menu, gameplay, etc.).
    */
-  public static byte state;
+  private static byte my_state;
+  /**
+   * Tells if the spaceship has the shields active.
+   */
+  private static boolean shieldOn;
+  /**
+   * Tells if the game is over.
+   */
+  private static boolean over;
+  /**
+   * The number of turret bullets.
+   */
+  private static int tur_bullets;
+  /**
+   * The turret bullet list.
+   */
+  private static List turBullets;
   /**
    * This class cannot be constructed.
    */
@@ -138,30 +162,50 @@ public final class Main {
    * @param the_args The command-line arguments are ignored.
    */
   public static void main(final String[] the_args) {
-    started = false;
     game = new GameState();
-    state = GameState.MENU_STATE;
+    my_state = GameState.MENU_STATE;
     createWelcomeScreen();
     displayHighScores();
     initializeEntities();
     while (true) {
+      shieldOn = false;
       input.process((char) inputListener.lastKeyPressed());
-      if (started) {
+      if (started && !over) {
         cycleEntities();
         drawComponent.updateShapes(renderable);
-        if (!mapBounds.contains(playerShip.position()[0],
-          playerShip.position()[1])) {
-          playerShip.position(new double[] {450, 50});
-          game.change_lives((byte)-1);
-        }
+        checkStatus();
         if (game.lives() < 0) {
+          over = true;
           createWelcomeScreen();
           started = false;
         }
+        displayInfo();
       }
       mainFrame.update(mainFrame.getGraphics());
       sleep();
     }
+  }
+
+  private static void checkStatus() {
+    if (!mapBounds.contains(playerShip.position()[0],
+      playerShip.position()[1])) {
+      killShip();
+    }
+    if (playerShip.fuel() <= 0) {
+      killShip();
+    }
+    if (playerShip.towed() && playerShip.position()[1] <= GConst.SHIP_D) {
+      createWelcomeScreen();
+      game.change_score(GConst.WIN_SCORE);
+      console.setText("You WIN!!! Your final score: " + game.score());
+      over = true;
+    }
+  }
+
+  private static void killShip() {
+    playerShip.position(new double[] {GConst.SHP_STRTX, GConst.SHP_STRTY});
+    game.change_lives((byte)-1);
+    playerShip.set_fuel_content(Spaceship.INITIAL_FUEL);
   }
 
   private static void displayHighScores() {
@@ -175,15 +219,13 @@ public final class Main {
   }
 
   public static void createWelcomeScreen() {
-    final int my_height = 600;
-    final int my_width = 800;
-    state = GameState.MENU_STATE;
+    my_state = GameState.MENU_STATE;
     started = false;
     if (mainFrame != null) {
       mainFrame.dispose();
     }
     mainFrame = new JFrame("Thrust");
-    mainFrame.setSize(my_width + 60, my_height + 60);
+    mainFrame.setSize(GConst.FRM_W, GConst.FRM_H);
     console = new JTextArea();
     scroll = new JScrollPane(console);
     mainFrame.add(scroll);
@@ -199,7 +241,6 @@ public final class Main {
 
   private static void cycleEntities() {
     final int my_dirlen = 25;
-    final double my_simulatetime = 0.1;
     renderable = new ArrayList();
     final Ellipse2D.Double plShape = (Ellipse2D.Double) playerShip.shape();
     final Point2D.Double origin =
@@ -210,91 +251,249 @@ public final class Main {
             (plShape.getCenterY() + my_dirlen * Math.cos(Math
               .toRadians(playerShip.orientation()))));
     final Line2D.Double orientLine = new Line2D.Double(origin, destination);
-    renderable.add(orientLine);
     renderable.add(mapBounds);
+    renderable.add(orientLine);
     for (int i = 0; i < entities.size(); ++i) {
-      Entity cur_ent = (Entity) entities.get(i);
-      if (!(cur_ent instanceof StaticEntity)) {
-        if (((DynamicEntity)cur_ent).state() != 1) {
-          ((DynamicEntity) cur_ent).simulate(my_simulatetime);
-          updateShape((DynamicEntity) cur_ent);
+      processEntity((Entity) entities.get(i), i);
+    }
+    cycleBullets();
+    cycleEnemyBullets();
+  }
+
+  private static void processEntity(final Entity the_ent, final int the_index) {
+    if (!(the_ent instanceof StaticEntity)) {
+      simulateDynamic(the_ent);
+    }
+    renderable.add(((Entity) the_ent).shape());
+    checkForDamage(the_ent, the_index);
+    if (!(the_ent instanceof Spaceship) && !(the_ent instanceof GoalSphere)) {
+      checkCollisions(the_ent);
+    }
+    if (shieldOn && the_ent instanceof FuelPod) {
+      fuelUp(the_ent, the_index);
+    }
+    if (the_ent instanceof GoalSphere) {
+      dealWithSphere(the_ent);
+    }
+  }
+
+  private static void cycleEnemyBullets() {
+    final double my_simulatetime = 0.1;
+    for (int i = 0; i < turBullets.size(); ++i) {
+      final Bullet cur_ent = (Bullet) turBullets.get(i);
+      cur_ent.simulate(my_simulatetime);
+      if (!mapBounds.contains(cur_ent.shape().getBounds())) {
+        turBullets.remove(i);
+        tur_bullets--;
+      }
+      if (playerShip.shape().contains(cur_ent.shape().getBounds())) {
+        killShip();
+        turBullets.remove(i);
+        tur_bullets--;
+      }
+      updateShape(cur_ent);
+      renderable.add(cur_ent.shape());
+    }
+  }
+
+  private static void checkForDamage(final Entity the_ent, final int the_ind) {
+    if (the_ent instanceof GunTurret) {
+      final GunTurret theGun = (GunTurret) the_ent;
+      final Random rand = new Random();
+      if (checkForHits(the_ent.shape())) {
+        entities.remove(the_ind);
+        game.change_score(GConst.TRT_SCORE);
+      } else {
+        final Point2D.Double player = new Point2D.Double(playerShip.
+          position()[0], playerShip.position()[1]);
+        final Point2D turret = new Point2D.Double(theGun.position()[0],
+          theGun.position()[1]);
+        if ((player.distance(turret) < GConst.TRT_FR_DIST) && (tur_bullets <
+            NUM_BULLETS)) {
+          tur_bullets++;
+          final int orient = rand.nextInt(170);
+          turBullets.add(new Bullet(theGun.position(), 0, new double[] {0, 0},
+              0, new double[] {
+                GConst.BUL_VEL * Math.sin(Math.toRadians(orient)),
+                GConst.BUL_VEL * Math.cos(Math.toRadians(orient))}, "",
+              new Rectangle2D.Double(theGun.position()[0],
+                  theGun.position()[1], GConst.BUL_D, GConst.BUL_D), (byte) 0));
         }
       }
-      renderable.add(((Entity) cur_ent).shape());
-      if (cur_ent instanceof Bullet) {
-        final Bullet bull = (Bullet) cur_ent;
-        if (!mapBounds.contains(bull.position()[0], bull
-            .position()[1])) {
-          entities.remove(i);
-          playerBullets.remove(bull);
-          bulletCount--;
-        }
+    }
+    if (the_ent instanceof Factory && checkForHits(the_ent.shape())) {
+      hitFactory(the_ent, the_ind);
+    }
+  }
+
+  private static void checkCollisions(final Entity the_ent) {
+    if (the_ent.shape().intersects(playerShip.shape().getBounds())) {
+      killShip();
+    }
+    if (theSphere.towed() && the_ent.shape().intersects(theSphere.shape()
+      .getBounds())) {
+      over = true;
+      createWelcomeScreen();
+    }
+  }
+
+  private static void simulateDynamic(final Entity the_ent) {
+    final double my_simulatetime = 0.1;
+    if (((DynamicEntity)the_ent).state() != 1) {
+      ((DynamicEntity) the_ent).simulate(my_simulatetime);
+      updateShape((DynamicEntity) the_ent);
+    }
+  }
+
+  private static void hitFactory(final Entity the_ent, final int the_index) {
+    final Factory entf = (Factory)the_ent;
+    final int hitScore = 200;
+    entf.damage((byte)1);
+    if (entf.damage() > 10) {
+      entf.chimney().smoking(false);
+    }
+    if (entf.damage() >= Factory.HEALTH_LIMIT) {
+      entities.remove(the_index);
+    }
+    game.change_score(hitScore);
+  }
+
+  private static void dealWithSphere(final Entity the_ent) {
+    final GoalSphere sphereEnt = (GoalSphere) the_ent;
+    if (shieldOn) {
+      final int pickUpDistance = 90;
+      final Point2D.Double player = new Point2D.Double(playerShip
+        .position()[0], playerShip.position()[1]);
+      final Point2D sphere = new Point2D.Double(sphereEnt.position()[0],
+        sphereEnt.position()[1]);
+      if (player.distance(sphere) < pickUpDistance) {
+        sphereEnt.tow();
+        playerShip.tow();
       }
-      if (cur_ent instanceof GunTurret) {
-        for (int j = 0; j < playerBullets.size(); ++j) {
-          if (((Rectangle2D.Double)cur_ent.shape())
-              .contains((Rectangle2D.Double)((Entity)playerBullets.get(j)).shape())) {
-            entities.remove(cur_ent);
-            playerBullets.remove(j);
-            entities.remove(playerBullets.get(j));
-          }
-        }
+    }
+    if (sphereEnt.towed()) {
+      sphereEnt.state((byte)0);
+    }
+  }
+
+  private static void fuelUp(final Entity the_ent, final int the_index) {
+    final int my_fuelUp = 4;
+    final int fuelUpDistance = 90;
+    final FuelPod podEnt = (FuelPod) the_ent;
+    final Point2D.Double player = new Point2D.Double(playerShip
+      .position()[0], playerShip.position()[1]);
+    final Point2D pod = new Point2D.Double(podEnt.position()[0],
+      podEnt.position()[1]);
+    if (player.distance(pod) < fuelUpDistance) {
+      playerShip.set_fuel_content(playerShip.fuel() + my_fuelUp);
+      podEnt.set_fuel_content(podEnt.fuel() - my_fuelUp);
+      if (podEnt.fuel() <= 0) {
+        entities.remove(the_index);
       }
     }
   }
 
-  public static void createGameScreen() {
-    final int my_width = 800;
-    final int my_height = 600;
-    state = GameState.GAMEPLAY_STATE;
-    started = true;
-    if (mainFrame != null) {
-      mainFrame.dispose();
+  private static void cycleBullets() {
+    final double my_simulatetime = 0.1;
+    for (int j = 0; j < playerBullets.size(); ++j) {
+      final Bullet bull = (Bullet) playerBullets.get(j);
+      if (mapBounds.contains(bull.position()[0], bull
+          .position()[1])) {
+        ((Bullet)playerBullets.get(j)).simulate(my_simulatetime);
+        updateShape((Bullet)playerBullets.get(j));
+        renderable.add(((Bullet)playerBullets.get(j)).shape());
+      } else {
+        playerBullets.remove(j);
+        bulletCount--;
+      }
     }
-    mapBounds = new Rectangle2D.Double(0, 0, my_width, my_height);
-    drawComponent = new GameDraw(renderable);
-    mainFrame = new JFrame("Thrust");
-    mainFrame.setVisible(true);
-    mainFrame.setSize(my_width + 60, my_height + 60);
-    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mainFrame.add(drawComponent);
-    mainFrame.update(mainFrame.getGraphics());
-    mainFrame.addKeyListener(inputListener);
+  }
+
+  private static boolean checkForHits(final Shape the_shape) {
+    boolean ret = false;
+    for (int i = 0; i < playerBullets.size(); ++i) {
+      final Bullet bull = (Bullet) playerBullets.get(i);
+      if (the_shape.contains(bull.position()[0], bull.position()[1])) {
+        playerBullets.remove(bull);
+        bulletCount--;
+        ret = true;
+      }
+    }
+    return ret;
+  }
+
+  public static void createGameScreen() {
+    if (!over) {
+      final JPanel infoPanel = new JPanel();
+      infoScreen = new JTextArea();
+      infoScreen.setFocusable(false);
+      infoPanel.setFocusable(false);
+      my_state = GameState.GAMEPLAY_STATE;
+      started = true;
+      if (mainFrame != null) {
+        mainFrame.dispose();
+      }
+      infoPanel.add(infoScreen);
+      mapBounds = new Rectangle2D.Double(0, 0, GConst.SCR_W, GConst.SCR_H);
+      drawComponent = new GameDraw(renderable);
+      mainFrame = new JFrame("Thrust");
+      mainFrame.add(infoPanel, BorderLayout.WEST);
+      mainFrame.setVisible(true);
+      mainFrame.setSize(GConst.FRM_W, GConst.FRM_H);
+      mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      mainFrame.add(drawComponent);
+      mainFrame.update(mainFrame.getGraphics());
+      mainFrame.addKeyListener(inputListener);
+    }
+  }
+
+  private static void displayInfo() {
+    final String infoString;
+    infoString = "Lives: " + game.lives() + "\nFuel: " + playerShip.fuel() +
+      "\nScore: " + game.score();
+    infoScreen.setText(infoString);
   }
 
   private static void initializeEntities() {
     renderable = new ArrayList();
     entities = new ArrayList();
     playerBullets = new ArrayList();
+    turBullets = new ArrayList();
     renderable.add(mapBounds);
     playerShip =
-        new Spaceship(new double[] {450, 50}, 0, new double[] {0, 0},
-            Spaceship.EMPTY_MASS + Spaceship.INITIAL_FUEL, new double[] {0, 0},
-            "Triangle", new Ellipse2D.Double(450, 500, 20, 20), (byte) 0);
+        new Spaceship(new double[] {GConst.SHP_STRTX, GConst.SHP_STRTY}, 0,
+            new double[] {0, 0}, Spaceship.EMPTY_MASS + Spaceship.INITIAL_FUEL,
+            new double[] {0, 0}, "Triangle", new Ellipse2D.Double(
+                GConst.SHP_STRTX, GConst.SHP_STRTY, GConst.SHIP_D,
+                GConst.SHIP_D), (byte) 0);
     entities.add(playerShip);
     renderable.add(playerShip.shape());
     theFactory =
-        new Factory(new double[] {450, 540}, 0.0, new double[] {0, 0}, 0.0,
-            new double[] {0, 0}, "Rectangle", new Rectangle2D.Double(450, 540,
-                60, 60), (byte) 0);
+        new Factory(new double[] {GConst.FACT_X, GConst.FACT_Y}, 0.0,
+            new double[] {0, 0}, 0.0, new double[] {0, 0}, "Rectangle",
+            new Rectangle2D.Double(GConst.FACT_X, GConst.FACT_Y, GConst.FACT_D,
+                GConst.FACT_D), (byte) 0);
     entities.add(theFactory);
     renderable.add(theFactory.shape());
     theTurret =
-        new GunTurret(new double[] {280, 580}, 0.0, new double[] {0, 0}, 0.0,
-            new double[] {0, 0}, "Rectangle", new Rectangle2D.Double(280, 580,
-                60, 20), (byte) 0);
+        new GunTurret(new double[] {GConst.TRT_X, GConst.TRT_Y}, 0.0,
+            new double[] {0, 0}, 0.0, new double[] {0, 0}, "Rectangle",
+            new Rectangle2D.Double(GConst.TRT_X, GConst.TRT_Y, GConst.TRT_W,
+                GConst.TRT_H), (byte) 0);
     entities.add(theTurret);
     renderable.add(theTurret.shape());
     theSphere =
-        new GoalSphere(new double[] {400, 580}, 0.0, new double[] {0, 0},
-            10000.0, new double[] {0, 0}, "Ellipse", new Ellipse2D.Double(400,
-                580, 20, 20), (byte) 1);
+        new GoalSphere(new double[] {GConst.SPH_X, GConst.SPH_Y}, 0.0,
+            new double[] {0, 0}, GConst.SPH_MASS, new double[] {0, 0},
+            "Ellipse", new Ellipse2D.Double(GConst.SPH_X, GConst.SPH_Y,
+                GConst.SPHERE_D, GConst.SPHERE_D), (byte) 1);
     entities.add(theSphere);
     renderable.add(theSphere.shape());
     theFuelPod =
-        new FuelPod(new double[] {720, 580}, 0.0, new double[] {0, 0}, 0.0,
-            new double[] {0, 0}, "Ellipse", new Ellipse2D.Double(720, 580, 20,
-                20), (byte) 0);
+        new FuelPod(new double[] {GConst.POD_X, GConst.POD_Y}, 0.0,
+            new double[] {0, 0}, 0.0, new double[] {0, 0}, "Ellipse",
+            new Ellipse2D.Double(GConst.POD_X, GConst.POD_Y, GConst.POD_D,
+                GConst.POD_D), (byte) 0);
     entities.add(theFuelPod);
     renderable.add(theFuelPod.shape());
   }
@@ -311,6 +510,12 @@ public final class Main {
           Math.sin(Math.toRadians(playerShip.orientation())),
       playerShip.acceleration()[1] + 1 *
           Math.cos(Math.toRadians(playerShip.orientation()))});
+    playerShip.set_fuel_content(playerShip.fuel() - 1);
+    if (playerShip.towed()) {
+      theSphere.acceleration(playerShip.acceleration());
+      theSphere.velocity(playerShip.velocity());
+      theSphere.orientation(playerShip.orientation());
+    }
   }
 
   public static void quit() {
@@ -319,7 +524,7 @@ public final class Main {
   }
 
   public static void turnRight() {
-    final int my_turnamount = 25;
+    final int my_turnamount = 10;
     final int my_fullcircle = 360;
     playerShip.orientation(playerShip.orientation() - my_turnamount);
     if (playerShip.orientation() < 0) {
@@ -328,7 +533,7 @@ public final class Main {
   }
 
   public static void turnLeft() {
-    final int my_turnamount = 25;
+    final int my_turnamount = 10;
     final int my_fullcircle = 360;
     playerShip.orientation(playerShip.orientation() + my_turnamount);
     if (playerShip.orientation() > my_fullcircle) {
@@ -341,14 +546,19 @@ public final class Main {
       final Bullet bull =
           new Bullet(playerShip.position(), playerShip.orientation(),
               new double[] {0, 0}, 0.0, new double[] {
-                50 * Math.sin(Math.toRadians(playerShip.orientation())),
-                50 * Math.cos(Math.toRadians(playerShip.orientation()))},
+                GConst.BUL_VEL *
+                    Math.sin(Math.toRadians(playerShip.orientation())),
+                GConst.BUL_VEL *
+                    Math.cos(Math.toRadians(playerShip.orientation()))},
               "Rectangle", new Rectangle2D.Double(playerShip.position()[0],
                   playerShip.position()[1], 2, 2), (byte) 0);
-      entities.add(bull);
       playerBullets.add(bull);
       bulletCount++;
     }
+  }
+
+  public static void activateShield() {
+    shieldOn = true;
   }
 
   private static void sleep() {
@@ -358,6 +568,10 @@ public final class Main {
     } catch (InterruptedException e) {
       e.printStackTrace(System.err);
     }
+  }
+
+  public static byte state() {
+    return my_state;
   }
 
   /**
@@ -382,9 +596,13 @@ public final class Main {
     protected void paintComponent(final Graphics the_graphics) {
       final Graphics2D graph2 = (Graphics2D) the_graphics;
       graph2.setColor(Color.BLACK);
+      graph2.draw((Shape)my_shapes.get(0));
+      graph2.fill((Shape) my_shapes.get(0));
+      graph2.setColor(Color.GREEN);
       final int size = my_shapes.size();
-      for (int i = 0; i < size; ++i) {
+      for (int i = 1; i < size; ++i) {
         graph2.draw((Shape) my_shapes.get(i));
+        graph2.fill((Shape) my_shapes.get(i));
       }
     }
 
@@ -419,9 +637,7 @@ public final class Main {
     }
 
     public int lastKeyPressed() {
-      final int temp = my_key;
-      //my_key = -1;
-      return temp;
+      return my_key;
     }
   }
 }

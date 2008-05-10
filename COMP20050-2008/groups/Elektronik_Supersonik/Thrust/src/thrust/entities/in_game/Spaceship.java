@@ -40,6 +40,10 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * The fuel of the Spaceship.
    */
   private transient EntityFuel my_fuel;
+  /**
+   * Am i towing?
+   */
+  private transient boolean my_towing;
 
   public Spaceship(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
@@ -50,6 +54,7 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
     super.set_dynamic_state(the_position, the_orientation, the_acceleration,
                             the_mass, the_velocity, the_initial_shape_name,
                             the_initial_shape, the_initial_state);
+    my_fuel = new EntityFuel(INITIAL_FUEL);
   }
 
   public void change_fuel_content(final int the_fuel_change) {
@@ -73,13 +78,11 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
   }
 
   public void tow() {
-    // TODO Auto-generated method stub
-
+    my_towing = true;
   }
 
   public boolean towed() {
-    // TODO Auto-generated method stub
-    return false;
+    return my_towing;
   }
 
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;

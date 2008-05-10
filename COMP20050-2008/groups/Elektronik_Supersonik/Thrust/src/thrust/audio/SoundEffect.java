@@ -44,9 +44,9 @@ public class SoundEffect {
     try {
       input_stream = AudioSystem.getAudioInputStream(the_sound_effect_file);
     } catch (UnsupportedAudioFileException uafe) {
-      uafe.printStackTrace(System.err);
+      uafe.printStackTrace(System.out);
     } catch (IOException ioe) {
-      ioe.printStackTrace(System.err);
+      ioe.printStackTrace(System.out);
     }
     data_line_info = new DataLine.Info(Clip.class, input_stream.getFormat());
     try {
@@ -58,6 +58,10 @@ public class SoundEffect {
       ioe.printStackTrace(System.err);
     }
     return this;
+  }
+
+  public final void stop() {
+    my_clip.stop();
   }
 
   /**

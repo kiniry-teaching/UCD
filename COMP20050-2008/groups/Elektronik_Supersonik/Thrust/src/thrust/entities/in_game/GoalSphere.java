@@ -26,6 +26,10 @@ public class GoalSphere extends DynamicEntity implements NeutralEntity, Tow {
    * The mass of the goal sphere is 10,000kg.
    */
   public static final int MASS = 10000;
+  /**
+   * Am i being towed?
+   */
+  private transient boolean my_towed;
   public GoalSphere(final double[] the_position, final double the_orientation,
       final double[] the_acceleration, final double the_mass,
       final double[] the_velocity, final String the_initial_shape_name,
@@ -38,12 +42,11 @@ public class GoalSphere extends DynamicEntity implements NeutralEntity, Tow {
   }
 
   public void tow() {
-    // TODO Auto-generated method stub
+    my_towed = true;
   }
 
   public boolean towed() {
-    // TODO Auto-generated method stub
-    return false;
+    return my_towed;
   }
   /*@ public invariant (* The fuel pod is destroyed by a bullet. *);
     @ public invariant (* If the fuel pod is destroyed, the spaceship

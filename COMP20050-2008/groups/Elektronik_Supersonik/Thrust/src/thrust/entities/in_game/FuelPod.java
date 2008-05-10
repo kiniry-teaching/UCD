@@ -23,6 +23,10 @@ import thrust.entities.about.Fuelable;
  */
 public class FuelPod extends StaticEntity implements NeutralEntity, Fuelable {
   /**
+   * The initial fuel in a pod.
+   */
+  public static final int INIT_FUEL = 2000;
+  /**
    * The fuel of the Pod.
    */
   private transient EntityFuel my_fuel;
@@ -36,6 +40,7 @@ public class FuelPod extends StaticEntity implements NeutralEntity, Fuelable {
     super.set_state(the_position, the_orientation, the_acceleration, the_mass,
                     the_velocity, the_initial_shape_name, the_initial_shape,
                     the_initial_state);
+    my_fuel = new EntityFuel(INIT_FUEL);
   }
 
   public void change_fuel_content(final int the_fuel_change) {

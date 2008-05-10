@@ -30,7 +30,7 @@ public class Factory extends StaticEntity
   /**
   * An Integer storing our maximum velocity and acceleration.
   */
-  private static final int HEALTH_LIMIT = 20;
+  public static final int HEALTH_LIMIT = 20;
   /**
    * Stores the health(hit-points) of the factory.
    */
@@ -46,7 +46,7 @@ public class Factory extends StaticEntity
   /**
    * The AI of the factory.
    */
-  private transient EnemyAI my_ai;
+  private final EnemyAI my_ai;
   /**
    * The animation of the factory.
    */
@@ -61,6 +61,11 @@ public class Factory extends StaticEntity
     super.set_state(the_position, the_orientation, the_acceleration, the_mass,
                     the_velocity, the_initial_shape_name, the_initial_shape,
                     the_initial_state);
+    my_chimney = new FactoryChimney();
+    my_sphere = new FactorySphere();
+    my_health = HEALTH_LIMIT;
+    my_ai = new EnemyAI();
+    my_animation = new EntityAnimation();
   }
 
   public AI attack() {
@@ -163,6 +168,11 @@ public class Factory extends StaticEntity
      * The animation of the chimney.
      */
     private transient EntityAnimation my_animation;
+    public FactoryChimney() {
+      super();
+      my_ai = new EnemyAI();
+      my_animation = new EntityAnimation();
+    }
     public AI attack() {
       return my_ai.attack();
     }
