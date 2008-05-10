@@ -10,15 +10,18 @@
 
 package thrust.entities.in_game;
 
+import java.awt.Color;
+
 import thrust.animation.Animatable;
+import thrust.animation.AnimatableImp;
 import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
 /**
  * A barrier and trigger to block the spaceship's way.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author ursula redmond (ursula.redmond@ucdconnect.ie)
+ * @version 10 May 2008
  */
 public class Barrier extends StaticEntity
   implements NeutralEntity, Animatable {
@@ -27,6 +30,8 @@ public class Barrier extends StaticEntity
   private transient boolean my_openDoor;
   /** The door when closed. */
   private transient boolean my_closedDoor;
+  /** Barrier's animation. */
+  private transient AnimatableImp my_animation;
 
   /**
    * @return Are you closed?
@@ -76,19 +81,25 @@ public class Barrier extends StaticEntity
   }
 
   public void animate() {
-    // TODO Auto-generated method stub
-
+    my_animation.animate();
   }
 
   public Animation animation() {
-    animate();
-    // TODO Auto-generated method stub
-    return null;
+    return my_animation.animation();
   }
 
   public void animation(final Animation the_animation) {
-    // TODO Auto-generated method stub
+    my_animation.animation(the_animation);
+  }
 
+  public Color color() {
+    return java.awt.Color.YELLOW;
+  }
+
+  public void color(final Color the_color) {
+    if (the_color == java.awt.Color.YELLOW) {
+      my_Color(java.awt.Color.YELLOW);
+    }
   }
 
   /*@ public invariant (* Barriers are always in one of the three states

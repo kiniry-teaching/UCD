@@ -11,29 +11,23 @@
 package thrust.entities.about;
 
 /**
- * @author joe kiniry (kiniry@acm.org)
+ * @author Joe Kiniry (kiniry@acm.org)
  * @version 11 April 2008
  */
-
-
-
 public interface Fuelable {
   /**
    * @return How much fuel do you contain?
    */
   //@ ensures 0 <= \result;
   //@ ensures \result <= maximum_fuel();
-  /*@ pure @*/
-
-  /**
-   * @return your fuel
-   */
-  float fuel();
+  /*@ pure @*/ int fuel();
 
   /**
    * @return How much fuel can you contain?
    */
-  float maximum_fuel();
+  //@ ensures 0 <= \result;
+  /*@ pure @*/ int maximum_fuel();
+
   /**
    * @param the_fuel_content This many units is your fuel content.
    */
@@ -52,11 +46,13 @@ public interface Fuelable {
     @*/
   void change_fuel_content(int the_fuel_change);
 
-  //@ invariant (* Fuel content is always non-negative and finite. *);
-  //@ invariant 0 <= fuel();
+  //@ public invariant (* Fuel content is always non-negative and finite. *);
+  //@ public invariant 0 <= fuel();
+
   //@ public invariant (* One unit of fuel weights 1kg. *);
   /**
    * @return What is the mass of your fuel?
    */
-
+  //@ ensures \result == fuel() * 1;
+  /*@ pure @*/ int fuel_mass();
 }

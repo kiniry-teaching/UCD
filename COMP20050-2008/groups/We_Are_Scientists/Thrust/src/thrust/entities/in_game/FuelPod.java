@@ -9,24 +9,119 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 import thrust.entities.about.Fuelable;
 
 /**
  * A fuel pod from which the spaceship can obtain fuel.
- * @author simon markey (kiniry@acm.org)
- * @version 18 April 2008
+ * @author ursula redmond (ursula.redmond@ucdconnect.ie)
+ * Original by Simon.
+ * @version 10 May 2008
  */
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
-  /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
-    @ public invariant (* The fuel pod is not affected by the goal sphere. *);
-    @ public invariant (* The fuel pod is not affected by the spaceship. *);
-    @ public invariant (* A fuel pod's color is always yellow. *);
-    @ public invariant color() == java.awt.Color.YELLOW;
-    @ public invariant (* A fuel pod's 'fuel' lettering color is
-    @                     dictated by the amount of fuel it contains. *);
+
+  /** The integer value that is the fuel. */
+  private transient int my_fuel;
+
+  /** maximum fuel available. */
+  private final transient int my_max_fuel = (int) Float.POSITIVE_INFINITY;
+
+  /**
+  *
+  * @param the_position
+  * @param the_orientation
+  * @param the_acceleration
+  * @param the_mass
+  * @param the_velocity
+  * @param the_initial_shape_name
+  * @param the_initial_shape
+  * @param the_initial_state
+  */
+  public FuelPod(final double[] the_position, final double the_orientation,
+       final double[] the_acceleration, final double the_mass,
+       final double[] the_velocity, final String the_initial_shape_name,
+       final Shape the_initial_shape, final byte the_initial_state) {
+
+    super();
+    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
+         the_mass, the_velocity, the_initial_shape_name,
+         the_initial_shape, the_initial_state);
+  }
+
+  /**
+   * @return How much fuel do you contain?
+   */
+  //@ ensures 0 <= \result;
+  //@ ensures \result <= maximum_fuel();
+  public int fuel() {
+    return my_fuel;
+  }
+
+  /**
+   * @return How much fuel can you contain?
+   */
+  //@ ensures 0 <= \result;
+  public int maximum_fuel() {
+    return my_max_fuel;
+  }
+
+  /**
+   * @param the_fuel_content This many units is your fuel content.
+   */
+  //@ requires 0 <= the_fuel_content & the_fuel_content <= maximum_fuel();
+  //@ ensures fuel() == the_fuel_content;
+  public void set_fuel_content(final int the_fuel_content) {
+    if (the_fuel_content >= 0 && the_fuel_content <= maximum_fuel()) {
+      my_fuel = the_fuel_content;
+    }
+  }
+
+  /**
+   * @param the_fuel_change Change your fuel content by this many units.
+   */
+  /*@ ensures (\old(fuel() + the_fuel_change < 0) ?
+    @            (fuel() == 0) :
+    @          (\old(maximum_fuel() < (fuel() + the_fuel_change)) ?
+    @             (fuel() == maximum_fuel()) :
+    @           fuel() == \old(fuel() + the_fuel_change)));
     @*/
-  
+  public void change_fuel_content(final int the_fuel_change) {
+    if (my_fuel + the_fuel_change < 0) {
+      my_fuel = 0;
+    } else if (my_fuel + the_fuel_change > my_max_fuel) {
+      my_fuel = my_max_fuel;
+    } else {
+      my_fuel = my_fuel + the_fuel_change;
+    }
+    // @ invariant (* Fuel content is always non-negative and finite. *);
+    // @ invariant 0 <= fuel();
+  }
+
+  //@ public invariant (* Fuel content is always non-negative and finite. *);
+  //@ public invariant 0 <= fuel();
+
+  //@ public invariant (* One unit of fuel weights 1kg. *);
+  /**
+   * @return What is the mass of your fuel?
+   */
+  //@ ensures \result == fuel() * 1;
+  public int fuel_mass() {
+    //Assume each unit of fuel has mass 1.
+    return my_fuel;
+  }
+
+  public Color color() {
+    return java.awt.Color.YELLOW;
+  }
+
+  public void color(final Color the_color) {
+    if (the_color == java.awt.Color.YELLOW) {
+      my_Color(java.awt.Color.YELLOW);
+    }
+  }
 }
