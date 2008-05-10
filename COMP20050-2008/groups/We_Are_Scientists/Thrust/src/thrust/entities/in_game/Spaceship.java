@@ -9,7 +9,6 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.FriendEntity;
@@ -46,28 +45,6 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
   /** The shield state of the SpaceShip. */
   private transient boolean my_shield_state;
 
-  /**
-   *
-   * @param the_position
-   * @param the_orientation
-   * @param the_acceleration
-   * @param the_mass
-   * @param the_velocity
-   * @param the_initial_shape_name
-   * @param the_initial_shape
-   * @param the_initial_state
-   */
-  public Spaceship(final double[] the_position, final double the_orientation,
-        final double[] the_acceleration, final double the_mass,
-        final double[] the_velocity, final String the_initial_shape_name,
-        final Shape the_initial_shape, final byte the_initial_state) {
-
-    super();
-    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
-          the_mass, the_velocity, the_initial_shape_name,
-          the_initial_shape, the_initial_state);
-  }
-
   /*
    * (non-Javadoc)
    * @see thrust.entities.about.Fuelable#change_fuel_content(int)
@@ -94,8 +71,8 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * (non-Javadoc)
    * @see thrust.entities.about.Fuelable#fuel()
    */
-  public float fuel() {
-    float answer;
+  public int fuel() {
+    int answer;
     if (0 <= my_fuel && my_fuel <= maximum_fuel()) {
       answer = my_fuel;
     } else {
@@ -108,8 +85,8 @@ public class Spaceship extends DynamicEntity implements FriendEntity, Fuelable,
    * (non-Javadoc)
    * @see thrust.entities.about.Fuelable#maximum_fuel()
    */
-  public float maximum_fuel() {
-    return Float.POSITIVE_INFINITY;
+  public int maximum_fuel() {
+    return (int) Float.POSITIVE_INFINITY;
   }
 
   /*

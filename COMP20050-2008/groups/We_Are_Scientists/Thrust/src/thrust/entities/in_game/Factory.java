@@ -32,7 +32,7 @@ public class Factory extends StaticEntity
   /** Amount factory damage, initially zero. */
   private transient byte my_damage;
   /** Factory's chimney. */
-  private static transient FactoryChimney my_chimney;
+  private transient FactoryChimney my_chimney;
   /** Factory's sphere. */
   private transient FactorySphere my_sphere;
   /** Factory's AI. */
@@ -89,7 +89,7 @@ public class Factory extends StaticEntity
   /**
    * @return What is your chimney?
    */
-  public static FactoryChimney chimney() {
+  public FactoryChimney chimney() {
     return my_chimney;
   }
 
@@ -142,12 +142,12 @@ public class Factory extends StaticEntity
     private transient boolean my_smoking_state;
 
     public Color color() {
-      return chimney().color();
+      return java.awt.Color.GREEN;
     }
 
     public void color(final Color the_color) {
-      if (the_color == chimney().color()) {
-        my_Color(chimney().color());
+      if (the_color == java.awt.Color.GREEN) {
+        my_Color(java.awt.Color.GREEN);
       }
     }
 

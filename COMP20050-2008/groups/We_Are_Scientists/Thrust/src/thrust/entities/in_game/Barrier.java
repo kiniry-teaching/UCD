@@ -11,7 +11,6 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
 
 import thrust.animation.Animatable;
 import thrust.animation.AnimatableImp;
@@ -33,17 +32,6 @@ public class Barrier extends StaticEntity
   private transient boolean my_closedDoor;
   /** Barrier's animation. */
   private transient AnimatableImp my_animation;
-
-  public Barrier(final double[] the_position, final double the_orientation,
-        final double[] the_acceleration, final double the_mass,
-        final double[] the_velocity, final String the_initial_shape_name,
-        final Shape the_initial_shape, final byte the_initial_state) {
-
-    super();
-    super.set_state(the_initial_shape_name, the_initial_shape,
-           the_initial_state);
-  }
-
 
   /**
    * @return Are you closed?

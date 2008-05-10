@@ -9,6 +9,8 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.List;
 import java.util.Collection;
 
 import thrust.entities.NeutralEntity;
@@ -22,18 +24,21 @@ import thrust.entities.StaticEntity;
 //import java.awt.event.ActionListener;
 /**
  * The vacuum in which entities exist.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author ursula redmond (ursula.redmond@ucdconnect.ie)
+ * @version 10 May 2008
  */
 public class Space extends StaticEntity
   implements NeutralEntity
-  {
+{
+
+  /** Collection of stars. */
+  private static final Collection STAR_COLLECTION = (Collection) new List();
+
   /**
    * @return What are your stars?"
    */
-  public /*@ pure @*/ Collection stars() {
-    assert false; //@ assert false;
-    return null;
+  public Collection stars() {
+    return STAR_COLLECTION;
   }
 
   /**
@@ -41,9 +46,17 @@ public class Space extends StaticEntity
    * @param the_star the star to add.
    */
   public void add_star(final Star the_star) {
-  //  assert false; //@ assert false;
+    STAR_COLLECTION.add(the_star);
+  }
 
-    //final Star add_star = the_star;
+  public Color color() {
+    return java.awt.Color.BLACK;
+  }
+
+  public void color(final Color the_color) {
+    if (the_color == java.awt.Color.BLACK) {
+      my_Color(java.awt.Color.BLACK);
+    }
   }
 
   //@ public invariant (* Terrain and space are disjoint. *);

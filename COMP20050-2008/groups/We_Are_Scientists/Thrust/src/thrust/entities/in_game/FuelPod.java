@@ -10,7 +10,6 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
 
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
@@ -42,16 +41,6 @@ public class FuelPod extends StaticEntity
   * @param the_initial_shape
   * @param the_initial_state
   */
-  public FuelPod(final double[] the_position, final double the_orientation,
-       final double[] the_acceleration, final double the_mass,
-       final double[] the_velocity, final String the_initial_shape_name,
-       final Shape the_initial_shape, final byte the_initial_state) {
-
-    super();
-    super.set_dynamic_state(the_position, the_orientation, the_acceleration,
-         the_mass, the_velocity, the_initial_shape_name,
-         the_initial_shape, the_initial_state);
-  }
 
   /**
    * @return How much fuel do you contain?

@@ -10,7 +10,6 @@
 package thrust.entities.in_game;
 
 import java.awt.Color;
-import java.awt.Shape;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
@@ -48,19 +47,6 @@ public class GoalSphere extends DynamicEntity
   public static final int MASS = 10000;
   /** The towing state of the GoalSphere. */
   private transient boolean my_tow_state;
-
-
-  public GoalSphere(final double[] the_position, final double the_orientation,
-         final double[] the_acceleration, final double the_mass,
-         final double[] the_velocity, final String the_initial_shape_name,
-         final Shape the_initial_shape, final byte the_initial_state) {
-
-    super();
-    super.set_dynamic_state(the_position, the_orientation,
-         the_acceleration,
-        the_mass, the_velocity, the_initial_shape_name,
-        the_initial_shape, the_initial_state);
-  }
 
   public void tow() {
     my_tow_state = true;
