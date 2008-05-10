@@ -190,7 +190,6 @@ public class Factory extends StaticEntity
       @                     factory's sphere. *);
       @*/
 
-
     public Color color() {
       return java.awt.Color.GREEN;
     }

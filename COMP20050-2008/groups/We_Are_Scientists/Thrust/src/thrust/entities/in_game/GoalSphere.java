@@ -9,6 +9,9 @@
  */
 package thrust.entities.in_game;
 
+import java.awt.Color;
+import java.awt.Shape;
+
 import thrust.entities.DynamicEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.behaviors.Tow;
@@ -16,8 +19,8 @@ import thrust.entities.behaviors.Tow;
 /**
  * The goal sphere that the spaceship needs to tow into
  * space away from the terrain to escape.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 18 April 2008
+ * @author ursula redmond (ursula.redmond@ucdconnect.ie)
+ * @version 10 May 2008
  */
 public class GoalSphere extends DynamicEntity
   implements NeutralEntity, Tow {
@@ -41,8 +44,39 @@ public class GoalSphere extends DynamicEntity
     @*/
 
   //@ public invariant (* The mass of the goal sphere is 10,000kg. *);
-  /**
-   * The mass of the goal sphere is 10,000kg.
-   */
+  /** The mass of the goal sphere is 10,000kg. */
   public static final int MASS = 10000;
+  /** The towing state of the GoalSphere. */
+  private transient boolean my_tow_state;
+
+
+  public GoalSphere(final double[] the_position, final double the_orientation,
+         final double[] the_acceleration, final double the_mass,
+         final double[] the_velocity, final String the_initial_shape_name,
+         final Shape the_initial_shape, final byte the_initial_state) {
+
+    super();
+    super.set_dynamic_state(the_position, the_orientation,
+         the_acceleration,
+        the_mass, the_velocity, the_initial_shape_name,
+        the_initial_shape, the_initial_state);
+  }
+
+  public void tow() {
+    my_tow_state = true;
+  }
+
+  public boolean towed() {
+    return my_tow_state;
+  }
+
+  public Color color() {
+    return java.awt.Color.GREEN;
+  }
+
+  public void color(final Color the_color) {
+    if (the_color == java.awt.Color.GREEN) {
+      my_Color(java.awt.Color.GREEN);
+    }
+  }
 }
