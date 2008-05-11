@@ -45,7 +45,8 @@ import thrust.input.InputHandler;
 
 /**
  * Simulating all of the entities in the game to realize the game.
- * @author Elektronik Supersonik (.@.)
+ * @author Elektronik Supersonik (zyliuz@yahoo.com, dominiccarr@gmail.com,
+ *  erikrf@indigo.ie).
  * @version 23 April 2008
  */
 public final class Main {

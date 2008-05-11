@@ -25,23 +25,23 @@ public class InputHandler {
   /** An unknown character code. */
   // private static final char UNKNOWN_CHAR = '\0';
   /** Character code for displaying high scores (F12). */
-  public static final char DISPLAY_HIGH_SCORES = KeyEvent.VK_F12;
+  public static final char DISPLAY_HIGH_SCORES = KeyEvent.VK_H;
   /** Character code for toggling sound and music (S). */
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_S;
+  public static final char TOGGLE_MUSIC_OR_EFFECTS = KeyEvent.VK_M;
   /** Character code to start the game (Enter). */
-  public static final char START_GAME = KeyEvent.VK_ENTER;
+  public static final char START_GAME = KeyEvent.VK_SPACE;
   /** Character code to stop (pause) the game (Pause). */
   public static final char STOP_GAME = KeyEvent.VK_ESCAPE;
   /** Character code to fire the gun (Space). */
-  public static final char FIRE_GUN = KeyEvent.VK_SPACE;
+  public static final char FIRE_GUN = KeyEvent.VK_ENTER;
   /** Character code to turn left (Left arrow). */
-  public static final char TURN_LEFT = KeyEvent.VK_LEFT;
+  public static final char TURN_LEFT = KeyEvent.VK_A;
   /** Character code to turn right (Right arrow). */
-  public static final char TURN_RIGHT = KeyEvent.VK_RIGHT;
+  public static final char TURN_RIGHT = KeyEvent.VK_S;
   /** Character code to use engine (thrust) (Up arrow). */
-  public static final char USE_ENGINE = KeyEvent.VK_UP;
+  public static final char USE_ENGINE = KeyEvent.VK_SHIFT;
   /** Character code to enable shield (Shift). */
-  public static final char USE_SHIELD = KeyEvent.VK_SHIFT;
+  public static final char USE_SHIELD = KeyEvent.VK_SPACE;
   /**
    * Quit game.
    */
