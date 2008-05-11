@@ -156,6 +156,10 @@ public final class Main {
    */
   private static long deadline = -1;
   /**
+   * Tells if the turrets are disabled.
+   */
+  private static long disableTimer = -1;
+  /**
    * This class cannot be constructed.
    */
   private Main() {
@@ -206,6 +210,9 @@ public final class Main {
     }
     if(deadline != -1 && System.currentTimeMillis() >= deadline) {
       lose();
+    }
+    if(disableTimer != -1 && System.currentTimeMillis() >= disableTimer) {
+      disableTimer = -1;
     }
     if (playerShip.towed() && playerShip.position()[1] <= GConst.SHIP_D) {
       createWelcomeScreen();
@@ -325,7 +332,7 @@ public final class Main {
         final Point2D turret = new Point2D.Double(theGun.position()[0],
           theGun.position()[1]);
         if ((player.distance(turret) < GConst.TRT_FR_DIST) && (tur_bullets <
-            NUM_BULLETS)) {
+            NUM_BULLETS) && disableTimer == -1) {
           tur_bullets++;
           final int orient = rand.nextInt(170);
           turBullets.add(new Bullet(theGun.position(), 0, new double[] {0, 0},
@@ -370,6 +377,8 @@ public final class Main {
     if (entf.damage() >= Factory.HEALTH_LIMIT) {
       entities.remove(the_index);
       deadline = System.currentTimeMillis() + GConst.ESC_TIME;
+    } else {
+      disableTimer = System.currentTimeMillis() + GConst.DIS_TIME;
     }
     game.change_score(hitScore);
   }

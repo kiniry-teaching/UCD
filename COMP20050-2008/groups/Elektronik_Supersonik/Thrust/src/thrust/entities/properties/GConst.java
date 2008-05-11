@@ -122,6 +122,10 @@ public class GConst {
    * The acceleration gained from thrusting.
    */
   public static final double ACC_GAIN = 5;
+  /**
+   * The time in milliseconds turrets are disabled after factory hit.
+   */
+  public static final int DIS_TIME = 4000;
   public GConst() {
     assert false;
   }
