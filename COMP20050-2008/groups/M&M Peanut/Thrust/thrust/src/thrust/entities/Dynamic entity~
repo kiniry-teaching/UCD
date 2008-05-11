@@ -1,0 +1,55 @@
+/*
+ * A re-implementation of the classic C=64 game 'Thrust'.
+ *
+ * @author "Joe Kiniry (kiniry@acm.org)"
+ * @module "COMP 20050, COMP 30050"
+ * @creation_date "March 2007"
+ * @last_updated_date "April 2008"
+ * @keywords "C=64", "Thrust", "game"
+ */
+
+package thrust.entities;
+
+import thrust.physics.Physics;
+
+import thrust.physics.PhysicsInterface;
+
+/**
+* Entities whose position or orientation change.
+* @author Colm Murphy ,Sean Jago, Naomi OReilly.
+* @version 18 April 2008
+*/
+
+public abstract class DynamicEntity extends Entity {
+
+private PhysicsClass my_physics = new PhysicsClass();
+
+/**
+*set position and orientation of the entity
+*/
+
+public static DynamicEntity(
+       final double[] the_position
+       final double[] the_orientation){
+      
+       my_physics.position(the_position);
+       my_physics.orientation(the_orientation);}
+
+       public double mass() {
+       return my_physics.mass();
+       }
+
+       public double[] velocity() {
+       return my_physics.velocity();
+       }
+
+       public double[] acceleration() {
+       return my_physics.acceleration();
+       }
+
+       public double momentum() {
+       return my_physics.momentum();
+       }
+}
+
+       
