@@ -1,5 +1,6 @@
 
-
+Revision on original charts by Colm Murphy, Sean Jago, Naomi O' Reilly 
+revision : Naomi O' Reilly - incomplete.
 
 
  system_chart GAME
