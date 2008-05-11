@@ -1,0 +1,99 @@
+
+
+package thrust.physics;
+
+
+/**
+ * Physics
+ * @author Sean Jago 06588557
+ * @version 16 April '08
+ */
+
+public class PhysicsMethod implements Physics
+ {
+  /** Gravity, the force that pulls the ship down towards the land. */
+  static final double gravity = -9.8;
+  
+  /** Speed, the Speed at which an Entity is traveling at. */
+  double speed;
+
+  /** Change In Speed, the rate of the change in speed of an Entity. */
+  double speed_change;
+
+  /** Mass, a dimensionless quantity representing the amount of matter in an Entity. */
+  double mass;
+
+  /** Momentum, product of mass and velocity of an Entity. */
+  double momentum;
+
+  /** Orientation, the direction of an entity. */
+  double orientation;
+ 
+  /** X-Coordinate, the x-coordinate where the enitity is placed. */
+  double xco;
+
+  /** Y-Coordinate, the y-coordinate where the entity is placed. */
+  double yco;
+
+  
+
+  /**
+  * @return What is your acceleration in meters per second squared?
+  */
+  public double[] acceleration()
+  {
+    double[] acceleration = {speed, speed_change};
+    return acceleration;
+  }
+
+  /**
+  * @return What is the gravitational constant?
+  */
+  public double gravitational_constant() 
+  {
+    return gravity;
+  }
+
+  /**
+   * @return What is your orientation in radians?
+   */
+  public double orientation() 
+  {
+    return orientation;
+  }
+
+ /**
+   * @return What is your mass in kilograms?
+   */
+   public double mass()
+   {
+     return mass;
+   }
+
+ /**
+   * @return What is your momentum in kilogrammes*meters per second?
+   */
+  public double momentum() 
+   {
+    return mass * speed;
+   } 
+
+ /**
+   * @return What is your position in meters from the origin?
+   */
+  public double[] position() 
+  {
+    final double[] position = {xco, yco};
+    return position;
+  }
+
+ /**
+   * @return What is your velocity in meters per second?
+   */
+  public double[] velocity() 
+  {
+    final double[] velocity = {speed, orientation};
+    return velocity;
+  }
+
+}
