@@ -1,134 +1,92 @@
-package thrust.input;
-import java.util.logging.Logger;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-/**
- * Processes and delegates each keyboard input received.
- * @author Joe Kiniry (kiniry@acm.org)
- * @version 2 April 2008
- * @revised 04/04/08 Patrick Nevin: 06754155
- *                   Robert Plunkett: 06038883
- * @revised 20/04/08 Patrick Nevin
-*/
-public class InputHandler extends KeyAdapter {
-
-  /** Press h to Display High Score.*/
-  public static final char DISPLAY_HIGH_SCORES = 'h';
-  /** Press m to Toggle Music Or Effect.*/
-  public static final char TOGGLE_MUSIC_OR_EFFECTS = 'm';
-  /**Press [space] to Start Game.*/
-  public static final char START_GAME = ' ';
-  /** Press [Esc] to Stop Game.*/
-  public static final char STOP_GAME = 27;
-  /**Press [Return] to Fire Gun.*/
-  public static final char FIRE_GUN = '\r';
-  /**Press a to Turn Left.*/
-  public static final char TURN_LEFT = 'a';
-  /**Press s to Turn Right.*/
-  public static final char TURN_RIGHT = 's';
-  /**Press shift to Use Engine.*/
-  public static final char USE_ENGINE = 16;
-  /**Press [Space] to Use Shield.*/
-  public static final char USE_SHIELD = ' ';
-  /**
-   * flag to determine when to stop/start game.
-   * setter and getter below.
-   */
-  private boolean my_game_on;
-
-  /**
-   * get value of stop_game.
-   */
-  public boolean get_game_on() {
-    return this.my_game_on;
-  }
-  /**
-   * set whether the game is on or off.
-   */
-  public void set_game_on(final boolean a_value) {
-    this.my_game_on = a_value;
-  }
-  /**
-   * @return What are the legal keyboard inputs?
-   */
-  public/*@ pure @*/char[] legal_inputs() {
-    //any array of char's
-    final char[] legal_inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS,
-                                 START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT,
-                                 TURN_RIGHT, USE_ENGINE, USE_SHIELD };
-    //return the array
-    return legal_inputs;
-  }
-
-  /**
-   * @return Is this character a legal keyboard input?
-   * @param the_character the character to check.
-   */
-  /*@ ensures \result <==> (the_character == DISPLAY_HIGH_SCORES) |
-    @                      (the_character == TOGGLE_MUSIC_OR_EFFECTS) |
-    @                      (the_character == START_GAME) |
-    @                      (the_character == STOP_GAME) |
-    @                      (the_character == FIRE_GUN) |
-    @                      (the_character == TURN_LEFT) |
-    @                      (the_character == TURN_RIGHT) |
-    @                      (the_character == USE_ENGINE) |
-    @                      (the_character == USE_SHIELD);
-    @*/
-  public/*@ pure @*/boolean legal_input(final char the_character) {
-
-    final char[] legals = legal_inputs();
-    for (int i = 0; i <= legals.length; i++) {
-      if (legals[i] == the_character) {
-        return true;
-      }
-    }
-    assert false : "ERROR: should never get here";
-    return false;
-  }
-
-  /**
-   * Process this keyboard input character.
-   * @param the_keyboard_input the input character to process.
-   */
-  //@ requires legal_input(the_keyboard_input);
-  public void process(final char the_keyboard_input) {
-
-    final Logger my_logger = Logger.getLogger("thrust.input.InputHandler");
-    switch (the_keyboard_input) {
-      case DISPLAY_HIGH_SCORES:
-        my_logger.info("New Command to deal with: DISPLAY_HIGH_SCORES");
-        break;
-      case TOGGLE_MUSIC_OR_EFFECTS:
-        my_logger.info("New Command to deal with: TOGGLE_MUSIC_OR_EFFECTS");
-        break;
-      case STOP_GAME:
-        this.set_game_on(false);
-        my_logger.info("New Command to deal with: STOP_GAME");
-        break;
-      case FIRE_GUN:
-        my_logger.info("New Command to deal with: FIRE_GUN");
-        break;
-      case TURN_LEFT:
-        my_logger.info("New Command to deal with: TURN_LEFT");
-        break;
-      case TURN_RIGHT:
-        my_logger.info("New Command to deal with: TURN_RIGHT");
-        break;
-      case USE_ENGINE:
-        my_logger.info("New Command to deal with: USE_ENGINE");
-        break;
-      default:/**do nothing*/
-    }
-    //char [space] is overloaded and has two associated behaviours
-    //if the game is not on, start the game when [space] pressed
-    if (the_keyboard_input == ' ' &&  !this.get_game_on()) {
-      my_logger.info("New Command to deal with: START_GAME");
-      this.set_game_on(true);
-    }
-    //otherwise if the game is not on, use shield when [space] pressed
-    else if (the_keyboard_input == ' ' && this.get_game_on()) {
-      my_logger.info("New Command to deal with: USE_SHIELD ");
-    }
-  }
-}
+ package thrust.input; 
+ import java.awt.event.KeyEvent; 
+  
+ /** 
+  * Processes and delegates each keyboard input received. 
+  * @author  Ciaran Flynn
+  * @version  10 April 2008 
+  */  
+ public class InputHandler { 
+  
+  
+   /** Display the high scores*/ 
+   public static final char DISPLAY_HIGH_SCORES = 104; 
+   /** Toggle music or sound effects. */ 
+   public static final char TOGGLE_MUSIC_OR_EFFECTS = 109; 
+   /** Start the game. */ 
+   public static final char START_GAME = 115; 
+   /** Stop the game. */ 
+   public static final char STOP_GAME = 27; 
+   /** Fire the gun. */ 
+   public static final char FIRE_GUN = 12; 
+  /** Turn left. */ 
+   public static final char TURN_LEFT = 97; 
+   /** Turn right. */ 
+   public static final char TURN_RIGHT = 100; 
+   /** Use engine. */ 
+   public static final char USE_ENGINE = 15; 
+   /** Use shield. */ 
+   public static final char USE_SHIELD = 32; 
+  
+  
+   
+   public final char[] legal_inputs() { 
+      
+     final char[] legal_inputs = {DISPLAY_HIGH_SCORES, TOGGLE_MUSIC_OR_EFFECTS, 
+                                  START_GAME, STOP_GAME, FIRE_GUN, TURN_LEFT, 
+                                  TURN_RIGHT, USE_ENGINE, USE_SHIELD }; 
+     return legal_inputs; 
+   } 
+  
+   /** 
+    * @return Is this character a legal keyboard input? 
+    * @param the_character the character to check. 
+    */ 
+   /*@ ensures \result <==> (the_character == DISPLAY_HIGH_SCORES) | 
+     @                      (the_character == TOGGLE_MUSIC_OR_EFFECTS) | 
+     @                      (the_character == START_GAME) | 
+     @                      (the_character == STOP_GAME) | 
+     @                      (the_character == FIRE_GUN) | 
+     @                      (the_character == TURN_LEFT) | 
+     @                      (the_character == TURN_RIGHT) | 
+     @                      (the_character == USE_ENGINE) | 
+     @                      (the_character == USE_SHIELD); 
+     @*/ 
+   
+  
+   
+   public void process(final char the_keyboard_input) { 
+     assert false; //@ assert false 
+     switch (the_keyboard_input) { 
+       case DISPLAY_HIGH_SCORES: 
+         System.out.print("High scores method"); 
+         break; 
+       case TOGGLE_MUSIC_OR_EFFECTS: 
+         System.out.print("Trigger Music method"); 
+         break; 
+       case START_GAME: 
+         System.out.print("Begin the game"); 
+         break; 
+       case STOP_GAME: 
+         System.out.print("End the game"); 
+         break; 
+       case FIRE_GUN: 
+        System.out.print("Fire bullet"); 
+        break; 
+      case TURN_LEFT: 
+        System.out.print("Turn left"); 
+        break; 
+      case TURN_RIGHT: 
+        System.out.print("Turn right"); 
+        break; 
+      case USE_ENGINE: 
+        System.out.print("thrust"); 
+        break; 
+      case USE_SHIELD: 
+        System.out.print("Shield on"); 
+         break; 
+       default: 
+     
+     } 
+   } 
+ } 
