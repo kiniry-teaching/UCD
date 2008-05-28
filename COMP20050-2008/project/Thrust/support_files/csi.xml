@@ -210,6 +210,7 @@
         <!-- See http://checkstyle.sf.net/config_design.html -->
         <module name="VisibilityModifier">
           <property name="packageAllowed" value="true"/>
+          <property name="protectedAllowed" value="true"/>
         </module>
         <module name="FinalClass"/>
         <module name="InterfaceIsType"/>
