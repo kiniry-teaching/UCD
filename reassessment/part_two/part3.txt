@@ -1,0 +1,27 @@
+o Unpackage the archive "source.tgz" found in the same directory as
+this file in the SVN repository.
+
+o Import the source as a new SVN branch called
+"reassessment/<surname_initials>", filling in the appropriate values.
+For example, my path would be "reassessment/Kiniry_JR".
+
+o Using Eclipse, checkout the newly imported path so that you have an
+SVN sandbox in which to work.
+
+o Perform a code review of the "ie.ucd.cs.cards" Java package.  Write
+any documentation that you see is missing, particularly Javadocs.
+
+o Identify *at least* three bugs in this Java package and its related
+files.
+
+o Submit an appropriate bug report on each of them in the project
+Tracker.  Identifying and fixing more than three bugs is to your
+benefit.
+
+o Fix each bug, document each fix, and write a unit test for each fix.
+
+o Commit all fixes and make sure to commit dependent fixes
+simultaneously.
+
+o The URL from which you will download the next step in the exam is
+included in the class PokerHand.
