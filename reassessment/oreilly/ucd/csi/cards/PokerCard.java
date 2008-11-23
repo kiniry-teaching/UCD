@@ -19,8 +19,9 @@ public class PokerCard implements Card {
 	public byte value;
 
 	public PokerCard(byte suit, byte value) {
-	  PokerCard poker = new PokerCard(byte suit, byte value);
-  }
+		this.suit = suit;
+		this.value = value;
+	}
 
 	public String toString() {
         return "Suit: " + suit + ", Value: " + value;
