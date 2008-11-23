@@ -33,8 +33,10 @@ public class PokerCard implements Card {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object o) {
-		if (o instanceof Card) {
-			return value.equals(o.value());
+		if (o instanceof PokerCard) {
+			pokerCard c = (PokerCard) o;
+			
+			return sameFaceValueAs(c) && sameSuitAs(c);
 		} else {
 			return false;
 		}
