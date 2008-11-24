@@ -1,0 +1,726 @@
+ system_chart Cards
+			indexing
+			clauster: "POKER";
+			created: "2008-11-23";
+                        explanation "" 
+                        part "1/1" 
+           	cluster CARDS description "objects used to play the game."
+	   		cluster HANDS description "sets of CARDS with a certain RANK."
+	   		cluster DECKS description "sets of 52 CARDS."
+	    	cluster SUITS description "four subsets of CARDS."
+	 		cluster VALUES description "given to CARDS and HANDS to determine their RANK." 
+                        end 
+
+ cluster_chart CARDS 
+                         indexing
+		      	 clauster:"CARDS";
+				 created: "2008-11-23";
+				 explanation "objects used to play the game."
+				 part "1/1" 
+                     class SUIT description "a subset of thirteen cards with a picture of a HEART, DIAMOND, CLUB or SPADE on them."
+                     class VALUE description "a numerical value given to each card."
+                     class RANK description "each card has a RANK form highest to lowest, based on its VALUE."
+                   	 class ACE description "a CARD with the highest VALUE in a POKER DECK."
+                   	 class TWO description "a CARD with the numerical VALUE of two in a POKER DECK."
+                   	 class THREE description "a CARD with the numerical VALUE of three in a POKER DECK."
+                   	 class FOUR description "a CARD with the numerical VALUE of four in a POKER DECK."
+                   	 class FIVE description "a CARD with the numerical VALUE of five in a POKER DECK."
+                   	 class SIX description "a CARD with the numerical VALUE of six in a POKER DECK."
+                   	 class SEVEN description "a CARD with the numerical VALUE of seven in a POKER DECK."
+                   	 class EIGHT description "a CARD with the numerical VALUE of eight in a POKER DECK."
+                   	 class NINE description "a CARD with the numerical VALUE of nine in a POKER DECK."
+                   	 class TEN description "a CARD with the numerical VALUE of ten in a POKER DECK."
+                   	 class JACK description "a CARD with the numerical VALUE of eleven in a POKER DECK."
+                   	 class QUEEN description "a CARD with the numerical VALUE of twelve in a POKER DECK."
+                   	 class KING description "a CARD with the numerical VALUE of thirteen in a POKER DECK."
+                     end
+
+class_chart SUIT		 
+                          indexing
+			  clauster: "SUITS";
+			  created: "2008-11-23";
+                          explanation "A subset of CARDS" 
+                          part "1/1" 
+                        
+                          query 
+			  			 "HEART","SPADE", "CLUB", "DIAMOND", "COLOUR"
+			  	  
+                          command 
+			  			 "Be a HEART","Be a CLUB","Be a SPADE","Be a DIAMOND"  "Be this COLOUR"
+                          constraint 
+			   			 "Can't change to a different SUIT or COLOUR" 
+                       	 end 
+class_chart VALUE		 
+                          indexing
+			  clauster: "VALUE";
+			  created: "2008-11-23";
+                          explanation "A number given to CARDS and HANDS in poker to determine RANK." 
+                          part "1/1"  
+                          query 
+			   			  "NUMBER", "RANK", "HIGEST", "LOWEST"
+			 			  command 
+			    		  "Be the higest VALUE", "Be the lowest VALUE" "Be this VALUE"
+                          constraint 
+			    		  "remains invariant"
+                          end 
+class_chart RANK		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "Based on VALUE, determines the winning hand." 
+                          part "1/1" 
+                          query 
+						  "What is your RANK", "are you higher than this RANK", "are you lower than this RANK", "are you a winning RANK"
+						  command 
+			    		  "Be this rank", "Be a high RANK", "Be a low RANK", "Win if you are a higer RANK than this RANK"
+                          constraint 
+						  "remains invariant"
+	                      end 
+
+class_chart ACE		 
+                          indexing
+			  clauster: "CARD";
+			  created: "2008-11-23";
+                          explanation "The CARD with the highest RANK in the POKER DECK."
+                          part "1/1"   
+                          query 
+			     		  "What SUIT are you", "What RANK are you", "What COLOUR are you", "What is your VALUE"
+					      command 
+			      		  "Be in this SUIT", "Have this RANK", "Be this COLOUR", "Have this VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR remain invariant"
+                          end 
+
+class_chart TWO		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of two."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			 			  command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end
+                        
+class_chart THREE	 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of three."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			 		      command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart FOUR		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of four."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			  			  command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart FIVE		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of five."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			 		      command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart SIX		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of six."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			  			  command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart SEVEN		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of seven."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			  			  command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			       		  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart EIGHT		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of eight."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			 			  command 
+			       		  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart NINE		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of nine."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			  			  command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart TEN	 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of ten."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			  		 	  command 
+			       	 	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart JACK		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of eleven."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			  			  command 
+			       		  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                       	  end 
+                        
+class_chart QUEEN		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of twelve."
+                          part "1/1" 
+                          query 
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			 			  command 
+			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end 
+                        
+class_chart KING		 
+                          indexing
+			  clauster: "CARDS";
+			  created: "2008-11-23";
+                          explanation "A CARD with the VALUE of thirteen."
+                          part "1/1" 
+                          query 
+			       		  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			 			  command 
+			       		  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+                          constraint 
+			       		  "SUIT, COLOUR, RANK and VALUE remain invariant"
+                          end  
+
+ cluster_chart HANDS 
+                        indexing
+		      	 clauster:"HANDS;
+			 created: "2008-11-23";
+                         explanation "Set of five POKER CARDS with a RANK."
+                         part "1/1" 
+                 class RANK description "A number which Determines the winning HAND."
+	     		 class ROYAL FLUSH description "Has the top RANK of first."
+	     		 class STRAIGHT FLUSH description "Has a RANK of second."
+	     		 class FOUR OF A KIND description "Has a RANK of third."
+	     		 class FULL HOUSE description "Has a RANK of fourth."
+	     		 class FLUSH description "Has a RANK of fifth."
+	     		 class STRAIGHT description "Has a RANK of sixth."
+	     		 class THREE OF A KIND description "Has a RANK of seventh."
+	     		 class TWO PAIR description "Has a RANK  of eighth."
+	     		 class ONE PAIR description "Has a RANK of ninth."
+	     		 class HIGH CARD description "Has the lowest RANK of tenth."
+                         end
+
+class_chart RANK 		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-11-23";
+                          explanation "A value which determines the winning HAND."
+                          part "1/1" 
+                          query 
+			    		  "What is you VALUE" "are you a winning/losing RANK" "Are you a high/low RANK"
+			  			  command 
+			    		  "Be this RANK" "Be a high/low RANK" "Be a winning/losing RANK"
+                          constraint 
+			      		  "remains invariant"
+                          end 
+
+class_chart ROYAL FLUSH		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUIT are you" "Are you the winning HAND" "What is your RANK."
+			 			  command 
+			     		  "Be this SUIT", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain TEN - JACK - QUEEN - KING - ACE of the same SUIT"
+	                      end
+	                        
+class_chart STRAIGHT FLUSH	 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The second highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			   			  "What SUIT are you",  "Are you the winning HAND"
+			  			  command 
+			    		  "Be this SUIT", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain five CARDS in numerical order from the same SUIT"
+	                      end
+	                        
+class_chart FOUR OF A KIND		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The third highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What CARDS do you contain.", "Are you the winning HAND", "What is your RANK."
+			  			  command 
+			     		  "Be four of this CARD", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain four of the same CARD."
+	                      end
+	                        
+class_chart FULL HOUSE		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The fourth highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUITS do you contain", "What CARDS do you contain", "Are you the winning HAND", "What is your RANK." 
+			  			  command 
+			     		  "Have Three of this CARD and two of this CARD", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain three of one CARD and two of another."
+	                      end
+	                        
+class_chart FLUSH		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The fifth highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUIT are you", "Which CARDS do you contain", "Are you the winning HAND", "What is your RANK."
+			  			  command 
+			     		  "Be this SUIT", "Contain these CARDS", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain five CARDS of the same SUIT"
+	                      end
+	                        
+class_chart STRAIGHT		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The sixth highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUITS do you contain", "what CARDS do you contain", "Are you the winning HAND", "What is your RANK."
+			  			  command 
+			     		  "Contain these SUITS", "contain these CARDS", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "CARDS must be in ascending order."
+	                      end
+	                        
+class_chart THREE OF A KIND		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The seventh highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUITS are you", "What CARD do you have three of", "Are you the winning HAND", "What is your RANK."
+			  			  command 
+			     		  "Be this SUIT" "Have three of this CARD", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain three of the same CARD"
+	                      end
+	                        
+class_chart TWO PAIR		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The eighth highest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUITS are you", "What CARDS do you have pairs of", "Are you the winning HAND", "What is your RANK."
+			 			  command 
+			     	 	  "Be these SUITS", "Have pairs of these CARDS", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain two pairs of either the same or different CARD"
+	                      end
+	                        
+class_chart ONE PAIR		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The second lowest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUIT are you", "What CARD are you a pair of", "Are you the winning HAND", "What is your RANK."
+			  			  command 
+			    		  "Be this SUIT", "Be a pair of this CARD", "Be the winning HAND", "Have this RANK."
+                          constraint 
+					 	  "Must contain a pair of the same CARD"
+	                      end
+	                        
+class_chart HIGH CARD		 
+                          indexing
+			  clauster: "HANDS";
+			  created: "2008-03-10";
+                          explanation "The lowest RANKING HAND in poker."
+                          part "1/1"
+                          query 
+			    		  "What SUIT are you", "What CARD are you", "What is your RANK", "Are you the winning HAND."
+			  			  command 
+			     		  "Be this SUIT", "Be this CARD", "Be the winning HAND", "Have this RANK."
+                          constraint 
+						  "Must contain at least one CARD which is higher than every CARD in the other HAND."
+	                      end
+
+ cluster_chart DECKS
+                        indexing
+		      	 clauster:"DECKS";
+			 created: "2008-11-23";
+                         explanation "A set of 52 CARDS"
+                         part "1/1" 
+			 class POKERDECK description  "A set of 52 POKER CARDS."
+                         end
+class_chart POKERDECK		 
+                          indexing
+			  clauster: "DECKS";
+			  created: "2008-11-23";
+                          explanation "A set of 52 POKERCARDS."
+                          part "1/1" 
+                          query 
+			     		  "How many CARDS do you contain", "How many SUITS do you contain."
+			 		      command 
+			      		  "Contain this amount of CARDS", "Contain these SUITS."
+                          constraint 
+						  "Must contain 52 POKER CARDS", "Must contain four SUITS."
+						  end 
+
+ cluster_chart SUITS  
+                         indexing
+		      	 clauster:"SUITS";
+			 created: "2008-11-23";
+                         explanation "Four subsets of CARDS of two colours with a unique picture on them of either a heart, club, diamond or spade."
+                         part "1/1" 
+                     class HEART description "A set of 13 CARDS with a picture of a red heart on them."
+                     class CLUB description "A set of 13 CARDS with a picture of a black club on them."
+                     class DIAMOND description "A set of 13 CARDS with a picture of a red diamond on them."
+                     class SPADE description "A set of 13 CARDS with a picture of a black spade on them."
+                         end
+
+class_chart HEART	    		 
+                          indexing
+			  clauster: "SUIT";
+			  created: "2008-11-23";
+                          explanation "A set of 13 CARDS with a picture of a red heart on them."
+                          part "1/1"   
+                          query 
+			  			  "COLOUR", "SUIT."
+			 			  command 
+						  "Be this COLOUR", "Be this SUIT."
+                          constraint 
+						  "COLOUR remains invariant."
+                          end 
+                        
+class_chart CLUB	    		 
+                          indexing
+			  clauster: "SUIT";
+			  created: "2008-11-23";
+                          explanation "A set of 13 CARDS with a picture of a black club on them."
+                          part "1/1"   
+                          query 
+			  			  "COLOUR", "SUIT."
+			  			  command 
+						  "Be this COLOUR", "Be this SUIT."
+                          constraint 
+						  "COLOUR remains invariant."
+                          end 
+                        
+class_chart DIAMOND	    		 
+                          indexing
+			  clauster: "SUIT";
+			  created: "2008-11-23";
+                          explanation "A set of 13 CARDS with a picture of a red diamond on them."
+                          part "1/1"   
+                          query 
+			   			  "COLOUR", "SUIT."
+			 		 	  command 
+						  "Be this COLOUR", "Be this SUIT."
+                          constraint 
+						  "COLOUR remains invariant."
+                       	  end 
+                        
+class_chart SPADE	    		 
+                          indexing
+			  clauster: "SUIT";
+			  created: "2008-11-23";
+                          explanation "A set of 13 CARDS with a picture of a black spade on them."
+                          part "1/1"   
+                          query 
+			   			  "COLOUR", "SUIT."
+			  			  command 
+						  "Be this COLOUR", "Be this SUIT."
+                          constraint 
+						  "COLOUR remains invariant."
+                       	  end 
+                        
+cluster_chart VALUES 
+                         indexing
+		      	 clauster:"CARDS";
+				 created: "2008-11-23";
+				 explanation "A number used to compare and RANK CARD and HANDS."
+				 part "1/1" 
+                   	 class ONE description "a CARD or HAND with the highest VALUE in a POKER DECK."
+                   	 class TWO description "a CARD or HAND with the numerical VALUE of two in a POKER DECK."
+                   	 class THREE description "a CARD or HAND with the numerical VALUE of three in a POKER DECK."
+                   	 class FOUR description "a CARD or HAND with the numerical VALUE of four in a POKER DECK."
+                   	 class FIVE description "a CARD or HAND with the numerical VALUE of five in a POKER DECK."
+                   	 class SIX description "a CARD or HAND with the numerical VALUE of seven in a POKER DECK."
+                   	 class EIGHT description "a CARD or HAND with the numerical VALUE of eight in a POKER DECK."
+                   	 class NINE description "a CARD or HAND with the numerical VALUE of nine in a POKER DECK."
+                   	 class TEN description "a CARD or HAND with the numerical VALUE of ten in a POKER DECK."
+                   	 class ELEVEN description "a CARD or HAND with the numerical VALUE of eleven in a POKER DECK."
+                   	 class TWELVE description "a CARD or HAND with the numerical VALUE of twelve in a POKER DECK."
+                   	 class THIRTEEN description "a CARD or HAND with the numerical VALUE of thirteen in a POKER DECK."
+                     end
+                     
+class_chart ONE	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                          end 
+                        
+class_chart TWO    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                      	  end 
+                        
+class_chart THREE	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			  			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			 			  command 
+					      "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                    	  end 
+                        
+class_chart FOUR    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end 
+                        
+class_chart FIVE	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			 			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end 
+                        
+class_chart SIX	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			  			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+					      command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                          end 
+                        
+class_chart SEVEN	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end 
+                        
+class_chart EIGHT    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end 
+                        
+class_chart NINE	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			  			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			 			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end 
+                        
+class_chart TEN	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+					      command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end 
+                        
+class_chart ELEVEN    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                          end 
+                        
+class_chart TWELVE	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			 			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                          end 
+                        
+class_chart THIRTEEN	    		 
+                          indexing
+			  clauster: "VALUES";
+			  created: "2008-11-23";
+                          explanation "A number used to compare and RANK CARD and HANDS."
+                          part "1/1"   
+                          query 
+			   			  "What VALUE are you", "What RANK are you", "Are you a high/low VALUE."
+			  			  command 
+						  "Be this VALUE", "Be this RANK", "Be a high/low VALUE."
+                          constraint 
+						  "VALUE and RANK remain invariant."
+                       	  end
+                       	   
