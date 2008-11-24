@@ -5,35 +5,77 @@
 
 package ie.ucd.csi.cards;
 
+
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 /**
  * A standard poker deck of 52 playing cards.
  *
- * @author Joseph Kiniry <joseph.kiniry@ucd.ie>
+ * @author Joseph Kiniry.
  */
 
+
 public class PokerDeck {
-
+/**
+ * The number of cards in a deck.
+ */
+private byte count;
+/**
+ * A Poker Deck.
+ */
   public PokerDeck() {
-	  PokerDeck deck = new PokerDeck();
   }
 
-  public byte count() {
+  /**
+   * @return count.
+   */
+  public final byte count() {
+   return count;
   }
 
+  /**
+   * @return Card.
+   */
   public Card getCard() {
+
   }
 
+  /**
+   *
+   */
   public void shuffle() {
+
   }
 
-  public String toString() {
-    return null;
-  }
+  /**
+   *
+   * @return "Count: " + count;
+   */
+  public final String toString() {
+     return "Count: " + count;
+ }
 
+  /**
+   *
+   * @return hash.
+   */
   public int hashCode() {
   }
 
-  public boolean equals(Object o) {
+  /**
+   *
+   * @param o.
+   *
+   * @return true.
+   */
+  public final boolean equals(final Object o) {
+    if (o instanceof PokerDeck) {
+        return true;
+    }
     return false;
   }
 }
