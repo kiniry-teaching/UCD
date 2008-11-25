@@ -88,7 +88,7 @@ ROYAL FLUSH			If a POKER HAND contains the five highest value cards
 -----------------------------------
 IS-A, HAS-A RELATIONSHIPS
 -----------------------------------
-CARD GAME   	IS-A	game played with CARDs
+CARD GAME   		IS-A	game played with CARDs
 CARD			HAS-A 	SUITE, VALUE
 SUITE			IS-A	group of 13 cards with differing values
 VALUE			IS-A	assigned rank of a CARD
