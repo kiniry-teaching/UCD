@@ -1,0 +1,155 @@
+Project: COMP20050 Software Engineering I Reassessment
+
+GROUP MEMBERS: 
+	Nicholas McCarthy, 06694870
+
+INTRODUCTION:
+	The aim of this project is to implement a small software 
+	system for Card Games and to perform debugging on this project.
+				
+
+REQUIREMENTS
+	UNIX-Based working environment 
+	Eclipse JDK
+	Subversion (through subclipse)
+	Analysis and implementation of key concepts.
+	A working knowledge of:
+		* Java
+		* Subversion
+		* BON Compilers
+		
+PURPOSE:
+	The purpose of this project is to teach the basics of software
+  	development in a working environment. It also aims to teach how 
+  	to use the necessary tools to achieve this, such as Subversion,
+  	Eclipse and BON Compilers.
+
+-----------------------------------
+CONCEPT DEFINITIONS:
+-----------------------------------
+
+CARD GAME	A game played with cards
+CARD		An object used to play card games
+POKER 		A type of card game.
+POKER CARD	A card object used in the game POKER.
+POKER DECK	A group of 52 POKER CARD objects.
+POKER HAND	A group of 5 POKER CARD objects, the hand itself holding
+			a POKER HAND VALUE based on the RULES of poker. 
+SUITE		A group of 13 CARD objects, denoted by suite identifiers
+			SPADE, CLUB, HEART, DIAMOND
+VALUE		The numerical value of a CARD, values (in ascending order):
+			TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK
+			QUEEN, KING, ACE.
+SPADE		A SUITE of thirteen CARDS, with one of the thirteen VALUEs
+			possible to assign.
+CLUB		A SUITE of thirteen CARDS, with one of the thirteen VALUEs
+			possible to assign.
+HEART		A SUITE of thirteen CARDS, with one of the thirteen VALUEs
+			possible to assign.
+DIAMOND		A SUITE of thirteen CARDS, with one of the thirteen VALUEs
+			possible to assign.
+TWO			The Assigned VALUE of a CARD
+THREE		The Assigned VALUE of a CARD		
+FOUR		The Assigned VALUE of a CARD
+FIVE		The Assigned VALUE of a CARD
+SIX			The Assigned VALUE of a CARD
+SEVEN		The Assigned VALUE of a CARD
+EIGHT		The Assigned VALUE of a CARD
+NINE		The Assigned VALUE of a CARD
+TEN			The Assigned VALUE of a CARD
+JACK		The Assigned VALUE of a CARD
+QUEEN		The Assigned VALUE of a CARD
+KING		The Assigned VALUE of a CARD
+ACE			The Assigned VALUE of a CARD
+RULES		Set of instructions describing how to play a CARD GAME. 
+			Assigns values to cards depending on type of GAME.
+			e.g. in POKER the card values start with the lowest (TWO)
+			and go in ascending order, and also assigns values to 
+			different POKER HANDs.
+HIGH CARD			If a POKER HAND contains none of the other 'special' 
+					hands, the highest card in a HAND it's value.
+ONE PAIR			If a POKER HAND contains two CARDs with the same 
+					value.
+TWO PAIR			If a POKER HAND contains two sets of two CARDs, each
+					set having the same numerical value but differing to
+					the other set.
+THREE OF A KIND		If a POKER HAND contains three CARDs with the same value.
+STRAIGHT			If a POKER HAND contains five cards in numerical order, 
+					but with different SUITEs.
+FLUSH				If a POKER HAND contains five cards of the same SUITE, 
+					but that are not in order.
+FULL HOUSE			If a POKER HAND contains a TWO PAIR and a THREE OF A KIND
+FOUR OF A KIND		If a POKER HAND contains four CARDs with the same value.		
+STRAIGHT FLUSH		If a POKER HAND contains five CARDs in numerical order, 
+					but all within the same SUITE.
+ROYAL FLUSH			If a POKER HAND contains the five highest value cards 
+					within the same SUITE. The highest value POKER HAND in POKER.
+
+-----------------------------------
+IS-A, HAS-A RELATIONSHIPS
+-----------------------------------
+CARD GAME   	IS-A	game played with CARDs
+CARD			HAS-A 	SUITE, VALUE
+SUITE			IS-A	group of 13 cards with differing values
+VALUE			IS-A	assigned rank of a CARD
+POKER			IS-A	type of CARD GAME, 	HAS-A	POKER DECK
+POKER CARD		IS-A	type of CARD
+POKER DECK 		IS-A	group of 52 CARDs
+POKER HAND 		IS-A	group of 5 CARDs, 	HAS-A 	value based on the RULES of POKER.
+HEART 			IS-A	SUITE
+DIAMOND			IS-A	SUITE
+CLUB			IS-A	SUITE
+SPADE			IS-A	SUITE
+TWO				IS-A 	CARD,			HAS-A 	SUITE, VALUE
+THREE			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+FOUR			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+FIVE			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+SIX				IS-A 	CARD,			HAS-A 	SUITE, VALUE
+SEVEN			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+EIGHT			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+NINE			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+TEN				IS-A 	CARD,			HAS-A 	SUITE, VALUE
+JACK			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+QUEEN			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+KING			IS-A 	CARD,			HAS-A 	SUITE, VALUE
+ACE				IS-A 	CARD,			HAS-A 	SUITE, VALUE
+HIGH CARD		IS-A 	POKER HAND, 	HAS-A	HAND VALUE		
+ONE PAIR		IS-A 	POKER HAND, 	HAS-A	HAND VALUE			
+TWO PAIR		IS-A 	POKER HAND, 	HAS-A	HAND VALUE						
+THREE OF A KIND	IS-A 	POKER HAND, 	HAS-A	HAND VALUE				
+STRAIGHT		IS-A 	POKER HAND, 	HAS-A	HAND VALUE					
+FLUSH			IS-A 	POKER HAND, 	HAS-A	HAND VALUE					
+FULL HOUSE		IS-A 	POKER HAND, 	HAS-A	HAND VALUE					
+FOUR OF A KIND	IS-A 	POKER HAND, 	HAS-A	HAND VALUE					
+STRAIGHT FLUSH	IS-A 	POKER HAND, 	HAS-A	HAND VALUE				
+ROYAL FLUSH		IS-A 	POKER HAND, 	HAS-A	HAND VALUE				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+system_chart CARD_GAME
+	cluster POKER_GAME description "A game of Poker."
+end
+
+cluster_chart POKER_GAME
+	class POKERCARD description "A card with a suite and value."
+	class POKERHAND description "A group of 5 POKERCARDs."
+	class POKERDECK description "A group of 52 POKERCARDs, each with a suite and value."
+end
+
+class_chart POKERCARD
+indexing
+	cluster: "SUITE", "VALUE" ;
+	created: "2008-11-20 nm" ;
+explanation
+	"A card with a suite and value."
+part "1/1"
+query
+	"SUITE", "VALUE";
+command
+	"GetSuite", "GetValue", "CompareTo"
+constraint
+	"Each card must belong to 1 suite."
+	"A suite must be either clubs, diamonds, hearts, spades."
+	"Each card must have 1 value."
+	"A value must be either 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace"
+end
+
+class_chart POKERHAND
+indexing
+	cluster: "HAND_VALUE" ;
+	created: "2008-11-20 nm" ;
+explanation
+	"A group of 5 POKERCARDs."
+query 
+	"Pokercards", "Hand value"
+command
+	"Swap card"
+constraint
+	"Each hand must have 5 cards. "
+	"A hand may have an identical HAND_VALUE to another hand."
+end
+
+class_chart POKERDECK
+indexing
+	cluster: "POKERCARD" ;
+	created: "2008-11-20 nm" ;
+explanation
+	"A group of 52 POKERCARDs."
+query
+	"Total cards remaining"
+command 
+	"Shuffle", "Deal card"
+constraint
+	"Each deck must have 52 cards."
+	"Each deck cannot have identical cards."
+	"Each deck must have 13 cards of each suite. "
+	"Each deck must have 4 cards of each value. "
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
