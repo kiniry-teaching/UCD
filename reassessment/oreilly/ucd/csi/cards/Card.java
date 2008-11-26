@@ -9,6 +9,7 @@ package ie.ucd.csi.cards;
  * A playing card.
  *
  * @author Joseph Kiniry <joseph.kiniry@ucd.ie />
+ * @revised Naomi O' Reilly <naomi.ucdconnect.ie />
  *
  * @todo kiniry How much of this can be put into an interface, and
  * what benefits and drawbacks are there to such?

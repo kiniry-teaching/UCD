@@ -13,45 +13,55 @@ import java.util.Vector;
  * A standard poker deck of 52 playing cards.
  *
  * @author Joseph Kiniry.
+ * @revised Naomi O' Reilly.
  */
 public class PokerDeck {
-	private Stack <Card> deck;
+/**
+* PokerDeck.
+*/
+    private Stack < Card > deck;
 
 /**
  * A Poker Deck.
  */
   public PokerDeck() {
-	 deck = new Stack <Card>();
-	 final byte suit[] = {Card.HEART, Card.SPADE, Card.DIAMOND, Card.CLUB};
-	 final byte value[] = {Card.ACE, Card.TWO, Card.THREE, Card.FOUR, Card.FIVE,
-			 Card.SIX, Card.SEVEN, Card.EIGHT, Card.NINE, Card.TEN, Card.JACK, Card.QUEEN,
-			 Card.KING};
-	 for(int i = 0; i < suit.length; i++){
-		 for(int j = 0; j < value.length; j++){
-			 deck.add(new PokerCard(suit[i],value[j]));
-		 }
-	 }
+    //"'>' is not followed by whitespace." yet if there is whitespace
+    //"'(' is preceded with whitespace."
+    deck = new Stack < Card >();
+    final byte suit[] = {Card.HEART, Card.SPADE, Card.DIAMOND, Card.CLUB};
+    final byte value[] = {Card.ACE, Card.TWO, Card.THREE, Card.FOUR, Card.FIVE,
+                      Card.SIX, Card.SEVEN, Card.EIGHT, Card.NINE, Card.TEN,
+                      Card.JACK, Card.QUEEN, Card.KING};
+     for (int i = 0; i < suit.length; i++) {
+         for (int j = 0; j < value.length; j++) {
+        	 //cannot follow ; by whitespace or there are trailing spaces.
+         deck.add(new PokerCard(suit[i],value[j]));
+        }
+     }
   }
 
   /**
    * @return byte.
    */
   public final byte count() {
-	  return (byte) deck.size();
+    return (byte) deck.size();
   }
 
   /**
    * @return Card.
    */
-  public Card getCard() {
-	  return deck.pop();
+  public final Card getCard() {
+    return deck.pop();
   }
 
   /**
    *
+   *Shuffles the deck.
+   *
+   * @ensures Collections.shuffle(deck);
    */
   public void shuffle() {
-	  Collections.shuffle(deck);
+     Collections.shuffle(deck);
   }
 
   /**
@@ -59,26 +69,26 @@ public class PokerDeck {
    * @return "Count: " + count;
    */
   public final String toString() {
-	  return " ";
+      return " ";
  }
 
   /**
    *
-   * @return hash.
+   * @return deck.size().
    */
-  public int hashCode() {
-	  return deck.size();
+  public final int hashCode() {
+     return deck.size();
   }
 
   /**
    *
    * @param o.
    *
-   * @return true.
+   * @return true iff deck.size() == ((Vector<Card>) o).size().
    */
   public final boolean equals(final Object o) {
     if (o instanceof PokerDeck) {
-        return deck.size() == ((Vector<Card>) o).size();
+        return deck.size() == ((Vector<Card> ) o).size();
     }
     return false;
   }

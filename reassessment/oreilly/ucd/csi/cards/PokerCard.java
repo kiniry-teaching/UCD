@@ -177,6 +177,17 @@ public class PokerCard implements Card {
    }
 
 /**
+ * @return hash
+ */
+   public final int hashCode() {
+       int hash = suit;
+       hash <<= 8;
+       hash |= value;
+
+       return hash;
+   }
+
+/**
 * @param card.
 *
 * @return 0 || 1 || -1.
