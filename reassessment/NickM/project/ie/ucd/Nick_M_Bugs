@@ -11,4 +11,40 @@ Bug #2
 				need an equals method?
 	Fix: I didn't implement the method ..
 	
-Bug #3 coming soon..
+Bug #3 
+	Where: PokerHand.java line 19
+	Description: addCard(Card c) should add a PokerCard object, not a Card object
+	Fix: Changed Card to PokerCard
+	
+Bug #4
+	Where: PokerHand.java
+	Description: removeCard(Card ) see Bug #3
+	Fix: see Bug#3
+	
+Bug #5
+	Where: PokerHand.java
+	Description: equal(PokerHand h) is supposed to return true if hand has a higher
+		value than parameter PokerHand.
+	Fix: Changed method name to higherValueThan (as per BON @see comment) to avoid
+		confusing method name.
+		
+Bug #6
+	Where: PokerHand.java
+	Description: No method to determine value of PokerHand (i.e. if one pair, two pair, etc)
+	Fix: Added getHandValue() method. In order to facilitate getting handValue added orderHand()
+		method (a simple insertion sort to ascending value).
+		
+Bug #7
+	Where: Card.java
+	Description: Probably a typo, byte denoting card value SIX is named SOX.
+	Fix: Changed SOX to SIX ..
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -14,7 +14,7 @@ package ie.ucd.csi.cards;
 public class PokerCard implements Card {
 
 	  private byte suite, value;	
-		
+	  
 	  public PokerCard(byte suite, byte value) {
 		  
 		  this.suite = suite;
