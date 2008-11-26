@@ -45,6 +45,8 @@ Bug#8
 	Fix: It may be impossible.		
 	Later Fix: amountOfPairs variable was adding up to 4, not 2. Works correctly now.
 
+Bug #9
+	Where: PokerCard
 		
 		
 		

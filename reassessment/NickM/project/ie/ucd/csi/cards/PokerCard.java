@@ -28,9 +28,9 @@ public class PokerCard implements Card {
 	  
 	  // Is this method not deprecated by the sameValue/SuiteAs 
 	  // and equivelantTo methods?
-	  public boolean equals(Card o) {
+	  public boolean equals(final Object obj) {
 		  
-		  return false;
+		  return this == obj;
 	  }
 	  /**
 	   * Returns the suite of this card.
@@ -47,18 +47,20 @@ public class PokerCard implements Card {
 	  /**
 	   * Checks if parameter s is a valid suite.
 	   */
-	  public boolean validSuite(byte s) {
+	  public boolean validSuite(final byte suite) {
 		
-		  if (-1 < s && s < 4) return true;
-		  else return false;
+		  if (-1 < suite && suite < 4) {return true;}
+		  
+		  return false;
 	  }
 	  /**
 	   * Checks if parameter v is a valid value.
 	   */
-	  public boolean validValue(byte v) {
+	  public boolean validValue(final byte value) {
 		
-		  if (-14 < v && v < 0) return true;
-		  else return false;
+		  if (-14 < value && value < 0) {return true;}
+		  
+		  return false;
 	  }
 
 	  /**
@@ -85,8 +87,9 @@ public class PokerCard implements Card {
 	   */
 	  public boolean greaterFaceValueThan(Card a_card) {
 
-		  if (a_card.value() < value) return true;
-		  else return false;
+		  if (a_card.value() < value) {return true;}
+		  
+		  return false;
 	  }
 
 	  /**
@@ -96,15 +99,17 @@ public class PokerCard implements Card {
 	   */
 	  public boolean greaterValueThan(Card a_card) {
 		
-		  if (a_card.value() < value) return true;
-		  else return false;
+		  if (a_card.value() < value) {return true;}
+		  
+		  return false;
 	  }
 
 	  public boolean equivalentTo(Card a_card) {
 	
 		  if ( (a_card.value() == value) && 
-			   (a_card.suite() == suite)) return true;
-		  else return false;
+			   (a_card.suite() == suite)) {return true;}
+		  
+		  return false;
 	  }
 
 }

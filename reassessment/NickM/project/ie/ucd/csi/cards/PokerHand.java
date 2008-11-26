@@ -47,11 +47,10 @@ public class PokerHand {
 	 * Adds a PokerCard to the PokerHand, unless the PokerHand is already full.
 	 * @param c
 	 */
-	public void addCard(PokerCard c) {
+	public void addCard(final PokerCard card) {
 		
-		if (count() == 5) System.out.println("Hand is full.");
-		else {
-			hand[count] = c;
+		if (count() < 5) {
+			hand[count] = card;
 			count++;
 		}
 	}
@@ -60,18 +59,17 @@ public class PokerHand {
 	 * all elements except for parameter.
 	 * @param c
 	 */
-	public void removeCard(PokerCard c) {
+	public void removeCard(final PokerCard card) {
 	  	  
 		int removedCardPosition = -1; 
 
 	   // gets the position in the array of the card to be moved.
 		for (int x = 0 ; x < count ; x++) {
-			if (c.equals(hand[x])) removedCardPosition = x;
+			if (card.equals(hand[x])) removedCardPosition = x;
 		}
 		// i.e. if the card is not found because removedCardPosition doesn't change ..
-		if (removedCardPosition == -1) System.out.println("Card not found in hand.");
 		
-		else {
+		if (removedCardPosition != -1)  {
 			// card to be removed moved to temp
 			PokerCard temp = hand[removedCardPosition];
 			// the last card in the hand is moved to the position of the card to be moved
@@ -186,14 +184,13 @@ public class PokerHand {
 	 */
 	public byte getHandValue(){
 		
-		System.out.println("Determining hand value...");
 		handValue = determineHandValue();
 		
 		return handValue;
 
 	}
 	
-	public byte determineHandValue(){
+	public byte determineHandValue() {
 		
 		// puts this pokerhand in ascending order
 		orderHand();
@@ -201,21 +198,21 @@ public class PokerHand {
 		// finish handValue methods in morning...
 		if (isRoyalFlush()) return ROYAL_FLUSH;
 		
-		else if (isStraightFlush()) return STRAIGHT_FLUSH;
+		else if (isStraightFlush()) {return STRAIGHT_FLUSH;}
 		
-		else if (isFourOfAKind()) return FOUR_OF_A_KIND;
+		else if (isFourOfAKind()) {return FOUR_OF_A_KIND;}
 		
-		else if (isFullHouse()) return FULL_HOUSE;
+		else if (isFullHouse()) {return FULL_HOUSE;}
 		
-		else if (isFlush()) return FLUSH;
+		else if (isFlush()) {return FLUSH;}
 		
-		else if (isStraight()) return STRAIGHT;
+		else if (isStraight()) {return STRAIGHT;}
 		
-		else if (isThreeOfAKind()) return THREE_OF_A_KIND;
+		else if (isThreeOfAKind()) {return THREE_OF_A_KIND;}
 		
-		else if (isTwoPair()) return TWO_PAIRS;
+		else if (isTwoPair()) {return TWO_PAIRS;}
 		
-		else if (isOnePair()) return ONE_PAIR;
+		else if (isOnePair()) {return ONE_PAIR;}
 		
 		else return HIGH_CARD;
 		
@@ -232,7 +229,7 @@ public class PokerHand {
 	 */
 	public static boolean isRoyalFlush() {
 		
-		if (isStraightFlush() && hand[0].value() == 10) return true;
+		if (isStraightFlush() && hand[0].value() == 10) {return true;}
 		
 		return false;
 	}
@@ -241,7 +238,7 @@ public class PokerHand {
 	 */
 	public static boolean isStraightFlush() {
 		
-		if (isFlush() && isStraight()) return true;
+		if (isFlush() && isStraight()) {return true;}
 		
 		return false;
 	}
@@ -258,9 +255,9 @@ public class PokerHand {
 		
 		for (int x = 0 ; x < hand.length ; x++) {
 			for (int y = 0 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) count++;
+				if (hand[x].value() == hand[y].value()) {count++;}
 			}
-			if (count == 4) return true;
+			if (count == 4) {return true;}
 			count = 0;
 		}
 	
@@ -277,7 +274,7 @@ public class PokerHand {
 	public static boolean isFullHouse() {
 
 		// obviously then there would be 1 card not in a valued position.
-		if (isFourOfAKind() == true || isTwoPair() == true) return false;
+		if (isFourOfAKind() == true || isTwoPair() == true) {return false;}
 		
 		int count = 0;
 		int amountOfPairs = 0;
