@@ -57,17 +57,34 @@ public class PokerHand {
 	 */
 	public void removeCard(PokerCard c) {
 	  	  
-		for (int x = 0 ; x < hand.length ; x++) {
-		  
-			if (c.equals(hand[x])) {
-			  
-				hand = new PokerCard[5];
-				// add all PokerCards except for x into new array;
-				count--;
-			}
+		int removedCardPosition = -1; 
+
+	   // gets the position in the array of the card to be moved.
+		for (int x = 0 ; x < count ; x++) {
+			if (c.equals(hand[x])) removedCardPosition = x;
 		}
-	  	  
+		// i.e. if the card is not found because removedCardPosition doesn't change ..
+		if (removedCardPosition == -1) System.out.println("Card not found in hand.");
+		
+		else {
+			// card to be removed moved to temp
+			PokerCard temp = hand[removedCardPosition];
+			// the last card in the hand is moved to the position of the card to be moved
+			hand[removedCardPosition] = hand[count];
+			// card to be removed moves to last position of array.
+			hand[count] = temp;
+			// new pokercard array 
+			PokerCard[] newHand = new PokerCard[5];
+			
+			// copies first four cards of old hand to new pokercard array.
+			for (int x = 0 ; x < count-1 ; x++) {
+				newHand[x] = hand[x];
+			}
+			// hand is now equal to the newly created hand
+			hand = newHand;
+		}  
 	}
+	
 	/**
 	 * Returns the current amount of cards in the hand.
 	 * */
