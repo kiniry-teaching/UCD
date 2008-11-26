@@ -25,7 +25,7 @@ public class PokerDeck {
 	/**
 	 * Creates an array of PokerCard objects.
 	 */
-	public static PokerCard[] deck = new PokerCard[51];
+	public static PokerCard[] deck = new PokerCard[52];
 	
 	/**
 	 * Constructor for the PokerDeck class.
@@ -33,19 +33,21 @@ public class PokerDeck {
 	 * in each suite.
 	 */
 	public PokerDeck() {
-		// 52 cards ..
-		for (int x = 0 ; x < 52 ; x++) {
-			// 4 suites..
-			for (byte suite = 0 ; suite < 5 ; suite++) {
-				// 13 values ..
-				for (byte value = -13 ; value < 0 ; value++) {
-					
-					deck[x] = new PokerCard(suite, value);
-					cardsInDeck++;	
-				}	
-			}
+				
+		int x = 0;
+		
+		// 4 suites..
+		for (byte suite = 0 ; suite < 4 ; suite++) {
+			// 13 values ..
+			for (byte value = 2 ; value < 15 ; value++) {
+				
+				deck[x] = new PokerCard(suite, value);
+				cardsInDeck++;	
+				x++;
+			}	
 		}
 	}
+	
 
 	/**
 	 * @return the amount of cards currently in deck
@@ -59,7 +61,7 @@ public class PokerDeck {
 	 */
 	public PokerCard getCard() {
 		
-		PokerCard topCard = deck[cardsInDeck];
+		PokerCard topCard = deck[cardsInDeck-1];
 		cardsInDeck--;
 		return topCard;
 	}
@@ -86,14 +88,15 @@ public class PokerDeck {
 	 */
 	public String toString() {
 		
-		String deckString  ="";
-		for (int x = 0 ; x < 51 ; x++) {
-			deckString = deck[x].toString()+"\n";
+		String handString = "";
+		  
+		for (int x = 0 ; x < cardsInDeck ; x++) {
+			handString = handString+" "+deck[x].toString()+", ";
 		}
-		return deckString;
+	  
+		return handString;
 	}
 
-	
 	public int hashCode() {
 		
 		int WHAT = 0;	
