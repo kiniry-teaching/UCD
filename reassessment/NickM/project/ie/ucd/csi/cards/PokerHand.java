@@ -254,14 +254,14 @@ public class PokerHand {
 	 * */
 	public static boolean isFourOfAKind() {
 		
-		int counter = 0;
+		int count = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
 			for (int y = 0 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) counter++;
+				if (hand[x].value() == hand[y].value()) count++;
 			}
-			if (counter == 4) return true;
-			counter = 0;
+			if (count == 4) return true;
+			count = 0;
 		}
 	
 		return false;
@@ -279,20 +279,19 @@ public class PokerHand {
 		// obviously then there would be 1 card not in a valued position.
 		if (isFourOfAKind() == true || isTwoPair() == true) return false;
 		
-		int counter = 0;
+		int count = 0;
 		int amountOfPairs = 0;
 		
 		for(int x = 0; x < hand.length; x++){
 			
 	        for(int y = 0; y < hand.length; y++){
 	        	
-	            if(hand[x].value() == hand[y].value()) {counter++;}
+	            if(hand[x].value() == hand[y].value()) {count++;}
 
 	        }
-	        if (counter > 1) {
-	        	System.out.println("Found a pair..");
+	        if (count > 1) {
 	        	amountOfPairs++;}
-	        counter = 0;
+	        count = 0;
 	    }
 
 	    if(amountOfPairs == 5) return true;
@@ -303,7 +302,7 @@ public class PokerHand {
 	/** Tests if hand is a flush. */
 	public static boolean isFlush() {
 		
-		for (int x = 0 ; x < count-1 ; x++) {
+		for (int x = 0 ; x < hand.length-1 ; x++) {
 			if ( !(hand[x].sameSuiteAs(hand[x+1])) ) {
 				return false;
 			}
@@ -314,7 +313,7 @@ public class PokerHand {
 	/** Tests if hand is a straight. */
 	public static boolean isStraight() {
 		
-		for (int x = 0 ; x < count-1 ; x++) {
+		for (int x = 0 ; x < hand.length-1 ; x++) {
 			if (hand[x].value() != hand[x+1].value() - 1) {
 				return false;
 			}
@@ -326,14 +325,14 @@ public class PokerHand {
 	 */
 	public static boolean isThreeOfAKind() {
 		
-		int counter = 0;
+		int count = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
 			for (int y = 0 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) counter++;
+				if (hand[x].value() == hand[y].value()) count++;
 			}
-			if (counter == 3) return true;
-			counter = 0;
+			if (count == 3) return true;
+			count = 0;
 		}
 	
 		return false;
@@ -344,18 +343,18 @@ public class PokerHand {
 	 */
 	public static boolean isTwoPair() {
 		
-		int counter = 0;
+		int count = 0;
 		int amountOfPairs = 0;
 		
 		for(int x = 0; x < hand.length; x++){
 			
 	        for(int y = 0; y < hand.length; y++){
 	        	
-	            if(hand[x].value() == hand[y].value()) {counter++;}
+	            if(hand[x].value() == hand[y].value()) {count++;}
 
 	        }
-	        if (counter == 2) {amountOfPairs++;}
-	        counter = 0;
+	        if (count == 2) {amountOfPairs++;}
+	        count = 0;
 	    }
 
 	    if(amountOfPairs == 4) return true;
@@ -366,14 +365,14 @@ public class PokerHand {
 		
 	public static boolean isOnePair() {
 		
-		int counter = 0;
+		int count = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
 			for (int y = 0 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) counter++;
+				if (hand[x].value() == hand[y].value()) count++;
 			}
-			if (counter == 2) {return true;}
-			counter = 0;
+			if (count == 2) {return true;}
+			count = 0;
 		}
 	
 		return false;
