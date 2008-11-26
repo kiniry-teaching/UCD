@@ -1,0 +1,21 @@
+
+	Bug #1: NAME OF BUG Description: In PokerCard.java public boolean equals(Card o),  Fix: should be : public boolean equals(Object o) e.g. PokerDeck.java, to allow comparison on the object level and because Java's container classes use the equals method defined by object Test: none
+
+	Bug #2: NAME OF BUG Description:In Card.java SPADE = 2, each suit needs a separate value in order to compare them so SPADE cannot have the value 2 as it is already in use for HEART, Fix:  Changed to SPADE = 3 Test: none 
+
+	Bug #3: NAME OF BUG Description:In PokerHand.java "public boolean compare(PokerHand h)" is wrong, boolean can only return true or false so there are only two cases. but when comparing poker hands we want to see if one is better or worse so 
+	they can be "<" ">" or "==" each other meaning there are three cases here.
+	Fix:  Changed to public int compare(PokerHand h) Test: none 
+
+	general changes made: Card.java - "Suite" -"Suit", line 39 "SOX" - "SIX"(maybe intended as a bug),
+	line 39 - 41: numbers changed to be positive as when computing public boolean greaterFaceValueThan(Card c)
+ 	and similar values it seems anti-intuitive to say something like "return value < c.value();" when the value is actually greater
+ 	- this one might be intended as a bug.
+
+
+
+
+
+
+
+ 
