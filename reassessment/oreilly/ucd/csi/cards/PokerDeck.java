@@ -5,50 +5,53 @@
 
 package ie.ucd.csi.cards;
 
-
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Collections;
+import java.util.Stack;
+import java.util.Vector;
 
 /**
  * A standard poker deck of 52 playing cards.
  *
  * @author Joseph Kiniry.
  */
-
-
 public class PokerDeck {
-/**
- * The number of cards in a deck.
- */
-private byte count;
+	private Stack <Card> deck;
+
 /**
  * A Poker Deck.
  */
   public PokerDeck() {
+	 deck = new Stack <Card>();
+	 final byte suit[] = {Card.HEART, Card.SPADE, Card.DIAMOND, Card.CLUB};
+	 final byte value[] = {Card.ACE, Card.TWO, Card.THREE, Card.FOUR, Card.FIVE,
+			 Card.SIX, Card.SEVEN, Card.EIGHT, Card.NINE, Card.TEN, Card.JACK, Card.QUEEN,
+			 Card.KING};
+	 for(int i = 0; i < suit.length; i++){
+		 for(int j = 0; j < value.length; j++){
+			 deck.add(new PokerCard(suit[i],value[j]));
+		 }
+	 }
   }
 
   /**
-   * @return count.
+   * @return byte.
    */
   public final byte count() {
-   return count;
+	  return (byte) deck.size();
   }
 
   /**
    * @return Card.
    */
   public Card getCard() {
-
+	  return deck.pop();
   }
 
   /**
    *
    */
   public void shuffle() {
-
+	  Collections.shuffle(deck);
   }
 
   /**
@@ -56,7 +59,7 @@ private byte count;
    * @return "Count: " + count;
    */
   public final String toString() {
-     return "Count: " + count;
+	  return " ";
  }
 
   /**
@@ -64,6 +67,7 @@ private byte count;
    * @return hash.
    */
   public int hashCode() {
+	  return deck.size();
   }
 
   /**
@@ -74,7 +78,7 @@ private byte count;
    */
   public final boolean equals(final Object o) {
     if (o instanceof PokerDeck) {
-        return true;
+        return deck.size() == ((Vector<Card>) o).size();
     }
     return false;
   }

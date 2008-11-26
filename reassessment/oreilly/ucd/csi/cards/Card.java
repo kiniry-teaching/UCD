@@ -3,7 +3,7 @@
  * $Id: Card.java 1096 2005-08-24 23:02:36Z jkiniry $
  */
 
-package ucd.csi.cards;
+package ie.ucd.csi.cards;
 
 /**
  * A playing card.
@@ -14,7 +14,7 @@ package ucd.csi.cards;
  * what benefits and drawbacks are there to such?
  */
 
-public interface Card {
+public interface Card extends Comparable<Card>{
 
  /** The four suites.
  * @bug SPADE's value should be different to the values of the other
