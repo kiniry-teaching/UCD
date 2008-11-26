@@ -16,8 +16,11 @@ package ie.ucd.csi.cards;
 
 public interface Card {
 
-  /** The four suites. */
-  public static final byte CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 2;
+  /** The four suites. 
+   *  BUG - or maybe a typo - changed SPADE to equal 3
+   * */
+	
+  public static final byte CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 3;
 
   /** The suite of this card. */
   public byte suite();

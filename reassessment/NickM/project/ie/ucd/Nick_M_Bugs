@@ -1,3 +1,14 @@
 
 
-Place holder for bugs
+Bug #1
+	Where: Card.java line 22
+	Description: Heart = 2, SPADE = 2 -  This also may just have been a typo..
+	Fix: Changed SPADE to equal 3.
+	
+Bug #2
+	Where: PokerDeck.java line 106
+	Description: equals(Object o) deprecated method, why does PokerDeck
+				need an equals method?
+	Fix: I didn't implement the method ..
+	
+Bug #3 coming soon..

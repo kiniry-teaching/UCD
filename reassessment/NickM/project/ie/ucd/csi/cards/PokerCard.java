@@ -32,57 +32,78 @@ public class PokerCard implements Card {
 		  
 		  return false;
 	  }
-	  
-	  public byte suite() {
-			
+	  /**
+	   * Returns the suite of this card.
+	   */
+	  public byte suite() {			
 			return suite;
 	  }
-
+	  /**
+	   * Returns the (numberical) value of this card.
+	   */
 	  public byte value() {
-		
 		  return value;
 	  }
+	  /**
+	   * Checks if parameter s is a valid suite.
+	   */
 	  public boolean validSuite(byte s) {
 		
-		  if (-1 < s && s < 5) return true;
+		  if (-1 < s && s < 4) return true;
 		  else return false;
 	  }
-
-
+	  /**
+	   * Checks if parameter v is a valid value.
+	   */
 	  public boolean validValue(byte v) {
 		
-		  if (-15 < v && v < 0) return true;
+		  if (-14 < v && v < 0) return true;
 		  else return false;
 	  }
 
+	  /**
+	   * Returns true if this card has the same face value
+	   * as the parameter Card.
+	   */
 	  public boolean sameFaceValueAs(Card a_card) {
 		
-		  return value.equals(a_card.value);
+		  return a_card.value() == value;
 	  }
 	  
-
+	  /**
+	   * Returns true if this card has the same suite 
+	   * as the parameter Card.
+	   */
 	  public boolean sameSuiteAs(Card a_card) {
 		
-		  return suite.equals(a_card.suite);
+		  return a_card.suite() == suite;
 	  }
-	
+	  
+	  /**
+	   * Returns true if this card has a greater face 
+	   * (numerical) value as that of the parameter Card.
+	   */
 	  public boolean greaterFaceValueThan(Card a_card) {
 
-		  if (value.compareTo(a_card.value) > 0) return true;
+		  if (a_card.value() < value) return true;
 		  else return false;
 	  }
 
-
+	  /**
+	   * This method is not needed in the game Poker, 
+	   * as it has no wildcards or trumps, so I've just
+	   * left it the same as greaterFaceValueThan()
+	   */
 	  public boolean greaterValueThan(Card a_card) {
 		
-		  if (value.compareTo(a_card.value) > 0) return true;
+		  if (a_card.value() < value) return true;
 		  else return false;
 	  }
 
 	  public boolean equivalentTo(Card a_card) {
 	
-		  if ( (value.equals(a_card.value)) && 
-				  (suite.equals(a_card.suite)) ) return true;
+		  if ( (a_card.value() == value) && 
+			   (a_card.suite() == suite)) return true;
 		  else return false;
 	  }
 
