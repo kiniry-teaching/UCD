@@ -19,41 +19,58 @@ public class PokerHand {
     	TWO_PAIRS = 3, ONE_PAIR = 2, HIGH_CARD = 1, NOTHING = 0;
 
 	  /** The thirteen standard card values. */
-	  public static final byte ACE = -1, TWO = -2, THREE = -3, FOUR = -4,
-	    FIVE = -5, SOX = -6, SEVEN = -7, EIGHT = -8, NINE = -9, TEN = -10,
-	    JACK = -11, QUEEN = -12, KING = -13;
+	  public static final byte TWO = 2, THREE = 3, FOUR = 4,
+	    FIVE = 5, SIX = 6, SEVEN = 7, EIGHT = 8, NINE = 9, TEN = 10,
+	    JACK = 11, QUEEN = 12, KING = 13, ACE = 14;
 	
 	private static PokerCard[] hand;
-	public static byte count;
+	public static byte count = 0;
 	public static byte handValue;
   
+	/**
+	 * Creates new PokerHand, an array of PokerCards
+	 * Array is set to size 5, but no elements are added until addCard method is used. 
+	 */
 	public PokerHand() {
-	  
+		  
 		hand = new PokerCard [5];
 		count = 0;
 		handValue = NOTHING;
 	}
 
+	/**
+	 * Adds a PokerCard to the PokerHand, unless the PokerHand is already full.
+	 * @param c
+	 */
 	public void addCard(PokerCard c) {
-	  
-		hand[count] = c;
-		count++;
+		
+		if (count() == 5) System.out.println("Hand is full.");
+		else {
+			hand[count] = c;
+			count++;
+		}
 	}
-
+	/**
+	 * Removes the parameter PokerCard, creates new PokerCard array with
+	 * all elements except for parameter.
+	 * @param c
+	 */
 	public void removeCard(PokerCard c) {
 	  	  
 		for (int x = 0 ; x < hand.length ; x++) {
 		  
 			if (c.equals(hand[x])) {
 			  
-			  // if x == 4, hand[x] == null
-			  // else remove all elements above x down
-			  
+				hand = new PokerCard[5];
+				// add all PokerCards except for x into new array;
+				count--;
 			}
 		}
 	  	  
 	}
-
+	/**
+	 * Returns the current amount of cards in the hand.
+	 * */
 	public byte count() {
 		return count;
 	}
@@ -145,7 +162,7 @@ public class PokerHand {
     	ONE_PAIR = 2
     	HIGH_CARD = 1
 	 */
-	public static byte getHandValue(){
+	public byte getHandValue(){
 		
 		// puts this pokerhand in ascending order
 		orderHand();
@@ -158,21 +175,73 @@ public class PokerHand {
 		else if (isFlush()) return FLUSH;
 		else if (isStraight()) return STRAIGHT;
 		else if (isThreeOfAKind()) return THREE_OF_A_KIND;
-		else if (isTwoPairs()) return TWO_PAIRS;
+		else if (isTwoPair()) return TWO_PAIRS;
 		else if (isOnePair()) return ONE_PAIR;
 		else return HIGH_CARD;
 	}
 	
-	
-	/** Tests if hand is a straight. */
-	public static boolean isStraight() {
+	/** Tests if hand is a royal flush..
+	 *	If its a flush and its a straight and the hand values are ten, jack
+	 *	queen, king, ace -> it is a royal flush. 
+	 *	
+	 *@change isFlush() && isStraight() -> isStraightFlush 
+	 */
+	public static boolean isRoyalFlush() {
+		
+		if (isStraightFlush() && hand[0].value() == 10 && hand[1].value() == JACK && 
+				 hand[2].value() == QUEEN && hand[3].value() == KING &&
+				 hand[4].value() == ACE) return true;
+		
+		return false;
+	}
+	/** Tests if hand is a straight flush
+	 * Just tests if isStraight and isFlush..
+	 */
+	public static boolean isStraightFlush() {
+		
+		if (isFlush() && isStraight()) return true;
+		
+		return false;
+	}
+	/** Tests if hand is four of a kind. 
+	 * @bug: if count == 4 is outside the first for loop then it will add
+	 * 		up the count of each card of the four of a kind so you end up
+	 * 		with count == 16. Moved the count == 4 within the y loop and 
+	 * 		set the count to 0 after each iteration of y loop.
+	 * 
+	 * */
+	public static boolean isFourOfAKind() {
+		
+		int count = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
-			if (hand[x].value() != hand[x+1].value() - 1) {
-				return false;
+			for (int y = x+1 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) count++;
+				if (count == 4) return true;
 			}
+			count = 0;
 		}
-		return true;
+	
+		return false;
+	}
+	/** Tests if hand is a full house.
+	 * 
+	 * Cannot be fourofakind or two pair, as this leaves one card without a handvalue
+	 * Basically can only be a three of a kind with a two of a kind.
+	 * @note if this method is being called then it has already failed the 
+	 * 			isFourOfAKind method (because they are called in descending order
+	 * 			in the getHandValue method) but i'll leave in the check anyway.
+	 */
+	public static boolean isFullHouse() {
+
+		// obviously then there would be 1 card not in a valued position.
+		if (isFourOfAKind() || isTwoPair()) return false;
+		
+		// if it's one pair and also three of a kind and is NOT two pair or a full house
+		// then it must be a full house.
+		if (isOnePair() && isThreeOfAKind()) return true;
+			
+		return false;
 	}
 	
 	/** Tests if hand is a flush. */
@@ -186,33 +255,107 @@ public class PokerHand {
 		return true;
 	}
 	
+	/** Tests if hand is a straight. */
+	public static boolean isStraight() {
+		
+		for (int x = 0 ; x < hand.length ; x++) {
+			if (hand[x].value() != hand[x+1].value() - 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+	/** Tests if hand is three of a kind.
+	 * Same method as isFourOfAKind, only the count == 3.
+	 */
+	public static boolean isThreeOfAKind() {
+		
+		int count = 0;
+		
+		for (int x = 0 ; x < hand.length ; x++) {
+			for (int y = x+1 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) count++;
+				if (count == 3) return true;
+			}
+			count = 0;
+		}
+	
+		return false;
+	}
+	/** Tests if hand is two pair.
+	 * 
+	 *  
+	 */
+	public static boolean isTwoPair() {
+		
+		int count = 0;
+		int amountOfPairs = 0;
+		
+		for (int x = 0 ; x < hand.length ; x++) {
+			
+			for (int y = x+1 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) count++;
+			}
+			if (count == 2) amountOfPairs++;
+			count = 0;
+		}
+		
+		if (amountOfPairs == 2) return true;
+		
+		return false;
+	}
+
+	public static boolean isOnePair() {
+		
+		int count = 0;
+		
+		for (int x = 0 ; x < hand.length ; x++) {
+			for (int y = x+1 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) count++;
+				if (count == 2) return true;
+			}
+			count = 0;
+		}
+	
+		return false;
+	}
+	/**
+	 * Orders the PokerHand in ascending order.
+	 */
 	public static void orderHand() {
 		
 		for (int x = 0; x < hand.length; x++) {
 			
 	        PokerCard temp = hand[x]; 
-	        int j = x;
+	        int y = x;
 	        
-	        while(j > 0 && hand[j-1].value() >= temp.value()) { 
-	            hand[j] = hand[j-1];
-	            j--;
+	        while(y > 0 && hand[y-1].value() >= temp.value()) { 
+	            hand[y] = hand[y-1];
+	            y--;
 	        }
-	        hand[j] = temp;
+	        hand[y] = temp;
 	    }
 	}
 	
+	/**
+	 * Compares this pokerhand's value to the parameter hand's value.
+	 * @param h
+	 * @return
+	 */
 	public boolean compare(PokerHand h) {
 	  
-		return handValue == h.handValue();
+		return getHandValue() == h.getHandValue();
 	}
 
 	/**
-	 * Switched method name from equal to higherValueThan to avoid confusing method names
+	 * Returns true if this pokerhand has a higher value then parameter hand.
+	 * @note Switched method name from equal to higherValueThan to avoid confusing method names
 	 * @see #higherValueThan(PokerHand)
 	 */
 	public boolean higherValueThan(PokerHand h) {
-	  
-		return handValue > h.handValue(); 
+		
+		
+		return getHandValue() > h.getHandValue(); 
 	}
 
 	public String toString() {
