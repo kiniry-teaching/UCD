@@ -97,6 +97,8 @@ public class PokerHand {
 	 * @return handValue
 	 */
 	public byte handValue() {
+		
+		getHandValue();
   		return handValue;
 	}
   
@@ -179,23 +181,44 @@ public class PokerHand {
     	ONE_PAIR = 2
     	HIGH_CARD = 1
 	 */
-	public byte getHandValue(){
+	public void getHandValue(){
 		
 		// puts this pokerhand in ascending order
 		orderHand();
 
 		// finish handValue methods in morning...
-		if (isRoyalFlush()) return ROYAL_FLUSH;
-		else if (isStraightFlush()) return STRAIGHT_FLUSH;
-		else if (isFourOfAKind()) return FOUR_OF_A_KIND;
-		else if (isFullHouse()) return FULL_HOUSE;
-		else if (isFlush()) return FLUSH;
-		else if (isStraight()) return STRAIGHT;
-		else if (isThreeOfAKind()) return THREE_OF_A_KIND;
-		else if (isTwoPair()) return TWO_PAIRS;
-		else if (isOnePair()) return ONE_PAIR;
-		else return HIGH_CARD;
+		if (isRoyalFlush()) {
+			handValue = ROYAL_FLUSH;
+		}
+		else if (isStraightFlush()) {
+			handValue = STRAIGHT_FLUSH;
+		}
+		else if (isFourOfAKind()) {
+			handValue = FOUR_OF_A_KIND;
+		}
+		else if (isFullHouse()) {
+			handValue = FULL_HOUSE;
+		}
+		else if (isFlush()) {
+			handValue = FLUSH;
+		}
+		else if (isStraight()) {
+			handValue = STRAIGHT;
+		}
+		else if (isThreeOfAKind()) {
+			handValue = THREE_OF_A_KIND;
+		}
+		else if (isTwoPair()) {
+			handValue = TWO_PAIRS;
+		}
+		else if (isOnePair()) {
+			handValue = ONE_PAIR;
+		}
+		else {
+			handValue = HIGH_CARD;
+		}
 	}
+	
 	
 	/** Tests if hand is a royal flush..
 	 *	If its a flush and its a straight and the hand values are ten, jack
@@ -361,7 +384,7 @@ public class PokerHand {
 	 */
 	public boolean compare(PokerHand h) {
 	  
-		return getHandValue() == h.getHandValue();
+		return handValue() == h.handValue();
 	}
 
 	/**
@@ -371,16 +394,15 @@ public class PokerHand {
 	 */
 	public boolean higherValueThan(PokerHand h) {
 		
-		
-		return getHandValue() > h.getHandValue(); 
+		return handValue() > h.handValue(); 
 	}
 
 	public String toString() {
 	  
 		String handString = "";
 	  
-		for (int x = 0 ; x < hand.length ; x++) {
-			handString = hand[x].toString()+", ";
+		for (int x = 0 ; x < count ; x++) {
+			handString = handString+" "+hand[x].toString()+", ";
 		}
 	  
 		return handString;

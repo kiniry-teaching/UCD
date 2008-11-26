@@ -22,8 +22,8 @@ public class PokerCard implements Card {
 	  }
 
 	  public String toString() {
-	    String cardString = Byte.toString(value)+" of "+Byte.toString(suite)+"s.";
-	    return cardString;
+		  
+	    return "The "+value()+" of "+suite();
 	  }
 	  
 	  // Is this method not deprecated by the sameValue/SuiteAs 
