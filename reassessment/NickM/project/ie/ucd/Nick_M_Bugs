@@ -39,7 +39,12 @@ Bug #7
 	Description: Probably a typo, byte denoting card value SIX is named SOX.
 	Fix: Changed SOX to SIX ..
 		
-		
+Bug#8
+	Where: PokerHand.java
+	Description: Cannot for the life of me get isTwoPair() method to work properly.
+	Fix: It may be impossible.		
+	Later Fix: amountOfPairs variable was adding up to 4, not 2. Works correctly now.
+
 		
 		
 		

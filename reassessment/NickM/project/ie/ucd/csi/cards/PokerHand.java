@@ -37,6 +37,11 @@ public class PokerHand {
 		count = 0;
 		handValue = NOTHING;
 	}
+	
+	public PokerCard[] hand() {
+		
+		return hand;
+	}
 
 	/**
 	 * Adds a PokerCard to the PokerHand, unless the PokerHand is already full.
@@ -97,9 +102,7 @@ public class PokerHand {
 	 * @return handValue
 	 */
 	public byte handValue() {
-		
-		getHandValue();
-  		return handValue;
+		return handValue;
 	}
   
   
@@ -181,42 +184,41 @@ public class PokerHand {
     	ONE_PAIR = 2
     	HIGH_CARD = 1
 	 */
-	public void getHandValue(){
+	public byte getHandValue(){
+		
+		System.out.println("Determining hand value...");
+		handValue = determineHandValue();
+		
+		return handValue;
+
+	}
+	
+	public byte determineHandValue(){
 		
 		// puts this pokerhand in ascending order
 		orderHand();
 
 		// finish handValue methods in morning...
-		if (isRoyalFlush()) {
-			handValue = ROYAL_FLUSH;
-		}
-		else if (isStraightFlush()) {
-			handValue = STRAIGHT_FLUSH;
-		}
-		else if (isFourOfAKind()) {
-			handValue = FOUR_OF_A_KIND;
-		}
-		else if (isFullHouse()) {
-			handValue = FULL_HOUSE;
-		}
-		else if (isFlush()) {
-			handValue = FLUSH;
-		}
-		else if (isStraight()) {
-			handValue = STRAIGHT;
-		}
-		else if (isThreeOfAKind()) {
-			handValue = THREE_OF_A_KIND;
-		}
-		else if (isTwoPair()) {
-			handValue = TWO_PAIRS;
-		}
-		else if (isOnePair()) {
-			handValue = ONE_PAIR;
-		}
-		else {
-			handValue = HIGH_CARD;
-		}
+		if (isRoyalFlush()) return ROYAL_FLUSH;
+		
+		else if (isStraightFlush()) return STRAIGHT_FLUSH;
+		
+		else if (isFourOfAKind()) return FOUR_OF_A_KIND;
+		
+		else if (isFullHouse()) return FULL_HOUSE;
+		
+		else if (isFlush()) return FLUSH;
+		
+		else if (isStraight()) return STRAIGHT;
+		
+		else if (isThreeOfAKind()) return THREE_OF_A_KIND;
+		
+		else if (isTwoPair()) return TWO_PAIRS;
+		
+		else if (isOnePair()) return ONE_PAIR;
+		
+		else return HIGH_CARD;
+		
 	}
 	
 	
@@ -225,12 +227,12 @@ public class PokerHand {
 	 *	queen, king, ace -> it is a royal flush. 
 	 *	
 	 *@change isFlush() && isStraight() -> isStraightFlush 
+	 *@change if it's a royal flush and the first (lowest) card is a ten, then it must
+	 *			be a royal flush..
 	 */
 	public static boolean isRoyalFlush() {
 		
-		if (isStraightFlush() && hand[0].value() == 10 && hand[1].value() == JACK && 
-				 hand[2].value() == QUEEN && hand[3].value() == KING &&
-				 hand[4].value() == ACE) return true;
+		if (isStraightFlush() && hand[0].value() == 10) return true;
 		
 		return false;
 	}
@@ -252,14 +254,14 @@ public class PokerHand {
 	 * */
 	public static boolean isFourOfAKind() {
 		
-		int count = 0;
+		int counter = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
-			for (int y = x+1 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) count++;
-				if (count == 4) return true;
+			for (int y = 0 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) counter++;
 			}
-			count = 0;
+			if (counter == 4) return true;
+			counter = 0;
 		}
 	
 		return false;
@@ -275,19 +277,33 @@ public class PokerHand {
 	public static boolean isFullHouse() {
 
 		// obviously then there would be 1 card not in a valued position.
-		if (isFourOfAKind() || isTwoPair()) return false;
+		if (isFourOfAKind() == true || isTwoPair() == true) return false;
 		
-		// if it's one pair and also three of a kind and is NOT two pair or a full house
-		// then it must be a full house.
-		if (isOnePair() && isThreeOfAKind()) return true;
+		int counter = 0;
+		int amountOfPairs = 0;
+		
+		for(int x = 0; x < hand.length; x++){
 			
-		return false;
+	        for(int y = 0; y < hand.length; y++){
+	        	
+	            if(hand[x].value() == hand[y].value()) {counter++;}
+
+	        }
+	        if (counter > 1) {
+	        	System.out.println("Found a pair..");
+	        	amountOfPairs++;}
+	        counter = 0;
+	    }
+
+	    if(amountOfPairs == 5) return true;
+
+	    return false;
 	}
 	
 	/** Tests if hand is a flush. */
 	public static boolean isFlush() {
 		
-		for (int x = 0 ; x < hand.length ; x++) {
+		for (int x = 0 ; x < count-1 ; x++) {
 			if ( !(hand[x].sameSuiteAs(hand[x+1])) ) {
 				return false;
 			}
@@ -298,7 +314,7 @@ public class PokerHand {
 	/** Tests if hand is a straight. */
 	public static boolean isStraight() {
 		
-		for (int x = 0 ; x < hand.length ; x++) {
+		for (int x = 0 ; x < count-1 ; x++) {
 			if (hand[x].value() != hand[x+1].value() - 1) {
 				return false;
 			}
@@ -310,14 +326,14 @@ public class PokerHand {
 	 */
 	public static boolean isThreeOfAKind() {
 		
-		int count = 0;
+		int counter = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
-			for (int y = x+1 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) count++;
-				if (count == 3) return true;
+			for (int y = 0 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) counter++;
 			}
-			count = 0;
+			if (counter == 3) return true;
+			counter = 0;
 		}
 	
 		return false;
@@ -328,36 +344,40 @@ public class PokerHand {
 	 */
 	public static boolean isTwoPair() {
 		
-		int count = 0;
+		int counter = 0;
 		int amountOfPairs = 0;
 		
-		for (int x = 0 ; x < hand.length ; x++) {
+		for(int x = 0; x < hand.length; x++){
 			
-			for (int y = x+1 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) count++;
-			}
-			if (count == 2) amountOfPairs++;
-			count = 0;
-		}
-		
-		if (amountOfPairs == 2) return true;
-		
-		return false;
-	}
+	        for(int y = 0; y < hand.length; y++){
+	        	
+	            if(hand[x].value() == hand[y].value()) {counter++;}
 
+	        }
+	        if (counter == 2) {amountOfPairs++;}
+	        counter = 0;
+	    }
+
+	    if(amountOfPairs == 4) return true;
+
+	    return false;
+	}
+		
+		
 	public static boolean isOnePair() {
 		
-		int count = 0;
+		int counter = 0;
 		
 		for (int x = 0 ; x < hand.length ; x++) {
-			for (int y = x+1 ; y < hand.length ; y++) {
-				if (hand[x].value() == hand[y].value()) count++;
-				if (count == 2) return true;
+			for (int y = 0 ; y < hand.length ; y++) {
+				if (hand[x].value() == hand[y].value()) counter++;
 			}
-			count = 0;
+			if (counter == 2) {return true;}
+			counter = 0;
 		}
 	
 		return false;
+	
 	}
 	/**
 	 * Orders the PokerHand in ascending order.
