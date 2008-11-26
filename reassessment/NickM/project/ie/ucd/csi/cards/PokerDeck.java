@@ -57,9 +57,9 @@ public class PokerDeck {
 	/**
 	 * @return Card from the top of the deck.
 	 */
-	public Card getCard() {
+	public PokerCard getCard() {
 		
-		Card topCard = deck[cardsInDeck];
+		PokerCard topCard = deck[cardsInDeck];
 		cardsInDeck--;
 		return topCard;
 	}
