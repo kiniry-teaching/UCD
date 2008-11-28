@@ -1,0 +1,227 @@
+Colm Murphy 06592295 Project Overview
+
+Project: Implement and de-bug pre-defined software system of Cards.
+
+Purpose: To put into practice the Software engineering tools learned in comp 20050
+         To debug the classes given to us.
+         
+Requirements: Implement game of poker.
+			  Find and Fix at least 3 bugs in code.
+			  Write Bon charts for the project.
+			  
+Dictionary:  
+
+Poker 
+Card
+Poker Deck
+Poker Hand
+Poker Card
+Value
+suite
+heart
+diamond
+spade
+club
+colour
+black
+red
+value
+ace
+two
+three
+four
+five
+six
+seven
+eight
+nine
+ten
+jack
+queen
+king
+face cards 
+count 
+rank 
+Royal flush 
+straight flush
+Four of a kind 
+full house
+flush
+straight
+Three of a kind
+two pairs
+one pair 
+high card
+
+Concept Definition:
+Poker: is a game played with cards
+Card: is used to play poker
+Poker Deck: all 52 cards including 4 different suites and each suite in ace to king
+Poker Hand: Players 5 cards which make up a value
+Poker Card: a card in poker with a value
+Suite: can be 1 of four types- heart, diamond, spade and club
+Heart: a type of suit with colour red, has 13 cards ace-king
+Diamond: a type of suit with colour red, has 13 cards ace-king 
+Spade: a type of suit with colour black, has 13 cards ace-king
+Club: a type of suit with colour black, has 13 cards ace-king
+Colour: red for hearts and diamonds, black for spades and clubs
+Black: A colour of card in the game of poker
+Red: A colour of card in the game of poker
+Value: the amount each card is worth
+ace: highest card in poker has value thirteen
+two: lowest value card has value two
+three: three card has value three
+four: four card has value four
+five: five card has value five
+six: six card has value six
+seven: seven card has value seven
+eight: eight card has value eight
+nine: nine card has value nine
+ten: ten card has value ten
+jack: face card has value eleven
+queen: face card has value twelve
+king: face card has value thirteen
+face cards: picture of jacks, queens, and kings instead of their value
+count: number of cards in the deck
+rank: determines whether a hand is better than another
+Royal flush: highest hand in poker-ten, jack, queen, king, ace all in the same suit
+straight flush: five cards in order, must be of the same suit
+Four of a kind: four of any card 
+full house: three of one card and two of another
+flush: five cards all with the same suit but not in order
+straight: five cards all in order but not same suite
+Three of a kind: three of one type of card
+two pairs: two pairs of the same cards
+one pair: one pair of the same card
+high card: if no other hands better highest value card will win
+
+Is-a relations:
+
+Poker is a game
+Card is an item for playing poker
+Poker Deck is a deck of 52 cards
+Poker Hand is a set of five cards with a certain value
+Poker Card is a card used to play the game of poker
+suite is a set of thirteen cards out of the 52 cards with all the same symbol (heart, diamond, spade, club)
+Heart is a suite
+Diamond is a suite
+Spade is a suite
+Club is a suite
+Colour is a visual element to the game (red or black)
+Black is a colour
+Red is a colour
+Value is a number given to a poker card
+Ace is a poker card
+two is a poker card
+three is a poker card
+four is a poker card
+five is a poker card
+six is a poker card
+seven is a poker card
+eight is a poker card
+nine is a poker card
+ten is a poker card
+jack is a face card
+queen is a face card
+king is a face card
+Face card is a card with jack, queen or king on it
+count is a numerical value of cards in deck
+rank is a level of Poker Hand
+Royal flush is a Poker Hand
+Straight flush is a Poker Hand
+four of a kind is a Poker Hand
+full house is a Poker Hand
+flush is a Poker Hand
+straight is a Poker Hand
+three of a kind is a Poker Hand
+two pairs is a Poker Hand
+one pair is a Poker Hand
+high card is a Poker Hand
+
+Has a Relations:
+
+Poker has a poker deck
+Card has a value
+Poker Deck has a set of 52 cards
+Poker Hand has a rank
+Poker card has a value
+suite has 13 cards of heart, diamond, spade or club
+Heart has 13 cards ace-king
+Diamond has 13 cards ace-king
+Spade has 13 cards ace-king
+Club has 13 cards ace-king
+Colour has a visual effect
+Value has a number
+Ace has a value 
+two has a value 
+three has a value 
+four has a value 
+five has a value 
+six has a value 
+seven has a value 
+eight has a value 
+nine has a value 
+ten has a value 
+jack has a value 
+queen has a value 
+king has a value 
+Face card has a value
+Count has a number
+Royal flush has a rank
+Straight flush has a rank
+Four of a kind has a rank
+Full house has a rank
+flush has a rank
+Straight has a rank
+Three of a kind has a rank
+Two pairs has a rank
+One pair has a rank
+High Card has a rank
+
+
+Is-a-kind of Relations:
+
+Poker is a kind of game
+Card is a kind of object
+Poker Deck is a kind of set of cards
+Poker Hand is a kind of set of cards
+Poker Card is a kind of Card
+Suit is a kind of set of thirteen cards
+Heart is a kind of suite
+Diamond is a kind of suite
+Spade is a kind of suite
+club is a kind of suite
+Value is a kind of Integer
+Ace is a kind of Card
+two is a kind of Card
+three is a kind of Card
+Four is a kind of Card
+five is a kind of Card
+six is a kind of Card
+Seven is a kind of Card
+Eight is a kind of Card
+Nine is a kind of Card
+ten is a kind of Card
+Jack is a kind of Card
+Queen is a kind of Card
+King is a kind of Card
+Face Card is a kind of card
+Count is a kind of Integer
+Royal flush is a kind of Poker Hand
+Straight flush is a kind of Poker Hand
+Four of a kind is a kind of Poker Hand
+Full House is a kind of Poker Hand
+Flush is a kind of Poker Hand
+Straight is a kind of Poker Hand
+Three of a kind is a kind of Poker Hand
+Two pairs is a kind of Poker Hand
+One pair is a kind of Poker Hand
+High Card is a kind of Poker Hand
+
+
+
+
+
+
+
+

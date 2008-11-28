@@ -1,0 +1,24 @@
+Bug#1: Name of Bug   Description: In Card.java Heart=2 and Spade=2 this cannot be allowed
+                                  as you cannot have two suites equal to the same number.
+                     
+                     Description of bug fix: changed spade=2 to spade=3
+                     
+                     
+Bug#2: Name of Bug   Description: In PokerHand.java "public boolean compare (PokerHand h)"
+								  is given. I think this should be changed to 
+								  public int compare (PokerHand h) as boolean can only return
+								  true or false but more than two comparisons may have to be 
+								  made so int is probably a better choice.
+                     
+                     Description of bug fix: changed public boolean compare (PokerHand h)
+                                  to public int compare (PokerHand h).
+                                  
+Bug#3: Name of Bug   Description: In Card.java under public static final byte the
+								  the word "sox" is there when this should obviously be "six".
+                     
+                     Description of bug fix: changed the word "sox" to the word "six".
+                     
+Bug#4: Name of Bug   Description: In PokerCard.java public boolean equals (Card o) this does 
+								  not make a comparison of Cards rather on the object o.
+                     
+                     Description of bug fix: changed (Card o) to (Object 0).
