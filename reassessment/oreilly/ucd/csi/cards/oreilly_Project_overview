@@ -1,0 +1,243 @@
+Naomi O' Reilly.
+
+Team Memebers :#1 Naomi O' Reilly, naomi, 05389623
+ 	
+ 	Project: For this project I will be working on implementing and debugging the pre-defined
+ 	  "cards" software system a java implementation of the game Poker.
+ 	       
+ 	Project Purpose:
+ 	        To teach us how to use the concepts and tools of software engineering
+ 	        we covered in the COMP20050 to correctly implement and debug the 
+ 	        java classes given to us in the card directory on csi-trac.
+ 	
+ 	Project Requirements:
+ 	       Knowledge on how to use subversion. 
+ 	       Implement the game of Poker using the classes given to us in the cards directory.
+           Find, report and fix at least 3 bugs in cards.
+           
+ 	       
+Summary of analysis & design process to date:
+	18/11/2008 - implementation of PokerCard.java.
+	19/11/2008 - started identifying bugs in Card.java and PokerCard.java
+	23/11/2008 - Project Overview - class dictionary, concepts and relations defined. 
+	23/11/2008 - hope to start on the BON specifications.
+	26/11/2008 - BON Charts done. 
+	27/11/2008 - makefile attempted.
+	
+*DICTIONARY*
+-----------------
+Poker
+Card
+Poker Card
+Poker Hand
+Poker Deck
+Colour
+Value
+Suit
+Heart
+Club
+Diamond
+Spade
+Ace
+Two
+Three
+Four
+Five
+Six
+Seven
+Eight
+Nine
+Ten
+Jack 
+Queen
+King
+Face Cards
+Count
+rules
+Royal Flush
+Straight Flush
+Four of a kind
+Full House
+Flush 
+Straight
+Three of a kind 
+Two Pair
+One Pair
+High Card
+
+	*CONCEPT* *DEFINITION*
+-----------------------------------
+Poker - a game played with Cards
+Card - an object which is used to play the game poker
+Poker Card - a card with a specific value given to it by the rules of Poker
+Poker Hand - a set of five Poker Cards with a specific value based on the rules of Poker
+Poker Deck - A set of 52 Cards with Four different suits all going from Ace to King
+Colour - Club and spade cards are black, Heart and Diamond cards are red.
+Value - The numerical amount each card is worth.
+Rank - Order of the Poker cards and hands based on the rules.
+Suit - One of four types of Card Heart, Diamond, Spade, Club. all suite carry equal value in Poker.
+Heart - A type of suit has thirteen Cards with Values Ace, two, three, four, five,six, seven, 
+eight, nine, 10, jack, queen, king. has a heart on the corner.
+
+Diamond - A type of suit has thirteen Cards with Values Ace, two, three, four, five,six, seven, 
+eight, nine, 10, jack, queen, king has a diamond on the corner.
+
+Spade - A type of suit has thirteen Cards with Values Ace, two, three, four, five,six, seven, 
+eight, nine, 10, jack, queen, king has a spade on the corner.
+
+Club - A type of suit has thirteen Cards with Values Ace, two, three, four, five,six, seven, 
+eight, nine, 10, jack, queen, king has a club on the corner.
+Ace - the highest value card in poker 
+Two - the lowest value card (two)
+Three - Card has the value three
+Four - Card has the value four
+Five -Card has the value five
+Six - Card has the value six
+Seven - Card has the value seven
+Eight - Card has the value eight
+Nine - Card has the value nine
+Ten - Card has the value ten
+Jack - Face Card has value of eleven
+Queen - Face Card has value of twelve
+King - Face Card has value of thirteen
+Face Cards - have pictures of Jacks Queens and Kings as opposed to numbers, 
+higher ranking than all but Ace cards
+Count - the amount of cards in the deck.
+Rule - a guideline to follow when playing poker which set out how a winner is chosen.
+Royal Flush - The highest ranking hand in poker. ace-king-queen-jack-ten of any suit. 
+Straight Flush - Any five cards in numerical order. must be of the same suit. highest top card wins.
+Four of a kind - Four of any card, etc; four Aces, ranked form four Aces down.
+Full House - Three of one kind of card, two of another, the highest three of a kind wins.
+Flush - five cards in the same suit but not in order, hand with highest card wins.
+Straight - five cards in ascending order but not all from the same suit.
+Three of a kind - Three of the same card, Highest value wins in case of two Threes.
+Two Pair - Two different pairs of the same card, highest pair wins, if both pairs are the same the highest other card wins. 
+One Pair - one pair of the same cards. highest pair wins or if both are equal the highest of the other three cards in the hands wins.
+High Card - if the hand contains none of the above hands the hand with the highest card wins.
+
+
+*IS-A RELATIONS*
+----------------
+Poker is a type of game.
+Card is an object used to play Poker.
+Poker Card is a card given a specific value to be used in the game of Poker.
+Poker Hand is a set of poker cards and has a rank based on the rules of Poker.
+Poker Deck is a set of 52 poker cards.
+Rank is a value from highest to lowest given to both poker cards and hands.
+Value is a number given to a poker card.
+Colour is a type of visual quality each object has.
+Suit is one of the four equal sets of cards in Poker.
+Heart is a suit.
+Club is a suit.
+Diamond i a suit.
+Spade is a suit.
+Ace is the highest ranking card in poker.
+Two is a poker card worth 2.
+Three is a poker card worth 3.
+Four is a poker card worth 4.
+Five is a poker card worth 5.
+Six is a poker card worth 6.
+Seven is a poker card worth 7.
+Eight is a poker card worth 8.
+Nine is a poker card worth 9.
+Ten is a poker card worth 10.
+Jack  is a poker card worth 11.
+Queen is a poker card worth 12.
+King is a poker card worth 13.
+Face Cards are either a Jack, a Queen or a King.
+Count is a number to keep track of the amount of cards in the deck.
+rule - is a way to determine the winner in a game of Poker.
+Royal Flush - is a Poker Hand.
+Straight Flush - is a Poker Hand.
+Four of a kind - is a Poker Hand.
+Full House - is a Poker Hand.
+Flush - is a Poker Hand.
+Straight - is a Poker Hand.
+Three of a kind  - is a Poker Hand.
+Two Pair - is a Poker Hand.
+One Pair - is a Poker Hand.
+High Card - is a Poker Hand.
+
+*HAS-A RELATIONS*
+-----------------
+Poker - has a poker deck 
+Card has a value
+Poker Card has a value
+Poker Hand has a rank 
+Poker Deck has 52 poker cards
+Colour has a distinctive effect visually.
+Rank has a value
+Value has a number
+Suit has 13 cards of either Heart, Club, Diamond or Spade.
+Heart has 13 heart cards.
+Club  has 13 club cards.
+Diamond has 13 diamond cards.
+Spade has 13 spade cards.
+Ace has a value.
+Two has a value.
+Three has a value.
+Four has a value.
+Five has a value.
+Six has a value.
+Seven has a value.
+Eight has a value.
+Nine has a value.
+Ten has a value.
+Jack  has a value.
+Queen has a value.
+King has a value.
+Face Cards has a value.
+Count has a number.
+Rule has directions on how to play a game.
+Royal Flush has a hand rank.
+Straight Flush has a hand rank.
+Four of a kind has a hand rank.
+Full House has a hand rank.
+Flush  has a hand rank.
+Straight has a hand rank.
+Three of a kind has a hand rank.
+Two Pair has a hand rank.
+One Pair has a hand rank.
+High Card has a hand rank.
+
+*IS-A-KIND-OF RELATIONS*
+------------------------
+Poker is a kind of game.
+Card is a kind of object.
+Poker Card is a kind of card.
+Poker Hand is a kind of set.
+Poker Deck is a kind of set.
+Colour is a kind of visual.
+Value is a kind of integer.
+Suit is a kind of set.
+Heart is a kind of suit.
+Club is a kind of suit.
+Diamond is a kind of suit.
+Spade is a kind of suit.
+Ace is a kind of card.
+Two is a kind of card.
+Three is a kind of card.
+Four is a kind of card.
+Five is a kind of card.
+Six is a kind of card.
+Seven is a kind of card.
+Eight is a kind of card.
+Nine is a kind of card.
+Ten is a kind of card.
+Jack is a kind of card. 
+Queen is a kind of card.
+King is a kind of card.
+Face Cards are a kind of card.
+Count is a kind of integer.
+Rule is a kind of guideline.
+Royal Flush is a kind of Poker Hand.
+Straight Flush is a kind of Poker Hand.
+Four of a kind is a kind of Poker Hand.
+Full House is a kind of Poker Hand.
+Flush is a kind of Poker Hand.
+Straight is a kind of Poker Hand.
+Three of a kind is a kind of Poker Hand.
+Two Pair is a kind of Poker Hand.
+One Pair is a kind of Poker Hand.
+High Card is a kind of Poker Hand.
+

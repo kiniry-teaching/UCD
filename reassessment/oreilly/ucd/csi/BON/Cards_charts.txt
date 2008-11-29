@@ -21,15 +21,15 @@
                      class VALUE description "a numerical value given to each card."
                      class RANK description "each card has a RANK form highest to lowest, based on its VALUE."
                    	 class ACE description "a CARD with the highest VALUE in a POKER DECK."
-                   	 class TWO description "a CARD with the numerical VALUE of two in a POKER DECK."
-                   	 class THREE description "a CARD with the numerical VALUE of three in a POKER DECK."
-                   	 class FOUR description "a CARD with the numerical VALUE of four in a POKER DECK."
-                   	 class FIVE description "a CARD with the numerical VALUE of five in a POKER DECK."
-                   	 class SIX description "a CARD with the numerical VALUE of six in a POKER DECK."
-                   	 class SEVEN description "a CARD with the numerical VALUE of seven in a POKER DECK."
-                   	 class EIGHT description "a CARD with the numerical VALUE of eight in a POKER DECK."
-                   	 class NINE description "a CARD with the numerical VALUE of nine in a POKER DECK."
-                   	 class TEN description "a CARD with the numerical VALUE of ten in a POKER DECK."
+                   	 class TWOCARD description "a CARD with the numerical VALUE of two in a POKER DECK."
+                   	 class THREECARD description "a CARD with the numerical VALUE of three in a POKER DECK."
+                   	 class FOURCARD description "a CARD with the numerical VALUE of four in a POKER DECK."
+                   	 class FIVECARD description "a CARD with the numerical VALUE of five in a POKER DECK."
+                   	 class SIXCARD description "a CARD with the numerical VALUE of six in a POKER DECK."
+                   	 class SEVENCARD description "a CARD with the numerical VALUE of seven in a POKER DECK."
+                   	 class EIGHTCARD description "a CARD with the numerical VALUE of eight in a POKER DECK."
+                   	 class NINECARD description "a CARD with the numerical VALUE of nine in a POKER DECK."
+                   	 class TENCARD description "a CARD with the numerical VALUE of ten in a POKER DECK."
                    	 class JACK description "a CARD with the numerical VALUE of eleven in a POKER DECK."
                    	 class QUEEN description "a CARD with the numerical VALUE of twelve in a POKER DECK."
                    	 class KING description "a CARD with the numerical VALUE of thirteen in a POKER DECK."
@@ -43,12 +43,12 @@ class_chart SUIT
                           part "1/1" 
                         
                           query 
-			  			 "HEART","SPADE", "CLUB", "DIAMOND", "COLOUR"
+			  			 "HEART","SPADE", "CLUB", "DIAMOND", "COLOUR."
 			  	  
                           command 
-			  			 "Be a HEART","Be a CLUB","Be a SPADE","Be a DIAMOND"  "Be this COLOUR"
+			  			 "Be a HEART","Be a CLUB","Be a SPADE","Be a DIAMOND", "Be this COLOUR."
                           constraint 
-			   			 "Can't change to a different SUIT or COLOUR" 
+			   			 "Can't change to a different SUIT or COLOUR." 
                        	 end 
 class_chart VALUE		 
                           indexing
@@ -59,9 +59,9 @@ class_chart VALUE
                           query 
 			   			  "NUMBER", "RANK", "HIGEST", "LOWEST"
 			 			  command 
-			    		  "Be the higest VALUE", "Be the lowest VALUE" "Be this VALUE"
+			    		  "Be the higest VALUE", "Be the lowest VALUE", "Be this VALUE."
                           constraint 
-			    		  "remains invariant"
+			    		  "remains invariant."
                           end 
 class_chart RANK		 
                           indexing
@@ -84,126 +84,126 @@ class_chart ACE
                           explanation "The CARD with the highest RANK in the POKER DECK."
                           part "1/1"   
                           query 
-			     		  "What SUIT are you", "What RANK are you", "What COLOUR are you", "What is your VALUE"
+			     		  "What SUIT are you", "What RANK are you", "What COLOUR are you", "What is your VALUE."
 					      command 
 			      		  "Be in this SUIT", "Have this RANK", "Be this COLOUR", "Have this VALUE"
                           constraint 
-			     		  "SUIT, RANK, VALUE and COLOUR remain invariant"
+			     		  "SUIT, RANK, VALUE and COLOUR remain invariant."
                           end 
 
-class_chart TWO		 
+class_chart TWOCARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of two."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			 			  command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end
                         
-class_chart THREE	 
+class_chart THREECARD	 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of three."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			 		      command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart FOUR		 
+class_chart FOURCARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of four."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			  			  command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart FIVE		 
+class_chart FIVECARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of five."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			 		      command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart SIX		 
+class_chart SIXCARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of six."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			  			  command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart SEVEN		 
+class_chart SEVENCARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of seven."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			  			  command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			       		  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			       		  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart EIGHT		 
+class_chart EIGHTCARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of eight."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			 			  command 
-			       		  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			       		  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart NINE		 
+class_chart NINECARD		 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
                           explanation "A CARD with the VALUE of nine."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			  			  command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
-class_chart TEN	 
+class_chart TENCARD 
                           indexing
 			  clauster: "CARDS";
 			  created: "2008-11-23";
@@ -212,9 +212,9 @@ class_chart TEN
                           query 
 			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
 			  		 	  command 
-			       	 	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			       	 	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
 class_chart JACK		 
@@ -226,9 +226,9 @@ class_chart JACK
                           query 
 			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
 			  			  command 
-			       		  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			       		  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                        	  end 
                         
 class_chart QUEEN		 
@@ -238,11 +238,11 @@ class_chart QUEEN
                           explanation "A CARD with the VALUE of twelve."
                           part "1/1" 
                           query 
-			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			        	  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			 			  command 
-			        	  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			        	  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			        	  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			        	  "SUIT, COLOUR, RANK and VALUE remain invariant."
                           end 
                         
 class_chart KING		 
@@ -252,75 +252,61 @@ class_chart KING
                           explanation "A CARD with the VALUE of thirteen."
                           part "1/1" 
                           query 
-			       		  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you"
+			       		  "What is your VALUE", "what is your COLOUR", "What is your RANK", "What SUIT are you."
 			 			  command 
-			       		  "Have this VALUE", "Be this COLOUR" "have this RANK" ""
+			       		  "Have this VALUE", "Be this COLOUR", "have this RANK."
                           constraint 
-			       		  "SUIT, COLOUR, RANK and VALUE remain invariant"
+			       		  "SUIT", "COLOUR", "RANK and VALUE remain invariant."
                           end  
 
  cluster_chart HANDS 
                         indexing
-		      	 clauster:"HANDS;
+		      	 clauster:"HANDS";
 			 created: "2008-11-23";
                          explanation "Set of five POKER CARDS with a RANK."
                          part "1/1" 
                  class RANK description "A number which Determines the winning HAND."
-	     		 class ROYAL FLUSH description "Has the top RANK of first."
-	     		 class STRAIGHT FLUSH description "Has a RANK of second."
-	     		 class FOUR OF A KIND description "Has a RANK of third."
-	     		 class FULL HOUSE description "Has a RANK of fourth."
+	     		 class ROYAL_FLUSH description "Has the top RANK of first."
+	     		 class STRAIGHT_FLUSH description "Has a RANK of second."
+	     		 class FOUR_OF_A_KIND description "Has a RANK of third."
+	     		 class FULL_HOUSE description "Has a RANK of fourth."
 	     		 class FLUSH description "Has a RANK of fifth."
 	     		 class STRAIGHT description "Has a RANK of sixth."
-	     		 class THREE OF A KIND description "Has a RANK of seventh."
-	     		 class TWO PAIR description "Has a RANK  of eighth."
-	     		 class ONE PAIR description "Has a RANK of ninth."
-	     		 class HIGH CARD description "Has the lowest RANK of tenth."
+	     		 class THREE_OF_A_KIND description "Has a RANK of seventh."
+	     		 class TWO_PAIR description "Has a RANK  of eighth."
+	     		 class ONE_PAIR description "Has a RANK of ninth."
+	     		 class HIGH_CARD description "Has the lowest RANK of tenth."
                          end
 
-class_chart RANK 		 
-                          indexing
-			  clauster: "HANDS";
-			  created: "2008-11-23";
-                          explanation "A value which determines the winning HAND."
-                          part "1/1" 
-                          query 
-			    		  "What is you VALUE" "are you a winning/losing RANK" "Are you a high/low RANK"
-			  			  command 
-			    		  "Be this RANK" "Be a high/low RANK" "Be a winning/losing RANK"
-                          constraint 
-			      		  "remains invariant"
-                          end 
-
-class_chart ROYAL FLUSH		 
+class_chart ROYAL_FLUSH		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
                           explanation "The highest RANKING HAND in poker."
                           part "1/1"
                           query 
-			    		  "What SUIT are you" "Are you the winning HAND" "What is your RANK."
+			    		  "What SUIT are you", "Are you the winning HAND", "What is your RANK."
 			 			  command 
 			     		  "Be this SUIT", "Be the winning HAND", "Have this RANK."
                           constraint 
-						  "Must contain TEN - JACK - QUEEN - KING - ACE of the same SUIT"
+						  "Must contain TEN - JACK - QUEEN - KING - ACE of the same SUIT."
 	                      end
 	                        
-class_chart STRAIGHT FLUSH	 
+class_chart STRAIGHT_FLUSH	 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
                           explanation "The second highest RANKING HAND in poker."
                           part "1/1"
                           query 
-			   			  "What SUIT are you",  "Are you the winning HAND"
+			   			  "What SUIT are you",  "Are you the winning HAND."
 			  			  command 
 			    		  "Be this SUIT", "Be the winning HAND", "Have this RANK."
                           constraint 
-						  "Must contain five CARDS in numerical order from the same SUIT"
+						  "Must contain five CARDS in numerical order from the same SUIT."
 	                      end
 	                        
-class_chart FOUR OF A KIND		 
+class_chart FOUR_OF_A_KIND		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
@@ -334,7 +320,7 @@ class_chart FOUR OF A KIND
 						  "Must contain four of the same CARD."
 	                      end
 	                        
-class_chart FULL HOUSE		 
+class_chart FULL_HOUSE		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
@@ -376,7 +362,7 @@ class_chart STRAIGHT
 						  "CARDS must be in ascending order."
 	                      end
 	                        
-class_chart THREE OF A KIND		 
+class_chart THREE_OF_A_KIND		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
@@ -385,12 +371,12 @@ class_chart THREE OF A KIND
                           query 
 			    		  "What SUITS are you", "What CARD do you have three of", "Are you the winning HAND", "What is your RANK."
 			  			  command 
-			     		  "Be this SUIT" "Have three of this CARD", "Be the winning HAND", "Have this RANK."
+			     		  "Be this SUIT", "Have three of this CARD", "Be the winning HAND", "Have this RANK."
                           constraint 
 						  "Must contain three of the same CARD"
 	                      end
 	                        
-class_chart TWO PAIR		 
+class_chart TWO_PAIR		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
@@ -404,7 +390,7 @@ class_chart TWO PAIR
 						  "Must contain two pairs of either the same or different CARD"
 	                      end
 	                        
-class_chart ONE PAIR		 
+class_chart ONE_PAIR		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
@@ -418,7 +404,7 @@ class_chart ONE PAIR
 					 	  "Must contain a pair of the same CARD"
 	                      end
 	                        
-class_chart HIGH CARD		 
+class_chart HIGH_CARD		 
                           indexing
 			  clauster: "HANDS";
 			  created: "2008-03-10";
@@ -533,7 +519,8 @@ cluster_chart VALUES
                    	 class THREE description "a CARD or HAND with the numerical VALUE of three in a POKER DECK."
                    	 class FOUR description "a CARD or HAND with the numerical VALUE of four in a POKER DECK."
                    	 class FIVE description "a CARD or HAND with the numerical VALUE of five in a POKER DECK."
-                   	 class SIX description "a CARD or HAND with the numerical VALUE of seven in a POKER DECK."
+                   	 class SIX description "a CARD or HAND with the numerical VALUE of six in a POKER DECK."
+                   	 class SEVEN description "a CARD or HAND with the numerical VALUE of seven in a POKER DECK."
                    	 class EIGHT description "a CARD or HAND with the numerical VALUE of eight in a POKER DECK."
                    	 class NINE description "a CARD or HAND with the numerical VALUE of nine in a POKER DECK."
                    	 class TEN description "a CARD or HAND with the numerical VALUE of ten in a POKER DECK."
