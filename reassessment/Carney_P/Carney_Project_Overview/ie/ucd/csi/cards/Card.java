@@ -17,7 +17,7 @@ package ie.ucd.csi.cards;
 public interface Card {
 
   /** The four suites. */
-  public static final byte CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 2;
+  public static final byte CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 3;
 
   /** The suite of this card. */
   public byte suite();
@@ -31,9 +31,9 @@ public interface Card {
   public boolean validSuite(byte s);
 
   /** The thirteen standard cards. */
-  public static final byte ACE = -1, TWO = -2, THREE = -3, FOUR = -4,
-    FIVE = -5, SOX = -6, SEVEN = -7, EIGHT = -8, NINE = -9, TEN = -10,
-    JACK = -11, QUEEN = -12, KING = -13;
+  public static final byte ACE = 1, TWO = 2, THREE = 3, FOUR = 4,
+    FIVE = 5, SIX = 6, SEVEN = 7, EIGHT = 8, NINE = 9, TEN = 10,
+    JACK = 11, QUEEN = 12, KING = 13;
 
   /** The face-value of this card */
   public byte value();
