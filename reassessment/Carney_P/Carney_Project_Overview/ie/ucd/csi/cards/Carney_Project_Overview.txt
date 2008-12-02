@@ -1,0 +1,65 @@
+Project Overview.
+Peter Carney.
+06676804.
+
+About this project:
+This project is to test our understanding of SVN, to debug the poker package, and in general to use the knowledge gained from Software 
+Engineering Project 2. 
+
+Details:
+
+Number of Cards = 52
+
+___________
+Range/Value
+___________
+ACE - Card of highest value
+TWO - Card of lowest value
+THREE - Card with a value of 3
+FOUR - Card with a value of 4
+FIVE - Card with a value of 5
+SIX - Card with a value of 6
+SEVEN - Card with a value of 7
+EIGHT - Card with a value of 8
+NINE - Card with a value of 9
+TEN - Card with a value of 10
+JACK - FaceCard with a value of 11
+QUEEN - FaceCard with a value of 12
+KING - FaceCard with a value of 13
+
+_______
+Suit - A group of 13 card objects with the same suit.  
+_______
+HEART - A type of suit
+DIAMOND - A type of suit
+CLUB - A type of suit
+SPADE - A type of Suit
+
+______
+Colours - 
+______
+
+RED
+BLACK
+
+POKERCARD			Card object within the game POKER
+POKERHAND			A group of any 5 POKERCARDs
+POKERDECK			All the card objects. 
+CARD				The object
+POKER				The name of the game
+				
+FACECARDS			Cards with lovely pictures on them
+COUNT				
+RULES				
+ROYAL FLUSH			
+STRAIGHT FLUSH		
+THREE OF A KIND		
+FOUR OF A KIND		
+FULL HOUSE			
+FLUSH
+STRAIGHT
+TWO PAIR
+ONE PAIR
+HIGH CARD
+
+
