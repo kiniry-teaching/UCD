@@ -1,0 +1,23 @@
+Bugs Identified - Peter Carney.
+
+Bug 1. 	Location: Card.java Line 10. 
+e
+		Problem: Heart = 2, Spade = 2. Spade should = 3 as it cannot have the same value as Heart for the program to work.  
+		
+		
+Bug 2	Location: Card.java Line 25.
+
+		Problem: Spelling error. Sox = -6. Should be Six = -6. 
+		
+		
+Bug 3	Location: Card.java Lines 25,26,27
+
+		Problem: Numbers is minus when they should be in plus. 
+		
+
+Bug 4	Location: 
+
+		Problem: 
+ 
+		
+		 
