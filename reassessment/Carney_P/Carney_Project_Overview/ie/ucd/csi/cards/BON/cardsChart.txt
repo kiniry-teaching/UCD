@@ -1,0 +1,262 @@
+system_chart Cards
+			indexing
+			cluster: "POKER";
+			created: "2008-11-30";
+                        explanation "" 
+                        part "1/1" 
+           	cluster CARDS description "the objects used to play poker."
+	   		cluster HANDS description "a group of 5 cards."
+	   		cluster DECKS description "all the cards, Total 52."
+	    	cluster SUITS description "four types of cards. 
+	 		 
+                        end 
+
+ cluster_chart CARDS 
+                         indexing
+		      	 cluster:"CARDS";
+				 created: "2008-11-30";
+				 explanation 
+				 part "1/1" 
+                     class SUIT description "a set of 13 cards with the same picture on them which can be a spade,heart,club or diamond. ."
+                     class VALUE description "the number/value of the card as set out in the dictionary ."
+                     class RANK description "the level of which the card object is worth."
+                   	 class ACE description "a card object of highest value"
+                   	 class TWO description "a card object of lowest value"
+                   	 class THREE description "a card object with a value of 3 "
+                   	 class FOUR description "a card object with a value of 4"
+                   	 class FIVE description "a card object with a value of 5 "
+                   	 class SIX description "a card object with a value of 6"
+                   	 class SEVEN description "a card object with a value of 7"
+                   	 class EIGHT description "a card object with a value of 8"
+                   	 class NINE description "a card object with a value of 9"
+                   	 class TEN description "a card object with a value of 10"
+                   	 class JACK description "a card object with a value of 11"
+                   	 class QUEEN description "a card object with a value of 12"
+                   	 class KING description "a card object with a value of 13"
+                     end.
+
+
+class_chart ACE		 
+                          indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "HIGHEST CARD."
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+
+class_chart TWO		 
+                     indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "LOWEST CARD."
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart THREE	 
+                        indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "Card object with a value of 3."
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart FOUR		 
+                          indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 4."
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+class_chart FIVE	
+ indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 5 "
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart SIX		 
+              indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 6"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end             
+                        
+class_chart SEVEN		 
+                  indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 7"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end         
+                        
+class_chart EIGHT		 
+                  indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 8"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end  
+                        
+class_chart NINE		 
+                     indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD Object with a value of 9"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart TEN 
+                     indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 10 "
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart JACK
+ indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 11"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart QUEEN
+ indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 12"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+                        
+class_chart KING
+ indexing
+			  cluster: "CARDS";
+			  created: "2008-11-30";
+                          explanation "CARD object with a value of 13"
+                          part "1/1"   
+                          query 
+			     		  "SUIT_IS", "RANK_IS", "VALUE_IS".
+					      command 
+			      		  "SUIT", "RANK", "COLOUR", "VALUE"
+                          constraint 
+			     		  "SUIT, RANK, VALUE and COLOUR Never change."
+                          end 
+class_chart SUIT		 
+                          indexing
+			  cluster: "SUITS";
+			  created: "2008-11-30";
+                         Explanation "one of four SUITs" 
+                         part "1/1" 
+                        
+                        Query 
+			  			 "HEART","SPADE", "CLUB", "DIAMOND"."
+			  	  
+                        Command 
+			  			 "Be a HEART","Be a CLUB","Be a SPADE","Be a DIAMOND".
+                          
+                        Constraint 
+			   			 "Never changes" 
+                       	 end. 
+class_chart VALUE		 
+                          indexing
+			  cluster: "VALUE";
+			  created: "2008-11-30";
+                          explanation "the value of each card." 
+                          part "1/1"  
+                          query 
+			   			  "NUMBER", "RANK"
+			 			  command 
+			    		   "Be of this VALUE."
+                          constraint 
+			    		  "Never Changes"
+                          end. 
+class_chart RANK		 
+                          indexing
+			  cluster: "VALUE";
+			  created: "2008-11-30";
+                          explanation "Based on rules. Identifies the winner." 
+                          part "1/1" 
+                          query 
+						  "Higher_than_RANK", "Lower_than_RANK", "Winning_RANK"
+						  command 
+			    		  "RANK", "RANK_is_HIGHER", "RANK_is_LOWER", "RANK_is_Winner".
+                          constraint 
+						  "Never Changes"
+	                      end 
+
+                     
