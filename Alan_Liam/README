@@ -1,0 +1,24 @@
+Project submission for COMP40690
+Created by: Alan Cooke - alancooke@ie.ibm.com
+			Liam McManus - br.liam@gmail.com
+
+The project is laid out as follows:
+src\ - contains the source code for the project
+bon\ - contains the BON files that describe the system
+javadoc\ - javadoc for the project
+jml-compiled\ - compiled output from JML2
+lib\ - contains a copy of the binary Jar files required for the project
+screenshots\ - contains screen shots of the output from AutoGrader, Problems 
+               and Console(ESC/Java2) tabs
+
+A associated test project is Testing Cash(Alan_Liam_Test)it contains the "Main" driver class.
+This can be executed to demonstrate the operation of the classes.
+
+There are no special settings required in setting up the project, the jars were included in the
+lib directory to remove the complexity of platform variations.
+
+There is a dependency on the jmlspecs project to be included in the workspace, as per the jmlspecs 
+project included in the sample workspace at the start of the week.  This was not delivered to SVN. 
+
+The screen shots taken show the output from all the tools at the time of submission 
+and are assumed to be valid.

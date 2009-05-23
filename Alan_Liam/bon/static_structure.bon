@@ -1,0 +1,43 @@
+static_diagram JOHNNY_STRUCTURE
+	component
+		class JOHNNY_CARD
+		class JOHNNY_MACHINE
+		class JOHNNY_REGISTER
+		class JOHNNY_BANK
+		JOHNNY_REGISTER client JOHNNY_CARD
+		JOHNNY_MACHINE client JOHNNY_CARD
+		JOHNNY_MACHINE client JOHNNY_BANK
+		JOHNNY_BANK client JOHNNY_CARD
+end
+
+creation_chart JOHNNY_CASH
+	indexing
+		author: "Liam McManus, Alan Cooke";
+		module: "COMP40690"
+	explanation
+		"Ownership relations between classifiers in this system."
+	creator JOHNNY_BANK creates JOHNNY_CARD
+end
+
+scenario_chart JOHNNY_CASH
+	indexing
+		author: "Liam McManus, Alan Cooke";
+		module: "COMP40690"
+	explanation
+		"Mandatory scenarios for the Johnny Card System."
+	scenario "Intialize Card."
+	description "Intialises a new card so that it is associated with a specific bank account, \
+				\ contains no cash, is unlocked and has no transactions in its log."
+	scenario "Incorrect PIN use locks card"
+	description "Typing in the incorrect PIN code three times locks the Johnny Card so that it may no longer \
+				\ be used in any Johnny Terminal or Johnny Machine until it is \
+				\ unlocked by the owner's bank."
+	scenario "Increase the amount of cash on a card."
+	description "Ask the user how much cash they'd like to add \
+				\ to a card, check that they have that much cash, \
+				\ deduct the cash from their account, add it to the \
+				\ card."
+	scenario "Pay for an item."
+	description "Ask the user if they'd like to deduce a specific \
+				\ amount of cash from their card."
+end
