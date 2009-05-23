@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Cash">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Cash/johnny_compilied"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="/Cash/lib/jml-release.jar"/>
+	<classpathentry kind="lib" path="/Cash/lib/jmljunitruntime.jar"/>
+	<classpathentry kind="lib" path="/Cash/lib/jmlmodels.jar"/>
+	<classpathentry kind="lib" path="/Cash/lib/jmlmodelsnonrac.jar"/>
+	<classpathentry kind="lib" path="/Cash/lib/jmlruntime.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
