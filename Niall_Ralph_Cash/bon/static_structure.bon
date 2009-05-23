@@ -1,0 +1,33 @@
+static_diagram JOHNNY_STRUCTURE
+	component
+	class JOHNNY_CARD
+	class JOHNNY_MACHINE
+	class JOHNNY_REGISTER
+	class JOHNNY_TRANNIE
+	JOHNNY_REGISTER client JOHNNY_CARD
+	JOHNNY_MACHINE client JOHNNY_CARD
+end
+
+scenario_chart JOHNNY_CASH
+	indexing
+		author: "Niall Colreavy";
+		module: "COMP40690"
+	explanation
+		"Mandatory scenarios for the Johnny Card System."
+	scenario "Initialize card."
+	description "Initializes a new card so that it is associated \
+				\ with an account, contains no cash, is unlocked, and has no transactions."
+	scenario "Incorrect PIN use locks card."
+	description "Typing an incorrect PIN code three times locks the card so that it cannot \
+				\ be used in any JOHNNY_TERMINAL or JOHNNY_MACHINE until it is unlocked \
+				\ by the owner's bank."
+	scenario "Increase the amount of cash on a card."
+	description "Ask the user how much cash they would like to add to the card, \
+				\ check that sufficient funds are available, deduct the cash from the account, \
+				\ add the cash to the card, record the transaction."
+	scenario "Pay for an item."
+	description "Ask the user if they would like to deduct a specific amount from the card, \
+				\ if the user says yes then deduct that amount from the card, record the transaction."
+	scenario "Main interactive loop."
+    description "Run the main interactive loop of the system."
+end

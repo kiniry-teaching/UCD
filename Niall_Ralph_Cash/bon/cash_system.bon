@@ -1,0 +1,101 @@
+system_chart JOHNNY_CASH
+	explanation "An example digital cash system developed by the COMP40690 class of 2009."
+	cluster CORE_CONCEPTS description "The core concepts of this digital cash system."
+	cluster MAIN description "The main body of the system."
+end
+
+cluster_chart CORE_CONCEPTS
+	explanation "The core concepts of this digital cash system."
+	class JOHNNY_CARD description "A digital cash card."
+	class JOHNNY_MACHINE description "A terminal for managing funds on a Johnny Card."
+	class JOHNNY_REGISTER description "The Johnny Card point-of-sale terminal."
+	class JOHNNY_BANK description "The bank and account with which a Johnny card is associated."
+	class JOHNNY_TRANNIE description "A transaction on a Johnny Card."
+end
+
+cluster_chart MAIN
+  explanation "The main body of the system."
+  class MAIN_LOOP description "An interactive prompt for exercising the system."
+end
+
+class_chart MAIN_LOOP
+  explanation "An interactive prompt for exercising the system.  Loops on \
+             \ actions expecting input from a user or a stream-based test driver."
+  query
+    "What does the user want to do with their card?",
+    "How much money should be added to the card?"
+  command
+    "Run the main loop.",
+    "Initialize the Johnny Card system.",
+    "Tell the user something."
+  constraint
+    "The user can either insert their card into a terminal or insert their \
+   \ card into a register."
+end
+
+class_chart JOHNNY_CARD
+	explanation "The Johnny Card is a digital cash card which uses a \
+	\ flash filesystem to store virtual cash for connectionless point-of-sale transactions."
+	query
+		"How much cash is on this card?",
+		"What is the lock status of this card?",
+		"What is the bank account associated with this card?"
+	command
+		"Change the amount of cash on this card by this much!",
+		"Record this transaction on the card!",
+		"Set the lock status to this!",
+		"Initialize the card and associate the card with this bank account!"
+	constraint
+		"The amount of cash on a Johnny Card is no more than 500 Euro.",
+		"The amount of cash on a Johnny Card cannot be less than 0 Euro.",
+		"Each Johnny Card is associated with exactly one Johnny Bank."
+end
+
+class_chart JOHNNY_MACHINE
+	explanation "A terminal for using Johnny Cards.  Adds cash to a Johnny Card. \
+	\ Used for managing funds of a Johnny Card."
+	query
+		"How much moola do I have in my bank account?",
+		"How much moola do I have on my Johnny Card?",
+		"Is this PIN valid for this card?"
+	command
+		"Lock the Johnny Card!",
+		"Transfer this amount from Johnny Bank to Johnny Card!",
+		"Initialize a new session when a card is inserted into the machine!"
+	constraint
+		"You can only transfer funds from a bank account to a \
+		\ Johnny Card if sufficient funds are available in the bank account.",
+		"The terminal cannot process transactions on Johnny cards that are locked."
+end
+
+class_chart JOHNNY_REGISTER
+	explanation "A point-of-sale terminal through which one makes Johnny Card transactions."
+	command
+		"Record a transaction for this amount on that Johnny Card on this date!"
+	constraint
+		"The maximum that can be debited from a Johnny Card in a single transaction is 500 Euro.",
+		"The terminal cannot process transactions on Johnny cards that are locked."
+end
+
+class_chart JOHNNY_BANK
+	explanation "The bank with which a Johnny card is associated."
+	query
+		"How much money is available in this account?",
+		"Is this PIN entry valid for this account?"
+	command
+		"Change the amount in the account by this much!"
+end
+
+class_chart JOHNNY_TRANNIE
+	explanation "A transaction on a Johnny Card."
+	query
+		"What is the date of this transaction?",
+		"What is the amount of this transaction?",
+		"Which card is associated with this transaction?",
+		"What type of transaction is this (purchase or upload funds)?"
+	command
+		"Create a transaction for this card, on this date, for this amount and for this type of transaction!",
+	constraint
+		"A transaction must be of type 'purchase' or 'upload funds'",
+		"Each transaction is associated with exactly one card"
+end
