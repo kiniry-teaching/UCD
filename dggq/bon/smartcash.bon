@@ -1,0 +1,117 @@
+system_chart JOHNNY_CASH 
+	explanation "An example ditigal cash system"
+	cluster CORE_CONCEPTS description "The core concepts of the ditigal class system"
+	cluster MAIN description "The main body of the system."
+end
+
+cluster_chart CORE_CONCEPTS
+	explanation "The core concepts of the digital class system"
+	class JohnnyCard description "A ditigal cash card"
+	class JohnnyMachine description "A terminal for adding cash to a ditigal cash card"
+	class JohnnyRegister description "A terminal for Point of sale support for ditigal cash card"
+	class JohnnyTransaction description "A transaction that occurrs on a JohnnyCard"
+	class JohnnyBank description "A bank account."
+end
+
+cluster_chart MAIN
+  explanation "The main body of the system."
+  class MAIN_LOOP description "An interactive prompt for exercising the system."
+end
+
+class_chart MAIN_LOOP
+  explanation "An interactive prompt for exercising the system.  Loops on \
+             \ actions expecting input from a user or a stream-based test driver."
+  query
+    "What does the user want to do with their card?"
+  command
+    "Run the main loop.",
+    "Initialize the Johnny Card system.",
+    "Tell the user something."
+  constraint
+    "The user can either insert their card into a terminal or insert their \
+   \ card into a register."
+end
+
+class_chart JohnnyCard
+	explanation "JohnnyCard is ditigal card system that stores ditigal cash \ 
+	 \ for connection less transactions"
+	query 
+		"What is my JohnnyCard id?",
+		"How much cash on this JohnnyCard?",
+		"What are the last five JohnnyTransactions that this card was involved in?",
+		"What is the lock state of this JohnnyCard?"
+	command
+		"Change the amount of cash on this JohnnyCard.",
+		"Add a new JohnnyTransaction to this card.",
+		"Change the lock state of the JohnnyCard"
+	constraint
+		"The amount of cash on a JohnnyCard cannot be greater 500 Euro.",
+		"The lock state is LOCKED or UNLOCKED.",
+		"There are only a max of five JohnnyTransactions saved on this card."
+end
+
+class_chart JohnnyMachine
+	explanation "JohnnyMachine adds CASH to your JohnnyCard and manages a JohnnyCard account"
+	query
+		"How much cash do I have in my bank account?",
+		"How much cash do I have in my JohnnyCard?",
+		"What is this terminal id?",
+		"What is the inserted JohnnyCard?",
+		"Is the entered pin valid?"
+	command
+		"Enter the pin.",
+		"Read inserted JohnnyCard id.",
+		"Change the JohnnyCard lock state to LOCKED.",
+		"Set the Bank account details",
+		"Change the pin of the JohnnyCard.",
+		"Transfer cash from JohnnyBank to JohnnyCard.",
+		"Create new JohnnyTransaction on the Johnnybank."
+	constraint
+		"The maximum amount added to a JohnnyCard per day is 250 Euro."
+end
+
+class_chart JohnnyRegister
+	explanation "JohnnyRegister is a point of sell terminal throught which one makes JohnnyCard transactions "
+	
+	query
+		"How much money the item cost?",
+		"How much money in this JohnnyRegister?",
+		"What are the JohnnyTransactions against this JohnnyRegister?",
+		"What is the inserted JohnnyCard id?",
+		"What is this terminal id?"
+	command
+		"Read inserted JohnnyCard id.",
+		"Request the cash for the item cost from the JohnnyCard.",
+		"Create new JohnnyTransaction on the JohnnyCard.",
+		"Move JohnnyTransactions to the JohnnyBank"
+end
+
+class_chart JohnnyTransaction
+	explanation "JOHNNY_TRANSATION is a transaction where a user adds money to a JOHNNY card or removes it."
+	query
+		"What is the JohnnyCard id?",
+		"What is the created date of this JohnnyTransaction?",
+		"How much is the amount of this JohnnyTransaction?",
+		"What the terminal id of this JohnnyTransaction?"
+	command
+		"Change the JohnnyCard id in this JohnnyTransaction",
+		"Change the created date of this JohnnyTransaction.",
+		"Change the amount of this JohnnyTransaction.",
+		"Change the terminal id of this JohnnyTransaction."
+	constraint
+		"Amount must be non-negative and less then 500 euro."
+end
+
+class_chart JohnnyBank
+	explanation "A bank account and assoicated bank"
+	query
+		"What are the JohnnyTransactions against this JohnnyBank?",
+		"How much cash do I have in my JohnnyBank?"
+	command
+		"Adjust the account balance up and down",
+		"Remove cash from my JohnnyBank",
+		"Add a JohnnyTransactions",
+		"Change the pin."
+	constraint
+		"Cash in JohnnyBank is non-negative."
+end
