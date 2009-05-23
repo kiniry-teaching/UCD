@@ -1,0 +1,65 @@
+static_diagram JOHNNY_STRUCTURE
+	component
+		class JOHNNY_CARD
+		class JOHNNY_MACHINE
+		class JOHNNY_REGISTER
+		class SMARTCARD
+		class JOHNNY_BANK
+		
+		JOHNNY_CARD inherit SMARTCARD
+		JOHNNY_REGISTER client JOHNNY_CARD
+		JOHNNY_MACHINE client JOHNNY_CARD
+end
+
+creation_chart JOHNNY_CASH
+	indexing 
+		author: "Damian Chojna Fergus McCann";
+		module: "COMP40690"
+	explanation
+		"Owndership relations between classifiers in this system"
+	creator JOHNNY_BANK creates JOHNNY_CARD
+end
+
+scenario_chart JOHNNY_CASH
+	indexing 
+		author: "Damian Chojna Fergus McCann";
+		module: "COMP40690"
+		
+	explanation
+		"Mandatory scenarios for the Johnny Card system"
+		
+	scenario 
+		"Initialize card."
+	description
+		"Initializes a new card so that it is associated with a bank, has no cash, is unlocked and has no transactions"
+	
+	scenario 
+		"Incorrect PIN use locks card."
+	description 
+		"Typing an incorrect PIN code three times locks the card so that it cannot \
+			\ be used in any JOHNNY_REGISTER or JOHNNY_MACHINE until it has been unlocked \
+			\ by the cards JOHNNY_BANK "
+	scenario
+		"Unlock card"
+	description
+		"JOHNNY_BANK unlocks a JOHNNY_CARD that has been locked by incorrect PIN use." 		
+	
+	scenario 
+		"Credit account from card"
+	description
+		"Check user's pin is valid for card. Ask the user how much cash they'd like to return to their account. Checks that \
+			\the card has sufficient funds. Credit account with value provided. Removes the value from the card."
+	scenario
+		"Top up a card."
+	description
+		"Check user's pin is valid for card. Ask the user how much cash they'd like to add to their JOHNNY_CARD. Check that they have sufficient funds to\
+			\deduct from their account. Add the amount to the card. If the user does not have enough funds in their account, or the amount added\
+			\exceeds daily limit, aborts the transaction."
+			
+	scenario
+		"Pay for an item."
+	description
+		"Ask the user to confirm transaction and deduct a specific amount from their card. On approval, the specific amount \
+			\ will be deducted from the JOHNNY_CARD and added to JOHNNY_REGISTER. JOHNNY_CARD will record the transaction as a  \
+			\ JOHNNY_TRANSCATION_CHARGE."
+end
