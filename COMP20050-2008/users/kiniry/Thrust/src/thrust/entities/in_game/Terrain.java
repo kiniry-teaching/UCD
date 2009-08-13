@@ -23,4 +23,10 @@ public class Terrain extends StaticEntity
     @ public invariant (* The shape of the terrain is rendered as a
     @                     sequence of horizontal lines. *);
     @*/
+
+  /** Create the terrain. */
+  public Terrain() {
+    super();
+    // skip
+  }
 }

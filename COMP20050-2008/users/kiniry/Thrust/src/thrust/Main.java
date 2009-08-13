@@ -10,17 +10,60 @@
 
 package thrust;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import thrust.audio.Music;
+import thrust.input.InputHandler;
+import javax.swing.JFrame;
+
 /**
  * Simulating all of the entities in the game to realize the game.
  * @author Joe Kiniry (kiniry@acm.org)
  * @version 23 April 2008
  */
 public final class Main {
+  /** A logger for use by the game as a console. */
+  public static final /*@ non_null @*/ Logger LOGGER =
+    Logger.getLogger("Thrust");
+
+  /** All log messages go to the console. */
+  public static final /*@ non_null @*/ Handler HANDLER =
+    new ConsoleHandler();
+
+  /** To handle all input to the game. */
+  public static final /*@ non_null @*/ InputHandler INPUT_HANDLER =
+    new InputHandler();
+
+  /** The frame into which we render the game. */
+  public static final /*@ non_null @*/ JFrame FRAME =
+    new JFrame("Thrust");
+
   /**
-   * This class cannot be constructed.
+   * Create GUI for game.
+   * @param the_main an instance of the main class of the game.
    */
-  private Main() {
-    assert false; //@ assert false;
+  private static void create_gui(final /*@ non_null @*/ Main the_main) {
+    // setup display
+    FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    FRAME.addKeyListener(the_main);
+    FRAME.pack();
+    FRAME.setVisible(true);
+  }
+
+  /** Show the game's title screen. */
+  private static void display_title_screen() {
+    // display the title screen
+    LOGGER.info("The title screen is displayed.");
+  }
+
+  /** Play the game's title music. */
+  private static void play_title_music() {
+    // play title music
+    final Music game_music = new Music("media/music.mp3");
+    game_music.start();
   }
 
   /**
@@ -28,24 +71,15 @@ public final class Main {
    * @param the_args The command-line arguments are ignored.
    */
   public static void main(final String[] the_args) {
-    assert false; //@ assert false;
-    // display the title screen
-    // play title music
-    // wait for keyboard input
-    // repeat the following until the player asks to quit
-    //   show the high score display
-    //   wait for input to start the game
-    //   create game map and initialize location of all entities
-    //   repeat the following until the player is out of lives or asks to quit:
-    //      record the current time T
-    //      perform a step in the simulation
-    //      render all entities
-    //      process the next keyboard input
-    //      record the current time T'
-    //      wait for (1/30th of a second - (T-T'))
-    //   remove the game interface
-    //   if the player has a new high score
-    //     ask them to input their initials
-    //     save the new high score
+  //Schedule a job for the event-dispatching thread:
+    //creating and showing this application's GUI.
+    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        create_gui(new Main());
+        display_title_screen();
+        play_title_music();
+        // now the KeyListener does all the work
+      }
+    });
   }
 }

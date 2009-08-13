@@ -6,7 +6,7 @@
 # version 1 April 2008
 #
 
-TEAMNAME = TeamAmerica
+TEAMNAME = Banzai
 PROJECT_ROOTDIR = `pwd`
 
 java_source = $(wildcard thrust/**/*.java)
@@ -45,7 +45,7 @@ jmlc:	.jmlc
 
 .jmlc:	$(java_source)
 	mkdir -p $(REL_ROOT)/jmlrac_classes;
-	$(JMLC) --Quiet --source 1.4 -d $(REL_ROOT)/jmlrac_classes $(java_source) && touch .jmlc
+	$(JMLC) --Quiet --source 1.4 --Assignable -d $(REL_ROOT)/jmlrac_classes $(java_source) && touch .jmlc
 
 esc:  .esc
 

@@ -33,7 +33,7 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's attack AI must shoot a bullet toward
    * the spaceship.
    */
-  public void attack(AI the_behavior) {
+  public void attack(final AI the_behavior) {
     assert false; //@ assert false;
   }
 
@@ -50,7 +50,7 @@ public class GunTurret extends StaticEntity
    * @param the_behavior The turret's disturb AI must shoot a bullet
    * in a random direction away from the terrain.
    */
-  public void disturb(AI the_behavior) {
+  public void disturb(final AI the_behavior) {
     assert false; //@ assert false;
   }
 

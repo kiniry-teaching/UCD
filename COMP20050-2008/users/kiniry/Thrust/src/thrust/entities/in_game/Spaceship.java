@@ -34,6 +34,59 @@ public class Spaceship extends DynamicEntity
   /** The spaceship's initial fuel is 1000 units. */
   public static final int INITIAL_FUEL = 1000;
 
+  /** The current fuel content of this spaceship. */
+  private transient int my_fuel_content;
+  //@ invariant 0 <= my_fuel_content;
+
+  /** Are we being towed? */
+  private transient boolean my_towed_state;
+
+  public void change_fuel_content(final int the_fuel_change) {
+    my_fuel_content += the_fuel_change;
+  }
+
+  public int fuel() {
+    return my_fuel_content;
+  }
+
+  public int fuel_mass() {
+    return my_fuel_content * MASS_PER_UNIT;
+  }
+
+  public int maximum_fuel() {
+    return Integer.MAX_VALUE;
+  }
+
+  public void set_fuel_content(final int the_fuel_content) {
+    my_fuel_content = the_fuel_content;
+  }
+
+  public void tow() {
+    my_towed_state = true;
+  }
+
+  public boolean towed() {
+    return my_towed_state;
+  }
+
+  public double mass() {
+    int result = EMPTY_MASS;
+    result += fuel_mass();
+    if (my_towed_state) {
+      result += GoalSphere.MASS;
+    }
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see thrust.entities.DynamicEntity#simulate(double)
+   */
+  public void simulate(final double some_seconds) {
+    super.simulate(some_seconds);
+    simulate_gravity(some_seconds);
+    simulate_friction(some_seconds);
+  }
+
   //@ public initially mass() == EMPTY_MASS + INITIAL_FUEL;
 
   /*@ public invariant (* The spaceship is destroyed by the barrier. *);

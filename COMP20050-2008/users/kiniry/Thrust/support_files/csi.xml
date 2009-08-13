@@ -210,6 +210,7 @@
         <!-- See http://checkstyle.sf.net/config_design.html -->
         <module name="VisibilityModifier">
           <property name="packageAllowed" value="true"/>
+          <property name="protectedAllowed" value="true"/>
         </module>
         <module name="FinalClass"/>
         <module name="InterfaceIsType"/>
@@ -238,7 +239,7 @@
             <property name="format" value="(@review)|(@todo)|(@design)"/>
             <property name="message" value="Some code still needs review."/>
         </module>
-        <module name="UncommentedMain"/>
+        <!-- <module name="UncommentedMain"/> -->
         <module name="UpperEll"/>
         <module name="ArrayTypeStyle"/>
         <module name="FinalParameters"/>
@@ -267,7 +268,7 @@
     <!-- Checks for Duplicate Code                           -->
     <!-- See http://checkstyle.sf.net/config_duplicates.html -->
     <module name="StrictDuplicateCode">
-      <property name="min" value="15"/>
+      <property name="min" value="50"/>
     </module>
 
 </module>
