@@ -411,6 +411,14 @@ end
 
 class_chart SPACESHIP
   inherit NEUTRAL_ENTITY, FUELABLE, DYNAMIC_ENTITY, TOW
+  query
+    "How many lives do you have?",
+    "What is your current score?",
+    "Are you currently towing?"
+  command
+    "You have this many lives remaining.",
+    "You have this many points.",
+    "You are now towing the goal sphere."
   constraint
     "The spaceship is destroyed by the barrier.",
     "The spaceship is destroyed by a bullet.",
@@ -532,6 +540,13 @@ end
 
 class_chart WELCOME_ANIMATION
   inherit ANIMATION
+end
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ENTITIES.PROPERTIES cluster classes
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+class_chart PROPERTIES
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
