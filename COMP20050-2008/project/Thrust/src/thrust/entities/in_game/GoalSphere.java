@@ -45,4 +45,14 @@ public class GoalSphere extends DynamicEntity
    * The mass of the goal sphere is 10,000kg.
    */
   public static final int MASS = 10000;
+
+  public void tow() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean towed() {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }

@@ -20,6 +20,31 @@ import thrust.entities.about.Fuelable;
  */
 public class FuelPod extends StaticEntity
   implements NeutralEntity, Fuelable {
+
+  public void change_fuel_content(int the_fuel_change) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public int fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int fuel_mass() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int maximum_fuel() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void set_fuel_content(int the_fuel_content) {
+    // TODO Auto-generated method stub
+    
+  }
   /*@ public invariant (* A fuel pod is destroyed by a bullet. *);
     @ public invariant (* The fuel pod is not affected by the goal sphere. *);
     @ public invariant (* The fuel pod is not affected by the spaceship. *);

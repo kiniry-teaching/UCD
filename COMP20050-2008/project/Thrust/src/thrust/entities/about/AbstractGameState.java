@@ -21,7 +21,7 @@ public abstract class AbstractGameState {
   /**
    * There are eight high scores.
    */
-  public static final int HIGH_SCORE_COUNT;
+  public static final int HIGH_SCORE_COUNT = 8;
   //@ invariant HIGH_SCORE_COUNT == 8;
   //@ invariant (* There are eight high scores. *);
 

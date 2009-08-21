@@ -11,6 +11,7 @@ package thrust.entities.in_game;
 
 import thrust.entities.DynamicEntity;
 import thrust.entities.EnemyEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * A bullet shot from the spaceship or a gun turret.
@@ -26,6 +27,26 @@ public class Bullet extends DynamicEntity
   public double mass() {
     assert false; //@ assert false;
     return 0;
+  }
+
+  public AI attack() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void attack(AI the_behavior) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public AI disturb() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void disturb(AI the_behavior) {
+    // TODO Auto-generated method stub
+    
   }
 
   /*@ public invariant (* Bullets are destroyed on contact with a

@@ -11,6 +11,7 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
 
@@ -59,6 +60,21 @@ public class Barrier extends StaticEntity
   //@ requires closed();
   public void open() {
     assert false; //@ assert false;
+  }
+
+  public void animate() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(Animation the_animation) {
+    // TODO Auto-generated method stub
+    
   }
 
   /*@ public invariant (* Barriers are always in one of the three states

@@ -10,9 +10,11 @@
 package thrust.entities.in_game;
 
 import thrust.animation.Animatable;
+import thrust.animation.Animation;
 import thrust.entities.EnemyEntity;
 import thrust.entities.NeutralEntity;
 import thrust.entities.StaticEntity;
+import thrust.entities.behaviors.AI;
 
 /**
  * An enemy factory.
@@ -99,6 +101,41 @@ public class Factory extends StaticEntity
       assert false; //@ assert false;
     }
 
+    public AI attack() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void attack(AI the_behavior) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    public AI disturb() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void disturb(AI the_behavior) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    public void animate() {
+      // TODO Auto-generated method stub
+      
+    }
+
+    public Animation animation() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    public void animation(Animation the_animation) {
+      // TODO Auto-generated method stub
+      
+    }
+
     /*@ public invariant (* A factories chimney is the same color as
       @                     its factory. *);
       @ public invariant (* The goal sphere is destroyed by a
@@ -120,5 +157,40 @@ public class Factory extends StaticEntity
       @ public invariant (* The goal sphere is not destroyed by a
       @                     factory's sphere. *);
       @*/
+  }
+
+  public AI attack() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void attack(AI the_behavior) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public AI disturb() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void disturb(AI the_behavior) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void animate() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Animation animation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void animation(Animation the_animation) {
+    // TODO Auto-generated method stub
+    
   }
 }
