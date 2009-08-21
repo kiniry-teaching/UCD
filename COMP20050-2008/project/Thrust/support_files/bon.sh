@@ -1,11 +1,11 @@
 #!/bin/sh
-echo -n "class_chart "
+echo "class_chart "
 # iterate through words until we see class and take next word and toupper it
 cat $1 | awk '/class/ { print toupper($4) }' -
 
 echo "explanation"
-echo -n "  \""
-echo -n `cat $1 | grep '@explanation' | sed s/\*// | sed s/@explanation//`
+echo "  \""
+echo `cat $1 | grep '@explanation' | sed s/\*// | sed s/@explanation//`
 echo "\""
 
 echo "indexing"
