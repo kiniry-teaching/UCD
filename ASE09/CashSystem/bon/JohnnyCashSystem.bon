@@ -1,0 +1,89 @@
+system_chart JOHNNY_CASH
+	explanation "An example digital cash system developed by the COMP40690 class of 2009"
+	cluster CORE_CONCEPTS description "The core concepts of this digital cash system"
+end
+
+cluster_chart CORE_CONCEPTS
+	explanation "The core concepts of this digital cash system."
+	
+	class JOHNNY_CARD description "A digital cash card"
+	class JOHNNY_MACHINE description "A terminal for managing the funds on a Johnny Card."
+	class JOHNNY_REGISTER description "The Johnny Card point-of-sale terminal"
+	class JOHNNY_BANK description "A bank that issues Johnny cards and maintains a cash account"
+	class JOHNNY_TRANSACTION description "A record of a transaction resulting from a Johnny Cash interaction"
+end
+
+class_chart JOHNNY_CARD
+	explanation "The Johnny Card is a digital cash card which uses a flash filesystem \
+	\to store virtual cash for connectionless point-of-sale transactions."
+	 
+	query
+		"How much cash is on this card?",
+		"What are the last 5 transactions that this card was involved in?",
+		"Is this Johnny Card locked?",
+		"How much cash am I allowed to credit this card?",
+		"What is the pin?",
+		"What is the bank accountID of this card?"
+	command
+		"Change the amount of cash on this card by this much.",
+		"Lock this card",
+		"Unlock this card"
+	constraint
+		"The amount of cash on a Johnny Card is no more than 500 Euro",
+		"Balance must be greater than or equal to zero",
+		"Don't perform a transaction when locked"
+end
+
+class_chart JOHNNY_MACHINE
+	explanation "A terminal for using Johnny Cards. Adds cash to a Johnny Card. Used to manage funds of a Johnny Card."
+	
+	query
+		"How much cash do I have in my bank account?",
+		"How much cash is on the Johnny Card?",
+		"What are the last transactions on this Johnny Card?",
+		"Is the PIN valid?"
+	command
+		"Insert a Johnny Card",
+		"Remove a Johnny Card",
+		"Enter PIN",
+		"Credit the Johnny Card with cash from bank account",
+		"Return specified cash amount from card to bank account"		
+	constraint
+		"Only allow transactions if user has entered valid pin", 
+		"Only allow transactions if there is a valid Johnny Card",
+		"The maximum amount of cash transferred to Johnny Card is 250 Euro per day",
+		"Cannot return more cash than is on card to bank"
+end
+
+class_chart JOHNNY_REGISTER
+	explanation "A point-of-sale terminal through which one makes Johnny Card transactions." 
+	
+	query 
+		"What is the balance on the Johnny Register?",
+		"What are the transactions on the Register?"
+	command
+		"Insert a Johnny Card",
+		"Remove a Johnny Card",
+		"Charge the specified amount to the Johnny Card",
+		"Deposit balance to bank"
+end
+
+class_chart JOHNNY_BANK
+	explanation "A high street bank providing JOHNNY CASH services to both Johnny Machines and Johnny Registers"
+	
+	query
+		"How much cash is in the account?"
+	command
+		"Withdraw cash from account",
+		"Credit cash to account",
+end
+
+class_chart JOHNNY_TRANSACTION
+	explanation "A record of any transaction performed by a Johnny Card"
+	query
+		"What is the timestamp of this transaction?",
+		"What is the amount involved in this transaction?",
+		"Where was this transaction?"
+	command
+		"Initialize the transaction with timestamp, amount and location"
+end

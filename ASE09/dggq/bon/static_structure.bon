@@ -1,0 +1,49 @@
+static_diagram JOHNNY_STRUCTURE
+  component
+    class JohnnyCard
+    class JohnnyMachine
+    class JohnnyRegister
+    class JohnnyBank
+	class JohnnyTransaction
+    JohnnyRegister client JohnnyCard
+    JohnnyMachine client JohnnyCard
+end
+
+creation_chart JOHNNY_CASH
+  indexing
+    author: "Joe Kiniry";
+    module: "COMP40690"
+  explanation
+    "Ownership relations between classifiers in this system."
+  creator JohnnyBank creates JohnnyCard
+  creator JohnnyMachine creates JohnnyTransaction
+  creator JohnnyRegister creates JohnnyTransaction
+end
+
+scenario_chart JOHNNY_CASH
+  indexing
+    author: "Joe Kiniry";
+    module: "COMP40690"
+  explanation
+    "Mandatory scenarios for the Johnny Card system."
+  scenario "Initialize card."
+  description "Initializes a new card so that it is associated \
+             \ with a specific bank account, contains no cash, is \
+             \ unlocked, and has no transactions in its log."
+  scenario "Incorrect PIN use locks card."
+  description "Typing an incorrect PIN code three times locks a \
+             \ card so that it may no longer be used in any \
+             \ JOHNNY_TERMINAL or JohnnyMachine transactions \
+             \ until it is unlocked by the owner's bank."
+  scenario "Increase the amount of cash on a card."
+  description "Ask the user how much cash they'd like to add \
+             \ to a card, check that they have that much cash, \
+             \ deduct the cash from their account, add it to the \
+             \ card."
+  scenario "Pay for an item."
+  description "Ask the user if they'd like to deduct a specific \
+             \ amount of cash from their card."
+  scenario "Update JohnnyRegister with takings"
+  description "Update the account of the JOHNY_REGISTER with all the \ 
+  			 \ JOHNY_TRANSACTIONs takings."
+end
